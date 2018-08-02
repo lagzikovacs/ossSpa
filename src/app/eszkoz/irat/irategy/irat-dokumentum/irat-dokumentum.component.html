@@ -1,0 +1,27 @@
+<div class="alapkeret">
+  <h5>{{dokumentumservice.cim}}</h5>
+  <nav>
+    <button [disabled]="eppFrissit" (click)="feltoltes()" class="btn btn-sm btn-outline-primary navgomb">
+      Feltöltés
+    </button>
+  </nav>
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Megjegyzés</th>
+      <th>Méret</th>
+      <th>Ext</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of dokumentumservice.Dto; let i = index">
+      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.DOKUMENTUMKOD}}</td>
+      <td>{{item.MEGJEGYZES}}</td>
+      <td>{{item.MERET}}</td>
+      <td>{{item.EXT}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <app-errormodal [cim]="dokumentumservice.cim"></app-errormodal>
+</div>

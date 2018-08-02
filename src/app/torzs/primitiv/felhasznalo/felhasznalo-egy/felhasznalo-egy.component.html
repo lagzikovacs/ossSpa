@@ -1,0 +1,78 @@
+<div class="alapkeret">
+  <h5>{{felhasznaloservice.cim}}</h5>
+  <div>
+    <nav>
+      <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
+        Vissza a listához
+      </button>
+
+      <button [disabled]="eppFrissit || felhasznaloservice.DtoSelectedIndex === -1" (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-minus" aria-hidden="true"></i>
+      </button>
+      <button [disabled]="eppFrissit || felhasznaloservice.DtoSelectedIndex === -1" (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-caret-up" aria-hidden="true"></i>
+      </button>
+
+      <button [disabled]="eppFrissit || felhasznaloservice.DtoSelectedIndex === -1" (click)="jelszo()" class="btn btn-sm btn-outline-primary navgomb">
+        Jelszó
+      </button>
+    </nav>
+  </div>
+  <div style="float: left;border: solid 1px silver;margin-right: 10px;margin-bottom: 5px;padding: 10px">
+    <table>
+      <tbody>
+      <tr>
+        <td class="egylabel">Id:</td>
+        <td *ngIf="felhasznaloservice.DtoSelectedIndex !== -1">{{felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].FELHASZNALOKOD}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Azonosító:</td>
+        <td *ngIf="felhasznaloservice.DtoSelectedIndex !== -1">{{felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].AZONOSITO}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Név:</td>
+        <td *ngIf="felhasznaloservice.DtoSelectedIndex !== -1">{{felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].NEV}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Telefon:</td>
+        <td *ngIf="felhasznaloservice.DtoSelectedIndex !== -1">{{felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].TELEFON}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Email:</td>
+        <td *ngIf="felhasznaloservice.DtoSelectedIndex !== -1">{{felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].EMAIL}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Státusz:</td>
+        <td *ngIf="felhasznaloservice.DtoSelectedIndex !== -1">{{felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].STATUSZ}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">A státusz kelte:</td>
+        <td *ngIf="felhasznaloservice.DtoSelectedIndex !== -1">{{felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].STATUSZKELTE | datehun}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Log:</td>
+        <td *ngIf="felhasznaloservice.DtoSelectedIndex !== -1 && felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].LOGONLOG">Igen</td>
+        <td *ngIf="felhasznaloservice.DtoSelectedIndex !== -1 && !felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].LOGONLOG">Nem</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Létrehozta:</td>
+        <td *ngIf="felhasznaloservice.DtoSelectedIndex !== -1">{{felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].LETREHOZTA}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Létrehozva:</td>
+        <td *ngIf="felhasznaloservice.DtoSelectedIndex !== -1">{{felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Módosította:</td>
+        <td *ngIf="felhasznaloservice.DtoSelectedIndex !== -1">{{felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].MODOSITOTTA}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Módosítva:</td>
+        <td *ngIf="felhasznaloservice.DtoSelectedIndex !== -1">{{felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].MODOSITVA | datetimehun}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <router-outlet></router-outlet>
+  <app-errormodal [cim]="felhasznaloservice.cim"></app-errormodal>
+</div>

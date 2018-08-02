@@ -1,0 +1,49 @@
+<div class="alapkeret">
+  <h5>{{ugyfelservice.cim}}</h5>
+  <app-toolbar [Szurok]="szurok"
+               [(szempont)]="ugyfelservice.szempont"
+               [(minta)]="ugyfelservice.minta"
+               [enKereses]="!eppFrissit" (Kereses)="onKereses()"
+               [enUj]="!eppFrissit" (Uj)="onUj()">
+  </app-toolbar>
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Név</th>
+      <th>Irányítószám</th>
+      <th>Helységnév</th>
+      <th>Közterület</th>
+      <th>Közterület tipus</th>
+      <th>Házszám</th>
+      <th>Adószám</th>
+      <th>EU adószám</th>
+      <th>Telefon</th>
+      <th>Email</th>
+      <th>Megjegyzés</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of ugyfelservice.Dto; let i = index">
+      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.UGYFELKOD}}</td>
+      <td>{{item.NEV}}</td>
+      <td>{{item.IRANYITOSZAM}}</td>
+      <td>{{item.HELYSEGNEV}}</td>
+      <td>{{item.KOZTERULET}}</td>
+      <td>{{item.KOZTERULETTIPUS}}</td>
+      <td>{{item.HAZSZAM}}</td>
+      <td>{{item.ADOSZAM}}</td>
+      <td>{{item.EUADOSZAM}}</td>
+      <td>{{item.TELEFON}}</td>
+      <td>{{item.EMAIL}}</td>
+      <td>{{item.MEGJEGYZES}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <app-toolbarfooter [enKereses]="!ugyfelservice.elsokereses && !eppFrissit"
+                     [rekordszam]="ugyfelservice.Dto.length"
+                     [osszesrekord]="ugyfelservice.OsszesRekord"
+                     (KeresesTovabb)="onKeresesTovabb()">
+  </app-toolbarfooter>
+  <app-errormodal [cim]="ugyfelservice.cim"></app-errormodal>
+</div>

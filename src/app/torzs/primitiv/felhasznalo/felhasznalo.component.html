@@ -1,0 +1,37 @@
+<div class="alapkeret">
+  <h5>{{felhasznaloservice.cim}}</h5>
+  <app-toolbar [Szurok]="szurok"
+               [(szempont)]="felhasznaloservice.ekDto.szempont"
+               [(minta)]="felhasznaloservice.ekDto.minta"
+               [enKereses]="!eppFrissit" (Kereses)="onKereses()"
+               [enUj]="!eppFrissit" (Uj)="uj()">
+  </app-toolbar>
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Azonosító</th>
+      <th>Név</th>
+      <th>Telefon</th>
+      <th>Email</th>
+      <th>Státusz</th>
+      <th>A státusz kelte</th>
+      <th>Log</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of felhasznaloservice.Dto; let i = index">
+      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.FELHASZNALOKOD}}</td>
+      <td>{{item.AZONOSITO}}</td>
+      <td>{{item.NEV}}</td>
+      <td>{{item.TELEFON}}</td>
+      <td>{{item.EMAIL}}</td>
+      <td>{{item.STATUSZ}}</td>
+      <td>{{item.STATUSZKELTE | datehun}}</td>
+      <td *ngIf="item.LOGONLOG">Igen</td>
+      <td *ngIf="!item.LOGONLOG">Nem</td>
+    </tr>
+    </tbody>
+  </table>
+  <app-errormodal [cim]="felhasznaloservice.cim"></app-errormodal>
+</div>

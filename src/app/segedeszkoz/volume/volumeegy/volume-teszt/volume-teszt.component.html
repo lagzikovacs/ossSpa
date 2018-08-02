@@ -1,0 +1,16 @@
+<div class="alapkeret">
+  <h5>Volume ellenőrzés</h5>
+  <div>
+    <nav>
+      <button [disabled]="volumeservice.eppTesztel" (click)="inditas()" class="btn btn-sm btn-outline-primary navgomb">
+        Indítás
+      </button>
+      <button [disabled]="!volumeservice.eppTesztel" (click)="leallitas()" class="btn btn-sm btn-outline-primary navgomb">
+        Leállítás
+      </button>
+    </nav>
+    <h6>{{index}}/{{volumeservice.dbv.length}}</h6>
+    <div *ngFor="let h of hibalista">{{h}}</div>
+  </div>
+  <app-errormodal [cim]="volumeservice.cim"></app-errormodal>
+</div>

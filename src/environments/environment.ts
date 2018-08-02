@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  lapmeret: 10,
+  BaseHref: 'https://docport.hu/ossrest/',
+  perAlldefault: '0 / 0'
 };
 
 /*

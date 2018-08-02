@@ -1,0 +1,156 @@
+<div class="alapkeret">
+  <h5>{{projektservice.cim}}</h5>
+  <div>
+    <nav>
+      <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
+        Vissza a listához
+      </button>
+
+      <button [disabled]="eppFrissit || projektservice.uj" (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-minus" aria-hidden="true"></i>
+      </button>
+
+      <button [disabled]="eppFrissit || projektservice.uj" (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-caret-up" aria-hidden="true"></i>
+      </button>
+
+      <button [disabled]="eppFrissit || projektservice.uj" (click)="muszakiallapot()" class="btn btn-sm btn-outline-primary navgomb">
+        Műszaki állapot
+      </button>
+      <button [disabled]="eppFrissit || projektservice.uj" (click)="inverter()" class="btn btn-sm btn-outline-primary navgomb">
+        Inverter
+      </button>
+      <button [disabled]="eppFrissit || projektservice.uj" (click)="napelem()" class="btn btn-sm btn-outline-primary navgomb">
+        Napelem
+      </button>
+      <button [disabled]="eppFrissit || projektservice.uj" (click)="iratminta()" class="btn btn-sm btn-outline-primary navgomb">
+        Iratminta
+      </button>
+      <button [disabled]="eppFrissit || projektservice.uj" (click)="export()" class="btn btn-sm btn-outline-primary navgomb">
+        Export
+      </button>
+
+      <button [disabled]="eppFrissit || projektservice.uj" (click)="bizonylatesirat()" class="btn btn-sm btn-outline-primary navgomb">
+        Bizonylat és irat
+      </button>
+      <button [disabled]="eppFrissit || projektservice.uj" (click)="szamlazasirend()" class="btn btn-sm btn-outline-primary navgomb">
+        Számlázási rend
+      </button>
+      <button [disabled]="eppFrissit || projektservice.uj" (click)="teendo()" class="btn btn-sm btn-outline-primary navgomb">
+        Teendő
+      </button>
+    </nav>
+  </div>
+  <div  style="float: left;width: 300px;border: solid 1px silver;margin-right: 10px;margin-bottom: 5px;padding: 10px">
+    <table class="table ng table-bordered table-sm table-responsive" style="border: none">
+      <tbody>
+      <tr>
+        <td class="egylabel">Id:</td>
+        <td>{{projektservice.DtoSelected.PROJEKTKOD}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Stsz:</td>
+        <td>{{projektservice.DtoSelected.STATUSZ}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Műszaki állapot:</td>
+        <td>{{projektservice.DtoSelected.MUSZAKIALLAPOT}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Ügyfél:</td>
+        <td>{{projektservice.DtoSelected.UGYFELNEV}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Cím:</td>
+        <td>{{projektservice.DtoSelected.UGYFELCIM}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Telefon:</td>
+        <td>{{projektservice.DtoSelected.UGYFELTELEFONSZAM}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Email:</td>
+        <td>{{projektservice.DtoSelected.UGYFELEMAIL}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Telepítési cím:</td>
+        <td>{{projektservice.DtoSelected.TELEPITESICIM}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">A projekt jellege:</td>
+        <td>{{projektservice.DtoSelected.PROJEKTJELLEGE}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Inverter:</td>
+        <td>{{projektservice.DtoSelected.INVERTER}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel"></td>
+        <td>{{projektservice.DtoSelected.INVERTERALLAPOT}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Napelem:</td>
+        <td>{{projektservice.DtoSelected.NAPELEM}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel"></td>
+        <td>{{projektservice.DtoSelected.NAPELEMALLAPOT}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">DC, kW:</td>
+        <td>{{projektservice.DtoSelected.DCKW}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">AC, kVA:</td>
+        <td>{{projektservice.DtoSelected.ACKVA}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Vállalási ár, netto:</td>
+        <td>{{projektservice.DtoSelected.VALLALASIARNETTO}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Pénznem:</td>
+        <td>{{projektservice.DtoSelected.PENZNEM}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Munkalapszám:</td>
+        <td>{{projektservice.DtoSelected.MUNKALAPSZAM}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Keletkezett:</td>
+        <td>{{projektservice.DtoSelected.KELETKEZETT | datehun}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Megrendelve:</td>
+        <td>{{projektservice.DtoSelected.MEGRENDELVE | datehun}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Kivitelezési határidő:</td>
+        <td>{{projektservice.DtoSelected.KIVITELEZESIHATARIDO | datehun}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Megjegyzés:</td>
+        <td>{{projektservice.DtoSelected.MEGJEGYZES}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Létrehozta:</td>
+        <td>{{projektservice.DtoSelected.LETREHOZTA}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Létrehozva:</td>
+        <td>{{projektservice.DtoSelected.LETREHOZVA | datetimehun}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Módosította:</td>
+        <td>{{projektservice.DtoSelected.MODOSITOTTA}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Módosítva:</td>
+        <td>{{projektservice.DtoSelected.MODOSITVA | datetimehun}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <router-outlet></router-outlet>
+  <app-errormodal [cim]="projektservice.cim"></app-errormodal>
+</div>

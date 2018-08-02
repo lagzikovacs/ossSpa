@@ -1,0 +1,75 @@
+<table class="table table-bordered table-sm table-responsive" style="border: none">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Stsz</th>
+    <th>Műszaki állapot</th>
+    <th>Ügyfél</th>
+    <th>Cím</th>
+    <th>Telefon</th>
+    <th>Email</th>
+    <th>Telepítési cím</th>
+    <th>A projekt jellege</th>
+    <th>Inverter</th>
+    <th></th>
+    <th>Napelem</th>
+    <th></th>
+    <th>DC, kW</th>
+    <th>AC, kVA</th>
+    <th>Vállalási ár, netto</th>
+    <th>Pénznem</th>
+    <th>Munkalapszám</th>
+    <th>Keletkezett</th>
+    <th>Megrendelve</th>
+    <th>Kivitelezési határidő</th>
+    <th>Megjegyzés</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of Dto; let i = index">
+    <td *ngIf="enIdclick" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.PROJEKTKOD}}</td>
+    <td *ngIf="!enIdclick">{{item.PROJEKTKOD}}</td>
+    <td>{{item.STATUSZ}}</td>
+    <td>
+      <div style="width: 100px">{{item.MUSZAKIALLAPOT}}</div>
+    </td>
+    <td>
+      <div style="width: 100px">{{item.UGYFELNEV}}</div>
+    </td>
+    <td>
+      <div style="width: 150px">{{item.UGYFELCIM}}</div>
+    </td>
+    <td>{{item.UGYFELTELEFONSZAM}}</td>
+    <td>{{item.UGYFELEMAIL}}</td>
+    <td>
+      <div style="width: 150px">{{item.TELEPITESICIM}}</div>
+    </td>
+    <td>
+      <div style="width: 150px">{{item.PROJEKTJELLEGE}}</div>
+    </td>
+    <td>
+      <div style="width: 150px">{{item.INVERTER}}</div>
+    </td>
+    <td>
+      <div style="width: 150px">{{item.INVERTERALLAPOT}}</div>
+    </td>
+    <td>
+      <div style="width: 150px">{{item.NAPELEM}}</div>
+    </td>
+    <td>
+      <div style="width: 150px">{{item.NAPELEMALLAPOT}}</div>
+    </td>
+    <td style="text-align: right">{{item.DCKW | number: '1.2-2'}}</td>
+    <td style="text-align: right">{{item.ACKVA | number: '1.2-2'}}</td>
+    <td style="text-align: right">{{item.VALLALASIARNETTO | number: '1.2-2'}}</td>
+    <td>{{item.PENZNEM}}</td>
+    <td>{{item.MUNKALAPSZAM}}</td>
+    <td>{{item.KELETKEZETT | datehun}}</td>
+    <td>{{item.MEGRENDELVE | datehun}}</td>
+    <td>{{item.KIVITELEZESIHATARIDO | datehun}}</td>
+    <td>
+      <div style="width: 500px">{{item.MEGJEGYZES}}</div>
+    </td>
+  </tr>
+  </tbody>
+</table>

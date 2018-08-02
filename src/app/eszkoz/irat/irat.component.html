@@ -1,0 +1,45 @@
+<div class="alapkeret">
+  <h5>{{iratservice.cim}}</h5>
+  <app-irattoolbar
+    [szurok]="szurok"
+    [szurok2]="szurok2"
+    [(szempont)]="iratservice.szempont"
+    [(minta)]="iratservice.minta"
+    [(szempont2)]="iratservice.szempont2"
+    [(minta2)]="iratservice.minta2"
+    [enKereses]="!eppFrissit" (Kereses)="onKereses()"
+    [enUj]="!eppFrissit" (Uj)="onUj()">
+  </app-irattoolbar>
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Irány</th>
+      <th>Keletkezett</th>
+      <th>Irattipus</th>
+      <th>Ügyfélnév</th>
+      <th>Ügyfélcím</th>
+      <th>Küldő</th>
+      <th>Tárgy</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of iratservice.Dto; let i = index">
+      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.IRATKOD}}</td>
+      <td>{{item.IRANY}}</td>
+      <td>{{item.KELETKEZETT | datehun}}</td>
+      <td>{{item.IRATTIPUS}}</td>
+      <td>{{item.UGYFELNEV}}</td>
+      <td>{{item.UGYFELCIM}}</td>
+      <td>{{item.KULDO}}</td>
+      <td>{{item.TARGY}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <app-toolbarfooter [enKereses]="!iratservice.elsokereses && !eppFrissit"
+                     [rekordszam]="iratservice.Dto.length"
+                     [osszesrekord]="iratservice.OsszesRekord"
+                     (KeresesTovabb)="onKeresesTovabb()">
+  </app-toolbarfooter>
+  <app-errormodal [cim]="iratservice.cim"></app-errormodal>
+</div>

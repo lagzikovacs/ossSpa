@@ -1,0 +1,15 @@
+<div class="alapkeret">
+  <h5>A csoport felhasználói</h5>
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <tbody>
+    <tr *ngFor="let item of csoportservice.DtoCsoportFelhasznalo; let i = index">
+      <td>
+        <input type="checkbox" [checked]="item.CSOPORTTAG" (click)="felhasznalo(i)">
+      </td>
+      <td>{{item.AZONOSITO}}</td>
+      <td>{{item.NEV}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <app-errormodal [cim]="csoportservice.cim"></app-errormodal>
+</div>

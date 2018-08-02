@@ -1,0 +1,13 @@
+<div class="alapkeret">
+  <h5>Üdvözöljük</h5>
+  <div *ngIf="szerepkorkivalasztva; else elseBlock">
+    <p>Hello {{sessiondto.FELHASZNALO}} ({{sessiondto.AZONOSITO}}), ön a(z) {{sessiondto.PARTICIO}} partíció
+      {{sessiondto.CSOPORT}} csoportjának tagja.<br>
+      Bejelentkezett {{sessiondto.LETREHOZVA | datetimehun}}-kor, munkamenete érvényes {{sessiondto.ERVENYES | datetimehun}}-ig
+    </p>
+  </div>
+  <ng-template #elseBlock>
+    Kérjük jelentkezzen be ill. válasszon szerepkört!
+  </ng-template>
+  <app-errormodal [cim]="'Főoldal'"></app-errormodal>
+</div>

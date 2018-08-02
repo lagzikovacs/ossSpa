@@ -1,0 +1,59 @@
+<div class="alapkeret">
+  <h5>{{feliratkozasservice.cim}}</h5>
+  <div>
+    <nav>
+      <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
+        Vissza a listához
+      </button>
+      <button [disabled]="eppFrissit || feliratkozasservice.DtoSelectedIndex === -1" (click)="projekt()" class="btn btn-sm btn-outline-primary navgomb">
+        Projekt
+      </button>
+    </nav>
+  </div>
+  <div style="float: left;border: solid 1px silver;margin-right: 10px;margin-bottom: 5px;padding: 10px">
+    <table>
+      <tbody>
+      <tr>
+        <td class="egylabel">Id:</td>
+        <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].FELIRATKOZASKOD}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Lista:</td>
+        <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].LISTA}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Név:</td>
+        <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].NEV}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Cím:</td>
+        <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].TELEPULES}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Email:</td>
+        <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].EMAIL}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Telefonszám:</td>
+        <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].TELEFONSZAM}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Megjegyzés:</td>
+        <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].MEGJEGYZES}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Létrehozta:</td>
+        <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].LETREHOZTA}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Létrehozva:</td>
+        <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <router-outlet></router-outlet>
+  <app-errormodal [cim]="feliratkozasservice.cim"></app-errormodal>
+</div>
+
+

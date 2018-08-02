@@ -1,0 +1,30 @@
+export class ProjektDto {
+  PROJEKTKOD: number;
+  STATUSZ: number;
+  MUSZAKIALLAPOT: string;
+  UGYFELKOD: number;
+  UGYFELNEV: string;
+  UGYFELCIM: string;
+  UGYFELTELEFONSZAM: string;
+  UGYFELEMAIL: string;
+  TELEPITESICIM: string;
+  PROJEKTJELLEGE: string;
+  INVERTER: string;
+  INVERTERALLAPOT: string;
+  NAPELEM: string;
+  NAPELEMALLAPOT: string;
+  DCKW: number;
+  ACKVA: number;
+  VALLALASIARNETTO: number;
+  PENZNEMKOD: number;
+  PENZNEM: string;
+  MUNKALAPSZAM: string;
+  KELETKEZETT: Date;
+  MEGRENDELVE: Date;
+  KIVITELEZESIHATARIDO: Date;
+  MEGJEGYZES: string;
+  LETREHOZVA: Date;
+  LETREHOZTA: string;
+  MODOSITVA: Date;
+  MODOSITOTTA: string;
+}

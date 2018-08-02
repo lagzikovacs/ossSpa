@@ -1,0 +1,21 @@
+<div class="alapkeret">
+  <h5>{{projektservice.cim}}</h5>
+  <app-projekttoolbar [Statuszszurok]="statuszszurok"
+                      [Teendoszurok]="teendoszurok"
+                      [Szurok]="szurok"
+                      [(statuszszempont)]="projektservice.statuszszempont"
+                      [(teendoszempont)]="projektservice.teendoszempont"
+                      [(szempont)]="projektservice.szempont"
+                      [(minta)]="projektservice.minta"
+                      [enKereses]="!eppFrissit" (Kereses)="onKereses()"
+                      [enUj]="!eppFrissit" (Uj)="onUj()">
+  </app-projekttoolbar>
+  <app-projekt-tabla [Dto]="projektservice.Dto" (idclick)="setClickedRow($event)"></app-projekt-tabla>
+  <app-toolbarfooter [enKereses]="!projektservice.elsokereses && !eppFrissit"
+                     [rekordszam]="projektservice.Dto.length"
+                     [osszesrekord]="projektservice.OsszesRekord"
+                     (KeresesTovabb)="onKeresesTovabb()">
+  </app-toolbarfooter>
+  <app-errormodal [cim]="projektservice.cim"></app-errormodal>
+</div>
+

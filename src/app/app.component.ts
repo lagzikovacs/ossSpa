@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
+import {LogonService} from './services/logon.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,27 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  constructor(private _logonservice: LogonService) {
+  }
+
+  @HostListener('window:beforeunload')
+  BezarasElott() {
+    if (this._logonservice.isBejelentkezve()) {
+      this._logonservice.Kijelentkezes().then();
+    }
+  }
+
+  @HostListener('window:scroll')
+  Gordites() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      document.getElementById('GoTopBtn').style.display = 'block';
+    } else {
+      document.getElementById('GoTopBtn').style.display = 'none';
+    }
+  }
+
+  onFel() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
 }

@@ -1,0 +1,77 @@
+<div class="alapkeret">
+  <h5>{{iratservice.cim}}</h5>
+  <div>
+    <nav>
+      <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
+        Vissza a listához
+      </button>
+
+      <button [disabled]="eppFrissit || iratservice.DtoSelectedIndex === -1" (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-minus" aria-hidden="true"></i>
+      </button>
+      <button [disabled]="eppFrissit || iratservice.DtoSelectedIndex === -1" (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-caret-up" aria-hidden="true"></i>
+      </button>
+
+      <button [disabled]="eppFrissit || iratservice.DtoSelectedIndex === -1" (click)="dokumentum()" class="btn btn-sm btn-outline-primary navgomb">
+        Dokumentum
+      </button>
+    </nav>
+  </div>
+  <div  style="float: left;width: 300px;border: solid 1px silver;margin-right: 10px;margin-bottom: 5px;padding: 10px">
+    <table class="table ng table-bordered table-sm table-responsive" style="border: none">
+      <tbody>
+      <tr>
+        <td class="egylabel">Id:</td>
+        <td *ngIf="iratservice.DtoSelectedIndex !== -1">{{iratservice.Dto[iratservice.DtoSelectedIndex].IRATKOD}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Irány:</td>
+        <td *ngIf="iratservice.DtoSelectedIndex !== -1">{{iratservice.Dto[iratservice.DtoSelectedIndex].IRANY}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Keletkezett:</td>
+        <td *ngIf="iratservice.DtoSelectedIndex !== -1">{{iratservice.Dto[iratservice.DtoSelectedIndex].KELETKEZETT | datehun}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Irattipus:</td>
+        <td *ngIf="iratservice.DtoSelectedIndex !== -1">{{iratservice.Dto[iratservice.DtoSelectedIndex].IRATTIPUS}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Ügyfélnév:</td>
+        <td *ngIf="iratservice.DtoSelectedIndex !== -1">{{iratservice.Dto[iratservice.DtoSelectedIndex].UGYFELNEV}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Ügyfélcím:</td>
+        <td *ngIf="iratservice.DtoSelectedIndex !== -1">{{iratservice.Dto[iratservice.DtoSelectedIndex].UGYFELCIM}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Küldő:</td>
+        <td *ngIf="iratservice.DtoSelectedIndex !== -1">{{iratservice.Dto[iratservice.DtoSelectedIndex].KULDO}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Tárgy:</td>
+        <td *ngIf="iratservice.DtoSelectedIndex !== -1">{{iratservice.Dto[iratservice.DtoSelectedIndex].TARGY}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Létrehozta:</td>
+        <td *ngIf="iratservice.DtoSelectedIndex !== -1">{{iratservice.Dto[iratservice.DtoSelectedIndex].LETREHOZTA}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Létrehozva:</td>
+        <td *ngIf="iratservice.DtoSelectedIndex !== -1">{{iratservice.Dto[iratservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Módosította:</td>
+        <td *ngIf="iratservice.DtoSelectedIndex !== -1">{{iratservice.Dto[iratservice.DtoSelectedIndex].MODOSITOTTA}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Módosítva:</td>
+        <td *ngIf="iratservice.DtoSelectedIndex !== -1">{{iratservice.Dto[iratservice.DtoSelectedIndex].MODOSITVA | datetimehun}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <router-outlet></router-outlet>
+  <app-errormodal [cim]="iratservice.cim"></app-errormodal>
+</div>

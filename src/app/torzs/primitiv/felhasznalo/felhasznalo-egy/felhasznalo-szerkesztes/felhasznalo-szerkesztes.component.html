@@ -1,0 +1,79 @@
+<div class="alapkeret">
+  <h5 *ngIf="felhasznaloservice.uj">Új {{felhasznaloservice.cim | lowercase}}</h5>
+  <h5 *ngIf="!felhasznaloservice.uj">{{felhasznaloservice.cim}} módosítása</h5>
+
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Azonosító</div>
+      </div>
+      <div class="col-md-2">
+        <input type="text" class="form-control form-control-sm" id="azonosito"
+               maxlength="30" required autocomplete="off"
+               [(ngModel)]="felhasznaloservice.DtoEdited.AZONOSITO" name="azonosito">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Név</div>
+      </div>
+      <div class="col-md-2">
+        <input type="text" class="form-control form-control-sm" id="nev"
+               maxlength="100" required autocomplete="off"
+               [(ngModel)]="felhasznaloservice.DtoEdited.NEV" name="nev">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Telefon</div>
+      </div>
+      <div class="col-md-2">
+        <input type="text" class="form-control form-control-sm" id="telefon"
+               maxlength="50" required autocomplete="off"
+               [(ngModel)]="felhasznaloservice.DtoEdited.TELEFON" name="telefon">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Email</div>
+      </div>
+      <div class="col-md-2">
+        <input type="text" class="form-control form-control-sm" id="email"
+               maxlength="50" required autocomplete="off"
+               [(ngModel)]="felhasznaloservice.DtoEdited.EMAIL" name="email">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Státusz</div>
+      </div>
+      <div class="col-md-2">
+        <select type="text" class="form-control form-control-sm"
+                [(ngModel)]="felhasznaloservice.DtoEdited.STATUSZ" name="statusz">
+          <option>OK</option>
+          <option>Tiltott</option>
+        </select>
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Log</div>
+      </div>
+      <div class="col-md-2">
+        <select type="text" class="form-control form-control-sm"
+                [(ngModel)]="felhasznaloservice.DtoEdited.LOGONLOG" name="log">
+          <option value="false">Nem</option>
+          <option value="true">Igen</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row no-gutters">
+      <div class="col-md-2"></div>
+      <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
+      <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
+    </div>
+  </form>
+  <app-errormodal [cim]="felhasznaloservice.cim"></app-errormodal>
+</div>

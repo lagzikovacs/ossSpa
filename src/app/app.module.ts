@@ -86,6 +86,14 @@ import { FeliratkozasComponent } from './eszkoz/feliratkozas/feliratkozas.compon
 import { FeliratkozasegyComponent } from './eszkoz/feliratkozas/feliratkozasegy/feliratkozasegy.component';
 import { FeliratkozasProjektComponent } from './eszkoz/feliratkozas/feliratkozasegy/feliratkozas-projekt/feliratkozas-projekt.component';
 import { ProjektTablaComponent } from './eszkoz/projekt/projekt-tabla/projekt-tabla.component';
+import { RiportComponent } from './riport/riport.component';
+import { KimenoszamlaComponent } from './riport/kimenoszamla/kimenoszamla.component';
+import { BejovoszamlaComponent } from './riport/bejovoszamla/bejovoszamla.component';
+import { KovetelesComponent } from './riport/koveteles/koveteles.component';
+import { TartozasComponent } from './riport/tartozas/tartozas.component';
+import { BeszerzesComponent } from './riport/beszerzes/beszerzes.component';
+import { KeszletComponent } from './riport/keszlet/keszlet.component';
+import { NgmComponent } from './riport/ngm/ngm.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -182,6 +190,16 @@ const routes: Routes = [
   {path: 'feliratkozas', component: FeliratkozasComponent, canActivate: [RoleGuard]},
   {path: 'feliratkozasegy', component: FeliratkozasegyComponent, canActivate: [RoleGuard], children: [
     {path: 'projekt', component: FeliratkozasProjektComponent}
+  ]},
+
+  {path: 'riport', component: RiportComponent, canActivate: [RoleGuard], children: [
+    {path: 'kimenoszamla', component: KimenoszamlaComponent},
+    {path: 'bejovoszamla', component: BejovoszamlaComponent},
+    {path: 'koveteles', component: KovetelesComponent},
+    {path: 'tartozas', component: TartozasComponent},
+    {path: 'beszerzes', component: BeszerzesComponent},
+    {path: 'keszlet', component: KeszletComponent},
+    {path: 'ngm', component: NgmComponent}
   ]},
 
   {path: 'bejelentkezes', component: BejelentkezesComponent},
@@ -302,7 +320,15 @@ if (environment.production) {
     FeliratkozasComponent,
     FeliratkozasegyComponent,
     FeliratkozasProjektComponent,
-    ProjektTablaComponent
+    ProjektTablaComponent,
+    RiportComponent,
+    KimenoszamlaComponent,
+    BejovoszamlaComponent,
+    KovetelesComponent,
+    TartozasComponent,
+    BeszerzesComponent,
+    KeszletComponent,
+    NgmComponent
   ],
   imports: [
     BrowserModule,

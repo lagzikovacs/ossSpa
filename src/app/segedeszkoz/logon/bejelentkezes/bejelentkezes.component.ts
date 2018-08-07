@@ -25,8 +25,8 @@ export class BejelentkezesComponent implements OnInit {
     this._logonservice.SzerepkorKivalasztva = false;
 
     this.form = this.fb.group({
-      'azonosito': ['s', Validators.required],
-      'jelszo': ['s', Validators.required]
+      'azonosito': ['', Validators.required],
+      'jelszo': ['', Validators.required]
     });
   }
 

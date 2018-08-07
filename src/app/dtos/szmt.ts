@@ -4,8 +4,8 @@ export class SzMT {
   Szempont: Szempont;
   Minta: string;
 
-  constructor (Szempont: Szempont, Minta: string) {
-    this.Szempont = Szempont;
-    this.Minta = Minta;
+  constructor (szempont: Szempont, minta: string) {
+    this.Szempont = szempont;
+    this.Minta = minta;
   }
 }

@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   lapmeret: 10,
   BaseHref: 'https://docport.hu/ossrest/',
+  // BaseHref: 'http://localhost:52643/',
   perAlldefault: '0 / 0'
 };
 

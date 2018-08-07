@@ -1,3 +1,66 @@
-<p>
-  particioegy works!
-</p>
+<div class="alapkeret">
+  <h5>{{particioservice.cim}}</h5>
+  <div>
+    <nav>
+      <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
+        Vissza a listához
+      </button>
+      <button [disabled]="eppFrissit || particioservice.DtoSelectedIndex === -1" (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-minus" aria-hidden="true"></i>
+      </button>
+      <button [disabled]="eppFrissit || particioservice.DtoSelectedIndex === -1" (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-caret-up" aria-hidden="true"></i>
+      </button>
+      <button [disabled]="eppFrissit" (click)="szallito()" class="btn btn-sm btn-outline-primary navgomb">
+        Szállító
+      </button>
+      <button [disabled]="eppFrissit" (click)="nav()" class="btn btn-sm btn-outline-primary navgomb">
+        NAV
+      </button>
+      <button [disabled]="eppFrissit" (click)="smtp()" class="btn btn-sm btn-outline-primary navgomb">
+        SMTP
+      </button>
+      <button [disabled]="eppFrissit" (click)="bizonylat()" class="btn btn-sm btn-outline-primary navgomb">
+        Bizonylat
+      </button>
+      <button [disabled]="eppFrissit" (click)="projekt()" class="btn btn-sm btn-outline-primary navgomb">
+        Projekt
+      </button>
+      <button [disabled]="eppFrissit" (click)="volume()" class="btn btn-sm btn-outline-primary navgomb">
+        Volume
+      </button>
+    </nav>
+  </div>
+  <div style="float: left;border: solid 1px silver;margin-right: 10px;margin-bottom: 5px;padding: 10px">
+    <table>
+      <tbody>
+      <tr>
+        <td class="egylabel">Id:</td>
+        <td *ngIf="particioservice.DtoSelectedIndex !== -1">{{particioservice.Dto[particioservice.DtoSelectedIndex].PARTICIOKOD}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Megnevezés:</td>
+        <td *ngIf="particioservice.DtoSelectedIndex !== -1">{{particioservice.Dto[particioservice.DtoSelectedIndex].MEGNEVEZES}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Létrehozta:</td>
+        <td *ngIf="particioservice.DtoSelectedIndex !== -1">{{particioservice.Dto[particioservice.DtoSelectedIndex].LETREHOZTA}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Létrehozva:</td>
+        <td *ngIf="particioservice.DtoSelectedIndex !== -1">{{particioservice.Dto[particioservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Módosította:</td>
+        <td *ngIf="particioservice.DtoSelectedIndex !== -1">{{particioservice.Dto[particioservice.DtoSelectedIndex].MODOSITOTTA}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Módosítva:</td>
+        <td *ngIf="particioservice.DtoSelectedIndex !== -1">{{particioservice.Dto[particioservice.DtoSelectedIndex].MODOSITVA | datetimehun}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <router-outlet></router-outlet>
+  <app-errormodal [cim]="particioservice.cim"></app-errormodal>
+</div>

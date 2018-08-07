@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 declare let $: any;
 
@@ -34,6 +34,10 @@ export class ErrormodalComponent {
     $('#' + this.idrandom).modal('hide');
   }
   halejart() {
+    if (this.hiba === undefined) {
+      this._router.navigate(['/bejelentkezes']);
+      return;
+    }
     if (this.hiba.indexOf('Ismeretlen Sid') !== -1) {
       this._router.navigate(['/bejelentkezes']);
     }

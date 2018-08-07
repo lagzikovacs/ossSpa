@@ -13,6 +13,8 @@ import {SzMT} from '../dtos/szmt';
 export class RiportService {
   private readonly _controller = 'api/riport/';
 
+  cim = 'Riport';
+
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
 
@@ -94,6 +96,28 @@ export class RiportService {
   }
   public KeszletLstTaskStart(fi: SzMT[]): Promise<StringResult> {
     const url = environment.BaseHref + this._controller + 'keszletlsttaskstart';
+    const body = fi;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<StringResult>(url, body, options).toPromise();
+  }
+
+
+  public PenztarTetelLstTaskStart(fi: SzMT[]): Promise<StringResult> {
+    const url = environment.BaseHref + this._controller + 'penztartetellsttaskstart';
+    const body = fi;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<StringResult>(url, body, options).toPromise();
+  }
+  public ProjektLstTaskStart(fi: SzMT[]): Promise<StringResult> {
+    const url = environment.BaseHref + this._controller + 'projektlsttaskstart';
     const body = fi;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

@@ -94,6 +94,12 @@ import { TartozasComponent } from './riport/tartozas/tartozas.component';
 import { BeszerzesComponent } from './riport/beszerzes/beszerzes.component';
 import { KeszletComponent } from './riport/keszlet/keszlet.component';
 import { NgmComponent } from './riport/ngm/ngm.component';
+import { ParticioSzallitoComponent } from './segedeszkoz/particio/particioegy/particio-szallito/particio-szallito.component';
+import { ParticioNavComponent } from './segedeszkoz/particio/particioegy/particio-nav/particio-nav.component';
+import { ParticioSmtpComponent } from './segedeszkoz/particio/particioegy/particio-smtp/particio-smtp.component';
+import { ParticioBizonylatComponent } from './segedeszkoz/particio/particioegy/particio-bizonylat/particio-bizonylat.component';
+import { ParticioProjektComponent } from './segedeszkoz/particio/particioegy/particio-projekt/particio-projekt.component';
+import { ParticioVolumeComponent } from './segedeszkoz/particio/particioegy/particio-volume/particio-volume.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -211,6 +217,12 @@ const routes: Routes = [
   {path: 'particioegy', component: ParticioegyComponent, canActivate: [RoleGuard], children: [
     {path: 'torles', component: ParticioTorlesComponent},
     {path: 'szerkesztes', component: ParticioSzerkesztesComponent},
+    {path: 'szallito', component: ParticioSzallitoComponent},
+    {path: 'nav', component: ParticioNavComponent},
+    {path: 'smtp', component: ParticioSmtpComponent},
+    {path: 'bizonylat', component: ParticioBizonylatComponent},
+    {path: 'projekt', component: ParticioProjektComponent},
+    {path: 'volume', component: ParticioVolumeComponent},
     {path: 'blank', component: BlankComponent}
   ]},
 
@@ -328,7 +340,13 @@ if (environment.production) {
     TartozasComponent,
     BeszerzesComponent,
     KeszletComponent,
-    NgmComponent
+    NgmComponent,
+    ParticioSzallitoComponent,
+    ParticioNavComponent,
+    ParticioSmtpComponent,
+    ParticioBizonylatComponent,
+    ParticioProjektComponent,
+    ParticioVolumeComponent
   ],
   imports: [
     BrowserModule,

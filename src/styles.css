@@ -43,6 +43,17 @@ html, body {
   margin-bottom: 5px;
 }
 
+.egypanel {
+  float: left;
+  width: 300px;
+  border: solid 1px silver;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  padding: 10px
+}
+.egytable {
+  border: none;
+}
 .egylabel {
   text-align: left;
   font-style: italic;

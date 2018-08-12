@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
-import {UgyfelService} from '../../../services/ugyfel.service';
+import {UgyfelService} from '../../../services/torzs/ugyfel.service';
 
 @Component({
   selector: 'app-ugyfelegy',

@@ -1,3 +1,45 @@
-<p>
-  termekdij-szerkesztes works!
-</p>
+<div class="alapkeret">
+  <h5 *ngIf="termekdijservice.uj">Új {{termekdijservice.cim | lowercase}}</h5>
+  <h5 *ngIf="!termekdijservice.uj">{{termekdijservice.cim}} módosítása</h5>
+
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">KT</div>
+      </div>
+      <div class="col-md-2">
+        <input type="text" class="form-control form-control-sm" id="kt"
+               maxlength="30" required autocomplete="off"
+               [(ngModel)]="termekdijservice.DtoEdited.TERMEKDIJKT" name="kt">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Megnevezés</div>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control form-control-sm" id="megnevezes"
+               maxlength="50" required autocomplete="off"
+               [(ngModel)]="termekdijservice.DtoEdited.TERMEKDIJMEGNEVEZES" name="megnevezes">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Egységár</div>
+      </div>
+      <div class="col-md-1">
+        <input type="number" class="form-control form-control-sm" id="egysegar"
+               required autocomplete="off"
+               [(ngModel)]="termekdijservice.DtoEdited.TERMEKDIJEGYSEGAR" name="egysegar">
+      </div>
+    </div>
+
+    <div class="row no-gutters" style="margin-bottom: 10px">
+      <div class="col-md-2"></div>
+      <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
+      <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
+    </div>
+  </form>
+  <app-errormodal [cim]="termekdijservice.cim"></app-errormodal>
+</div>

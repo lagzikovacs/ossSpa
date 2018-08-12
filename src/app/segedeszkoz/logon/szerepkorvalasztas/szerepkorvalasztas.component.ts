@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
-import {LogonService} from '../../../services/logon.service';
+import {LogonService} from '../../../services/segedeszkosz/logon.service';
 import {Router} from '@angular/router';
 
 @Component({

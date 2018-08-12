@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs/index';
 import {AngularmenuDto} from '../../dtos/menu/angularmenudto';
 import {Router} from '@angular/router';
-import {LogonService} from '../../services/logon.service';
+import {LogonService} from '../../services/segedeszkosz/logon.service';
 import {MenuService} from '../../services/menu.service';
 import {ErrormodalComponent} from '../errormodal/errormodal.component';
 import {VerzioService} from '../../services/verzio.service';

@@ -8,14 +8,14 @@ import {environment} from '../environments/environment';
 import { FooldalComponent } from './fooldal/fooldal.component';
 import { MenunodeComponent } from './tools/menu/menunode/menunode.component';
 import { MenuitemComponent } from './tools/menu/menuitem/menuitem.component';
-import {LogonService} from './services/logon.service';
+import {LogonService} from './services/segedeszkosz/logon.service';
 import {MenuService} from './services/menu.service';
 import {HttpClientModule} from '@angular/common/http';
 import { BejelentkezesComponent } from './segedeszkoz/logon/bejelentkezes/bejelentkezes.component';
 import { ErrormodalComponent } from './tools/errormodal/errormodal.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FelhasznaloComponent } from './torzs/primitiv/felhasznalo/felhasznalo.component';
-import {FelhasznaloService} from './services/felhasznalo.service';
+import {FelhasznaloService} from './services/torzs/primitiv/felhasznalo.service';
 import {LoginGuard} from './guards/login.guard';
 import {RoleGuard} from './guards/role.guard';
 import { SzerepkorvalasztasComponent } from './segedeszkoz/logon/szerepkorvalasztas/szerepkorvalasztas.component';
@@ -36,7 +36,7 @@ import { ProjektegyComponent } from './eszkoz/projekt/projektegy/projektegy.comp
 import { ProjektSzerkesztesComponent } from './eszkoz/projekt/projektegy/projekt-szerkesztes/projekt-szerkesztes.component';
 import { ProjektTorlesComponent } from './eszkoz/projekt/projektegy/projekt-torles/projekt-torles.component';
 import {ProjektToolbarComponent} from './eszkoz/projekt/projekttoolbar/projekttoolbar.component';
-import {ProjektService} from './services/projekt.service';
+import {ProjektService} from './services/eszkoz/projekt.service';
 import { ProjektMuszakiallapotComponent } from './eszkoz/projekt/projektegy/projekt-muszakiallapot/projekt-muszakiallapot.component';
 import { ProjektInverterComponent } from './eszkoz/projekt/projektegy/projekt-inverter/projekt-inverter.component';
 import { ProjektNapelemComponent } from './eszkoz/projekt/projektegy/projekt-napelem/projekt-napelem.component';
@@ -49,8 +49,8 @@ import { IratComponent } from './eszkoz/irat/irat.component';
 import { IrategyComponent } from './eszkoz/irat/irategy/irategy.component';
 import {IratToolbarComponent} from './eszkoz/irat/irattolbar/irattoolbar.component';
 import { IratDokumentumComponent } from './eszkoz/irat/irategy/irat-dokumentum/irat-dokumentum.component';
-import {IratService} from './services/irat.service';
-import {DokumentumService} from './services/dokumentum.service';
+import {IratService} from './services/eszkoz/irat.service';
+import {DokumentumService} from './services/eszkoz/dokumentum.service';
 import { IratDokumentumegyComponent } from './eszkoz/irat/irategy/irat-dokumentum/irat-dokumentumegy/irat-dokumentumegy.component';
 import { IratSzerkesztesComponent } from './eszkoz/irat/irategy/irat-szerkesztes/irat-szerkesztes.component';
 import { IratTorlesComponent } from './eszkoz/irat/irategy/irat-torles/irat-torles.component';
@@ -76,9 +76,6 @@ import { CsoportTorlesComponent } from './segedeszkoz/csoport/csoportegy/csoport
 import { CsoportFelhasznaloComponent } from './segedeszkoz/csoport/csoportegy/csoport-felhasznalo/csoport-felhasznalo.component';
 import { CsoportJogComponent } from './segedeszkoz/csoport/csoportegy/csoport-jog/csoport-jog.component';
 import { ParticioComponent } from './segedeszkoz/particio/particio.component';
-import { ParticioegyComponent } from './segedeszkoz/particio/particioegy/particioegy.component';
-import { ParticioSzerkesztesComponent } from './segedeszkoz/particio/particioegy/particio-szerkesztes/particio-szerkesztes.component';
-import { ParticioTorlesComponent } from './segedeszkoz/particio/particioegy/particio-torles/particio-torles.component';
 import { VolumeComponent } from './segedeszkoz/volume/volume.component';
 import { VolumeegyComponent } from './segedeszkoz/volume/volumeegy/volumeegy.component';
 import { VolumeTesztComponent } from './segedeszkoz/volume/volumeegy/volume-teszt/volume-teszt.component';
@@ -94,12 +91,12 @@ import { TartozasComponent } from './riport/tartozas/tartozas.component';
 import { BeszerzesComponent } from './riport/beszerzes/beszerzes.component';
 import { KeszletComponent } from './riport/keszlet/keszlet.component';
 import { NgmComponent } from './riport/ngm/ngm.component';
-import { ParticioSzallitoComponent } from './segedeszkoz/particio/particioegy/particio-szallito/particio-szallito.component';
-import { ParticioNavComponent } from './segedeszkoz/particio/particioegy/particio-nav/particio-nav.component';
-import { ParticioSmtpComponent } from './segedeszkoz/particio/particioegy/particio-smtp/particio-smtp.component';
-import { ParticioBizonylatComponent } from './segedeszkoz/particio/particioegy/particio-bizonylat/particio-bizonylat.component';
-import { ParticioProjektComponent } from './segedeszkoz/particio/particioegy/particio-projekt/particio-projekt.component';
-import { ParticioVolumeComponent } from './segedeszkoz/particio/particioegy/particio-volume/particio-volume.component';
+import { ParticioSzallitoComponent } from './segedeszkoz/particio/particio-szallito/particio-szallito.component';
+import { ParticioNavComponent } from './segedeszkoz/particio/particio-nav/particio-nav.component';
+import { ParticioSmtpComponent } from './segedeszkoz/particio/particio-smtp/particio-smtp.component';
+import { ParticioBizonylatComponent } from './segedeszkoz/particio/particio-bizonylat/particio-bizonylat.component';
+import { ParticioProjektComponent } from './segedeszkoz/particio/particio-projekt/particio-projekt.component';
+import { ParticioVolumeComponent } from './segedeszkoz/particio/particio-volume/particio-volume.component';
 import { TeendoComponent } from './torzs/primitiv/teendo/teendo.component';
 import { FizetesimodComponent } from './torzs/primitiv/fizetesimod/fizetesimod.component';
 import { PenznemComponent } from './torzs/primitiv/penznem/penznem.component';
@@ -128,6 +125,7 @@ import { FizetesimodSzerkesztesComponent } from './torzs/primitiv/fizetesimod/fi
 import { FizetesimodTorlesComponent } from './torzs/primitiv/fizetesimod/fizetesimodegy/fizetesimod-torles/fizetesimod-torles.component';
 import { PenznemSzerkesztesComponent } from './torzs/primitiv/penznem/penznemegy/penznem-szerkesztes/penznem-szerkesztes.component';
 import { PenznemTorlesComponent } from './torzs/primitiv/penznem/penznemegy/penznem-torles/penznem-torles.component';
+import { CikkBeszerzesKivetComponent } from './torzs/cikk/cikkegy/cikk-beszerzes-kivet/cikk-beszerzes-kivet.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -163,10 +161,58 @@ const routes: Routes = [
     {path: 'blank', component: BlankComponent}
   ]},
   {path: 'cikk', component: CikkComponent, canActivate: [RoleGuard]},
-  {path: 'cikkuj', component: CikkSzerkesztesComponent, canActivate: [RoleGuard]},
+  {path: 'cikkuj', component: CikkSzerkesztesComponent, canActivate: [RoleGuard], children: [
+    {path: 'me', component: MeComponent, canActivate: [RoleGuard]},
+    {path: 'meuj', component: MeSzerkesztesComponent, canActivate: [RoleGuard]},
+    {path: 'meegy', component: MeegyComponent, canActivate: [RoleGuard], children: [
+      {path: 'torles', component: MeTorlesComponent},
+      {path: 'szerkesztes', component: MeSzerkesztesComponent},
+      {path: 'blank', component: BlankComponent}
+    ]},
+    {path: 'afakulcs', component: AfakulcsComponent, canActivate: [RoleGuard]},
+    {path: 'afakulcsuj', component: AfakulcsSzerkesztesComponent, canActivate: [RoleGuard]},
+    {path: 'afakulcsegy', component: AfakulcsegyComponent, canActivate: [RoleGuard], children: [
+      {path: 'torles', component: AfakulcsTorlesComponent},
+      {path: 'szerkesztes', component: AfakulcsSzerkesztesComponent},
+      {path: 'blank', component: BlankComponent}
+    ]},
+    {path: 'termekdij', component: TermekdijComponent, canActivate: [RoleGuard]},
+    {path: 'termekdijuj', component: TermekdijSzerkesztesComponent, canActivate: [RoleGuard]},
+    {path: 'termekdijegy', component: TermekdijegyComponent, canActivate: [RoleGuard], children: [
+      {path: 'torles', component: TermekdijTorlesComponent},
+      {path: 'szerkesztes', component: TermekdijSzerkesztesComponent},
+      {path: 'blank', component: BlankComponent}
+    ]},
+    {path: 'blank', component: BlankComponent}
+  ]},
   {path: 'cikkegy', component: CikkegyComponent, canActivate: [RoleGuard], children: [
     {path: 'torles', component: CikkTorlesComponent},
-    {path: 'szerkesztes', component: CikkSzerkesztesComponent},
+    {path: 'szerkesztes', component: CikkSzerkesztesComponent, children: [
+      {path: 'me', component: MeComponent, canActivate: [RoleGuard]},
+      {path: 'meuj', component: MeSzerkesztesComponent, canActivate: [RoleGuard]},
+      {path: 'meegy', component: MeegyComponent, canActivate: [RoleGuard], children: [
+        {path: 'torles', component: MeTorlesComponent},
+        {path: 'szerkesztes', component: MeSzerkesztesComponent},
+        {path: 'blank', component: BlankComponent}
+      ]},
+      {path: 'afakulcs', component: AfakulcsComponent, canActivate: [RoleGuard]},
+      {path: 'afakulcsuj', component: AfakulcsSzerkesztesComponent, canActivate: [RoleGuard]},
+      {path: 'afakulcsegy', component: AfakulcsegyComponent, canActivate: [RoleGuard], children: [
+        {path: 'torles', component: AfakulcsTorlesComponent},
+        {path: 'szerkesztes', component: AfakulcsSzerkesztesComponent},
+        {path: 'blank', component: BlankComponent}
+      ]},
+      {path: 'termekdij', component: TermekdijComponent, canActivate: [RoleGuard]},
+      {path: 'termekdijuj', component: TermekdijSzerkesztesComponent, canActivate: [RoleGuard]},
+      {path: 'termekdijegy', component: TermekdijegyComponent, canActivate: [RoleGuard], children: [
+        {path: 'torles', component: TermekdijTorlesComponent},
+        {path: 'szerkesztes', component: TermekdijSzerkesztesComponent},
+        {path: 'blank', component: BlankComponent}
+      ]},
+      {path: 'blank', component: BlankComponent}
+    ]},
+    {path: 'beszerzes', component: CikkBeszerzesKivetComponent},
+    {path: 'kivet', component: CikkBeszerzesKivetComponent},
     {path: 'blank', component: BlankComponent}
   ]},
   {path: 'me', component: MeComponent, canActivate: [RoleGuard]},
@@ -292,11 +338,7 @@ const routes: Routes = [
   {path: 'szerepkorvalasztas', component: SzerepkorvalasztasComponent, canActivate: [LoginGuard]},
   {path: 'jelszocsere', component: JelszocsereComponent, canActivate: [LoginGuard]},
 
-  {path: 'particio', component: ParticioComponent, canActivate: [RoleGuard]},
-  {path: 'particiouj', component: ParticioSzerkesztesComponent, canActivate: [RoleGuard]},
-  {path: 'particioegy', component: ParticioegyComponent, canActivate: [RoleGuard], children: [
-    {path: 'torles', component: ParticioTorlesComponent},
-    {path: 'szerkesztes', component: ParticioSzerkesztesComponent},
+  {path: 'particio', component: ParticioComponent, canActivate: [RoleGuard], children: [
     {path: 'szallito', component: ParticioSzallitoComponent},
     {path: 'nav', component: ParticioNavComponent},
     {path: 'smtp', component: ParticioSmtpComponent},
@@ -403,9 +445,6 @@ if (environment.production) {
     CsoportFelhasznaloComponent,
     CsoportJogComponent,
     ParticioComponent,
-    ParticioegyComponent,
-    ParticioSzerkesztesComponent,
-    ParticioTorlesComponent,
     VolumeComponent,
     VolumeegyComponent,
     VolumeTesztComponent,
@@ -454,7 +493,8 @@ if (environment.production) {
     FizetesimodSzerkesztesComponent,
     FizetesimodTorlesComponent,
     PenznemSzerkesztesComponent,
-    PenznemTorlesComponent
+    PenznemTorlesComponent,
+    CikkBeszerzesKivetComponent
   ],
   imports: [
     BrowserModule,

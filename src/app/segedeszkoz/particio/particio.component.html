@@ -1,26 +1,28 @@
 <div class="alapkeret">
   <h5>{{particioservice.cim}}</h5>
-  <app-toolbar [Szurok]="szurok"
-               [(szempont)]="particioservice.ekDto.szempont"
-               [(minta)]="particioservice.ekDto.minta"
-               [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit" (Uj)="uj()">
-  </app-toolbar>
-  <table class="table table-bordered table-sm table-responsive" style="border: none">
-    <thead>
-    <tr>
-      <th *ngIf="particioservice.zoom"></th>
-      <th>Id</th>
-      <th>Megnevezés</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of particioservice.Dto; let i = index">
-      <td *ngIf="particioservice.zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer" (click)="selectforzoom(i)"><i class="fa fa-check" aria-hidden="true"></i></td>
-      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.PARTICIOKOD}}</td>
-      <td>{{item.MEGNEVEZES}}</td>
-    </tr>
-    </tbody>
-  </table>
+  <div>
+    <nav>
+      <button [disabled]="eppFrissit" (click)="szallito()" class="btn btn-sm btn-outline-primary navgomb">
+        Szállító
+      </button>
+      <button [disabled]="eppFrissit" (click)="nav()" class="btn btn-sm btn-outline-primary navgomb">
+        NAV
+      </button>
+      <button [disabled]="eppFrissit" (click)="smtp()" class="btn btn-sm btn-outline-primary navgomb">
+        SMTP
+      </button>
+      <button [disabled]="eppFrissit" (click)="bizonylat()" class="btn btn-sm btn-outline-primary navgomb">
+        Bizonylat
+      </button>
+      <button [disabled]="eppFrissit" (click)="projekt()" class="btn btn-sm btn-outline-primary navgomb">
+        Projekt
+      </button>
+      <button [disabled]="eppFrissit" (click)="volume()" class="btn btn-sm btn-outline-primary navgomb">
+        Volume
+      </button>
+    </nav>
+  </div>
+  <router-outlet></router-outlet>
   <app-errormodal [cim]="particioservice.cim"></app-errormodal>
 </div>
+

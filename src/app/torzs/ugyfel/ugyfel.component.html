@@ -20,24 +20,27 @@
       <th>EU adószám</th>
       <th>Telefon</th>
       <th>Email</th>
-      <th>Megjegyzés</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let item of ugyfelservice.Dto; let i = index">
-      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.UGYFELKOD}}</td>
-      <td>{{item.NEV}}</td>
-      <td>{{item.IRANYITOSZAM}}</td>
-      <td>{{item.HELYSEGNEV}}</td>
-      <td>{{item.KOZTERULET}}</td>
-      <td>{{item.KOZTERULETTIPUS}}</td>
-      <td>{{item.HAZSZAM}}</td>
-      <td>{{item.ADOSZAM}}</td>
-      <td>{{item.EUADOSZAM}}</td>
-      <td>{{item.TELEFON}}</td>
-      <td>{{item.EMAIL}}</td>
-      <td>{{item.MEGJEGYZES}}</td>
-    </tr>
+    <ng-container *ngFor="let item of ugyfelservice.Dto; let i = index">
+      <tr>
+        <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.UGYFELKOD}}</td>
+        <td>{{item.NEV}}</td>
+        <td>{{item.IRANYITOSZAM}}</td>
+        <td>{{item.HELYSEGNEV}}</td>
+        <td>{{item.KOZTERULET}}</td>
+        <td>{{item.KOZTERULETTIPUS}}</td>
+        <td>{{item.HAZSZAM}}</td>
+        <td>{{item.ADOSZAM}}</td>
+        <td>{{item.EUADOSZAM}}</td>
+        <td>{{item.TELEFON}}</td>
+        <td>{{item.EMAIL}}</td>
+      </tr>
+      <tr *ngIf="item.MEGJEGYZES !== null && item.MEGJEGYZES !== ''">
+        <td colspan="11">{{item.MEGJEGYZES}}</td>
+      </tr>
+    </ng-container>
     </tbody>
   </table>
   <app-toolbarfooter [enKereses]="!ugyfelservice.elsokereses && !eppFrissit"

@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CsoportService} from '../../../../services/csoport.service';
+import {CsoportService} from '../../../../services/segedeszkosz/csoport.service';
 import {ErrormodalComponent} from '../../../../tools/errormodal/errormodal.component';
 import {NumberResult} from '../../../../dtos/numberresult';
 

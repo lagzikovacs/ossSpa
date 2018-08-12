@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
-import {ProjektService} from '../../../services/projekt.service';
+import {ProjektService} from '../../../services/eszkoz/projekt.service';
 
 @Component({
   selector: 'app-projektegy',

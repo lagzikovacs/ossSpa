@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
-import {IrattipusService} from '../../../services/irattipus.service';
+import {IrattipusService} from '../../../services/torzs/primitiv/irattipus.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({

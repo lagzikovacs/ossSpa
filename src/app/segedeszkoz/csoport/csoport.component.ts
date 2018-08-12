@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {CsoportService} from '../../services/csoport.service';
+import {CsoportService} from '../../services/segedeszkosz/csoport.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 

@@ -1,3 +1,50 @@
-<p>
-  fizetesimodegy works!
-</p>
+<div class="alapkeret">
+  <h5>{{fizetesimodservice.cim}}</h5>
+  <div>
+    <nav>
+      <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
+        Vissza a listához
+      </button>
+      <button [disabled]="eppFrissit || fizetesimodservice.DtoSelectedIndex === -1" (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-minus" aria-hidden="true"></i>
+      </button>
+      <button [disabled]="eppFrissit || fizetesimodservice.DtoSelectedIndex === -1" (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-caret-up" aria-hidden="true"></i>
+      </button>
+    </nav>
+  </div>
+  <div class="egypanel">
+    <table class="table ng table-bordered table-sm table-responsive" style="border: none">
+      <tbody>
+      <tr>
+        <td class="egylabel">Id:</td>
+        <td *ngIf="fizetesimodservice.DtoSelectedIndex !== -1">{{fizetesimodservice.Dto[fizetesimodservice.DtoSelectedIndex].FIZETESIMODKOD}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Fizetési mód:</td>
+        <td *ngIf="fizetesimodservice.DtoSelectedIndex !== -1">{{fizetesimodservice.Dto[fizetesimodservice.DtoSelectedIndex].FIZETESIMOD1}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Létrehozta:</td>
+        <td *ngIf="fizetesimodservice.DtoSelectedIndex !== -1">{{fizetesimodservice.Dto[fizetesimodservice.DtoSelectedIndex].LETREHOZTA}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Létrehozva:</td>
+        <td *ngIf="fizetesimodservice.DtoSelectedIndex !== -1">{{fizetesimodservice.Dto[fizetesimodservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Módosította:</td>
+        <td *ngIf="fizetesimodservice.DtoSelectedIndex !== -1">{{fizetesimodservice.Dto[fizetesimodservice.DtoSelectedIndex].MODOSITOTTA}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Módosítva:</td>
+        <td *ngIf="fizetesimodservice.DtoSelectedIndex !== -1">{{fizetesimodservice.Dto[fizetesimodservice.DtoSelectedIndex].MODOSITVA | datetimehun}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <router-outlet></router-outlet>
+  <app-errormodal [cim]="fizetesimodservice.cim"></app-errormodal>
+</div>
+
+

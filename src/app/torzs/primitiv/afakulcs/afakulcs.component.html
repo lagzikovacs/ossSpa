@@ -1,3 +1,30 @@
-<p>
-  afakulcs works!
-</p>
+<div class="alapkeret">
+  <h5 *ngIf="!afakulcsservice.zoom">{{afakulcsservice.cim}}</h5>
+  <h5 *ngIf="afakulcsservice.zoom">{{afakulcsservice.cim}} - zoom</h5>
+  <app-toolbar [Szurok]="szurok"
+               [(szempont)]="afakulcsservice.ekDto.szempont"
+               [(minta)]="afakulcsservice.ekDto.minta"
+               [enKereses]="!eppFrissit" (Kereses)="onKereses()"
+               [enUj]="!eppFrissit" (Uj)="uj()"
+               [visZoom]="afakulcsservice.zoom" (StopZoom)="stopzoom()">
+  </app-toolbar>
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th *ngIf="afakulcsservice.zoom"></th>
+      <th>Id</th>
+      <th>ÁFA kulcs</th>
+      <th>Az ÁFA mértéke, %</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of afakulcsservice.Dto; let i = index">
+      <td *ngIf="afakulcsservice.zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="selectforzoom(i)"><i class="fa fa-check" aria-hidden="true"></i></td>
+      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.AFAKULCSKOD}}</td>
+      <td>{{item.AFAKULCS1}}</td>
+      <td>{{item.AFAMERTEKE}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <app-errormodal [cim]="afakulcsservice.cim"></app-errormodal>
+</div>

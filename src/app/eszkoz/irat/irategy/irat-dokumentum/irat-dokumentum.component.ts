@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../../tools/errormodal/errormodal.component';
-import {DokumentumService} from '../../../../services/dokumentum.service';
-import {IratService} from '../../../../services/irat.service';
+import {DokumentumService} from '../../../../services/eszkoz/dokumentum.service';
+import {IratService} from '../../../../services/eszkoz/irat.service';
 import {DokumentumDto} from '../../../../dtos/dokumentum/dokumentumdto';
 
 @Component({

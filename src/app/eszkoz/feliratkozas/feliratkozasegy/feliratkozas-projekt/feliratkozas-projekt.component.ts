@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FeliratkozasService} from '../../../../services/feliratkozas.service';
+import {FeliratkozasService} from '../../../../services/eszkoz/feliratkozas.service';
 
 @Component({
   selector: 'app-feliratkozas-projekt',

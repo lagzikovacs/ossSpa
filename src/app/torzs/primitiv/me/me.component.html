@@ -1,3 +1,28 @@
-<p>
-  me works!
-</p>
+<div class="alapkeret">
+  <h5 *ngIf="!meservice.zoom">{{meservice.cim}}</h5>
+  <h5 *ngIf="meservice.zoom">{{meservice.cim}} - zoom</h5>
+  <app-toolbar [Szurok]="szurok"
+               [(szempont)]="meservice.ekDto.szempont"
+               [(minta)]="meservice.ekDto.minta"
+               [enKereses]="!eppFrissit" (Kereses)="onKereses()"
+               [enUj]="!eppFrissit" (Uj)="uj()"
+               [visZoom]="meservice.zoom" (StopZoom)="stopzoom()">
+  </app-toolbar>
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th *ngIf="meservice.zoom"></th>
+      <th>Id</th>
+      <th>Mennyiségi egység</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of meservice.Dto; let i = index">
+      <td *ngIf="meservice.zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="selectforzoom(i)"><i class="fa fa-check" aria-hidden="true"></i></td>
+      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.MEKOD}}</td>
+      <td>{{item.ME}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <app-errormodal [cim]="meservice.cim"></app-errormodal>
+</div>

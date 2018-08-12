@@ -1,9 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {Szempont} from '../../enums/szempont';
-import {UgyfelService} from '../../services/ugyfel.service';
+import {UgyfelService} from '../../services/torzs/ugyfel.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UgyfelDto} from '../../dtos/ugyfel/ugyfeldto';
+import {UgyfelDto} from '../../dtos/torzs/ugyfel/ugyfeldto';
 import {SzMT} from '../../dtos/szmt';
 
 @Component({
@@ -24,8 +24,8 @@ export class UgyfelComponent {
 
   constructor(private _router: Router,
               private _route: ActivatedRoute,
-              iratservice: UgyfelService  ) {
-    this.ugyfelservice = iratservice;
+              ugyfelservice: UgyfelService  ) {
+    this.ugyfelservice = ugyfelservice;
   }
 
   onKereses() {

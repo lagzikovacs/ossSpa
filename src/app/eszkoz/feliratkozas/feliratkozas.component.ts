@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {FeliratkozasService} from '../../services/feliratkozas.service';
+import {FeliratkozasService} from '../../services/eszkoz/feliratkozas.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Szempont} from '../../enums/szempont';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';

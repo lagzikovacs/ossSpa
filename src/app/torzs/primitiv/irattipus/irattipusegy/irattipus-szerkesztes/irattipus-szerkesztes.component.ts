@@ -1,7 +1,7 @@
-import {IrattipusService} from '../../../../../services/irattipus.service';
+import {IrattipusService} from '../../../../../services/torzs/primitiv/irattipus.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../../../tools/errormodal/errormodal.component';
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {NumberResult} from '../../../../../dtos/numberresult';
 
 @Component({
@@ -9,7 +9,7 @@ import {NumberResult} from '../../../../../dtos/numberresult';
   templateUrl: './irattipus-szerkesztes.component.html',
   styleUrls: ['./irattipus-szerkesztes.component.css']
 })
-export class IrattipusSzerkesztesComponent implements OnInit {
+export class IrattipusSzerkesztesComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   irattipusservice: IrattipusService;
@@ -19,9 +19,6 @@ export class IrattipusSzerkesztesComponent implements OnInit {
               private _route: ActivatedRoute,
               irattipusservice: IrattipusService) {
     this.irattipusservice = irattipusservice;
-  }
-
-  ngOnInit() {
   }
 
   onSubmit() {

@@ -1,6 +1,6 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ParticioService} from '../../services/particio.service';
+import {ParticioService} from '../../services/segedeszkosz/particio.service';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 
 @Component({
@@ -8,13 +8,11 @@ import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
   templateUrl: './particio.component.html',
   styleUrls: ['./particio.component.css']
 })
-export class ParticioComponent {
+export class ParticioComponent implements OnInit {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
-  szurok = ['Partíció'];
-
-  eppFrissit = false;
   particioservice: ParticioService;
+  eppFrissit = false;
 
   constructor(private _router: Router,
               private _route: ActivatedRoute,
@@ -22,32 +20,15 @@ export class ParticioComponent {
     this.particioservice = particioservice;
   }
 
-  onKereses() {
-    this.particioservice.elsokereses = true;
-    this.particioservice.ekDto.rekordtol = 0;
-
-    this.onKeresesTovabb();
-  }
-
-  onKeresesTovabb() {
+  ngOnInit() {
     this.eppFrissit = true;
-    this.particioservice.Read(this.particioservice.ekDto.minta)
+    this.particioservice.Get()
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        if (this.particioservice.elsokereses) {
-          this.particioservice.Dto = res.Result;
-          this.particioservice.elsokereses = false;
-        } else {
-          const buf = [...this.particioservice.Dto];
-          res.Result.forEach(element => {
-            buf.push(element);
-          });
-          this.particioservice.Dto = buf;
-        }
-
+        this.particioservice.Dto = res.Result[0];
         this.eppFrissit = false;
       })
       .catch(err => {
@@ -56,34 +37,22 @@ export class ParticioComponent {
       });
   }
 
-  selectforzoom(i: number) {
-    this.setClickedRow(i);
+  szallito() {
+    this._router.navigate(['szallito'], {relativeTo: this._route});
   }
-
-  setClickedRow(i: number) {
-    this.particioservice.DtoSelectedIndex = i;
-    this.particioservice.uj = false;
-    this._router.navigate(['../particioegy'], {relativeTo: this._route});
+  nav() {
+    this._router.navigate(['nav'], {relativeTo: this._route});
   }
-
-  uj() {
-    this.eppFrissit = true;
-    this.particioservice.CreateNew()
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
-
-        this.particioservice.uj = true;
-        this.particioservice.DtoEdited = res.Result[0];
-        this.particioservice.DtoSelectedIndex = -1;
-        this.eppFrissit = false;
-
-        this._router.navigate(['../particiouj'], {relativeTo: this._route});
-      })
-      .catch(err => {
-        this.errormodal.show(err);
-        this.eppFrissit = false;
-      });
+  smtp() {
+    this._router.navigate(['smtp'], {relativeTo: this._route});
+  }
+  bizonylat() {
+    this._router.navigate(['bizonylat'], {relativeTo: this._route});
+  }
+  projekt() {
+    this._router.navigate(['projekt'], {relativeTo: this._route});
+  }
+  volume() {
+    this._router.navigate(['volume'], {relativeTo: this._route});
   }
 }

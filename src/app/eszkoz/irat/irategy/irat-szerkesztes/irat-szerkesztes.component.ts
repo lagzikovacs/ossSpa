@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../../tools/errormodal/errormodal.component';
-import {IratService} from '../../../../services/irat.service';
+import {IratService} from '../../../../services/eszkoz/irat.service';
 import {IratDto} from '../../../../dtos/irat/iratdto';
-import {IrattipusService} from '../../../../services/irattipus.service';
+import {IrattipusService} from '../../../../services/torzs/primitiv/irattipus.service';
 
 @Component({
   selector: 'app-irat-szerkesztes',

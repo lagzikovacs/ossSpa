@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {TeendoService} from '../../../../../services/torzs/primitiv/teendo.service';
+import {ErrormodalComponent} from '../../../../../tools/errormodal/errormodal.component';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-teendo-torles',
@@ -6,10 +9,43 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./teendo-torles.component.css']
 })
 export class TeendoTorlesComponent implements OnInit {
+  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
-  constructor() { }
+  teendoservice: TeendoService;
+  eppFrissit = false;
 
-  ngOnInit() {
+  constructor(private _router: Router,
+              private _route: ActivatedRoute,
+              teendoservice: TeendoService) {
+    this.teendoservice = teendoservice;
   }
 
+  ngOnInit() {
+    if (this.teendoservice.DtoSelectedIndex === -1) {
+      this._router.navigate(['../blank'], {relativeTo: this._route});
+    }
+  }
+
+  ok() {
+    this.eppFrissit = true;
+    this.teendoservice.Delete(this.teendoservice.Dto[this.teendoservice.DtoSelectedIndex])
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.teendoservice.Dto.splice(this.teendoservice.DtoSelectedIndex, 1);
+        this.teendoservice.DtoSelectedIndex = -1;
+
+        this.eppFrissit = false;
+        this._router.navigate(['../../teendo'], {relativeTo: this._route});
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
+  }
+  cancel() {
+    this._router.navigate(['../blank'], {relativeTo: this._route});
+  }
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../../../tools/errormodal/errormodal.component';
-import {HelysegService} from '../../../../../services/helyseg.service';
+import {HelysegService} from '../../../../../services/torzs/primitiv/helyseg.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({

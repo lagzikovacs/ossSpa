@@ -1,3 +1,26 @@
-<p>
-  penznem works!
-</p>
+<div class="alapkeret">
+  <h5>{{penznemservice.cim}}</h5>
+  <app-toolbar [Szurok]="szurok"
+               [(szempont)]="penznemservice.ekDto.szempont"
+               [(minta)]="penznemservice.ekDto.minta"
+               [enKereses]="!eppFrissit" (Kereses)="onKereses()"
+               [enUj]="!eppFrissit" (Uj)="uj()">
+  </app-toolbar>
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th *ngIf="penznemservice.zoom"></th>
+      <th>Id</th>
+      <th>Pénznem</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of penznemservice.Dto; let i = index">
+      <td *ngIf="penznemservice.zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="selectforzoom(i)"><i class="fa fa-check" aria-hidden="true"></i></td>
+      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.PENZNEMKOD}}</td>
+      <td>{{item.PENZNEM1}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <app-errormodal [cim]="penznemservice.cim"></app-errormodal>
+</div>

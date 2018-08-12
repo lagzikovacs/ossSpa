@@ -1,3 +1,49 @@
-<p>
-  penznemegy works!
-</p>
+<div class="alapkeret">
+  <h5>{{penznemservice.cim}}</h5>
+  <div>
+    <nav>
+      <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
+        Vissza a listához
+      </button>
+      <button [disabled]="eppFrissit || penznemservice.DtoSelectedIndex === -1" (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-minus" aria-hidden="true"></i>
+      </button>
+      <button [disabled]="eppFrissit || penznemservice.DtoSelectedIndex === -1" (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-caret-up" aria-hidden="true"></i>
+      </button>
+    </nav>
+  </div>
+  <div class="egypanel">
+    <table class="table ng table-bordered table-sm table-responsive" style="border: none">
+      <tbody>
+      <tr>
+        <td class="egylabel">Id:</td>
+        <td *ngIf="penznemservice.DtoSelectedIndex !== -1">{{penznemservice.Dto[penznemservice.DtoSelectedIndex].PENZNEMKOD}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Pénznem:</td>
+        <td *ngIf="penznemservice.DtoSelectedIndex !== -1">{{penznemservice.Dto[penznemservice.DtoSelectedIndex].PENZNEM1}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Létrehozta:</td>
+        <td *ngIf="penznemservice.DtoSelectedIndex !== -1">{{penznemservice.Dto[penznemservice.DtoSelectedIndex].LETREHOZTA}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Létrehozva:</td>
+        <td *ngIf="penznemservice.DtoSelectedIndex !== -1">{{penznemservice.Dto[penznemservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Módosította:</td>
+        <td *ngIf="penznemservice.DtoSelectedIndex !== -1">{{penznemservice.Dto[penznemservice.DtoSelectedIndex].MODOSITOTTA}}</td>
+      </tr>
+      <tr>
+        <td class="egylabel">Módosítva:</td>
+        <td *ngIf="penznemservice.DtoSelectedIndex !== -1">{{penznemservice.Dto[penznemservice.DtoSelectedIndex].MODOSITVA | datetimehun}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <router-outlet></router-outlet>
+  <app-errormodal [cim]="penznemservice.cim"></app-errormodal>
+</div>
+

@@ -1,8 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
-import {FeliratkozasService} from '../../../services/feliratkozas.service';
+import {FeliratkozasService} from '../../../services/eszkoz/feliratkozas.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
-import {ProjektService} from '../../../services/projekt.service';
+import {ProjektService} from '../../../services/eszkoz/projekt.service';
 import {SzMT} from "../../../dtos/szmt";
 import {Szempont} from "../../../enums/szempont";
 

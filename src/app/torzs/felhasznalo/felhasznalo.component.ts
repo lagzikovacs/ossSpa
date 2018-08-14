@@ -1,7 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
-import {FelhasznaloService} from '../../../services/torzs/primitiv/felhasznalo.service';
+import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {FelhasznaloService} from '../../services/torzs/primitiv/felhasznalo.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {LogonService} from '../../services/segedeszkosz/logon.service';
+import {JogKod} from '../../enums/jogkod';
 
 @Component({
   selector: 'app-felhasznalo',
@@ -14,11 +16,14 @@ export class FelhasznaloComponent {
   szurok = ['Név'];
 
   eppFrissit = false;
+  mod = false;
   felhasznaloservice: FelhasznaloService;
 
   constructor(private _router: Router,
               private _route: ActivatedRoute,
+              private _logonservice: LogonService,
               felhasznaloservice: FelhasznaloService) {
+    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.FELHASZNALOMOD]);
     this.felhasznaloservice = felhasznaloservice;
   }
 

@@ -1,3 +1,44 @@
-<p>
-  particio-bizonylat works!
-</p>
+<div class="alapkeret">
+  <h5>Bizonylat</h5>
+
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Bizonylatkép iratkód</div>
+      </div>
+      <div class="col-md-1">
+        <input type="text" class="form-control form-control-sm" id="m1"
+               autocomplete="off"
+               [(ngModel)]="particioservice.Dto.BIZONYLAT_BIZONYLATKEP_IRATKOD" name="m1">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Eredeti példány</div>
+      </div>
+      <div class="col-md-1">
+        <input type="text" class="form-control form-control-sm" id="m2"
+               autocomplete="off"
+               [(ngModel)]="particioservice.Dto.BIZONYLAT_EREDETIPELDANYOK_SZAMA" name="m2">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Másolatok</div>
+      </div>
+      <div class="col-md-1">
+        <input type="text" class="form-control form-control-sm" id="m3"
+               autocomplete="off"
+               [(ngModel)]="particioservice.Dto.BIZONYLAT_MASOLATOK_SZAMA" name="m3">
+      </div>
+    </div>
+
+    <div class="row no-gutters" style="margin-bottom: 10px">
+      <div class="col-md-2"></div>
+      <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
+      <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
+    </div>
+  </form>
+  <app-errormodal [cim]="particioservice.cim"></app-errormodal>
+</div>

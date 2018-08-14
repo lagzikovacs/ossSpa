@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {LogonService} from '../../../services/segedeszkosz/logon.service';
 import {Router} from '@angular/router';
+import {CsoportService} from '../../../services/segedeszkosz/csoport.service';
 
 @Component({
   selector: 'app-szerepkorvalasztas',
@@ -13,7 +14,8 @@ export class SzerepkorvalasztasComponent implements OnInit {
   logonservice: LogonService;
 
   constructor(private _router: Router,
-              logonservice: LogonService) {
+              logonservice: LogonService,
+              private _csoportservice: CsoportService) {
     this.logonservice = logonservice;
   }
 
@@ -28,6 +30,15 @@ export class SzerepkorvalasztasComponent implements OnInit {
         if (res.Error != null) {
           throw res.Error;
         }
+
+        return this._csoportservice.Jogaim();
+      })
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.logonservice.Jogaim = res.Result;
 
         this.logonservice.SzerepkorKivalasztva = true;
         this._router.navigate(['/fooldal']);

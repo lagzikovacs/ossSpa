@@ -4,7 +4,7 @@
                [(szempont)]="felhasznaloservice.ekDto.szempont"
                [(minta)]="felhasznaloservice.ekDto.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit" (Uj)="uj()">
+               [enUj]="!eppFrissit && mod" (Uj)="uj()">
   </app-toolbar>
   <table class="table table-bordered table-sm table-responsive" style="border: none">
     <thead>
@@ -21,7 +21,8 @@
     </thead>
     <tbody>
     <tr *ngFor="let item of felhasznaloservice.Dto; let i = index">
-      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.FELHASZNALOKOD}}</td>
+      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
+          (click)="setClickedRow(i)">{{item.FELHASZNALOKOD}}</td>
       <td>{{item.AZONOSITO}}</td>
       <td>{{item.NEV}}</td>
       <td>{{item.TELEFON}}</td>

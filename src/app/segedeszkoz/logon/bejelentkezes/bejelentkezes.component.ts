@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {LogonService} from '../../../services/segedeszkosz/logon.service';
+import {CsoportService} from '../../../services/segedeszkosz/csoport.service';
 
 @Component({
   selector: 'app-bejelentkezes',
@@ -17,11 +18,13 @@ export class BejelentkezesComponent implements OnInit {
 
   constructor(private _router: Router,
               private fb: FormBuilder,
-              private _logonservice: LogonService) {
+              private _logonservice: LogonService,
+              private _csoportservice: CsoportService) {
   }
 
   ngOnInit() {
     this._logonservice.Sid = '';
+    this._logonservice.Jogaim = new Array<any>();
     this._logonservice.SzerepkorKivalasztva = false;
 
     this.form = this.fb.group({
@@ -53,7 +56,8 @@ export class BejelentkezesComponent implements OnInit {
           case 0:
             throw nincsBesorolva;
           case 1:
-            return this._logonservice.SzerepkorValasztas(this._logonservice.lehetsegesszerepkorokDto[0].PARTICIOKOD, this._logonservice.lehetsegesszerepkorokDto[0].CSOPORTKOD);
+            return this._logonservice.SzerepkorValasztas(this._logonservice.lehetsegesszerepkorokDto[0].PARTICIOKOD,
+              this._logonservice.lehetsegesszerepkorokDto[0].CSOPORTKOD);
           default:
             this._router.navigate(['/szerepkorvalasztas']);
         }
@@ -62,6 +66,11 @@ export class BejelentkezesComponent implements OnInit {
         if (res2.Error != null) {
           throw res2.Error;
         }
+
+        return this._csoportservice.Jogaim();
+      })
+    .then(res3 => {
+        this._logonservice.Jogaim = res3.Result;
 
         this._logonservice.SzerepkorKivalasztva = true;
         this._router.navigate(['/fooldal']);

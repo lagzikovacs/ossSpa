@@ -12,8 +12,9 @@ import {FelhasznaloResult} from '../../dtos/primitiv/felhasznalo/felhasznaloresu
 import {LehetsegesJogResult} from '../../dtos/primitiv/lehetsegesjog/lehetsegesjogresult';
 import {FelhasznaloDto} from '../../dtos/primitiv/felhasznalo/felhasznalodto';
 import {LehetsegesJogDto} from '../../dtos/primitiv/lehetsegesjog/lehetsegesjogdto';
-import {CsoportFelhasznaloParameter} from "../../dtos/csoport/csoportfelhasznaloparameter";
-import {CsoportJogParameter} from "../../dtos/csoport/csoportjogparameter";
+import {CsoportFelhasznaloParameter} from '../../dtos/csoport/csoportfelhasznaloparameter';
+import {CsoportJogParameter} from '../../dtos/csoport/csoportjogparameter';
+import {JogaimResult} from '../../dtos/csoport/jogaimresult';
 
 @Injectable({
   providedIn: 'root'
@@ -144,5 +145,16 @@ export class CsoportService {
     };
 
     return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
+  }
+
+  public Jogaim(): Promise<JogaimResult> {
+    const url = environment.BaseHref + this._controller + 'jogaim';
+    const body = null;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<JogaimResult>(url, body, options).toPromise();
   }
 }

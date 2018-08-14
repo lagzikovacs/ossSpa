@@ -27,7 +27,6 @@ export class ParticioComponent implements OnInit {
         if (res.Error != null) {
           throw res.Error;
         }
-
         this.particioservice.Dto = res.Result[0];
         this.eppFrissit = false;
       })

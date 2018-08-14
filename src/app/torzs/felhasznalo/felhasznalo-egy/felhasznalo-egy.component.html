@@ -1,0 +1,30 @@
+<div class="alapkeret">
+  <h5>{{felhasznaloservice.cim}}</h5>
+  <h6 *ngIf="felhasznaloservice.DtoSelectedIndex !== -1">{{felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].FELHASZNALOKOD}} - {{felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].AZONOSITO}} - {{felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].NEV}}</h6>
+  <div>
+    <nav>
+      <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+      </button>
+      <button [disabled]="eppFrissit" (click)="reszletek()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-file" aria-hidden="true"></i>
+      </button>
+
+      <button [disabled]="eppFrissit || felhasznaloservice.DtoSelectedIndex === -1 || !mod"
+              (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-minus" aria-hidden="true"></i>
+      </button>
+      <button [disabled]="eppFrissit || felhasznaloservice.DtoSelectedIndex === -1 || !mod"
+              (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-edit" aria-hidden="true"></i>
+      </button>
+      <button [disabled]="eppFrissit || felhasznaloservice.DtoSelectedIndex === -1 || !mod"
+              (click)="jelszo()" class="btn btn-sm btn-outline-primary navgomb">
+        Jelszó
+      </button>
+    </nav>
+  </div>
+
+  <router-outlet></router-outlet>
+  <app-errormodal [cim]="felhasznaloservice.cim"></app-errormodal>
+</div>

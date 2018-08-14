@@ -14,7 +14,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { BejelentkezesComponent } from './segedeszkoz/logon/bejelentkezes/bejelentkezes.component';
 import { ErrormodalComponent } from './tools/errormodal/errormodal.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { FelhasznaloComponent } from './torzs/primitiv/felhasznalo/felhasznalo.component';
+import { FelhasznaloComponent } from './torzs/felhasznalo/felhasznalo.component';
 import {FelhasznaloService} from './services/torzs/primitiv/felhasznalo.service';
 import {LoginGuard} from './guards/login.guard';
 import {RoleGuard} from './guards/role.guard';
@@ -26,10 +26,10 @@ import {VerzioService} from './services/verzio.service';
 import {SessionService} from './services/session.service';
 import {DateHunPipe} from './pipes/datehun.pipe';
 import {DatetimeHunPipe} from './pipes/datetimehun.pipe';
-import { FelhasznaloEgyComponent } from './torzs/primitiv/felhasznalo/felhasznalo-egy/felhasznalo-egy.component';
-import { FelhasznaloTorlesComponent } from './torzs/primitiv/felhasznalo/felhasznalo-egy/felhasznalo-torles/felhasznalo-torles.component';
-import { FelhasznaloSzerkesztesComponent } from './torzs/primitiv/felhasznalo/felhasznalo-egy/felhasznalo-szerkesztes/felhasznalo-szerkesztes.component';
-import { FelhasznaloJelszoComponent } from './torzs/primitiv/felhasznalo/felhasznalo-egy/felhasznalo-jelszo/felhasznalo-jelszo.component';
+import { FelhasznaloEgyComponent } from './torzs/felhasznalo/felhasznalo-egy/felhasznalo-egy.component';
+import { FelhasznaloTorlesComponent } from './torzs/felhasznalo/felhasznalo-egy/felhasznalo-torles/felhasznalo-torles.component';
+import { FelhasznaloSzerkesztesComponent } from './torzs/felhasznalo/felhasznalo-egy/felhasznalo-szerkesztes/felhasznalo-szerkesztes.component';
+import { FelhasznaloJelszoComponent } from './torzs/felhasznalo/felhasznalo-egy/felhasznalo-jelszo/felhasznalo-jelszo.component';
 import { BlankComponent } from './tools/blank/blank.component';
 import { ProjektComponent } from './eszkoz/projekt/projekt.component';
 import { ProjektegyComponent } from './eszkoz/projekt/projektegy/projektegy.component';
@@ -126,6 +126,11 @@ import { FizetesimodTorlesComponent } from './torzs/primitiv/fizetesimod/fizetes
 import { PenznemSzerkesztesComponent } from './torzs/primitiv/penznem/penznemegy/penznem-szerkesztes/penznem-szerkesztes.component';
 import { PenznemTorlesComponent } from './torzs/primitiv/penznem/penznemegy/penznem-torles/penznem-torles.component';
 import { CikkBeszerzesKivetComponent } from './torzs/cikk/cikkegy/cikk-beszerzes-kivet/cikk-beszerzes-kivet.component';
+import { PenztarComponent } from './eszkoz/penztar/penztar.component';
+import { PenztaregyComponent } from './eszkoz/penztar/penztaregy/penztaregy.component';
+import { PenztarTorlesComponent } from './eszkoz/penztar/penztaregy/penztar-torles/penztar-torles.component';
+import { PenztarSzerkesztesComponent } from './eszkoz/penztar/penztaregy/penztar-szerkesztes/penztar-szerkesztes.component';
+import { FelhasznaloReszletekComponent } from './torzs/felhasznalo/felhasznalo-egy/felhasznalo-reszletek/felhasznalo-reszletek.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -319,6 +324,13 @@ const routes: Routes = [
     ]},
   ]},
 
+  {path: 'penztar', component: PenztarComponent, canActivate: [RoleGuard]},
+  {path: 'penztaregy', component: PenztaregyComponent, canActivate: [RoleGuard], children: [
+    {path: 'torles', component: PenztarTorlesComponent},
+    {path: 'modositas', component: PenztarSzerkesztesComponent},
+    {path: 'blank', component: BlankComponent}
+  ]},
+
   {path: 'feliratkozas', component: FeliratkozasComponent, canActivate: [RoleGuard]},
   {path: 'feliratkozasegy', component: FeliratkozasegyComponent, canActivate: [RoleGuard], children: [
     {path: 'projekt', component: FeliratkozasProjektComponent}
@@ -357,6 +369,7 @@ const routes: Routes = [
   {path: 'felhasznalo', component: FelhasznaloComponent, canActivate: [RoleGuard]},
   {path: 'felhasznalouj', component: FelhasznaloSzerkesztesComponent, canActivate: [RoleGuard]},
   {path: 'felhasznaloegy', component: FelhasznaloEgyComponent, canActivate: [RoleGuard], children: [
+    {path: 'reszletek', component: FelhasznaloReszletekComponent},
     {path: 'torles', component: FelhasznaloTorlesComponent},
     {path: 'szerkesztes', component: FelhasznaloSzerkesztesComponent},
     {path: 'jelszo', component: FelhasznaloJelszoComponent},
@@ -494,7 +507,12 @@ if (environment.production) {
     FizetesimodTorlesComponent,
     PenznemSzerkesztesComponent,
     PenznemTorlesComponent,
-    CikkBeszerzesKivetComponent
+    CikkBeszerzesKivetComponent,
+    PenztarComponent,
+    PenztaregyComponent,
+    PenztarTorlesComponent,
+    PenztarSzerkesztesComponent,
+    FelhasznaloReszletekComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,34 @@
-<p>
-  particio-volume works!
-</p>
+<div class="alapkeret">
+  <h5>Volume</h5>
+
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Új volume max. méret</div>
+      </div>
+      <div class="col-md-2">
+        <input type="text" class="form-control form-control-sm" id="m1"
+               autocomplete="off"
+               [(ngModel)]="particioservice.Dto.VOLUME_UJVOLUME_MAXMERET" name="m1">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Új volume elérési út</div>
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-control form-control-sm" id="m2"
+               autocomplete="off"
+               [(ngModel)]="particioservice.Dto.VOLUME_UJVOLUME_ELERESIUT" name="m2">
+      </div>
+    </div>
+
+    <div class="row no-gutters" style="margin-bottom: 10px">
+      <div class="col-md-2"></div>
+      <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
+      <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
+    </div>
+  </form>
+  <app-errormodal [cim]="particioservice.cim"></app-errormodal>
+</div>
+

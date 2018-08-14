@@ -3,7 +3,6 @@ import {Observable, Subject} from 'rxjs/index';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {LogonParameter} from '../../dtos/logon/logonparameter';
-import {JelszocsereParameter} from '../../dtos/primitiv/felhasznalo/jelszocsereparameter';
 import {LogonResult} from '../../dtos/logon/logonresult';
 import {Md5} from 'ts-md5';
 import {SzerepkorokResult} from '../../dtos/logon/szerepkorokresult';
@@ -18,6 +17,7 @@ export class LogonService {
   lehetsegesszerepkorokDto: CsoportDto[];
   readonly BaseHref: string;
   Sid = '';
+  Jogaim: any[] = new Array<any>();
   private readonly _controller = 'api/logon/';
   private _subjectSzerepkorKivalasztva = new Subject<any>();
 

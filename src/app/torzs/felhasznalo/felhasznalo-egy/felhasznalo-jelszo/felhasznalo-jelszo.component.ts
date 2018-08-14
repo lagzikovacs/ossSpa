@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FelhasznaloService} from '../../../../../services/torzs/primitiv/felhasznalo.service';
-import {ErrormodalComponent} from '../../../../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../../../tools/errormodal/errormodal.component';
+import {FelhasznaloService} from '../../../../services/torzs/primitiv/felhasznalo.service';
 
 @Component({
   selector: 'app-felhasznalo-jelszo',

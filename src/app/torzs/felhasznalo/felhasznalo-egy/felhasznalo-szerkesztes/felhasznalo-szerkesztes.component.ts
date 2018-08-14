@@ -1,8 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../../../tools/errormodal/errormodal.component';
-import {FelhasznaloService} from '../../../../../services/torzs/primitiv/felhasznalo.service';
+import {ErrormodalComponent} from '../../../../tools/errormodal/errormodal.component';
+import {FelhasznaloService} from '../../../../services/torzs/primitiv/felhasznalo.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NumberResult} from '../../../../../dtos/numberresult';
+import {NumberResult} from '../../../../dtos/numberresult';
 
 @Component({
   selector: 'app-felhasznalo-szerkesztes',

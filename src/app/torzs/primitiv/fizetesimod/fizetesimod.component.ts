@@ -2,8 +2,8 @@ import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {FizetesimodService} from '../../../services/torzs/primitiv/fizetesimod.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {LogonService} from "../../../services/segedeszkosz/logon.service";
-import {JogKod} from "../../../enums/jogkod";
+import {LogonService} from '../../../services/segedeszkosz/logon.service';
+import {JogKod} from '../../../enums/jogkod';
 
 @Component({
   selector: 'app-fizetesimod',

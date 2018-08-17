@@ -1,54 +1,34 @@
 <div class="alapkeret">
   <h5>{{csoportservice.cim}}</h5>
+  <h6 *ngIf="csoportservice.DtoSelectedIndex !== -1">{{csoportservice.Dto[csoportservice.DtoSelectedIndex].CSOPORT1}}</h6>
   <div>
     <nav>
       <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
-        Vissza a listához
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
       </button>
-      <button [disabled]="eppFrissit || csoportservice.DtoSelectedIndex === -1" (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit" (click)="reszletek()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-file" aria-hidden="true"></i>
+      </button>
+
+      <button [disabled]="eppFrissit || csoportservice.DtoSelectedIndex === -1"
+              (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-minus" aria-hidden="true"></i>
       </button>
-      <button [disabled]="eppFrissit || csoportservice.DtoSelectedIndex === -1" (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit || csoportservice.DtoSelectedIndex === -1"
+              (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-caret-up" aria-hidden="true"></i>
       </button>
-      <button [disabled]="eppFrissit" (click)="felhasznalo()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit"
+              (click)="felhasznalo()" class="btn btn-sm btn-outline-primary navgomb">
         Felhasználó
       </button>
-      <button [disabled]="eppFrissit" (click)="jog()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit"
+              (click)="jog()" class="btn btn-sm btn-outline-primary navgomb">
         Jog
       </button>
     </nav>
   </div>
-  <div style="float: left;border: solid 1px silver;margin-right: 10px;margin-bottom: 5px;padding: 10px">
-    <table>
-      <tbody>
-      <tr>
-        <td class="egylabel">Id:</td>
-        <td *ngIf="csoportservice.DtoSelectedIndex !== -1">{{csoportservice.Dto[csoportservice.DtoSelectedIndex].CSOPORTKOD}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Csoport:</td>
-        <td *ngIf="csoportservice.DtoSelectedIndex !== -1">{{csoportservice.Dto[csoportservice.DtoSelectedIndex].CSOPORT1}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Létrehozta:</td>
-        <td *ngIf="csoportservice.DtoSelectedIndex !== -1">{{csoportservice.Dto[csoportservice.DtoSelectedIndex].LETREHOZTA}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Létrehozva:</td>
-        <td *ngIf="csoportservice.DtoSelectedIndex !== -1">{{csoportservice.Dto[csoportservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Módosította:</td>
-        <td *ngIf="csoportservice.DtoSelectedIndex !== -1">{{csoportservice.Dto[csoportservice.DtoSelectedIndex].MODOSITOTTA}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Módosítva:</td>
-        <td *ngIf="csoportservice.DtoSelectedIndex !== -1">{{csoportservice.Dto[csoportservice.DtoSelectedIndex].MODOSITVA | datetimehun}}</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+
   <router-outlet></router-outlet>
   <app-errormodal [cim]="csoportservice.cim"></app-errormodal>
 </div>

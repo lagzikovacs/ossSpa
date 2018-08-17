@@ -1,7 +1,7 @@
 export class AngularmenuDto {
   Title: string;
   RouterLink: string;
-  Rule: string;
+  Enabled: boolean;
 
   Sub: AngularmenuDto[];
 }

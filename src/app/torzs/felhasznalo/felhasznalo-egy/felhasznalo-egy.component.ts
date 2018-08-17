@@ -42,4 +42,7 @@ export class FelhasznaloEgyComponent {
   jelszo() {
     this._router.navigate(['jelszo'], {relativeTo: this._route});
   }
+  tevekenyseg() {
+    this._router.navigate(['tevekenyseg'], {relativeTo: this._route});
+  }
 }

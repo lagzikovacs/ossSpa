@@ -8,6 +8,7 @@ import {LogonService} from '../../segedeszkosz/logon.service';
 import {PenznemResult} from '../../../dtos/primitiv/penznem/penznemresult';
 import {EmptyResult} from '../../../dtos/emptyresult';
 import {NumberResult} from '../../../dtos/numberresult';
+import {PenznemZoomParameter} from "../../../dtos/primitiv/penznem/penznemzoomparameter";
 
 @Injectable({
   providedIn: 'root'
@@ -92,5 +93,16 @@ export class PenznemService {
     };
 
     return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+  }
+
+  public ZoomCheck(par: PenznemZoomParameter): Promise<EmptyResult> {
+    const url = environment.BaseHref + this._controller + 'zoomcheck';
+    const body = par;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
   }
 }

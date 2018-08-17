@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../../tools/errormodal/errormodal.component';
 import {UgyfelService} from '../../../../services/torzs/ugyfel.service';
-import {UgyfelDto} from '../../../../dtos/torzs/ugyfel/ugyfeldto';
 import {HelysegService} from '../../../../services/torzs/primitiv/helyseg.service';
 import {ZoomSources} from '../../../../enums/zoomsources';
 import {HelysegZoomParameter} from '../../../../dtos/primitiv/helyseg/helysegzoomparameter';

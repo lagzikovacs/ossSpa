@@ -5,7 +5,7 @@
                [(szempont)]="termekdijservice.ekDto.szempont"
                [(minta)]="termekdijservice.ekDto.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit" (Uj)="uj()"
+               [enUj]="!eppFrissit && mod" (Uj)="uj()"
                [visZoom]="termekdijservice.zoom" (StopZoom)="stopzoom()">
   </app-toolbar>
   <table class="table table-bordered table-sm table-responsive" style="border: none">

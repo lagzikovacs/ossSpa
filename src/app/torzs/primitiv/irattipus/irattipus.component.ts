@@ -2,6 +2,8 @@ import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {IrattipusService} from '../../../services/torzs/primitiv/irattipus.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {LogonService} from '../../../services/segedeszkosz/logon.service';
+import {JogKod} from '../../../enums/jogkod';
 
 @Component({
   selector: 'app-irattipus',
@@ -14,11 +16,14 @@ export class IrattipusComponent {
   szurok = ['Irattipus'];
 
   eppFrissit = false;
+  mod = false;
   irattipusservice: IrattipusService;
 
   constructor(private _router: Router,
               private _route: ActivatedRoute,
+              private _logonservice: LogonService,
               irattipusservice: IrattipusService) {
+    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.irattipusservice = irattipusservice;
   }
 
@@ -59,11 +64,15 @@ export class IrattipusComponent {
   selectforzoom(i: number) {
     this.setClickedRow(i);
   }
+  stopzoom() {
+    this.irattipusservice.zoom = false;
+    this._router.navigate(['../blank'], {relativeTo: this._route});
+  }
 
   setClickedRow(i: number) {
     this.irattipusservice.DtoSelectedIndex = i;
     this.irattipusservice.uj = false;
-    this._router.navigate(['../irattipusegy'], {relativeTo: this._route});
+    this._router.navigate(['../irattipusegy/reszletek'], {relativeTo: this._route});
   }
 
   uj() {

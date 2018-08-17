@@ -64,7 +64,7 @@ export class FelhasznaloComponent {
   setClickedRow(i: number) {
     this.felhasznaloservice.DtoSelectedIndex = i;
     this.felhasznaloservice.uj = false;
-    this._router.navigate(['../felhasznaloegy'], {relativeTo: this._route});
+    this._router.navigate(['../felhasznaloegy/reszletek'], {relativeTo: this._route});
   }
 
   uj() {

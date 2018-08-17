@@ -2,6 +2,8 @@ import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../../tools/errormodal/errormodal.component';
 import {IrattipusService} from '../../../../services/torzs/primitiv/irattipus.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {LogonService} from '../../../../services/segedeszkosz/logon.service';
+import {JogKod} from '../../../../enums/jogkod';
 
 @Component({
   selector: 'app-irattipusegy',
@@ -12,16 +14,22 @@ export class IrattipusegyComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   irattipusservice: IrattipusService;
+  mod = false;
   eppFrissit = false;
 
   constructor(private _router: Router,
               private _route: ActivatedRoute,
+              private _logonservice: LogonService,
               irattipusservice: IrattipusService) {
+    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.irattipusservice = irattipusservice;
   }
 
   vissza() {
     this._router.navigate(['../irattipus'], {relativeTo: this._route});
+  }
+  reszletek() {
+    this._router.navigate(['reszletek'], {relativeTo: this._route});
   }
   torles () {
     this._router.navigate(['torles'], {relativeTo: this._route});

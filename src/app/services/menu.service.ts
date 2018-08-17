@@ -37,6 +37,8 @@ import {MeDto} from '../dtos/primitiv/me/medto';
 import {AfakulcsDto} from '../dtos/primitiv/afakulcs/afakulcsdto';
 import {TermekdijDto} from '../dtos/primitiv/termekdij/termekdijdto';
 import {CikkDto} from '../dtos/torzs/cikk/cikkdto';
+import {PenztarDto} from "../dtos/penztar/penztardto";
+import {PenztarService} from "./eszkoz/penztar.service";
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +61,7 @@ export class MenuService {
               private _ugyfelservice: UgyfelService,
               private _projektservice: ProjektService,
               private _iratservice: IratService,
+              private _penztarservice: PenztarService,
               private _feliratkozasservice: FeliratkozasService,
               private _volumeservice: VolumeService,
               private _felhasznaloservice: FelhasznaloService,
@@ -125,6 +128,10 @@ export class MenuService {
       case '/irat':
         this._iratservice.Dto = new Array<IratDto>();
       break;
+      case '/penztar':
+        this._penztarservice.ekDto.minta = '';
+        this._penztarservice.Dto = new Array<PenztarDto>();
+        break;
       case '/feliratkozas':
         this._feliratkozasservice.Dto = new Array<FeliratkozasDto>();
       break;

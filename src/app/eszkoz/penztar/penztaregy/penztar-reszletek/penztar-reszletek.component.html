@@ -1,0 +1,45 @@
+<div class="alapkeret">
+  <h5>{{penztarservice.cim}} részletesen</h5>
+  <table class="table ng table-bordered table-sm table-responsive" style="border: none">
+    <tbody>
+    <tr>
+      <td class="egylabel">Id:</td>
+      <td *ngIf="penztarservice.DtoSelectedIndex !== -1">{{penztarservice.Dto[penztarservice.DtoSelectedIndex].PENZTARKOD}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Pénztár:</td>
+      <td *ngIf="penztarservice.DtoSelectedIndex !== -1">{{penztarservice.Dto[penztarservice.DtoSelectedIndex].PENZTAR1}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Pénznem:</td>
+      <td *ngIf="penztarservice.DtoSelectedIndex !== -1">{{penztarservice.Dto[penztarservice.DtoSelectedIndex].PENZNEM}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Egyenleg:</td>
+      <td *ngIf="penztarservice.DtoSelectedIndex !== -1">{{penztarservice.Dto[penztarservice.DtoSelectedIndex].EGYENLEG}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Nyitva:</td>
+      <td *ngIf="penztarservice.DtoSelectedIndex !== -1 && penztarservice.Dto[penztarservice.DtoSelectedIndex].NYITVA">Igen</td>
+      <td *ngIf="penztarservice.DtoSelectedIndex !== -1 && !penztarservice.Dto[penztarservice.DtoSelectedIndex].NYITVA">Nem</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Létrehozta:</td>
+      <td *ngIf="penztarservice.DtoSelectedIndex !== -1">{{penztarservice.Dto[penztarservice.DtoSelectedIndex].LETREHOZTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Létrehozva:</td>
+      <td *ngIf="penztarservice.DtoSelectedIndex !== -1">{{penztarservice.Dto[penztarservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosította:</td>
+      <td *ngIf="penztarservice.DtoSelectedIndex !== -1">{{penztarservice.Dto[penztarservice.DtoSelectedIndex].MODOSITOTTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosítva:</td>
+      <td *ngIf="penztarservice.DtoSelectedIndex !== -1">{{penztarservice.Dto[penztarservice.DtoSelectedIndex].MODOSITVA | datetimehun}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

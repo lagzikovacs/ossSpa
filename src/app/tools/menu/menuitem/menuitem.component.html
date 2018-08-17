@@ -1,2 +1,12 @@
-<a class="dropdown-item" *ngIf="menunode.Title !== 'divider'" (click)="menuservice.menuclick(menunode.RouterLink)">{{menunode.Title}}</a>
-<div class="dropdown-divider" *ngIf="menunode.Title === 'divider'"></div>
+<a *ngIf="menunode.Title !== 'divider' && menunode.Enabled"
+   class="dropdown-item" style="cursor: pointer"
+   (click)="menuservice.menuclick(menunode.RouterLink)">
+  {{menunode.Title}}
+</a>
+<a *ngIf="menunode.Title !== 'divider' && !menunode.Enabled"
+   class="dropdown-item" style="color: silver;cursor: not-allowed">
+  {{menunode.Title}}
+</a>
+<div *ngIf="menunode.Title === 'divider'"
+     class="dropdown-divider" >
+</div>

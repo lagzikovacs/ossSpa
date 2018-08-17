@@ -1,0 +1,31 @@
+<div class="alapkeret">
+  <h5>{{teendoservice.cim}} részletesen</h5>
+  <table class="table ng table-bordered table-sm table-responsive" style="border: none">
+    <tbody>
+    <tr>
+      <td class="egylabel">Id:</td>
+      <td *ngIf="teendoservice.DtoSelectedIndex !== -1">{{teendoservice.Dto[teendoservice.DtoSelectedIndex].TEENDOKOD}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Teendő:</td>
+      <td *ngIf="teendoservice.DtoSelectedIndex !== -1">{{teendoservice.Dto[teendoservice.DtoSelectedIndex].TEENDO1}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Létrehozta:</td>
+      <td *ngIf="teendoservice.DtoSelectedIndex !== -1">{{teendoservice.Dto[teendoservice.DtoSelectedIndex].LETREHOZTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Létrehozva:</td>
+      <td *ngIf="teendoservice.DtoSelectedIndex !== -1">{{teendoservice.Dto[teendoservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosította:</td>
+      <td *ngIf="teendoservice.DtoSelectedIndex !== -1">{{teendoservice.Dto[teendoservice.DtoSelectedIndex].MODOSITOTTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosítva:</td>
+      <td *ngIf="teendoservice.DtoSelectedIndex !== -1">{{teendoservice.Dto[teendoservice.DtoSelectedIndex].MODOSITVA | datetimehun}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

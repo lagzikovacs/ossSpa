@@ -1,4 +1,5 @@
 export enum ZoomSources {
   Ugyfel,
-  Cikk
+  Cikk,
+  Penztar
 }

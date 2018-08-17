@@ -1,48 +1,26 @@
 <div class="alapkeret">
   <h5>{{teendoservice.cim}}</h5>
+  <h6 *ngIf="teendoservice.DtoSelectedIndex !== -1">{{teendoservice.Dto[teendoservice.DtoSelectedIndex].TEENDO1}}</h6>
   <div>
     <nav>
       <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
-        Vissza a listához
+        <i class="fa fa-arrow-left" style="margin-right: 3px" aria-hidden="true"></i>Vissza
       </button>
-      <button [disabled]="eppFrissit || teendoservice.DtoSelectedIndex === -1" (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit" (click)="reszletek()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>Részletesen
+      </button>
+
+      <button [disabled]="eppFrissit || teendoservice.DtoSelectedIndex === -1 || !mod"
+              (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-minus" aria-hidden="true"></i>
       </button>
-      <button [disabled]="eppFrissit || teendoservice.DtoSelectedIndex === -1" (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit || teendoservice.DtoSelectedIndex === -1 || !mod"
+              (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-caret-up" aria-hidden="true"></i>
       </button>
     </nav>
   </div>
-  <div class="egypanel">
-    <table class="table ng table-bordered table-sm table-responsive" style="border: none">
-      <tbody>
-      <tr>
-        <td class="egylabel">Id:</td>
-        <td *ngIf="teendoservice.DtoSelectedIndex !== -1">{{teendoservice.Dto[teendoservice.DtoSelectedIndex].TEENDOKOD}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Teendő:</td>
-        <td *ngIf="teendoservice.DtoSelectedIndex !== -1">{{teendoservice.Dto[teendoservice.DtoSelectedIndex].TEENDO1}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Létrehozta:</td>
-        <td *ngIf="teendoservice.DtoSelectedIndex !== -1">{{teendoservice.Dto[teendoservice.DtoSelectedIndex].LETREHOZTA}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Létrehozva:</td>
-        <td *ngIf="teendoservice.DtoSelectedIndex !== -1">{{teendoservice.Dto[teendoservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Módosította:</td>
-        <td *ngIf="teendoservice.DtoSelectedIndex !== -1">{{teendoservice.Dto[teendoservice.DtoSelectedIndex].MODOSITOTTA}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Módosítva:</td>
-        <td *ngIf="teendoservice.DtoSelectedIndex !== -1">{{teendoservice.Dto[teendoservice.DtoSelectedIndex].MODOSITVA | datetimehun}}</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+
   <router-outlet></router-outlet>
   <app-errormodal [cim]="teendoservice.cim"></app-errormodal>
 </div>

@@ -2,6 +2,8 @@ import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {TeendoService} from '../../../services/torzs/primitiv/teendo.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {JogKod} from '../../../enums/jogkod';
+import {LogonService} from '../../../services/segedeszkosz/logon.service';
 
 @Component({
   selector: 'app-teendo',
@@ -14,11 +16,14 @@ export class TeendoComponent {
   szurok = ['Teendő'];
 
   eppFrissit = false;
+  mod = false;
   teendoservice: TeendoService;
 
   constructor(private _router: Router,
               private _route: ActivatedRoute,
+              private _logonservice: LogonService,
               teendoservice: TeendoService) {
+    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.teendoservice = teendoservice;
   }
 
@@ -59,11 +64,15 @@ export class TeendoComponent {
   selectforzoom(i: number) {
     this.setClickedRow(i);
   }
+  stopzoom() {
+    this.teendoservice.zoom = false;
+    this._router.navigate(['../blank'], {relativeTo: this._route});
+  }
 
   setClickedRow(i: number) {
     this.teendoservice.DtoSelectedIndex = i;
     this.teendoservice.uj = false;
-    this._router.navigate(['../teendoegy'], {relativeTo: this._route});
+    this._router.navigate(['../teendoegy/reszletek'], {relativeTo: this._route});
   }
 
   uj() {

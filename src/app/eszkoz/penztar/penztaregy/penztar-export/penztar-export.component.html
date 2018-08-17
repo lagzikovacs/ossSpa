@@ -1,0 +1,30 @@
+<div class="alapkeret">
+  <h5>Pénztártételek exportja</h5>
+
+  <form #f="ngForm" (ngSubmit)="submit()">
+
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Dátum</div>
+      </div>
+      <div class="col-md-2">
+        <input type="date" class="form-control form-control-sm" id="tol"
+               [(ngModel)]="tol" name="tol">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2"></div>
+      <div class="col-md-2">
+        <input type="date" class="form-control form-control-sm" id="ig"
+               [(ngModel)]="ig" name="ig">
+      </div>
+    </div>
+
+    <div class="row no-gutters" style="margin-bottom: 10px">
+      <div class="col-md-2"></div>
+      <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
+      <button class="btn btn-sm btn-secondary" style="margin-left:3px;" [disabled]="!eppFrissit" type="button" (click)="megsem()">Mégsem</button>
+    </div>
+  </form>
+  <app-errormodal [cim]="riportservice.cim"></app-errormodal>
+</div>

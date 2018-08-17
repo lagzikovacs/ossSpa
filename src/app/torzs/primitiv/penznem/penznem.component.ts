@@ -1,25 +1,39 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {PenznemService} from '../../../services/torzs/primitiv/penznem.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {PenztarService} from '../../../services/eszkoz/penztar.service';
+import {ZoomSources} from "../../../enums/zoomsources";
+import {LogonService} from "../../../services/segedeszkosz/logon.service";
+import {JogKod} from "../../../enums/jogkod";
 
 @Component({
   selector: 'app-penznem',
   templateUrl: './penznem.component.html',
   styleUrls: ['./penznem.component.css']
 })
-export class PenznemComponent {
+export class PenznemComponent implements OnInit {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Pénznem'];
 
   eppFrissit = false;
+  mod = false;
   penznemservice: PenznemService;
 
   constructor(private _router: Router,
               private _route: ActivatedRoute,
-              penznemservice: PenznemService) {
+              private _logonservice: LogonService,
+              penznemservice: PenznemService,
+              private _penztarservice: PenztarService) {
+    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.penznemservice = penznemservice;
+  }
+
+  ngOnInit() {
+    if (this.penznemservice.zoom) {
+      this.onKereses();
+    }
   }
 
   onKereses() {
@@ -57,13 +71,22 @@ export class PenznemComponent {
   }
 
   selectforzoom(i: number) {
-    this.setClickedRow(i);
+    if (this.penznemservice.zoomsource === ZoomSources.Penztar) {
+      this._penztarservice.DtoEdited.PENZNEMKOD = this.penznemservice.Dto[i].PENZNEMKOD;
+      this._penztarservice.DtoEdited.PENZNEM = this.penznemservice.Dto[i].PENZNEM1;
+
+      this.stopzoom();
+    }
+  }
+  stopzoom() {
+    this.penznemservice.zoom = false;
+    this._router.navigate(['../blank'], {relativeTo: this._route});
   }
 
   setClickedRow(i: number) {
     this.penznemservice.DtoSelectedIndex = i;
     this.penznemservice.uj = false;
-    this._router.navigate(['../penznemegy'], {relativeTo: this._route});
+    this._router.navigate(['../penznemegy/reszletek'], {relativeTo: this._route});
   }
 
   uj() {

@@ -3,87 +3,23 @@
   <div>
     <nav>
       <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
-        Vissza a listához
+        <i class="fa fa-arrow-left" style="margin-right: 3px" aria-hidden="true"></i>Vissza
+      </button>
+      <button [disabled]="eppFrissit" (click)="reszletek()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>Részletesen
       </button>
 
-      <button [disabled]="eppFrissit || ugyfelservice.DtoSelectedIndex === -1" (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit || ugyfelservice.DtoSelectedIndex === -1 || !mod"
+              (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-minus" aria-hidden="true"></i>
       </button>
-      <button [disabled]="eppFrissit || ugyfelservice.DtoSelectedIndex === -1" (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit || ugyfelservice.DtoSelectedIndex === -1 || !mod"
+              (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-caret-up" aria-hidden="true"></i>
       </button>
     </nav>
   </div>
-  <div class="egypanel">
-    <table class="table ng table-bordered table-sm table-responsive" style="border: none">
-      <tbody>
-      <tr>
-        <td class="egylabel">Id:</td>
-        <td *ngIf="ugyfelservice.DtoSelectedIndex !== -1">{{ugyfelservice.Dto[ugyfelservice.DtoSelectedIndex].UGYFELKOD}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Név:</td>
-        <td *ngIf="ugyfelservice.DtoSelectedIndex !== -1">{{ugyfelservice.Dto[ugyfelservice.DtoSelectedIndex].NEV}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Irányítószám:</td>
-        <td *ngIf="ugyfelservice.DtoSelectedIndex !== -1">{{ugyfelservice.Dto[ugyfelservice.DtoSelectedIndex].IRANYITOSZAM}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Helységnév:</td>
-        <td *ngIf="ugyfelservice.DtoSelectedIndex !== -1">{{ugyfelservice.Dto[ugyfelservice.DtoSelectedIndex].HELYSEGNEV}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Közterület:</td>
-        <td *ngIf="ugyfelservice.DtoSelectedIndex !== -1">{{ugyfelservice.Dto[ugyfelservice.DtoSelectedIndex].KOZTERULET}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Közterület tipus:</td>
-        <td *ngIf="ugyfelservice.DtoSelectedIndex !== -1">{{ugyfelservice.Dto[ugyfelservice.DtoSelectedIndex].KOZTERULETTIPUS}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Házszám:</td>
-        <td *ngIf="ugyfelservice.DtoSelectedIndex !== -1">{{ugyfelservice.Dto[ugyfelservice.DtoSelectedIndex].HAZSZAM}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Adószám:</td>
-        <td *ngIf="ugyfelservice.DtoSelectedIndex !== -1">{{ugyfelservice.Dto[ugyfelservice.DtoSelectedIndex].ADOSZAM}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">EU adószám:</td>
-        <td *ngIf="ugyfelservice.DtoSelectedIndex !== -1">{{ugyfelservice.Dto[ugyfelservice.DtoSelectedIndex].EUADOSZAM}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Telefon:</td>
-        <td *ngIf="ugyfelservice.DtoSelectedIndex !== -1">{{ugyfelservice.Dto[ugyfelservice.DtoSelectedIndex].TELEFON}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Email:</td>
-        <td *ngIf="ugyfelservice.DtoSelectedIndex !== -1">{{ugyfelservice.Dto[ugyfelservice.DtoSelectedIndex].EMAIL}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Megjegyzés:</td>
-        <td *ngIf="ugyfelservice.DtoSelectedIndex !== -1">{{ugyfelservice.Dto[ugyfelservice.DtoSelectedIndex].MEGJEGYZES}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Létrehozta:</td>
-        <td *ngIf="ugyfelservice.DtoSelectedIndex !== -1">{{ugyfelservice.Dto[ugyfelservice.DtoSelectedIndex].LETREHOZTA}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Létrehozva:</td>
-        <td *ngIf="ugyfelservice.DtoSelectedIndex !== -1">{{ugyfelservice.Dto[ugyfelservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Módosította:</td>
-        <td *ngIf="ugyfelservice.DtoSelectedIndex !== -1">{{ugyfelservice.Dto[ugyfelservice.DtoSelectedIndex].MODOSITOTTA}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Módosítva:</td>
-        <td *ngIf="ugyfelservice.DtoSelectedIndex !== -1">{{ugyfelservice.Dto[ugyfelservice.DtoSelectedIndex].MODOSITVA | datetimehun}}</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+
   <router-outlet></router-outlet>
   <app-errormodal [cim]="ugyfelservice.cim"></app-errormodal>
 </div>

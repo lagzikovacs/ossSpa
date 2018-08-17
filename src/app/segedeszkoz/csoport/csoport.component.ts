@@ -83,7 +83,7 @@ export class CsoportComponent {
         this.csoportservice.DtoCsoportLehetsegesJog = res1.Result;
 
         this.eppFrissit = false;
-        this._router.navigate(['../csoportegy'], {relativeTo: this._route});
+        this._router.navigate(['../csoportegy/reszletek'], {relativeTo: this._route});
       })
       .catch(err => {
         this.errormodal.show(err);

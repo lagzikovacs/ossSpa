@@ -4,7 +4,8 @@
                [(szempont)]="cikkservice.szempont"
                [(minta)]="cikkservice.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit" (Uj)="onUj()">
+               [enUj]="!eppFrissit && mod" (Uj)="onUj()"
+               [visZoom]="cikkservice.zoom" (StopZoom)="stopzoom()">
   </app-toolbar>
   <table class="table table-bordered table-sm table-responsive" style="border: none">
     <thead>

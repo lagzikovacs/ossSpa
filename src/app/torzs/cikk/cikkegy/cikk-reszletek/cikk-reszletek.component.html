@@ -1,0 +1,63 @@
+<div class="alapkeret">
+  <h5>{{cikkservice.cim}} részletesen</h5>
+  <table class="table ng table-bordered table-sm table-responsive" style="border: none">
+    <tbody>
+    <tr>
+      <td class="egylabel">Id:</td>
+      <td *ngIf="cikkservice.DtoSelectedIndex !== -1">{{cikkservice.Dto[cikkservice.DtoSelectedIndex].CIKKKOD}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Megnevezés:</td>
+      <td *ngIf="cikkservice.DtoSelectedIndex !== -1">{{cikkservice.Dto[cikkservice.DtoSelectedIndex].MEGNEVEZES}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Me:</td>
+      <td *ngIf="cikkservice.DtoSelectedIndex !== -1">{{cikkservice.Dto[cikkservice.DtoSelectedIndex].ME}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">ÁFA kulcs:</td>
+      <td *ngIf="cikkservice.DtoSelectedIndex !== -1">{{cikkservice.Dto[cikkservice.DtoSelectedIndex].AFAKULCS}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Egységár:</td>
+      <td *ngIf="cikkservice.DtoSelectedIndex !== -1">{{cikkservice.Dto[cikkservice.DtoSelectedIndex].EGYSEGAR}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Készletet képez:</td>
+      <td *ngIf="cikkservice.DtoSelectedIndex !== -1">{{cikkservice.Dto[cikkservice.DtoSelectedIndex].KESZLETETKEPEZ}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Tömeg, kg:</td>
+      <td *ngIf="cikkservice.DtoSelectedIndex !== -1">{{cikkservice.Dto[cikkservice.DtoSelectedIndex].TOMEGKG}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Termékdíj KT:</td>
+      <td *ngIf="cikkservice.DtoSelectedIndex !== -1">{{cikkservice.Dto[cikkservice.DtoSelectedIndex].TERMEKDIJKT}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Termékdíj megnevezés:</td>
+      <td *ngIf="cikkservice.DtoSelectedIndex !== -1">{{cikkservice.Dto[cikkservice.DtoSelectedIndex].TERMEKDIJMEGNEVEZES}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Termékdíj egységár:</td>
+      <td *ngIf="cikkservice.DtoSelectedIndex !== -1">{{cikkservice.Dto[cikkservice.DtoSelectedIndex].TERMEKDIJEGYSEGAR}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Létrehozta:</td>
+      <td *ngIf="cikkservice.DtoSelectedIndex !== -1">{{cikkservice.Dto[cikkservice.DtoSelectedIndex].LETREHOZTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Létrehozva:</td>
+      <td *ngIf="cikkservice.DtoSelectedIndex !== -1">{{cikkservice.Dto[cikkservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosította:</td>
+      <td *ngIf="cikkservice.DtoSelectedIndex !== -1">{{cikkservice.Dto[cikkservice.DtoSelectedIndex].MODOSITOTTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosítva:</td>
+      <td *ngIf="cikkservice.DtoSelectedIndex !== -1">{{cikkservice.Dto[cikkservice.DtoSelectedIndex].MODOSITVA | datetimehun}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

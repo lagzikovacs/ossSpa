@@ -1,0 +1,31 @@
+<div class="alapkeret">
+  <h5>{{helysegservice.cim}} részletesen</h5>
+  <table class="table ng table-bordered table-sm table-responsive" style="border: none">
+    <tbody>
+    <tr>
+      <td class="egylabel">Id:</td>
+      <td *ngIf="helysegservice.DtoSelectedIndex !== -1">{{helysegservice.Dto[helysegservice.DtoSelectedIndex].HELYSEGKOD}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Helység:</td>
+      <td *ngIf="helysegservice.DtoSelectedIndex !== -1">{{helysegservice.Dto[helysegservice.DtoSelectedIndex].HELYSEGNEV}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Létrehozta:</td>
+      <td *ngIf="helysegservice.DtoSelectedIndex !== -1">{{helysegservice.Dto[helysegservice.DtoSelectedIndex].LETREHOZTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Létrehozva:</td>
+      <td *ngIf="helysegservice.DtoSelectedIndex !== -1">{{helysegservice.Dto[helysegservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosította:</td>
+      <td *ngIf="helysegservice.DtoSelectedIndex !== -1">{{helysegservice.Dto[helysegservice.DtoSelectedIndex].MODOSITOTTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosítva:</td>
+      <td *ngIf="helysegservice.DtoSelectedIndex !== -1">{{helysegservice.Dto[helysegservice.DtoSelectedIndex].MODOSITVA | datetimehun}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

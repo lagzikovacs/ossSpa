@@ -5,6 +5,8 @@ import {UgyfelService} from '../../services/torzs/ugyfel.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UgyfelDto} from '../../dtos/torzs/ugyfel/ugyfeldto';
 import {SzMT} from '../../dtos/szmt';
+import {LogonService} from '../../services/segedeszkosz/logon.service';
+import {JogKod} from '../../enums/jogkod';
 
 @Component({
   selector: 'app-ugyfel',
@@ -20,11 +22,14 @@ export class UgyfelComponent {
   ];
 
   eppFrissit = false;
+  mod = false;
   ugyfelservice: UgyfelService;
 
   constructor(private _router: Router,
               private _route: ActivatedRoute,
+              private _logonservice: LogonService,
               ugyfelservice: UgyfelService  ) {
+    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.UGYFELEKMOD]);
     this.ugyfelservice = ugyfelservice;
   }
 
@@ -69,10 +74,19 @@ export class UgyfelComponent {
         this.eppFrissit = false;
       });
   }
+
+  selectforzoom(i: number) {
+    this.setClickedRow(i);
+  }
+  stopzoom() {
+    this.ugyfelservice.zoom = false;
+    this._router.navigate(['../blank'], {relativeTo: this._route});
+  }
+
   setClickedRow(i: number) {
     this.ugyfelservice.DtoSelectedIndex = i;
     this.ugyfelservice.uj = false;
-    this._router.navigate(['../ugyfelegy'], {relativeTo: this._route});
+    this._router.navigate(['../ugyfelegy/reszletek'], {relativeTo: this._route});
   }
 
   onUj() {

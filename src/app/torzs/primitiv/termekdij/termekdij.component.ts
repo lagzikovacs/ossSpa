@@ -2,8 +2,10 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {TermekdijService} from '../../../services/torzs/primitiv/termekdij.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CikkService} from "../../../services/torzs/cikk.service";
-import {ZoomSources} from "../../../enums/zoomsources";
+import {CikkService} from '../../../services/torzs/cikk.service';
+import {ZoomSources} from '../../../enums/zoomsources';
+import {LogonService} from "../../../services/segedeszkosz/logon.service";
+import {JogKod} from "../../../enums/jogkod";
 
 @Component({
   selector: 'app-termekdij',
@@ -16,12 +18,15 @@ export class TermekdijComponent implements OnInit {
   szurok = ['KT'];
 
   eppFrissit = false;
+  mod = false;
   termekdijservice: TermekdijService;
 
   constructor(private _router: Router,
               private _route: ActivatedRoute,
+              private _logonservice: LogonService,
               termekdijservice: TermekdijService,
               private _cikkservice: CikkService) {
+    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.termekdijservice = termekdijservice;
   }
 
@@ -83,7 +88,7 @@ export class TermekdijComponent implements OnInit {
   setClickedRow(i: number) {
     this.termekdijservice.DtoSelectedIndex = i;
     this.termekdijservice.uj = false;
-    this._router.navigate(['../termekdijegy'], {relativeTo: this._route});
+    this._router.navigate(['../termekdijegy/reszletek'], {relativeTo: this._route});
   }
 
   uj() {

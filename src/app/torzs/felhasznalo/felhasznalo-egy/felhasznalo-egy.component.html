@@ -1,13 +1,13 @@
 <div class="alapkeret">
   <h5>{{felhasznaloservice.cim}}</h5>
-  <h6 *ngIf="felhasznaloservice.DtoSelectedIndex !== -1">{{felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].FELHASZNALOKOD}} - {{felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].AZONOSITO}} - {{felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].NEV}}</h6>
+  <h6 *ngIf="felhasznaloservice.DtoSelectedIndex !== -1">{{felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].NEV}}</h6>
   <div>
     <nav>
       <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        <i class="fa fa-arrow-left" style="margin-right: 3px" aria-hidden="true"></i>Vissza
       </button>
       <button [disabled]="eppFrissit" (click)="reszletek()" class="btn btn-sm btn-outline-primary navgomb">
-        <i class="fa fa-file" aria-hidden="true"></i>
+        <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>Részletesen
       </button>
 
       <button [disabled]="eppFrissit || felhasznaloservice.DtoSelectedIndex === -1 || !mod"
@@ -21,6 +21,10 @@
       <button [disabled]="eppFrissit || felhasznaloservice.DtoSelectedIndex === -1 || !mod"
               (click)="jelszo()" class="btn btn-sm btn-outline-primary navgomb">
         Jelszó
+      </button>
+      <button [disabled]="eppFrissit || felhasznaloservice.DtoSelectedIndex === -1 || !mod"
+              (click)="tevekenyseg()" class="btn btn-sm btn-outline-primary navgomb">
+        Tevékenység
       </button>
     </nav>
   </div>

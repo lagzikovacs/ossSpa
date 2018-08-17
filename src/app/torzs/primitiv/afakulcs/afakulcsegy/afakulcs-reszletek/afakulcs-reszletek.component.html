@@ -1,0 +1,35 @@
+<div class="alapkeret">
+  <h5>{{afakulcsservice.cim}} részletesen</h5>
+  <table class="table ng table-bordered table-sm table-responsive" style="border: none">
+    <tbody>
+    <tr>
+      <td class="egylabel">Id:</td>
+      <td *ngIf="afakulcsservice.DtoSelectedIndex !== -1">{{afakulcsservice.Dto[afakulcsservice.DtoSelectedIndex].AFAKULCSKOD}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">ÁFA kulcs:</td>
+      <td *ngIf="afakulcsservice.DtoSelectedIndex !== -1">{{afakulcsservice.Dto[afakulcsservice.DtoSelectedIndex].AFAKULCS1}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">ÁFA mértéke, %:</td>
+      <td *ngIf="afakulcsservice.DtoSelectedIndex !== -1">{{afakulcsservice.Dto[afakulcsservice.DtoSelectedIndex].AFAMERTEKE}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Létrehozta:</td>
+      <td *ngIf="afakulcsservice.DtoSelectedIndex !== -1">{{afakulcsservice.Dto[afakulcsservice.DtoSelectedIndex].LETREHOZTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Létrehozva:</td>
+      <td *ngIf="afakulcsservice.DtoSelectedIndex !== -1">{{afakulcsservice.Dto[afakulcsservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosította:</td>
+      <td *ngIf="afakulcsservice.DtoSelectedIndex !== -1">{{afakulcsservice.Dto[afakulcsservice.DtoSelectedIndex].MODOSITOTTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosítva:</td>
+      <td *ngIf="afakulcsservice.DtoSelectedIndex !== -1">{{afakulcsservice.Dto[afakulcsservice.DtoSelectedIndex].MODOSITVA | datetimehun}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

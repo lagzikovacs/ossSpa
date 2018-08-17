@@ -1,0 +1,39 @@
+<div class="alapkeret">
+  <h5>{{termekdijservice.cim}} részletesen</h5>
+  <table class="table ng table-bordered table-sm table-responsive" style="border: none">
+    <tbody>
+    <tr>
+      <td class="egylabel">Id:</td>
+      <td *ngIf="termekdijservice.DtoSelectedIndex !== -1">{{termekdijservice.Dto[termekdijservice.DtoSelectedIndex].TERMEKDIJKOD}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Termékdíj KT:</td>
+      <td *ngIf="termekdijservice.DtoSelectedIndex !== -1">{{termekdijservice.Dto[termekdijservice.DtoSelectedIndex].TERMEKDIJKT}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Termékdíj megnevezés:</td>
+      <td *ngIf="termekdijservice.DtoSelectedIndex !== -1">{{termekdijservice.Dto[termekdijservice.DtoSelectedIndex].TERMEKDIJMEGNEVEZES}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Termékdíj egységár:</td>
+      <td *ngIf="termekdijservice.DtoSelectedIndex !== -1">{{termekdijservice.Dto[termekdijservice.DtoSelectedIndex].TERMEKDIJEGYSEGAR}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Létrehozta:</td>
+      <td *ngIf="termekdijservice.DtoSelectedIndex !== -1">{{termekdijservice.Dto[termekdijservice.DtoSelectedIndex].LETREHOZTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Létrehozva:</td>
+      <td *ngIf="termekdijservice.DtoSelectedIndex !== -1">{{termekdijservice.Dto[termekdijservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosította:</td>
+      <td *ngIf="termekdijservice.DtoSelectedIndex !== -1">{{termekdijservice.Dto[termekdijservice.DtoSelectedIndex].MODOSITOTTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosítva:</td>
+      <td *ngIf="termekdijservice.DtoSelectedIndex !== -1">{{termekdijservice.Dto[termekdijservice.DtoSelectedIndex].MODOSITVA | datetimehun}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

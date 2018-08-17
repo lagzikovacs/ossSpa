@@ -4,6 +4,8 @@ import {HelysegService} from '../../../services/torzs/primitiv/helyseg.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {UgyfelService} from '../../../services/torzs/ugyfel.service';
+import {LogonService} from "../../../services/segedeszkosz/logon.service";
+import {JogKod} from "../../../enums/jogkod";
 
 @Component({
   selector: 'app-helyseg',
@@ -16,12 +18,15 @@ export class HelysegComponent implements OnInit {
   szurok = ['Helység'];
 
   eppFrissit = false;
+  mod = false;
   helysegservice: HelysegService;
 
   constructor(private _router: Router,
               private _route: ActivatedRoute,
+              private _logonservice: LogonService,
               helysegservice: HelysegService,
               private ugyfelservice: UgyfelService) {
+    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.helysegservice = helysegservice;
   }
 
@@ -81,7 +86,7 @@ export class HelysegComponent implements OnInit {
   setClickedRow(i: number) {
     this.helysegservice.DtoSelectedIndex = i;
     this.helysegservice.uj = false;
-    this._router.navigate(['../helysegegy'], {relativeTo: this._route});
+    this._router.navigate(['../helysegegy/reszletek'], {relativeTo: this._route});
   }
 
   uj() {

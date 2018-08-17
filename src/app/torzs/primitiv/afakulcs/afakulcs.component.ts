@@ -3,7 +3,9 @@ import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.componen
 import {AfakulcsService} from '../../../services/torzs/primitiv/afakulcs.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CikkService} from '../../../services/torzs/cikk.service';
-import {ZoomSources} from "../../../enums/zoomsources";
+import {ZoomSources} from '../../../enums/zoomsources';
+import {LogonService} from "../../../services/segedeszkosz/logon.service";
+import {JogKod} from "../../../enums/jogkod";
 
 @Component({
   selector: 'app-afakulcs',
@@ -16,12 +18,15 @@ export class AfakulcsComponent implements OnInit {
   szurok = ['ÁFA kulcs'];
 
   eppFrissit = false;
+  mod = false;
   afakulcsservice: AfakulcsService;
 
   constructor(private _router: Router,
               private _route: ActivatedRoute,
+              private _logonservice: LogonService,
               afakulcsservice: AfakulcsService,
               private _cikkservice: CikkService) {
+    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.afakulcsservice = afakulcsservice;
   }
 
@@ -82,7 +87,7 @@ export class AfakulcsComponent implements OnInit {
   setClickedRow(i: number) {
     this.afakulcsservice.DtoSelectedIndex = i;
     this.afakulcsservice.uj = false;
-    this._router.navigate(['../afakulcsegy'], {relativeTo: this._route});
+    this._router.navigate(['../afakulcsegy/reszletek'], {relativeTo: this._route});
   }
 
   uj() {

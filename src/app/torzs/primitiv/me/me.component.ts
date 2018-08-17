@@ -4,6 +4,8 @@ import {MeService} from '../../../services/torzs/primitiv/me.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {CikkService} from '../../../services/torzs/cikk.service';
+import {LogonService} from "../../../services/segedeszkosz/logon.service";
+import {JogKod} from "../../../enums/jogkod";
 
 @Component({
   selector: 'app-me',
@@ -16,12 +18,15 @@ export class MeComponent implements OnInit {
   szurok = ['Mennyiségi egység'];
 
   eppFrissit = false;
+  mod = false;
   meservice: MeService;
 
   constructor(private _router: Router,
               private _route: ActivatedRoute,
+              private _logonservice: LogonService,
               meservice: MeService,
               private _cikkservice: CikkService) {
+    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.meservice = meservice;
   }
 
@@ -81,7 +86,7 @@ export class MeComponent implements OnInit {
   setClickedRow(i: number) {
     this.meservice.DtoSelectedIndex = i;
     this.meservice.uj = false;
-    this._router.navigate(['../meegy'], {relativeTo: this._route});
+    this._router.navigate(['../meegy/reszletek'], {relativeTo: this._route});
   }
 
   uj() {

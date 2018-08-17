@@ -2,6 +2,8 @@ import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {FizetesimodService} from '../../../services/torzs/primitiv/fizetesimod.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {LogonService} from "../../../services/segedeszkosz/logon.service";
+import {JogKod} from "../../../enums/jogkod";
 
 @Component({
   selector: 'app-fizetesimod',
@@ -14,11 +16,14 @@ export class FizetesimodComponent {
   szurok = ['Fizetési mód'];
 
   eppFrissit = false;
+  mod = false;
   fizetesimodservice: FizetesimodService;
 
   constructor(private _router: Router,
               private _route: ActivatedRoute,
+              private _logonservice: LogonService,
               fizetesimodservice: FizetesimodService) {
+    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.fizetesimodservice = fizetesimodservice;
   }
 
@@ -59,11 +64,15 @@ export class FizetesimodComponent {
   selectforzoom(i: number) {
     this.setClickedRow(i);
   }
+  stopzoom() {
+    this.fizetesimodservice.zoom = false;
+    this._router.navigate(['../blank'], {relativeTo: this._route});
+  }
 
   setClickedRow(i: number) {
     this.fizetesimodservice.DtoSelectedIndex = i;
     this.fizetesimodservice.uj = false;
-    this._router.navigate(['../fizetesimodegy'], {relativeTo: this._route});
+    this._router.navigate(['../fizetesimodegy/reszletek'], {relativeTo: this._route});
   }
 
   uj() {

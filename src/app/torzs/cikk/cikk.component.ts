@@ -5,6 +5,8 @@ import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CikkDto} from '../../dtos/torzs/cikk/cikkdto';
 import {SzMT} from '../../dtos/szmt';
+import {LogonService} from '../../services/segedeszkosz/logon.service';
+import {JogKod} from '../../enums/jogkod';
 
 @Component({
   selector: 'app-cikk',
@@ -20,11 +22,14 @@ export class CikkComponent {
   ];
 
   eppFrissit = false;
+  mod = false;
   cikkservice: CikkService;
 
   constructor(private _router: Router,
               private _route: ActivatedRoute,
+              private _logonservice: LogonService,
               cikkservice: CikkService  ) {
+    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.CIKKMOD]);
     this.cikkservice = cikkservice;
   }
 
@@ -69,10 +74,19 @@ export class CikkComponent {
         this.eppFrissit = false;
       });
   }
+
+  selectforzoom(i: number) {
+    this.setClickedRow(i);
+  }
+  stopzoom() {
+    this.cikkservice.zoom = false;
+    this._router.navigate(['../blank'], {relativeTo: this._route});
+  }
+
   setClickedRow(i: number) {
     this.cikkservice.DtoSelectedIndex = i;
     this.cikkservice.uj = false;
-    this._router.navigate(['../cikkegy'], {relativeTo: this._route});
+    this._router.navigate(['../cikkegy/reszletek'], {relativeTo: this._route});
   }
 
   onUj() {

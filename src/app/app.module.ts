@@ -131,6 +131,36 @@ import { PenztaregyComponent } from './eszkoz/penztar/penztaregy/penztaregy.comp
 import { PenztarTorlesComponent } from './eszkoz/penztar/penztaregy/penztar-torles/penztar-torles.component';
 import { PenztarSzerkesztesComponent } from './eszkoz/penztar/penztaregy/penztar-szerkesztes/penztar-szerkesztes.component';
 import { FelhasznaloReszletekComponent } from './torzs/felhasznalo/felhasznalo-egy/felhasznalo-reszletek/felhasznalo-reszletek.component';
+import { CsoportReszletekComponent } from './segedeszkoz/csoport/csoportegy/csoport-reszletek/csoport-reszletek.component';
+import { FelhasznaloTevekenysegComponent } from './torzs/felhasznalo/felhasznalo-egy/felhasznalo-tevekenyseg/felhasznalo-tevekenyseg.component';
+import {IrattipusService} from "./services/torzs/primitiv/irattipus.service";
+import {TeendoService} from "./services/torzs/primitiv/teendo.service";
+import {FizetesimodService} from "./services/torzs/primitiv/fizetesimod.service";
+import {PenznemService} from "./services/torzs/primitiv/penznem.service";
+import {MeService} from "./services/torzs/primitiv/me.service";
+import {AfakulcsService} from "./services/torzs/primitiv/afakulcs.service";
+import {TermekdijService} from "./services/torzs/primitiv/termekdij.service";
+import {CikkService} from "./services/torzs/cikk.service";
+import {HelysegService} from "./services/torzs/primitiv/helyseg.service";
+import {UgyfelService} from "./services/torzs/ugyfel.service";
+import {ParticioService} from "./services/segedeszkosz/particio.service";
+import {VolumeService} from "./services/volume.service";
+import {CsoportService} from "./services/segedeszkosz/csoport.service";
+import {FeliratkozasService} from "./services/eszkoz/feliratkozas.service";
+import {PenztarService} from "./services/eszkoz/penztar.service";
+import { PenztarReszletekComponent } from './eszkoz/penztar/penztaregy/penztar-reszletek/penztar-reszletek.component';
+import { PenztarExportComponent } from './eszkoz/penztar/penztaregy/penztar-export/penztar-export.component';
+import { PenztartetelComponent } from './eszkoz/penztar/penztaregy/penztartetel/penztartetel.component';
+import { AfakulcsReszletekComponent } from './torzs/primitiv/afakulcs/afakulcsegy/afakulcs-reszletek/afakulcs-reszletek.component';
+import { TeendoReszletekComponent } from './torzs/primitiv/teendo/teendoegy/teendo-reszletek/teendo-reszletek.component';
+import { FizetesimodReszletekComponent } from './torzs/primitiv/fizetesimod/fizetesimodegy/fizetesimod-reszletek/fizetesimod-reszletek.component';
+import { HelysegReszletekComponent } from './torzs/primitiv/helyseg/helysegegy/helyseg-reszletek/helyseg-reszletek.component';
+import { IrattipusReszletekComponent } from './torzs/primitiv/irattipus/irattipusegy/irattipus-reszletek/irattipus-reszletek.component';
+import { MeReszletekComponent } from './torzs/primitiv/me/meegy/me-reszletek/me-reszletek.component';
+import { PenznemReszletekComponent } from './torzs/primitiv/penznem/penznemegy/penznem-reszletek/penznem-reszletek.component';
+import { TermekdijReszletekComponent } from './torzs/primitiv/termekdij/termekdijegy/termekdij-reszletek/termekdij-reszletek.component';
+import { CikkReszletekComponent } from './torzs/cikk/cikkegy/cikk-reszletek/cikk-reszletek.component';
+import { UgyfelReszletekComponent } from './torzs/ugyfel/ugyfelegy/ugyfel-reszletek/ugyfel-reszletek.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -138,6 +168,7 @@ const routes: Routes = [
   {path: 'irattipus', component: IrattipusComponent, canActivate: [RoleGuard]},
   {path: 'irattipusuj', component: IrattipusSzerkesztesComponent, canActivate: [RoleGuard]},
   {path: 'irattipusegy', component: IrattipusegyComponent, canActivate: [RoleGuard], children: [
+    {path: 'reszletek', component: IrattipusReszletekComponent},
     {path: 'torles', component: IrattipusTorlesComponent},
     {path: 'szerkesztes', component: IrattipusSzerkesztesComponent},
     {path: 'blank', component: BlankComponent}
@@ -147,6 +178,7 @@ const routes: Routes = [
   {path: 'teendo', component: TeendoComponent, canActivate: [RoleGuard]},
   {path: 'teendouj', component: TeendoSzerkesztesComponent, canActivate: [RoleGuard]},
   {path: 'teendoegy', component: TeendoegyComponent, canActivate: [RoleGuard], children: [
+    {path: 'reszletek', component: TeendoReszletekComponent},
     {path: 'torles', component: TeendoTorlesComponent},
     {path: 'szerkesztes', component: TeendoSzerkesztesComponent},
     {path: 'blank', component: BlankComponent}
@@ -154,6 +186,7 @@ const routes: Routes = [
   {path: 'fizetesimod', component: FizetesimodComponent, canActivate: [RoleGuard]},
   {path: 'fizetesimoduj', component: FizetesimodSzerkesztesComponent, canActivate: [RoleGuard]},
   {path: 'fizetesimodegy', component: FizetesimodegyComponent, canActivate: [RoleGuard], children: [
+    {path: 'reszletek', component: FizetesimodReszletekComponent},
     {path: 'torles', component: FizetesimodTorlesComponent},
     {path: 'szerkesztes', component: FizetesimodSzerkesztesComponent},
     {path: 'blank', component: BlankComponent}
@@ -161,6 +194,7 @@ const routes: Routes = [
   {path: 'penznem', component: PenznemComponent, canActivate: [RoleGuard]},
   {path: 'penznemuj', component: PenznemSzerkesztesComponent, canActivate: [RoleGuard]},
   {path: 'penznemegy', component: PenznemegyComponent, canActivate: [RoleGuard], children: [
+    {path: 'reszletek', component: PenznemReszletekComponent},
     {path: 'torles', component: PenznemTorlesComponent},
     {path: 'szerkesztes', component: PenznemSzerkesztesComponent},
     {path: 'blank', component: BlankComponent}
@@ -177,6 +211,7 @@ const routes: Routes = [
     {path: 'afakulcs', component: AfakulcsComponent, canActivate: [RoleGuard]},
     {path: 'afakulcsuj', component: AfakulcsSzerkesztesComponent, canActivate: [RoleGuard]},
     {path: 'afakulcsegy', component: AfakulcsegyComponent, canActivate: [RoleGuard], children: [
+      {path: 'reszletek', component: AfakulcsReszletekComponent},
       {path: 'torles', component: AfakulcsTorlesComponent},
       {path: 'szerkesztes', component: AfakulcsSzerkesztesComponent},
       {path: 'blank', component: BlankComponent}
@@ -184,6 +219,7 @@ const routes: Routes = [
     {path: 'termekdij', component: TermekdijComponent, canActivate: [RoleGuard]},
     {path: 'termekdijuj', component: TermekdijSzerkesztesComponent, canActivate: [RoleGuard]},
     {path: 'termekdijegy', component: TermekdijegyComponent, canActivate: [RoleGuard], children: [
+      {path: 'reszletek', component: TermekdijReszletekComponent},
       {path: 'torles', component: TermekdijTorlesComponent},
       {path: 'szerkesztes', component: TermekdijSzerkesztesComponent},
       {path: 'blank', component: BlankComponent}
@@ -191,11 +227,13 @@ const routes: Routes = [
     {path: 'blank', component: BlankComponent}
   ]},
   {path: 'cikkegy', component: CikkegyComponent, canActivate: [RoleGuard], children: [
+    {path: 'reszletek', component: CikkReszletekComponent},
     {path: 'torles', component: CikkTorlesComponent},
     {path: 'szerkesztes', component: CikkSzerkesztesComponent, children: [
       {path: 'me', component: MeComponent, canActivate: [RoleGuard]},
       {path: 'meuj', component: MeSzerkesztesComponent, canActivate: [RoleGuard]},
       {path: 'meegy', component: MeegyComponent, canActivate: [RoleGuard], children: [
+        {path: 'reszletek', component: MeReszletekComponent},
         {path: 'torles', component: MeTorlesComponent},
         {path: 'szerkesztes', component: MeSzerkesztesComponent},
         {path: 'blank', component: BlankComponent}
@@ -203,6 +241,7 @@ const routes: Routes = [
       {path: 'afakulcs', component: AfakulcsComponent, canActivate: [RoleGuard]},
       {path: 'afakulcsuj', component: AfakulcsSzerkesztesComponent, canActivate: [RoleGuard]},
       {path: 'afakulcsegy', component: AfakulcsegyComponent, canActivate: [RoleGuard], children: [
+        {path: 'reszletek', component: AfakulcsReszletekComponent},
         {path: 'torles', component: AfakulcsTorlesComponent},
         {path: 'szerkesztes', component: AfakulcsSzerkesztesComponent},
         {path: 'blank', component: BlankComponent}
@@ -210,6 +249,7 @@ const routes: Routes = [
       {path: 'termekdij', component: TermekdijComponent, canActivate: [RoleGuard]},
       {path: 'termekdijuj', component: TermekdijSzerkesztesComponent, canActivate: [RoleGuard]},
       {path: 'termekdijegy', component: TermekdijegyComponent, canActivate: [RoleGuard], children: [
+        {path: 'reszletek', component: TermekdijReszletekComponent},
         {path: 'torles', component: TermekdijTorlesComponent},
         {path: 'szerkesztes', component: TermekdijSzerkesztesComponent},
         {path: 'blank', component: BlankComponent}
@@ -223,6 +263,7 @@ const routes: Routes = [
   {path: 'me', component: MeComponent, canActivate: [RoleGuard]},
   {path: 'meuj', component: MeSzerkesztesComponent, canActivate: [RoleGuard]},
   {path: 'meegy', component: MeegyComponent, canActivate: [RoleGuard], children: [
+    {path: 'reszletek', component: MeReszletekComponent},
     {path: 'torles', component: MeTorlesComponent},
     {path: 'szerkesztes', component: MeSzerkesztesComponent},
     {path: 'blank', component: BlankComponent}
@@ -230,6 +271,7 @@ const routes: Routes = [
   {path: 'afakulcs', component: AfakulcsComponent, canActivate: [RoleGuard]},
   {path: 'afakulcsuj', component: AfakulcsSzerkesztesComponent, canActivate: [RoleGuard]},
   {path: 'afakulcsegy', component: AfakulcsegyComponent, canActivate: [RoleGuard], children: [
+    {path: 'reszletek', component: AfakulcsReszletekComponent},
     {path: 'torles', component: AfakulcsTorlesComponent},
     {path: 'szerkesztes', component: AfakulcsSzerkesztesComponent},
     {path: 'blank', component: BlankComponent}
@@ -237,6 +279,7 @@ const routes: Routes = [
   {path: 'termekdij', component: TermekdijComponent, canActivate: [RoleGuard]},
   {path: 'termekdijuj', component: TermekdijSzerkesztesComponent, canActivate: [RoleGuard]},
   {path: 'termekdijegy', component: TermekdijegyComponent, canActivate: [RoleGuard], children: [
+    {path: 'reszletek', component: TermekdijReszletekComponent},
     {path: 'torles', component: TermekdijTorlesComponent},
     {path: 'szerkesztes', component: TermekdijSzerkesztesComponent},
     {path: 'blank', component: BlankComponent}
@@ -246,6 +289,7 @@ const routes: Routes = [
   {path: 'helyseg', component: HelysegComponent, canActivate: [RoleGuard]},
   {path: 'helyseguj', component: HelysegSzerkesztesComponent, canActivate: [RoleGuard]},
   {path: 'helysegegy', component: HelysegegyComponent, canActivate: [RoleGuard], children: [
+    {path: 'reszletek', component: HelysegReszletekComponent},
     {path: 'torles', component: HelysegTorlesComponent},
     {path: 'szerkesztes', component: HelysegSzerkesztesComponent},
     {path: 'blank', component: BlankComponent}
@@ -256,6 +300,7 @@ const routes: Routes = [
     {path: 'helyseg', component: HelysegComponent, canActivate: [RoleGuard]},
     {path: 'helyseguj', component: HelysegSzerkesztesComponent, canActivate: [RoleGuard]},
     {path: 'helysegegy', component: HelysegegyComponent, canActivate: [RoleGuard], children: [
+      {path: 'reszletek', component: HelysegReszletekComponent},
       {path: 'torles', component: HelysegTorlesComponent},
       {path: 'szerkesztes', component: HelysegSzerkesztesComponent},
       {path: 'blank', component: BlankComponent}
@@ -263,11 +308,13 @@ const routes: Routes = [
     {path: 'blank', component: BlankComponent}
   ]},
   {path: 'ugyfelegy', component: UgyfelegyComponent, canActivate: [RoleGuard], children: [
+    {path: 'reszletek', component: UgyfelReszletekComponent},
     {path: 'torles', component: UgyfelTorlesComponent},
     {path: 'szerkesztes', component: UgyfelSzerkesztesComponent, children: [
       {path: 'helyseg', component: HelysegComponent, canActivate: [RoleGuard]},
       {path: 'helyseguj', component: HelysegSzerkesztesComponent, canActivate: [RoleGuard]},
       {path: 'helysegegy', component: HelysegegyComponent, canActivate: [RoleGuard], children: [
+        {path: 'reszletek', component: HelysegReszletekComponent},
         {path: 'torles', component: HelysegTorlesComponent},
         {path: 'szerkesztes', component: HelysegSzerkesztesComponent},
         {path: 'blank', component: BlankComponent}
@@ -298,6 +345,7 @@ const routes: Routes = [
     {path: 'irattipus', component: IrattipusComponent, canActivate: [RoleGuard]},
     {path: 'irattipusuj', component: IrattipusSzerkesztesComponent, canActivate: [RoleGuard]},
     {path: 'irattipusegy', component: IrattipusegyComponent, canActivate: [RoleGuard], children: [
+      {path: 'reszletek', component: IrattipusReszletekComponent},
       {path: 'torles', component: IrattipusTorlesComponent},
       {path: 'szerkesztes', component: IrattipusSzerkesztesComponent},
       {path: 'blank', component: BlankComponent}
@@ -308,6 +356,7 @@ const routes: Routes = [
       {path: 'irattipus', component: IrattipusComponent},
       {path: 'irattipusuj', component: IrattipusSzerkesztesComponent, canActivate: [RoleGuard]},
       {path: 'irattipusegy', component: IrattipusegyComponent, canActivate: [RoleGuard], children: [
+        {path: 'reszletek', component: IrattipusReszletekComponent},
         {path: 'torles', component: IrattipusTorlesComponent},
         {path: 'szerkesztes', component: IrattipusSzerkesztesComponent},
         {path: 'blank', component: BlankComponent}
@@ -325,9 +374,33 @@ const routes: Routes = [
   ]},
 
   {path: 'penztar', component: PenztarComponent, canActivate: [RoleGuard]},
+  {path: 'penztaruj', component: PenztarSzerkesztesComponent, canActivate: [RoleGuard], children: [
+    {path: 'penznem', component: PenznemComponent, canActivate: [RoleGuard]},
+    {path: 'penznemuj', component: PenznemSzerkesztesComponent, canActivate: [RoleGuard]},
+    {path: 'penznemegy', component: PenznemegyComponent, canActivate: [RoleGuard], children: [
+      {path: 'reszletek', component: PenznemReszletekComponent},
+      {path: 'torles', component: PenznemTorlesComponent},
+      {path: 'szerkesztes', component: PenznemSzerkesztesComponent},
+      {path: 'blank', component: BlankComponent}
+    ]},
+    {path: 'blank', component: BlankComponent},
+  ]},
   {path: 'penztaregy', component: PenztaregyComponent, canActivate: [RoleGuard], children: [
+    {path: 'reszletek', component: PenztarReszletekComponent},
     {path: 'torles', component: PenztarTorlesComponent},
-    {path: 'modositas', component: PenztarSzerkesztesComponent},
+    {path: 'szerkesztes', component: PenztarSzerkesztesComponent, children: [
+      {path: 'penznem', component: PenznemComponent, canActivate: [RoleGuard]},
+      {path: 'penznemuj', component: PenznemSzerkesztesComponent, canActivate: [RoleGuard]},
+      {path: 'penznemegy', component: PenznemegyComponent, canActivate: [RoleGuard], children: [
+        {path: 'reszletek', component: PenznemReszletekComponent},
+        {path: 'torles', component: PenznemTorlesComponent},
+        {path: 'szerkesztes', component: PenznemSzerkesztesComponent},
+        {path: 'blank', component: BlankComponent}
+      ]},
+      {path: 'blank', component: BlankComponent},
+    ]},
+    {path: 'tetelek', component: PenztartetelComponent},
+    {path: 'export', component: PenztarExportComponent},
     {path: 'blank', component: BlankComponent}
   ]},
 
@@ -373,12 +446,14 @@ const routes: Routes = [
     {path: 'torles', component: FelhasznaloTorlesComponent},
     {path: 'szerkesztes', component: FelhasznaloSzerkesztesComponent},
     {path: 'jelszo', component: FelhasznaloJelszoComponent},
+    {path: 'tevekenyseg', component: FelhasznaloTevekenysegComponent},
     {path: 'blank', component: BlankComponent}
   ]},
 
   {path: 'csoport', component: CsoportComponent, canActivate: [RoleGuard]},
   {path: 'csoportuj', component: CsoportSzerkesztesComponent, canActivate: [RoleGuard]},
   {path: 'csoportegy', component: CsoportegyComponent, canActivate: [RoleGuard], children: [
+    {path: 'reszletek', component: CsoportReszletekComponent},
     {path: 'torles', component: CsoportTorlesComponent},
     {path: 'szerkesztes', component: CsoportSzerkesztesComponent},
     {path: 'felhasznalo', component: CsoportFelhasznaloComponent},
@@ -512,7 +587,22 @@ if (environment.production) {
     PenztaregyComponent,
     PenztarTorlesComponent,
     PenztarSzerkesztesComponent,
-    FelhasznaloReszletekComponent
+    FelhasznaloReszletekComponent,
+    CsoportReszletekComponent,
+    FelhasznaloTevekenysegComponent,
+    PenztarReszletekComponent,
+    PenztarExportComponent,
+    PenztartetelComponent,
+    AfakulcsReszletekComponent,
+    TeendoReszletekComponent,
+    FizetesimodReszletekComponent,
+    HelysegReszletekComponent,
+    IrattipusReszletekComponent,
+    MeReszletekComponent,
+    PenznemReszletekComponent,
+    TermekdijReszletekComponent,
+    CikkReszletekComponent,
+    UgyfelReszletekComponent
   ],
   imports: [
     BrowserModule,
@@ -529,14 +619,32 @@ if (environment.production) {
     LoginGuard,
     RoleGuard,
 
+    IrattipusService,
+    TeendoService,
+    FizetesimodService,
+    PenznemService,
+    MeService,
+    AfakulcsService,
+    TermekdijService,
+    CikkService,
+    HelysegService,
+    UgyfelService,
+
+    ProjektService,
+    IratService,
+    DokumentumService,
+    PenztarService,
+    FeliratkozasService,
+
+    ParticioService,
+    VolumeService,
+    FelhasznaloService,
+    CsoportService,
     LogonService,
+
     MenuService,
     VerzioService,
     SessionService,
-    IratService,
-    DokumentumService,
-    ProjektService,
-    FelhasznaloService
   ],
   bootstrap: [AppComponent]
 })

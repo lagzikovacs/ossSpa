@@ -3,6 +3,84 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Dátum</div>
+      </div>
+      <div class="col-md-2">
+        <input type="date" class="form-control form-control-sm" id="datum"
+               [(ngModel)]="datum" name="datum">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Jogcím</div>
+      </div>
+      <div class="col-md-4">
+        <select #jogcim type="text" class="form-control form-control-sm"
+                [(ngModel)]="penztartetelservice.DtoEdited.JOGCIM" name="jogcim"
+                (change)="jogcimchange()">
+          <option>Bevét korrekció</option>
+          <option>Kiadás korrekció</option>
+          <option>Pénzfelvét bankból</option>
+          <option>Befizetés bankba</option>
+          <option>Bejövő számla</option>
+          <option>Kimenő számla</option>
+          <option>Bérkifizetés</option>
+        </select>
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Ügyfél</div>
+      </div>
+      <div class="col-md-4">
+        <input #ugyfel type="text" class="form-control form-control-sm" id="ugyfel"
+               autocomplete="off"
+               [(ngModel)]="penztartetelservice.DtoEdited.UGYFELNEV" name="ugyfel">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Bizonylatszám</div>
+      </div>
+      <div class="col-md-2">
+        <input #bizonylatszam type="text" class="form-control form-control-sm" id="bizonylatszam"
+               autocomplete="off"
+               [(ngModel)]="penztartetelservice.DtoEdited.BIZONYLATSZAM" name="bizonylatszam">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Bevétel</div>
+      </div>
+      <div class="col-md-2">
+        <input #bevetel type="text" class="form-control form-control-sm" id="bevetel"
+               autocomplete="off"
+               [(ngModel)]="penztartetelservice.DtoEdited.BEVETEL" name="bevetel">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Kiadás</div>
+      </div>
+      <div class="col-md-2">
+        <input #kiadas type="text" class="form-control form-control-sm" id="kiadas"
+               autocomplete="off"
+               [(ngModel)]="penztartetelservice.DtoEdited.KIADAS" name="kiadas">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Megjegyzés</div>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control form-control-sm" id="megjegyzes"
+               autocomplete="off"
+               [(ngModel)]="penztartetelservice.DtoEdited.MEGJEGYZES" name="megjegyzes">
+      </div>
+    </div>
+
     <div class="row no-gutters" style="margin-bottom: 10px">
       <div class="col-md-2"></div>
       <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>

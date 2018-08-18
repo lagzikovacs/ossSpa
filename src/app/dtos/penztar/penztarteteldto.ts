@@ -2,7 +2,7 @@ export class PenztartetelDto {
   PENZTARTETELKOD: number;
   PENZTARKOD: number;
   PENZTARBIZONYLATSZAM: string;
-  DATUM: Date;
+  DATUM: any;
   JOGCIM: string;
   UGYFELKOD: number;
   UGYFELNEV: string;

@@ -1,18 +1,18 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {PenztarService} from '../../services/eszkoz/penztar.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {LogonService} from '../../services/segedeszkosz/logon.service';
 import {JogKod} from '../../enums/jogkod';
-import {PenztartetelService} from "../../services/eszkoz/penztartetel.service";
-import {PenztartetelDto} from "../../dtos/penztar/penztarteteldto";
+import {PenztartetelService} from '../../services/eszkoz/penztartetel.service';
+import {PenztartetelDto} from '../../dtos/penztar/penztarteteldto';
 
 @Component({
   selector: 'app-penztar',
   templateUrl: './penztar.component.html',
   styleUrls: ['./penztar.component.css']
 })
-export class PenztarComponent {
+export class PenztarComponent implements OnInit {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Pénztár'];
@@ -28,6 +28,10 @@ export class PenztarComponent {
               private _penztartetelservice: PenztartetelService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);
     this.penztarservice = penztarservice;
+  }
+
+  ngOnInit() {
+    this.onKereses();
   }
 
   onKereses() {
@@ -72,8 +76,9 @@ export class PenztarComponent {
     this.penztarservice.DtoSelectedIndex = i;
     this.penztarservice.uj = false;
     this._penztartetelservice.Dto = new Array<PenztartetelDto>();
+    this._penztartetelservice.elsokereses = true;
     this._penztartetelservice.OsszesRekord = 0;
-    this._router.navigate(['../penztaregy/reszletek'], {relativeTo: this._route});
+    this._router.navigate(['../penztaregy/tetelek'], {relativeTo: this._route});
   }
 
   uj() {

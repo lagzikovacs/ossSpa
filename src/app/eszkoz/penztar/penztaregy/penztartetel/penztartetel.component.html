@@ -4,7 +4,7 @@
                [(szempont)]="penztartetelservice.szempont"
                [(minta)]="penztartetelservice.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit && mod" (Uj)="onUj()">
+               [enUj]="!eppFrissit && mod && nyitva" (Uj)="onUj()">
   </app-toolbar>
   <table class="table table-bordered table-sm table-responsive" style="border: none">
     <thead>

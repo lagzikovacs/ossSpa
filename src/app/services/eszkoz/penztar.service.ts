@@ -82,6 +82,16 @@ export class PenztarService {
 
     return this._httpClient.post<PenztarResult>(url, JSON.stringify(body), options).toPromise();
   }
+  public ReadById(key: number): Promise<PenztarResult> {
+    const url = environment.BaseHref + this._controller + 'readbyid';
+    const body = key;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<PenztarResult>(url, JSON.stringify(body), options).toPromise();
+  }
 
   public Update(dto: PenztarDto): Promise<NumberResult> {
     const url = environment.BaseHref + this._controller + 'update';

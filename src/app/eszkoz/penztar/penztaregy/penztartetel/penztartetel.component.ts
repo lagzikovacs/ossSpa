@@ -23,6 +23,7 @@ export class PenztartetelComponent {
 
   eppFrissit = false;
   mod = false;
+  nyitva = false;
   penztarservice: PenztarService;
   penztartetelservice: PenztartetelService;
 
@@ -34,6 +35,7 @@ export class PenztartetelComponent {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);
     this.penztarservice = penztarservice;
     this.penztartetelservice = penztartetelservice;
+    this.nyitva = this.penztarservice.Dto[this.penztarservice.DtoSelectedIndex].NYITVA;
   }
 
   onKereses() {

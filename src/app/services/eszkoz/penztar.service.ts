@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import {EgyszeruKeresesDto} from "../../dtos/egyszerukeresesdto";
-import {environment} from "../../../environments/environment";
-import {PenztarDto} from "../../dtos/penztar/penztardto";
-import {ZoomSources} from "../../enums/zoomsources";
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {LogonService} from "../segedeszkosz/logon.service";
-import {NumberResult} from "../../dtos/numberresult";
-import {PenztarResult} from "../../dtos/penztar/penztarresult";
-import {EmptyResult} from "../../dtos/emptyresult";
+import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
+import {environment} from '../../../environments/environment';
+import {PenztarDto} from '../../dtos/penztar/penztardto';
+import {ZoomSources} from '../../enums/zoomsources';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {LogonService} from '../segedeszkosz/logon.service';
+import {NumberResult} from '../../dtos/numberresult';
+import {PenztarResult} from '../../dtos/penztar/penztarresult';
+import {EmptyResult} from '../../dtos/emptyresult';
 
 @Injectable({
   providedIn: 'root'
@@ -93,5 +93,4 @@ export class PenztarService {
 
     return this._httpClient.post<NumberResult>(url, body, options).toPromise();
   }
-
 }

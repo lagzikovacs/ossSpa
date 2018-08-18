@@ -4,6 +4,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {LogonService} from '../../services/segedeszkosz/logon.service';
 import {JogKod} from '../../enums/jogkod';
+import {PenztartetelService} from "../../services/eszkoz/penztartetel.service";
+import {PenztartetelDto} from "../../dtos/penztar/penztarteteldto";
 
 @Component({
   selector: 'app-penztar',
@@ -22,7 +24,8 @@ export class PenztarComponent {
   constructor(private _router: Router,
               private _route: ActivatedRoute,
               private _logonservice: LogonService,
-              penztarservice: PenztarService) {
+              penztarservice: PenztarService,
+              private _penztartetelservice: PenztartetelService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);
     this.penztarservice = penztarservice;
   }
@@ -68,6 +71,8 @@ export class PenztarComponent {
   setClickedRow(i: number) {
     this.penztarservice.DtoSelectedIndex = i;
     this.penztarservice.uj = false;
+    this._penztartetelservice.Dto = new Array<PenztartetelDto>();
+    this._penztartetelservice.OsszesRekord = 0;
     this._router.navigate(['../penztaregy/reszletek'], {relativeTo: this._route});
   }
 

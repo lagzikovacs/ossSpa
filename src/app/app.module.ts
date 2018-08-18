@@ -133,21 +133,21 @@ import { PenztarSzerkesztesComponent } from './eszkoz/penztar/penztaregy/penztar
 import { FelhasznaloReszletekComponent } from './torzs/felhasznalo/felhasznalo-egy/felhasznalo-reszletek/felhasznalo-reszletek.component';
 import { CsoportReszletekComponent } from './segedeszkoz/csoport/csoportegy/csoport-reszletek/csoport-reszletek.component';
 import { FelhasznaloTevekenysegComponent } from './torzs/felhasznalo/felhasznalo-egy/felhasznalo-tevekenyseg/felhasznalo-tevekenyseg.component';
-import {IrattipusService} from "./services/torzs/primitiv/irattipus.service";
-import {TeendoService} from "./services/torzs/primitiv/teendo.service";
-import {FizetesimodService} from "./services/torzs/primitiv/fizetesimod.service";
-import {PenznemService} from "./services/torzs/primitiv/penznem.service";
-import {MeService} from "./services/torzs/primitiv/me.service";
-import {AfakulcsService} from "./services/torzs/primitiv/afakulcs.service";
-import {TermekdijService} from "./services/torzs/primitiv/termekdij.service";
-import {CikkService} from "./services/torzs/cikk.service";
-import {HelysegService} from "./services/torzs/primitiv/helyseg.service";
-import {UgyfelService} from "./services/torzs/ugyfel.service";
-import {ParticioService} from "./services/segedeszkosz/particio.service";
-import {VolumeService} from "./services/volume.service";
-import {CsoportService} from "./services/segedeszkosz/csoport.service";
-import {FeliratkozasService} from "./services/eszkoz/feliratkozas.service";
-import {PenztarService} from "./services/eszkoz/penztar.service";
+import {IrattipusService} from './services/torzs/primitiv/irattipus.service';
+import {TeendoService} from './services/torzs/primitiv/teendo.service';
+import {FizetesimodService} from './services/torzs/primitiv/fizetesimod.service';
+import {PenznemService} from './services/torzs/primitiv/penznem.service';
+import {MeService} from './services/torzs/primitiv/me.service';
+import {AfakulcsService} from './services/torzs/primitiv/afakulcs.service';
+import {TermekdijService} from './services/torzs/primitiv/termekdij.service';
+import {CikkService} from './services/torzs/cikk.service';
+import {HelysegService} from './services/torzs/primitiv/helyseg.service';
+import {UgyfelService} from './services/torzs/ugyfel.service';
+import {ParticioService} from './services/segedeszkosz/particio.service';
+import {VolumeService} from './services/volume.service';
+import {CsoportService} from './services/segedeszkosz/csoport.service';
+import {FeliratkozasService} from './services/eszkoz/feliratkozas.service';
+import {PenztarService} from './services/eszkoz/penztar.service';
 import { PenztarReszletekComponent } from './eszkoz/penztar/penztaregy/penztar-reszletek/penztar-reszletek.component';
 import { PenztarExportComponent } from './eszkoz/penztar/penztaregy/penztar-export/penztar-export.component';
 import { PenztartetelComponent } from './eszkoz/penztar/penztaregy/penztartetel/penztartetel.component';
@@ -161,6 +161,7 @@ import { PenznemReszletekComponent } from './torzs/primitiv/penznem/penznemegy/p
 import { TermekdijReszletekComponent } from './torzs/primitiv/termekdij/termekdijegy/termekdij-reszletek/termekdij-reszletek.component';
 import { CikkReszletekComponent } from './torzs/cikk/cikkegy/cikk-reszletek/cikk-reszletek.component';
 import { UgyfelReszletekComponent } from './torzs/ugyfel/ugyfelegy/ugyfel-reszletek/ugyfel-reszletek.component';
+import { PenztartetelSzerkesztesComponent } from './eszkoz/penztar/penztaregy/penztartetel/penztartetel-szerkesztes/penztartetel-szerkesztes.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -401,6 +402,7 @@ const routes: Routes = [
     ]},
     {path: 'tetelek', component: PenztartetelComponent},
     {path: 'export', component: PenztarExportComponent},
+    {path: 'tetelszerkesztes', component: PenztartetelSzerkesztesComponent},
     {path: 'blank', component: BlankComponent}
   ]},
 
@@ -602,7 +604,8 @@ if (environment.production) {
     PenznemReszletekComponent,
     TermekdijReszletekComponent,
     CikkReszletekComponent,
-    UgyfelReszletekComponent
+    UgyfelReszletekComponent,
+    PenztartetelSzerkesztesComponent
   ],
   imports: [
     BrowserModule,

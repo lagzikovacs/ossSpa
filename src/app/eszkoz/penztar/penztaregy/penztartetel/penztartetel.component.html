@@ -1,2 +1,46 @@
 <div class="alapkeret">
+  <h5>{{penztartetelservice.cim}}</h5>
+  <app-toolbar [Szurok]="szurok"
+               [(szempont)]="penztartetelservice.szempont"
+               [(minta)]="penztartetelservice.minta"
+               [enKereses]="!eppFrissit" (Kereses)="onKereses()"
+               [enUj]="!eppFrissit && mod" (Uj)="onUj()">
+  </app-toolbar>
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th>Pénztárbizonylatszám</th>
+      <th>Dátum</th>
+      <th>Jogcím</th>
+      <th>Ügyfél</th>
+      <th>Bizonylatszám</th>
+      <th>Bevétel</th>
+      <th>Kiadás</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let item of penztartetelservice.Dto; let i = index">
+      <tr >
+        <td>{{item.PENZTARBIZONYLATSZAM}}</td>
+        <td>{{item.DATUM | datehun}}</td>
+        <td>{{item.JOGCIM}}</td>
+        <td>{{item.UGYFELNEV}}</td>
+        <td>{{item.BIZONYLATSZAM}}</td>
+        <td>{{item.BEVETEL}}</td>
+        <td>{{item.KIADAS}}</td>
+      </tr>
+      <tr *ngIf="item.MEGJEGYZES !== null && item.MEGJEGYZES !== ''">
+        <td colspan="7">{{item.MEGJEGYZES}}</td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+  <app-toolbarfooter [enKereses]="!penztartetelservice.elsokereses && !eppFrissit"
+                     [rekordszam]="penztartetelservice.Dto.length"
+                     [osszesrekord]="penztartetelservice.OsszesRekord"
+                     (KeresesTovabb)="onKeresesTovabb()">
+  </app-toolbarfooter>
+  <app-errormodal [cim]="penztartetelservice.cim"></app-errormodal>
 </div>
+
+

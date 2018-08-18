@@ -4,7 +4,7 @@
                [(szempont)]="penztarservice.ekDto.szempont"
                [(minta)]="penztarservice.ekDto.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit" (Uj)="uj()">
+               [enUj]="!eppFrissit && mod" (Uj)="uj()">
   </app-toolbar>
   <table class="table table-bordered table-sm table-responsive" style="border: none">
     <thead>

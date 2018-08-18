@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
 import {environment} from '../../../environments/environment';
 import {PenztartetelDto} from '../../dtos/penztar/penztarteteldto';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';

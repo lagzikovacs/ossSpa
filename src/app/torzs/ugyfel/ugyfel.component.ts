@@ -86,7 +86,7 @@ export class UgyfelComponent {
   setClickedRow(i: number) {
     this.ugyfelservice.DtoSelectedIndex = i;
     this.ugyfelservice.uj = false;
-    this._router.navigate(['../ugyfelegy/reszletek'], {relativeTo: this._route});
+    this._router.navigate(['../ugyfelegy'], {relativeTo: this._route});
   }
 
   onUj() {

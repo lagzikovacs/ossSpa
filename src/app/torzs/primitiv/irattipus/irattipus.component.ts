@@ -72,7 +72,7 @@ export class IrattipusComponent {
   setClickedRow(i: number) {
     this.irattipusservice.DtoSelectedIndex = i;
     this.irattipusservice.uj = false;
-    this._router.navigate(['../irattipusegy/reszletek'], {relativeTo: this._route});
+    this._router.navigate(['../irattipusegy'], {relativeTo: this._route});
   }
 
   uj() {

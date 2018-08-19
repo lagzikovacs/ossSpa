@@ -5,6 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {LogonService} from '../../services/segedeszkosz/logon.service';
 import {NavexportellenorzesService} from '../../services/bizonylat/navexportellenorzes.service';
 import {JogKod} from '../../enums/jogkod';
+import {SzMT} from '../../dtos/szmt';
+import {NavfeltoltesDto} from '../../dtos/bizonylat/navfeltoltesdto';
 
 @Component({
   selector: 'app-navonlineszamla',
@@ -14,7 +16,7 @@ import {JogKod} from '../../enums/jogkod';
 export class NavexportellenorzesComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
-  szurok = ['Id', 'Bizonylatkod', 'Bizonylatszám', 'Ügyfél'];
+  szurok = ['Id', 'Bizonylat Id', 'Bizonylatszám', 'Ügyfél'];
   szempontok = [
     Szempont.Kod, Szempont.BizonylatKod, Szempont.Bizonylatszam, Szempont.Ugyfel
   ];
@@ -31,4 +33,46 @@ export class NavexportellenorzesComponent {
     this.navexportellenorzesservice = navexportellenorzesservice;
   }
 
+  onKereses() {
+    this.navexportellenorzesservice.Dto = new Array<NavfeltoltesDto>();
+    this.navexportellenorzesservice.DtoSelectedIndex = -1;
+    this.navexportellenorzesservice.OsszesRekord = 0;
+
+    this.navexportellenorzesservice.elsokereses = true;
+    this.navexportellenorzesservice.up.rekordtol = 0;
+    this.navexportellenorzesservice.up.fi = new Array<SzMT>();
+
+    this.navexportellenorzesservice.up.fi.push(new SzMT(this.szempontok[this.navexportellenorzesservice.szempont],
+      this.navexportellenorzesservice.minta));
+
+    this.onKeresesTovabb();
+  }
+  onKeresesTovabb() {
+    this.eppFrissit = true;
+    this.navexportellenorzesservice.Select(this.navexportellenorzesservice.up)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        if (this.navexportellenorzesservice.elsokereses) {
+          this.navexportellenorzesservice.Dto = res.Result;
+          this.navexportellenorzesservice.elsokereses = false;
+        } else {
+          const buf = [...this.navexportellenorzesservice.Dto];
+          res.Result.forEach(element => {
+            buf.push(element);
+          });
+          this.navexportellenorzesservice.Dto = buf;
+        }
+        this.navexportellenorzesservice.OsszesRekord = res.OsszesRekord;
+
+        this.navexportellenorzesservice.up.rekordtol += this.navexportellenorzesservice.up.lapmeret;
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
+  }
 }

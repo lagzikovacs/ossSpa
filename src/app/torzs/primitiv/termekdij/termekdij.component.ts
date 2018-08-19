@@ -88,7 +88,7 @@ export class TermekdijComponent implements OnInit {
   setClickedRow(i: number) {
     this.termekdijservice.DtoSelectedIndex = i;
     this.termekdijservice.uj = false;
-    this._router.navigate(['../termekdijegy/reszletek'], {relativeTo: this._route});
+    this._router.navigate(['../termekdijegy'], {relativeTo: this._route});
   }
 
   uj() {

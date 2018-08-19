@@ -72,7 +72,7 @@ export class FizetesimodComponent {
   setClickedRow(i: number) {
     this.fizetesimodservice.DtoSelectedIndex = i;
     this.fizetesimodservice.uj = false;
-    this._router.navigate(['../fizetesimodegy/reszletek'], {relativeTo: this._route});
+    this._router.navigate(['../fizetesimodegy'], {relativeTo: this._route});
   }
 
   uj() {

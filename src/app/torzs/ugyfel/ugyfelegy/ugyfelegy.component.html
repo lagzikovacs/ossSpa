@@ -1,5 +1,6 @@
 <div class="alapkeret">
   <h5>{{ugyfelservice.cim}}</h5>
+  <h6 *ngIf="ugyfelservice.DtoSelectedIndex !== -1">{{ugyfelservice.Dto[ugyfelservice.DtoSelectedIndex].NEV}}</h6>
   <div>
     <nav>
       <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
@@ -15,7 +16,7 @@
       </button>
       <button [disabled]="eppFrissit || ugyfelservice.DtoSelectedIndex === -1 || !mod"
               (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
-        <i class="fa fa-caret-up" aria-hidden="true"></i>
+        <i class="fa fa-edit" aria-hidden="true"></i>
       </button>
     </nav>
   </div>

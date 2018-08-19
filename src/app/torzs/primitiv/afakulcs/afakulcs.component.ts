@@ -87,7 +87,7 @@ export class AfakulcsComponent implements OnInit {
   setClickedRow(i: number) {
     this.afakulcsservice.DtoSelectedIndex = i;
     this.afakulcsservice.uj = false;
-    this._router.navigate(['../afakulcsegy/reszletek'], {relativeTo: this._route});
+    this._router.navigate(['../afakulcsegy'], {relativeTo: this._route});
   }
 
   uj() {

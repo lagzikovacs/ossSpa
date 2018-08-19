@@ -86,7 +86,7 @@ export class HelysegComponent implements OnInit {
   setClickedRow(i: number) {
     this.helysegservice.DtoSelectedIndex = i;
     this.helysegservice.uj = false;
-    this._router.navigate(['../helysegegy/reszletek'], {relativeTo: this._route});
+    this._router.navigate(['../helysegegy'], {relativeTo: this._route});
   }
 
   uj() {

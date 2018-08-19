@@ -23,6 +23,9 @@ export class IrategyComponent {
   vissza() {
     this._router.navigate(['../irat'], {relativeTo: this._route});
   }
+  reszletek() {
+    this._router.navigate(['reszletek'], {relativeTo: this._route});
+  }
   torles() {
     this._router.navigate(['torles'], {relativeTo: this._route});
   }

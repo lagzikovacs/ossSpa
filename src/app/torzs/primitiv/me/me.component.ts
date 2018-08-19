@@ -86,7 +86,7 @@ export class MeComponent implements OnInit {
   setClickedRow(i: number) {
     this.meservice.DtoSelectedIndex = i;
     this.meservice.uj = false;
-    this._router.navigate(['../meegy/reszletek'], {relativeTo: this._route});
+    this._router.navigate(['../meegy'], {relativeTo: this._route});
   }
 
   uj() {

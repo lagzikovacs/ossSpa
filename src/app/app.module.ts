@@ -164,6 +164,8 @@ import { UgyfelReszletekComponent } from './torzs/ugyfel/ugyfelegy/ugyfel-reszle
 import { PenztartetelSzerkesztesComponent } from './eszkoz/penztar/penztaregy/penztartetel/penztartetel-szerkesztes/penztartetel-szerkesztes.component';
 import { FeliratkozasReszletekComponent } from './eszkoz/feliratkozas/feliratkozasegy/feliratkozas-reszletek/feliratkozas-reszletek.component';
 import { NavexportellenorzesComponent } from './bizonylat/navexportellenorzes/navexportellenorzes.component';
+import { IratReszletekComponent } from './eszkoz/irat/irategy/irat-reszletek/irat-reszletek.component';
+import { DokumentumReszletekComponent } from './eszkoz/irat/irategy/irat-dokumentum/irat-dokumentumegy/dokumentum-reszletek/dokumentum-reszletek.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -355,6 +357,8 @@ const routes: Routes = [
     ]},
   ]},
   {path: 'irategy', component: IrategyComponent, canActivate: [RoleGuard], children: [
+    {path: 'reszletek', component: IratReszletekComponent},
+    {path: 'torles', component: IratTorlesComponent},
     {path: 'szerkesztes', component: IratSzerkesztesComponent, children: [
       {path: 'irattipus', component: IrattipusComponent},
       {path: 'irattipusuj', component: IrattipusSzerkesztesComponent, canActivate: [RoleGuard]},
@@ -365,7 +369,6 @@ const routes: Routes = [
         {path: 'blank', component: BlankComponent}
       ]},
     ]},
-    {path: 'torles', component: IratTorlesComponent},
     {path: 'dokumentum', component: IratDokumentumComponent},
     {path: 'dokumentumfeltoltes', component: DokumentumFeltoltesComponent},
     {path: 'blank', component: BlankComponent},
@@ -612,7 +615,9 @@ if (environment.production) {
     UgyfelReszletekComponent,
     PenztartetelSzerkesztesComponent,
     FeliratkozasReszletekComponent,
-    NavexportellenorzesComponent
+    NavexportellenorzesComponent,
+    IratReszletekComponent,
+    DokumentumReszletekComponent
   ],
   imports: [
     BrowserModule,

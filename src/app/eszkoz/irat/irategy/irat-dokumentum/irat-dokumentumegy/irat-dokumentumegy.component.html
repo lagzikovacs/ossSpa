@@ -13,45 +13,7 @@
       </button>
     </nav>
   </div>
-  <div  style="float: left;width: 300px;border: solid 1px silver;margin-right: 10px;margin-bottom: 5px;padding: 10px">
-    <table class="table ng table-bordered table-sm table-responsive" style="border: none">
-      <tbody>
-      <tr>
-        <td class="egylabel">Id:</td>
-        <td>{{dokumentumservice.DtoSelected.DOKUMENTUMKOD}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Megjegyzés:</td>
-        <td>{{dokumentumservice.DtoSelected.MEGJEGYZES}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Méret:</td>
-        <td>{{dokumentumservice.DtoSelected.MERET}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Ext:</td>
-        <td>{{dokumentumservice.DtoSelected.EXT}}</td>
-      </tr>
 
-      <tr>
-        <td class="egylabel">Létrehozta:</td>
-        <td>{{dokumentumservice.DtoSelected.LETREHOZTA}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Létrehozva:</td>
-        <td>{{dokumentumservice.DtoSelected.LETREHOZVA | datetimehun}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Módosította:</td>
-        <td>{{dokumentumservice.DtoSelected.MODOSITOTTA}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Módosítva:</td>
-        <td>{{dokumentumservice.DtoSelected.MODOSITVA | datetimehun}}</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
   <router-outlet></router-outlet>
   <app-errormodal [cim]="dokumentumservice.cim"></app-errormodal>
 </div>

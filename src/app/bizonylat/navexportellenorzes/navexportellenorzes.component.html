@@ -4,36 +4,35 @@
                [(szempont)]="navexportellenorzesservice.szempont"
                [(minta)]="navexportellenorzesservice.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit">
+               [visUj]="false">
   </app-toolbar>
   <table class="table table-bordered table-sm table-responsive" style="border: none">
     <thead>
     <tr>
       <th>Id</th>
-      <th>Megnevezés</th>
-      <th>Me</th>
-      <th>ÁFA kulcs</th>
-      <th>Egységár</th>
-      <th>Készletet képez</th>
-      <th>Tömeg, kg</th>
-      <th>Termékdíj KT</th>
-      <th>Termékdíj megnevezés</th>
-      <th>Termékdíj egységár</th>
+      <th>Bizonylat Id</th>
+      <th>Bizonylatszám</th>
+      <th>Ügyfél</th>
+      <th>A bizonylat kelte</th>
+      <th>Időpont</th>
+      <th>Státusz</th>
+      <th>Tranzakció</th>
     </tr>
     </thead>
     <tbody>
     <ng-container *ngFor="let item of navexportellenorzesservice.Dto; let i = index">
       <tr>
-        <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.CIKKKOD}}</td>
-        <td>{{item.MEGNEVEZES}}</td>
-        <td>{{item.ME}}</td>
-        <td>{{item.AFAKULCS}}</td>
-        <td>{{item.EGYSEGAR}}</td>
-        <td>{{item.KESZLETETKEPEZ}}</td>
-        <td>{{item.TOMEGKG}}</td>
-        <td>{{item.TERMEKDIJKT}}</td>
-        <td>{{item.TERMEKDIJMEGNEVEZES}}</td>
-        <td>{{item.TERMEKDIJEGYSEGAR}}</td>
+        <td>{{item.NAVFELTOLTESKOD}}</td>
+        <td>{{item.BIZONYLATKOD}}</td>
+        <td>{{item.BIZONYLATSZAM}}</td>
+        <td>{{item.UGYFELNEV}}</td>
+        <td>{{item.BIZONYLATKELTE | datehun}}</td>
+        <td>{{item.IDOPONT | datetimehun}}</td>
+        <td>{{item.Statuszneve}}</td>
+        <td>{{item.TRANZAKCIOAZONOSITO}}</td>
+      </tr>
+      <tr *ngIf="item.HIBA !== null && item.HIBA !== ''">
+        <td colspan="8">{{item.HIBA}}</td>
       </tr>
     </ng-container>
     </tbody>

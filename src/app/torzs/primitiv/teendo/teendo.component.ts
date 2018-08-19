@@ -72,7 +72,7 @@ export class TeendoComponent {
   setClickedRow(i: number) {
     this.teendoservice.DtoSelectedIndex = i;
     this.teendoservice.uj = false;
-    this._router.navigate(['../teendoegy/reszletek'], {relativeTo: this._route});
+    this._router.navigate(['../teendoegy'], {relativeTo: this._route});
   }
 
   uj() {

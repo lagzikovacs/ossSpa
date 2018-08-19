@@ -86,7 +86,7 @@ export class PenznemComponent implements OnInit {
   setClickedRow(i: number) {
     this.penznemservice.DtoSelectedIndex = i;
     this.penznemservice.uj = false;
-    this._router.navigate(['../penznemegy/reszletek'], {relativeTo: this._route});
+    this._router.navigate(['../penznemegy'], {relativeTo: this._route});
   }
 
   uj() {

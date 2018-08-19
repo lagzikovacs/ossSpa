@@ -86,7 +86,7 @@ export class CikkComponent {
   setClickedRow(i: number) {
     this.cikkservice.DtoSelectedIndex = i;
     this.cikkservice.uj = false;
-    this._router.navigate(['../cikkegy/reszletek'], {relativeTo: this._route});
+    this._router.navigate(['../cikkegy'], {relativeTo: this._route});
   }
 
   onUj() {

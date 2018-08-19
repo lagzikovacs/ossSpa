@@ -76,6 +76,6 @@ export class FeliratkozasComponent {
     this.feliratkozasservice.ProjektDto = new Array<ProjektDto>();
 
     this.feliratkozasservice.DtoSelectedIndex = i;
-    this._router.navigate(['../feliratkozasegy'], {relativeTo: this._route});
+    this._router.navigate(['../feliratkozasegy/projekt'], {relativeTo: this._route});
   }
 }

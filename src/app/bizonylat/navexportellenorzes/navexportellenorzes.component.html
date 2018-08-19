@@ -1,0 +1,48 @@
+<div class="alapkeret">
+  <h5>{{navexportellenorzesservice.cim}}</h5>
+  <app-toolbar [Szurok]="szurok"
+               [(szempont)]="navexportellenorzesservice.szempont"
+               [(minta)]="navexportellenorzesservice.minta"
+               [enKereses]="!eppFrissit" (Kereses)="onKereses()"
+               [enUj]="!eppFrissit">
+  </app-toolbar>
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Megnevezés</th>
+      <th>Me</th>
+      <th>ÁFA kulcs</th>
+      <th>Egységár</th>
+      <th>Készletet képez</th>
+      <th>Tömeg, kg</th>
+      <th>Termékdíj KT</th>
+      <th>Termékdíj megnevezés</th>
+      <th>Termékdíj egységár</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let item of navexportellenorzesservice.Dto; let i = index">
+      <tr>
+        <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.CIKKKOD}}</td>
+        <td>{{item.MEGNEVEZES}}</td>
+        <td>{{item.ME}}</td>
+        <td>{{item.AFAKULCS}}</td>
+        <td>{{item.EGYSEGAR}}</td>
+        <td>{{item.KESZLETETKEPEZ}}</td>
+        <td>{{item.TOMEGKG}}</td>
+        <td>{{item.TERMEKDIJKT}}</td>
+        <td>{{item.TERMEKDIJMEGNEVEZES}}</td>
+        <td>{{item.TERMEKDIJEGYSEGAR}}</td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+  <app-toolbarfooter [enKereses]="!navexportellenorzesservice.elsokereses && !eppFrissit"
+                     [rekordszam]="navexportellenorzesservice.Dto.length"
+                     [osszesrekord]="navexportellenorzesservice.OsszesRekord"
+                     (KeresesTovabb)="onKeresesTovabb()">
+  </app-toolbarfooter>
+  <app-errormodal [cim]="navexportellenorzesservice.cim"></app-errormodal>
+</div>
+

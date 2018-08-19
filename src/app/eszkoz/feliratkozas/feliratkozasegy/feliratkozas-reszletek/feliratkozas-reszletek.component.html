@@ -1,0 +1,42 @@
+<div class="alapkeret">
+  <table class="table ng table-bordered table-sm table-responsive" style="border: none">
+    <tbody>
+    <tr>
+      <td class="egylabel">Id:</td>
+      <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].FELIRATKOZASKOD}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Lista:</td>
+      <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].LISTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Név:</td>
+      <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].NEV}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Cím:</td>
+      <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].TELEPULES}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Email:</td>
+      <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].EMAIL}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Telefonszám:</td>
+      <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].TELEFONSZAM}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Megjegyzés:</td>
+      <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].MEGJEGYZES}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Létrehozta:</td>
+      <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].LETREHOZTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Létrehozva:</td>
+      <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

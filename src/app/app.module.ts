@@ -162,6 +162,8 @@ import { TermekdijReszletekComponent } from './torzs/primitiv/termekdij/termekdi
 import { CikkReszletekComponent } from './torzs/cikk/cikkegy/cikk-reszletek/cikk-reszletek.component';
 import { UgyfelReszletekComponent } from './torzs/ugyfel/ugyfelegy/ugyfel-reszletek/ugyfel-reszletek.component';
 import { PenztartetelSzerkesztesComponent } from './eszkoz/penztar/penztaregy/penztartetel/penztartetel-szerkesztes/penztartetel-szerkesztes.component';
+import { FeliratkozasReszletekComponent } from './eszkoz/feliratkozas/feliratkozasegy/feliratkozas-reszletek/feliratkozas-reszletek.component';
+import { NavexportellenorzesComponent } from './bizonylat/navexportellenorzes/navexportellenorzes.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -408,6 +410,7 @@ const routes: Routes = [
 
   {path: 'feliratkozas', component: FeliratkozasComponent, canActivate: [RoleGuard]},
   {path: 'feliratkozasegy', component: FeliratkozasegyComponent, canActivate: [RoleGuard], children: [
+    {path: 'reszletek', component: FeliratkozasReszletekComponent},
     {path: 'projekt', component: FeliratkozasProjektComponent}
   ]},
 
@@ -420,6 +423,8 @@ const routes: Routes = [
     {path: 'keszlet', component: KeszletComponent},
     {path: 'ngm', component: NgmComponent}
   ]},
+
+  {path: 'navexportellenorzese', component: NavexportellenorzesComponent, canActivate: [RoleGuard]},
 
   {path: 'bejelentkezes', component: BejelentkezesComponent},
   {path: 'szerepkorvalasztas', component: SzerepkorvalasztasComponent, canActivate: [LoginGuard]},
@@ -605,7 +610,9 @@ if (environment.production) {
     TermekdijReszletekComponent,
     CikkReszletekComponent,
     UgyfelReszletekComponent,
-    PenztartetelSzerkesztesComponent
+    PenztartetelSzerkesztesComponent,
+    FeliratkozasReszletekComponent,
+    NavexportellenorzesComponent
   ],
   imports: [
     BrowserModule,

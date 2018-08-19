@@ -7,7 +7,7 @@ import {environment} from '../../../environments/environment';
 import {CikkParameter} from '../../dtos/torzs/cikk/cikkparameter';
 import {CikkResult} from '../../dtos/torzs/cikk/cikkresult';
 import {NumberResult} from '../../dtos/numberresult';
-import {EmptyResult} from "../../dtos/emptyresult";
+import {EmptyResult} from '../../dtos/emptyresult';
 
 @Injectable({
   providedIn: 'root'

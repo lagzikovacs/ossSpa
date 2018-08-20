@@ -1,45 +1,21 @@
 <div class="alapkeret">
   <h5>{{volumeservice.cim}}</h5>
+  <h6 *ngIf="volumeservice.DtoSelectedIndex !== -1">{{volumeservice.Dto[volumeservice.DtoSelectedIndex].VOLUMENO}}</h6>
   <div>
     <nav>
       <button [disabled]="eppFrissit || volumeservice.eppTesztel" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
-        Vissza a listához
+        <i class="fa fa-arrow-left" style="margin-right: 3px" aria-hidden="true"></i>Vissza
       </button>
+      <button [disabled]="eppFrissit" (click)="reszletek()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>Részletesen
+      </button>
+
       <button [disabled]="eppFrissit || volumeservice.eppTesztel || volumeservice.DtoSelectedIndex === -1" (click)="ellenorzes()" class="btn btn-sm btn-outline-primary navgomb">
         Ellenőrzés
       </button>
     </nav>
   </div>
-  <div style="float: left;border: solid 1px silver;margin-right: 10px;margin-bottom: 5px;padding: 10px">
-    <table>
-      <tbody>
-      <tr>
-        <td class="egylabel">Id:</td>
-        <td *ngIf="volumeservice.DtoSelectedIndex !== -1">{{volumeservice.Dto[volumeservice.DtoSelectedIndex].VOLUMEKOD}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">No:</td>
-        <td *ngIf="volumeservice.DtoSelectedIndex !== -1">{{volumeservice.Dto[volumeservice.DtoSelectedIndex].VOLUMENO}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Max. méret:</td>
-        <td *ngIf="volumeservice.DtoSelectedIndex !== -1">{{volumeservice.Dto[volumeservice.DtoSelectedIndex].MAXMERET}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Jelenlegi méret:</td>
-        <td *ngIf="volumeservice.DtoSelectedIndex !== -1">{{volumeservice.Dto[volumeservice.DtoSelectedIndex].JELENLEGIMERET}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Állapot:</td>
-        <td *ngIf="volumeservice.DtoSelectedIndex !== -1">{{volumeservice.Dto[volumeservice.DtoSelectedIndex].ALLAPOT}}</td>
-      </tr>
-      <tr>
-        <td class="egylabel">Az állapot kelte:</td>
-        <td *ngIf="volumeservice.DtoSelectedIndex !== -1">{{volumeservice.Dto[volumeservice.DtoSelectedIndex].ALLAPOTKELTE | datetimehun}}</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+
   <router-outlet></router-outlet>
   <app-errormodal [cim]="volumeservice.cim"></app-errormodal>
 </div>

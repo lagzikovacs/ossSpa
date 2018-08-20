@@ -166,6 +166,7 @@ import { FeliratkozasReszletekComponent } from './eszkoz/feliratkozas/feliratkoz
 import { NavexportellenorzesComponent } from './bizonylat/navexportellenorzes/navexportellenorzes.component';
 import { IratReszletekComponent } from './eszkoz/irat/irategy/irat-reszletek/irat-reszletek.component';
 import { DokumentumReszletekComponent } from './eszkoz/irat/irategy/irat-dokumentum/irat-dokumentumegy/dokumentum-reszletek/dokumentum-reszletek.component';
+import { VolumeReszletekComponent } from './segedeszkoz/volume/volumeegy/volume-reszletek/volume-reszletek.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -445,6 +446,7 @@ const routes: Routes = [
 
   {path: 'volume', component: VolumeComponent, canActivate: [RoleGuard]},
   {path: 'volumeegy', component: VolumeegyComponent, canActivate: [RoleGuard], children: [
+    {path: 'reszletek', component: VolumeReszletekComponent},
     {path: 'teszt', component: VolumeTesztComponent},
     {path: 'blank', component: BlankComponent}
   ]},
@@ -617,7 +619,8 @@ if (environment.production) {
     FeliratkozasReszletekComponent,
     NavexportellenorzesComponent,
     IratReszletekComponent,
-    DokumentumReszletekComponent
+    DokumentumReszletekComponent,
+    VolumeReszletekComponent
   ],
   imports: [
     BrowserModule,

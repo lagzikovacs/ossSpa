@@ -23,6 +23,9 @@ export class VolumeegyComponent {
   vissza() {
     this._router.navigate(['../volume'], {relativeTo: this._route});
   }
+  reszletek() {
+    this._router.navigate(['reszletek'], {relativeTo: this._route});
+  }
   ellenorzes() {
     this.eppFrissit = true;
     this.volumeservice.DokumentumkodByVolume(this.volumeservice.Dto[this.volumeservice.DtoSelectedIndex].VOLUMEKOD)

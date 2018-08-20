@@ -1,0 +1,31 @@
+<div class="alapkeret">
+  <h5>{{volumeservice.cim}} részletesen</h5>
+  <table class="table ng table-bordered table-sm table-responsive" style="border: none">
+    <tbody>
+    <tr>
+      <td class="egylabel">Id:</td>
+      <td *ngIf="volumeservice.DtoSelectedIndex !== -1">{{volumeservice.Dto[volumeservice.DtoSelectedIndex].VOLUMEKOD}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">No:</td>
+      <td *ngIf="volumeservice.DtoSelectedIndex !== -1">{{volumeservice.Dto[volumeservice.DtoSelectedIndex].VOLUMENO}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Max. méret:</td>
+      <td *ngIf="volumeservice.DtoSelectedIndex !== -1">{{volumeservice.Dto[volumeservice.DtoSelectedIndex].MAXMERET}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Jelenlegi méret:</td>
+      <td *ngIf="volumeservice.DtoSelectedIndex !== -1">{{volumeservice.Dto[volumeservice.DtoSelectedIndex].JELENLEGIMERET}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Állapot:</td>
+      <td *ngIf="volumeservice.DtoSelectedIndex !== -1">{{volumeservice.Dto[volumeservice.DtoSelectedIndex].ALLAPOT}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Az állapot kelte:</td>
+      <td *ngIf="volumeservice.DtoSelectedIndex !== -1">{{volumeservice.Dto[volumeservice.DtoSelectedIndex].ALLAPOTKELTE | datetimehun}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

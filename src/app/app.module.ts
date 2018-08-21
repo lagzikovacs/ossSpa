@@ -167,6 +167,7 @@ import { NavexportellenorzesComponent } from './bizonylat/navexportellenorzes/na
 import { IratReszletekComponent } from './eszkoz/irat/irategy/irat-reszletek/irat-reszletek.component';
 import { DokumentumReszletekComponent } from './eszkoz/irat/irategy/irat-dokumentum/irat-dokumentumegy/dokumentum-reszletek/dokumentum-reszletek.component';
 import { VolumeReszletekComponent } from './segedeszkoz/volume/volumeegy/volume-reszletek/volume-reszletek.component';
+import { ProjektReszletekComponent } from './eszkoz/projekt/projektegy/projekt-reszletek/projekt-reszletek.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -333,6 +334,7 @@ const routes: Routes = [
   {path: 'projekt', component: ProjektComponent, canActivate: [RoleGuard]},
   {path: 'projektuj', component: ProjektSzerkesztesComponent},
   {path: 'projektegy', component: ProjektegyComponent, canActivate: [RoleGuard], children: [
+    {path: 'reszletek', component: ProjektReszletekComponent},
     {path: 'torles', component: ProjektTorlesComponent},
     {path: 'szerkesztes', component: ProjektSzerkesztesComponent},
     {path: 'muszakiallapot', component: ProjektMuszakiallapotComponent},
@@ -620,7 +622,8 @@ if (environment.production) {
     NavexportellenorzesComponent,
     IratReszletekComponent,
     DokumentumReszletekComponent,
-    VolumeReszletekComponent
+    VolumeReszletekComponent,
+    ProjektReszletekComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,111 @@
+<div class="alapkeret">
+  <h5>{{projektservice.cim}} részletesen</h5>
+  <table class="table ng table-bordered table-sm table-responsive" style="border: none">
+    <tbody>
+    <tr>
+      <td class="egylabel">Id:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].PROJEKTKOD}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Stsz:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].STATUSZ}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Műszaki állapot:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].MUSZAKIALLAPOT}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Ügyfél:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].UGYFELNEV}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Cím:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].UGYFELCIM}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Telefon:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].UGYFELTELEFONSZAM}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Email:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].UGYFELEMAIL}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Telepítési cím:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].TELEPITESICIM}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">A projekt jellege:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].PROJEKTJELLEGE}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Inverter:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].INVERTER}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel"></td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].INVERTERALLAPOT}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Napelem:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].NAPELEM}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel"></td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].NAPELEMALLAPOT}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">DC, kW:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].DCKW}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">AC, kVA:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].ACKVA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Vállalási ár, netto:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].VALLALASIARNETTO}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Pénznem:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].PENZNEM}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Munkalapszám:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].MUNKALAPSZAM}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Keletkezett:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].KELETKEZETT | datehun}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Megrendelve:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].MEGRENDELVE | datehun}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Kivitelezési határidő:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].KIVITELEZESIHATARIDO | datehun}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Megjegyzés:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].MEGJEGYZES}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Létrehozta:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].LETREHOZTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Létrehozva:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosította:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].MODOSITOTTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosítva:</td>
+      <td>{{projektservice.Dto[projektservice.DtoSelectedIndex].MODOSITVA | datetimehun}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

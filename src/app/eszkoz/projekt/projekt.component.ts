@@ -84,9 +84,9 @@ export class ProjektComponent implements OnInit {
   }
 
   setClickedRow(i: number) {
-    this.projektservice.DtoSelected = Object.assign({}, this.projektservice.Dto[i]);
+    this.projektservice.DtoSelectedIndex = i;
     this.projektservice.uj = false;
-    this._router.navigate(['/projektegy']);
+    this._router.navigate(['/projektegy/bizonylatesirat']);
   }
 
   onUj() {
@@ -97,7 +97,7 @@ export class ProjektComponent implements OnInit {
           throw res.Error;
         }
 
-        this.projektservice.DtoSelected = res.Result[0];
+        this.projektservice.DtoEdited = res.Result[0];
         this.projektservice.uj = true;
         this.eppFrissit = false;
         this._router.navigate(['/projektuj']);

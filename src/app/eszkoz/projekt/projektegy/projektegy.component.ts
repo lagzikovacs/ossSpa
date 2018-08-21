@@ -23,6 +23,9 @@ export class ProjektegyComponent {
   vissza() {
     this._router.navigate(['/projekt']);
   }
+  reszletek() {
+    this._router.navigate(['reszletek'], {relativeTo: this._route});
+  }
   torles () {
     this._router.navigate(['torles'], {relativeTo: this._route});
   }

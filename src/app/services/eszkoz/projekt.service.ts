@@ -20,9 +20,10 @@ export class ProjektService {
   pp = new ProjektParameter(0, environment.lapmeret);
   OsszesRekord = 0;
   elsokereses = true;
-  Dto = ProjektDto[0];
-  DtoSelected = new ProjektDto();
+  Dto: ProjektDto[] = new Array<ProjektDto>();
+  DtoSelectedIndex = -1;
   uj = false;
+  DtoEdited = new ProjektDto();
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

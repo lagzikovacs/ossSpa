@@ -4,36 +4,36 @@
     <tbody>
     <tr>
       <td class="egylabel">Id:</td>
-      <td>{{dokumentumservice.DtoSelected.DOKUMENTUMKOD}}</td>
+      <td>{{dokumentumservice.Dto[dokumentumservice.DtoSelectedIndex].DOKUMENTUMKOD}}</td>
     </tr>
     <tr>
       <td class="egylabel">Megjegyzés:</td>
-      <td>{{dokumentumservice.DtoSelected.MEGJEGYZES}}</td>
+      <td>{{dokumentumservice.Dto[dokumentumservice.DtoSelectedIndex].MEGJEGYZES}}</td>
     </tr>
     <tr>
       <td class="egylabel">Méret:</td>
-      <td>{{dokumentumservice.DtoSelected.MERET}}</td>
+      <td>{{dokumentumservice.Dto[dokumentumservice.DtoSelectedIndex].MERET}}</td>
     </tr>
     <tr>
       <td class="egylabel">Ext:</td>
-      <td>{{dokumentumservice.DtoSelected.EXT}}</td>
+      <td>{{dokumentumservice.Dto[dokumentumservice.DtoSelectedIndex].EXT}}</td>
     </tr>
 
     <tr>
       <td class="egylabel">Létrehozta:</td>
-      <td>{{dokumentumservice.DtoSelected.LETREHOZTA}}</td>
+      <td>{{dokumentumservice.Dto[dokumentumservice.DtoSelectedIndex].LETREHOZTA}}</td>
     </tr>
     <tr>
       <td class="egylabel">Létrehozva:</td>
-      <td>{{dokumentumservice.DtoSelected.LETREHOZVA | datetimehun}}</td>
+      <td>{{dokumentumservice.Dto[dokumentumservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
     </tr>
     <tr>
       <td class="egylabel">Módosította:</td>
-      <td>{{dokumentumservice.DtoSelected.MODOSITOTTA}}</td>
+      <td>{{dokumentumservice.Dto[dokumentumservice.DtoSelectedIndex].MODOSITOTTA}}</td>
     </tr>
     <tr>
       <td class="egylabel">Módosítva:</td>
-      <td>{{dokumentumservice.DtoSelected.MODOSITVA | datetimehun}}</td>
+      <td>{{dokumentumservice.Dto[dokumentumservice.DtoSelectedIndex].MODOSITVA | datetimehun}}</td>
     </tr>
     </tbody>
   </table>

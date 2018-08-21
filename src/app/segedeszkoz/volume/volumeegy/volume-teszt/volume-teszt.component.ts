@@ -37,6 +37,8 @@ export class VolumeTesztComponent {
         if (res.Error != null) {
           this.hibalista.push(this.volumeservice.dbv[this.index] + ': ' + res.Error);
         }
+        // TODO: lejárt sid esetén nem kéne folytatni
+
         this.next();
       })
       .catch(err => {

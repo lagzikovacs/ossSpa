@@ -14,9 +14,10 @@ export class DokumentumService {
 
   cim = 'Dokumentum';
 
-  Dto = DokumentumDto[0];
-  DtoSelected = new DokumentumDto();
+  Dto: DokumentumDto[] = new Array<DokumentumDto>();
+  DtoSelectedIndex = -1;
   uj = false;
+  DtoEdited = new DokumentumDto();
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

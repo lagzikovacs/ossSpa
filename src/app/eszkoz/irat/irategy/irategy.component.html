@@ -1,6 +1,6 @@
 <div class="alapkeret">
   <h5>{{iratservice.cim}}</h5>
-  <h6 *ngIf="iratservice.DtoSelectedIndex !== -1">{{iratservice.Dto[iratservice.DtoSelectedIndex].IRATKOD}} {{iratservice.Dto[iratservice.DtoSelectedIndex].UGYFELNEV}}, {{iratservice.Dto[iratservice.DtoSelectedIndex].UGYFELCIM}}</h6>
+  <h6 *ngIf="iratservice.DtoSelectedIndex !== -1">{{iratservice.Dto[iratservice.DtoSelectedIndex].UGYFELNEV}}, {{iratservice.Dto[iratservice.DtoSelectedIndex].UGYFELCIM}}</h6>
   <div>
     <nav>
       <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">

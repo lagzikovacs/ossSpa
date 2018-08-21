@@ -1,9 +1,10 @@
 <div class="alapkeret">
   <h5>{{dokumentumservice.cim}}</h5>
+  <h6 *ngIf="dokumentumservice.DtoSelectedIndex !== -1">{{dokumentumservice.Dto[dokumentumservice.DtoSelectedIndex].MEGJEGYZES}}</h6>
   <div>
     <nav>
       <button (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
-        Vissza a listához
+        <i class="fa fa-arrow-left" style="margin-right: 3px" aria-hidden="true"></i>Vissza
       </button>
       <button [disabled]="dokumentumservice.uj" (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-minus" aria-hidden="true"></i>

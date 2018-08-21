@@ -84,7 +84,7 @@ export class IratComponent {
   setClickedRow(i: number) {
     this.iratservice.DtoSelectedIndex = i;
     this.iratservice.uj = false;
-    this._router.navigate(['../irategy'], {relativeTo: this._route});
+    this._router.navigate(['../irategy/dokumentum'], {relativeTo: this._route});
   }
 
   onUj() {

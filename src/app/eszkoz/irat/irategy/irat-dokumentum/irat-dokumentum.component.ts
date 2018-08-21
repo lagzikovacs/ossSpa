@@ -44,13 +44,13 @@ export class IratDokumentumComponent implements OnInit {
   }
 
   setClickedRow(i: number) {
-    this.dokumentumservice.DtoSelected = Object.assign({}, this.dokumentumservice.Dto[i]);
+    this.dokumentumservice.DtoSelectedIndex = i;
     this.dokumentumservice.uj = false;
     this._router.navigate(['../dokumentumegy'], {relativeTo: this._route});
   }
   feltoltes() {
     // csak h üres rekordot mutasson
-    this.dokumentumservice.DtoSelected = new DokumentumDto();
+    this.dokumentumservice.DtoEdited = new DokumentumDto();
     this.dokumentumservice.uj = true;
     this._router.navigate(['../dokumentumfeltoltes'], {relativeTo: this._route});
   }

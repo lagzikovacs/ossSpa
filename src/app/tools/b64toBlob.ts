@@ -21,6 +21,8 @@ export function b64toBlob(b64Data, contentType: BlobContentType) {
   switch (contentType) {
     case BlobContentType.Xls:
       return new Blob(byteArrays, {type: 'application/vnd.ms-excel'});
+    case BlobContentType.Docx:
+      return new Blob(byteArrays, {type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
     default:
       throw new Error('Lekezeletlen BlobContentType!');
   }

@@ -16,17 +16,10 @@ export class ErrormodalComponent {
   constructor(private _router: Router) { }
 
   @Input() cim: string;
-  hiba: string;
+  hiba: any;
 
-  show(errObj: any) {
-    if (errObj instanceof HttpErrorResponse) {
-      errObj = errObj as HttpErrorResponse;
-
-      this.hiba = `${errObj.status} - ${errObj.statusText}`;
-    }
-    if (typeof errObj === 'string') {
-      this.hiba = errObj;
-    }
+  show(hiba: any) {
+    this.hiba = hiba;
 
     $('#' + this.idrandom).modal('show');
   }

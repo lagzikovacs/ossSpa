@@ -1,3 +1,4 @@
 export enum BlobContentType {
-  Xls
+  Xls,
+  Docx
 }

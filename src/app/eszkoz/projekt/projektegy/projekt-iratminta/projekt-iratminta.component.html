@@ -1,3 +1,29 @@
 <div class="alapkeret">
   <h5>Iratminta</h5>
+  <div style="paddig-top: 6px;padding-bottom: 6px">
+    <nav>
+      <button [disabled]="eppFrissit" (click)="szerzodes()" class="btn btn-sm btn-outline-primary navgomb">
+        Szerződés
+      </button>
+      <button [disabled]="eppFrissit" (click)="szallitasiszerzodes()" class="btn btn-sm btn-outline-primary navgomb">
+        Szállítási szerződés
+      </button>
+      <button [disabled]="eppFrissit" (click)="munkalap()" class="btn btn-sm btn-outline-primary navgomb">
+        Munkalap
+      </button>
+      <button [disabled]="eppFrissit" (click)="elegedettseg()" class="btn btn-sm btn-outline-primary navgomb">
+        Elégedettségi felmérés
+      </button>
+      <button [disabled]="eppFrissit" (click)="elmuemasz()" class="btn btn-sm btn-outline-primary navgomb">
+        Elmű/Émász készrejelentés
+      </button>
+      <button [disabled]="eppFrissit" (click)="eon()" class="btn btn-sm btn-outline-primary navgomb">
+        Eon készrejelentés
+      </button>
+      <button [disabled]="eppFrissit" (click)="demasz()" class="btn btn-sm btn-outline-primary navgomb">
+        Démász készrejelentés
+      </button>
+    </nav>
+  </div>
+  <app-errormodal [cim]="projektservice.cim"></app-errormodal>
 </div>

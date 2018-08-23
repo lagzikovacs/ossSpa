@@ -2,8 +2,9 @@ import {Component, ViewChild} from '@angular/core';
 import {CikkService} from '../../../services/torzs/cikk.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
-import {LogonService} from "../../../services/segedeszkosz/logon.service";
-import {JogKod} from "../../../enums/jogkod";
+import {LogonService} from '../../../services/segedeszkosz/logon.service';
+import {JogKod} from '../../../enums/jogkod';
+import {CikkMozgasParameter} from '../../../dtos/torzs/cikk/cikkmozgasparameter';
 
 @Component({
   selector: 'app-cikkegy',
@@ -40,11 +41,30 @@ export class CikkegyComponent {
     this._router.navigate(['szerkesztes'], {relativeTo: this._route});
   }
   beszerzes() {
-    this.cikkservice.BeszerzesKivet = 0;
-    this._router.navigate(['beszerzes'], {relativeTo: this._route});
+    this.cikkservice.BizonylattipusKod = 3;
+    this.beszerzeskivet();
   }
   kivet() {
-    this.cikkservice.BeszerzesKivet = 1;
-    this._router.navigate(['kivet'], {relativeTo: this._route});
+    this.cikkservice.BizonylattipusKod = 2;
+    this.beszerzeskivet();
+  }
+  beszerzeskivet() {
+    this.eppFrissit = true;
+    this.cikkservice.Mozgas(new CikkMozgasParameter(this.cikkservice.Dto[this.cikkservice.DtoSelectedIndex].CIKKKOD,
+      this.cikkservice.BizonylattipusKod))
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.cikkservice.MozgasDto = res.Result;
+
+        this.eppFrissit = false;
+        this._router.navigate(['beszerzeskivet'], {relativeTo: this._route});
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
   }
 }

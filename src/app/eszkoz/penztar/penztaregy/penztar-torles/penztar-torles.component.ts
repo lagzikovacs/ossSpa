@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {PenztarService} from '../../../../services/eszkoz/penztar.service';
+import {PenztarService} from '../../../../services/eszkoz/penztar/penztar.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../../tools/errormodal/errormodal.component';
 

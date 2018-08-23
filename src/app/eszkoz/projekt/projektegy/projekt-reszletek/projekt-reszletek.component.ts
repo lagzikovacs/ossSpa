@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ProjektService} from '../../../../services/eszkoz/projekt.service';
+import {ProjektService} from '../../../../services/eszkoz/projekt/projekt.service';
 
 @Component({
   selector: 'app-projekt-reszletek',

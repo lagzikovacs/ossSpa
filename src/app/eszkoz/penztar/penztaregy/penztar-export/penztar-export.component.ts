@@ -7,7 +7,7 @@ import {Szempont} from '../../../../enums/szempont';
 import {SzMT} from '../../../../dtos/szmt';
 import {BlobContentType} from '../../../../enums/blobcontentType';
 import {b64toBlob} from '../../../../tools/b64toBlob';
-import {PenztarService} from '../../../../services/eszkoz/penztar.service';
+import {PenztarService} from '../../../../services/eszkoz/penztar/penztar.service';
 
 @Component({
   selector: 'app-penztar-export',

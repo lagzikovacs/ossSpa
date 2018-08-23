@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {IratService} from '../../../services/eszkoz/irat.service';
+import {IratService} from '../../../services/eszkoz/irat/irat.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 

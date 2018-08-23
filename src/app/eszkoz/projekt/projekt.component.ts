@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
-import {ProjektService} from '../../services/eszkoz/projekt.service';
+import {ProjektService} from '../../services/eszkoz/projekt/projekt.service';
 import {Router} from '@angular/router';
 import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';

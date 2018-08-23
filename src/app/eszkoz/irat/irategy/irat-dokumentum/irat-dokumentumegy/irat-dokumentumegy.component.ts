@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {DokumentumService} from '../../../../../services/eszkoz/dokumentum.service';
+import {DokumentumService} from '../../../../../services/eszkoz/irat/dokumentum.service';
 
 @Component({
   selector: 'app-irat-dokumentumegy',

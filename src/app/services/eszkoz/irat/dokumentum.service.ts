@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {LogonService} from '../segedeszkosz/logon.service';
+import {LogonService} from '../../segedeszkosz/logon.service';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
-import {DokumentumResult} from '../../dtos/dokumentum/dokumentumresult';
-import {DokumentumDto} from '../../dtos/dokumentum/dokumentumdto';
-import {EmptyResult} from '../../dtos/emptyresult';
+import {environment} from '../../../../environments/environment';
+import {DokumentumResult} from '../../../dtos/dokumentum/dokumentumresult';
+import {DokumentumDto} from '../../../dtos/dokumentum/dokumentumdto';
+import {EmptyResult} from '../../../dtos/emptyresult';
 
 @Injectable({
   providedIn: 'root'

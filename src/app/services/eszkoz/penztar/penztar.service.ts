@@ -1,43 +1,34 @@
 import { Injectable } from '@angular/core';
+import {EgyszeruKeresesDto} from '../../../dtos/egyszerukeresesdto';
+import {environment} from '../../../../environments/environment';
+import {PenztarDto} from '../../../dtos/penztar/penztardto';
+import {ZoomSources} from '../../../enums/zoomsources';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {LogonService} from '../segedeszkosz/logon.service';
-import {CikkDto} from '../../dtos/torzs/cikk/cikkdto';
-import {ZoomSources} from '../../enums/zoomsources';
-import {environment} from '../../../environments/environment';
-import {CikkParameter} from '../../dtos/torzs/cikk/cikkparameter';
-import {CikkResult} from '../../dtos/torzs/cikk/cikkresult';
-import {NumberResult} from '../../dtos/numberresult';
-import {EmptyResult} from '../../dtos/emptyresult';
-import {CikkMozgasResult} from '../../dtos/torzs/cikk/cikkmozgasresult';
-import {CikkMozgasParameter} from '../../dtos/torzs/cikk/cikkmozgasparameter';
-import {CikkMozgasTetelDto} from '../../dtos/torzs/cikk/cikkmozgasteteldto';
+import {LogonService} from '../../segedeszkosz/logon.service';
+import {NumberResult} from '../../../dtos/numberresult';
+import {PenztarResult} from '../../../dtos/penztar/penztarresult';
+import {EmptyResult} from '../../../dtos/emptyresult';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CikkService {
-  private readonly _controller = 'api/cikk/';
+export class PenztarService {
+  private readonly _controller = 'api/penztar/';
 
-  cim = 'Cikk';
-  szempont = 0;
-  minta = '';
-  up = new CikkParameter(0, environment.lapmeret);
-  OsszesRekord = 0;
+  cim = 'Pénztár';
+  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
   elsokereses = true;
-  Dto: CikkDto[] = new Array<CikkDto>();
+  Dto: PenztarDto[] = new Array<PenztarDto>();
   DtoSelectedIndex = -1;
   uj = false;
   zoom = false;
   zoomsource: ZoomSources;
-  DtoEdited = new CikkDto();
-
-  BizonylattipusKod: number;
-  MozgasDto: CikkMozgasTetelDto[] = new Array<CikkMozgasTetelDto>();
+  DtoEdited = new PenztarDto();
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
 
-  public Add(dto: CikkDto): Promise<NumberResult> {
+  public Add(dto: PenztarDto): Promise<NumberResult> {
     const url = environment.BaseHref + this._controller + 'add';
     const body = dto;
     const options = {
@@ -48,7 +39,7 @@ export class CikkService {
     return this._httpClient.post<NumberResult>(url, body, options).toPromise();
   }
 
-  public CreateNew(): Promise<CikkResult> {
+  public CreateNew(): Promise<PenztarResult> {
     const url = environment.BaseHref + this._controller + 'createnew';
     const body = '';
     const options = {
@@ -56,10 +47,10 @@ export class CikkService {
       params: new HttpParams().set('sid', this._logonservice.Sid)
     };
 
-    return this._httpClient.post<CikkResult>(url, body, options).toPromise();
+    return this._httpClient.post<PenztarResult>(url, body, options).toPromise();
   }
 
-  public Delete(dto: CikkDto): Promise<EmptyResult> {
+  public Delete(dto: PenztarDto): Promise<EmptyResult> {
     const url = environment.BaseHref + this._controller + 'delete';
     const body = dto;
     const options = {
@@ -70,7 +61,7 @@ export class CikkService {
     return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
   }
 
-  public Get(key: number): Promise<CikkResult> {
+  public Get(key: number): Promise<PenztarResult> {
     const url = environment.BaseHref + this._controller + 'get';
     const body = key;
     const options = {
@@ -78,21 +69,31 @@ export class CikkService {
       params: new HttpParams().set('sid', this._logonservice.Sid)
     };
 
-    return this._httpClient.post<CikkResult>(url, body, options).toPromise();
+    return this._httpClient.post<PenztarResult>(url, body, options).toPromise();
   }
 
-  public Select(up: CikkParameter): Promise<CikkResult> {
-    const url = environment.BaseHref + this._controller + 'select';
-    const body = up;
+  public Read(maszk: string): Promise<PenztarResult> {
+    const url = environment.BaseHref + this._controller + 'read';
+    const body = maszk;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
       params: new HttpParams().set('sid', this._logonservice.Sid)
     };
 
-    return this._httpClient.post<CikkResult>(url, body, options).toPromise();
+    return this._httpClient.post<PenztarResult>(url, JSON.stringify(body), options).toPromise();
+  }
+  public ReadById(key: number): Promise<PenztarResult> {
+    const url = environment.BaseHref + this._controller + 'readbyid';
+    const body = key;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<PenztarResult>(url, JSON.stringify(body), options).toPromise();
   }
 
-  public Update(dto: CikkDto): Promise<NumberResult> {
+  public Update(dto: PenztarDto): Promise<NumberResult> {
     const url = environment.BaseHref + this._controller + 'update';
     const body = dto;
     const options = {
@@ -101,16 +102,5 @@ export class CikkService {
     };
 
     return this._httpClient.post<NumberResult>(url, body, options).toPromise();
-  }
-
-  public Mozgas(par: CikkMozgasParameter): Promise<CikkMozgasResult> {
-    const url = environment.BaseHref + this._controller + 'mozgas';
-    const body = par;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<CikkMozgasResult>(url, body, options).toPromise();
   }
 }

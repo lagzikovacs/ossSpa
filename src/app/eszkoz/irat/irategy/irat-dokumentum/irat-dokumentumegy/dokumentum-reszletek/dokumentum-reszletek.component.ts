@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {DokumentumService} from '../../../../../../services/eszkoz/dokumentum.service';
+import {DokumentumService} from '../../../../../../services/eszkoz/irat/dokumentum.service';
 
 @Component({
   selector: 'app-dokumentum-reszletek',

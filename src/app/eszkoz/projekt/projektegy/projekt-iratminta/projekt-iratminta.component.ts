@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {ProjektService} from '../../../../services/eszkoz/projekt.service';
+import {ProjektService} from '../../../../services/eszkoz/projekt/projekt.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../../tools/errormodal/errormodal.component';
 import {b64toBlob} from '../../../../tools/b64toBlob';

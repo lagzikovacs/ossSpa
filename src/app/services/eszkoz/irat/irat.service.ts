@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {LogonService} from '../segedeszkosz/logon.service';
+import {LogonService} from '../../segedeszkosz/logon.service';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {IratParameter} from '../../dtos/irat/iratparameter';
-import {environment} from '../../../environments/environment';
-import {IratDto} from '../../dtos/irat/iratdto';
-import {IratResult} from '../../dtos/irat/iratresult';
+import {IratParameter} from '../../../dtos/irat/iratparameter';
+import {environment} from '../../../../environments/environment';
+import {IratDto} from '../../../dtos/irat/iratdto';
+import {IratResult} from '../../../dtos/irat/iratresult';
 
 @Injectable({
   providedIn: 'root'

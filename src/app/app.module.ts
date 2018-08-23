@@ -36,11 +36,10 @@ import { ProjektegyComponent } from './eszkoz/projekt/projektegy/projektegy.comp
 import { ProjektSzerkesztesComponent } from './eszkoz/projekt/projektegy/projekt-szerkesztes/projekt-szerkesztes.component';
 import { ProjektTorlesComponent } from './eszkoz/projekt/projektegy/projekt-torles/projekt-torles.component';
 import {ProjektToolbarComponent} from './eszkoz/projekt/projekttoolbar/projekttoolbar.component';
-import {ProjektService} from './services/eszkoz/projekt.service';
+import {ProjektService} from './services/eszkoz/projekt/projekt.service';
 import { ProjektMuszakiallapotComponent } from './eszkoz/projekt/projektegy/projekt-muszakiallapot/projekt-muszakiallapot.component';
 import { ProjektInverterComponent } from './eszkoz/projekt/projektegy/projekt-inverter/projekt-inverter.component';
 import { ProjektNapelemComponent } from './eszkoz/projekt/projektegy/projekt-napelem/projekt-napelem.component';
-import { ProjektExportComponent } from './eszkoz/projekt/projektegy/projekt-export/projekt-export.component';
 import { ProjektIratmintaComponent } from './eszkoz/projekt/projektegy/projekt-iratminta/projekt-iratminta.component';
 import { ProjektBizonylatesiratComponent } from './eszkoz/projekt/projektegy/projekt-bizonylatesirat/projekt-bizonylatesirat.component';
 import { ProjektSzamlazasirendComponent } from './eszkoz/projekt/projektegy/projekt-szamlazasirend/projekt-szamlazasirend.component';
@@ -49,8 +48,8 @@ import { IratComponent } from './eszkoz/irat/irat.component';
 import { IrategyComponent } from './eszkoz/irat/irategy/irategy.component';
 import {IratToolbarComponent} from './eszkoz/irat/irattolbar/irattoolbar.component';
 import { IratDokumentumComponent } from './eszkoz/irat/irategy/irat-dokumentum/irat-dokumentum.component';
-import {IratService} from './services/eszkoz/irat.service';
-import {DokumentumService} from './services/eszkoz/dokumentum.service';
+import {IratService} from './services/eszkoz/irat/irat.service';
+import {DokumentumService} from './services/eszkoz/irat/dokumentum.service';
 import { IratDokumentumegyComponent } from './eszkoz/irat/irategy/irat-dokumentum/irat-dokumentumegy/irat-dokumentumegy.component';
 import { IratSzerkesztesComponent } from './eszkoz/irat/irategy/irat-szerkesztes/irat-szerkesztes.component';
 import { IratTorlesComponent } from './eszkoz/irat/irategy/irat-torles/irat-torles.component';
@@ -147,7 +146,7 @@ import {ParticioService} from './services/segedeszkosz/particio.service';
 import {VolumeService} from './services/volume.service';
 import {CsoportService} from './services/segedeszkosz/csoport.service';
 import {FeliratkozasService} from './services/eszkoz/feliratkozas.service';
-import {PenztarService} from './services/eszkoz/penztar.service';
+import {PenztarService} from './services/eszkoz/penztar/penztar.service';
 import { PenztarReszletekComponent } from './eszkoz/penztar/penztaregy/penztar-reszletek/penztar-reszletek.component';
 import { PenztarExportComponent } from './eszkoz/penztar/penztaregy/penztar-export/penztar-export.component';
 import { PenztartetelComponent } from './eszkoz/penztar/penztaregy/penztartetel/penztartetel.component';
@@ -168,6 +167,7 @@ import { IratReszletekComponent } from './eszkoz/irat/irategy/irat-reszletek/ira
 import { DokumentumReszletekComponent } from './eszkoz/irat/irategy/irat-dokumentum/irat-dokumentumegy/dokumentum-reszletek/dokumentum-reszletek.component';
 import { VolumeReszletekComponent } from './segedeszkoz/volume/volumeegy/volume-reszletek/volume-reszletek.component';
 import { ProjektReszletekComponent } from './eszkoz/projekt/projektegy/projekt-reszletek/projekt-reszletek.component';
+import { ProjektStatuszComponent } from './eszkoz/projekt/projektegy/projekt-statusz/projekt-statusz.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -263,8 +263,7 @@ const routes: Routes = [
       ]},
       {path: 'blank', component: BlankComponent}
     ]},
-    {path: 'beszerzes', component: CikkBeszerzesKivetComponent},
-    {path: 'kivet', component: CikkBeszerzesKivetComponent},
+    {path: 'beszerzeskivet', component: CikkBeszerzesKivetComponent},
     {path: 'blank', component: BlankComponent}
   ]},
   {path: 'me', component: MeComponent, canActivate: [RoleGuard]},
@@ -337,11 +336,11 @@ const routes: Routes = [
     {path: 'reszletek', component: ProjektReszletekComponent},
     {path: 'torles', component: ProjektTorlesComponent},
     {path: 'szerkesztes', component: ProjektSzerkesztesComponent},
+    {path: 'stsz', component: ProjektStatuszComponent},
     {path: 'muszakiallapot', component: ProjektMuszakiallapotComponent},
     {path: 'inverter', component: ProjektInverterComponent},
     {path: 'napelem', component: ProjektNapelemComponent},
     {path: 'iratminta', component: ProjektIratmintaComponent},
-    {path: 'export', component: ProjektExportComponent},
     {path: 'bizonylatesirat', component: ProjektBizonylatesiratComponent},
     {path: 'szamlazasirend', component: ProjektSzamlazasirendComponent},
     {path: 'teendo', component: ProjektTeendoComponent},
@@ -513,7 +512,6 @@ if (environment.production) {
     ProjektMuszakiallapotComponent,
     ProjektInverterComponent,
     ProjektNapelemComponent,
-    ProjektExportComponent,
     ProjektIratmintaComponent,
     ProjektBizonylatesiratComponent,
     ProjektSzamlazasirendComponent,
@@ -623,7 +621,8 @@ if (environment.production) {
     IratReszletekComponent,
     DokumentumReszletekComponent,
     VolumeReszletekComponent,
-    ProjektReszletekComponent
+    ProjektReszletekComponent,
+    ProjektStatuszComponent
   ],
   imports: [
     BrowserModule,

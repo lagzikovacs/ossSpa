@@ -17,8 +17,8 @@ import {CsoportService} from './segedeszkosz/csoport.service';
 import {VolumeService} from './volume.service';
 import {VolumeDto} from '../dtos/volume/volumedto';
 import {CsoportDto} from '../dtos/csoport/csoportdto';
-import {ProjektService} from './eszkoz/projekt.service';
-import {IratService} from './eszkoz/irat.service';
+import {ProjektService} from './eszkoz/projekt/projekt.service';
+import {IratService} from './eszkoz/irat/irat.service';
 import {FeliratkozasService} from './eszkoz/feliratkozas.service';
 import {IratDto} from '../dtos/irat/iratdto';
 import {ProjektDto} from '../dtos/projekt/projektdto';
@@ -38,7 +38,7 @@ import {AfakulcsDto} from '../dtos/primitiv/afakulcs/afakulcsdto';
 import {TermekdijDto} from '../dtos/primitiv/termekdij/termekdijdto';
 import {CikkDto} from '../dtos/torzs/cikk/cikkdto';
 import {PenztarDto} from "../dtos/penztar/penztardto";
-import {PenztarService} from "./eszkoz/penztar.service";
+import {PenztarService} from "./eszkoz/penztar/penztar.service";
 
 @Injectable({
   providedIn: 'root'

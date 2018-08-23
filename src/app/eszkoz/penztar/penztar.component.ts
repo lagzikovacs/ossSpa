@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {PenztarService} from '../../services/eszkoz/penztar.service';
+import {PenztarService} from '../../services/eszkoz/penztar/penztar.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {LogonService} from '../../services/segedeszkosz/logon.service';
 import {JogKod} from '../../enums/jogkod';
-import {PenztartetelService} from '../../services/eszkoz/penztartetel.service';
+import {PenztartetelService} from '../../services/eszkoz/penztar/penztartetel.service';
 import {PenztartetelDto} from '../../dtos/penztar/penztarteteldto';
 
 @Component({

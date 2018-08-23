@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {PenztarService} from '../../../../services/eszkoz/penztar.service';
+import {PenztarService} from '../../../../services/eszkoz/penztar/penztar.service';
 
 @Component({
   selector: 'app-penztar-reszletek',

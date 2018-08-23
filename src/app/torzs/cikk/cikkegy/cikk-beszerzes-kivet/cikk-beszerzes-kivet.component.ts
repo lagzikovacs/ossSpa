@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import {CikkService} from '../../../../services/torzs/cikk.service';
 
 @Component({
   selector: 'app-cikk-beszerzes-kivet',
   templateUrl: './cikk-beszerzes-kivet.component.html',
   styleUrls: ['./cikk-beszerzes-kivet.component.css']
 })
-export class CikkBeszerzesKivetComponent implements OnInit {
+export class CikkBeszerzesKivetComponent {
+  cikkservice: CikkService;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(cikkservice: CikkService) {
+    this.cikkservice = cikkservice;
   }
-
 }

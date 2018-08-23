@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {PenztartetelService} from '../../../../../services/eszkoz/penztartetel.service';
+import {PenztartetelService} from '../../../../../services/eszkoz/penztar/penztartetel.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../../../tools/errormodal/errormodal.component';
 import * as moment from 'moment';
-import {PenztarService} from '../../../../../services/eszkoz/penztar.service';
+import {PenztarService} from '../../../../../services/eszkoz/penztar/penztar.service';
 
 @Component({
   selector: 'app-penztartetel-szerkesztes',

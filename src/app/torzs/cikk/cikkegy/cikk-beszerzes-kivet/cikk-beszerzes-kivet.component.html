@@ -1,3 +1,37 @@
-<p>
-  cikk-beszerzes-kivet works!
-</p>
+<div class="alapkeret">
+  <h5 *ngIf="cikkservice.BizonylattipusKod === 3">Beszerzés</h5>
+  <h5 *ngIf="cikkservice.BizonylattipusKod === 2">Kivét</h5>
+
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th>Bizonylatszám</th>
+      <th>Ügyfél</th>
+      <th>A teljesítés kelte</th>
+      <th>Mennyiség</th>
+      <th>Me</th>
+      <th>Egységár</th>
+      <th>Pénznem</th>
+      <th>Netto</th>
+      <th>Netto Ft</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let item of cikkservice.MozgasDto">
+      <tr>
+        <td>{{item.BIZONYLATSZAM}}</td>
+        <td>{{item.UGYFELNEV}}</td>
+        <td>{{item.TELJESITESKELTE | datehun}}</td>
+        <td>{{item.MENNYISEG}}</td>
+        <td>{{item.ME}}</td>
+        <td>{{item.EGYSEGAR}}</td>
+        <td>{{item.PENZNEM}}</td>
+        <td>{{item.NETTO}}</td>
+        <td>{{item.NETTOFT}}</td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+</div>
+
+

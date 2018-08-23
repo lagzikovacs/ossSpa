@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IratService} from '../../../../services/eszkoz/irat.service';
+import {IratService} from '../../../../services/eszkoz/irat/irat.service';
 
 @Component({
   selector: 'app-irat-reszletek',

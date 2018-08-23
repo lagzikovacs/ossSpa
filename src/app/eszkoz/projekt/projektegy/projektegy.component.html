@@ -18,6 +18,9 @@
         <i class="fa fa-edit" aria-hidden="true"></i>
       </button>
 
+      <button [disabled]="eppFrissit || projektservice.uj" (click)="stsz()" class="btn btn-sm btn-outline-primary navgomb">
+        Stsz
+      </button>
       <button [disabled]="eppFrissit || projektservice.uj" (click)="muszakiallapot()" class="btn btn-sm btn-outline-primary navgomb">
         Műszaki állapot
       </button>
@@ -30,10 +33,6 @@
       <button [disabled]="eppFrissit || projektservice.uj" (click)="iratminta()" class="btn btn-sm btn-outline-primary navgomb">
         Iratminta
       </button>
-      <button [disabled]="eppFrissit || projektservice.uj" (click)="export()" class="btn btn-sm btn-outline-primary navgomb">
-        Export
-      </button>
-
       <button [disabled]="eppFrissit || projektservice.uj" (click)="bizonylatesirat()" class="btn btn-sm btn-outline-primary navgomb">
         Bizonylat és irat
       </button>

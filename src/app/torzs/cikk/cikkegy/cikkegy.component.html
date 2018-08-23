@@ -18,10 +18,12 @@
               (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-edit" aria-hidden="true"></i>
       </button>
-      <button [disabled]="eppFrissit" (click)="beszerzes()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit || cikkservice.DtoSelectedIndex === -1"
+              (click)="beszerzes()" class="btn btn-sm btn-outline-primary navgomb">
         Beszerzés
       </button>
-      <button [disabled]="eppFrissit" (click)="kivet()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit || cikkservice.DtoSelectedIndex === -1"
+              (click)="kivet()" class="btn btn-sm btn-outline-primary navgomb">
         Kivét
       </button>
     </nav>

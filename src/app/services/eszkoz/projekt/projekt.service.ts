@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import {LogonService} from '../segedeszkosz/logon.service';
+import {LogonService} from '../../segedeszkosz/logon.service';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {ProjektDto} from '../../dtos/projekt/projektdto';
-import {ProjektParameter} from '../../dtos/projekt/projektparameter';
-import {environment} from '../../../environments/environment';
-import {ProjektResult} from '../../dtos/projekt/projektresult';
-import {IratmintaResult} from '../../dtos/projekt/iratmintaresult';
+import {ProjektDto} from '../../../dtos/projekt/projektdto';
+import {ProjektParameter} from '../../../dtos/projekt/projektparameter';
+import {environment} from '../../../../environments/environment';
+import {ProjektResult} from '../../../dtos/projekt/projektresult';
+import {IratmintaResult} from '../../../dtos/projekt/iratmintaresult';
+import {NumberResult} from '../../../dtos/numberresult';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,17 @@ export class ProjektService {
     return this._httpClient.post<ProjektResult>(url, body, options).toPromise();
   }
 
+  public Get(key: number): Promise<ProjektResult> {
+    const url = environment.BaseHref + this._controller + 'get';
+    const body = key;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<ProjektResult>(url, body, options).toPromise();
+  }
+
   public Select(pp: ProjektParameter): Promise<ProjektResult> {
     const url = environment.BaseHref + this._controller + 'select';
     const body = pp;
@@ -51,6 +63,16 @@ export class ProjektService {
     return this._httpClient.post<ProjektResult>(url, body, options).toPromise();
   }
 
+  public Update(dto: ProjektDto): Promise<NumberResult> {
+    const url = environment.BaseHref + this._controller + 'update';
+    const body = dto;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+  }
 
 
   public Szerzodes(projektkod: number): Promise<IratmintaResult> {

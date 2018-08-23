@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
-import {ProjektService} from '../../../services/eszkoz/projekt.service';
+import {ProjektService} from '../../../services/eszkoz/projekt/projekt.service';
 
 @Component({
   selector: 'app-projektegy',
@@ -34,25 +34,29 @@ export class ProjektegyComponent {
     this._router.navigate(['szerkesztes'], {relativeTo: this._route});
   }
 
+  stsz() {
+    this.projektservice.uj = false;
+    this.projektservice.DtoEdited = Object.assign({}, this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
+    this._router.navigate(['stsz'], {relativeTo: this._route});
+  }
   muszakiallapot() {
     this.projektservice.uj = false;
+    this.projektservice.DtoEdited = Object.assign({}, this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     this._router.navigate(['muszakiallapot'], {relativeTo: this._route});
   }
   inverter() {
     this.projektservice.uj = false;
+    this.projektservice.DtoEdited = Object.assign({}, this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     this._router.navigate(['inverter'], {relativeTo: this._route});
   }
   napelem() {
     this.projektservice.uj = false;
+    this.projektservice.DtoEdited = Object.assign({}, this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     this._router.navigate(['napelem'], {relativeTo: this._route});
   }
   iratminta() {
     this.projektservice.uj = false;
     this._router.navigate(['iratminta'], {relativeTo: this._route});
-  }
-  export() {
-    this.projektservice.uj = false;
-    this._router.navigate(['export'], {relativeTo: this._route});
   }
   bizonylatesirat() {
     this.projektservice.uj = false;

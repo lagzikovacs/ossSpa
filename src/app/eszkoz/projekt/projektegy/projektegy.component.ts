@@ -2,6 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {ProjektService} from '../../../services/eszkoz/projekt/projekt.service';
+import {ProjektteendoService} from '../../../services/eszkoz/projekt/projektteendo.service';
+import {SzamlazasirendService} from '../../../services/eszkoz/projekt/szamlazasirend.service';
 
 @Component({
   selector: 'app-projektegy',
@@ -16,7 +18,9 @@ export class ProjektegyComponent {
 
   constructor(private _router: Router,
               private _route: ActivatedRoute,
-              projektservice: ProjektService) {
+              projektservice: ProjektService,
+              private _szamlazasirendservice: SzamlazasirendService,
+              private _projektteendoservice: ProjektteendoService) {
     this.projektservice = projektservice;
   }
 
@@ -63,11 +67,39 @@ export class ProjektegyComponent {
     this._router.navigate(['bizonylatesirat'], {relativeTo: this._route});
   }
   szamlazasirend() {
-    this.projektservice.uj = false;
-    this._router.navigate(['szamlazasirend'], {relativeTo: this._route});
+    this.eppFrissit = true;
+    this._szamlazasirendservice.Select(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this._szamlazasirendservice.Dto = res.Result;
+
+        this.eppFrissit = false;
+        this._router.navigate(['szamlazasirend'], {relativeTo: this._route});
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
   }
   teendo() {
-    this.projektservice.uj = false;
-    this._router.navigate(['teendo'], {relativeTo: this._route});
+    this.eppFrissit = true;
+    this._projektteendoservice.Select(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this._projektteendoservice.Dto = res.Result;
+
+        this.eppFrissit = false;
+        this._router.navigate(['teendo'], {relativeTo: this._route});
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
   }
 }

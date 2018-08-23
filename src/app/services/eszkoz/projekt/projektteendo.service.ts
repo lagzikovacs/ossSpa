@@ -11,7 +11,7 @@ import {EmptyResult} from "../../../dtos/emptyresult";
   providedIn: 'root'
 })
 export class ProjektteendoService {
-  private readonly _controller = 'api/projekttendo/';
+  private readonly _controller = 'api/projektteendo/';
 
   cim = 'Projekt teendő';
   Dto: ProjektteendoDto[] = new Array<ProjektteendoDto>();

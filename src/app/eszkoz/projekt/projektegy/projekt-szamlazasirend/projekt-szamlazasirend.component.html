@@ -1,3 +1,31 @@
 <div class="alapkeret">
-  <h5>Számlázási rend</h5>
+  <h5>{{szamlazasirendservice.cim}}</h5>
+  <div>
+    <nav>
+      <button (click)="uj()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>
+      </button>
+    </nav>
+  </div>
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Összeg</th>
+      <th>Pénznem</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let item of szamlazasirendservice.Dto; let i = index">
+      <tr>
+        <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer" (click)="setClickedRow(i)">{{item.SZAMLAZASIRENDKOD}}</td>
+        <td>{{item.OSSZEG}}</td>
+        <td>{{item.PENZNEM}}</td>
+      </tr>
+      <tr *ngIf="item.MEGJEGYZES !== null && item.MEGJEGYZES !== ''">
+        <td colspan="3">{{item.MEGJEGYZES}}</td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
 </div>

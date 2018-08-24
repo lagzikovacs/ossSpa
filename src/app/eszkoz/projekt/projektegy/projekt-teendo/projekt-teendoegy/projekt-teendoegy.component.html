@@ -1,3 +1,26 @@
-<p>
-  projekt-teendoegy works!
-</p>
+<div class="alapkeret">
+  <h5>{{projektteendoservice.cim}}</h5>
+  <h6 *ngIf="projektteendoservice.DtoSelectedIndex !== -1">{{projektteendoservice.Dto[projektteendoservice.DtoSelectedIndex].DEDIKALVA}} {{projektteendoservice.Dto[projektteendoservice.DtoSelectedIndex].TEENDO}}</h6>
+  <div>
+    <nav>
+      <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-arrow-left" style="margin-right: 3px" aria-hidden="true"></i>Vissza
+      </button>
+      <button [disabled]="eppFrissit" (click)="reszletek()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>Részletesen
+      </button>
+
+      <button [disabled]="eppFrissit || projektteendoservice.DtoSelectedIndex === -1"
+              (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-minus" aria-hidden="true"></i>
+      </button>
+      <button [disabled]="eppFrissit || projektteendoservice.DtoSelectedIndex === -1"
+              (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-edit" aria-hidden="true"></i>
+      </button>
+    </nav>
+  </div>
+
+  <router-outlet></router-outlet>
+  <app-errormodal [cim]="projektteendoservice.cim"></app-errormodal>
+</div>

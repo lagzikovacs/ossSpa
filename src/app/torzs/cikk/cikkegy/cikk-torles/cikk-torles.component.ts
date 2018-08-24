@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {CikkService} from "../../../../services/torzs/cikk.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ErrormodalComponent} from "../../../../tools/errormodal/errormodal.component";
+import {CikkService} from '../../../../services/torzs/cikk.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ErrormodalComponent} from '../../../../tools/errormodal/errormodal.component';
 
 @Component({
   selector: 'app-cikk-torles',

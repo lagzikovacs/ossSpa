@@ -1,3 +1,38 @@
-<p>
-  projekt-szamlazasirend-reszletek works!
-</p>
+<div class="alapkeret">
+  <h5>{{szamlazasirendservice.cim}} részletesen</h5>
+  <table class="table ng table-bordered table-sm table-responsive" style="border: none">
+    <tbody>
+    <tr>
+      <td class="egylabel">Összeg:</td>
+      <td *ngIf="szamlazasirendservice.DtoSelectedIndex !== -1">{{szamlazasirendservice.Dto[szamlazasirendservice.DtoSelectedIndex].OSSZEG}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Pénznem:</td>
+      <td *ngIf="szamlazasirendservice.DtoSelectedIndex !== -1">{{szamlazasirendservice.Dto[szamlazasirendservice.DtoSelectedIndex].PENZNEM}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Megjegyzés:</td>
+      <td *ngIf="szamlazasirendservice.DtoSelectedIndex !== -1">{{szamlazasirendservice.Dto[szamlazasirendservice.DtoSelectedIndex].MEGJEGYZES}}</td>
+    </tr>
+
+
+    <tr>
+      <td class="egylabel">Létrehozta:</td>
+      <td *ngIf="szamlazasirendservice.DtoSelectedIndex !== -1">{{szamlazasirendservice.Dto[szamlazasirendservice.DtoSelectedIndex].LETREHOZTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Létrehozva:</td>
+      <td *ngIf="szamlazasirendservice.DtoSelectedIndex !== -1">{{szamlazasirendservice.Dto[szamlazasirendservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosította:</td>
+      <td *ngIf="szamlazasirendservice.DtoSelectedIndex !== -1">{{szamlazasirendservice.Dto[szamlazasirendservice.DtoSelectedIndex].MODOSITOTTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosítva:</td>
+      <td *ngIf="szamlazasirendservice.DtoSelectedIndex !== -1">{{szamlazasirendservice.Dto[szamlazasirendservice.DtoSelectedIndex].MODOSITVA | datetimehun}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

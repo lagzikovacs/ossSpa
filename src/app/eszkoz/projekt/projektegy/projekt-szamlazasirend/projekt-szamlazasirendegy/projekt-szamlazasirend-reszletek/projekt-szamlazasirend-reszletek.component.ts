@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import {SzamlazasirendService} from '../../../../../../services/eszkoz/projekt/szamlazasirend.service';
 
 @Component({
   selector: 'app-projekt-szamlazasirend-reszletek',
   templateUrl: './projekt-szamlazasirend-reszletek.component.html',
   styleUrls: ['./projekt-szamlazasirend-reszletek.component.css']
 })
-export class ProjektSzamlazasirendReszletekComponent implements OnInit {
+export class ProjektSzamlazasirendReszletekComponent {
+  szamlazasirendservice: SzamlazasirendService;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(szamlazasirendservice: SzamlazasirendService) {
+    this.szamlazasirendservice = szamlazasirendservice;
   }
-
 }

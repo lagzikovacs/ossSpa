@@ -13,7 +13,6 @@ export class ProjektSzamlazasirendegyComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szamlazasirendservice: SzamlazasirendService;
-  mod = false;
   eppFrissit = false;
 
   constructor(private _router: Router,

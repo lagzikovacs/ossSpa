@@ -1,3 +1,46 @@
-<p>
-  projekt-teendo-reszletek works!
-</p>
+<div class="alapkeret">
+  <h5>{{projektteendoservice.cim}} részletesen</h5>
+  <table class="table ng table-bordered table-sm table-responsive" style="border: none">
+    <tbody>
+    <tr>
+      <td class="egylabel">Dedikálva:</td>
+      <td *ngIf="projektteendoservice.DtoSelectedIndex !== -1">{{projektteendoservice.Dto[projektteendoservice.DtoSelectedIndex].DEDIKALVA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Határidő:</td>
+      <td *ngIf="projektteendoservice.DtoSelectedIndex !== -1">{{projektteendoservice.Dto[projektteendoservice.DtoSelectedIndex].HATARIDO}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Elvégezve:</td>
+      <td *ngIf="projektteendoservice.DtoSelectedIndex !== -1">{{projektteendoservice.Dto[projektteendoservice.DtoSelectedIndex].ELVEGEZVE}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Teendő:</td>
+      <td *ngIf="projektteendoservice.DtoSelectedIndex !== -1">{{projektteendoservice.Dto[projektteendoservice.DtoSelectedIndex].TEENDO}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Leirás:</td>
+      <td *ngIf="projektteendoservice.DtoSelectedIndex !== -1">{{projektteendoservice.Dto[projektteendoservice.DtoSelectedIndex].LEIRAS}}</td>
+    </tr>
+
+
+
+    <tr>
+      <td class="egylabel">Létrehozta:</td>
+      <td *ngIf="projektteendoservice.DtoSelectedIndex !== -1">{{projektteendoservice.Dto[projektteendoservice.DtoSelectedIndex].LETREHOZTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Létrehozva:</td>
+      <td *ngIf="projektteendoservice.DtoSelectedIndex !== -1">{{projektteendoservice.Dto[projektteendoservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosította:</td>
+      <td *ngIf="projektteendoservice.DtoSelectedIndex !== -1">{{projektteendoservice.Dto[projektteendoservice.DtoSelectedIndex].MODOSITOTTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosítva:</td>
+      <td *ngIf="projektteendoservice.DtoSelectedIndex !== -1">{{projektteendoservice.Dto[projektteendoservice.DtoSelectedIndex].MODOSITVA | datetimehun}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

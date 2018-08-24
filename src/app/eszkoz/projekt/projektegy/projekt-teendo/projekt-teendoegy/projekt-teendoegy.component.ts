@@ -13,7 +13,6 @@ export class ProjektTeendoegyComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektteendoservice: ProjektteendoService;
-  mod = false;
   eppFrissit = false;
 
   constructor(private _router: Router,

@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import {ProjektteendoService} from '../../../../../../services/eszkoz/projekt/projektteendo.service';
 
 @Component({
   selector: 'app-projekt-teendo-reszletek',
   templateUrl: './projekt-teendo-reszletek.component.html',
   styleUrls: ['./projekt-teendo-reszletek.component.css']
 })
-export class ProjektTeendoReszletekComponent implements OnInit {
+export class ProjektTeendoReszletekComponent {
+  projektteendoservice: ProjektteendoService;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(projektteendoservice: ProjektteendoService) {
+    this.projektteendoservice = projektteendoservice;
   }
-
 }

@@ -13,6 +13,7 @@
     <th>Id</th>
     <th>Összeg</th>
     <th>Pénznem</th>
+    <th>Megjegyzés</th>
   </tr>
   </thead>
   <tbody>
@@ -21,9 +22,7 @@
       <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer" (click)="setClickedRow(i)">{{item.SZAMLAZASIRENDKOD}}</td>
       <td>{{item.OSSZEG}}</td>
       <td>{{item.PENZNEM}}</td>
-    </tr>
-    <tr *ngIf="item.MEGJEGYZES !== null && item.MEGJEGYZES !== ''">
-      <td colspan="3">{{item.MEGJEGYZES}}</td>
+      <td>{{item.MEGJEGYZES}}</td>
     </tr>
   </ng-container>
   </tbody>

@@ -1,5 +1,6 @@
 export enum ZoomSources {
   Ugyfel,
   Cikk,
-  Penztar
+  Penztar,
+  Szamlazasirend
 }

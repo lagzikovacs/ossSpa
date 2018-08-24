@@ -351,11 +351,31 @@ const routes: Routes = [
     {path: 'iratminta', component: ProjektIratmintaComponent},
     {path: 'bizonylatesirat', component: ProjektBizonylatesiratComponent},
     {path: 'szamlazasirend', component: ProjektSzamlazasirendComponent},
-    {path: 'szamlazasirenduj', component: ProjektSzamlazasirendSzerkesztesComponent},
+    {path: 'szamlazasirenduj', component: ProjektSzamlazasirendSzerkesztesComponent, children: [
+      {path: 'penznem', component: PenznemComponent, canActivate: [RoleGuard]},
+      {path: 'penznemuj', component: PenznemSzerkesztesComponent, canActivate: [RoleGuard]},
+      {path: 'penznemegy', component: PenznemegyComponent, canActivate: [RoleGuard], children: [
+        {path: 'reszletek', component: PenznemReszletekComponent},
+        {path: 'torles', component: PenznemTorlesComponent},
+        {path: 'szerkesztes', component: PenznemSzerkesztesComponent},
+        {path: 'blank', component: BlankComponent}
+      ]},
+      {path: 'blank', component: BlankComponent},
+    ]},
     {path: 'szamlazasirendegy', component: ProjektSzamlazasirendegyComponent, children: [
       {path: 'reszletek', component: ProjektSzamlazasirendReszletekComponent},
       {path: 'torles', component: ProjektSzamlazasirendTorlesComponent},
-      {path: 'szerkesztes', component: ProjektSzamlazasirendSzerkesztesComponent},
+      {path: 'szerkesztes', component: ProjektSzamlazasirendSzerkesztesComponent, children: [
+        {path: 'penznem', component: PenznemComponent, canActivate: [RoleGuard]},
+        {path: 'penznemuj', component: PenznemSzerkesztesComponent, canActivate: [RoleGuard]},
+        {path: 'penznemegy', component: PenznemegyComponent, canActivate: [RoleGuard], children: [
+          {path: 'reszletek', component: PenznemReszletekComponent},
+          {path: 'torles', component: PenznemTorlesComponent},
+          {path: 'szerkesztes', component: PenznemSzerkesztesComponent},
+          {path: 'blank', component: BlankComponent}
+        ]},
+        {path: 'blank', component: BlankComponent},
+      ]},
       {path: 'blank', component: BlankComponent}
     ]},
     {path: 'teendo', component: ProjektTeendoComponent},

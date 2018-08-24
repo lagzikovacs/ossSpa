@@ -6,6 +6,7 @@ import {PenztarService} from '../../../services/eszkoz/penztar/penztar.service';
 import {ZoomSources} from "../../../enums/zoomsources";
 import {LogonService} from "../../../services/segedeszkosz/logon.service";
 import {JogKod} from "../../../enums/jogkod";
+import {SzamlazasirendService} from "../../../services/eszkoz/projekt/szamlazasirend.service";
 
 @Component({
   selector: 'app-penznem',
@@ -25,7 +26,8 @@ export class PenznemComponent implements OnInit {
               private _route: ActivatedRoute,
               private _logonservice: LogonService,
               penznemservice: PenznemService,
-              private _penztarservice: PenztarService) {
+              private _penztarservice: PenztarService,
+              private _szamlazasirendservice: SzamlazasirendService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.penznemservice = penznemservice;
   }
@@ -74,6 +76,12 @@ export class PenznemComponent implements OnInit {
     if (this.penznemservice.zoomsource === ZoomSources.Penztar) {
       this._penztarservice.DtoEdited.PENZNEMKOD = this.penznemservice.Dto[i].PENZNEMKOD;
       this._penztarservice.DtoEdited.PENZNEM = this.penznemservice.Dto[i].PENZNEM1;
+
+      this.stopzoom();
+    }
+    if (this.penznemservice.zoomsource === ZoomSources.Szamlazasirend) {
+      this._szamlazasirendservice.DtoEdited.PENZNEMKOD = this.penznemservice.Dto[i].PENZNEMKOD;
+      this._szamlazasirendservice.DtoEdited.PENZNEM = this.penznemservice.Dto[i].PENZNEM1;
 
       this.stopzoom();
     }

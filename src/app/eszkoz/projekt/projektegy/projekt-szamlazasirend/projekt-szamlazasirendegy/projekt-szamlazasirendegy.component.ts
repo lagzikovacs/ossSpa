@@ -1,15 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
+import {SzamlazasirendService} from '../../../../../services/eszkoz/projekt/szamlazasirend.service';
+import {ErrormodalComponent} from '../../../../../tools/errormodal/errormodal.component';
+import {ActivatedRoute, Router} from '@angular/router';
+import {LogonService} from '../../../../../services/segedeszkosz/logon.service';
 
 @Component({
   selector: 'app-projekt-szamlazasirendegy',
   templateUrl: './projekt-szamlazasirendegy.component.html',
   styleUrls: ['./projekt-szamlazasirendegy.component.css']
 })
-export class ProjektSzamlazasirendegyComponent implements OnInit {
+export class ProjektSzamlazasirendegyComponent {
+  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
-  constructor() { }
+  szamlazasirendservice: SzamlazasirendService;
+  mod = false;
+  eppFrissit = false;
 
-  ngOnInit() {
+  constructor(private _router: Router,
+              private _route: ActivatedRoute,
+              private _logonservice: LogonService,
+              szamlazasirendservice: SzamlazasirendService) {
+    this.szamlazasirendservice = szamlazasirendservice;
   }
 
+  vissza() {
+    this._router.navigate(['../szamlazasirend'], {relativeTo: this._route});
+  }
+  reszletek() {
+    this._router.navigate(['reszletek'], {relativeTo: this._route});
+  }
+  torles () {
+    this._router.navigate(['torles'], {relativeTo: this._route});
+  }
+  modositas() {
+    this.szamlazasirendservice.uj = false;
+    this.szamlazasirendservice.DtoEdited = Object.assign({}, this.szamlazasirendservice.Dto[this.szamlazasirendservice.DtoSelectedIndex]);
+    this._router.navigate(['szerkesztes'], {relativeTo: this._route});
+  }
 }

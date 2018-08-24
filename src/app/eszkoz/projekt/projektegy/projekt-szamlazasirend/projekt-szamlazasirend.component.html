@@ -8,24 +8,24 @@
     </nav>
   </div>
   <table class="table table-bordered table-sm table-responsive" style="border: none">
-    <thead>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Összeg</th>
+    <th>Pénznem</th>
+  </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngFor="let item of szamlazasirendservice.Dto; let i = index">
     <tr>
-      <th>Id</th>
-      <th>Összeg</th>
-      <th>Pénznem</th>
+      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer" (click)="setClickedRow(i)">{{item.SZAMLAZASIRENDKOD}}</td>
+      <td>{{item.OSSZEG}}</td>
+      <td>{{item.PENZNEM}}</td>
     </tr>
-    </thead>
-    <tbody>
-    <ng-container *ngFor="let item of szamlazasirendservice.Dto; let i = index">
-      <tr>
-        <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer" (click)="setClickedRow(i)">{{item.SZAMLAZASIRENDKOD}}</td>
-        <td>{{item.OSSZEG}}</td>
-        <td>{{item.PENZNEM}}</td>
-      </tr>
-      <tr *ngIf="item.MEGJEGYZES !== null && item.MEGJEGYZES !== ''">
-        <td colspan="3">{{item.MEGJEGYZES}}</td>
-      </tr>
-    </ng-container>
-    </tbody>
-  </table>
+    <tr *ngIf="item.MEGJEGYZES !== null && item.MEGJEGYZES !== ''">
+      <td colspan="3">{{item.MEGJEGYZES}}</td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table><app-errormodal [cim]="szamlazasirendservice.cim"></app-errormodal>
 </div>

@@ -172,6 +172,10 @@ import { ProjektSzamlazasirendegyComponent } from './eszkoz/projekt/projektegy/p
 import { ProjektSzamlazasirendSzerkesztesComponent } from './eszkoz/projekt/projektegy/projekt-szamlazasirend/projekt-szamlazasirendegy/projekt-szamlazasirend-szerkesztes/projekt-szamlazasirend-szerkesztes.component';
 import { ProjektSzamlazasirendTorlesComponent } from './eszkoz/projekt/projektegy/projekt-szamlazasirend/projekt-szamlazasirendegy/projekt-szamlazasirend-torles/projekt-szamlazasirend-torles.component';
 import { ProjektSzamlazasirendReszletekComponent } from './eszkoz/projekt/projektegy/projekt-szamlazasirend/projekt-szamlazasirendegy/projekt-szamlazasirend-reszletek/projekt-szamlazasirend-reszletek.component';
+import { ProjektTeendoegyComponent } from './eszkoz/projekt/projektegy/projekt-teendo/projekt-teendoegy/projekt-teendoegy.component';
+import { ProjektTeendoSzerkesztesComponent } from './eszkoz/projekt/projektegy/projekt-teendo/projekt-teendoegy/projekt-teendo-szerkesztes/projekt-teendo-szerkesztes.component';
+import { ProjektTeendoTorlesComponent } from './eszkoz/projekt/projektegy/projekt-teendo/projekt-teendoegy/projekt-teendo-torles/projekt-teendo-torles.component';
+import { ProjektTeendoReszletekComponent } from './eszkoz/projekt/projektegy/projekt-teendo/projekt-teendoegy/projekt-teendo-reszletek/projekt-teendo-reszletek.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -352,8 +356,16 @@ const routes: Routes = [
       {path: 'reszletek', component: ProjektSzamlazasirendReszletekComponent},
       {path: 'torles', component: ProjektSzamlazasirendTorlesComponent},
       {path: 'szerkesztes', component: ProjektSzamlazasirendSzerkesztesComponent},
+      {path: 'blank', component: BlankComponent}
     ]},
     {path: 'teendo', component: ProjektTeendoComponent},
+    {path: 'teendouj', component: ProjektTeendoSzerkesztesComponent},
+    {path: 'teendoegy', component: ProjektTeendoegyComponent, children: [
+      {path: 'reszletek', component: ProjektTeendoReszletekComponent},
+      {path: 'torles', component: ProjektTeendoTorlesComponent},
+      {path: 'szerkesztes', component: ProjektTeendoSzerkesztesComponent},
+      {path: 'blank', component: BlankComponent}
+    ]},
     {path: 'blank', component: BlankComponent}
   ]},
 
@@ -636,7 +648,11 @@ if (environment.production) {
     ProjektSzamlazasirendegyComponent,
     ProjektSzamlazasirendSzerkesztesComponent,
     ProjektSzamlazasirendTorlesComponent,
-    ProjektSzamlazasirendReszletekComponent
+    ProjektSzamlazasirendReszletekComponent,
+    ProjektTeendoegyComponent,
+    ProjektTeendoSzerkesztesComponent,
+    ProjektTeendoTorlesComponent,
+    ProjektTeendoReszletekComponent
   ],
   imports: [
     BrowserModule,

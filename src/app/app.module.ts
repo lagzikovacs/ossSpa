@@ -168,6 +168,10 @@ import { DokumentumReszletekComponent } from './eszkoz/irat/irategy/irat-dokumen
 import { VolumeReszletekComponent } from './segedeszkoz/volume/volumeegy/volume-reszletek/volume-reszletek.component';
 import { ProjektReszletekComponent } from './eszkoz/projekt/projektegy/projekt-reszletek/projekt-reszletek.component';
 import { ProjektStatuszComponent } from './eszkoz/projekt/projektegy/projekt-statusz/projekt-statusz.component';
+import { ProjektSzamlazasirendegyComponent } from './eszkoz/projekt/projektegy/projekt-szamlazasirend/projekt-szamlazasirendegy/projekt-szamlazasirendegy.component';
+import { ProjektSzamlazasirendSzerkesztesComponent } from './eszkoz/projekt/projektegy/projekt-szamlazasirend/projekt-szamlazasirendegy/projekt-szamlazasirend-szerkesztes/projekt-szamlazasirend-szerkesztes.component';
+import { ProjektSzamlazasirendTorlesComponent } from './eszkoz/projekt/projektegy/projekt-szamlazasirend/projekt-szamlazasirendegy/projekt-szamlazasirend-torles/projekt-szamlazasirend-torles.component';
+import { ProjektSzamlazasirendReszletekComponent } from './eszkoz/projekt/projektegy/projekt-szamlazasirend/projekt-szamlazasirendegy/projekt-szamlazasirend-reszletek/projekt-szamlazasirend-reszletek.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -343,6 +347,12 @@ const routes: Routes = [
     {path: 'iratminta', component: ProjektIratmintaComponent},
     {path: 'bizonylatesirat', component: ProjektBizonylatesiratComponent},
     {path: 'szamlazasirend', component: ProjektSzamlazasirendComponent},
+    {path: 'szamlazasirenduj', component: ProjektSzamlazasirendSzerkesztesComponent},
+    {path: 'szamlazasirendegy', component: ProjektSzamlazasirendegyComponent, children: [
+      {path: 'reszletek', component: ProjektSzamlazasirendReszletekComponent},
+      {path: 'torles', component: ProjektSzamlazasirendTorlesComponent},
+      {path: 'szerkesztes', component: ProjektSzamlazasirendSzerkesztesComponent},
+    ]},
     {path: 'teendo', component: ProjektTeendoComponent},
     {path: 'blank', component: BlankComponent}
   ]},
@@ -622,7 +632,11 @@ if (environment.production) {
     DokumentumReszletekComponent,
     VolumeReszletekComponent,
     ProjektReszletekComponent,
-    ProjektStatuszComponent
+    ProjektStatuszComponent,
+    ProjektSzamlazasirendegyComponent,
+    ProjektSzamlazasirendSzerkesztesComponent,
+    ProjektSzamlazasirendTorlesComponent,
+    ProjektSzamlazasirendReszletekComponent
   ],
   imports: [
     BrowserModule,

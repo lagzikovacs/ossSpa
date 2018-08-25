@@ -23,7 +23,7 @@ export class ProjektTeendoegyComponent {
   }
 
   vissza() {
-    this._router.navigate(['../teendo'], {relativeTo: this._route});
+    this._router.navigate(['../projektteendo'], {relativeTo: this._route});
   }
   reszletek() {
     this._router.navigate(['reszletek'], {relativeTo: this._route});

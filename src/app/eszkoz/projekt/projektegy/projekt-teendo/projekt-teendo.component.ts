@@ -35,7 +35,7 @@ export class ProjektTeendoComponent {
         this.projektteendoservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this._router.navigate(['../teendouj'], {relativeTo: this._route});
+        this._router.navigate(['../projektteendouj'], {relativeTo: this._route});
       })
       .catch(err => {
         this.errormodal.show(err);
@@ -46,6 +46,6 @@ export class ProjektTeendoComponent {
   setClickedRow(i: number) {
     this.projektteendoservice.DtoSelectedIndex = i;
     this.projektteendoservice.uj = false;
-    this._router.navigate(['../teendoegy'], {relativeTo: this._route});
+    this._router.navigate(['../projektteendoegy'], {relativeTo: this._route});
   }
 }

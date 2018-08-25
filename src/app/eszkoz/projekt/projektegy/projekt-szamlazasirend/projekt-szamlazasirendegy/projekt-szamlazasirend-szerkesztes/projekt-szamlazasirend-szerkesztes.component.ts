@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ZoomSources} from '../../../../../../enums/zoomsources';
 import {PenznemZoomParameter} from '../../../../../../dtos/primitiv/penznem/penznemzoomparameter';
 import {ErrormodalComponent} from '../../../../../../tools/errormodal/errormodal.component';
-import {ProjektService} from "../../../../../../services/eszkoz/projekt/projekt.service";
+import {ProjektService} from '../../../../../../services/eszkoz/projekt/projekt.service';
 
 @Component({
   selector: 'app-projekt-szamlazasirend-szerkesztes',

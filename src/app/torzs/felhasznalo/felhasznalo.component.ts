@@ -1,16 +1,18 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {FelhasznaloService} from '../../services/torzs/primitiv/felhasznalo.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LogonService} from '../../services/segedeszkosz/logon.service';
 import {JogKod} from '../../enums/jogkod';
+import {ZoomSources} from '../../enums/zoomsources';
+import {ProjektteendoService} from '../../services/eszkoz/projekt/projektteendo.service';
 
 @Component({
   selector: 'app-felhasznalo',
   templateUrl: './felhasznalo.component.html',
   styleUrls: ['./felhasznalo.component.css']
 })
-export class FelhasznaloComponent {
+export class FelhasznaloComponent implements OnInit {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Név'];
@@ -22,9 +24,16 @@ export class FelhasznaloComponent {
   constructor(private _router: Router,
               private _route: ActivatedRoute,
               private _logonservice: LogonService,
-              felhasznaloservice: FelhasznaloService) {
+              felhasznaloservice: FelhasznaloService,
+              private _projektteendoservice: ProjektteendoService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.FELHASZNALOMOD]);
     this.felhasznaloservice = felhasznaloservice;
+  }
+
+  ngOnInit() {
+    if (this.felhasznaloservice.zoom) {
+      this.onKereses();
+    }
   }
 
   onKereses() {
@@ -59,6 +68,18 @@ export class FelhasznaloComponent {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+
+  selectforzoom(i: number) {
+    if (this.felhasznaloservice.zoomsource === ZoomSources.Projektteendo) {
+      this._projektteendoservice.DtoEdited.DEDIKALVA = this.felhasznaloservice.Dto[i].NEV;
+
+      this.stopzoom();
+    }
+  }
+  stopzoom() {
+    this.felhasznaloservice.zoom = false;
+    this._router.navigate(['../blank'], {relativeTo: this._route});
   }
 
   setClickedRow(i: number) {

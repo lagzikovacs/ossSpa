@@ -1,107 +1,52 @@
 <div class="alapkeret">
-  <h5 *ngIf="cikkservice.uj">Új {{cikkservice.cim | lowercase}}</h5>
-  <h5 *ngIf="!cikkservice.uj">{{cikkservice.cim}} módosítása</h5>
+  <h5 *ngIf="projektteendoservice.uj">Új {{projektteendoservice.cim | lowercase}}</h5>
+  <h5 *ngIf="!projektteendoservice.uj">{{projektteendoservice.cim}} módosítása</h5>
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
     <div class="row no-gutters editform-row">
       <div class="col-md-2">
-        <div class="editform-title">Megnevezés</div>
+        <div class="editform-title">Dedikálva</div>
+      </div>
+      <div class="col-md-3">
+        <input type="text" class="form-control form-control-sm" id="dedikalva"
+               autocomplete="off" style="background-color: aquamarine"
+               [(ngModel)]="projektteendoservice.DtoEdited.DEDIKALVA" name="dedikalva">
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="FelhasznaloZoom()">...</button>
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Határidő</div>
+      </div>
+      <div class="col-md-2">
+        <input type="date" class="form-control form-control-sm" id="hatarido"
+               autocomplete="off"
+               [(ngModel)]="Hatarido" name="hatarido">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Teendő</div>
       </div>
       <div class="col-md-5">
-        <input type="text" class="form-control form-control-sm" id="megnevezes"
-               maxlength="100" required autocomplete="off"
-               [(ngModel)]="cikkservice.DtoEdited.MEGNEVEZES" name="megnevezes">
-      </div>
-    </div>
-    <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Me</div>
+        <input type="text" class="form-control form-control-sm" id="teendo"
+               maxlength="100" required autocomplete="off" style="background-color: aquamarine"
+               [(ngModel)]="projektteendoservice.DtoEdited.TEENDO" name="teendo">
       </div>
       <div class="col-md-1">
-        <input type="text" class="form-control form-control-sm" id="me"
-               maxlength="10" required autocomplete="off" style="background-color: aquamarine"
-               [(ngModel)]="cikkservice.DtoEdited.ME" name="me">
-      </div>
-      <div class="col-md-1">
-        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="MeZoom()">...</button>
+        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="TeendoZoom()">...</button>
       </div>
     </div>
     <div class="row no-gutters editform-row">
       <div class="col-md-2">
-        <div class="editform-title">ÁFA kulcs</div>
+        <div class="editform-title">Leírás</div>
       </div>
-      <div class="col-md-1">
-        <input type="text" class="form-control form-control-sm" id="afakulcs"
-               maxlength="10" required autocomplete="off" style="background-color: aquamarine"
-               [(ngModel)]="cikkservice.DtoEdited.AFAKULCS" name="afakulcs">
-      </div>
-      <div class="col-md-1">
-        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="AfakulcsZoom()">...</button>
-      </div>
-    </div>
-    <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Egységár</div>
-      </div>
-      <div class="col-md-2">
-        <input type="number" class="form-control form-control-sm" id="egysegar"
-               maxlength="10" required autocomplete="off"
-               [(ngModel)]="cikkservice.DtoEdited.EGYSEGAR" name="egysegar">
-      </div>
-    </div>
-    <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Készletet képez</div>
-      </div>
-      <div class="col-md-1">
-        <select type="text" class="form-control form-control-sm"
-                [(ngModel)]="cikkservice.DtoEdited.KESZLETETKEPEZ" name="kk">
-          <option value="false">Nem</option>
-          <option value="true">Igen</option>
-        </select>
-      </div>
-    </div>
-    <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Tömeg, kg</div>
-      </div>
-      <div class="col-md-2">
-        <input type="number" class="form-control form-control-sm" id="tomeg"
-               maxlength="10" required autocomplete="off"
-               [(ngModel)]="cikkservice.DtoEdited.TOMEGKG" name="tomeg">
-      </div>
-    </div>
-    <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Termékdíj KT</div>
-      </div>
-      <div class="col-md-2">
-        <input type="text" class="form-control form-control-sm" id="termekdijkt"
-               maxlength="10" autocomplete="off" style="background-color: aquamarine"
-               [(ngModel)]="cikkservice.DtoEdited.TERMEKDIJKT" name="termekdijkt">
-      </div>
-      <div class="col-md-1">
-        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="TermekdijZoom()">...</button>
-      </div>
-    </div>
-    <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Termékdíj megnevezés</div>
-      </div>
-      <div class="col-md-4">
-        <input type="text" class="form-control form-control-sm" id="termekdijmegnevezes"
-               autocomplete="off" readonly
-               [(ngModel)]="cikkservice.DtoEdited.TERMEKDIJMEGNEVEZES" name="termekdijmegnevezes">
-      </div>
-    </div>
-    <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Termékdíj egységár</div>
-      </div>
-      <div class="col-md-1">
-        <input type="number" class="form-control form-control-sm" id="termekdijegysegar"
-               autocomplete="off" readonly
-               [(ngModel)]="cikkservice.DtoEdited.TERMEKDIJEGYSEGAR" name="termekdijegysegar">
+      <div class="col-md-6">
+        <input type="text" class="form-control form-control-sm" id="leiras"
+               autocomplete="off"
+               [(ngModel)]="projektteendoservice.DtoEdited.LEIRAS" name="leiras">
       </div>
     </div>
 
@@ -112,7 +57,6 @@
     </div>
   </form>
   <router-outlet></router-outlet>
-  <app-errormodal [cim]="cikkservice.cim"></app-errormodal>
+  <app-errormodal [cim]="projektteendoservice.cim"></app-errormodal>
 </div>
-
 

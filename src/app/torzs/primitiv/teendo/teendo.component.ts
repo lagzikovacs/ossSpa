@@ -1,16 +1,18 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {TeendoService} from '../../../services/torzs/primitiv/teendo.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {JogKod} from '../../../enums/jogkod';
 import {LogonService} from '../../../services/segedeszkosz/logon.service';
+import {ZoomSources} from '../../../enums/zoomsources';
+import {ProjektteendoService} from '../../../services/eszkoz/projekt/projektteendo.service';
 
 @Component({
   selector: 'app-teendo',
   templateUrl: './teendo.component.html',
   styleUrls: ['./teendo.component.css']
 })
-export class TeendoComponent {
+export class TeendoComponent implements OnInit {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Teendő'];
@@ -22,9 +24,16 @@ export class TeendoComponent {
   constructor(private _router: Router,
               private _route: ActivatedRoute,
               private _logonservice: LogonService,
-              teendoservice: TeendoService) {
+              teendoservice: TeendoService,
+              private _projektteendoservice: ProjektteendoService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.teendoservice = teendoservice;
+  }
+
+  ngOnInit() {
+    if (this.teendoservice.zoom) {
+      this.onKereses();
+    }
   }
 
   onKereses() {
@@ -62,7 +71,12 @@ export class TeendoComponent {
   }
 
   selectforzoom(i: number) {
-    this.setClickedRow(i);
+    if (this.teendoservice.zoomsource === ZoomSources.Projektteendo) {
+      this._projektteendoservice.DtoEdited.TEENDOKOD = this.teendoservice.Dto[i].TEENDOKOD;
+      this._projektteendoservice.DtoEdited.TEENDO = this.teendoservice.Dto[i].TEENDO1;
+
+      this.stopzoom();
+    }
   }
   stopzoom() {
     this.teendoservice.zoom = false;

@@ -378,12 +378,57 @@ const routes: Routes = [
       ]},
       {path: 'blank', component: BlankComponent}
     ]},
-    {path: 'teendo', component: ProjektTeendoComponent},
-    {path: 'teendouj', component: ProjektTeendoSzerkesztesComponent},
-    {path: 'teendoegy', component: ProjektTeendoegyComponent, children: [
+    {path: 'projektteendo', component: ProjektTeendoComponent},
+    {path: 'projektteendouj', component: ProjektTeendoSzerkesztesComponent, children: [
+//itt
+      {path: 'felhasznalo', component: FelhasznaloComponent, canActivate: [RoleGuard]},
+      {path: 'felhasznalouj', component: FelhasznaloSzerkesztesComponent, canActivate: [RoleGuard]},
+      {path: 'felhasznaloegy', component: FelhasznaloEgyComponent, canActivate: [RoleGuard], children: [
+        {path: 'reszletek', component: FelhasznaloReszletekComponent},
+        {path: 'torles', component: FelhasznaloTorlesComponent},
+        {path: 'szerkesztes', component: FelhasznaloSzerkesztesComponent},
+        {path: 'jelszo', component: FelhasznaloJelszoComponent},
+        {path: 'tevekenyseg', component: FelhasznaloTevekenysegComponent},
+        {path: 'blank', component: BlankComponent}
+      ]},
+      {path: 'teendo', component: TeendoComponent, canActivate: [RoleGuard]},
+      {path: 'teendouj', component: TeendoSzerkesztesComponent, canActivate: [RoleGuard]},
+      {path: 'teendoegy', component: TeendoegyComponent, canActivate: [RoleGuard], children: [
+        {path: 'reszletek', component: TeendoReszletekComponent},
+        {path: 'torles', component: TeendoTorlesComponent},
+        {path: 'szerkesztes', component: TeendoSzerkesztesComponent},
+        {path: 'blank', component: BlankComponent}
+      ]},
+      {path: 'blank', component: BlankComponent}
+//itt
+    ]},
+    {path: 'blank', component: BlankComponent},
+    {path: 'projektteendoegy', component: ProjektTeendoegyComponent, children: [
       {path: 'reszletek', component: ProjektTeendoReszletekComponent},
       {path: 'torles', component: ProjektTeendoTorlesComponent},
-      {path: 'szerkesztes', component: ProjektTeendoSzerkesztesComponent},
+      {path: 'szerkesztes', component: ProjektTeendoSzerkesztesComponent, children: [
+//itt
+        {path: 'felhasznalo', component: FelhasznaloComponent, canActivate: [RoleGuard]},
+        {path: 'felhasznalouj', component: FelhasznaloSzerkesztesComponent, canActivate: [RoleGuard]},
+        {path: 'felhasznaloegy', component: FelhasznaloEgyComponent, canActivate: [RoleGuard], children: [
+          {path: 'reszletek', component: FelhasznaloReszletekComponent},
+          {path: 'torles', component: FelhasznaloTorlesComponent},
+          {path: 'szerkesztes', component: FelhasznaloSzerkesztesComponent},
+          {path: 'jelszo', component: FelhasznaloJelszoComponent},
+          {path: 'tevekenyseg', component: FelhasznaloTevekenysegComponent},
+          {path: 'blank', component: BlankComponent}
+        ]},
+        {path: 'teendo', component: TeendoComponent, canActivate: [RoleGuard]},
+        {path: 'teendouj', component: TeendoSzerkesztesComponent, canActivate: [RoleGuard]},
+        {path: 'teendoegy', component: TeendoegyComponent, canActivate: [RoleGuard], children: [
+          {path: 'reszletek', component: TeendoReszletekComponent},
+          {path: 'torles', component: TeendoTorlesComponent},
+          {path: 'szerkesztes', component: TeendoSzerkesztesComponent},
+          {path: 'blank', component: BlankComponent}
+        ]},
+        {path: 'blank', component: BlankComponent}
+//itt
+      ]},
       {path: 'blank', component: BlankComponent}
     ]},
     {path: 'blank', component: BlankComponent}

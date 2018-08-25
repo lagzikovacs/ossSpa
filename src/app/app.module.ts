@@ -176,6 +176,7 @@ import { ProjektTeendoegyComponent } from './eszkoz/projekt/projektegy/projekt-t
 import { ProjektTeendoSzerkesztesComponent } from './eszkoz/projekt/projektegy/projekt-teendo/projekt-teendoegy/projekt-teendo-szerkesztes/projekt-teendo-szerkesztes.component';
 import { ProjektTeendoTorlesComponent } from './eszkoz/projekt/projektegy/projekt-teendo/projekt-teendoegy/projekt-teendo-torles/projekt-teendo-torles.component';
 import { ProjektTeendoReszletekComponent } from './eszkoz/projekt/projektegy/projekt-teendo/projekt-teendoegy/projekt-teendo-reszletek/projekt-teendo-reszletek.component';
+import { ProjektTeendoElvegezveComponent } from './eszkoz/projekt/projektegy/projekt-teendo/projekt-teendoegy/projekt-teendo-elvegezve/projekt-teendo-elvegezve.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -429,6 +430,7 @@ const routes: Routes = [
         {path: 'blank', component: BlankComponent}
 //itt
       ]},
+      {path: 'elvegezve', component: ProjektTeendoElvegezveComponent},
       {path: 'blank', component: BlankComponent}
     ]},
     {path: 'blank', component: BlankComponent}
@@ -717,7 +719,8 @@ if (environment.production) {
     ProjektTeendoegyComponent,
     ProjektTeendoSzerkesztesComponent,
     ProjektTeendoTorlesComponent,
-    ProjektTeendoReszletekComponent
+    ProjektTeendoReszletekComponent,
+    ProjektTeendoElvegezveComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,8 @@ import {FelhasznaloService} from '../../../../../../services/torzs/primitiv/felh
 import {ProjektteendoService} from '../../../../../../services/eszkoz/projekt/projektteendo.service';
 import {ZoomSources} from '../../../../../../enums/zoomsources';
 import * as moment from 'moment';
+import {TeendoZoomParameter} from '../../../../../../dtos/primitiv/teendo/teendozoomparameter';
+import {ProjektService} from '../../../../../../services/eszkoz/projekt/projekt.service';
 
 @Component({
   selector: 'app-projekt-teendo-szerkesztes',
@@ -23,7 +25,8 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit {
               private _route: ActivatedRoute,
               projektteendoservice: ProjektteendoService,
               private _felhasznalosevice: FelhasznaloService,
-              private _teendoservice: TeendoService) {
+              private _teendoservice: TeendoService,
+              private _projektservice: ProjektService) {
     this.projektteendoservice = projektteendoservice;
   }
 
@@ -32,7 +35,49 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit {
   }
 
   onSubmit() {
+    // nem ellenőrzi, h a dedikált felhasználó létezik-e
 
+    this._teendoservice.ZoomCheck(new TeendoZoomParameter(this.projektteendoservice.DtoEdited.TEENDOKOD || 0,
+      this.projektteendoservice.DtoEdited.TEENDO || ''))
+      .then(res => {
+        if (res.Error !== null) {
+          throw res.Error;
+        }
+
+        this.projektteendoservice.DtoEdited.HATARIDO = moment(this.Hatarido).toISOString(true);
+
+        if (this.projektteendoservice.uj) {
+          this.projektteendoservice.DtoEdited.PROJEKTKOD = this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD;
+          return this.projektteendoservice.Add(this.projektteendoservice.DtoEdited);
+        } else {
+          return this.projektteendoservice.Update(this.projektteendoservice.DtoEdited);
+        }
+      })
+      .then(res1 => {
+        if (res1.Error !== null) {
+          throw res1.Error;
+        }
+
+        return this.projektteendoservice.Get(res1.Result);
+      })
+      .then(res2 => {
+        if (res2.Error !== null) {
+          throw res2.Error;
+        }
+
+        if (this.projektteendoservice.uj) {
+          this.projektteendoservice.Dto.unshift(res2.Result[0]);
+        } else {
+          this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex] = res2.Result[0];
+        }
+
+        this.eppFrissit = false;
+        this.navigal();
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
   }
 
   cancel() {

@@ -38,7 +38,7 @@ export class ProjektTeendoTorlesComponent implements OnInit {
         this.projektteendoservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this._router.navigate(['../../teendo'], {relativeTo: this._route});
+        this._router.navigate(['../../projektteendo'], {relativeTo: this._route});
       })
       .catch(err => {
         this.errormodal.show(err);

@@ -36,4 +36,9 @@ export class ProjektTeendoegyComponent {
     this.projektteendoservice.DtoEdited = Object.assign({}, this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex]);
     this._router.navigate(['szerkesztes'], {relativeTo: this._route});
   }
+  elvegezve() {
+    this.projektteendoservice.uj = false;
+    this.projektteendoservice.DtoEdited = Object.assign({}, this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex]);
+    this._router.navigate(['elvegezve'], {relativeTo: this._route});
+  }
 }

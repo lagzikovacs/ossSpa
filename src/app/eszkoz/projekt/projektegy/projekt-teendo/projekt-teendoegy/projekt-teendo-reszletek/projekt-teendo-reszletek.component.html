@@ -8,11 +8,11 @@
     </tr>
     <tr>
       <td class="egylabel">Határidő:</td>
-      <td *ngIf="projektteendoservice.DtoSelectedIndex !== -1">{{projektteendoservice.Dto[projektteendoservice.DtoSelectedIndex].HATARIDO}}</td>
+      <td *ngIf="projektteendoservice.DtoSelectedIndex !== -1">{{projektteendoservice.Dto[projektteendoservice.DtoSelectedIndex].HATARIDO | datehun}}</td>
     </tr>
     <tr>
       <td class="egylabel">Elvégezve:</td>
-      <td *ngIf="projektteendoservice.DtoSelectedIndex !== -1">{{projektteendoservice.Dto[projektteendoservice.DtoSelectedIndex].ELVEGEZVE}}</td>
+      <td *ngIf="projektteendoservice.DtoSelectedIndex !== -1">{{projektteendoservice.Dto[projektteendoservice.DtoSelectedIndex].ELVEGEZVE | datehun}}</td>
     </tr>
     <tr>
       <td class="egylabel">Teendő:</td>

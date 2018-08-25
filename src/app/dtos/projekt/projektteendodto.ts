@@ -4,8 +4,8 @@ export class ProjektteendoDto {
   DEDIKALVA: string;
   TEENDOKOD: number;
   TEENDO: string;
-  HATARIDO: Date;
-  ELVEGEZVE: Date;
+  HATARIDO: any;
+  ELVEGEZVE: any;
   LEIRAS: string;
 
   LETREHOZVA: Date;

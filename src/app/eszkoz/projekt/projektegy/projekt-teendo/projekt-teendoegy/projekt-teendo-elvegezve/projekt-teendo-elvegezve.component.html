@@ -1,0 +1,25 @@
+<div class="alapkeret">
+  <h5>{{projektteendoservice.cim}} elvégezve</h5>
+
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Elvégezve</div>
+      </div>
+      <div class="col-md-2">
+        <input type="date" class="form-control form-control-sm" id="elvegezve"
+               autocomplete="off"
+               [(ngModel)]="Elvegezve" name="elvegezve">
+      </div>
+    </div>
+
+    <div class="row no-gutters" style="margin-bottom: 10px">
+      <div class="col-md-2"></div>
+      <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
+      <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
+    </div>
+  </form>
+  <app-errormodal [cim]="projektteendoservice.cim"></app-errormodal>
+</div>
+
+

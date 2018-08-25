@@ -8,7 +8,7 @@ import {LogonService} from '../../segedeszkosz/logon.service';
 import {PenznemResult} from '../../../dtos/primitiv/penznem/penznemresult';
 import {EmptyResult} from '../../../dtos/emptyresult';
 import {NumberResult} from '../../../dtos/numberresult';
-import {PenznemZoomParameter} from "../../../dtos/primitiv/penznem/penznemzoomparameter";
+import {PenznemZoomParameter} from '../../../dtos/primitiv/penznem/penznemzoomparameter';
 
 @Injectable({
   providedIn: 'root'

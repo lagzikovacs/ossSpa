@@ -15,6 +15,7 @@
       <th>Határidő</th>
       <th>Elvégezve</th>
       <th>Teendő</th>
+      <th>Leírás</th>
     </tr>
     </thead>
     <tbody>
@@ -25,9 +26,7 @@
         <td>{{item.HATARIDO | datehun}}</td>
         <td>{{item.ELVEGEZVE | datehun}}</td>
         <td>{{item.TEENDO}}</td>
-      </tr>
-      <tr *ngIf="item.LEIRAS !== null && item.LEIRAS !== ''">
-        <td colspan="5">{{item.LEIRAS}}</td>
+        <td style="min-width: 500px">{{item.LEIRAS}}</td>
       </tr>
     </ng-container>
     </tbody>

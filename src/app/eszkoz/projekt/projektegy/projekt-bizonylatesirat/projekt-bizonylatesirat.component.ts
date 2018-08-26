@@ -1,15 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import {ProjektkapcsolatService} from '../../../../services/eszkoz/projekt/projektkapcsolat.service';
+import {LogonService} from '../../../../services/segedeszkosz/logon.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-projekt-bizonylatesirat',
   templateUrl: './projekt-bizonylatesirat.component.html',
   styleUrls: ['./projekt-bizonylatesirat.component.css']
 })
-export class ProjektBizonylatesiratComponent implements OnInit {
+export class ProjektBizonylatesiratComponent {
+  projektkapcsolatservice: ProjektkapcsolatService;
+  eppFrissit = false;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private _router: Router,
+              private _route: ActivatedRoute,
+              private _logonservice: LogonService,
+              projektkapcsolatservice: ProjektkapcsolatService) {
+    this.projektkapcsolatservice = projektkapcsolatservice;
   }
 
+  setClickedRow(i: number) {
+    this.projektkapcsolatservice.DtoSelectedIndex = i;
+    this._router.navigate(['../bizonylatesirategy'], {relativeTo: this._route});
+  }
 }

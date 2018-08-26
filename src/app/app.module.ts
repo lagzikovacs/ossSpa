@@ -143,7 +143,7 @@ import {CikkService} from './services/torzs/cikk.service';
 import {HelysegService} from './services/torzs/primitiv/helyseg.service';
 import {UgyfelService} from './services/torzs/ugyfel.service';
 import {ParticioService} from './services/segedeszkosz/particio.service';
-import {VolumeService} from './services/volume.service';
+import {VolumeService} from './services/segedeszkosz/volume.service';
 import {CsoportService} from './services/segedeszkosz/csoport.service';
 import {FeliratkozasService} from './services/eszkoz/feliratkozas.service';
 import {PenztarService} from './services/eszkoz/penztar/penztar.service';
@@ -351,6 +351,7 @@ const routes: Routes = [
     {path: 'napelem', component: ProjektNapelemComponent},
     {path: 'iratminta', component: ProjektIratmintaComponent},
     {path: 'bizonylatesirat', component: ProjektBizonylatesiratComponent},
+    ///////////////////////////////
     {path: 'szamlazasirend', component: ProjektSzamlazasirendComponent},
     {path: 'szamlazasirenduj', component: ProjektSzamlazasirendSzerkesztesComponent, children: [
       {path: 'penznem', component: PenznemComponent, canActivate: [RoleGuard]},

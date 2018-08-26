@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {environment} from '../../environments/environment';
-import {EgyszeruKeresesDto} from '../dtos/egyszerukeresesdto';
-import {VolumeDto} from '../dtos/volume/volumedto';
-import {ZoomSources} from '../enums/zoomsources';
+import {environment} from '../../../environments/environment';
+import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
+import {VolumeDto} from '../../dtos/volume/volumedto';
+import {ZoomSources} from '../../enums/zoomsources';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {LogonService} from './segedeszkosz/logon.service';
-import {VolumeResult} from '../dtos/volume/volumeresult';
-import {DokumentumkodByVolumeResult} from '../dtos/volume/dokumentumbyvolumeresult';
+import {LogonService} from './logon.service';
+import {VolumeResult} from '../../dtos/volume/volumeresult';
+import {DokumentumkodByVolumeResult} from '../../dtos/volume/dokumentumbyvolumeresult';
 
 @Injectable({
   providedIn: 'root'

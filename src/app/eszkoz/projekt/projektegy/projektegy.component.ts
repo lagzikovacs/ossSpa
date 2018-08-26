@@ -4,6 +4,7 @@ import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.componen
 import {ProjektService} from '../../../services/eszkoz/projekt/projekt.service';
 import {ProjektteendoService} from '../../../services/eszkoz/projekt/projektteendo.service';
 import {SzamlazasirendService} from '../../../services/eszkoz/projekt/szamlazasirend.service';
+import {ProjektkapcsolatService} from '../../../services/eszkoz/projekt/projektkapcsolat.service';
 
 @Component({
   selector: 'app-projektegy',
@@ -19,6 +20,7 @@ export class ProjektegyComponent {
   constructor(private _router: Router,
               private _route: ActivatedRoute,
               projektservice: ProjektService,
+              private _projektkapcsolatservice: ProjektkapcsolatService,
               private _szamlazasirendservice: SzamlazasirendService,
               private _projektteendoservice: ProjektteendoService) {
     this.projektservice = projektservice;
@@ -59,12 +61,25 @@ export class ProjektegyComponent {
     this._router.navigate(['napelem'], {relativeTo: this._route});
   }
   iratminta() {
-    this.projektservice.uj = false;
     this._router.navigate(['iratminta'], {relativeTo: this._route});
   }
   bizonylatesirat() {
-    this.projektservice.uj = false;
-    this._router.navigate(['bizonylatesirat'], {relativeTo: this._route});
+    this.eppFrissit = true;
+    this._projektkapcsolatservice.Select(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this._projektkapcsolatservice.Dto = res.Result;
+
+        this.eppFrissit = false;
+        this._router.navigate(['bizonylatesirat'], {relativeTo: this._route});
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
   }
   szamlazasirend() {
     this.eppFrissit = true;

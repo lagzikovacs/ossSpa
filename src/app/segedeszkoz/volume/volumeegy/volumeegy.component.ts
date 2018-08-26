@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
-import {VolumeService} from '../../../services/volume.service';
+import {VolumeService} from '../../../services/segedeszkosz/volume.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({

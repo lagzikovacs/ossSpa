@@ -1,3 +1,40 @@
 <div class="alapkeret">
-  <h5>Bizonylat és irat</h5>
+  <h5>{{projektkapcsolatservice.cim}}</h5>
+  <div>
+    <nav>
+      <button [disabled]="eppFrissit" (click)="m()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Bizonylat
+      </button>
+      <button [disabled]="eppFrissit" (click)="m()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Irat
+      </button>
+      <button [disabled]="eppFrissit" (click)="m()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Ajánlat
+      </button>
+    </nav>
+  </div>
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Kapcsolat</th>
+      <th>Tipus</th>
+      <th>Azonosító</th>
+      <th>Keletkezett</th>
+      <th>Tárgy</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of projektkapcsolatservice.Dto; let i = index">
+      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
+          (click)="setClickedRow(i)">{{item.PROJEKTKAPCSOLATKOD}}</td>
+      <td>{{item.KAPCSOLAT}}</td>
+      <td>{{item.TIPUS}}</td>
+      <td>{{item.AZONOSITO}}</td>
+      <td>{{item.KELETKEZETT | datehun}}</td>
+      <td>{{item.TARGY}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <app-errormodal [cim]="projektkapcsolatservice.cim"></app-errormodal>
 </div>

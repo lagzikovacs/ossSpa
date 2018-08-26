@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {VolumeService} from '../../../../services/volume.service';
+import {VolumeService} from '../../../../services/segedeszkosz/volume.service';
 import {ErrormodalComponent} from '../../../../tools/errormodal/errormodal.component';
 import {DokumentumService} from '../../../../services/eszkoz/irat/dokumentum.service';
 

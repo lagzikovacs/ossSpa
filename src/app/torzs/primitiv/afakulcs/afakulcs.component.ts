@@ -4,8 +4,8 @@ import {AfakulcsService} from '../../../services/torzs/primitiv/afakulcs.service
 import {ActivatedRoute, Router} from '@angular/router';
 import {CikkService} from '../../../services/torzs/cikk.service';
 import {ZoomSources} from '../../../enums/zoomsources';
-import {LogonService} from "../../../services/segedeszkosz/logon.service";
-import {JogKod} from "../../../enums/jogkod";
+import {LogonService} from '../../../services/segedeszkosz/logon.service';
+import {JogKod} from '../../../enums/jogkod';
 
 @Component({
   selector: 'app-afakulcs',

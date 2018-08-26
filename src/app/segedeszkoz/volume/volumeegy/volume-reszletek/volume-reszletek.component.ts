@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {VolumeService} from '../../../../services/volume.service';
+import {VolumeService} from '../../../../services/segedeszkosz/volume.service';
 
 @Component({
   selector: 'app-volume-reszletek',

@@ -14,7 +14,7 @@ import {UgyfelDto} from '../dtos/torzs/ugyfel/ugyfeldto';
 import {FelhasznaloDto} from '../dtos/primitiv/felhasznalo/felhasznalodto';
 import {FelhasznaloService} from './torzs/primitiv/felhasznalo.service';
 import {CsoportService} from './segedeszkosz/csoport.service';
-import {VolumeService} from './volume.service';
+import {VolumeService} from './segedeszkosz/volume.service';
 import {VolumeDto} from '../dtos/volume/volumedto';
 import {CsoportDto} from '../dtos/csoport/csoportdto';
 import {ProjektService} from './eszkoz/projekt/projekt.service';
@@ -37,8 +37,14 @@ import {MeDto} from '../dtos/primitiv/me/medto';
 import {AfakulcsDto} from '../dtos/primitiv/afakulcs/afakulcsdto';
 import {TermekdijDto} from '../dtos/primitiv/termekdij/termekdijdto';
 import {CikkDto} from '../dtos/torzs/cikk/cikkdto';
-import {PenztarDto} from "../dtos/penztar/penztardto";
-import {PenztarService} from "./eszkoz/penztar/penztar.service";
+import {PenztarDto} from '../dtos/penztar/penztardto';
+import {PenztarService} from './eszkoz/penztar/penztar.service';
+import {ProjektkapcsolatService} from './eszkoz/projekt/projektkapcsolat.service';
+import {ProjektKapcsolatDto} from '../dtos/projekt/projektkapcsolatdto';
+import {SzamlazasirendService} from "./eszkoz/projekt/szamlazasirend.service";
+import {ProjektteendoService} from "./eszkoz/projekt/projektteendo.service";
+import {SzamlazasirendDto} from "../dtos/projekt/szamlazasirenddto";
+import {ProjektteendoDto} from "../dtos/projekt/projektteendodto";
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +66,9 @@ export class MenuService {
               private _helysegservice: HelysegService,
               private _ugyfelservice: UgyfelService,
               private _projektservice: ProjektService,
+              private _projektkapcsolatservice: ProjektkapcsolatService,
+              private _szamlazasirendservice: SzamlazasirendService,
+              private _projektteendoservice: ProjektteendoService,
               private _iratservice: IratService,
               private _penztarservice: PenztarService,
               private _feliratkozasservice: FeliratkozasService,
@@ -124,6 +133,9 @@ export class MenuService {
 
       case '/projekt':
         this._projektservice.Dto = new Array<ProjektDto>();
+        this._projektkapcsolatservice.Dto = new Array<ProjektKapcsolatDto>();
+        this._szamlazasirendservice.Dto = new Array<SzamlazasirendDto>();
+        this._projektteendoservice.Dto = new Array<ProjektteendoDto>();
       break;
       case '/irat':
         this._iratservice.Dto = new Array<IratDto>();

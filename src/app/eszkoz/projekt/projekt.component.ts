@@ -86,7 +86,7 @@ export class ProjektComponent implements OnInit {
   setClickedRow(i: number) {
     this.projektservice.DtoSelectedIndex = i;
     this.projektservice.uj = false;
-    this._router.navigate(['/projektegy/bizonylatesirat']);
+    this._router.navigate(['/projektegy']);
   }
 
   onUj() {

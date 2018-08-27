@@ -177,6 +177,9 @@ import { ProjektTeendoSzerkesztesComponent } from './eszkoz/projekt/projektegy/p
 import { ProjektTeendoTorlesComponent } from './eszkoz/projekt/projektegy/projekt-teendo/projekt-teendoegy/projekt-teendo-torles/projekt-teendo-torles.component';
 import { ProjektTeendoReszletekComponent } from './eszkoz/projekt/projektegy/projekt-teendo/projekt-teendoegy/projekt-teendo-reszletek/projekt-teendo-reszletek.component';
 import { ProjektTeendoElvegezveComponent } from './eszkoz/projekt/projektegy/projekt-teendo/projekt-teendoegy/projekt-teendo-elvegezve/projekt-teendo-elvegezve.component';
+import { ProjektBizonylatesiratUjbizonylatComponent } from './eszkoz/projekt/projektegy/projekt-bizonylatesirat/projekt-bizonylatesirat-ujbizonylat/projekt-bizonylatesirat-ujbizonylat.component';
+import { ProjektBizonylatesiratUjiratComponent } from './eszkoz/projekt/projektegy/projekt-bizonylatesirat/projekt-bizonylatesirat-ujirat/projekt-bizonylatesirat-ujirat.component';
+import { ProjektBizonylatesiratUjajanlatComponent } from './eszkoz/projekt/projektegy/projekt-bizonylatesirat/projekt-bizonylatesirat-ujajanlat/projekt-bizonylatesirat-ujajanlat.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -351,6 +354,19 @@ const routes: Routes = [
     {path: 'napelem', component: ProjektNapelemComponent},
     {path: 'iratminta', component: ProjektIratmintaComponent},
     {path: 'bizonylatesirat', component: ProjektBizonylatesiratComponent},
+    {path: 'bizonylatesiratujbizonylat', component: ProjektBizonylatesiratUjbizonylatComponent},
+    {path: 'bizonylatesiratujirat', component: ProjektBizonylatesiratUjiratComponent, children: [
+      {path: 'irattipus', component: IrattipusComponent, canActivate: [RoleGuard]},
+      {path: 'irattipusuj', component: IrattipusSzerkesztesComponent, canActivate: [RoleGuard]},
+      {path: 'irattipusegy', component: IrattipusegyComponent, canActivate: [RoleGuard], children: [
+        {path: 'reszletek', component: IrattipusReszletekComponent},
+        {path: 'torles', component: IrattipusTorlesComponent},
+        {path: 'szerkesztes', component: IrattipusSzerkesztesComponent},
+        {path: 'blank', component: BlankComponent}
+      ]},
+      {path: 'blank', component: BlankComponent}
+    ]},
+    {path: 'bizonylatesiratujajanlat', component: ProjektBizonylatesiratUjajanlatComponent},
     ///////////////////////////////
     {path: 'szamlazasirend', component: ProjektSzamlazasirendComponent},
     {path: 'szamlazasirenduj', component: ProjektSzamlazasirendSzerkesztesComponent, children: [
@@ -721,7 +737,10 @@ if (environment.production) {
     ProjektTeendoSzerkesztesComponent,
     ProjektTeendoTorlesComponent,
     ProjektTeendoReszletekComponent,
-    ProjektTeendoElvegezveComponent
+    ProjektTeendoElvegezveComponent,
+    ProjektBizonylatesiratUjbizonylatComponent,
+    ProjektBizonylatesiratUjiratComponent,
+    ProjektBizonylatesiratUjajanlatComponent
   ],
   imports: [
     BrowserModule,

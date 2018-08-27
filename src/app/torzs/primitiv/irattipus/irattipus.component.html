@@ -1,5 +1,6 @@
 <div class="alapkeret">
-  <h5>{{irattipusservice.cim}}</h5>
+  <h5 *ngIf="!irattipusservice.zoom">{{irattipusservice.cim}}</h5>
+  <h5 *ngIf="irattipusservice.zoom">{{irattipusservice.cim}} - zoom</h5>
   <app-toolbar [Szurok]="szurok"
                [(szempont)]="irattipusservice.ekDto.szempont"
                [(minta)]="irattipusservice.ekDto.minta"

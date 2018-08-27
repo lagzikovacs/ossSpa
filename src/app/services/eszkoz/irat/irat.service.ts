@@ -5,6 +5,7 @@ import {IratParameter} from '../../../dtos/irat/iratparameter';
 import {environment} from '../../../../environments/environment';
 import {IratDto} from '../../../dtos/irat/iratdto';
 import {IratResult} from '../../../dtos/irat/iratresult';
+import {NumberResult} from '../../../dtos/numberresult';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,17 @@ export class IratService {
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
+
+  public Add(dto: IratDto): Promise<NumberResult> {
+    const url = environment.BaseHref + this._controller + 'add';
+    const body = dto;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+  }
 
   public CreateNew(): Promise<IratResult> {
     const url = environment.BaseHref + this._controller + 'createnew';

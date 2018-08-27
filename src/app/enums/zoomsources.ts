@@ -3,5 +3,6 @@ export enum ZoomSources {
   Cikk,
   Penztar,
   Szamlazasirend,
-  Projektteendo
+  Projektteendo,
+  Projektirat
 }

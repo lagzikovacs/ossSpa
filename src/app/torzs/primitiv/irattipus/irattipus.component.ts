@@ -1,16 +1,18 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {IrattipusService} from '../../../services/torzs/primitiv/irattipus.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LogonService} from '../../../services/segedeszkosz/logon.service';
 import {JogKod} from '../../../enums/jogkod';
+import {ZoomSources} from '../../../enums/zoomsources';
+import {ProjektkapcsolatService} from '../../../services/eszkoz/projekt/projektkapcsolat.service';
 
 @Component({
   selector: 'app-irattipus',
   templateUrl: './irattipus.component.html',
   styleUrls: ['./irattipus.component.css']
 })
-export class IrattipusComponent {
+export class IrattipusComponent implements OnInit {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Irattipus'];
@@ -22,9 +24,16 @@ export class IrattipusComponent {
   constructor(private _router: Router,
               private _route: ActivatedRoute,
               private _logonservice: LogonService,
+              private _projektkapcsolatservice: ProjektkapcsolatService,
               irattipusservice: IrattipusService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.irattipusservice = irattipusservice;
+  }
+
+  ngOnInit() {
+    if (this.irattipusservice.zoom) {
+      this.onKereses();
+    }
   }
 
   onKereses() {
@@ -62,7 +71,12 @@ export class IrattipusComponent {
   }
 
   selectforzoom(i: number) {
-    this.setClickedRow(i);
+    if (this.irattipusservice.zoomsource === ZoomSources.Projektirat) {
+      this._projektkapcsolatservice.UjIratDto.IRATTIPUSKOD = this.irattipusservice.Dto[i].IRATTIPUSKOD;
+      this._projektkapcsolatservice.UjIratDto.IRATTIPUS = this.irattipusservice.Dto[i].IRATTIPUS1;
+
+      this.stopzoom();
+    }
   }
   stopzoom() {
     this.irattipusservice.zoom = false;

@@ -2,7 +2,7 @@ export class IratDto {
   IRATKOD: number;
   PARTICIOKOD: number;
   IRANY: string;
-  KELETKEZETT: Date;
+  KELETKEZETT: any;
   IRATTIPUSKOD: number;
   IRATTIPUS: string;
   UGYFELKOD: number;
@@ -10,7 +10,6 @@ export class IratDto {
   UGYFELCIM: string;
   KULDO: string;
   TARGY: string;
-  MEGJEGYZES: string;
   LETREHOZVA: Date;
   LETREHOZTA: string;
   MODOSITVA: Date;

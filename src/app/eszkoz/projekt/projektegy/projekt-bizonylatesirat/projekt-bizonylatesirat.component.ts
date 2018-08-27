@@ -19,6 +19,16 @@ export class ProjektBizonylatesiratComponent {
     this.projektkapcsolatservice = projektkapcsolatservice;
   }
 
+  ujbizonylat() {
+    this._router.navigate(['../bizonylatesiratujbizonylat'], {relativeTo: this._route});
+  }
+  ujirat() {
+    this._router.navigate(['../bizonylatesiratujirat'], {relativeTo: this._route});
+  }
+  ujajanlat() {
+    this._router.navigate(['../bizonylatesiratujajanlat'], {relativeTo: this._route});
+  }
+
   setClickedRow(i: number) {
     this.projektkapcsolatservice.DtoSelectedIndex = i;
     this._router.navigate(['../bizonylatesirategy'], {relativeTo: this._route});

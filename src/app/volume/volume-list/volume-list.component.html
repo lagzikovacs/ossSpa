@@ -1,0 +1,28 @@
+<div class="alapkeret">
+  <h5>{{volumeservice.cim}}</h5>
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>No</th>
+      <th>Max. méret</th>
+      <th>Jelenlegi méret</th>
+      <th>Állapot</th>
+      <th>Az állapot kelte</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of volumeservice.Dto; let i = index">
+      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.VOLUMEKOD}}</td>
+      <td>{{item.VOLUMENO}}</td>
+      <td>{{item.MAXMERET}}</td>
+      <td>{{item.JELENLEGIMERET}}</td>
+      <td>{{item.ALLAPOT}}</td>
+      <td>{{item.ALLAPOTKELTE | datetimehun}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <app-errormodal [cim]="volumeservice.cim"></app-errormodal>
+</div>
+
+

@@ -1,0 +1,34 @@
+<div class="alapkeret">
+  <h5>{{volumeservice.cim}}</h5>
+  <h6 *ngIf="volumeservice.DtoSelectedIndex !== -1">{{volumeservice.Dto[volumeservice.DtoSelectedIndex].VOLUMENO}}</h6>
+  <div>
+    <nav>
+      <button [disabled]="eppFrissit || volumeservice.eppTesztel" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-arrow-left" style="margin-right: 3px" aria-hidden="true"></i>Vissza
+      </button>
+      <button [disabled]="eppFrissit || volumeservice.eppTesztel" (click)="reszletek()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>Részletesen
+      </button>
+
+      <button [disabled]="eppFrissit || volumeservice.eppTesztel || volumeservice.DtoSelectedIndex === -1" (click)="ellenorzes()" class="btn btn-sm btn-outline-primary navgomb">
+        Ellenőrzés
+      </button>
+    </nav>
+  </div>
+
+<!--  export enum VolumeEgyMode {
+  Reszletek = 0,
+  Teszt = 1
+  }-->
+
+  <ng-container *ngIf="volumeservice.EgyMode === 0">
+    <app-volume-reszletek></app-volume-reszletek>
+  </ng-container>
+  <ng-container *ngIf="volumeservice.EgyMode === 1">
+    <app-volume-teszt></app-volume-teszt>
+  </ng-container>
+
+  <app-errormodal [cim]="volumeservice.cim"></app-errormodal>
+</div>
+
+

@@ -74,10 +74,7 @@ import { CsoportSzerkesztesComponent } from './segedeszkoz/csoport/csoportegy/cs
 import { CsoportTorlesComponent } from './segedeszkoz/csoport/csoportegy/csoport-torles/csoport-torles.component';
 import { CsoportFelhasznaloComponent } from './segedeszkoz/csoport/csoportegy/csoport-felhasznalo/csoport-felhasznalo.component';
 import { CsoportJogComponent } from './segedeszkoz/csoport/csoportegy/csoport-jog/csoport-jog.component';
-import { ParticioComponent } from './segedeszkoz/particio/particio.component';
-import { VolumeComponent } from './segedeszkoz/volume/volume.component';
-import { VolumeegyComponent } from './segedeszkoz/volume/volumeegy/volumeegy.component';
-import { VolumeTesztComponent } from './segedeszkoz/volume/volumeegy/volume-teszt/volume-teszt.component';
+import { VolumeTesztComponent } from './volume/volume-teszt/volume-teszt.component';
 import { FeliratkozasComponent } from './eszkoz/feliratkozas/feliratkozas.component';
 import { FeliratkozasegyComponent } from './eszkoz/feliratkozas/feliratkozasegy/feliratkozasegy.component';
 import { FeliratkozasProjektComponent } from './eszkoz/feliratkozas/feliratkozasegy/feliratkozas-projekt/feliratkozas-projekt.component';
@@ -90,12 +87,12 @@ import { TartozasComponent } from './riport/tartozas/tartozas.component';
 import { BeszerzesComponent } from './riport/beszerzes/beszerzes.component';
 import { KeszletComponent } from './riport/keszlet/keszlet.component';
 import { NgmComponent } from './riport/ngm/ngm.component';
-import { ParticioSzallitoComponent } from './segedeszkoz/particio/particio-szallito/particio-szallito.component';
-import { ParticioNavComponent } from './segedeszkoz/particio/particio-nav/particio-nav.component';
-import { ParticioSmtpComponent } from './segedeszkoz/particio/particio-smtp/particio-smtp.component';
-import { ParticioBizonylatComponent } from './segedeszkoz/particio/particio-bizonylat/particio-bizonylat.component';
-import { ParticioProjektComponent } from './segedeszkoz/particio/particio-projekt/particio-projekt.component';
-import { ParticioVolumeComponent } from './segedeszkoz/particio/particio-volume/particio-volume.component';
+import { ParticioSzallitoComponent } from './particio/particio-szallito/particio-szallito.component';
+import { ParticioNavComponent } from './particio/particio-nav/particio-nav.component';
+import { ParticioSmtpComponent } from './particio/particio-smtp/particio-smtp.component';
+import { ParticioBizonylatComponent } from './particio/particio-bizonylat/particio-bizonylat.component';
+import { ParticioProjektComponent } from './particio/particio-projekt/particio-projekt.component';
+import { ParticioVolumeComponent } from './particio/particio-volume/particio-volume.component';
 import { TeendoComponent } from './torzs/primitiv/teendo/teendo.component';
 import { FizetesimodComponent } from './torzs/primitiv/fizetesimod/fizetesimod.component';
 import { PenznemComponent } from './torzs/primitiv/penznem/penznem.component';
@@ -142,8 +139,8 @@ import {TermekdijService} from './services/torzs/primitiv/termekdij.service';
 import {CikkService} from './services/torzs/cikk.service';
 import {HelysegService} from './services/torzs/primitiv/helyseg.service';
 import {UgyfelService} from './services/torzs/ugyfel.service';
-import {ParticioService} from './services/segedeszkosz/particio.service';
-import {VolumeService} from './services/segedeszkosz/volume.service';
+import {ParticioService} from './particio/particio.service';
+import {VolumeService} from './volume/volume.service';
 import {CsoportService} from './services/segedeszkosz/csoport.service';
 import {FeliratkozasService} from './services/eszkoz/feliratkozas.service';
 import {PenztarService} from './services/eszkoz/penztar/penztar.service';
@@ -165,7 +162,7 @@ import { FeliratkozasReszletekComponent } from './eszkoz/feliratkozas/feliratkoz
 import { NavexportellenorzesComponent } from './bizonylat/navexportellenorzes/navexportellenorzes.component';
 import { IratReszletekComponent } from './eszkoz/irat/irategy/irat-reszletek/irat-reszletek.component';
 import { DokumentumReszletekComponent } from './eszkoz/irat/irategy/irat-dokumentum/irat-dokumentumegy/dokumentum-reszletek/dokumentum-reszletek.component';
-import { VolumeReszletekComponent } from './segedeszkoz/volume/volumeegy/volume-reszletek/volume-reszletek.component';
+import { VolumeReszletekComponent } from './volume/volume-reszletek/volume-reszletek.component';
 import { ProjektReszletekComponent } from './eszkoz/projekt/projektegy/projekt-reszletek/projekt-reszletek.component';
 import { ProjektStatuszComponent } from './eszkoz/projekt/projektegy/projekt-statusz/projekt-statusz.component';
 import { ProjektSzamlazasirendegyComponent } from './eszkoz/projekt/projektegy/projekt-szamlazasirend/projekt-szamlazasirendegy/projekt-szamlazasirendegy.component';
@@ -180,6 +177,10 @@ import { ProjektTeendoElvegezveComponent } from './eszkoz/projekt/projektegy/pro
 import { ProjektBizonylatesiratUjbizonylatComponent } from './eszkoz/projekt/projektegy/projekt-bizonylatesirat/projekt-bizonylatesirat-ujbizonylat/projekt-bizonylatesirat-ujbizonylat.component';
 import { ProjektBizonylatesiratUjiratComponent } from './eszkoz/projekt/projektegy/projekt-bizonylatesirat/projekt-bizonylatesirat-ujirat/projekt-bizonylatesirat-ujirat.component';
 import { ProjektBizonylatesiratUjajanlatComponent } from './eszkoz/projekt/projektegy/projekt-bizonylatesirat/projekt-bizonylatesirat-ujajanlat/projekt-bizonylatesirat-ujajanlat.component';
+import { VolumeContainerComponent } from './volume/volume-container/volume-container.component';
+import { VolumeEgyComponent } from './volume/volume-egy/volume-egy.component';
+import { VolumeListComponent } from './volume/volume-list/volume-list.component';
+import { ParticioEgyComponent } from './particio/particio-egy/particio-egy.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -463,6 +464,36 @@ const routes: Routes = [
       {path: 'szerkesztes', component: IrattipusSzerkesztesComponent},
       {path: 'blank', component: BlankComponent}
     ]},
+    //ügyfél
+    {path: 'ugyfel', component: UgyfelComponent, canActivate: [RoleGuard]},
+    {path: 'ugyfeluj', component: UgyfelSzerkesztesComponent, canActivate: [RoleGuard], children: [
+      {path: 'helyseg', component: HelysegComponent, canActivate: [RoleGuard]},
+      {path: 'helyseguj', component: HelysegSzerkesztesComponent, canActivate: [RoleGuard]},
+      {path: 'helysegegy', component: HelysegegyComponent, canActivate: [RoleGuard], children: [
+        {path: 'reszletek', component: HelysegReszletekComponent},
+        {path: 'torles', component: HelysegTorlesComponent},
+        {path: 'szerkesztes', component: HelysegSzerkesztesComponent},
+        {path: 'blank', component: BlankComponent}
+      ]},
+      {path: 'blank', component: BlankComponent}
+    ]},
+    {path: 'ugyfelegy', component: UgyfelegyComponent, canActivate: [RoleGuard], children: [
+      {path: 'reszletek', component: UgyfelReszletekComponent},
+      {path: 'torles', component: UgyfelTorlesComponent},
+      {path: 'szerkesztes', component: UgyfelSzerkesztesComponent, children: [
+        {path: 'helyseg', component: HelysegComponent, canActivate: [RoleGuard]},
+        {path: 'helyseguj', component: HelysegSzerkesztesComponent, canActivate: [RoleGuard]},
+        {path: 'helysegegy', component: HelysegegyComponent, canActivate: [RoleGuard], children: [
+          {path: 'reszletek', component: HelysegReszletekComponent},
+          {path: 'torles', component: HelysegTorlesComponent},
+          {path: 'szerkesztes', component: HelysegSzerkesztesComponent},
+          {path: 'blank', component: BlankComponent}
+        ]},
+        {path: 'blank', component: BlankComponent}
+      ]},
+      {path: 'blank', component: BlankComponent}
+    ]},
+    {path: 'blank', component: BlankComponent},
   ]},
   {path: 'irategy', component: IrategyComponent, canActivate: [RoleGuard], children: [
     {path: 'reszletek', component: IratReszletekComponent},
@@ -476,6 +507,36 @@ const routes: Routes = [
         {path: 'szerkesztes', component: IrattipusSzerkesztesComponent},
         {path: 'blank', component: BlankComponent}
       ]},
+      //ügyfél
+      {path: 'ugyfel', component: UgyfelComponent, canActivate: [RoleGuard]},
+      {path: 'ugyfeluj', component: UgyfelSzerkesztesComponent, canActivate: [RoleGuard], children: [
+        {path: 'helyseg', component: HelysegComponent, canActivate: [RoleGuard]},
+        {path: 'helyseguj', component: HelysegSzerkesztesComponent, canActivate: [RoleGuard]},
+        {path: 'helysegegy', component: HelysegegyComponent, canActivate: [RoleGuard], children: [
+          {path: 'reszletek', component: HelysegReszletekComponent},
+          {path: 'torles', component: HelysegTorlesComponent},
+          {path: 'szerkesztes', component: HelysegSzerkesztesComponent},
+          {path: 'blank', component: BlankComponent}
+        ]},
+        {path: 'blank', component: BlankComponent}
+      ]},
+      {path: 'ugyfelegy', component: UgyfelegyComponent, canActivate: [RoleGuard], children: [
+        {path: 'reszletek', component: UgyfelReszletekComponent},
+        {path: 'torles', component: UgyfelTorlesComponent},
+        {path: 'szerkesztes', component: UgyfelSzerkesztesComponent, children: [
+          {path: 'helyseg', component: HelysegComponent, canActivate: [RoleGuard]},
+          {path: 'helyseguj', component: HelysegSzerkesztesComponent, canActivate: [RoleGuard]},
+          {path: 'helysegegy', component: HelysegegyComponent, canActivate: [RoleGuard], children: [
+            {path: 'reszletek', component: HelysegReszletekComponent},
+            {path: 'torles', component: HelysegTorlesComponent},
+            {path: 'szerkesztes', component: HelysegSzerkesztesComponent},
+            {path: 'blank', component: BlankComponent}
+          ]},
+          {path: 'blank', component: BlankComponent}
+        ]},
+        {path: 'blank', component: BlankComponent}
+      ]},
+      {path: 'blank', component: BlankComponent},
     ]},
     {path: 'dokumentum', component: IratDokumentumComponent},
     {path: 'dokumentumfeltoltes', component: DokumentumFeltoltesComponent},
@@ -541,22 +602,25 @@ const routes: Routes = [
   {path: 'szerepkorvalasztas', component: SzerepkorvalasztasComponent, canActivate: [LoginGuard]},
   {path: 'jelszocsere', component: JelszocsereComponent, canActivate: [LoginGuard]},
 
-  {path: 'particio', component: ParticioComponent, canActivate: [RoleGuard], children: [
-    {path: 'szallito', component: ParticioSzallitoComponent},
-    {path: 'nav', component: ParticioNavComponent},
-    {path: 'smtp', component: ParticioSmtpComponent},
-    {path: 'bizonylat', component: ParticioBizonylatComponent},
-    {path: 'projekt', component: ParticioProjektComponent},
-    {path: 'volume', component: ParticioVolumeComponent},
-    {path: 'blank', component: BlankComponent}
-  ]},
+  // {path: 'particio', component: ParticioComponent, canActivate: [RoleGuard], children: [
+  //   {path: 'szallito', component: ParticioSzallitoComponent},
+  //   {path: 'nav', component: ParticioNavComponent},
+  //   {path: 'smtp', component: ParticioSmtpComponent},
+  //   {path: 'bizonylat', component: ParticioBizonylatComponent},
+  //   {path: 'projekt', component: ParticioProjektComponent},
+  //   {path: 'volume', component: ParticioVolumeComponent},
+  //   {path: 'blank', component: BlankComponent}
+  // ]},
 
-  {path: 'volume', component: VolumeComponent, canActivate: [RoleGuard]},
-  {path: 'volumeegy', component: VolumeegyComponent, canActivate: [RoleGuard], children: [
-    {path: 'reszletek', component: VolumeReszletekComponent},
-    {path: 'teszt', component: VolumeTesztComponent},
-    {path: 'blank', component: BlankComponent}
-  ]},
+  // {path: 'volume', component: VolumeComponent, canActivate: [RoleGuard]},
+  // {path: 'volumeegy', component: VolumeegyComponent, canActivate: [RoleGuard], children: [
+  //   {path: 'reszletek', component: VolumeReszletekComponent},
+  //   {path: 'teszt', component: VolumeTesztComponent},
+  //   {path: 'blank', component: BlankComponent}
+  // ]},
+
+  {path: 'particio', component: ParticioEgyComponent, canActivate: [RoleGuard]},
+  {path: 'volume', component: VolumeContainerComponent, canActivate: [RoleGuard]},
 
   {path: 'felhasznalo', component: FelhasznaloComponent, canActivate: [RoleGuard]},
   {path: 'felhasznalouj', component: FelhasznaloSzerkesztesComponent, canActivate: [RoleGuard]},
@@ -650,9 +714,6 @@ if (environment.production) {
     CsoportTorlesComponent,
     CsoportFelhasznaloComponent,
     CsoportJogComponent,
-    ParticioComponent,
-    VolumeComponent,
-    VolumeegyComponent,
     VolumeTesztComponent,
     FeliratkozasComponent,
     FeliratkozasegyComponent,
@@ -740,7 +801,11 @@ if (environment.production) {
     ProjektTeendoElvegezveComponent,
     ProjektBizonylatesiratUjbizonylatComponent,
     ProjektBizonylatesiratUjiratComponent,
-    ProjektBizonylatesiratUjajanlatComponent
+    ProjektBizonylatesiratUjajanlatComponent,
+    VolumeContainerComponent,
+    VolumeEgyComponent,
+    VolumeListComponent,
+    ParticioEgyComponent
   ],
   imports: [
     BrowserModule,

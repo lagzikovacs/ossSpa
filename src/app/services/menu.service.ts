@@ -14,7 +14,7 @@ import {UgyfelDto} from '../dtos/torzs/ugyfel/ugyfeldto';
 import {FelhasznaloDto} from '../dtos/primitiv/felhasznalo/felhasznalodto';
 import {FelhasznaloService} from './torzs/primitiv/felhasznalo.service';
 import {CsoportService} from './segedeszkosz/csoport.service';
-import {VolumeService} from './segedeszkosz/volume.service';
+import {VolumeService} from '../volume/volume.service';
 import {VolumeDto} from '../dtos/volume/volumedto';
 import {CsoportDto} from '../dtos/csoport/csoportdto';
 import {ProjektService} from './eszkoz/projekt/projekt.service';
@@ -45,6 +45,9 @@ import {SzamlazasirendService} from "./eszkoz/projekt/szamlazasirend.service";
 import {ProjektteendoService} from "./eszkoz/projekt/projektteendo.service";
 import {SzamlazasirendDto} from "../dtos/projekt/szamlazasirenddto";
 import {ProjektteendoDto} from "../dtos/projekt/projektteendodto";
+import {VolumeContainerMode} from "../volume/volumecontainermode";
+import {ParticioService} from "../particio/particio.service";
+import {ParticioEgyMode} from "../particio/particioegymode";
 
 @Injectable({
   providedIn: 'root'
@@ -72,6 +75,7 @@ export class MenuService {
               private _iratservice: IratService,
               private _penztarservice: PenztarService,
               private _feliratkozasservice: FeliratkozasService,
+              private _particioservice: ParticioService,
               private _volumeservice: VolumeService,
               private _felhasznaloservice: FelhasznaloService,
               private _csoportservice: CsoportService) {
@@ -148,8 +152,11 @@ export class MenuService {
         this._feliratkozasservice.Dto = new Array<FeliratkozasDto>();
       break;
 
+      case '/particio':
+        this._particioservice.EgyMode = ParticioEgyMode.Szallito;
+        break;
       case '/volume':
-        this._volumeservice.zoom = false;
+        this._volumeservice.ContainerMode = VolumeContainerMode.List;
         this._volumeservice.Dto = new Array<VolumeDto>();
         break;
       case '/felhasznalo':

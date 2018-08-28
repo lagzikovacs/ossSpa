@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {Szempont} from '../../enums/szempont';
 import {UgyfelService} from '../../services/torzs/ugyfel.service';
@@ -7,13 +7,15 @@ import {UgyfelDto} from '../../dtos/torzs/ugyfel/ugyfeldto';
 import {SzMT} from '../../dtos/szmt';
 import {LogonService} from '../../services/segedeszkosz/logon.service';
 import {JogKod} from '../../enums/jogkod';
+import {ZoomSources} from "../../enums/zoomsources";
+import {IratService} from "../../services/eszkoz/irat/irat.service";
 
 @Component({
   selector: 'app-ugyfel',
   templateUrl: './ugyfel.component.html',
   styleUrls: ['./ugyfel.component.css']
 })
-export class UgyfelComponent {
+export class UgyfelComponent implements OnInit {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Ügyfél', 'Email'];
@@ -28,9 +30,16 @@ export class UgyfelComponent {
   constructor(private _router: Router,
               private _route: ActivatedRoute,
               private _logonservice: LogonService,
+              private _iratservice: IratService,
               ugyfelservice: UgyfelService  ) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.UGYFELEKMOD]);
     this.ugyfelservice = ugyfelservice;
+  }
+
+  ngOnInit() {
+    if (this.ugyfelservice.zoom) {
+      this.onKereses();
+    }
   }
 
   onKereses() {
@@ -76,7 +85,12 @@ export class UgyfelComponent {
   }
 
   selectforzoom(i: number) {
-    this.setClickedRow(i);
+    if (this.ugyfelservice.zoomsource === ZoomSources.Irat) {
+      this._iratservice.DtoEdited.UGYFELKOD = this.ugyfelservice.Dto[i].UGYFELKOD;
+      this._iratservice.DtoEdited.UGYFELNEV = this.ugyfelservice.Dto[i].NEV;
+
+      this.stopzoom();
+    }
   }
   stopzoom() {
     this.ugyfelservice.zoom = false;

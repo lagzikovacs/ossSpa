@@ -1,0 +1,11 @@
+<!--export enum VolumeContainerMode {
+  List = 0,
+  Egy = 1
+}-->
+
+<ng-container *ngIf="volumeservice.ContainerMode === 0">
+  <app-volume-list></app-volume-list>
+</ng-container>
+<ng-container *ngIf="volumeservice.ContainerMode === 1">
+  <app-volume-egy></app-volume-egy>
+</ng-container>

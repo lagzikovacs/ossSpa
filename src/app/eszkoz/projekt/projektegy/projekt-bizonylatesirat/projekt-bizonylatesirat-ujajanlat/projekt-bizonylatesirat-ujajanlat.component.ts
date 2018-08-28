@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./projekt-bizonylatesirat-ujajanlat.component.css']
 })
 export class ProjektBizonylatesiratUjajanlatComponent implements OnInit {
+  eppFrissit = false;
 
   constructor(private _router: Router,
               private _route: ActivatedRoute) { }

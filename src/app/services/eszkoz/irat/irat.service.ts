@@ -51,6 +51,17 @@ export class IratService {
     return this._httpClient.post<IratResult>(url, body, options).toPromise();
   }
 
+  public Get(iratkod: number): Promise<IratResult> {
+    const url = environment.BaseHref + this._controller + 'get';
+    const body = iratkod;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<IratResult>(url, body, options).toPromise();
+  }
+
   public Select(ip: IratParameter): Promise<IratResult> {
     const url = environment.BaseHref + this._controller + 'select';
     const body = ip;
@@ -60,5 +71,16 @@ export class IratService {
     };
 
     return this._httpClient.post<IratResult>(url, body, options).toPromise();
+  }
+
+  public Update(dto: IratDto): Promise<NumberResult> {
+    const url = environment.BaseHref + this._controller + 'update';
+    const body = dto;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
   }
 }

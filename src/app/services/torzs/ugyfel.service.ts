@@ -7,7 +7,7 @@ import {LogonService} from '../segedeszkosz/logon.service';
 import {UgyfelResult} from '../../dtos/torzs/ugyfel/ugyfelresult';
 import {ZoomSources} from '../../enums/zoomsources';
 import {NumberResult} from '../../dtos/numberresult';
-import {EmptyResult} from "../../dtos/emptyresult";
+import {EmptyResult} from '../../dtos/emptyresult';
 
 @Injectable({
   providedIn: 'root'

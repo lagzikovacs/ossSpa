@@ -1,0 +1,61 @@
+<div class="alapkeret">
+  <h5>{{particioservice.cim}}</h5>
+  <div>
+    <nav>
+      <button [disabled]="eppFrissit" (click)="szallito()" class="btn btn-sm btn-outline-primary navgomb">
+        Szállító
+      </button>
+      <button [disabled]="eppFrissit" (click)="nav()" class="btn btn-sm btn-outline-primary navgomb">
+        NAV
+      </button>
+      <button [disabled]="eppFrissit" (click)="smtp()" class="btn btn-sm btn-outline-primary navgomb">
+        SMTP
+      </button>
+      <button [disabled]="eppFrissit" (click)="bizonylat()" class="btn btn-sm btn-outline-primary navgomb">
+        Bizonylat
+      </button>
+      <button [disabled]="eppFrissit" (click)="projekt()" class="btn btn-sm btn-outline-primary navgomb">
+        Projekt
+      </button>
+      <button [disabled]="eppFrissit" (click)="volume()" class="btn btn-sm btn-outline-primary navgomb">
+        Volume
+      </button>
+    </nav>
+  </div>
+
+<!--  export enum ParticioEgyMode {
+  Blank = 0,
+  Szallito = 1,
+  Nav = 2,
+  Smtp = 3,
+  Bizonylat = 4,
+  Projekt = 5,
+  Volume = 6
+  }-->
+
+  <ng-container *ngIf="particioservice.EgyMode === 0">
+    <app-blank></app-blank>
+  </ng-container>
+  <ng-container *ngIf="particioservice.EgyMode === 1">
+    <app-particio-szallito></app-particio-szallito>
+  </ng-container>
+  <ng-container *ngIf="particioservice.EgyMode === 2">
+    <app-particio-nav></app-particio-nav>
+  </ng-container>
+  <ng-container *ngIf="particioservice.EgyMode === 3">
+    <app-particio-smtp></app-particio-smtp>
+  </ng-container>
+  <ng-container *ngIf="particioservice.EgyMode === 4">
+    <app-particio-bizonylat></app-particio-bizonylat>
+  </ng-container>
+  <ng-container *ngIf="particioservice.EgyMode === 5">
+    <app-particio-projekt></app-particio-projekt>
+  </ng-container>
+  <ng-container *ngIf="particioservice.EgyMode === 6">
+    <app-particio-volume></app-particio-volume>
+  </ng-container>
+
+  <app-errormodal [cim]="particioservice.cim"></app-errormodal>
+</div>
+
+

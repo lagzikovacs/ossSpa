@@ -6,6 +6,7 @@ import {LogonService} from '../../../services/segedeszkosz/logon.service';
 import {JogKod} from '../../../enums/jogkod';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {ProjektkapcsolatService} from '../../../services/eszkoz/projekt/projektkapcsolat.service';
+import {IratService} from "../../../services/eszkoz/irat/irat.service";
 
 @Component({
   selector: 'app-irattipus',
@@ -24,6 +25,7 @@ export class IrattipusComponent implements OnInit {
   constructor(private _router: Router,
               private _route: ActivatedRoute,
               private _logonservice: LogonService,
+              private _iratservice: IratService,
               private _projektkapcsolatservice: ProjektkapcsolatService,
               irattipusservice: IrattipusService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
@@ -71,6 +73,12 @@ export class IrattipusComponent implements OnInit {
   }
 
   selectforzoom(i: number) {
+    if (this.irattipusservice.zoomsource === ZoomSources.Irat) {
+      this._iratservice.DtoEdited.IRATTIPUSKOD = this.irattipusservice.Dto[i].IRATTIPUSKOD;
+      this._iratservice.DtoEdited.IRATTIPUS = this.irattipusservice.Dto[i].IRATTIPUS1;
+
+      this.stopzoom();
+    }
     if (this.irattipusservice.zoomsource === ZoomSources.Projektirat) {
       this._projektkapcsolatservice.UjIratDto.IRATTIPUSKOD = this.irattipusservice.Dto[i].IRATTIPUSKOD;
       this._projektkapcsolatservice.UjIratDto.IRATTIPUS = this.irattipusservice.Dto[i].IRATTIPUS1;

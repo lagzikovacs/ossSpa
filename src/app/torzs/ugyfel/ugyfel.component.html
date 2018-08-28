@@ -1,5 +1,6 @@
 <div class="alapkeret">
-  <h5>{{ugyfelservice.cim}}</h5>
+  <h5 *ngIf="!ugyfelservice.zoom">{{ugyfelservice.cim}}</h5>
+  <h5 *ngIf="ugyfelservice.zoom">{{ugyfelservice.cim}} - zoom</h5>
   <app-toolbar [Szurok]="szurok"
                [(szempont)]="ugyfelservice.szempont"
                [(minta)]="ugyfelservice.minta"
@@ -10,6 +11,7 @@
   <table class="table table-bordered table-sm table-responsive" style="border: none">
     <thead>
     <tr>
+      <th *ngIf="ugyfelservice.zoom"></th>
       <th>Id</th>
       <th>Név</th>
       <th>Irányítószám</th>
@@ -26,6 +28,7 @@
     <tbody>
     <ng-container *ngFor="let item of ugyfelservice.Dto; let i = index">
       <tr>
+        <td *ngIf="ugyfelservice.zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="selectforzoom(i)"><i class="fa fa-check" aria-hidden="true"></i></td>
         <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.UGYFELKOD}}</td>
         <td>{{item.NEV}}</td>
         <td>{{item.IRANYITOSZAM}}</td>

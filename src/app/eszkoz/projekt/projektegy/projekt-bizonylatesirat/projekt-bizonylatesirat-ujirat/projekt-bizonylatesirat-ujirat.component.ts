@@ -6,7 +6,6 @@ import {ProjektkapcsolatService} from '../../../../../services/eszkoz/projekt/pr
 import {IrattipusService} from '../../../../../services/torzs/primitiv/irattipus.service';
 import {ZoomSources} from '../../../../../enums/zoomsources';
 import {IratService} from '../../../../../services/eszkoz/irat/irat.service';
-import {UgyfelService} from '../../../../../services/torzs/ugyfel.service';
 import {ProjektService} from '../../../../../services/eszkoz/projekt/projekt.service';
 import {ProjektKapcsolatParameter} from '../../../../../dtos/projekt/projektkapcsolatparameter';
 

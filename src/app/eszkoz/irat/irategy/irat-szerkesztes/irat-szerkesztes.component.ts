@@ -2,8 +2,11 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../../tools/errormodal/errormodal.component';
 import {IratService} from '../../../../services/eszkoz/irat/irat.service';
-import {IratDto} from '../../../../dtos/irat/iratdto';
 import {IrattipusService} from '../../../../services/torzs/primitiv/irattipus.service';
+import {ZoomSources} from '../../../../enums/zoomsources';
+import * as moment from 'moment';
+import {NumberResult} from '../../../../dtos/numberresult';
+import {UgyfelService} from "../../../../services/torzs/ugyfel.service";
 
 @Component({
   selector: 'app-irat-szerkesztes',
@@ -15,25 +18,65 @@ export class IratSzerkesztesComponent implements OnInit {
 
   iratservice: IratService;
   eppFrissit = false;
-  DtoSelected = new IratDto();
+  Keletkezett: any;
 
   constructor(private _router: Router,
               private _route: ActivatedRoute,
-              iratservice: IratService,
-              private _irattipusservice: IrattipusService) {
+              private _irattipusservice: IrattipusService,
+              private _ugyfelservice: UgyfelService,
+              iratservice: IratService) {
     this.iratservice = iratservice;
   }
 
   ngOnInit() {
-    // TODO hibás állapotok kiszűrése
-
-    // this.DtoSelected.KELETKEZETT = moment(this.DtoSelected.KELETKEZETT).format('YYYY-MM_DD');
+    if (this.iratservice.uj) {
+      this.Keletkezett = moment().format('YYYY-MM-DD');
+    } else {
+      this.Keletkezett = moment(this.iratservice.DtoEdited.KELETKEZETT).format('YYYY-MM-DD');
+    }
   }
 
   onSubmit() {
-// TODO dátumok konvertálása
+    this.eppFrissit = true;
+    let p: Promise<NumberResult>;
+
+    if (this.iratservice.uj) {
+      p = this.iratservice.Add(this.iratservice.DtoEdited);
+    } else {
+      p = this.iratservice.Update(this.iratservice.DtoEdited);
+    }
+
+    p
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        return this.iratservice.Get(res.Result);
+      })
+      .then(res1 => {
+        if (res1.Error != null) {
+          throw res1.Error;
+        }
+
+        if (this.iratservice.uj) {
+          this.iratservice.Dto.unshift(res1.Result[0]);
+        } else {
+          this.iratservice.Dto[this.iratservice.DtoSelectedIndex] = res1.Result[0];
+        }
+
+        this.eppFrissit = false;
+        this.navigal();
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
   }
   cancel() {
+    this.navigal();
+  }
+  navigal() {
     if (this.iratservice.uj) {
       this._router.navigate(['../irat'], {relativeTo: this._route});
     } else {
@@ -42,7 +85,17 @@ export class IratSzerkesztesComponent implements OnInit {
   }
 
   IrattipusZoom() {
-    this._irattipusservice.ekDto.minta = this.iratservice.DtoEdited.IRATTIPUS;
+    this._irattipusservice.ekDto.minta = this.iratservice.DtoEdited.IRATTIPUS || '';
+    this._irattipusservice.zoomsource = ZoomSources.Irat;
+    this._irattipusservice.zoom = true;
     this._router.navigate(['irattipus'], {relativeTo: this._route});
+  }
+
+  UgyfelZoom() {
+    this._ugyfelservice.szempont = 0;
+    this._ugyfelservice.minta = this.iratservice.DtoEdited.UGYFELNEV || '';
+    this._ugyfelservice.zoomsource = ZoomSources.Irat;
+    this._ugyfelservice.zoom = true;
+    this._router.navigate(['ugyfel'], {relativeTo: this._route});
   }
 }

@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import {AngularmenuDto} from '../dtos/menu/angularmenudto';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {LogonService} from './segedeszkosz/logon.service';
+import {LogonService} from './logon.service';
 import {AngularmenuResult} from '../dtos/menu/angularmenuresult';
 import {Router} from '@angular/router';
-import {IrattipusService} from './torzs/primitiv/irattipus.service';
+import {IrattipusService} from '../irattipus/irattipus.service';
 import {IrattipusDto} from '../dtos/primitiv/irattipus/irattipusdto';
-import {HelysegService} from './torzs/primitiv/helyseg.service';
+import {HelysegService} from '../helyseg/helyseg.service';
 import {HelysegDto} from '../dtos/primitiv/helyseg/helysegdto';
-import {UgyfelService} from './torzs/ugyfel.service';
+import {UgyfelService} from '../ugyfel/ugyfel.service';
 import {UgyfelDto} from '../dtos/torzs/ugyfel/ugyfeldto';
 import {FelhasznaloDto} from '../dtos/primitiv/felhasznalo/felhasznalodto';
-import {FelhasznaloService} from './torzs/primitiv/felhasznalo.service';
-import {CsoportService} from './segedeszkosz/csoport.service';
+import {FelhasznaloService} from '../felhasznalo/felhasznalo.service';
+import {CsoportService} from '../csoport/csoport.service';
 import {VolumeService} from '../volume/volume.service';
 import {VolumeDto} from '../dtos/volume/volumedto';
 import {CsoportDto} from '../dtos/csoport/csoportdto';
@@ -23,16 +23,16 @@ import {FeliratkozasService} from './eszkoz/feliratkozas.service';
 import {IratDto} from '../dtos/irat/iratdto';
 import {ProjektDto} from '../dtos/projekt/projektdto';
 import {FeliratkozasDto} from '../dtos/feliratkozas/feliratkozasdto';
-import {TeendoService} from './torzs/primitiv/teendo.service';
+import {TeendoService} from '../teendo/teendo.service';
 import {TeendoDto} from '../dtos/primitiv/teendo/teendodto';
-import {FizetesimodService} from './torzs/primitiv/fizetesimod.service';
-import {PenznemService} from './torzs/primitiv/penznem.service';
+import {FizetesimodService} from '../fizetesimod/fizetesimod.service';
+import {PenznemService} from '../penznem/penznem.service';
 import {FizetesimodDto} from '../dtos/primitiv/fizetesimod/fizetesimoddto';
 import {PenznemDto} from '../dtos/primitiv/penznem/penznemdto';
-import {MeService} from './torzs/primitiv/me.service';
-import {AfakulcsService} from './torzs/primitiv/afakulcs.service';
-import {TermekdijService} from './torzs/primitiv/termekdij.service';
-import {CikkService} from './torzs/cikk.service';
+import {MeService} from '../me/me.service';
+import {AfakulcsService} from '../afakulcs/afakulcs.service';
+import {TermekdijService} from '../termekdij/termekdij.service';
+import {CikkService} from '../cikk/cikk.service';
 import {MeDto} from '../dtos/primitiv/me/medto';
 import {AfakulcsDto} from '../dtos/primitiv/afakulcs/afakulcsdto';
 import {TermekdijDto} from '../dtos/primitiv/termekdij/termekdijdto';
@@ -41,13 +41,19 @@ import {PenztarDto} from '../dtos/penztar/penztardto';
 import {PenztarService} from './eszkoz/penztar/penztar.service';
 import {ProjektkapcsolatService} from './eszkoz/projekt/projektkapcsolat.service';
 import {ProjektKapcsolatDto} from '../dtos/projekt/projektkapcsolatdto';
-import {SzamlazasirendService} from "./eszkoz/projekt/szamlazasirend.service";
-import {ProjektteendoService} from "./eszkoz/projekt/projektteendo.service";
-import {SzamlazasirendDto} from "../dtos/projekt/szamlazasirenddto";
-import {ProjektteendoDto} from "../dtos/projekt/projektteendodto";
-import {VolumeContainerMode} from "../volume/volumecontainermode";
-import {ParticioService} from "../particio/particio.service";
-import {ParticioEgyMode} from "../particio/particioegymode";
+import {SzamlazasirendService} from './eszkoz/projekt/szamlazasirend.service';
+import {ProjektteendoService} from './eszkoz/projekt/projektteendo.service';
+import {SzamlazasirendDto} from '../dtos/projekt/szamlazasirenddto';
+import {ProjektteendoDto} from '../dtos/projekt/projektteendodto';
+import {VolumeContainerMode} from '../volume/volumecontainermode';
+import {ParticioService} from '../particio/particio.service';
+import {ParticioEgyMode} from '../particio/particioegymode';
+import {HelysegContainerMode} from '../helyseg/helysegcontainermode';
+import {UgyfelContainerMode} from "../ugyfel/ugyfelcontainermode";
+import {MeContainerMode} from "../me/mecontainermode";
+import {AfakulcsContainerMode} from "../afakulcs/afakulcscontainermode";
+import {TermekdijContainerMode} from "../termekdij/termekdijcontainermode";
+import {CikkContainerMode} from "../cikk/cikkcontainermode";
 
 @Injectable({
   providedIn: 'root'
@@ -111,26 +117,32 @@ export class MenuService {
         this._penznemservice.Dto = new Array<PenznemDto>();
         break;
       case '/me':
+        this._meservice.ContainerMode = MeContainerMode.List;
         this._meservice.zoom = false;
         this._meservice.Dto = new Array<MeDto>();
         break;
       case '/afakulcs':
+        this._afakulcsservice.ContainerMode = AfakulcsContainerMode.List;
         this._afakulcsservice.zoom = false;
         this._afakulcsservice.Dto = new Array<AfakulcsDto>();
         break;
       case '/termekdij':
+        this._termekdijservice.ContainerMode = TermekdijContainerMode.List;
         this._termekdijservice.zoom = false;
         this._termekdijservice.Dto = new Array<TermekdijDto>();
         break;
       case '/cikk':
+        this._cikkservice.ContainerMode = CikkContainerMode.List;
         this._cikkservice.zoom = false;
         this._cikkservice.Dto = new Array<CikkDto>();
         break;
       case '/helyseg':
+        this._helysegservice.ContainerMode = HelysegContainerMode.List;
         this._helysegservice.zoom = false;
         this._helysegservice.Dto = new Array<HelysegDto>();
         break;
       case '/ugyfel':
+        this._ugyfelservice.ContainerMode = UgyfelContainerMode.List;
         this._ugyfelservice.zoom = false;
         this._ugyfelservice.Dto = new Array<UgyfelDto>();
       break;

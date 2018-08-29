@@ -4,7 +4,7 @@ import {environment} from '../../../../environments/environment';
 import {PenztarDto} from '../../../dtos/penztar/penztardto';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {LogonService} from '../../segedeszkosz/logon.service';
+import {LogonService} from '../../logon.service';
 import {NumberResult} from '../../../dtos/numberresult';
 import {PenztarResult} from '../../../dtos/penztar/penztarresult';
 import {EmptyResult} from '../../../dtos/emptyresult';

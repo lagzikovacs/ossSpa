@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {SzamlazasirendService} from '../../../../../services/eszkoz/projekt/szamlazasirend.service';
 import {ErrormodalComponent} from '../../../../../tools/errormodal/errormodal.component';
 import {ActivatedRoute, Router} from '@angular/router';
-import {LogonService} from '../../../../../services/segedeszkosz/logon.service';
+import {LogonService} from '../../../../../services/logon.service';
 
 @Component({
   selector: 'app-projekt-szamlazasirendegy',

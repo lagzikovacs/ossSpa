@@ -1,5 +1,5 @@
 import {Component, HostListener} from '@angular/core';
-import {LogonService} from './services/segedeszkosz/logon.service';
+import {LogonService} from './services/logon.service';
 
 @Component({
   selector: 'app-root',

@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {ProjektteendoService} from '../../../../services/eszkoz/projekt/projektteendo.service';
-import {LogonService} from '../../../../services/segedeszkosz/logon.service';
+import {LogonService} from '../../../../services/logon.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../../tools/errormodal/errormodal.component';
 

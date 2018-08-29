@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import * as moment from 'moment';
 import {ErrormodalComponent} from '../../../../../tools/errormodal/errormodal.component';
 import {ProjektkapcsolatService} from '../../../../../services/eszkoz/projekt/projektkapcsolat.service';
-import {IrattipusService} from '../../../../../services/torzs/primitiv/irattipus.service';
+import {IrattipusService} from '../../../../../irattipus/irattipus.service';
 import {ZoomSources} from '../../../../../enums/zoomsources';
 import {IratService} from '../../../../../services/eszkoz/irat/irat.service';
 import {ProjektService} from '../../../../../services/eszkoz/projekt/projekt.service';
@@ -53,7 +53,7 @@ export class ProjektBizonylatesiratUjiratComponent implements OnInit {
     this._irattipusservice.ekDto.minta = this.projektkapcsolatservice.UjIratDto.IRATTIPUS || '';
     this._irattipusservice.zoomsource = ZoomSources.Projektirat;
     this._irattipusservice.zoom = true;
-    this._router.navigate(['irattipus'], {relativeTo: this._route});
+    this._router.navigate(['irattipus-list'], {relativeTo: this._route});
   }
 
   onSubmit() {

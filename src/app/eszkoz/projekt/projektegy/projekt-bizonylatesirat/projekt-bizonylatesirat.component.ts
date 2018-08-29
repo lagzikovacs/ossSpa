@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {ProjektkapcsolatService} from '../../../../services/eszkoz/projekt/projektkapcsolat.service';
-import {LogonService} from '../../../../services/segedeszkosz/logon.service';
+import {LogonService} from '../../../../services/logon.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({

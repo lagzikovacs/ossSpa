@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {LogonService} from './segedeszkosz/logon.service';
+import {LogonService} from './logon.service';
 import {SessionResult} from '../dtos/session/sessionresult';
 import {environment} from '../../environments/environment';
 

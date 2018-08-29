@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {SzamlazasirendService} from '../../../../services/eszkoz/projekt/szamlazasirend.service';
-import {LogonService} from '../../../../services/segedeszkosz/logon.service';
+import {LogonService} from '../../../../services/logon.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../../tools/errormodal/errormodal.component';
 

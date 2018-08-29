@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {TeendoService} from '../../../../../../services/torzs/primitiv/teendo.service';
+import {TeendoService} from '../../../../../../teendo/teendo.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../../../../tools/errormodal/errormodal.component';
-import {FelhasznaloService} from '../../../../../../services/torzs/primitiv/felhasznalo.service';
+import {FelhasznaloService} from '../../../../../../felhasznalo/felhasznalo.service';
 import {ProjektteendoService} from '../../../../../../services/eszkoz/projekt/projektteendo.service';
 import {ZoomSources} from '../../../../../../enums/zoomsources';
 import * as moment from 'moment';

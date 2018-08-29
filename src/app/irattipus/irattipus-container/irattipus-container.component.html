@@ -1,0 +1,19 @@
+<!--export enum IrattipusContainerMode {
+  Blank = 0,
+  List = 1,
+  Egy = 2,
+  Uj = 3
+}-->
+
+<ng-container *ngIf="irattipusservice.ContainerMode === 0">
+  <app-blank></app-blank>
+</ng-container>
+<ng-container *ngIf="irattipusservice.ContainerMode === 1">
+  <app-irattipus-list></app-irattipus-list>
+</ng-container>
+<ng-container *ngIf="irattipusservice.ContainerMode === 2">
+  <app-irattipus-egy></app-irattipus-egy>
+</ng-container>
+<ng-container *ngIf="irattipusservice.ContainerMode === 3">
+  <app-irattipus-szerkesztes></app-irattipus-szerkesztes>
+</ng-container>

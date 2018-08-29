@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from '../../../../environments/environment';
 import {PenztartetelDto} from '../../../dtos/penztar/penztarteteldto';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {LogonService} from '../../segedeszkosz/logon.service';
+import {LogonService} from '../../logon.service';
 import {NumberResult} from '../../../dtos/numberresult';
 import {PenztartetelResult} from '../../../dtos/penztar/penztartetelresult';
 import {PenztartetelParameter} from '../../../dtos/penztar/penztartetelparameter';

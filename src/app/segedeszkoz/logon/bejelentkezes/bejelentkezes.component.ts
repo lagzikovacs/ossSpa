@@ -2,8 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
-import {LogonService} from '../../../services/segedeszkosz/logon.service';
-import {CsoportService} from '../../../services/segedeszkosz/csoport.service';
+import {LogonService} from '../../../services/logon.service';
+import {CsoportService} from '../../../csoport/csoport.service';
 
 @Component({
   selector: 'app-bejelentkezes',

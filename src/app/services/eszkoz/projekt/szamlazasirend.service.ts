@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {SzamlazasirendDto} from '../../../dtos/projekt/szamlazasirenddto';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {LogonService} from '../../segedeszkosz/logon.service';
+import {LogonService} from '../../logon.service';
 import {NumberResult} from '../../../dtos/numberresult';
 import {environment} from '../../../../environments/environment';
 import {SzamlazasirendResult} from '../../../dtos/projekt/szamlazasirendresult';

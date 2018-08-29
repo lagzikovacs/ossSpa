@@ -1,0 +1,19 @@
+<!--export enum MeContainerMode {
+  Blank = 0,
+  List = 1,
+  Egy = 2,
+  Uj = 3
+}-->
+
+<ng-container *ngIf="meservice.ContainerMode === 0">
+  <app-blank></app-blank>
+</ng-container>
+<ng-container *ngIf="meservice.ContainerMode === 1">
+  <app-me-list></app-me-list>
+</ng-container>
+<ng-container *ngIf="meservice.ContainerMode === 2">
+  <app-me-egy></app-me-egy>
+</ng-container>
+<ng-container *ngIf="meservice.ContainerMode === 3">
+  <app-me-szerkesztes></app-me-szerkesztes>
+</ng-container>

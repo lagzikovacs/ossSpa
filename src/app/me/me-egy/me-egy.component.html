@@ -1,0 +1,43 @@
+<div class="alapkeret">
+  <h5>{{meservice.cim}}</h5>
+  <h6 *ngIf="meservice.DtoSelectedIndex !== -1">{{meservice.Dto[meservice.DtoSelectedIndex].ME}}</h6>
+  <div>
+    <nav>
+      <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-arrow-left" style="margin-right: 3px" aria-hidden="true"></i>Vissza
+      </button>
+      <button [disabled]="eppFrissit" (click)="reszletek()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>Részletesen
+      </button>
+
+      <button [disabled]="eppFrissit || meservice.DtoSelectedIndex === -1 || !mod"
+              (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-minus" aria-hidden="true"></i>
+      </button>
+      <button [disabled]="eppFrissit || meservice.DtoSelectedIndex === -1 || !mod"
+              (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-edit" aria-hidden="true"></i>
+      </button>
+    </nav>
+  </div>
+
+  <!--  export enum MeEgyMode {
+  Reszletek = 1,
+  Torles = 2,
+  Modositas = 3
+  }-->
+
+  <ng-container *ngIf="meservice.EgyMode === 1">
+    <app-me-reszletek></app-me-reszletek>
+  </ng-container>
+  <ng-container *ngIf="meservice.EgyMode === 2">
+    <app-me-torles></app-me-torles>
+  </ng-container>
+  <ng-container *ngIf="meservice.EgyMode === 3">
+    <app-me-szerkesztes></app-me-szerkesztes>
+  </ng-container>
+
+  <app-errormodal [cim]="meservice.cim"></app-errormodal>
+</div>
+
+

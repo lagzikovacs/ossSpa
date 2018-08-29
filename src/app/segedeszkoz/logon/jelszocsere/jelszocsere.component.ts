@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {FelhasznaloService} from '../../../services/torzs/primitiv/felhasznalo.service';
+import {FelhasznaloService} from '../../../felhasznalo/felhasznalo.service';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {ActivatedRoute, Router} from '@angular/router';
 

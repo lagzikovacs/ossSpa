@@ -1,0 +1,19 @@
+<!--export enum CsoportContainerMode {
+  Blank = 0,
+  List = 1,
+  Egy = 2,
+  Uj = 3
+}-->
+
+<ng-container *ngIf="csoportservice.ContainerMode === 0">
+  <app-blank></app-blank>
+</ng-container>
+<ng-container *ngIf="csoportservice.ContainerMode === 1">
+  <app-csoport-list></app-csoport-list>
+</ng-container>
+<ng-container *ngIf="csoportservice.ContainerMode === 2">
+  <app-csoport-egy></app-csoport-egy>
+</ng-container>
+<ng-container *ngIf="csoportservice.ContainerMode === 3">
+  <app-csoport-szerkesztes></app-csoport-szerkesztes>
+</ng-container>

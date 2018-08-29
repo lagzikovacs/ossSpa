@@ -1,0 +1,19 @@
+<!--export enum FizetesiContainerMode {
+  Blank = 0,
+  List = 1,
+  Egy = 2,
+  Uj = 3
+}-->
+
+<ng-container *ngIf="fizetesimodservice.ContainerMode === 0">
+  <app-blank></app-blank>
+</ng-container>
+<ng-container *ngIf="fizetesimodservice.ContainerMode === 1">
+  <app-fizetesimod-list></app-fizetesimod-list>
+</ng-container>
+<ng-container *ngIf="fizetesimodservice.ContainerMode === 2">
+  <app-fizetesimod-egy></app-fizetesimod-egy>
+</ng-container>
+<ng-container *ngIf="fizetesimodservice.ContainerMode === 3">
+  <app-fizetesimod-szerkesztes></app-fizetesimod-szerkesztes>
+</ng-container>

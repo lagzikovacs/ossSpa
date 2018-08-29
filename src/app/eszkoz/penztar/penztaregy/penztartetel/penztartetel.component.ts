@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../../tools/errormodal/errormodal.component';
 import {PenztarService} from '../../../../services/eszkoz/penztar/penztar.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {LogonService} from '../../../../services/segedeszkosz/logon.service';
+import {LogonService} from '../../../../services/logon.service';
 import {JogKod} from '../../../../enums/jogkod';
 import {PenztartetelService} from '../../../../services/eszkoz/penztar/penztartetel.service';
 import {Szempont} from '../../../../enums/szempont';

@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {SzamlazasirendService} from '../../../../../../services/eszkoz/projekt/szamlazasirend.service';
-import {PenznemService} from '../../../../../../services/torzs/primitiv/penznem.service';
+import {PenznemService} from '../../../../../../penznem/penznem.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ZoomSources} from '../../../../../../enums/zoomsources';
 import {PenznemZoomParameter} from '../../../../../../dtos/primitiv/penznem/penznemzoomparameter';

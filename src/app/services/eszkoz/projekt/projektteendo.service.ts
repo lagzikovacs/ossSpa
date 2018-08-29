@@ -3,7 +3,7 @@ import {NumberResult} from "../../../dtos/numberresult";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 import {ProjektteendoDto} from "../../../dtos/projekt/projektteendodto";
-import {LogonService} from "../../segedeszkosz/logon.service";
+import {LogonService} from "../../logon.service";
 import {ProjektteendoResult} from "../../../dtos/projekt/projektteendoresult";
 import {EmptyResult} from "../../../dtos/emptyresult";
 

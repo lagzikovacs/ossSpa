@@ -2,11 +2,11 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../../tools/errormodal/errormodal.component';
 import {IratService} from '../../../../services/eszkoz/irat/irat.service';
-import {IrattipusService} from '../../../../services/torzs/primitiv/irattipus.service';
+import {IrattipusService} from '../../../../irattipus/irattipus.service';
 import {ZoomSources} from '../../../../enums/zoomsources';
 import * as moment from 'moment';
 import {NumberResult} from '../../../../dtos/numberresult';
-import {UgyfelService} from "../../../../services/torzs/ugyfel.service";
+import {UgyfelService} from "../../../../ugyfel/ugyfel.service";
 
 @Component({
   selector: 'app-irat-szerkesztes',
@@ -88,7 +88,7 @@ export class IratSzerkesztesComponent implements OnInit {
     this._irattipusservice.ekDto.minta = this.iratservice.DtoEdited.IRATTIPUS || '';
     this._irattipusservice.zoomsource = ZoomSources.Irat;
     this._irattipusservice.zoom = true;
-    this._router.navigate(['irattipus'], {relativeTo: this._route});
+    this._router.navigate(['irattipus-list'], {relativeTo: this._route});
   }
 
   UgyfelZoom() {
@@ -96,6 +96,6 @@ export class IratSzerkesztesComponent implements OnInit {
     this._ugyfelservice.minta = this.iratservice.DtoEdited.UGYFELNEV || '';
     this._ugyfelservice.zoomsource = ZoomSources.Irat;
     this._ugyfelservice.zoom = true;
-    this._router.navigate(['ugyfel'], {relativeTo: this._route});
+    this._router.navigate(['ugyfel-list'], {relativeTo: this._route});
   }
 }

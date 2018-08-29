@@ -4,7 +4,7 @@ import {EgyszeruKeresesDto} from '../dtos/egyszerukeresesdto';
 import {VolumeDto} from '../dtos/volume/volumedto';
 import {ZoomSources} from '../enums/zoomsources';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {LogonService} from '../services/segedeszkosz/logon.service';
+import {LogonService} from '../services/logon.service';
 import {VolumeResult} from '../dtos/volume/volumeresult';
 import {DokumentumkodByVolumeResult} from '../dtos/volume/dokumentumbyvolumeresult';
 import {VolumeContainerMode} from "./volumecontainermode";

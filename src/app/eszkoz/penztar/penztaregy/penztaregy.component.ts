@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {PenztarService} from '../../../services/eszkoz/penztar/penztar.service';
-import {LogonService} from '../../../services/segedeszkosz/logon.service';
+import {LogonService} from '../../../services/logon.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {JogKod} from '../../../enums/jogkod';

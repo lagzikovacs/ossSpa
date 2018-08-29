@@ -1,0 +1,19 @@
+<!--export enum TermekdijContainerMode {
+  Blank = 0,
+  List = 1,
+  Egy = 2,
+  Uj = 3
+}-->
+
+<ng-container *ngIf="termekdijservice.ContainerMode === 0">
+  <app-blank></app-blank>
+</ng-container>
+<ng-container *ngIf="termekdijservice.ContainerMode === 1">
+  <app-termekdij-list></app-termekdij-list>
+</ng-container>
+<ng-container *ngIf="termekdijservice.ContainerMode === 2">
+  <app-termekdij-egy></app-termekdij-egy>
+</ng-container>
+<ng-container *ngIf="termekdijservice.ContainerMode === 3">
+  <app-termekdij-szerkesztes></app-termekdij-szerkesztes>
+</ng-container>

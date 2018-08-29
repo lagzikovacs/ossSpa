@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {LogonService} from '../services/segedeszkosz/logon.service';
+import {LogonService} from '../services/logon.service';
 import {Subscription} from 'rxjs/index';
 import {SessionService} from '../services/session.service';
 import {ErrormodalComponent} from '../tools/errormodal/errormodal.component';

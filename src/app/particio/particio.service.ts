@@ -3,7 +3,7 @@ import {NumberResult} from '../dtos/numberresult';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {ParticioDto} from '../dtos/particio/particiodto';
-import {LogonService} from '../services/segedeszkosz/logon.service';
+import {LogonService} from '../services/logon.service';
 import {ParticioResult} from '../dtos/particio/particioresult';
 import {ParticioEgyMode} from './particioegymode';
 

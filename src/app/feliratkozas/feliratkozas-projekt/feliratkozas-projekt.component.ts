@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {FeliratkozasService} from '../feliratkozas.service';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
-import {ProjektService} from '../../services/eszkoz/projekt/projekt.service';
+import {ProjektService} from '../../projekt/projekt.service';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {ProjektDto} from '../../dtos/projekt/projektdto';
 

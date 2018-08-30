@@ -7,7 +7,7 @@ import {SzMT} from '../../dtos/szmt';
 import {LogonService} from '../../services/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ZoomSources} from '../../enums/zoomsources';
-import {IratService} from '../../services/eszkoz/irat/irat.service';
+import {IratService} from '../../irat/irat.service';
 import {UgyfelContainerMode} from "../ugyfelcontainermode";
 import {UgyfelEgyMode} from "../ugyfelegymode";
 

@@ -17,8 +17,8 @@ import {CsoportService} from '../csoport/csoport.service';
 import {VolumeService} from '../volume/volume.service';
 import {VolumeDto} from '../dtos/volume/volumedto';
 import {CsoportDto} from '../dtos/csoport/csoportdto';
-import {ProjektService} from './eszkoz/projekt/projekt.service';
-import {IratService} from './eszkoz/irat/irat.service';
+import {ProjektService} from '../projekt/projekt.service';
+import {IratService} from '../irat/irat.service';
 import {FeliratkozasService} from '../feliratkozas/feliratkozas.service';
 import {IratDto} from '../dtos/irat/iratdto';
 import {ProjektDto} from '../dtos/projekt/projektdto';
@@ -39,10 +39,10 @@ import {TermekdijDto} from '../dtos/primitiv/termekdij/termekdijdto';
 import {CikkDto} from '../dtos/torzs/cikk/cikkdto';
 import {PenztarDto} from '../dtos/penztar/penztardto';
 import {PenztarService} from '../penztar/penztar.service';
-import {ProjektkapcsolatService} from './eszkoz/projekt/projektkapcsolat.service';
+import {ProjektkapcsolatService} from '../projekt/projektkapcsolat.service';
 import {ProjektKapcsolatDto} from '../dtos/projekt/projektkapcsolatdto';
-import {SzamlazasirendService} from './eszkoz/projekt/szamlazasirend.service';
-import {ProjektteendoService} from './eszkoz/projekt/projektteendo.service';
+import {SzamlazasirendService} from '../projekt/szamlazasirend.service';
+import {ProjektteendoService} from '../projekt/projektteendo.service';
 import {SzamlazasirendDto} from '../dtos/projekt/szamlazasirenddto';
 import {ProjektteendoDto} from '../dtos/projekt/projektteendodto';
 import {VolumeContainerMode} from '../volume/volumecontainermode';
@@ -165,7 +165,7 @@ export class MenuService {
         this._szamlazasirendservice.Dto = new Array<SzamlazasirendDto>();
         this._projektteendoservice.Dto = new Array<ProjektteendoDto>();
       break;
-      case '/irat':
+      case '/irat-list':
         this._iratservice.Dto = new Array<IratDto>();
       break;
       case '/penztar':

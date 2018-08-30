@@ -5,8 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {LogonService} from '../../services/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ZoomSources} from '../../enums/zoomsources';
-import {ProjektkapcsolatService} from '../../services/eszkoz/projekt/projektkapcsolat.service';
-import {IratService} from '../../services/eszkoz/irat/irat.service';
+import {ProjektkapcsolatService} from '../../projekt/projektkapcsolat.service';
+import {IratService} from '../../irat/irat.service';
 import {IrattipusEgyMode} from "../irattipusegymode";
 import {IrattipusContainerMode} from "../irattipuscontainermode";
 

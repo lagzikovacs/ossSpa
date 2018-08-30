@@ -1,8 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
 import {IrattipusService} from '../irattipus.service';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
-import {IrattipusContainerMode} from "../irattipuscontainermode";
-import {IrattipusEgyMode} from "../irattipusegymode";
+import {IrattipusContainerMode} from '../irattipuscontainermode';
+import {IrattipusEgyMode} from '../irattipusegymode';
 
 @Component({
   selector: 'app-irattipus-torles',

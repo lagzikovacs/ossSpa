@@ -1,7 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
 import {IratService} from '../irat.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {IratContainerMode} from '../iratcontainermode';
+import {IratEgyMode} from '../irategymode';
 
 @Component({
   selector: 'app-irat-egy',
@@ -14,27 +15,25 @@ export class IratEgyComponent {
   iratservice: IratService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              iratservice: IratService) {
+  constructor(iratservice: IratService) {
     this.iratservice = iratservice;
   }
 
   vissza() {
-    this._router.navigate(['../irat-list'], {relativeTo: this._route});
+    this.iratservice.ContainerMode = IratContainerMode.List;
   }
   reszletek() {
-    this._router.navigate(['reszletek'], {relativeTo: this._route});
+    this.iratservice.EgyMode = IratEgyMode.Reszletek;
   }
   torles() {
-    this._router.navigate(['torles'], {relativeTo: this._route});
+    this.iratservice.EgyMode = IratEgyMode.Torles;
   }
   modositas() {
     this.iratservice.uj = false;
     this.iratservice.DtoEdited = Object.assign({}, this.iratservice.Dto[this.iratservice.DtoSelectedIndex]);
-    this._router.navigate(['szerkesztes'], {relativeTo: this._route});
+    this.iratservice.EgyMode = IratEgyMode.Modositas;
   }
   dokumentum() {
-    this._router.navigate(['dokumentum'], {relativeTo: this._route});
+    this.iratservice.EgyMode = IratEgyMode.Dokumentum;
   }
 }

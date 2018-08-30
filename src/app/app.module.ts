@@ -504,7 +504,7 @@ const routes: Routes = [
   //     {path: 'blank', component: BlankComponent}
   //   ]},
   // ]},
-  {path: 'irat-list', component: IratContainerComponent, canActivate: [RoleGuard]},
+  {path: 'irat', component: IratContainerComponent, canActivate: [RoleGuard]},
 
   // {path: 'penztar-list', component: PenztarListComponent, canActivate: [RoleGuard]},
   // {path: 'penztaruj', component: PenztarSzerkesztesComponent, canActivate: [RoleGuard], children: [

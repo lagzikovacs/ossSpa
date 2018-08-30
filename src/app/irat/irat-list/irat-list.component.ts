@@ -1,10 +1,11 @@
 import {Component, ViewChild} from '@angular/core';
 import {IratService} from '../irat.service';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
-import {ActivatedRoute, Router} from '@angular/router';
 import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
 import {IratDto} from '../../dtos/irat/iratdto';
+import {IratContainerMode} from '../iratcontainermode';
+import {IratEgyMode} from '../irategymode';
 
 @Component({
   selector: 'app-irat-list',
@@ -26,9 +27,7 @@ export class IratListComponent {
   eppFrissit = false;
   iratservice: IratService;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              iratservice: IratService) {
+  constructor(iratservice: IratService) {
     this.iratservice = iratservice;
   }
 
@@ -84,7 +83,7 @@ export class IratListComponent {
   setClickedRow(i: number) {
     this.iratservice.DtoSelectedIndex = i;
     this.iratservice.uj = false;
-    this._router.navigate(['../irat-egy/dokumentum'], {relativeTo: this._route});
+    this.iratservice.ContainerMode = IratContainerMode.Egy;
   }
 
   onUj() {
@@ -100,7 +99,8 @@ export class IratListComponent {
         this.iratservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this._router.navigate(['../iratuj'], {relativeTo: this._route});
+        this.iratservice.ContainerMode = IratContainerMode.Uj;
+        this.iratservice.EgyMode = IratEgyMode.Dokumentum;
       })
       .catch(err => {
         this.errormodal.show(err);

@@ -6,6 +6,8 @@ import {environment} from '../../environments/environment';
 import {IratDto} from '../dtos/irat/iratdto';
 import {IratResult} from '../dtos/irat/iratresult';
 import {NumberResult} from '../dtos/numberresult';
+import {IratContainerMode} from './iratcontainermode';
+import {IratEgyMode} from "./irategymode";
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +27,9 @@ export class IratService {
   DtoSelectedIndex = -1;
   uj = false;
   DtoEdited = new IratDto();
+
+  ContainerMode = IratContainerMode.List;
+  EgyMode = IratEgyMode.Dokumentum;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

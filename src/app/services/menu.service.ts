@@ -62,6 +62,7 @@ import {FelhasznaloContainerMode} from "../felhasznalo/felhasznalocontainermode"
 import {CsoportContainerMode} from "../csoport/csoportcontainermode";
 import {FeliratkozasContainerMode} from "../feliratkozas/feliratkozascontainermode";
 import {PenztarContainerMode} from "../penztar/penztarcontainermode";
+import {IratContainerMode} from "../irat/iratcontainermode";
 
 @Injectable({
   providedIn: 'root'
@@ -165,7 +166,8 @@ export class MenuService {
         this._szamlazasirendservice.Dto = new Array<SzamlazasirendDto>();
         this._projektteendoservice.Dto = new Array<ProjektteendoDto>();
       break;
-      case '/irat-list':
+      case '/irat':
+        this._iratservice.ContainerMode = IratContainerMode.List;
         this._iratservice.Dto = new Array<IratDto>();
       break;
       case '/penztar':

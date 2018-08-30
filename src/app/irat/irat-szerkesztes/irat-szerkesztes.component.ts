@@ -7,6 +7,7 @@ import {ZoomSources} from '../../enums/zoomsources';
 import * as moment from 'moment';
 import {NumberResult} from '../../dtos/numberresult';
 import {UgyfelService} from "../../ugyfel/ugyfel.service";
+import {IratContainerMode} from "../iratcontainermode";
 
 @Component({
   selector: 'app-irat-szerkesztes',
@@ -78,7 +79,7 @@ export class IratSzerkesztesComponent implements OnInit {
   }
   navigal() {
     if (this.iratservice.uj) {
-      this._router.navigate(['../irat-list'], {relativeTo: this._route});
+      this.iratservice.ContainerMode = IratContainerMode.List;
     } else {
       this._router.navigate(['../blank'], {relativeTo: this._route});
     }

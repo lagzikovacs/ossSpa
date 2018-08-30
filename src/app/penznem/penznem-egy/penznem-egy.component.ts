@@ -1,9 +1,10 @@
 import {Component, ViewChild} from '@angular/core';
 import {PenznemService} from '../penznem.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {LogonService} from '../../services/logon.service';
 import {JogKod} from '../../enums/jogkod';
+import {PenznemContainerMode} from "../penznemcontainermode";
+import {PenznemEgyMode} from "../penznemegymode";
 
 @Component({
   selector: 'app-penznem-egy',
@@ -17,26 +18,24 @@ export class PenznemEgyComponent {
   mod = false;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              private _logonservice: LogonService,
+  constructor(private _logonservice: LogonService,
               penznemservice: PenznemService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.penznemservice = penznemservice;
   }
 
   vissza() {
-    this._router.navigate(['../penznem-list'], {relativeTo: this._route});
+    this.penznemservice.ContainerMode = PenznemContainerMode.List;
   }
   reszletek() {
-    this._router.navigate(['reszletek'], {relativeTo: this._route});
+    this.penznemservice.EgyMode = PenznemEgyMode.Reszletek;
   }
   torles () {
-    this._router.navigate(['torles'], {relativeTo: this._route});
+    this.penznemservice.EgyMode = PenznemEgyMode.Torles;
   }
   modositas() {
     this.penznemservice.uj = false;
     this.penznemservice.DtoEdited = Object.assign({}, this.penznemservice.Dto[this.penznemservice.DtoSelectedIndex]);
-    this._router.navigate(['szerkesztes'], {relativeTo: this._route});
+    this.penznemservice.EgyMode = PenznemEgyMode.Modositas;
   }
 }

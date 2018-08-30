@@ -1,29 +1,23 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {CsoportService} from '../csoport.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {CsoportContainerMode} from "../csoportcontainermode";
+import {CsoportEgyMode} from "../csoportegymode";
 
 @Component({
   selector: 'app-csoport-torles',
   templateUrl: './csoport-torles.component.html',
   styleUrls: ['./csoport-torles.component.css']
 })
-export class CsoportTorlesComponent implements OnInit {
+export class CsoportTorlesComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   csoportservice: CsoportService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              csoportservice: CsoportService) {
+  constructor(csoportservice: CsoportService) {
     this.csoportservice = csoportservice;
-  }
-
-  ngOnInit() {
-    if (this.csoportservice.DtoSelectedIndex === -1) {
-      this._router.navigate(['../blank'], {relativeTo: this._route});
-    }
   }
 
   ok() {
@@ -38,7 +32,7 @@ export class CsoportTorlesComponent implements OnInit {
         this.csoportservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this._router.navigate(['../../csoport-list'], {relativeTo: this._route});
+        this.csoportservice.ContainerMode = CsoportContainerMode.List;
       })
       .catch(err => {
         this.errormodal.show(err);
@@ -46,6 +40,6 @@ export class CsoportTorlesComponent implements OnInit {
       });
   }
   cancel() {
-    this._router.navigate(['../blank'], {relativeTo: this._route});
+    this.csoportservice.EgyMode = CsoportEgyMode.Reszletek;
   }
 }

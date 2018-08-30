@@ -1,0 +1,16 @@
+<!--export enum FeliratkozasContainerMode {
+Blank = 0,
+List = 1,
+Egy = 2
+}-->
+
+<ng-container *ngIf="feliratkozasservice.ContainerMode === 0">
+  <app-blank></app-blank>
+</ng-container>
+<ng-container *ngIf="feliratkozasservice.ContainerMode === 1">
+  <app-feliratkozas-list></app-feliratkozas-list>
+</ng-container>
+<ng-container *ngIf="feliratkozasservice.ContainerMode === 2">
+  <app-feliratkozas-egy></app-feliratkozas-egy>
+</ng-container>
+

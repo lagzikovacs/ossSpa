@@ -21,7 +21,22 @@
     </nav>
   </div>
 
-  <router-outlet></router-outlet>
+  <!--  export enum IrattipusEgyMode {
+Reszletek = 1,
+Torles = 2,
+Modositas = 3
+}-->
+
+  <ng-container *ngIf="irattipusservice.EgyMode === 1">
+    <app-irattipus-reszletek></app-irattipus-reszletek>
+  </ng-container>
+  <ng-container *ngIf="irattipusservice.EgyMode === 2">
+    <app-irattipus-torles></app-irattipus-torles>
+  </ng-container>
+  <ng-container *ngIf="irattipusservice.EgyMode === 3">
+    <app-irattipus-szerkesztes></app-irattipus-szerkesztes>
+  </ng-container>
+
   <app-errormodal [cim]="irattipusservice.cim"></app-errormodal>
 </div>
 

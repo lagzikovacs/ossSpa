@@ -1,11 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {TeendoService} from '../teendo.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {JogKod} from '../../enums/jogkod';
 import {LogonService} from '../../services/logon.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import {ProjektteendoService} from '../../services/eszkoz/projekt/projektteendo.service';
+import {TeendoContainerMode} from "../teendocontainermode";
+import {TeendoEgyMode} from "../teendoegymode";
 
 @Component({
   selector: 'app-teendo-list',
@@ -21,9 +22,7 @@ export class TeendoListComponent implements OnInit {
   mod = false;
   teendoservice: TeendoService;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              private _logonservice: LogonService,
+  constructor(private _logonservice: LogonService,
               teendoservice: TeendoService,
               private _projektteendoservice: ProjektteendoService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
@@ -80,13 +79,17 @@ export class TeendoListComponent implements OnInit {
   }
   stopzoom() {
     this.teendoservice.zoom = false;
-    this._router.navigate(['../blank'], {relativeTo: this._route});
+
+    if (this.teendoservice.zoomsource === ZoomSources.Projektteendo) {
+      // this._projektteendoservice.SzerkesztesMode = ProjektteendoSzerkesztesMode.Blank;
+    }
   }
 
   setClickedRow(i: number) {
     this.teendoservice.DtoSelectedIndex = i;
     this.teendoservice.uj = false;
-    this._router.navigate(['../teendo-egy'], {relativeTo: this._route});
+    this.teendoservice.ContainerMode = TeendoContainerMode.Egy;
+    this.teendoservice.EgyMode = TeendoEgyMode.Reszletek;
   }
 
   uj() {
@@ -102,7 +105,7 @@ export class TeendoListComponent implements OnInit {
         this.teendoservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this._router.navigate(['../teendouj'], {relativeTo: this._route});
+        this.teendoservice.ContainerMode = TeendoContainerMode.Uj;
       })
       .catch(err => {
         this.errormodal.show(err);

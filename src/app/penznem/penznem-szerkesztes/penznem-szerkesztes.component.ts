@@ -1,8 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
-import {PenznemService} from "../penznem.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ErrormodalComponent} from "../../tools/errormodal/errormodal.component";
-import {NumberResult} from "../../dtos/numberresult";
+import {PenznemService} from '../penznem.service';
+import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {NumberResult} from '../../dtos/numberresult';
+import {PenznemEgyMode} from "../penznemegymode";
+import {PenznemContainerMode} from "../penznemcontainermode";
 
 @Component({
   selector: 'app-penznem-szerkesztes',
@@ -15,9 +16,7 @@ export class PenznemSzerkesztesComponent {
   penznemservice: PenznemService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              penznemservice: PenznemService) {
+  constructor(penznemservice: PenznemService) {
     this.penznemservice = penznemservice;
   }
 
@@ -63,9 +62,9 @@ export class PenznemSzerkesztesComponent {
   }
   navigal() {
     if (this.penznemservice.uj) {
-      this._router.navigate(['../penznem-list'], {relativeTo: this._route});
+      this.penznemservice.ContainerMode = PenznemContainerMode.List;
     } else {
-      this._router.navigate(['../blank'], {relativeTo: this._route});
+      this.penznemservice.EgyMode = PenznemEgyMode.Reszletek;
     }
   }
 }

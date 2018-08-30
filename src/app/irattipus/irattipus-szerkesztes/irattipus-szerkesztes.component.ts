@@ -1,8 +1,9 @@
 import {IrattipusService} from '../irattipus.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {Component, ViewChild} from '@angular/core';
 import {NumberResult} from '../../dtos/numberresult';
+import {IrattipusContainerMode} from '../irattipuscontainermode';
+import {IrattipusEgyMode} from '../irattipusegymode';
 
 @Component({
   selector: 'app-irattipus-szerkesztes',
@@ -15,9 +16,7 @@ export class IrattipusSzerkesztesComponent {
   irattipusservice: IrattipusService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              irattipusservice: IrattipusService) {
+  constructor(irattipusservice: IrattipusService) {
     this.irattipusservice = irattipusservice;
   }
 
@@ -63,9 +62,9 @@ export class IrattipusSzerkesztesComponent {
   }
   navigal() {
     if (this.irattipusservice.uj) {
-      this._router.navigate(['../irattipus-list'], {relativeTo: this._route});
+      this.irattipusservice.ContainerMode = IrattipusContainerMode.List;
     } else {
-      this._router.navigate(['../blank'], {relativeTo: this._route});
+      this.irattipusservice.EgyMode = IrattipusEgyMode.Reszletek;
     }
   }
 }

@@ -1,8 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
 import {CsoportService} from '../csoport.service';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {NumberResult} from '../../dtos/numberresult';
+import {CsoportContainerMode} from '../csoportcontainermode';
+import {CsoportEgyMode} from '../csoportegymode';
 
 @Component({
   selector: 'app-csoport-szerkesztes',
@@ -15,9 +16,7 @@ export class CsoportSzerkesztesComponent {
   csoportservice: CsoportService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              csoportservice: CsoportService) {
+  constructor(csoportservice: CsoportService) {
     this.csoportservice = csoportservice;
   }
 
@@ -63,9 +62,9 @@ export class CsoportSzerkesztesComponent {
   }
   navigal() {
     if (this.csoportservice.uj) {
-      this._router.navigate(['../csoport-list'], {relativeTo: this._route});
+      this.csoportservice.ContainerMode = CsoportContainerMode.List;
     } else {
-      this._router.navigate(['../blank'], {relativeTo: this._route});
+      this.csoportservice.EgyMode = CsoportEgyMode.Reszletek;
     }
   }
 }

@@ -1,9 +1,10 @@
 import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {FelhasznaloService} from '../felhasznalo.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {LogonService} from '../../services/logon.service';
 import {JogKod} from '../../enums/jogkod';
+import {FelhasznaloContainerMode} from "../felhasznalocontainermode";
+import {FelhasznaloEgyMode} from "../felhasznaloegymode";
 
 @Component({
   selector: 'app-felhasznalo-egy',
@@ -17,32 +18,30 @@ export class FelhasznaloEgyComponent {
   mod = false;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              private _logonservice: LogonService,
+  constructor(private _logonservice: LogonService,
               felhasznaloservice: FelhasznaloService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.FELHASZNALOMOD]);
     this.felhasznaloservice = felhasznaloservice;
   }
 
   vissza() {
-    this._router.navigate(['../felhasznalo-list'], {relativeTo: this._route});
+    this.felhasznaloservice.ContainerMode = FelhasznaloContainerMode.List;
   }
   reszletek() {
-    this._router.navigate(['reszletek'], {relativeTo: this._route});
+    this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Reszletek;
   }
   torles () {
-    this._router.navigate(['torles'], {relativeTo: this._route});
+    this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Torles;
   }
   modositas() {
     this.felhasznaloservice.uj = false;
     this.felhasznaloservice.DtoEdited = Object.assign({}, this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex]);
-    this._router.navigate(['szerkesztes'], {relativeTo: this._route});
+    this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Modositas;
   }
   jelszo() {
-    this._router.navigate(['jelszo'], {relativeTo: this._route});
+    this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Jelszo;
   }
   tevekenyseg() {
-    this._router.navigate(['tevekenyseg'], {relativeTo: this._route});
+    this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Tevekenyseg;
   }
 }

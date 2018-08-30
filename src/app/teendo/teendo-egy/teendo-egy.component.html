@@ -21,7 +21,22 @@
     </nav>
   </div>
 
-  <router-outlet></router-outlet>
+  <!--  export enum TeendoEgyMode {
+Reszletek = 1,
+Torles = 2,
+Modositas = 3
+}-->
+
+  <ng-container *ngIf="teendoservice.EgyMode === 1">
+    <app-teendo-reszletek></app-teendo-reszletek>
+  </ng-container>
+  <ng-container *ngIf="teendoservice.EgyMode === 2">
+    <app-teendo-torles></app-teendo-torles>
+  </ng-container>
+  <ng-container *ngIf="teendoservice.EgyMode === 3">
+    <app-teendo-szerkesztes></app-teendo-szerkesztes>
+  </ng-container>
+
   <app-errormodal [cim]="teendoservice.cim"></app-errormodal>
 </div>
 

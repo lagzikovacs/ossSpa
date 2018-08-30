@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {FelhasznaloService} from '../felhasznalo.service';
+import {FelhasznaloEgyMode} from '../felhasznaloegymode';
 
 @Component({
   selector: 'app-felhasznalo-jelszo',
@@ -16,9 +16,7 @@ export class FelhasznaloJelszoComponent {
   jelszo = '';
   jelszoujra = '';
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              felhasznaloservice: FelhasznaloService) {
+  constructor(felhasznaloservice: FelhasznaloService) {
     this.felhasznaloservice = felhasznaloservice;
   }
 
@@ -36,8 +34,17 @@ export class FelhasznaloJelszoComponent {
           throw res.Error;
         }
 
+        return this.felhasznaloservice.Get(this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex].FELHASZNALOKOD);
+      })
+      .then(res1 => {
+        if (res1.Error != null) {
+          throw res1.Error;
+        }
+
+        this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex] = res1.Result[0];
+
         this.eppFrissit = false;
-        this._router.navigate(['../blank'], {relativeTo: this._route});
+        this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Reszletek;
       })
       .catch(err => {
         this.errormodal.show(err);
@@ -46,6 +53,6 @@ export class FelhasznaloJelszoComponent {
   }
 
   cancel() {
-    this._router.navigate(['../blank'], {relativeTo: this._route});
+    this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Reszletek;
   }
 }

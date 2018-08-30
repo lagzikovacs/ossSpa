@@ -1,29 +1,22 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {TeendoService} from '../teendo.service';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
-import {ActivatedRoute, Router} from '@angular/router';
+import {TeendoContainerMode} from "../teendocontainermode";
+import {TeendoEgyMode} from "../teendoegymode";
 
 @Component({
   selector: 'app-teendo-torles',
   templateUrl: './teendo-torles.component.html',
   styleUrls: ['./teendo-torles.component.css']
 })
-export class TeendoTorlesComponent implements OnInit {
+export class TeendoTorlesComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   teendoservice: TeendoService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              teendoservice: TeendoService) {
+  constructor(teendoservice: TeendoService) {
     this.teendoservice = teendoservice;
-  }
-
-  ngOnInit() {
-    if (this.teendoservice.DtoSelectedIndex === -1) {
-      this._router.navigate(['../blank'], {relativeTo: this._route});
-    }
   }
 
   ok() {
@@ -38,7 +31,7 @@ export class TeendoTorlesComponent implements OnInit {
         this.teendoservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this._router.navigate(['../../teendo-list'], {relativeTo: this._route});
+        this.teendoservice.ContainerMode = TeendoContainerMode.List;
       })
       .catch(err => {
         this.errormodal.show(err);
@@ -46,6 +39,6 @@ export class TeendoTorlesComponent implements OnInit {
       });
   }
   cancel() {
-    this._router.navigate(['../blank'], {relativeTo: this._route});
+    this.teendoservice.EgyMode = TeendoEgyMode.Reszletek;
   }
 }

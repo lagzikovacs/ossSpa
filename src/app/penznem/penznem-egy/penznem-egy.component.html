@@ -21,7 +21,22 @@
     </nav>
   </div>
 
-  <router-outlet></router-outlet>
+  <!--  export enum PenznemEgyMode {
+Reszletek = 1,
+Torles = 2,
+Modositas = 3
+}-->
+
+  <ng-container *ngIf="penznemservice.EgyMode === 1">
+    <app-penznem-reszletek></app-penznem-reszletek>
+  </ng-container>
+  <ng-container *ngIf="penznemservice.EgyMode === 2">
+    <app-penznem-torles></app-penznem-torles>
+  </ng-container>
+  <ng-container *ngIf="penznemservice.EgyMode === 3">
+    <app-penznem-szerkesztes></app-penznem-szerkesztes>
+  </ng-container>
+
   <app-errormodal [cim]="penznemservice.cim"></app-errormodal>
 </div>
 

@@ -4,6 +4,8 @@ import {FizetesimodService} from '../fizetesimod.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LogonService} from '../../services/logon.service';
 import {JogKod} from '../../enums/jogkod';
+import {FizetesimodContainerMode} from "../fizetesimodcontainermode";
+import {FizetesimodEgyMode} from "../fizetesimodegymode";
 
 @Component({
   selector: 'app-fizetesimod-list',
@@ -19,9 +21,7 @@ export class FizetesimodListComponent {
   mod = false;
   fizetesimodservice: FizetesimodService;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              private _logonservice: LogonService,
+  constructor(private _logonservice: LogonService,
               fizetesimodservice: FizetesimodService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.fizetesimodservice = fizetesimodservice;
@@ -62,17 +62,19 @@ export class FizetesimodListComponent {
   }
 
   selectforzoom(i: number) {
+    // TODO
     this.setClickedRow(i);
   }
   stopzoom() {
     this.fizetesimodservice.zoom = false;
-    this._router.navigate(['../blank'], {relativeTo: this._route});
+    // TODO
   }
 
   setClickedRow(i: number) {
     this.fizetesimodservice.DtoSelectedIndex = i;
     this.fizetesimodservice.uj = false;
-    this._router.navigate(['../fizetesimod-egy'], {relativeTo: this._route});
+    this.fizetesimodservice.ContainerMode = FizetesimodContainerMode.Egy;
+    this.fizetesimodservice.EgyMode = FizetesimodEgyMode.Reszletek;
   }
 
   uj() {
@@ -88,7 +90,7 @@ export class FizetesimodListComponent {
         this.fizetesimodservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this._router.navigate(['../fizetesimoduj'], {relativeTo: this._route});
+        this.fizetesimodservice.ContainerMode = FizetesimodContainerMode.Uj;
       })
       .catch(err => {
         this.errormodal.show(err);

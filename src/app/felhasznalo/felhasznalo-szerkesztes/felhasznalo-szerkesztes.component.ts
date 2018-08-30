@@ -1,8 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {FelhasznaloService} from '../felhasznalo.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {NumberResult} from '../../dtos/numberresult';
+import {FelhasznaloContainerMode} from '../felhasznalocontainermode';
+import {FelhasznaloEgyMode} from '../felhasznaloegymode';
 
 @Component({
   selector: 'app-felhasznalo-szerkesztes',
@@ -15,9 +16,7 @@ export class FelhasznaloSzerkesztesComponent {
   felhasznaloservice: FelhasznaloService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              felhasznaloservice: FelhasznaloService) {
+  constructor(felhasznaloservice: FelhasznaloService) {
     this.felhasznaloservice = felhasznaloservice;
   }
 
@@ -63,9 +62,9 @@ export class FelhasznaloSzerkesztesComponent {
   }
   navigal() {
     if (this.felhasznaloservice.uj) {
-      this._router.navigate(['../felhasznalo-list'], {relativeTo: this._route});
+      this.felhasznaloservice.ContainerMode = FelhasznaloContainerMode.List;
     } else {
-      this._router.navigate(['../blank'], {relativeTo: this._route});
+      this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Reszletek;
     }
   }
 }

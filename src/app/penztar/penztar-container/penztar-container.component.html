@@ -1,0 +1,16 @@
+<!--export enum PenztarContainerMode {
+  Blank = 0,
+  List = 1,
+  Egy = 2,
+  Uj = 3
+}-->
+
+<ng-container *ngIf="penztarservice.ContainerMode === 1">
+  <app-penztar-list></app-penztar-list>
+</ng-container>
+<ng-container *ngIf="penztarservice.ContainerMode === 2">
+  <app-penztar-egy></app-penztar-egy>
+</ng-container>
+<ng-container *ngIf="penztarservice.ContainerMode === 3">
+  <app-penztar-szerkesztes></app-penztar-szerkesztes>
+</ng-container>

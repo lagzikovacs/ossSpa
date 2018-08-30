@@ -72,9 +72,9 @@ import { CsoportTorlesComponent } from './csoport/csoport-torles/csoport-torles.
 import { CsoportFelhasznaloComponent } from './csoport/csoport-felhasznalo/csoport-felhasznalo.component';
 import { CsoportJogComponent } from './csoport/csoport-jog/csoport-jog.component';
 import { VolumeTesztComponent } from './volume/volume-teszt/volume-teszt.component';
-import { FeliratkozasComponent } from './eszkoz/feliratkozas/feliratkozas.component';
-import { FeliratkozasegyComponent } from './eszkoz/feliratkozas/feliratkozasegy/feliratkozasegy.component';
-import { FeliratkozasProjektComponent } from './eszkoz/feliratkozas/feliratkozasegy/feliratkozas-projekt/feliratkozas-projekt.component';
+import { FeliratkozasListComponent } from './feliratkozas/feliratkozas-list/feliratkozas-list.component';
+import { FeliratkozasEgyComponent } from './feliratkozas/feliratkozas-egy/feliratkozas-egy.component';
+import { FeliratkozasProjektComponent } from './feliratkozas/feliratkozas-projekt/feliratkozas-projekt.component';
 import { ProjektTablaComponent } from './eszkoz/projekt/projekt-tabla/projekt-tabla.component';
 import { RiportComponent } from './riport/riport.component';
 import { KimenoszamlaComponent } from './riport/kimenoszamla/kimenoszamla.component';
@@ -119,10 +119,8 @@ import { FizetesimodTorlesComponent } from './fizetesimod/fizetesimod-torles/fiz
 import { PenznemSzerkesztesComponent } from './penznem/penznem-szerkesztes/penznem-szerkesztes.component';
 import { PenznemTorlesComponent } from './penznem/penznem-torles/penznem-torles.component';
 import { CikkBeszerzesKivetComponent } from './cikk/cikk-beszerzes-kivet/cikk-beszerzes-kivet.component';
-import { PenztarComponent } from './eszkoz/penztar/penztar.component';
-import { PenztaregyComponent } from './eszkoz/penztar/penztaregy/penztaregy.component';
-import { PenztarTorlesComponent } from './eszkoz/penztar/penztaregy/penztar-torles/penztar-torles.component';
-import { PenztarSzerkesztesComponent } from './eszkoz/penztar/penztaregy/penztar-szerkesztes/penztar-szerkesztes.component';
+import { PenztarListComponent } from './penztar/penztar-list/penztar-list.component';
+import { PenztarEgyComponent } from './penztar/penztar-egy/penztar-egy.component';
 import { FelhasznaloReszletekComponent } from './felhasznalo/felhasznalo-reszletek/felhasznalo-reszletek.component';
 import { CsoportReszletekComponent } from './csoport/csoport-reszletek/csoport-reszletek.component';
 import { FelhasznaloTevekenysegComponent } from './felhasznalo/felhasznalo-tevekenyseg/felhasznalo-tevekenyseg.component';
@@ -139,11 +137,8 @@ import {UgyfelService} from './ugyfel/ugyfel.service';
 import {ParticioService} from './particio/particio.service';
 import {VolumeService} from './volume/volume.service';
 import {CsoportService} from './csoport/csoport.service';
-import {FeliratkozasService} from './services/eszkoz/feliratkozas.service';
-import {PenztarService} from './services/eszkoz/penztar/penztar.service';
-import { PenztarReszletekComponent } from './eszkoz/penztar/penztaregy/penztar-reszletek/penztar-reszletek.component';
-import { PenztarExportComponent } from './eszkoz/penztar/penztaregy/penztar-export/penztar-export.component';
-import { PenztartetelComponent } from './eszkoz/penztar/penztaregy/penztartetel/penztartetel.component';
+import {FeliratkozasService} from './feliratkozas/feliratkozas.service';
+import {PenztarService} from './penztar/penztar.service';
 import { AfakulcsReszletekComponent } from './afakulcs/afakulcs-reszletek/afakulcs-reszletek.component';
 import { TeendoReszletekComponent } from './teendo/teendo-reszletek/teendo-reszletek.component';
 import { FizetesimodReszletekComponent } from './fizetesimod/fizetesimod-reszletek/fizetesimod-reszletek.component';
@@ -154,8 +149,8 @@ import { PenznemReszletekComponent } from './penznem/penznem-reszletek/penznem-r
 import { TermekdijReszletekComponent } from './termekdij/termekdij-reszletek/termekdij-reszletek.component';
 import { CikkReszletekComponent } from './cikk/cikk-reszletek/cikk-reszletek.component';
 import { UgyfelReszletekComponent } from './ugyfel/ugyfel-reszletek/ugyfel-reszletek.component';
-import { PenztartetelSzerkesztesComponent } from './eszkoz/penztar/penztaregy/penztartetel/penztartetel-szerkesztes/penztartetel-szerkesztes.component';
-import { FeliratkozasReszletekComponent } from './eszkoz/feliratkozas/feliratkozasegy/feliratkozas-reszletek/feliratkozas-reszletek.component';
+import { PenztartetelSzerkesztesComponent } from './penztar/penztartetel-szerkesztes/penztartetel-szerkesztes.component';
+import { FeliratkozasReszletekComponent } from './feliratkozas/feliratkozas-reszletek/feliratkozas-reszletek.component';
 import { NavexportellenorzesComponent } from './bizonylat/navexportellenorzes/navexportellenorzes.component';
 import { IratReszletekComponent } from './eszkoz/irat/irategy/irat-reszletek/irat-reszletek.component';
 import { DokumentumReszletekComponent } from './eszkoz/irat/irategy/irat-dokumentum/irat-dokumentumegy/dokumentum-reszletek/dokumentum-reszletek.component';
@@ -182,7 +177,7 @@ import { HelysegContainerComponent } from './helyseg/helyseg-container/helyseg-c
 import { HelysegEgyComponent } from './helyseg/helyseg-egy/helyseg-egy.component';
 import { HelysegListComponent } from './helyseg/helyseg-list/helyseg-list.component';
 import { UgyfelContainerComponent } from './ugyfel/ugyfel-container/ugyfel-container.component';
-import {UgyfelEgyComponent} from "./ugyfel/ugyfel-egy/ugyfel-egy.component";
+import {UgyfelEgyComponent} from './ugyfel/ugyfel-egy/ugyfel-egy.component';
 import { AfakulcsContainerComponent } from './afakulcs/afakulcs-container/afakulcs-container.component';
 import { CikkContainerComponent } from './cikk/cikk-container/cikk-container.component';
 import { MeContainerComponent } from './me/me-container/me-container.component';
@@ -193,6 +188,14 @@ import { IrattipusContainerComponent } from './irattipus/irattipus-container/ira
 import { PenznemContainerComponent } from './penznem/penznem-container/penznem-container.component';
 import { TeendoContainerComponent } from './teendo/teendo-container/teendo-container.component';
 import { CsoportContainerComponent } from './csoport/csoport-container/csoport-container.component';
+import { FeliratkozasContainerComponent } from './feliratkozas/feliratkozas-container/feliratkozas-container.component';
+import {PenztartetelListComponent} from "./penztar/penztartetel-list/penztartetel-list.component";
+import {PenztarExportComponent} from "./penztar/penztar-export/penztar-export.component";
+import {PenztarReszletekComponent} from "./penztar/penztar-reszletek/penztar-reszletek.component";
+import {PenztarTorlesComponent} from "./penztar/penztar-torles/penztar-torles.component";
+import {PenztarSzerkesztesComponent} from "./penztar/penztar-szerkesztes/penztar-szerkesztes.component";
+import { PenztarContainerComponent } from './penztar/penztar-container/penztar-container.component';
+import { PenztartetelContainerComponent } from './penztar/penztartetel-container/penztartetel-container.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -501,43 +504,45 @@ const routes: Routes = [
     ]},
   ]},
 
-  {path: 'penztar', component: PenztarComponent, canActivate: [RoleGuard]},
-  {path: 'penztaruj', component: PenztarSzerkesztesComponent, canActivate: [RoleGuard], children: [
-    {path: 'penznem', component: PenznemListComponent, canActivate: [RoleGuard]},
-    {path: 'penznemuj', component: PenznemSzerkesztesComponent, canActivate: [RoleGuard]},
-    {path: 'penznem-egy', component: PenznemEgyComponent, canActivate: [RoleGuard], children: [
-      {path: 'reszletek', component: PenznemReszletekComponent},
-      {path: 'torles', component: PenznemTorlesComponent},
-      {path: 'szerkesztes', component: PenznemSzerkesztesComponent},
-      {path: 'blank', component: BlankComponent}
-    ]},
-    {path: 'blank', component: BlankComponent},
-  ]},
-  {path: 'penztaregy', component: PenztaregyComponent, canActivate: [RoleGuard], children: [
-    {path: 'reszletek', component: PenztarReszletekComponent},
-    {path: 'torles', component: PenztarTorlesComponent},
-    {path: 'szerkesztes', component: PenztarSzerkesztesComponent, children: [
-      {path: 'penznem', component: PenznemListComponent, canActivate: [RoleGuard]},
-      {path: 'penznemuj', component: PenznemSzerkesztesComponent, canActivate: [RoleGuard]},
-      {path: 'penznem-egy', component: PenznemEgyComponent, canActivate: [RoleGuard], children: [
-        {path: 'reszletek', component: PenznemReszletekComponent},
-        {path: 'torles', component: PenznemTorlesComponent},
-        {path: 'szerkesztes', component: PenznemSzerkesztesComponent},
-        {path: 'blank', component: BlankComponent}
-      ]},
-      {path: 'blank', component: BlankComponent},
-    ]},
-    {path: 'tetelek', component: PenztartetelComponent},
-    {path: 'export', component: PenztarExportComponent},
-    {path: 'tetelszerkesztes', component: PenztartetelSzerkesztesComponent},
-    {path: 'blank', component: BlankComponent}
-  ]},
+  // {path: 'penztar-list', component: PenztarListComponent, canActivate: [RoleGuard]},
+  // {path: 'penztaruj', component: PenztarSzerkesztesComponent, canActivate: [RoleGuard], children: [
+  //   {path: 'penznem', component: PenznemListComponent, canActivate: [RoleGuard]},
+  //   {path: 'penznemuj', component: PenznemSzerkesztesComponent, canActivate: [RoleGuard]},
+  //   {path: 'penznem-egy', component: PenznemEgyComponent, canActivate: [RoleGuard], children: [
+  //     {path: 'reszletek', component: PenznemReszletekComponent},
+  //     {path: 'torles', component: PenznemTorlesComponent},
+  //     {path: 'szerkesztes', component: PenznemSzerkesztesComponent},
+  //     {path: 'blank', component: BlankComponent}
+  //   ]},
+  //   {path: 'blank', component: BlankComponent},
+  // ]},
+  // {path: 'penztar-egy', component: PenztarEgyComponent, canActivate: [RoleGuard], children: [
+  //   {path: 'reszletek', component: PenztarReszletekComponent},
+  //   {path: 'torles', component: PenztarTorlesComponent},
+  //   {path: 'szerkesztes', component: PenztarSzerkesztesComponent, children: [
+  //     {path: 'penznem', component: PenznemListComponent, canActivate: [RoleGuard]},
+  //     {path: 'penznemuj', component: PenznemSzerkesztesComponent, canActivate: [RoleGuard]},
+  //     {path: 'penznem-egy', component: PenznemEgyComponent, canActivate: [RoleGuard], children: [
+  //       {path: 'reszletek', component: PenznemReszletekComponent},
+  //       {path: 'torles', component: PenznemTorlesComponent},
+  //       {path: 'szerkesztes', component: PenznemSzerkesztesComponent},
+  //       {path: 'blank', component: BlankComponent}
+  //     ]},
+  //     {path: 'blank', component: BlankComponent},
+  //   ]},
+  //   {path: 'tetelek', component: PenztartetelListComponent},
+  //   {path: 'export', component: PenztarExportComponent},
+  //   {path: 'tetelszerkesztes', component: PenztartetelSzerkesztesComponent},
+  //   {path: 'blank', component: BlankComponent}
+  // ]},
+  {path: 'penztar', component: PenztarContainerComponent, canActivate: [RoleGuard]},
 
-  {path: 'feliratkozas', component: FeliratkozasComponent, canActivate: [RoleGuard]},
-  {path: 'feliratkozasegy', component: FeliratkozasegyComponent, canActivate: [RoleGuard], children: [
-    {path: 'reszletek', component: FeliratkozasReszletekComponent},
-    {path: 'projekt', component: FeliratkozasProjektComponent}
-  ]},
+  // {path: 'feliratkozas-list', component: FeliratkozasListComponent, canActivate: [RoleGuard]},
+  // {path: 'feliratkozas-egy', component: FeliratkozasEgyComponent, canActivate: [RoleGuard], children: [
+  //   {path: 'reszletek', component: FeliratkozasReszletekComponent},
+  //   {path: 'projekt', component: FeliratkozasProjektComponent}
+  // ]},
+  {path: 'feliratkozas', component: FeliratkozasContainerComponent, canActivate: [RoleGuard]},
 
   {path: 'riport', component: RiportComponent, canActivate: [RoleGuard], children: [
     {path: 'kimenoszamla', component: KimenoszamlaComponent},
@@ -666,8 +671,8 @@ if (environment.production) {
     CsoportFelhasznaloComponent,
     CsoportJogComponent,
     VolumeTesztComponent,
-    FeliratkozasComponent,
-    FeliratkozasegyComponent,
+    FeliratkozasListComponent,
+    FeliratkozasEgyComponent,
     FeliratkozasProjektComponent,
     ProjektTablaComponent,
     RiportComponent,
@@ -713,8 +718,8 @@ if (environment.production) {
     PenznemSzerkesztesComponent,
     PenznemTorlesComponent,
     CikkBeszerzesKivetComponent,
-    PenztarComponent,
-    PenztaregyComponent,
+    PenztarListComponent,
+    PenztarEgyComponent,
     PenztarTorlesComponent,
     PenztarSzerkesztesComponent,
     FelhasznaloReszletekComponent,
@@ -722,7 +727,7 @@ if (environment.production) {
     FelhasznaloTevekenysegComponent,
     PenztarReszletekComponent,
     PenztarExportComponent,
-    PenztartetelComponent,
+    PenztartetelListComponent,
     AfakulcsReszletekComponent,
     TeendoReszletekComponent,
     FizetesimodReszletekComponent,
@@ -773,6 +778,9 @@ if (environment.production) {
     PenznemContainerComponent,
     TeendoContainerComponent,
     CsoportContainerComponent,
+    FeliratkozasContainerComponent,
+    PenztarContainerComponent,
+    PenztartetelContainerComponent,
   ],
   imports: [
     BrowserModule,

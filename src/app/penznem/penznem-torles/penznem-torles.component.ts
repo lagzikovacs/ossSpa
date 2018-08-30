@@ -1,29 +1,22 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {PenznemService} from '../penznem.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {PenznemContainerMode} from '../penznemcontainermode';
+import {PenznemEgyMode} from '../penznemegymode';
 
 @Component({
   selector: 'app-penznem-torles',
   templateUrl: './penznem-torles.component.html',
   styleUrls: ['./penznem-torles.component.css']
 })
-export class PenznemTorlesComponent implements OnInit {
+export class PenznemTorlesComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   penznemservice: PenznemService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              penznemservice: PenznemService) {
+  constructor(penznemservice: PenznemService) {
     this.penznemservice = penznemservice;
-  }
-
-  ngOnInit() {
-    if (this.penznemservice.DtoSelectedIndex === -1) {
-      this._router.navigate(['../blank'], {relativeTo: this._route});
-    }
   }
 
   ok() {
@@ -38,7 +31,7 @@ export class PenznemTorlesComponent implements OnInit {
         this.penznemservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this._router.navigate(['../../penznem-list'], {relativeTo: this._route});
+        this.penznemservice.ContainerMode = PenznemContainerMode.List;
       })
       .catch(err => {
         this.errormodal.show(err);
@@ -46,6 +39,6 @@ export class PenznemTorlesComponent implements OnInit {
       });
   }
   cancel() {
-    this._router.navigate(['../blank'], {relativeTo: this._route});
+    this.penznemservice.EgyMode = PenznemEgyMode.Reszletek;
   }
 }

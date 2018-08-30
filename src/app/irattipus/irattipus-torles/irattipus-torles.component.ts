@@ -1,29 +1,22 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {IrattipusService} from '../irattipus.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {IrattipusContainerMode} from "../irattipuscontainermode";
+import {IrattipusEgyMode} from "../irattipusegymode";
 
 @Component({
   selector: 'app-irattipus-torles',
   templateUrl: './irattipus-torles.component.html',
   styleUrls: ['./irattipus-torles.component.css']
 })
-export class IrattipusTorlesComponent implements OnInit {
+export class IrattipusTorlesComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   irattipusservice: IrattipusService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              irattipusservice: IrattipusService) {
+  constructor(irattipusservice: IrattipusService) {
     this.irattipusservice = irattipusservice;
-  }
-
-  ngOnInit() {
-    if (this.irattipusservice.DtoSelectedIndex === -1) {
-      this._router.navigate(['../blank'], {relativeTo: this._route});
-    }
   }
 
   ok() {
@@ -38,7 +31,7 @@ export class IrattipusTorlesComponent implements OnInit {
         this.irattipusservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this._router.navigate(['../../irattipus-list'], {relativeTo: this._route});
+        this.irattipusservice.ContainerMode = IrattipusContainerMode.List;
       })
       .catch(err => {
         this.errormodal.show(err);
@@ -46,6 +39,6 @@ export class IrattipusTorlesComponent implements OnInit {
       });
   }
   cancel() {
-    this._router.navigate(['../blank'], {relativeTo: this._route});
+    this.irattipusservice.EgyMode = IrattipusEgyMode.Reszletek;
   }
 }

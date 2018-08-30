@@ -1,8 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {TeendoService} from '../teendo.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {NumberResult} from '../../dtos/numberresult';
+import {TeendoContainerMode} from "../teendocontainermode";
+import {TeendoEgyMode} from "../teendoegymode";
 
 @Component({
   selector: 'app-teendo-szerkesztes',
@@ -15,9 +16,7 @@ export class TeendoSzerkesztesComponent {
   teendoservice: TeendoService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              teendoservice: TeendoService) {
+  constructor(teendoservice: TeendoService) {
     this.teendoservice = teendoservice;
   }
 
@@ -63,9 +62,9 @@ export class TeendoSzerkesztesComponent {
   }
   navigal() {
     if (this.teendoservice.uj) {
-      this._router.navigate(['../teendo-list'], {relativeTo: this._route});
+      this.teendoservice.ContainerMode = TeendoContainerMode.List;
     } else {
-      this._router.navigate(['../blank'], {relativeTo: this._route});
+      this.teendoservice.EgyMode = TeendoEgyMode.Reszletek;
     }
   }
 }

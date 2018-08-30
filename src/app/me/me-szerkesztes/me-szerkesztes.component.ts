@@ -2,8 +2,8 @@ import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {MeService} from '../me.service';
 import {NumberResult} from '../../dtos/numberresult';
-import {MeContainerMode} from "../mecontainermode";
-import {MeEgyMode} from "../meegymode";
+import {MeContainerMode} from '../mecontainermode';
+import {MeEgyMode} from '../meegymode';
 
 @Component({
   selector: 'app-me-szerkesztes',

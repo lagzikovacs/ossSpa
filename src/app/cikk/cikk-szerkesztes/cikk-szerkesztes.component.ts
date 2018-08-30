@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {CikkService} from '../cikk.service';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {MeService} from '../../me/me.service';
@@ -9,19 +9,19 @@ import {MeZoomParameter} from '../../dtos/primitiv/me/mezoomparameter';
 import {AfakulcsZoomParameter} from '../../dtos/primitiv/afakulcs/afakulcszoomparameter';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {TermekdijZoomParameter} from '../../dtos/primitiv/termekdij/termekdijzoomparameter';
-import {CikkContainerMode} from "../cikkcontainermode";
-import {CikkEgyMode} from "../cikkegymode";
-import {MeContainerMode} from "../../me/mecontainermode";
-import {AfakulcsContainerMode} from "../../afakulcs/afakulcscontainermode";
-import {CikkSzerkesztesMode} from "../cikkszerkesztesmode";
-import {TermekdijContainerMode} from "../../termekdij/termekdijcontainermode";
+import {CikkContainerMode} from '../cikkcontainermode';
+import {CikkEgyMode} from '../cikkegymode';
+import {MeContainerMode} from '../../me/mecontainermode';
+import {AfakulcsContainerMode} from '../../afakulcs/afakulcscontainermode';
+import {CikkSzerkesztesMode} from '../cikkszerkesztesmode';
+import {TermekdijContainerMode} from '../../termekdij/termekdijcontainermode';
 
 @Component({
   selector: 'app-cikk-szerkesztes',
   templateUrl: './cikk-szerkesztes.component.html',
   styleUrls: ['./cikk-szerkesztes.component.css']
 })
-export class CikkSzerkesztesComponent implements OnInit {
+export class CikkSzerkesztesComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   cikkservice: CikkService;
@@ -32,9 +32,6 @@ export class CikkSzerkesztesComponent implements OnInit {
               private _afakulcsservice: AfakulcsService,
               private _termekdijservice: TermekdijService) {
     this.cikkservice = cikkservice;
-  }
-
-  ngOnInit() {
   }
 
   onSubmit() {

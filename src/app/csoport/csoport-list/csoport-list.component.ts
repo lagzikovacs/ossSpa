@@ -2,6 +2,8 @@ import {Component, ViewChild} from '@angular/core';
 import {CsoportService} from '../csoport.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {CsoportContainerMode} from "../csoportcontainermode";
+import {CsoportEgyMode} from "../csoportegymode";
 
 @Component({
   selector: 'app-csoport-list',
@@ -16,9 +18,7 @@ export class CsoportListComponent {
   eppFrissit = false;
   csoportservice: CsoportService;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              csoportservice: CsoportService) {
+  constructor(csoportservice: CsoportService) {
     this.csoportservice = csoportservice;
   }
 
@@ -83,7 +83,8 @@ export class CsoportListComponent {
         this.csoportservice.DtoCsoportLehetsegesJog = res1.Result;
 
         this.eppFrissit = false;
-        this._router.navigate(['../csoport-egy'], {relativeTo: this._route});
+        this.csoportservice.ContainerMode = CsoportContainerMode.Egy;
+        this.csoportservice.EgyMode = CsoportEgyMode.Reszletek;
       })
       .catch(err => {
         this.errormodal.show(err);
@@ -104,7 +105,7 @@ export class CsoportListComponent {
         this.csoportservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this._router.navigate(['../csoportuj'], {relativeTo: this._route});
+        this.csoportservice.ContainerMode = CsoportContainerMode.Uj;
       })
       .catch(err => {
         this.errormodal.show(err);

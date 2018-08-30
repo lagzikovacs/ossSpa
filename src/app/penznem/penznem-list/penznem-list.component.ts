@@ -1,12 +1,14 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {PenznemService} from '../penznem.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
-import {PenztarService} from '../../services/eszkoz/penztar/penztar.service';
+import {PenztarService} from '../../penztar/penztar.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import {LogonService} from '../../services/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {SzamlazasirendService} from '../../services/eszkoz/projekt/szamlazasirend.service';
+import {PenznemEgyMode} from "../penznemegymode";
+import {PenznemContainerMode} from "../penznemcontainermode";
+import {PenztarSzerkesztesMode} from "../../penztar/penztarszerkesztesmode";
 
 @Component({
   selector: 'app-penznem-list',
@@ -22,9 +24,7 @@ export class PenznemListComponent implements OnInit {
   mod = false;
   penznemservice: PenznemService;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              private _logonservice: LogonService,
+  constructor(private _logonservice: LogonService,
               penznemservice: PenznemService,
               private _penztarservice: PenztarService,
               private _szamlazasirendservice: SzamlazasirendService) {
@@ -88,13 +88,20 @@ export class PenznemListComponent implements OnInit {
   }
   stopzoom() {
     this.penznemservice.zoom = false;
-    this._router.navigate(['../blank'], {relativeTo: this._route});
+
+    if (this.penznemservice.zoomsource === ZoomSources.Penztar) {
+      this._penztarservice.SzerkesztesMode = PenztarSzerkesztesMode.Blank;
+    }
+    if (this.penznemservice.zoomsource === ZoomSources.Szamlazasirend) {
+      // this._szamlazasirendservice.SzerkesztesMode = SzalazasirendSzerkesztesMode.Blank;
+    }
   }
 
   setClickedRow(i: number) {
     this.penznemservice.DtoSelectedIndex = i;
     this.penznemservice.uj = false;
-    this._router.navigate(['../penznem-egy'], {relativeTo: this._route});
+    this.penznemservice.ContainerMode = PenznemContainerMode.Egy;
+    this.penznemservice.EgyMode = PenznemEgyMode.Reszletek;
   }
 
   uj() {
@@ -110,7 +117,7 @@ export class PenznemListComponent implements OnInit {
         this.penznemservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this._router.navigate(['../penznemuj'], {relativeTo: this._route});
+        this.penznemservice.ContainerMode = PenznemContainerMode.Uj;
       })
       .catch(err => {
         this.errormodal.show(err);

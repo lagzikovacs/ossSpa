@@ -1,7 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {CsoportService} from '../csoport.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {CsoportContainerMode} from "../csoportcontainermode";
+import {CsoportEgyMode} from "../csoportegymode";
 
 @Component({
   selector: 'app-csoport-egy',
@@ -14,30 +15,28 @@ export class CsoportEgyComponent {
   csoportservice: CsoportService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              csoportservice: CsoportService) {
+  constructor(csoportservice: CsoportService) {
     this.csoportservice = csoportservice;
   }
 
   vissza() {
-    this._router.navigate(['../csoport-list'], {relativeTo: this._route});
+    this.csoportservice.ContainerMode = CsoportContainerMode.List;
   }
   reszletek() {
-    this._router.navigate(['reszletek'], {relativeTo: this._route});
+    this.csoportservice.EgyMode = CsoportEgyMode.Reszletek;
   }
   torles () {
-    this._router.navigate(['torles'], {relativeTo: this._route});
+    this.csoportservice.EgyMode = CsoportEgyMode.Torles;
   }
   modositas() {
     this.csoportservice.uj = false;
     this.csoportservice.DtoEdited = Object.assign({}, this.csoportservice.Dto[this.csoportservice.DtoSelectedIndex]);
-    this._router.navigate(['szerkesztes'], {relativeTo: this._route});
+    this.csoportservice.EgyMode = CsoportEgyMode.Modositas;
   }
   felhasznalo() {
-    this._router.navigate(['felhasznalo'], {relativeTo: this._route});
+    this.csoportservice.EgyMode = CsoportEgyMode.Felhasznalo;
   }
   jog() {
-    this._router.navigate(['jog'], {relativeTo: this._route});
+    this.csoportservice.EgyMode = CsoportEgyMode.Jog;
   }
 }

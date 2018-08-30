@@ -19,7 +19,7 @@ import {VolumeDto} from '../dtos/volume/volumedto';
 import {CsoportDto} from '../dtos/csoport/csoportdto';
 import {ProjektService} from './eszkoz/projekt/projekt.service';
 import {IratService} from './eszkoz/irat/irat.service';
-import {FeliratkozasService} from './eszkoz/feliratkozas.service';
+import {FeliratkozasService} from '../feliratkozas/feliratkozas.service';
 import {IratDto} from '../dtos/irat/iratdto';
 import {ProjektDto} from '../dtos/projekt/projektdto';
 import {FeliratkozasDto} from '../dtos/feliratkozas/feliratkozasdto';
@@ -38,7 +38,7 @@ import {AfakulcsDto} from '../dtos/primitiv/afakulcs/afakulcsdto';
 import {TermekdijDto} from '../dtos/primitiv/termekdij/termekdijdto';
 import {CikkDto} from '../dtos/torzs/cikk/cikkdto';
 import {PenztarDto} from '../dtos/penztar/penztardto';
-import {PenztarService} from './eszkoz/penztar/penztar.service';
+import {PenztarService} from '../penztar/penztar.service';
 import {ProjektkapcsolatService} from './eszkoz/projekt/projektkapcsolat.service';
 import {ProjektKapcsolatDto} from '../dtos/projekt/projektkapcsolatdto';
 import {SzamlazasirendService} from './eszkoz/projekt/szamlazasirend.service';
@@ -54,6 +54,14 @@ import {MeContainerMode} from "../me/mecontainermode";
 import {AfakulcsContainerMode} from "../afakulcs/afakulcscontainermode";
 import {TermekdijContainerMode} from "../termekdij/termekdijcontainermode";
 import {CikkContainerMode} from "../cikk/cikkcontainermode";
+import {IrattipusContainerMode} from "../irattipus/irattipuscontainermode";
+import {TeendoContainerMode} from "../teendo/teendocontainermode";
+import {FizetesimodContainerMode} from "../fizetesimod/fizetesimodcontainermode";
+import {PenznemContainerMode} from "../penznem/penznemcontainermode";
+import {FelhasznaloContainerMode} from "../felhasznalo/felhasznalocontainermode";
+import {CsoportContainerMode} from "../csoport/csoportcontainermode";
+import {FeliratkozasContainerMode} from "../feliratkozas/feliratkozascontainermode";
+import {PenztarContainerMode} from "../penztar/penztarcontainermode";
 
 @Injectable({
   providedIn: 'root'
@@ -101,18 +109,22 @@ export class MenuService {
   menuclick(utvonal: string) {
     switch (utvonal) {
       case '/irattipus':
+        this._irattipusservice.ContainerMode = IrattipusContainerMode.List;
         this._irattipusservice.zoom = false;
         this._irattipusservice.Dto = new Array<IrattipusDto>();
         break;
       case '/teendo':
+        this._teendoservice.ContainerMode = TeendoContainerMode.List;
         this._teendoservice.zoom = false;
         this._teendoservice.Dto = new Array<TeendoDto>();
         break;
       case '/fizetesimod':
+        this._fizetesimodservice.ContainerMode = FizetesimodContainerMode.List;
         this._fizetesimodservice.zoom = false;
         this._fizetesimodservice.Dto = new Array<FizetesimodDto>();
         break;
       case '/penznem':
+        this._penznemservice.ContainerMode = PenznemContainerMode.List;
         this._penznemservice.zoom = false;
         this._penznemservice.Dto = new Array<PenznemDto>();
         break;
@@ -157,10 +169,12 @@ export class MenuService {
         this._iratservice.Dto = new Array<IratDto>();
       break;
       case '/penztar':
+        this._penztarservice.ContainerMode = PenztarContainerMode.List;
         this._penztarservice.ekDto.minta = '';
         this._penztarservice.Dto = new Array<PenztarDto>();
         break;
       case '/feliratkozas':
+        this._feliratkozasservice.ContainerMode = FeliratkozasContainerMode.List;
         this._feliratkozasservice.Dto = new Array<FeliratkozasDto>();
       break;
 
@@ -172,10 +186,12 @@ export class MenuService {
         this._volumeservice.Dto = new Array<VolumeDto>();
         break;
       case '/felhasznalo':
+        this._felhasznaloservice.ContainerMode = FelhasznaloContainerMode.List;
         this._felhasznaloservice.zoom = false;
         this._felhasznaloservice.Dto = new Array<FelhasznaloDto>();
         break;
       case '/csoport':
+        this._csoportservice.ContainerMode = CsoportContainerMode.List;
         this._csoportservice.zoom = false;
         this._csoportservice.Dto = new Array<CsoportDto>();
         break;

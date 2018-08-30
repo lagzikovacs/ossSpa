@@ -5,9 +5,9 @@ import {ZoomSources} from '../../enums/zoomsources';
 import {CikkService} from '../../cikk/cikk.service';
 import {LogonService} from '../../services/logon.service';
 import {JogKod} from '../../enums/jogkod';
-import {CikkSzerkesztesMode} from "../../cikk/cikkszerkesztesmode";
-import {MeEgyMode} from "../meegymode";
-import {MeContainerMode} from "../mecontainermode";
+import {CikkSzerkesztesMode} from '../../cikk/cikkszerkesztesmode';
+import {MeEgyMode} from '../meegymode';
+import {MeContainerMode} from '../mecontainermode';
 
 @Component({
   selector: 'app-me-list',

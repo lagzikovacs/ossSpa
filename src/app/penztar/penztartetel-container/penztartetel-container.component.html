@@ -1,0 +1,12 @@
+<!--
+export enum PenztartetelContainerMode {
+List = 1,
+Uj = 2
+}-->
+
+<ng-container *ngIf="penztartetelservice.ContainerMode === 1">
+  <app-penztartetel-list></app-penztartetel-list>
+</ng-container>
+<ng-container *ngIf="penztartetelservice.ContainerMode === 2">
+  <app-penztartetel-szerkesztes></app-penztartetel-szerkesztes>
+</ng-container>

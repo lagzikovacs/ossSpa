@@ -1,9 +1,10 @@
 import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {IrattipusService} from '../irattipus.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {LogonService} from '../../services/logon.service';
 import {JogKod} from '../../enums/jogkod';
+import {IrattipusEgyMode} from "../irattipusegymode";
+import {IrattipusContainerMode} from "../irattipuscontainermode";
 
 @Component({
   selector: 'app-irattipus-egy',
@@ -17,26 +18,24 @@ export class IrattipusEgyComponent {
   mod = false;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              private _logonservice: LogonService,
+  constructor(private _logonservice: LogonService,
               irattipusservice: IrattipusService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.irattipusservice = irattipusservice;
   }
 
   vissza() {
-    this._router.navigate(['../irattipus-list'], {relativeTo: this._route});
+    this.irattipusservice.ContainerMode = IrattipusContainerMode.List;
   }
   reszletek() {
-    this._router.navigate(['reszletek'], {relativeTo: this._route});
+    this.irattipusservice.EgyMode = IrattipusEgyMode.Reszletek;
   }
   torles () {
-    this._router.navigate(['torles'], {relativeTo: this._route});
+    this.irattipusservice.EgyMode = IrattipusEgyMode.Torles;
   }
   modositas() {
     this.irattipusservice.uj = false;
     this.irattipusservice.DtoEdited = Object.assign({}, this.irattipusservice.Dto[this.irattipusservice.DtoSelectedIndex]);
-    this._router.navigate(['szerkesztes'], {relativeTo: this._route});
+    this.irattipusservice.EgyMode = IrattipusEgyMode.Modositas;
   }
 }

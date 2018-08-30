@@ -7,6 +7,8 @@ import {JogKod} from '../../enums/jogkod';
 import {ZoomSources} from '../../enums/zoomsources';
 import {ProjektkapcsolatService} from '../../services/eszkoz/projekt/projektkapcsolat.service';
 import {IratService} from '../../services/eszkoz/irat/irat.service';
+import {IrattipusEgyMode} from "../irattipusegymode";
+import {IrattipusContainerMode} from "../irattipuscontainermode";
 
 @Component({
   selector: 'app-irattipus-list',
@@ -22,9 +24,7 @@ export class IrattipusListComponent implements OnInit {
   mod = false;
   irattipusservice: IrattipusService;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              private _logonservice: LogonService,
+  constructor(private _logonservice: LogonService,
               private _iratservice: IratService,
               private _projektkapcsolatservice: ProjektkapcsolatService,
               irattipusservice: IrattipusService) {
@@ -88,13 +88,20 @@ export class IrattipusListComponent implements OnInit {
   }
   stopzoom() {
     this.irattipusservice.zoom = false;
-    this._router.navigate(['../blank'], {relativeTo: this._route});
+
+    if (this.irattipusservice.zoomsource === ZoomSources.Irat) {
+      // this._iratservice.SzerkesztesMode = IratSzerkesztesMode.Blank;
+    }
+    if (this.irattipusservice.zoomsource === ZoomSources.Projektirat) {
+      // this._projektkapcsolatservice.SzerkesztesMode = ProjektkapcsolatSzerkesztesMode.Blank;
+    }
   }
 
   setClickedRow(i: number) {
     this.irattipusservice.DtoSelectedIndex = i;
     this.irattipusservice.uj = false;
-    this._router.navigate(['../irattipus-egy'], {relativeTo: this._route});
+    this.irattipusservice.ContainerMode = IrattipusContainerMode.Egy;
+    this.irattipusservice.EgyMode = IrattipusEgyMode.Reszletek;
   }
 
   uj() {
@@ -110,7 +117,7 @@ export class IrattipusListComponent implements OnInit {
         this.irattipusservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this._router.navigate(['../irattipusuj'], {relativeTo: this._route});
+        this.irattipusservice.ContainerMode = IrattipusContainerMode.Uj;
       })
       .catch(err => {
         this.errormodal.show(err);

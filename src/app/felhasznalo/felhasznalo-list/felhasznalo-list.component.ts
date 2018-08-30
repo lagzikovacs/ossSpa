@@ -6,6 +6,8 @@ import {LogonService} from '../../services/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ZoomSources} from '../../enums/zoomsources';
 import {ProjektteendoService} from '../../services/eszkoz/projekt/projektteendo.service';
+import {FelhasznaloContainerMode} from "../felhasznalocontainermode";
+import {FelhasznaloEgyMode} from "../felhasznaloegymode";
 
 @Component({
   selector: 'app-felhasznalo-list',
@@ -21,9 +23,7 @@ export class FelhasznaloListComponent implements OnInit {
   mod = false;
   felhasznaloservice: FelhasznaloService;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              private _logonservice: LogonService,
+  constructor(private _logonservice: LogonService,
               felhasznaloservice: FelhasznaloService,
               private _projektteendoservice: ProjektteendoService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.FELHASZNALOMOD]);
@@ -79,13 +79,17 @@ export class FelhasznaloListComponent implements OnInit {
   }
   stopzoom() {
     this.felhasznaloservice.zoom = false;
-    this._router.navigate(['../blank'], {relativeTo: this._route});
+
+    if (this.felhasznaloservice.zoomsource === ZoomSources.Projektteendo) {
+      // this._projektteendoservice.SzerkesztesMode = ProjektteendoSzerkesztesMode.Blank;
+    }
   }
 
   setClickedRow(i: number) {
     this.felhasznaloservice.DtoSelectedIndex = i;
     this.felhasznaloservice.uj = false;
-    this._router.navigate(['../felhasznaloegy'], {relativeTo: this._route});
+    this.felhasznaloservice.ContainerMode = FelhasznaloContainerMode.Egy;
+    this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Reszletek;
   }
 
   uj() {
@@ -101,7 +105,7 @@ export class FelhasznaloListComponent implements OnInit {
         this.felhasznaloservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this._router.navigate(['../felhasznalouj'], {relativeTo: this._route});
+        this.felhasznaloservice.ContainerMode = FelhasznaloContainerMode.Uj;
       })
       .catch(err => {
         this.errormodal.show(err);

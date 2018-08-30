@@ -1,29 +1,22 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {FizetesimodService} from '../fizetesimod.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {FizetesimodContainerMode} from "../fizetesimodcontainermode";
+import {FizetesimodEgyMode} from "../fizetesimodegymode";
 
 @Component({
   selector: 'app-fizetesimod-torles',
   templateUrl: './fizetesimod-torles.component.html',
   styleUrls: ['./fizetesimod-torles.component.css']
 })
-export class FizetesimodTorlesComponent implements OnInit {
+export class FizetesimodTorlesComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   fizetesimodservice: FizetesimodService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              fizetesimodservice: FizetesimodService) {
+  constructor(fizetesimodservice: FizetesimodService) {
     this.fizetesimodservice = fizetesimodservice;
-  }
-
-  ngOnInit() {
-    if (this.fizetesimodservice.DtoSelectedIndex === -1) {
-      this._router.navigate(['../blank'], {relativeTo: this._route});
-    }
   }
 
   ok() {
@@ -38,7 +31,7 @@ export class FizetesimodTorlesComponent implements OnInit {
         this.fizetesimodservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this._router.navigate(['../../fizetesimod-list'], {relativeTo: this._route});
+        this.fizetesimodservice.ContainerMode = FizetesimodContainerMode.List;
       })
       .catch(err => {
         this.errormodal.show(err);
@@ -46,6 +39,6 @@ export class FizetesimodTorlesComponent implements OnInit {
       });
   }
   cancel() {
-    this._router.navigate(['../blank'], {relativeTo: this._route});
+    this.fizetesimodservice.EgyMode = FizetesimodEgyMode.Reszletek;
   }
 }

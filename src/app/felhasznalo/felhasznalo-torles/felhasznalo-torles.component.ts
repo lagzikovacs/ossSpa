@@ -1,29 +1,22 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {FelhasznaloService} from '../felhasznalo.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {FelhasznaloContainerMode} from "../felhasznalocontainermode";
+import {FelhasznaloEgyMode} from "../felhasznaloegymode";
 
 @Component({
   selector: 'app-felhasznalo-torles',
   templateUrl: './felhasznalo-torles.component.html',
   styleUrls: ['./felhasznalo-torles.component.css']
 })
-export class FelhasznaloTorlesComponent implements OnInit {
+export class FelhasznaloTorlesComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   felhasznaloservice: FelhasznaloService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              felhasznaloservice: FelhasznaloService) {
+  constructor(felhasznaloservice: FelhasznaloService) {
     this.felhasznaloservice = felhasznaloservice;
-  }
-
-  ngOnInit() {
-    if (this.felhasznaloservice.DtoSelectedIndex === -1) {
-      this._router.navigate(['../blank'], {relativeTo: this._route});
-    }
   }
 
   ok() {
@@ -38,7 +31,7 @@ export class FelhasznaloTorlesComponent implements OnInit {
         this.felhasznaloservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this._router.navigate(['../../felhasznalo-list'], {relativeTo: this._route});
+        this.felhasznaloservice.ContainerMode = FelhasznaloContainerMode.List;
       })
       .catch(err => {
         this.errormodal.show(err);
@@ -46,6 +39,6 @@ export class FelhasznaloTorlesComponent implements OnInit {
       });
   }
   cancel() {
-    this._router.navigate(['../blank'], {relativeTo: this._route});
+    this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Reszletek;
   }
 }

@@ -1,15 +1,15 @@
 import {Component, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from "../../../tools/errormodal/errormodal.component";
-import {LogonService} from "../../../services/logon.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ProjektteendoService} from "../projektteendo.service";
+import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {LogonService} from '../../../services/logon.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ProjektteendoService} from '../projektteendo.service';
 
 @Component({
-  selector: 'app-projekt-teendoegy',
-  templateUrl: './projekt-teendoegy.component.html',
-  styleUrls: ['./projekt-teendoegy.component.css']
+  selector: 'app-projekt-teendo-egy',
+  templateUrl: './projekt-teendo-egy.component.html',
+  styleUrls: ['./projekt-teendo-egy.component.css']
 })
-export class ProjektTeendoegyComponent {
+export class ProjektTeendoEgyComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektteendoservice: ProjektteendoService;

@@ -83,7 +83,6 @@ export class ProjektListComponent {
 
   setClickedRow(i: number) {
     this.projektservice.DtoSelectedIndex = i;
-    this.projektservice.uj = false;
     this.projektservice.ContainerMode = ProjektContainerMode.Egy;
     this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
     this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;

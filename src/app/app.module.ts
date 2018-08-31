@@ -43,7 +43,7 @@ import { ProjektNapelemComponent } from './projekt/projekt/projekt-napelem/proje
 import { ProjektIratmintaComponent } from './projekt/projekt/projekt-iratminta/projekt-iratminta.component';
 import { ProjektBizonylatesiratComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat/projekt-bizonylatesirat.component';
 import { ProjektSzamlazasirendComponent } from './projekt/szamlazasirend/projekt-szamlazasirend/projekt-szamlazasirend.component';
-import { ProjektTeendoComponent } from './projekt/teendo/projekt-teendo/projekt-teendo.component';
+import { ProjektTeendoListComponent } from './projekt/teendo/projekt-teendo-list/projekt-teendo-list.component';
 import { IratListComponent } from './irat/irat/irat-list/irat-list.component';
 import { IratEgyComponent } from './irat/irat/irat-egy/irat-egy.component';
 import {IratToolbarComponent} from './irat/irat/irattolbar/irattoolbar.component';
@@ -161,7 +161,7 @@ import { ProjektSzamlazasirendegyComponent } from './projekt/szamlazasirend/proj
 import { ProjektSzamlazasirendSzerkesztesComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-szerkesztes/projekt-szamlazasirend-szerkesztes.component';
 import { ProjektSzamlazasirendTorlesComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-torles/projekt-szamlazasirend-torles.component';
 import { ProjektSzamlazasirendReszletekComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-reszletek/projekt-szamlazasirend-reszletek.component';
-import { ProjektTeendoegyComponent } from './projekt/teendo/projekt-teendoegy/projekt-teendoegy.component';
+import { ProjektTeendoEgyComponent } from './projekt/teendo/projekt-teendo-egy/projekt-teendo-egy.component';
 import { ProjektTeendoSzerkesztesComponent } from './projekt/teendo/projekt-teendo-szerkesztes/projekt-teendo-szerkesztes.component';
 import { ProjektTeendoTorlesComponent } from './projekt/teendo/projekt-teendo-torles/projekt-teendo-torles.component';
 import { ProjektTeendoReszletekComponent } from './projekt/teendo/projekt-teendo-reszletek/projekt-teendo-reszletek.component';
@@ -414,7 +414,7 @@ const routes: Routes = [
 //       ]},
 //       {path: 'blank', component: BlankComponent}
 //     ]},
-//     {path: 'projektteendo', component: ProjektTeendoComponent},
+//     {path: 'projektteendo', component: ProjektTeendoListComponent},
 //     {path: 'projektteendouj', component: ProjektTeendoSzerkesztesComponent, children: [
 // //itt
 //       {path: 'felhasznalo', component: FelhasznaloListComponent, canActivate: [RoleGuard]},
@@ -439,7 +439,7 @@ const routes: Routes = [
 // //itt
 //     ]},
 //     {path: 'blank', component: BlankComponent},
-//     {path: 'projektteendoegy', component: ProjektTeendoegyComponent, children: [
+//     {path: 'projektteendoegy', component: ProjektTeendoEgyComponent, children: [
 //       {path: 'reszletek', component: ProjektTeendoReszletekComponent},
 //       {path: 'torles', component: ProjektTeendoTorlesComponent},
 //       {path: 'szerkesztes', component: ProjektTeendoSzerkesztesComponent, children: [
@@ -648,7 +648,7 @@ if (environment.production) {
     ProjektIratmintaComponent,
     ProjektBizonylatesiratComponent,
     ProjektSzamlazasirendComponent,
-    ProjektTeendoComponent,
+    ProjektTeendoListComponent,
     IratListComponent,
     IratEgyComponent,
     IratToolbarComponent,
@@ -753,7 +753,7 @@ if (environment.production) {
     ProjektSzamlazasirendSzerkesztesComponent,
     ProjektSzamlazasirendTorlesComponent,
     ProjektSzamlazasirendReszletekComponent,
-    ProjektTeendoegyComponent,
+    ProjektTeendoEgyComponent,
     ProjektTeendoSzerkesztesComponent,
     ProjektTeendoTorlesComponent,
     ProjektTeendoReszletekComponent,

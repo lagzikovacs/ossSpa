@@ -5,11 +5,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 
 @Component({
-  selector: 'app-projekt-teendo',
-  templateUrl: './projekt-teendo.component.html',
-  styleUrls: ['./projekt-teendo.component.css']
+  selector: 'app-projekt-teendo-list',
+  templateUrl: './projekt-teendo-list.component.html',
+  styleUrls: ['./projekt-teendo-list.component.css']
 })
-export class ProjektTeendoComponent {
+export class ProjektTeendoListComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektteendoservice: ProjektteendoService;

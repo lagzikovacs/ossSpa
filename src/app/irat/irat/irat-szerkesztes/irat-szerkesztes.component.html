@@ -1,0 +1,110 @@
+<div class="alapkeret">
+  <h5 *ngIf="iratservice.uj">Új {{iratservice.cim | lowercase}}</h5>
+  <h5 *ngIf="!iratservice.uj">{{iratservice.cim}} módosítása</h5>
+
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Irány</div>
+      </div>
+      <div class="col-md-2">
+        <select type="text" class="form-control form-control-sm"
+                [(ngModel)]="iratservice.DtoEdited.IRANY" name="irany">
+          <option>Be</option>
+          <option>Ki</option>
+          <option>Belső</option>
+        </select>
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Keletkezett</div>
+      </div>
+      <div class="col-md-2">
+        <input type="date" class="form-control form-control-sm" id="keletkezett"
+               [(ngModel)]="Keletkezett" name="keletkezett">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Irattipus</div>
+      </div>
+      <div class="col-md-3">
+        <input type="text" class="form-control form-control-sm" id="irattipus"
+               maxlength="30" required autocomplete="off" style="background-color: aquamarine"
+               [(ngModel)]="iratservice.DtoEdited.IRATTIPUS" name="irattipus">
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="IrattipusZoom()">...</button>
+      </div>
+    </div>
+
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Ügyfél</div>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control form-control-sm" id="ugyfelnev"
+               maxlength="200" autocomplete="off" style="background-color: aquamarine"
+               [(ngModel)]="iratservice.DtoEdited.UGYFELNEV" name="ugyfelnev">
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="UgyfelZoom()">...</button>
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control form-control-sm" id="ugyfelcim"
+               autocomplete="off" readonly="true"
+               [(ngModel)]="iratservice.DtoEdited.UGYFELCIM" name="ugyfelcim">
+      </div>
+    </div>
+
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Küldő</div>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control form-control-sm" id="kuldo"
+               maxlength="100" autocomplete="off"
+               [(ngModel)]="iratservice.DtoEdited.KULDO" name="kuldo">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Tárgy</div>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control form-control-sm" id="targy"
+               maxlength="200" autocomplete="off"
+               [(ngModel)]="iratservice.DtoEdited.TARGY" name="targy">
+      </div>
+    </div>
+
+    <div class="row no-gutters" style="margin-bottom: 10px">
+      <div class="col-md-2"></div>
+      <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
+      <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
+    </div>
+  </form>
+
+<!--  export enum IratSzerkesztesMode {
+  Blank = 0,
+  IrattipusZoom = 1,
+  UgyfelZoom = 2,
+  }-->
+  <ng-container *ngIf="iratservice.SzerkesztesMode === 0">
+    <app-blank></app-blank>
+  </ng-container>
+  <ng-container *ngIf="iratservice.SzerkesztesMode === 1">
+    <app-irattipus-container></app-irattipus-container>
+  </ng-container>
+  <ng-container *ngIf="iratservice.SzerkesztesMode === 2">
+    <app-ugyfel-container></app-ugyfel-container>
+  </ng-container>
+
+  <app-errormodal [cim]="iratservice.cim"></app-errormodal>
+</div>

@@ -5,10 +5,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {LogonService} from '../../services/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ZoomSources} from '../../enums/zoomsources';
-import {ProjektkapcsolatService} from '../../projekt/projektkapcsolat.service';
-import {IratService} from '../../irat/irat.service';
+import {ProjektkapcsolatService} from '../../projekt/bizonylatesirat/projektkapcsolat.service';
+import {IratService} from '../../irat/irat/irat.service';
 import {IrattipusEgyMode} from "../irattipusegymode";
 import {IrattipusContainerMode} from "../irattipuscontainermode";
+import {IratSzerkesztesMode} from "../../irat/irat/iratszerkesztesmode";
 
 @Component({
   selector: 'app-irattipus-list',
@@ -90,7 +91,7 @@ export class IrattipusListComponent implements OnInit {
     this.irattipusservice.zoom = false;
 
     if (this.irattipusservice.zoomsource === ZoomSources.Irat) {
-      // this._iratservice.SzerkesztesMode = IratSzerkesztesMode.Blank;
+      this._iratservice.SzerkesztesMode = IratSzerkesztesMode.Blank;
     }
     if (this.irattipusservice.zoomsource === ZoomSources.Projektirat) {
       // this._projektkapcsolatservice.SzerkesztesMode = ProjektkapcsolatSzerkesztesMode.Blank;

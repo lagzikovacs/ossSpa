@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {LogonService} from '../../services/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ZoomSources} from '../../enums/zoomsources';
-import {ProjektteendoService} from '../../projekt/projektteendo.service';
+import {ProjektteendoService} from '../../projekt/teendo/projektteendo.service';
 import {FelhasznaloContainerMode} from "../felhasznalocontainermode";
 import {FelhasznaloEgyMode} from "../felhasznaloegymode";
 

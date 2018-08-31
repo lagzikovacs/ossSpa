@@ -4,7 +4,7 @@ import {TeendoService} from '../teendo.service';
 import {JogKod} from '../../enums/jogkod';
 import {LogonService} from '../../services/logon.service';
 import {ZoomSources} from '../../enums/zoomsources';
-import {ProjektteendoService} from '../../projekt/projektteendo.service';
+import {ProjektteendoService} from '../../projekt/teendo/projektteendo.service';
 import {TeendoContainerMode} from "../teendocontainermode";
 import {TeendoEgyMode} from "../teendoegymode";
 

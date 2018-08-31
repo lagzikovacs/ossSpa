@@ -1,5 +1,6 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {DokumentumService} from '../dokumentum.service';
+import {DokumentumContainerMode} from "../dokumentumcontainermode";
 
 @Component({
   selector: 'app-dokumentum-feltoltes',
@@ -34,7 +35,12 @@ export class DokumentumFeltoltesComponent {
   }
 
   onSubmit() {
+    this.navigal();
   }
   cancel() {
+    this.navigal();
+  }
+  navigal() {
+    this.dokumentumservice.ContainerMode = DokumentumContainerMode.List;
   }
 }

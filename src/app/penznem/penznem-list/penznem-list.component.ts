@@ -5,7 +5,7 @@ import {PenztarService} from '../../penztar/penztar.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import {LogonService} from '../../services/logon.service';
 import {JogKod} from '../../enums/jogkod';
-import {SzamlazasirendService} from '../../projekt/szamlazasirend.service';
+import {SzamlazasirendService} from '../../projekt/szamlazasirend/szamlazasirend.service';
 import {PenznemEgyMode} from "../penznemegymode";
 import {PenznemContainerMode} from "../penznemcontainermode";
 import {PenztarSzerkesztesMode} from "../../penztar/penztarszerkesztesmode";

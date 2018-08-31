@@ -1,0 +1,33 @@
+<div class="alapkeret">
+  <h5>{{dokumentumservice.cim}}</h5>
+  <h6 *ngIf="dokumentumservice.DtoSelectedIndex !== -1">{{dokumentumservice.Dto[dokumentumservice.DtoSelectedIndex].MEGJEGYZES}}</h6>
+  <div>
+    <nav>
+      <button (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-arrow-left" style="margin-right: 3px" aria-hidden="true"></i>Vissza
+      </button>
+      <button (click)="reszletek()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>Részletesen
+      </button>
+      <button [disabled]="dokumentumservice.uj" (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-minus" aria-hidden="true"></i>
+      </button>
+      <button [disabled]="dokumentumservice.uj" (click)="letoltes()" class="btn btn-sm btn-outline-primary navgomb">
+        Letöltés
+      </button>
+    </nav>
+  </div>
+
+<!--  export enum DokumentumEgyMode {
+  Reszletek = 1,
+  Torles = 2,
+  }-->
+  <ng-container *ngIf="dokumentumservice.EgyMode === 1">
+    <app-dokumentum-reszletek></app-dokumentum-reszletek>
+  </ng-container>
+  <ng-container *ngIf="dokumentumservice.EgyMode === 2">
+    <app-dokumentum-torles></app-dokumentum-torles>
+  </ng-container>
+
+  <app-errormodal [cim]="dokumentumservice.cim"></app-errormodal>
+</div>

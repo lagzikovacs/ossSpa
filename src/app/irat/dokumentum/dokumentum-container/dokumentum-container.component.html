@@ -1,0 +1,16 @@
+<!--export enum IratContainerMode {
+  Blank = 0,
+  List = 1,
+  Egy = 2,
+  Feltoltes = 3
+}-->
+
+<ng-container *ngIf="dokumentumservice.ContainerMode === 1">
+  <app-dokumentum-list></app-dokumentum-list>
+</ng-container>
+<ng-container *ngIf="dokumentumservice.ContainerMode === 2">
+  <app-dokumentum-egy></app-dokumentum-egy>
+</ng-container>
+<ng-container *ngIf="dokumentumservice.ContainerMode === 3">
+  <app-dokumentum-feltoltes></app-dokumentum-feltoltes>
+</ng-container>

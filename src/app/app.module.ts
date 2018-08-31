@@ -31,28 +31,28 @@ import { FelhasznaloTorlesComponent } from './felhasznalo/felhasznalo-torles/fel
 import { FelhasznaloSzerkesztesComponent } from './felhasznalo/felhasznalo-szerkesztes/felhasznalo-szerkesztes.component';
 import { FelhasznaloJelszoComponent } from './felhasznalo/felhasznalo-jelszo/felhasznalo-jelszo.component';
 import { BlankComponent } from './tools/blank/blank.component';
-import { ProjektComponent } from './projekt/projekt/projekt.component';
-import { ProjektegyComponent } from './projekt/projektegy/projektegy.component';
-import { ProjektSzerkesztesComponent } from './projekt/projekt-szerkesztes/projekt-szerkesztes.component';
-import { ProjektTorlesComponent } from './projekt/projekt-torles/projekt-torles.component';
+import { ProjektComponent } from './projekt/projekt/projekt-list/projekt.component';
+import { ProjektegyComponent } from './projekt/projekt/projekt-egy/projektegy.component';
+import { ProjektSzerkesztesComponent } from './projekt/projekt/projekt-szerkesztes/projekt-szerkesztes.component';
+import { ProjektTorlesComponent } from './projekt/projekt/projekt-torles/projekt-torles.component';
 import {ProjektToolbarComponent} from './projekt/projekttoolbar/projekttoolbar.component';
-import {ProjektService} from './projekt/projekt.service';
-import { ProjektMuszakiallapotComponent } from './projekt/projekt-muszakiallapot/projekt-muszakiallapot.component';
-import { ProjektInverterComponent } from './projekt/projekt-inverter/projekt-inverter.component';
-import { ProjektNapelemComponent } from './projekt/projekt-napelem/projekt-napelem.component';
-import { ProjektIratmintaComponent } from './projekt/projekt-iratminta/projekt-iratminta.component';
-import { ProjektBizonylatesiratComponent } from './projekt/projekt-bizonylatesirat/projekt-bizonylatesirat.component';
-import { ProjektSzamlazasirendComponent } from './projekt/projekt-szamlazasirend/projekt-szamlazasirend.component';
-import { ProjektTeendoComponent } from './projekt/projekt-teendo/projekt-teendo.component';
-import { IratListComponent } from './irat/irat-list/irat-list.component';
-import { IratEgyComponent } from './irat/irat-egy/irat-egy.component';
-import {IratToolbarComponent} from './irat/irattolbar/irattoolbar.component';
-import { IratDokumentumComponent } from './irat/dokumentum/irat-dokumentum/irat-dokumentum.component';
-import {IratService} from './irat/irat.service';
+import {ProjektService} from './projekt/projekt/projekt.service';
+import { ProjektMuszakiallapotComponent } from './projekt/projekt/projekt-muszakiallapot/projekt-muszakiallapot.component';
+import { ProjektInverterComponent } from './projekt/projekt/projekt-inverter/projekt-inverter.component';
+import { ProjektNapelemComponent } from './projekt/projekt/projekt-napelem/projekt-napelem.component';
+import { ProjektIratmintaComponent } from './projekt/projekt/projekt-iratminta/projekt-iratminta.component';
+import { ProjektBizonylatesiratComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat/projekt-bizonylatesirat.component';
+import { ProjektSzamlazasirendComponent } from './projekt/szamlazasirend/projekt-szamlazasirend/projekt-szamlazasirend.component';
+import { ProjektTeendoComponent } from './projekt/teendo/projekt-teendo/projekt-teendo.component';
+import { IratListComponent } from './irat/irat/irat-list/irat-list.component';
+import { IratEgyComponent } from './irat/irat/irat-egy/irat-egy.component';
+import {IratToolbarComponent} from './irat/irat/irattolbar/irattoolbar.component';
+import { DokumentumListComponent } from './irat/dokumentum/dokumentum-list/dokumentum-list.component';
+import {IratService} from './irat/irat/irat.service';
 import {DokumentumService} from './irat/dokumentum/dokumentum.service';
-import { IratDokumentumegyComponent } from './irat/dokumentum/irat-dokumentumegy/irat-dokumentumegy.component';
-import { IratSzerkesztesComponent } from './irat/irat-szerkesztes/irat-szerkesztes.component';
-import { IratTorlesComponent } from './irat/irat-torles/irat-torles.component';
+import { DokumentumEgyComponent } from './irat/dokumentum/dokumentum-egy/dokumentum-egy.component';
+import { IratSzerkesztesComponent } from './irat/irat/irat-szerkesztes/irat-szerkesztes.component';
+import { IratTorlesComponent } from './irat/irat/irat-torles/irat-torles.component';
 import { DokumentumFeltoltesComponent } from './irat/dokumentum/dokumentum-feltoltes/dokumentum-feltoltes.component';
 import { DokumentumLetoltesComponent } from './irat/dokumentum/dokumentum-letoltes/dokumentum-letoltes.component';
 import { DokumentumTorlesComponent } from './irat/dokumentum/dokumentum-torles/dokumentum-torles.component';
@@ -75,7 +75,7 @@ import { VolumeTesztComponent } from './volume/volume-teszt/volume-teszt.compone
 import { FeliratkozasListComponent } from './feliratkozas/feliratkozas-list/feliratkozas-list.component';
 import { FeliratkozasEgyComponent } from './feliratkozas/feliratkozas-egy/feliratkozas-egy.component';
 import { FeliratkozasProjektComponent } from './feliratkozas/feliratkozas-projekt/feliratkozas-projekt.component';
-import { ProjektTablaComponent } from './projekt/projekt-tabla/projekt-tabla.component';
+import { ProjektTablaComponent } from './projekt/projekt/projekt-tabla/projekt-tabla.component';
 import { RiportComponent } from './riport/riport.component';
 import { KimenoszamlaComponent } from './riport/kimenoszamla/kimenoszamla.component';
 import { BejovoszamlaComponent } from './riport/bejovoszamla/bejovoszamla.component';
@@ -152,23 +152,23 @@ import { UgyfelReszletekComponent } from './ugyfel/ugyfel-reszletek/ugyfel-reszl
 import { PenztartetelSzerkesztesComponent } from './penztar/penztartetel/penztartetel-szerkesztes/penztartetel-szerkesztes.component';
 import { FeliratkozasReszletekComponent } from './feliratkozas/feliratkozas-reszletek/feliratkozas-reszletek.component';
 import { NavexportellenorzesComponent } from './bizonylat/navexportellenorzes/navexportellenorzes.component';
-import { IratReszletekComponent } from './irat/irat-reszletek/irat-reszletek.component';
+import { IratReszletekComponent } from './irat/irat/irat-reszletek/irat-reszletek.component';
 import { DokumentumReszletekComponent } from './irat/dokumentum/dokumentum-reszletek/dokumentum-reszletek.component';
 import { VolumeReszletekComponent } from './volume/volume-reszletek/volume-reszletek.component';
-import { ProjektReszletekComponent } from './projekt/projekt-reszletek/projekt-reszletek.component';
-import { ProjektStatuszComponent } from './projekt/projekt-statusz/projekt-statusz.component';
-import { ProjektSzamlazasirendegyComponent } from './projekt/projekt-szamlazasirendegy/projekt-szamlazasirendegy.component';
-import { ProjektSzamlazasirendSzerkesztesComponent } from './projekt/projekt-szamlazasirend-szerkesztes/projekt-szamlazasirend-szerkesztes.component';
-import { ProjektSzamlazasirendTorlesComponent } from './projekt/projekt-szamlazasirend-torles/projekt-szamlazasirend-torles.component';
-import { ProjektSzamlazasirendReszletekComponent } from './projekt/projekt-szamlazasirend-reszletek/projekt-szamlazasirend-reszletek.component';
-import { ProjektTeendoegyComponent } from './projekt/projekt-teendoegy/projekt-teendoegy.component';
-import { ProjektTeendoSzerkesztesComponent } from './projekt/projekt-teendo-szerkesztes/projekt-teendo-szerkesztes.component';
-import { ProjektTeendoTorlesComponent } from './projekt/projekt-teendo-torles/projekt-teendo-torles.component';
-import { ProjektTeendoReszletekComponent } from './projekt/projekt-teendo-reszletek/projekt-teendo-reszletek.component';
-import { ProjektTeendoElvegezveComponent } from './projekt/projekt-teendo-elvegezve/projekt-teendo-elvegezve.component';
-import { ProjektBizonylatesiratUjbizonylatComponent } from './projekt/projekt-bizonylatesirat-ujbizonylat/projekt-bizonylatesirat-ujbizonylat.component';
-import { ProjektBizonylatesiratUjiratComponent } from './projekt/projekt-bizonylatesirat-ujirat/projekt-bizonylatesirat-ujirat.component';
-import { ProjektBizonylatesiratUjajanlatComponent } from './projekt/projekt-bizonylatesirat-ujajanlat/projekt-bizonylatesirat-ujajanlat.component';
+import { ProjektReszletekComponent } from './projekt/projekt/projekt-reszletek/projekt-reszletek.component';
+import { ProjektStatuszComponent } from './projekt/projekt/projekt-statusz/projekt-statusz.component';
+import { ProjektSzamlazasirendegyComponent } from './projekt/szamlazasirend/projekt-szamlazasirendegy/projekt-szamlazasirendegy.component';
+import { ProjektSzamlazasirendSzerkesztesComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-szerkesztes/projekt-szamlazasirend-szerkesztes.component';
+import { ProjektSzamlazasirendTorlesComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-torles/projekt-szamlazasirend-torles.component';
+import { ProjektSzamlazasirendReszletekComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-reszletek/projekt-szamlazasirend-reszletek.component';
+import { ProjektTeendoegyComponent } from './projekt/teendo/projekt-teendoegy/projekt-teendoegy.component';
+import { ProjektTeendoSzerkesztesComponent } from './projekt/teendo/projekt-teendo-szerkesztes/projekt-teendo-szerkesztes.component';
+import { ProjektTeendoTorlesComponent } from './projekt/teendo/projekt-teendo-torles/projekt-teendo-torles.component';
+import { ProjektTeendoReszletekComponent } from './projekt/teendo/projekt-teendo-reszletek/projekt-teendo-reszletek.component';
+import { ProjektTeendoElvegezveComponent } from './projekt/teendo/projekt-teendo-elvegezve/projekt-teendo-elvegezve.component';
+import { ProjektBizonylatesiratUjbizonylatComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-ujbizonylat/projekt-bizonylatesirat-ujbizonylat.component';
+import { ProjektBizonylatesiratUjiratComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-ujirat/projekt-bizonylatesirat-ujirat.component';
+import { ProjektBizonylatesiratUjajanlatComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-ujajanlat/projekt-bizonylatesirat-ujajanlat.component';
 import { VolumeContainerComponent } from './volume/volume-container/volume-container.component';
 import { VolumeEgyComponent } from './volume/volume-egy/volume-egy.component';
 import { VolumeListComponent } from './volume/volume-list/volume-list.component';
@@ -196,7 +196,8 @@ import {PenztarTorlesComponent} from "./penztar/penztar-torles/penztar-torles.co
 import {PenztarSzerkesztesComponent} from "./penztar/penztar-szerkesztes/penztar-szerkesztes.component";
 import { PenztarContainerComponent } from './penztar/penztar-container/penztar-container.component';
 import { PenztartetelContainerComponent } from './penztar/penztartetel/penztartetel-container/penztartetel-container.component';
-import { IratContainerComponent } from './irat/irat-container/irat-container.component';
+import { IratContainerComponent } from './irat/irat/irat-container/irat-container.component';
+import { DokumentumContainerComponent } from './irat/dokumentum/dokumentum-container/dokumentum-container.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -342,7 +343,6 @@ const routes: Routes = [
   //   {path: 'szerkesztes', component: HelysegSzerkesztesComponent},
   //   {path: 'blank', component: BlankComponent}
   // ]},
-
   {path: 'helyseg', component: HelysegContainerComponent, canActivate: [RoleGuard]},
 
   // {path: 'ugyfel-list', component: UgyfelComponent, canActivate: [RoleGuard]},
@@ -357,12 +357,11 @@ const routes: Routes = [
   //   ]},
   //   {path: 'blank', component: BlankComponent}
   // ]},
-
   {path: 'ugyfel', component: UgyfelContainerComponent, canActivate: [RoleGuard]},
 
   {path: 'projekt', component: ProjektComponent, canActivate: [RoleGuard]},
   {path: 'projektuj', component: ProjektSzerkesztesComponent},
-  {path: 'projektegy', component: ProjektegyComponent, canActivate: [RoleGuard], children: [
+  {path: 'projekt-egy', component: ProjektegyComponent, canActivate: [RoleGuard], children: [
     {path: 'reszletek', component: ProjektReszletekComponent},
     {path: 'torles', component: ProjektTorlesComponent},
     {path: 'szerkesztes', component: ProjektSzerkesztesComponent},
@@ -495,10 +494,10 @@ const routes: Routes = [
   //       {path: 'blank', component: BlankComponent}
   //     ]},
   //   ]},
-  //   {path: 'dokumentum', component: IratDokumentumComponent},
+  //   {path: 'dokumentum', component: DokumentumListComponent},
   //   {path: 'dokumentumfeltoltes', component: DokumentumFeltoltesComponent},
   //   {path: 'blank', component: BlankComponent},
-  //   {path: 'dokumentumegy', component: IratDokumentumegyComponent, children: [
+  //   {path: 'dokumentumegy', component: DokumentumEgyComponent, children: [
   //     {path: 'torles', component: DokumentumTorlesComponent},
   //     {path: 'letoltes', component: DokumentumLetoltesComponent},
   //     {path: 'blank', component: BlankComponent}
@@ -542,7 +541,7 @@ const routes: Routes = [
   // {path: 'feliratkozas-list', component: FeliratkozasListComponent, canActivate: [RoleGuard]},
   // {path: 'feliratkozas-egy', component: FeliratkozasEgyComponent, canActivate: [RoleGuard], children: [
   //   {path: 'reszletek', component: FeliratkozasReszletekComponent},
-  //   {path: 'projekt', component: FeliratkozasProjektComponent}
+  //   {path: 'projekt-list', component: FeliratkozasProjektComponent}
   // ]},
   {path: 'feliratkozas', component: FeliratkozasContainerComponent, canActivate: [RoleGuard]},
 
@@ -567,7 +566,7 @@ const routes: Routes = [
   //   {path: 'nav', component: ParticioNavComponent},
   //   {path: 'smtp', component: ParticioSmtpComponent},
   //   {path: 'bizonylat', component: ParticioBizonylatComponent},
-  //   {path: 'projekt', component: ParticioProjektComponent},
+  //   {path: 'projekt-list', component: ParticioProjektComponent},
   //   {path: 'volume', component: ParticioVolumeComponent},
   //   {path: 'blank', component: BlankComponent}
   // ]},
@@ -651,8 +650,8 @@ if (environment.production) {
     IratListComponent,
     IratEgyComponent,
     IratToolbarComponent,
-    IratDokumentumComponent,
-    IratDokumentumegyComponent,
+    DokumentumListComponent,
+    DokumentumEgyComponent,
     IratSzerkesztesComponent,
     IratTorlesComponent,
     DokumentumFeltoltesComponent,
@@ -784,6 +783,7 @@ if (environment.production) {
     PenztarContainerComponent,
     PenztartetelContainerComponent,
     IratContainerComponent,
+    DokumentumContainerComponent,
   ],
   imports: [
     BrowserModule,

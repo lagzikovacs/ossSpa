@@ -5,6 +5,8 @@ import {environment} from '../../../environments/environment';
 import {DokumentumResult} from '../../dtos/dokumentum/dokumentumresult';
 import {DokumentumDto} from '../../dtos/dokumentum/dokumentumdto';
 import {EmptyResult} from '../../dtos/emptyresult';
+import {DokumentumContainerMode} from './dokumentumcontainermode';
+import {DokumentumEgyMode} from './dokumentumegymode';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,9 @@ export class DokumentumService {
   uj = false;
   DtoEdited = new DokumentumDto();
 
+  ContainerMode = DokumentumContainerMode.List;
+  EgyMode = DokumentumEgyMode.Reszletek;
+
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
 
@@ -31,6 +36,17 @@ export class DokumentumService {
     };
 
     return this._httpClient.post<DokumentumResult>(url, body, options).toPromise();
+  }
+
+  public Delete(dto: DokumentumDto): Promise<EmptyResult> {
+    const url = environment.BaseHref + this._controller + 'delete';
+    const body = dto;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
   }
 
   public Ellenorzes(dokumentumkod: number): Promise<EmptyResult> {

@@ -198,6 +198,7 @@ import { PenztarContainerComponent } from './penztar/penztar-container/penztar-c
 import { PenztartetelContainerComponent } from './penztar/penztartetel/penztartetel-container/penztartetel-container.component';
 import { IratContainerComponent } from './irat/irat/irat-container/irat-container.component';
 import { DokumentumContainerComponent } from './irat/dokumentum/dokumentum-container/dokumentum-container.component';
+import { ProjektContainerComponent } from './projekt/projekt/projekt-container/projekt-container.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -784,6 +785,7 @@ if (environment.production) {
     PenztartetelContainerComponent,
     IratContainerComponent,
     DokumentumContainerComponent,
+    ProjektContainerComponent,
   ],
   imports: [
     BrowserModule,

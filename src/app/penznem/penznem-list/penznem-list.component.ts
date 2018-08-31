@@ -9,6 +9,8 @@ import {SzamlazasirendService} from '../../projekt/szamlazasirend/szamlazasirend
 import {PenznemEgyMode} from "../penznemegymode";
 import {PenznemContainerMode} from "../penznemcontainermode";
 import {PenztarSzerkesztesMode} from "../../penztar/penztarszerkesztesmode";
+import {ProjektService} from "../../projekt/projekt/projekt.service";
+import {ProjektSzerkesztesMode} from "../../projekt/projekt/projektszerkesztesmode";
 
 @Component({
   selector: 'app-penznem-list',
@@ -27,6 +29,7 @@ export class PenznemListComponent implements OnInit {
   constructor(private _logonservice: LogonService,
               penznemservice: PenznemService,
               private _penztarservice: PenztarService,
+              private _projektservice: ProjektService,
               private _szamlazasirendservice: SzamlazasirendService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.penznemservice = penznemservice;
@@ -76,21 +79,26 @@ export class PenznemListComponent implements OnInit {
     if (this.penznemservice.zoomsource === ZoomSources.Penztar) {
       this._penztarservice.DtoEdited.PENZNEMKOD = this.penznemservice.Dto[i].PENZNEMKOD;
       this._penztarservice.DtoEdited.PENZNEM = this.penznemservice.Dto[i].PENZNEM1;
-
-      this.stopzoom();
+    }
+    if (this.penznemservice.zoomsource === ZoomSources.Projekt) {
+      this._projektservice.DtoEdited.PENZNEMKOD = this.penznemservice.Dto[i].PENZNEMKOD;
+      this._projektservice.DtoEdited.PENZNEM = this.penznemservice.Dto[i].PENZNEM1;
     }
     if (this.penznemservice.zoomsource === ZoomSources.Szamlazasirend) {
       this._szamlazasirendservice.DtoEdited.PENZNEMKOD = this.penznemservice.Dto[i].PENZNEMKOD;
       this._szamlazasirendservice.DtoEdited.PENZNEM = this.penznemservice.Dto[i].PENZNEM1;
-
-      this.stopzoom();
     }
+
+    this.stopzoom();
   }
   stopzoom() {
     this.penznemservice.zoom = false;
 
     if (this.penznemservice.zoomsource === ZoomSources.Penztar) {
       this._penztarservice.SzerkesztesMode = PenztarSzerkesztesMode.Blank;
+    }
+    if (this.penznemservice.zoomsource === ZoomSources.Projekt) {
+      this._projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
     }
     if (this.penznemservice.zoomsource === ZoomSources.Szamlazasirend) {
       // this._szamlazasirendservice.SzerkesztesMode = SzalazasirendSzerkesztesMode.Blank;

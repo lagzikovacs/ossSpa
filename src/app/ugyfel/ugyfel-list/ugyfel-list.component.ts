@@ -8,8 +8,11 @@ import {LogonService} from '../../services/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ZoomSources} from '../../enums/zoomsources';
 import {IratService} from '../../irat/irat/irat.service';
-import {UgyfelContainerMode} from "../ugyfelcontainermode";
-import {UgyfelEgyMode} from "../ugyfelegymode";
+import {UgyfelContainerMode} from '../ugyfelcontainermode';
+import {UgyfelEgyMode} from '../ugyfelegymode';
+import {ProjektService} from '../../projekt/projekt/projekt.service';
+import {ProjektSzerkesztesMode} from '../../projekt/projekt/projektszerkesztesmode';
+import {IratSzerkesztesMode} from '../../irat/irat/iratszerkesztesmode';
 
 @Component({
   selector: 'app-ugyfel-list',
@@ -30,6 +33,7 @@ export class UgyfelListComponent implements OnInit {
 
   constructor(private _logonservice: LogonService,
               private _iratservice: IratService,
+              private _projektservice: ProjektService,
               ugyfelservice: UgyfelService  ) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.UGYFELEKMOD]);
     this.ugyfelservice = ugyfelservice;
@@ -87,13 +91,23 @@ export class UgyfelListComponent implements OnInit {
     if (this.ugyfelservice.zoomsource === ZoomSources.Irat) {
       this._iratservice.DtoEdited.UGYFELKOD = this.ugyfelservice.Dto[i].UGYFELKOD;
       this._iratservice.DtoEdited.UGYFELNEV = this.ugyfelservice.Dto[i].NEV;
-
-      this.stopzoom();
     }
+    if (this.ugyfelservice.zoomsource === ZoomSources.Projekt) {
+      this._projektservice.DtoEdited.UGYFELKOD = this.ugyfelservice.Dto[i].UGYFELKOD;
+      this._projektservice.DtoEdited.UGYFELNEV = this.ugyfelservice.Dto[i].NEV;
+    }
+
+    this.stopzoom();
   }
   stopzoom() {
     this.ugyfelservice.zoom = false;
-    this.ugyfelservice.ContainerMode = UgyfelContainerMode.Blank;
+
+    if (this.ugyfelservice.zoomsource === ZoomSources.Irat) {
+      this._iratservice.SzerkesztesMode = IratSzerkesztesMode.Blank;
+    }
+    if (this.ugyfelservice.zoomsource === ZoomSources.Projekt) {
+      this._projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
+    }
   }
 
   setClickedRow(i: number) {

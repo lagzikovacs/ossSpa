@@ -1,67 +1,67 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {ProjektService} from '../projekt.service';
 import {ProjektteendoService} from '../../teendo/projektteendo.service';
 import {SzamlazasirendService} from '../../szamlazasirend/szamlazasirend.service';
 import {ProjektkapcsolatService} from '../../bizonylatesirat/projektkapcsolat.service';
+import {ProjektContainerMode} from '../projektcontainermode';
+import {ProjektEgyMode} from '../projektegymode';
 
 @Component({
-  selector: 'app-projektegy',
-  templateUrl: './projektegy.component.html',
-  styleUrls: ['./projektegy.component.css']
+  selector: 'app-projekt-egy',
+  templateUrl: './projekt-egy.component.html',
+  styleUrls: ['./projekt-egy.component.css']
 })
-export class ProjektegyComponent {
+export class ProjektEgyComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektservice: ProjektService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              projektservice: ProjektService,
-              private _projektkapcsolatservice: ProjektkapcsolatService,
+  constructor(private _projektkapcsolatservice: ProjektkapcsolatService,
               private _szamlazasirendservice: SzamlazasirendService,
-              private _projektteendoservice: ProjektteendoService) {
+              private _projektteendoservice: ProjektteendoService,
+              projektservice: ProjektService) {
     this.projektservice = projektservice;
   }
 
   vissza() {
-    this._router.navigate(['/projekt-list']);
+    this.projektservice.ContainerMode = ProjektContainerMode.List;
   }
   reszletek() {
-    this._router.navigate(['reszletek'], {relativeTo: this._route});
+    this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
   }
   torles () {
-    this._router.navigate(['torles'], {relativeTo: this._route});
+    this.projektservice.EgyMode = ProjektEgyMode.Torles;
   }
   modositas() {
     this.projektservice.uj = false;
-    this._router.navigate(['szerkesztes'], {relativeTo: this._route});
+    this.projektservice.DtoEdited = Object.assign({}, this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
+    this.projektservice.EgyMode = ProjektEgyMode.Modositas;
   }
 
   stsz() {
     this.projektservice.uj = false;
     this.projektservice.DtoEdited = Object.assign({}, this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
-    this._router.navigate(['stsz'], {relativeTo: this._route});
+    this.projektservice.EgyMode = ProjektEgyMode.Statusz;
   }
   muszakiallapot() {
     this.projektservice.uj = false;
     this.projektservice.DtoEdited = Object.assign({}, this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
-    this._router.navigate(['muszakiallapot'], {relativeTo: this._route});
+    this.projektservice.EgyMode = ProjektEgyMode.Muszakiallapot;
   }
   inverter() {
     this.projektservice.uj = false;
     this.projektservice.DtoEdited = Object.assign({}, this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
-    this._router.navigate(['inverter'], {relativeTo: this._route});
+    this.projektservice.EgyMode = ProjektEgyMode.Inverter;
   }
   napelem() {
     this.projektservice.uj = false;
     this.projektservice.DtoEdited = Object.assign({}, this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
-    this._router.navigate(['napelem'], {relativeTo: this._route});
+    this.projektservice.EgyMode = ProjektEgyMode.Napelem;
   }
   iratminta() {
-    this._router.navigate(['iratminta'], {relativeTo: this._route});
+    this.projektservice.EgyMode = ProjektEgyMode.Iratminta;
   }
   bizonylatesirat() {
     this.eppFrissit = true;
@@ -74,7 +74,7 @@ export class ProjektegyComponent {
         this._projektkapcsolatservice.Dto = res.Result;
 
         this.eppFrissit = false;
-        this._router.navigate(['bizonylatesirat'], {relativeTo: this._route});
+        this.projektservice.EgyMode = ProjektEgyMode.Bizonylatesirat;
       })
       .catch(err => {
         this.errormodal.show(err);
@@ -92,7 +92,7 @@ export class ProjektegyComponent {
         this._szamlazasirendservice.Dto = res.Result;
 
         this.eppFrissit = false;
-        this._router.navigate(['szamlazasirend'], {relativeTo: this._route});
+        this.projektservice.EgyMode = ProjektEgyMode.Szamlazasirend;
       })
       .catch(err => {
         this.errormodal.show(err);
@@ -110,7 +110,7 @@ export class ProjektegyComponent {
         this._projektteendoservice.Dto = res.Result;
 
         this.eppFrissit = false;
-        this._router.navigate(['projektteendo'], {relativeTo: this._route});
+        this.projektservice.EgyMode = ProjektEgyMode.Teendo;
       })
       .catch(err => {
         this.errormodal.show(err);

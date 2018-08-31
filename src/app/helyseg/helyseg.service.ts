@@ -4,11 +4,11 @@ import {NumberResult} from '../dtos/numberresult';
 import {EgyszeruKeresesDto} from '../dtos/egyszerukeresesdto';
 import {LogonService} from '../services/logon.service';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {HelysegDto} from '../dtos/primitiv/helyseg/helysegdto';
-import {HelysegResult} from '../dtos/primitiv/helyseg/helysegresult';
+import {HelysegDto} from './helysegdto';
+import {HelysegResult} from './helysegresult';
 import {EmptyResult} from '../dtos/emptyresult';
 import {ZoomSources} from '../enums/zoomsources';
-import {HelysegZoomParameter} from '../dtos/primitiv/helyseg/helysegzoomparameter';
+import {HelysegZoomParameter} from './helysegzoomparameter';
 import {HelysegContainerMode} from './helysegcontainermode';
 import {HelysegEgyMode} from './helysegegymode';
 

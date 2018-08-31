@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import {EgyszeruKeresesDto} from '../dtos/egyszerukeresesdto';
 import {environment} from '../../environments/environment';
-import {PenznemDto} from '../dtos/primitiv/penznem/penznemdto';
+import {PenznemDto} from './penznemdto';
 import {ZoomSources} from '../enums/zoomsources';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {LogonService} from '../services/logon.service';
-import {PenznemResult} from '../dtos/primitiv/penznem/penznemresult';
+import {PenznemResult} from './penznemresult';
 import {EmptyResult} from '../dtos/emptyresult';
 import {NumberResult} from '../dtos/numberresult';
-import {PenznemZoomParameter} from '../dtos/primitiv/penznem/penznemzoomparameter';
+import {PenznemZoomParameter} from './penznemzoomparameter';
 import {PenznemEgyMode} from './penznemegymode';
 import {PenznemContainerMode} from './penznemcontainermode';
 

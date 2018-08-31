@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
-import {ProjektService} from "../projekt.service";
-import {ErrormodalComponent} from "../../../tools/errormodal/errormodal.component";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ProjektService} from '../projekt.service';
+import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {ProjektEgyMode} from '../projektegymode';
 
 @Component({
   selector: 'app-projekt-muszakiallapot',
@@ -17,9 +17,7 @@ export class ProjektMuszakiallapotComponent {
   selected = '';
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              projektservice: ProjektService) {
+  constructor(projektservice: ProjektService) {
     this.projektservice = projektservice;
   }
 
@@ -57,6 +55,6 @@ export class ProjektMuszakiallapotComponent {
   }
 
   navigal() {
-    this._router.navigate(['../blank'], {relativeTo: this._route});
+    this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
   }
 }

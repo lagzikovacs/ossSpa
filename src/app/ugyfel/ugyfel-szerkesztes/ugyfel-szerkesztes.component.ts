@@ -3,7 +3,7 @@ import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {UgyfelService} from '../ugyfel.service';
 import {HelysegService} from '../../helyseg/helyseg.service';
 import {ZoomSources} from '../../enums/zoomsources';
-import {HelysegZoomParameter} from '../../dtos/primitiv/helyseg/helysegzoomparameter';
+import {HelysegZoomParameter} from '../../helyseg/helysegzoomparameter';
 import {UgyfelContainerMode} from '../ugyfelcontainermode';
 import {UgyfelEgyMode} from '../ugyfelegymode';
 import {UgyfelSzerkesztesMode} from '../ugyfelszerkesztesmode';

@@ -1,16 +1,18 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {ProjektService} from '../projekt.service';
-import {Router} from '@angular/router';
 import {SzMT} from '../../../dtos/szmt';
 import {Szempont} from '../../../enums/szempont';
+import {ProjektContainerMode} from "../projektcontainermode";
+import {ProjektEgyMode} from "../projektegymode";
+import {ProjektSzerkesztesMode} from "../projektszerkesztesmode";
 
 @Component({
-  selector: 'app-projekt',
-  templateUrl: './projekt.component.html',
-  styleUrls: ['./projekt.component.css']
+  selector: 'app-projekt-list',
+  templateUrl: './projekt-list.component.html',
+  styleUrls: ['./projekt-list.component.css']
 })
-export class ProjektComponent implements OnInit {
+export class ProjektListComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   statuszszurok = [
@@ -34,12 +36,8 @@ export class ProjektComponent implements OnInit {
   eppFrissit = false;
   projektservice: ProjektService;
 
-  constructor(private _router: Router,
-              projektservice: ProjektService) {
+  constructor(projektservice: ProjektService) {
     this.projektservice = projektservice;
-  }
-
-  ngOnInit() {
   }
 
   onKereses() {
@@ -86,7 +84,9 @@ export class ProjektComponent implements OnInit {
   setClickedRow(i: number) {
     this.projektservice.DtoSelectedIndex = i;
     this.projektservice.uj = false;
-    this._router.navigate(['/projekt-egy']);
+    this.projektservice.ContainerMode = ProjektContainerMode.Egy;
+    this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
+    this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
   }
 
   onUj() {
@@ -100,7 +100,8 @@ export class ProjektComponent implements OnInit {
         this.projektservice.DtoEdited = res.Result[0];
         this.projektservice.uj = true;
         this.eppFrissit = false;
-        this._router.navigate(['/projektuj']);
+        this.projektservice.ContainerMode = ProjektContainerMode.Uj;
+        this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
       })
       .catch(err => {
         this.errormodal.show(err);

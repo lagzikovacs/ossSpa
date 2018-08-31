@@ -16,12 +16,22 @@
     </div>
     <div class="row no-gutters editform-row">
       <div class="col-md-2">
+        <div class="editform-title">AC, kVA</div>
+      </div>
+      <div class="col-md-2">
+        <input type="number" class="form-control form-control-sm" id="ackva"
+               [(ngModel)]="projektservice.DtoEdited.ACKVA"
+               name="ackva">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
         <div class="editform-title">Inverter státusz</div>
       </div>
       <div class="col-md-4">
         <div *ngFor="let entry of entries" class="form-check">
           <input class="form-check-input" type="radio" name="radiogroup" id="entry"
-                 [checked]="entry === projektservice.DtoEdited.INVERTERALLAPOT" (change)="change(entry)">
+                 [checked]="entry === projektservice.DtoEdited.INVERTERALLAPOT || ''" (change)="change(entry)">
           <label class="form-check-label" for="entry">
             {{entry}}
           </label>

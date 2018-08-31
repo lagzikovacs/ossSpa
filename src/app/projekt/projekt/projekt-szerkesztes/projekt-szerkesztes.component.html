@@ -1,3 +1,107 @@
-<p>
-  projekt-szerkesztes works!
-</p>
+<div class="alapkeret">
+  <h5 *ngIf="projektservice.uj">Új {{projektservice.cim | lowercase}}</h5>
+  <h5 *ngIf="!projektservice.uj">{{projektservice.cim}} módosítása</h5>
+
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Ügyfél</div>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control form-control-sm" id="ugyfelnev"
+               maxlength="200" required autocomplete="off" style="background-color: aquamarine"
+               [(ngModel)]="projektservice.DtoEdited.UGYFELNEV" name="ugyfelnev">
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="UgyfelZoom()">...</button>
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control form-control-sm" id="ugyfelcim"
+               autocomplete="off" readonly="true"
+               [(ngModel)]="projektservice.DtoEdited.UGYFELCIM" name="ugyfelcim">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Telepítési cím</div>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control form-control-sm" id="telepitesicim"
+               autocomplete="off"
+               [(ngModel)]="projektservice.DtoEdited.TELEPITESICIM" name="telepitesicim">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">A projekt jellege</div>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control form-control-sm" id="projektjellege"
+               autocomplete="off"
+               [(ngModel)]="projektservice.DtoEdited.PROJEKTJELLEGE" name="projektjellege">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Vállalási ár</div>
+      </div>
+      <div class="col-md-2">
+        <input type="number" class="form-control form-control-sm" id="kuldo"
+               required
+               [(ngModel)]="projektservice.DtoEdited.VALLALASIARNETTO" name="kuldo">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Pénznem</div>
+      </div>
+      <div class="col-md-1">
+        <input type="text" class="form-control form-control-sm" id="penznem"
+               maxlength="30" required autocomplete="off" style="background-color: aquamarine"
+               [(ngModel)]="projektservice.DtoEdited.PENZNEM" name="penznem">
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="PenznemZoom()">...</button>
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Megjegyzés</div>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control form-control-sm" id="megjegyzes"
+               autocomplete="off"
+               [(ngModel)]="projektservice.DtoEdited.MEGJEGYZES" name="megjegyzes">
+      </div>
+    </div>
+
+    <div class="row no-gutters" style="margin-bottom: 10px">
+      <div class="col-md-2"></div>
+      <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
+      <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
+    </div>
+  </form>
+
+  <!--  export enum ProjektSzerkesztesMode {
+  Blank = 0,
+  UgyfelZoom = 1,
+  PenznemZoom = 2
+    }-->
+  <ng-container *ngIf="projektservice.SzerkesztesMode === 0">
+    <app-blank></app-blank>
+  </ng-container>
+  <ng-container *ngIf="projektservice.SzerkesztesMode === 1">
+    <app-ugyfel-container></app-ugyfel-container>
+  </ng-container>
+  <ng-container *ngIf="projektservice.SzerkesztesMode === 2">
+    <app-penznem-container></app-penznem-container>
+  </ng-container>
+
+  <app-errormodal [cim]="projektservice.cim"></app-errormodal>
+</div>

@@ -45,6 +45,53 @@
     </nav>
   </div>
 
-  <router-outlet></router-outlet>
+<!--  export enum ProjektEgyMode {
+  Reszletek = 1,
+  Torles = 2,
+  Modositas = 3,
+  Statusz = 4,
+  Muszakiallapot = 5,
+  Inverter = 6,
+  Napelem = 7,
+  Iratminta = 8,
+  Bizonylatesirat = 9,
+  Szamlazasirend = 10,
+  Teendo = 11
+  }-->
+
+  <ng-container *ngIf="projektservice.EgyMode === 1">
+    <app-projekt-reszletek></app-projekt-reszletek>
+  </ng-container>
+  <ng-container *ngIf="projektservice.EgyMode === 2">
+    <app-projekt-torles></app-projekt-torles>
+  </ng-container>
+  <ng-container *ngIf="projektservice.EgyMode === 3">
+    <app-projekt-szerkesztes></app-projekt-szerkesztes>
+  </ng-container>
+  <ng-container *ngIf="projektservice.EgyMode === 4">
+    <app-projekt-statusz></app-projekt-statusz>
+  </ng-container>
+  <ng-container *ngIf="projektservice.EgyMode === 5">
+    <app-projekt-muszakiallapot></app-projekt-muszakiallapot>
+  </ng-container>
+  <ng-container *ngIf="projektservice.EgyMode === 6">
+    <app-projekt-inverter></app-projekt-inverter>
+  </ng-container>
+  <ng-container *ngIf="projektservice.EgyMode === 7">
+    <app-projekt-napelem></app-projekt-napelem>
+  </ng-container>
+  <ng-container *ngIf="projektservice.EgyMode === 8">
+    <app-projekt-iratminta></app-projekt-iratminta>
+  </ng-container>
+  <ng-container *ngIf="projektservice.EgyMode === 9">
+    <app-projekt-bizonylatesirat></app-projekt-bizonylatesirat>
+  </ng-container>
+  <ng-container *ngIf="projektservice.EgyMode === 10">
+    <app-projekt-szamlazasirend></app-projekt-szamlazasirend>
+  </ng-container>
+  <ng-container *ngIf="projektservice.EgyMode === 11">
+    <app-projekt-teendo></app-projekt-teendo>
+  </ng-container>
+
   <app-errormodal [cim]="projektservice.cim"></app-errormodal>
 </div>

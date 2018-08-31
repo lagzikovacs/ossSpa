@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {PenznemService} from '../../penznem/penznem.service';
-import {PenznemZoomParameter} from '../../dtos/primitiv/penznem/penznemzoomparameter';
+import {PenznemZoomParameter} from '../../penznem/penznemzoomparameter';
 import {ZoomSources} from '../../enums/zoomsources';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import {PenztarService} from '../penztar.service';

@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
 import {IrattipusService} from '../irattipus/irattipus.service';
 import {IrattipusDto} from '../dtos/primitiv/irattipus/irattipusdto';
 import {HelysegService} from '../helyseg/helyseg.service';
-import {HelysegDto} from '../dtos/primitiv/helyseg/helysegdto';
+import {HelysegDto} from '../helyseg/helysegdto';
 import {UgyfelService} from '../ugyfel/ugyfel.service';
 import {UgyfelDto} from '../dtos/torzs/ugyfel/ugyfeldto';
 import {FelhasznaloDto} from '../dtos/primitiv/felhasznalo/felhasznalodto';
@@ -28,7 +28,7 @@ import {TeendoDto} from '../dtos/primitiv/teendo/teendodto';
 import {FizetesimodService} from '../fizetesimod/fizetesimod.service';
 import {PenznemService} from '../penznem/penznem.service';
 import {FizetesimodDto} from '../dtos/primitiv/fizetesimod/fizetesimoddto';
-import {PenznemDto} from '../dtos/primitiv/penznem/penznemdto';
+import {PenznemDto} from '../penznem/penznemdto';
 import {MeService} from '../me/me.service';
 import {AfakulcsService} from '../afakulcs/afakulcs.service';
 import {TermekdijService} from '../termekdij/termekdij.service';
@@ -63,6 +63,7 @@ import {CsoportContainerMode} from "../csoport/csoportcontainermode";
 import {FeliratkozasContainerMode} from "../feliratkozas/feliratkozascontainermode";
 import {PenztarContainerMode} from "../penztar/penztarcontainermode";
 import {IratContainerMode} from "../irat/irat/iratcontainermode";
+import {ProjektContainerMode} from "../projekt/projekt/projektcontainermode";
 
 @Injectable({
   providedIn: 'root'
@@ -160,7 +161,8 @@ export class MenuService {
         this._ugyfelservice.Dto = new Array<UgyfelDto>();
       break;
 
-      case '/projekt-list':
+      case '/projekt':
+        this._projektservice.ContainerMode = ProjektContainerMode.List;
         this._projektservice.Dto = new Array<ProjektDto>();
         this._projektkapcsolatservice.Dto = new Array<ProjektKapcsolatDto>();
         this._szamlazasirendservice.Dto = new Array<SzamlazasirendDto>();

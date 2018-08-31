@@ -3,7 +3,7 @@ import {SzamlazasirendService} from '../szamlazasirend.service';
 import {PenznemService} from '../../../penznem/penznem.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ZoomSources} from '../../../enums/zoomsources';
-import {PenznemZoomParameter} from '../../../dtos/primitiv/penznem/penznemzoomparameter';
+import {PenznemZoomParameter} from '../../../penznem/penznemzoomparameter';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {ProjektService} from '../../projekt/projekt.service';
 

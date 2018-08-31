@@ -1,3 +1,20 @@
-<p>
-  projekt-container works!
-</p>
+<!--
+export enum ProjektContainerMode {
+Blank = 0,
+List = 1,
+Egy = 2,
+Uj = 3
+}-->
+
+<ng-container *ngIf="projektservice.ContainerMode === 0">
+  <app-blank></app-blank>
+</ng-container>
+<ng-container *ngIf="projektservice.ContainerMode === 1">
+  <app-projekt-list></app-projekt-list>
+</ng-container>
+<ng-container *ngIf="projektservice.ContainerMode === 2">
+  <app-projekt-egy></app-projekt-egy>
+</ng-container>
+<ng-container *ngIf="projektservice.ContainerMode === 3">
+  <app-projekt-szerkesztes></app-projekt-szerkesztes>
+</ng-container>

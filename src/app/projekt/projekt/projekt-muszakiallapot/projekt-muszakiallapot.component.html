@@ -5,11 +5,12 @@
 
     <div class="row no-gutters editform-row">
       <div class="col-md-2">
+        <div class="editform-title">Műszaki állapot</div>
       </div>
       <div class="col-md-4">
         <div *ngFor="let entry of entries" class="form-check">
           <input class="form-check-input" type="radio" name="radiogroup" id="entry"
-                 [checked]="entry === projektservice.DtoEdited.MUSZAKIALLAPOT" (change)="change(entry)">
+                 [checked]="entry === projektservice.DtoEdited.MUSZAKIALLAPOT || ''" (change)="change(entry)">
           <label class="form-check-label" for="entry">
             {{entry}}
           </label>

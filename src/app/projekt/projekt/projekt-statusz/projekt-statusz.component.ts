@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ProjektEgyMode} from "../projektegymode";
 
 @Component({
   selector: 'app-projekt-statusz',
@@ -19,15 +19,12 @@ export class ProjektStatuszComponent {
   selected = 0;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              projektservice: ProjektService) {
+  constructor(projektservice: ProjektService) {
     this.projektservice = projektservice;
   }
 
   change(i) {
     this.selected = i;
-    console.log(this.selected);
   }
 
   onSubmit() {
@@ -60,6 +57,6 @@ export class ProjektStatuszComponent {
   }
 
   navigal() {
-    this._router.navigate(['../blank'], {relativeTo: this._route});
+    this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
   }
 }

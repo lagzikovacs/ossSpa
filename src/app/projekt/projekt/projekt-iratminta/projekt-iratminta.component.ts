@@ -1,6 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
 import {ProjektService} from '../projekt.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {b64toBlob} from '../../../tools/b64toBlob';
 import {BlobContentType} from '../../../enums/blobcontentType';
@@ -17,9 +16,7 @@ export class ProjektIratmintaComponent {
   projektservice: ProjektService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              projektservice: ProjektService) {
+  constructor(projektservice: ProjektService) {
     this.projektservice = projektservice;
   }
 
@@ -61,6 +58,15 @@ export class ProjektIratmintaComponent {
         }
         const blob = b64toBlob(res.Result, BlobContentType.Docx);
         FileSaver.saveAs(blob, 'Munkalap.docx');
+
+        return this.projektservice.Get(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD);
+      })
+      .then(res1 => {
+        if (res1.Error != null) {
+          throw res1.Error;
+        }
+
+        this.projektservice.Dto[this.projektservice.DtoSelectedIndex] = res1.Result[0];
         this.eppFrissit = false;
       })
       .catch(err => {

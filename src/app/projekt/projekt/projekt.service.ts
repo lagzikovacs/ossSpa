@@ -7,12 +7,15 @@ import {environment} from '../../../environments/environment';
 import {ProjektResult} from '../../dtos/projekt/projektresult';
 import {IratmintaResult} from '../../dtos/projekt/iratmintaresult';
 import {NumberResult} from '../../dtos/numberresult';
+import {ProjektContainerMode} from "./projektcontainermode";
+import {ProjektSzerkesztesMode} from "./projektszerkesztesmode";
+import {ProjektEgyMode} from "./projektegymode";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjektService {
-  private readonly _controller = 'api/projekt-list/';
+  private readonly _controller = 'api/projekt/';
 
   cim = 'Projekt';
   statuszszempont = 0;
@@ -27,8 +30,23 @@ export class ProjektService {
   uj = false;
   DtoEdited = new ProjektDto();
 
+  ContainerMode = ProjektContainerMode.List;
+  EgyMode = ProjektEgyMode.Reszletek;
+  SzerkesztesMode = ProjektSzerkesztesMode.Blank;
+
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
+
+  public Add(dto: ProjektDto): Promise<NumberResult> {
+    const url = environment.BaseHref + this._controller + 'add';
+    const body = dto;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+  }
 
   public CreateNew(): Promise<ProjektResult> {
     const url = environment.BaseHref + this._controller + 'createnew';

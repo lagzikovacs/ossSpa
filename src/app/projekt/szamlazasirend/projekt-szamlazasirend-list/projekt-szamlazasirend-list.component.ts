@@ -1,8 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
 import {SzamlazasirendService} from '../szamlazasirend.service';
 import {LogonService} from '../../../services/logon.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {SzamlazasirendContainerMode} from '../szamlazasirendcontainermode';
+import {SzamlazasirendEgyMode} from '../szamlazasirendegymode';
 
 @Component({
   selector: 'app-projekt-szamlazasirend-list',
@@ -15,9 +16,7 @@ export class ProjektSzamlazasirendListComponent {
   szamlazasirendservice: SzamlazasirendService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              private _logonservice: LogonService,
+  constructor(private _logonservice: LogonService,
               szamlazasirendservice: SzamlazasirendService) {
     this.szamlazasirendservice = szamlazasirendservice;
   }
@@ -33,6 +32,12 @@ export class ProjektSzamlazasirendListComponent {
         this.eppFrissit = false;
       });
   }
+  setClickedRow(i: number) {
+    this.szamlazasirendservice.DtoSelectedIndex = i;
+    this.szamlazasirendservice.uj = false;
+    this.szamlazasirendservice.ContainerMode = SzamlazasirendContainerMode.Egy;
+    this.szamlazasirendservice.EgyMode = SzamlazasirendEgyMode.Reszletek;
+  }
   uj() {
     this.eppFrissit = true;
     this.szamlazasirendservice.CreateNew()
@@ -46,17 +51,11 @@ export class ProjektSzamlazasirendListComponent {
         this.szamlazasirendservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this._router.navigate(['../szamlazasirenduj'], {relativeTo: this._route});
+        this.szamlazasirendservice.ContainerMode = SzamlazasirendContainerMode.Uj;
       })
       .catch(err => {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
-  }
-
-  setClickedRow(i: number) {
-    this.szamlazasirendservice.DtoSelectedIndex = i;
-    this.szamlazasirendservice.uj = false;
-    this._router.navigate(['../szamlazasirendegy'], {relativeTo: this._route});
   }
 }

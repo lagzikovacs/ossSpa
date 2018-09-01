@@ -7,6 +7,7 @@ import {environment} from '../../../environments/environment';
 import {SzamlazasirendResult} from '../../dtos/projekt/szamlazasirendresult';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {SzamlazasirendContainerMode} from './szamlazasirendcontainermode';
+import {SzamlazasirendEgyMode} from "./szamlazasirendegymode";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,7 @@ export class SzamlazasirendService {
   DtoEdited = new SzamlazasirendDto();
 
   ContainerMode = SzamlazasirendContainerMode.List;
+  EgyMode = SzamlazasirendEgyMode.Reszletek;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

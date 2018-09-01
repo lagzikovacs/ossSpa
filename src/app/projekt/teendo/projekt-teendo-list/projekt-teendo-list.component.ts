@@ -1,8 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
 import {ProjektteendoService} from '../projektteendo.service';
 import {LogonService} from '../../../services/logon.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {ProjektteendoContainerMode} from "../projektteendocontainermode";
+import {ProjektteendoEgyMode} from "../projekttendoegymode";
 
 @Component({
   selector: 'app-projekt-teendo-list',
@@ -15,9 +16,7 @@ export class ProjektTeendoListComponent {
   projektteendoservice: ProjektteendoService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              private _logonservice: LogonService,
+  constructor(private _logonservice: LogonService,
               projektteendoservice: ProjektteendoService) {
     this.projektteendoservice = projektteendoservice;
   }
@@ -33,6 +32,12 @@ export class ProjektTeendoListComponent {
         this.eppFrissit = false;
       });
   }
+  setClickedRow(i: number) {
+    this.projektteendoservice.DtoSelectedIndex = i;
+    this.projektteendoservice.uj = false;
+    this.projektteendoservice.ContainerMode = ProjektteendoContainerMode.Egy;
+    this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Reszletek;
+  }
   uj() {
     this.eppFrissit = true;
     this.projektteendoservice.CreateNew()
@@ -46,17 +51,11 @@ export class ProjektTeendoListComponent {
         this.projektteendoservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this._router.navigate(['../projektteendouj'], {relativeTo: this._route});
+        this.projektteendoservice.ContainerMode = ProjektteendoContainerMode.Uj;
       })
       .catch(err => {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
-  }
-
-  setClickedRow(i: number) {
-    this.projektteendoservice.DtoSelectedIndex = i;
-    this.projektteendoservice.uj = false;
-    this._router.navigate(['../projektteendoegy'], {relativeTo: this._route});
   }
 }

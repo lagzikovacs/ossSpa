@@ -7,6 +7,7 @@ import {LogonService} from '../../services/logon.service';
 import {ProjektteendoResult} from '../../dtos/projekt/projektteendoresult';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {ProjektteendoContainerMode} from './projektteendocontainermode';
+import {ProjektteendoEgyMode} from "./projekttendoegymode";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,7 @@ export class ProjektteendoService {
   DtoEdited = new ProjektteendoDto();
 
   ContainerMode = ProjektteendoContainerMode.List;
+  EgyMode = ProjektteendoEgyMode.Reszletek;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

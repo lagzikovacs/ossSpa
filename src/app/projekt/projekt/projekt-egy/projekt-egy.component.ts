@@ -1,11 +1,14 @@
 import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {ProjektService} from '../projekt.service';
+import {ProjektContainerMode} from '../projektcontainermode';
+import {ProjektEgyMode} from '../projektegymode';
 import {ProjektteendoService} from '../../teendo/projektteendo.service';
 import {SzamlazasirendService} from '../../szamlazasirend/szamlazasirend.service';
 import {ProjektkapcsolatService} from '../../bizonylatesirat/projektkapcsolat.service';
-import {ProjektContainerMode} from '../projektcontainermode';
-import {ProjektEgyMode} from '../projektegymode';
+import {BizonylatesIratContainerMode} from '../../bizonylatesirat/bizonylatesiratcontainermode';
+import {SzamlazasirendContainerMode} from '../../szamlazasirend/szamlazasirendcontainermode';
+import {ProjektteendoContainerMode} from '../../teendo/projektteendocontainermode';
 
 @Component({
   selector: 'app-projekt-egy',
@@ -64,57 +67,15 @@ export class ProjektEgyComponent {
     this.projektservice.EgyMode = ProjektEgyMode.Iratminta;
   }
   bizonylatesirat() {
-    this.eppFrissit = true;
-    this._projektkapcsolatservice.Select(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        this._projektkapcsolatservice.Dto = res.Result;
-
-        this.eppFrissit = false;
-        this.projektservice.EgyMode = ProjektEgyMode.Bizonylatesirat;
-      })
-      .catch(err => {
-        this.errormodal.show(err);
-        this.eppFrissit = false;
-      });
+    this.projektservice.EgyMode = ProjektEgyMode.Bizonylatesirat;
+    this._projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
   }
   szamlazasirend() {
-    this.eppFrissit = true;
-    this._szamlazasirendservice.Select(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        this._szamlazasirendservice.Dto = res.Result;
-
-        this.eppFrissit = false;
-        this.projektservice.EgyMode = ProjektEgyMode.Szamlazasirend;
-      })
-      .catch(err => {
-        this.errormodal.show(err);
-        this.eppFrissit = false;
-      });
+    this.projektservice.EgyMode = ProjektEgyMode.Szamlazasirend;
+    this._szamlazasirendservice.ContainerMode = SzamlazasirendContainerMode.List;
   }
   teendo() {
-    this.eppFrissit = true;
-    this._projektteendoservice.Select(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        this._projektteendoservice.Dto = res.Result;
-
-        this.eppFrissit = false;
-        this.projektservice.EgyMode = ProjektEgyMode.Teendo;
-      })
-      .catch(err => {
-        this.errormodal.show(err);
-        this.eppFrissit = false;
-      });
+    this.projektservice.EgyMode = ProjektEgyMode.Teendo;
+    this._projektteendoservice.ContainerMode = ProjektteendoContainerMode.List;
   }
 }

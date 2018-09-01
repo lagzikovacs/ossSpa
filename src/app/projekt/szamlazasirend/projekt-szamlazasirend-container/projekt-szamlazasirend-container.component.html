@@ -1,0 +1,16 @@
+<!--export enum SzamlazasirendContainerMode {
+Blank = 0,
+List = 1,
+Egy = 2,
+Uj = 3
+}-->
+
+<ng-container *ngIf="szamlazasirendservice.ContainerMode === 1">
+  <app-projekt-szamlazasirend-list></app-projekt-szamlazasirend-list>
+</ng-container>
+<ng-container *ngIf="szamlazasirendservice.ContainerMode === 2">
+  <app-projekt-szamlazasirend-egy></app-projekt-szamlazasirend-egy>
+</ng-container>
+<ng-container *ngIf="szamlazasirendservice.ContainerMode === 3">
+  <app-projekt-szamlazasirend-szerkesztes></app-projekt-szamlazasirend-szerkesztes>
+</ng-container>

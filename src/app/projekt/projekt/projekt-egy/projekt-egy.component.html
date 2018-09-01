@@ -84,13 +84,13 @@
     <app-projekt-iratminta></app-projekt-iratminta>
   </ng-container>
   <ng-container *ngIf="projektservice.EgyMode === 9">
-    <app-projekt-bizonylatesirat></app-projekt-bizonylatesirat>
+    <app-projekt-bizonylatesirat-container></app-projekt-bizonylatesirat-container>
   </ng-container>
   <ng-container *ngIf="projektservice.EgyMode === 10">
-    <app-projekt-szamlazasirend></app-projekt-szamlazasirend>
+    <app-projekt-szamlazasirend-container></app-projekt-szamlazasirend-container>
   </ng-container>
   <ng-container *ngIf="projektservice.EgyMode === 11">
-    <app-projekt-teendo-list></app-projekt-teendo-list>
+    <app-projekt-teendo-container></app-projekt-teendo-container>
   </ng-container>
 
   <app-errormodal [cim]="projektservice.cim"></app-errormodal>

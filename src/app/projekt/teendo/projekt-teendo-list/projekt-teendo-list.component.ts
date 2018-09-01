@@ -22,6 +22,17 @@ export class ProjektTeendoListComponent {
     this.projektteendoservice = projektteendoservice;
   }
 
+  kereses() {
+    this.eppFrissit = true;
+    this.projektteendoservice.Kereses()
+      .then(res => {
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
+  }
   uj() {
     this.eppFrissit = true;
     this.projektteendoservice.CreateNew()

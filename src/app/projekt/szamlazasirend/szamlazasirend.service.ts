@@ -6,6 +6,7 @@ import {NumberResult} from '../../dtos/numberresult';
 import {environment} from '../../../environments/environment';
 import {SzamlazasirendResult} from '../../dtos/projekt/szamlazasirendresult';
 import {EmptyResult} from '../../dtos/emptyresult';
+import {SzamlazasirendContainerMode} from './szamlazasirendcontainermode';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,15 @@ import {EmptyResult} from '../../dtos/emptyresult';
 export class SzamlazasirendService {
   private readonly _controller = 'api/szamlazasirend/';
 
+  ProjektKod = -1;
+
   cim = 'Számlázási rend';
   Dto: SzamlazasirendDto[] = new Array<SzamlazasirendDto>();
   DtoSelectedIndex = -1;
   uj = false;
   DtoEdited = new SzamlazasirendDto();
+
+  ContainerMode = SzamlazasirendContainerMode.List;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
@@ -86,5 +91,21 @@ export class SzamlazasirendService {
     };
 
     return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+  }
+
+  public Kereses(): Promise<EmptyResult> {
+    this.Dto = new Array<SzamlazasirendDto>();
+    this.DtoSelectedIndex = -1;
+
+    return this.Select(this.ProjektKod)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.Dto = res.Result;
+
+        return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
+      });
   }
 }

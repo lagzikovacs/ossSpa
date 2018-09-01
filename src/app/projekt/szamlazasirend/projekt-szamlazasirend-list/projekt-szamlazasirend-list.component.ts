@@ -5,11 +5,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 
 @Component({
-  selector: 'app-projekt-szamlazasirend',
-  templateUrl: './projekt-szamlazasirend.component.html',
-  styleUrls: ['./projekt-szamlazasirend.component.css']
+  selector: 'app-projekt-szamlazasirend-list',
+  templateUrl: './projekt-szamlazasirend-list.component.html',
+  styleUrls: ['./projekt-szamlazasirend-list.component.css']
 })
-export class ProjektSzamlazasirendComponent {
+export class ProjektSzamlazasirendListComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szamlazasirendservice: SzamlazasirendService;
@@ -22,6 +22,17 @@ export class ProjektSzamlazasirendComponent {
     this.szamlazasirendservice = szamlazasirendservice;
   }
 
+  kereses() {
+    this.eppFrissit = true;
+    this.szamlazasirendservice.Kereses()
+      .then(res => {
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
+  }
   uj() {
     this.eppFrissit = true;
     this.szamlazasirendservice.CreateNew()

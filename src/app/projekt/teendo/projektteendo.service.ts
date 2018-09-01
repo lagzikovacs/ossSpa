@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import {NumberResult} from "../../dtos/numberresult";
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
-import {ProjektteendoDto} from "../../dtos/projekt/projektteendodto";
-import {LogonService} from "../../services/logon.service";
-import {ProjektteendoResult} from "../../dtos/projekt/projektteendoresult";
-import {EmptyResult} from "../../dtos/emptyresult";
+import {NumberResult} from '../../dtos/numberresult';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {ProjektteendoDto} from '../../dtos/projekt/projektteendodto';
+import {LogonService} from '../../services/logon.service';
+import {ProjektteendoResult} from '../../dtos/projekt/projektteendoresult';
+import {EmptyResult} from '../../dtos/emptyresult';
+import {ProjektteendoContainerMode} from './projektteendocontainermode';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,15 @@ import {EmptyResult} from "../../dtos/emptyresult";
 export class ProjektteendoService {
   private readonly _controller = 'api/projektteendo/';
 
+  ProjektKod = -1;
+
   cim = 'Projekt teendő';
   Dto: ProjektteendoDto[] = new Array<ProjektteendoDto>();
   DtoSelectedIndex = -1;
   uj = false;
   DtoEdited = new ProjektteendoDto();
+
+  ContainerMode = ProjektteendoContainerMode.List;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
@@ -86,5 +91,21 @@ export class ProjektteendoService {
     };
 
     return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+  }
+
+  public Kereses(): Promise<EmptyResult> {
+    this.Dto = new Array<ProjektteendoDto>();
+    this.DtoSelectedIndex = -1;
+
+    return this.Select(this.ProjektKod)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.Dto = res.Result;
+
+        return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
+      });
   }
 }

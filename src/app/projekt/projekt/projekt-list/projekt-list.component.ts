@@ -3,9 +3,12 @@ import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.componen
 import {ProjektService} from '../projekt.service';
 import {SzMT} from '../../../dtos/szmt';
 import {Szempont} from '../../../enums/szempont';
-import {ProjektContainerMode} from "../projektcontainermode";
-import {ProjektEgyMode} from "../projektegymode";
-import {ProjektSzerkesztesMode} from "../projektszerkesztesmode";
+import {ProjektContainerMode} from '../projektcontainermode';
+import {ProjektEgyMode} from '../projektegymode';
+import {ProjektSzerkesztesMode} from '../projektszerkesztesmode';
+import {ProjektteendoService} from '../../teendo/projektteendo.service';
+import {SzamlazasirendService} from '../../szamlazasirend/szamlazasirend.service';
+import {ProjektkapcsolatService} from '../../bizonylatesirat/projektkapcsolat.service';
 
 @Component({
   selector: 'app-projekt-list',
@@ -36,7 +39,10 @@ export class ProjektListComponent {
   eppFrissit = false;
   projektservice: ProjektService;
 
-  constructor(projektservice: ProjektService) {
+  constructor(private _projektkapcsolatservice: ProjektkapcsolatService,
+              private _szamlazasirendservice: SzamlazasirendService,
+              private _projektteendoservice: ProjektteendoService,
+              projektservice: ProjektService) {
     this.projektservice = projektservice;
   }
 
@@ -83,9 +89,31 @@ export class ProjektListComponent {
 
   setClickedRow(i: number) {
     this.projektservice.DtoSelectedIndex = i;
-    this.projektservice.ContainerMode = ProjektContainerMode.Egy;
-    this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
-    this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
+
+    const ProjektKod = this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD;
+    this._projektkapcsolatservice.ProjektKod = ProjektKod;
+    this._szamlazasirendservice.ProjektKod = ProjektKod;
+    this._projektteendoservice.ProjektKod = ProjektKod;
+
+    this.eppFrissit = true;
+    this._projektkapcsolatservice.Kereses()
+      .then(res => {
+        return this._szamlazasirendservice.Kereses();
+      })
+      .then(res1 => {
+        return this._projektteendoservice.Kereses();
+      })
+      .then(res2 => {
+        this.projektservice.ContainerMode = ProjektContainerMode.Egy;
+        this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
+        this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
+
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
   }
 
   onUj() {

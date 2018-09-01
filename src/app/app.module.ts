@@ -41,8 +41,8 @@ import { ProjektMuszakiallapotComponent } from './projekt/projekt/projekt-muszak
 import { ProjektInverterComponent } from './projekt/projekt/projekt-inverter/projekt-inverter.component';
 import { ProjektNapelemComponent } from './projekt/projekt/projekt-napelem/projekt-napelem.component';
 import { ProjektIratmintaComponent } from './projekt/projekt/projekt-iratminta/projekt-iratminta.component';
-import { ProjektBizonylatesiratComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat/projekt-bizonylatesirat.component';
-import { ProjektSzamlazasirendComponent } from './projekt/szamlazasirend/projekt-szamlazasirend/projekt-szamlazasirend.component';
+import { ProjektBizonylatesiratListComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-list/projekt-bizonylatesirat-list.component';
+import { ProjektSzamlazasirendListComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-list/projekt-szamlazasirend-list.component';
 import { ProjektTeendoListComponent } from './projekt/teendo/projekt-teendo-list/projekt-teendo-list.component';
 import { IratListComponent } from './irat/irat/irat-list/irat-list.component';
 import { IratEgyComponent } from './irat/irat/irat-egy/irat-egy.component';
@@ -157,7 +157,7 @@ import { DokumentumReszletekComponent } from './irat/dokumentum/dokumentum-reszl
 import { VolumeReszletekComponent } from './volume/volume-reszletek/volume-reszletek.component';
 import { ProjektReszletekComponent } from './projekt/projekt/projekt-reszletek/projekt-reszletek.component';
 import { ProjektStatuszComponent } from './projekt/projekt/projekt-statusz/projekt-statusz.component';
-import { ProjektSzamlazasirendegyComponent } from './projekt/szamlazasirend/projekt-szamlazasirendegy/projekt-szamlazasirendegy.component';
+import { ProjektSzamlazasirendEgyComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-egy/projekt-szamlazasirend-egy.component';
 import { ProjektSzamlazasirendSzerkesztesComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-szerkesztes/projekt-szamlazasirend-szerkesztes.component';
 import { ProjektSzamlazasirendTorlesComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-torles/projekt-szamlazasirend-torles.component';
 import { ProjektSzamlazasirendReszletekComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-reszletek/projekt-szamlazasirend-reszletek.component';
@@ -199,6 +199,9 @@ import { PenztartetelContainerComponent } from './penztar/penztartetel/penztarte
 import { IratContainerComponent } from './irat/irat/irat-container/irat-container.component';
 import { DokumentumContainerComponent } from './irat/dokumentum/dokumentum-container/dokumentum-container.component';
 import { ProjektContainerComponent } from './projekt/projekt/projekt-container/projekt-container.component';
+import { ProjektSzamlazasirendContainerComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-container/projekt-szamlazasirend-container.component';
+import { ProjektTeendoContainerComponent } from './projekt/teendo/projekt-teendo-container/projekt-teendo-container.component';
+import { ProjektBizonylatesiratContainerComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-container/projekt-bizonylatesirat-container.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -371,7 +374,7 @@ const routes: Routes = [
 //     {path: 'inverter', component: ProjektInverterComponent},
 //     {path: 'napelem', component: ProjektNapelemComponent},
 //     {path: 'iratminta', component: ProjektIratmintaComponent},
-//     {path: 'bizonylatesirat', component: ProjektBizonylatesiratComponent},
+//     {path: 'bizonylatesirat', component: ProjektBizonylatesiratListComponent},
 //     {path: 'bizonylatesiratujbizonylat', component: ProjektBizonylatesiratUjbizonylatComponent},
 //     {path: 'bizonylatesiratujirat', component: ProjektBizonylatesiratUjiratComponent, children: [
 //       {path: 'irattipus-list', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -386,7 +389,7 @@ const routes: Routes = [
 //     ]},
 //     {path: 'bizonylatesiratujajanlat', component: ProjektBizonylatesiratUjajanlatComponent},
 //     ///////////////////////////////
-//     {path: 'szamlazasirend', component: ProjektSzamlazasirendComponent},
+//     {path: 'szamlazasirend', component: ProjektSzamlazasirendListComponent},
 //     {path: 'szamlazasirenduj', component: ProjektSzamlazasirendSzerkesztesComponent, children: [
 //       {path: 'penznem', component: PenznemListComponent, canActivate: [RoleGuard]},
 //       {path: 'penznemuj', component: PenznemSzerkesztesComponent, canActivate: [RoleGuard]},
@@ -398,7 +401,7 @@ const routes: Routes = [
 //       ]},
 //       {path: 'blank', component: BlankComponent},
 //     ]},
-//     {path: 'szamlazasirendegy', component: ProjektSzamlazasirendegyComponent, children: [
+//     {path: 'szamlazasirendegy', component: ProjektSzamlazasirendEgyComponent, children: [
 //       {path: 'reszletek', component: ProjektSzamlazasirendReszletekComponent},
 //       {path: 'torles', component: ProjektSzamlazasirendTorlesComponent},
 //       {path: 'szerkesztes', component: ProjektSzamlazasirendSzerkesztesComponent, children: [
@@ -646,8 +649,8 @@ if (environment.production) {
     ProjektInverterComponent,
     ProjektNapelemComponent,
     ProjektIratmintaComponent,
-    ProjektBizonylatesiratComponent,
-    ProjektSzamlazasirendComponent,
+    ProjektBizonylatesiratListComponent,
+    ProjektSzamlazasirendListComponent,
     ProjektTeendoListComponent,
     IratListComponent,
     IratEgyComponent,
@@ -749,7 +752,7 @@ if (environment.production) {
     VolumeReszletekComponent,
     ProjektReszletekComponent,
     ProjektStatuszComponent,
-    ProjektSzamlazasirendegyComponent,
+    ProjektSzamlazasirendEgyComponent,
     ProjektSzamlazasirendSzerkesztesComponent,
     ProjektSzamlazasirendTorlesComponent,
     ProjektSzamlazasirendReszletekComponent,
@@ -787,6 +790,9 @@ if (environment.production) {
     IratContainerComponent,
     DokumentumContainerComponent,
     ProjektContainerComponent,
+    ProjektSzamlazasirendContainerComponent,
+    ProjektTeendoContainerComponent,
+    ProjektBizonylatesiratContainerComponent,
   ],
   imports: [
     BrowserModule,

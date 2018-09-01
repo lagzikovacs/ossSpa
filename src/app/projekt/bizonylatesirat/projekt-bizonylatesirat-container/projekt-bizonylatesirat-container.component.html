@@ -1,0 +1,15 @@
+<!--
+export enum BizonylatesIratContainerMode {
+Blank = 0,
+List = 1,
+Egy = 2,
+Uj = 3
+}-->
+
+<ng-container *ngIf="projektkapcsolatservice.ContainerMode === 1">
+  <app-projekt-bizonylatesirat-list></app-projekt-bizonylatesirat-list>
+</ng-container>
+<ng-container *ngIf="projektkapcsolatservice.ContainerMode === 2">
+</ng-container>
+<ng-container *ngIf="projektkapcsolatservice.ContainerMode === 3">
+</ng-container>

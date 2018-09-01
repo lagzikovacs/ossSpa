@@ -5,11 +5,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {LogonService} from '../../../services/logon.service';
 
 @Component({
-  selector: 'app-projekt-szamlazasirendegy',
-  templateUrl: './projekt-szamlazasirendegy.component.html',
-  styleUrls: ['./projekt-szamlazasirendegy.component.css']
+  selector: 'app-projekt-szamlazasirend-egy',
+  templateUrl: './projekt-szamlazasirend-egy.component.html',
+  styleUrls: ['./projekt-szamlazasirend-egy.component.css']
 })
-export class ProjektSzamlazasirendegyComponent {
+export class ProjektSzamlazasirendEgyComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szamlazasirendservice: SzamlazasirendService;

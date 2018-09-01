@@ -7,17 +7,24 @@ import {ProjektKapcsolatDto} from '../../dtos/projekt/projektkapcsolatdto';
 import {IratDto} from '../../dtos/irat/iratdto';
 import {NumberResult} from '../../dtos/numberresult';
 import {ProjektKapcsolatParameter} from '../../dtos/projekt/projektkapcsolatparameter';
+import {EmptyResult} from '../../dtos/emptyresult';
+import {BizonylatesIratContainerMode} from './bizonylatesiratcontainermode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjektkapcsolatService {
   private readonly _controller = 'api/projektkapcsolat/';
-  cim = 'Bizonylat és irat-list';
+
+  ProjektKod = -1;
+
+  cim = 'Bizonylat és irat';
   Dto: ProjektKapcsolatDto[] = new Array<ProjektKapcsolatDto>();
   DtoSelectedIndex = -1;
 
   UjIratDto = new IratDto();
+
+  ContainerMode = BizonylatesIratContainerMode.List;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
@@ -42,6 +49,22 @@ export class ProjektkapcsolatService {
     };
 
     return this._httpClient.post<ProjektKapcsolatResult>(url, body, options).toPromise();
+  }
+
+  public Kereses(): Promise<EmptyResult> {
+    this.Dto = new Array<ProjektKapcsolatDto>();
+    this.DtoSelectedIndex = -1;
+
+    return this.Select(this.ProjektKod)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.Dto = res.Result;
+
+        return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
+      });
   }
 
   public AddIratToProjekt(pkp: ProjektKapcsolatParameter): Promise<NumberResult> {

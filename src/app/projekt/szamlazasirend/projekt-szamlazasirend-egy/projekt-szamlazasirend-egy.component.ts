@@ -1,8 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
 import {SzamlazasirendService} from '../szamlazasirend.service';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
-import {ActivatedRoute, Router} from '@angular/router';
 import {LogonService} from '../../../services/logon.service';
+import {SzamlazasirendEgyMode} from '../szamlazasirendegymode';
+import {SzamlazasirendContainerMode} from '../szamlazasirendcontainermode';
 
 @Component({
   selector: 'app-projekt-szamlazasirend-egy',
@@ -15,25 +16,23 @@ export class ProjektSzamlazasirendEgyComponent {
   szamlazasirendservice: SzamlazasirendService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              private _logonservice: LogonService,
+  constructor(private _logonservice: LogonService,
               szamlazasirendservice: SzamlazasirendService) {
     this.szamlazasirendservice = szamlazasirendservice;
   }
 
   vissza() {
-    this._router.navigate(['../szamlazasirend'], {relativeTo: this._route});
+    this.szamlazasirendservice.ContainerMode = SzamlazasirendContainerMode.List;
   }
   reszletek() {
-    this._router.navigate(['reszletek'], {relativeTo: this._route});
+    this.szamlazasirendservice.EgyMode = SzamlazasirendEgyMode.Reszletek;
   }
   torles () {
-    this._router.navigate(['torles'], {relativeTo: this._route});
+    this.szamlazasirendservice.EgyMode = SzamlazasirendEgyMode.Torles;
   }
   modositas() {
     this.szamlazasirendservice.uj = false;
     this.szamlazasirendservice.DtoEdited = Object.assign({}, this.szamlazasirendservice.Dto[this.szamlazasirendservice.DtoSelectedIndex]);
-    this._router.navigate(['szerkesztes'], {relativeTo: this._route});
+    this.szamlazasirendservice.EgyMode = SzamlazasirendEgyMode.Modositas;
   }
 }

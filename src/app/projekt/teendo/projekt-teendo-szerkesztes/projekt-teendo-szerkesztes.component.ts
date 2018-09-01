@@ -8,6 +8,11 @@ import {ZoomSources} from '../../../enums/zoomsources';
 import * as moment from 'moment';
 import {TeendoZoomParameter} from '../../../dtos/primitiv/teendo/teendozoomparameter';
 import {ProjektService} from '../../projekt/projekt.service';
+import {ProjektteendoEgyMode} from "../projekttendoegymode";
+import {ProjektteendoContainerMode} from "../projektteendocontainermode";
+import {FelhasznaloContainerMode} from "../../../felhasznalo/felhasznalocontainermode";
+import {TeendoContainerMode} from "../../../teendo/teendocontainermode";
+import {ProjektteendoSzerkesztesMode} from "../projektteendoszerkesztesmode";
 
 @Component({
   selector: 'app-projekt-teendo-szerkesztes',
@@ -21,9 +26,7 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit {
   eppFrissit = false;
   Hatarido: any;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              projektteendoservice: ProjektteendoService,
+  constructor(projektteendoservice: ProjektteendoService,
               private _felhasznalosevice: FelhasznaloService,
               private _teendoservice: TeendoService,
               private _projektservice: ProjektService) {
@@ -86,9 +89,9 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit {
 
   navigal() {
     if (this.projektteendoservice.uj) {
-      this._router.navigate(['../projektteendo'], {relativeTo: this._route});
+      this.projektteendoservice.ContainerMode = ProjektteendoContainerMode.List;
     } else {
-      this._router.navigate(['../blank'], {relativeTo: this._route});
+      this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Reszletek;
     }
   }
 
@@ -96,12 +99,16 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit {
     this._felhasznalosevice.ekDto.minta = this.projektteendoservice.DtoEdited.DEDIKALVA || '';
     this._felhasznalosevice.zoomsource = ZoomSources.Projektteendo;
     this._felhasznalosevice.zoom = true;
-    this._router.navigate(['felhasznalo'], {relativeTo: this._route});
+    this._felhasznalosevice.ContainerMode = FelhasznaloContainerMode.List;
+
+    this.projektteendoservice.SzerkesztesMode = ProjektteendoSzerkesztesMode.FelhasznaloZoom;
   }
   TeendoZoom() {
     this._teendoservice.ekDto.minta = this.projektteendoservice.DtoEdited.TEENDO || '';
     this._teendoservice.zoomsource = ZoomSources.Projektteendo;
     this._teendoservice.zoom = true;
-    this._router.navigate(['teendo'], {relativeTo: this._route});
+    this._teendoservice.ContainerMode = TeendoContainerMode.List;
+
+    this.projektteendoservice.SzerkesztesMode = ProjektteendoSzerkesztesMode.TeendoZoom;
   }
 }

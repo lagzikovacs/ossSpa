@@ -1,29 +1,22 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {ProjektteendoService} from '../projektteendo.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {ProjektteendoContainerMode} from '../projektteendocontainermode';
+import {ProjektteendoEgyMode} from '../projekttendoegymode';
 
 @Component({
   selector: 'app-projekt-teendo-torles',
   templateUrl: './projekt-teendo-torles.component.html',
   styleUrls: ['./projekt-teendo-torles.component.css']
 })
-export class ProjektTeendoTorlesComponent implements OnInit {
+export class ProjektTeendoTorlesComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektteendoservice: ProjektteendoService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              projektteendoservice: ProjektteendoService) {
+  constructor(projektteendoservice: ProjektteendoService) {
     this.projektteendoservice = projektteendoservice;
-  }
-
-  ngOnInit() {
-    if (this.projektteendoservice.DtoSelectedIndex === -1) {
-      this._router.navigate(['../blank'], {relativeTo: this._route});
-    }
   }
 
   ok() {
@@ -38,7 +31,7 @@ export class ProjektTeendoTorlesComponent implements OnInit {
         this.projektteendoservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this._router.navigate(['../../projektteendo'], {relativeTo: this._route});
+        this.projektteendoservice.ContainerMode = ProjektteendoContainerMode.List;
       })
       .catch(err => {
         this.errormodal.show(err);
@@ -46,6 +39,6 @@ export class ProjektTeendoTorlesComponent implements OnInit {
       });
   }
   cancel() {
-    this._router.navigate(['../blank'], {relativeTo: this._route});
+    this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Reszletek;
   }
 }

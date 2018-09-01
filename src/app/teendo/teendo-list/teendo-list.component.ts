@@ -7,6 +7,7 @@ import {ZoomSources} from '../../enums/zoomsources';
 import {ProjektteendoService} from '../../projekt/teendo/projektteendo.service';
 import {TeendoContainerMode} from "../teendocontainermode";
 import {TeendoEgyMode} from "../teendoegymode";
+import {ProjektteendoSzerkesztesMode} from "../../projekt/teendo/projektteendoszerkesztesmode";
 
 @Component({
   selector: 'app-teendo-list',
@@ -81,7 +82,7 @@ export class TeendoListComponent implements OnInit {
     this.teendoservice.zoom = false;
 
     if (this.teendoservice.zoomsource === ZoomSources.Projektteendo) {
-      // this._projektteendoservice.SzerkesztesMode = ProjektteendoSzerkesztesMode.Blank;
+      this._projektteendoservice.SzerkesztesMode = ProjektteendoSzerkesztesMode.Blank;
     }
   }
 

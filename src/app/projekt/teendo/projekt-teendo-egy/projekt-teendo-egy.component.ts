@@ -1,8 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {LogonService} from '../../../services/logon.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {ProjektteendoService} from '../projektteendo.service';
+import {ProjektteendoContainerMode} from '../projektteendocontainermode';
+import {ProjektteendoEgyMode} from '../projekttendoegymode';
 
 @Component({
   selector: 'app-projekt-teendo-egy',
@@ -15,30 +16,28 @@ export class ProjektTeendoEgyComponent {
   projektteendoservice: ProjektteendoService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              private _logonservice: LogonService,
+  constructor(private _logonservice: LogonService,
               projektteendoservice: ProjektteendoService) {
     this.projektteendoservice = projektteendoservice;
   }
 
   vissza() {
-    this._router.navigate(['../projektteendo'], {relativeTo: this._route});
+    this.projektteendoservice.ContainerMode = ProjektteendoContainerMode.List;
   }
   reszletek() {
-    this._router.navigate(['reszletek'], {relativeTo: this._route});
+    this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Reszletek;
   }
   torles () {
-    this._router.navigate(['torles'], {relativeTo: this._route});
+    this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Torles;
   }
   modositas() {
     this.projektteendoservice.uj = false;
     this.projektteendoservice.DtoEdited = Object.assign({}, this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex]);
-    this._router.navigate(['szerkesztes'], {relativeTo: this._route});
+    this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Modositas;
   }
   elvegezve() {
     this.projektteendoservice.uj = false;
     this.projektteendoservice.DtoEdited = Object.assign({}, this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex]);
-    this._router.navigate(['elvegezve'], {relativeTo: this._route});
+    this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Elvegezve;
   }
 }

@@ -11,6 +11,7 @@ import {PenznemContainerMode} from "../penznemcontainermode";
 import {PenztarSzerkesztesMode} from "../../penztar/penztarszerkesztesmode";
 import {ProjektService} from "../../projekt/projekt/projekt.service";
 import {ProjektSzerkesztesMode} from "../../projekt/projekt/projektszerkesztesmode";
+import {SzamlazasirendSzerkesztesMode} from "../../projekt/szamlazasirend/szamlazasirendszerkesztesmode";
 
 @Component({
   selector: 'app-penznem-list',
@@ -101,7 +102,7 @@ export class PenznemListComponent implements OnInit {
       this._projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
     }
     if (this.penznemservice.zoomsource === ZoomSources.Szamlazasirend) {
-      // this._szamlazasirendservice.SzerkesztesMode = SzalazasirendSzerkesztesMode.Blank;
+      this._szamlazasirendservice.SzerkesztesMode = SzamlazasirendSzerkesztesMode.Blank;
     }
   }
 

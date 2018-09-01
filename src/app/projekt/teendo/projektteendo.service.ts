@@ -8,6 +8,7 @@ import {ProjektteendoResult} from '../../dtos/projekt/projektteendoresult';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {ProjektteendoContainerMode} from './projektteendocontainermode';
 import {ProjektteendoEgyMode} from "./projekttendoegymode";
+import {ProjektteendoSzerkesztesMode} from "./projektteendoszerkesztesmode";
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,7 @@ export class ProjektteendoService {
 
   ContainerMode = ProjektteendoContainerMode.List;
   EgyMode = ProjektteendoEgyMode.Reszletek;
+  SzerkesztesMode = ProjektteendoSzerkesztesMode.Blank;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

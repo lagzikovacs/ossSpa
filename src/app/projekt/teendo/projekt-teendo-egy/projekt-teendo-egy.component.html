@@ -25,6 +25,24 @@
     </nav>
   </div>
 
-  <router-outlet></router-outlet>
+<!--  export enum ProjektteendoEgyMode {
+  Reszletek = 1,
+  Torles = 2,
+  Modositas = 3,
+  Elvegezve = 4
+  }-->
+  <ng-container *ngIf="projektteendoservice.EgyMode === 1">
+    <app-projekt-teendo-reszletek></app-projekt-teendo-reszletek>
+  </ng-container>
+  <ng-container *ngIf="projektteendoservice.EgyMode === 2">
+    <app-projekt-teendo-torles></app-projekt-teendo-torles>
+  </ng-container>
+  <ng-container *ngIf="projektteendoservice.EgyMode === 3">
+    <app-projekt-teendo-szerkesztes></app-projekt-teendo-szerkesztes>
+  </ng-container>
+  <ng-container *ngIf="projektteendoservice.EgyMode === 4">
+    <app-projekt-teendo-elvegezve></app-projekt-teendo-elvegezve>
+  </ng-container>
+
   <app-errormodal [cim]="projektteendoservice.cim"></app-errormodal>
 </div>

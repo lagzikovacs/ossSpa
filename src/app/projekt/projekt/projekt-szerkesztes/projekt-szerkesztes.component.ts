@@ -1,16 +1,16 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from "../../../tools/errormodal/errormodal.component";
-import {ProjektService} from "../projekt.service";
-import {UgyfelService} from "../../../ugyfel/ugyfel.service";
-import {PenznemService} from "../../../penznem/penznem.service";
-import {ZoomSources} from "../../../enums/zoomsources";
-import {UgyfelContainerMode} from "../../../ugyfel/ugyfelcontainermode";
-import {PenznemContainerMode} from "../../../penznem/penznemcontainermode";
-import {ProjektContainerMode} from "../projektcontainermode";
-import {ProjektSzerkesztesMode} from "../projektszerkesztesmode";
-import {ProjektEgyMode} from "../projektegymode";
-import {UgyfelZoomParameter} from "../../../ugyfel/ugyfelzoomparameter";
-import {PenznemZoomParameter} from "../../../penznem/penznemzoomparameter";
+import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {ProjektService} from '../projekt.service';
+import {UgyfelService} from '../../../ugyfel/ugyfel.service';
+import {PenznemService} from '../../../penznem/penznem.service';
+import {ZoomSources} from '../../../enums/zoomsources';
+import {UgyfelContainerMode} from '../../../ugyfel/ugyfelcontainermode';
+import {PenznemContainerMode} from '../../../penznem/penznemcontainermode';
+import {ProjektContainerMode} from '../projektcontainermode';
+import {ProjektSzerkesztesMode} from '../projektszerkesztesmode';
+import {ProjektEgyMode} from '../projektegymode';
+import {UgyfelZoomParameter} from '../../../ugyfel/ugyfelzoomparameter';
+import {PenznemZoomParameter} from '../../../penznem/penznemzoomparameter';
 
 @Component({
   selector: 'app-projekt-szerkesztes',

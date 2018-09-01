@@ -43,7 +43,18 @@
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
     </div>
   </form>
-  <router-outlet></router-outlet>
+
+<!--  export enum ProjektSzerkesztesMode {
+  Blank = 0,
+  PenznemZoom = 1
+  }-->
+  <ng-container *ngIf="szamlazasirendservice.SzerkesztesMode === 0">
+    <app-blank></app-blank>
+  </ng-container>
+  <ng-container *ngIf="szamlazasirendservice.SzerkesztesMode === 1">
+    <app-penznem-container></app-penznem-container>
+  </ng-container>
+
   <app-errormodal [cim]="szamlazasirendservice.cim"></app-errormodal>
 </div>
 

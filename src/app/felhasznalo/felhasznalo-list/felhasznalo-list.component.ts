@@ -8,6 +8,7 @@ import {ZoomSources} from '../../enums/zoomsources';
 import {ProjektteendoService} from '../../projekt/teendo/projektteendo.service';
 import {FelhasznaloContainerMode} from "../felhasznalocontainermode";
 import {FelhasznaloEgyMode} from "../felhasznaloegymode";
+import {ProjektteendoSzerkesztesMode} from "../../projekt/teendo/projektteendoszerkesztesmode";
 
 @Component({
   selector: 'app-felhasznalo-list',
@@ -81,7 +82,7 @@ export class FelhasznaloListComponent implements OnInit {
     this.felhasznaloservice.zoom = false;
 
     if (this.felhasznaloservice.zoomsource === ZoomSources.Projektteendo) {
-      // this._projektteendoservice.SzerkesztesMode = ProjektteendoSzerkesztesMode.Blank;
+      this._projektteendoservice.SzerkesztesMode = ProjektteendoSzerkesztesMode.Blank;
     }
   }
 

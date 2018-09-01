@@ -7,9 +7,10 @@ import {environment} from '../../../environments/environment';
 import {ProjektResult} from '../../dtos/projekt/projektresult';
 import {IratmintaResult} from '../../dtos/projekt/iratmintaresult';
 import {NumberResult} from '../../dtos/numberresult';
-import {ProjektContainerMode} from "./projektcontainermode";
-import {ProjektSzerkesztesMode} from "./projektszerkesztesmode";
-import {ProjektEgyMode} from "./projektegymode";
+import {ProjektContainerMode} from './projektcontainermode';
+import {ProjektSzerkesztesMode} from './projektszerkesztesmode';
+import {ProjektEgyMode} from './projektegymode';
+import {EmptyResult} from '../../dtos/emptyresult';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,17 @@ export class ProjektService {
     };
 
     return this._httpClient.post<ProjektResult>(url, body, options).toPromise();
+  }
+
+  public Delete(dto: ProjektDto): Promise<EmptyResult> {
+    const url = environment.BaseHref + this._controller + 'delete';
+    const body = dto;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
   }
 
   public Get(key: number): Promise<ProjektResult> {

@@ -1,29 +1,22 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {SzamlazasirendService} from "../szamlazasirend.service";
-import {ErrormodalComponent} from "../../../tools/errormodal/errormodal.component";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Component, ViewChild} from '@angular/core';
+import {SzamlazasirendService} from '../szamlazasirend.service';
+import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {SzamlazasirendContainerMode} from '../szamlazasirendcontainermode';
+import {SzamlazasirendEgyMode} from '../szamlazasirendegymode';
 
 @Component({
   selector: 'app-projekt-szamlazasirend-torles',
   templateUrl: './projekt-szamlazasirend-torles.component.html',
   styleUrls: ['./projekt-szamlazasirend-torles.component.css']
 })
-export class ProjektSzamlazasirendTorlesComponent implements OnInit {
+export class ProjektSzamlazasirendTorlesComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szamlazasirendservice: SzamlazasirendService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              cikkservice: SzamlazasirendService) {
+  constructor(cikkservice: SzamlazasirendService) {
     this.szamlazasirendservice = cikkservice;
-  }
-
-  ngOnInit() {
-    if (this.szamlazasirendservice.DtoSelectedIndex === -1) {
-      this._router.navigate(['../blank'], {relativeTo: this._route});
-    }
   }
 
   ok() {
@@ -38,7 +31,7 @@ export class ProjektSzamlazasirendTorlesComponent implements OnInit {
         this.szamlazasirendservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this._router.navigate(['../../szamlazasirend'], {relativeTo: this._route});
+        this.szamlazasirendservice.ContainerMode = SzamlazasirendContainerMode.List;
       })
       .catch(err => {
         this.errormodal.show(err);
@@ -47,6 +40,6 @@ export class ProjektSzamlazasirendTorlesComponent implements OnInit {
   }
 
   cancel() {
-    this._router.navigate(['../blank'], {relativeTo: this._route});
+    this.szamlazasirendservice.EgyMode = SzamlazasirendEgyMode.Reszletek;
   }
 }

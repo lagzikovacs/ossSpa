@@ -56,7 +56,22 @@
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
     </div>
   </form>
-  <router-outlet></router-outlet>
+
+<!--  export enum ProjektteendoSzerkesztesMode {
+  Blank = 0,
+  FelhasznaloZoom = 1,
+  TeendoZoom = 2
+  }-->
+  <ng-container *ngIf="projektteendoservice.SzerkesztesMode === 0">
+    <app-blank></app-blank>
+  </ng-container>
+  <ng-container *ngIf="projektteendoservice.SzerkesztesMode === 1">
+    <app-felhasznalo-container></app-felhasznalo-container>
+  </ng-container>
+  <ng-container *ngIf="projektteendoservice.SzerkesztesMode === 2">
+    <app-teendo-container></app-teendo-container>
+  </ng-container>
+
   <app-errormodal [cim]="projektteendoservice.cim"></app-errormodal>
 </div>
 

@@ -1,11 +1,14 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {SzamlazasirendService} from '../szamlazasirend.service';
 import {PenznemService} from '../../../penznem/penznem.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {PenznemZoomParameter} from '../../../penznem/penznemzoomparameter';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {ProjektService} from '../../projekt/projekt.service';
+import {SzamlazasirendEgyMode} from "../szamlazasirendegymode";
+import {SzamlazasirendContainerMode} from "../szamlazasirendcontainermode";
+import {PenznemContainerMode} from "../../../penznem/penznemcontainermode";
+import {SzamlazasirendSzerkesztesMode} from "../szamlazasirendszerkesztesmode";
 
 @Component({
   selector: 'app-projekt-szamlazasirend-szerkesztes',
@@ -18,9 +21,7 @@ export class ProjektSzamlazasirendSzerkesztesComponent implements OnInit {
   szamlazasirendservice: SzamlazasirendService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              szamlazasirendservice: SzamlazasirendService,
+  constructor(szamlazasirendservice: SzamlazasirendService,
               private _penznemservice: PenznemService,
               private _projektservice: ProjektService) {
     this.szamlazasirendservice = szamlazasirendservice;
@@ -76,9 +77,9 @@ export class ProjektSzamlazasirendSzerkesztesComponent implements OnInit {
   }
   navigal() {
     if (this.szamlazasirendservice.uj) {
-      this._router.navigate(['../szamlazasirend'], {relativeTo: this._route});
+      this.szamlazasirendservice.ContainerMode = SzamlazasirendContainerMode.List;
     } else {
-      this._router.navigate(['../blank'], {relativeTo: this._route});
+      this.szamlazasirendservice.EgyMode = SzamlazasirendEgyMode.Reszletek;
     }
   }
 
@@ -86,6 +87,8 @@ export class ProjektSzamlazasirendSzerkesztesComponent implements OnInit {
     this._penznemservice.ekDto.minta = this.szamlazasirendservice.DtoEdited.PENZNEM || '';
     this._penznemservice.zoomsource = ZoomSources.Szamlazasirend;
     this._penznemservice.zoom = true;
-    this._router.navigate(['penznem'], {relativeTo: this._route});
+    this._penznemservice.ContainerMode = PenznemContainerMode.List;
+
+    this.szamlazasirendservice.SzerkesztesMode = SzamlazasirendSzerkesztesMode.PenznemZoom;
   }
 }

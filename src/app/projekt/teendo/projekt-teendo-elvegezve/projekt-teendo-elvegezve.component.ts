@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import * as moment from 'moment';
-import {ActivatedRoute, Router} from '@angular/router';
 import {ProjektteendoService} from '../projektteendo.service';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {ProjektteendoEgyMode} from "../projekttendoegymode";
 
 @Component({
   selector: 'app-projekt-teendo-elvegezve',
@@ -16,9 +16,7 @@ export class ProjektTeendoElvegezveComponent implements OnInit {
   eppFrissit = false;
   Elvegezve: any;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              projektteendoservice: ProjektteendoService) {
+  constructor(projektteendoservice: ProjektteendoService) {
     this.projektteendoservice = projektteendoservice;
   }
 
@@ -57,6 +55,6 @@ export class ProjektTeendoElvegezveComponent implements OnInit {
   }
 
   navigal() {
-    this._router.navigate(['../blank'], {relativeTo: this._route});
+    this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Reszletek;
   }
 }

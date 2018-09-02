@@ -105,7 +105,7 @@ export class ProjektListComponent {
       })
       .then(res2 => {
         this.projektservice.ContainerMode = ProjektContainerMode.Egy;
-        this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
+        this.projektservice.EgyMode = ProjektEgyMode.Bizonylatesirat;
         this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
 
         this.eppFrissit = false;

@@ -202,6 +202,7 @@ import { ProjektContainerComponent } from './projekt/projekt/projekt-container/p
 import { ProjektSzamlazasirendContainerComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-container/projekt-szamlazasirend-container.component';
 import { ProjektTeendoContainerComponent } from './projekt/teendo/projekt-teendo-container/projekt-teendo-container.component';
 import { ProjektBizonylatesiratContainerComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-container/projekt-bizonylatesirat-container.component';
+import { ProjektBizonylatesiratTorlesComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-torles/projekt-bizonylatesirat-torles.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -793,6 +794,7 @@ if (environment.production) {
     ProjektSzamlazasirendContainerComponent,
     ProjektTeendoContainerComponent,
     ProjektBizonylatesiratContainerComponent,
+    ProjektBizonylatesiratTorlesComponent,
   ],
   imports: [
     BrowserModule,

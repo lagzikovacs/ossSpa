@@ -7,9 +7,10 @@ import {JogKod} from '../../enums/jogkod';
 import {ZoomSources} from '../../enums/zoomsources';
 import {ProjektkapcsolatService} from '../../projekt/bizonylatesirat/projektkapcsolat.service';
 import {IratService} from '../../irat/irat/irat.service';
-import {IrattipusEgyMode} from "../irattipusegymode";
-import {IrattipusContainerMode} from "../irattipuscontainermode";
-import {IratSzerkesztesMode} from "../../irat/irat/iratszerkesztesmode";
+import {IrattipusEgyMode} from '../irattipusegymode';
+import {IrattipusContainerMode} from '../irattipuscontainermode';
+import {IratSzerkesztesMode} from '../../irat/irat/iratszerkesztesmode';
+import {BizonylatesiratSzerkesztesMode} from '../../projekt/bizonylatesirat/bizonylatesiratszerkesztesmode';
 
 @Component({
   selector: 'app-irattipus-list',
@@ -94,7 +95,7 @@ export class IrattipusListComponent implements OnInit {
       this._iratservice.SzerkesztesMode = IratSzerkesztesMode.Blank;
     }
     if (this.irattipusservice.zoomsource === ZoomSources.Projektirat) {
-      // this._projektkapcsolatservice.SzerkesztesMode = ProjektkapcsolatSzerkesztesMode.Blank;
+      this._projektkapcsolatservice.SzerkesztesMode = BizonylatesiratSzerkesztesMode.Blank;
     }
   }
 

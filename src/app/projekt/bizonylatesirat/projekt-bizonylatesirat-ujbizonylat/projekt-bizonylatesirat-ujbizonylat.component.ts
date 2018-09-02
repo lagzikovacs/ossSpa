@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ProjektkapcsolatService} from '../projektkapcsolat.service';
+import {LogonService} from '../../../services/logon.service';
+import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-ujbizonylat',
@@ -7,10 +10,15 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./projekt-bizonylatesirat-ujbizonylat.component.css']
 })
 export class ProjektBizonylatesiratUjbizonylatComponent implements OnInit {
+  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
+
+  projektkapcsolatservice: ProjektkapcsolatService;
   eppFrissit = false;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute) { }
+  constructor(private _logonservice: LogonService,
+              projektkapcsolatservice: ProjektkapcsolatService) {
+    this.projektkapcsolatservice = projektkapcsolatservice;
+  }
 
   ngOnInit() {
   }
@@ -22,6 +30,6 @@ export class ProjektBizonylatesiratUjbizonylatComponent implements OnInit {
     this.navigal();
   }
   navigal() {
-    this._router.navigate(['../bizonylatesirat'], {relativeTo: this._route});
+    this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
   }
 }

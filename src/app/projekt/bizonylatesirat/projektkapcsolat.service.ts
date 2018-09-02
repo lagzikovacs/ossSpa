@@ -9,6 +9,7 @@ import {NumberResult} from '../../dtos/numberresult';
 import {ProjektKapcsolatParameter} from '../../dtos/projekt/projektkapcsolatparameter';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {BizonylatesIratContainerMode} from './bizonylatesiratcontainermode';
+import {BizonylatesiratSzerkesztesMode} from './bizonylatesiratszerkesztesmode';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,7 @@ export class ProjektkapcsolatService {
   UjIratDto = new IratDto();
 
   ContainerMode = BizonylatesIratContainerMode.List;
+  SzerkesztesMode = BizonylatesiratSzerkesztesMode.Blank;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

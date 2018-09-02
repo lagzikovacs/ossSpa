@@ -1,9 +1,13 @@
 <!--
 export enum BizonylatesIratContainerMode {
-Blank = 0,
-List = 1,
-Egy = 2,
-Uj = 3
+  Blank = 0,
+  List = 1,
+  EgyBizonylat = 2,
+  EgyIrat = 3,
+  UjBizonylat = 4,
+  UjIrat = 5,
+  UjAjanlat = 6,
+  Torles = 7
 }-->
 
 <ng-container *ngIf="projektkapcsolatservice.ContainerMode === 1">
@@ -13,3 +17,13 @@ Uj = 3
 </ng-container>
 <ng-container *ngIf="projektkapcsolatservice.ContainerMode === 3">
 </ng-container>
+<ng-container *ngIf="projektkapcsolatservice.ContainerMode === 4">
+  <app-projekt-bizonylatesirat-ujbizonylat></app-projekt-bizonylatesirat-ujbizonylat>
+</ng-container>
+<ng-container *ngIf="projektkapcsolatservice.ContainerMode === 5">
+  <app-projekt-bizonylatesirat-ujirat></app-projekt-bizonylatesirat-ujirat>
+</ng-container>
+<ng-container *ngIf="projektkapcsolatservice.ContainerMode === 6">
+  <app-projekt-bizonylatesirat-ujajanlat></app-projekt-bizonylatesirat-ujajanlat>
+</ng-container>
+

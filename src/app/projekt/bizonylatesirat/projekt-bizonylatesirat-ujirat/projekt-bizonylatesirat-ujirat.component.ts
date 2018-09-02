@@ -1,5 +1,4 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
 import * as moment from 'moment';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
@@ -8,6 +7,9 @@ import {ZoomSources} from '../../../enums/zoomsources';
 import {IratService} from '../../../irat/irat/irat.service';
 import {ProjektService} from '../../projekt/projekt.service';
 import {ProjektKapcsolatParameter} from '../../../dtos/projekt/projektkapcsolatparameter';
+import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
+import {BizonylatesiratSzerkesztesMode} from '../bizonylatesiratszerkesztesmode';
+import {IrattipusContainerMode} from '../../../irattipus/irattipuscontainermode';
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-ujirat',
@@ -21,9 +23,7 @@ export class ProjektBizonylatesiratUjiratComponent implements OnInit {
   eppFrissit = false;
   Keletkezett: any;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              private _irattipusservice: IrattipusService,
+  constructor(private _irattipusservice: IrattipusService,
               private _iratservice: IratService,
               private _projektservice: ProjektService,
               projektkapcsolatservice: ProjektkapcsolatService) {
@@ -53,12 +53,16 @@ export class ProjektBizonylatesiratUjiratComponent implements OnInit {
     this._irattipusservice.ekDto.minta = this.projektkapcsolatservice.UjIratDto.IRATTIPUS || '';
     this._irattipusservice.zoomsource = ZoomSources.Projektirat;
     this._irattipusservice.zoom = true;
-    this._router.navigate(['irattipus-list'], {relativeTo: this._route});
+    this._irattipusservice.ContainerMode = IrattipusContainerMode.List;
+
+    this.projektkapcsolatservice.SzerkesztesMode = BizonylatesiratSzerkesztesMode.IrattipusZoom;
   }
 
   onSubmit() {
     this.projektkapcsolatservice.UjIratDto.UGYFELKOD = this._projektservice.Dto[this._projektservice.DtoSelectedIndex].UGYFELKOD;
     this.projektkapcsolatservice.UjIratDto.KELETKEZETT = moment(this.Keletkezett).toISOString(true);
+
+    // TODO zoomcheck
     this._iratservice.Add(this.projektkapcsolatservice.UjIratDto)
       .then(res => {
         if (res.Error != null) {
@@ -96,6 +100,6 @@ export class ProjektBizonylatesiratUjiratComponent implements OnInit {
     this.navigal();
   }
   navigal() {
-    this._router.navigate(['../bizonylatesirat'], {relativeTo: this._route});
+    this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
   }
 }

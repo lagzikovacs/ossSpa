@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import {LogonService} from '../../services/logon.service';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {ProjektKapcsolatResult} from '../../dtos/projekt/projektkapcsolatresult';
+import {ProjektKapcsolatResult} from './projektkapcsolatresult';
 import {environment} from '../../../environments/environment';
-import {ProjektKapcsolatDto} from '../../dtos/projekt/projektkapcsolatdto';
+import {ProjektKapcsolatDto} from './projektkapcsolatdto';
 import {IratDto} from '../../dtos/irat/iratdto';
 import {NumberResult} from '../../dtos/numberresult';
-import {ProjektKapcsolatParameter} from '../../dtos/projekt/projektkapcsolatparameter';
+import {ProjektKapcsolatParameter} from './projektkapcsolatparameter';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {BizonylatesIratContainerMode} from './bizonylatesiratcontainermode';
 import {BizonylatesiratSzerkesztesMode} from './bizonylatesiratszerkesztesmode';
@@ -18,6 +18,7 @@ export class ProjektkapcsolatService {
   private readonly _controller = 'api/projektkapcsolat/';
 
   ProjektKod = -1;
+  UgyfelKod = -1;
 
   cim = 'Bizonylat és irat';
   Dto: ProjektKapcsolatDto[] = new Array<ProjektKapcsolatDto>();
@@ -71,6 +72,17 @@ export class ProjektkapcsolatService {
 
   public AddIratToProjekt(pkp: ProjektKapcsolatParameter): Promise<NumberResult> {
     const url = environment.BaseHref + this._controller + 'addirattoprojekt';
+    const body = pkp;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+  }
+
+  public UjBizonylatToProjekt(pkp: ProjektKapcsolatParameter): Promise<NumberResult> {
+    const url = environment.BaseHref + this._controller + 'ujbizonylattoprojekt';
     const body = pkp;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

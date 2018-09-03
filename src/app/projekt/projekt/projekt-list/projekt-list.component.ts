@@ -91,7 +91,10 @@ export class ProjektListComponent {
     this.projektservice.DtoSelectedIndex = i;
 
     const ProjektKod = this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD;
+    const UgyfelKod = this.projektservice.Dto[this.projektservice.DtoSelectedIndex].UGYFELKOD;
+
     this._projektkapcsolatservice.ProjektKod = ProjektKod;
+    this._projektkapcsolatservice.UgyfelKod = UgyfelKod;
     this._szamlazasirendservice.ProjektKod = ProjektKod;
     this._projektteendoservice.ProjektKod = ProjektKod;
 

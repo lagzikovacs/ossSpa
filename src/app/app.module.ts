@@ -189,11 +189,11 @@ import { PenznemContainerComponent } from './penznem/penznem-container/penznem-c
 import { TeendoContainerComponent } from './teendo/teendo-container/teendo-container.component';
 import { CsoportContainerComponent } from './csoport/csoport-container/csoport-container.component';
 import { FeliratkozasContainerComponent } from './feliratkozas/feliratkozas-container/feliratkozas-container.component';
-import {PenztartetelListComponent} from "./penztar/penztartetel/penztartetel-list/penztartetel-list.component";
-import {PenztarExportComponent} from "./penztar/penztar-export/penztar-export.component";
-import {PenztarReszletekComponent} from "./penztar/penztar-reszletek/penztar-reszletek.component";
-import {PenztarTorlesComponent} from "./penztar/penztar-torles/penztar-torles.component";
-import {PenztarSzerkesztesComponent} from "./penztar/penztar-szerkesztes/penztar-szerkesztes.component";
+import {PenztartetelListComponent} from './penztar/penztartetel/penztartetel-list/penztartetel-list.component';
+import {PenztarExportComponent} from './penztar/penztar-export/penztar-export.component';
+import {PenztarReszletekComponent} from './penztar/penztar-reszletek/penztar-reszletek.component';
+import {PenztarTorlesComponent} from './penztar/penztar-torles/penztar-torles.component';
+import {PenztarSzerkesztesComponent} from './penztar/penztar-szerkesztes/penztar-szerkesztes.component';
 import { PenztarContainerComponent } from './penztar/penztar-container/penztar-container.component';
 import { PenztartetelContainerComponent } from './penztar/penztartetel/penztartetel-container/penztartetel-container.component';
 import { IratContainerComponent } from './irat/irat/irat-container/irat-container.component';
@@ -203,6 +203,9 @@ import { ProjektSzamlazasirendContainerComponent } from './projekt/szamlazasiren
 import { ProjektTeendoContainerComponent } from './projekt/teendo/projekt-teendo-container/projekt-teendo-container.component';
 import { ProjektBizonylatesiratContainerComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-container/projekt-bizonylatesirat-container.component';
 import { ProjektBizonylatesiratTorlesComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-torles/projekt-bizonylatesirat-torles.component';
+import {PenztartetelService} from './penztar/penztartetel/penztartetel.service';
+import {BizonylatService} from './bizonylat/bizonylat.service';
+import {RiportService} from './services/riport.service';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -826,7 +829,11 @@ if (environment.production) {
     IratService,
     DokumentumService,
     PenztarService,
+    PenztartetelService,
     FeliratkozasService,
+
+    BizonylatService,
+    RiportService,
 
     ParticioService,
     VolumeService,

@@ -2,6 +2,21 @@
   <h5>Új bizonylat</h5>
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Bizonylattipus</div>
+      </div>
+      <div class="col-md-4">
+        <div *ngFor="let entry of entries; let i = index" class="form-check">
+          <input class="form-check-input" type="radio" name="radiogroup" id="entry"
+                 [checked]="i === entryindex"
+                 (change)="change(i)">
+          <label class="form-check-label" for="entry">
+            {{entry[0]}}
+          </label>
+        </div>
+      </div>
+    </div>
 
     <div class="row no-gutters" style="margin-bottom: 10px">
       <div class="col-md-2"></div>

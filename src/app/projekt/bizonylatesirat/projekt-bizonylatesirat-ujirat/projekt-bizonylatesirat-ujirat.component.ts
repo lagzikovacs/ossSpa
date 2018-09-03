@@ -6,7 +6,7 @@ import {IrattipusService} from '../../../irattipus/irattipus.service';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {IratService} from '../../../irat/irat/irat.service';
 import {ProjektService} from '../../projekt/projekt.service';
-import {ProjektKapcsolatParameter} from '../../../dtos/projekt/projektkapcsolatparameter';
+import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
 import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 import {BizonylatesiratSzerkesztesMode} from '../bizonylatesiratszerkesztesmode';
 import {IrattipusContainerMode} from '../../../irattipus/irattipuscontainermode';
@@ -59,7 +59,7 @@ export class ProjektBizonylatesiratUjiratComponent implements OnInit {
   }
 
   onSubmit() {
-    this.projektkapcsolatservice.UjIratDto.UGYFELKOD = this._projektservice.Dto[this._projektservice.DtoSelectedIndex].UGYFELKOD;
+    this.projektkapcsolatservice.UjIratDto.UGYFELKOD = this.projektkapcsolatservice.UgyfelKod;
     this.projektkapcsolatservice.UjIratDto.KELETKEZETT = moment(this.Keletkezett).toISOString(true);
 
     // TODO zoomcheck
@@ -70,9 +70,10 @@ export class ProjektBizonylatesiratUjiratComponent implements OnInit {
         }
 
         return this.projektkapcsolatservice.AddIratToProjekt(new ProjektKapcsolatParameter(
-          this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD,
+          this.projektkapcsolatservice.ProjektKod,
           0,
           res.Result,
+          undefined
         ));
       })
       .then(res1 => {

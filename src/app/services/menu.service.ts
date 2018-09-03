@@ -40,7 +40,7 @@ import {CikkDto} from '../dtos/torzs/cikk/cikkdto';
 import {PenztarDto} from '../dtos/penztar/penztardto';
 import {PenztarService} from '../penztar/penztar.service';
 import {ProjektkapcsolatService} from '../projekt/bizonylatesirat/projektkapcsolat.service';
-import {ProjektKapcsolatDto} from '../dtos/projekt/projektkapcsolatdto';
+import {ProjektKapcsolatDto} from '../projekt/bizonylatesirat/projektkapcsolatdto';
 import {SzamlazasirendService} from '../projekt/szamlazasirend/szamlazasirend.service';
 import {ProjektteendoService} from '../projekt/teendo/projektteendo.service';
 import {SzamlazasirendDto} from '../dtos/projekt/szamlazasirenddto';

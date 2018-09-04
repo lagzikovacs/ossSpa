@@ -5,6 +5,9 @@ import {IratService} from '../../irat/irat.service';
 import {DokumentumDto} from '../../../dtos/dokumentum/dokumentumdto';
 import {DokumentumContainerMode} from '../dokumentumcontainermode';
 import {DokumentumEgyMode} from '../dokumentumegymode';
+import {LetoltesParam} from '../letoltesparam';
+import * as FileSaver from 'file-saver';
+import {b64toBlob} from '../../../tools/b64toBlob';
 
 @Component({
   selector: 'app-dokumentum-list',
@@ -23,8 +26,6 @@ export class DokumentumListComponent implements OnInit {
   }
 
   ngOnInit() {
-    // TODO hibás állapotok kiszűrése
-
     this.eppFrissit = true;
     this.dokumentumservice.Dto = DokumentumDto[0];
     this.dokumentumservice.Select(this._iratservice.Dto[this._iratservice.DtoSelectedIndex].IRATKOD)
@@ -43,6 +44,17 @@ export class DokumentumListComponent implements OnInit {
   }
 
   letoltes(i: number) {
+    this.dokumentumservice.DtoSelectedIndex = i;
+
+    this.eppFrissit = true;
+    this.dokumentumservice.Kimentes()
+      .then(res => {
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
   }
   setClickedRow(i: number) {
     this.dokumentumservice.DtoSelectedIndex = i;

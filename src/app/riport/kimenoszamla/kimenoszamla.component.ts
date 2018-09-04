@@ -5,7 +5,6 @@ import {Szempont} from '../../enums/szempont';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import * as moment from 'moment';
 import * as FileSaver from 'file-saver';
-import {BlobContentType} from '../../enums/blobcontentType';
 import {b64toBlob} from '../../tools/b64toBlob';
 
 @Component({
@@ -70,7 +69,7 @@ export class KimenoszamlaComponent implements OnDestroy {
         }
 
         if (res.Status === 'Completed') {
-          const blob = b64toBlob(res.Riport, BlobContentType.Xls);
+          const blob = b64toBlob(res.Riport);
           FileSaver.saveAs(blob, 'Kimenő számla.xls');
           this.eppFrissit = false;
         }

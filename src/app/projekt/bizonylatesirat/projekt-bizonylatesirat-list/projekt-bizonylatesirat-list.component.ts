@@ -2,7 +2,8 @@ import {Component, ViewChild} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {LogonService} from '../../../services/logon.service';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
-import {BizonylatesIratContainerMode} from "../bizonylatesiratcontainermode";
+import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
+import {IratService} from '../../../irat/irat/irat.service';
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-list',
@@ -16,6 +17,7 @@ export class ProjektBizonylatesiratListComponent {
   eppFrissit = false;
 
   constructor(private _logonservice: LogonService,
+              private _iratservice: IratService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.projektkapcsolatservice = projektkapcsolatservice;
   }
@@ -31,9 +33,30 @@ export class ProjektBizonylatesiratListComponent {
         this.eppFrissit = false;
       });
   }
+  levalasztas(i: number) {
+    this.projektkapcsolatservice.DtoSelectedIndex = i;
+    this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.Levalasztas;
+  }
   setClickedRow(i: number) {
     this.projektkapcsolatservice.DtoSelectedIndex = i;
     // TODO itt elágazik tipustól függően: BizonylatKod v IratKod
+
+    if (this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].IRATKOD !== null) {
+      this._iratservice.Get(this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].IRATKOD)
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
+
+          this._iratservice.Dto = res.Result;
+          this._iratservice.DtoSelectedIndex = 0;
+          this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.IratEgy;
+        })
+        .catch(err => {
+          this.errormodal.show(err);
+          this.eppFrissit = false;
+        });
+    }
     console.log(this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex]);
   }
   ujbizonylat() {

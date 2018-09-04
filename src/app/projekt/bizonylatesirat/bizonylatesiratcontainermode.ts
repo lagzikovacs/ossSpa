@@ -6,5 +6,6 @@ export enum BizonylatesIratContainerMode {
   UjBizonylat = 4,
   UjIrat = 5,
   UjAjanlat = 6,
-  Torles = 7
+  Levalasztas = 7,
+  IratEgy = 8
 }

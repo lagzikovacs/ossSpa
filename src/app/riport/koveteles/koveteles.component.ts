@@ -5,7 +5,6 @@ import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import * as moment from 'moment';
 import {b64toBlob} from '../../tools/b64toBlob';
-import {BlobContentType} from '../../enums/blobcontentType';
 import * as FileSaver from 'file-saver';
 
 @Component({
@@ -67,7 +66,7 @@ export class KovetelesComponent implements OnDestroy {
         }
 
         if (res.Status === 'Completed') {
-          const blob = b64toBlob(res.Riport, BlobContentType.Xls);
+          const blob = b64toBlob(res.Riport);
           FileSaver.saveAs(blob, 'Követelés.xls');
           this.eppFrissit = false;
         }

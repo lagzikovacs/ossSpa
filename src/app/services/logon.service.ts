@@ -21,7 +21,7 @@ export class LogonService {
   private readonly _controller = 'api/logon/';
   private _subjectSzerepkorKivalasztva = new Subject<any>();
 
-  constructor(private _httpClient: HttpClient) { }
+  constructor(private _httpClient: HttpClient) {}
 
   private _SzerepkorKivalasztva = false;
 

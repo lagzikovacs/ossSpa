@@ -5,6 +5,8 @@ import {IratContainerMode} from '../iratcontainermode';
 import {IratEgyMode} from '../irategymode';
 import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {DokumentumContainerMode} from '../../dokumentum/dokumentumcontainermode';
+import {ProjektkapcsolatService} from '../../../projekt/bizonylatesirat/projektkapcsolat.service';
+import {BizonylatesIratContainerMode} from '../../../projekt/bizonylatesirat/bizonylatesiratcontainermode';
 
 @Component({
   selector: 'app-irat-egy',
@@ -18,14 +20,17 @@ export class IratEgyComponent {
   dokumentumservice: DokumentumService;
   eppFrissit = false;
 
-  constructor(iratservice: IratService,
+  constructor(private _projektkapcsolatservice: ProjektkapcsolatService,
+              iratservice: IratService,
               dokumentumservice: DokumentumService) {
     this.iratservice = iratservice;
     this.dokumentumservice = dokumentumservice;
   }
 
   vissza() {
+    this._projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
     this.iratservice.ContainerMode = IratContainerMode.List;
+    // TODO talán problémát okozhat...
   }
   reszletek() {
     this.iratservice.EgyMode = IratEgyMode.Reszletek;

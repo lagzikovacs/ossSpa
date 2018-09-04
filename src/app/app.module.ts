@@ -202,10 +202,10 @@ import { ProjektContainerComponent } from './projekt/projekt/projekt-container/p
 import { ProjektSzamlazasirendContainerComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-container/projekt-szamlazasirend-container.component';
 import { ProjektTeendoContainerComponent } from './projekt/teendo/projekt-teendo-container/projekt-teendo-container.component';
 import { ProjektBizonylatesiratContainerComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-container/projekt-bizonylatesirat-container.component';
-import { ProjektBizonylatesiratTorlesComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-torles/projekt-bizonylatesirat-torles.component';
 import {PenztartetelService} from './penztar/penztartetel/penztartetel.service';
 import {BizonylatService} from './bizonylat/bizonylat.service';
 import {RiportService} from './services/riport.service';
+import { ProjektBizonylatesiratLevalasztasComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-levalasztas/projekt-bizonylatesirat-levalasztas.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -219,15 +219,6 @@ const routes: Routes = [
   //   {path: 'blank', component: BlankComponent}
   // ]},
   {path: 'irattipus', component: IrattipusContainerComponent, canActivate: [RoleGuard]},
-
-  // {path: 'teendo-list', component: TeendoListComponent, canActivate: [RoleGuard]},
-  // {path: 'teendouj', component: TeendoSzerkesztesComponent, canActivate: [RoleGuard]},
-  // {path: 'teendo-egy', component: TeendoEgyComponent, canActivate: [RoleGuard], children: [
-  //   {path: 'reszletek', component: TeendoReszletekComponent},
-  //   {path: 'torles', component: TeendoTorlesComponent},
-  //   {path: 'szerkesztes', component: TeendoSzerkesztesComponent},
-  //   {path: 'blank', component: BlankComponent}
-  // ]},
   {path: 'teendo', component: TeendoContainerComponent, canActivate: [RoleGuard]},
 
   // {path: 'fizetesimod-list', component: FizetesimodListComponent, canActivate: [RoleGuard]},
@@ -797,7 +788,7 @@ if (environment.production) {
     ProjektSzamlazasirendContainerComponent,
     ProjektTeendoContainerComponent,
     ProjektBizonylatesiratContainerComponent,
-    ProjektBizonylatesiratTorlesComponent,
+    ProjektBizonylatesiratLevalasztasComponent,
   ],
   imports: [
     BrowserModule,

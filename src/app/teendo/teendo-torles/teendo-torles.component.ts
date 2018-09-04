@@ -1,8 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
 import {TeendoService} from '../teendo.service';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
-import {TeendoContainerMode} from "../teendocontainermode";
-import {TeendoEgyMode} from "../teendoegymode";
+import {TeendoContainerMode} from '../teendocontainermode';
+import {TeendoEgyMode} from '../teendoegymode';
 
 @Component({
   selector: 'app-teendo-torles',

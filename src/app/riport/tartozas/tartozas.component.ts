@@ -3,7 +3,6 @@ import {RiportService} from '../../services/riport.service';
 import * as moment from 'moment';
 import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
 import * as FileSaver from 'file-saver';
-import {BlobContentType} from '../../enums/blobcontentType';
 import {b64toBlob} from '../../tools/b64toBlob';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
@@ -67,7 +66,7 @@ export class TartozasComponent implements OnDestroy {
         }
 
         if (res.Status === 'Completed') {
-          const blob = b64toBlob(res.Riport, BlobContentType.Xls);
+          const blob = b64toBlob(res.Riport);
           FileSaver.saveAs(blob, 'Tartozás.xls');
           this.eppFrissit = false;
         }

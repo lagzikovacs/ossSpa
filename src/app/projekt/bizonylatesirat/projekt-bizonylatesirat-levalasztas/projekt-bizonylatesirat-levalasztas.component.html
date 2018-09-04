@@ -1,0 +1,10 @@
+<div class="alapkeret">
+  <h5>{{projektkapcsolatservice.Dto[projektkapcsolatservice.DtoSelectedIndex].KAPCSOLAT}} ({{projektkapcsolatservice.Dto[projektkapcsolatservice.DtoSelectedIndex].TIPUS}}) leválasztása</h5>
+  <p>Biztosan le akarja választani ezt a tételt a projektről?</p>
+  <div class="row no-gutters" style="margin-bottom: 10px">
+    <button class="btn btn-sm btn-primary" [disabled]="eppFrissit" type="button" (click)="ok()">Ok</button>
+    <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
+  </div>
+  <app-errormodal [cim]="projektkapcsolatservice.cim"></app-errormodal>
+</div>
+

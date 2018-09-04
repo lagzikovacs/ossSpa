@@ -49,21 +49,22 @@ import {VolumeContainerMode} from '../volume/volumecontainermode';
 import {ParticioService} from '../particio/particio.service';
 import {ParticioEgyMode} from '../particio/particioegymode';
 import {HelysegContainerMode} from '../helyseg/helysegcontainermode';
-import {UgyfelContainerMode} from "../ugyfel/ugyfelcontainermode";
-import {MeContainerMode} from "../me/mecontainermode";
-import {AfakulcsContainerMode} from "../afakulcs/afakulcscontainermode";
-import {TermekdijContainerMode} from "../termekdij/termekdijcontainermode";
-import {CikkContainerMode} from "../cikk/cikkcontainermode";
-import {IrattipusContainerMode} from "../irattipus/irattipuscontainermode";
-import {TeendoContainerMode} from "../teendo/teendocontainermode";
-import {FizetesimodContainerMode} from "../fizetesimod/fizetesimodcontainermode";
-import {PenznemContainerMode} from "../penznem/penznemcontainermode";
-import {FelhasznaloContainerMode} from "../felhasznalo/felhasznalocontainermode";
-import {CsoportContainerMode} from "../csoport/csoportcontainermode";
-import {FeliratkozasContainerMode} from "../feliratkozas/feliratkozascontainermode";
-import {PenztarContainerMode} from "../penztar/penztarcontainermode";
-import {IratContainerMode} from "../irat/irat/iratcontainermode";
-import {ProjektContainerMode} from "../projekt/projekt/projektcontainermode";
+import {UgyfelContainerMode} from '../ugyfel/ugyfelcontainermode';
+import {MeContainerMode} from '../me/mecontainermode';
+import {AfakulcsContainerMode} from '../afakulcs/afakulcscontainermode';
+import {TermekdijContainerMode} from '../termekdij/termekdijcontainermode';
+import {CikkContainerMode} from '../cikk/cikkcontainermode';
+import {IrattipusContainerMode} from '../irattipus/irattipuscontainermode';
+import {TeendoContainerMode} from '../teendo/teendocontainermode';
+import {FizetesimodContainerMode} from '../fizetesimod/fizetesimodcontainermode';
+import {PenznemContainerMode} from '../penznem/penznemcontainermode';
+import {FelhasznaloContainerMode} from '../felhasznalo/felhasznalocontainermode';
+import {CsoportContainerMode} from '../csoport/csoportcontainermode';
+import {FeliratkozasContainerMode} from '../feliratkozas/feliratkozascontainermode';
+import {PenztarContainerMode} from '../penztar/penztarcontainermode';
+import {IratContainerMode} from '../irat/irat/iratcontainermode';
+import {ProjektContainerMode} from '../projekt/projekt/projektcontainermode';
+import {PlatformLocation} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -72,6 +73,7 @@ export class MenuService {
   private _controller = 'api/menu/';
 
   constructor(private _router: Router,
+              private _location: PlatformLocation,
               private _httpClient: HttpClient,
               private _logonservice: LogonService,
               private _irattipusservice: IrattipusService,
@@ -95,6 +97,10 @@ export class MenuService {
               private _volumeservice: VolumeService,
               private _felhasznaloservice: FelhasznaloService,
               private _csoportservice: CsoportService) {
+    _location.onPopState(() => {
+      _router.navigate(['bejelentkezes']);
+      // TODO nem a vár dolog történik, de megfelel
+    });
   }
 
   public AngularMenu(): Promise<AngularmenuResult> {

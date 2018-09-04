@@ -2,7 +2,6 @@ import {Component, ViewChild} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {b64toBlob} from '../../../tools/b64toBlob';
-import {BlobContentType} from '../../../enums/blobcontentType';
 import * as FileSaver from 'file-saver';
 
 @Component({
@@ -21,12 +20,13 @@ export class ProjektIratmintaComponent {
   }
 
   szerzodes() {
-    this.projektservice.Szerzodes(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD)
+    this.eppFrissit = true;
+      this.projektservice.Szerzodes(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
-        const blob = b64toBlob(res.Result, BlobContentType.Docx);
+        const blob = b64toBlob(res.Result);
         FileSaver.saveAs(blob, 'Szerződés.docx');
         this.eppFrissit = false;
       })
@@ -36,12 +36,13 @@ export class ProjektIratmintaComponent {
       });
   }
   szallitasiszerzodes() {
+    this.eppFrissit = true;
     this.projektservice.Szallitasiszerzodes(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
-        const blob = b64toBlob(res.Result, BlobContentType.Docx);
+        const blob = b64toBlob(res.Result);
         FileSaver.saveAs(blob, 'Szállítási szerződés.docx');
         this.eppFrissit = false;
       })
@@ -51,12 +52,13 @@ export class ProjektIratmintaComponent {
       });
   }
   munkalap() {
+    this.eppFrissit = true;
     this.projektservice.Munkalap(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
-        const blob = b64toBlob(res.Result, BlobContentType.Docx);
+        const blob = b64toBlob(res.Result);
         FileSaver.saveAs(blob, 'Munkalap.docx');
 
         return this.projektservice.Get(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD);
@@ -75,12 +77,13 @@ export class ProjektIratmintaComponent {
       });
   }
   elegedettseg() {
+    this.eppFrissit = true;
     this.projektservice.Elegedettseg(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
-        const blob = b64toBlob(res.Result, BlobContentType.Docx);
+        const blob = b64toBlob(res.Result);
         FileSaver.saveAs(blob, 'Elégedettségi felmérés.docx');
         this.eppFrissit = false;
       })
@@ -90,12 +93,13 @@ export class ProjektIratmintaComponent {
       });
   }
   elmuemasz() {
+    this.eppFrissit = true;
     this.projektservice.KeszrejelentesElmuEmasz(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
-        const blob = b64toBlob(res.Result, BlobContentType.Docx);
+        const blob = b64toBlob(res.Result);
         FileSaver.saveAs(blob, 'Készrejelentés Elmű/Émász.docx');
         this.eppFrissit = false;
       })
@@ -105,12 +109,13 @@ export class ProjektIratmintaComponent {
       });
   }
   eon() {
+    this.eppFrissit = true;
     this.projektservice.KeszrejelentesEon(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
-        const blob = b64toBlob(res.Result, BlobContentType.Docx);
+        const blob = b64toBlob(res.Result);
         FileSaver.saveAs(blob, 'Készrejelentés Eon.docx');
         this.eppFrissit = false;
       })
@@ -120,12 +125,13 @@ export class ProjektIratmintaComponent {
       });
   }
   demasz() {
+    this.eppFrissit = true;
     this.projektservice.KeszrejelentesDemasz(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
-        const blob = b64toBlob(res.Result, BlobContentType.Docx);
+        const blob = b64toBlob(res.Result);
         FileSaver.saveAs(blob, 'Készrejelentés Démász.docx');
         this.eppFrissit = false;
       })

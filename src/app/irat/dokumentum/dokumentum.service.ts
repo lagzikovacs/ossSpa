@@ -7,6 +7,10 @@ import {DokumentumDto} from '../../dtos/dokumentum/dokumentumdto';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {DokumentumContainerMode} from './dokumentumcontainermode';
 import {DokumentumEgyMode} from './dokumentumegymode';
+import {LetoltesResult} from "./letoltesresult";
+import {LetoltesParam} from "./letoltesparam";
+import * as FileSaver from "file-saver";
+import {b64toBlob} from "../../tools/b64toBlob";
 
 @Injectable({
   providedIn: 'root'
@@ -58,5 +62,32 @@ export class DokumentumService {
     };
 
     return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
+  }
+
+  public Letoltes(lp: LetoltesParam): Promise<LetoltesResult> {
+    const url = environment.BaseHref + this._controller + 'letoltes';
+    const body = lp;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<LetoltesResult>(url, body, options).toPromise();
+  }
+
+  public Kimentes(): Promise<EmptyResult> {
+    return this.Letoltes(new LetoltesParam(
+      this.Dto[this.DtoSelectedIndex].DOKUMENTUMKOD,
+      this.Dto[this.DtoSelectedIndex].MERET))
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        const blob = b64toBlob(res.Result.b);
+        FileSaver.saveAs(blob, this.Dto[this.DtoSelectedIndex].DOKUMENTUMKOD + this.Dto[this.DtoSelectedIndex].EXT);
+
+        return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
+      });
   }
 }

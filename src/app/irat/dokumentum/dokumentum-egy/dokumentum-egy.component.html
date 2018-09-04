@@ -9,10 +9,10 @@
       <button (click)="reszletek()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>Részletesen
       </button>
-      <button [disabled]="dokumentumservice.uj" (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit" (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-minus" aria-hidden="true"></i>
       </button>
-      <button [disabled]="dokumentumservice.uj" (click)="letoltes()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit" (click)="letoltes()" class="btn btn-sm btn-outline-primary navgomb">
         Letöltés
       </button>
     </nav>

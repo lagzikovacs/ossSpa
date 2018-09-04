@@ -1,6 +1,4 @@
-import {BlobContentType} from '../enums/blobcontentType';
-
-export function b64toBlob(b64Data, contentType: BlobContentType) {
+export function b64toBlob(b64Data) {
   const sliceSize = 512;
   const byteCharacters = atob(b64Data);
   const byteArrays = [];
@@ -18,12 +16,5 @@ export function b64toBlob(b64Data, contentType: BlobContentType) {
     byteArrays.push(byteArray);
   }
 
-  switch (contentType) {
-    case BlobContentType.Xls:
-      return new Blob(byteArrays, {type: 'application/vnd.ms-excel'});
-    case BlobContentType.Docx:
-      return new Blob(byteArrays, {type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
-    default:
-      throw new Error('Lekezeletlen BlobContentType!');
-  }
+  return new Blob(byteArrays, {type: 'application/octet-stream'});
 }

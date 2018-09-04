@@ -5,7 +5,6 @@ import * as moment from 'moment';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import * as FileSaver from 'file-saver';
-import {BlobContentType} from '../../enums/blobcontentType';
 import {b64toBlob} from '../../tools/b64toBlob';
 
 @Component({
@@ -70,7 +69,7 @@ export class BejovoszamlaComponent implements OnDestroy {
         }
 
         if (res.Status === 'Completed') {
-          const blob = b64toBlob(res.Riport, BlobContentType.Xls);
+          const blob = b64toBlob(res.Riport);
           FileSaver.saveAs(blob, 'Bejövő számla.xls');
           this.eppFrissit = false;
         }

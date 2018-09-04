@@ -4,6 +4,7 @@ import {LogonService} from '../../../services/logon.service';
 import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
 import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 import {IratService} from '../../../irat/irat/irat.service';
+import {IratContainerMode} from '../../../irat/irat/iratcontainermode';
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-list',
@@ -48,16 +49,17 @@ export class ProjektBizonylatesiratListComponent {
             throw res.Error;
           }
 
+          this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.EgyIrat;
+
           this._iratservice.Dto = res.Result;
           this._iratservice.DtoSelectedIndex = 0;
-          this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.IratEgy;
+          this._iratservice.ContainerMode = IratContainerMode.List;
         })
         .catch(err => {
           this.errormodal.show(err);
           this.eppFrissit = false;
         });
     }
-    console.log(this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex]);
   }
   ujbizonylat() {
     this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.UjBizonylat;

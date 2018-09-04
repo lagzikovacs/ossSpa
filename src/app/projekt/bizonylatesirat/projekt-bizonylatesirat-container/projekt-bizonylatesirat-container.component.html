@@ -16,6 +16,7 @@ export enum BizonylatesIratContainerMode {
 <ng-container *ngIf="projektkapcsolatservice.ContainerMode === 2">
 </ng-container>
 <ng-container *ngIf="projektkapcsolatservice.ContainerMode === 3">
+  <app-irat-egy></app-irat-egy>
 </ng-container>
 <ng-container *ngIf="projektkapcsolatservice.ContainerMode === 4">
   <app-projekt-bizonylatesirat-ujbizonylat></app-projekt-bizonylatesirat-ujbizonylat>
@@ -28,7 +29,4 @@ export enum BizonylatesIratContainerMode {
 </ng-container>
 <ng-container *ngIf="projektkapcsolatservice.ContainerMode === 7">
   <app-projekt-bizonylatesirat-levalasztas></app-projekt-bizonylatesirat-levalasztas>
-</ng-container>
-<ng-container *ngIf="projektkapcsolatservice.ContainerMode === 8">
-  <app-irat-egy></app-irat-egy>
 </ng-container>

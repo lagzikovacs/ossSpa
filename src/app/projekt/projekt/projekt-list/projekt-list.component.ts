@@ -9,6 +9,7 @@ import {ProjektSzerkesztesMode} from '../projektszerkesztesmode';
 import {ProjektteendoService} from '../../teendo/projektteendo.service';
 import {SzamlazasirendService} from '../../szamlazasirend/szamlazasirend.service';
 import {ProjektkapcsolatService} from '../../bizonylatesirat/projektkapcsolat.service';
+import {BizonylatesIratContainerMode} from '../../bizonylatesirat/bizonylatesiratcontainermode';
 
 @Component({
   selector: 'app-projekt-list',
@@ -110,6 +111,8 @@ export class ProjektListComponent {
         this.projektservice.ContainerMode = ProjektContainerMode.Egy;
         this.projektservice.EgyMode = ProjektEgyMode.Bizonylatesirat;
         this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
+
+        this._projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
 
         this.eppFrissit = false;
       })

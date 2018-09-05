@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {IrattipusService} from '../irattipus.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {LogonService} from '../../services/logon.service';
+import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ZoomSources} from '../../enums/zoomsources';
 import {ProjektkapcsolatService} from '../../projekt/bizonylatesirat/projektkapcsolat.service';

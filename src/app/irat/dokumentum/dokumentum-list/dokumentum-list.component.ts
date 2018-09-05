@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {DokumentumService} from '../dokumentum.service';
 import {IratService} from '../../irat/irat.service';
-import {DokumentumDto} from '../../../dtos/dokumentum/dokumentumdto';
+import {DokumentumDto} from '../dokumentumdto';
 import {DokumentumContainerMode} from '../dokumentumcontainermode';
 import {DokumentumEgyMode} from '../dokumentumegymode';
 import {LetoltesParam} from '../letoltesparam';

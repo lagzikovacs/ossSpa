@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {LogonService} from '../services/logon.service';
+import {LogonService} from '../logon/logon.service';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {FeliratkozasResult} from '../dtos/feliratkozas/feliratkozasresult';
+import {FeliratkozasResult} from './feliratkozasresult';
 import {environment} from '../../environments/environment';
-import {FeliratkozasDto} from '../dtos/feliratkozas/feliratkozasdto';
-import {FeliratkozasParameter} from '../dtos/feliratkozas/feliratkozasparameter';
-import {ProjektDto} from '../dtos/projekt/projektdto';
-import {ProjektParameter} from '../dtos/projekt/projektparameter';
+import {FeliratkozasDto} from './feliratkozasdto';
+import {FeliratkozasParameter} from './feliratkozasparameter';
+import {ProjektDto} from '../projekt/projekt/projektdto';
+import {ProjektParameter} from '../projekt/projekt/projektparameter';
 import {FeliratkozasContainerMode} from './feliratkozascontainermode';
 import {FeliratkozasEgyMode} from "./feliratkozasegymode";
 

@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {CsoportService} from '../csoport.service';
-import {CsoportFelhasznaloParameter} from '../../dtos/csoport/csoportfelhasznaloparameter';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {CsoportFelhasznaloParameter} from '../csoportfelhasznaloparameter';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-csoport-felhasznalo',

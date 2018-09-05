@@ -3,7 +3,7 @@ import {SzamlazasirendService} from '../szamlazasirend.service';
 import {PenznemService} from '../../../penznem/penznem.service';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {PenznemZoomParameter} from '../../../penznem/penznemzoomparameter';
-import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {ProjektService} from '../../projekt/projekt.service';
 import {SzamlazasirendEgyMode} from "../szamlazasirendegymode";
 import {SzamlazasirendContainerMode} from "../szamlazasirendcontainermode";

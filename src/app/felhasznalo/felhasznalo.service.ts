@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {NumberResult} from '../dtos/numberresult';
-import {FelhasznaloDto} from '../dtos/primitiv/felhasznalo/felhasznalodto';
+import {FelhasznaloDto} from './felhasznalodto';
 import {environment} from '../../environments/environment';
-import {LogonService} from '../services/logon.service';
-import {FelhasznaloResult} from '../dtos/primitiv/felhasznalo/felhasznaloresult';
+import {LogonService} from '../logon/logon.service';
+import {FelhasznaloResult} from './felhasznaloresult';
 import {EmptyResult} from '../dtos/emptyresult';
 import {EgyszeruKeresesDto} from '../dtos/egyszerukeresesdto';
 import {ZoomSources} from '../enums/zoomsources';
 import {Md5} from 'ts-md5';
-import {JelszocsereParameter} from '../dtos/primitiv/felhasznalo/jelszocsereparameter';
+import {JelszocsereParameter} from './jelszocsereparameter';
 import {FelhasznaloEgyMode} from './felhasznaloegymode';
 import {FelhasznaloContainerMode} from './felhasznalocontainermode';
 

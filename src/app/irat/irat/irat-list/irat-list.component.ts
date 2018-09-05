@@ -1,9 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
 import {IratService} from '../irat.service';
-import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {SzMT} from '../../../dtos/szmt';
 import {Szempont} from '../../../enums/szempont';
-import {IratDto} from '../../../dtos/irat/iratdto';
+import {IratDto} from '../iratdto';
 import {IratContainerMode} from '../iratcontainermode';
 import {IratEgyMode} from '../irategymode';
 import {DokumentumService} from '../../dokumentum/dokumentum.service';
@@ -89,6 +89,7 @@ export class IratListComponent {
   setClickedRow(i: number) {
     this.iratservice.DtoSelectedIndex = i;
     this.iratservice.uj = false;
+
     this.iratservice.ContainerMode = IratContainerMode.Egy;
     this.iratservice.EgyMode = IratEgyMode.Dokumentum;
     this.dokumentumservice.ContainerMode = DokumentumContainerMode.List;

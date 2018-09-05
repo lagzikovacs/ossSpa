@@ -1,10 +1,10 @@
 import {Component, ViewChild} from '@angular/core';
 import {FeliratkozasService} from '../feliratkozas.service';
 import {Szempont} from '../../enums/szempont';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {SzMT} from '../../dtos/szmt';
-import {FeliratkozasDto} from '../../dtos/feliratkozas/feliratkozasdto';
-import {ProjektDto} from '../../dtos/projekt/projektdto';
+import {FeliratkozasDto} from '../feliratkozasdto';
+import {ProjektDto} from '../../projekt/projekt/projektdto';
 import {FeliratkozasContainerMode} from '../feliratkozascontainermode';
 import {FeliratkozasEgyMode} from '../feliratkozasegymode';
 

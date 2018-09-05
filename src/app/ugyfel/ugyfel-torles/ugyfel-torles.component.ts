@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {UgyfelService} from '../ugyfel.service';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {UgyfelContainerMode} from '../ugyfelcontainermode';
 import {UgyfelEgyMode} from '../ugyfelegymode';
 

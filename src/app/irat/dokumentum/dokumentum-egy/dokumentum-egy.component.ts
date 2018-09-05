@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {DokumentumService} from '../dokumentum.service';
 import {DokumentumContainerMode} from '../dokumentumcontainermode';
 import {DokumentumEgyMode} from '../dokumentumegymode';
-import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-dokumentum-egy',

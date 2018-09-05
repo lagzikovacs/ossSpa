@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {ProjektteendoService} from '../projektteendo.service';
-import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {ProjektteendoContainerMode} from '../projektteendocontainermode';
 import {ProjektteendoEgyMode} from '../projekttendoegymode';
 

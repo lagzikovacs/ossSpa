@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {ProjektService} from '../projekt.service';
-import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {ProjektEgyMode} from "../projektegymode";
 
 @Component({

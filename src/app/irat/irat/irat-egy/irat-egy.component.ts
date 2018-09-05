@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {IratService} from '../irat.service';
-import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {IratContainerMode} from '../iratcontainermode';
 import {IratEgyMode} from '../irategymode';
 import {DokumentumService} from '../../dokumentum/dokumentum.service';

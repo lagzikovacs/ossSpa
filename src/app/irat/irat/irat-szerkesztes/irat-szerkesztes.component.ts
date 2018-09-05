@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {IratService} from '../irat.service';
 import {IrattipusService} from '../../../irattipus/irattipus.service';
 import {ZoomSources} from '../../../enums/zoomsources';

@@ -1,8 +1,8 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {RiportService} from '../../services/riport.service';
+import {RiportService} from '../riport.service';
 import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import * as moment from 'moment';
 import * as FileSaver from 'file-saver';
 import {b64toBlob} from '../../tools/b64toBlob';

@@ -1,8 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {FizetesimodService} from '../fizetesimod.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {LogonService} from '../../services/logon.service';
+import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {FizetesimodContainerMode} from "../fizetesimodcontainermode";
 import {FizetesimodEgyMode} from "../fizetesimodegymode";

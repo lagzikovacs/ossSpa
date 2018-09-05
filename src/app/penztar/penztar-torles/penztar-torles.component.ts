@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from "../../tools/errormodal/errormodal.component";
+import {ErrormodalComponent} from "../../errormodal/errormodal.component";
 import {PenztarService} from "../penztar.service";
 import {PenztarContainerMode} from "../penztarcontainermode";
 import {PenztarEgyMode} from "../penztaregymode";

@@ -1,9 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
 import {AfakulcsService} from '../afakulcs.service';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {NumberResult} from '../../dtos/numberresult';
-import {AfakulcsContainerMode} from "../afakulcscontainermode";
-import {AfakulcsEgyMode} from "../afakulcsegymode";
+import {AfakulcsContainerMode} from '../afakulcscontainermode';
+import {AfakulcsEgyMode} from '../afakulcsegymode';
 
 @Component({
   selector: 'app-afakulcs-szerkesztes',

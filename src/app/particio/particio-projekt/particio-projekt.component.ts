@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {ParticioService} from '../particio.service';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {ParticioEgyMode} from '../particioegymode';
 
 @Component({

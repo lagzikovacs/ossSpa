@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from "../../../tools/errormodal/errormodal.component";
+import {ErrormodalComponent} from "../../../errormodal/errormodal.component";
 import {DokumentumService} from "../dokumentum.service";
 import {DokumentumContainerMode} from "../dokumentumcontainermode";
 import {DokumentumEgyMode} from "../dokumentumegymode";

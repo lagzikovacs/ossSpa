@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {FelhasznaloService} from '../felhasznalo.service';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {FelhasznaloContainerMode} from "../felhasznalocontainermode";
 import {FelhasznaloEgyMode} from "../felhasznaloegymode";
 

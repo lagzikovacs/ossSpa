@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
-import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 
 @Component({

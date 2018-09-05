@@ -1,10 +1,10 @@
 import {Component, ViewChild} from '@angular/core';
 import {CikkService} from '../cikk.service';
 import {Szempont} from '../../enums/szempont';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
-import {CikkDto} from '../../dtos/torzs/cikk/cikkdto';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {CikkDto} from '../cikkdto';
 import {SzMT} from '../../dtos/szmt';
-import {LogonService} from '../../services/logon.service';
+import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {CikkContainerMode} from "../cikkcontainermode";
 import {CikkEgyMode} from "../cikkegymode";

@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {ProjektService} from '../projekt.service';
 import {UgyfelService} from '../../../ugyfel/ugyfel.service';
 import {PenznemService} from '../../../penznem/penznem.service';

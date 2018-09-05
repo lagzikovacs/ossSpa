@@ -1,12 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {TeendoService} from '../../../teendo/teendo.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {FelhasznaloService} from '../../../felhasznalo/felhasznalo.service';
 import {ProjektteendoService} from '../projektteendo.service';
 import {ZoomSources} from '../../../enums/zoomsources';
 import * as moment from 'moment';
-import {TeendoZoomParameter} from '../../../dtos/primitiv/teendo/teendozoomparameter';
+import {TeendoZoomParameter} from '../../../teendo/teendozoomparameter';
 import {ProjektService} from '../../projekt/projekt.service';
 import {ProjektteendoEgyMode} from "../projekttendoegymode";
 import {ProjektteendoContainerMode} from "../projektteendocontainermode";

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {SzamlazasirendDto} from '../../dtos/projekt/szamlazasirenddto';
+import {SzamlazasirendDto} from './szamlazasirenddto';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {LogonService} from '../../services/logon.service';
+import {LogonService} from '../../logon/logon.service';
 import {NumberResult} from '../../dtos/numberresult';
 import {environment} from '../../../environments/environment';
-import {SzamlazasirendResult} from '../../dtos/projekt/szamlazasirendresult';
+import {SzamlazasirendResult} from './szamlazasirendresult';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {SzamlazasirendContainerMode} from './szamlazasirendcontainermode';
 import {SzamlazasirendEgyMode} from "./szamlazasirendegymode";

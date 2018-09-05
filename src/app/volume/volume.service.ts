@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
 import {EgyszeruKeresesDto} from '../dtos/egyszerukeresesdto';
-import {VolumeDto} from '../dtos/volume/volumedto';
+import {VolumeDto} from './volumedto';
 import {ZoomSources} from '../enums/zoomsources';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {LogonService} from '../services/logon.service';
-import {VolumeResult} from '../dtos/volume/volumeresult';
-import {DokumentumkodByVolumeResult} from '../dtos/volume/dokumentumbyvolumeresult';
+import {LogonService} from '../logon/logon.service';
+import {VolumeResult} from './volumeresult';
+import {DokumentumkodByVolumeResult} from './dokumentumbyvolumeresult';
 import {VolumeContainerMode} from "./volumecontainermode";
 import {VolumeEgyMode} from "./volumeegymode";
 

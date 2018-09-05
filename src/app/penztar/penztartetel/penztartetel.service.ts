@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../../environments/environment';
-import {PenztartetelDto} from '../../dtos/penztar/penztarteteldto';
+import {PenztartetelDto} from './penztarteteldto';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {LogonService} from '../../services/logon.service';
+import {LogonService} from '../../logon/logon.service';
 import {NumberResult} from '../../dtos/numberresult';
-import {PenztartetelResult} from '../../dtos/penztar/penztartetelresult';
-import {PenztartetelParameter} from '../../dtos/penztar/penztartetelparameter';
+import {PenztartetelResult} from './penztartetelresult';
+import {PenztartetelParameter} from './penztartetelparameter';
 import {PenztartetelContainerMode} from "./penztartetelcontainermode";
 
 @Injectable({

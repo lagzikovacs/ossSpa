@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
 import {NumberResult} from '../dtos/numberresult';
 import {EgyszeruKeresesDto} from '../dtos/egyszerukeresesdto';
-import {LogonService} from '../services/logon.service';
+import {LogonService} from '../logon/logon.service';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {HelysegDto} from './helysegdto';
 import {HelysegResult} from './helysegresult';

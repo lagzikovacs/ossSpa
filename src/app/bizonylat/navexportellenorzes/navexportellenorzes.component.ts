@@ -1,12 +1,12 @@
 import {Component, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {Szempont} from '../../enums/szempont';
 import {ActivatedRoute, Router} from '@angular/router';
-import {LogonService} from '../../services/logon.service';
-import {NavexportellenorzesService} from '../../services/bizonylat/navexportellenorzes.service';
+import {LogonService} from '../../logon/logon.service';
+import {NavexportellenorzesService} from './navexportellenorzes.service';
 import {JogKod} from '../../enums/jogkod';
 import {SzMT} from '../../dtos/szmt';
-import {NavfeltoltesDto} from '../../dtos/bizonylat/navfeltoltesdto';
+import {NavfeltoltesDto} from './navfeltoltesdto';
 
 @Component({
   selector: 'app-navonlineszamla',

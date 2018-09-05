@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {LogonService} from '../../services/logon.service';
+import {LogonService} from '../../logon/logon.service';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {ProjektKapcsolatResult} from './projektkapcsolatresult';
 import {environment} from '../../../environments/environment';
 import {ProjektKapcsolatDto} from './projektkapcsolatdto';
-import {IratDto} from '../../dtos/irat/iratdto';
+import {IratDto} from '../../irat/irat/iratdto';
 import {NumberResult} from '../../dtos/numberresult';
 import {ProjektKapcsolatParameter} from './projektkapcsolatparameter';
 import {EmptyResult} from '../../dtos/emptyresult';

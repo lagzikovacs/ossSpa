@@ -4,7 +4,7 @@ import {environment} from '../../environments/environment';
 import {PenznemDto} from './penznemdto';
 import {ZoomSources} from '../enums/zoomsources';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {LogonService} from '../services/logon.service';
+import {LogonService} from '../logon/logon.service';
 import {PenznemResult} from './penznemresult';
 import {EmptyResult} from '../dtos/emptyresult';
 import {NumberResult} from '../dtos/numberresult';

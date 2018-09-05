@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {CsoportService} from '../csoport.service';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {NumberResult} from '../../dtos/numberresult';
 import {CsoportContainerMode} from '../csoportcontainermode';
 import {CsoportEgyMode} from '../csoportegymode';

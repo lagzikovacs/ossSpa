@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import {EgyszeruKeresesDto} from '../dtos/egyszerukeresesdto';
 import {environment} from '../../environments/environment';
-import {PenztarDto} from '../dtos/penztar/penztardto';
+import {PenztarDto} from './penztardto';
 import {ZoomSources} from '../enums/zoomsources';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {LogonService} from '../services/logon.service';
+import {LogonService} from '../logon/logon.service';
 import {NumberResult} from '../dtos/numberresult';
-import {PenztarResult} from '../dtos/penztar/penztarresult';
+import {PenztarResult} from './penztarresult';
 import {EmptyResult} from '../dtos/emptyresult';
 import {PenztarContainerMode} from './penztarcontainermode';
 import {PenztarEgyMode} from './penztaregymode';

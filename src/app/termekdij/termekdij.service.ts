@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import {EgyszeruKeresesDto} from '../dtos/egyszerukeresesdto';
 import {environment} from '../../environments/environment';
-import {TermekdijDto} from '../dtos/primitiv/termekdij/termekdijdto';
+import {TermekdijDto} from './termekdijdto';
 import {ZoomSources} from '../enums/zoomsources';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {LogonService} from '../services/logon.service';
-import {TermekdijResult} from '../dtos/primitiv/termekdij/termekdijresult';
+import {LogonService} from '../logon/logon.service';
+import {TermekdijResult} from './termekdijresult';
 import {EmptyResult} from '../dtos/emptyresult';
 import {NumberResult} from '../dtos/numberresult';
-import {TermekdijZoomParameter} from '../dtos/primitiv/termekdij/termekdijzoomparameter';
+import {TermekdijZoomParameter} from './termekdijzoomparameter';
 import {TermekdijContainerMode} from "./termekdijcontainermode";
 import {TermekdijEgyMode} from "./termekdijegymode";
 

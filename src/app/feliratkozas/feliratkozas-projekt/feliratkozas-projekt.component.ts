@@ -3,8 +3,8 @@ import {FeliratkozasService} from '../feliratkozas.service';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import {ProjektService} from '../../projekt/projekt/projekt.service';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
-import {ProjektDto} from '../../dtos/projekt/projektdto';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {ProjektDto} from '../../projekt/projekt/projektdto';
 
 @Component({
   selector: 'app-feliratkozas-projekt',

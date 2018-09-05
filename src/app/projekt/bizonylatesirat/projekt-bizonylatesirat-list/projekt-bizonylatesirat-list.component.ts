@@ -1,10 +1,13 @@
 import {Component, ViewChild} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
-import {LogonService} from '../../../services/logon.service';
-import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {LogonService} from '../../../logon/logon.service';
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 import {IratService} from '../../../irat/irat/irat.service';
 import {IratContainerMode} from '../../../irat/irat/iratcontainermode';
+import {DokumentumContainerMode} from '../../../irat/dokumentum/dokumentumcontainermode';
+import {IratEgyMode} from '../../../irat/irat/irategymode';
+import {DokumentumService} from "../../../irat/dokumentum/dokumentum.service";
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-list',
@@ -19,6 +22,7 @@ export class ProjektBizonylatesiratListComponent {
 
   constructor(private _logonservice: LogonService,
               private _iratservice: IratService,
+              private _dokumentumservice: DokumentumService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.projektkapcsolatservice = projektkapcsolatservice;
   }
@@ -49,11 +53,13 @@ export class ProjektBizonylatesiratListComponent {
             throw res.Error;
           }
 
-          this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.EgyIrat;
-
           this._iratservice.Dto = res.Result;
           this._iratservice.DtoSelectedIndex = 0;
+
+          this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.EgyIrat;
           this._iratservice.ContainerMode = IratContainerMode.List;
+          this._iratservice.EgyMode = IratEgyMode.Dokumentum;
+          this._dokumentumservice.ContainerMode = DokumentumContainerMode.List;
         })
         .catch(err => {
           this.errormodal.show(err);

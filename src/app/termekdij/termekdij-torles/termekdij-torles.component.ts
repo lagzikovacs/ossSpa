@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {TermekdijService} from '../termekdij.service';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {TermekdijEgyMode} from "../termekdijegymode";
 import {TermekdijContainerMode} from "../termekdijcontainermode";
 

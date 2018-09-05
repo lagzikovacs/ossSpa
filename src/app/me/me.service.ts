@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import {MeDto} from '../dtos/primitiv/me/medto';
+import {MeDto} from './medto';
 import {EgyszeruKeresesDto} from '../dtos/egyszerukeresesdto';
 import {environment} from '../../environments/environment';
 import {ZoomSources} from '../enums/zoomsources';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {LogonService} from '../services/logon.service';
+import {LogonService} from '../logon/logon.service';
 import {NumberResult} from '../dtos/numberresult';
-import {MeResult} from '../dtos/primitiv/me/meresult';
+import {MeResult} from './meresult';
 import {EmptyResult} from '../dtos/emptyresult';
-import {MeZoomParameter} from "../dtos/primitiv/me/mezoomparameter";
+import {MeZoomParameter} from "./mezoomparameter";
 import {MeContainerMode} from "./mecontainermode";
 import {MeEgyMode} from "./meegymode";
 

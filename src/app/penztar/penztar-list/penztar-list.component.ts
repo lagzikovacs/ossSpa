@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {PenztarService} from '../penztar.service';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
-import {LogonService} from '../../services/logon.service';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {PenztartetelService} from '../penztartetel/penztartetel.service';
-import {PenztartetelDto} from '../../dtos/penztar/penztarteteldto';
+import {PenztartetelDto} from '../penztartetel/penztarteteldto';
 import {PenztarContainerMode} from '../penztarcontainermode';
 import {PenztarEgyMode} from '../penztaregymode';
 import {PenztartetelContainerMode} from "../penztartetel/penztartetelcontainermode";

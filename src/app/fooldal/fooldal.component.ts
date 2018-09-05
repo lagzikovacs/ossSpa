@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {LogonService} from '../services/logon.service';
+import {LogonService} from '../logon/logon.service';
 import {Subscription} from 'rxjs/index';
-import {SessionService} from '../services/session.service';
-import {ErrormodalComponent} from '../tools/errormodal/errormodal.component';
-import {SessionDto} from '../dtos/session/sessiondto';
+import {SessionService} from './session.service';
+import {ErrormodalComponent} from '../errormodal/errormodal.component';
+import {SessionDto} from './sessiondto';
 
 @Component({
   selector: 'app-fooldal',

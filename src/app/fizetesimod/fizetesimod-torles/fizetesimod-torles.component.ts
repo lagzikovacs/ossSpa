@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {FizetesimodService} from '../fizetesimod.service';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {FizetesimodContainerMode} from "../fizetesimodcontainermode";
 import {FizetesimodEgyMode} from "../fizetesimodegymode";
 

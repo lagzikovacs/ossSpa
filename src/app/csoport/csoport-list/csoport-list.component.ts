@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {CsoportService} from '../csoport.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {CsoportContainerMode} from "../csoportcontainermode";
 import {CsoportEgyMode} from "../csoportegymode";
 

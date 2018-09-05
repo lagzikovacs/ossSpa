@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ProjektDto} from '../../../dtos/projekt/projektdto';
+import {ProjektDto} from '../projektdto';
 
 @Component({
   selector: 'app-projekt-tabla',

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import {EgyszeruKeresesDto} from '../dtos/egyszerukeresesdto';
 import {environment} from '../../environments/environment';
-import {TeendoDto} from '../dtos/primitiv/teendo/teendodto';
+import {TeendoDto} from './teendodto';
 import {ZoomSources} from '../enums/zoomsources';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {LogonService} from '../services/logon.service';
+import {LogonService} from '../logon/logon.service';
 import {NumberResult} from '../dtos/numberresult';
-import {TeendoResult} from '../dtos/primitiv/teendo/teendoresult';
+import {TeendoResult} from './teendoresult';
 import {EmptyResult} from '../dtos/emptyresult';
-import {TeendoZoomParameter} from '../dtos/primitiv/teendo/teendozoomparameter';
+import {TeendoZoomParameter} from './teendozoomparameter';
 import {TeendoEgyMode} from './teendoegymode';
 import {TeendoContainerMode} from './teendocontainermode';
 

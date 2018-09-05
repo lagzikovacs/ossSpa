@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {VolumeService} from '../volume.service';
 import {VolumeContainerMode} from '../volumecontainermode';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {VolumeEgyMode} from '../volumeegymode';
 
 @Component({

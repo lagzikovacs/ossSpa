@@ -3,12 +3,12 @@ import {NumberResult} from '../dtos/numberresult';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {EgyszeruKeresesDto} from '../dtos/egyszerukeresesdto';
-import {AfakulcsDto} from '../dtos/primitiv/afakulcs/afakulcsdto';
+import {AfakulcsDto} from './afakulcsdto';
 import {ZoomSources} from '../enums/zoomsources';
-import {LogonService} from '../services/logon.service';
-import {AfakulcsResult} from '../dtos/primitiv/afakulcs/afakulcsresult';
+import {LogonService} from '../logon/logon.service';
+import {AfakulcsResult} from './afakulcsresult';
 import {EmptyResult} from '../dtos/emptyresult';
-import {AfakulcsZoomParameter} from '../dtos/primitiv/afakulcs/afakulcszoomparameter';
+import {AfakulcsZoomParameter} from './afakulcszoomparameter';
 import {AfakulcsContainerMode} from "./afakulcscontainermode";
 import {AfakulcsEgyMode} from "./afakulcsegymode";
 

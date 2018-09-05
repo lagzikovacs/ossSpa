@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {UgyfelParameter} from '../dtos/torzs/ugyfel/ugyfelparameter';
+import {UgyfelParameter} from './ugyfelparameter';
 import {environment} from '../../environments/environment';
-import {UgyfelDto} from '../dtos/torzs/ugyfel/ugyfeldto';
+import {UgyfelDto} from './ugyfeldto';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {LogonService} from '../services/logon.service';
-import {UgyfelResult} from '../dtos/torzs/ugyfel/ugyfelresult';
+import {LogonService} from '../logon/logon.service';
+import {UgyfelResult} from './ugyfelresult';
 import {ZoomSources} from '../enums/zoomsources';
 import {NumberResult} from '../dtos/numberresult';
 import {EmptyResult} from '../dtos/emptyresult';

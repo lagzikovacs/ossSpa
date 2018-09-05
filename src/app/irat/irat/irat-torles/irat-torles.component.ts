@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {IratService} from '../irat.service';
 import {IratContainerMode} from '../iratcontainermode';
 import {IratEgyMode} from '../irategymode';

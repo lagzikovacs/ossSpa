@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {Szempont} from '../../enums/szempont';
 import {UgyfelService} from '../ugyfel.service';
-import {UgyfelDto} from '../../dtos/torzs/ugyfel/ugyfeldto';
+import {UgyfelDto} from '../ugyfeldto';
 import {SzMT} from '../../dtos/szmt';
-import {LogonService} from '../../services/logon.service';
+import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ZoomSources} from '../../enums/zoomsources';
 import {IratService} from '../../irat/irat/irat.service';

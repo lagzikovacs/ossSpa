@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {TeendoService} from '../teendo.service';
 import {NumberResult} from '../../dtos/numberresult';
 import {TeendoContainerMode} from "../teendocontainermode";

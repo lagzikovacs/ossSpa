@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {HelysegService} from '../helyseg.service';
-import {LogonService} from '../../services/logon.service';
+import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {HelysegContainerMode} from '../helysegcontainermode';
 import {HelysegEgyMode} from '../helysegegymode';

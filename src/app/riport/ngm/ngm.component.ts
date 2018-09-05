@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {RiportService} from '../../services/riport.service';
+import {RiportService} from '../riport.service';
 
 @Component({
   selector: 'app-ngm',

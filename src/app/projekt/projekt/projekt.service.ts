@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {LogonService} from '../../services/logon.service';
+import {LogonService} from '../../logon/logon.service';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {ProjektDto} from '../../dtos/projekt/projektdto';
-import {ProjektParameter} from '../../dtos/projekt/projektparameter';
+import {ProjektDto} from './projektdto';
+import {ProjektParameter} from './projektparameter';
 import {environment} from '../../../environments/environment';
-import {ProjektResult} from '../../dtos/projekt/projektresult';
-import {IratmintaResult} from '../../dtos/projekt/iratmintaresult';
+import {ProjektResult} from './projektresult';
+import {IratmintaResult} from './iratmintaresult';
 import {NumberResult} from '../../dtos/numberresult';
 import {ProjektContainerMode} from './projektcontainermode';
 import {ProjektSzerkesztesMode} from './projektszerkesztesmode';

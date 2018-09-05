@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {PenznemService} from '../penznem.service';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {PenznemContainerMode} from '../penznemcontainermode';
 import {PenznemEgyMode} from '../penznemegymode';
 

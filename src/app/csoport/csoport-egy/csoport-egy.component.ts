@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {CsoportService} from '../csoport.service';
 import {CsoportContainerMode} from "../csoportcontainermode";
 import {CsoportEgyMode} from "../csoportegymode";

@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
-import {LogonService} from '../../../services/logon.service';
-import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {LogonService} from '../../../logon/logon.service';
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 import {BizonylatTipus} from '../../../bizonylat/bizonylattipus';
 import {BizonylatService} from '../../../bizonylat/bizonylat.service';

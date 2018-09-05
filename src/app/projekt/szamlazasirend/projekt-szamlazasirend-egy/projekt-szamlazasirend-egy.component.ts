@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {SzamlazasirendService} from '../szamlazasirend.service';
-import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
-import {LogonService} from '../../../services/logon.service';
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {LogonService} from '../../../logon/logon.service';
 import {SzamlazasirendEgyMode} from '../szamlazasirendegymode';
 import {SzamlazasirendContainerMode} from '../szamlazasirendcontainermode';
 

@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {FizetesimodService} from '../fizetesimod.service';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
-import {LogonService} from '../../services/logon.service';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {FizetesimodContainerMode} from "../fizetesimodcontainermode";
 import {FizetesimodEgyMode} from "../fizetesimodegymode";

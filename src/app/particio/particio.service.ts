@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import {NumberResult} from '../dtos/numberresult';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {ParticioDto} from '../dtos/particio/particiodto';
-import {LogonService} from '../services/logon.service';
-import {ParticioResult} from '../dtos/particio/particioresult';
+import {ParticioDto} from './particiodto';
+import {LogonService} from '../logon/logon.service';
+import {ParticioResult} from './particioresult';
 import {ParticioEgyMode} from './particioegymode';
 
 @Injectable({

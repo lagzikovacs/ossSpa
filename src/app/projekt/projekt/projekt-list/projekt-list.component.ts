@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {ProjektService} from '../projekt.service';
 import {SzMT} from '../../../dtos/szmt';
 import {Szempont} from '../../../enums/szempont';

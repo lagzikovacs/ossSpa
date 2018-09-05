@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import * as moment from 'moment';
 import {ProjektteendoService} from '../projektteendo.service';
-import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {ProjektteendoEgyMode} from "../projekttendoegymode";
 
 @Component({

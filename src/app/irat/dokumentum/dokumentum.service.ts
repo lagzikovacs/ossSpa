@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
-import {LogonService} from '../../services/logon.service';
+import {LogonService} from '../../logon/logon.service';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {DokumentumResult} from '../../dtos/dokumentum/dokumentumresult';
-import {DokumentumDto} from '../../dtos/dokumentum/dokumentumdto';
+import {DokumentumResult} from './dokumentumresult';
+import {DokumentumDto} from './dokumentumdto';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {DokumentumContainerMode} from './dokumentumcontainermode';
 import {DokumentumEgyMode} from './dokumentumegymode';
-import {LetoltesResult} from "./letoltesresult";
-import {LetoltesParam} from "./letoltesparam";
-import * as FileSaver from "file-saver";
-import {b64toBlob} from "../../tools/b64toBlob";
+import {LetoltesResult} from './letoltesresult';
+import {LetoltesParam} from './letoltesparam';
+import * as FileSaver from 'file-saver';
+import {b64toBlob} from '../../tools/b64toBlob';
+import {NumberResult} from '../../dtos/numberresult';
+import {FajlBuf} from './fajlbuf';
+import {FeltoltesParam} from "./feltortesparam";
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +37,17 @@ export class DokumentumService {
   public Select(iratkod: number): Promise<DokumentumResult> {
     const url = environment.BaseHref + this._controller + 'select';
     const body = JSON.stringify(iratkod);
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<DokumentumResult>(url, body, options).toPromise();
+  }
+
+  public Get(dokumentumkod: number): Promise<DokumentumResult> {
+    const url = environment.BaseHref + this._controller + 'get';
+    const body = JSON.stringify(dokumentumkod);
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
       params: new HttpParams().set('sid', this._logonservice.Sid)
@@ -89,5 +103,16 @@ export class DokumentumService {
 
         return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
       });
+  }
+
+  public FeltoltesAngular(fb: FajlBuf): Promise<NumberResult> {
+    const url = environment.BaseHref + this._controller + 'feltoltesangular';
+    const body = fb;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
   }
 }

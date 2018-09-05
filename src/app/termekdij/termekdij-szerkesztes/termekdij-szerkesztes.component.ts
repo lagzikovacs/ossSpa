@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {NumberResult} from '../../dtos/numberresult';
 import {TermekdijService} from '../termekdij.service';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {TermekdijContainerMode} from '../termekdijcontainermode';
 import {TermekdijEgyMode} from '../termekdijegymode';
 

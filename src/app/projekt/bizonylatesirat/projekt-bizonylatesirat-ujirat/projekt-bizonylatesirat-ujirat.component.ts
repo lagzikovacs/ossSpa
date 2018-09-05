@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import * as moment from 'moment';
-import {ErrormodalComponent} from '../../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {IrattipusService} from '../../../irattipus/irattipus.service';
 import {ZoomSources} from '../../../enums/zoomsources';

@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {CikkService} from '../cikk.service';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {CikkEgyMode} from "../cikkegymode";
 import {CikkContainerMode} from "../cikkcontainermode";
 

@@ -1,6 +1,6 @@
 export class FajlBuf {
 Meret: number;
-b: string;
+b: any;
 Ext: string;
 Hash: string;
 IratKod: number;

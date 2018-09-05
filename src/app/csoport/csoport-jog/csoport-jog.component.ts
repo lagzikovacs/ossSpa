@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {CsoportService} from '../csoport.service';
-import {CsoportJogParameter} from '../../dtos/csoport/csoportjogparameter';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {CsoportJogParameter} from '../csoportjogparameter';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-csoport-jog',

@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {AfakulcsService} from "../afakulcs.service";
-import {ErrormodalComponent} from "../../tools/errormodal/errormodal.component";
+import {ErrormodalComponent} from "../../errormodal/errormodal.component";
 import {AfakulcsEgyMode} from "../afakulcsegymode";
 import {AfakulcsContainerMode} from "../afakulcscontainermode";
 

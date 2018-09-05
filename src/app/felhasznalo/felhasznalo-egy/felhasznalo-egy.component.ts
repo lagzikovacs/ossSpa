@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {FelhasznaloService} from '../felhasznalo.service';
-import {LogonService} from '../../services/logon.service';
+import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {FelhasznaloContainerMode} from "../felhasznalocontainermode";
 import {FelhasznaloEgyMode} from "../felhasznaloegymode";

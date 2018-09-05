@@ -1,5 +1,5 @@
 import {IrattipusService} from '../irattipus.service';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {Component, ViewChild} from '@angular/core';
 import {NumberResult} from '../../dtos/numberresult';
 import {IrattipusContainerMode} from '../irattipuscontainermode';

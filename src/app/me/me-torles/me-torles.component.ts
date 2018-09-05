@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {MeService} from '../me.service';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {MeEgyMode} from '../meegymode';
 import {MeContainerMode} from '../mecontainermode';
 

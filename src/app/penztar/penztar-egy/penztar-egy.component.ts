@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {PenztarService} from '../penztar.service';
-import {LogonService} from '../../services/logon.service';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {LogonService} from '../../logon/logon.service';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {JogKod} from '../../enums/jogkod';
 import {PenztarContainerMode} from "../penztarcontainermode";
 import {PenztarEgyMode} from "../penztaregymode";

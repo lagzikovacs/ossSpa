@@ -1,6 +1,6 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {RiportService} from '../../services/riport.service';
-import {ErrormodalComponent} from '../../tools/errormodal/errormodal.component';
+import {RiportService} from '../riport.service';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import * as moment from 'moment';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';

@@ -75,7 +75,7 @@ import { VolumeTesztComponent } from './volume/volume-teszt/volume-teszt.compone
 import { FeliratkozasListComponent } from './feliratkozas/feliratkozas-list/feliratkozas-list.component';
 import { FeliratkozasEgyComponent } from './feliratkozas/feliratkozas-egy/feliratkozas-egy.component';
 import { FeliratkozasProjektComponent } from './feliratkozas/feliratkozas-projekt/feliratkozas-projekt.component';
-import { ProjektTablaComponent } from './projekt/projekt/projekt-tabla/projekt-tabla.component';
+import { ProjektTablaComponent } from './projekt/projekt-tabla/projekt-tabla.component';
 import { RiportComponent } from './riport/riport.component';
 import { KimenoszamlaComponent } from './riport/kimenoszamla/kimenoszamla.component';
 import { BejovoszamlaComponent } from './riport/bejovoszamla/bejovoszamla.component';
@@ -207,6 +207,7 @@ import {BizonylatService} from './bizonylat/bizonylat.service';
 import {RiportService} from './riport/riport.service';
 import { ProjektBizonylatesiratLevalasztasComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-levalasztas/projekt-bizonylatesirat-levalasztas.component';
 import { ProjektExportComponent } from './projekt/projekt/projekt-export/projekt-export.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -791,6 +792,7 @@ if (environment.production) {
     ProjektBizonylatesiratContainerComponent,
     ProjektBizonylatesiratLevalasztasComponent,
     ProjektExportComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,

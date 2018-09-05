@@ -11,7 +11,9 @@ import {CsoportService} from '../../csoport/csoport.service';
 })
 export class SzerepkorvalasztasComponent implements OnInit {
   @ViewChild(ErrormodalComponent) private errormodal: ErrormodalComponent;
+
   logonservice: LogonService;
+  eppFrissit = false;
 
   constructor(private _router: Router,
               logonservice: LogonService,
@@ -24,6 +26,7 @@ export class SzerepkorvalasztasComponent implements OnInit {
   }
 
   setClickedRow(i: number) {
+    this.eppFrissit = true;
     this.logonservice.SzerepkorValasztas(this.logonservice.lehetsegesszerepkorokDto[i].PARTICIOKOD,
       this.logonservice.lehetsegesszerepkorokDto[i].CSOPORTKOD)
       .then(res => {
@@ -41,9 +44,11 @@ export class SzerepkorvalasztasComponent implements OnInit {
         this.logonservice.Jogaim = res.Result;
 
         this.logonservice.SzerepkorKivalasztva = true;
+        this.eppFrissit = false;
         this._router.navigate(['/fooldal']);
       })
       .catch(err => {
+        this.eppFrissit = false;
         this.errormodal.show(err);
       });
   }

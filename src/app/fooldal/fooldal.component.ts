@@ -16,6 +16,8 @@ export class FooldalComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   @ViewChild(ErrormodalComponent) private errormodal: ErrormodalComponent;
 
+  eppFrissit = false;
+
   constructor(private _logonservice: LogonService,
               private _sessionservice: SessionService) {
   }
@@ -34,14 +36,17 @@ export class FooldalComponent implements OnInit, OnDestroy {
 
   Frissites(): void {
     if (this.szerepkorkivalasztva) {
+      this.eppFrissit = true;
       this._sessionservice.Get()
         .then(res => {
           if (res.Error !== null) {
             throw res.Error;
           }
           this.sessiondto = res.Result[0];
+          this.eppFrissit = false;
         })
         .catch(err => {
+          this.eppFrissit = false;
           this.errormodal.show(err);
         });
     }

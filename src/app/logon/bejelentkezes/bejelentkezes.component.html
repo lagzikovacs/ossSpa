@@ -27,9 +27,9 @@
       <div class="col-md-2"></div>
       <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.valid || eppFrissit">Bejelentkezés</button>
     </div>
-
   </form>
   <app-errormodal [cim]="'Bejelentkezés'"></app-errormodal>
 </div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>
 
 

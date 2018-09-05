@@ -16,7 +16,7 @@
     <th></th>
     <th>DC, kW</th>
     <th>AC, kVA</th>
-    <th>Vállalási ár, netto</th>
+    <th>Vállalási ár</th>
     <th>Pénznem</th>
     <th>Munkalapszám</th>
     <th>Keletkezett</th>
@@ -31,18 +31,18 @@
       <td *ngIf="!enIdclick">{{item.PROJEKTKOD}}</td>
       <td>{{item.STATUSZ}}</td>
       <td>
-        <div style="width: 100px">{{item.MUSZAKIALLAPOT}}</div>
+        <div style="width: 200px">{{item.MUSZAKIALLAPOT}}</div>
       </td>
       <td>
-        <div style="width: 100px">{{item.UGYFELNEV}}</div>
+        <div style="width: 200px">{{item.UGYFELNEV}}</div>
       </td>
       <td>
-        <div style="width: 150px">{{item.UGYFELCIM}}</div>
+        <div style="width: 250px">{{item.UGYFELCIM}}</div>
       </td>
       <td>{{item.UGYFELTELEFONSZAM}}</td>
       <td>{{item.UGYFELEMAIL}}</td>
       <td>
-        <div style="width: 150px">{{item.TELEPITESICIM}}</div>
+        <div style="width: 300px">{{item.TELEPITESICIM}}</div>
       </td>
       <td>
         <div style="width: 150px">{{item.PROJEKTJELLEGE}}</div>
@@ -51,13 +51,13 @@
         <div style="width: 150px">{{item.INVERTER}}</div>
       </td>
       <td>
-        <div style="width: 150px">{{item.INVERTERALLAPOT}}</div>
+        <div style="width: 250px">{{item.INVERTERALLAPOT}}</div>
       </td>
       <td>
         <div style="width: 150px">{{item.NAPELEM}}</div>
       </td>
       <td>
-        <div style="width: 150px">{{item.NAPELEMALLAPOT}}</div>
+        <div style="width: 250px">{{item.NAPELEMALLAPOT}}</div>
       </td>
       <td style="text-align: right">{{item.DCKW | number: '1.2-2'}}</td>
       <td style="text-align: right">{{item.ACKVA | number: '1.2-2'}}</td>

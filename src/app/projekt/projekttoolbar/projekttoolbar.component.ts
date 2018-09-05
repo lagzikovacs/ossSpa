@@ -14,9 +14,11 @@ export class ProjektToolbarComponent implements AfterViewInit {
 
   @Input() enKereses = true;
   @Input() enUj = true;
+  @Input() enExport = true;
 
   @Output() Kereses = new EventEmitter<void>();
   @Output() Uj = new EventEmitter<void>();
+  @Output() Export = new EventEmitter<number>();
 
   // azért kell a kétirányú adatkötés, h a szülő komponens újrainicializálja a toolbart
   // pl. egy tétel szerkesztése után
@@ -78,5 +80,9 @@ export class ProjektToolbarComponent implements AfterViewInit {
 
   doUj() {
     this.Uj.emit();
+  }
+
+  doExport() {
+    this.Export.emit(this._statuszszempont);
   }
 }

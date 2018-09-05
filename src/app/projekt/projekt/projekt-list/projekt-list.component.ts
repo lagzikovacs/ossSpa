@@ -141,4 +141,9 @@ export class ProjektListComponent {
         this.eppFrissit = false;
       });
   }
+
+  onExport(sszi: number) {
+    this.projektservice.statuszexporthoz = this.statuszszurok[sszi];
+    this.projektservice.ContainerMode = ProjektContainerMode.Export;
+  }
 }

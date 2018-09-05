@@ -20,6 +20,7 @@ export class ProjektService {
 
   cim = 'Projekt';
   statuszszempont = 0;
+  statuszexporthoz = '';
   teendoszempont = 0;
   szempont = 0;
   minta = '';

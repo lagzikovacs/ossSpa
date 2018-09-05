@@ -4,6 +4,7 @@ Blank = 0,
 List = 1,
 Egy = 2,
 Uj = 3
+Export = 4
 }-->
 
 <ng-container *ngIf="projektservice.ContainerMode === 0">
@@ -17,4 +18,7 @@ Uj = 3
 </ng-container>
 <ng-container *ngIf="projektservice.ContainerMode === 3">
   <app-projekt-szerkesztes></app-projekt-szerkesztes>
+</ng-container>
+<ng-container *ngIf="projektservice.ContainerMode === 4">
+  <app-projekt-export></app-projekt-export>
 </ng-container>

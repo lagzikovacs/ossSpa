@@ -1,14 +1,14 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
-import {ProjektEgyMode} from "../projektegymode";
+import {ProjektEgyMode} from '../projektegymode';
 
 @Component({
   selector: 'app-projekt-napelem',
   templateUrl: './projekt-napelem.component.html',
   styleUrls: ['./projekt-napelem.component.css']
 })
-export class ProjektNapelemComponent {
+export class ProjektNapelemComponent implements OnInit {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektservice: ProjektService;
@@ -19,6 +19,10 @@ export class ProjektNapelemComponent {
 
   constructor(projektservice: ProjektService) {
     this.projektservice = projektservice;
+  }
+
+  ngOnInit() {
+    this.selected = this.projektservice.DtoEdited.NAPELEMALLAPOT || '';
   }
 
   change(entry) {

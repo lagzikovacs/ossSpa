@@ -206,6 +206,7 @@ import {PenztartetelService} from './penztar/penztartetel/penztartetel.service';
 import {BizonylatService} from './bizonylat/bizonylat.service';
 import {RiportService} from './riport/riport.service';
 import { ProjektBizonylatesiratLevalasztasComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-levalasztas/projekt-bizonylatesirat-levalasztas.component';
+import { ProjektExportComponent } from './projekt/projekt/projekt-export/projekt-export.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -789,6 +790,7 @@ if (environment.production) {
     ProjektTeendoContainerComponent,
     ProjektBizonylatesiratContainerComponent,
     ProjektBizonylatesiratLevalasztasComponent,
+    ProjektExportComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,14 +1,14 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
-import {ProjektEgyMode} from "../projektegymode";
+import {ProjektEgyMode} from '../projektegymode';
 
 @Component({
   selector: 'app-projekt-statusz',
   templateUrl: './projekt-statusz.component.html',
   styleUrls: ['./projekt-statusz.component.css']
 })
-export class ProjektStatuszComponent {
+export class ProjektStatuszComponent implements OnInit {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektservice: ProjektService;
@@ -21,6 +21,10 @@ export class ProjektStatuszComponent {
 
   constructor(projektservice: ProjektService) {
     this.projektservice = projektservice;
+  }
+
+  ngOnInit() {
+    this.selected = this.projektservice.DtoEdited.STATUSZ;
   }
 
   change(i) {

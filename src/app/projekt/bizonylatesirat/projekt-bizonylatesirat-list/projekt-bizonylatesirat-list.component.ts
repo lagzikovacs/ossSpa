@@ -7,7 +7,8 @@ import {IratService} from '../../../irat/irat/irat.service';
 import {IratContainerMode} from '../../../irat/irat/iratcontainermode';
 import {DokumentumContainerMode} from '../../../irat/dokumentum/dokumentumcontainermode';
 import {IratEgyMode} from '../../../irat/irat/irategymode';
-import {DokumentumService} from "../../../irat/dokumentum/dokumentum.service";
+import {DokumentumService} from '../../../irat/dokumentum/dokumentum.service';
+import {AjanlatTetelTipus} from '../ajanlatteteltipus';
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-list',
@@ -62,8 +63,8 @@ export class ProjektBizonylatesiratListComponent {
           this._dokumentumservice.ContainerMode = DokumentumContainerMode.List;
         })
         .catch(err => {
-          this.errormodal.show(err);
           this.eppFrissit = false;
+          this.errormodal.show(err);
         });
     }
   }
@@ -74,6 +75,21 @@ export class ProjektBizonylatesiratListComponent {
     this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.UjIrat;
   }
   ujajanlat() {
-    this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.UjAjanlat;
+    this.eppFrissit = true;
+    this.projektkapcsolatservice.AjanlatCreateNew()
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.projektkapcsolatservice.AjanlatParam = res.Result;
+
+        this.eppFrissit = false;
+        this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.UjAjanlat;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this.errormodal.show(err);
+      });
   }
 }

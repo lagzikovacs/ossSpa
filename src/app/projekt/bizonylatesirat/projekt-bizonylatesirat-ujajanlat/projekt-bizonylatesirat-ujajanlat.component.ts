@@ -3,6 +3,8 @@ import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {LogonService} from '../../../logon/logon.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
+import {AjanlatBuf} from '../ajanlatbuf';
+import {AjanlatTetelTipus} from '../ajanlatteteltipus';
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-ujajanlat',
@@ -15,12 +17,17 @@ export class ProjektBizonylatesiratUjajanlatComponent implements OnInit {
   projektkapcsolatservice: ProjektkapcsolatService;
   eppFrissit = false;
 
+  Ervenyes: any;
+  Szuksaram: any;
+  Megjegyzes: any;
+
   constructor(private _logonservice: LogonService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.projektkapcsolatservice = projektkapcsolatservice;
   }
 
   ngOnInit() {
+
   }
 
   onSubmit() {

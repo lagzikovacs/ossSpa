@@ -1,14 +1,82 @@
 <div class="alapkeret">
   <h5>Új ajánlat</h5>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Érvényes</div>
+      </div>
+      <div class="col-md-2">
+        <input type="date" class="form-control form-control-sm" id="ervenyes"
+               [(ngModel)]="Ervenyes" name="ervenyes">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Szükséges áramerősség</div>
+      </div>
+      <div class="col-md-2">
+        <input type="text" class="form-control form-control-sm" id="szuksaram"
+               maxlength="20" required autocomplete="off"
+               [(ngModel)]="Szuksaram" name="szuksaram">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Tájolás</div>
+      </div>
+      <div class="col-md-2">
+        <input type="text" class="form-control form-control-sm" id="tajolas">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Termelés</div>
+      </div>
+      <div class="col-md-2">
+        <input type="number" class="form-control form-control-sm" id="termeles">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Megjegyzés</div>
+      </div>
+      <div class="col-md-6">
+        <input type="text" class="form-control form-control-sm" id="megjegyzes"
+               maxlength="200" autocomplete="off"
+               [(ngModel)]="Megjegyzes" name="megjegyzes">
+      </div>
+    </div>
+
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title"></div>
+      </div>
+      <div class="col-md-2">
+        <input type="text" class="form-control form-control-sm" id="netto">
+      </div>
+      <div class="col-md-2">
+        <input type="text" class="form-control form-control-sm" id="afa">
+      </div>
+      <div class="col-md-2">
+        <input type="text" class="form-control form-control-sm" id="brutto">
+      </div>
+    </div>
+
+
+
+    <ng-container>
+      <app-projekt-bizonylatesirat-ujajanlat-list></app-projekt-bizonylatesirat-ujajanlat-list>
+    </ng-container>
+    <ng-container>
+      <app-projekt-bizonylatesirat-ujajanlat-szerkesztes></app-projekt-bizonylatesirat-ujajanlat-szerkesztes>
+    </ng-container>
 
     <div class="row no-gutters" style="margin-bottom: 10px">
-      <div class="col-md-2"></div>
-      <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
+      <button class="btn btn-sm btn-primary" [disabled]="eppFrissit" type="button" (click)="onSubmit()">Ok</button>
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
     </div>
-  </form>
+
   <app-errormodal [cim]="'Új ajánlat'"></app-errormodal>
 </div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>
 

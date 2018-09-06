@@ -10,6 +10,8 @@ import {ProjektKapcsolatParameter} from './projektkapcsolatparameter';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {BizonylatesIratContainerMode} from './bizonylatesiratcontainermode';
 import {BizonylatesiratSzerkesztesMode} from './bizonylatesiratszerkesztesmode';
+import {AjanlatParam} from './ajanlatparam';
+import {AjanlatParamResult} from './ajanlatparamresult';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +30,8 @@ export class ProjektkapcsolatService {
 
   ContainerMode = BizonylatesIratContainerMode.List;
   SzerkesztesMode = BizonylatesiratSzerkesztesMode.Blank;
+
+  AjanlatParam: AjanlatParam;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
@@ -115,6 +119,28 @@ export class ProjektkapcsolatService {
   public UjBizonylatToProjekt(pkp: ProjektKapcsolatParameter): Promise<NumberResult> {
     const url = environment.BaseHref + this._controller + 'ujbizonylattoprojekt';
     const body = pkp;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+  }
+
+  public AjanlatCreateNew(): Promise<AjanlatParamResult> {
+    const url = environment.BaseHref + this._controller + 'ajanlatcreatenew';
+    const body = null;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<AjanlatParamResult>(url, body, options).toPromise();
+  }
+
+  public AjanlatKeszites(ap: AjanlatParam): Promise<NumberResult> {
+    const url = environment.BaseHref + this._controller + 'ajanlatkeszites';
+    const body = ap;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
       params: new HttpParams().set('sid', this._logonservice.Sid)

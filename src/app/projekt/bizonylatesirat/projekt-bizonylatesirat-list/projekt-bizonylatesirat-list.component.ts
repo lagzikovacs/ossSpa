@@ -34,8 +34,8 @@ export class ProjektBizonylatesiratListComponent {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this.errormodal.show(err);
       });
   }
   levalasztas(i: number) {

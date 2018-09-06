@@ -64,6 +64,26 @@ export class ProjektkapcsolatService {
 
     return this._httpClient.post<ProjektKapcsolatResult>(url, body, options).toPromise();
   }
+  public SelectByBizonylat(bizonylatkod: number): Promise<ProjektKapcsolatResult> {
+    const url = environment.BaseHref + this._controller + 'selectbybizonylat';
+    const body = bizonylatkod;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<ProjektKapcsolatResult>(url, body, options).toPromise();
+  }
+  public SelectByIrat(iratkod: number): Promise<ProjektKapcsolatResult> {
+    const url = environment.BaseHref + this._controller + 'selectbyirat';
+    const body = iratkod;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<ProjektKapcsolatResult>(url, body, options).toPromise();
+  }
 
   public Kereses(): Promise<EmptyResult> {
     this.Dto = new Array<ProjektKapcsolatDto>();

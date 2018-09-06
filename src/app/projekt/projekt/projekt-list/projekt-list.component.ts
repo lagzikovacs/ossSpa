@@ -117,8 +117,8 @@ export class ProjektListComponent {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this.errormodal.show(err);
       });
   }
 
@@ -137,8 +137,8 @@ export class ProjektListComponent {
         this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this.errormodal.show(err);
       });
   }
 

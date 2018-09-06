@@ -7,6 +7,8 @@ import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {DokumentumContainerMode} from '../../dokumentum/dokumentumcontainermode';
 import {ProjektkapcsolatService} from '../../../projekt/bizonylatesirat/projektkapcsolat.service';
 import {BizonylatesIratContainerMode} from '../../../projekt/bizonylatesirat/bizonylatesiratcontainermode';
+import {ProjektService} from "../../../projekt/projekt/projekt.service";
+import {ProjektResult} from "../../../projekt/projekt/projektresult";
 
 @Component({
   selector: 'app-irat-egy',
@@ -19,8 +21,10 @@ export class IratEgyComponent {
   iratservice: IratService;
   dokumentumservice: DokumentumService;
   eppFrissit = false;
+  nincsProjekt = false;
 
   constructor(private _projektkapcsolatservice: ProjektkapcsolatService,
+              private _projektservice: ProjektService,
               iratservice: IratService,
               dokumentumservice: DokumentumService) {
     this.iratservice = iratservice;
@@ -46,5 +50,39 @@ export class IratEgyComponent {
   dokumentum() {
     this.iratservice.EgyMode = IratEgyMode.Dokumentum;
     this.dokumentumservice.ContainerMode = DokumentumContainerMode.List;
+  }
+  projekt() {
+    this.eppFrissit = true;
+    this._projektkapcsolatservice.SelectByIrat(this.iratservice.Dto[this.iratservice.DtoSelectedIndex].IRATKOD)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        if (res.Result.length === 0) {
+          this.nincsProjekt = true;
+          return new Promise<ProjektResult>((resolve, reject) => { resolve(new ProjektResult()); });
+        } else {
+          this.nincsProjekt = false;
+          return this._projektservice.Get(res.Result[0].PROJEKTKOD);
+        }
+      })
+      .then(res1 => {
+        if (res1.Error != null) {
+          throw res1.Error;
+        }
+
+        if (!this.nincsProjekt) {
+          this._projektservice.Dto = res1.Result;
+          this._projektservice.DtoSelectedIndex = 0;
+        }
+
+        this.iratservice.EgyMode = IratEgyMode.Projekt;
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this.errormodal.show(err);
+      });
   }
 }

@@ -23,6 +23,9 @@
       <button [disabled]="eppFrissit || iratservice.DtoSelectedIndex === -1" (click)="dokumentum()" class="btn btn-sm btn-outline-primary navgomb">
         Dokumentum
       </button>
+      <button [disabled]="eppFrissit" (click)="projekt()" class="btn btn-sm btn-outline-primary navgomb">
+        Projekt
+      </button>
     </nav>
   </div>
 
@@ -30,7 +33,8 @@
   Reszletek = 1,
   Torles = 2,
   Modositas = 3,
-  Dokumentum = 4
+  Dokumentum = 4,
+  Projekt = 5
   }-->
 
   <ng-container *ngIf="iratservice.EgyMode === 1">
@@ -45,6 +49,11 @@
   <ng-container *ngIf="iratservice.EgyMode === 4">
     <app-dokumentum-container></app-dokumentum-container>
   </ng-container>
+  <ng-container *ngIf="iratservice.EgyMode === 5">
+    <app-irat-nincsprojekt *ngIf="nincsProjekt"></app-irat-nincsprojekt>
+    <app-projekt-reszletek *ngIf="!nincsProjekt"></app-projekt-reszletek>
+  </ng-container>
 
   <app-errormodal [cim]="iratservice.cim"></app-errormodal>
 </div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

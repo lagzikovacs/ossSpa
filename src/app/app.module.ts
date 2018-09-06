@@ -208,6 +208,7 @@ import {RiportService} from './riport/riport.service';
 import { ProjektBizonylatesiratLevalasztasComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-levalasztas/projekt-bizonylatesirat-levalasztas.component';
 import { ProjektExportComponent } from './projekt/projekt/projekt-export/projekt-export.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { IratNincsprojektComponent } from './irat/irat/irat-nincsprojekt/irat-nincsprojekt.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -793,6 +794,7 @@ if (environment.production) {
     ProjektBizonylatesiratLevalasztasComponent,
     ProjektExportComponent,
     SpinnerComponent,
+    IratNincsprojektComponent,
   ],
   imports: [
     BrowserModule,

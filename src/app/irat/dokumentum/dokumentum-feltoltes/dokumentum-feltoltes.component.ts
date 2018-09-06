@@ -44,6 +44,7 @@ export class DokumentumFeltoltesComponent {
     fb.Megjegyzes = this.file.name;
     fb.IratKod = this._iratservice.Dto[this._iratservice.DtoSelectedIndex].IRATKOD;
 
+    this.eppFrissit = true;
     this.dokumentumservice.FeltoltesAngular(fb)
       .then(res => {
         if (res.Error != null) {
@@ -63,8 +64,8 @@ export class DokumentumFeltoltesComponent {
         this.navigal();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this.errormodal.show(err);
       });
   }
   cancel() {

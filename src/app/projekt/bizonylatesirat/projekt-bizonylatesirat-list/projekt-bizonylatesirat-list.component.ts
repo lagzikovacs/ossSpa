@@ -9,6 +9,7 @@ import {DokumentumContainerMode} from '../../../irat/dokumentum/dokumentumcontai
 import {IratEgyMode} from '../../../irat/irat/irategymode';
 import {DokumentumService} from '../../../irat/dokumentum/dokumentum.service';
 import {AjanlatTetelTipus} from '../ajanlatteteltipus';
+import {UjajanlatContainerMode} from "../ujajanlatcontainermode";
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-list',
@@ -83,9 +84,13 @@ export class ProjektBizonylatesiratListComponent {
         }
 
         this.projektkapcsolatservice.AjanlatParam = res.Result;
+        this.projektkapcsolatservice.AjanlatNetto = 0;
+        this.projektkapcsolatservice.AjanlatAfa = 0;
+        this.projektkapcsolatservice.AjanlatBrutto = 0;
 
         this.eppFrissit = false;
         this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.UjAjanlat;
+        this.projektkapcsolatservice.AjanlatContainerMode = UjajanlatContainerMode.List;
       })
       .catch(err => {
         this.eppFrissit = false;

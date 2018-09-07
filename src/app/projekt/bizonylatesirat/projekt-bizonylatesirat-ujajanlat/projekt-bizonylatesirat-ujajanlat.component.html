@@ -10,6 +10,7 @@
                [(ngModel)]="Ervenyes" name="ervenyes">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
       <div class="col-md-2">
         <div class="editform-title">Szükséges áramerősség</div>
@@ -17,25 +18,32 @@
       <div class="col-md-2">
         <input type="text" class="form-control form-control-sm" id="szuksaram"
                maxlength="20" required autocomplete="off"
-               [(ngModel)]="Szuksaram" name="szuksaram">
+               [(ngModel)]="projektkapcsolatservice.AjanlatParam.SzuksegesAramerosseg" name="szuksaram">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
       <div class="col-md-2">
         <div class="editform-title">Tájolás</div>
       </div>
       <div class="col-md-2">
-        <input type="text" class="form-control form-control-sm" id="tajolas">
+        <input type="text" class="form-control form-control-sm" id="tajolas"
+               maxlength="20" required autocomplete="off"
+               [(ngModel)]="projektkapcsolatservice.AjanlatParam.Tajolas" name="tajolas">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
       <div class="col-md-2">
         <div class="editform-title">Termelés</div>
       </div>
       <div class="col-md-2">
-        <input type="number" class="form-control form-control-sm" id="termeles">
+        <input type="number" class="form-control form-control-sm" id="termeles"
+               required
+               [(ngModel)]="projektkapcsolatservice.AjanlatParam.Termeles" name="termeles">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
       <div class="col-md-2">
         <div class="editform-title">Megjegyzés</div>
@@ -43,7 +51,7 @@
       <div class="col-md-6">
         <input type="text" class="form-control form-control-sm" id="megjegyzes"
                maxlength="200" autocomplete="off"
-               [(ngModel)]="Megjegyzes" name="megjegyzes">
+               [(ngModel)]="projektkapcsolatservice.AjanlatParam.Megjegyzes" name="megjegyzes">
       </div>
     </div>
 
@@ -52,28 +60,36 @@
         <div class="editform-title"></div>
       </div>
       <div class="col-md-2">
-        <input type="text" class="form-control form-control-sm" id="netto">
+        <input type="text" class="form-control form-control-sm" id="netto" style="text-align:right"
+               readonly="true" [(ngModel)]="projektkapcsolatservice.AjanlatNetto">
       </div>
       <div class="col-md-2">
-        <input type="text" class="form-control form-control-sm" id="afa">
+        <input type="text" class="form-control form-control-sm" id="afa" style="text-align:right"
+               readonly="true" [(ngModel)]="projektkapcsolatservice.AjanlatAfa">
       </div>
       <div class="col-md-2">
-        <input type="text" class="form-control form-control-sm" id="brutto">
+        <input type="text" class="form-control form-control-sm" id="brutto" style="text-align:right"
+               readonly="true" [(ngModel)]="projektkapcsolatservice.AjanlatBrutto">
       </div>
     </div>
 
 
-
-    <ng-container>
+<!--  export enum UjajanlatContainerMode {
+  List = 1,
+  Szerkesztes = 2
+  }-->
+    <ng-container *ngIf="projektkapcsolatservice.AjanlatContainerMode === 1">
       <app-projekt-bizonylatesirat-ujajanlat-list></app-projekt-bizonylatesirat-ujajanlat-list>
     </ng-container>
-    <ng-container>
+    <ng-container *ngIf="projektkapcsolatservice.AjanlatContainerMode === 2">
       <app-projekt-bizonylatesirat-ujajanlat-szerkesztes></app-projekt-bizonylatesirat-ujajanlat-szerkesztes>
     </ng-container>
 
     <div class="row no-gutters" style="margin-bottom: 10px">
-      <button class="btn btn-sm btn-primary" [disabled]="eppFrissit" type="button" (click)="onSubmit()">Ok</button>
-      <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
+      <button class="btn btn-sm btn-primary" [disabled]="eppFrissit || projektkapcsolatservice.AjanlatContainerMode === 2"
+              type="button" (click)="onSubmit()">Ok</button>
+      <button class="btn btn-sm btn-default" [disabled]="eppFrissit || projektkapcsolatservice.AjanlatContainerMode === 2"
+              style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
     </div>
 
   <app-errormodal [cim]="'Új ajánlat'"></app-errormodal>

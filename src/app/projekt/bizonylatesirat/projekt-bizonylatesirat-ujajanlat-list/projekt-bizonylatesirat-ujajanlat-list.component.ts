@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
+import {UjajanlatContainerMode} from "../ujajanlatcontainermode";
+import {UjajanlatSzerkesztesMode} from "../ujajanlatszerkesztesmode";
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-ujajanlat-list',
@@ -14,6 +16,8 @@ export class ProjektBizonylatesiratUjajanlatListComponent {
   }
 
   setClickedRow(i) {
-
+    this.projektkapcsolatservice.AjanlattetelIndex = i;
+    this.projektkapcsolatservice.AjanlatContainerMode = UjajanlatContainerMode.Szerkesztes;
+    this.projektkapcsolatservice.AjanlatSzerkesztesMode = UjajanlatSzerkesztesMode.Blank;
   }
 }

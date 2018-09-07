@@ -12,6 +12,8 @@ import {BizonylatesIratContainerMode} from './bizonylatesiratcontainermode';
 import {BizonylatesiratSzerkesztesMode} from './bizonylatesiratszerkesztesmode';
 import {AjanlatParam} from './ajanlatparam';
 import {AjanlatParamResult} from './ajanlatparamresult';
+import {UjajanlatContainerMode} from "./ujajanlatcontainermode";
+import {UjajanlatSzerkesztesMode} from "./ujajanlatszerkesztesmode";
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +33,13 @@ export class ProjektkapcsolatService {
   ContainerMode = BizonylatesIratContainerMode.List;
   SzerkesztesMode = BizonylatesiratSzerkesztesMode.Blank;
 
+  AjanlatContainerMode = UjajanlatContainerMode.List;
   AjanlatParam: AjanlatParam;
+  AjanlattetelIndex = 0;
+  AjanlatSzerkesztesMode = UjajanlatSzerkesztesMode.Blank;
+  AjanlatNetto = 0;
+  AjanlatAfa = 0;
+  AjanlatBrutto = 0;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

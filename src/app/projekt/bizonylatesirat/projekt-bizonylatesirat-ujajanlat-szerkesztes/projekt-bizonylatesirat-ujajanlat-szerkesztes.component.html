@@ -1,3 +1,73 @@
-<p>
-  projekt-bizonylatesirat-ujajanlat-szerkesztes works!
-</p>
+<div class="alapkeret">
+  <h5>{{projektkapcsolatservice.AjanlatParam.AjanlatBuf[projektkapcsolatservice.AjanlattetelIndex].TetelTipus}}</h5>
+
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+
+<!--    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Irány</div>
+      </div>
+      <div class="col-md-2">
+        <select type="text" class="form-control form-control-sm"
+                [(ngModel)]="projektkapcsolatservice.UjIratDto.IRANY" name="irany">
+          <option>Be</option>
+          <option>Ki</option>
+          <option>Belső</option>
+        </select>
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Keletkezett</div>
+      </div>
+      <div class="col-md-2">
+        <input type="date" class="form-control form-control-sm" id="keletkezett"
+               [(ngModel)]="Keletkezett" name="keletkezett">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Irattipus</div>
+      </div>
+      <div class="col-md-3">
+        <input type="text" class="form-control form-control-sm" id="irattipus"
+               maxlength="30" required autocomplete="off" style="background-color: aquamarine"
+               [(ngModel)]="projektkapcsolatservice.UjIratDto.IRATTIPUS" name="irattipus">
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="IrattipusZoom()">...</button>
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Tárgy</div>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control form-control-sm" id="targy"
+               maxlength="200" required autocomplete="off"
+               [(ngModel)]="projektkapcsolatservice.UjIratDto.TARGY" name="targy">
+      </div>
+    </div>-->
+
+    <div class="row no-gutters" style="margin-bottom: 10px">
+      <div class="col-md-2"></div>
+      <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
+      <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
+    </div>
+  </form>
+
+<!--  export enum UjajanlatSzerkesztesMode {
+  Blank = 0,
+  CikkZoom = 1
+  }-->
+
+  <ng-container *ngIf="projektkapcsolatservice.SzerkesztesMode === 0">
+    <app-blank></app-blank>
+  </ng-container>
+  <ng-container *ngIf="projektkapcsolatservice.SzerkesztesMode === 1">
+    <app-cikk-container></app-cikk-container>
+  </ng-container>
+
+  <app-errormodal [cim]="'Új irat'"></app-errormodal>
+</div>
+

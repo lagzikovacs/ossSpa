@@ -3,6 +3,20 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">{{projektkapcsolatservice.AjanlatParam.AjanlatBuf[projektkapcsolatservice.AjanlattetelIndex].TetelTipus}}</div>
+      </div>
+      <div class="col-md-3">
+        <input type="text" class="form-control form-control-sm" id="cikk"
+               maxlength="30" required autocomplete="off" style="background-color: aquamarine"
+               [(ngModel)]="projektkapcsolatservice.AjanlatParam.AjanlatBuf[projektkapcsolatservice.AjanlattetelIndex].CikkNev" name="cikk">
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="CikkZoom()">...</button>
+      </div>
+    </div>
+
 <!--    <div class="row no-gutters editform-row">
       <div class="col-md-2">
         <div class="editform-title">Irány</div>
@@ -25,19 +39,7 @@
                [(ngModel)]="Keletkezett" name="keletkezett">
       </div>
     </div>
-    <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Irattipus</div>
-      </div>
-      <div class="col-md-3">
-        <input type="text" class="form-control form-control-sm" id="irattipus"
-               maxlength="30" required autocomplete="off" style="background-color: aquamarine"
-               [(ngModel)]="projektkapcsolatservice.UjIratDto.IRATTIPUS" name="irattipus">
-      </div>
-      <div class="col-md-1">
-        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="IrattipusZoom()">...</button>
-      </div>
-    </div>
+
     <div class="row no-gutters editform-row">
       <div class="col-md-2">
         <div class="editform-title">Tárgy</div>
@@ -61,10 +63,10 @@
   CikkZoom = 1
   }-->
 
-  <ng-container *ngIf="projektkapcsolatservice.SzerkesztesMode === 0">
+  <ng-container *ngIf="projektkapcsolatservice.AjanlatSzerkesztesMode === 0">
     <app-blank></app-blank>
   </ng-container>
-  <ng-container *ngIf="projektkapcsolatservice.SzerkesztesMode === 1">
+  <ng-container *ngIf="projektkapcsolatservice.AjanlatSzerkesztesMode === 1">
     <app-cikk-container></app-cikk-container>
   </ng-container>
 

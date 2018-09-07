@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {CikkService} from '../cikk.service';
 import {Szempont} from '../../enums/szempont';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
@@ -6,15 +6,18 @@ import {CikkDto} from '../cikkdto';
 import {SzMT} from '../../dtos/szmt';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
-import {CikkContainerMode} from "../cikkcontainermode";
-import {CikkEgyMode} from "../cikkegymode";
+import {CikkContainerMode} from '../cikkcontainermode';
+import {CikkEgyMode} from '../cikkegymode';
+import {ProjektkapcsolatService} from '../../projekt/bizonylatesirat/projektkapcsolat.service';
+import {ZoomSources} from '../../enums/zoomsources';
+import {UjajanlatSzerkesztesMode} from "../../projekt/bizonylatesirat/ujajanlatszerkesztesmode";
 
 @Component({
   selector: 'app-cikk-list',
   templateUrl: './cikk-list.component.html',
   styleUrls: ['./cikk-list.component.css']
 })
-export class CikkListComponent {
+export class CikkListComponent implements OnInit {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Megnevezés', 'Id'];
@@ -27,9 +30,16 @@ export class CikkListComponent {
   cikkservice: CikkService;
 
   constructor(private _logonservice: LogonService,
+              private _projektkapcsolatservice: ProjektkapcsolatService,
               cikkservice: CikkService  ) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.CIKKMOD]);
     this.cikkservice = cikkservice;
+  }
+
+  ngOnInit() {
+    if (this.cikkservice.zoom) {
+      this.onKereses();
+    }
   }
 
   onKereses() {
@@ -75,11 +85,23 @@ export class CikkListComponent {
   }
 
   selectforzoom(i: number) {
+    if (this.cikkservice.zoomsource === ZoomSources.Ajanlat) {
+      this._projektkapcsolatservice.AjanlatParam.AjanlatBuf[this._projektkapcsolatservice.AjanlattetelIndex].CikkKod =
+        this.cikkservice.Dto[i].CIKKKOD;
+      this._projektkapcsolatservice.AjanlatParam.AjanlatBuf[this._projektkapcsolatservice.AjanlattetelIndex].CikkNev =
+        this.cikkservice.Dto[i].MEGNEVEZES;
+      this._projektkapcsolatservice.AjanlatParam.AjanlatBuf[this._projektkapcsolatservice.AjanlattetelIndex].AfaMerteke =
+        this.cikkservice.Dto[i].AFAMERTEKE;
+      this._projektkapcsolatservice.AjanlatParam.AjanlatBuf[this._projektkapcsolatservice.AjanlattetelIndex].EgysegAr =
+        this.cikkservice.Dto[i].EGYSEGAR;
+
+      this.stopzoom();
+    }
   }
   stopzoom() {
     this.cikkservice.zoom = false;
 
-    // TODO
+    this._projektkapcsolatservice.AjanlatSzerkesztesMode = UjajanlatSzerkesztesMode.Blank;
   }
 
   setClickedRow(i: number) {

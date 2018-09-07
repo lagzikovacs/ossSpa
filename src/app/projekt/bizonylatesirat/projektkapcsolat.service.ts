@@ -12,8 +12,8 @@ import {BizonylatesIratContainerMode} from './bizonylatesiratcontainermode';
 import {BizonylatesiratSzerkesztesMode} from './bizonylatesiratszerkesztesmode';
 import {AjanlatParam} from './ajanlatparam';
 import {AjanlatParamResult} from './ajanlatparamresult';
-import {UjajanlatContainerMode} from "./ujajanlatcontainermode";
-import {UjajanlatSzerkesztesMode} from "./ujajanlatszerkesztesmode";
+import {UjajanlatContainerMode} from './ujajanlatcontainermode';
+import {UjajanlatSzerkesztesMode} from './ujajanlatszerkesztesmode';
 
 @Injectable({
   providedIn: 'root'

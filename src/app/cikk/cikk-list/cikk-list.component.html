@@ -10,6 +10,7 @@
   <table class="table table-bordered table-sm table-responsive" style="border: none">
     <thead>
     <tr>
+      <th></th>
       <th>Id</th>
       <th>Megnevezés</th>
       <th>Me</th>
@@ -25,6 +26,7 @@
     <tbody>
     <ng-container *ngFor="let item of cikkservice.Dto; let i = index">
       <tr>
+        <td *ngIf="cikkservice.zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="selectforzoom(i)"><i class="fa fa-check" aria-hidden="true"></i></td>
         <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.CIKKKOD}}</td>
         <td>{{item.MEGNEVEZES}}</td>
         <td>{{item.ME}}</td>

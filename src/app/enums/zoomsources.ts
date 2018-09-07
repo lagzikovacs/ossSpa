@@ -6,5 +6,6 @@ export enum ZoomSources {
   Szamlazasirend,
   Projektteendo,
   Projektirat,
-  Projekt
+  Projekt,
+  Ajanlat
 }

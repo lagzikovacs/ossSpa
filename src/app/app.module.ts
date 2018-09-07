@@ -151,7 +151,7 @@ import { CikkReszletekComponent } from './cikk/cikk-reszletek/cikk-reszletek.com
 import { UgyfelReszletekComponent } from './ugyfel/ugyfel-reszletek/ugyfel-reszletek.component';
 import { PenztartetelSzerkesztesComponent } from './penztar/penztartetel/penztartetel-szerkesztes/penztartetel-szerkesztes.component';
 import { FeliratkozasReszletekComponent } from './feliratkozas/feliratkozas-reszletek/feliratkozas-reszletek.component';
-import { NavexportellenorzesComponent } from './bizonylat/navexportellenorzes/navexportellenorzes.component';
+import { NavexportellenorzesComponent } from './navexportellenorzes/navexportellenorzes.component';
 import { IratReszletekComponent } from './irat/irat/irat-reszletek/irat-reszletek.component';
 import { DokumentumReszletekComponent } from './irat/dokumentum/dokumentum-reszletek/dokumentum-reszletek.component';
 import { VolumeReszletekComponent } from './volume/volume-reszletek/volume-reszletek.component';
@@ -211,344 +211,34 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { IratNincsprojektComponent } from './irat/irat/irat-nincsprojekt/irat-nincsprojekt.component';
 import { ProjektBizonylatesiratUjajanlatListComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-ujajanlat-list/projekt-bizonylatesirat-ujajanlat-list.component';
 import { ProjektBizonylatesiratUjajanlatSzerkesztesComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-ujajanlat-szerkesztes/projekt-bizonylatesirat-ujajanlat-szerkesztes.component';
+import { BizonylatContainerComponent } from './bizonylat/bizonylat-container/bizonylat-container.component';
+import { BizonylatListComponent } from './bizonylat/bizonylat-list/bizonylat-list.component';
+import { BizonylatEgyComponent } from './bizonylat/bizonylat-egy/bizonylat-egy.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
 
-  // {path: 'irattipus-list', component: IrattipusListComponent, canActivate: [RoleGuard]},
-  // {path: 'irattipusuj', component: IrattipusSzerkesztesComponent, canActivate: [RoleGuard]},
-  // {path: 'irattipus-egy', component: IrattipusEgyComponent, canActivate: [RoleGuard], children: [
-  //   {path: 'reszletek', component: IrattipusReszletekComponent},
-  //   {path: 'torles', component: IrattipusTorlesComponent},
-  //   {path: 'szerkesztes', component: IrattipusSzerkesztesComponent},
-  //   {path: 'blank', component: BlankComponent}
-  // ]},
   {path: 'irattipus', component: IrattipusContainerComponent, canActivate: [RoleGuard]},
   {path: 'teendo', component: TeendoContainerComponent, canActivate: [RoleGuard]},
-
-  // {path: 'fizetesimod-list', component: FizetesimodListComponent, canActivate: [RoleGuard]},
-  // {path: 'fizetesimoduj', component: FizetesimodSzerkesztesComponent, canActivate: [RoleGuard]},
-  // {path: 'fizetesimod-egy', component: FizetesimodEgyComponent, canActivate: [RoleGuard], children: [
-  //   {path: 'reszletek', component: FizetesimodReszletekComponent},
-  //   {path: 'torles', component: FizetesimodTorlesComponent},
-  //   {path: 'szerkesztes', component: FizetesimodSzerkesztesComponent},
-  //   {path: 'blank', component: BlankComponent}
-  // ]},
   {path: 'fizetesimod', component: FizetesimodContainerComponent, canActivate: [RoleGuard]},
-
-  // {path: 'penznem-list', component: PenznemListComponent, canActivate: [RoleGuard]},
-  // {path: 'penznemuj', component: PenznemSzerkesztesComponent, canActivate: [RoleGuard]},
-  // {path: 'penznem-egy', component: PenznemEgyComponent, canActivate: [RoleGuard], children: [
-  //   {path: 'reszletek', component: PenznemReszletekComponent},
-  //   {path: 'torles', component: PenznemTorlesComponent},
-  //   {path: 'szerkesztes', component: PenznemSzerkesztesComponent},
-  //   {path: 'blank', component: BlankComponent}
-  // ]},
   {path: 'penznem', component: PenznemContainerComponent, canActivate: [RoleGuard]},
-
-  // {path: 'cikk', component: CikkListComponent, canActivate: [RoleGuard]},
-  // {path: 'cikkuj', component: CikkSzerkesztesComponent, canActivate: [RoleGuard], children: [
-  //   {path: 'me', component: MeListComponent, canActivate: [RoleGuard]},
-  //   {path: 'meuj', component: MeSzerkesztesComponent, canActivate: [RoleGuard]},
-  //   {path: 'me-list-egy', component: MeEgyComponent, canActivate: [RoleGuard], children: [
-  //     {path: 'torles', component: MeTorlesComponent},
-  //     {path: 'szerkesztes', component: MeSzerkesztesComponent},
-  //     {path: 'blank', component: BlankComponent}
-  //   ]},
-  //   {path: 'afakulcs', component: AfakulcsListComponent, canActivate: [RoleGuard]},
-  //   {path: 'afakulcsuj', component: AfakulcsSzerkesztesComponent, canActivate: [RoleGuard]},
-  //   {path: 'afakulcs-list-egy', component: AfakulcsEgyComponent, canActivate: [RoleGuard], children: [
-  //     {path: 'reszletek', component: AfakulcsReszletekComponent},
-  //     {path: 'torles', component: AfakulcsTorlesComponent},
-  //     {path: 'szerkesztes', component: AfakulcsSzerkesztesComponent},
-  //     {path: 'blank', component: BlankComponent}
-  //   ]},
-  //   {path: 'termekdij-list', component: TermekdijListComponent, canActivate: [RoleGuard]},
-  //   {path: 'termekdijuj', component: TermekdijSzerkesztesComponent, canActivate: [RoleGuard]},
-  //   {path: 'termekdij-list-egy', component: TermekdijEgyComponent, canActivate: [RoleGuard], children: [
-  //     {path: 'reszletek', component: TermekdijReszletekComponent},
-  //     {path: 'torles', component: TermekdijTorlesComponent},
-  //     {path: 'szerkesztes', component: TermekdijSzerkesztesComponent},
-  //     {path: 'blank', component: BlankComponent}
-  //   ]},
-  //   {path: 'blank', component: BlankComponent}
-  // ]},
-  // {path: 'cikk-list-egy', component: CikkEgyComponent, canActivate: [RoleGuard], children: [
-  //   {path: 'reszletek', component: CikkReszletekComponent},
-  //   {path: 'torles', component: CikkTorlesComponent},
-  //   {path: 'szerkesztes', component: CikkSzerkesztesComponent, children: [
-  //     {path: 'me', component: MeListComponent, canActivate: [RoleGuard]},
-  //     {path: 'meuj', component: MeSzerkesztesComponent, canActivate: [RoleGuard]},
-  //     {path: 'me-list-egy', component: MeEgyComponent, canActivate: [RoleGuard], children: [
-  //       {path: 'reszletek', component: MeReszletekComponent},
-  //       {path: 'torles', component: MeTorlesComponent},
-  //       {path: 'szerkesztes', component: MeSzerkesztesComponent},
-  //       {path: 'blank', component: BlankComponent}
-  //     ]},
-  //     {path: 'afakulcs', component: AfakulcsListComponent, canActivate: [RoleGuard]},
-  //     {path: 'afakulcsuj', component: AfakulcsSzerkesztesComponent, canActivate: [RoleGuard]},
-  //     {path: 'afakulcs-list-egy', component: AfakulcsEgyComponent, canActivate: [RoleGuard], children: [
-  //       {path: 'reszletek', component: AfakulcsReszletekComponent},
-  //       {path: 'torles', component: AfakulcsTorlesComponent},
-  //       {path: 'szerkesztes', component: AfakulcsSzerkesztesComponent},
-  //       {path: 'blank', component: BlankComponent}
-  //     ]},
-  //     {path: 'termekdij-list', component: TermekdijListComponent, canActivate: [RoleGuard]},
-  //     {path: 'termekdijuj', component: TermekdijSzerkesztesComponent, canActivate: [RoleGuard]},
-  //     {path: 'termekdij-list-egy', component: TermekdijEgyComponent, canActivate: [RoleGuard], children: [
-  //       {path: 'reszletek', component: TermekdijReszletekComponent},
-  //       {path: 'torles', component: TermekdijTorlesComponent},
-  //       {path: 'szerkesztes', component: TermekdijSzerkesztesComponent},
-  //       {path: 'blank', component: BlankComponent}
-  //     ]},
-  //     {path: 'blank', component: BlankComponent}
-  //   ]},
-  //   {path: 'beszerzeskivet', component: CikkBeszerzesKivetComponent},
-  //   {path: 'blank', component: BlankComponent}
-  // ]},
-  {path: 'cikk', component: CikkContainerComponent, canActivate: [RoleGuard]},
-
-  // {path: 'me', component: MeListComponent, canActivate: [RoleGuard]},
-  // {path: 'meuj', component: MeSzerkesztesComponent, canActivate: [RoleGuard]},
-  // {path: 'me-list-egy', component: MeEgyComponent, canActivate: [RoleGuard], children: [
-  //   {path: 'reszletek', component: MeReszletekComponent},
-  //   {path: 'torles', component: MeTorlesComponent},
-  //   {path: 'szerkesztes', component: MeSzerkesztesComponent},
-  //   {path: 'blank', component: BlankComponent}
-  // ]},
   {path: 'me', component: MeContainerComponent, canActivate: [RoleGuard]},
-
-  // {path: 'afakulcs', component: AfakulcsListComponent, canActivate: [RoleGuard]},
-  // {path: 'afakulcsuj', component: AfakulcsSzerkesztesComponent, canActivate: [RoleGuard]},
-  // {path: 'afakulcs-list-egy', component: AfakulcsEgyComponent, canActivate: [RoleGuard], children: [
-  //   {path: 'reszletek', component: AfakulcsReszletekComponent},
-  //   {path: 'torles', component: AfakulcsTorlesComponent},
-  //   {path: 'szerkesztes', component: AfakulcsSzerkesztesComponent},
-  //   {path: 'blank', component: BlankComponent}
-  // ]},
   {path: 'afakulcs', component: AfakulcsContainerComponent, canActivate: [RoleGuard]},
-
-  // {path: 'termekdij', component: TermekdijListComponent, canActivate: [RoleGuard]},
-  // {path: 'termekdijuj', component: TermekdijSzerkesztesComponent, canActivate: [RoleGuard]},
-  // {path: 'termekdij-list-egy', component: TermekdijEgyComponent, canActivate: [RoleGuard], children: [
-  //   {path: 'reszletek', component: TermekdijReszletekComponent},
-  //   {path: 'torles', component: TermekdijTorlesComponent},
-  //   {path: 'szerkesztes', component: TermekdijSzerkesztesComponent},
-  //   {path: 'blank', component: BlankComponent}
-  // ]},
   {path: 'termekdij', component: TermekdijContainerComponent, canActivate: [RoleGuard]},
-
-
-  // {path: 'helyseg', component: HelysegComponent, canActivate: [RoleGuard]},
-  // {path: 'helyseguj', component: HelysegSzerkesztesComponent, canActivate: [RoleGuard]},
-  // {path: 'helysegegy', component: HelysegegyComponent, canActivate: [RoleGuard], children: [
-  //   {path: 'reszletek', component: HelysegReszletekComponent},
-  //   {path: 'torles', component: HelysegTorlesComponent},
-  //   {path: 'szerkesztes', component: HelysegSzerkesztesComponent},
-  //   {path: 'blank', component: BlankComponent}
-  // ]},
+  {path: 'cikk', component: CikkContainerComponent, canActivate: [RoleGuard]},
   {path: 'helyseg', component: HelysegContainerComponent, canActivate: [RoleGuard]},
-
-  // {path: 'ugyfel-list', component: UgyfelComponent, canActivate: [RoleGuard]},
-  // {path: 'ugyfeluj', component: UgyfelSzerkesztesComponent, canActivate: [RoleGuard], children: [
-  //
-  // ]},
-  // {path: 'ugyfel-list-egy', component: UgyfelegyComponent, canActivate: [RoleGuard], children: [
-  //   {path: 'reszletek', component: UgyfelReszletekComponent},
-  //   {path: 'torles', component: UgyfelTorlesComponent},
-  //   {path: 'szerkesztes', component: UgyfelSzerkesztesComponent, children: [
-  //
-  //   ]},
-  //   {path: 'blank', component: BlankComponent}
-  // ]},
   {path: 'ugyfel', component: UgyfelContainerComponent, canActivate: [RoleGuard]},
 
-//   {path: 'projekt', component: ProjektListComponent, canActivate: [RoleGuard]},
-//   {path: 'projektuj', component: ProjektSzerkesztesComponent},
-//   {path: 'projekt-egy', component: ProjektEgyComponent, canActivate: [RoleGuard], children: [
-//     {path: 'reszletek', component: ProjektReszletekComponent},
-//     {path: 'torles', component: ProjektTorlesComponent},
-//     {path: 'szerkesztes', component: ProjektSzerkesztesComponent},
-//     {path: 'stsz', component: ProjektStatuszComponent},
-//     {path: 'muszakiallapot', component: ProjektMuszakiallapotComponent},
-//     {path: 'inverter', component: ProjektInverterComponent},
-//     {path: 'napelem', component: ProjektNapelemComponent},
-//     {path: 'iratminta', component: ProjektIratmintaComponent},
-//     {path: 'bizonylatesirat', component: ProjektBizonylatesiratListComponent},
-//     {path: 'bizonylatesiratujbizonylat', component: ProjektBizonylatesiratUjbizonylatComponent},
-//     {path: 'bizonylatesiratujirat', component: ProjektBizonylatesiratUjiratComponent, children: [
-//       {path: 'irattipus-list', component: IrattipusListComponent, canActivate: [RoleGuard]},
-//       {path: 'irattipusuj', component: IrattipusSzerkesztesComponent, canActivate: [RoleGuard]},
-//       {path: 'irattipus-egy', component: IrattipusEgyComponent, canActivate: [RoleGuard], children: [
-//         {path: 'reszletek', component: IrattipusReszletekComponent},
-//         {path: 'torles', component: IrattipusTorlesComponent},
-//         {path: 'szerkesztes', component: IrattipusSzerkesztesComponent},
-//         {path: 'blank', component: BlankComponent}
-//       ]},
-//       {path: 'blank', component: BlankComponent}
-//     ]},
-//     {path: 'bizonylatesiratujajanlat', component: ProjektBizonylatesiratUjajanlatComponent},
-//     ///////////////////////////////
-//     {path: 'szamlazasirend', component: ProjektSzamlazasirendListComponent},
-//     {path: 'szamlazasirenduj', component: ProjektSzamlazasirendSzerkesztesComponent, children: [
-//       {path: 'penznem', component: PenznemListComponent, canActivate: [RoleGuard]},
-//       {path: 'penznemuj', component: PenznemSzerkesztesComponent, canActivate: [RoleGuard]},
-//       {path: 'penznem-egy', component: PenznemEgyComponent, canActivate: [RoleGuard], children: [
-//         {path: 'reszletek', component: PenznemReszletekComponent},
-//         {path: 'torles', component: PenznemTorlesComponent},
-//         {path: 'szerkesztes', component: PenznemSzerkesztesComponent},
-//         {path: 'blank', component: BlankComponent}
-//       ]},
-//       {path: 'blank', component: BlankComponent},
-//     ]},
-//     {path: 'szamlazasirendegy', component: ProjektSzamlazasirendEgyComponent, children: [
-//       {path: 'reszletek', component: ProjektSzamlazasirendReszletekComponent},
-//       {path: 'torles', component: ProjektSzamlazasirendTorlesComponent},
-//       {path: 'szerkesztes', component: ProjektSzamlazasirendSzerkesztesComponent, children: [
-//         {path: 'penznem', component: PenznemListComponent, canActivate: [RoleGuard]},
-//         {path: 'penznemuj', component: PenznemSzerkesztesComponent, canActivate: [RoleGuard]},
-//         {path: 'penznem-egy', component: PenznemEgyComponent, canActivate: [RoleGuard], children: [
-//           {path: 'reszletek', component: PenznemReszletekComponent},
-//           {path: 'torles', component: PenznemTorlesComponent},
-//           {path: 'szerkesztes', component: PenznemSzerkesztesComponent},
-//           {path: 'blank', component: BlankComponent}
-//         ]},
-//         {path: 'blank', component: BlankComponent},
-//       ]},
-//       {path: 'blank', component: BlankComponent}
-//     ]},
-//     {path: 'projektteendo', component: ProjektTeendoListComponent},
-//     {path: 'projektteendouj', component: ProjektTeendoSzerkesztesComponent, children: [
-// //itt
-//       {path: 'felhasznalo', component: FelhasznaloListComponent, canActivate: [RoleGuard]},
-//       {path: 'felhasznalouj', component: FelhasznaloSzerkesztesComponent, canActivate: [RoleGuard]},
-//       {path: 'felhasznaloegy', component: FelhasznaloEgyComponent, canActivate: [RoleGuard], children: [
-//         {path: 'reszletek', component: FelhasznaloReszletekComponent},
-//         {path: 'torles', component: FelhasznaloTorlesComponent},
-//         {path: 'szerkesztes', component: FelhasznaloSzerkesztesComponent},
-//         {path: 'jelszo', component: FelhasznaloJelszoComponent},
-//         {path: 'tevekenyseg', component: FelhasznaloTevekenysegComponent},
-//         {path: 'blank', component: BlankComponent}
-//       ]},
-//       {path: 'teendo', component: TeendoListComponent, canActivate: [RoleGuard]},
-//       {path: 'teendouj', component: TeendoSzerkesztesComponent, canActivate: [RoleGuard]},
-//       {path: 'teendo-egy', component: TeendoEgyComponent, canActivate: [RoleGuard], children: [
-//         {path: 'reszletek', component: TeendoReszletekComponent},
-//         {path: 'torles', component: TeendoTorlesComponent},
-//         {path: 'szerkesztes', component: TeendoSzerkesztesComponent},
-//         {path: 'blank', component: BlankComponent}
-//       ]},
-//       {path: 'blank', component: BlankComponent}
-// //itt
-//     ]},
-//     {path: 'blank', component: BlankComponent},
-//     {path: 'projektteendoegy', component: ProjektTeendoEgyComponent, children: [
-//       {path: 'reszletek', component: ProjektTeendoReszletekComponent},
-//       {path: 'torles', component: ProjektTeendoTorlesComponent},
-//       {path: 'szerkesztes', component: ProjektTeendoSzerkesztesComponent, children: [
-// //itt
-//         {path: 'felhasznalo', component: FelhasznaloListComponent, canActivate: [RoleGuard]},
-//         {path: 'felhasznalouj', component: FelhasznaloSzerkesztesComponent, canActivate: [RoleGuard]},
-//         {path: 'felhasznaloegy', component: FelhasznaloEgyComponent, canActivate: [RoleGuard], children: [
-//           {path: 'reszletek', component: FelhasznaloReszletekComponent},
-//           {path: 'torles', component: FelhasznaloTorlesComponent},
-//           {path: 'szerkesztes', component: FelhasznaloSzerkesztesComponent},
-//           {path: 'jelszo', component: FelhasznaloJelszoComponent},
-//           {path: 'tevekenyseg', component: FelhasznaloTevekenysegComponent},
-//           {path: 'blank', component: BlankComponent}
-//         ]},
-//         {path: 'teendo', component: TeendoListComponent, canActivate: [RoleGuard]},
-//         {path: 'teendouj', component: TeendoSzerkesztesComponent, canActivate: [RoleGuard]},
-//         {path: 'teendo-egy', component: TeendoEgyComponent, canActivate: [RoleGuard], children: [
-//           {path: 'reszletek', component: TeendoReszletekComponent},
-//           {path: 'torles', component: TeendoTorlesComponent},
-//           {path: 'szerkesztes', component: TeendoSzerkesztesComponent},
-//           {path: 'blank', component: BlankComponent}
-//         ]},
-//         {path: 'blank', component: BlankComponent}
-// //itt
-//       ]},
-//       {path: 'elvegezve', component: ProjektTeendoElvegezveComponent},
-//       {path: 'blank', component: BlankComponent}
-//     ]},
-//     {path: 'blank', component: BlankComponent}
-//   ]},
   {path: 'projekt', component: ProjektContainerComponent, canActivate: [RoleGuard]},
-
-  // {path: 'irat-list', component: IratListComponent, canActivate: [RoleGuard]},
-  // {path: 'iratuj', component: IratSzerkesztesComponent, canActivate: [RoleGuard], children: [
-  //   {path: 'irattipus-list', component: IrattipusListComponent, canActivate: [RoleGuard]},
-  //   {path: 'irattipusuj', component: IrattipusSzerkesztesComponent, canActivate: [RoleGuard]},
-  //   {path: 'irattipus-egy', component: IrattipusEgyComponent, canActivate: [RoleGuard], children: [
-  //     {path: 'reszletek', component: IrattipusReszletekComponent},
-  //     {path: 'torles', component: IrattipusTorlesComponent},
-  //     {path: 'szerkesztes', component: IrattipusSzerkesztesComponent},
-  //     {path: 'blank', component: BlankComponent}
-  //   ]},
-  // ]},
-  // {path: 'irat-egy', component: IratEgyComponent, canActivate: [RoleGuard], children: [
-  //   {path: 'reszletek', component: IratReszletekComponent},
-  //   {path: 'torles', component: IratTorlesComponent},
-  //   {path: 'szerkesztes', component: IratSzerkesztesComponent, children: [
-  //     {path: 'irattipus-list', component: IrattipusListComponent},
-  //     {path: 'irattipusuj', component: IrattipusSzerkesztesComponent, canActivate: [RoleGuard]},
-  //     {path: 'irattipus-egy', component: IrattipusEgyComponent, canActivate: [RoleGuard], children: [
-  //       {path: 'reszletek', component: IrattipusReszletekComponent},
-  //       {path: 'torles', component: IrattipusTorlesComponent},
-  //       {path: 'szerkesztes', component: IrattipusSzerkesztesComponent},
-  //       {path: 'blank', component: BlankComponent}
-  //     ]},
-  //   ]},
-  //   {path: 'dokumentum', component: DokumentumListComponent},
-  //   {path: 'dokumentumfeltoltes', component: DokumentumFeltoltesComponent},
-  //   {path: 'blank', component: BlankComponent},
-  //   {path: 'dokumentumegy', component: DokumentumEgyComponent, children: [
-  //     {path: 'torles', component: DokumentumTorlesComponent},
-  //     {path: 'letoltes', component: DokumentumLetoltesComponent},
-  //     {path: 'blank', component: BlankComponent}
-  //   ]},
-  // ]},
   {path: 'irat', component: IratContainerComponent, canActivate: [RoleGuard]},
-
-  // {path: 'penztar-list', component: PenztarListComponent, canActivate: [RoleGuard]},
-  // {path: 'penztaruj', component: PenztarSzerkesztesComponent, canActivate: [RoleGuard], children: [
-  //   {path: 'penznem', component: PenznemListComponent, canActivate: [RoleGuard]},
-  //   {path: 'penznemuj', component: PenznemSzerkesztesComponent, canActivate: [RoleGuard]},
-  //   {path: 'penznem-egy', component: PenznemEgyComponent, canActivate: [RoleGuard], children: [
-  //     {path: 'reszletek', component: PenznemReszletekComponent},
-  //     {path: 'torles', component: PenznemTorlesComponent},
-  //     {path: 'szerkesztes', component: PenznemSzerkesztesComponent},
-  //     {path: 'blank', component: BlankComponent}
-  //   ]},
-  //   {path: 'blank', component: BlankComponent},
-  // ]},
-  // {path: 'penztar-egy', component: PenztarEgyComponent, canActivate: [RoleGuard], children: [
-  //   {path: 'reszletek', component: PenztarReszletekComponent},
-  //   {path: 'torles', component: PenztarTorlesComponent},
-  //   {path: 'szerkesztes', component: PenztarSzerkesztesComponent, children: [
-  //     {path: 'penznem', component: PenznemListComponent, canActivate: [RoleGuard]},
-  //     {path: 'penznemuj', component: PenznemSzerkesztesComponent, canActivate: [RoleGuard]},
-  //     {path: 'penznem-egy', component: PenznemEgyComponent, canActivate: [RoleGuard], children: [
-  //       {path: 'reszletek', component: PenznemReszletekComponent},
-  //       {path: 'torles', component: PenznemTorlesComponent},
-  //       {path: 'szerkesztes', component: PenznemSzerkesztesComponent},
-  //       {path: 'blank', component: BlankComponent}
-  //     ]},
-  //     {path: 'blank', component: BlankComponent},
-  //   ]},
-  //   {path: 'tetelek', component: PenztartetelListComponent},
-  //   {path: 'export', component: PenztarExportComponent},
-  //   {path: 'tetelszerkesztes', component: PenztartetelSzerkesztesComponent},
-  //   {path: 'blank', component: BlankComponent}
-  // ]},
   {path: 'penztar', component: PenztarContainerComponent, canActivate: [RoleGuard]},
-
-  // {path: 'feliratkozas-list', component: FeliratkozasListComponent, canActivate: [RoleGuard]},
-  // {path: 'feliratkozas-egy', component: FeliratkozasEgyComponent, canActivate: [RoleGuard], children: [
-  //   {path: 'reszletek', component: FeliratkozasReszletekComponent},
-  //   {path: 'projekt-list', component: FeliratkozasProjektComponent}
-  // ]},
   {path: 'feliratkozas', component: FeliratkozasContainerComponent, canActivate: [RoleGuard]},
+
+  {path: 'bizonylat', children: [
+    {path: 'dijbekero', component: BizonylatContainerComponent, canActivate: [RoleGuard]},
+    {path: 'elolegszamla', component: BizonylatContainerComponent, canActivate: [RoleGuard]},
+  ]},
+  {path: 'navexportellenorzese', component: NavexportellenorzesComponent, canActivate: [RoleGuard]},
 
   {path: 'riport', component: RiportComponent, canActivate: [RoleGuard], children: [
     {path: 'kimenoszamla', component: KimenoszamlaComponent},
@@ -560,55 +250,13 @@ const routes: Routes = [
     {path: 'ngm', component: NgmComponent}
   ]},
 
-  {path: 'navexportellenorzese', component: NavexportellenorzesComponent, canActivate: [RoleGuard]},
-
+  {path: 'particio', component: ParticioEgyComponent, canActivate: [RoleGuard]},
+  {path: 'volume', component: VolumeContainerComponent, canActivate: [RoleGuard]},
+  {path: 'felhasznalo', component: FelhasznaloContainerComponent, canActivate: [RoleGuard]},
+  {path: 'csoport', component: CsoportContainerComponent, canActivate: [RoleGuard]},
   {path: 'bejelentkezes', component: BejelentkezesComponent},
   {path: 'szerepkorvalasztas', component: SzerepkorvalasztasComponent, canActivate: [LoginGuard]},
   {path: 'jelszocsere', component: JelszocsereComponent, canActivate: [LoginGuard]},
-
-  // {path: 'particio', component: ParticioComponent, canActivate: [RoleGuard], children: [
-  //   {path: 'szallito', component: ParticioSzallitoComponent},
-  //   {path: 'nav', component: ParticioNavComponent},
-  //   {path: 'smtp', component: ParticioSmtpComponent},
-  //   {path: 'bizonylat', component: ParticioBizonylatComponent},
-  //   {path: 'projekt-list', component: ParticioProjektComponent},
-  //   {path: 'volume', component: ParticioVolumeComponent},
-  //   {path: 'blank', component: BlankComponent}
-  // ]},
-
-  // {path: 'volume', component: VolumeComponent, canActivate: [RoleGuard]},
-  // {path: 'volumeegy', component: VolumeegyComponent, canActivate: [RoleGuard], children: [
-  //   {path: 'reszletek', component: VolumeReszletekComponent},
-  //   {path: 'teszt', component: VolumeTesztComponent},
-  //   {path: 'blank', component: BlankComponent}
-  // ]},
-
-  {path: 'particio', component: ParticioEgyComponent, canActivate: [RoleGuard]},
-  {path: 'volume', component: VolumeContainerComponent, canActivate: [RoleGuard]},
-
-  // {path: 'felhasznalo-list', component: FelhasznaloListComponent, canActivate: [RoleGuard]},
-  // {path: 'felhasznalouj', component: FelhasznaloSzerkesztesComponent, canActivate: [RoleGuard]},
-  // {path: 'felhasznaloegy', component: FelhasznaloEgyComponent, canActivate: [RoleGuard], children: [
-  //   {path: 'reszletek', component: FelhasznaloReszletekComponent},
-  //   {path: 'torles', component: FelhasznaloTorlesComponent},
-  //   {path: 'szerkesztes', component: FelhasznaloSzerkesztesComponent},
-  //   {path: 'jelszo', component: FelhasznaloJelszoComponent},
-  //   {path: 'tevekenyseg', component: FelhasznaloTevekenysegComponent},
-  //   {path: 'blank', component: BlankComponent}
-  // ]},
-  {path: 'felhasznalo', component: FelhasznaloContainerComponent, canActivate: [RoleGuard]},
-
-  // {path: 'csoport-list', component: CsoportListComponent, canActivate: [RoleGuard]},
-  // {path: 'csoportuj', component: CsoportSzerkesztesComponent, canActivate: [RoleGuard]},
-  // {path: 'csoport-egy', component: CsoportEgyComponent, canActivate: [RoleGuard], children: [
-  //   {path: 'reszletek', component: CsoportReszletekComponent},
-  //   {path: 'torles', component: CsoportTorlesComponent},
-  //   {path: 'szerkesztes', component: CsoportSzerkesztesComponent},
-  //   {path: 'felhasznalo', component: CsoportFelhasznaloComponent},
-  //   {path: 'jog', component: CsoportJogComponent},
-  //   {path: 'blank', component: BlankComponent}
-  // ]},
-  {path: 'csoport', component: CsoportContainerComponent, canActivate: [RoleGuard]},
 
   {path: '', redirectTo: 'bejelentkezes', pathMatch: 'full'},
   {path: '**', redirectTo: 'fooldal'}
@@ -799,6 +447,9 @@ if (environment.production) {
     IratNincsprojektComponent,
     ProjektBizonylatesiratUjajanlatListComponent,
     ProjektBizonylatesiratUjajanlatSzerkesztesComponent,
+    BizonylatContainerComponent,
+    BizonylatListComponent,
+    BizonylatEgyComponent,
   ],
   imports: [
     BrowserModule,

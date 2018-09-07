@@ -1,11 +1,11 @@
 import {Component, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {Szempont} from '../../enums/szempont';
+import {ErrormodalComponent} from '../errormodal/errormodal.component';
+import {Szempont} from '../enums/szempont';
 import {ActivatedRoute, Router} from '@angular/router';
-import {LogonService} from '../../logon/logon.service';
+import {LogonService} from '../logon/logon.service';
 import {NavexportellenorzesService} from './navexportellenorzes.service';
-import {JogKod} from '../../enums/jogkod';
-import {SzMT} from '../../dtos/szmt';
+import {JogKod} from '../enums/jogkod';
+import {SzMT} from '../dtos/szmt';
 import {NavfeltoltesDto} from './navfeltoltesdto';
 
 @Component({

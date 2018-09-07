@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {LogonService} from '../../logon/logon.service';
+import {LogonService} from '../logon/logon.service';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {NavfeltoltesDto} from './navfeltoltesdto';
-import {ZoomSources} from '../../enums/zoomsources';
-import {environment} from '../../../environments/environment';
+import {ZoomSources} from '../enums/zoomsources';
+import {environment} from '../../environments/environment';
 import {NavfeltoltesParameter} from './navfeltoltesparameter';
 import {NavfeltoltesResult} from './navfeltoltesresult';
 

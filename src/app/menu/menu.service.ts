@@ -68,6 +68,7 @@ import {PlatformLocation} from '@angular/common';
 import {DokumentumService} from '../irat/dokumentum/dokumentum.service';
 import {DokumentumContainerMode} from '../irat/dokumentum/dokumentumcontainermode';
 import {DokumentumDto} from '../irat/dokumentum/dokumentumdto';
+import {BizonylatService} from "../bizonylat/bizonylat.service";
 
 @Injectable({
   providedIn: 'root'
@@ -97,6 +98,7 @@ export class MenuService {
               private _dokumentumservice: DokumentumService,
               private _penztarservice: PenztarService,
               private _feliratkozasservice: FeliratkozasService,
+              private _bizonylatservice: BizonylatService,
               private _particioservice: ParticioService,
               private _volumeservice: VolumeService,
               private _felhasznaloservice: FelhasznaloService,
@@ -203,6 +205,10 @@ export class MenuService {
         this._feliratkozasservice.ContainerMode = FeliratkozasContainerMode.List;
         this._feliratkozasservice.Dto = new Array<FeliratkozasDto>();
       break;
+
+      case '/bizonylat/dijbekero':
+        console.log('/bizonylat/dijbekero');
+        break;
 
       case '/particio':
         this._particioservice.EgyMode = ParticioEgyMode.Szallito;

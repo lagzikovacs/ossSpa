@@ -3,12 +3,17 @@ import {LogonService} from '../logon/logon.service';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {BizonylatComplexResult} from './bizonylatcomplexresult';
+import {BizonylatTipus} from './bizonylattipus';
+import {BizonylatDto} from "./bizonylatdto";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BizonylatService {
   private readonly _controller = 'api/bizonylat/';
+
+  bizonylatTipus = BizonylatTipus.Szamla;
+  Dto = new Array<BizonylatDto>();
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

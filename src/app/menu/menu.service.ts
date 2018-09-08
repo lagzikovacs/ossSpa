@@ -68,7 +68,9 @@ import {PlatformLocation} from '@angular/common';
 import {DokumentumService} from '../irat/dokumentum/dokumentum.service';
 import {DokumentumContainerMode} from '../irat/dokumentum/dokumentumcontainermode';
 import {DokumentumDto} from '../irat/dokumentum/dokumentumdto';
-import {BizonylatService} from "../bizonylat/bizonylat.service";
+import {BizonylatService} from '../bizonylat/bizonylat.service';
+import {BizonylatTipus} from '../bizonylat/bizonylattipus';
+import {BizonylatDto} from "../bizonylat/bizonylatdto";
 
 @Injectable({
   providedIn: 'root'
@@ -206,9 +208,32 @@ export class MenuService {
         this._feliratkozasservice.Dto = new Array<FeliratkozasDto>();
       break;
 
+
       case '/bizonylat/dijbekero':
-        console.log('/bizonylat/dijbekero');
+        this._bizonylatservice.bizonylatTipus = BizonylatTipus.DijBekero;
+        this._bizonylatservice.Dto = new Array<BizonylatDto>();
         break;
+      case '/bizonylat/elolegszamla':
+        this._bizonylatservice.bizonylatTipus = BizonylatTipus.ElolegSzamla;
+        this._bizonylatservice.Dto = new Array<BizonylatDto>();
+        break;
+      case '/bizonylat/szallito':
+        this._bizonylatservice.bizonylatTipus = BizonylatTipus.Szallito;
+        this._bizonylatservice.Dto = new Array<BizonylatDto>();
+        break;
+      case '/bizonylat/szamla':
+        this._bizonylatservice.bizonylatTipus = BizonylatTipus.Szamla;
+        this._bizonylatservice.Dto = new Array<BizonylatDto>();
+        break;
+      case '/bizonylat/megrendeles':
+        this._bizonylatservice.bizonylatTipus = BizonylatTipus.Megrendeles;
+        this._bizonylatservice.Dto = new Array<BizonylatDto>();
+        break;
+      case '/bizonylat/bejovoszamla':
+        this._bizonylatservice.bizonylatTipus = BizonylatTipus.BejovoSzamla;
+        this._bizonylatservice.Dto = new Array<BizonylatDto>();
+        break;
+
 
       case '/particio':
         this._particioservice.EgyMode = ParticioEgyMode.Szallito;

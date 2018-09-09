@@ -1,3 +1,21 @@
-<p>
-  bizonylat-container works!
-</p>
+<!--
+export enum BizonylatContainerMode {
+Blank = 0,
+List = 1,
+Egy = 2,
+Uj = 3
+}
+-->
+
+<ng-container *ngIf="bizonylatservice.ContainerMode === 0">
+  <app-blank></app-blank>
+</ng-container>
+<ng-container *ngIf="bizonylatservice.ContainerMode === 1">
+  <app-bizonylat-list></app-bizonylat-list>
+</ng-container>
+<ng-container *ngIf="bizonylatservice.ContainerMode === 2">
+  <app-bizonylat-egy></app-bizonylat-egy>
+</ng-container>
+<ng-container *ngIf="bizonylatservice.ContainerMode === 3">
+  <app-bizonylat-szerkesztes></app-bizonylat-szerkesztes>
+</ng-container>

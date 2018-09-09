@@ -1,3 +1,6 @@
-<p>
-  bizonylat-list works!
-</p>
+<div class="alapkeret">
+  <app-bizonylattoolbar></app-bizonylattoolbar>
+  <app-bizonylattabla></app-bizonylattabla>
+  <app-errormodal [cim]="bizonylatservice.cim"></app-errormodal>
+</div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

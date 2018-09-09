@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {BizonylatService} from '../bizonylat.service';
 
 @Component({
   selector: 'app-bizonylat-list',
@@ -6,8 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bizonylat-list.component.css']
 })
 export class BizonylatListComponent implements OnInit {
+  bizonylatservice: BizonylatService;
+  eppFrissit = false;
 
-  constructor() { }
+  constructor(bizonylatservice: BizonylatService) {
+    this.bizonylatservice = bizonylatservice;
+  }
 
   ngOnInit() {
   }

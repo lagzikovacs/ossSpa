@@ -3,6 +3,7 @@ import {BizonylatService} from '../bizonylat.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
+import {BizonylatContainerMode} from "../bizonylatcontainermode";
 
 @Component({
   selector: 'app-bizonylat-list',
@@ -63,7 +64,9 @@ export class BizonylatListComponent {
   }
 
   setClickedRow(i: number) {
-    // this.projektservice.DtoSelectedIndex = i;
+    this.bizonylatservice.DtoSelectedIndex = i;
+
+    this.bizonylatservice.ContainerMode = BizonylatContainerMode.Egy;
     //
     // const ProjektKod = this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD;
     // const UgyfelKod = this.projektservice.Dto[this.projektservice.DtoSelectedIndex].UGYFELKOD;

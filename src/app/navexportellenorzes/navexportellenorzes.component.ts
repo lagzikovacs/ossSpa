@@ -1,7 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../errormodal/errormodal.component';
 import {Szempont} from '../enums/szempont';
-import {ActivatedRoute, Router} from '@angular/router';
 import {LogonService} from '../logon/logon.service';
 import {NavexportellenorzesService} from './navexportellenorzes.service';
 import {JogKod} from '../enums/jogkod';
@@ -25,9 +24,7 @@ export class NavexportellenorzesComponent {
   mod = false;
   navexportellenorzesservice: NavexportellenorzesService;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute,
-              private _logonservice: LogonService,
+  constructor(private _logonservice: LogonService,
               navexportellenorzesservice: NavexportellenorzesService  ) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.CIKKMOD]);
     this.navexportellenorzesservice = navexportellenorzesservice;

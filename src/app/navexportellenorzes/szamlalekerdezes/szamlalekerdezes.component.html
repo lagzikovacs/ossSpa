@@ -1,0 +1,34 @@
+<div class="alapkeret">
+  <h5>Számlalekérdezés</h5>
+
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Számlaszám</div>
+      </div>
+      <div class="col-md-2">
+        <input type="text" class="form-control form-control-sm" id="szamlaszam"
+               required autocomplete="off"
+               [(ngModel)]="szamlaszam" name="szamlaszam">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-10">
+        <input type="text" class="form-control form-control-sm" id="valasz"
+               readonly="true"
+               [(ngModel)]="valasz" name="valasz">
+      </div>
+    </div>
+
+    <div class="row no-gutters" style="margin-bottom: 10px">
+      <div class="col-md-2"></div>
+      <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Lekérdezés</button>
+    </div>
+  </form>
+  <app-errormodal [cim]="'Számlalekérdezés'"></app-errormodal>
+</div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>
+

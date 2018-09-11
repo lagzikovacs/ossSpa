@@ -6,6 +6,7 @@ import {ZoomSources} from '../enums/zoomsources';
 import {environment} from '../../environments/environment';
 import {NavfeltoltesParameter} from './navfeltoltesparameter';
 import {NavfeltoltesResult} from './navfeltoltesresult';
+import {StringResult} from "../dtos/stringresult";
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +36,27 @@ export class NavexportellenorzesService {
     };
 
     return this._httpClient.post<NavfeltoltesResult>(url, body, options).toPromise();
+  }
+
+  public Adoszamellenorzes(adoszam: string): Promise<StringResult> {
+    const url = environment.BaseHref + this._controller + 'adoszamellenorzes';
+    const body = JSON.stringify(adoszam);
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<StringResult>(url, body, options).toPromise();
+  }
+
+  public Szamlalekerdezes(szamlaszam: string): Promise<StringResult> {
+    const url = environment.BaseHref + this._controller + 'szamlalekerdezes';
+    const body = JSON.stringify(szamlaszam);
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<StringResult>(url, body, options).toPromise();
   }
 }

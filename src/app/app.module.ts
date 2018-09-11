@@ -217,6 +217,8 @@ import { BizonylatEgyComponent } from './bizonylat/bizonylat-egy/bizonylat-egy.c
 import { BizonylattoolbarComponent } from './bizonylat/bizonylattoolbar/bizonylattoolbar.component';
 import { BizonylattablaComponent } from './bizonylat/bizonylattabla/bizonylattabla.component';
 import { BizonylatSzerkesztesComponent } from './bizonylat/bizonylat-szerkesztes/bizonylat-szerkesztes.component';
+import { AdoszamellenorzesComponent } from './navexportellenorzes/adoszamellenorzes/adoszamellenorzes.component';
+import { SzamlalekerdezesComponent } from './navexportellenorzes/szamlalekerdezes/szamlalekerdezes.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -237,6 +239,7 @@ const routes: Routes = [
   {path: 'penztar', component: PenztarContainerComponent, canActivate: [RoleGuard]},
   {path: 'feliratkozas', component: FeliratkozasContainerComponent, canActivate: [RoleGuard]},
 
+  {path: 'adoszamellenorzes', component: AdoszamellenorzesComponent, canActivate: [RoleGuard]},
   {path: 'bizonylat', children: [
     {path: 'dijbekero', component: BizonylatContainerComponent, canActivate: [RoleGuard]},
     {path: 'elolegszamla', component: BizonylatContainerComponent, canActivate: [RoleGuard]},
@@ -247,6 +250,7 @@ const routes: Routes = [
     {path: 'bejovoszamla', component: BizonylatContainerComponent, canActivate: [RoleGuard]},
   ]},
   {path: 'navexportellenorzese', component: NavexportellenorzesComponent, canActivate: [RoleGuard]},
+  {path: 'szamlalekerdezes', component: SzamlalekerdezesComponent, canActivate: [RoleGuard]},
 
   {path: 'riport', component: RiportComponent, canActivate: [RoleGuard], children: [
     {path: 'kimenoszamla', component: KimenoszamlaComponent},
@@ -461,6 +465,8 @@ if (environment.production) {
     BizonylattoolbarComponent,
     BizonylattablaComponent,
     BizonylatSzerkesztesComponent,
+    AdoszamellenorzesComponent,
+    SzamlalekerdezesComponent,
   ],
   imports: [
     BrowserModule,

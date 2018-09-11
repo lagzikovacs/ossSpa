@@ -13,6 +13,7 @@ import {CikkContainerMode} from '../../../cikk/cikkcontainermode';
 })
 export class ProjektBizonylatesiratUjajanlatSzerkesztesComponent implements OnInit {
   projektkapcsolatservice: ProjektkapcsolatService;
+  eppFrissit = false;
 
   constructor(private _cikkservice: CikkService,
               projektkapcsolatservice: ProjektkapcsolatService) {

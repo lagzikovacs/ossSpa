@@ -37,9 +37,6 @@ export class ProjektkapcsolatService {
   AjanlatParam: AjanlatParam;
   AjanlattetelIndex = 0;
   AjanlatSzerkesztesMode = UjajanlatSzerkesztesMode.Blank;
-  AjanlatNetto = 0;
-  AjanlatAfa = 0;
-  AjanlatBrutto = 0;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
@@ -155,5 +152,16 @@ export class ProjektkapcsolatService {
     };
 
     return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+  }
+
+  public AjanlatCalc(ap: AjanlatParam): Promise<AjanlatParamResult> {
+    const url = environment.BaseHref + this._controller + 'ajanlatcalc';
+    const body = ap;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<AjanlatParamResult>(url, body, options).toPromise();
   }
 }

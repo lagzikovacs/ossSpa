@@ -84,9 +84,6 @@ export class ProjektBizonylatesiratListComponent {
         }
 
         this.projektkapcsolatservice.AjanlatParam = res.Result;
-        this.projektkapcsolatservice.AjanlatNetto = 0;
-        this.projektkapcsolatservice.AjanlatAfa = 0;
-        this.projektkapcsolatservice.AjanlatBrutto = 0;
 
         this.eppFrissit = false;
         this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.UjAjanlat;

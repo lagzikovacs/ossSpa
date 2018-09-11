@@ -1,15 +1,18 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {LogonService} from '../../../logon/logon.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
+import {UjajanlatSzerkesztesMode} from '../ujajanlatszerkesztesmode';
+import {UjajanlatContainerMode} from '../ujajanlatcontainermode';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-ujajanlat',
   templateUrl: './projekt-bizonylatesirat-ujajanlat.component.html',
   styleUrls: ['./projekt-bizonylatesirat-ujajanlat.component.css']
 })
-export class ProjektBizonylatesiratUjajanlatComponent {
+export class ProjektBizonylatesiratUjajanlatComponent implements OnInit {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektkapcsolatservice: ProjektkapcsolatService;
@@ -22,9 +25,20 @@ export class ProjektBizonylatesiratUjajanlatComponent {
     this.projektkapcsolatservice = projektkapcsolatservice;
   }
 
+  ngOnInit() {
+    this.Ervenyes = moment(this.projektkapcsolatservice.AjanlatParam.Ervenyes).format('YYYY-MM-DD');
+  }
+
+  setClickedRow(i) {
+    this.projektkapcsolatservice.AjanlattetelIndex = i;
+    this.projektkapcsolatservice.AjanlatContainerMode = UjajanlatContainerMode.Szerkesztes;
+    this.projektkapcsolatservice.AjanlatSzerkesztesMode = UjajanlatSzerkesztesMode.Blank;
+  }
+
   onSubmit() {
     this.eppFrissit = true;
     this.projektkapcsolatservice.AjanlatParam.ProjektKod = this.projektkapcsolatservice.ProjektKod;
+    this.projektkapcsolatservice.AjanlatParam.Ervenyes = moment(this.Ervenyes).toISOString(true);
     this.projektkapcsolatservice.AjanlatKeszites(this.projektkapcsolatservice.AjanlatParam)
       .then(res => {
         if (res.Error != null) {

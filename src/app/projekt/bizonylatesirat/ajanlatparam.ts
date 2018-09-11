@@ -9,5 +9,8 @@ export class AjanlatParam {
   Megjegyzes: string;
   SzuksegesAramerosseg: string;
   AjanlatBuf: AjanlatBuf[];
+  Netto: number;
+  Afa: number;
+  Brutto: number;
   Fi: SzMT[];
 }

@@ -209,7 +209,6 @@ import { ProjektBizonylatesiratLevalasztasComponent } from './projekt/bizonylate
 import { ProjektExportComponent } from './projekt/projekt/projekt-export/projekt-export.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { IratNincsprojektComponent } from './irat/irat/irat-nincsprojekt/irat-nincsprojekt.component';
-import { ProjektBizonylatesiratUjajanlatListComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-ujajanlat-list/projekt-bizonylatesirat-ujajanlat-list.component';
 import { ProjektBizonylatesiratUjajanlatSzerkesztesComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-ujajanlat-szerkesztes/projekt-bizonylatesirat-ujajanlat-szerkesztes.component';
 import { BizonylatContainerComponent } from './bizonylat/bizonylat-container/bizonylat-container.component';
 import { BizonylatListComponent } from './bizonylat/bizonylat-list/bizonylat-list.component';
@@ -457,7 +456,6 @@ if (environment.production) {
     ProjektExportComponent,
     SpinnerComponent,
     IratNincsprojektComponent,
-    ProjektBizonylatesiratUjajanlatListComponent,
     ProjektBizonylatesiratUjajanlatSzerkesztesComponent,
     BizonylatContainerComponent,
     BizonylatListComponent,

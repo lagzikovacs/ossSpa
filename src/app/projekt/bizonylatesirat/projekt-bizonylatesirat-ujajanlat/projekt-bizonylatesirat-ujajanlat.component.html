@@ -46,7 +46,7 @@
 
     <div class="row no-gutters editform-row">
       <div class="col-md-2">
-        <div class="editform-title">Megjegyzés</div>
+        <div class="editform-title">Megjegyzés (tárgy)</div>
       </div>
       <div class="col-md-6">
         <input type="text" class="form-control form-control-sm" id="megjegyzes"
@@ -61,15 +61,15 @@
       </div>
       <div class="col-md-2">
         <input type="text" class="form-control form-control-sm" id="netto" style="text-align:right"
-               readonly="true" [(ngModel)]="projektkapcsolatservice.AjanlatNetto">
+               readonly="true" [(ngModel)]="projektkapcsolatservice.AjanlatParam.Netto">
       </div>
       <div class="col-md-2">
         <input type="text" class="form-control form-control-sm" id="afa" style="text-align:right"
-               readonly="true" [(ngModel)]="projektkapcsolatservice.AjanlatAfa">
+               readonly="true" [(ngModel)]="projektkapcsolatservice.AjanlatParam.Afa">
       </div>
       <div class="col-md-2">
         <input type="text" class="form-control form-control-sm" id="brutto" style="text-align:right"
-               readonly="true" [(ngModel)]="projektkapcsolatservice.AjanlatBrutto">
+               readonly="true" [(ngModel)]="projektkapcsolatservice.AjanlatParam.Brutto">
       </div>
     </div>
 
@@ -79,7 +79,37 @@
   Szerkesztes = 2
   }-->
     <ng-container *ngIf="projektkapcsolatservice.AjanlatContainerMode === 1">
-      <app-projekt-bizonylatesirat-ujajanlat-list></app-projekt-bizonylatesirat-ujajanlat-list>
+      <table class="table table-bordered table-sm table-responsive" style="border: none">
+        <thead>
+        <tr>
+          <th>Tételtipus</th>
+          <th>Cikk</th>
+          <th>Mennyiség</th>
+          <th>Egységár</th>
+          <th>Egységnyi teljesítmény</th>
+          <th>Netto</th>
+          <th>ÁFA</th>
+          <th>Brutto</th>
+          <th>Össz. teljesítmény</th>
+          <th>Garancia</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of projektkapcsolatservice.AjanlatParam.AjanlatBuf; let i = index">
+          <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
+              (click)="setClickedRow(i)">{{item.TetelTipus}}</td>
+          <td>{{item.CikkNev}}</td>
+          <td>{{item.Mennyiseg}}</td>
+          <td>{{item.EgysegAr}}</td>
+          <td>{{item.EgysegnyiTeljesitmeny}}</td>
+          <td>{{item.Netto}}</td>
+          <td>{{item.Afa}}</td>
+          <td>{{item.Brutto}}</td>
+          <td>{{item.OsszTeljesitmeny}}</td>
+          <td>{{item.Garancia}}</td>
+        </tr>
+        </tbody>
+      </table>
     </ng-container>
     <ng-container *ngIf="projektkapcsolatservice.AjanlatContainerMode === 2">
       <app-projekt-bizonylatesirat-ujajanlat-szerkesztes></app-projekt-bizonylatesirat-ujajanlat-szerkesztes>

@@ -8,11 +8,11 @@ import {ZoomSources} from '../../../enums/zoomsources';
 import * as moment from 'moment';
 import {TeendoZoomParameter} from '../../../teendo/teendozoomparameter';
 import {ProjektService} from '../../projekt/projekt.service';
-import {ProjektteendoEgyMode} from "../projekttendoegymode";
-import {ProjektteendoContainerMode} from "../projektteendocontainermode";
-import {FelhasznaloContainerMode} from "../../../felhasznalo/felhasznalocontainermode";
-import {TeendoContainerMode} from "../../../teendo/teendocontainermode";
-import {ProjektteendoSzerkesztesMode} from "../projektteendoszerkesztesmode";
+import {ProjektteendoEgyMode} from '../projekttendoegymode';
+import {ProjektteendoContainerMode} from '../projektteendocontainermode';
+import {FelhasznaloContainerMode} from '../../../felhasznalo/felhasznalocontainermode';
+import {TeendoContainerMode} from '../../../teendo/teendocontainermode';
+import {ProjektteendoSzerkesztesMode} from '../projektteendoszerkesztesmode';
 
 @Component({
   selector: 'app-projekt-teendo-szerkesztes',

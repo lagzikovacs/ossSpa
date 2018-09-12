@@ -13,7 +13,7 @@ export class ProjektInverterComponent implements OnInit {
 
   projektservice: ProjektService;
 
-  entries = ['', 'Nincs megrendelve', 'Megrendelve', 'Raktárban', 'Kiszálítva/telepítve', 'Harmadik fél biztosítja'];
+  entries = ['', 'Nincs megrendelve', 'Megrendelve', 'Raktárban', 'Kiszállítva/telepítve', 'Harmadik fél biztosítja'];
   selected = '';
   eppFrissit = false;
 

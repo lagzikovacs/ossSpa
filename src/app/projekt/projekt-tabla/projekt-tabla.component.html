@@ -1,21 +1,20 @@
-<table class="table table-bordered table-sm table-responsive" style="border: none">
+<table class="table table-bordered table-sm table-responsive" style="border: none" xmlns="http://www.w3.org/1999/html">
   <thead>
   <tr>
     <th>Id</th>
     <th>Stsz</th>
+    <th>Ügyfél és cím</th>
+    <th>Email és telefonszám</th>
+    <th>Telepítési cím és a projekt jellege</th>
     <th>Műszaki állapot</th>
-    <th>Ügyfél</th>
-    <th>Cím</th>
-    <th>Telefon</th>
-    <th>Email</th>
-    <th>Telepítési cím</th>
-    <th>A projekt jellege</th>
     <th>Inverter</th>
-    <th></th>
     <th>Napelem</th>
-    <th></th>
-    <th>DC, kW</th>
-    <th>AC, kVA</th>
+    <th>
+      <div style="white-space: nowrap">
+        <div>AC, kVA</div>
+        <div>DC, kW</div>
+      </div>
+    </th>
     <th>Vállalási ár</th>
     <th>Pénznem</th>
     <th>Munkalapszám</th>
@@ -31,36 +30,38 @@
       <td *ngIf="!enIdclick">{{item.PROJEKTKOD}}</td>
       <td>{{item.STATUSZ}}</td>
       <td>
-        <div style="width: 200px">{{item.MUSZAKIALLAPOT}}</div>
-      </td>
-      <td>
         <div style="width: 200px">{{item.UGYFELNEV}}</div>
-      </td>
-      <td>
         <div style="width: 250px">{{item.UGYFELCIM}}</div>
       </td>
-      <td>{{item.UGYFELTELEFONSZAM}}</td>
-      <td>{{item.UGYFELEMAIL}}</td>
       <td>
-        <div style="width: 300px">{{item.TELEPITESICIM}}</div>
+        <div>{{item.UGYFELEMAIL}}</div>
+        <div>{{item.UGYFELTELEFONSZAM}}</div>
       </td>
       <td>
+        <div style="width: 300px">{{item.TELEPITESICIM}}</div>
         <div style="width: 150px">{{item.PROJEKTJELLEGE}}</div>
       </td>
       <td>
-        <div style="width: 150px">{{item.INVERTER}}</div>
+        <div style="width:120px" [style.background-color]="MuszakiallapotColor(item.MUSZAKIALLAPOT)">{{item.MUSZAKIALLAPOT}}</div>
       </td>
       <td>
-        <div style="width: 250px">{{item.INVERTERALLAPOT}}</div>
+        <div style="width: 250px" [style.background-color]="InverterNapelemColor(item.INVERTERALLAPOT)">
+          <div>{{item.INVERTER}}</div>
+          <div>{{item.INVERTERALLAPOT}}</div>
+        </div>
       </td>
       <td>
-        <div style="width: 150px">{{item.NAPELEM}}</div>
+        <div style="width: 250px" [style.background-color]="InverterNapelemColor(item.NAPELEMALLAPOT)">
+          <div>{{item.NAPELEM}}</div>
+          <div>{{item.NAPELEMALLAPOT}}</div>
+        </div>
       </td>
       <td>
-        <div style="width: 250px">{{item.NAPELEMALLAPOT}}</div>
+        <div style="text-align: right">
+          <div>{{item.ACKVA | number: '1.2-2'}}</div>
+          <div>{{item.DCKW | number: '1.2-2'}}</div>
+        </div>
       </td>
-      <td style="text-align: right">{{item.DCKW | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.ACKVA | number: '1.2-2'}}</td>
       <td style="text-align: right">{{item.VALLALASIARNETTO | number: '1.2-2'}}</td>
       <td>{{item.PENZNEM}}</td>
       <td>{{item.MUNKALAPSZAM}}</td>
@@ -69,7 +70,7 @@
       <td>{{item.KIVITELEZESIHATARIDO | datehun}}</td>
     </tr>
     <tr *ngIf="item.MEGJEGYZES !== null && item.MEGJEGYZES !== ''">
-      <td colspan="21">{{item.MEGJEGYZES}}</td>
+      <td colspan="15">{{item.MEGJEGYZES}}</td>
     </tr>
   </ng-container>
   </tbody>

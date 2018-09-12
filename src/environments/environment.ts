@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  lapmeret: 10,
+  lapmeret: 5,
   BaseHref: 'https://docport.hu/ossrest/',
   // BaseHref: 'http://localhost:52643/',
   perAlldefault: '0 / 0'

@@ -7,9 +7,9 @@ import {IratDto} from './iratdto';
 import {IratResult} from './iratresult';
 import {NumberResult} from '../../dtos/numberresult';
 import {IratContainerMode} from './iratcontainermode';
-import {IratEgyMode} from "./irategymode";
-import {EmptyResult} from "../../dtos/emptyresult";
-import {IratSzerkesztesMode} from "./iratszerkesztesmode";
+import {IratEgyMode} from './irategymode';
+import {EmptyResult} from '../../dtos/emptyresult';
+import {IratSzerkesztesMode} from './iratszerkesztesmode';
 
 @Injectable({
   providedIn: 'root'

@@ -10,7 +10,7 @@
   <table class="table table-bordered table-sm table-responsive" style="border: none">
     <thead>
     <tr>
-      <th></th>
+      <th *ngIf="cikkservice.zoom"></th>
       <th>Id</th>
       <th>Megnevezés</th>
       <th>Me</th>
@@ -31,12 +31,13 @@
         <td>{{item.MEGNEVEZES}}</td>
         <td>{{item.ME}}</td>
         <td>{{item.AFAKULCS}}</td>
-        <td>{{item.EGYSEGAR}}</td>
-        <td>{{item.KESZLETETKEPEZ}}</td>
-        <td>{{item.TOMEGKG}}</td>
+        <td style="text-align: right">{{item.EGYSEGAR | number: '1.2-2'}}</td>
+        <td *ngIf="item.KESZLETETKEPEZ">igen</td>
+        <td *ngIf="!item.KESZLETETKEPEZ">nem</td>
+        <td style="text-align: right">{{item.TOMEGKG | number: '1.2-2'}}</td>
         <td>{{item.TERMEKDIJKT}}</td>
         <td>{{item.TERMEKDIJMEGNEVEZES}}</td>
-        <td>{{item.TERMEKDIJEGYSEGAR}}</td>
+        <td style="text-align: right">{{item.TERMEKDIJEGYSEGAR | number: '1.2-2'}}</td>
       </tr>
     </ng-container>
     </tbody>

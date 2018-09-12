@@ -41,7 +41,7 @@ export class BizonylatListComponent {
         if (res.Error != null) {
           throw res.Error;
         }
-        console.log(res);
+
         if (this.bizonylatservice.elsokereses) {
           this.bizonylatservice.Dto = res.Result;
           this.bizonylatservice.elsokereses = false;
@@ -58,45 +58,32 @@ export class BizonylatListComponent {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this.errormodal.show(err);
       });
   }
 
   setClickedRow(i: number) {
     this.bizonylatservice.DtoSelectedIndex = i;
 
-    this.bizonylatservice.ContainerMode = BizonylatContainerMode.Egy;
-    //
-    // const ProjektKod = this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD;
-    // const UgyfelKod = this.projektservice.Dto[this.projektservice.DtoSelectedIndex].UGYFELKOD;
-    //
-    // this._projektkapcsolatservice.ProjektKod = ProjektKod;
-    // this._projektkapcsolatservice.UgyfelKod = UgyfelKod;
-    // this._szamlazasirendservice.ProjektKod = ProjektKod;
-    // this._projektteendoservice.ProjektKod = ProjektKod;
-    //
-    // this.eppFrissit = true;
-    // this._projektkapcsolatservice.Kereses()
-    //   .then(res => {
-    //     return this._szamlazasirendservice.Kereses();
-    //   })
-    //   .then(res1 => {
-    //     return this._projektteendoservice.Kereses();
-    //   })
-    //   .then(res2 => {
-    //     this.projektservice.ContainerMode = ProjektContainerMode.Egy;
-    //     this.projektservice.EgyMode = ProjektEgyMode.Bizonylatesirat;
-    //     this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
-    //
-    //     this._projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
-    //
-    //     this.eppFrissit = false;
-    //   })
-    //   .catch(err => {
-    //     this.eppFrissit = false;
-    //     this.errormodal.show(err);
-    //   });
+    this.eppFrissit = true;
+    this.bizonylatservice.GetComplex(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATKOD)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex] = res.Result[0].Dto;
+        this.bizonylatservice.LstTetelDto = res.Result[0].LstTetelDto;
+        this.bizonylatservice.LstAfaDto = res.Result[0].LstAfaDto;
+        this.bizonylatservice.LstTermekdijDto = res.Result[0].LstTermekdijDto;
+
+        this.bizonylatservice.ContainerMode = BizonylatContainerMode.Egy;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this.errormodal.show(err);
+      });
   }
 
   onUj() {

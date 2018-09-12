@@ -11,6 +11,9 @@ import {EmptyResult} from '../dtos/emptyresult';
 import {BizonylatTipusLeiro} from './bizonylattipusleiro';
 import {BizonylatParameter} from "./bizonylatparameter";
 import {BizonylatResult} from "./bizonylatresult";
+import {BizonylatTermekdijDto} from "./bizonylattermekdijdto";
+import {BizonylatAfaDto} from "./bizonylatafadto";
+import {BizonylatTetelDto} from "./bizonylatteteldto";
 
 @Injectable({
   providedIn: 'root'
@@ -30,21 +33,14 @@ export class BizonylatService {
   OsszesRekord = 0;
   elsokereses = true;
 
+  LstTetelDto = new Array<BizonylatTetelDto>();
+  LstAfaDto = new Array<BizonylatAfaDto>();
+  LstTermekdijDto = new Array<BizonylatTermekdijDto>();
+
   ContainerMode = BizonylatContainerMode.List;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
-
-  public CreateNewComplex(): Promise<BizonylatComplexResult> {
-    const url = environment.BaseHref + this._controller + 'createnewcomplex';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<BizonylatComplexResult>(url, body, options).toPromise();
-  }
 
   public BizonylatLeiro(bt: BizonylatTipus): Promise<BizonylatTipusLeiroResult> {
     const url = environment.BaseHref + this._controller + 'bizonylatleiro';
@@ -67,6 +63,50 @@ export class BizonylatService {
         }
 
         this.bizonylatLeiro = res.Result;
+
+        return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
+      });
+  }
+
+  public CreateNewComplex(): Promise<BizonylatComplexResult> {
+    const url = environment.BaseHref + this._controller + 'createnewcomplex';
+    const body = '';
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<BizonylatComplexResult>(url, body, options).toPromise();
+  }
+
+  public Get(bizonylatkod: number): Promise<BizonylatResult> {
+    const url = environment.BaseHref + this._controller + 'get';
+    const body = bizonylatkod;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<BizonylatResult>(url, body, options).toPromise();
+  }
+
+  public GetComplex(bizonylatkod: number): Promise<BizonylatComplexResult> {
+    const url = environment.BaseHref + this._controller + 'getcomplex';
+    const body = bizonylatkod;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<BizonylatComplexResult>(url, body, options).toPromise();
+  }
+
+  public GetGetComplex(bizonylatkod: number): Promise<EmptyResult> {
+    return this.GetComplex(bizonylatkod)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
 
         return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
       });

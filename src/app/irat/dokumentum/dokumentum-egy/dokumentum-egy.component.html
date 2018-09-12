@@ -1,6 +1,9 @@
 <div class="alapkeret">
   <h5>{{dokumentumservice.cim}}</h5>
-  <h6 *ngIf="dokumentumservice.DtoSelectedIndex !== -1">{{dokumentumservice.Dto[dokumentumservice.DtoSelectedIndex].MEGJEGYZES}}</h6>
+  <!--<h6 *ngIf="dokumentumservice.DtoSelectedIndex !== -1">{{dokumentumservice.Dto[dokumentumservice.DtoSelectedIndex].MEGJEGYZES}}</h6>-->
+  <div style="margin-bottom: 10px">
+    <div style="font-size: smaller">{{dokumentumservice.Dto[dokumentumservice.DtoSelectedIndex].DOKUMENTUMKOD}} {{dokumentumservice.Dto[dokumentumservice.DtoSelectedIndex].MEGJEGYZES}}</div>
+  </div>
   <div>
     <nav>
       <button (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">

@@ -9,7 +9,8 @@ import {DokumentumContainerMode} from '../../../irat/dokumentum/dokumentumcontai
 import {IratEgyMode} from '../../../irat/irat/irategymode';
 import {DokumentumService} from '../../../irat/dokumentum/dokumentum.service';
 import {AjanlatTetelTipus} from '../ajanlatteteltipus';
-import {UjajanlatContainerMode} from "../ujajanlatcontainermode";
+import {UjajanlatContainerMode} from '../ujajanlatcontainermode';
+import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-list',
@@ -25,6 +26,7 @@ export class ProjektBizonylatesiratListComponent {
   constructor(private _logonservice: LogonService,
               private _iratservice: IratService,
               private _dokumentumservice: DokumentumService,
+              private _bizonylatservice: BizonylatService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.projektkapcsolatservice = projektkapcsolatservice;
   }
@@ -46,9 +48,42 @@ export class ProjektBizonylatesiratListComponent {
   }
   setClickedRow(i: number) {
     this.projektkapcsolatservice.DtoSelectedIndex = i;
-    // TODO itt elágazik tipustól függően: BizonylatKod v IratKod
+
+    if (this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].BIZONYLATKOD !== null) {
+      this.eppFrissit = true;
+      this._bizonylatservice.GetComplex(this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].BIZONYLATKOD)
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
+
+          this._bizonylatservice.Dto = [res.Result[0].Dto];
+          this._bizonylatservice.DtoSelectedIndex = 0;
+          this._bizonylatservice.bizonylatTipus = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].BIZONYLATTIPUSKOD;
+
+          this._bizonylatservice.LstTetelDto = res.Result[0].LstTetelDto;
+          this._bizonylatservice.LstAfaDto = res.Result[0].LstAfaDto;
+          this._bizonylatservice.LstTermekdijDto = res.Result[0].LstTermekdijDto;
+
+          return this._bizonylatservice.GetBizonylatLeiro();
+        })
+        .then(res1 => {
+          if (res1.Error != null) {
+            throw res1.Error;
+          }
+
+          this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.EgyBizonylat;
+          // TODO bizonylat-egy parameterei
+          this.eppFrissit = false;
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this.errormodal.show(err);
+        });
+    }
 
     if (this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].IRATKOD !== null) {
+      this.eppFrissit = true;
       this._iratservice.Get(this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].IRATKOD)
         .then(res => {
           if (res.Error != null) {
@@ -62,6 +97,7 @@ export class ProjektBizonylatesiratListComponent {
           this._iratservice.ContainerMode = IratContainerMode.List;
           this._iratservice.EgyMode = IratEgyMode.Dokumentum;
           this._dokumentumservice.ContainerMode = DokumentumContainerMode.List;
+          this.eppFrissit = false;
         })
         .catch(err => {
           this.eppFrissit = false;

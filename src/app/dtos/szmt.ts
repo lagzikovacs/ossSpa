@@ -2,9 +2,9 @@ import {Szempont} from '../enums/szempont';
 
 export class SzMT {
   Szempont: Szempont;
-  Minta: string;
+  Minta: any;
 
-  constructor (szempont: Szempont, minta: string) {
+  constructor (szempont: Szempont, minta: any) {
     this.Szempont = szempont;
     this.Minta = minta;
   }

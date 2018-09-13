@@ -26,7 +26,6 @@ export class BizonylatEgyComponent {
   torles() {}
   modositas() {}
   nyomtatas() {}
-  tetelek() {}
   kifizetes() {}
   irat() {}
 }

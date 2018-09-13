@@ -16,7 +16,7 @@ import {TeendoContainerMode} from './teendocontainermode';
   providedIn: 'root'
 })
 export class TeendoService {
-  private readonly _controller = 'api/teendo/';
+  private readonly _controller = 'api/projektteendo/';
 
   cim = 'Teendő';
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);

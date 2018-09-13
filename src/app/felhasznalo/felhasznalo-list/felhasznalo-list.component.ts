@@ -5,10 +5,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ZoomSources} from '../../enums/zoomsources';
-import {ProjektteendoService} from '../../projekt/teendo/projektteendo.service';
+import {ProjektteendoService} from '../../projekt/projektteendo/projektteendo.service';
 import {FelhasznaloContainerMode} from "../felhasznalocontainermode";
 import {FelhasznaloEgyMode} from "../felhasznaloegymode";
-import {ProjektteendoSzerkesztesMode} from "../../projekt/teendo/projektteendoszerkesztesmode";
+import {ProjektteendoSzerkesztesMode} from "../../projekt/projektteendo/projektteendoszerkesztesmode";
 
 @Component({
   selector: 'app-felhasznalo-list',

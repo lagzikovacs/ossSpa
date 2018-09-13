@@ -43,7 +43,7 @@ import { ProjektNapelemComponent } from './projekt/projekt/projekt-napelem/proje
 import { ProjektIratmintaComponent } from './projekt/projekt/projekt-iratminta/projekt-iratminta.component';
 import { ProjektBizonylatesiratListComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-list/projekt-bizonylatesirat-list.component';
 import { ProjektSzamlazasirendListComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-list/projekt-szamlazasirend-list.component';
-import { ProjektTeendoListComponent } from './projekt/teendo/projekt-teendo-list/projekt-teendo-list.component';
+import { ProjektTeendoListComponent } from './projekt/projektteendo/projekt-teendo-list/projekt-teendo-list.component';
 import { IratListComponent } from './irat/irat/irat-list/irat-list.component';
 import { IratEgyComponent } from './irat/irat/irat-egy/irat-egy.component';
 import {IratToolbarComponent} from './irat/irat/irattolbar/irattoolbar.component';
@@ -75,7 +75,7 @@ import { VolumeTesztComponent } from './volume/volume-teszt/volume-teszt.compone
 import { FeliratkozasListComponent } from './feliratkozas/feliratkozas-list/feliratkozas-list.component';
 import { FeliratkozasEgyComponent } from './feliratkozas/feliratkozas-egy/feliratkozas-egy.component';
 import { FeliratkozasProjektComponent } from './feliratkozas/feliratkozas-projekt/feliratkozas-projekt.component';
-import { ProjektTablaComponent } from './projekt/projekt-tabla/projekt-tabla.component';
+import { ProjektTablaComponent } from './projekt/projekttabla/projekt-tabla.component';
 import { RiportComponent } from './riport/riport.component';
 import { KimenoszamlaComponent } from './riport/kimenoszamla/kimenoszamla.component';
 import { BejovoszamlaComponent } from './riport/bejovoszamla/bejovoszamla.component';
@@ -161,11 +161,11 @@ import { ProjektSzamlazasirendEgyComponent } from './projekt/szamlazasirend/proj
 import { ProjektSzamlazasirendSzerkesztesComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-szerkesztes/projekt-szamlazasirend-szerkesztes.component';
 import { ProjektSzamlazasirendTorlesComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-torles/projekt-szamlazasirend-torles.component';
 import { ProjektSzamlazasirendReszletekComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-reszletek/projekt-szamlazasirend-reszletek.component';
-import { ProjektTeendoEgyComponent } from './projekt/teendo/projekt-teendo-egy/projekt-teendo-egy.component';
-import { ProjektTeendoSzerkesztesComponent } from './projekt/teendo/projekt-teendo-szerkesztes/projekt-teendo-szerkesztes.component';
-import { ProjektTeendoTorlesComponent } from './projekt/teendo/projekt-teendo-torles/projekt-teendo-torles.component';
-import { ProjektTeendoReszletekComponent } from './projekt/teendo/projekt-teendo-reszletek/projekt-teendo-reszletek.component';
-import { ProjektTeendoElvegezveComponent } from './projekt/teendo/projekt-teendo-elvegezve/projekt-teendo-elvegezve.component';
+import { ProjektTeendoEgyComponent } from './projekt/projektteendo/projekt-teendo-egy/projekt-teendo-egy.component';
+import { ProjektTeendoSzerkesztesComponent } from './projekt/projektteendo/projekt-teendo-szerkesztes/projekt-teendo-szerkesztes.component';
+import { ProjektTeendoTorlesComponent } from './projekt/projektteendo/projekt-teendo-torles/projekt-teendo-torles.component';
+import { ProjektTeendoReszletekComponent } from './projekt/projektteendo/projekt-teendo-reszletek/projekt-teendo-reszletek.component';
+import { ProjektTeendoElvegezveComponent } from './projekt/projektteendo/projekt-teendo-elvegezve/projekt-teendo-elvegezve.component';
 import { ProjektBizonylatesiratUjbizonylatComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-ujbizonylat/projekt-bizonylatesirat-ujbizonylat.component';
 import { ProjektBizonylatesiratUjiratComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-ujirat/projekt-bizonylatesirat-ujirat.component';
 import { ProjektBizonylatesiratUjajanlatComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-ujajanlat/projekt-bizonylatesirat-ujajanlat.component';
@@ -200,7 +200,7 @@ import { IratContainerComponent } from './irat/irat/irat-container/irat-containe
 import { DokumentumContainerComponent } from './irat/dokumentum/dokumentum-container/dokumentum-container.component';
 import { ProjektContainerComponent } from './projekt/projekt/projekt-container/projekt-container.component';
 import { ProjektSzamlazasirendContainerComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-container/projekt-szamlazasirend-container.component';
-import { ProjektTeendoContainerComponent } from './projekt/teendo/projekt-teendo-container/projekt-teendo-container.component';
+import { ProjektTeendoContainerComponent } from './projekt/projektteendo/projekt-teendo-container/projekt-teendo-container.component';
 import { ProjektBizonylatesiratContainerComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-container/projekt-bizonylatesirat-container.component';
 import {PenztartetelService} from './penztar/penztartetel/penztartetel.service';
 import {BizonylatService} from './bizonylat/bizonylat.service';
@@ -218,6 +218,10 @@ import { BizonylattablaComponent } from './bizonylat/bizonylattabla/bizonylattab
 import { BizonylatSzerkesztesComponent } from './bizonylat/bizonylat-szerkesztes/bizonylat-szerkesztes.component';
 import { AdoszamellenorzesComponent } from './navexportellenorzes/adoszamellenorzes/adoszamellenorzes.component';
 import { SzamlalekerdezesComponent } from './navexportellenorzes/szamlalekerdezes/szamlalekerdezes.component';
+import { BizonylatKifizetesContainerComponent } from './bizonylat/bizonylatkifizetes/bizonylat-kifizetes-container/bizonylat-kifizetes-container.component';
+import { BizonylatKifizetesListComponent } from './bizonylat/bizonylatkifizetes/bizonylat-kifizetes-list/bizonylat-kifizetes-list.component';
+import { BizonylatKifizetesEgyComponent } from './bizonylat/bizonylatkifizetes/bizonylat-kifizetes-egy/bizonylat-kifizetes-egy.component';
+import { BizonylatKifizetesSzerkesztesComponent } from './bizonylat/bizonylatkifizetes/bizonylat-kifizetes-szerkesztes/bizonylat-kifizetes-szerkesztes.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -465,6 +469,10 @@ if (environment.production) {
     BizonylatSzerkesztesComponent,
     AdoszamellenorzesComponent,
     SzamlalekerdezesComponent,
+    BizonylatKifizetesContainerComponent,
+    BizonylatKifizetesListComponent,
+    BizonylatKifizetesEgyComponent,
+    BizonylatKifizetesSzerkesztesComponent,
   ],
   imports: [
     BrowserModule,

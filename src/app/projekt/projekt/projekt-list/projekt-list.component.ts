@@ -6,7 +6,7 @@ import {Szempont} from '../../../enums/szempont';
 import {ProjektContainerMode} from '../projektcontainermode';
 import {ProjektEgyMode} from '../projektegymode';
 import {ProjektSzerkesztesMode} from '../projektszerkesztesmode';
-import {ProjektteendoService} from '../../teendo/projektteendo.service';
+import {ProjektteendoService} from '../../projektteendo/projektteendo.service';
 import {SzamlazasirendService} from '../../szamlazasirend/szamlazasirend.service';
 import {ProjektkapcsolatService} from '../../bizonylatesirat/projektkapcsolat.service';
 import {BizonylatesIratContainerMode} from '../../bizonylatesirat/bizonylatesiratcontainermode';

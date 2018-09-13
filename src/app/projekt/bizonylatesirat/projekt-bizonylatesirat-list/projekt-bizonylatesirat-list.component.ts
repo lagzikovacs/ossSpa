@@ -11,6 +11,8 @@ import {DokumentumService} from '../../../irat/dokumentum/dokumentum.service';
 import {AjanlatTetelTipus} from '../ajanlatteteltipus';
 import {UjajanlatContainerMode} from '../ujajanlatcontainermode';
 import {BizonylatService} from '../../../bizonylat/bizonylat.service';
+import {BizonylatkapcsolatService} from '../../../bizonylat/bizonylatirat/bizonylatkapcsolat.service';
+import {BizonylatkifizetesService} from '../../../bizonylat/bizonylatkifizetes/bizonylatkifizetes.service';
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-list',
@@ -27,6 +29,8 @@ export class ProjektBizonylatesiratListComponent {
               private _iratservice: IratService,
               private _dokumentumservice: DokumentumService,
               private _bizonylatservice: BizonylatService,
+              private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
+              private _bizonylatkifizetesservice: BizonylatkifizetesService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.projektkapcsolatservice = projektkapcsolatservice;
   }
@@ -65,12 +69,31 @@ export class ProjektBizonylatesiratListComponent {
           this._bizonylatservice.LstAfaDto = res.Result[0].LstAfaDto;
           this._bizonylatservice.LstTermekdijDto = res.Result[0].LstTermekdijDto;
 
-          return this._bizonylatservice.GetBizonylatLeiro();
+          return this._bizonylatservice.GetBizonylatLeiro(); // ez megcsinálja az értékadásokat is
         })
         .then(res1 => {
           if (res1.Error != null) {
             throw res1.Error;
           }
+
+          return this._bizonylatkapcsolatservice.Select(
+            this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].BIZONYLATKOD);
+        })
+        .then(res2 => {
+          if (res2.Error != null) {
+            throw res2.Error;
+          }
+
+          this._bizonylatkapcsolatservice.Dto = res2.Result;
+          return this._bizonylatkifizetesservice.Select(
+            this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].BIZONYLATKOD);
+        })
+        .then(res3 => {
+          if (res3.Error != null) {
+            throw res3.Error;
+          }
+
+          this._bizonylatkifizetesservice.Dto = res3.Result;
 
           this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.EgyBizonylat;
           // TODO bizonylat-egy parameterei

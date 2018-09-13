@@ -3,7 +3,9 @@ import {BizonylatService} from '../bizonylat.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
-import {BizonylatContainerMode} from "../bizonylatcontainermode";
+import {BizonylatContainerMode} from '../bizonylatcontainermode';
+import {BizonylatkapcsolatService} from '../bizonylatirat/bizonylatkapcsolat.service';
+import {BizonylatkifizetesService} from "../bizonylatkifizetes/bizonylatkifizetes.service";
 
 @Component({
   selector: 'app-bizonylat-list',
@@ -21,7 +23,9 @@ export class BizonylatListComponent {
   bizonylatservice: BizonylatService;
   eppFrissit = false;
 
-  constructor(bizonylatservice: BizonylatService) {
+  constructor(private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
+              private _bizonylatkifizetesservice: BizonylatkifizetesService,
+              bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
   }
 
@@ -78,7 +82,26 @@ export class BizonylatListComponent {
         this.bizonylatservice.LstAfaDto = res.Result[0].LstAfaDto;
         this.bizonylatservice.LstTermekdijDto = res.Result[0].LstTermekdijDto;
 
+        return this._bizonylatkapcsolatservice.Select(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATKOD);
+      })
+      .then(res1 => {
+        if (res1.Error != null) {
+          throw res1.Error;
+        }
+
+        this._bizonylatkapcsolatservice.Dto = res1.Result;
+        return this._bizonylatkifizetesservice.Select(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATKOD);
+      })
+      .then(res2 => {
+        if (res2.Error != null) {
+          throw res2.Error;
+        }
+
+        this._bizonylatkifizetesservice.Dto = res2.Result;
+
         this.bizonylatservice.ContainerMode = BizonylatContainerMode.Egy;
+        // TODO bizonylat-egy parameterei
+        this.eppFrissit = false;
       })
       .catch(err => {
         this.eppFrissit = false;

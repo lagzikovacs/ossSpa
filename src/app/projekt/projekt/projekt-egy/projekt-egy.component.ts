@@ -3,12 +3,12 @@ import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {ProjektService} from '../projekt.service';
 import {ProjektContainerMode} from '../projektcontainermode';
 import {ProjektEgyMode} from '../projektegymode';
-import {ProjektteendoService} from '../../teendo/projektteendo.service';
+import {ProjektteendoService} from '../../projektteendo/projektteendo.service';
 import {SzamlazasirendService} from '../../szamlazasirend/szamlazasirend.service';
 import {ProjektkapcsolatService} from '../../bizonylatesirat/projektkapcsolat.service';
 import {BizonylatesIratContainerMode} from '../../bizonylatesirat/bizonylatesiratcontainermode';
 import {SzamlazasirendContainerMode} from '../../szamlazasirend/szamlazasirendcontainermode';
-import {ProjektteendoContainerMode} from '../../teendo/projektteendocontainermode';
+import {ProjektteendoContainerMode} from '../../projektteendo/projektteendocontainermode';
 
 @Component({
   selector: 'app-projekt-egy',

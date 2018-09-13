@@ -42,9 +42,9 @@ import {PenztarService} from '../penztar/penztar.service';
 import {ProjektkapcsolatService} from '../projekt/bizonylatesirat/projektkapcsolat.service';
 import {ProjektKapcsolatDto} from '../projekt/bizonylatesirat/projektkapcsolatdto';
 import {SzamlazasirendService} from '../projekt/szamlazasirend/szamlazasirend.service';
-import {ProjektteendoService} from '../projekt/teendo/projektteendo.service';
+import {ProjektteendoService} from '../projekt/projektteendo/projektteendo.service';
 import {SzamlazasirendDto} from '../projekt/szamlazasirend/szamlazasirenddto';
-import {ProjektteendoDto} from '../projekt/teendo/projektteendodto';
+import {ProjektteendoDto} from '../projekt/projektteendo/projektteendodto';
 import {VolumeContainerMode} from '../volume/volumecontainermode';
 import {ParticioService} from '../particio/particio.service';
 import {ParticioEgyMode} from '../particio/particioegymode';
@@ -130,7 +130,7 @@ export class MenuService {
         this._irattipusservice.zoom = false;
         this._irattipusservice.Dto = new Array<IrattipusDto>();
         break;
-      case '/teendo':
+      case '/projektteendo':
         this._teendoservice.ContainerMode = TeendoContainerMode.List;
         this._teendoservice.zoom = false;
         this._teendoservice.Dto = new Array<TeendoDto>();

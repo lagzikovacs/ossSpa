@@ -1,5 +1,9 @@
 <div class="alapkeret">
   <h5>{{bizonylatservice.bizonylatLeiro.BizonylatNev}}</h5>
+  <div style="margin-bottom: 10px">
+    <div style="font-size: smaller">{{bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].BIZONYLATKOD}} {{bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].UGYFELNEV}}</div>
+    <div style="font-size: smaller">{{bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].BIZONYLATSZAM}}</div>
+  </div>
   <div>
     <nav>
       <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
@@ -28,6 +32,19 @@
       </button>
     </nav>
   </div>
+
+<!--  export enum BizonylatEgyMode {
+  Blank = 0,
+  Nyomtatas = 1,
+  Reszletek = 2
+  }-->
+  <ng-container *ngIf="bizonylatservice.EgyMode === 0">
+    <app-blank></app-blank>
+  </ng-container>
+  <ng-container *ngIf="bizonylatservice.EgyMode === 1">
+    <app-bizonylat-nyomtatas></app-bizonylat-nyomtatas>
+  </ng-container>
+
   <app-errormodal [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"></app-errormodal>
 </div>
 <app-spinner *ngIf="eppFrissit"></app-spinner>

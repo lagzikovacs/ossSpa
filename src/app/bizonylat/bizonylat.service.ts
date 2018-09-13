@@ -14,6 +14,7 @@ import {BizonylatResult} from "./bizonylatresult";
 import {BizonylatTermekdijDto} from "./bizonylattermekdijdto";
 import {BizonylatAfaDto} from "./bizonylatafadto";
 import {BizonylatTetelDto} from "./bizonylatteteldto";
+import {BizonylatEgyMode} from "./bizonylategymode";
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,7 @@ export class BizonylatService {
   LstTermekdijDto = new Array<BizonylatTermekdijDto>();
 
   ContainerMode = BizonylatContainerMode.List;
+  EgyMode = BizonylatEgyMode.Reszletek;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

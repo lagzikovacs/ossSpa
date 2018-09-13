@@ -6,6 +6,7 @@ import {SzMT} from '../../dtos/szmt';
 import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {BizonylatkapcsolatService} from '../bizonylatirat/bizonylatkapcsolat.service';
 import {BizonylatkifizetesService} from "../bizonylatkifizetes/bizonylatkifizetes.service";
+import {BizonylatEgyMode} from "../bizonylategymode";
 
 @Component({
   selector: 'app-bizonylat-list',
@@ -100,7 +101,7 @@ export class BizonylatListComponent {
         this._bizonylatkifizetesservice.Dto = res2.Result;
 
         this.bizonylatservice.ContainerMode = BizonylatContainerMode.Egy;
-        // TODO bizonylat-egy parameterei
+        this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
         this.eppFrissit = false;
       })
       .catch(err => {

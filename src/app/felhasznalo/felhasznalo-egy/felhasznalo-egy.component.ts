@@ -3,8 +3,8 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {FelhasznaloService} from '../felhasznalo.service';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
-import {FelhasznaloContainerMode} from "../felhasznalocontainermode";
-import {FelhasznaloEgyMode} from "../felhasznaloegymode";
+import {FelhasznaloContainerMode} from '../felhasznalocontainermode';
+import {FelhasznaloEgyMode} from '../felhasznaloegymode';
 
 @Component({
   selector: 'app-felhasznalo-egy',

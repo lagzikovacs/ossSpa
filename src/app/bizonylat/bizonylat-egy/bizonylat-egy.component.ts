@@ -3,6 +3,7 @@ import {BizonylatService} from '../bizonylat.service';
 import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {ProjektkapcsolatService} from '../../projekt/bizonylatesirat/projektkapcsolat.service';
 import {BizonylatesIratContainerMode} from '../../projekt/bizonylatesirat/bizonylatesiratcontainermode';
+import {BizonylatEgyMode} from "../bizonylategymode";
 
 @Component({
   selector: 'app-bizonylat-egy',
@@ -25,7 +26,9 @@ export class BizonylatEgyComponent {
   reszletek() {}
   torles() {}
   modositas() {}
-  nyomtatas() {}
+  nyomtatas() {
+    this.bizonylatservice.EgyMode = BizonylatEgyMode.Nyomtatas;
+  }
   kifizetes() {}
   irat() {}
 }

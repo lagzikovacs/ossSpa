@@ -13,6 +13,7 @@ import {UjajanlatContainerMode} from '../ujajanlatcontainermode';
 import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 import {BizonylatkapcsolatService} from '../../../bizonylat/bizonylatirat/bizonylatkapcsolat.service';
 import {BizonylatkifizetesService} from '../../../bizonylat/bizonylatkifizetes/bizonylatkifizetes.service';
+import {BizonylatEgyMode} from "../../../bizonylat/bizonylategymode";
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-list',
@@ -96,7 +97,7 @@ export class ProjektBizonylatesiratListComponent {
           this._bizonylatkifizetesservice.Dto = res3.Result;
 
           this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.EgyBizonylat;
-          // TODO bizonylat-egy parameterei
+          this._bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
           this.eppFrissit = false;
         })
         .catch(err => {

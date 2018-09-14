@@ -4,6 +4,8 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {KifizetesDto} from './kifizetesdto';
 import {KifizetesResult} from './kifizetesresult';
 import {environment} from '../../../environments/environment';
+import {NumberResult} from "../../dtos/numberresult";
+import {EmptyResult} from "../../dtos/emptyresult";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,61 @@ export class BizonylatkifizetesService {
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
+
+  public Add(dto: KifizetesDto): Promise<NumberResult> {
+    const url = environment.BaseHref + this._controller + 'add';
+    const body = dto;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+  }
+
+  public CreateNew(): Promise<KifizetesResult> {
+    const url = environment.BaseHref + this._controller + 'createnew';
+    const body = '';
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<KifizetesResult>(url, body, options).toPromise();
+  }
+
+  public Delete(dto: KifizetesDto): Promise<EmptyResult> {
+    const url = environment.BaseHref + this._controller + 'delete';
+    const body = dto;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
+  }
+
+  public Get(key: number): Promise<KifizetesResult> {
+    const url = environment.BaseHref + this._controller + 'get';
+    const body = key;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<KifizetesResult>(url, body, options).toPromise();
+  }
+
+  public Update(dto: KifizetesDto): Promise<NumberResult> {
+    const url = environment.BaseHref + this._controller + 'update';
+    const body = dto;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+  }
 
   public Select(bizonylatkod: number): Promise<KifizetesResult> {
     const url = environment.BaseHref + this._controller + 'select';

@@ -19,12 +19,12 @@ export class ProjektDto {
   PENZNEMKOD: number;
   PENZNEM: string;
   MUNKALAPSZAM: string;
-  KELETKEZETT: Date;
-  MEGRENDELVE: Date;
-  KIVITELEZESIHATARIDO: Date;
+  KELETKEZETT: any;
+  MEGRENDELVE: any;
+  KIVITELEZESIHATARIDO: any;
   MEGJEGYZES: string;
-  LETREHOZVA: Date;
+  LETREHOZVA: any;
   LETREHOZTA: string;
-  MODOSITVA: Date;
+  MODOSITVA: any;
   MODOSITOTTA: string;
 }

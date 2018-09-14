@@ -9,5 +9,6 @@ export enum ProjektEgyMode {
   Iratminta = 8,
   Bizonylatesirat = 9,
   Szamlazasirend = 10,
-  Teendo = 11
+  Teendo = 11,
+  Datumok = 12
 }

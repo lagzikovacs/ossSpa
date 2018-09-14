@@ -33,6 +33,9 @@
       <button [disabled]="eppFrissit" (click)="iratminta()" class="btn btn-sm btn-outline-primary navgomb">
         Iratminta
       </button>
+      <button [disabled]="eppFrissit" (click)="datumok()" class="btn btn-sm btn-outline-primary navgomb">
+        Dátumok
+      </button>
       <button [disabled]="eppFrissit" (click)="bizonylatesirat()" class="btn btn-sm btn-outline-primary navgomb">
         Bizonylat és irat
       </button>
@@ -56,7 +59,8 @@
   Iratminta = 8,
   Bizonylatesirat = 9,
   Szamlazasirend = 10,
-  Teendo = 11
+  Teendo = 11,
+  Datumok = 12
   }-->
 
   <ng-container *ngIf="projektservice.EgyMode === 1">
@@ -91,6 +95,9 @@
   </ng-container>
   <ng-container *ngIf="projektservice.EgyMode === 11">
     <app-projekt-teendo-container></app-projekt-teendo-container>
+  </ng-container>
+  <ng-container *ngIf="projektservice.EgyMode === 12">
+    <app-projekt-datumok></app-projekt-datumok>
   </ng-container>
 
   <app-errormodal [cim]="projektservice.cim"></app-errormodal>

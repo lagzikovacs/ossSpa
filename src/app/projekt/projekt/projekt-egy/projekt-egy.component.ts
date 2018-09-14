@@ -66,6 +66,11 @@ export class ProjektEgyComponent {
   iratminta() {
     this.projektservice.EgyMode = ProjektEgyMode.Iratminta;
   }
+  datumok() {
+    this.projektservice.uj = false;
+    this.projektservice.DtoEdited = Object.assign({}, this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
+    this.projektservice.EgyMode = ProjektEgyMode.Datumok;
+  }
   bizonylatesirat() {
     this.projektservice.EgyMode = ProjektEgyMode.Bizonylatesirat;
     this._projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;

@@ -223,6 +223,7 @@ import { BizonylatKifizetesListComponent } from './bizonylat/bizonylatkifizetes/
 import { BizonylatKifizetesEgyComponent } from './bizonylat/bizonylatkifizetes/bizonylat-kifizetes-egy/bizonylat-kifizetes-egy.component';
 import { BizonylatKifizetesSzerkesztesComponent } from './bizonylat/bizonylatkifizetes/bizonylat-kifizetes-szerkesztes/bizonylat-kifizetes-szerkesztes.component';
 import { BizonylatNyomtatasComponent } from './bizonylat/bizonylat-nyomtatas/bizonylat-nyomtatas.component';
+import { ProjektDatumokComponent } from './projekt/projekt/projekt-datumok/projekt-datumok.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -475,6 +476,7 @@ if (environment.production) {
     BizonylatKifizetesEgyComponent,
     BizonylatKifizetesSzerkesztesComponent,
     BizonylatNyomtatasComponent,
+    ProjektDatumokComponent,
   ],
   imports: [
     BrowserModule,

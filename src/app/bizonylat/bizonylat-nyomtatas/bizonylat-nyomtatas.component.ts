@@ -110,8 +110,4 @@ export class BizonylatNyomtatasComponent implements OnDestroy {
   ngOnDestroy() {
     clearInterval(this.szamlalo);
   }
-
-  navigal() {
-    this._bizonylatservice.EgyMode = BizonylatEgyMode.Blank;
-  }
 }

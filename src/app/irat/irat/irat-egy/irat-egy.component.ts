@@ -9,6 +9,8 @@ import {ProjektkapcsolatService} from '../../../projekt/bizonylatesirat/projektk
 import {BizonylatesIratContainerMode} from '../../../projekt/bizonylatesirat/bizonylatesiratcontainermode';
 import {ProjektService} from "../../../projekt/projekt/projekt.service";
 import {ProjektResult} from "../../../projekt/projekt/projektresult";
+import {BizonylatkapcsolatService} from "../../../bizonylat/bizonylatirat/bizonylatkapcsolat.service";
+import {BizonylatKapcsolatContainerMode} from "../../../bizonylat/bizonylatirat/bizonylatkapcsolatcontainermode";
 
 @Component({
   selector: 'app-irat-egy',
@@ -24,6 +26,7 @@ export class IratEgyComponent {
   nincsProjekt = false;
 
   constructor(private _projektkapcsolatservice: ProjektkapcsolatService,
+              private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
               private _projektservice: ProjektService,
               iratservice: IratService,
               dokumentumservice: DokumentumService) {
@@ -33,6 +36,7 @@ export class IratEgyComponent {
 
   vissza() {
     this._projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
+    this._bizonylatkapcsolatservice.ContainerMode = BizonylatKapcsolatContainerMode.List;
     this.iratservice.ContainerMode = IratContainerMode.List;
     // TODO talán problémát okozhat...
   }

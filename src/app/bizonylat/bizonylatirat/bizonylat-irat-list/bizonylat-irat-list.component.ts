@@ -4,6 +4,11 @@ import {BizonylatkapcsolatService} from "../bizonylatkapcsolat.service";
 import {LogonService} from "../../../logon/logon.service";
 import {BizonylatKapcsolatContainerMode} from "../bizonylatkapcsolatcontainermode";
 import {BizonylatService} from "../../bizonylat.service";
+import {IratService} from "../../../irat/irat/irat.service";
+import {IratContainerMode} from "../../../irat/irat/iratcontainermode";
+import {IratEgyMode} from "../../../irat/irat/irategymode";
+import {DokumentumContainerMode} from "../../../irat/dokumentum/dokumentumcontainermode";
+import {DokumentumService} from "../../../irat/dokumentum/dokumentum.service";
 
 @Component({
   selector: 'app-bizonylat-irat-list',
@@ -18,6 +23,8 @@ export class BizonylatIratListComponent {
 
   constructor(private _logonservice: LogonService,
               private _bizonylatservice: BizonylatService,
+              private _iratservice: IratService,
+              private _dokumentumservice: DokumentumService,
               bizonylatkapcsolatservice: BizonylatkapcsolatService) {
     this.bizonylatkapcsolatservice = bizonylatkapcsolatservice;
   }
@@ -41,7 +48,27 @@ export class BizonylatIratListComponent {
   }
   setClickedRow(i: number) {
     this.bizonylatkapcsolatservice.DtoSelectedIndex = i;
-    // TODO ide az irategy jön
+
+    this.eppFrissit = true;
+    this._iratservice.Get(this.bizonylatkapcsolatservice.Dto[this.bizonylatkapcsolatservice.DtoSelectedIndex].IRATKOD)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this._iratservice.Dto = res.Result;
+        this._iratservice.DtoSelectedIndex = 0;
+
+        this.bizonylatkapcsolatservice.ContainerMode = BizonylatKapcsolatContainerMode.Egy;
+        this._iratservice.ContainerMode = IratContainerMode.List;
+        this._iratservice.EgyMode = IratEgyMode.Dokumentum;
+        this._dokumentumservice.ContainerMode = DokumentumContainerMode.List;
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this.errormodal.show(err);
+      });
   }
   uj() {
     this.bizonylatkapcsolatservice.ContainerMode = BizonylatKapcsolatContainerMode.Uj;

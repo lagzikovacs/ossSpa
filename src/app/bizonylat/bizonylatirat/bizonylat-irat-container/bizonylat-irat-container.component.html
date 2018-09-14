@@ -10,7 +10,9 @@ Levalasztas = 4
 <ng-container *ngIf="bizonylatkapcsolatservice.ContainerMode === 1">
   <app-bizonylat-irat-list></app-bizonylat-irat-list>
 </ng-container>
-
+<ng-container *ngIf="bizonylatkapcsolatservice.ContainerMode === 2">
+  <app-irat-egy></app-irat-egy>
+</ng-container>
 <ng-container *ngIf="bizonylatkapcsolatservice.ContainerMode === 3">
 </ng-container>
 

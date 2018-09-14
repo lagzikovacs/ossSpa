@@ -7,6 +7,7 @@ import {BizonylatKapcsolatDto} from './bizonylatkapcsolatdto';
 import {NumberResult} from "../../dtos/numberresult";
 import {EmptyResult} from "../../dtos/emptyresult";
 import {BizonylatKapcsolatParam} from "./bizonylatkapcsolarparam";
+import {BizonylatKapcsolatContainerMode} from "./bizonylatkapcsolatcontainermode";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,8 @@ export class BizonylatkapcsolatService {
   DtoSelectedIndex = -1;
   uj = false;
   DtoEdited = new BizonylatKapcsolatDto();
+
+  ContainerMode = BizonylatKapcsolatContainerMode.List;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

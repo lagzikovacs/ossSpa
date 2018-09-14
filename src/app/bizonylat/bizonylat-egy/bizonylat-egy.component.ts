@@ -4,6 +4,10 @@ import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {ProjektkapcsolatService} from '../../projekt/bizonylatesirat/projektkapcsolat.service';
 import {BizonylatesIratContainerMode} from '../../projekt/bizonylatesirat/bizonylatesiratcontainermode';
 import {BizonylatEgyMode} from "../bizonylategymode";
+import {BizonylatkifizetesService} from "../bizonylatkifizetes/bizonylatkifizetes.service";
+import {BizonylatKifizetesContainerMode} from "../bizonylatkifizetes/bizonylatkifizetescontainermode";
+import {BizonylatKapcsolatContainerMode} from "../bizonylatirat/bizonylatkapcsolatcontainermode";
+import {BizonylatkapcsolatService} from "../bizonylatirat/bizonylatkapcsolat.service";
 
 @Component({
   selector: 'app-bizonylat-egy',
@@ -15,6 +19,8 @@ export class BizonylatEgyComponent {
   eppFrissit = false;
 
   constructor(private _projektkapcsolatservice: ProjektkapcsolatService,
+              private _bizonylatkifizetesservice: BizonylatkifizetesService,
+              private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
   }
@@ -37,10 +43,10 @@ export class BizonylatEgyComponent {
   }
   kifizetes() {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Kifizetes;
-    // TODO
+    this._bizonylatkifizetesservice.ContainerMode = BizonylatKifizetesContainerMode.List;
   }
   irat() {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Irat;
-    // TODO
+    this._bizonylatkapcsolatservice.ContainerMode = BizonylatKapcsolatContainerMode.List;
   }
 }

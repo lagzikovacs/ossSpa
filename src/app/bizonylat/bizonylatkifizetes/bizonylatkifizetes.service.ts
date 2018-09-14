@@ -4,8 +4,9 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {KifizetesDto} from './kifizetesdto';
 import {KifizetesResult} from './kifizetesresult';
 import {environment} from '../../../environments/environment';
-import {NumberResult} from "../../dtos/numberresult";
-import {EmptyResult} from "../../dtos/emptyresult";
+import {NumberResult} from '../../dtos/numberresult';
+import {EmptyResult} from '../../dtos/emptyresult';
+import {BizonylatKifizetesContainerMode} from './bizonylatkifizetescontainermode';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,8 @@ export class BizonylatkifizetesService {
   DtoSelectedIndex = -1;
   uj = false;
   DtoEdited = new KifizetesDto();
+
+  ContainerMode = BizonylatKifizetesContainerMode.Blank;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

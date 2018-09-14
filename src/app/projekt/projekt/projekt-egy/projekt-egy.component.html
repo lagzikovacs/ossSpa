@@ -1,6 +1,10 @@
 <div class="alapkeret">
   <h5>{{projektservice.cim}}</h5>
-  <h6 *ngIf="projektservice.DtoSelectedIndex !== -1">{{projektservice.Dto[projektservice.DtoSelectedIndex].UGYFELNEV}}, {{projektservice.Dto[projektservice.DtoSelectedIndex].UGYFELCIM}}</h6>
+  <div style="margin-bottom: 10px">
+    <div style="font-size: smaller">{{projektservice.Dto[projektservice.DtoSelectedIndex].PROJEKTKOD}}</div>
+    <div style="font-size: smaller">{{projektservice.Dto[projektservice.DtoSelectedIndex].UGYFELNEV}} {{projektservice.Dto[projektservice.DtoSelectedIndex].UGYFELCIM}}</div>
+    <div style="font-size: smaller">{{projektservice.Dto[projektservice.DtoSelectedIndex].MEGJEGYZES}}</div>
+  </div>
   <div>
     <nav>
       <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">

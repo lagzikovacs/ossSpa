@@ -7,5 +7,6 @@ export enum ZoomSources {
   Projektteendo,
   Projektirat,
   Projekt,
-  Ajanlat
+  Ajanlat,
+  Bizonylatirat
 }

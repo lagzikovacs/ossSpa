@@ -4,10 +4,12 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {BizonylatKapcsolatResult} from './bizonylatkapcsolatresult';
 import {environment} from '../../../environments/environment';
 import {BizonylatKapcsolatDto} from './bizonylatkapcsolatdto';
-import {NumberResult} from "../../dtos/numberresult";
-import {EmptyResult} from "../../dtos/emptyresult";
-import {BizonylatKapcsolatParam} from "./bizonylatkapcsolarparam";
-import {BizonylatKapcsolatContainerMode} from "./bizonylatkapcsolatcontainermode";
+import {NumberResult} from '../../dtos/numberresult';
+import {EmptyResult} from '../../dtos/emptyresult';
+import {BizonylatKapcsolatParam} from './bizonylatkapcsolatparam';
+import {BizonylatKapcsolatContainerMode} from './bizonylatkapcsolatcontainermode';
+import {IratDto} from '../../irat/irat/iratdto';
+import {BizonylatKapcsolatSzerkesztesMode} from "./bizonylatkapcsolatszerkesztesmode";
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +23,10 @@ export class BizonylatkapcsolatService {
   uj = false;
   DtoEdited = new BizonylatKapcsolatDto();
 
+  UjIratDto = new IratDto();
+
   ContainerMode = BizonylatKapcsolatContainerMode.List;
+  SzerkesztesMode = BizonylatKapcsolatSzerkesztesMode.Blank;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
@@ -46,6 +51,17 @@ export class BizonylatkapcsolatService {
     };
 
     return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
+  }
+
+  public Get(bizonylatkapcsolatkod: number): Promise<BizonylatKapcsolatResult> {
+    const url = environment.BaseHref + this._controller + 'get';
+    const body = bizonylatkapcsolatkod;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<BizonylatKapcsolatResult>(url, body, options).toPromise();
   }
 
   public Select(bizonylatkod: number): Promise<BizonylatKapcsolatResult> {

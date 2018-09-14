@@ -11,6 +11,8 @@ import {IrattipusEgyMode} from '../irattipusegymode';
 import {IrattipusContainerMode} from '../irattipuscontainermode';
 import {IratSzerkesztesMode} from '../../irat/irat/iratszerkesztesmode';
 import {BizonylatesiratSzerkesztesMode} from '../../projekt/bizonylatesirat/bizonylatesiratszerkesztesmode';
+import {BizonylatkapcsolatService} from "../../bizonylat/bizonylatirat/bizonylatkapcsolat.service";
+import {BizonylatKapcsolatSzerkesztesMode} from "../../bizonylat/bizonylatirat/bizonylatkapcsolatszerkesztesmode";
 
 @Component({
   selector: 'app-irattipus-list',
@@ -29,6 +31,7 @@ export class IrattipusListComponent implements OnInit {
   constructor(private _logonservice: LogonService,
               private _iratservice: IratService,
               private _projektkapcsolatservice: ProjektkapcsolatService,
+              private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
               irattipusservice: IrattipusService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.irattipusservice = irattipusservice;
@@ -87,6 +90,12 @@ export class IrattipusListComponent implements OnInit {
 
       this.stopzoom();
     }
+    if (this.irattipusservice.zoomsource === ZoomSources.Bizonylatirat) {
+      this._bizonylatkapcsolatservice.UjIratDto.IRATTIPUSKOD = this.irattipusservice.Dto[i].IRATTIPUSKOD;
+      this._bizonylatkapcsolatservice.UjIratDto.IRATTIPUS = this.irattipusservice.Dto[i].IRATTIPUS1;
+
+      this.stopzoom();
+    }
   }
   stopzoom() {
     this.irattipusservice.zoom = false;
@@ -96,6 +105,9 @@ export class IrattipusListComponent implements OnInit {
     }
     if (this.irattipusservice.zoomsource === ZoomSources.Projektirat) {
       this._projektkapcsolatservice.SzerkesztesMode = BizonylatesiratSzerkesztesMode.Blank;
+    }
+    if (this.irattipusservice.zoomsource === ZoomSources.Bizonylatirat) {
+      this._bizonylatkapcsolatservice.SzerkesztesMode = BizonylatKapcsolatSzerkesztesMode.Blank;
     }
   }
 

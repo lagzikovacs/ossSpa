@@ -3,15 +3,18 @@ export enum BizonylatKapcsolatContainerMode {
 Blank = 0,
 List = 1,
 Egy = 2,
-Uj = 3
+Uj = 3,
+Levalasztas = 4
 }-->
 
 <ng-container *ngIf="bizonylatkapcsolatservice.ContainerMode === 1">
   <app-bizonylat-irat-list></app-bizonylat-irat-list>
 </ng-container>
-<ng-container *ngIf="bizonylatkapcsolatservice.ContainerMode === 2">
 
-</ng-container>
 <ng-container *ngIf="bizonylatkapcsolatservice.ContainerMode === 3">
-
 </ng-container>
+
+<ng-container *ngIf="bizonylatkapcsolatservice.ContainerMode === 4">
+  <app-bizonylat-irat-levalasztas></app-bizonylat-irat-levalasztas>
+</ng-container>
+

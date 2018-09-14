@@ -1,3 +1,38 @@
-<p>
-  bizonylat-irat-list works!
-</p>
+<div class="alapkeret">
+  <h5>{{bizonylatkapcsolatservice.cim}}</h5>
+  <div>
+    <nav>
+      <button [disabled]="eppFrissit" (click)="kereses()" class="btn btn-sm btn-outline-primary navgomb" style="margin-right: 3px">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
+      <button [disabled]="eppFrissit" (click)="uj()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>
+      </button>
+    </nav>
+  </div>
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th></th>
+      <th>Id</th>
+      <th>Azonosító</th>
+      <th>Keletkezett</th>
+      <th>Tárgy</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of bizonylatkapcsolatservice.Dto; let i = index">
+      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer;padding-left: 8px;padding-right: 8px"
+          (click)="levalasztas(i)">
+        <i class="fa fa-minus" aria-hidden="true"></i></td>
+      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
+          (click)="setClickedRow(i)">{{item.BIZONYLATKAPCSOLATKOD}}</td>
+      <td>{{item.AZONOSITO}}</td>
+      <td>{{item.KELETKEZETT | datehun}}</td>
+      <td>{{item.TARGY}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <app-errormodal [cim]="bizonylatkapcsolatservice.cim"></app-errormodal>
+</div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

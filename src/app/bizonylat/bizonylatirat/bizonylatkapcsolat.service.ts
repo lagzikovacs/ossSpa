@@ -15,6 +15,7 @@ import {BizonylatKapcsolatContainerMode} from "./bizonylatkapcsolatcontainermode
 export class BizonylatkapcsolatService {
   private readonly _controller = 'api/bizonylatkapcsolat/';
 
+  cim = 'Irat';
   Dto = new Array<BizonylatKapcsolatDto>();
   DtoSelectedIndex = -1;
   uj = false;

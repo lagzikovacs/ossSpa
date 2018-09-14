@@ -36,13 +36,32 @@
 <!--  export enum BizonylatEgyMode {
   Blank = 0,
   Nyomtatas = 1,
-  Reszletek = 2
+  Reszletek = 2,
+  Kifizetes = 3,
+  Irat = 4,
+  Torles = 5,
+  Modositas = 6
   }-->
   <ng-container *ngIf="bizonylatservice.EgyMode === 0">
     <app-blank></app-blank>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 1">
     <app-bizonylat-nyomtatas></app-bizonylat-nyomtatas>
+  </ng-container>
+  <ng-container *ngIf="bizonylatservice.EgyMode === 2">
+    <app-bizonylat-reszletek></app-bizonylat-reszletek>
+  </ng-container>
+  <ng-container *ngIf="bizonylatservice.EgyMode === 3">
+    <app-bizonylat-kifizetes-container></app-bizonylat-kifizetes-container>
+  </ng-container>
+  <ng-container *ngIf="bizonylatservice.EgyMode === 4">
+    <app-bizonylat-irat-container></app-bizonylat-irat-container>
+  </ng-container>
+  <ng-container *ngIf="bizonylatservice.EgyMode === 5">
+    <app-bizonylat-torles></app-bizonylat-torles>
+  </ng-container>
+  <ng-container *ngIf="bizonylatservice.EgyMode === 6">
+    <app-bizonylat-szerkesztes></app-bizonylat-szerkesztes>
   </ng-container>
 
   <app-errormodal [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"></app-errormodal>

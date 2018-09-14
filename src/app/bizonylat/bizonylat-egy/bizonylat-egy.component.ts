@@ -23,12 +23,24 @@ export class BizonylatEgyComponent {
     this.bizonylatservice.ContainerMode = BizonylatContainerMode.List;
     this._projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
   }
-  reszletek() {}
-  torles() {}
-  modositas() {}
+  reszletek() {
+    this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
+  }
+  torles() {
+    this.bizonylatservice.EgyMode = BizonylatEgyMode.Torles;
+  }
+  modositas() {
+    this.bizonylatservice.EgyMode = BizonylatEgyMode.Modositas;
+  }
   nyomtatas() {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Nyomtatas;
   }
-  kifizetes() {}
-  irat() {}
+  kifizetes() {
+    this.bizonylatservice.EgyMode = BizonylatEgyMode.Kifizetes;
+    // TODO
+  }
+  irat() {
+    this.bizonylatservice.EgyMode = BizonylatEgyMode.Irat;
+    // TODO
+  }
 }

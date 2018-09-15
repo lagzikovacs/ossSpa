@@ -14,7 +14,7 @@ import {BizonylatKifizetesContainerMode} from './bizonylatkifizetescontainermode
 export class BizonylatkifizetesService {
   private readonly _controller = 'api/kifizetes/';
 
-  Cim = 'Kifizetés';
+  cim = 'Kifizetés';
 
   Dto = new Array<KifizetesDto>();
   DtoSelectedIndex = -1;

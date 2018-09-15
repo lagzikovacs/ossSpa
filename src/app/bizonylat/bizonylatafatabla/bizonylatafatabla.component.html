@@ -1,0 +1,25 @@
+<table class="table table-bordered table-sm table-responsive" style="border: none">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>ÁFA %</th>
+    <th>Netto</th>
+    <th>ÁFA</th>
+    <th>Brutto</th>
+  </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngFor="let item of Dto; let i = index">
+    <tr>
+      <td *ngIf="enIdclick" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.BIZONYLATAFAKOD}}</td>
+      <td *ngIf="!enIdclick">{{item.BIZONYLATAFAKOD}}</td>
+      <td style="text-align: right">{{item.AFAMERTEKE | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.NETTO | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.AFA | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.BRUTTO | number: '1.2-2'}}</td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>
+
+

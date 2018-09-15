@@ -4,15 +4,18 @@
     <th>Id</th>
     <th>Sorszám</th>
     <th>Ügyfél</th>
-    <th>A bizonylat kelte</th>
-    <th>A teljesítés kelte</th>
+    <th>Bizonylat kelte</th>
+    <th>Teljesítés kelte</th>
     <th>Fizetési mód</th>
     <th>Fizetési határidő</th>
+    <th>Kifizetés rendben</th>
     <th>Pénznem</th>
     <th>Árfolyam</th>
     <th>Netto</th>
     <th>ÁFA</th>
     <th>Brutto</th>
+    <th>Ez stornozo</th>
+    <th>Ez stornozott</th>
   </tr>
   </thead>
   <tbody>
@@ -29,11 +32,17 @@
       <td>{{item.TELJESITESKELTE | datehun}}</td>
       <td>{{item.FIZETESIMOD}}</td>
       <td>{{item.FIZETESIHATARIDO | datehun}}</td>
+      <td *ngIf="item.KIFIZETESRENDBEN">igen</td>
+      <td *ngIf="!item.KIFIZETESRENDBEN"></td>
       <td>{{item.PENZNEM}}</td>
       <td style="text-align: right">{{item.ARFOLYAM | number: '1.2-2'}}</td>
       <td style="text-align: right">{{item.NETTO | number: '1.2-2'}}</td>
       <td style="text-align: right">{{item.AFA | number: '1.2-2'}}</td>
       <td style="text-align: right">{{item.BRUTTO | number: '1.2-2'}}</td>
+      <td *ngIf="item.EZSTORNOZO">igen</td>
+      <td *ngIf="!item.EZSTORNOZO"></td>
+      <td *ngIf="item.EZSTORNOZOTT">igen</td>
+      <td *ngIf="!item.EZSTORNOZOTT"></td>
     </tr>
   </ng-container>
   </tbody>

@@ -1,0 +1,23 @@
+<table class="table table-bordered table-sm table-responsive" style="border: none">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>KT</th>
+    <th>Össztömeg, kg</th>
+    <th>Termékdíj egységár</th>
+    <th>Termékdíj</th>
+  </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngFor="let item of Dto; let i = index">
+    <tr>
+      <td *ngIf="enIdclick" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.BIZONYLATTERMEKDIJKOD}}</td>
+      <td *ngIf="!enIdclick">{{item.BIZONYLATTERMEKDIJKOD}}</td>
+      <td>{{item.TERMEKDIJKT}}</td>
+      <td style="text-align: right">{{item.OSSZTOMEGKG | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.TERMEKDIJEGYSEGAR | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.TERMEKDIJ | number: '1.2-2'}}</td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>

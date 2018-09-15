@@ -1,3 +1,11 @@
-<p>
-  bizonylat-reszletek works!
-</p>
+<div class="alapkeret">
+  <h5>{{bizonylatservice.bizonylatLeiro.BizonylatNev}} részletesen</h5>
+  <div>Bizonylat</div>
+  <app-bizonylattabla [enIdclick]="false" [Dto]="dto"></app-bizonylattabla>
+  <div>Tételek</div>
+  <app-bizonylatteteltabla [enIdclick]="false" [Dto]="bizonylatservice.LstTetelDto"></app-bizonylatteteltabla>
+  <div>ÁFA összesítés</div>
+  <app-bizonylatafatabla [enIdclick]="false" [Dto]="bizonylatservice.LstAfaDto"></app-bizonylatafatabla>
+  <div>Termékdíj összesítés</div>
+  <app-bizonylattermekdijtabla [enIdclick]="false" [Dto]="bizonylatservice.LstTermekdijDto"></app-bizonylattermekdijtabla>
+</div>

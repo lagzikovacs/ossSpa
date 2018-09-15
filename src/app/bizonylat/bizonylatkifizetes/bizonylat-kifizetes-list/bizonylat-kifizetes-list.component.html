@@ -1,3 +1,37 @@
-<p>
-  bizonylat-kifizetes-list works!
-</p>
+<div class="alapkeret">
+  <h5>{{bizonylatkifizetesservice.cim}}</h5>
+  <div>
+    <nav>
+      <button [disabled]="eppFrissit" (click)="kereses()" class="btn btn-sm btn-outline-primary navgomb" style="margin-right: 3px">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
+      <button [disabled]="eppFrissit" (click)="uj()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>
+      </button>
+    </nav>
+  </div>
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Dátum</th>
+      <th>Összeg</th>
+      <th>Pénznem</th>
+      <th>Fizetési mód</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of bizonylatkifizetesservice.Dto; let i = index">
+      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
+          (click)="setClickedRow(i)">{{item.KIFIZETESKOD}}</td>
+      <td>{{item.DATUM | datehun}}</td>
+      <td>{{item.OSSZEG | number: '1.2-2'}}</td>
+      <td>{{item.PENZNEM}}</td>
+      <td>{{item.FIZETESIMOD}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <app-errormodal [cim]="bizonylatkifizetesservice.cim"></app-errormodal>
+</div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>
+

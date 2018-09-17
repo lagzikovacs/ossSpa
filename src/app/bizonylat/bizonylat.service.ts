@@ -15,6 +15,8 @@ import {BizonylatTermekdijDto} from "./bizonylattermekdijdto";
 import {BizonylatAfaDto} from "./bizonylatafadto";
 import {BizonylatTetelDto} from "./bizonylatteteldto";
 import {BizonylatEgyMode} from "./bizonylategymode";
+import {NumberResult} from "../dtos/numberresult";
+import {BizonylatMintaAlapjanParam} from "./bizonylatmintaalapjan";
 
 @Injectable({
   providedIn: 'root'
@@ -123,5 +125,16 @@ export class BizonylatService {
     };
 
     return this._httpClient.post<BizonylatResult>(url, body, options).toPromise();
+  }
+
+  public UjBizonylatMintaAlapjan(par: BizonylatMintaAlapjanParam): Promise<NumberResult> {
+    const url = environment.BaseHref + this._controller + 'ujbizonylatmintaalapjan';
+    const body = par;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
   }
 }

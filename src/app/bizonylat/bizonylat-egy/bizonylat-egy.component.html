@@ -13,10 +13,10 @@
         <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>Részletesen
       </button>
 
-      <button [disabled]="eppFrissit" (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit || !torlesenabled()" (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-minus" aria-hidden="true"></i>
       </button>
-      <button [disabled]="eppFrissit" (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit || !modositasenabled()" (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-edit" aria-hidden="true"></i>
       </button>
 
@@ -24,6 +24,24 @@
         <i class="fa fa-print" style="margin-right: 3px" aria-hidden="true"></i>Nyomtatás
       </button>
 
+      <button [disabled]="eppFrissit" (click)="errol()" class="btn btn-sm btn-outline-primary navgomb">
+        Erről
+      </button>
+      <button [disabled]="eppFrissit || !kibocsatasenabled()" (click)="kibocsatas()" class="btn btn-sm btn-outline-primary navgomb">
+        Kibocsátás
+      </button>
+      <button [disabled]="eppFrissit || !penztarenabled()" (click)="penztar()" class="btn btn-sm btn-outline-primary navgomb">
+        Pénztár
+      </button>
+      <button [disabled]="eppFrissit || !stornoenabled()" (click)="storno()" class="btn btn-sm btn-outline-primary navgomb">
+        Storno
+      </button>
+      <button [disabled]="eppFrissit || !kifizetesrendbenenabled()" (click)="kifizetesrendben()" class="btn btn-sm btn-outline-primary navgomb">
+        Kifizetés rendben
+      </button>
+      <button [disabled]="eppFrissit || !kiszallitvaenabled()" (click)="kiszallitva()" class="btn btn-sm btn-outline-primary navgomb">
+        Kiszállítva
+      </button>
       <button [disabled]="eppFrissit" (click)="kifizetes()" class="btn btn-sm btn-outline-primary navgomb">
         Kifizetés
       </button>
@@ -40,7 +58,13 @@
   Kifizetes = 3,
   Irat = 4,
   Torles = 5,
-  Modositas = 6
+  Modositas = 6,
+  Errol = 7,
+  Kibocsatas = 8,
+  Storno = 9,
+  Penztar = 10,
+  Kifizetesrendben = 11,
+  Kiszallitva = 12
   }-->
   <ng-container *ngIf="bizonylatservice.EgyMode === 0">
     <app-blank></app-blank>
@@ -62,6 +86,26 @@
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 6">
     <app-bizonylat-szerkesztes></app-bizonylat-szerkesztes>
+  </ng-container>
+  <ng-container *ngIf="bizonylatservice.EgyMode === 7">
+    <app-bizonylat-errol></app-bizonylat-errol>
+  </ng-container>
+
+  <ng-container *ngIf="bizonylatservice.EgyMode === 8">
+    <app-bizonylat-kibocsatas></app-bizonylat-kibocsatas>
+  </ng-container>
+  <ng-container *ngIf="bizonylatservice.EgyMode === 9">
+    <app-bizonylat-storno></app-bizonylat-storno>
+  </ng-container>
+
+  <ng-container *ngIf="bizonylatservice.EgyMode === 10">
+    <app-bizonylat-penztar></app-bizonylat-penztar>
+  </ng-container>
+  <ng-container *ngIf="bizonylatservice.EgyMode === 11">
+    <app-bizonylat-kifizetesrendben></app-bizonylat-kifizetesrendben>
+  </ng-container>
+  <ng-container *ngIf="bizonylatservice.EgyMode === 12">
+    <app-bizonylat-kiszallitva></app-bizonylat-kiszallitva>
   </ng-container>
 
   <app-errormodal [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"></app-errormodal>

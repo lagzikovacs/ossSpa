@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {LogonService} from '../../../logon/logon.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
@@ -13,7 +13,7 @@ import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
   templateUrl: './projekt-bizonylatesirat-ujbizonylat.component.html',
   styleUrls: ['./projekt-bizonylatesirat-ujbizonylat.component.css']
 })
-export class ProjektBizonylatesiratUjbizonylatComponent implements OnInit {
+export class ProjektBizonylatesiratUjbizonylatComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektkapcsolatservice: ProjektkapcsolatService;
@@ -33,9 +33,6 @@ export class ProjektBizonylatesiratUjbizonylatComponent implements OnInit {
               private _ugyfelservice: UgyfelService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.projektkapcsolatservice = projektkapcsolatservice;
-  }
-
-  ngOnInit() {
   }
 
   change(i) {
@@ -99,8 +96,6 @@ export class ProjektBizonylatesiratUjbizonylatComponent implements OnInit {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
-
-
   }
   cancel() {
     this.navigal();

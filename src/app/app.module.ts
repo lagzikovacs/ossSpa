@@ -233,6 +233,12 @@ import { BizonylatIratUjComponent } from './bizonylat/bizonylatirat/bizonylat-ir
 import { BizonylatteteltablaComponent } from './bizonylat/bizonylatteteltabla/bizonylatteteltabla.component';
 import { BizonylatafatablaComponent } from './bizonylat/bizonylatafatabla/bizonylatafatabla.component';
 import { BizonylattermekdijtablaComponent } from './bizonylat/bizonylattermekdijtabla/bizonylattermekdijtabla.component';
+import { BizonylatErrolComponent } from './bizonylat/bizonylat-errol/bizonylat-errol.component';
+import { BizonylatKibocsatasComponent } from './bizonylat/bizonylat-kibocsatas/bizonylat-kibocsatas.component';
+import { BizonylatStornoComponent } from './bizonylat/bizonylat-storno/bizonylat-storno.component';
+import { BizonylatPenztarComponent } from './bizonylat/bizonylat-penztar/bizonylat-penztar.component';
+import { BizonylatKifizetesrendbenComponent } from './bizonylat/bizonylat-kifizetesrendben/bizonylat-kifizetesrendben.component';
+import { BizonylatKiszallitvaComponent } from './bizonylat/bizonylat-kiszallitva/bizonylat-kiszallitva.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -495,6 +501,12 @@ if (environment.production) {
     BizonylatteteltablaComponent,
     BizonylatafatablaComponent,
     BizonylattermekdijtablaComponent,
+    BizonylatErrolComponent,
+    BizonylatKibocsatasComponent,
+    BizonylatStornoComponent,
+    BizonylatPenztarComponent,
+    BizonylatKifizetesrendbenComponent,
+    BizonylatKiszallitvaComponent,
   ],
   imports: [
     BrowserModule,

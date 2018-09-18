@@ -6,12 +6,14 @@ import {ZoomSources} from '../../enums/zoomsources';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {SzamlazasirendService} from '../../projekt/szamlazasirend/szamlazasirend.service';
-import {PenznemEgyMode} from "../penznemegymode";
-import {PenznemContainerMode} from "../penznemcontainermode";
-import {PenztarSzerkesztesMode} from "../../penztar/penztarszerkesztesmode";
-import {ProjektService} from "../../projekt/projekt/projekt.service";
-import {ProjektSzerkesztesMode} from "../../projekt/projekt/projektszerkesztesmode";
-import {SzamlazasirendSzerkesztesMode} from "../../projekt/szamlazasirend/szamlazasirendszerkesztesmode";
+import {PenznemEgyMode} from '../penznemegymode';
+import {PenznemContainerMode} from '../penznemcontainermode';
+import {PenztarSzerkesztesMode} from '../../penztar/penztarszerkesztesmode';
+import {ProjektService} from '../../projekt/projekt/projekt.service';
+import {ProjektSzerkesztesMode} from '../../projekt/projekt/projektszerkesztesmode';
+import {SzamlazasirendSzerkesztesMode} from '../../projekt/szamlazasirend/szamlazasirendszerkesztesmode';
+import {BizonylatkifizetesService} from '../../bizonylat/bizonylatkifizetes/bizonylatkifizetes.service';
+import {BizonylatKifizetesSzerkesztesMode} from '../../bizonylat/bizonylatkifizetes/bizonylatkifizetesszerkesztesmode';
 
 @Component({
   selector: 'app-penznem-list',
@@ -31,7 +33,8 @@ export class PenznemListComponent implements OnInit {
               penznemservice: PenznemService,
               private _penztarservice: PenztarService,
               private _projektservice: ProjektService,
-              private _szamlazasirendservice: SzamlazasirendService) {
+              private _szamlazasirendservice: SzamlazasirendService,
+              private _bizonylatkifizetesservice: BizonylatkifizetesService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.penznemservice = penznemservice;
   }
@@ -89,6 +92,10 @@ export class PenznemListComponent implements OnInit {
       this._szamlazasirendservice.DtoEdited.PENZNEMKOD = this.penznemservice.Dto[i].PENZNEMKOD;
       this._szamlazasirendservice.DtoEdited.PENZNEM = this.penznemservice.Dto[i].PENZNEM1;
     }
+    if (this.penznemservice.zoomsource === ZoomSources.Bizonylatkifizetes) {
+      this._bizonylatkifizetesservice.DtoEdited.PENZNEMKOD = this.penznemservice.Dto[i].PENZNEMKOD;
+      this._bizonylatkifizetesservice.DtoEdited.PENZNEM = this.penznemservice.Dto[i].PENZNEM1;
+    }
 
     this.stopzoom();
   }
@@ -103,6 +110,9 @@ export class PenznemListComponent implements OnInit {
     }
     if (this.penznemservice.zoomsource === ZoomSources.Szamlazasirend) {
       this._szamlazasirendservice.SzerkesztesMode = SzamlazasirendSzerkesztesMode.Blank;
+    }
+    if (this.penznemservice.zoomsource === ZoomSources.Bizonylatkifizetes) {
+      this._bizonylatkifizetesservice.SzerkesztesMode = BizonylatKifizetesSzerkesztesMode.Blank;
     }
   }
 

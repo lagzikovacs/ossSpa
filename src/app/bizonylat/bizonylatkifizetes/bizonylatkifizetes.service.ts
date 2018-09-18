@@ -7,6 +7,8 @@ import {environment} from '../../../environments/environment';
 import {NumberResult} from '../../dtos/numberresult';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {BizonylatKifizetesContainerMode} from './bizonylatkifizetescontainermode';
+import {BizonylatKifizetesSzerkesztesMode} from "./bizonylatkifizetesszerkesztesmode";
+import {BizonylatKifizetesEgyMode} from "./bizonylatkifizetesegymode";
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +24,8 @@ export class BizonylatkifizetesService {
   DtoEdited = new KifizetesDto();
 
   ContainerMode = BizonylatKifizetesContainerMode.Blank;
+  EgyMode = BizonylatKifizetesEgyMode.Reszletek;
+  SzerkesztesMode = BizonylatKifizetesSzerkesztesMode.Blank;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

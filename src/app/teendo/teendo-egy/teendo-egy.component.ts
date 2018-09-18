@@ -3,8 +3,8 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {TeendoService} from '../teendo.service';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
-import {TeendoContainerMode} from "../teendocontainermode";
-import {TeendoEgyMode} from "../teendoegymode";
+import {TeendoContainerMode} from '../teendocontainermode';
+import {TeendoEgyMode} from '../teendoegymode';
 
 @Component({
   selector: 'app-teendo-egy',

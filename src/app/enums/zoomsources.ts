@@ -8,5 +8,6 @@ export enum ZoomSources {
   Projektirat,
   Projekt,
   Ajanlat,
-  Bizonylatirat
+  Bizonylatirat,
+  Bizonylatkifizetes
 }

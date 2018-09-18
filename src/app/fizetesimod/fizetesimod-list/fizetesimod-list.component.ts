@@ -1,18 +1,20 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {FizetesimodService} from '../fizetesimod.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
-import {FizetesimodContainerMode} from "../fizetesimodcontainermode";
-import {FizetesimodEgyMode} from "../fizetesimodegymode";
+import {FizetesimodContainerMode} from '../fizetesimodcontainermode';
+import {FizetesimodEgyMode} from '../fizetesimodegymode';
+import {ZoomSources} from '../../enums/zoomsources';
+import {BizonylatkifizetesService} from '../../bizonylat/bizonylatkifizetes/bizonylatkifizetes.service';
+import {BizonylatKifizetesSzerkesztesMode} from '../../bizonylat/bizonylatkifizetes/bizonylatkifizetesszerkesztesmode';
 
 @Component({
   selector: 'app-fizetesimod-list',
   templateUrl: './fizetesimod-list.component.html',
   styleUrls: ['./fizetesimod-list.component.css']
 })
-export class FizetesimodListComponent {
+export class FizetesimodListComponent implements OnInit {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Fizetési mód'];
@@ -22,9 +24,16 @@ export class FizetesimodListComponent {
   fizetesimodservice: FizetesimodService;
 
   constructor(private _logonservice: LogonService,
+              private _bizonylatkifizetesservice: BizonylatkifizetesService,
               fizetesimodservice: FizetesimodService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.fizetesimodservice = fizetesimodservice;
+  }
+
+  ngOnInit() {
+    if (this.fizetesimodservice.zoom) {
+      this.onKereses();
+    }
   }
 
   onKereses() {
@@ -62,12 +71,19 @@ export class FizetesimodListComponent {
   }
 
   selectforzoom(i: number) {
-    // TODO
-    this.setClickedRow(i);
+    if (this.fizetesimodservice.zoomsource === ZoomSources.Bizonylatkifizetes) {
+      this._bizonylatkifizetesservice.DtoEdited.FIZETESIMODKOD = this.fizetesimodservice.Dto[i].FIZETESIMODKOD;
+      this._bizonylatkifizetesservice.DtoEdited.FIZETESIMOD = this.fizetesimodservice.Dto[i].FIZETESIMOD1;
+    }
+
+    this.stopzoom();
   }
   stopzoom() {
     this.fizetesimodservice.zoom = false;
-    // TODO
+
+    if (this.fizetesimodservice.zoomsource === ZoomSources.Bizonylatkifizetes) {
+      this._bizonylatkifizetesservice.SzerkesztesMode = BizonylatKifizetesSzerkesztesMode.Blank;
+    }
   }
 
   setClickedRow(i: number) {

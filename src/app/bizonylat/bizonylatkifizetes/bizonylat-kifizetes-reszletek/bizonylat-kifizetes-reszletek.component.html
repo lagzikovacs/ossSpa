@@ -1,0 +1,45 @@
+<div class="alapkeret">
+  <h5>{{bizonylatkifizetesservice.cim}} részletesen</h5>
+  <table class="table ng table-bordered table-sm table-responsive" style="border: none">
+    <tbody>
+    <tr>
+      <td class="egylabel">Id:</td>
+      <td>{{bizonylatkifizetesservice.Dto[bizonylatkifizetesservice.DtoSelectedIndex].KIFIZETESKOD}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Dátum:</td>
+      <td>{{bizonylatkifizetesservice.Dto[bizonylatkifizetesservice.DtoSelectedIndex].DATUM | datehun}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Összeg:</td>
+      <td>{{bizonylatkifizetesservice.Dto[bizonylatkifizetesservice.DtoSelectedIndex].OSSZEG | number: '1.2-2'}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Pénznem:</td>
+      <td>{{bizonylatkifizetesservice.Dto[bizonylatkifizetesservice.DtoSelectedIndex].PENZNEM}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Fizetési mód:</td>
+      <td>{{bizonylatkifizetesservice.Dto[bizonylatkifizetesservice.DtoSelectedIndex].FIZETESIMOD}}</td>
+    </tr>
+
+    <tr>
+      <td class="egylabel">Létrehozta:</td>
+      <td>{{bizonylatkifizetesservice.Dto[bizonylatkifizetesservice.DtoSelectedIndex].LETREHOZTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Létrehozva:</td>
+      <td>{{bizonylatkifizetesservice.Dto[bizonylatkifizetesservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosította:</td>
+      <td>{{bizonylatkifizetesservice.Dto[bizonylatkifizetesservice.DtoSelectedIndex].MODOSITOTTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosítva:</td>
+      <td>{{bizonylatkifizetesservice.Dto[bizonylatkifizetesservice.DtoSelectedIndex].MODOSITVA | datetimehun}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

@@ -1,16 +1,15 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import * as moment from 'moment';
-import {ErrormodalComponent} from "../../../errormodal/errormodal.component";
-import {BizonylatkapcsolatService} from "../bizonylatkapcsolat.service";
-import {IratService} from "../../../irat/irat/irat.service";
-import {IrattipusService} from "../../../irattipus/irattipus.service";
-import {IrattipusContainerMode} from "../../../irattipus/irattipuscontainermode";
-import {ZoomSources} from "../../../enums/zoomsources";
-import {BizonylatService} from "../../bizonylat.service";
-import {BizonylatKapcsolatParam} from "../bizonylatkapcsolatparam";
-import {BizonylatContainerMode} from "../../bizonylatcontainermode";
-import {BizonylatKapcsolatContainerMode} from "../bizonylatkapcsolatcontainermode";
-import {BizonylatKapcsolatSzerkesztesMode} from "../bizonylatkapcsolatszerkesztesmode";
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
+import {IratService} from '../../../irat/irat/irat.service';
+import {IrattipusService} from '../../../irattipus/irattipus.service';
+import {IrattipusContainerMode} from '../../../irattipus/irattipuscontainermode';
+import {ZoomSources} from '../../../enums/zoomsources';
+import {BizonylatService} from '../../bizonylat.service';
+import {BizonylatKapcsolatParam} from '../bizonylatkapcsolatparam';
+import {BizonylatKapcsolatContainerMode} from '../bizonylatkapcsolatcontainermode';
+import {BizonylatKapcsolatSzerkesztesMode} from '../bizonylatkapcsolatszerkesztesmode';
 
 @Component({
   selector: 'app-bizonylat-irat-uj',

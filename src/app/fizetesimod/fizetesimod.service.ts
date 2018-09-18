@@ -10,6 +10,7 @@ import {NumberResult} from '../dtos/numberresult';
 import {EmptyResult} from '../dtos/emptyresult';
 import {FizetesimodEgyMode} from './fizetesimodegymode';
 import {FizetesimodContainerMode} from './fizetesimodcontainermode';
+import {FizetesimodZoomParameter} from "./fiztesimodzoomparameter";
 
 @Injectable({
   providedIn: 'root'
@@ -97,5 +98,16 @@ export class FizetesimodService {
     };
 
     return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+  }
+
+  public ZoomCheck(par: FizetesimodZoomParameter): Promise<EmptyResult> {
+    const url = environment.BaseHref + this._controller + 'zoomcheck';
+    const body = par;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
   }
 }

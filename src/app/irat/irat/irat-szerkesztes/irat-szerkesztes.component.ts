@@ -88,7 +88,7 @@ export class IratSzerkesztesComponent implements OnInit {
 
   IrattipusZoom() {
     this._irattipusservice.ekDto.minta = this.iratservice.DtoEdited.IRATTIPUS || '';
-    this._irattipusservice.zoomsource = ZoomSources.Projektirat;
+    this._irattipusservice.zoomsource = ZoomSources.Irat;
     this._irattipusservice.zoom = true;
     this._irattipusservice.ContainerMode = IrattipusContainerMode.List;
 

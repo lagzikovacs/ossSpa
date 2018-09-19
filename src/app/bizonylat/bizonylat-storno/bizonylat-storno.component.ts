@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import {BizonylatService} from '../bizonylat.service';
 
 @Component({
   selector: 'app-bizonylat-storno',
   templateUrl: './bizonylat-storno.component.html',
   styleUrls: ['./bizonylat-storno.component.css']
 })
-export class BizonylatStornoComponent implements OnInit {
+export class BizonylatStornoComponent {
+  bizonylatservice: BizonylatService;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(bizonylatservice: BizonylatService) {
+    this.bizonylatservice = bizonylatservice;
   }
-
 }

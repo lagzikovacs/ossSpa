@@ -182,4 +182,15 @@ export class BizonylatService {
 
     return this._httpClient.post<NumberResult>(url, body, options).toPromise();
   }
+
+  public Storno(dto: BizonylatDto): Promise<NumberResult> {
+    const url = environment.BaseHref + this._controller + 'storno';
+    const body = dto;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+  }
 }

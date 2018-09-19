@@ -26,6 +26,9 @@
       <td style="text-align: right">{{item.AFA | number: '1.2-2'}}</td>
       <td style="text-align: right">{{item.BRUTTO | number: '1.2-2'}}</td>
     </tr>
+    <tr *ngIf="item.MEGJEGYZES || '' !== ''">
+      <td colspan="9">{{item.MEGJEGYZES}}</td>
+    </tr>
   </ng-container>
   </tbody>
 </table>

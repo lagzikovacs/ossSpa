@@ -1,3 +1,5 @@
-<p>
-  bizonylat-storno works!
-</p>
+<div class="alapkeret">
+  <h5>{{bizonylatservice.bizonylatLeiro.BizonylatNev}} storno</h5>
+  <app-errormodal [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"></app-errormodal>
+</div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

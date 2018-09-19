@@ -44,6 +44,9 @@
       <td *ngIf="item.EZSTORNOZOTT">igen</td>
       <td *ngIf="!item.EZSTORNOZOTT"></td>
     </tr>
+    <tr *ngIf="item.MEGJEGYZESFEJ || '' !== ''">
+      <td colspan="15">{{item.MEGJEGYZESFEJ}}</td>
+    </tr>
   </ng-container>
   </tbody>
 </table>

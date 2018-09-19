@@ -52,8 +52,17 @@ export class BizonylatEgyComponent {
   }
   stornoenabled(): boolean {
     return this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATSZAM !== null &&
+      this.bizonylatservice.bizonylatLeiro.Stornozhato &&
       !this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].EZSTORNOZOTT &&
       !this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].EZSTORNOZO;
+  }
+  formaiellenorzesenabled(): boolean {
+    return (this.bizonylatservice.bizonylatLeiro.BizonylatTipus === BizonylatTipus.Szamla ||
+      this.bizonylatservice.bizonylatLeiro.BizonylatTipus === BizonylatTipus.BejovoSzamla);
+  }
+  osnxmlenabled(): boolean {
+    return (this.bizonylatservice.bizonylatLeiro.BizonylatTipus === BizonylatTipus.Szamla ||
+      this.bizonylatservice.bizonylatLeiro.BizonylatTipus === BizonylatTipus.BejovoSzamla);
   }
 
   vissza() {
@@ -98,4 +107,6 @@ export class BizonylatEgyComponent {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Irat;
     this._bizonylatkapcsolatservice.ContainerMode = BizonylatKapcsolatContainerMode.List;
   }
+  formaiellenorzes() {}
+  osnxml() {}
 }

@@ -48,6 +48,13 @@
       <button [disabled]="eppFrissit" (click)="irat()" class="btn btn-sm btn-outline-primary navgomb">
         Irat
       </button>
+
+      <button [disabled]="eppFrissit || !formaiellenorzesenabled()" (click)="formaiellenorzes()" class="btn btn-sm btn-outline-primary navgomb">
+        Formai elenőrzés
+      </button>
+      <button [disabled]="eppFrissit || !osnxmlenabled()" (click)="osnxml()" class="btn btn-sm btn-outline-primary navgomb">
+        OSN xml
+      </button>
     </nav>
   </div>
 

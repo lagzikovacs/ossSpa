@@ -1,3 +1,33 @@
-<p>
-  bizonylat-kibocsatas works!
-</p>
+<div class="alapkeret">
+  <h5>{{bizonylatservice.bizonylatLeiro.BizonylatNev}} kibocsátás</h5>
+
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <ng-container *ngIf="!bizonylatservice.bizonylatLeiro.GenBizonylatszam">
+      <div class="row no-gutters editform-row">
+        <div class="col-md-2">
+          <div class="editform-title">Bizonylatszám</div>
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control form-control-sm" id="bizonylatszam"
+                 maxlength="20" required autocomplete="off"
+                 [(ngModel)]="bizonylatszam" name="bizonylatszam">
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="PenznemZoom()">...</button>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="bizonylatservice.bizonylatLeiro.GenBizonylatszam">
+      <div>Biztosan kibocsátja ezt a bizonylatot?</div>
+    </ng-container>
+
+    <div class="row no-gutters" style="margin-bottom: 10px">
+      <div class="col-md-2"></div>
+      <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
+      <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
+    </div>
+  </form>
+
+  <app-errormodal [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"></app-errormodal>
+</div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {BizonylatService} from "../bizonylat.service";
 
 @Component({
   selector: 'app-bizonylat-kibocsatas',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bizonylat-kibocsatas.component.css']
 })
 export class BizonylatKibocsatasComponent implements OnInit {
+  bizonylatservice: BizonylatService;
+  eppFrissit = '';
+  bizonylatszam = '';
 
-  constructor() { }
+  constructor(bizonylatservice: BizonylatService) {
+    this.bizonylatservice = bizonylatservice;
+  }
 
   ngOnInit() {
   }
 
+  onSubmit() {}
+  cancel() {}
 }

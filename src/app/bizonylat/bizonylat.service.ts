@@ -18,6 +18,7 @@ import {BizonylatEgyMode} from "./bizonylategymode";
 import {NumberResult} from "../dtos/numberresult";
 import {BizonylatMintaAlapjanParam} from "./bizonylatmintaalapjan";
 import {StringResult} from "../dtos/stringresult";
+import {BizonylatKibocsatasParam} from "./bizonylatkibocsatasparam";
 
 @Injectable({
   providedIn: 'root'
@@ -186,6 +187,17 @@ export class BizonylatService {
   public Storno(dto: BizonylatDto): Promise<NumberResult> {
     const url = environment.BaseHref + this._controller + 'storno';
     const body = dto;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+  }
+
+  public Kibocsatas(par: BizonylatKibocsatasParam): Promise<NumberResult> {
+    const url = environment.BaseHref + this._controller + 'kibocsatas';
+    const body = par;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
       params: new HttpParams().set('sid', this._logonservice.Sid)

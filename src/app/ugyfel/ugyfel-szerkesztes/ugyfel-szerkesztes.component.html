@@ -73,8 +73,11 @@
       </div>
       <div class="col-md-2">
         <input type="text" class="form-control form-control-sm" id="adoszam"
-               maxlength="20" required autocomplete="off"
+               maxlength="20" autocomplete="off"
                [(ngModel)]="ugyfelservice.DtoEdited.ADOSZAM" name="adoszam">
+      </div>
+      <div class="col-md-8" style="color: red">
+        <div style="margin-left: 5px">Magánszemélynél legyen üres, egyébként a megfelelő formátumú!</div>
       </div>
     </div>
     <div class="row no-gutters editform-row">

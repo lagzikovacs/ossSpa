@@ -39,10 +39,11 @@ export class BizonylatEgyComponent {
     return this.bizonylatservice.bizonylatTipus === BizonylatTipus.Megrendeles;
   }
   kifizetesrendbenenabled(): boolean {
-    return this.bizonylatservice.bizonylatTipus === BizonylatTipus.Szamla ||
+    return (this.bizonylatservice.bizonylatTipus === BizonylatTipus.Szamla ||
       this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
       this.bizonylatservice.bizonylatTipus === BizonylatTipus.DijBekero ||
-      this.bizonylatservice.bizonylatTipus === BizonylatTipus.ElolegSzamla;
+      this.bizonylatservice.bizonylatTipus === BizonylatTipus.ElolegSzamla) &&
+      this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATSZAM !== null;
   }
   penztarenabled(): boolean {
     return (this.bizonylatservice.bizonylatTipus === BizonylatTipus.Szamla ||

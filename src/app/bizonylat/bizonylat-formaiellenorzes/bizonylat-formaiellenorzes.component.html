@@ -1,3 +1,6 @@
-<p>
-  bizonylat-formaiellenorzes works!
-</p>
+<div class="alapkeret">
+  <h5>{{bizonylatservice.bizonylatLeiro.BizonylatNev}} formai ellenőrzése</h5>
+  <div>{{result}}</div>
+  <app-errormodal [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"></app-errormodal>
+</div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

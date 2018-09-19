@@ -17,6 +17,7 @@ import {BizonylatTetelDto} from "./bizonylatteteldto";
 import {BizonylatEgyMode} from "./bizonylategymode";
 import {NumberResult} from "../dtos/numberresult";
 import {BizonylatMintaAlapjanParam} from "./bizonylatmintaalapjan";
+import {StringResult} from "../dtos/stringresult";
 
 @Injectable({
   providedIn: 'root'
@@ -130,6 +131,50 @@ export class BizonylatService {
   public UjBizonylatMintaAlapjan(par: BizonylatMintaAlapjanParam): Promise<NumberResult> {
     const url = environment.BaseHref + this._controller + 'ujbizonylatmintaalapjan';
     const body = par;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+  }
+
+  public SzamlaTartalmiEllenorzese(bizonylatKod: number): Promise<StringResult> {
+    const url = environment.BaseHref + this._controller + 'szamlatartalmiellenorzese';
+    const body = bizonylatKod;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<StringResult>(url, body, options).toPromise();
+  }
+
+  public LetoltesOsnxmlFormatumban(bizonylatKod: number): Promise<StringResult> {
+    const url = environment.BaseHref + this._controller + 'letoltesosnxmlformatumban';
+    const body = bizonylatKod;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<StringResult>(url, body, options).toPromise();
+  }
+
+  public KifizetesRendben(dto: BizonylatDto): Promise<NumberResult> {
+    const url = environment.BaseHref + this._controller + 'kifizetesrendben';
+    const body = dto;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+  }
+
+  public Kiszallitva(dto: BizonylatDto): Promise<NumberResult> {
+    const url = environment.BaseHref + this._controller + 'kiszallitva';
+    const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
       params: new HttpParams().set('sid', this._logonservice.Sid)

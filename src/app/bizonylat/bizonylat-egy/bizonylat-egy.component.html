@@ -50,7 +50,7 @@
       </button>
 
       <button [disabled]="eppFrissit || !formaiellenorzesenabled()" (click)="formaiellenorzes()" class="btn btn-sm btn-outline-primary navgomb">
-        Formai elenőrzés
+        Formai ellenőrzés
       </button>
       <button [disabled]="eppFrissit || !osnxmlenabled()" (click)="osnxml()" class="btn btn-sm btn-outline-primary navgomb">
         OSN xml
@@ -71,7 +71,9 @@
   Storno = 9,
   Penztar = 10,
   Kifizetesrendben = 11,
-  Kiszallitva = 12
+  Kiszallitva = 12,
+  Formaiellenorzes = 13,
+  OSNxml = 14
   }-->
   <ng-container *ngIf="bizonylatservice.EgyMode === 0">
     <app-blank></app-blank>
@@ -113,6 +115,13 @@
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 12">
     <app-bizonylat-kiszallitva></app-bizonylat-kiszallitva>
+  </ng-container>
+
+  <ng-container *ngIf="bizonylatservice.EgyMode === 13">
+    <app-bizonylat-formaiellenorzes></app-bizonylat-formaiellenorzes>
+  </ng-container>
+  <ng-container *ngIf="bizonylatservice.EgyMode === 14">
+    <app-bizonylat-osnxml></app-bizonylat-osnxml>
   </ng-container>
 
   <app-errormodal [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"></app-errormodal>

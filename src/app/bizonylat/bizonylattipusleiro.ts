@@ -2,7 +2,7 @@ import {JogKod} from '../enums/jogkod';
 import {BizonylatTipus} from './bizonylattipus';
 
 export class BizonylatTipusLeiro {
-  BizonylatTipus: BizonylatTipus;
+  bizonylatTipus: BizonylatTipus;
   BizonylatNev: string;
   BizonylatFejlec: string;
   GenBizonylatszam: boolean;

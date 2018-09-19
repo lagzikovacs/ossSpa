@@ -11,5 +11,7 @@ export enum BizonylatEgyMode {
   Storno = 9,
   Penztar = 10,
   Kifizetesrendben = 11,
-  Kiszallitva = 12
+  Kiszallitva = 12,
+  Formaiellenorzes = 13,
+  OSNxml = 14
 }

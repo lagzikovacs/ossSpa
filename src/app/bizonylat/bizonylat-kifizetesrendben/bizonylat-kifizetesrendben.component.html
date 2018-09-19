@@ -1,3 +1,7 @@
-<p>
-  bizonylat-kifizetesrendben works!
-</p>
+<div class="alapkeret">
+  <h5>{{bizonylatservice.bizonylatLeiro.BizonylatNev}} kifizetés</h5>
+  <div>Kifizetés rendben: {{bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].KIFIZETESRENDBEN | boolhun}}</div>
+  <button class="btn btn-sm btn-primary" [disabled]="eppFrissit" (click)="modositas()">Módosítás</button>
+  <app-errormodal [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"></app-errormodal>
+</div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

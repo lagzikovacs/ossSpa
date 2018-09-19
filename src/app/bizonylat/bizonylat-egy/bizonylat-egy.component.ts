@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {ProjektkapcsolatService} from '../../projekt/bizonylatesirat/projektkapcsolat.service';
@@ -39,14 +39,14 @@ export class BizonylatEgyComponent {
     return this.bizonylatservice.bizonylatTipus === BizonylatTipus.Megrendeles;
   }
   kifizetesrendbenenabled(): boolean {
-    return this.bizonylatservice.bizonylatLeiro.BizonylatTipus === BizonylatTipus.Szamla ||
-      this.bizonylatservice.bizonylatLeiro.BizonylatTipus === BizonylatTipus.BejovoSzamla ||
-      this.bizonylatservice.bizonylatLeiro.BizonylatTipus === BizonylatTipus.DijBekero ||
-      this.bizonylatservice.bizonylatLeiro.BizonylatTipus === BizonylatTipus.ElolegSzamla;
+    return this.bizonylatservice.bizonylatTipus === BizonylatTipus.Szamla ||
+      this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
+      this.bizonylatservice.bizonylatTipus === BizonylatTipus.DijBekero ||
+      this.bizonylatservice.bizonylatTipus === BizonylatTipus.ElolegSzamla;
   }
   penztarenabled(): boolean {
-    return (this.bizonylatservice.bizonylatLeiro.BizonylatTipus === BizonylatTipus.Szamla ||
-      this.bizonylatservice.bizonylatLeiro.BizonylatTipus === BizonylatTipus.BejovoSzamla) &&
+    return (this.bizonylatservice.bizonylatTipus === BizonylatTipus.Szamla ||
+      this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla) &&
       this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATSZAM !== null &&
       this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].FIZETESIMOD === 'Készpénz';
   }
@@ -57,12 +57,12 @@ export class BizonylatEgyComponent {
       !this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].EZSTORNOZO;
   }
   formaiellenorzesenabled(): boolean {
-    return (this.bizonylatservice.bizonylatLeiro.BizonylatTipus === BizonylatTipus.Szamla ||
-      this.bizonylatservice.bizonylatLeiro.BizonylatTipus === BizonylatTipus.BejovoSzamla);
+    return (this.bizonylatservice.bizonylatTipus === BizonylatTipus.Szamla ||
+    this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla);
   }
   osnxmlenabled(): boolean {
-    return (this.bizonylatservice.bizonylatLeiro.BizonylatTipus === BizonylatTipus.Szamla ||
-      this.bizonylatservice.bizonylatLeiro.BizonylatTipus === BizonylatTipus.BejovoSzamla);
+    return (this.bizonylatservice.bizonylatTipus === BizonylatTipus.Szamla ||
+      this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla);
   }
 
   vissza() {
@@ -107,6 +107,10 @@ export class BizonylatEgyComponent {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Irat;
     this._bizonylatkapcsolatservice.ContainerMode = BizonylatKapcsolatContainerMode.List;
   }
-  formaiellenorzes() {}
-  osnxml() {}
+  formaiellenorzes() {
+    this.bizonylatservice.EgyMode = BizonylatEgyMode.Formaiellenorzes;
+  }
+  osnxml() {
+    this.bizonylatservice.EgyMode = BizonylatEgyMode.OSNxml;
+  }
 }

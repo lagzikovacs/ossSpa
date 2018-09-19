@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {BizonylatService} from "../bizonylat.service";
+import {ErrormodalComponent} from "../../errormodal/errormodal.component";
 
 @Component({
   selector: 'app-bizonylat-formaiellenorzes',
@@ -6,10 +8,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bizonylat-formaiellenorzes.component.css']
 })
 export class BizonylatFormaiellenorzesComponent implements OnInit {
+  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
-  constructor() { }
+  bizonylatservice: BizonylatService;
+  eppFrissit = false;
+  result = '';
 
-  ngOnInit() {
+  constructor(bizonylatservice: BizonylatService) {
+    this.bizonylatservice = bizonylatservice
   }
 
+  ngOnInit() {
+    this.eppFrissit = true;
+    this.bizonylatservice.SzamlaTartalmiEllenorzese(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATKOD)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.result = res.Result;
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this.errormodal.show(err);
+      });
+  }
 }

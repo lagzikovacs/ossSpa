@@ -66,9 +66,9 @@ export class ProjektBizonylatesiratListComponent {
           this._bizonylatservice.DtoSelectedIndex = 0;
           this._bizonylatservice.bizonylatTipus = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].BIZONYLATTIPUSKOD;
 
-          this._bizonylatservice.LstTetelDto = res.Result[0].LstTetelDto;
-          this._bizonylatservice.LstAfaDto = res.Result[0].LstAfaDto;
-          this._bizonylatservice.LstTermekdijDto = res.Result[0].LstTermekdijDto;
+          this._bizonylatservice.TetelDto = res.Result[0].LstTetelDto;
+          this._bizonylatservice.AfaDto = res.Result[0].LstAfaDto;
+          this._bizonylatservice.TermekdijDto = res.Result[0].LstTermekdijDto;
 
           return this._bizonylatservice.GetBizonylatLeiro(); // ez megcsinálja az értékadásokat is
         })

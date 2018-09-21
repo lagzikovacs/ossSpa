@@ -10,7 +10,7 @@ import {CikkContainerMode} from '../cikkcontainermode';
 import {CikkEgyMode} from '../cikkegymode';
 import {ProjektkapcsolatService} from '../../projekt/bizonylatesirat/projektkapcsolat.service';
 import {ZoomSources} from '../../enums/zoomsources';
-import {UjajanlatSzerkesztesMode} from "../../projekt/bizonylatesirat/ujajanlatszerkesztesmode";
+import {UjajanlatSzerkesztesMode} from '../../projekt/bizonylatesirat/ujajanlatszerkesztesmode';
 
 @Component({
   selector: 'app-cikk-list',

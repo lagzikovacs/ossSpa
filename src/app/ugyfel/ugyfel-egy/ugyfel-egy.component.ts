@@ -17,6 +17,7 @@ export class UgyfelEgyComponent {
   ugyfelservice: UgyfelService;
   mod = false;
   eppFrissit = false;
+  nincsProjekt = false;
 
   constructor(private _logonservice: LogonService,
               ugyfelservice: UgyfelService) {
@@ -37,5 +38,10 @@ export class UgyfelEgyComponent {
     this.ugyfelservice.uj = false;
     this.ugyfelservice.DtoEdited = Object.assign({}, this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
     this.ugyfelservice.EgyMode = UgyfelEgyMode.Modositas;
+  }
+  projekt() {
+    // this.ugyfelservice.EgyMode = UgyfelEgyMode.Projekt
+    // TODO a projekt-list módszerével le lehet kérdezni, csak ne a projekt service-be kerüljenek a rekordok
+    // mert projektből ügyfél zoomnál összeakad, pl.
   }
 }

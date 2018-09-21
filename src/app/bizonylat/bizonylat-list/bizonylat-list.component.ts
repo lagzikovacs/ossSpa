@@ -5,8 +5,8 @@ import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {BizonylatkapcsolatService} from '../bizonylatirat/bizonylatkapcsolat.service';
-import {BizonylatkifizetesService} from "../bizonylatkifizetes/bizonylatkifizetes.service";
-import {BizonylatEgyMode} from "../bizonylategymode";
+import {BizonylatkifizetesService} from '../bizonylatkifizetes/bizonylatkifizetes.service';
+import {BizonylatEgyMode} from '../bizonylategymode';
 
 @Component({
   selector: 'app-bizonylat-list',
@@ -79,9 +79,9 @@ export class BizonylatListComponent {
         }
 
         this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex] = res.Result[0].Dto;
-        this.bizonylatservice.LstTetelDto = res.Result[0].LstTetelDto;
-        this.bizonylatservice.LstAfaDto = res.Result[0].LstAfaDto;
-        this.bizonylatservice.LstTermekdijDto = res.Result[0].LstTermekdijDto;
+        this.bizonylatservice.TetelDto = res.Result[0].LstTetelDto;
+        this.bizonylatservice.AfaDto = res.Result[0].LstAfaDto;
+        this.bizonylatservice.TermekdijDto = res.Result[0].LstTermekdijDto;
 
         return this._bizonylatkapcsolatservice.Select(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATKOD);
       })
@@ -111,22 +111,20 @@ export class BizonylatListComponent {
   }
 
   onUj() {
-    // this.eppFrissit = true;
-    // this.projektservice.CreateNew()
-    //   .then(res => {
-    //     if (res.Error !== null) {
-    //       throw res.Error;
-    //     }
-    //
-    //     this.projektservice.DtoEdited = res.Result[0];
-    //     this.projektservice.uj = true;
-    //     this.eppFrissit = false;
-    //     this.projektservice.ContainerMode = ProjektContainerMode.Uj;
-    //     this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
-    //   })
-    //   .catch(err => {
-    //     this.eppFrissit = false;
-    //     this.errormodal.show(err);
-    //   });
+    this.eppFrissit = true;
+    this.bizonylatservice.CreateNewComplex()
+      .then(res => {
+        if (res.Error !== null) {
+          throw res.Error;
+        }
+
+        this.bizonylatservice.uj = true;
+        this.eppFrissit = false;
+        this.bizonylatservice.ContainerMode = BizonylatContainerMode.Uj;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this.errormodal.show(err);
+      });
   }
 }

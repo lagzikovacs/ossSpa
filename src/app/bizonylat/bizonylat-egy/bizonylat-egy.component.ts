@@ -82,6 +82,8 @@ export class BizonylatEgyComponent {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Torles;
   }
   modositas() {
+    this.bizonylatservice.uj = false;
+    // TODO itt másolat készül
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Modositas;
   }
   nyomtatas() {

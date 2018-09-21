@@ -17,9 +17,11 @@ export class ErrormodalComponent {
 
   @Input() cim: string;
   hiba: any;
+  ahibastring = true;
 
   show(hiba: any) {
     this.hiba = hiba;
+    this.ahibastring = typeof(hiba) === 'string';
 
     $('#' + this.idrandom).modal('show');
   }

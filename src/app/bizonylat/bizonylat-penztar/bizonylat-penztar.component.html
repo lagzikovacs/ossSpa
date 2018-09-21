@@ -1,3 +1,30 @@
-<p>
-  bizonylat-penztar works!
-</p>
+<div class="alapkeret">
+  <h5>{{bizonylatservice.bizonylatLeiro.BizonylatNev}} pénztári kezelése</h5>
+  <ng-container *ngIf="bizonylatservice.BizonylatPenztarDto.length > 0">
+    <div>A bizonylat pénznemének megfelelő nyitott pénztárak a következők, válassza ki a megfelelőt:</div>
+    <table class="table table-bordered table-sm table-responsive" style="border: none">
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>Pénztár</th>
+        <th>Pénznem</th>
+        <th>Egyenleg</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of bizonylatservice.BizonylatPenztarDto; let i = index">
+        <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
+            (click)="penztarvalasztas(i)">{{item.PENZTARKOD}}</td>
+        <td>{{item.PENZTAR1}}</td>
+        <td>{{item.PENZNEM}}</td>
+        <td>{{item.EGYENLEG}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </ng-container>
+  <ng-container *ngIf="bizonylatservice.BizonylatPenztarDto.length === 0">
+    <div>Nincs a bizonylat pénznemének megfelelő nyitott pénztár!</div>
+  </ng-container>
+  <app-errormodal [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"></app-errormodal>
+</div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

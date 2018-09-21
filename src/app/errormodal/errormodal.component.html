@@ -5,7 +5,13 @@
         <h5 class="modal-title">{{cim}}</h5>
       </div>
       <div id="projektmodal" class="modal-body" style="color: red">
-        {{hiba}}
+        <ng-container *ngIf="ahibastring">
+          {{hiba}}
+        </ng-container>
+        <ng-container *ngIf="!ahibastring">
+          <p>{{hiba.status}} {{hiba.statusText}}</p>
+          <p>{{hiba.url}}</p>
+        </ng-container>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" (click)="halejart()">Ok</button>

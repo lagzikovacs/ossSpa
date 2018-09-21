@@ -19,6 +19,7 @@ import {NumberResult} from "../dtos/numberresult";
 import {BizonylatMintaAlapjanParam} from "./bizonylatmintaalapjan";
 import {StringResult} from "../dtos/stringresult";
 import {BizonylatKibocsatasParam} from "./bizonylatkibocsatasparam";
+import {PenztarDto} from "../penztar/penztardto";
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,8 @@ export class BizonylatService {
 
   ContainerMode = BizonylatContainerMode.List;
   EgyMode = BizonylatEgyMode.Reszletek;
+
+  BizonylatPenztarDto = new Array<PenztarDto>();
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
@@ -83,6 +86,17 @@ export class BizonylatService {
     };
 
     return this._httpClient.post<BizonylatComplexResult>(url, body, options).toPromise();
+  }
+
+  public Delete(dto: BizonylatDto): Promise<EmptyResult> {
+    const url = environment.BaseHref + this._controller + 'delete';
+    const body = dto;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
   }
 
   public Get(bizonylatkod: number): Promise<BizonylatResult> {

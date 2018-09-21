@@ -99,6 +99,16 @@ export class PenztarService {
 
     return this._httpClient.post<PenztarResult>(url, JSON.stringify(body), options).toPromise();
   }
+  public ReadByCurrencyOpened(penznemkod: number): Promise<PenztarResult> {
+    const url = environment.BaseHref + this._controller + 'readbycurrencyopened';
+    const body = penznemkod;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<PenztarResult>(url, JSON.stringify(body), options).toPromise();
+  }
 
   public Update(dto: PenztarDto): Promise<NumberResult> {
     const url = environment.BaseHref + this._controller + 'update';

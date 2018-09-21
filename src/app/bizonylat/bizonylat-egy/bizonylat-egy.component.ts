@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {ProjektkapcsolatService} from '../../projekt/bizonylatesirat/projektkapcsolat.service';
@@ -9,6 +9,8 @@ import {BizonylatKifizetesContainerMode} from '../bizonylatkifizetes/bizonylatki
 import {BizonylatKapcsolatContainerMode} from '../bizonylatirat/bizonylatkapcsolatcontainermode';
 import {BizonylatkapcsolatService} from '../bizonylatirat/bizonylatkapcsolat.service';
 import {BizonylatTipus} from '../bizonylattipus';
+import {PenztarService} from '../../penztar/penztar.service';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-bizonylat-egy',
@@ -16,12 +18,15 @@ import {BizonylatTipus} from '../bizonylattipus';
   styleUrls: ['./bizonylat-egy.component.css']
 })
 export class BizonylatEgyComponent {
+  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
+
   bizonylatservice: BizonylatService;
   eppFrissit = false;
 
   constructor(private _projektkapcsolatservice: ProjektkapcsolatService,
               private _bizonylatkifizetesservice: BizonylatkifizetesService,
               private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
+              private _penztarsevice: PenztarService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
   }
@@ -89,7 +94,22 @@ export class BizonylatEgyComponent {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Kibocsatas;
   }
   penztar() {
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Penztar;
+    this.eppFrissit = true;
+    this._penztarsevice.ReadByCurrencyOpened(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].PENZNEMKOD)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.bizonylatservice.BizonylatPenztarDto = res.Result;
+
+        this.bizonylatservice.EgyMode = BizonylatEgyMode.Penztar;
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this.errormodal.show(err);
+      });
   }
   storno() {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Storno;

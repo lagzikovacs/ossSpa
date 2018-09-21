@@ -5,6 +5,6 @@
     <button class="btn btn-sm btn-primary" [disabled]="eppFrissit" type="button" (click)="ok()">Ok</button>
     <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
   </div>
-  <app-errormodal [cim]="bizonylatservice.cim"></app-errormodal>
+  <app-errormodal [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"></app-errormodal>
 </div>
 <app-spinner *ngIf="eppFrissit"></app-spinner>

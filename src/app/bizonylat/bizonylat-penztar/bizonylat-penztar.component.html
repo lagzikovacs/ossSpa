@@ -1,6 +1,6 @@
 <div class="alapkeret">
   <h5>{{bizonylatservice.bizonylatLeiro.BizonylatNev}} pénztári kezelése</h5>
-  <ng-container *ngIf="bizonylatservice.BizonylatPenztarDto.length > 0">
+  <ng-container *ngIf="bizonylatservice.BizonylatPenztarDto.length > 0 && !penztarkivalasztva">
     <div>A bizonylat pénznemének megfelelő nyitott pénztárak a következők, válassza ki a megfelelőt:</div>
     <table class="table table-bordered table-sm table-responsive" style="border: none">
       <thead>
@@ -21,6 +21,66 @@
       </tr>
       </tbody>
     </table>
+  </ng-container>
+  <ng-container *ngIf="penztarkivalasztva">
+    <form #f="ngForm" (ngSubmit)="onSubmit()">
+      <div class="row no-gutters editform-row">
+        <div class="col-md-2">
+          <div class="editform-title">Pénztár</div>
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control form-control-sm" id="penztar"
+                 readonly="true"
+                 [(ngModel)]="bizonylatservice.BizonylatPenztarDto[penztarindex].PENZTAR1" name="penztar">
+        </div>
+      </div>
+      <div class="row no-gutters editform-row">
+        <div class="col-md-2">
+          <div class="editform-title">Pénznem</div>
+        </div>
+        <div class="col-md-1">
+          <input type="text" class="form-control form-control-sm" id="penznem"
+                 readonly="true"
+                 [(ngModel)]="bizonylatservice.BizonylatPenztarDto[penztarindex].PENZNEM" name="penznem">
+        </div>
+      </div>
+      <div class="row no-gutters editform-row">
+        <div class="col-md-2">
+          <div class="editform-title">Egyenleg</div>
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control form-control-sm" id="egyenleg"
+                 readonly="true"
+                 [(ngModel)]="bizonylatservice.BizonylatPenztarDto[penztarindex].EGYENLEG" name="egyenleg">
+        </div>
+      </div>
+      <div class="row no-gutters editform-row">
+        <div class="col-md-2">
+          <div class="editform-title">Összeg</div>
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control form-control-sm" id="osszeg"
+                 readonly="true"
+                 [(ngModel)]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].BRUTTO" name="osszeg">
+        </div>
+      </div>
+      <div class="row no-gutters editform-row">
+        <div class="col-md-2">
+          <div class="editform-title">Megjegyzés</div>
+        </div>
+        <div class="col-md-4">
+          <input type="text" class="form-control form-control-sm" id="megjegyzes"
+                 autocomplete="off"
+                 [(ngModel)]="megjegyzes" name="megjegyzes">
+        </div>
+      </div>
+
+      <div class="row no-gutters" style="margin-bottom: 10px">
+        <div class="col-md-2"></div>
+        <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
+        <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
+      </div>
+    </form>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.BizonylatPenztarDto.length === 0">
     <div>Nincs a bizonylat pénznemének megfelelő nyitott pénztár!</div>

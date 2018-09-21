@@ -82,9 +82,26 @@ export class BizonylatEgyComponent {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Torles;
   }
   modositas() {
-    this.bizonylatservice.uj = false;
-    // TODO itt másolat készül
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Modositas;
+    // itt másolat szokott készülni az aktuális rekordról
+    // most a complex miatt egyszerűbb újra lekérni
+
+    this.eppFrissit = true;
+    this.bizonylatservice.GetComplex(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATKOD)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.bizonylatservice.ComplexDtoEdited = res.Result[0];
+
+        this.bizonylatservice.uj = false;
+        this.eppFrissit = false;
+        this.bizonylatservice.EgyMode = BizonylatEgyMode.Modositas;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this.errormodal.show(err);
+      });
   }
   nyomtatas() {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Nyomtatas;

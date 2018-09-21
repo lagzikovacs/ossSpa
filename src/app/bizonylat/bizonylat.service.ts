@@ -34,11 +34,13 @@ export class BizonylatService {
   Dto = new Array<BizonylatDto>();
   DtoSelectedIndex = -1;
 
+  // ezek csak a részletek megjelenítéséhez kellenek
   TetelDto = new Array<BizonylatTetelDto>();
   AfaDto = new Array<BizonylatAfaDto>();
   TermekdijDto = new Array<BizonylatTermekdijDto>();
 
-  ComplexDto = new BizonylatComplexDto();
+  ComplexDtoEdited = new BizonylatComplexDto();
+  DtoTetelSelectedIndex = -1;
 
   uj = false;
   DtoEdited = new BizonylatDto();

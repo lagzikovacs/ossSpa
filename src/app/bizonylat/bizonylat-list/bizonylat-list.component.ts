@@ -118,6 +118,8 @@ export class BizonylatListComponent {
           throw res.Error;
         }
 
+        this.bizonylatservice.ComplexDtoEdited = res.Result[0];
+
         this.bizonylatservice.uj = true;
         this.eppFrissit = false;
         this.bizonylatservice.ContainerMode = BizonylatContainerMode.Uj;

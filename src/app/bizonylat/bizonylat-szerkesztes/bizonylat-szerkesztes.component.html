@@ -1,3 +1,6 @@
-<p>
-  bizonylat-szerkesztes works!
-</p>
+<div class="alapkeret">
+  <h5 *ngIf="bizonylatservice.uj">Új {{bizonylatservice.bizonylatLeiro.BizonylatNev | lowercase}}</h5>
+  <h5 *ngIf="!bizonylatservice.uj">{{bizonylatservice.bizonylatLeiro.BizonylatNev}} módosítása</h5>
+  <app-errormodal [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"></app-errormodal>
+</div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

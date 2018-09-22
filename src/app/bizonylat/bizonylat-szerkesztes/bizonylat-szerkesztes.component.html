@@ -1,6 +1,133 @@
 <div class="alapkeret">
   <h5 *ngIf="bizonylatservice.uj">Új {{bizonylatservice.bizonylatLeiro.BizonylatNev | lowercase}}</h5>
   <h5 *ngIf="!bizonylatservice.uj">{{bizonylatservice.bizonylatLeiro.BizonylatNev}} módosítása</h5>
+
+  <div class="row no-gutters editform-row">
+    <div class="col-md-1">
+      <div class="editform-title">Ügyfél</div>
+    </div>
+    <div class="col-md-4">
+      <input type="text" class="form-control form-control-sm" id="ugyfelnev"
+             maxlength="200" required autocomplete="off" style="background-color: aquamarine"
+             [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.UGYFELNEV">
+    </div>
+    <div class="col-md-1">
+      <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button">...</button>
+    </div>
+    <div class="col-md-2">
+      <div class="editform-title">Pénznem</div>
+    </div>
+    <div class="col-md-1">
+      <input type="text" class="form-control form-control-sm" id="penznem"
+             maxlength="3" required autocomplete="off" style="background-color: aquamarine"
+             [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.PENZNEM">
+    </div>
+    <div class="col-md-1">
+      <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button">...</button>
+    </div>
+  </div>
+  <div class="row no-gutters editform-row">
+    <div class="col-md-1">
+      <div class="editform-title"></div>
+    </div>
+    <div class="col-md-4">
+      <input type="text" class="form-control form-control-sm" id="ugyfelcim"
+             readonly="true">
+    </div>
+    <div class="col-md-3">
+      <div class="editform-title">Árfolyam</div>
+    </div>
+    <div class="col-md-2">
+      <input type="number" class="form-control form-control-sm" id="arfolyam"
+             [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.ARFOLYAM">
+    </div>
+  </div>
+  <div class="row no-gutters editform-row">
+    <div class="col-md-1">
+      <div class="editform-title">Megjegyzés</div>
+    </div>
+    <div class="col-md-4">
+      <input type="text" class="form-control form-control-sm" id="megjegyzes"
+             maxlength="200" autocomplete="off"
+             [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.MEGJEGYZESFEJ" name="megjegyzes">
+    </div>
+    <div class="col-md-3">
+      <div class="editform-title">Fizetési mód</div>
+    </div>
+    <div class="col-md-2">
+      <input type="text" class="form-control form-control-sm" id="fizetesimod"
+             maxlength="20" required autocomplete="off" style="background-color: aquamarine"
+             [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.FIZETESIMOD" name="megjegyzes">
+    </div>
+    <div class="col-md-1">
+      <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button">...</button>
+      <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button">Bk</button>
+      <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button">Kp</button>
+    </div>
+  </div>
+  <div class="row no-gutters editform-row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-4 input-group">
+      <input type="text" class="form-control form-control-sm" id="netto" style="text-align:right"
+             readonly="true" [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.NETTO">
+      <input type="text" class="form-control form-control-sm" id="afa" style="text-align:right"
+             readonly="true" [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.AFA">
+      <input type="text" class="form-control form-control-sm" id="brutto" style="text-align:right"
+             readonly="true" [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.BRUTTO">
+    </div>
+    <div class="col-md-3">
+      <div class="editform-title">A teljesítés kelte</div>
+    </div>
+    <div class="col-md-2">
+      <input type="date" class="form-control form-control-sm" id="teljesiteskelte">
+    </div>
+  </div>
+  <div class="row no-gutters editform-row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-3">
+      <div class="editform-title">Fizetési határidő</div>
+    </div>
+    <div class="col-md-2">
+      <input type="date" class="form-control form-control-sm" id="fizetesihatarido">
+    </div>
+  </div>
+
+<!--  export enum BizonylatSzerkesztesMode {
+  List = 1,
+  UgyfelZoom = 2,
+  PenznemZoom = 3,
+  FizetesimodZoom = 4
+  }-->
+
+  <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 1">
+    <nav>
+      <button [disabled]="eppFrissit" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>
+      </button>
+    </nav>
+    <app-bizonylatteteltabla [enIdclick]="false" [Dto]="bizonylatservice.ComplexDtoEdited.LstTetelDto"></app-bizonylatteteltabla>
+  </ng-container>
+  <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 2">
+    <app-ugyfel-container></app-ugyfel-container>
+  </ng-container>
+  <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 3">
+    <app-penznem-container></app-penznem-container>
+  </ng-container>
+  <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 4">
+    <app-fizetesimod-container></app-fizetesimod-container>
+  </ng-container>
+
+  <div class="row no-gutters" style="margin-bottom: 10px">
+    <button class="btn btn-sm btn-primary" [disabled]="eppFrissit || bizonylatservice.SzerkesztesMode !== 1"
+            type="button" (click)="onSubmit()">Ok</button>
+    <button class="btn btn-sm btn-default" [disabled]="eppFrissit || bizonylatservice.SzerkesztesMode !== 1"
+            style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
+  </div>
+
   <app-errormodal [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"></app-errormodal>
 </div>
 <app-spinner *ngIf="eppFrissit"></app-spinner>

@@ -11,6 +11,7 @@ import {BizonylatkapcsolatService} from '../bizonylatirat/bizonylatkapcsolat.ser
 import {BizonylatTipus} from '../bizonylattipus';
 import {PenztarService} from '../../penztar/penztar.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {BizonylatSzerkesztesMode} from "../bizonylatszerkesztesmode";
 
 @Component({
   selector: 'app-bizonylat-egy',
@@ -97,6 +98,7 @@ export class BizonylatEgyComponent {
         this.bizonylatservice.uj = false;
         this.eppFrissit = false;
         this.bizonylatservice.EgyMode = BizonylatEgyMode.Modositas;
+        this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
       })
       .catch(err => {
         this.eppFrissit = false;

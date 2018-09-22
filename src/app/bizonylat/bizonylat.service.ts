@@ -21,6 +21,7 @@ import {StringResult} from '../dtos/stringresult';
 import {BizonylatKibocsatasParam} from './bizonylatkibocsatasparam';
 import {PenztarDto} from '../penztar/penztardto';
 import {BizonylatComplexDto} from './bizonylatcomplexdto';
+import {BizonylatSzerkesztesMode} from "./bizonylatszerkesztesmode";
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +53,7 @@ export class BizonylatService {
 
   ContainerMode = BizonylatContainerMode.List;
   EgyMode = BizonylatEgyMode.Reszletek;
+  SzerkesztesMode = BizonylatSzerkesztesMode.List;
 
   BizonylatPenztarDto = new Array<PenztarDto>();
 

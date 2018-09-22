@@ -7,6 +7,7 @@ import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {BizonylatkapcsolatService} from '../bizonylatirat/bizonylatkapcsolat.service';
 import {BizonylatkifizetesService} from '../bizonylatkifizetes/bizonylatkifizetes.service';
 import {BizonylatEgyMode} from '../bizonylategymode';
+import {BizonylatSzerkesztesMode} from "../bizonylatszerkesztesmode";
 
 @Component({
   selector: 'app-bizonylat-list',
@@ -123,6 +124,7 @@ export class BizonylatListComponent {
         this.bizonylatservice.uj = true;
         this.eppFrissit = false;
         this.bizonylatservice.ContainerMode = BizonylatContainerMode.Uj;
+        this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
       })
       .catch(err => {
         this.eppFrissit = false;

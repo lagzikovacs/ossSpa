@@ -53,6 +53,15 @@ export class BizonylatSzerkesztesComponent {
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.FizetesimodZoom;
   }
 
+  tetelUj() {
+    this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.TetelSzerkesztes;
+  }
+  tetelTorles(i: number) {
+  }
+  tetelModositas(i: number) {
+    this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.TetelSzerkesztes;
+  }
+
   onSubmit() {}
   cancel() {
     if (this.bizonylatservice.uj) {

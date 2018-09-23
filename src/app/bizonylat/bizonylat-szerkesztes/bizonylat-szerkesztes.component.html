@@ -13,6 +13,7 @@
     </div>
     <div class="col-md-1">
       <button class="btn btn-sm btn-outline-primary" (click)="UgyfelZoom()"
+              [disabled] = "bizonylatservice.SzerkesztesMode !== 1"
               style="margin-left: 4px" type="button">...</button>
     </div>
     <div class="col-md-2">
@@ -25,6 +26,7 @@
     </div>
     <div class="col-md-1">
       <button class="btn btn-sm btn-outline-primary" (click)="PenznemZoom()"
+              [disabled] = "bizonylatservice.SzerkesztesMode !== 1"
               style="margin-left: 4px" type="button">...</button>
     </div>
   </div>
@@ -64,6 +66,7 @@
     </div>
     <div class="col-md-1">
       <button class="btn btn-sm btn-outline-primary" (click)="FizetesimodZoom()"
+              [disabled] = "bizonylatservice.SzerkesztesMode !== 1"
               style="margin-left: 4px" type="button">...</button>
       <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button">Bk</button>
       <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button">Kp</button>
@@ -104,16 +107,18 @@
   List = 1,
   UgyfelZoom = 2,
   PenznemZoom = 3,
-  FizetesimodZoom = 4
+  FizetesimodZoom = 4,
+  TetelSzerkesztes = 5
   }-->
 
   <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 1">
     <nav>
-      <button [disabled]="eppFrissit" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit" (click)="tetelUj()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>
       </button>
     </nav>
-    <app-bizonylatteteltabla [enIdclick]="false" [Dto]="bizonylatservice.ComplexDtoEdited.LstTetelDto"></app-bizonylatteteltabla>
+    <app-bizonylatteteltabla [enEdit]="true" (torles)="tetelTorles($event)" (modositas)="tetelModositas($event)"
+                             [Dto]="bizonylatservice.ComplexDtoEdited.LstTetelDto"></app-bizonylatteteltabla>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 2">
     <app-ugyfel-container></app-ugyfel-container>
@@ -123,6 +128,9 @@
   </ng-container>
   <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 4">
     <app-fizetesimod-container></app-fizetesimod-container>
+  </ng-container>
+  <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 5">
+    <app-bizonylat-tetel-szerkesztes></app-bizonylat-tetel-szerkesztes>
   </ng-container>
 
   <div class="row no-gutters" style="margin-bottom: 10px">

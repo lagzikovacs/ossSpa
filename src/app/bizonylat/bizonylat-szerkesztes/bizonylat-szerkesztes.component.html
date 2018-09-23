@@ -12,7 +12,8 @@
              [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.UGYFELNEV">
     </div>
     <div class="col-md-1">
-      <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button">...</button>
+      <button class="btn btn-sm btn-outline-primary" (click)="UgyfelZoom()"
+              style="margin-left: 4px" type="button">...</button>
     </div>
     <div class="col-md-2">
       <div class="editform-title">Pénznem</div>
@@ -23,7 +24,8 @@
              [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.PENZNEM">
     </div>
     <div class="col-md-1">
-      <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button">...</button>
+      <button class="btn btn-sm btn-outline-primary" (click)="PenznemZoom()"
+              style="margin-left: 4px" type="button">...</button>
     </div>
   </div>
   <div class="row no-gutters editform-row">
@@ -32,7 +34,8 @@
     </div>
     <div class="col-md-4">
       <input type="text" class="form-control form-control-sm" id="ugyfelcim"
-             readonly="true">
+             readonly="true"
+             [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.UGYFELCIM">
     </div>
     <div class="col-md-3">
       <div class="editform-title">Árfolyam</div>
@@ -60,7 +63,8 @@
              [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.FIZETESIMOD" name="megjegyzes">
     </div>
     <div class="col-md-1">
-      <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button">...</button>
+      <button class="btn btn-sm btn-outline-primary" (click)="FizetesimodZoom()"
+              style="margin-left: 4px" type="button">...</button>
       <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button">Bk</button>
       <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button">Kp</button>
     </div>

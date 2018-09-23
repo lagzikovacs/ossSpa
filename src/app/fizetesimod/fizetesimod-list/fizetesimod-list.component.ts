@@ -8,6 +8,8 @@ import {FizetesimodEgyMode} from '../fizetesimodegymode';
 import {ZoomSources} from '../../enums/zoomsources';
 import {BizonylatkifizetesService} from '../../bizonylat/bizonylatkifizetes/bizonylatkifizetes.service';
 import {BizonylatKifizetesSzerkesztesMode} from '../../bizonylat/bizonylatkifizetes/bizonylatkifizetesszerkesztesmode';
+import {BizonylatService} from "../../bizonylat/bizonylat.service";
+import {BizonylatSzerkesztesMode} from "../../bizonylat/bizonylatszerkesztesmode";
 
 @Component({
   selector: 'app-fizetesimod-list',
@@ -25,6 +27,7 @@ export class FizetesimodListComponent implements OnInit {
 
   constructor(private _logonservice: LogonService,
               private _bizonylatkifizetesservice: BizonylatkifizetesService,
+              private _bizonylatservice: BizonylatService,
               fizetesimodservice: FizetesimodService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.fizetesimodservice = fizetesimodservice;
@@ -75,6 +78,10 @@ export class FizetesimodListComponent implements OnInit {
       this._bizonylatkifizetesservice.DtoEdited.FIZETESIMODKOD = this.fizetesimodservice.Dto[i].FIZETESIMODKOD;
       this._bizonylatkifizetesservice.DtoEdited.FIZETESIMOD = this.fizetesimodservice.Dto[i].FIZETESIMOD1;
     }
+    if (this.fizetesimodservice.zoomsource === ZoomSources.Bizonylat) {
+      this._bizonylatservice.ComplexDtoEdited.Dto.FIZETESIMODKOD = this.fizetesimodservice.Dto[i].FIZETESIMODKOD;
+      this._bizonylatservice.ComplexDtoEdited.Dto.FIZETESIMOD = this.fizetesimodservice.Dto[i].FIZETESIMOD1;
+    }
 
     this.stopzoom();
   }
@@ -83,6 +90,9 @@ export class FizetesimodListComponent implements OnInit {
 
     if (this.fizetesimodservice.zoomsource === ZoomSources.Bizonylatkifizetes) {
       this._bizonylatkifizetesservice.SzerkesztesMode = BizonylatKifizetesSzerkesztesMode.Blank;
+    }
+    if (this.fizetesimodservice.zoomsource === ZoomSources.Bizonylat) {
+      this._bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
     }
   }
 

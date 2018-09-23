@@ -17,6 +17,7 @@ export class BizonylatDto {
   UGYFELKOZTERULET: string;
   UGYFELKOZTERULETTIPUS: string;
   UGYFELHAZSZAM: string;
+  UGYFELCIM: string;
   UGYFELADOSZAM: string;
   BIZONYLATKELTE: any;
   TELJESITESKELTE: any;

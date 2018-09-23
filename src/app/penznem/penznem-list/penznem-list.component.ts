@@ -14,6 +14,8 @@ import {ProjektSzerkesztesMode} from '../../projekt/projekt/projektszerkesztesmo
 import {SzamlazasirendSzerkesztesMode} from '../../projekt/szamlazasirend/szamlazasirendszerkesztesmode';
 import {BizonylatkifizetesService} from '../../bizonylat/bizonylatkifizetes/bizonylatkifizetes.service';
 import {BizonylatKifizetesSzerkesztesMode} from '../../bizonylat/bizonylatkifizetes/bizonylatkifizetesszerkesztesmode';
+import {BizonylatService} from "../../bizonylat/bizonylat.service";
+import {BizonylatSzerkesztesMode} from "../../bizonylat/bizonylatszerkesztesmode";
 
 @Component({
   selector: 'app-penznem-list',
@@ -30,11 +32,12 @@ export class PenznemListComponent implements OnInit {
   penznemservice: PenznemService;
 
   constructor(private _logonservice: LogonService,
-              penznemservice: PenznemService,
               private _penztarservice: PenztarService,
               private _projektservice: ProjektService,
               private _szamlazasirendservice: SzamlazasirendService,
-              private _bizonylatkifizetesservice: BizonylatkifizetesService) {
+              private _bizonylatkifizetesservice: BizonylatkifizetesService,
+              private _bizonylatservice: BizonylatService,
+              penznemservice: PenznemService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.penznemservice = penznemservice;
   }
@@ -96,6 +99,10 @@ export class PenznemListComponent implements OnInit {
       this._bizonylatkifizetesservice.DtoEdited.PENZNEMKOD = this.penznemservice.Dto[i].PENZNEMKOD;
       this._bizonylatkifizetesservice.DtoEdited.PENZNEM = this.penznemservice.Dto[i].PENZNEM1;
     }
+    if (this.penznemservice.zoomsource === ZoomSources.Bizonylat) {
+      this._bizonylatservice.ComplexDtoEdited.Dto.PENZNEMKOD = this.penznemservice.Dto[i].PENZNEMKOD;
+      this._bizonylatservice.ComplexDtoEdited.Dto.PENZNEM = this.penznemservice.Dto[i].PENZNEM1;
+    }
 
     this.stopzoom();
   }
@@ -113,6 +120,9 @@ export class PenznemListComponent implements OnInit {
     }
     if (this.penznemservice.zoomsource === ZoomSources.Bizonylatkifizetes) {
       this._bizonylatkifizetesservice.SzerkesztesMode = BizonylatKifizetesSzerkesztesMode.Blank;
+    }
+    if (this.penznemservice.zoomsource === ZoomSources.Bizonylat) {
+      this._bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
     }
   }
 

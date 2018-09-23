@@ -7,6 +7,7 @@ export class UgyfelDto {
   KOZTERULET: string;
   KOZTERULETTIPUS: string;
   HAZSZAM: string;
+  CIM: string;
   ADOSZAM: string;
   EUADOSZAM: string;
   TELEFON: string;

@@ -1,5 +1,6 @@
 <div class="alapkeret">
-  <h5>{{cikkservice.cim}}</h5>
+  <h5 *ngIf="!cikkservice.zoom">{{cikkservice.cim}}</h5>
+  <h5 *ngIf="cikkservice.zoom">{{cikkservice.cim}} - zoom</h5>
   <app-toolbar [Szurok]="szurok"
                [(szempont)]="cikkservice.szempont"
                [(minta)]="cikkservice.minta"

@@ -6,6 +6,7 @@ import {JogKod} from '../../enums/jogkod';
 import {CikkMozgasParameter} from '../cikkmozgasparameter';
 import {CikkContainerMode} from "../cikkcontainermode";
 import {CikkEgyMode} from "../cikkegymode";
+import {CikkSzerkesztesMode} from "../cikkszerkesztesmode";
 
 @Component({
   selector: 'app-cikk-egy',
@@ -38,6 +39,7 @@ export class CikkEgyComponent {
     this.cikkservice.uj = false;
     this.cikkservice.DtoEdited = Object.assign({}, this.cikkservice.Dto[this.cikkservice.DtoSelectedIndex]);
     this.cikkservice.EgyMode = CikkEgyMode.Modositas;
+    this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.Blank;
   }
   beszerzes() {
     this.cikkservice.BizonylattipusKod = 3;

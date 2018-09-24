@@ -10,5 +10,6 @@ export enum ZoomSources {
   Ajanlat,
   Bizonylatirat,
   Bizonylatkifizetes,
-  Bizonylat
+  Bizonylat,
+  Bizonylattetel
 }

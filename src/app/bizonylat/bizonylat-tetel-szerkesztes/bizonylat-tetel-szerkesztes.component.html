@@ -211,8 +211,17 @@
   TermekdijZoom = 4
   }-->
 
-  <ng-container>
-
+  <ng-container *ngIf="bizonylatservice.TetelSzerkesztesMode === 1">
+    <app-cikk-container></app-cikk-container>
+  </ng-container>
+  <ng-container *ngIf="bizonylatservice.TetelSzerkesztesMode === 2">
+    <app-me-container></app-me-container>
+  </ng-container>
+  <ng-container *ngIf="bizonylatservice.TetelSzerkesztesMode === 3">
+    <app-afakulcs-container></app-afakulcs-container>
+  </ng-container>
+  <ng-container *ngIf="bizonylatservice.TetelSzerkesztesMode === 4">
+    <app-termekdij-container></app-termekdij-container>
   </ng-container>
 
   <app-errormodal [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"></app-errormodal>

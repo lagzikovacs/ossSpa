@@ -11,6 +11,7 @@ import {FizetesimodContainerMode} from '../../fizetesimod/fizetesimodcontainermo
 import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {ErrormodalComponent} from "../../errormodal/errormodal.component";
+import {BizonylattetelSzerkesztesMode} from "../bizonylattetelszerkesztesmode";
 
 @Component({
   selector: 'app-bizonylat-szerkesztes',
@@ -86,14 +87,18 @@ export class BizonylatSzerkesztesComponent {
 
   tetelUj() {
     // TODO CreateNewTetel
+    // TODO teteluj
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.TetelSzerkesztes;
+    this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
   }
   tetelTorles(i: number) {
     // TODO törölni szó nélkül?
   }
   tetelModositas(i: number) {
+    // TODO nem teteluj
     this.bizonylatservice.TetelDtoEdited = Object.assign({}, this.bizonylatservice.ComplexDtoEdited.LstTetelDto[i]);
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.TetelSzerkesztes;
+    this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
   }
 
   onSubmit() {}

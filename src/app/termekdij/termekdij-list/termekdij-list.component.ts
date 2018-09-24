@@ -8,6 +8,8 @@ import {JogKod} from '../../enums/jogkod';
 import {CikkSzerkesztesMode} from "../../cikk/cikkszerkesztesmode";
 import {TermekdijEgyMode} from "../termekdijegymode";
 import {TermekdijContainerMode} from "../termekdijcontainermode";
+import {BizonylatService} from "../../bizonylat/bizonylat.service";
+import {BizonylattetelSzerkesztesMode} from "../../bizonylat/bizonylattetelszerkesztesmode";
 
 @Component({
   selector: 'app-termekdij-list',
@@ -24,8 +26,9 @@ export class TermekdijListComponent implements OnInit {
   termekdijservice: TermekdijService;
 
   constructor(private _logonservice: LogonService,
-              termekdijservice: TermekdijService,
-              private _cikkservice: CikkService) {
+              private _cikkservice: CikkService,
+              private _bizonylatservice: BizonylatService,
+              termekdijservice: TermekdijService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.termekdijservice = termekdijservice;
   }
@@ -76,14 +79,25 @@ export class TermekdijListComponent implements OnInit {
       this._cikkservice.DtoEdited.TERMEKDIJKT = this.termekdijservice.Dto[i].TERMEKDIJKT;
       this._cikkservice.DtoEdited.TERMEKDIJMEGNEVEZES = this.termekdijservice.Dto[i].TERMEKDIJMEGNEVEZES;
       this._cikkservice.DtoEdited.TERMEKDIJEGYSEGAR = this.termekdijservice.Dto[i].TERMEKDIJEGYSEGAR;
-
-      this.stopzoom();
     }
+    if (this.termekdijservice.zoomsource === ZoomSources.Bizonylattetel) {
+      this._bizonylatservice.TetelDtoEdited.TERMEKDIJKOD = this.termekdijservice.Dto[i].TERMEKDIJKOD;
+      this._bizonylatservice.TetelDtoEdited.TERMEKDIJKT = this.termekdijservice.Dto[i].TERMEKDIJKT;
+      this._bizonylatservice.TetelDtoEdited.TERMEKDIJMEGNEVEZES = this.termekdijservice.Dto[i].TERMEKDIJMEGNEVEZES;
+      this._bizonylatservice.TetelDtoEdited.TERMEKDIJEGYSEGAR = this.termekdijservice.Dto[i].TERMEKDIJEGYSEGAR;
+    }
+
+    this.stopzoom();
   }
   stopzoom() {
     this.termekdijservice.zoom = false;
 
-    this._cikkservice.SzerkesztesMode = CikkSzerkesztesMode.Blank;
+    if (this.termekdijservice.zoomsource === ZoomSources.Cikk) {
+      this._cikkservice.SzerkesztesMode = CikkSzerkesztesMode.Blank;
+    }
+    if (this.termekdijservice.zoomsource === ZoomSources.Bizonylattetel) {
+      this._bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
+    }
   }
 
   setClickedRow(i: number) {

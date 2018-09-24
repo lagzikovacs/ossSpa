@@ -8,6 +8,8 @@ import {JogKod} from '../../enums/jogkod';
 import {CikkSzerkesztesMode} from "../../cikk/cikkszerkesztesmode";
 import {AfakulcsContainerMode} from "../afakulcscontainermode";
 import {AfakulcsEgyMode} from "../afakulcsegymode";
+import {BizonylattetelSzerkesztesMode} from "../../bizonylat/bizonylattetelszerkesztesmode";
+import {BizonylatService} from "../../bizonylat/bizonylat.service";
 
 @Component({
   selector: 'app-afakulcs-list',
@@ -24,8 +26,9 @@ export class AfakulcsListComponent implements OnInit {
   afakulcsservice: AfakulcsService;
 
   constructor(private _logonservice: LogonService,
-              afakulcsservice: AfakulcsService,
-              private _cikkservice: CikkService) {
+              private _cikkservice: CikkService,
+              private _bizonylatservice: BizonylatService,
+              afakulcsservice: AfakulcsService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.afakulcsservice = afakulcsservice;
   }
@@ -75,14 +78,24 @@ export class AfakulcsListComponent implements OnInit {
       this._cikkservice.DtoEdited.AFAKULCSKOD = this.afakulcsservice.Dto[i].AFAKULCSKOD;
       this._cikkservice.DtoEdited.AFAKULCS = this.afakulcsservice.Dto[i].AFAKULCS1;
       this._cikkservice.DtoEdited.AFAMERTEKE = this.afakulcsservice.Dto[i].AFAMERTEKE;
-
-      this.stopzoom();
     }
+    if (this.afakulcsservice.zoomsource === ZoomSources.Bizonylattetel) {
+      this._bizonylatservice.TetelDtoEdited.AFAKULCSKOD = this.afakulcsservice.Dto[i].AFAKULCSKOD;
+      this._bizonylatservice.TetelDtoEdited.AFAKULCS = this.afakulcsservice.Dto[i].AFAKULCS1;
+      this._bizonylatservice.TetelDtoEdited.AFAMERTEKE = this.afakulcsservice.Dto[i].AFAMERTEKE;
+    }
+
+    this.stopzoom();
   }
   stopzoom() {
     this.afakulcsservice.zoom = false;
 
-    this._cikkservice.SzerkesztesMode = CikkSzerkesztesMode.Blank;
+    if (this.afakulcsservice.zoomsource === ZoomSources.Cikk) {
+      this._cikkservice.SzerkesztesMode = CikkSzerkesztesMode.Blank;
+    }
+    if (this.afakulcsservice.zoomsource === ZoomSources.Bizonylattetel) {
+      this._bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
+    }
   }
 
   setClickedRow(i: number) {

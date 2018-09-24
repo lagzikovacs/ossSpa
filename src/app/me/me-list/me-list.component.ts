@@ -8,6 +8,8 @@ import {JogKod} from '../../enums/jogkod';
 import {CikkSzerkesztesMode} from '../../cikk/cikkszerkesztesmode';
 import {MeEgyMode} from '../meegymode';
 import {MeContainerMode} from '../mecontainermode';
+import {BizonylatService} from "../../bizonylat/bizonylat.service";
+import {BizonylattetelSzerkesztesMode} from "../../bizonylat/bizonylattetelszerkesztesmode";
 
 @Component({
   selector: 'app-me-list',
@@ -24,8 +26,9 @@ export class MeListComponent implements OnInit {
   meservice: MeService;
 
   constructor(private _logonservice: LogonService,
-              meservice: MeService,
-              private _cikkservice: CikkService) {
+              private _cikkservice: CikkService,
+              private _bizonylatservice: BizonylatService,
+              meservice: MeService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.meservice = meservice;
   }
@@ -74,14 +77,23 @@ export class MeListComponent implements OnInit {
     if (this.meservice.zoomsource === ZoomSources.Cikk) {
       this._cikkservice.DtoEdited.MEKOD = this.meservice.Dto[i].MEKOD;
       this._cikkservice.DtoEdited.ME = this.meservice.Dto[i].ME;
-
-      this.stopzoom();
     }
+    if (this.meservice.zoomsource === ZoomSources.Bizonylattetel) {
+      this._bizonylatservice.TetelDtoEdited.MEKOD = this.meservice.Dto[i].MEKOD;
+      this._bizonylatservice.TetelDtoEdited.ME = this.meservice.Dto[i].ME;
+    }
+
+    this.stopzoom();
   }
   stopzoom() {
     this.meservice.zoom = false;
 
-    this._cikkservice.SzerkesztesMode = CikkSzerkesztesMode.Blank;
+    if (this.meservice.zoomsource === ZoomSources.Cikk) {
+      this._cikkservice.SzerkesztesMode = CikkSzerkesztesMode.Blank;
+    }
+    if (this.meservice.zoomsource === ZoomSources.Bizonylattetel) {
+      this._bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
+    }
   }
 
   setClickedRow(i: number) {

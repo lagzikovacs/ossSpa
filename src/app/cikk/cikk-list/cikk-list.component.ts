@@ -11,6 +11,8 @@ import {CikkEgyMode} from '../cikkegymode';
 import {ProjektkapcsolatService} from '../../projekt/bizonylatesirat/projektkapcsolat.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import {UjajanlatSzerkesztesMode} from '../../projekt/bizonylatesirat/ujajanlatszerkesztesmode';
+import {BizonylatService} from "../../bizonylat/bizonylat.service";
+import {BizonylattetelSzerkesztesMode} from "../../bizonylat/bizonylattetelszerkesztesmode";
 
 @Component({
   selector: 'app-cikk-list',
@@ -31,6 +33,7 @@ export class CikkListComponent implements OnInit {
 
   constructor(private _logonservice: LogonService,
               private _projektkapcsolatservice: ProjektkapcsolatService,
+              private _bizonylatservice: BizonylatService,
               cikkservice: CikkService  ) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.CIKKMOD]);
     this.cikkservice = cikkservice;
@@ -94,14 +97,35 @@ export class CikkListComponent implements OnInit {
         this.cikkservice.Dto[i].AFAMERTEKE;
       this._projektkapcsolatservice.AjanlatParam.AjanlatBuf[this._projektkapcsolatservice.AjanlattetelIndex].EgysegAr =
         this.cikkservice.Dto[i].EGYSEGAR;
-
-      this.stopzoom();
     }
+    if (this.cikkservice.zoomsource === ZoomSources.Bizonylattetel) {
+      this._bizonylatservice.TetelDtoEdited.CIKKKOD = this.cikkservice.Dto[i].CIKKKOD;
+      this._bizonylatservice.TetelDtoEdited.MEGNEVEZES = this.cikkservice.Dto[i].MEGNEVEZES;
+      this._bizonylatservice.TetelDtoEdited.MEKOD = this.cikkservice.Dto[i].MEKOD;
+      this._bizonylatservice.TetelDtoEdited.ME = this.cikkservice.Dto[i].ME;
+      this._bizonylatservice.TetelDtoEdited.AFAKULCSKOD = this.cikkservice.Dto[i].AFAKULCSKOD;
+      this._bizonylatservice.TetelDtoEdited.AFAKULCS = this.cikkservice.Dto[i].AFAKULCS;
+      this._bizonylatservice.TetelDtoEdited.AFAMERTEKE = this.cikkservice.Dto[i].AFAMERTEKE;
+      this._bizonylatservice.TetelDtoEdited.EGYSEGAR = this.cikkservice.Dto[i].EGYSEGAR;
+      this._bizonylatservice.TetelDtoEdited.TOMEGKG = this.cikkservice.Dto[i].TOMEGKG;
+
+      this._bizonylatservice.TetelDtoEdited.TERMEKDIJKOD = this.cikkservice.Dto[i].TERMEKDIJKOD;
+      this._bizonylatservice.TetelDtoEdited.TERMEKDIJKT = this.cikkservice.Dto[i].TERMEKDIJKT;
+      this._bizonylatservice.TetelDtoEdited.TERMEKDIJMEGNEVEZES = this.cikkservice.Dto[i].TERMEKDIJMEGNEVEZES;
+      this._bizonylatservice.TetelDtoEdited.TERMEKDIJEGYSEGAR = this.cikkservice.Dto[i].TERMEKDIJEGYSEGAR;
+    }
+
+    this.stopzoom();
   }
   stopzoom() {
     this.cikkservice.zoom = false;
 
-    this._projektkapcsolatservice.AjanlatSzerkesztesMode = UjajanlatSzerkesztesMode.Blank;
+    if (this.cikkservice.zoomsource === ZoomSources.Ajanlat) {
+      this._projektkapcsolatservice.AjanlatSzerkesztesMode = UjajanlatSzerkesztesMode.Blank;
+    }
+    if (this.cikkservice.zoomsource === ZoomSources.Bizonylattetel) {
+      this._bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
+    }
   }
 
   setClickedRow(i: number) {

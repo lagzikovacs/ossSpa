@@ -22,6 +22,7 @@ import {BizonylatKibocsatasParam} from './bizonylatkibocsatasparam';
 import {PenztarDto} from '../penztar/penztardto';
 import {BizonylatComplexDto} from './bizonylatcomplexdto';
 import {BizonylatSzerkesztesMode} from "./bizonylatszerkesztesmode";
+import {BizonylattetelSzerkesztesMode} from "./bizonylattetelszerkesztesmode";
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,7 @@ export class BizonylatService {
   bizonylatTipus = BizonylatTipus.Szamla;
   bizonylatLeiro = new BizonylatTipusLeiro();
 
+  // a listából kiválasztott tételeken végzett eyszerűbb műveletekhez
   Dto = new Array<BizonylatDto>();
   DtoSelectedIndex = -1;
 
@@ -40,11 +42,10 @@ export class BizonylatService {
   AfaDto = new Array<BizonylatAfaDto>();
   TermekdijDto = new Array<BizonylatTermekdijDto>();
 
-  ComplexDtoEdited = new BizonylatComplexDto();
-  DtoTetelSelectedIndex = -1;
-
   uj = false;
-  DtoEdited = new BizonylatDto();
+  ComplexDtoEdited = new BizonylatComplexDto();
+  TetelDtoEdited = new BizonylatTetelDto();
+
   szempont = 0;
   minta = '';
   bp = new BizonylatParameter(0, environment.lapmeret);
@@ -54,6 +55,7 @@ export class BizonylatService {
   ContainerMode = BizonylatContainerMode.List;
   EgyMode = BizonylatEgyMode.Reszletek;
   SzerkesztesMode = BizonylatSzerkesztesMode.List;
+  TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
 
   BizonylatPenztarDto = new Array<PenztarDto>();
 

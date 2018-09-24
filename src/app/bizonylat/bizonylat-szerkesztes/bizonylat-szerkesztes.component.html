@@ -68,8 +68,8 @@
       <button class="btn btn-sm btn-outline-primary" (click)="FizetesimodZoom()"
               [disabled] = "bizonylatservice.SzerkesztesMode !== 1"
               style="margin-left: 4px" type="button">...</button>
-      <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button">Bk</button>
-      <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button">Kp</button>
+      <button class="btn btn-sm btn-outline-primary" (click)="Bk()" style="margin-left: 4px" type="button">Bk</button>
+      <button class="btn btn-sm btn-outline-primary" (click)="Kp()" style="margin-left: 4px" type="button">Kp</button>
     </div>
   </div>
   <div class="row no-gutters editform-row">

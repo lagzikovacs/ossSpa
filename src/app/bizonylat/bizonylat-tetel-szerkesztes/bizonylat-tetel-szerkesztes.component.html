@@ -4,12 +4,13 @@
 
   <div class="row no-gutters editform-row">
     <div class="col-md-2">
-      <div class="editform-title">Ternékdíjas</div>
+      <div class="editform-title">Termékdíjas</div>
     </div>
     <div class="col-md-1">
-      <select type="text" class="form-control form-control-sm" name="termekdijas">
-        <option>Nem</option>
-        <option>Igen</option>
+      <select type="text" class="form-control form-control-sm" name="termekdijas"
+              [(ngModel)]="bizonylatservice.TetelDtoEdited.TERMEKDIJAS">
+        <option value="false">Nem</option>
+        <option value="true">Igen</option>
       </select>
     </div>
   </div>
@@ -18,9 +19,10 @@
       <div class="editform-title">Közvetített szolgáltatás</div>
     </div>
     <div class="col-md-1">
-      <select type="text" class="form-control form-control-sm" name="kozvetitett">
-        <option>Nem</option>
-        <option>Igen</option>
+      <select type="text" class="form-control form-control-sm" name="kozvetitett"
+              [(ngModel)]="bizonylatservice.TetelDtoEdited.KOZVETITETTSZOLGALTATAS">
+        <option value="false">Nem</option>
+        <option value="true">Igen</option>
       </select>
     </div>
   </div>
@@ -29,9 +31,10 @@
       <div class="editform-title">Előleg</div>
     </div>
     <div class="col-md-1">
-      <select type="text" class="form-control form-control-sm" name="eloleg">
-        <option>Nem</option>
-        <option>Igen</option>
+      <select type="text" class="form-control form-control-sm" name="eloleg"
+              [(ngModel)]="bizonylatservice.TetelDtoEdited.EZELOLEG">
+        <option value="false">Nem</option>
+        <option value="true">Igen</option>
       </select>
     </div>
   </div>
@@ -41,6 +44,7 @@
     </div>
     <div class="col-md-4">
       <input type="text" class="form-control form-control-sm" id="megnevezes" name="megnevezes"
+             [(ngModel)]="bizonylatservice.TetelDtoEdited.MEGNEVEZES"
              maxlength="100" required autocomplete="off" style="background-color: aquamarine">
     </div>
     <div class="col-md-1">
@@ -54,6 +58,7 @@
     </div>
     <div class="col-md-4">
       <input type="text" class="form-control form-control-sm" id="megjegyzes" name="megjegyzes"
+             [(ngModel)]="bizonylatservice.TetelDtoEdited.MEGJEGYZES"
              autocomplete="off">
     </div>
   </div>
@@ -63,6 +68,7 @@
     </div>
     <div class="col-md-2">
       <input type="number" class="form-control form-control-sm" id="mennyiseg" name="mennyiseg"
+             [(ngModel)]="bizonylatservice.TetelDtoEdited.MENNYISEG"
              required>
     </div>
   </div>
@@ -72,6 +78,7 @@
     </div>
     <div class="col-md-1">
       <input type="text" class="form-control form-control-sm" id="me" name="me"
+             [(ngModel)]="bizonylatservice.TetelDtoEdited.ME"
              maxlength="10" required autocomplete="off" style="background-color: aquamarine">
     </div>
     <div class="col-md-1">
@@ -85,6 +92,7 @@
     </div>
     <div class="col-md-4 input-group">
       <input type="number" class="form-control form-control-sm" id="egysegar" name="egysegar"
+             [(ngModel)]="bizonylatservice.TetelDtoEdited.EGYSEGAR"
              required>
       <button class="btn btn-sm btn-outline-primary" (click)="Br()"
               style="margin-left: 4px;margin-right: 4px" type="button"><- Br</button>
@@ -97,6 +105,7 @@
     </div>
     <div class="col-md-1">
       <input type="text" class="form-control form-control-sm" id="afakulcs" name="afakulcs"
+             [(ngModel)]="bizonylatservice.TetelDtoEdited.AFAKULCS"
              maxlength="10" required autocomplete="off" style="background-color: aquamarine">
     </div>
     <div class="col-md-1">
@@ -110,7 +119,7 @@
     </div>
     <div class="col-md-2">
       <input type="number" class="form-control form-control-sm" id="tomegkg" name="tomegkg"
-             required>
+             [(ngModel)]="bizonylatservice.TetelDtoEdited.TOMEGKG">
     </div>
     <div class="col-md-3">
     </div>
@@ -118,7 +127,8 @@
       <div class="editform-title">Netto</div>
     </div>
     <div class="col-md-2">
-      <input type="number" class="form-control form-control-sm" id="netto" name="netto" readonly="true">
+      <input type="number" class="form-control form-control-sm" id="netto" name="netto" readonly="true"
+             [(ngModel)]="bizonylatservice.TetelDtoEdited.NETTO">
     </div>
   </div>
   <div class="row no-gutters editform-row">
@@ -127,7 +137,8 @@
     </div>
     <div class="col-md-2">
       <input type="text" class="form-control form-control-sm" id="termekdijkt" name="termekdijkt"
-             maxlength="10" required autocomplete="off" style="background-color: aquamarine">
+             [(ngModel)]="bizonylatservice.TetelDtoEdited.TERMEKDIJKT"
+             maxlength="10" autocomplete="off" style="background-color: aquamarine">
     </div>
     <div class="col-md-1">
       <button class="btn btn-sm btn-outline-primary" (click)="TermekdijZoom()"
@@ -139,7 +150,8 @@
       <div class="editform-title">ÁFA</div>
     </div>
     <div class="col-md-2">
-      <input type="number" class="form-control form-control-sm" id="afa" name="afa" readonly="true">
+      <input type="number" class="form-control form-control-sm" id="afa" name="afa" readonly="true"
+             [(ngModel)]="bizonylatservice.TetelDtoEdited.AFA">
     </div>
   </div>
   <div class="row no-gutters editform-row">
@@ -148,6 +160,7 @@
     </div>
     <div class="col-md-3">
       <input type="text" class="form-control form-control-sm" id="termekdijmegnevezes" name="termekdijmegnevezes"
+             [(ngModel)]="bizonylatservice.TetelDtoEdited.TERMEKDIJMEGNEVEZES"
              readonly="true" autocomplete="off">
     </div>
     <div class="col-md-2">
@@ -156,7 +169,8 @@
       <div class="editform-title">Brutto</div>
     </div>
     <div class="col-md-2">
-      <input type="number" class="form-control form-control-sm" id="brutto" name="brutto" readonly="true">
+      <input type="number" class="form-control form-control-sm" id="brutto" name="brutto" readonly="true"
+             [(ngModel)]="bizonylatservice.TetelDtoEdited.BRUTTO">
     </div>
   </div>
   <div class="row no-gutters editform-row">
@@ -165,6 +179,7 @@
     </div>
     <div class="col-md-2">
       <input type="number" class="form-control form-control-sm" id="termekdijegysegar" name="termekdijegysegar"
+             [(ngModel)]="bizonylatservice.TetelDtoEdited.TERMEKDIJEGYSEGAR"
              readonly="true">
     </div>
     <div class="col-md-3">
@@ -173,7 +188,9 @@
       <div class="editform-title">Termékdíj a brutto árból</div>
     </div>
     <div class="col-md-2">
-      <input type="number" class="form-control form-control-sm" id="terekdijabruttoarbol" name="terekdijabruttoarbol" readonly="true">
+      <input type="number" class="form-control form-control-sm" id="terekdijabruttoarbol" name="terekdijabruttoarbol"
+             [(ngModel)]="bizonylatservice.TetelDtoEdited.TERMEKDIJ"
+             readonly="true">
     </div>
   </div>
 
@@ -185,6 +202,18 @@
     <button class="btn btn-sm btn-default" [disabled]="eppFrissit"
             style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
   </div>
+
+<!--  export enum BizonylattetelSzerkesztesMode {
+  Blank = 0,
+  CikkZoom = 1,
+  MeZoom = 2,
+  AfakulcsZoom = 3,
+  TermekdijZoom = 4
+  }-->
+
+  <ng-container>
+
+  </ng-container>
 
   <app-errormodal [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"></app-errormodal>
 </div>

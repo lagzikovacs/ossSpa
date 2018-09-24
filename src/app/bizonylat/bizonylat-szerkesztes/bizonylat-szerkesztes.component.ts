@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {PenznemService} from '../../penznem/penznem.service';
@@ -10,6 +10,7 @@ import {FizetesimodService} from '../../fizetesimod/fizetesimod.service';
 import {FizetesimodContainerMode} from '../../fizetesimod/fizetesimodcontainermode';
 import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {BizonylatEgyMode} from '../bizonylategymode';
+import {ErrormodalComponent} from "../../errormodal/errormodal.component";
 
 @Component({
   selector: 'app-bizonylat-szerkesztes',
@@ -17,8 +18,11 @@ import {BizonylatEgyMode} from '../bizonylategymode';
   styleUrls: ['./bizonylat-szerkesztes.component.css']
 })
 export class BizonylatSzerkesztesComponent {
+  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
+
   bizonylatservice: BizonylatService;
   eppFrissit = false;
+  fizerr = 'Ismeretlen fizetési mód: ';
 
   constructor(private _ugyfelservice: UgyfelService,
               private _penznemservice: PenznemService,
@@ -53,12 +57,42 @@ export class BizonylatSzerkesztesComponent {
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.FizetesimodZoom;
   }
 
+  Fiztool(fm: string) {
+    this.eppFrissit = true;
+    this._fizetesimodservice.Read(fm)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+        if (res.Result.length !== 1) {
+          throw this.fizerr + fm;
+        }
+
+        this.bizonylatservice.ComplexDtoEdited.Dto.FIZETESIMODKOD = res.Result[0].FIZETESIMODKOD;
+        this.bizonylatservice.ComplexDtoEdited.Dto.FIZETESIMOD = res.Result[0].FIZETESIMOD1;
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this.errormodal.show(err);
+      });
+  }
+  Bk() {
+    this.Fiztool('Bankkártya');
+  }
+  Kp() {
+    this.Fiztool('Készpénz');
+  }
+
   tetelUj() {
+    // TODO CreateNewTetel
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.TetelSzerkesztes;
   }
   tetelTorles(i: number) {
+    // TODO törölni szó nélkül?
   }
   tetelModositas(i: number) {
+    this.bizonylatservice.TetelDtoEdited = Object.assign({}, this.bizonylatservice.ComplexDtoEdited.LstTetelDto[i]);
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.TetelSzerkesztes;
   }
 

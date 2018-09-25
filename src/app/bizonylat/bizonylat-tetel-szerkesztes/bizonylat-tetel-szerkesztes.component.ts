@@ -63,13 +63,10 @@ export class BizonylatTetelSzerkesztesComponent {
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.TermekdijZoom;
   }
 
-  Br() {
-    if (this.bizonylatservice.TetelDtoEdited.MENNYISEG)
-    this.tetelcalc(null);
+  bruttobol() {
   }
 
   tetelcalc(e: any) {
-    console.log('most');
   }
 
   onSubmit() {

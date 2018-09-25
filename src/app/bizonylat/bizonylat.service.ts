@@ -23,6 +23,8 @@ import {PenztarDto} from '../penztar/penztardto';
 import {BizonylatComplexDto} from './bizonylatcomplexdto';
 import {BizonylatSzerkesztesMode} from "./bizonylatszerkesztesmode";
 import {BizonylattetelSzerkesztesMode} from "./bizonylattetelszerkesztesmode";
+import {BizonylatTetelResult} from "./bizonylattetelresult";
+import {BruttobolParam} from "./bruttobolparam";
 
 @Injectable({
   providedIn: 'root'
@@ -229,5 +231,27 @@ export class BizonylatService {
     };
 
     return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+  }
+
+  public BizonylattetelCalc(dto: BizonylatTetelDto): Promise<BizonylatTetelResult> {
+    const url = environment.BaseHref + this._controller + 'bizonylattetelcalc';
+    const body = dto;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<BizonylatTetelResult>(url, body, options).toPromise();
+  }
+
+  public Bruttobol(par: BruttobolParam): Promise<BizonylatTetelResult> {
+    const url = environment.BaseHref + this._controller + 'bruttobol';
+    const body = par;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<BizonylatTetelResult>(url, body, options).toPromise();
   }
 }

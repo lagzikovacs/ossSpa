@@ -63,7 +63,14 @@ export class BizonylatTetelSzerkesztesComponent {
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.TermekdijZoom;
   }
 
-  Br() {}
+  Br() {
+    if (this.bizonylatservice.TetelDtoEdited.MENNYISEG)
+    this.tetelcalc(null);
+  }
+
+  tetelcalc(e: any) {
+    console.log('most');
+  }
 
   onSubmit() {
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;

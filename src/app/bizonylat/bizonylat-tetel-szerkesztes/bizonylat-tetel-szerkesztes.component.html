@@ -8,7 +8,8 @@
     </div>
     <div class="col-md-1">
       <select type="text" class="form-control form-control-sm" name="termekdijas"
-              [(ngModel)]="bizonylatservice.TetelDtoEdited.TERMEKDIJAS">
+              [(ngModel)]="bizonylatservice.TetelDtoEdited.TERMEKDIJAS"
+              (change)="tetelcalc($event)">
         <option value="false">Nem</option>
         <option value="true">Igen</option>
       </select>
@@ -69,7 +70,8 @@
     <div class="col-md-2">
       <input type="number" class="form-control form-control-sm" id="mennyiseg" name="mennyiseg"
              [(ngModel)]="bizonylatservice.TetelDtoEdited.MENNYISEG"
-             required>
+             (focusout)="tetelcalc($event)"
+             required min="0">
     </div>
   </div>
   <div class="row no-gutters editform-row">
@@ -93,6 +95,7 @@
     <div class="col-md-4 input-group">
       <input type="number" class="form-control form-control-sm" id="egysegar" name="egysegar"
              [(ngModel)]="bizonylatservice.TetelDtoEdited.EGYSEGAR"
+             (focusout)="tetelcalc($event)"
              required>
       <button class="btn btn-sm btn-outline-primary" (click)="Br()"
               style="margin-left: 4px;margin-right: 4px" type="button"><- Br</button>
@@ -119,7 +122,9 @@
     </div>
     <div class="col-md-2">
       <input type="number" class="form-control form-control-sm" id="tomegkg" name="tomegkg"
-             [(ngModel)]="bizonylatservice.TetelDtoEdited.TOMEGKG">
+             [(ngModel)]="bizonylatservice.TetelDtoEdited.TOMEGKG"
+             (focusout)="tetelcalc($event)"
+             min="0">
     </div>
     <div class="col-md-3">
     </div>
@@ -180,6 +185,7 @@
     <div class="col-md-2">
       <input type="number" class="form-control form-control-sm" id="termekdijegysegar" name="termekdijegysegar"
              [(ngModel)]="bizonylatservice.TetelDtoEdited.TERMEKDIJEGYSEGAR"
+             (focusout)="tetelcalc($event)"
              readonly="true">
     </div>
     <div class="col-md-3">

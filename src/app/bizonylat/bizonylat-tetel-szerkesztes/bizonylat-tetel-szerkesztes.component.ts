@@ -11,8 +11,13 @@ import {MeContainerMode} from '../../me/mecontainermode';
 import {AfakulcsContainerMode} from '../../afakulcs/afakulcscontainermode';
 import {TermekdijContainerMode} from '../../termekdij/termekdijcontainermode';
 import {BizonylattetelSzerkesztesMode} from '../bizonylattetelszerkesztesmode';
-import {BruttobolParam} from "../bruttobolparam";
-import {ErrormodalComponent} from "../../errormodal/errormodal.component";
+import {BruttobolParam} from '../bruttobolparam';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {CikkZoomParameter} from '../../cikk/cikkzoomparameter';
+import {EmptyResult} from '../../dtos/emptyresult';
+import {TermekdijZoomParameter} from '../../termekdij/termekdijzoomparameter';
+import {AfakulcsZoomParameter} from '../../afakulcs/afakulcszoomparameter';
+import {MeZoomParameter} from '../../me/mezoomparameter';
 
 @Component({
   selector: 'app-bizonylat-tetel-szerkesztes',
@@ -109,7 +114,67 @@ export class BizonylatTetelSzerkesztesComponent {
   }
 
   onSubmit() {
-    this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
+    this.eppFrissit = true;
+    this._cikkservice.ZoomCheck(new CikkZoomParameter(this.bizonylatservice.TetelDtoEdited.CIKKKOD || 0,
+            this.bizonylatservice.TetelDtoEdited.MEGNEVEZES || ''))
+      .then(res1 => {
+        if (res1.Error != null) {
+          throw res1.Error;
+        }
+
+        return this._meservice.ZoomCheck(new MeZoomParameter(this.bizonylatservice.TetelDtoEdited.MEKOD || 0,
+          this.bizonylatservice.TetelDtoEdited.ME || ''));
+      })
+      .then(res2 => {
+        if (res2.Error != null) {
+          throw res2.Error;
+        }
+
+        return this._afakulcsservice.ZoomCheck(new AfakulcsZoomParameter(this.bizonylatservice.TetelDtoEdited.AFAKULCSKOD || 0,
+          this.bizonylatservice.TetelDtoEdited.AFAKULCS || ''));
+      })
+      .then(res3 => {
+        if (res3.Error != null) {
+          throw res3.Error;
+        }
+
+        if ((this.bizonylatservice.TetelDtoEdited.TERMEKDIJKT || '') !== '') {
+          return this._termekdijservice.ZoomCheck(new TermekdijZoomParameter(this.bizonylatservice.TetelDtoEdited.TERMEKDIJKOD || 0,
+            this.bizonylatservice.TetelDtoEdited.TERMEKDIJKT || ''));
+        } else {
+          this.bizonylatservice.TetelDtoEdited.TERMEKDIJKOD = undefined;
+          this.bizonylatservice.TetelDtoEdited.TERMEKDIJKT = undefined;
+          this.bizonylatservice.TetelDtoEdited.TERMEKDIJMEGNEVEZES = undefined;
+          this.bizonylatservice.TetelDtoEdited.TERMEKDIJEGYSEGAR = undefined;
+          return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
+        }
+      })
+      .then(res4 => {
+        if (res4.Error != null) {
+          throw res4.Error;
+        }
+
+        return this.bizonylatservice.BizonylattetelCalc(this.bizonylatservice.TetelDtoEdited);
+      })
+      .then(res5 => {
+        if (res5.Error != null) {
+          throw res5.Error;
+        }
+
+        if (this.bizonylatservice.teteluj) {
+          this.bizonylatservice.ComplexDtoEdited.LstTetelDto.unshift(res5.Result[0]);
+        } else {
+          this.bizonylatservice.ComplexDtoEdited.LstTetelDto[this.bizonylatservice.TetelDtoSelectedIndex] = res5.Result[0];
+        }
+
+        // TODO SumEsAfaEsTermekdij
+        this.eppFrissit = false;
+        this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this.errormodal.show(err);
+      });
   }
   cancel() {
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;

@@ -49,6 +49,7 @@ export class BizonylatService {
   ComplexDtoEdited = new BizonylatComplexDto();
   teteluj = false;
   TetelDtoEdited = new BizonylatTetelDto();
+  TetelDtoSelectedIndex = -1;
 
   szempont = 0;
   minta = '';

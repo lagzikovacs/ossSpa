@@ -11,9 +11,10 @@ import {EmptyResult} from '../dtos/emptyresult';
 import {CikkMozgasResult} from './cikkmozgasresult';
 import {CikkMozgasParameter} from './cikkmozgasparameter';
 import {CikkMozgasTetelDto} from './cikkmozgasteteldto';
-import {CikkContainerMode} from "./cikkcontainermode";
-import {CikkEgyMode} from "./cikkegymode";
-import {CikkSzerkesztesMode} from "./cikkszerkesztesmode";
+import {CikkContainerMode} from './cikkcontainermode';
+import {CikkEgyMode} from './cikkegymode';
+import {CikkSzerkesztesMode} from './cikkszerkesztesmode';
+import {CikkZoomParameter} from './cikkzoomparameter';
 
 @Injectable({
   providedIn: 'root'
@@ -119,5 +120,16 @@ export class CikkService {
     };
 
     return this._httpClient.post<CikkMozgasResult>(url, body, options).toPromise();
+  }
+
+  public ZoomCheck(par: CikkZoomParameter): Promise<EmptyResult> {
+    const url = environment.BaseHref + this._controller + 'zoomcheck';
+    const body = par;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
   }
 }

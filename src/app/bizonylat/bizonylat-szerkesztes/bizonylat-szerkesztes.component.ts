@@ -111,6 +111,7 @@ export class BizonylatSzerkesztesComponent {
     // TODO törölni szó nélkül?
   }
   tetelModositas(i: number) {
+    this.bizonylatservice.TetelDtoSelectedIndex = i;
     this.bizonylatservice.teteluj = false;
     this.bizonylatservice.Setszvesz();
 

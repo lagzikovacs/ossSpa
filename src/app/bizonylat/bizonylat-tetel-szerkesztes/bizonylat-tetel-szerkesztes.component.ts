@@ -167,7 +167,15 @@ export class BizonylatTetelSzerkesztesComponent {
           this.bizonylatservice.ComplexDtoEdited.LstTetelDto[this.bizonylatservice.TetelDtoSelectedIndex] = res5.Result[0];
         }
 
-        // TODO SumEsAfaEsTermekdij
+        return this.bizonylatservice.SumEsAfaEsTermekdij(this.bizonylatservice.ComplexDtoEdited);
+      })
+      .then(res6 => {
+        if (res6.Error != null) {
+          throw res6.Error;
+        }
+
+        this.bizonylatservice.ComplexDtoEdited = res6.Result[0];
+
         this.eppFrissit = false;
         this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
       })

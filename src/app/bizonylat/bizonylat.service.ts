@@ -274,4 +274,15 @@ export class BizonylatService {
 
     return this._httpClient.post<BizonylatTetelResult>(url, body, options).toPromise();
   }
+
+  public SumEsAfaEsTermekdij(dto: BizonylatComplexDto): Promise<BizonylatComplexResult> {
+    const url = environment.BaseHref + this._controller + 'sumesafaestermekdij';
+    const body = dto;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<BizonylatComplexResult>(url, body, options).toPromise();
+  }
 }

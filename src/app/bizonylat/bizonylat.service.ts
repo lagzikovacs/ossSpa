@@ -34,6 +34,7 @@ export class BizonylatService {
 
   bizonylatTipus = BizonylatTipus.Szamla;
   bizonylatLeiro = new BizonylatTipusLeiro();
+  szvesz = false;
 
   // a listából kiválasztott tételeken végzett eyszerűbb műveletekhez
   Dto = new Array<BizonylatDto>();
@@ -46,6 +47,7 @@ export class BizonylatService {
 
   uj = false;
   ComplexDtoEdited = new BizonylatComplexDto();
+  teteluj = false;
   TetelDtoEdited = new BizonylatTetelDto();
 
   szempont = 0;
@@ -63,6 +65,12 @@ export class BizonylatService {
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
+
+  public Setszvesz() {
+    this.szvesz = this.bizonylatTipus === BizonylatTipus.Szamla ||
+      this.bizonylatTipus === BizonylatTipus.ElolegSzamla ||
+      this.bizonylatTipus === BizonylatTipus.Szallito;
+  }
 
   public BizonylatLeiro(bt: BizonylatTipus): Promise<BizonylatTipusLeiroResult> {
     const url = environment.BaseHref + this._controller + 'bizonylatleiro';
@@ -247,6 +255,17 @@ export class BizonylatService {
   public Bruttobol(par: BruttobolParam): Promise<BizonylatTetelResult> {
     const url = environment.BaseHref + this._controller + 'bruttobol';
     const body = par;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<BizonylatTetelResult>(url, body, options).toPromise();
+  }
+
+  public CreateNewTetel(bt: BizonylatTipus): Promise<BizonylatTetelResult> {
+    const url = environment.BaseHref + this._controller + 'createnewtetel';
+    const body = bt;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
       params: new HttpParams().set('sid', this._logonservice.Sid)

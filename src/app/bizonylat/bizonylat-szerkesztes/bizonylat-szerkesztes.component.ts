@@ -10,8 +10,8 @@ import {FizetesimodService} from '../../fizetesimod/fizetesimod.service';
 import {FizetesimodContainerMode} from '../../fizetesimod/fizetesimodcontainermode';
 import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {BizonylatEgyMode} from '../bizonylategymode';
-import {ErrormodalComponent} from "../../errormodal/errormodal.component";
-import {BizonylattetelSzerkesztesMode} from "../bizonylattetelszerkesztesmode";
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {BizonylattetelSzerkesztesMode} from '../bizonylattetelszerkesztesmode';
 
 @Component({
   selector: 'app-bizonylat-szerkesztes',
@@ -86,16 +86,34 @@ export class BizonylatSzerkesztesComponent {
   }
 
   tetelUj() {
-    // TODO CreateNewTetel
-    // TODO teteluj
-    this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.TetelSzerkesztes;
-    this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
+    this.eppFrissit = true;
+    this.bizonylatservice.CreateNewTetel(this.bizonylatservice.bizonylatTipus)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.bizonylatservice.TetelDtoEdited = res.Result[0];
+        this.eppFrissit = false;
+
+        this.bizonylatservice.teteluj = true;
+        this.bizonylatservice.Setszvesz();
+
+        this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.TetelSzerkesztes;
+        this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this.errormodal.show(err);
+      });
   }
   tetelTorles(i: number) {
     // TODO törölni szó nélkül?
   }
   tetelModositas(i: number) {
-    // TODO nem teteluj
+    this.bizonylatservice.teteluj = false;
+    this.bizonylatservice.Setszvesz();
+
     this.bizonylatservice.TetelDtoEdited = Object.assign({}, this.bizonylatservice.ComplexDtoEdited.LstTetelDto[i]);
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.TetelSzerkesztes;
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;

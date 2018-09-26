@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
 import {CikkService} from '../../cikk/cikk.service';
@@ -11,6 +11,8 @@ import {MeContainerMode} from '../../me/mecontainermode';
 import {AfakulcsContainerMode} from '../../afakulcs/afakulcscontainermode';
 import {TermekdijContainerMode} from '../../termekdij/termekdijcontainermode';
 import {BizonylattetelSzerkesztesMode} from '../bizonylattetelszerkesztesmode';
+import {BruttobolParam} from "../bruttobolparam";
+import {ErrormodalComponent} from "../../errormodal/errormodal.component";
 
 @Component({
   selector: 'app-bizonylat-tetel-szerkesztes',
@@ -18,8 +20,11 @@ import {BizonylattetelSzerkesztesMode} from '../bizonylattetelszerkesztesmode';
   styleUrls: ['./bizonylat-tetel-szerkesztes.component.css']
 })
 export class BizonylatTetelSzerkesztesComponent {
+  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
+
   bizonylatservice: BizonylatService;
   eppFrissit = false;
+  bruttoosszeg = 0;
 
   constructor(private _cikkservice: CikkService,
               private _meservice: MeService,
@@ -62,11 +67,45 @@ export class BizonylatTetelSzerkesztesComponent {
 
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.TermekdijZoom;
   }
+  TermekdijTorles() {
+    this.bizonylatservice.TetelDtoEdited.TERMEKDIJKOD = null;
+    this.bizonylatservice.TetelDtoEdited.TERMEKDIJKT = null;
+    this.bizonylatservice.TetelDtoEdited.TERMEKDIJMEGNEVEZES = null;
+    this.bizonylatservice.TetelDtoEdited.TERMEKDIJEGYSEGAR = null;
+  }
 
   bruttobol() {
+    this.eppFrissit = true;
+    this.bizonylatservice.Bruttobol(new BruttobolParam(this.bizonylatservice.TetelDtoEdited, this.bruttoosszeg))
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.bizonylatservice.TetelDtoEdited = res.Result[0];
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this.errormodal.show(err);
+      });
   }
 
   tetelcalc(e: any) {
+    this.eppFrissit = true;
+    this.bizonylatservice.BizonylattetelCalc(this.bizonylatservice.TetelDtoEdited)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.bizonylatservice.TetelDtoEdited = res.Result[0];
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this.errormodal.show(err);
+      });
   }
 
   onSubmit() {

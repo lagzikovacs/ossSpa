@@ -8,6 +8,7 @@
     </div>
     <div class="col-md-1">
       <select type="text" class="form-control form-control-sm" name="termekdijas"
+              [disabled]="!bizonylatservice.szvesz"
               [(ngModel)]="bizonylatservice.TetelDtoEdited.TERMEKDIJAS"
               (change)="tetelcalc($event)">
         <option value="false">Nem</option>
@@ -21,6 +22,7 @@
     </div>
     <div class="col-md-1">
       <select type="text" class="form-control form-control-sm" name="kozvetitett"
+              [disabled]="!bizonylatservice.szvesz"
               [(ngModel)]="bizonylatservice.TetelDtoEdited.KOZVETITETTSZOLGALTATAS">
         <option value="false">Nem</option>
         <option value="true">Igen</option>
@@ -33,6 +35,7 @@
     </div>
     <div class="col-md-1">
       <select type="text" class="form-control form-control-sm" name="eloleg"
+              [disabled]="!bizonylatservice.szvesz"
               [(ngModel)]="bizonylatservice.TetelDtoEdited.EZELOLEG">
         <option value="false">Nem</option>
         <option value="true">Igen</option>
@@ -99,7 +102,8 @@
              required>
       <button class="btn btn-sm btn-outline-primary" (click)="bruttobol()"
               style="margin-left: 4px;margin-right: 4px" type="button"><- Br</button>
-      <input type="number" class="form-control form-control-sm" id="bruttoosszeg" name="bruttoosszeg">
+      <input type="number" class="form-control form-control-sm" id="bruttoosszeg" name="bruttoosszeg"
+             [(ngModel)]="bruttoosszeg">
     </div>
   </div>
   <div class="row no-gutters editform-row">
@@ -148,6 +152,10 @@
     <div class="col-md-1">
       <button class="btn btn-sm btn-outline-primary" (click)="TermekdijZoom()"
               style="margin-left: 4px" type="button">...</button>
+      <button class="btn btn-sm btn-outline-primary" (click)="TermekdijTorles()"
+              style="margin-left: 4px" type="button">
+        <i class="fa fa-close" aria-hidden="true"></i>
+      </button>
     </div>
     <div class="col-md-2">
     </div>

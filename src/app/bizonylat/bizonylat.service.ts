@@ -36,7 +36,7 @@ export class BizonylatService {
   bizonylatLeiro = new BizonylatTipusLeiro();
   szvesz = false;
 
-  // a listából kiválasztott tételeken végzett eyszerűbb műveletekhez
+  // a listából kiválasztott tételeken végzett egyszerűbb műveletekhez
   Dto = new Array<BizonylatDto>();
   DtoSelectedIndex = -1;
 
@@ -284,5 +284,16 @@ export class BizonylatService {
     };
 
     return this._httpClient.post<BizonylatComplexResult>(url, body, options).toPromise();
+  }
+
+  public Save(dto: BizonylatComplexDto): Promise<NumberResult> {
+    const url = environment.BaseHref + this._controller + 'save';
+    const body = dto;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
   }
 }

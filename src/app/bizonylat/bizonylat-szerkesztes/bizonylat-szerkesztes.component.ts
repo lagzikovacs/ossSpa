@@ -12,6 +12,10 @@ import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylattetelSzerkesztesMode} from '../bizonylattetelszerkesztesmode';
+import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
+import {PenznemZoomParameter} from '../../penznem/penznemzoomparameter';
+import {FizetesimodZoomParameter} from '../../fizetesimod/fiztesimodzoomparameter';
+import {EmptyResult} from '../../dtos/emptyresult';
 
 @Component({
   selector: 'app-bizonylat-szerkesztes',
@@ -108,7 +112,9 @@ export class BizonylatSzerkesztesComponent {
       });
   }
   tetelTorles(i: number) {
-    // TODO törölni szó nélkül?
+    this.bizonylatservice.TetelDtoSelectedIndex = i;
+    this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.TetelTorles;
+    this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
   }
   tetelModositas(i: number) {
     this.bizonylatservice.TetelDtoSelectedIndex = i;
@@ -120,8 +126,70 @@ export class BizonylatSzerkesztesComponent {
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.bizonylatservice.ComplexDtoEdited.Dto.UGYFELKOD,
+      this.bizonylatservice.ComplexDtoEdited.Dto.UGYFELNEV))
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        return this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.bizonylatservice.ComplexDtoEdited.Dto.PENZNEMKOD,
+          this.bizonylatservice.ComplexDtoEdited.Dto.PENZNEM));
+      })
+      .then(res1 => {
+        if (res1.Error != null) {
+          throw res1.Error;
+        }
+
+        if (this.bizonylatservice.bizonylatLeiro.FizetesiModIs) {
+          return this._fizetesimodservice.ZoomCheck(new FizetesimodZoomParameter(this.bizonylatservice.ComplexDtoEdited.Dto.FIZETESIMODKOD,
+            this.bizonylatservice.ComplexDtoEdited.Dto.FIZETESIMOD));
+        } else {
+          return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
+        }
+      })
+      .then(res2 => {
+        if (res2.Error != null) {
+          throw res2.Error;
+        }
+
+        // TODO további ellenőrzések, esetleg lehetne szerver oldalon
+
+        return this.bizonylatservice.Save(this.bizonylatservice.ComplexDtoEdited);
+      })
+      .then(res3 => {
+        if (res3.Error != null) {
+          throw res3.Error;
+        }
+
+        return this.bizonylatservice.GetComplex(res3.Result);
+      })
+      .then(res4 => {
+        if (res4.Error != null) {
+          throw res4.Error;
+        }
+
+        if (this.bizonylatservice.uj) {
+          this.bizonylatservice.Dto.unshift(res4.Result[0].Dto);
+        } else {
+          this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex] = res4.Result[0].Dto;
+          this.bizonylatservice.TetelDto = res4.Result[0].LstTetelDto;
+          this.bizonylatservice.AfaDto = res4.Result[0].LstAfaDto;
+          this.bizonylatservice.TermekdijDto = res4.Result[0].LstTermekdijDto;
+        }
+
+        this.navigal();
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this.errormodal.show(err);
+      });
+  }
   cancel() {
+    this.navigal();
+  }
+  navigal() {
     if (this.bizonylatservice.uj) {
       this.bizonylatservice.ContainerMode = BizonylatContainerMode.List;
     } else {

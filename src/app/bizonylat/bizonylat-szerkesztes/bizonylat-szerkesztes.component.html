@@ -108,7 +108,8 @@
   UgyfelZoom = 2,
   PenznemZoom = 3,
   FizetesimodZoom = 4,
-  TetelSzerkesztes = 5
+  TetelSzerkesztes = 5,
+  TetelTorles = 6,
   }-->
 
   <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 1">
@@ -131,6 +132,9 @@
   </ng-container>
   <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 5">
     <app-bizonylat-tetel-szerkesztes></app-bizonylat-tetel-szerkesztes>
+  </ng-container>
+  <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 6">
+    <app-bizonylat-tetel-torles></app-bizonylat-tetel-torles>
   </ng-container>
 
   <div class="row no-gutters" style="margin-bottom: 10px">

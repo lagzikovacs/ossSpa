@@ -162,7 +162,8 @@ export class BizonylatTetelSzerkesztesComponent {
         }
 
         if (this.bizonylatservice.teteluj) {
-          this.bizonylatservice.ComplexDtoEdited.LstTetelDto.unshift(res5.Result[0]);
+          // a lista végére teszi, h a sorrend a user szándékának feleljen meg
+          this.bizonylatservice.ComplexDtoEdited.LstTetelDto.push(res5.Result[0]);
         } else {
           this.bizonylatservice.ComplexDtoEdited.LstTetelDto[this.bizonylatservice.TetelDtoSelectedIndex] = res5.Result[0];
         }

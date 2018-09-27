@@ -84,10 +84,24 @@
              readonly="true" [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.BRUTTO">
     </div>
     <div class="col-md-3">
-      <div class="editform-title">A teljesítés kelte</div>
+      <div class="editform-title">A bizonylat kelte</div>
     </div>
     <div class="col-md-2">
-      <input type="date" class="form-control form-control-sm" id="teljesiteskelte">
+      <input type="date" class="form-control form-control-sm" id="bizonylatkelte"
+             [(ngModel)]="bizonylatservice.BizonylatKelte">
+    </div>
+  </div>
+  <div class="row no-gutters editform-row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-3">
+      <div class="editform-title">A teljesités kelte</div>
+    </div>
+    <div class="col-md-2">
+      <input type="date" class="form-control form-control-sm" id="teljesiteskelte"
+             [(ngModel)]="bizonylatservice.TeljesitesKelte">
     </div>
   </div>
   <div class="row no-gutters editform-row">
@@ -99,7 +113,8 @@
       <div class="editform-title">Fizetési határidő</div>
     </div>
     <div class="col-md-2">
-      <input type="date" class="form-control form-control-sm" id="fizetesihatarido">
+      <input type="date" class="form-control form-control-sm" id="fizetesihatarido"
+             [(ngModel)]="bizonylatservice.FizetesiHatarido">
     </div>
   </div>
 

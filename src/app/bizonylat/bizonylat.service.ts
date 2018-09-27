@@ -21,10 +21,10 @@ import {StringResult} from '../dtos/stringresult';
 import {BizonylatKibocsatasParam} from './bizonylatkibocsatasparam';
 import {PenztarDto} from '../penztar/penztardto';
 import {BizonylatComplexDto} from './bizonylatcomplexdto';
-import {BizonylatSzerkesztesMode} from "./bizonylatszerkesztesmode";
-import {BizonylattetelSzerkesztesMode} from "./bizonylattetelszerkesztesmode";
-import {BizonylatTetelResult} from "./bizonylattetelresult";
-import {BruttobolParam} from "./bruttobolparam";
+import {BizonylatSzerkesztesMode} from './bizonylatszerkesztesmode';
+import {BizonylattetelSzerkesztesMode} from './bizonylattetelszerkesztesmode';
+import {BizonylatTetelResult} from './bizonylattetelresult';
+import {BruttobolParam} from './bruttobolparam';
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +63,10 @@ export class BizonylatService {
   TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
 
   BizonylatPenztarDto = new Array<PenztarDto>();
+
+  BizonylatKelte: any;
+  TeljesitesKelte: any;
+  FizetesiHatarido: any;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

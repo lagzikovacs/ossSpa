@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {PenznemService} from '../../penznem/penznem.service';
@@ -16,13 +16,14 @@ import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
 import {PenznemZoomParameter} from '../../penznem/penznemzoomparameter';
 import {FizetesimodZoomParameter} from '../../fizetesimod/fiztesimodzoomparameter';
 import {EmptyResult} from '../../dtos/emptyresult';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-bizonylat-szerkesztes',
   templateUrl: './bizonylat-szerkesztes.component.html',
   styleUrls: ['./bizonylat-szerkesztes.component.css']
 })
-export class BizonylatSzerkesztesComponent {
+export class BizonylatSzerkesztesComponent implements OnInit {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatservice: BizonylatService;
@@ -34,6 +35,12 @@ export class BizonylatSzerkesztesComponent {
               private _fizetesimodservice: FizetesimodService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
+  }
+
+  ngOnInit() {
+    this.bizonylatservice.BizonylatKelte = moment(this.bizonylatservice.ComplexDtoEdited.Dto.BIZONYLATKELTE).format('YYYY-MM-DD');
+    this.bizonylatservice.TeljesitesKelte = moment(this.bizonylatservice.ComplexDtoEdited.Dto.TELJESITESKELTE).format('YYYY-MM-DD');
+    this.bizonylatservice.FizetesiHatarido = moment(this.bizonylatservice.ComplexDtoEdited.Dto.FIZETESIHATARIDO).format('YYYY-MM-DD');
   }
 
   UgyfelZoom() {
@@ -155,6 +162,10 @@ export class BizonylatSzerkesztesComponent {
         }
 
         // TODO további ellenőrzések, esetleg lehetne szerver oldalon
+
+        this.bizonylatservice.ComplexDtoEdited.Dto.BIZONYLATKELTE = moment(this.bizonylatservice.BizonylatKelte).toISOString(true);
+        this.bizonylatservice.ComplexDtoEdited.Dto.TELJESITESKELTE = moment(this.bizonylatservice.TeljesitesKelte).toISOString(true);
+        this.bizonylatservice.ComplexDtoEdited.Dto.FIZETESIHATARIDO = moment(this.bizonylatservice.FizetesiHatarido).toISOString(true);
 
         return this.bizonylatservice.Save(this.bizonylatservice.ComplexDtoEdited);
       })

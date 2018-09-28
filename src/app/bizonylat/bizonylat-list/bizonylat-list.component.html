@@ -1,6 +1,9 @@
 <div class="alapkeret">
   <h5>{{bizonylatservice.bizonylatLeiro.BizonylatNev}}</h5>
-  <app-bizonylattoolbar [Szurok]="szurok"
+  <app-bizonylattoolbar [Megrendeles]="bizonylatservice.bizonylatTipus === 4"
+                        [MegrendelesSzurok]="megrendelesszurok"
+                        [Szurok]="szurok"
+                        [(megrendelesszempont)]="bizonylatservice.megrendelesszempont"
                         [(szempont)]="bizonylatservice.szempont"
                         [(minta)]="bizonylatservice.minta"
                         [enKereses]="!eppFrissit" (Kereses)="onKereses()"

@@ -1,4 +1,11 @@
 <div class="row no-gutters" style="paddig-top: 6px;padding-bottom: 6px">
+  <ng-container *ngIf="Megrendeles">
+    <div style="margin-right: 6px">
+      <select [disabled]="!enKereses" #MegrendelesSzempont type="text" class="form-control form-control-sm">
+        <option *ngFor="let msz of MegrendelesSzurok; let i = index" [value]="i" [selected]="i == _megrendelesszempont">{{msz}}</option>
+      </select>
+    </div>
+  </ng-container>
   <div style="margin-right: 6px">
     <select [disabled]="!enKereses" #Szempont type="text" class="form-control form-control-sm">
       <option *ngFor="let sz of Szurok; let i = index" [value]="i" [selected]="i == _szempont">{{sz}}</option>

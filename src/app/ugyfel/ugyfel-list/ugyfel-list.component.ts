@@ -13,8 +13,8 @@ import {UgyfelEgyMode} from '../ugyfelegymode';
 import {ProjektService} from '../../projekt/projekt/projekt.service';
 import {ProjektSzerkesztesMode} from '../../projekt/projekt/projektszerkesztesmode';
 import {IratSzerkesztesMode} from '../../irat/irat/iratszerkesztesmode';
-import {BizonylatService} from "../../bizonylat/bizonylat.service";
-import {BizonylatSzerkesztesMode} from "../../bizonylat/bizonylatszerkesztesmode";
+import {BizonylatService} from '../../bizonylat/bizonylat.service';
+import {BizonylatSzerkesztesMode} from '../../bizonylat/bizonylatszerkesztesmode';
 
 @Component({
   selector: 'app-ugyfel-list',

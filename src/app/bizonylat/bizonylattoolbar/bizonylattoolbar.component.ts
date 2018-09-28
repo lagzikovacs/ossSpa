@@ -6,6 +6,9 @@ import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewC
   styleUrls: ['./bizonylattoolbar.component.css']
 })
 export class BizonylattoolbarComponent implements AfterViewInit {
+  @Input() Megrendeles = false;
+
+  @Input() MegrendelesSzurok: string[] = [];
   @Input() Szurok: string[] = [];
 
   @Input() enKereses = true;
@@ -17,7 +20,15 @@ export class BizonylattoolbarComponent implements AfterViewInit {
   // azért kell a kétirányú adatkötés, h a szülő komponens újrainicializálja a toolbart
   // pl. egy tétel szerkesztése után
 
+  _megrendelesszempont = 0;
   _szempont = 0;
+
+  @ViewChild('MegrendelesSzempont') MegrendelesSzempontCombobox: ElementRef;
+  @Input()
+  set megrendelesszempont(value: number) {
+    this._megrendelesszempont = value;
+  }
+  @Output() megrendelesszempontChange: EventEmitter<number> = new EventEmitter();
 
   @ViewChild('Szempont') SzempontCombobox: ElementRef;
   @Input()
@@ -34,6 +45,11 @@ export class BizonylattoolbarComponent implements AfterViewInit {
   @Output() mintaChange: EventEmitter<string> = new EventEmitter();
 
   ngAfterViewInit(): void {
+    this.MegrendelesSzempontCombobox.nativeElement.addEventListener('change', (event) => {
+      this._megrendelesszempont = event.target.value;
+      this.megrendelesszempontChange.emit(this._megrendelesszempont);
+    });
+
     this.SzempontCombobox.nativeElement.addEventListener('change', (event) => {
       this._szempont = event.target.value;
       this.szempontChange.emit(this._szempont);

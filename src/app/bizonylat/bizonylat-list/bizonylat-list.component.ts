@@ -8,6 +8,7 @@ import {BizonylatkapcsolatService} from '../bizonylatirat/bizonylatkapcsolat.ser
 import {BizonylatkifizetesService} from '../bizonylatkifizetes/bizonylatkifizetes.service';
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {BizonylatSzerkesztesMode} from "../bizonylatszerkesztesmode";
+import {BizonylatTipus} from "../bizonylattipus";
 
 @Component({
   selector: 'app-bizonylat-list',
@@ -17,6 +18,7 @@ import {BizonylatSzerkesztesMode} from "../bizonylatszerkesztesmode";
 export class BizonylatListComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
+  megrendelesszurok = ['Mind', 'Nincs kiszállítva'];
   szurok = ['Id', 'Bizonylatszám', 'Ügyfél'];
   szempontok = [
     Szempont.Kod, Szempont.Bizonylatszam, Szempont.Ugyfel,
@@ -37,6 +39,17 @@ export class BizonylatListComponent {
     this.bizonylatservice.bp.fi = new Array();
     this.bizonylatservice.bp.BizonylatTipus = this.bizonylatservice.bizonylatTipus;
     this.bizonylatservice.bp.fi.push(new SzMT(this.szempontok[this.bizonylatservice.szempont], this.bizonylatservice.minta));
+
+    console.log(this.bizonylatservice.bizonylatTipus);
+    console.log(this.bizonylatservice.megrendelesszempont);
+    console.log((typeof this.bizonylatservice.megrendelesszempont));
+    console.log((this.bizonylatservice.bizonylatTipus === BizonylatTipus.Megrendeles));
+    console.log((this.bizonylatservice.megrendelesszempont === 1));
+
+    if (this.bizonylatservice.bizonylatTipus === BizonylatTipus.Megrendeles && this.bizonylatservice.megrendelesszempont === 1) {
+      this.bizonylatservice.bp.fi.push(new SzMT(Szempont.NincsKiszallitva, ''));
+      console.log('heh');
+    }
 
     this.onKeresesTovabb();
   }

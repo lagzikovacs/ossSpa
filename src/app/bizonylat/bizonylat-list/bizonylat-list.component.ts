@@ -43,7 +43,6 @@ export class BizonylatListComponent {
     // TODO szempont és megrendelesszempont tipusa valamiért stringre vált
     if (this.bizonylatservice.bizonylatTipus === BizonylatTipus.Megrendeles && this.bizonylatservice.megrendelesszempont == 1) {
       this.bizonylatservice.bp.fi.push(new SzMT(Szempont.NincsKiszallitva, ''));
-      console.log('heh');
     }
 
     this.onKeresesTovabb();

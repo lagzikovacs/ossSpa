@@ -45,10 +45,12 @@ export class BizonylattoolbarComponent implements AfterViewInit {
   @Output() mintaChange: EventEmitter<string> = new EventEmitter();
 
   ngAfterViewInit(): void {
-    this.MegrendelesSzempontCombobox.nativeElement.addEventListener('change', (event) => {
-      this._megrendelesszempont = event.target.value;
-      this.megrendelesszempontChange.emit(this._megrendelesszempont);
-    });
+    if (this.Megrendeles) {
+      this.MegrendelesSzempontCombobox.nativeElement.addEventListener('change', (event) => {
+        this._megrendelesszempont = event.target.value;
+        this.megrendelesszempontChange.emit(this._megrendelesszempont);
+      });
+    }
 
     this.SzempontCombobox.nativeElement.addEventListener('change', (event) => {
       this._szempont = event.target.value;

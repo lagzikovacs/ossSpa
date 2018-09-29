@@ -9,6 +9,7 @@
     <th>Fizetési mód</th>
     <th>Fizetési határidő</th>
     <th>Kifizetés rendben</th>
+    <th>Kiszállítva</th>
     <th>Pénznem</th>
     <th>Árfolyam</th>
     <th>Netto</th>
@@ -34,8 +35,8 @@
       <td>{{item.TELJESITESKELTE | datehun}}</td>
       <td>{{item.FIZETESIMOD}}</td>
       <td>{{item.FIZETESIHATARIDO | datehun}}</td>
-      <td *ngIf="item.KIFIZETESRENDBEN">igen</td>
-      <td *ngIf="!item.KIFIZETESRENDBEN"></td>
+      <td>{{item.KIFIZETESRENDBEN | boolhun}}</td>
+      <td>{{item.KISZALLITVA | boolhun}}</td>
       <td>{{item.PENZNEM}}</td>
       <td style="text-align: right">{{item.ARFOLYAM | number: '1.2-2'}}</td>
       <td style="text-align: right">{{item.NETTO | number: '1.2-2'}}</td>
@@ -47,7 +48,7 @@
       <td *ngIf="!item.EZSTORNOZOTT"></td>
     </tr>
     <tr *ngIf="item.MEGJEGYZESFEJ || '' !== ''">
-      <td colspan="15">{{item.MEGJEGYZESFEJ}}</td>
+      <td colspan="16">{{item.MEGJEGYZESFEJ}}</td>
     </tr>
   </ng-container>
   </tbody>

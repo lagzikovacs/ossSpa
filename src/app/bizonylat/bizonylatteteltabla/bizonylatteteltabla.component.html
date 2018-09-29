@@ -12,6 +12,12 @@
     <th>Netto</th>
     <th>ÁFA</th>
     <th>Brutto</th>
+    <th>Tömeg</th>
+    <th>Össztömeg</th>
+    <th>Termékdíj KT</th>
+    <th>Termékdíj megnevezés</th>
+    <th>Termékdíj egységár</th>
+    <th>Termékdíj</th>
   </tr>
   </thead>
   <tbody>
@@ -33,9 +39,15 @@
       <td style="text-align: right">{{item.NETTO | number: '1.2-2'}}</td>
       <td style="text-align: right">{{item.AFA | number: '1.2-2'}}</td>
       <td style="text-align: right">{{item.BRUTTO | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.TOMEGKG | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.OSSZTOMEGKG | number: '1.2-2'}}</td>
+      <td>{{item.TERMEKDIJKT}}</td>
+      <td>{{item.TERMEKDIJMEGNEVEZES}}</td>
+      <td style="text-align: right">{{item.TERMEKDIJEGYSEGAR | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.TERMEKDIJ | number: '1.2-2'}}</td>
     </tr>
     <tr *ngIf="item.MEGJEGYZES || '' !== ''">
-      <td colspan="9">{{item.MEGJEGYZES}}</td>
+      <td colspan="15">{{item.MEGJEGYZES}}</td>
     </tr>
   </ng-container>
   </tbody>

@@ -40,13 +40,8 @@ export class BizonylatListComponent {
     this.bizonylatservice.bp.BizonylatTipus = this.bizonylatservice.bizonylatTipus;
     this.bizonylatservice.bp.fi.push(new SzMT(this.szempontok[this.bizonylatservice.szempont], this.bizonylatservice.minta));
 
-    console.log(this.bizonylatservice.bizonylatTipus);
-    console.log(this.bizonylatservice.megrendelesszempont);
-    console.log((typeof this.bizonylatservice.megrendelesszempont));
-    console.log((this.bizonylatservice.bizonylatTipus === BizonylatTipus.Megrendeles));
-    console.log((this.bizonylatservice.megrendelesszempont === 1));
-
-    if (this.bizonylatservice.bizonylatTipus === BizonylatTipus.Megrendeles && this.bizonylatservice.megrendelesszempont === 1) {
+    // TODO szempont és megrendelesszempont tipusa valamiért stringre vált
+    if (this.bizonylatservice.bizonylatTipus === BizonylatTipus.Megrendeles && this.bizonylatservice.megrendelesszempont == 1) {
       this.bizonylatservice.bp.fi.push(new SzMT(Szempont.NincsKiszallitva, ''));
       console.log('heh');
     }

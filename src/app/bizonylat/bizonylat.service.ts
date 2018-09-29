@@ -51,7 +51,7 @@ export class BizonylatService {
   TetelDtoEdited = new BizonylatTetelDto();
   TetelDtoSelectedIndex = -1;
 
-  megrendelesszempont = 0;
+  megrendelesszempont = 1;
   szempont = 0;
   minta = '';
   bp = new BizonylatParameter(0, environment.lapmeret);

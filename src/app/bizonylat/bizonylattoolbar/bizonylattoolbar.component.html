@@ -2,7 +2,7 @@
   <ng-container *ngIf="Megrendeles">
     <div style="margin-right: 6px">
       <select [disabled]="!enKereses" #MegrendelesSzempont type="text" class="form-control form-control-sm">
-        <option *ngFor="let msz of MegrendelesSzurok; let i = index" [value]="i" [selected]="i == _megrendelesszempont">{{msz}}</option>
+        <option *ngFor="let msz of MegrendelesSzurok; let mi = index" [value]="mi" [selected]="mi == _megrendelesszempont">{{msz}}</option>
       </select>
     </div>
   </ng-container>

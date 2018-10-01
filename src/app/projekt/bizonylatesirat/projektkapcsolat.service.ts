@@ -35,6 +35,7 @@ export class ProjektkapcsolatService {
 
   AjanlatContainerMode = UjajanlatContainerMode.List;
   AjanlatParam: AjanlatParam;
+  AjanlatErvenyes: any;
   AjanlattetelIndex = 0;
   AjanlatSzerkesztesMode = UjajanlatSzerkesztesMode.Blank;
 
@@ -144,6 +145,7 @@ export class ProjektkapcsolatService {
   }
 
   public AjanlatKeszites(ap: AjanlatParam): Promise<NumberResult> {
+    console.log(ap);
     const url = environment.BaseHref + this._controller + 'ajanlatkeszites';
     const body = ap;
     const options = {

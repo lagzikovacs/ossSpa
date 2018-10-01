@@ -18,15 +18,13 @@ export class ProjektBizonylatesiratUjajanlatComponent implements OnInit {
   projektkapcsolatservice: ProjektkapcsolatService;
   eppFrissit = false;
 
-  Ervenyes: any;
-
   constructor(private _logonservice: LogonService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.projektkapcsolatservice = projektkapcsolatservice;
   }
 
   ngOnInit() {
-    this.Ervenyes = moment(this.projektkapcsolatservice.AjanlatParam.Ervenyes).format('YYYY-MM-DD');
+    this.projektkapcsolatservice.AjanlatErvenyes = moment(this.projektkapcsolatservice.AjanlatParam.Ervenyes).format('YYYY-MM-DD');
   }
 
   setClickedRow(i) {
@@ -38,7 +36,10 @@ export class ProjektBizonylatesiratUjajanlatComponent implements OnInit {
   onSubmit() {
     this.eppFrissit = true;
     this.projektkapcsolatservice.AjanlatParam.ProjektKod = this.projektkapcsolatservice.ProjektKod;
-    this.projektkapcsolatservice.AjanlatParam.Ervenyes = moment(this.Ervenyes).toISOString(true);
+    console.log(this.projektkapcsolatservice.AjanlatParam.Ervenyes);
+    console.log(this.projektkapcsolatservice.AjanlatErvenyes);
+    this.projektkapcsolatservice.AjanlatParam.Ervenyes = moment(this.projektkapcsolatservice.AjanlatErvenyes).toISOString(true);
+    console.log(this.projektkapcsolatservice.AjanlatParam.Ervenyes);
     this.projektkapcsolatservice.AjanlatKeszites(this.projektkapcsolatservice.AjanlatParam)
       .then(res => {
         if (res.Error != null) {

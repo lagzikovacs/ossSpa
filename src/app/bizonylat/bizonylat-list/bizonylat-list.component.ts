@@ -127,6 +127,7 @@ export class BizonylatListComponent {
         }
 
         this.bizonylatservice.ComplexDtoEdited = res.Result[0];
+        this.bizonylatservice.ComplexDtoEdited.Dto.BIZONYLATTIPUSKOD = this.bizonylatservice.bizonylatTipus;
 
         this.bizonylatservice.uj = true;
         this.eppFrissit = false;

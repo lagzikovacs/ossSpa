@@ -80,8 +80,10 @@ export class BizonylatSzerkesztesComponent implements OnInit {
           throw this.fizerr + fm;
         }
 
+        this.bizonylatservice.TeljesitesKelte = this.bizonylatservice.BizonylatKelte;
         this.bizonylatservice.ComplexDtoEdited.Dto.FIZETESIMODKOD = res.Result[0].FIZETESIMODKOD;
         this.bizonylatservice.ComplexDtoEdited.Dto.FIZETESIMOD = res.Result[0].FIZETESIMOD1;
+        this.bizonylatservice.FizetesiHatarido = this.bizonylatservice.BizonylatKelte;
         this.eppFrissit = false;
       })
       .catch(err => {

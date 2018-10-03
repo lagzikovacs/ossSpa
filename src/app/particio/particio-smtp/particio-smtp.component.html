@@ -3,6 +3,100 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Klienstipus</div>
+      </div>
+      <div class="col-md-2">
+        <select type="text" class="form-control form-control-sm"
+                [(ngModel)]="particioservice.Dto.SMTP_KLIENSTIPUS" name="m1">
+          <option>Gmail</option>
+        </select>
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Azonosító</div>
+      </div>
+      <div class="col-md-3">
+        <input type="text" class="form-control form-control-sm" id="m2"
+               autocomplete="off"
+               [(ngModel)]="particioservice.Dto.SMTP_FELHASZNALOAZONOSITO" name="m2">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Jelszó</div>
+      </div>
+      <div class="col-md-3">
+        <input type="text" class="form-control form-control-sm" id="m3"
+               autocomplete="off"
+               [(ngModel)]="particioservice.Dto.SMTP_FELHASZNALOJELSZO" name="m3">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">A küldő neve</div>
+      </div>
+      <div class="col-md-3">
+        <input type="text" class="form-control form-control-sm" id="m4"
+               autocomplete="off" maxlength="50"
+               [(ngModel)]="particioservice.Dto.SMTP_KULDONEVE" name="m4">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">A küldő email címe</div>
+      </div>
+      <div class="col-md-3">
+        <input type="text" class="form-control form-control-sm" id="m5"
+               autocomplete="off" maxlength="50"
+               [(ngModel)]="particioservice.Dto.SMTP_KULDOEMAILCIME" name="m5">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Custom host</div>
+      </div>
+      <div class="col-md-2">
+        <input type="text" class="form-control form-control-sm" id="m6"
+               autocomplete="off" maxlength="50"
+               [(ngModel)]="particioservice.Dto.SMTP_CUSTOMHOST" name="m6">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Custom port</div>
+      </div>
+      <div class="col-md-1">
+        <input type="number" class="form-control form-control-sm" id="m7"
+               autocomplete="off"
+               [(ngModel)]="particioservice.Dto.SMTP_CUSTOMPORT" name="m7">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">TLS</div>
+      </div>
+      <div class="col-md-1">
+        <select type="text" class="form-control form-control-sm"
+                [(ngModel)]="particioservice.Dto.SMTP_TLS" name="m8">
+          <option value="false">Nem</option>
+          <option value="true">Igen</option>
+        </select>
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Hibaértesítési email címek</div>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control form-control-sm" id="m9"
+               autocomplete="off"
+               [(ngModel)]="particioservice.Dto.HIBAERTESITESEMAILCIMEK" name="m9">
+      </div>
+    </div>
+
     <div class="row no-gutters" style="margin-bottom: 10px">
       <div class="col-md-2"></div>
       <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>

@@ -9,8 +9,8 @@ import {TermekdijResult} from './termekdijresult';
 import {EmptyResult} from '../dtos/emptyresult';
 import {NumberResult} from '../dtos/numberresult';
 import {TermekdijZoomParameter} from './termekdijzoomparameter';
-import {TermekdijContainerMode} from "./termekdijcontainermode";
-import {TermekdijEgyMode} from "./termekdijegymode";
+import {TermekdijContainerMode} from './termekdijcontainermode';
+import {TermekdijEgyMode} from './termekdijegymode';
 
 @Injectable({
   providedIn: 'root'

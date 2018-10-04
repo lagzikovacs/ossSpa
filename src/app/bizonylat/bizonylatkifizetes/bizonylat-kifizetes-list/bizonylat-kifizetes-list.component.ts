@@ -5,7 +5,8 @@ import {BizonylatService} from '../../bizonylat.service';
 import {LogonService} from '../../../logon/logon.service';
 import {BizonylatKifizetesContainerMode} from '../bizonylatkifizetescontainermode';
 import {BizonylatKifizetesEgyMode} from '../bizonylatkifizetesegymode';
-import {BizonylatKifizetesSzerkesztesMode} from "../bizonylatkifizetesszerkesztesmode";
+import {BizonylatKifizetesSzerkesztesMode} from '../bizonylatkifizetesszerkesztesmode';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-bizonylat-kifizetes-list',
@@ -52,8 +53,19 @@ export class BizonylatKifizetesListComponent {
         }
 
         this.bizonylatkifizetesservice.uj = true;
-        this.bizonylatkifizetesservice.DtoEdited = res.Result[0];
         this.bizonylatkifizetesservice.DtoSelectedIndex = -1;
+
+        this.bizonylatkifizetesservice.DtoEdited = res.Result[0];
+        this.bizonylatkifizetesservice.DtoEdited.DATUM = moment().toISOString(true);
+        this.bizonylatkifizetesservice.DtoEdited.OSSZEG = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].BRUTTO;
+        this.bizonylatkifizetesservice.DtoEdited.PENZNEMKOD =
+          this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].PENZNEMKOD;
+        this.bizonylatkifizetesservice.DtoEdited.PENZNEM = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].PENZNEM;
+        this.bizonylatkifizetesservice.DtoEdited.FIZETESIMODKOD =
+          this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].FIZETESIMODKOD;
+        this.bizonylatkifizetesservice.DtoEdited.FIZETESIMOD =
+          this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].FIZETESIMOD;
+
         this.eppFrissit = false;
 
         this.bizonylatkifizetesservice.ContainerMode = BizonylatKifizetesContainerMode.Uj;

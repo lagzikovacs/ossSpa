@@ -72,6 +72,7 @@ import {BizonylatService} from '../bizonylat/bizonylat.service';
 import {BizonylatTipus} from '../bizonylat/bizonylattipus';
 import {BizonylatDto} from "../bizonylat/bizonylatdto";
 import {BizonylatContainerMode} from "../bizonylat/bizonylatcontainermode";
+import {VagolapService} from "../vagolap/vagolap.service";
 
 @Injectable({
   providedIn: 'root'
@@ -105,7 +106,8 @@ export class MenuService {
               private _particioservice: ParticioService,
               private _volumeservice: VolumeService,
               private _felhasznaloservice: FelhasznaloService,
-              private _csoportservice: CsoportService) {
+              private _csoportservice: CsoportService,
+              private _vagolapservice: VagolapService) {
     _location.onPopState(() => {
       _router.navigate(['bejelentkezes']);
       // TODO nem a várt dolog történik, de megfelel
@@ -258,6 +260,8 @@ export class MenuService {
         this._csoportservice.ContainerMode = CsoportContainerMode.List;
         this._csoportservice.zoom = false;
         this._csoportservice.Dto = new Array<CsoportDto>();
+        break;
+      case '/vagolap':
         break;
       default:
         // TODO

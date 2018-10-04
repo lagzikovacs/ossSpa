@@ -49,6 +49,9 @@
       <button [disabled]="eppFrissit" (click)="teendo()" class="btn btn-sm btn-outline-primary navgomb">
         Teendő
       </button>
+      <button [disabled]="eppFrissit" (click)="vagolap()" class="btn btn-sm btn-outline-primary navgomb">
+        Vágólap
+      </button>
     </nav>
   </div>
 
@@ -64,7 +67,8 @@
   Bizonylatesirat = 9,
   Szamlazasirend = 10,
   Teendo = 11,
-  Datumok = 12
+  Datumok = 12,
+  Vagolap = 13
   }-->
 
   <ng-container *ngIf="projektservice.EgyMode === 1">
@@ -103,6 +107,10 @@
   <ng-container *ngIf="projektservice.EgyMode === 12">
     <app-projekt-datumok></app-projekt-datumok>
   </ng-container>
+  <ng-container *ngIf="projektservice.EgyMode === 13">
+    <app-vagolap></app-vagolap>
+  </ng-container>
 
   <app-errormodal [cim]="projektservice.cim"></app-errormodal>
 </div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

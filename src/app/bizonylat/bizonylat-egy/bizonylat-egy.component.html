@@ -55,6 +55,9 @@
       <button [disabled]="eppFrissit || !osnxmlenabled()" (click)="osnxml()" class="btn btn-sm btn-outline-primary navgomb">
         OSN xml
       </button>
+      <button [disabled]="eppFrissit" (click)="vagolap()" class="btn btn-sm btn-outline-primary navgomb">
+        Vágólap
+      </button>
     </nav>
   </div>
 
@@ -73,7 +76,8 @@
   Kifizetesrendben = 11,
   Kiszallitva = 12,
   Formaiellenorzes = 13,
-  OSNxml = 14
+  OSNxml = 14,
+  Vagolap = 15
   }-->
   <ng-container *ngIf="bizonylatservice.EgyMode === 0">
     <app-blank></app-blank>
@@ -122,6 +126,9 @@
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 14">
     <app-bizonylat-osnxml></app-bizonylat-osnxml>
+  </ng-container>
+  <ng-container *ngIf="bizonylatservice.EgyMode === 15">
+    <app-vagolap></app-vagolap>
   </ng-container>
 
   <app-errormodal [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"></app-errormodal>

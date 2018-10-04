@@ -9,6 +9,7 @@ import {ProjektkapcsolatService} from '../../bizonylatesirat/projektkapcsolat.se
 import {BizonylatesIratContainerMode} from '../../bizonylatesirat/bizonylatesiratcontainermode';
 import {SzamlazasirendContainerMode} from '../../szamlazasirend/szamlazasirendcontainermode';
 import {ProjektteendoContainerMode} from '../../projektteendo/projektteendocontainermode';
+import {VagolapService} from "../../../vagolap/vagolap.service";
 
 @Component({
   selector: 'app-projekt-egy',
@@ -24,6 +25,7 @@ export class ProjektEgyComponent {
   constructor(private _projektkapcsolatservice: ProjektkapcsolatService,
               private _szamlazasirendservice: SzamlazasirendService,
               private _projektteendoservice: ProjektteendoService,
+              private _vagolapservice: VagolapService,
               projektservice: ProjektService) {
     this.projektservice = projektservice;
   }
@@ -82,5 +84,9 @@ export class ProjektEgyComponent {
   teendo() {
     this.projektservice.EgyMode = ProjektEgyMode.Teendo;
     this._projektteendoservice.ContainerMode = ProjektteendoContainerMode.List;
+  }
+  vagolap() {
+    // TODO vágólap üzemmód
+    this.projektservice.EgyMode = ProjektEgyMode.Vagolap;
   }
 }

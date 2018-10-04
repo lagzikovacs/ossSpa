@@ -11,6 +11,7 @@ import {ProjektService} from "../../../projekt/projekt/projekt.service";
 import {ProjektResult} from "../../../projekt/projekt/projektresult";
 import {BizonylatkapcsolatService} from "../../../bizonylat/bizonylatirat/bizonylatkapcsolat.service";
 import {BizonylatKapcsolatContainerMode} from "../../../bizonylat/bizonylatirat/bizonylatkapcsolatcontainermode";
+import {VagolapService} from "../../../vagolap/vagolap.service";
 
 @Component({
   selector: 'app-irat-egy',
@@ -28,6 +29,7 @@ export class IratEgyComponent {
   constructor(private _projektkapcsolatservice: ProjektkapcsolatService,
               private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
               private _projektservice: ProjektService,
+              private _vagolapservice: VagolapService,
               iratservice: IratService,
               dokumentumservice: DokumentumService) {
     this.iratservice = iratservice;
@@ -88,5 +90,9 @@ export class IratEgyComponent {
         this.eppFrissit = false;
         this.errormodal.show(err);
       });
+  }
+  vagolap() {
+    // TODO vágólap üzemmód
+    this.iratservice.EgyMode = IratEgyMode.Vagolap;
   }
 }

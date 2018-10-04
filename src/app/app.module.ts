@@ -247,6 +247,8 @@ import { BoolHunPipe } from './pipes/boolhun.pipe';
 import { UgyfelNincsprojektComponent } from './ugyfel/ugyfel-nincsprojekt/ugyfel-nincsprojekt.component';
 import { BizonylatTetelSzerkesztesComponent } from './bizonylat/bizonylat-tetel-szerkesztes/bizonylat-tetel-szerkesztes.component';
 import { BizonylatTetelTorlesComponent } from './bizonylat/bizonylat-tetel-torles/bizonylat-tetel-torles.component';
+import { VagolapComponent } from './vagolap/vagolap.component';
+import {VagolapService} from "./vagolap/vagolap.service";
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -297,6 +299,7 @@ const routes: Routes = [
   {path: 'bejelentkezes', component: BejelentkezesComponent},
   {path: 'szerepkorvalasztas', component: SzerepkorvalasztasComponent, canActivate: [LoginGuard]},
   {path: 'jelszocsere', component: JelszocsereComponent, canActivate: [LoginGuard]},
+  {path: 'vagolap', component: VagolapComponent},
 
   {path: '', redirectTo: 'bejelentkezes', pathMatch: 'full'},
   {path: '**', redirectTo: 'fooldal'}
@@ -523,6 +526,7 @@ if (environment.production) {
     UgyfelNincsprojektComponent,
     BizonylatTetelSzerkesztesComponent,
     BizonylatTetelTorlesComponent,
+    VagolapComponent,
   ],
   imports: [
     BrowserModule,
@@ -569,6 +573,7 @@ if (environment.production) {
     MenuService,
     VerzioService,
     SessionService,
+    VagolapService
   ],
   bootstrap: [AppComponent]
 })

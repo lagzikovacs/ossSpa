@@ -12,6 +12,7 @@ import {BizonylatTipus} from '../bizonylattipus';
 import {PenztarService} from '../../penztar/penztar.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatSzerkesztesMode} from "../bizonylatszerkesztesmode";
+import {VagolapService} from "../../vagolap/vagolap.service";
 
 @Component({
   selector: 'app-bizonylat-egy',
@@ -28,6 +29,7 @@ export class BizonylatEgyComponent {
               private _bizonylatkifizetesservice: BizonylatkifizetesService,
               private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
               private _penztarsevice: PenztarService,
+              private _vagolapservice: VagolapService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
   }
@@ -154,5 +156,9 @@ export class BizonylatEgyComponent {
   }
   osnxml() {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.OSNxml;
+  }
+  vagolap() {
+    // TODO vágólap üzemmód
+    this.bizonylatservice.EgyMode = BizonylatEgyMode.Vagolap;
   }
 }

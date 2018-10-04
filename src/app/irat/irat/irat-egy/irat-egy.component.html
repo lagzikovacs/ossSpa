@@ -14,20 +14,23 @@
         <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>Részletesen
       </button>
 
-      <button [disabled]="eppFrissit || iratservice.DtoSelectedIndex === -1"
+      <button [disabled]="eppFrissit"
               (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-minus" aria-hidden="true"></i>
       </button>
-      <button [disabled]="eppFrissit || iratservice.DtoSelectedIndex === -1"
+      <button [disabled]="eppFrissit"
               (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-edit" aria-hidden="true"></i>
       </button>
 
-      <button [disabled]="eppFrissit || iratservice.DtoSelectedIndex === -1" (click)="dokumentum()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit" (click)="dokumentum()" class="btn btn-sm btn-outline-primary navgomb">
         Dokumentum
       </button>
       <button [disabled]="eppFrissit" (click)="projekt()" class="btn btn-sm btn-outline-primary navgomb">
         Projekt
+      </button>
+      <button [disabled]="eppFrissit" (click)="vagolap()" class="btn btn-sm btn-outline-primary navgomb">
+        Vágólap
       </button>
     </nav>
   </div>
@@ -37,7 +40,8 @@
   Torles = 2,
   Modositas = 3,
   Dokumentum = 4,
-  Projekt = 5
+  Projekt = 5,
+  Vagolap = 6
   }-->
 
   <ng-container *ngIf="iratservice.EgyMode === 1">
@@ -55,6 +59,9 @@
   <ng-container *ngIf="iratservice.EgyMode === 5">
     <app-irat-nincsprojekt *ngIf="nincsProjekt"></app-irat-nincsprojekt>
     <app-projekt-reszletek *ngIf="!nincsProjekt"></app-projekt-reszletek>
+  </ng-container>
+  <ng-container *ngIf="iratservice.EgyMode === 6">
+    <app-vagolap></app-vagolap>
   </ng-container>
 
   <app-errormodal [cim]="iratservice.cim"></app-errormodal>

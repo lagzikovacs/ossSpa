@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {VagolapDto} from './vagolapdto';
 import {VagolapMode} from "./vagolapmode";
+import {IratService} from "../irat/irat/irat.service";
+import {BizonylatService} from "../bizonylat/bizonylat.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,5 +12,28 @@ export class VagolapService {
   Dto = new Array<VagolapDto>();
   Mode = VagolapMode.List;
 
-  constructor() { }
+  constructor(private _iratservice: IratService,
+              private _bizonylatservice: BizonylatService) { }
+
+  iratotvagolapra() {
+    const d = new VagolapDto();
+    d.tipus = 0;
+    d.iratkod = this._iratservice.Dto[this._iratservice.DtoSelectedIndex].IRATKOD;
+    d.irattipus = this._iratservice.Dto[this._iratservice.DtoSelectedIndex].IRATTIPUS;
+    d.ugyfelnev = this._iratservice.Dto[this._iratservice.DtoSelectedIndex].UGYFELNEV;
+    d.ugyfelcim = this._iratservice.Dto[this._iratservice.DtoSelectedIndex].UGYFELCIM;
+
+    this.Dto.push(d);
+  }
+  bizonylatotvagolapra() {
+    const d = new VagolapDto();
+    d.tipus = 1;
+    d.bizonylatkod = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].BIZONYLATKOD;
+    d.bizonylatszam = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].BIZONYLATSZAM;
+    d.bizonylattipus = this._bizonylatservice.bizonylatLeiro.BizonylatNev;
+    d.ugyfelnev = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].UGYFELNEV;
+    d.ugyfelcim = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].UGYFELCIM;
+
+    this.Dto.push(d);
+  }
 }

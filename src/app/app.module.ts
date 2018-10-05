@@ -249,6 +249,7 @@ import { BizonylatTetelSzerkesztesComponent } from './bizonylat/bizonylat-tetel-
 import { BizonylatTetelTorlesComponent } from './bizonylat/bizonylat-tetel-torles/bizonylat-tetel-torles.component';
 import { VagolapComponent } from './vagolap/vagolap.component';
 import {VagolapService} from "./vagolap/vagolap.service";
+import { AbuComponent } from './tools/abu/abu.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -299,7 +300,7 @@ const routes: Routes = [
   {path: 'bejelentkezes', component: BejelentkezesComponent},
   {path: 'szerepkorvalasztas', component: SzerepkorvalasztasComponent, canActivate: [LoginGuard]},
   {path: 'jelszocsere', component: JelszocsereComponent, canActivate: [LoginGuard]},
-  {path: 'vagolap', component: VagolapComponent},
+  {path: 'vagolap', component: VagolapComponent, canActivate: [RoleGuard]},
 
   {path: '', redirectTo: 'bejelentkezes', pathMatch: 'full'},
   {path: '**', redirectTo: 'fooldal'}
@@ -527,6 +528,7 @@ if (environment.production) {
     BizonylatTetelSzerkesztesComponent,
     BizonylatTetelTorlesComponent,
     VagolapComponent,
+    AbuComponent,
   ],
   imports: [
     BrowserModule,

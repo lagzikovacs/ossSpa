@@ -10,6 +10,5 @@ export enum ProjektEgyMode {
   Bizonylatesirat = 9,
   Szamlazasirend = 10,
   Teendo = 11,
-  Datumok = 12,
-  Vagolap = 13
+  Datumok = 12
 }

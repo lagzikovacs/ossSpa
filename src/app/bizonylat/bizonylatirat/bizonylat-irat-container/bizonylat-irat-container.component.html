@@ -4,7 +4,8 @@ Blank = 0,
 List = 1,
 Egy = 2,
 Uj = 3,
-Levalasztas = 4
+Levalasztas = 4,
+Vagolap = 5
 }-->
 
 <ng-container *ngIf="bizonylatkapcsolatservice.ContainerMode === 1">
@@ -21,3 +22,6 @@ Levalasztas = 4
   <app-bizonylat-irat-levalasztas></app-bizonylat-irat-levalasztas>
 </ng-container>
 
+<ng-container *ngIf="bizonylatkapcsolatservice.ContainerMode === 5">
+  <app-vagolap></app-vagolap>
+</ng-container>

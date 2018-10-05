@@ -30,9 +30,11 @@
         Projekt
       </button>
       <button [disabled]="eppFrissit" (click)="vagolap()" class="btn btn-sm btn-outline-primary navgomb">
-        Vágólap
+        <i class="fa fa-angle-right" style="margin-right: 3px" aria-hidden="true"></i>
+        Vágólapra
       </button>
     </nav>
+    <app-abu></app-abu>
   </div>
 
 <!--  export enum IratEgyMode {
@@ -40,8 +42,7 @@
   Torles = 2,
   Modositas = 3,
   Dokumentum = 4,
-  Projekt = 5,
-  Vagolap = 6
+  Projekt = 5
   }-->
 
   <ng-container *ngIf="iratservice.EgyMode === 1">
@@ -59,9 +60,6 @@
   <ng-container *ngIf="iratservice.EgyMode === 5">
     <app-irat-nincsprojekt *ngIf="nincsProjekt"></app-irat-nincsprojekt>
     <app-projekt-reszletek *ngIf="!nincsProjekt"></app-projekt-reszletek>
-  </ng-container>
-  <ng-container *ngIf="iratservice.EgyMode === 6">
-    <app-vagolap></app-vagolap>
   </ng-container>
 
   <app-errormodal [cim]="iratservice.cim"></app-errormodal>

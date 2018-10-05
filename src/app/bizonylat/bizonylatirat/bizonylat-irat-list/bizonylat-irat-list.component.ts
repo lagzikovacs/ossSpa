@@ -9,6 +9,8 @@ import {IratContainerMode} from "../../../irat/irat/iratcontainermode";
 import {IratEgyMode} from "../../../irat/irat/irategymode";
 import {DokumentumContainerMode} from "../../../irat/dokumentum/dokumentumcontainermode";
 import {DokumentumService} from "../../../irat/dokumentum/dokumentum.service";
+import {VagolapService} from "../../../vagolap/vagolap.service";
+import {VagolapMode} from "../../../vagolap/vagolapmode";
 
 @Component({
   selector: 'app-bizonylat-irat-list',
@@ -25,6 +27,7 @@ export class BizonylatIratListComponent {
               private _bizonylatservice: BizonylatService,
               private _iratservice: IratService,
               private _dokumentumservice: DokumentumService,
+              private _vagolapservice: VagolapService,
               bizonylatkapcsolatservice: BizonylatkapcsolatService) {
     this.bizonylatkapcsolatservice = bizonylatkapcsolatservice;
   }
@@ -72,5 +75,9 @@ export class BizonylatIratListComponent {
   }
   uj() {
     this.bizonylatkapcsolatservice.ContainerMode = BizonylatKapcsolatContainerMode.Uj;
+  }
+  vagolap() {
+    this.bizonylatkapcsolatservice.ContainerMode = BizonylatKapcsolatContainerMode.Vagolap;
+    this._vagolapservice.Mode = VagolapMode.Bizonylatirat;
   }
 }

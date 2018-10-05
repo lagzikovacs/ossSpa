@@ -13,6 +13,8 @@ import {PenztarService} from '../../penztar/penztar.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatSzerkesztesMode} from "../bizonylatszerkesztesmode";
 import {VagolapService} from "../../vagolap/vagolap.service";
+import {VagolapMode} from "../../vagolap/vagolapmode";
+import {AbuComponent} from "../../tools/abu/abu.component";
 
 @Component({
   selector: 'app-bizonylat-egy',
@@ -21,6 +23,7 @@ import {VagolapService} from "../../vagolap/vagolap.service";
 })
 export class BizonylatEgyComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
+  @ViewChild(AbuComponent) abu: AbuComponent;
 
   bizonylatservice: BizonylatService;
   eppFrissit = false;
@@ -158,7 +161,7 @@ export class BizonylatEgyComponent {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.OSNxml;
   }
   vagolap() {
-    // TODO vágólap üzemmód
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Vagolap;
+    this._vagolapservice.bizonylatotvagolapra();
+    this.abu.Uzenet('A(z) ' + this.bizonylatservice.bizonylatLeiro.BizonylatNev + ' a vágólapra került!');
   }
 }

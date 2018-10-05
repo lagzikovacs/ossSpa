@@ -73,6 +73,7 @@ import {BizonylatTipus} from '../bizonylat/bizonylattipus';
 import {BizonylatDto} from "../bizonylat/bizonylatdto";
 import {BizonylatContainerMode} from "../bizonylat/bizonylatcontainermode";
 import {VagolapService} from "../vagolap/vagolap.service";
+import {VagolapMode} from "../vagolap/vagolapmode";
 
 @Injectable({
   providedIn: 'root'
@@ -262,6 +263,7 @@ export class MenuService {
         this._csoportservice.Dto = new Array<CsoportDto>();
         break;
       case '/vagolap':
+        this._vagolapservice.Mode = VagolapMode.List;
         break;
       default:
         // TODO

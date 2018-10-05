@@ -12,6 +12,8 @@ import {ProjektResult} from "../../../projekt/projekt/projektresult";
 import {BizonylatkapcsolatService} from "../../../bizonylat/bizonylatirat/bizonylatkapcsolat.service";
 import {BizonylatKapcsolatContainerMode} from "../../../bizonylat/bizonylatirat/bizonylatkapcsolatcontainermode";
 import {VagolapService} from "../../../vagolap/vagolap.service";
+import {VagolapMode} from "../../../vagolap/vagolapmode";
+import {AbuComponent} from "../../../tools/abu/abu.component";
 
 @Component({
   selector: 'app-irat-egy',
@@ -20,6 +22,7 @@ import {VagolapService} from "../../../vagolap/vagolap.service";
 })
 export class IratEgyComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
+  @ViewChild(AbuComponent) abu: AbuComponent;
 
   iratservice: IratService;
   dokumentumservice: DokumentumService;
@@ -92,7 +95,7 @@ export class IratEgyComponent {
       });
   }
   vagolap() {
-    // TODO vágólap üzemmód
-    this.iratservice.EgyMode = IratEgyMode.Vagolap;
+    this._vagolapservice.iratotvagolapra();
+    this.abu.Uzenet('Az irat a vágólapra került!');
   }
 }

@@ -10,6 +10,7 @@ import {BizonylatesIratContainerMode} from '../../bizonylatesirat/bizonylatesira
 import {SzamlazasirendContainerMode} from '../../szamlazasirend/szamlazasirendcontainermode';
 import {ProjektteendoContainerMode} from '../../projektteendo/projektteendocontainermode';
 import {VagolapService} from "../../../vagolap/vagolap.service";
+import {VagolapMode} from "../../../vagolap/vagolapmode";
 
 @Component({
   selector: 'app-projekt-egy',
@@ -84,9 +85,5 @@ export class ProjektEgyComponent {
   teendo() {
     this.projektservice.EgyMode = ProjektEgyMode.Teendo;
     this._projektteendoservice.ContainerMode = ProjektteendoContainerMode.List;
-  }
-  vagolap() {
-    // TODO vágólap üzemmód
-    this.projektservice.EgyMode = ProjektEgyMode.Vagolap;
   }
 }

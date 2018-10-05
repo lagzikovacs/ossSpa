@@ -1,3 +1,48 @@
-<p>
-  vagolap works!
-</p>
+<div class="alapkeret">
+  <h5>{{vagolapservice.cim}}</h5>
+  <div>
+    <nav>
+      <button [disabled]="eppFrissit" (click)="torles()" class="btn btn-sm btn-outline-primary navgomb" style="margin-right: 3px">
+        A vágólap törlése
+      </button>
+    </nav>
+  </div>
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th></th>
+      <th>Id</th>
+      <th>Azonosító</th>
+      <th>Tipus</th>
+      <th>Ügyfélnév</th>
+      <th>Ügyfélcím</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of vagolapservice.Dto; let i = index">
+      <td *ngIf="vagolapservice.Mode !== 4 && vagolapservice.Mode !== 5">
+      </td>
+      <td *ngIf="item.tipus === 0 && (vagolapservice.Mode === 4 || vagolapservice.Mode === 5)"
+          style="text-align: right; color: blue; text-decoration: underline; cursor: pointer;padding-left: 8px;padding-right: 8px"
+          (click)="beszur(i)">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+      </td>
+      <td *ngIf="item.tipus === 1 && (vagolapservice.Mode === 4)"
+          style="text-align: right; color: blue; text-decoration: underline; cursor: pointer;padding-left: 8px;padding-right: 8px"
+          (click)="beszur(i)">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+      </td>
+      <td *ngIf="item.tipus === 0">{{item.iratkod}}</td>
+      <td *ngIf="item.tipus === 1">{{item.bizonylatkod}}</td>
+      <td *ngIf="item.tipus === 0"></td>
+      <td *ngIf="item.tipus === 1">{{item.bizonylatszam}}</td>
+      <td *ngIf="item.tipus === 0">{{item.irattipus}}</td>
+      <td *ngIf="item.tipus === 1">{{item.bizonylattipus}}</td>
+      <td>{{item.ugyfelnev}}</td>
+      <td>{{item.ugyfelcim}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <app-errormodal [cim]="vagolapservice.cim"></app-errormodal>
+</div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

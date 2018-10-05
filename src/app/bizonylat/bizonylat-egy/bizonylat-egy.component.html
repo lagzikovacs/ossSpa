@@ -56,9 +56,11 @@
         OSN xml
       </button>
       <button [disabled]="eppFrissit" (click)="vagolap()" class="btn btn-sm btn-outline-primary navgomb">
-        Vágólap
+        <i class="fa fa-angle-right" style="margin-right: 3px" aria-hidden="true"></i>
+        Vágólapra
       </button>
     </nav>
+    <app-abu></app-abu>
   </div>
 
 <!--  export enum BizonylatEgyMode {
@@ -77,7 +79,6 @@
   Kiszallitva = 12,
   Formaiellenorzes = 13,
   OSNxml = 14,
-  Vagolap = 15
   }-->
   <ng-container *ngIf="bizonylatservice.EgyMode === 0">
     <app-blank></app-blank>
@@ -126,9 +127,6 @@
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 14">
     <app-bizonylat-osnxml></app-bizonylat-osnxml>
-  </ng-container>
-  <ng-container *ngIf="bizonylatservice.EgyMode === 15">
-    <app-vagolap></app-vagolap>
   </ng-container>
 
   <app-errormodal [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"></app-errormodal>

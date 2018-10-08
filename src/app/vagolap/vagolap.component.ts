@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {VagolapService} from './vagolap.service';
 import {VagolapDto} from './vagolapdto';
 import {IratService} from '../irat/irat/irat.service';
@@ -15,54 +15,32 @@ import {BizonylatKapcsolatParam} from '../bizonylat/bizonylatirat/bizonylatkapcs
   templateUrl: './vagolap.component.html',
   styleUrls: ['./vagolap.component.css']
 })
-export class VagolapComponent {
+export class VagolapComponent implements OnInit {
   vagolapservice: VagolapService;
   eppFrissit = false;
 
-  constructor(private _bizonylatservice: BizonylatService,
-              private _projektservice: ProjektService,
-              private _projektkapcsolatservice: ProjektkapcsolatService,
-              private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
-              vagolapservice: VagolapService) {
+  constructor(vagolapservice: VagolapService) {
     this.vagolapservice = vagolapservice;
+  }
+
+  ngOnInit() {
+    for (let i = 0; i < this.vagolapservice.Dto.length; i++) {
+      this.vagolapservice.Dto[i].selected = false;
+    }
   }
 
   torles() {
     this.vagolapservice.Dto = new Array<VagolapDto>();
   }
 
-  beszur(i: number) {
-    switch (this.vagolapservice.Dto[i].tipus) {
-      case 0: // irat a kiválasztott tétel
-        switch (this.vagolapservice.Mode) {
-          case VagolapMode.Projekt:
-            this._projektkapcsolatservice.AddIratToProjekt(new ProjektKapcsolatParameter(
-              this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD,
-              0,
-              this.vagolapservice.Dto[i].iratkod,
-              null
-            ));
-          break;
-          case VagolapMode.Bizonylatirat:
-            this._bizonylatkapcsolatservice.AddIratToBizonylat(new BizonylatKapcsolatParam(
-              this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].BIZONYLATKOD,
-              this.vagolapservice.Dto[i].iratkod
-            ));
-          break;
-        }
-      break;
-      case 1: // bizonylat a kiválasztott tétel
-        switch (this.vagolapservice.Mode) {
-          case VagolapMode.Projekt:
-            this._projektkapcsolatservice.AddBizonylatToProjekt(new ProjektKapcsolatParameter(
-              this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD,
-              this.vagolapservice.Dto[i].bizonylatkod,
-              0,
-              null
-            ));
-          break;
-        }
-      break;
+  isdisabled(i: number) {
+    if (this.vagolapservice.Mode === VagolapMode.List) {
+      return true;
     }
+    if (this.vagolapservice.Mode === VagolapMode.Bizonylatirat && this.vagolapservice.Dto[i].tipus === 1) {
+      return true;
+    }
+
+    return false;
   }
 }

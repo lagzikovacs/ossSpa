@@ -14,6 +14,8 @@ import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 import {BizonylatkapcsolatService} from '../../../bizonylat/bizonylatirat/bizonylatkapcsolat.service';
 import {BizonylatkifizetesService} from '../../../bizonylat/bizonylatkifizetes/bizonylatkifizetes.service';
 import {BizonylatEgyMode} from "../../../bizonylat/bizonylategymode";
+import {VagolapService} from "../../../vagolap/vagolap.service";
+import {VagolapMode} from "../../../vagolap/vagolapmode";
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-list',
@@ -32,6 +34,7 @@ export class ProjektBizonylatesiratListComponent {
               private _bizonylatservice: BizonylatService,
               private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
               private _bizonylatkifizetesservice: BizonylatkifizetesService,
+              private _vagolapservice: VagolapService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.projektkapcsolatservice = projektkapcsolatservice;
   }
@@ -153,5 +156,9 @@ export class ProjektBizonylatesiratListComponent {
         this.eppFrissit = false;
         this.errormodal.show(err);
       });
+  }
+  vagolaprol() {
+    this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.Vagolap;
+    this._vagolapservice.Mode = VagolapMode.Projekt;
   }
 }

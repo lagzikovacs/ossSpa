@@ -1,4 +1,6 @@
 export class VagolapDto {
+  selected: boolean;
+
   tipus: number;
 
   iratkod: number;

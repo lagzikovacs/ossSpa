@@ -76,7 +76,7 @@ export class BizonylatIratListComponent {
   uj() {
     this.bizonylatkapcsolatservice.ContainerMode = BizonylatKapcsolatContainerMode.Uj;
   }
-  vagolap() {
+  vagolaprol() {
     this.bizonylatkapcsolatservice.ContainerMode = BizonylatKapcsolatContainerMode.Vagolap;
     this._vagolapservice.Mode = VagolapMode.Bizonylatirat;
   }

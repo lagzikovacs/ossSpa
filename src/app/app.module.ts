@@ -250,6 +250,8 @@ import { BizonylatTetelTorlesComponent } from './bizonylat/bizonylat-tetel-torle
 import { VagolapComponent } from './vagolap/vagolap.component';
 import {VagolapService} from "./vagolap/vagolap.service";
 import { AbuComponent } from './tools/abu/abu.component';
+import { BizonylatIratVagolaprolComponent } from './bizonylat/bizonylatirat/bizonylat-irat-vagolaprol/bizonylat-irat-vagolaprol.component';
+import { ProjektBizonylatesiratVagolaprolComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-vagolaprol/projekt-bizonylatesirat-vagolaprol.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -529,6 +531,8 @@ if (environment.production) {
     BizonylatTetelTorlesComponent,
     VagolapComponent,
     AbuComponent,
+    BizonylatIratVagolaprolComponent,
+    ProjektBizonylatesiratVagolaprolComponent,
   ],
   imports: [
     BrowserModule,

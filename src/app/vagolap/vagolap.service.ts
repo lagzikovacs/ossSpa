@@ -36,4 +36,22 @@ export class VagolapService {
 
     this.Dto.push(d);
   }
+  kijeloltiratokszama(): number {
+    let kijeloltdb = 0;
+    for (let i = 0; i < this.Dto.length; i++) {
+      if (this.Dto[i].tipus === 0 && this.Dto[i].selected) {
+        ++kijeloltdb;
+      }
+    }
+    return kijeloltdb;
+  }
+  kijeloltekszama(): number {
+    let kijeloltdb = 0;
+    for (let i = 0; i < this.Dto.length; i++) {
+      if (this.Dto[i].selected) {
+        ++kijeloltdb;
+      }
+    }
+    return kijeloltdb;
+  }
 }

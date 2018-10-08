@@ -35,9 +35,19 @@ export class DokumentumEgyComponent {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this.errormodal.show(err);
       });
   }
-
+  letoltesPDF() {
+    this.eppFrissit = true;
+    this.dokumentumservice.KimentesPDF()
+      .then(res => {
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this.errormodal.show(err);
+      });
+  }
 }

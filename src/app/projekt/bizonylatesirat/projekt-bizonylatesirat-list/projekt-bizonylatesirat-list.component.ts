@@ -8,14 +8,15 @@ import {IratContainerMode} from '../../../irat/irat/iratcontainermode';
 import {DokumentumContainerMode} from '../../../irat/dokumentum/dokumentumcontainermode';
 import {IratEgyMode} from '../../../irat/irat/irategymode';
 import {DokumentumService} from '../../../irat/dokumentum/dokumentum.service';
-import {AjanlatTetelTipus} from '../ajanlatteteltipus';
-import {UjajanlatContainerMode} from '../ujajanlatcontainermode';
+import {AjanlatTetelTipus} from '../../ajanlat/ajanlatteteltipus';
+import {AjanlatContainerMode} from '../../ajanlat/ajanlatcontainermode';
 import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 import {BizonylatkapcsolatService} from '../../../bizonylat/bizonylatirat/bizonylatkapcsolat.service';
 import {BizonylatkifizetesService} from '../../../bizonylat/bizonylatkifizetes/bizonylatkifizetes.service';
 import {BizonylatEgyMode} from "../../../bizonylat/bizonylategymode";
 import {VagolapService} from "../../../vagolap/vagolap.service";
 import {VagolapMode} from "../../../vagolap/vagolapmode";
+import {AjanlatService} from "../../ajanlat/ajanlat.service";
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-list',
@@ -35,6 +36,7 @@ export class ProjektBizonylatesiratListComponent {
               private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
               private _bizonylatkifizetesservice: BizonylatkifizetesService,
               private _vagolapservice: VagolapService,
+              private _ajanlatservice: AjanlatService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.projektkapcsolatservice = projektkapcsolatservice;
   }
@@ -140,17 +142,17 @@ export class ProjektBizonylatesiratListComponent {
   }
   ujajanlat() {
     this.eppFrissit = true;
-    this.projektkapcsolatservice.AjanlatCreateNew()
+    this._ajanlatservice.CreateNew()
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        this.projektkapcsolatservice.AjanlatParam = res.Result;
+        this._ajanlatservice.AjanlatParam = res.Result;
 
         this.eppFrissit = false;
         this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.UjAjanlat;
-        this.projektkapcsolatservice.AjanlatContainerMode = UjajanlatContainerMode.List;
+        this._ajanlatservice.AjanlatContainerMode = AjanlatContainerMode.List;
       })
       .catch(err => {
         this.eppFrissit = false;

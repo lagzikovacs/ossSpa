@@ -10,6 +10,7 @@ import {ProjektteendoService} from '../../projektteendo/projektteendo.service';
 import {SzamlazasirendService} from '../../szamlazasirend/szamlazasirend.service';
 import {ProjektkapcsolatService} from '../../bizonylatesirat/projektkapcsolat.service';
 import {BizonylatesIratContainerMode} from '../../bizonylatesirat/bizonylatesiratcontainermode';
+import {AjanlatService} from "../../ajanlat/ajanlat.service";
 
 @Component({
   selector: 'app-projekt-list',
@@ -43,6 +44,7 @@ export class ProjektListComponent {
   constructor(private _projektkapcsolatservice: ProjektkapcsolatService,
               private _szamlazasirendservice: SzamlazasirendService,
               private _projektteendoservice: ProjektteendoService,
+              private _ajanlatservice: AjanlatService,
               projektservice: ProjektService) {
     this.projektservice = projektservice;
   }
@@ -98,6 +100,7 @@ export class ProjektListComponent {
     this._projektkapcsolatservice.UgyfelKod = UgyfelKod;
     this._szamlazasirendservice.ProjektKod = ProjektKod;
     this._projektteendoservice.ProjektKod = ProjektKod;
+    this._ajanlatservice.ProjektKod = ProjektKod;
 
     this.eppFrissit = true;
     this._projektkapcsolatservice.Kereses()

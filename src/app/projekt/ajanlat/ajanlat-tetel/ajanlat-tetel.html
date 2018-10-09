@@ -1,16 +1,16 @@
 <div class="alapkeret">
-  <h5>{{projektkapcsolatservice.AjanlatParam.AjanlatBuf[projektkapcsolatservice.AjanlattetelIndex].TetelTipus}}</h5>
+  <h5>{{ajanlatservice.AjanlatParam.AjanlatBuf[ajanlatservice.AjanlattetelIndex].TetelTipus}}</h5>
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
     <div class="row no-gutters editform-row">
       <div class="col-md-2">
-        <div class="editform-title">{{projektkapcsolatservice.AjanlatParam.AjanlatBuf[projektkapcsolatservice.AjanlattetelIndex].TetelTipus}}</div>
+        <div class="editform-title">{{ajanlatservice.AjanlatParam.AjanlatBuf[ajanlatservice.AjanlattetelIndex].TetelTipus}}</div>
       </div>
       <div class="col-md-3">
         <input type="text" class="form-control form-control-sm" id="cikk"
                maxlength="100" autocomplete="off" style="background-color: aquamarine"
-               [(ngModel)]="projektkapcsolatservice.AjanlatParam.AjanlatBuf[projektkapcsolatservice.AjanlattetelIndex].CikkNev" name="cikk">
+               [(ngModel)]="ajanlatservice.AjanlatParam.AjanlatBuf[ajanlatservice.AjanlattetelIndex].CikkNev" name="cikk">
       </div>
       <div class="col-md-1">
         <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="CikkZoom()">...</button>
@@ -23,7 +23,7 @@
       </div>
       <div class="col-md-2">
         <input type="number" class="form-control form-control-sm" id="mennyiseg"
-               [(ngModel)]="projektkapcsolatservice.AjanlatParam.AjanlatBuf[projektkapcsolatservice.AjanlattetelIndex].Mennyiseg" name="mennyiseg">
+               [(ngModel)]="ajanlatservice.AjanlatParam.AjanlatBuf[ajanlatservice.AjanlattetelIndex].Mennyiseg" name="mennyiseg">
       </div>
     </div>
     <div class="row no-gutters editform-row">
@@ -32,7 +32,7 @@
       </div>
       <div class="col-md-2">
         <input type="number" class="form-control form-control-sm" id="egysegar"
-               [(ngModel)]="projektkapcsolatservice.AjanlatParam.AjanlatBuf[projektkapcsolatservice.AjanlattetelIndex].EgysegAr" name="egysegar">
+               [(ngModel)]="ajanlatservice.AjanlatParam.AjanlatBuf[ajanlatservice.AjanlattetelIndex].EgysegAr" name="egysegar">
       </div>
     </div>
     <div class="row no-gutters editform-row">
@@ -41,7 +41,7 @@
       </div>
       <div class="col-md-2">
         <input type="number" class="form-control form-control-sm" id="egysegnyi"
-               [(ngModel)]="projektkapcsolatservice.AjanlatParam.AjanlatBuf[projektkapcsolatservice.AjanlattetelIndex].EgysegnyiTeljesitmeny" name="egysegnyi">
+               [(ngModel)]="ajanlatservice.AjanlatParam.AjanlatBuf[ajanlatservice.AjanlattetelIndex].EgysegnyiTeljesitmeny" name="egysegnyi">
       </div>
     </div>
     <div class="row no-gutters editform-row">
@@ -50,7 +50,7 @@
       </div>
       <div class="col-md-2">
         <input type="number" class="form-control form-control-sm" id="garancia"
-               [(ngModel)]="projektkapcsolatservice.AjanlatParam.AjanlatBuf[projektkapcsolatservice.AjanlattetelIndex].Garancia" name="garancia">
+               [(ngModel)]="ajanlatservice.AjanlatParam.AjanlatBuf[ajanlatservice.AjanlattetelIndex].Garancia" name="garancia">
       </div>
     </div>
 
@@ -61,19 +61,19 @@
     </div>
   </form>
 
-<!--  export enum UjajanlatSzerkesztesMode {
+<!--  export eAjanlatSzerkesztesModeMode {
   Blank = 0,
   CikkZoom = 1
   }-->
 
-  <ng-container *ngIf="projektkapcsolatservice.AjanlatSzerkesztesMode === 0">
+  <ng-container *ngIf="ajanlatservice.AjanlatSzerkesztesMode === 0">
     <app-blank></app-blank>
   </ng-container>
-  <ng-container *ngIf="projektkapcsolatservice.AjanlatSzerkesztesMode === 1">
+  <ng-container *ngIf="ajanlatservice.AjanlatSzerkesztesMode === 1">
     <app-cikk-container></app-cikk-container>
   </ng-container>
 
-  <app-errormodal [cim]="projektkapcsolatservice.AjanlatParam.AjanlatBuf[projektkapcsolatservice.AjanlattetelIndex].TetelTipus"></app-errormodal>
+  <app-errormodal [cim]="ajanlatservice.AjanlatParam.AjanlatBuf[ajanlatservice.AjanlattetelIndex].TetelTipus"></app-errormodal>
 </div>
 <app-spinner *ngIf="eppFrissit"></app-spinner>
 

@@ -1,48 +1,52 @@
 import {Component, ViewChild} from '@angular/core';
-import {ProjektkapcsolatService} from '../projektkapcsolat.service';
-import {UjajanlatSzerkesztesMode} from '../ujajanlatszerkesztesmode';
-import {UjajanlatContainerMode} from '../ujajanlatcontainermode';
+import {ProjektkapcsolatService} from '../../bizonylatesirat/projektkapcsolat.service';
+import {AjanlatSzerkesztesMode} from '../ajanlatszerkesztesmode';
+import {AjanlatContainerMode} from '../ajanlatcontainermode';
 import {CikkService} from '../../../cikk/cikk.service';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {CikkContainerMode} from '../../../cikk/cikkcontainermode';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {AjanlatService} from "../ajanlat.service";
 
 @Component({
-  selector: 'app-projekt-bizonylatesirat-ujajanlat-szerkesztes',
-  templateUrl: './projekt-bizonylatesirat-ujajanlat-szerkesztes.component.html',
-  styleUrls: ['./projekt-bizonylatesirat-ujajanlat-szerkesztes.component.css']
+  selector: 'app-ajanlat-tetel',
+  templateUrl: './ajanlat-tetel.html',
+  styleUrls: ['./ajanlat-tetel.css']
 })
-export class ProjektBizonylatesiratUjajanlatSzerkesztesComponent {
+export class AjanlatTetelComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
+  ajanlatservice: AjanlatService;
   projektkapcsolatservice: ProjektkapcsolatService;
   eppFrissit = false;
 
   constructor(private _cikkservice: CikkService,
+              ajanlatservice: AjanlatService,
               projektkapcsolatservice: ProjektkapcsolatService) {
+    this.ajanlatservice = ajanlatservice;
     this.projektkapcsolatservice = projektkapcsolatservice;
   }
 
   CikkZoom() {
     this._cikkservice.szempont = 0;
     this._cikkservice.minta =
-      this.projektkapcsolatservice.AjanlatParam.AjanlatBuf[this.projektkapcsolatservice.AjanlattetelIndex].CikkNev || '';
+      this.ajanlatservice.AjanlatParam.AjanlatBuf[this.ajanlatservice.AjanlattetelIndex].CikkNev || '';
     this._cikkservice.zoomsource = ZoomSources.Ajanlat;
     this._cikkservice.zoom = true;
     this._cikkservice.ContainerMode = CikkContainerMode.List;
 
-    this.projektkapcsolatservice.AjanlatSzerkesztesMode = UjajanlatSzerkesztesMode.CikkZoom;
+    this.ajanlatservice.AjanlatSzerkesztesMode = AjanlatSzerkesztesMode.CikkZoom;
   }
 
   onSubmit() {
     this.eppFrissit = true;
-    this.projektkapcsolatservice.AjanlatCalc(this.projektkapcsolatservice.AjanlatParam)
+    this.ajanlatservice.AjanlatCalc(this.ajanlatservice.AjanlatParam)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        this.projektkapcsolatservice.AjanlatParam = res.Result;
+        this.ajanlatservice.AjanlatParam = res.Result;
 
         this.eppFrissit = false;
         this.navigal();
@@ -56,7 +60,7 @@ export class ProjektBizonylatesiratUjajanlatSzerkesztesComponent {
     this.navigal();
   }
   navigal() {
-    this.projektkapcsolatservice.AjanlatSzerkesztesMode = UjajanlatSzerkesztesMode.Blank;
-    this.projektkapcsolatservice.AjanlatContainerMode = UjajanlatContainerMode.List;
+    this.ajanlatservice.AjanlatSzerkesztesMode = AjanlatSzerkesztesMode.Blank;
+    this.ajanlatservice.AjanlatContainerMode = AjanlatContainerMode.List;
   }
 }

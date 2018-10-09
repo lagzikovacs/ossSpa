@@ -3,6 +3,7 @@ import {ProjektService} from '../projekt.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {b64toBlob} from '../../../tools/b64toBlob';
 import * as FileSaver from 'file-saver';
+import {IratmintaService} from "./iratminta.service";
 
 @Component({
   selector: 'app-projekt-iratminta',
@@ -12,16 +13,15 @@ import * as FileSaver from 'file-saver';
 export class ProjektIratmintaComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
-  projektservice: ProjektService;
   eppFrissit = false;
 
-  constructor(projektservice: ProjektService) {
-    this.projektservice = projektservice;
+  constructor(private _projektservice: ProjektService,
+              private _iratmintaservice: IratmintaService) {
   }
 
   szerzodes() {
     this.eppFrissit = true;
-      this.projektservice.Szerzodes(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD)
+      this._iratmintaservice.Szerzodes(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -37,7 +37,7 @@ export class ProjektIratmintaComponent {
   }
   szallitasiszerzodes() {
     this.eppFrissit = true;
-    this.projektservice.Szallitasiszerzodes(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD)
+    this._iratmintaservice.Szallitasiszerzodes(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -53,7 +53,7 @@ export class ProjektIratmintaComponent {
   }
   munkalap() {
     this.eppFrissit = true;
-    this.projektservice.Munkalap(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD)
+    this._iratmintaservice.Munkalap(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -61,14 +61,14 @@ export class ProjektIratmintaComponent {
         const blob = b64toBlob(res.Result);
         FileSaver.saveAs(blob, 'Munkalap.docx');
 
-        return this.projektservice.Get(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD);
+        return this._projektservice.Get(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD);
       })
       .then(res1 => {
         if (res1.Error != null) {
           throw res1.Error;
         }
 
-        this.projektservice.Dto[this.projektservice.DtoSelectedIndex] = res1.Result[0];
+        this._projektservice.Dto[this._projektservice.DtoSelectedIndex] = res1.Result[0];
         this.eppFrissit = false;
       })
       .catch(err => {
@@ -78,7 +78,7 @@ export class ProjektIratmintaComponent {
   }
   elegedettseg() {
     this.eppFrissit = true;
-    this.projektservice.Elegedettseg(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD)
+    this._iratmintaservice.Elegedettseg(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -94,7 +94,7 @@ export class ProjektIratmintaComponent {
   }
   elmuemasz() {
     this.eppFrissit = true;
-    this.projektservice.KeszrejelentesElmuEmasz(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD)
+    this._iratmintaservice.KeszrejelentesElmuEmasz(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -110,7 +110,7 @@ export class ProjektIratmintaComponent {
   }
   eon() {
     this.eppFrissit = true;
-    this.projektservice.KeszrejelentesEon(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD)
+    this._iratmintaservice.KeszrejelentesEon(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -126,7 +126,7 @@ export class ProjektIratmintaComponent {
   }
   demasz() {
     this.eppFrissit = true;
-    this.projektservice.KeszrejelentesDemasz(this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD)
+    this._iratmintaservice.KeszrejelentesDemasz(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

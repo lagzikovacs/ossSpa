@@ -254,6 +254,7 @@ import { BizonylatIratVagolaprolComponent } from './bizonylat/bizonylatirat/bizo
 import { ProjektBizonylatesiratVagolaprolComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-vagolaprol/projekt-bizonylatesirat-vagolaprol.component';
 import {AjanlatService} from "./projekt/ajanlat/ajanlat.service";
 import {IratmintaService} from "./projekt/projekt/projekt-iratminta/iratminta.service";
+import { EsemenynaploComponent } from './esemenynaplo/esemenynaplo.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -535,6 +536,7 @@ if (environment.production) {
     AbuComponent,
     BizonylatIratVagolaprolComponent,
     ProjektBizonylatesiratVagolaprolComponent,
+    EsemenynaploComponent,
   ],
   imports: [
     BrowserModule,

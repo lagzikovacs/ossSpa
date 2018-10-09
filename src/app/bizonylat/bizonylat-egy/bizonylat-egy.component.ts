@@ -11,10 +11,9 @@ import {BizonylatkapcsolatService} from '../bizonylatirat/bizonylatkapcsolat.ser
 import {BizonylatTipus} from '../bizonylattipus';
 import {PenztarService} from '../../penztar/penztar.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {BizonylatSzerkesztesMode} from "../bizonylatszerkesztesmode";
-import {VagolapService} from "../../vagolap/vagolap.service";
-import {VagolapMode} from "../../vagolap/vagolapmode";
-import {AbuComponent} from "../../tools/abu/abu.component";
+import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
+import {VagolapService} from '../../vagolap/vagolap.service';
+import {AbuComponent} from '../../tools/abu/abu.component';
 
 @Component({
   selector: 'app-bizonylat-egy',

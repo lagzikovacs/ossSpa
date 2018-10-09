@@ -6,7 +6,7 @@ import {BizonylatesIratContainerMode} from '../../bizonylatesirat/bizonylatesira
 import {AjanlatSzerkesztesMode} from '../ajanlatszerkesztesmode';
 import {AjanlatContainerMode} from '../ajanlatcontainermode';
 import * as moment from 'moment';
-import {AjanlatService} from "../ajanlat.service";
+import {AjanlatService} from '../ajanlat.service';
 
 @Component({
   selector: 'app-ajanlat',

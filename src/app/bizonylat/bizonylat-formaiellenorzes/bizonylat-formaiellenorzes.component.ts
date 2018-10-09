@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {BizonylatService} from "../bizonylat.service";
-import {ErrormodalComponent} from "../../errormodal/errormodal.component";
+import {BizonylatService} from '../bizonylat.service';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-bizonylat-formaiellenorzes',
@@ -15,7 +15,7 @@ export class BizonylatFormaiellenorzesComponent implements OnInit {
   result = '';
 
   constructor(bizonylatservice: BizonylatService) {
-    this.bizonylatservice = bizonylatservice
+    this.bizonylatservice = bizonylatservice;
   }
 
   ngOnInit() {

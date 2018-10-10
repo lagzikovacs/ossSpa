@@ -5,6 +5,7 @@ import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {FelhasznaloContainerMode} from '../felhasznalocontainermode';
 import {FelhasznaloEgyMode} from '../felhasznaloegymode';
+import {EsemenynaploService} from "../../esemenynaplo/esemenynaplo.service";
 
 @Component({
   selector: 'app-felhasznalo-egy',
@@ -19,6 +20,7 @@ export class FelhasznaloEgyComponent {
   eppFrissit = false;
 
   constructor(private _logonservice: LogonService,
+              private _esemenynaploservice: EsemenynaploService,
               felhasznaloservice: FelhasznaloService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.FELHASZNALOMOD]);
     this.felhasznaloservice = felhasznaloservice;
@@ -42,6 +44,7 @@ export class FelhasznaloEgyComponent {
     this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Jelszo;
   }
   tevekenyseg() {
+    this._esemenynaploservice.Felhasznalokod = this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex].FELHASZNALOKOD;
     this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Tevekenyseg;
   }
 }

@@ -1,3 +1,37 @@
-<p>
-  esemenynaplo works!
-</p>
+<div class="alapkeret">
+  <h5>{{esemenynaploservice.cim}}</h5>
+  <div>
+    <nav>
+      <button [disabled]="eppFrissit" (click)="onKereses()" class="btn btn-sm btn-outline-primary navgomb">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
+    </nav>
+  </div>
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Időpont</th>
+      <th>Partíció</th>
+      <th>Csoport</th>
+      <th>Művelet</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of esemenynaploservice.Dto; let i = index">
+      <td>{{item.Esemenynaplokod}}</td>
+      <td>{{item.Idopont | datetimehun}}</td>
+      <td>{{item.Particio}}</td>
+      <td>{{item.Csoport}}</td>
+      <td>{{item.Muvelet}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <app-toolbarfooter [enKereses]="!esemenynaploservice.elsokereses && !eppFrissit"
+                     [rekordszam]="esemenynaploservice.Dto.length"
+                     [osszesrekord]="esemenynaploservice.OsszesRekord"
+                     (KeresesTovabb)="onKeresesTovabb()">
+  </app-toolbarfooter>
+  <app-errormodal [cim]="esemenynaploservice.cim"></app-errormodal>
+</div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

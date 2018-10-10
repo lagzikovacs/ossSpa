@@ -123,7 +123,6 @@ import { PenztarListComponent } from './penztar/penztar-list/penztar-list.compon
 import { PenztarEgyComponent } from './penztar/penztar-egy/penztar-egy.component';
 import { FelhasznaloReszletekComponent } from './felhasznalo/felhasznalo-reszletek/felhasznalo-reszletek.component';
 import { CsoportReszletekComponent } from './csoport/csoport-reszletek/csoport-reszletek.component';
-import { FelhasznaloTevekenysegComponent } from './felhasznalo/felhasznalo-tevekenyseg/felhasznalo-tevekenyseg.component';
 import {IrattipusService} from './irattipus/irattipus.service';
 import {TeendoService} from './teendo/teendo.service';
 import {FizetesimodService} from './fizetesimod/fizetesimod.service';
@@ -255,6 +254,7 @@ import { ProjektBizonylatesiratVagolaprolComponent } from './projekt/bizonylates
 import {AjanlatService} from "./projekt/ajanlat/ajanlat.service";
 import {IratmintaService} from "./projekt/projekt/projekt-iratminta/iratminta.service";
 import { EsemenynaploComponent } from './esemenynaplo/esemenynaplo.component';
+import { UgyfelPublicComponent } from './ugyfel-public/ugyfel-public.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -306,6 +306,8 @@ const routes: Routes = [
   {path: 'szerepkorvalasztas', component: SzerepkorvalasztasComponent, canActivate: [LoginGuard]},
   {path: 'jelszocsere', component: JelszocsereComponent, canActivate: [LoginGuard]},
   {path: 'vagolap', component: VagolapComponent, canActivate: [RoleGuard]},
+
+  {path: 'ugyfelpublic', component: UgyfelPublicComponent},
 
   {path: '', redirectTo: 'bejelentkezes', pathMatch: 'full'},
   {path: '**', redirectTo: 'fooldal'}
@@ -427,7 +429,6 @@ if (environment.production) {
     PenztarSzerkesztesComponent,
     FelhasznaloReszletekComponent,
     CsoportReszletekComponent,
-    FelhasznaloTevekenysegComponent,
     PenztarReszletekComponent,
     PenztarExportComponent,
     PenztartetelListComponent,
@@ -537,6 +538,7 @@ if (environment.production) {
     BizonylatIratVagolaprolComponent,
     ProjektBizonylatesiratVagolaprolComponent,
     EsemenynaploComponent,
+    UgyfelPublicComponent,
   ],
   imports: [
     BrowserModule,

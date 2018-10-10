@@ -4,6 +4,7 @@ import {Subscription} from 'rxjs/index';
 import {SessionService} from './session.service';
 import {ErrormodalComponent} from '../errormodal/errormodal.component';
 import {SessionDto} from './sessiondto';
+import {EsemenynaploService} from '../esemenynaplo/esemenynaplo.service';
 
 @Component({
   selector: 'app-fooldal',
@@ -19,7 +20,8 @@ export class FooldalComponent implements OnInit, OnDestroy {
   eppFrissit = false;
 
   constructor(private _logonservice: LogonService,
-              private _sessionservice: SessionService) {
+              private _sessionservice: SessionService,
+              private _esemenynaploservice: EsemenynaploService) {
   }
 
   ngOnInit() {
@@ -42,7 +44,10 @@ export class FooldalComponent implements OnInit, OnDestroy {
           if (res.Error !== null) {
             throw res.Error;
           }
+
           this.sessiondto = res.Result[0];
+          this._esemenynaploservice.Felhasznalokod = this.sessiondto.FELHASZNALOKOD;
+
           this.eppFrissit = false;
         })
         .catch(err => {

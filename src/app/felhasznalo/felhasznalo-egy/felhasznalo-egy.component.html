@@ -1,6 +1,8 @@
 <div class="alapkeret">
   <h5>{{felhasznaloservice.cim}}</h5>
-  <h6 *ngIf="felhasznaloservice.DtoSelectedIndex !== -1">{{felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].NEV}}</h6>
+  <div style="margin-bottom: 10px">
+    <div style="font-size: smaller">{{felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex].NEV}}</div>
+  </div>
   <div>
     <nav>
       <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
@@ -10,19 +12,19 @@
         <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>Részletesen
       </button>
 
-      <button [disabled]="eppFrissit || felhasznaloservice.DtoSelectedIndex === -1 || !mod"
+      <button [disabled]="eppFrissit || !mod"
               (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-minus" aria-hidden="true"></i>
       </button>
-      <button [disabled]="eppFrissit || felhasznaloservice.DtoSelectedIndex === -1 || !mod"
+      <button [disabled]="eppFrissit || !mod"
               (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-edit" aria-hidden="true"></i>
       </button>
-      <button [disabled]="eppFrissit || felhasznaloservice.DtoSelectedIndex === -1 || !mod"
+      <button [disabled]="eppFrissit || !mod"
               (click)="jelszo()" class="btn btn-sm btn-outline-primary navgomb">
         Jelszó
       </button>
-      <button [disabled]="eppFrissit || felhasznaloservice.DtoSelectedIndex === -1 || !mod"
+      <button [disabled]="eppFrissit || !mod"
               (click)="tevekenyseg()" class="btn btn-sm btn-outline-primary navgomb">
         Tevékenység
       </button>
@@ -50,7 +52,7 @@ Tevekenyseg = 5
     <app-felhasznalo-jelszo></app-felhasznalo-jelszo>
   </ng-container>
   <ng-container *ngIf="felhasznaloservice.EgyMode === 5">
-    <app-felhasznalo-tevekenyseg></app-felhasznalo-tevekenyseg>
+    <app-esemenynaplo></app-esemenynaplo>
   </ng-container>
 
   <app-errormodal [cim]="felhasznaloservice.cim"></app-errormodal>

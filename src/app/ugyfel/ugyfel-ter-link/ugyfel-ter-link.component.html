@@ -1,0 +1,12 @@
+<div class="alapkeret">
+  <h5>Ügyféltér link</h5>
+  <p>Ha korábban már készült ügyféltér link, annak az érvényessége megszűnik!</p>
+  <button [disabled]="eppFrissit" (click)="ugyfelterlink()" class="btn btn-sm btn-outline-primary navgomb">
+    Ügyféltér link
+  </button>
+  <div class="form-group">
+    <textarea class="form-control" rows="3" id="link" [(ngModel)]="link"></textarea>
+  </div>
+  <app-errormodal [cim]="'Ügyféltér link'"></app-errormodal>
+</div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

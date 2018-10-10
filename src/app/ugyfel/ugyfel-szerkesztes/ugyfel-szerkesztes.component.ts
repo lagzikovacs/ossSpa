@@ -62,8 +62,8 @@ export class UgyfelSzerkesztesComponent {
         this.navigal();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this.errormodal.show(err);
       });
   }
   cancel() {

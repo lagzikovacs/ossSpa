@@ -1,10 +1,10 @@
 import {Component, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {UgyfelService} from '../ugyfel.service';
-import {LogonService} from "../../logon/logon.service";
-import {JogKod} from "../../enums/jogkod";
-import {UgyfelContainerMode} from "../ugyfelcontainermode";
-import {UgyfelEgyMode} from "../ugyfelegymode";
+import {LogonService} from '../../logon/logon.service';
+import {JogKod} from '../../enums/jogkod';
+import {UgyfelContainerMode} from '../ugyfelcontainermode';
+import {UgyfelEgyMode} from '../ugyfelegymode';
 
 @Component({
   selector: 'app-ugyfel-egy',
@@ -43,5 +43,8 @@ export class UgyfelEgyComponent {
     // this.ugyfelservice.EgyMode = UgyfelEgyMode.Projekt
     // TODO a projekt-list módszerével le lehet kérdezni, csak ne a projekt service-be kerüljenek a rekordok
     // mert projektből ügyfél zoomnál összeakad, pl.
+  }
+  ugyfelterlink() {
+    this.ugyfelservice.EgyMode = UgyfelEgyMode.UgyfelterLink;
   }
 }

@@ -247,14 +247,15 @@ import { UgyfelNincsprojektComponent } from './ugyfel/ugyfel-nincsprojekt/ugyfel
 import { BizonylatTetelSzerkesztesComponent } from './bizonylat/bizonylat-tetel-szerkesztes/bizonylat-tetel-szerkesztes.component';
 import { BizonylatTetelTorlesComponent } from './bizonylat/bizonylat-tetel-torles/bizonylat-tetel-torles.component';
 import { VagolapComponent } from './vagolap/vagolap.component';
-import {VagolapService} from "./vagolap/vagolap.service";
+import {VagolapService} from './vagolap/vagolap.service';
 import { AbuComponent } from './tools/abu/abu.component';
 import { BizonylatIratVagolaprolComponent } from './bizonylat/bizonylatirat/bizonylat-irat-vagolaprol/bizonylat-irat-vagolaprol.component';
 import { ProjektBizonylatesiratVagolaprolComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-vagolaprol/projekt-bizonylatesirat-vagolaprol.component';
-import {AjanlatService} from "./projekt/ajanlat/ajanlat.service";
-import {IratmintaService} from "./projekt/projekt/projekt-iratminta/iratminta.service";
+import {AjanlatService} from './projekt/ajanlat/ajanlat.service';
+import {IratmintaService} from './projekt/projekt/projekt-iratminta/iratminta.service';
 import { EsemenynaploComponent } from './esemenynaplo/esemenynaplo.component';
-import { UgyfelPublicComponent } from './ugyfel-public/ugyfel-public.component';
+import { UgyfelTerComponent } from './ugyfel/ugyfel-ter/ugyfel-ter.component';
+import { UgyfelTerLinkComponent } from './ugyfel/ugyfel-ter-link/ugyfel-ter-link.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -307,7 +308,7 @@ const routes: Routes = [
   {path: 'jelszocsere', component: JelszocsereComponent, canActivate: [LoginGuard]},
   {path: 'vagolap', component: VagolapComponent, canActivate: [RoleGuard]},
 
-  {path: 'ugyfelpublic', component: UgyfelPublicComponent},
+  {path: 'ugyfelter', component: UgyfelTerComponent},
 
   {path: '', redirectTo: 'bejelentkezes', pathMatch: 'full'},
   {path: '**', redirectTo: 'fooldal'}
@@ -538,7 +539,8 @@ if (environment.production) {
     BizonylatIratVagolaprolComponent,
     ProjektBizonylatesiratVagolaprolComponent,
     EsemenynaploComponent,
-    UgyfelPublicComponent,
+    UgyfelTerComponent,
+    UgyfelTerLinkComponent,
   ],
   imports: [
     BrowserModule,

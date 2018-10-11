@@ -254,8 +254,9 @@ import { ProjektBizonylatesiratVagolaprolComponent } from './projekt/bizonylates
 import {AjanlatService} from './projekt/ajanlat/ajanlat.service';
 import {IratmintaService} from './projekt/projekt/projekt-iratminta/iratminta.service';
 import { EsemenynaploComponent } from './esemenynaplo/esemenynaplo.component';
-import { UgyfelTerComponent } from './ugyfel/ugyfel-ter/ugyfel-ter.component';
-import { UgyfelTerLinkComponent } from './ugyfel/ugyfel-ter-link/ugyfel-ter-link.component';
+import { UgyfelTerComponent } from './ugyfelter/ugyfel-ter/ugyfel-ter.component';
+import { UgyfelTerLinkComponent } from './ugyfelter/ugyfel-ter-link/ugyfel-ter-link.component';
+import {UgyfelterService} from "./ugyfelter/ugyfelter.service";
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -567,6 +568,7 @@ if (environment.production) {
     CikkService,
     HelysegService,
     UgyfelService,
+    UgyfelterService,
 
     ProjektService,
     AjanlatService,

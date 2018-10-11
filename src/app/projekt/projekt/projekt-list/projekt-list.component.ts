@@ -11,6 +11,8 @@ import {SzamlazasirendService} from '../../szamlazasirend/szamlazasirend.service
 import {ProjektkapcsolatService} from '../../bizonylatesirat/projektkapcsolat.service';
 import {BizonylatesIratContainerMode} from '../../bizonylatesirat/bizonylatesiratcontainermode';
 import {AjanlatService} from "../../ajanlat/ajanlat.service";
+import {JogKod} from "../../../enums/jogkod";
+import {LogonService} from "../../../logon/logon.service";
 
 @Component({
   selector: 'app-projekt-list',
@@ -38,14 +40,17 @@ export class ProjektListComponent {
     Szempont.TelepitesiCim, Szempont.Keletkezett, Szempont.MuszakiAllapot
   ];
 
+  mod = false;
   eppFrissit = false;
   projektservice: ProjektService;
 
-  constructor(private _projektkapcsolatservice: ProjektkapcsolatService,
+  constructor(private _logonservice: LogonService,
+              private _projektkapcsolatservice: ProjektkapcsolatService,
               private _szamlazasirendservice: SzamlazasirendService,
               private _projektteendoservice: ProjektteendoService,
               private _ajanlatservice: AjanlatService,
               projektservice: ProjektService) {
+    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PROJEKTMOD]);
     this.projektservice = projektservice;
   }
 

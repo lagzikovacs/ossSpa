@@ -8,7 +8,7 @@
                       [(szempont)]="projektservice.szempont"
                       [(minta)]="projektservice.minta"
                       [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-                      [enUj]="!eppFrissit" (Uj)="onUj()"
+                      [enUj]="!eppFrissit && mod" (Uj)="onUj()"
                       [enExport]="!eppFrissit" (Export)="onExport($event)">
   </app-projekttoolbar>
   <app-projekt-tabla [Dto]="projektservice.Dto" (idclick)="setClickedRow($event)"></app-projekt-tabla>

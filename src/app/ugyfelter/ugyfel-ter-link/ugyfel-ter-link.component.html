@@ -1,6 +1,8 @@
 <div class="alapkeret">
   <h5>Ügyféltér link</h5>
-  <p>Ha korábban már készült ügyféltér link, annak az érvényessége megszűnik!</p>
+  <ng-container *ngIf="kikuldesikodidopontja !== ''">
+    <p>Korábban már készült ügyféltér link ({{kikuldesikodidopontja}}), annak az érvényessége megszűnik!</p>
+  </ng-container>
   <button [disabled]="eppFrissit" (click)="ugyfelterlink()" class="btn btn-sm btn-outline-primary navgomb">
     Ügyféltér link
   </button>

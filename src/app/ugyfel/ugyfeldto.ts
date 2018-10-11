@@ -13,8 +13,9 @@ export class UgyfelDto {
   TELEFON: string;
   EMAIL: string;
   MEGJEGYZES: string;
-  LETREHOZVA: Date;
+  KIKULDESIKODIDOPONTJA: any;
+  LETREHOZVA: any;
   LETREHOZTA: string;
-  MODOSITVA: Date;
+  MODOSITVA: any;
   MODOSITOTTA: string;
 }

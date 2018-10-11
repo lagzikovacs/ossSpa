@@ -12,7 +12,6 @@ import {UgyfelContainerMode} from './ugyfelcontainermode';
 import {UgyfelEgyMode} from './ugyfelegymode';
 import {UgyfelSzerkesztesMode} from "./ugyfelszerkesztesmode";
 import {UgyfelZoomParameter} from "./ugyfelzoomparameter";
-import {StringResult} from "../dtos/stringresult";
 
 @Injectable({
   providedIn: 'root'
@@ -115,16 +114,5 @@ export class UgyfelService {
     };
 
     return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
-  }
-
-  public UgyfelterLink(dto: UgyfelDto): Promise<StringResult> {
-    const url = environment.BaseHref + this._controller + 'ugyfelterlink';
-    const body = dto;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<StringResult>(url, body, options).toPromise();
   }
 }

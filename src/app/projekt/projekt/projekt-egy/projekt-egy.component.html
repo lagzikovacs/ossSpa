@@ -14,31 +14,31 @@
         <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>Részletesen
       </button>
 
-      <button [disabled]="eppFrissit" (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit || !mod" (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-minus" aria-hidden="true"></i>
       </button>
 
-      <button [disabled]="eppFrissit" (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit || !mod" (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-edit" aria-hidden="true"></i>
       </button>
 
-      <button [disabled]="eppFrissit" (click)="stsz()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit || !mod" (click)="stsz()" class="btn btn-sm btn-outline-primary navgomb">
         Stsz
       </button>
-      <button [disabled]="eppFrissit" (click)="muszakiallapot()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit || !mod" (click)="muszakiallapot()" class="btn btn-sm btn-outline-primary navgomb">
         Műszaki állapot
       </button>
-      <button [disabled]="eppFrissit" (click)="inverter()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit || !mod" (click)="inverter()" class="btn btn-sm btn-outline-primary navgomb">
         Inverter
       </button>
-      <button [disabled]="eppFrissit" (click)="napelem()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit || !mod" (click)="napelem()" class="btn btn-sm btn-outline-primary navgomb">
         Napelem
+      </button>
+      <button [disabled]="eppFrissit || !mod" (click)="datumok()" class="btn btn-sm btn-outline-primary navgomb">
+        Dátumok
       </button>
       <button [disabled]="eppFrissit" (click)="iratminta()" class="btn btn-sm btn-outline-primary navgomb">
         Iratminta
-      </button>
-      <button [disabled]="eppFrissit" (click)="datumok()" class="btn btn-sm btn-outline-primary navgomb">
-        Dátumok
       </button>
       <button [disabled]="eppFrissit" (click)="bizonylatesirat()" class="btn btn-sm btn-outline-primary navgomb">
         Bizonylat és irat

@@ -1,0 +1,17 @@
+<div class="alapkeret">
+  <h5>Ügyféltér</h5>
+  <ng-container *ngIf="!bejelentkezve">
+    <p>Üdvözöljük, ön a GridSolar Group Kft. informatikai rendszerét (OSS) használja. Kérjük a levélben kapott linket kezelje bizalmasan!</p>
+    <button [disabled]="eppFrissit" (click)="folytatas()" class="btn btn-sm btn-outline-primary navgomb">
+      Folytatás
+    </button>
+  </ng-container>
+  <ng-container *ngIf="bejelentkezve">
+    <p>Üdvözöljük {{Dto.ugyfelDto.NEV}} ({{Dto.ugyfelDto.CIM}}, {{Dto.ugyfelDto.TELEFON}}, {{Dto.ugyfelDto.EMAIL}}) az önnel kapcsolatos tárolt adatok a következők:</p>
+    <div *ngFor="let item of Dto.projektDto">{{item.PROJEKTKOD}} projekt, telepítési cím: {{item.TELEPITESICIM}}, jelleg: {{item.PROJEKTJELLEGE}}</div>
+  </ng-container>
+  <app-errormodal [cim]="'Ügyféltér'"></app-errormodal>
+</div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>
+
+

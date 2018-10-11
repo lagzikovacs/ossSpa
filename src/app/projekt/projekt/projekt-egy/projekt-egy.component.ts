@@ -9,8 +9,9 @@ import {ProjektkapcsolatService} from '../../bizonylatesirat/projektkapcsolat.se
 import {BizonylatesIratContainerMode} from '../../bizonylatesirat/bizonylatesiratcontainermode';
 import {SzamlazasirendContainerMode} from '../../szamlazasirend/szamlazasirendcontainermode';
 import {ProjektteendoContainerMode} from '../../projektteendo/projektteendocontainermode';
-import {VagolapService} from "../../../vagolap/vagolap.service";
-import {VagolapMode} from "../../../vagolap/vagolapmode";
+import {VagolapService} from '../../../vagolap/vagolap.service';
+import {LogonService} from "../../../logon/logon.service";
+import {JogKod} from "../../../enums/jogkod";
 
 @Component({
   selector: 'app-projekt-egy',
@@ -22,12 +23,14 @@ export class ProjektEgyComponent {
 
   projektservice: ProjektService;
   eppFrissit = false;
+  mod = false;
 
-  constructor(private _projektkapcsolatservice: ProjektkapcsolatService,
+  constructor(private _logonservice: LogonService,
+              private _projektkapcsolatservice: ProjektkapcsolatService,
               private _szamlazasirendservice: SzamlazasirendService,
               private _projektteendoservice: ProjektteendoService,
-              private _vagolapservice: VagolapService,
               projektservice: ProjektService) {
+    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PROJEKTMOD]);
     this.projektservice = projektservice;
   }
 

@@ -243,7 +243,6 @@ import { BizonylatKifizetesTorlesComponent } from './bizonylat/bizonylatkifizete
 import { BizonylatFormaiellenorzesComponent } from './bizonylat/bizonylat-formaiellenorzes/bizonylat-formaiellenorzes.component';
 import { BizonylatOSNxmlComponent } from './bizonylat/bizonylat-osnxml/bizonylat-osnxml.component';
 import { BoolHunPipe } from './pipes/boolhun.pipe';
-import { UgyfelNincsprojektComponent } from './ugyfel/ugyfel-nincsprojekt/ugyfel-nincsprojekt.component';
 import { BizonylatTetelSzerkesztesComponent } from './bizonylat/bizonylat-tetel-szerkesztes/bizonylat-tetel-szerkesztes.component';
 import { BizonylatTetelTorlesComponent } from './bizonylat/bizonylat-tetel-torles/bizonylat-tetel-torles.component';
 import { VagolapComponent } from './vagolap/vagolap.component';
@@ -257,6 +256,7 @@ import { EsemenynaploComponent } from './esemenynaplo/esemenynaplo.component';
 import { UgyfelTerComponent } from './ugyfelter/ugyfel-ter/ugyfel-ter.component';
 import { UgyfelTerLinkComponent } from './ugyfelter/ugyfel-ter-link/ugyfel-ter-link.component';
 import {UgyfelterService} from "./ugyfelter/ugyfelter.service";
+import { UgyfelProjektComponent } from './ugyfel/ugyfel-projekt/ugyfel-projekt.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -532,7 +532,6 @@ if (environment.production) {
     BizonylatFormaiellenorzesComponent,
     BizonylatOSNxmlComponent,
     BoolHunPipe,
-    UgyfelNincsprojektComponent,
     BizonylatTetelSzerkesztesComponent,
     BizonylatTetelTorlesComponent,
     VagolapComponent,
@@ -542,6 +541,7 @@ if (environment.production) {
     EsemenynaploComponent,
     UgyfelTerComponent,
     UgyfelTerLinkComponent,
+    UgyfelProjektComponent,
   ],
   imports: [
     BrowserModule,

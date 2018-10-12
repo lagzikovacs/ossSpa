@@ -12,6 +12,8 @@ import {UgyfelContainerMode} from './ugyfelcontainermode';
 import {UgyfelEgyMode} from './ugyfelegymode';
 import {UgyfelSzerkesztesMode} from "./ugyfelszerkesztesmode";
 import {UgyfelZoomParameter} from "./ugyfelzoomparameter";
+import {ProjektDto} from "../projekt/projekt/projektdto";
+import {ProjektParameter} from "../projekt/projekt/projektparameter";
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +37,9 @@ export class UgyfelService {
   ContainerMode = UgyfelContainerMode.List;
   EgyMode = UgyfelEgyMode.Reszletek;
   SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
+
+  pp = new ProjektParameter(0, environment.lapmeret);
+  ProjektDto: ProjektDto[] = new Array<ProjektDto>();
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

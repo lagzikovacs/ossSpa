@@ -40,9 +40,7 @@ export class UgyfelEgyComponent {
     this.ugyfelservice.EgyMode = UgyfelEgyMode.Modositas;
   }
   projekt() {
-    // this.ugyfelservice.EgyMode = UgyfelEgyMode.Projekt
-    // TODO a projekt-list módszerével le lehet kérdezni, csak ne a projekt service-be kerüljenek a rekordok
-    // mert projektből ügyfél zoomnál összeakad, pl.
+    this.ugyfelservice.EgyMode = UgyfelEgyMode.Projekt;
   }
   ugyfelterlink() {
     this.ugyfelservice.EgyMode = UgyfelEgyMode.UgyfelterLink;

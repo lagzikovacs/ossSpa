@@ -7,8 +7,8 @@
     </button>
   </ng-container>
   <ng-container *ngIf="bejelentkezve">
-    <p>Üdvözöljük {{Dto.ugyfelDto.NEV}} ({{Dto.ugyfelDto.CIM}}, {{Dto.ugyfelDto.TELEFON}}, {{Dto.ugyfelDto.EMAIL}}) az önnel kapcsolatos tárolt adatok a következők:</p>
-    <div *ngFor="let item of Dto.projektDto">{{item.PROJEKTKOD}} projekt, telepítési cím: {{item.TELEPITESICIM}}, jelleg: {{item.PROJEKTJELLEGE}}</div>
+    <p>Üdvözöljük <b>{{Dto.ugyfelDto.NEV}}</b> ({{Dto.ugyfelDto.CIM}}, {{Dto.ugyfelDto.TELEFON}}, {{Dto.ugyfelDto.EMAIL}}) az önnel kapcsolatos tárolt adatok a következők - válasszon projektet:</p>
+    <app-projekt-tabla [Dto]="Dto.projektDto" (idclick)="setClickedRow($event)"></app-projekt-tabla>
   </ng-container>
   <app-errormodal [cim]="'Ügyféltér'"></app-errormodal>
 </div>

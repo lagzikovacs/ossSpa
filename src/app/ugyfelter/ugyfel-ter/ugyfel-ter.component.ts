@@ -49,6 +49,11 @@ export class UgyfelTerComponent implements OnInit, OnDestroy {
       });
   }
 
+  setProjektClickedRow(i: number)
+  {
+
+  }
+
   ngOnDestroy() {
     this._sub.unsubscribe();
   }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UgyfelNincsprojektComponent } from './ugyfel-nincsprojekt.component';
+import { UgyfelProjektComponent } from './ugyfel-projekt.component';
 
-describe('UgyfelNincsprojektComponent', () => {
-  let component: UgyfelNincsprojektComponent;
-  let fixture: ComponentFixture<UgyfelNincsprojektComponent>;
+describe('UgyfelProjektComponent', () => {
+  let component: UgyfelProjektComponent;
+  let fixture: ComponentFixture<UgyfelProjektComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UgyfelNincsprojektComponent ]
+      declarations: [ UgyfelProjektComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UgyfelNincsprojektComponent);
+    fixture = TestBed.createComponent(UgyfelProjektComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

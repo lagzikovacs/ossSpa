@@ -45,8 +45,7 @@
     <app-ugyfel-szerkesztes></app-ugyfel-szerkesztes>
   </ng-container>
   <ng-container *ngIf="ugyfelservice.EgyMode === 4">
-    <app-ugyfel-nincsprojekt *ngIf="nincsProjekt"></app-ugyfel-nincsprojekt>
-    <app-projekt-reszletek *ngIf="!nincsProjekt"></app-projekt-reszletek>
+    <app-ugyfel-projekt></app-ugyfel-projekt>
   </ng-container>
   <ng-container *ngIf="ugyfelservice.EgyMode === 5">
     <app-ugyfel-ter-link></app-ugyfel-ter-link>

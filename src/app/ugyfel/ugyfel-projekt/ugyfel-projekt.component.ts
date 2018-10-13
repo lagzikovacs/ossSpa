@@ -40,8 +40,8 @@ export class UgyfelProjektComponent implements OnInit {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this.errormodal.show(err);
       });
   }
 

@@ -83,7 +83,7 @@ import { KovetelesComponent } from './riport/koveteles/koveteles.component';
 import { TartozasComponent } from './riport/tartozas/tartozas.component';
 import { BeszerzesComponent } from './riport/beszerzes/beszerzes.component';
 import { KeszletComponent } from './riport/keszlet/keszlet.component';
-import { NgmComponent } from './riport/ngm/ngm.component';
+import { NgmComponent } from './ngm/ngm.component';
 import { ParticioSzallitoComponent } from './particio/particio-szallito/particio-szallito.component';
 import { ParticioNavComponent } from './particio/particio-nav/particio-nav.component';
 import { ParticioSmtpComponent } from './particio/particio-smtp/particio-smtp.component';

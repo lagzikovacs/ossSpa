@@ -1,22 +1,27 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylattetelSzerkesztesMode} from '../bizonylattetelszerkesztesmode';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
-import {ErrormodalComponent} from "../../errormodal/errormodal.component";
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-bizonylat-tetel-torles',
   templateUrl: './bizonylat-tetel-torles.component.html',
   styleUrls: ['./bizonylat-tetel-torles.component.css']
 })
-export class BizonylatTetelTorlesComponent {
+export class BizonylatTetelTorlesComponent implements OnInit {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatservice: BizonylatService;
   eppFrissit = false;
+  megnevezes = '';
 
   constructor(bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
+  }
+
+  ngOnInit() {
+    this.megnevezes = this.bizonylatservice.ComplexDtoEdited.LstTetelDto[this.bizonylatservice.TetelDtoSelectedIndex].MEGNEVEZES;
   }
 
   ok() {

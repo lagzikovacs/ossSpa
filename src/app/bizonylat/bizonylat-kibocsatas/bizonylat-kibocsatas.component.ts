@@ -1,9 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {BizonylatService} from "../bizonylat.service";
-import {BizonylatEgyMode} from "../bizonylategymode";
-import {BizonylatKibocsatasParam} from "../bizonylatkibocsatasparam";
-import {ErrormodalComponent} from "../../errormodal/errormodal.component";
-import {BizonylatTipus} from "../bizonylattipus";
+import {BizonylatService} from '../bizonylat.service';
+import {BizonylatEgyMode} from '../bizonylategymode';
+import {BizonylatKibocsatasParam} from '../bizonylatkibocsatasparam';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {BizonylatTipus} from '../bizonylattipus';
+import {PenztarService} from "../../penztar/penztar.service";
 
 @Component({
   selector: 'app-bizonylat-kibocsatas',
@@ -17,7 +18,8 @@ export class BizonylatKibocsatasComponent {
   eppFrissit = false;
   bizonylatszam = '';
 
-  constructor(bizonylatservice: BizonylatService) {
+  constructor(private _penztarsevice: PenztarService,
+              bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
   }
 
@@ -43,10 +45,20 @@ export class BizonylatKibocsatasComponent {
             this.bizonylatservice.bizonylatTipus === BizonylatTipus.ElolegSzamla ||
             this.bizonylatservice.bizonylatTipus === BizonylatTipus.Szamla) &&
             this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].FIZETESIMOD === 'Készpénz') {
-          this.bizonylatservice.EgyMode = BizonylatEgyMode.Penztar;
+
+            return this._penztarsevice.ReadByCurrencyOpened(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].PENZNEMKOD);
         } else {
           this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
         }
+      })
+      .then(res2 => {
+        if (res2.Error != null) {
+          throw res2.Error;
+        }
+
+        this.bizonylatservice.BizonylatPenztarDto = res2.Result;
+
+        this.bizonylatservice.EgyMode = BizonylatEgyMode.Penztar;
       })
       .catch(err => {
         this.eppFrissit = false;

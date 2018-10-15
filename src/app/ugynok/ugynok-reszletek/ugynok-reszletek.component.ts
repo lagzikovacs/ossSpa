@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import {FeliratkozasService} from '../feliratkozas.service';
+import {FeliratkozasService} from '../ugynok.service';
 
 @Component({
   selector: 'app-feliratkozas-reszletek',
-  templateUrl: './feliratkozas-reszletek.component.html',
-  styleUrls: ['./feliratkozas-reszletek.component.css']
+  templateUrl: './ugynok-reszletek.component.html',
+  styleUrls: ['./ugynok-reszletek.component.css']
 })
 export class FeliratkozasReszletekComponent {
   feliratkozasservice: FeliratkozasService;

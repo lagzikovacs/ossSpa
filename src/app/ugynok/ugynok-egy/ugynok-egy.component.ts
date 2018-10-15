@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
-import {FeliratkozasService} from '../feliratkozas.service';
-import {FeliratkozasContainerMode} from '../feliratkozascontainermode';
-import {FeliratkozasEgyMode} from '../feliratkozasegymode';
+import {FeliratkozasService} from '../ugynok.service';
+import {FeliratkozasContainerMode} from '../ugynokcontainermode';
+import {FeliratkozasEgyMode} from '../ugynokegymode';
 
 @Component({
   selector: 'app-feliratkozas-egy',
-  templateUrl: './feliratkozas-egy.component.html',
-  styleUrls: ['./feliratkozas-egy.component.css']
+  templateUrl: './ugynok-egy.component.html',
+  styleUrls: ['./ugynok-egy.component.css']
 })
 export class FeliratkozasEgyComponent {
   feliratkozasservice: FeliratkozasService;

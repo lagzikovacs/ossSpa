@@ -1,17 +1,17 @@
 import {Component, ViewChild} from '@angular/core';
-import {FeliratkozasService} from '../feliratkozas.service';
+import {FeliratkozasService} from '../ugynok.service';
 import {Szempont} from '../../enums/szempont';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {SzMT} from '../../dtos/szmt';
-import {FeliratkozasDto} from '../feliratkozasdto';
+import {FeliratkozasDto} from '../ugynokdto';
 import {ProjektDto} from '../../projekt/projekt/projektdto';
-import {FeliratkozasContainerMode} from '../feliratkozascontainermode';
-import {FeliratkozasEgyMode} from '../feliratkozasegymode';
+import {FeliratkozasContainerMode} from '../ugynokcontainermode';
+import {FeliratkozasEgyMode} from '../ugynokegymode';
 
 @Component({
   selector: 'app-feliratkozas-list',
-  templateUrl: './feliratkozas-list.component.html',
-  styleUrls: ['./feliratkozas-list.component.css']
+  templateUrl: './ugynok-list.component.html',
+  styleUrls: ['./ugynok-list.component.css']
 })
 export class FeliratkozasListComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

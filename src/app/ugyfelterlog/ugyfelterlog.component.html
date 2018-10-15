@@ -1,0 +1,36 @@
+<div class="alapkeret">
+  <h5>{{ugyfelterlogservice.cim}}</h5>
+  <app-toolbar [Szurok]="szurok"
+               [(szempont)]="ugyfelterlogservice.szempont"
+               [(minta)]="ugyfelterlogservice.minta"
+               [enKereses]="!eppFrissit" (Kereses)="onKereses()"
+               [visUj]="false">
+  </app-toolbar>
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Név</th>
+      <th>Cím</th>
+      <th>Létrehozta</th>
+      <th>Létrehozva</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of ugyfelterlogservice.Dto; let i = index">
+      <td>{{item.UGYFELTERLOGKOD}}</td>
+      <td>{{item.UGYFELNEV}}</td>
+      <td>{{item.UGYFELCIM}}</td>
+      <td>{{item.LETREHOZTA}}</td>
+      <td>{{item.LETREHOZVA | datetimehun}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <app-toolbarfooter [enKereses]="!ugyfelterlogservice.elsokereses && !eppFrissit"
+                     [rekordszam]="ugyfelterlogservice.Dto.length"
+                     [osszesrekord]="ugyfelterlogservice.OsszesRekord"
+                     (KeresesTovabb)="onKeresesTovabb()">
+  </app-toolbarfooter>
+  <app-errormodal [cim]="ugyfelterlogservice.cim"></app-errormodal>
+</div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import {LogonService} from '../logon/logon.service';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {FeliratkozasResult} from './feliratkozasresult';
+import {FeliratkozasResult} from './ugynokresult';
 import {environment} from '../../environments/environment';
-import {FeliratkozasDto} from './feliratkozasdto';
-import {FeliratkozasParameter} from './feliratkozasparameter';
+import {FeliratkozasDto} from './ugynokdto';
+import {FeliratkozasParameter} from './ugynokparameter';
 import {ProjektDto} from '../projekt/projekt/projektdto';
 import {ProjektParameter} from '../projekt/projekt/projektparameter';
-import {FeliratkozasContainerMode} from './feliratkozascontainermode';
-import {FeliratkozasEgyMode} from "./feliratkozasegymode";
+import {FeliratkozasContainerMode} from './ugynokcontainermode';
+import {FeliratkozasEgyMode} from "./ugynokegymode";
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FeliratkozasReszletekComponent } from './feliratkozas-reszletek.component';
+import { FeliratkozasReszletekComponent } from './ugynok-reszletek.component';
 
 describe('FeliratkozasReszletekComponent', () => {
   let component: FeliratkozasReszletekComponent;

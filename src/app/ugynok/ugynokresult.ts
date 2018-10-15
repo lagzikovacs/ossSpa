@@ -1,4 +1,4 @@
-import {FeliratkozasDto} from './feliratkozasdto';
+import {FeliratkozasDto} from './ugynokdto';
 
 export class FeliratkozasResult {
   Error: string;

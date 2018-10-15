@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FeliratkozasProjektComponent } from './feliratkozas-projekt.component';
+import { FeliratkozasProjektComponent } from './ugynok-projekt.component';
 
 describe('FeliratkozasProjektComponent', () => {
   let component: FeliratkozasProjektComponent;

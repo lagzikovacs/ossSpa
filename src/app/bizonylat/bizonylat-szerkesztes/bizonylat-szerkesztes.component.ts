@@ -163,8 +163,6 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
           throw res2.Error;
         }
 
-        // TODO további ellenőrzések, esetleg lehetne szerver oldalon
-
         this.bizonylatservice.ComplexDtoEdited.Dto.BIZONYLATKELTE = moment(this.bizonylatservice.BizonylatKelte).toISOString(true);
         this.bizonylatservice.ComplexDtoEdited.Dto.TELJESITESKELTE = moment(this.bizonylatservice.TeljesitesKelte).toISOString(true);
         this.bizonylatservice.ComplexDtoEdited.Dto.FIZETESIHATARIDO = moment(this.bizonylatservice.FizetesiHatarido).toISOString(true);

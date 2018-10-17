@@ -11,10 +11,10 @@ import {CsoportService} from '../../csoport/csoport.service';
   styleUrls: ['./bejelentkezes.component.css']
 })
 export class BejelentkezesComponent implements OnInit, OnDestroy {
-  form: FormGroup;
-
-  public eppFrissit = false;
   @ViewChild(ErrormodalComponent) private errormodal: ErrormodalComponent;
+
+  form: FormGroup;
+  public eppFrissit = false;
 
   constructor(private _router: Router,
               private fb: FormBuilder,
@@ -42,42 +42,50 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
         if (res.Error !== null) {
           throw res.Error;
         }
-        this._logonservice.Sid = res.Result;
 
+        this._logonservice.Sid = res.Result;
         return this._logonservice.Szerepkorok();
       })
       .then(res1 => {
         if (res1.Error != null) {
           throw res1.Error;
         }
-        this._logonservice.lehetsegesszerepkorokDto = res1.Result;
 
+        this._logonservice.lehetsegesszerepkorokDto = res1.Result;
         switch (this._logonservice.lehetsegesszerepkorokDto.length) {
           case 0:
             throw nincsBesorolva;
           case 1:
-            return this._logonservice.SzerepkorValasztas(this._logonservice.lehetsegesszerepkorokDto[0].PARTICIOKOD,
-              this._logonservice.lehetsegesszerepkorokDto[0].CSOPORTKOD);
+            this._logonservice.SzerepkorValasztas(this._logonservice.lehetsegesszerepkorokDto[0].PARTICIOKOD,
+              this._logonservice.lehetsegesszerepkorokDto[0].CSOPORTKOD)
+              .then(res2 => {
+                if (res2.Error != null) {
+                  throw res2.Error;
+                }
+
+                return this._csoportservice.Jogaim();
+              })
+              .then(res3 => {
+                if (res3.Error != null) {
+                  throw res3.Error;
+                }
+
+                this._logonservice.Jogaim = res3.Result;
+                this._logonservice.SzerepkorKivalasztva = true;
+                this._router.navigate(['/fooldal']);
+              })
+              .catch(err => {
+                this.eppFrissit = false;
+                this.errormodal.show(err);
+              });
+            break;
           default:
             this._router.navigate(['/szerepkorvalasztas']);
         }
       })
-      .then(res2 => {
-        if (res2.Error != null) {
-          throw res2.Error;
-        }
-
-        return this._csoportservice.Jogaim();
-      })
-    .then(res3 => {
-        this._logonservice.Jogaim = res3.Result;
-
-        this._logonservice.SzerepkorKivalasztva = true;
-        this._router.navigate(['/fooldal']);
-      })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this.errormodal.show(err);
       });
   }
 

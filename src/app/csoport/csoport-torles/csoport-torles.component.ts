@@ -1,16 +1,16 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {CsoportService} from '../csoport.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CsoportContainerMode} from "../csoportcontainermode";
-import {CsoportEgyMode} from "../csoportegymode";
+import {CsoportContainerMode} from '../csoportcontainermode';
+import {CsoportEgyMode} from '../csoportegymode';
 
 @Component({
   selector: 'app-csoport-torles',
   templateUrl: './csoport-torles.component.html',
   styleUrls: ['./csoport-torles.component.css']
 })
-export class CsoportTorlesComponent {
+export class CsoportTorlesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   csoportservice: CsoportService;
@@ -41,5 +41,10 @@ export class CsoportTorlesComponent {
   }
   cancel() {
     this.csoportservice.EgyMode = CsoportEgyMode.Reszletek;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

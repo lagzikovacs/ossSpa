@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {PenznemService} from '../../penznem/penznem.service';
 import {PenznemZoomParameter} from '../../penznem/penznemzoomparameter';
 import {ZoomSources} from '../../enums/zoomsources';
@@ -13,7 +13,7 @@ import {PenztarSzerkesztesMode} from '../penztarszerkesztesmode';
   templateUrl: './penztar-szerkesztes.component.html',
   styleUrls: ['./penztar-szerkesztes.component.css']
 })
-export class PenztarSzerkesztesComponent {
+export class PenztarSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   penztarservice: PenztarService;
@@ -81,5 +81,11 @@ export class PenztarSzerkesztesComponent {
     this._penznemservice.zoom = true;
 
     this.penztarservice.SzerkesztesMode = PenztarSzerkesztesMode.PenznemZoom;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

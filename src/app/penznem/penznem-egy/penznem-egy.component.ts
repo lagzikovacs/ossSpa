@@ -1,17 +1,17 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {PenznemService} from '../penznem.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
-import {PenznemContainerMode} from "../penznemcontainermode";
-import {PenznemEgyMode} from "../penznemegymode";
+import {PenznemContainerMode} from '../penznemcontainermode';
+import {PenznemEgyMode} from '../penznemegymode';
 
 @Component({
   selector: 'app-penznem-egy',
   templateUrl: './penznem-egy.component.html',
   styleUrls: ['./penznem-egy.component.css']
 })
-export class PenznemEgyComponent {
+export class PenznemEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   penznemservice: PenznemService;
@@ -37,5 +37,11 @@ export class PenznemEgyComponent {
     this.penznemservice.uj = false;
     this.penznemservice.DtoEdited = Object.assign({}, this.penznemservice.Dto[this.penznemservice.DtoSelectedIndex]);
     this.penznemservice.EgyMode = PenznemEgyMode.Modositas;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {MeService} from '../me.service';
 import {ZoomSources} from '../../enums/zoomsources';
@@ -8,15 +8,15 @@ import {JogKod} from '../../enums/jogkod';
 import {CikkSzerkesztesMode} from '../../cikk/cikkszerkesztesmode';
 import {MeEgyMode} from '../meegymode';
 import {MeContainerMode} from '../mecontainermode';
-import {BizonylatService} from "../../bizonylat/bizonylat.service";
-import {BizonylattetelSzerkesztesMode} from "../../bizonylat/bizonylattetelszerkesztesmode";
+import {BizonylatService} from '../../bizonylat/bizonylat.service';
+import {BizonylattetelSzerkesztesMode} from '../../bizonylat/bizonylattetelszerkesztesmode';
 
 @Component({
   selector: 'app-me-list',
   templateUrl: './me-list.component.html',
   styleUrls: ['./me-list.component.css']
 })
-export class MeListComponent implements OnInit {
+export class MeListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Mennyiségi egység'];
@@ -122,5 +122,11 @@ export class MeListComponent implements OnInit {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

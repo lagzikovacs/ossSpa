@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {HelysegService} from '../helyseg.service';
 import {LogonService} from '../../logon/logon.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
@@ -14,7 +14,7 @@ import {UgyfelSzerkesztesMode} from '../../ugyfel/ugyfelszerkesztesmode';
   templateUrl: './helyseg-list.component.html',
   styleUrls: ['./helyseg-list.component.css']
 })
-export class HelysegListComponent implements OnInit {
+export class HelysegListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Helység'];
@@ -110,5 +110,11 @@ export class HelysegListComponent implements OnInit {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

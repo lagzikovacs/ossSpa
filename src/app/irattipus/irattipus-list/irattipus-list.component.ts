@@ -1,7 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {IrattipusService} from '../irattipus.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ZoomSources} from '../../enums/zoomsources';
@@ -11,15 +10,15 @@ import {IrattipusEgyMode} from '../irattipusegymode';
 import {IrattipusContainerMode} from '../irattipuscontainermode';
 import {IratSzerkesztesMode} from '../../irat/irat/iratszerkesztesmode';
 import {BizonylatesiratSzerkesztesMode} from '../../projekt/bizonylatesirat/bizonylatesiratszerkesztesmode';
-import {BizonylatkapcsolatService} from "../../bizonylat/bizonylatirat/bizonylatkapcsolat.service";
-import {BizonylatKapcsolatSzerkesztesMode} from "../../bizonylat/bizonylatirat/bizonylatkapcsolatszerkesztesmode";
+import {BizonylatkapcsolatService} from '../../bizonylat/bizonylatirat/bizonylatkapcsolat.service';
+import {BizonylatKapcsolatSzerkesztesMode} from '../../bizonylat/bizonylatirat/bizonylatkapcsolatszerkesztesmode';
 
 @Component({
   selector: 'app-irattipus-list',
   templateUrl: './irattipus-list.component.html',
   styleUrls: ['./irattipus-list.component.css']
 })
-export class IrattipusListComponent implements OnInit {
+export class IrattipusListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Irattipus'];
@@ -137,5 +136,11 @@ export class IrattipusListComponent implements OnInit {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

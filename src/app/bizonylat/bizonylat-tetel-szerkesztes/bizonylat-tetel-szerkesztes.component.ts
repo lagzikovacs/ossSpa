@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
 import {CikkService} from '../../cikk/cikk.service';
@@ -24,7 +24,7 @@ import {MeZoomParameter} from '../../me/mezoomparameter';
   templateUrl: './bizonylat-tetel-szerkesztes.component.html',
   styleUrls: ['./bizonylat-tetel-szerkesztes.component.css']
 })
-export class BizonylatTetelSzerkesztesComponent {
+export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatservice: BizonylatService;
@@ -187,5 +187,10 @@ export class BizonylatTetelSzerkesztesComponent {
   }
   cancel() {
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

@@ -1,13 +1,12 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {BizonylatEgyMode} from '../bizonylategymode';
-import {BizonylatnyomtatasService} from "../bizonylatnyomtatas.service";
-import {SzMT} from "../../dtos/szmt";
-import {Szempont} from "../../enums/szempont";
-import {BizonylatNyomtatasTipus} from "../bizonylatnyomtatastipus";
-import * as FileSaver from "file-saver";
-import {b64toBlob} from "../../tools/b64toBlob";
+import {BizonylatnyomtatasService} from '../bizonylatnyomtatas.service';
+import {SzMT} from '../../dtos/szmt';
+import {Szempont} from '../../enums/szempont';
+import {BizonylatNyomtatasTipus} from '../bizonylatnyomtatastipus';
+import * as FileSaver from 'file-saver';
+import {b64toBlob} from '../../tools/b64toBlob';
 
 @Component({
   selector: 'app-bizonylat-nyomtatas',
@@ -109,5 +108,9 @@ export class BizonylatNyomtatasComponent implements OnDestroy {
   }
   ngOnDestroy() {
     clearInterval(this.szamlalo);
+
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

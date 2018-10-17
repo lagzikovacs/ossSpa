@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {IrattipusService} from '../irattipus.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {IrattipusContainerMode} from '../irattipuscontainermode';
@@ -9,7 +9,7 @@ import {IrattipusEgyMode} from '../irattipusegymode';
   templateUrl: './irattipus-torles.component.html',
   styleUrls: ['./irattipus-torles.component.css']
 })
-export class IrattipusTorlesComponent {
+export class IrattipusTorlesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   irattipusservice: IrattipusService;
@@ -40,5 +40,11 @@ export class IrattipusTorlesComponent {
   }
   cancel() {
     this.irattipusservice.EgyMode = IrattipusEgyMode.Reszletek;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

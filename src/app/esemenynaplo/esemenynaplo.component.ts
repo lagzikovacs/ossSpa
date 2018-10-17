@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {EsemenynaploService} from './esemenynaplo.service';
 import {ErrormodalComponent} from '../errormodal/errormodal.component';
 
@@ -7,7 +7,7 @@ import {ErrormodalComponent} from '../errormodal/errormodal.component';
   templateUrl: './esemenynaplo.component.html',
   styleUrls: ['./esemenynaplo.component.css']
 })
-export class EsemenynaploComponent {
+export class EsemenynaploComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   esemenynaploservice: EsemenynaploService;
@@ -51,5 +51,10 @@ export class EsemenynaploComponent {
         this.eppFrissit = false;
         this.errormodal.show(err);
       });
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

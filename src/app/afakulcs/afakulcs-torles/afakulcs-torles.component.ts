@@ -1,15 +1,15 @@
-import {Component, ViewChild} from '@angular/core';
-import {AfakulcsService} from "../afakulcs.service";
-import {ErrormodalComponent} from "../../errormodal/errormodal.component";
-import {AfakulcsEgyMode} from "../afakulcsegymode";
-import {AfakulcsContainerMode} from "../afakulcscontainermode";
+import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {AfakulcsService} from '../afakulcs.service';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {AfakulcsEgyMode} from '../afakulcsegymode';
+import {AfakulcsContainerMode} from '../afakulcscontainermode';
 
 @Component({
   selector: 'app-afakulcs-torles',
   templateUrl: './afakulcs-torles.component.html',
   styleUrls: ['./afakulcs-torles.component.css']
 })
-export class AfakulcsTorlesComponent {
+export class AfakulcsTorlesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   afakulcsservice: AfakulcsService;
@@ -40,5 +40,11 @@ export class AfakulcsTorlesComponent {
   }
   cancel() {
     this.afakulcsservice.EgyMode = AfakulcsEgyMode.Reszletek;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

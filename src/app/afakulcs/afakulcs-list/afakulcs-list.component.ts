@@ -1,22 +1,22 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {AfakulcsService} from '../afakulcs.service';
 import {CikkService} from '../../cikk/cikk.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
-import {CikkSzerkesztesMode} from "../../cikk/cikkszerkesztesmode";
-import {AfakulcsContainerMode} from "../afakulcscontainermode";
-import {AfakulcsEgyMode} from "../afakulcsegymode";
-import {BizonylattetelSzerkesztesMode} from "../../bizonylat/bizonylattetelszerkesztesmode";
-import {BizonylatService} from "../../bizonylat/bizonylat.service";
+import {CikkSzerkesztesMode} from '../../cikk/cikkszerkesztesmode';
+import {AfakulcsContainerMode} from '../afakulcscontainermode';
+import {AfakulcsEgyMode} from '../afakulcsegymode';
+import {BizonylattetelSzerkesztesMode} from '../../bizonylat/bizonylattetelszerkesztesmode';
+import {BizonylatService} from '../../bizonylat/bizonylat.service';
 
 @Component({
   selector: 'app-afakulcs-list',
   templateUrl: './afakulcs-list.component.html',
   styleUrls: ['./afakulcs-list.component.css']
 })
-export class AfakulcsListComponent implements OnInit {
+export class AfakulcsListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['ÁFA kulcs'];
@@ -124,5 +124,11 @@ export class AfakulcsListComponent implements OnInit {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

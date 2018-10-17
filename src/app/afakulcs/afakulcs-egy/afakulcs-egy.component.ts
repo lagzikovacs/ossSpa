@@ -1,17 +1,17 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {AfakulcsService} from '../afakulcs.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
-import {AfakulcsContainerMode} from "../afakulcscontainermode";
-import {AfakulcsEgyMode} from "../afakulcsegymode";
+import {AfakulcsContainerMode} from '../afakulcscontainermode';
+import {AfakulcsEgyMode} from '../afakulcsegymode';
 
 @Component({
   selector: 'app-afakulcs-egy',
   templateUrl: './afakulcs-egy.component.html',
   styleUrls: ['./afakulcs-egy.component.css']
 })
-export class AfakulcsEgyComponent {
+export class AfakulcsEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   afakulcsservice: AfakulcsService;
@@ -37,5 +37,11 @@ export class AfakulcsEgyComponent {
     this.afakulcsservice.uj = false;
     this.afakulcsservice.DtoEdited = Object.assign({}, this.afakulcsservice.Dto[this.afakulcsservice.DtoSelectedIndex]);
     this.afakulcsservice.EgyMode = AfakulcsEgyMode.Modositas;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

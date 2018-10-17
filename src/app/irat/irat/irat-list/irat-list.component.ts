@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {IratService} from '../irat.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {SzMT} from '../../../dtos/szmt';
@@ -8,14 +8,14 @@ import {IratContainerMode} from '../iratcontainermode';
 import {IratEgyMode} from '../irategymode';
 import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {DokumentumContainerMode} from '../../dokumentum/dokumentumcontainermode';
-import {IratSzerkesztesMode} from "../iratszerkesztesmode";
+import {IratSzerkesztesMode} from '../iratszerkesztesmode';
 
 @Component({
   selector: 'app-irat-list',
   templateUrl: './irat-list.component.html',
   styleUrls: ['./irat-list.component.css']
 })
-export class IratListComponent {
+export class IratListComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Id', 'Keletkezett', 'Ügyfél', 'Tárgy', 'Irattipus', 'Küldő'];
@@ -115,5 +115,11 @@ export class IratListComponent {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

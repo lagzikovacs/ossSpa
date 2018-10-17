@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {FizetesimodService} from '../fizetesimod.service';
 import {LogonService} from '../../logon/logon.service';
@@ -8,15 +8,15 @@ import {FizetesimodEgyMode} from '../fizetesimodegymode';
 import {ZoomSources} from '../../enums/zoomsources';
 import {BizonylatkifizetesService} from '../../bizonylat/bizonylatkifizetes/bizonylatkifizetes.service';
 import {BizonylatKifizetesSzerkesztesMode} from '../../bizonylat/bizonylatkifizetes/bizonylatkifizetesszerkesztesmode';
-import {BizonylatService} from "../../bizonylat/bizonylat.service";
-import {BizonylatSzerkesztesMode} from "../../bizonylat/bizonylatszerkesztesmode";
+import {BizonylatService} from '../../bizonylat/bizonylat.service';
+import {BizonylatSzerkesztesMode} from '../../bizonylat/bizonylatszerkesztesmode';
 
 @Component({
   selector: 'app-fizetesimod-list',
   templateUrl: './fizetesimod-list.component.html',
   styleUrls: ['./fizetesimod-list.component.css']
 })
-export class FizetesimodListComponent implements OnInit {
+export class FizetesimodListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Fizetési mód'];
@@ -122,5 +122,11 @@ export class FizetesimodListComponent implements OnInit {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

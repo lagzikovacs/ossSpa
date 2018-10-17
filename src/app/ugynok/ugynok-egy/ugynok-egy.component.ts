@@ -1,27 +1,32 @@
-import {Component} from '@angular/core';
-import {FeliratkozasService} from '../ugynok.service';
-import {FeliratkozasContainerMode} from '../ugynokcontainermode';
-import {FeliratkozasEgyMode} from '../ugynokegymode';
+import {Component, OnDestroy} from '@angular/core';
+import {UgynokService} from '../ugynok.service';
+import {UgynokContainerMode} from '../ugynokcontainermode';
+import {UgynokEgyMode} from '../ugynokegymode';
 
 @Component({
   selector: 'app-feliratkozas-egy',
   templateUrl: './ugynok-egy.component.html',
   styleUrls: ['./ugynok-egy.component.css']
 })
-export class FeliratkozasEgyComponent {
-  feliratkozasservice: FeliratkozasService;
+export class FeliratkozasEgyComponent implements OnDestroy {
+  feliratkozasservice: UgynokService;
 
-  constructor(feliratkozasservice: FeliratkozasService) {
+  constructor(feliratkozasservice: UgynokService) {
     this.feliratkozasservice = feliratkozasservice;
   }
 
   vissza() {
-    this.feliratkozasservice.ContainerMode = FeliratkozasContainerMode.List;
+    this.feliratkozasservice.ContainerMode = UgynokContainerMode.List;
   }
   reszletek() {
-    this.feliratkozasservice.EgyMode = FeliratkozasEgyMode.Reszletek;
+    this.feliratkozasservice.EgyMode = UgynokEgyMode.Reszletek;
   }
   projekt() {
-    this.feliratkozasservice.EgyMode = FeliratkozasEgyMode.Projekt;
+    this.feliratkozasservice.EgyMode = UgynokEgyMode.Projekt;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

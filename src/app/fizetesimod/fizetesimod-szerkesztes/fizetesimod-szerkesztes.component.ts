@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {FizetesimodService} from '../fizetesimod.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {NumberResult} from '../../dtos/numberresult';
@@ -10,7 +10,7 @@ import {FizetesimodEgyMode} from '../fizetesimodegymode';
   templateUrl: './fizetesimod-szerkesztes.component.html',
   styleUrls: ['./fizetesimod-szerkesztes.component.css']
 })
-export class FizetesimodSzerkesztesComponent {
+export class FizetesimodSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   fizetesimodservice: FizetesimodService;
@@ -66,5 +66,10 @@ export class FizetesimodSzerkesztesComponent {
     } else {
       this.fizetesimodservice.EgyMode = FizetesimodEgyMode.Reszletek;
     }
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

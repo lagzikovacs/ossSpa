@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {BizonylatTetelDto} from '../bizonylatteteldto';
 
 @Component({
@@ -6,7 +6,7 @@ import {BizonylatTetelDto} from '../bizonylatteteldto';
   templateUrl: './bizonylatteteltabla.component.html',
   styleUrls: ['./bizonylatteteltabla.component.css']
 })
-export class BizonylatteteltablaComponent {
+export class BizonylatteteltablaComponent implements OnDestroy {
   @Input() Dto: BizonylatTetelDto[] = new Array<BizonylatTetelDto>();
   @Input() enEdit = false;
   @Output() torles = new EventEmitter<number>();
@@ -17,5 +17,11 @@ export class BizonylatteteltablaComponent {
   }
   domodositas(i: number) {
     this.modositas.emit(i);
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

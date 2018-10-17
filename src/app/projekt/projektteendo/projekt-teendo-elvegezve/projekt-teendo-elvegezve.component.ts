@@ -1,15 +1,15 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import * as moment from 'moment';
 import {ProjektteendoService} from '../projektteendo.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
-import {ProjektteendoEgyMode} from "../projekttendoegymode";
+import {ProjektteendoEgyMode} from '../projekttendoegymode';
 
 @Component({
   selector: 'app-projekt-teendo-elvegezve',
   templateUrl: './projekt-teendo-elvegezve.component.html',
   styleUrls: ['./projekt-teendo-elvegezve.component.css']
 })
-export class ProjektTeendoElvegezveComponent implements OnInit {
+export class ProjektTeendoElvegezveComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektteendoservice: ProjektteendoService;
@@ -56,5 +56,11 @@ export class ProjektTeendoElvegezveComponent implements OnInit {
 
   navigal() {
     this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Reszletek;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

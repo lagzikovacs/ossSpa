@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatDto} from '../bizonylatdto';
 
@@ -7,7 +7,7 @@ import {BizonylatDto} from '../bizonylatdto';
   templateUrl: './bizonylat-reszletek.component.html',
   styleUrls: ['./bizonylat-reszletek.component.css']
 })
-export class BizonylatReszletekComponent implements OnInit {
+export class BizonylatReszletekComponent implements OnInit, OnDestroy {
   bizonylatservice: BizonylatService;
   dto = new Array<BizonylatDto>();
 
@@ -17,5 +17,11 @@ export class BizonylatReszletekComponent implements OnInit {
 
   ngOnInit() {
     this.dto.unshift(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex]);
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {TeendoService} from '../teendo.service';
 import {LogonService} from '../../logon/logon.service';
@@ -11,7 +11,7 @@ import {TeendoEgyMode} from '../teendoegymode';
   templateUrl: './teendo-egy.component.html',
   styleUrls: ['./teendo-egy.component.css']
 })
-export class TeendoEgyComponent {
+export class TeendoEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   teendoservice: TeendoService;
@@ -37,5 +37,11 @@ export class TeendoEgyComponent {
     this.teendoservice.uj = false;
     this.teendoservice.DtoEdited = Object.assign({}, this.teendoservice.Dto[this.teendoservice.DtoSelectedIndex]);
     this.teendoservice.EgyMode = TeendoEgyMode.Modositas;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

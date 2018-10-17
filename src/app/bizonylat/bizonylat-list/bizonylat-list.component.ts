@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {Szempont} from '../../enums/szempont';
@@ -7,15 +7,15 @@ import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {BizonylatkapcsolatService} from '../bizonylatirat/bizonylatkapcsolat.service';
 import {BizonylatkifizetesService} from '../bizonylatkifizetes/bizonylatkifizetes.service';
 import {BizonylatEgyMode} from '../bizonylategymode';
-import {BizonylatSzerkesztesMode} from "../bizonylatszerkesztesmode";
-import {BizonylatTipus} from "../bizonylattipus";
+import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
+import {BizonylatTipus} from '../bizonylattipus';
 
 @Component({
   selector: 'app-bizonylat-list',
   templateUrl: './bizonylat-list.component.html',
   styleUrls: ['./bizonylat-list.component.css']
 })
-export class BizonylatListComponent {
+export class BizonylatListComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   megrendelesszurok = ['Mind', 'Nincs kiszállítva'];
@@ -138,5 +138,11 @@ export class BizonylatListComponent {
         this.eppFrissit = false;
         this.errormodal.show(err);
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

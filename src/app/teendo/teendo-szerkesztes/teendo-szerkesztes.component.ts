@@ -1,16 +1,16 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {TeendoService} from '../teendo.service';
 import {NumberResult} from '../../dtos/numberresult';
-import {TeendoContainerMode} from "../teendocontainermode";
-import {TeendoEgyMode} from "../teendoegymode";
+import {TeendoContainerMode} from '../teendocontainermode';
+import {TeendoEgyMode} from '../teendoegymode';
 
 @Component({
   selector: 'app-teendo-szerkesztes',
   templateUrl: './teendo-szerkesztes.component.html',
   styleUrls: ['./teendo-szerkesztes.component.css']
 })
-export class TeendoSzerkesztesComponent {
+export class TeendoSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   teendoservice: TeendoService;
@@ -66,5 +66,11 @@ export class TeendoSzerkesztesComponent {
     } else {
       this.teendoservice.EgyMode = TeendoEgyMode.Reszletek;
     }
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

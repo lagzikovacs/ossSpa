@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../errormodal/errormodal.component';
 import {Szempont} from '../enums/szempont';
 import {LogonService} from '../logon/logon.service';
@@ -12,7 +12,7 @@ import {NavfeltoltesDto} from './navfeltoltesdto';
   templateUrl: './navexportellenorzes.component.html',
   styleUrls: ['./navexportellenorzes.component.css']
 })
-export class NavexportellenorzesComponent {
+export class NavexportellenorzesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Id', 'Bizonylat Id', 'Bizonylatszám', 'Ügyfél'];
@@ -71,5 +71,11 @@ export class NavexportellenorzesComponent {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

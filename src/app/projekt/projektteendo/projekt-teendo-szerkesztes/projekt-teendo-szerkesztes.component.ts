@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {TeendoService} from '../../../teendo/teendo.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
@@ -19,7 +19,7 @@ import {ProjektteendoSzerkesztesMode} from '../projektteendoszerkesztesmode';
   templateUrl: './projekt-teendo-szerkesztes.component.html',
   styleUrls: ['./projekt-teendo-szerkesztes.component.css']
 })
-export class ProjektTeendoSzerkesztesComponent implements OnInit {
+export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektteendoservice: ProjektteendoService;
@@ -110,5 +110,11 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit {
     this._teendoservice.ContainerMode = TeendoContainerMode.List;
 
     this.projektteendoservice.SzerkesztesMode = ProjektteendoSzerkesztesMode.TeendoZoom;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

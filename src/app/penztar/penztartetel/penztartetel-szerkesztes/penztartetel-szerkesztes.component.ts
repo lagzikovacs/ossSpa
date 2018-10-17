@@ -1,16 +1,16 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {PenztartetelService} from '../penztartetel.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import * as moment from 'moment';
 import {PenztarService} from '../../penztar.service';
-import {PenztartetelContainerMode} from "../penztartetelcontainermode";
+import {PenztartetelContainerMode} from '../penztartetelcontainermode';
 
 @Component({
   selector: 'app-penztartetel-szerkesztes',
   templateUrl: './penztartetel-szerkesztes.component.html',
   styleUrls: ['./penztartetel-szerkesztes.component.css']
 })
-export class PenztartetelSzerkesztesComponent implements AfterViewInit {
+export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   @ViewChild('jogcim') jogcimInput: ElementRef;
@@ -114,5 +114,11 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit {
   }
   navigal() {
     this.penztartetelservice.ContainerMode = PenztartetelContainerMode.List;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

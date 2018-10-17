@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
 
 @Component({
@@ -6,10 +6,16 @@ import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
   templateUrl: './bizonylat-irat-container.component.html',
   styleUrls: ['./bizonylat-irat-container.component.css']
 })
-export class BizonylatIratContainerComponent {
+export class BizonylatIratContainerComponent implements OnDestroy {
   bizonylatkapcsolatservice: BizonylatkapcsolatService;
 
   constructor(bizonylatkapcsolatservice: BizonylatkapcsolatService) {
     this.bizonylatkapcsolatservice = bizonylatkapcsolatservice;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

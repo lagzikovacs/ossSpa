@@ -1,6 +1,6 @@
 import {SzMT} from '../dtos/szmt';
 
-export class FeliratkozasParameter {
+export class UgynokParameter {
   rekordtol: number;
   lapmeret: number;
   fi: SzMT[];

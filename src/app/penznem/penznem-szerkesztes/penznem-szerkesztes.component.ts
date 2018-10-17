@@ -1,16 +1,16 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {PenznemService} from '../penznem.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {NumberResult} from '../../dtos/numberresult';
-import {PenznemEgyMode} from "../penznemegymode";
-import {PenznemContainerMode} from "../penznemcontainermode";
+import {PenznemEgyMode} from '../penznemegymode';
+import {PenznemContainerMode} from '../penznemcontainermode';
 
 @Component({
   selector: 'app-penznem-szerkesztes',
   templateUrl: './penznem-szerkesztes.component.html',
   styleUrls: ['./penznem-szerkesztes.component.css']
 })
-export class PenznemSzerkesztesComponent {
+export class PenznemSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   penznemservice: PenznemService;
@@ -66,5 +66,10 @@ export class PenznemSzerkesztesComponent {
     } else {
       this.penznemservice.EgyMode = PenznemEgyMode.Reszletek;
     }
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

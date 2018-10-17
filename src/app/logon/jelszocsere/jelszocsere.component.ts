@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {FelhasznaloService} from '../../felhasznalo/felhasznalo.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -8,7 +8,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   templateUrl: './jelszocsere.component.html',
   styleUrls: ['./jelszocsere.component.css']
 })
-export class JelszocsereComponent {
+export class JelszocsereComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   felhasznaloservice: FelhasznaloService;
@@ -47,5 +47,11 @@ export class JelszocsereComponent {
 
   cancel() {
     this._router.navigate(['../fooldal'], {relativeTo: this._route});
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

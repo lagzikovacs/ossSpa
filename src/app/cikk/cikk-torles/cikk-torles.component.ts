@@ -1,15 +1,15 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {CikkService} from '../cikk.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {CikkEgyMode} from "../cikkegymode";
-import {CikkContainerMode} from "../cikkcontainermode";
+import {CikkEgyMode} from '../cikkegymode';
+import {CikkContainerMode} from '../cikkcontainermode';
 
 @Component({
   selector: 'app-cikk-torles',
   templateUrl: './cikk-torles.component.html',
   styleUrls: ['./cikk-torles.component.css']
 })
-export class CikkTorlesComponent {
+export class CikkTorlesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   cikkservice: CikkService;
@@ -40,5 +40,10 @@ export class CikkTorlesComponent {
   }
   cancel() {
     this.cikkservice.EgyMode = CikkEgyMode.Reszletek;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

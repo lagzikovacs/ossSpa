@@ -1,17 +1,17 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
 import {BizonylatKapcsolatContainerMode} from '../bizonylatkapcsolatcontainermode';
 import {BizonylatService} from '../../bizonylat.service';
 import {BizonylatKapcsolatParam} from '../bizonylatkapcsolatparam';
 import {VagolapService} from '../../../vagolap/vagolap.service';
-import {ErrormodalComponent} from "../../../errormodal/errormodal.component";
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-bizonylat-irat-vagolaprol',
   templateUrl: './bizonylat-irat-vagolaprol.component.html',
   styleUrls: ['./bizonylat-irat-vagolaprol.component.css']
 })
-export class BizonylatIratVagolaprolComponent implements OnInit {
+export class BizonylatIratVagolaprolComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatkapcsolatservice: BizonylatkapcsolatService;
@@ -21,9 +21,6 @@ export class BizonylatIratVagolaprolComponent implements OnInit {
               private _vagolapservice: VagolapService,
               bizonylatkapcsolatservice: BizonylatkapcsolatService) {
     this.bizonylatkapcsolatservice = bizonylatkapcsolatservice;
-  }
-
-  ngOnInit() {
   }
 
   ok() {
@@ -67,5 +64,11 @@ export class BizonylatIratVagolaprolComponent implements OnInit {
   }
   navigal() {
     this.bizonylatkapcsolatservice.ContainerMode = BizonylatKapcsolatContainerMode.List;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

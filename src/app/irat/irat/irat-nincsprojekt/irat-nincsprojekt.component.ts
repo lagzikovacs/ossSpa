@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-irat-nincsprojekt',
   templateUrl: './irat-nincsprojekt.component.html',
   styleUrls: ['./irat-nincsprojekt.component.css']
 })
-export class IratNincsprojektComponent implements OnInit {
+export class IratNincsprojektComponent implements OnDestroy {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
-
 }

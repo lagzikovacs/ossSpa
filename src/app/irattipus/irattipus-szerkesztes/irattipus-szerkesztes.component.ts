@@ -1,6 +1,6 @@
 import {IrattipusService} from '../irattipus.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {NumberResult} from '../../dtos/numberresult';
 import {IrattipusContainerMode} from '../irattipuscontainermode';
 import {IrattipusEgyMode} from '../irattipusegymode';
@@ -10,7 +10,7 @@ import {IrattipusEgyMode} from '../irattipusegymode';
   templateUrl: './irattipus-szerkesztes.component.html',
   styleUrls: ['./irattipus-szerkesztes.component.css']
 })
-export class IrattipusSzerkesztesComponent {
+export class IrattipusSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   irattipusservice: IrattipusService;
@@ -66,5 +66,11 @@ export class IrattipusSzerkesztesComponent {
     } else {
       this.irattipusservice.EgyMode = IrattipusEgyMode.Reszletek;
     }
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

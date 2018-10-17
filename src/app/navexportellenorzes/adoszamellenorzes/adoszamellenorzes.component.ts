@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {NavexportellenorzesService} from '../navexportellenorzes.service';
 
@@ -7,7 +7,7 @@ import {NavexportellenorzesService} from '../navexportellenorzes.service';
   templateUrl: './adoszamellenorzes.component.html',
   styleUrls: ['./adoszamellenorzes.component.css']
 })
-export class AdoszamellenorzesComponent {
+export class AdoszamellenorzesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   eppFrissit = false;
@@ -35,5 +35,11 @@ export class AdoszamellenorzesComponent {
         this.eppFrissit = false;
         this.errormodal.show(err);
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

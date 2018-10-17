@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from "../../../errormodal/errormodal.component";
 import {DokumentumService} from "../dokumentum.service";
 import {DokumentumContainerMode} from "../dokumentumcontainermode";
@@ -9,7 +9,7 @@ import {DokumentumEgyMode} from "../dokumentumegymode";
   templateUrl: './dokumentum-torles.component.html',
   styleUrls: ['./dokumentum-torles.component.css']
 })
-export class DokumentumTorlesComponent {
+export class DokumentumTorlesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   dokumentumservice: DokumentumService;
@@ -40,5 +40,11 @@ export class DokumentumTorlesComponent {
   }
   cancel() {
     this.dokumentumservice.EgyMode = DokumentumEgyMode.Reszletek;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

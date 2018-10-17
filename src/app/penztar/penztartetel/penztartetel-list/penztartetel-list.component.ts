@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {PenztarService} from '../../penztar.service';
 import {LogonService} from '../../../logon/logon.service';
@@ -6,14 +6,14 @@ import {JogKod} from '../../../enums/jogkod';
 import {PenztartetelService} from '../penztartetel.service';
 import {Szempont} from '../../../enums/szempont';
 import {SzMT} from '../../../dtos/szmt';
-import {PenztartetelContainerMode} from "../penztartetelcontainermode";
+import {PenztartetelContainerMode} from '../penztartetelcontainermode';
 
 @Component({
   selector: 'app-penztartetel-list',
   templateUrl: './penztartetel-list.component.html',
   styleUrls: ['./penztartetel-list.component.css']
 })
-export class PenztartetelListComponent {
+export class PenztartetelListComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Id', 'Pénztárbizonylatszám', 'Ügyfél', 'Bizonylatszám'];
@@ -94,5 +94,11 @@ export class PenztartetelListComponent {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

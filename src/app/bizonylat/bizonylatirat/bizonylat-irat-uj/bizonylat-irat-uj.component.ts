@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import * as moment from 'moment';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
@@ -16,7 +16,7 @@ import {BizonylatKapcsolatSzerkesztesMode} from '../bizonylatkapcsolatszerkeszte
   templateUrl: './bizonylat-irat-uj.component.html',
   styleUrls: ['./bizonylat-irat-uj.component.css']
 })
-export class BizonylatIratUjComponent implements OnInit {
+export class BizonylatIratUjComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatkapcsolatservice: BizonylatkapcsolatService;
@@ -100,5 +100,10 @@ export class BizonylatIratUjComponent implements OnInit {
   }
   navigal() {
     this.bizonylatkapcsolatservice.ContainerMode = BizonylatKapcsolatContainerMode.List;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

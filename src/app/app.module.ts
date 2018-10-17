@@ -54,7 +54,6 @@ import { DokumentumEgyComponent } from './irat/dokumentum/dokumentum-egy/dokumen
 import { IratSzerkesztesComponent } from './irat/irat/irat-szerkesztes/irat-szerkesztes.component';
 import { IratTorlesComponent } from './irat/irat/irat-torles/irat-torles.component';
 import { DokumentumFeltoltesComponent } from './irat/dokumentum/dokumentum-feltoltes/dokumentum-feltoltes.component';
-import { DokumentumLetoltesComponent } from './irat/dokumentum/dokumentum-letoltes/dokumentum-letoltes.component';
 import { DokumentumTorlesComponent } from './irat/dokumentum/dokumentum-torles/dokumentum-torles.component';
 import { IrattipusListComponent } from './irattipus/irattipus-list/irattipus-list.component';
 import { IrattipusEgyComponent } from './irattipus/irattipus-egy/irattipus-egy.component';
@@ -72,7 +71,7 @@ import { CsoportTorlesComponent } from './csoport/csoport-torles/csoport-torles.
 import { CsoportFelhasznaloComponent } from './csoport/csoport-felhasznalo/csoport-felhasznalo.component';
 import { CsoportJogComponent } from './csoport/csoport-jog/csoport-jog.component';
 import { VolumeTesztComponent } from './volume/volume-teszt/volume-teszt.component';
-import { FeliratkozasListComponent } from './ugynok/ugynok-list/ugynok-list.component';
+import { UgynokListComponent } from './ugynok/ugynok-list/ugynok-list.component';
 import { FeliratkozasEgyComponent } from './ugynok/ugynok-egy/ugynok-egy.component';
 import { FeliratkozasProjektComponent } from './ugynok/ugynok-projekt/ugynok-projekt.component';
 import { ProjektTablaComponent } from './projekt/projekttabla/projekt-tabla.component';
@@ -136,7 +135,7 @@ import {UgyfelService} from './ugyfel/ugyfel.service';
 import {ParticioService} from './particio/particio.service';
 import {VolumeService} from './volume/volume.service';
 import {CsoportService} from './csoport/csoport.service';
-import {FeliratkozasService} from './ugynok/ugynok.service';
+import {UgynokService} from './ugynok/ugynok.service';
 import {PenztarService} from './penztar/penztar.service';
 import { AfakulcsReszletekComponent } from './afakulcs/afakulcs-reszletek/afakulcs-reszletek.component';
 import { TeendoReszletekComponent } from './teendo/teendo-reszletek/teendo-reszletek.component';
@@ -149,7 +148,7 @@ import { TermekdijReszletekComponent } from './termekdij/termekdij-reszletek/ter
 import { CikkReszletekComponent } from './cikk/cikk-reszletek/cikk-reszletek.component';
 import { UgyfelReszletekComponent } from './ugyfel/ugyfel-reszletek/ugyfel-reszletek.component';
 import { PenztartetelSzerkesztesComponent } from './penztar/penztartetel/penztartetel-szerkesztes/penztartetel-szerkesztes.component';
-import { FeliratkozasReszletekComponent } from './ugynok/ugynok-reszletek/ugynok-reszletek.component';
+import { UgynokReszletekComponent } from './ugynok/ugynok-reszletek/ugynok-reszletek.component';
 import { NavexportellenorzesComponent } from './navexportellenorzes/navexportellenorzes.component';
 import { IratReszletekComponent } from './irat/irat/irat-reszletek/irat-reszletek.component';
 import { DokumentumReszletekComponent } from './irat/dokumentum/dokumentum-reszletek/dokumentum-reszletek.component';
@@ -365,7 +364,6 @@ if (environment.production) {
     IratSzerkesztesComponent,
     IratTorlesComponent,
     DokumentumFeltoltesComponent,
-    DokumentumLetoltesComponent,
     DokumentumTorlesComponent,
     IrattipusListComponent,
     IrattipusEgyComponent,
@@ -382,7 +380,7 @@ if (environment.production) {
     CsoportFelhasznaloComponent,
     CsoportJogComponent,
     VolumeTesztComponent,
-    FeliratkozasListComponent,
+    UgynokListComponent,
     FeliratkozasEgyComponent,
     FeliratkozasProjektComponent,
     ProjektTablaComponent,
@@ -449,7 +447,7 @@ if (environment.production) {
     CikkReszletekComponent,
     UgyfelReszletekComponent,
     PenztartetelSzerkesztesComponent,
-    FeliratkozasReszletekComponent,
+    UgynokReszletekComponent,
     NavexportellenorzesComponent,
     IratReszletekComponent,
     DokumentumReszletekComponent,
@@ -584,7 +582,7 @@ if (environment.production) {
     DokumentumService,
     PenztarService,
     PenztartetelService,
-    FeliratkozasService,
+    UgynokService,
 
     BizonylatService,
     RiportService,

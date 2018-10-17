@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {BizonylatKapcsolatContainerMode} from '../bizonylatkapcsolatcontainermode';
@@ -8,7 +8,7 @@ import {BizonylatKapcsolatContainerMode} from '../bizonylatkapcsolatcontainermod
   templateUrl: './bizonylat-irat-levalasztas.component.html',
   styleUrls: ['./bizonylat-irat-levalasztas.component.css']
 })
-export class BizonylatIratLevalasztasComponent {
+export class BizonylatIratLevalasztasComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatkapcsolatservice: BizonylatkapcsolatService;
@@ -42,5 +42,10 @@ export class BizonylatIratLevalasztasComponent {
   }
   navigal() {
     this.bizonylatkapcsolatservice.ContainerMode = BizonylatKapcsolatContainerMode.List;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ProjektteendoService} from '../projektteendo.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {ProjektteendoContainerMode} from '../projektteendocontainermode';
@@ -9,7 +9,7 @@ import {ProjektteendoEgyMode} from '../projekttendoegymode';
   templateUrl: './projekt-teendo-torles.component.html',
   styleUrls: ['./projekt-teendo-torles.component.css']
 })
-export class ProjektTeendoTorlesComponent {
+export class ProjektTeendoTorlesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektteendoservice: ProjektteendoService;
@@ -40,5 +40,11 @@ export class ProjektTeendoTorlesComponent {
   }
   cancel() {
     this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Reszletek;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

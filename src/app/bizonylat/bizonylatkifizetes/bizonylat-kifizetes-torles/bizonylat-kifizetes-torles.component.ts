@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {BizonylatkifizetesService} from '../bizonylatkifizetes.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {BizonylatKifizetesContainerMode} from '../bizonylatkifizetescontainermode';
@@ -9,7 +9,7 @@ import {BizonylatKifizetesEgyMode} from '../bizonylatkifizetesegymode';
   templateUrl: './bizonylat-kifizetes-torles.component.html',
   styleUrls: ['./bizonylat-kifizetes-torles.component.css']
 })
-export class BizonylatKifizetesTorlesComponent {
+export class BizonylatKifizetesTorlesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatkifizetesservice: BizonylatkifizetesService;
@@ -40,5 +40,11 @@ export class BizonylatKifizetesTorlesComponent {
   }
   cancel() {
     this.bizonylatkifizetesservice.EgyMode = BizonylatKifizetesEgyMode.Reszletek;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

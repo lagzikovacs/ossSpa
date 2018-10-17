@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {DokumentumService} from '../dokumentum.service';
 import {DokumentumContainerMode} from '../dokumentumcontainermode';
 import {DokumentumEgyMode} from '../dokumentumegymode';
@@ -9,7 +9,7 @@ import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
   templateUrl: './dokumentum-egy.component.html',
   styleUrls: ['./dokumentum-egy.component.css']
 })
-export class DokumentumEgyComponent {
+export class DokumentumEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   dokumentumservice: DokumentumService;
@@ -49,5 +49,11 @@ export class DokumentumEgyComponent {
         this.eppFrissit = false;
         this.errormodal.show(err);
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

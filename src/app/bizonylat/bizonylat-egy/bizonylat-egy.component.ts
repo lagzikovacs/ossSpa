@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {ProjektkapcsolatService} from '../../projekt/bizonylatesirat/projektkapcsolat.service';
@@ -20,7 +20,7 @@ import {AbuComponent} from '../../tools/abu/abu.component';
   templateUrl: './bizonylat-egy.component.html',
   styleUrls: ['./bizonylat-egy.component.css']
 })
-export class BizonylatEgyComponent {
+export class BizonylatEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
   @ViewChild(AbuComponent) abu: AbuComponent;
 
@@ -162,5 +162,11 @@ export class BizonylatEgyComponent {
   vagolap() {
     this._vagolapservice.bizonylatotvagolapra();
     this.abu.Uzenet('A(z) ' + this.bizonylatservice.bizonylatLeiro.BizonylatNev + ' a vágólapra került!');
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

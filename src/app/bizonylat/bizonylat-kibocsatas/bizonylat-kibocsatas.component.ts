@@ -1,17 +1,17 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {BizonylatKibocsatasParam} from '../bizonylatkibocsatasparam';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatTipus} from '../bizonylattipus';
-import {PenztarService} from "../../penztar/penztar.service";
+import {PenztarService} from '../../penztar/penztar.service';
 
 @Component({
   selector: 'app-bizonylat-kibocsatas',
   templateUrl: './bizonylat-kibocsatas.component.html',
   styleUrls: ['./bizonylat-kibocsatas.component.css']
 })
-export class BizonylatKibocsatasComponent {
+export class BizonylatKibocsatasComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatservice: BizonylatService;
@@ -67,5 +67,11 @@ export class BizonylatKibocsatasComponent {
   }
   cancel() {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Blank;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

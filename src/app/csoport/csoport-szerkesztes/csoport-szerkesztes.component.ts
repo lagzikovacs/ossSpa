@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {CsoportService} from '../csoport.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {NumberResult} from '../../dtos/numberresult';
@@ -10,7 +10,7 @@ import {CsoportEgyMode} from '../csoportegymode';
   templateUrl: './csoport-szerkesztes.component.html',
   styleUrls: ['./csoport-szerkesztes.component.css']
 })
-export class CsoportSzerkesztesComponent {
+export class CsoportSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   csoportservice: CsoportService;
@@ -66,5 +66,10 @@ export class CsoportSzerkesztesComponent {
     } else {
       this.csoportservice.EgyMode = CsoportEgyMode.Reszletek;
     }
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

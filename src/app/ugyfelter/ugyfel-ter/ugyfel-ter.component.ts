@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {UgyfelterService} from "../ugyfelter.service";
-import {ErrormodalComponent} from "../../errormodal/errormodal.component";
-import {UgyfelterDto} from "../ugyfelterdto";
+import {UgyfelterService} from '../ugyfelter.service';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {UgyfelterDto} from '../ugyfelterdto';
 
 @Component({
   selector: 'app-ugyfel-ter',
@@ -49,12 +49,15 @@ export class UgyfelTerComponent implements OnInit, OnDestroy {
       });
   }
 
-  setProjektClickedRow(i: number)
-  {
+  setProjektClickedRow(i: number) {
 
   }
 
   ngOnDestroy() {
     this._sub.unsubscribe();
+
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

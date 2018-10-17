@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {VolumeService} from '../volume.service';
 import {VolumeContainerMode} from '../volumecontainermode';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
@@ -9,7 +9,7 @@ import {VolumeEgyMode} from '../volumeegymode';
   templateUrl: './volume-egy.component.html',
   styleUrls: ['./volume-egy.component.css']
 })
-export class VolumeEgyComponent {
+export class VolumeEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   volumeservice: VolumeService;
@@ -41,5 +41,10 @@ export class VolumeEgyComponent {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

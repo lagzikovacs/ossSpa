@@ -1,17 +1,17 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {TermekdijService} from '../termekdij.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
-import {TermekdijContainerMode} from "../termekdijcontainermode";
-import {TermekdijEgyMode} from "../termekdijegymode";
+import {TermekdijContainerMode} from '../termekdijcontainermode';
+import {TermekdijEgyMode} from '../termekdijegymode';
 
 @Component({
   selector: 'app-termekdij-egy',
   templateUrl: './termekdij-egy.component.html',
   styleUrls: ['./termekdij-egy.component.css']
 })
-export class TermekdijEgyComponent {
+export class TermekdijEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   termekdijservice: TermekdijService;
@@ -37,5 +37,10 @@ export class TermekdijEgyComponent {
     this.termekdijservice.uj = false;
     this.termekdijservice.DtoEdited = Object.assign({}, this.termekdijservice.Dto[this.termekdijservice.DtoSelectedIndex]);
     this.termekdijservice.EgyMode = TermekdijEgyMode.Modositas;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

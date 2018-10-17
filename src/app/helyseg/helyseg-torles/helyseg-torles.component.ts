@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {HelysegService} from '../helyseg.service';
 import {HelysegContainerMode} from '../helysegcontainermode';
@@ -9,7 +9,7 @@ import {HelysegEgyMode} from '../helysegegymode';
   templateUrl: './helyseg-torles.component.html',
   styleUrls: ['./helyseg-torles.component.css']
 })
-export class HelysegTorlesComponent {
+export class HelysegTorlesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   helysegservice: HelysegService;
@@ -40,5 +40,11 @@ export class HelysegTorlesComponent {
   }
   cancel() {
     this.helysegservice.EgyMode = HelysegEgyMode.Reszletek;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

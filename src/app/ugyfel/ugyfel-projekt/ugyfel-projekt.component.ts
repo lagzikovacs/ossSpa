@@ -1,17 +1,17 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {UgyfelService} from "../ugyfel.service";
-import {ProjektService} from "../../projekt/projekt/projekt.service";
-import {ErrormodalComponent} from "../../errormodal/errormodal.component";
-import {ProjektDto} from "../../projekt/projekt/projektdto";
-import {SzMT} from "../../dtos/szmt";
-import {Szempont} from "../../enums/szempont";
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {UgyfelService} from '../ugyfel.service';
+import {ProjektService} from '../../projekt/projekt/projekt.service';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {ProjektDto} from '../../projekt/projekt/projektdto';
+import {SzMT} from '../../dtos/szmt';
+import {Szempont} from '../../enums/szempont';
 
 @Component({
   selector: 'app-ugyfel-projekt',
   templateUrl: './ugyfel-projekt.component.html',
   styleUrls: ['./ugyfel-projekt.component.css']
 })
-export class UgyfelProjektComponent implements OnInit {
+export class UgyfelProjektComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   ugyfelservice: UgyfelService;
@@ -44,5 +44,9 @@ export class UgyfelProjektComponent implements OnInit {
         this.errormodal.show(err);
       });
   }
-
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
+  }
 }

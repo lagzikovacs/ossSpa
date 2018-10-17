@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {UgyfelService} from '../ugyfel.service';
 import {HelysegService} from '../../helyseg/helyseg.service';
@@ -14,7 +14,7 @@ import {HelysegContainerMode} from '../../helyseg/helysegcontainermode';
   templateUrl: './ugyfel-szerkesztes.component.html',
   styleUrls: ['./ugyfel-szerkesztes.component.css']
 })
-export class UgyfelSzerkesztesComponent {
+export class UgyfelSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   ugyfelservice: UgyfelService;
@@ -83,5 +83,11 @@ export class UgyfelSzerkesztesComponent {
     this._helysegservice.ContainerMode = HelysegContainerMode.List;
 
     this.ugyfelservice.SzerkesztesMode = UgyfelSzerkesztesMode.HelysegZoom;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

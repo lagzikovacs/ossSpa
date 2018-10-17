@@ -1,11 +1,11 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.css']
 })
-export class ToolbarComponent implements AfterViewInit  {
+export class ToolbarComponent implements AfterViewInit, OnDestroy  {
   @Input() Szurok: string[] = [];
 
   @Input() enKereses = true;
@@ -55,5 +55,11 @@ export class ToolbarComponent implements AfterViewInit  {
   }
   doStopZoom() {
     this.StopZoom.emit();
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

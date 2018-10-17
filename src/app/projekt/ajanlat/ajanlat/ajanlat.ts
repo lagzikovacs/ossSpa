@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ProjektkapcsolatService} from '../../bizonylatesirat/projektkapcsolat.service';
 import {LogonService} from '../../../logon/logon.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
@@ -13,7 +13,7 @@ import {AjanlatService} from '../ajanlat.service';
   templateUrl: './ajanlat.html',
   styleUrls: ['./ajanlat.css']
 })
-export class AjanlatComponent implements OnInit {
+export class AjanlatComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   ajanlatservice: AjanlatService;
@@ -69,5 +69,10 @@ export class AjanlatComponent implements OnInit {
   }
   navigal() {
     this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

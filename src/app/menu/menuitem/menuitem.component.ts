@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnDestroy} from '@angular/core';
 import {AngularmenuDto} from '../angularmenudto';
 import {MenuService} from '../menu.service';
 
@@ -7,12 +7,18 @@ import {MenuService} from '../menu.service';
   templateUrl: './menuitem.component.html',
   styleUrls: ['./menuitem.component.css']
 })
-export class MenuitemComponent {
+export class MenuitemComponent implements OnDestroy {
   @Input() menunode: AngularmenuDto;
 
   menuservice: MenuService;
 
   constructor(menuservice: MenuService) {
     this.menuservice = menuservice;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

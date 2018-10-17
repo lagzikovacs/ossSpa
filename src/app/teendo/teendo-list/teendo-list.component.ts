@@ -1,20 +1,20 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {TeendoService} from '../teendo.service';
 import {JogKod} from '../../enums/jogkod';
 import {LogonService} from '../../logon/logon.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import {ProjektteendoService} from '../../projekt/projektteendo/projektteendo.service';
-import {TeendoContainerMode} from "../teendocontainermode";
-import {TeendoEgyMode} from "../teendoegymode";
-import {ProjektteendoSzerkesztesMode} from "../../projekt/projektteendo/projektteendoszerkesztesmode";
+import {TeendoContainerMode} from '../teendocontainermode';
+import {TeendoEgyMode} from '../teendoegymode';
+import {ProjektteendoSzerkesztesMode} from '../../projekt/projektteendo/projektteendoszerkesztesmode';
 
 @Component({
   selector: 'app-teendo-list',
   templateUrl: './teendo-list.component.html',
   styleUrls: ['./teendo-list.component.css']
 })
-export class TeendoListComponent implements OnInit {
+export class TeendoListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Teendő'];
@@ -112,5 +112,11 @@ export class TeendoListComponent implements OnInit {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

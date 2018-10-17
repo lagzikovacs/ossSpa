@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {PenztarService} from '../penztar.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {LogonService} from '../../logon/logon.service';
@@ -7,15 +7,15 @@ import {PenztartetelService} from '../penztartetel/penztartetel.service';
 import {PenztartetelDto} from '../penztartetel/penztarteteldto';
 import {PenztarContainerMode} from '../penztarcontainermode';
 import {PenztarEgyMode} from '../penztaregymode';
-import {PenztartetelContainerMode} from "../penztartetel/penztartetelcontainermode";
-import {PenztarSzerkesztesMode} from "../penztarszerkesztesmode";
+import {PenztartetelContainerMode} from '../penztartetel/penztartetelcontainermode';
+import {PenztarSzerkesztesMode} from '../penztarszerkesztesmode';
 
 @Component({
   selector: 'app-penztar-list',
   templateUrl: './penztar-list.component.html',
   styleUrls: ['./penztar-list.component.css']
 })
-export class PenztarListComponent implements OnInit {
+export class PenztarListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Pénztár'];
@@ -104,5 +104,11 @@ export class PenztarListComponent implements OnInit {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

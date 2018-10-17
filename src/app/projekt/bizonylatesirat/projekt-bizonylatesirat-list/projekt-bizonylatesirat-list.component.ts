@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {LogonService} from '../../../logon/logon.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
@@ -8,22 +8,21 @@ import {IratContainerMode} from '../../../irat/irat/iratcontainermode';
 import {DokumentumContainerMode} from '../../../irat/dokumentum/dokumentumcontainermode';
 import {IratEgyMode} from '../../../irat/irat/irategymode';
 import {DokumentumService} from '../../../irat/dokumentum/dokumentum.service';
-import {AjanlatTetelTipus} from '../../ajanlat/ajanlatteteltipus';
 import {AjanlatContainerMode} from '../../ajanlat/ajanlatcontainermode';
 import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 import {BizonylatkapcsolatService} from '../../../bizonylat/bizonylatirat/bizonylatkapcsolat.service';
 import {BizonylatkifizetesService} from '../../../bizonylat/bizonylatkifizetes/bizonylatkifizetes.service';
-import {BizonylatEgyMode} from "../../../bizonylat/bizonylategymode";
-import {VagolapService} from "../../../vagolap/vagolap.service";
-import {VagolapMode} from "../../../vagolap/vagolapmode";
-import {AjanlatService} from "../../ajanlat/ajanlat.service";
+import {BizonylatEgyMode} from '../../../bizonylat/bizonylategymode';
+import {VagolapService} from '../../../vagolap/vagolap.service';
+import {VagolapMode} from '../../../vagolap/vagolapmode';
+import {AjanlatService} from '../../ajanlat/ajanlat.service';
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-list',
   templateUrl: './projekt-bizonylatesirat-list.component.html',
   styleUrls: ['./projekt-bizonylatesirat-list.component.css']
 })
-export class ProjektBizonylatesiratListComponent {
+export class ProjektBizonylatesiratListComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektkapcsolatservice: ProjektkapcsolatService;
@@ -162,5 +161,10 @@ export class ProjektBizonylatesiratListComponent {
   vagolaprol() {
     this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.Vagolap;
     this._vagolapservice.Mode = VagolapMode.Projekt;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

@@ -1,16 +1,16 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {HelysegService} from '../helyseg.service';
 import {NumberResult} from '../../dtos/numberresult';
-import {HelysegContainerMode} from "../helysegcontainermode";
-import {HelysegEgyMode} from "../helysegegymode";
+import {HelysegContainerMode} from '../helysegcontainermode';
+import {HelysegEgyMode} from '../helysegegymode';
 
 @Component({
   selector: 'app-helyseg-szerkesztes',
   templateUrl: './helyseg-szerkesztes.component.html',
   styleUrls: ['./helyseg-szerkesztes.component.css']
 })
-export class HelysegSzerkesztesComponent {
+export class HelysegSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   helysegservice: HelysegService;
@@ -66,5 +66,11 @@ export class HelysegSzerkesztesComponent {
     } else {
       this.helysegservice.EgyMode = HelysegEgyMode.Reszletek;
     }
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

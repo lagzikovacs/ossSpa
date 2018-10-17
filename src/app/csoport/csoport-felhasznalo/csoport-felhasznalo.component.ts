@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {CsoportService} from '../csoport.service';
 import {CsoportFelhasznaloParameter} from '../csoportfelhasznaloparameter';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
@@ -8,7 +8,7 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
   templateUrl: './csoport-felhasznalo.component.html',
   styleUrls: ['./csoport-felhasznalo.component.css']
 })
-export class CsoportFelhasznaloComponent {
+export class CsoportFelhasznaloComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   csoportservice: CsoportService;
@@ -37,5 +37,11 @@ export class CsoportFelhasznaloComponent {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

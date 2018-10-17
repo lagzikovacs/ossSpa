@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ProjektkapcsolatService} from '../../bizonylatesirat/projektkapcsolat.service';
 import {AjanlatSzerkesztesMode} from '../ajanlatszerkesztesmode';
 import {AjanlatContainerMode} from '../ajanlatcontainermode';
@@ -6,14 +6,14 @@ import {CikkService} from '../../../cikk/cikk.service';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {CikkContainerMode} from '../../../cikk/cikkcontainermode';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
-import {AjanlatService} from "../ajanlat.service";
+import {AjanlatService} from '../ajanlat.service';
 
 @Component({
   selector: 'app-ajanlat-tetel',
   templateUrl: './ajanlat-tetel.html',
   styleUrls: ['./ajanlat-tetel.css']
 })
-export class AjanlatTetelComponent {
+export class AjanlatTetelComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   ajanlatservice: AjanlatService;
@@ -62,5 +62,11 @@ export class AjanlatTetelComponent {
   navigal() {
     this.ajanlatservice.AjanlatSzerkesztesMode = AjanlatSzerkesztesMode.Blank;
     this.ajanlatservice.AjanlatContainerMode = AjanlatContainerMode.List;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

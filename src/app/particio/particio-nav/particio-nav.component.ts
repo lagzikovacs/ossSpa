@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ParticioService} from '../particio.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {ParticioEgyMode} from '../particioegymode';
@@ -8,7 +8,7 @@ import {ParticioEgyMode} from '../particioegymode';
   templateUrl: './particio-nav.component.html',
   styleUrls: ['./particio-nav.component.css']
 })
-export class ParticioNavComponent {
+export class ParticioNavComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   particioservice: ParticioService;
@@ -48,5 +48,11 @@ export class ParticioNavComponent {
   }
   navigal() {
     this.particioservice.EgyMode = ParticioEgyMode.Blank;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

@@ -1,13 +1,13 @@
-import {Component, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from "../../errormodal/errormodal.component";
-import {BizonylatService} from "../bizonylat.service";
+import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {BizonylatService} from '../bizonylat.service';
 
 @Component({
   selector: 'app-bizonylat-kiszallitva',
   templateUrl: './bizonylat-kiszallitva.component.html',
   styleUrls: ['./bizonylat-kiszallitva.component.css']
 })
-export class BizonylatKiszallitvaComponent {
+export class BizonylatKiszallitvaComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatservice: BizonylatService;
@@ -39,5 +39,11 @@ export class BizonylatKiszallitvaComponent {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

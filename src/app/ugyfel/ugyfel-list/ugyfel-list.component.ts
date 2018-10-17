@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {Szempont} from '../../enums/szempont';
 import {UgyfelService} from '../ugyfel.service';
@@ -21,7 +21,7 @@ import {BizonylatSzerkesztesMode} from '../../bizonylat/bizonylatszerkesztesmode
   templateUrl: './ugyfel-list.component.html',
   styleUrls: ['./ugyfel-list.component.css']
 })
-export class UgyfelListComponent implements OnInit {
+export class UgyfelListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Ügyfél', 'Email'];
@@ -158,5 +158,11 @@ export class UgyfelListComponent implements OnInit {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {PenznemService} from '../../penznem/penznem.service';
@@ -23,7 +23,7 @@ import * as moment from 'moment';
   templateUrl: './bizonylat-szerkesztes.component.html',
   styleUrls: ['./bizonylat-szerkesztes.component.css']
 })
-export class BizonylatSzerkesztesComponent implements OnInit {
+export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatservice: BizonylatService;
@@ -208,5 +208,10 @@ export class BizonylatSzerkesztesComponent implements OnInit {
     } else {
       this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
     }
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

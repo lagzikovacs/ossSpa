@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {LogonService} from '../logon.service';
 import {Router} from '@angular/router';
@@ -9,7 +9,7 @@ import {CsoportService} from '../../csoport/csoport.service';
   templateUrl: './szerepkorvalasztas.component.html',
   styleUrls: ['./szerepkorvalasztas.component.css']
 })
-export class SzerepkorvalasztasComponent implements OnInit {
+export class SzerepkorvalasztasComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) private errormodal: ErrormodalComponent;
 
   logonservice: LogonService;
@@ -51,5 +51,11 @@ export class SzerepkorvalasztasComponent implements OnInit {
         this.eppFrissit = false;
         this.errormodal.show(err);
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

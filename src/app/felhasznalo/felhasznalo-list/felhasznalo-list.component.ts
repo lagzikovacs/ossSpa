@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {FelhasznaloService} from '../felhasznalo.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -6,16 +6,16 @@ import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ZoomSources} from '../../enums/zoomsources';
 import {ProjektteendoService} from '../../projekt/projektteendo/projektteendo.service';
-import {FelhasznaloContainerMode} from "../felhasznalocontainermode";
-import {FelhasznaloEgyMode} from "../felhasznaloegymode";
-import {ProjektteendoSzerkesztesMode} from "../../projekt/projektteendo/projektteendoszerkesztesmode";
+import {FelhasznaloContainerMode} from '../felhasznalocontainermode';
+import {FelhasznaloEgyMode} from '../felhasznaloegymode';
+import {ProjektteendoSzerkesztesMode} from '../../projekt/projektteendo/projektteendoszerkesztesmode';
 
 @Component({
   selector: 'app-felhasznalo-list',
   templateUrl: './felhasznalo-list.component.html',
   styleUrls: ['./felhasznalo-list.component.css']
 })
-export class FelhasznaloListComponent implements OnInit {
+export class FelhasznaloListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Név'];
@@ -112,5 +112,11 @@ export class FelhasznaloListComponent implements OnInit {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

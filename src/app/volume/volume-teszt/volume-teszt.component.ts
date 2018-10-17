@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {VolumeService} from '../volume.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {DokumentumService} from '../../irat/dokumentum/dokumentum.service';
@@ -8,7 +8,7 @@ import {DokumentumService} from '../../irat/dokumentum/dokumentum.service';
   templateUrl: './volume-teszt.component.html',
   styleUrls: ['./volume-teszt.component.css']
 })
-export class VolumeTesztComponent {
+export class VolumeTesztComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   volumeservice: VolumeService;
@@ -58,5 +58,11 @@ export class VolumeTesztComponent {
 
   leallitas() {
     this.volumeservice.eppTesztel = false;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

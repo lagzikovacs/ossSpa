@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
@@ -7,7 +7,7 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
   templateUrl: './bizonylat-formaiellenorzes.component.html',
   styleUrls: ['./bizonylat-formaiellenorzes.component.css']
 })
-export class BizonylatFormaiellenorzesComponent implements OnInit {
+export class BizonylatFormaiellenorzesComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatservice: BizonylatService;
@@ -33,5 +33,11 @@ export class BizonylatFormaiellenorzesComponent implements OnInit {
         this.eppFrissit = false;
         this.errormodal.show(err);
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

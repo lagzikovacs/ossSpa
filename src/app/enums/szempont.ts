@@ -52,5 +52,7 @@ export enum Szempont {
   Termeles = 51,
   Megjegyzes = 52,
   SzuksegesAramerosseg = 53,
+  Cim = 54,
+  Ugynoknev = 55,
 }
 

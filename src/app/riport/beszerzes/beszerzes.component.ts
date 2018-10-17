@@ -107,5 +107,9 @@ export class BeszerzesComponent implements OnDestroy {
   }
   ngOnDestroy() {
     clearInterval(this.szamlalo);
+
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

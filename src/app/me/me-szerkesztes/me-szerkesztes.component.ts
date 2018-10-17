@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {MeService} from '../me.service';
 import {NumberResult} from '../../dtos/numberresult';
@@ -10,7 +10,7 @@ import {MeEgyMode} from '../meegymode';
   templateUrl: './me-szerkesztes.component.html',
   styleUrls: ['./me-szerkesztes.component.css']
 })
-export class MeSzerkesztesComponent {
+export class MeSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   meservice: MeService;
@@ -66,5 +66,10 @@ export class MeSzerkesztesComponent {
     } else {
       this.meservice.EgyMode = MeEgyMode.Reszletek;
     }
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

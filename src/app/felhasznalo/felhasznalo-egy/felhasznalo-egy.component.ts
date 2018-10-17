@@ -1,18 +1,18 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {FelhasznaloService} from '../felhasznalo.service';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {FelhasznaloContainerMode} from '../felhasznalocontainermode';
 import {FelhasznaloEgyMode} from '../felhasznaloegymode';
-import {EsemenynaploService} from "../../esemenynaplo/esemenynaplo.service";
+import {EsemenynaploService} from '../../esemenynaplo/esemenynaplo.service';
 
 @Component({
   selector: 'app-felhasznalo-egy',
   templateUrl: './felhasznalo-egy.component.html',
   styleUrls: ['./felhasznalo-egy.component.css']
 })
-export class FelhasznaloEgyComponent {
+export class FelhasznaloEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   felhasznaloservice: FelhasznaloService;
@@ -46,5 +46,10 @@ export class FelhasznaloEgyComponent {
   tevekenyseg() {
     this._esemenynaploservice.Felhasznalokod = this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex].FELHASZNALOKOD;
     this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Tevekenyseg;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

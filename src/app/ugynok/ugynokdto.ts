@@ -1,11 +1,16 @@
-export class FeliratkozasDto {
-  FELIRATKOZASKOD: number;
-  LISTA: string;
+export class UgynokDto {
+  UGYNOKKOD: number;
+  UGYNOKNEV: string;
   NEV: string;
-  TELEPULES: string;
+  CIM: string;
   EMAIL: string;
   TELEFONSZAM: string;
+  HAVIFOGYASZTASKWH: string;
+  HAVISZAMLAFT: string;
+  NAPELEMEKTELJESITMENYEKW: string;
   MEGJEGYZES: string;
-  LETREHOZVA: Date;
+  LETREHOZVA: any;
   LETREHOZTA: string;
+  MODOSITVA: any;
+  MODOSITOTTA: string;
 }

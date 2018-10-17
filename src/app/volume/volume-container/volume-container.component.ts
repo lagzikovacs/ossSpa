@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {VolumeService} from '../volume.service';
 
 @Component({
@@ -6,10 +6,16 @@ import {VolumeService} from '../volume.service';
   templateUrl: './volume-container.component.html',
   styleUrls: ['./volume-container.component.css']
 })
-export class VolumeContainerComponent {
+export class VolumeContainerComponent implements OnDestroy {
   volumeservice: VolumeService;
 
   constructor(volumeservice: VolumeService) {
     this.volumeservice = volumeservice;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

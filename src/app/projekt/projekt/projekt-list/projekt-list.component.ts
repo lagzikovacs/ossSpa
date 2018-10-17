@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {ProjektService} from '../projekt.service';
 import {SzMT} from '../../../dtos/szmt';
@@ -10,16 +10,16 @@ import {ProjektteendoService} from '../../projektteendo/projektteendo.service';
 import {SzamlazasirendService} from '../../szamlazasirend/szamlazasirend.service';
 import {ProjektkapcsolatService} from '../../bizonylatesirat/projektkapcsolat.service';
 import {BizonylatesIratContainerMode} from '../../bizonylatesirat/bizonylatesiratcontainermode';
-import {AjanlatService} from "../../ajanlat/ajanlat.service";
-import {JogKod} from "../../../enums/jogkod";
-import {LogonService} from "../../../logon/logon.service";
+import {AjanlatService} from '../../ajanlat/ajanlat.service';
+import {JogKod} from '../../../enums/jogkod';
+import {LogonService} from '../../../logon/logon.service';
 
 @Component({
   selector: 'app-projekt-list',
   templateUrl: './projekt-list.component.html',
   styleUrls: ['./projekt-list.component.css']
 })
-export class ProjektListComponent {
+export class ProjektListComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   statuszszurok = [
@@ -153,5 +153,11 @@ export class ProjektListComponent {
   onExport(sszi: number) {
     this.projektservice.statuszexporthoz = this.statuszszurok[sszi];
     this.projektservice.ContainerMode = ProjektContainerMode.Export;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

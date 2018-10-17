@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylattetelSzerkesztesMode} from '../bizonylattetelszerkesztesmode';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
@@ -9,7 +9,7 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
   templateUrl: './bizonylat-tetel-torles.component.html',
   styleUrls: ['./bizonylat-tetel-torles.component.css']
 })
-export class BizonylatTetelTorlesComponent implements OnInit {
+export class BizonylatTetelTorlesComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatservice: BizonylatService;
@@ -49,5 +49,10 @@ export class BizonylatTetelTorlesComponent implements OnInit {
   navigal() {
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

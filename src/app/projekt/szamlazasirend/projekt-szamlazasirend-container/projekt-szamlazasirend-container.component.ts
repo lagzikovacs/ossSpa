@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {SzamlazasirendService} from '../szamlazasirend.service';
 
 @Component({
@@ -6,10 +6,16 @@ import {SzamlazasirendService} from '../szamlazasirend.service';
   templateUrl: './projekt-szamlazasirend-container.component.html',
   styleUrls: ['./projekt-szamlazasirend-container.component.css']
 })
-export class ProjektSzamlazasirendContainerComponent {
+export class ProjektSzamlazasirendContainerComponent implements OnDestroy {
   szamlazasirendservice: SzamlazasirendService;
 
   constructor(szamlazasirendservice: SzamlazasirendService) {
     this.szamlazasirendservice = szamlazasirendservice;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

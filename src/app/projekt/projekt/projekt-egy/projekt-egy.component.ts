@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {ProjektService} from '../projekt.service';
 import {ProjektContainerMode} from '../projektcontainermode';
@@ -18,7 +18,7 @@ import {JogKod} from "../../../enums/jogkod";
   templateUrl: './projekt-egy.component.html',
   styleUrls: ['./projekt-egy.component.css']
 })
-export class ProjektEgyComponent {
+export class ProjektEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektservice: ProjektService;
@@ -88,5 +88,10 @@ export class ProjektEgyComponent {
   teendo() {
     this.projektservice.EgyMode = ProjektEgyMode.Teendo;
     this._projektteendoservice.ContainerMode = ProjektteendoContainerMode.List;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

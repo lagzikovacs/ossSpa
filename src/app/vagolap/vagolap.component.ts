@@ -1,21 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {VagolapService} from './vagolap.service';
 import {VagolapDto} from './vagolapdto';
-import {IratService} from '../irat/irat/irat.service';
-import {BizonylatService} from '../bizonylat/bizonylat.service';
 import {VagolapMode} from './vagolapmode';
-import {ProjektService} from '../projekt/projekt/projekt.service';
-import {ProjektkapcsolatService} from '../projekt/bizonylatesirat/projektkapcsolat.service';
-import {ProjektKapcsolatParameter} from '../projekt/bizonylatesirat/projektkapcsolatparameter';
-import {BizonylatkapcsolatService} from '../bizonylat/bizonylatirat/bizonylatkapcsolat.service';
-import {BizonylatKapcsolatParam} from '../bizonylat/bizonylatirat/bizonylatkapcsolatparam';
 
 @Component({
   selector: 'app-vagolap',
   templateUrl: './vagolap.component.html',
   styleUrls: ['./vagolap.component.css']
 })
-export class VagolapComponent implements OnInit {
+export class VagolapComponent implements OnInit, OnDestroy {
   vagolapservice: VagolapService;
   eppFrissit = false;
 
@@ -42,5 +35,11 @@ export class VagolapComponent implements OnInit {
     }
 
     return false;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

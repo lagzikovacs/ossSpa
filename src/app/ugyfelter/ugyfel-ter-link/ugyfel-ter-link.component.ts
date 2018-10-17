@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {UgyfelterService} from '../ugyfelter.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
@@ -9,7 +9,7 @@ import * as moment from 'moment';
   templateUrl: './ugyfel-ter-link.component.html',
   styleUrls: ['./ugyfel-ter-link.component.css']
 })
-export class UgyfelTerLinkComponent implements OnInit {
+export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   link = '';
@@ -56,5 +56,11 @@ export class UgyfelTerLinkComponent implements OnInit {
         this.eppFrissit = false;
         this.errormodal.show(err);
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

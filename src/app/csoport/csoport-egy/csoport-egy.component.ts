@@ -1,15 +1,15 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {CsoportService} from '../csoport.service';
-import {CsoportContainerMode} from "../csoportcontainermode";
-import {CsoportEgyMode} from "../csoportegymode";
+import {CsoportContainerMode} from '../csoportcontainermode';
+import {CsoportEgyMode} from '../csoportegymode';
 
 @Component({
   selector: 'app-csoport-egy',
   templateUrl: './csoport-egy.component.html',
   styleUrls: ['./csoport-egy.component.css']
 })
-export class CsoportEgyComponent {
+export class CsoportEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   csoportservice: CsoportService;
@@ -38,5 +38,11 @@ export class CsoportEgyComponent {
   }
   jog() {
     this.csoportservice.EgyMode = CsoportEgyMode.Jog;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
@@ -10,7 +10,7 @@ import {CsoportService} from '../../csoport/csoport.service';
   templateUrl: './bejelentkezes.component.html',
   styleUrls: ['./bejelentkezes.component.css']
 })
-export class BejelentkezesComponent implements OnInit {
+export class BejelentkezesComponent implements OnInit, OnDestroy {
   form: FormGroup;
 
   public eppFrissit = false;
@@ -79,5 +79,11 @@ export class BejelentkezesComponent implements OnInit {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

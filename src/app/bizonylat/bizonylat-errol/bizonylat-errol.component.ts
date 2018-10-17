@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {BizonylatTipus} from '../bizonylattipus';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatService} from '../bizonylat.service';
@@ -10,7 +10,7 @@ import {BizonylatMintaAlapjanParam} from '../bizonylatmintaalapjan';
   templateUrl: './bizonylat-errol.component.html',
   styleUrls: ['./bizonylat-errol.component.css']
 })
-export class BizonylatErrolComponent {
+export class BizonylatErrolComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   eppFrissit = false;
@@ -60,5 +60,11 @@ export class BizonylatErrolComponent {
   }
   navigal() {
     this._bizonylatservice.EgyMode = BizonylatEgyMode.Blank;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

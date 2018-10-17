@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {BizonylatAfaDto} from '../bizonylatafadto';
 
 @Component({
@@ -6,12 +6,18 @@ import {BizonylatAfaDto} from '../bizonylatafadto';
   templateUrl: './bizonylatafatabla.component.html',
   styleUrls: ['./bizonylatafatabla.component.css']
 })
-export class BizonylatafatablaComponent {
+export class BizonylatafatablaComponent implements OnDestroy {
   @Input() Dto: BizonylatAfaDto[] = new Array<BizonylatAfaDto>();
   @Input() enIdclick = true;
   @Output() idclick = new EventEmitter<number>();
 
   setClickedRow(i: number) {
     this.idclick.emit(i);
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

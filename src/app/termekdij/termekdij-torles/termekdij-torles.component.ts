@@ -1,15 +1,15 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {TermekdijService} from '../termekdij.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {TermekdijEgyMode} from "../termekdijegymode";
-import {TermekdijContainerMode} from "../termekdijcontainermode";
+import {TermekdijEgyMode} from '../termekdijegymode';
+import {TermekdijContainerMode} from '../termekdijcontainermode';
 
 @Component({
   selector: 'app-termekdij-torles',
   templateUrl: './termekdij-torles.component.html',
   styleUrls: ['./termekdij-torles.component.css']
 })
-export class TermekdijTorlesComponent {
+export class TermekdijTorlesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   termekdijservice: TermekdijService;
@@ -40,5 +40,10 @@ export class TermekdijTorlesComponent {
   }
   cancel() {
     this.termekdijservice.EgyMode = TermekdijEgyMode.Reszletek;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

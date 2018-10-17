@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
 
 declare let $: any;
 
@@ -7,7 +7,7 @@ declare let $: any;
   templateUrl: './projekttoolbar.component.html',
   styleUrls: ['./projekttoolbar.component.css'],
 })
-export class ProjektToolbarComponent implements AfterViewInit {
+export class ProjektToolbarComponent implements AfterViewInit, OnDestroy {
   @Input() Statuszszurok: string[] = [];
   @Input() Teendoszurok: string[] = [];
   @Input() Szurok: string[] = [];
@@ -84,5 +84,11 @@ export class ProjektToolbarComponent implements AfterViewInit {
 
   doExport() {
     this.Export.emit(this._statuszszempont);
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

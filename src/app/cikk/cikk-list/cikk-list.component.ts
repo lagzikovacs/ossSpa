@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {CikkService} from '../cikk.service';
 import {Szempont} from '../../enums/szempont';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
@@ -11,16 +11,16 @@ import {CikkEgyMode} from '../cikkegymode';
 import {ProjektkapcsolatService} from '../../projekt/bizonylatesirat/projektkapcsolat.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import {AjanlatSzerkesztesMode} from '../../projekt/ajanlat/ajanlatszerkesztesmode';
-import {BizonylatService} from "../../bizonylat/bizonylat.service";
-import {BizonylattetelSzerkesztesMode} from "../../bizonylat/bizonylattetelszerkesztesmode";
-import {AjanlatService} from "../../projekt/ajanlat/ajanlat.service";
+import {BizonylatService} from '../../bizonylat/bizonylat.service';
+import {BizonylattetelSzerkesztesMode} from '../../bizonylat/bizonylattetelszerkesztesmode';
+import {AjanlatService} from '../../projekt/ajanlat/ajanlat.service';
 
 @Component({
   selector: 'app-cikk-list',
   templateUrl: './cikk-list.component.html',
   styleUrls: ['./cikk-list.component.css']
 })
-export class CikkListComponent implements OnInit {
+export class CikkListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Megnevezés', 'Id'];
@@ -156,5 +156,10 @@ export class CikkListComponent implements OnInit {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

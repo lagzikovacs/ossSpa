@@ -1,4 +1,4 @@
-export enum FeliratkozasContainerMode {
+export enum UgynokContainerMode {
   Blank = 0,
   List = 1,
   Egy = 2,

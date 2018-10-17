@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {ProjektEgyMode} from '../projektegymode';
@@ -8,7 +8,7 @@ import {ProjektEgyMode} from '../projektegymode';
   templateUrl: './projekt-statusz.component.html',
   styleUrls: ['./projekt-statusz.component.css']
 })
-export class ProjektStatuszComponent implements OnInit {
+export class ProjektStatuszComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektservice: ProjektService;
@@ -62,5 +62,11 @@ export class ProjektStatuszComponent implements OnInit {
 
   navigal() {
     this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

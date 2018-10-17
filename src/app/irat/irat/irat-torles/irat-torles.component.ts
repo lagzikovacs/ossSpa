@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {IratService} from '../irat.service';
 import {IratContainerMode} from '../iratcontainermode';
@@ -9,7 +9,7 @@ import {IratEgyMode} from '../irategymode';
   templateUrl: './irat-torles.component.html',
   styleUrls: ['./irat-torles.component.css']
 })
-export class IratTorlesComponent {
+export class IratTorlesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   iratservice: IratService;
@@ -40,5 +40,11 @@ export class IratTorlesComponent {
   }
   cancel() {
     this.iratservice.EgyMode = IratEgyMode.Reszletek;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

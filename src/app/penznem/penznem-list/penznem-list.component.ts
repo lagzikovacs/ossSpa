@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {PenznemService} from '../penznem.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {PenztarService} from '../../penztar/penztar.service';
@@ -14,15 +14,15 @@ import {ProjektSzerkesztesMode} from '../../projekt/projekt/projektszerkesztesmo
 import {SzamlazasirendSzerkesztesMode} from '../../projekt/szamlazasirend/szamlazasirendszerkesztesmode';
 import {BizonylatkifizetesService} from '../../bizonylat/bizonylatkifizetes/bizonylatkifizetes.service';
 import {BizonylatKifizetesSzerkesztesMode} from '../../bizonylat/bizonylatkifizetes/bizonylatkifizetesszerkesztesmode';
-import {BizonylatService} from "../../bizonylat/bizonylat.service";
-import {BizonylatSzerkesztesMode} from "../../bizonylat/bizonylatszerkesztesmode";
+import {BizonylatService} from '../../bizonylat/bizonylat.service';
+import {BizonylatSzerkesztesMode} from '../../bizonylat/bizonylatszerkesztesmode';
 
 @Component({
   selector: 'app-penznem-list',
   templateUrl: './penznem-list.component.html',
   styleUrls: ['./penznem-list.component.css']
 })
-export class PenznemListComponent implements OnInit {
+export class PenznemListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Pénznem'];
@@ -149,8 +149,13 @@ export class PenznemListComponent implements OnInit {
         this.penznemservice.ContainerMode = PenznemContainerMode.Uj;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this.errormodal.show(err);
       });
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

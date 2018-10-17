@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {SzamlazasirendService} from '../szamlazasirend.service';
 import {LogonService} from '../../../logon/logon.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
@@ -10,7 +10,7 @@ import {SzamlazasirendEgyMode} from '../szamlazasirendegymode';
   templateUrl: './projekt-szamlazasirend-list.component.html',
   styleUrls: ['./projekt-szamlazasirend-list.component.css']
 })
-export class ProjektSzamlazasirendListComponent {
+export class ProjektSzamlazasirendListComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szamlazasirendservice: SzamlazasirendService;
@@ -57,5 +57,10 @@ export class ProjektSzamlazasirendListComponent {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

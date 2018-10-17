@@ -1,15 +1,15 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {VolumeService} from '../volume.service';
 import {VolumeContainerMode} from '../volumecontainermode';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {VolumeEgyMode} from "../volumeegymode";
+import {VolumeEgyMode} from '../volumeegymode';
 
 @Component({
   selector: 'app-volume-list',
   templateUrl: './volume-list.component.html',
   styleUrls: ['./volume-list.component.css']
 })
-export class VolumeListComponent implements OnInit {
+export class VolumeListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   eppFrissit = false;
@@ -61,5 +61,10 @@ export class VolumeListComponent implements OnInit {
     this.volumeservice.DtoSelectedIndex = i;
     this.volumeservice.ContainerMode = VolumeContainerMode.Egy;
     this.volumeservice.EgyMode = VolumeEgyMode.Reszletek;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

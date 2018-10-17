@@ -1,17 +1,16 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 import {DokumentumService} from '../dokumentum.service';
 import {DokumentumContainerMode} from '../dokumentumcontainermode';
-import {b64toBlob} from '../../../tools/b64toBlob';
 import {FajlBuf} from '../fajlbuf';
-import {ErrormodalComponent} from "../../../errormodal/errormodal.component";
-import {IratService} from "../../irat/irat.service";
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {IratService} from '../../irat/irat.service';
 
 @Component({
   selector: 'app-dokumentum-feltoltes',
   templateUrl: './dokumentum-feltoltes.component.html',
   styleUrls: ['./dokumentum-feltoltes.component.css']
 })
-export class DokumentumFeltoltesComponent {
+export class DokumentumFeltoltesComponent implements OnDestroy {
   @ViewChild('fileInput') fileInput: ElementRef;
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
@@ -73,5 +72,10 @@ export class DokumentumFeltoltesComponent {
   }
   navigal() {
     this.dokumentumservice.ContainerMode = DokumentumContainerMode.List;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

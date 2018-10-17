@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
 
 declare let $: any;
 
@@ -7,7 +7,7 @@ declare let $: any;
   templateUrl: './irattoolbar.component.html',
   styleUrls: ['./irattoolbar.component.css'],
 })
-export class IratToolbarComponent implements AfterViewInit {
+export class IratToolbarComponent implements AfterViewInit, OnDestroy {
   @Input() szurok: string[] = [];
   @Input() szurok2: string[] = [];
 
@@ -78,5 +78,11 @@ export class IratToolbarComponent implements AfterViewInit {
 
   doUj() {
     this.Uj.emit();
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

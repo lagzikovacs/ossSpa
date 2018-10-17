@@ -1,23 +1,23 @@
-import {Component, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from "../../../errormodal/errormodal.component";
-import {BizonylatkapcsolatService} from "../bizonylatkapcsolat.service";
-import {LogonService} from "../../../logon/logon.service";
-import {BizonylatKapcsolatContainerMode} from "../bizonylatkapcsolatcontainermode";
-import {BizonylatService} from "../../bizonylat.service";
-import {IratService} from "../../../irat/irat/irat.service";
-import {IratContainerMode} from "../../../irat/irat/iratcontainermode";
-import {IratEgyMode} from "../../../irat/irat/irategymode";
-import {DokumentumContainerMode} from "../../../irat/dokumentum/dokumentumcontainermode";
-import {DokumentumService} from "../../../irat/dokumentum/dokumentum.service";
-import {VagolapService} from "../../../vagolap/vagolap.service";
-import {VagolapMode} from "../../../vagolap/vagolapmode";
+import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
+import {LogonService} from '../../../logon/logon.service';
+import {BizonylatKapcsolatContainerMode} from '../bizonylatkapcsolatcontainermode';
+import {BizonylatService} from '../../bizonylat.service';
+import {IratService} from '../../../irat/irat/irat.service';
+import {IratContainerMode} from '../../../irat/irat/iratcontainermode';
+import {IratEgyMode} from '../../../irat/irat/irategymode';
+import {DokumentumContainerMode} from '../../../irat/dokumentum/dokumentumcontainermode';
+import {DokumentumService} from '../../../irat/dokumentum/dokumentum.service';
+import {VagolapService} from '../../../vagolap/vagolap.service';
+import {VagolapMode} from '../../../vagolap/vagolapmode';
 
 @Component({
   selector: 'app-bizonylat-irat-list',
   templateUrl: './bizonylat-irat-list.component.html',
   styleUrls: ['./bizonylat-irat-list.component.css']
 })
-export class BizonylatIratListComponent {
+export class BizonylatIratListComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatkapcsolatservice: BizonylatkapcsolatService;
@@ -79,5 +79,10 @@ export class BizonylatIratListComponent {
   vagolaprol() {
     this.bizonylatkapcsolatservice.ContainerMode = BizonylatKapcsolatContainerMode.Vagolap;
     this._vagolapservice.Mode = VagolapMode.Bizonylatirat;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

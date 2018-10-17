@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {ProjektDto} from '../projekt/projektdto';
 
 @Component({
@@ -6,7 +6,7 @@ import {ProjektDto} from '../projekt/projektdto';
   templateUrl: './projekt-tabla.component.html',
   styleUrls: ['./projekt-tabla.component.css']
 })
-export class ProjektTablaComponent {
+export class ProjektTablaComponent implements OnDestroy {
   @Input() Dto: ProjektDto[] = new Array<ProjektDto>();
   @Input() enIdclick = true;
   @Output() idclick = new EventEmitter<number>();
@@ -54,5 +54,11 @@ export class ProjektTablaComponent {
       default:
         return 'silver';
     }
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

@@ -1,15 +1,15 @@
-import {Component, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from "../../errormodal/errormodal.component";
-import {PenztarService} from "../penztar.service";
-import {PenztarContainerMode} from "../penztarcontainermode";
-import {PenztarEgyMode} from "../penztaregymode";
+import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {PenztarService} from '../penztar.service';
+import {PenztarContainerMode} from '../penztarcontainermode';
+import {PenztarEgyMode} from '../penztaregymode';
 
 @Component({
   selector: 'app-penztar-torles',
   templateUrl: './penztar-torles.component.html',
   styleUrls: ['./penztar-torles.component.css']
 })
-export class PenztarTorlesComponent {
+export class PenztarTorlesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   penztarservice: PenztarService;
@@ -40,5 +40,11 @@ export class PenztarTorlesComponent {
   }
   cancel() {
     this.penztarservice.EgyMode = PenztarEgyMode.Reszletek;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {HelysegService} from '../helyseg.service';
 import {LogonService} from '../../logon/logon.service';
@@ -11,7 +11,7 @@ import {HelysegEgyMode} from '../helysegegymode';
   templateUrl: './helyseg-egy.component.html',
   styleUrls: ['./helyseg-egy.component.css']
 })
-export class HelysegEgyComponent {
+export class HelysegEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   helysegservice: HelysegService;
@@ -37,5 +37,10 @@ export class HelysegEgyComponent {
     this.helysegservice.uj = false;
     this.helysegservice.DtoEdited = Object.assign({}, this.helysegservice.Dto[this.helysegservice.DtoSelectedIndex]);
     this.helysegservice.EgyMode = HelysegEgyMode.Modositas;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {TeendoService} from '../teendo.service';
 
 @Component({
@@ -6,10 +6,16 @@ import {TeendoService} from '../teendo.service';
   templateUrl: './teendo-reszletek.component.html',
   styleUrls: ['./teendo-reszletek.component.css']
 })
-export class TeendoReszletekComponent {
+export class TeendoReszletekComponent implements OnDestroy {
   teendoservice: TeendoService;
 
   constructor(teendoservice: TeendoService) {
     this.teendoservice = teendoservice;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

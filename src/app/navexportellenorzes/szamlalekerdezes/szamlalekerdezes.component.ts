@@ -1,13 +1,13 @@
-import {Component, ViewChild} from '@angular/core';
-import {NavexportellenorzesService} from "../navexportellenorzes.service";
-import {ErrormodalComponent} from "../../errormodal/errormodal.component";
+import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {NavexportellenorzesService} from '../navexportellenorzes.service';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-szamlalekerdezes',
   templateUrl: './szamlalekerdezes.component.html',
   styleUrls: ['./szamlalekerdezes.component.css']
 })
-export class SzamlalekerdezesComponent {
+export class SzamlalekerdezesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   eppFrissit = false;
@@ -35,5 +35,11 @@ export class SzamlalekerdezesComponent {
         this.eppFrissit = false;
         this.errormodal.show(err);
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {BizonylatkifizetesService} from '../bizonylatkifizetes.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {BizonylatService} from '../../bizonylat.service';
@@ -13,7 +13,7 @@ import * as moment from 'moment';
   templateUrl: './bizonylat-kifizetes-list.component.html',
   styleUrls: ['./bizonylat-kifizetes-list.component.css']
 })
-export class BizonylatKifizetesListComponent {
+export class BizonylatKifizetesListComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatkifizetesservice: BizonylatkifizetesService;
@@ -75,5 +75,11 @@ export class BizonylatKifizetesListComponent {
         this.eppFrissit = false;
         this.errormodal.show(err);
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

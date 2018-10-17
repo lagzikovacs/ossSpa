@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {TermekdijService} from '../termekdij.service';
 import {CikkService} from '../../cikk/cikk.service';
@@ -16,7 +16,7 @@ import {BizonylattetelSzerkesztesMode} from "../../bizonylat/bizonylattetelszerk
   templateUrl: './termekdij-list.component.html',
   styleUrls: ['./termekdij-list.component.css']
 })
-export class TermekdijListComponent implements OnInit {
+export class TermekdijListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['KT'];
@@ -126,5 +126,11 @@ export class TermekdijListComponent implements OnInit {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

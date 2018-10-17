@@ -19,10 +19,10 @@ import {VolumeDto} from '../volume/volumedto';
 import {CsoportDto} from '../csoport/csoportdto';
 import {ProjektService} from '../projekt/projekt/projekt.service';
 import {IratService} from '../irat/irat/irat.service';
-import {FeliratkozasService} from '../ugynok/ugynok.service';
+import {UgynokService} from '../ugynok/ugynok.service';
 import {IratDto} from '../irat/irat/iratdto';
 import {ProjektDto} from '../projekt/projekt/projektdto';
-import {FeliratkozasDto} from '../ugynok/ugynokdto';
+import {UgynokDto} from '../ugynok/ugynokdto';
 import {TeendoService} from '../teendo/teendo.service';
 import {TeendoDto} from '../teendo/teendodto';
 import {FizetesimodService} from '../fizetesimod/fizetesimod.service';
@@ -60,7 +60,7 @@ import {FizetesimodContainerMode} from '../fizetesimod/fizetesimodcontainermode'
 import {PenznemContainerMode} from '../penznem/penznemcontainermode';
 import {FelhasznaloContainerMode} from '../felhasznalo/felhasznalocontainermode';
 import {CsoportContainerMode} from '../csoport/csoportcontainermode';
-import {FeliratkozasContainerMode} from '../ugynok/ugynokcontainermode';
+import {UgynokContainerMode} from '../ugynok/ugynokcontainermode';
 import {PenztarContainerMode} from '../penztar/penztarcontainermode';
 import {IratContainerMode} from '../irat/irat/iratcontainermode';
 import {ProjektContainerMode} from '../projekt/projekt/projektcontainermode';
@@ -102,7 +102,7 @@ export class MenuService {
               private _iratservice: IratService,
               private _dokumentumservice: DokumentumService,
               private _penztarservice: PenztarService,
-              private _feliratkozasservice: FeliratkozasService,
+              private _feliratkozasservice: UgynokService,
               private _bizonylatservice: BizonylatService,
               private _particioservice: ParticioService,
               private _volumeservice: VolumeService,
@@ -208,8 +208,8 @@ export class MenuService {
         this._penztarservice.Dto = new Array<PenztarDto>();
         break;
       case '/feliratkozas':
-        this._feliratkozasservice.ContainerMode = FeliratkozasContainerMode.List;
-        this._feliratkozasservice.Dto = new Array<FeliratkozasDto>();
+        this._feliratkozasservice.ContainerMode = UgynokContainerMode.List;
+        this._feliratkozasservice.Dto = new Array<UgynokDto>();
       break;
 
 

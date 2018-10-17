@@ -3,39 +3,62 @@
     <tbody>
     <tr>
       <td class="egylabel">Id:</td>
-      <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].FELIRATKOZASKOD}}</td>
+      <td>{{ugynokservice.Dto[ugynokservice.DtoSelectedIndex].UGYNOKKOD}}</td>
     </tr>
     <tr>
-      <td class="egylabel">Lista:</td>
-      <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].LISTA}}</td>
+      <td class="egylabel">Az ügynök neve:</td>
+      <td>{{ugynokservice.Dto[ugynokservice.DtoSelectedIndex].UGYNOKNEV}}</td>
     </tr>
     <tr>
       <td class="egylabel">Név:</td>
-      <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].NEV}}</td>
+      <td>{{ugynokservice.Dto[ugynokservice.DtoSelectedIndex].NEV}}</td>
     </tr>
     <tr>
       <td class="egylabel">Cím:</td>
-      <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].TELEPULES}}</td>
+      <td>{{ugynokservice.Dto[ugynokservice.DtoSelectedIndex].CIM}}</td>
     </tr>
     <tr>
       <td class="egylabel">Email:</td>
-      <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].EMAIL}}</td>
+      <td>{{ugynokservice.Dto[ugynokservice.DtoSelectedIndex].EMAIL}}</td>
     </tr>
     <tr>
       <td class="egylabel">Telefonszám:</td>
-      <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].TELEFONSZAM}}</td>
+      <td>{{ugynokservice.Dto[ugynokservice.DtoSelectedIndex].TELEFONSZAM}}</td>
+    </tr>
+
+    <tr>
+      <td class="egylabel">Havi fogyasztás, kWh:</td>
+      <td>{{ugynokservice.Dto[ugynokservice.DtoSelectedIndex].HAVIFOGYASZTASKWH}}</td>
     </tr>
     <tr>
+      <td class="egylabel">Havi számla, Ft:</td>
+      <td>{{ugynokservice.Dto[ugynokservice.DtoSelectedIndex].HAVISZAMLAFT}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Napelemek teljesítménye, kW:</td>
+      <td>{{ugynokservice.Dto[ugynokservice.DtoSelectedIndex].NAPELEMEKTELJESITMENYEKW}}</td>
+    </tr>
+
+
+    <tr>
       <td class="egylabel">Megjegyzés:</td>
-      <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].MEGJEGYZES}}</td>
+      <td>{{ugynokservice.Dto[ugynokservice.DtoSelectedIndex].MEGJEGYZES}}</td>
     </tr>
     <tr>
       <td class="egylabel">Létrehozta:</td>
-      <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].LETREHOZTA}}</td>
+      <td>{{ugynokservice.Dto[ugynokservice.DtoSelectedIndex].LETREHOZTA}}</td>
     </tr>
     <tr>
       <td class="egylabel">Létrehozva:</td>
-      <td *ngIf="feliratkozasservice.DtoSelectedIndex !== -1">{{feliratkozasservice.Dto[feliratkozasservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
+      <td>{{ugynokservice.Dto[ugynokservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosította:</td>
+      <td>{{ugynokservice.Dto[ugynokservice.DtoSelectedIndex].MODOSITOTTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosítva:</td>
+      <td>{{ugynokservice.Dto[ugynokservice.DtoSelectedIndex].MODOSITVA | datetimehun}}</td>
     </tr>
     </tbody>
   </table>

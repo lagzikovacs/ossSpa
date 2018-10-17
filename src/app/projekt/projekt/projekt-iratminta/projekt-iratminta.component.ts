@@ -1,16 +1,16 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {b64toBlob} from '../../../tools/b64toBlob';
 import * as FileSaver from 'file-saver';
-import {IratmintaService} from "./iratminta.service";
+import {IratmintaService} from './iratminta.service';
 
 @Component({
   selector: 'app-projekt-iratminta',
   templateUrl: './projekt-iratminta.component.html',
   styleUrls: ['./projekt-iratminta.component.css']
 })
-export class ProjektIratmintaComponent {
+export class ProjektIratmintaComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   eppFrissit = false;
@@ -139,5 +139,10 @@ export class ProjektIratmintaComponent {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {ProjektService} from '../projekt.service';
 import {UgyfelService} from '../../../ugyfel/ugyfel.service';
@@ -17,7 +17,7 @@ import {PenznemZoomParameter} from '../../../penznem/penznemzoomparameter';
   templateUrl: './projekt-szerkesztes.component.html',
   styleUrls: ['./projekt-szerkesztes.component.css']
 })
-export class ProjektSzerkesztesComponent implements OnInit {
+export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektservice: ProjektService;
@@ -109,5 +109,11 @@ export class ProjektSzerkesztesComponent implements OnInit {
     this._penznemservice.ContainerMode = PenznemContainerMode.List;
 
     this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.PenznemZoom;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

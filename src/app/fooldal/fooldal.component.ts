@@ -59,5 +59,9 @@ export class FooldalComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

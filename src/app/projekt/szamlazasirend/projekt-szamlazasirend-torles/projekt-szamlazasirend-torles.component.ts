@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {SzamlazasirendService} from '../szamlazasirend.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {SzamlazasirendContainerMode} from '../szamlazasirendcontainermode';
@@ -9,7 +9,7 @@ import {SzamlazasirendEgyMode} from '../szamlazasirendegymode';
   templateUrl: './projekt-szamlazasirend-torles.component.html',
   styleUrls: ['./projekt-szamlazasirend-torles.component.css']
 })
-export class ProjektSzamlazasirendTorlesComponent {
+export class ProjektSzamlazasirendTorlesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szamlazasirendservice: SzamlazasirendService;
@@ -41,5 +41,11 @@ export class ProjektSzamlazasirendTorlesComponent {
 
   cancel() {
     this.szamlazasirendservice.EgyMode = SzamlazasirendEgyMode.Reszletek;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

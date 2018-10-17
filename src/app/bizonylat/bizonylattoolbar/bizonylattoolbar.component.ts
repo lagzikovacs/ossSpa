@@ -1,11 +1,11 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-bizonylattoolbar',
   templateUrl: './bizonylattoolbar.component.html',
   styleUrls: ['./bizonylattoolbar.component.css']
 })
-export class BizonylattoolbarComponent implements AfterViewInit {
+export class BizonylattoolbarComponent implements AfterViewInit, OnDestroy {
   @Input() Megrendeles = false;
 
   @Input() MegrendelesSzurok: string[] = [];
@@ -68,5 +68,11 @@ export class BizonylattoolbarComponent implements AfterViewInit {
 
   doUj() {
     this.Uj.emit();
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

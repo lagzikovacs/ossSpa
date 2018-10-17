@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {PenznemService} from '../penznem.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {PenznemContainerMode} from '../penznemcontainermode';
@@ -9,7 +9,7 @@ import {PenznemEgyMode} from '../penznemegymode';
   templateUrl: './penznem-torles.component.html',
   styleUrls: ['./penznem-torles.component.css']
 })
-export class PenznemTorlesComponent {
+export class PenznemTorlesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   penznemservice: PenznemService;
@@ -40,5 +40,10 @@ export class PenznemTorlesComponent {
   }
   cancel() {
     this.penznemservice.EgyMode = PenznemEgyMode.Reszletek;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

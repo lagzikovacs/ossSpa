@@ -106,6 +106,10 @@ export class ProjektExportComponent implements OnDestroy {
   }
   ngOnDestroy() {
     clearInterval(this.szamlalo);
+
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
   vissza() {
     this.projektservice.ContainerMode = ProjektContainerMode.List;

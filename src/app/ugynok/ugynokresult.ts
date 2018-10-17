@@ -1,7 +1,7 @@
-import {FeliratkozasDto} from './ugynokdto';
+import {UgynokDto} from './ugynokdto';
 
-export class FeliratkozasResult {
+export class UgynokResult {
   Error: string;
-  Result: FeliratkozasDto[];
+  Result: UgynokDto[];
   OsszesRekord: number;
 }

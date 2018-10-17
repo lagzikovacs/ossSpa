@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {FeliratkozasService} from '../ugynok.service';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {UgynokService} from '../ugynok.service';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import {ProjektService} from '../../projekt/projekt/projekt.service';
@@ -11,14 +11,14 @@ import {ProjektDto} from '../../projekt/projekt/projektdto';
   templateUrl: './ugynok-projekt.component.html',
   styleUrls: ['./ugynok-projekt.component.css']
 })
-export class FeliratkozasProjektComponent implements OnInit {
+export class FeliratkozasProjektComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
-  feliratkozasservice: FeliratkozasService;
+  feliratkozasservice: UgynokService;
   projektservice: ProjektService;
   eppFrissit = false;
 
-  constructor(feliratkozasservice: FeliratkozasService,
+  constructor(feliratkozasservice: UgynokService,
               projektservice: ProjektService) {
     this.feliratkozasservice = feliratkozasservice;
     this.projektservice = projektservice;
@@ -45,5 +45,11 @@ export class FeliratkozasProjektComponent implements OnInit {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

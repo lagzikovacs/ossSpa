@@ -1,5 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {HttpErrorResponse} from '@angular/common/http';
+import {Component, Input, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
 
 declare let $: any;
@@ -9,7 +8,7 @@ declare let $: any;
   templateUrl: './errormodal.component.html',
   styleUrls: ['./errormodal.component.css']
 })
-export class ErrormodalComponent {
+export class ErrormodalComponent implements OnDestroy {
   // egyedi azonosításhoz, h a jquery ezt a példányt találja meg
   idrandom = Math.floor((Math.random() * 1000000) + 1).toString();
 
@@ -36,5 +35,10 @@ export class ErrormodalComponent {
     if (this.hiba.indexOf('Ismeretlen Sid') !== -1) {
       this._router.navigate(['/bejelentkezes']);
     }
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

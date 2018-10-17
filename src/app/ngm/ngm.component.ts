@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {NgmService} from './ngm.service';
 import {ErrormodalComponent} from '../errormodal/errormodal.component';
 import {NGMParam} from './ngmparam';
@@ -10,7 +10,7 @@ import {NGMMode} from './ngmmode';
   templateUrl: './ngm.component.html',
   styleUrls: ['./ngm.component.css']
 })
-export class NgmComponent {
+export class NgmComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   ngmservice: NgmService;
@@ -66,5 +66,11 @@ export class NgmComponent {
         this.eppFrissit = false;
         this.errormodal.show(err);
       });
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

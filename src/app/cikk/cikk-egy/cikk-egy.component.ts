@@ -1,19 +1,19 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {CikkService} from '../cikk.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {CikkMozgasParameter} from '../cikkmozgasparameter';
-import {CikkContainerMode} from "../cikkcontainermode";
-import {CikkEgyMode} from "../cikkegymode";
-import {CikkSzerkesztesMode} from "../cikkszerkesztesmode";
+import {CikkContainerMode} from '../cikkcontainermode';
+import {CikkEgyMode} from '../cikkegymode';
+import {CikkSzerkesztesMode} from '../cikkszerkesztesmode';
 
 @Component({
   selector: 'app-cikk-egy',
   templateUrl: './cikk-egy.component.html',
   styleUrls: ['./cikk-egy.component.css']
 })
-export class CikkEgyComponent {
+export class CikkEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   cikkservice: CikkService;
@@ -67,5 +67,10 @@ export class CikkEgyComponent {
         this.errormodal.show(err);
         this.eppFrissit = false;
       });
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

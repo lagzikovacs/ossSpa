@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {LogonService} from '../../../logon/logon.service';
 import {ProjektteendoService} from '../projektteendo.service';
@@ -10,7 +10,7 @@ import {ProjektteendoEgyMode} from '../projekttendoegymode';
   templateUrl: './projekt-teendo-egy.component.html',
   styleUrls: ['./projekt-teendo-egy.component.css']
 })
-export class ProjektTeendoEgyComponent {
+export class ProjektTeendoEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektteendoservice: ProjektteendoService;
@@ -39,5 +39,11 @@ export class ProjektTeendoEgyComponent {
     this.projektteendoservice.uj = false;
     this.projektteendoservice.DtoEdited = Object.assign({}, this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex]);
     this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Elvegezve;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

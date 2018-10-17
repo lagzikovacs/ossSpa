@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {FelhasznaloService} from '../felhasznalo.service';
 import {NumberResult} from '../../dtos/numberresult';
@@ -10,7 +10,7 @@ import {FelhasznaloEgyMode} from '../felhasznaloegymode';
   templateUrl: './felhasznalo-szerkesztes.component.html',
   styleUrls: ['./felhasznalo-szerkesztes.component.css']
 })
-export class FelhasznaloSzerkesztesComponent {
+export class FelhasznaloSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   felhasznaloservice: FelhasznaloService;
@@ -66,5 +66,10 @@ export class FelhasznaloSzerkesztesComponent {
     } else {
       this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Reszletek;
     }
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

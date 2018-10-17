@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {IratService} from '../irat.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {IratContainerMode} from '../iratcontainermode';
@@ -7,20 +7,19 @@ import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {DokumentumContainerMode} from '../../dokumentum/dokumentumcontainermode';
 import {ProjektkapcsolatService} from '../../../projekt/bizonylatesirat/projektkapcsolat.service';
 import {BizonylatesIratContainerMode} from '../../../projekt/bizonylatesirat/bizonylatesiratcontainermode';
-import {ProjektService} from "../../../projekt/projekt/projekt.service";
-import {ProjektResult} from "../../../projekt/projekt/projektresult";
-import {BizonylatkapcsolatService} from "../../../bizonylat/bizonylatirat/bizonylatkapcsolat.service";
-import {BizonylatKapcsolatContainerMode} from "../../../bizonylat/bizonylatirat/bizonylatkapcsolatcontainermode";
-import {VagolapService} from "../../../vagolap/vagolap.service";
-import {VagolapMode} from "../../../vagolap/vagolapmode";
-import {AbuComponent} from "../../../tools/abu/abu.component";
+import {ProjektService} from '../../../projekt/projekt/projekt.service';
+import {ProjektResult} from '../../../projekt/projekt/projektresult';
+import {BizonylatkapcsolatService} from '../../../bizonylat/bizonylatirat/bizonylatkapcsolat.service';
+import {BizonylatKapcsolatContainerMode} from '../../../bizonylat/bizonylatirat/bizonylatkapcsolatcontainermode';
+import {VagolapService} from '../../../vagolap/vagolap.service';
+import {AbuComponent} from '../../../tools/abu/abu.component';
 
 @Component({
   selector: 'app-irat-egy',
   templateUrl: './irat-egy.component.html',
   styleUrls: ['./irat-egy.component.css']
 })
-export class IratEgyComponent {
+export class IratEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
   @ViewChild(AbuComponent) abu: AbuComponent;
 
@@ -97,5 +96,11 @@ export class IratEgyComponent {
   vagolap() {
     this._vagolapservice.iratotvagolapra();
     this.abu.Uzenet('Az irat a vágólapra került!');
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

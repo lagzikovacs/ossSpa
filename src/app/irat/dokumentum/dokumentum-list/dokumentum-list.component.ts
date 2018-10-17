@@ -1,20 +1,17 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {DokumentumService} from '../dokumentum.service';
 import {IratService} from '../../irat/irat.service';
 import {DokumentumDto} from '../dokumentumdto';
 import {DokumentumContainerMode} from '../dokumentumcontainermode';
 import {DokumentumEgyMode} from '../dokumentumegymode';
-import {LetoltesParam} from '../letoltesparam';
-import * as FileSaver from 'file-saver';
-import {b64toBlob} from '../../../tools/b64toBlob';
 
 @Component({
   selector: 'app-dokumentum-list',
   templateUrl: './dokumentum-list.component.html',
   styleUrls: ['./dokumentum-list.component.css']
 })
-export class DokumentumListComponent implements OnInit {
+export class DokumentumListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   dokumentumservice: DokumentumService;
@@ -68,4 +65,11 @@ export class DokumentumListComponent implements OnInit {
     this.dokumentumservice.uj = true;
     this.dokumentumservice.ContainerMode = DokumentumContainerMode.Feltoltes;
   }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
+  }
+
 }

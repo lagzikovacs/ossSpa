@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {IratService} from '../irat.service';
 import {IrattipusService} from '../../../irattipus/irattipus.service';
@@ -13,14 +13,14 @@ import {IratSzerkesztesMode} from '../iratszerkesztesmode';
 import {IratEgyMode} from '../irategymode';
 import {IrattipusZoomParameter} from '../../../irattipus/irattipuszoomparameter';
 import {EmptyResult} from '../../../dtos/emptyresult';
-import {UgyfelZoomParameter} from "../../../ugyfel/ugyfelzoomparameter";
+import {UgyfelZoomParameter} from '../../../ugyfel/ugyfelzoomparameter';
 
 @Component({
   selector: 'app-irat-szerkesztes',
   templateUrl: './irat-szerkesztes.component.html',
   styleUrls: ['./irat-szerkesztes.component.css']
 })
-export class IratSzerkesztesComponent implements OnInit {
+export class IratSzerkesztesComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   iratservice: IratService;
@@ -128,5 +128,10 @@ export class IratSzerkesztesComponent implements OnInit {
     this.iratservice.DtoEdited.UGYFELKOD = null;
     this.iratservice.DtoEdited.UGYFELNEV = null;
     this.iratservice.DtoEdited.UGYFELCIM = null;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

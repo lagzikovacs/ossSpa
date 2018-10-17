@@ -1,21 +1,21 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {FizetesimodService} from '../fizetesimod.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {FizetesimodContainerMode} from "../fizetesimodcontainermode";
-import {FizetesimodEgyMode} from "../fizetesimodegymode";
+import {FizetesimodContainerMode} from '../fizetesimodcontainermode';
+import {FizetesimodEgyMode} from '../fizetesimodegymode';
 
 @Component({
   selector: 'app-fizetesimod-torles',
   templateUrl: './fizetesimod-torles.component.html',
   styleUrls: ['./fizetesimod-torles.component.css']
 })
-export class FizetesimodTorlesComponent {
+export class FizetesimodTorlesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   fizetesimodservice: FizetesimodService;
   eppFrissit = false;
 
-  constructor(fizetesimodservice: FizetesimodService) {
+  constructor(fizetesimodservice: FizetesimodService)  {
     this.fizetesimodservice = fizetesimodservice;
   }
 
@@ -40,5 +40,10 @@ export class FizetesimodTorlesComponent {
   }
   cancel() {
     this.fizetesimodservice.EgyMode = FizetesimodEgyMode.Reszletek;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

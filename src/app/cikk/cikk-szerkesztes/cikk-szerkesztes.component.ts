@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {CikkService} from '../cikk.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {MeService} from '../../me/me.service';
@@ -21,7 +21,7 @@ import {TermekdijContainerMode} from '../../termekdij/termekdijcontainermode';
   templateUrl: './cikk-szerkesztes.component.html',
   styleUrls: ['./cikk-szerkesztes.component.css']
 })
-export class CikkSzerkesztesComponent {
+export class CikkSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   cikkservice: CikkService;
@@ -130,5 +130,10 @@ export class CikkSzerkesztesComponent {
     this._termekdijservice.ContainerMode = TermekdijContainerMode.List;
 
     this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.TermekdijZoom;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

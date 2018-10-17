@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {AfakulcsService} from '../afakulcs.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {NumberResult} from '../../dtos/numberresult';
@@ -10,7 +10,7 @@ import {AfakulcsEgyMode} from '../afakulcsegymode';
   templateUrl: './afakulcs-szerkesztes.component.html',
   styleUrls: ['./afakulcs-szerkesztes.component.css']
 })
-export class AfakulcsSzerkesztesComponent {
+export class AfakulcsSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   afakulcsservice: AfakulcsService;
@@ -66,5 +66,11 @@ export class AfakulcsSzerkesztesComponent {
     } else {
       this.afakulcsservice.EgyMode = AfakulcsEgyMode.Reszletek;
     }
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

@@ -1,15 +1,15 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {BizonylatContainerMode} from "../bizonylatcontainermode";
-import {BizonylatEgyMode} from "../bizonylategymode";
+import {BizonylatContainerMode} from '../bizonylatcontainermode';
+import {BizonylatEgyMode} from '../bizonylategymode';
 
 @Component({
   selector: 'app-bizonylat-torles',
   templateUrl: './bizonylat-torles.component.html',
   styleUrls: ['./bizonylat-torles.component.css']
 })
-export class BizonylatTorlesComponent {
+export class BizonylatTorlesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatservice: BizonylatService;
@@ -40,5 +40,10 @@ export class BizonylatTorlesComponent {
   }
   cancel() {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

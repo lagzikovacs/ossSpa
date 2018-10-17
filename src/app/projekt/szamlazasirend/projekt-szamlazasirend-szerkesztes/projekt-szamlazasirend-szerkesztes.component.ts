@@ -1,21 +1,21 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {SzamlazasirendService} from '../szamlazasirend.service';
 import {PenznemService} from '../../../penznem/penznem.service';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {PenznemZoomParameter} from '../../../penznem/penznemzoomparameter';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {ProjektService} from '../../projekt/projekt.service';
-import {SzamlazasirendEgyMode} from "../szamlazasirendegymode";
-import {SzamlazasirendContainerMode} from "../szamlazasirendcontainermode";
-import {PenznemContainerMode} from "../../../penznem/penznemcontainermode";
-import {SzamlazasirendSzerkesztesMode} from "../szamlazasirendszerkesztesmode";
+import {SzamlazasirendEgyMode} from '../szamlazasirendegymode';
+import {SzamlazasirendContainerMode} from '../szamlazasirendcontainermode';
+import {PenznemContainerMode} from '../../../penznem/penznemcontainermode';
+import {SzamlazasirendSzerkesztesMode} from '../szamlazasirendszerkesztesmode';
 
 @Component({
   selector: 'app-projekt-szamlazasirend-szerkesztes',
   templateUrl: './projekt-szamlazasirend-szerkesztes.component.html',
   styleUrls: ['./projekt-szamlazasirend-szerkesztes.component.css']
 })
-export class ProjektSzamlazasirendSzerkesztesComponent implements OnInit {
+export class ProjektSzamlazasirendSzerkesztesComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szamlazasirendservice: SzamlazasirendService;
@@ -90,5 +90,11 @@ export class ProjektSzamlazasirendSzerkesztesComponent implements OnInit {
     this._penznemservice.ContainerMode = PenznemContainerMode.List;
 
     this.szamlazasirendservice.SzerkesztesMode = SzamlazasirendSzerkesztesMode.PenznemZoom;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {UgyfelService} from '../ugyfel.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {UgyfelContainerMode} from '../ugyfelcontainermode';
@@ -9,7 +9,7 @@ import {UgyfelEgyMode} from '../ugyfelegymode';
   templateUrl: './ugyfel-torles.component.html',
   styleUrls: ['./ugyfel-torles.component.css']
 })
-export class UgyfelTorlesComponent {
+export class UgyfelTorlesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   ugyfelservice: UgyfelService;
@@ -40,5 +40,10 @@ export class UgyfelTorlesComponent {
   }
   cancel() {
     this.ugyfelservice.EgyMode = UgyfelEgyMode.Reszletek;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

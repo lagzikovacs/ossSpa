@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {IrattipusService} from '../irattipus.service';
 
 @Component({
@@ -6,10 +6,16 @@ import {IrattipusService} from '../irattipus.service';
   templateUrl: './irattipus-reszletek.component.html',
   styleUrls: ['./irattipus-reszletek.component.css']
 })
-export class IrattipusReszletekComponent {
+export class IrattipusReszletekComponent implements OnDestroy {
   irattipusservice: IrattipusService;
 
   constructor(irattipusservice: IrattipusService) {
     this.irattipusservice = irattipusservice;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

@@ -1,47 +1,50 @@
 <div class="alapkeret">
-  <h5>{{feliratkozasservice.cim}}</h5>
+  <h5>{{ugynokservice.cim}}</h5>
   <app-toolbar [Szurok]="szurok"
-               [(szempont)]="feliratkozasservice.szempont"
-               [(minta)]="feliratkozasservice.minta"
+               [(szempont)]="ugynokservice.szempont"
+               [(minta)]="ugynokservice.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [visUj]="false">
+               [visUj]="true" (Uj)="uj()">
   </app-toolbar>
   <table class="table table-bordered table-sm table-responsive" style="border: none">
     <thead>
     <tr>
       <th>Id</th>
-      <th>Lista</th>
+      <th>Ügynöknév</th>
       <th>Név</th>
       <th>Cím</th>
       <th>Email</th>
       <th>Telefonszam</th>
-      <th>Megjegyzés</th>
-      <th>Létrehozta</th>
-      <th>Létrehozva</th>
+      <th>Havi fogyasztás, kWh</th>
+      <th>Havi számla, Ft</th>
+      <th>Napelemek teljesítménye, kW</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let item of feliratkozasservice.Dto; let i = index">
-      <td style="text-align: right;color: blue;text-decoration: underline;cursor: pointer"
-          (click)="setClickedRow(i)">{{item.FELIRATKOZASKOD}}
-      </td>
-      <td>{{item.LISTA}}</td>
-      <td>{{item.NEV}}</td>
-      <td>{{item.TELEPULES}}</td>
-      <td>{{item.EMAIL}}</td>
-      <td>{{item.TELEFONSZAM}}</td>
-      <td>{{item.MEGJEGYZES}}</td>
-      <td>{{item.LETREHOZTA}}</td>
-      <td>{{item.LETREHOZVA | datetimehun}}</td>
-    </tr>
+      <ng-container *ngFor="let item of ugynokservice.Dto; let i = index">
+        <tr>
+          <td style="text-align: right;color: blue;text-decoration: underline;cursor: pointer" (click)="setClickedRow(i)">{{item.UGYNOKKOD}}</td>
+          <td>{{item.UGYNOKNEV}}</td>
+          <td>{{item.NEV}}</td>
+          <td>{{item.CIM}}</td>
+          <td>{{item.EMAIL}}</td>
+          <td>{{item.TELEFONSZAM}}</td>
+          <td style="text-align: right">{{item.HAVIFOGYASZTASKWH | number: '1.2-2'}}</td>
+          <td style="text-align: right">{{item.HAVISZAMLAFT | number: '1.2-2'}}</td>
+          <td style="text-align: right">{{item.NAPELEMEKTELJESITMENYEKW | number: '1.2-2'}}</td>
+        </tr>
+        <tr *ngIf="item.MEGJEGYZES || '' !== ''">
+          <td colspan="9">{{item.MEGJEGYZES}}</td>
+        </tr>
+      </ng-container>
     </tbody>
   </table>
-  <app-toolbarfooter [enKereses]="!feliratkozasservice.elsokereses && !eppFrissit"
-                     [rekordszam]="feliratkozasservice.Dto.length"
-                     [osszesrekord]="feliratkozasservice.OsszesRekord"
+  <app-toolbarfooter [enKereses]="!ugynokservice.elsokereses && !eppFrissit"
+                     [rekordszam]="ugynokservice.Dto.length"
+                     [osszesrekord]="ugynokservice.OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">
   </app-toolbarfooter>
-  <app-errormodal [cim]="feliratkozasservice.cim"></app-errormodal>
+  <app-errormodal [cim]="ugynokservice.cim"></app-errormodal>
 </div>
 <app-spinner *ngIf="eppFrissit"></app-spinner>
 

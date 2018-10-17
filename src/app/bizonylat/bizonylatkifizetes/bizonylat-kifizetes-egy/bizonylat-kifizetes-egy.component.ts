@@ -1,15 +1,15 @@
-import {Component, ViewChild} from '@angular/core';
-import {BizonylatkifizetesService} from "../bizonylatkifizetes.service";
-import {ErrormodalComponent} from "../../../errormodal/errormodal.component";
-import {BizonylatKifizetesContainerMode} from "../bizonylatkifizetescontainermode";
-import {BizonylatKifizetesEgyMode} from "../bizonylatkifizetesegymode";
+import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {BizonylatkifizetesService} from '../bizonylatkifizetes.service';
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {BizonylatKifizetesContainerMode} from '../bizonylatkifizetescontainermode';
+import {BizonylatKifizetesEgyMode} from '../bizonylatkifizetesegymode';
 
 @Component({
   selector: 'app-bizonylat-kifizetes-egy',
   templateUrl: './bizonylat-kifizetes-egy.component.html',
   styleUrls: ['./bizonylat-kifizetes-egy.component.css']
 })
-export class BizonylatKifizetesEgyComponent {
+export class BizonylatKifizetesEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatkifizetesservice: BizonylatkifizetesService;
@@ -30,7 +30,14 @@ export class BizonylatKifizetesEgyComponent {
   }
   modositas() {
     this.bizonylatkifizetesservice.uj = false;
-    this.bizonylatkifizetesservice.DtoEdited = Object.assign({}, this.bizonylatkifizetesservice.Dto[this.bizonylatkifizetesservice.DtoSelectedIndex]);
+    this.bizonylatkifizetesservice.DtoEdited =
+      Object.assign({}, this.bizonylatkifizetesservice.Dto[this.bizonylatkifizetesservice.DtoSelectedIndex]);
     this.bizonylatkifizetesservice.EgyMode = BizonylatKifizetesEgyMode.Modositas;
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

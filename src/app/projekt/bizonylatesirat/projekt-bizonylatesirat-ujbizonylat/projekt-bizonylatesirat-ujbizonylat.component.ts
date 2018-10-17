@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {LogonService} from '../../../logon/logon.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
@@ -13,7 +13,7 @@ import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
   templateUrl: './projekt-bizonylatesirat-ujbizonylat.component.html',
   styleUrls: ['./projekt-bizonylatesirat-ujbizonylat.component.css']
 })
-export class ProjektBizonylatesiratUjbizonylatComponent {
+export class ProjektBizonylatesiratUjbizonylatComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektkapcsolatservice: ProjektkapcsolatService;
@@ -102,5 +102,10 @@ export class ProjektBizonylatesiratUjbizonylatComponent {
   }
   navigal() {
     this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
+  }
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

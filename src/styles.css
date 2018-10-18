@@ -33,9 +33,16 @@ html, body {
   margin-bottom: 5px;
 }
 
-.editform-title {
-  text-align: right;
-  padding-right: 10px;
+@media(max-width:963px) {
+  .editform-title {
+    text-align: left;
+  }
+}
+@media(min-width:964px) {
+  .editform-title {
+    text-align: right;
+    padding-right: 10px;
+  }
 }
 
 .navgomb {

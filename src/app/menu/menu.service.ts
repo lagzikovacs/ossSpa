@@ -102,7 +102,7 @@ export class MenuService {
               private _iratservice: IratService,
               private _dokumentumservice: DokumentumService,
               private _penztarservice: PenztarService,
-              private _feliratkozasservice: UgynokService,
+              private _ugynokservice: UgynokService,
               private _bizonylatservice: BizonylatService,
               private _particioservice: ParticioService,
               private _volumeservice: VolumeService,
@@ -207,9 +207,9 @@ export class MenuService {
         this._penztarservice.ekDto.minta = '';
         this._penztarservice.Dto = new Array<PenztarDto>();
         break;
-      case '/feliratkozas':
-        this._feliratkozasservice.ContainerMode = UgynokContainerMode.List;
-        this._feliratkozasservice.Dto = new Array<UgynokDto>();
+      case '/ugynok':
+        this._ugynokservice.ContainerMode = UgynokContainerMode.List;
+        this._ugynokservice.Dto = new Array<UgynokDto>();
       break;
 
 

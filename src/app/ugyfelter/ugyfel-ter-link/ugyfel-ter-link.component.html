@@ -1,14 +1,15 @@
 <div class="alapkeret">
   <h5>Ügyféltér link</h5>
   <ng-container *ngIf="kikuldesikodidopontja !== ''">
-    <p>Korábban már készült ügyféltér link ({{kikuldesikodidopontja}}), annak az érvényessége megszűnik!</p>
+    <p>Korábban már készült ügyféltér link ({{kikuldesikodidopontja}})!</p>
+    <div class="form-group">
+      <textarea class="form-control" rows="3" id="regilink" readonly="true" [(ngModel)]="link"></textarea>
+    </div>
   </ng-container>
   <button [disabled]="eppFrissit" (click)="ugyfelterlink()" class="btn btn-sm btn-outline-primary navgomb">
-    Ügyféltér link
+    Új ügyféltér link
   </button>
-  <div class="form-group">
-    <textarea class="form-control" rows="3" id="link" [(ngModel)]="link"></textarea>
-  </div>
+  <p *ngIf="kikuldesikodidopontja !== ''">Ha új linket készít, a régi érvényessége megszűnik!</p>
   <app-errormodal [cim]="'Ügyféltér link'"></app-errormodal>
 </div>
 <app-spinner *ngIf="eppFrissit"></app-spinner>

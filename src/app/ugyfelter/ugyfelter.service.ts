@@ -15,8 +15,18 @@ export class UgyfelterService {
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
 
-  public UgyfelterLink(dto: UgyfelDto): Promise<StringResult> {
-    const url = environment.BaseHref + this._controller + 'ugyfelterlink';
+  public CreateNewLink(dto: UgyfelDto): Promise<StringResult> {
+    const url = environment.BaseHref + this._controller + 'createnewlink';
+    const body = dto;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<StringResult>(url, body, options).toPromise();
+  }
+  public GetLink(dto: UgyfelDto): Promise<StringResult> {
+    const url = environment.BaseHref + this._controller + 'getlink';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

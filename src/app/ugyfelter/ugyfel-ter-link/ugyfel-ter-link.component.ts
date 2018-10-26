@@ -20,21 +20,34 @@ export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
               private _ugyfelterservice: UgyfelterService) { }
 
   ngOnInit() {
-    this.idopont();
-  }
-
-  idopont() {
     if (this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex].KIKULDESIKODIDOPONTJA !== null) {
-      this.kikuldesikodidopontja =
-        moment(this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex].KIKULDESIKODIDOPONTJA).format('YYYY-MM-DD HH:MM:SS');
+      this.kikuldesidopontja();
+      this._ugyfelterservice.GetLink(this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error !== null) {
+            throw res.Error;
+          }
+
+          this.link = res.Result;
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this.errormodal.show(err);
+        });
     } else {
       this.kikuldesikodidopontja = '';
+      this.link = '';
     }
+  }
+
+  kikuldesidopontja() {
+    this.kikuldesikodidopontja =
+      moment(this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex].KIKULDESIKODIDOPONTJA).format('YYYY-MM-DD HH:mm:ss');
   }
 
   ugyfelterlink() {
     this.eppFrissit = true;
-    this._ugyfelterservice.UgyfelterLink(this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex])
+    this._ugyfelterservice.CreateNewLink(this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex])
       .then(res => {
         if (res.Error !== null) {
           throw res.Error;
@@ -49,7 +62,7 @@ export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
         }
 
         this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex] = res1.Result[0];
-        this.idopont();
+        this.kikuldesidopontja();
         this.eppFrissit = false;
       })
       .catch(err => {

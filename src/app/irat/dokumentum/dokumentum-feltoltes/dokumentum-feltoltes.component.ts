@@ -19,6 +19,8 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
 
   file: any;
   file64: any;
+  fajlnev = '';
+  megjegyzes = '';
 
   constructor(private _iratservice: IratService,
               dokumentumservice: DokumentumService) {
@@ -29,6 +31,7 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
     const reader = new FileReader();
     if (event.target.files && event.target.files.length > 0) {
       this.file = event.target.files[0];
+      this.fajlnev = this.file.name;
       reader.readAsDataURL(this.file);
       reader.onload = () => {
         this.file64 = reader.result.split(',')[1];
@@ -39,8 +42,9 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
   onSubmit() {
     const fb = new FajlBuf();
     fb.b = this.file64;
+    fb.Fajlnev = this.fajlnev;
     fb.Meret = this.file.size;
-    fb.Megjegyzes = this.file.name;
+    fb.Megjegyzes = this.megjegyzes;
     fb.IratKod = this._iratservice.Dto[this._iratservice.DtoSelectedIndex].IRATKOD;
 
     this.eppFrissit = true;

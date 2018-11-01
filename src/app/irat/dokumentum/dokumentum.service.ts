@@ -109,7 +109,7 @@ export class DokumentumService {
         }
 
         const blob = b64toBlob(res.Result.b);
-        FileSaver.saveAs(blob, this.Dto[this.DtoSelectedIndex].DOKUMENTUMKOD + this.Dto[this.DtoSelectedIndex].EXT);
+        FileSaver.saveAs(blob, this.Dto[this.DtoSelectedIndex].MEGJEGYZES + this.Dto[this.DtoSelectedIndex].EXT);
 
         return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
       });
@@ -122,7 +122,7 @@ export class DokumentumService {
         }
 
         const blob = b64toBlob(res.Result);
-        FileSaver.saveAs(blob, this.Dto[this.DtoSelectedIndex].DOKUMENTUMKOD + '.pdf');
+        FileSaver.saveAs(blob, this.Dto[this.DtoSelectedIndex].MEGJEGYZES + '.pdf');
 
         return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
       });

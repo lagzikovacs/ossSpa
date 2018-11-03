@@ -23,5 +23,8 @@ export enum JogKod {
   VOLUME,
   FELHASZNALO,
   FELHASZNALOMOD,
-  CSOPORT
+  CSOPORT,
+
+  UGYNOK,
+  UGYNOKMOD
 }

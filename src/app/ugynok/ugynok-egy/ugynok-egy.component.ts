@@ -2,6 +2,8 @@ import {Component, OnDestroy} from '@angular/core';
 import {UgynokService} from '../ugynok.service';
 import {UgynokContainerMode} from '../ugynokcontainermode';
 import {UgynokEgyMode} from '../ugynokegymode';
+import {LogonService} from "../../logon/logon.service";
+import {JogKod} from "../../enums/jogkod";
 
 @Component({
   selector: 'app-feliratkozas-egy',
@@ -10,8 +12,11 @@ import {UgynokEgyMode} from '../ugynokegymode';
 })
 export class FeliratkozasEgyComponent implements OnDestroy {
   feliratkozasservice: UgynokService;
+  enprojekt = false;
 
-  constructor(feliratkozasservice: UgynokService) {
+  constructor(private _logonservice: LogonService,
+              feliratkozasservice: UgynokService) {
+    this.enprojekt = _logonservice.Jogaim.includes(JogKod[JogKod.PROJEKT]);
     this.feliratkozasservice = feliratkozasservice;
   }
 

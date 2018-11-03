@@ -7,6 +7,8 @@ import {UgynokDto} from '../ugynokdto';
 import {ProjektDto} from '../../projekt/projekt/projektdto';
 import {UgynokContainerMode} from '../ugynokcontainermode';
 import {UgynokEgyMode} from '../ugynokegymode';
+import {JogKod} from '../../enums/jogkod';
+import {LogonService} from '../../logon/logon.service';
 
 @Component({
   selector: 'app-ugynok-list',
@@ -24,9 +26,12 @@ export class UgynokListComponent implements OnDestroy {
   ];
 
   eppFrissit = false;
+  mod = false;
   ugynokservice: UgynokService;
 
-  constructor(ugynokservice: UgynokService) {
+  constructor(private _logonservice: LogonService,
+              ugynokservice: UgynokService) {
+    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.UGYNOKMOD]);
     this.ugynokservice = ugynokservice;
   }
 

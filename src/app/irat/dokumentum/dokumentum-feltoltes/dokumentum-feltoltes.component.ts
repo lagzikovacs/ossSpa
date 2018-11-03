@@ -21,6 +21,7 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
   file64: any;
   fajlnev = '';
   megjegyzes = '';
+  imageSrc: string;
 
   constructor(private _iratservice: IratService,
               dokumentumservice: DokumentumService) {
@@ -34,6 +35,7 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
       this.fajlnev = this.file.name;
       reader.readAsDataURL(this.file);
       reader.onload = () => {
+        this.imageSrc = reader.result;
         this.file64 = reader.result.split(',')[1];
       };
     }

@@ -11,7 +11,7 @@
       <button (click)="reszletek()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>Részletesen
       </button>
-      <button [disabled]="feliratkozasservice.DtoSelectedIndex === -1" (click)="projekt()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="!enprojekt" (click)="projekt()" class="btn btn-sm btn-outline-primary navgomb">
         Projekt
       </button>
     </nav>

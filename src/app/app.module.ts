@@ -259,6 +259,7 @@ import { UgyfelProjektComponent } from './ugyfel/ugyfel-projekt/ugyfel-projekt.c
 import { UgynokSzerkesztesComponent } from './ugynok/ugynok-szerkesztes/ugynok-szerkesztes.component';
 import { UgyfelterlogComponent } from './ugyfelterlog/ugyfelterlog.component';
 import {UgyfelterlogService} from "./ugyfelterlog/ugyfelterlog.service";
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -546,6 +547,7 @@ if (environment.production) {
     UgyfelProjektComponent,
     UgynokSzerkesztesComponent,
     UgyfelterlogComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

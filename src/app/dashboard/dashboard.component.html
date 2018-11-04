@@ -1,0 +1,6 @@
+<div class="row no-gutters rounded mb-3" style="background-color: silver">
+  <div *ngIf="szerepkorkivalasztva" class="col-auto mr-auto" style="margin-left: 14px">partíció / felhasználói csoport / felhasználó</div>
+  <div *ngIf="szerepkorkivalasztva" class="col-auto" style="margin-left: 14px;margin-right: 18px">Üzenetek: 0 Értesítések: 0</div>
+</div>
+<app-errormodal [cim]="'Dashboard'"></app-errormodal>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

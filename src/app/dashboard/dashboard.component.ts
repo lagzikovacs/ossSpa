@@ -1,7 +1,8 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs/index';
 import {ErrormodalComponent} from '../errormodal/errormodal.component';
-import {LogonService} from "../logon/logon.service";
+import {LogonService} from '../logon/logon.service';
+import {SessionService} from "../session/session.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -13,20 +14,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
 
-  private subscription: Subscription;
-  public szerepkorkivalasztva: boolean;
+  private _subscription: Subscription;
+  szerepkorkivalasztva: boolean;
+  sessionservice: SessionService;
 
-  constructor(private _logonservice: LogonService) { }
+  constructor(private _logonservice: LogonService,
+              sessionservice: SessionService) {
+    this.sessionservice = sessionservice;
+  }
 
   ngOnInit() {
-    this.subscription = this._logonservice.SzerepkorKivalasztvaObservable().subscribe(uzenet => {
+    this._subscription = this._logonservice.SzerepkorKivalasztvaObservable().subscribe(uzenet => {
       this.szerepkorkivalasztva = (uzenet.szerepkorkivalasztva as boolean);
-      console.log(this.szerepkorkivalasztva);
     });
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this._subscription.unsubscribe();
 
     Object.keys(this).map(k => {
       (this[k]) = null;

@@ -1,20 +1,27 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {EsemenynaploService} from './esemenynaplo.service';
 import {ErrormodalComponent} from '../errormodal/errormodal.component';
+import {SessionService} from '../session/session.service';
 
 @Component({
   selector: 'app-esemenynaplo',
   templateUrl: './esemenynaplo.component.html',
   styleUrls: ['./esemenynaplo.component.css']
 })
-export class EsemenynaploComponent implements OnDestroy {
+export class EsemenynaploComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   esemenynaploservice: EsemenynaploService;
   eppFrissit = false;
 
-  constructor(esemenynaploservice: EsemenynaploService) {
+  constructor(esemenynaploservice: EsemenynaploService,
+              private _sessionservice: SessionService) {
     this.esemenynaploservice = esemenynaploservice;
+  }
+
+  ngOnInit() {
+    // ez egy property !
+    this.esemenynaploservice.Felhasznalokod = this._sessionservice.sessiondto.FELHASZNALOKOD;
   }
 
   onKereses() {

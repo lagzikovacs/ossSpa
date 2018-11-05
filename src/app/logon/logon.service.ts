@@ -67,7 +67,6 @@ export class LogonService {
     return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
   }
 
-  // bár <void> a szervernek legalább null-t kell visszaküldenie, különben catch
   public Kijelentkezes(): Promise<EmptyResult> {
     const url = environment.BaseHref + this._controller + 'kijelentkezes';
     const body = null;

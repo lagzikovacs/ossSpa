@@ -23,7 +23,7 @@ import { JelszocsereComponent } from './logon/jelszocsere/jelszocsere.component'
 import { ToolbarComponent } from './tools/toolbar/toolbar.component';
 import { ToolbarfooterComponent } from './tools/toolbar/toolbarfooter/toolbarfooter.component';
 import {VerzioService} from './menu/verzio.service';
-import {SessionService} from './fooldal/session.service';
+import {SessionService} from './session/session.service';
 import {DateHunPipe} from './pipes/datehun.pipe';
 import {DatetimeHunPipe} from './pipes/datetimehun.pipe';
 import { FelhasznaloEgyComponent } from './felhasznalo/felhasznalo-egy/felhasznalo-egy.component';

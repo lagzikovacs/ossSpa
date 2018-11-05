@@ -3,6 +3,8 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {LogonService} from '../logon.service';
 import {Router} from '@angular/router';
 import {CsoportService} from '../../csoport/csoport.service';
+import {SessionService} from '../../session/session.service';
+import {SessionDto} from "../../session/sessiondto";
 
 @Component({
   selector: 'app-szerepkorvalasztas',
@@ -16,12 +18,14 @@ export class SzerepkorvalasztasComponent implements OnInit, OnDestroy {
   eppFrissit = false;
 
   constructor(private _router: Router,
-              logonservice: LogonService,
-              private _csoportservice: CsoportService) {
+              private _csoportservice: CsoportService,
+              private _sessionservice: SessionService,
+              logonservice: LogonService) {
     this.logonservice = logonservice;
   }
 
   ngOnInit() {
+    this._sessionservice.sessiondto = new SessionDto();
     this.logonservice.SzerepkorKivalasztva = false;
   }
 
@@ -36,12 +40,21 @@ export class SzerepkorvalasztasComponent implements OnInit, OnDestroy {
 
         return this._csoportservice.Jogaim();
       })
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
+      .then(res1 => {
+        if (res1.Error != null) {
+          throw res1.Error;
         }
 
-        this.logonservice.Jogaim = res.Result;
+        this.logonservice.Jogaim = res1.Result;
+
+        return this._sessionservice.Get();
+      })
+      .then(res2 => {
+        if (res2.Error != null) {
+          throw res2.Error;
+        }
+
+        this._sessionservice.sessiondto = res2.Result[0];
 
         this.logonservice.SzerepkorKivalasztva = true;
         this.eppFrissit = false;

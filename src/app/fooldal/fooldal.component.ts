@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {LogonService} from '../logon/logon.service';
 import {Subscription} from 'rxjs/index';
-import {SessionService} from './session.service';
+import {SessionService} from '../session/session.service';
 import {ErrormodalComponent} from '../errormodal/errormodal.component';
-import {SessionDto} from './sessiondto';
+import {SessionDto} from '../session/sessiondto';
 import {EsemenynaploService} from '../esemenynaplo/esemenynaplo.service';
 
 @Component({
@@ -12,53 +12,23 @@ import {EsemenynaploService} from '../esemenynaplo/esemenynaplo.service';
   styleUrls: ['./fooldal.component.css']
 })
 export class FooldalComponent implements OnInit, OnDestroy {
-  public sessiondto = new SessionDto();
-  public szerepkorkivalasztva: boolean;
-  private subscription: Subscription;
-  @ViewChild(ErrormodalComponent) private errormodal: ErrormodalComponent;
+  szerepkorkivalasztva: boolean;
+  private _subscription: Subscription;
 
-  eppFrissit = false;
-
-  constructor(private _logonservice: LogonService,
-              private _sessionservice: SessionService,
-              private _esemenynaploservice: EsemenynaploService) {
-  }
+  constructor(private _logonservice: LogonService) { }
 
   ngOnInit() {
     // arra az esetre kell, amikor a főoldal van megjelenítve bejelentkezett állapotban és kattintunk a kijelentkezésre
     // ilyenkor a router nem irányít 'még egyszer' a főoldalra, nem frissül
-    this.subscription = this._logonservice.SzerepkorKivalasztvaObservable().subscribe(uzenet => {
+    this._subscription = this._logonservice.SzerepkorKivalasztvaObservable().subscribe(uzenet => {
       this.szerepkorkivalasztva = (uzenet.szerepkorkivalasztva as boolean);
-      this.Frissites();
     });
 
     this.szerepkorkivalasztva = this._logonservice.SzerepkorKivalasztva;
-    this.Frissites();
-  }
-
-  Frissites(): void {
-    if (this.szerepkorkivalasztva) {
-      this.eppFrissit = true;
-      this._sessionservice.Get()
-        .then(res => {
-          if (res.Error !== null) {
-            throw res.Error;
-          }
-
-          this.sessiondto = res.Result[0];
-          this._esemenynaploservice.Felhasznalokod = this.sessiondto.FELHASZNALOKOD;
-
-          this.eppFrissit = false;
-        })
-        .catch(err => {
-          this.eppFrissit = false;
-          this.errormodal.show(err);
-        });
-    }
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this._subscription.unsubscribe();
 
     Object.keys(this).map(k => {
       (this[k]) = null;

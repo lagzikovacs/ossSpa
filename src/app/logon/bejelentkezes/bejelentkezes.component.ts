@@ -4,6 +4,8 @@ import {Router} from '@angular/router';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {LogonService} from '../logon.service';
 import {CsoportService} from '../../csoport/csoport.service';
+import {SessionService} from '../../session/session.service';
+import {SessionDto} from "../../session/sessiondto";
 
 @Component({
   selector: 'app-bejelentkezes',
@@ -19,12 +21,14 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
   constructor(private _router: Router,
               private fb: FormBuilder,
               private _logonservice: LogonService,
-              private _csoportservice: CsoportService) {
+              private _csoportservice: CsoportService,
+              private _sessionservice: SessionService) {
   }
 
   ngOnInit() {
     this._logonservice.Sid = '';
     this._logonservice.Jogaim = new Array<any>();
+    this._sessionservice.sessiondto = new SessionDto();
     this._logonservice.SzerepkorKivalasztva = false;
 
     this.form = this.fb.group({
@@ -71,7 +75,18 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
                 }
 
                 this._logonservice.Jogaim = res3.Result;
+
+                return this._sessionservice.Get();
+              })
+              .then(res4 => {
+                if (res4.Error != null) {
+                  throw res4.Error;
+                }
+
+                this._sessionservice.sessiondto = res4.Result[0];
+
                 this._logonservice.SzerepkorKivalasztva = true;
+                this.eppFrissit = false;
                 this._router.navigate(['/fooldal']);
               })
               .catch(err => {

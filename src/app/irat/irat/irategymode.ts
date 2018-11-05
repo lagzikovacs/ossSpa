@@ -3,5 +3,6 @@ export enum IratEgyMode {
   Torles = 2,
   Modositas = 3,
   Dokumentum = 4,
-  Projekt = 5
+  Projekt = 5,
+  FotozasLink = 6
 }

@@ -1,0 +1,60 @@
+<div class="alapkeret">
+  <h5>Fotózás</h5>
+  <ng-container *ngIf="!bejelentkezve">
+    <p>Üdvözöljük, ön a GridSolar Group Kft. informatikai rendszerét (OSS) használja. Kérjük a fotózáshoz kapott linket kezelje bizalmasan!</p>
+    <button [disabled]="eppFrissit" (click)="folytatas()" class="btn btn-sm btn-outline-primary navgomb">
+      Folytatás
+    </button>
+  </ng-container>
+  <ng-container *ngIf="bejelentkezve">
+    <div style="font-size: smaller;margin-bottom: 10px">(tető, inverter, óraszekrény/mérőóra, rákötés)</div>
+    <div>{{Dto.iratDto[0].UGYFELNEV}}</div>
+    <div>{{Dto.iratDto[0].UGYFELCIM}}</div>
+    <div><b>{{Dto.iratDto[0].TARGY}}</b></div>
+    <table class="table table-bordered table-sm table-responsive" style="border: none;margin-top: 10px;margin-bottom: 10px">
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>Megjegyzés</th>
+        <th>Méret</th>
+        <th>Ext</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of Dto.dokumentumDto">
+        <td>{{item.DOKUMENTUMKOD}}</td>
+        <td>{{item.MEGJEGYZES}}</td>
+        <td>{{item.MERET}}</td>
+        <td>{{item.EXT}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <form #f="ngForm" (ngSubmit)="onSubmit()">
+
+      <div class="row no-gutters editform-row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-6">
+          <input type="file" (change)="onFileChange($event)" #fileInput>
+        </div>
+      </div>
+      <div class="row no-gutters editform-row">
+        <div class="col-md-2">
+          <div class="editform-title">Megjegyzés</div>
+        </div>
+        <div class="col-md-4">
+          <input type="text" class="form-control form-control-sm" id="megjegyzes"
+                 autocomplete="off" required
+                 [(ngModel)]="megjegyzes" name="megjegyzes">
+        </div>
+      </div>
+
+      <div class="row no-gutters" style="margin-bottom: 10px">
+        <div class="col-md-2"></div>
+        <button class="btn btn-sm btn-primary" [disabled]="file === undefined || eppFrissit" type="submit">Ok</button>
+      </div>
+    </form>
+  </ng-container>
+  <app-errormodal [cim]="'Fotózás'"></app-errormodal>
+</div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

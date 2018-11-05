@@ -26,6 +26,9 @@
       <button [disabled]="eppFrissit" (click)="dokumentum()" class="btn btn-sm btn-outline-primary navgomb">
         Dokumentum
       </button>
+      <button [disabled]="eppFrissit" (click)="fotozaslink()" class="btn btn-sm btn-outline-primary navgomb">
+        Fotózás link
+      </button>
       <button [disabled]="eppFrissit" (click)="projekt()" class="btn btn-sm btn-outline-primary navgomb">
         Projekt
       </button>
@@ -60,6 +63,9 @@
   <ng-container *ngIf="iratservice.EgyMode === 5">
     <app-irat-nincsprojekt *ngIf="nincsProjekt"></app-irat-nincsprojekt>
     <app-projekt-reszletek *ngIf="!nincsProjekt"></app-projekt-reszletek>
+  </ng-container>
+  <ng-container *ngIf="iratservice.EgyMode === 6">
+    <app-fotozas-link></app-fotozas-link>
   </ng-container>
 
   <app-errormodal [cim]="iratservice.cim"></app-errormodal>

@@ -10,8 +10,9 @@ export class IratDto {
   UGYFELCIM: string;
   KULDO: string;
   TARGY: string;
-  LETREHOZVA: Date;
+  KIKULDESIKODIDOPONTJA: any;
+  LETREHOZVA: any;
   LETREHOZTA: string;
-  MODOSITVA: Date;
+  MODOSITVA: any;
   MODOSITOTTA: string;
 }

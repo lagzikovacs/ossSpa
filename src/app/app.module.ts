@@ -260,6 +260,8 @@ import { UgynokSzerkesztesComponent } from './ugynok/ugynok-szerkesztes/ugynok-s
 import { UgyfelterlogComponent } from './ugyfelterlog/ugyfelterlog.component';
 import {UgyfelterlogService} from "./ugyfelterlog/ugyfelterlog.service";
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FotozasComponent } from './fotozas/fotozas/fotozas.component';
+import { FotozasLinkComponent } from './fotozas/fotozas-link/fotozas-link.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -314,6 +316,7 @@ const routes: Routes = [
   {path: 'vagolap', component: VagolapComponent, canActivate: [RoleGuard]},
 
   {path: 'ugyfelter', component: UgyfelTerComponent},
+  {path: 'fotozas', component: FotozasComponent},
 
   {path: '', redirectTo: 'bejelentkezes', pathMatch: 'full'},
   {path: '**', redirectTo: 'fooldal'}
@@ -548,6 +551,8 @@ if (environment.production) {
     UgynokSzerkesztesComponent,
     UgyfelterlogComponent,
     DashboardComponent,
+    FotozasComponent,
+    FotozasLinkComponent,
   ],
   imports: [
     BrowserModule,

@@ -59,6 +59,9 @@ export class IratEgyComponent implements OnDestroy {
     this.iratservice.EgyMode = IratEgyMode.Dokumentum;
     this.dokumentumservice.ContainerMode = DokumentumContainerMode.List;
   }
+  fotozaslink() {
+    this.iratservice.EgyMode = IratEgyMode.FotozasLink;
+  }
   projekt() {
     this.eppFrissit = true;
     this._projektkapcsolatservice.SelectByIrat(this.iratservice.Dto[this.iratservice.DtoSelectedIndex].IRATKOD)

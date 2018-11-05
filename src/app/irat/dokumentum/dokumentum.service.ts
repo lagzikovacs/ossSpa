@@ -13,7 +13,7 @@ import * as FileSaver from 'file-saver';
 import {b64toBlob} from '../../tools/b64toBlob';
 import {NumberResult} from '../../dtos/numberresult';
 import {FajlBuf} from './fajlbuf';
-import {LetoltesPDFResult} from "./letoltespdfresult";
+import {LetoltesPDFResult} from './letoltespdfresult';
 
 @Injectable({
   providedIn: 'root'

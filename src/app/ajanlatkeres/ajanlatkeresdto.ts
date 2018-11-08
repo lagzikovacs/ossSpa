@@ -1,5 +1,5 @@
 export class AjanlatkeresDto {
-  UGYNOKKOD: number;
+  AJANLATKERESKOD: number;
   UGYNOKNEV: string;
   NEV: string;
   CIM: string;

@@ -16,7 +16,7 @@ import {EmptyResult} from '../dtos/emptyresult';
   providedIn: 'root'
 })
 export class AjanlatkeresService {
-  private readonly _controller = 'api/ugynok/';
+  private readonly _controller = 'api/ajanlatkeres/';
 
   cim = 'Ajánlatkérés';
   szempont = 0;

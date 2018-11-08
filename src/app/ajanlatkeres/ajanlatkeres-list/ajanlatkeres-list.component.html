@@ -1,0 +1,51 @@
+<div class="alapkeret">
+  <h5>{{ajanlatkeresservice.cim}}</h5>
+  <app-toolbar [Szurok]="szurok"
+               [(szempont)]="ajanlatkeresservice.szempont"
+               [(minta)]="ajanlatkeresservice.minta"
+               [enKereses]="!eppFrissit" (Kereses)="onKereses()"
+               [visUj]="true" [enUj]="mod" (Uj)="uj()">
+  </app-toolbar>
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Ügynöknév</th>
+      <th>Név</th>
+      <th>Cím</th>
+      <th>Email</th>
+      <th>Telefonszam</th>
+      <th>Havi fogyasztás, kWh</th>
+      <th>Havi számla, Ft</th>
+      <th>Napelemek teljesítménye, kW</th>
+    </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let item of ajanlatkeresservice.Dto; let i = index">
+        <tr>
+          <td style="text-align: right;color: blue;text-decoration: underline;cursor: pointer" (click)="setClickedRow(i)">{{item.UGYNOKKOD}}</td>
+          <td>{{item.UGYNOKNEV}}</td>
+          <td>{{item.NEV}}</td>
+          <td>{{item.CIM}}</td>
+          <td>{{item.EMAIL}}</td>
+          <td>{{item.TELEFONSZAM}}</td>
+          <td style="text-align: right">{{item.HAVIFOGYASZTASKWH | number: '1.2-2'}}</td>
+          <td style="text-align: right">{{item.HAVISZAMLAFT | number: '1.2-2'}}</td>
+          <td style="text-align: right">{{item.NAPELEMEKTELJESITMENYEKW | number: '1.2-2'}}</td>
+        </tr>
+        <tr *ngIf="item.MEGJEGYZES || '' !== ''">
+          <td colspan="9">{{item.MEGJEGYZES}}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <app-toolbarfooter [enKereses]="!ajanlatkeresservice.elsokereses && !eppFrissit"
+                     [rekordszam]="ajanlatkeresservice.Dto.length"
+                     [osszesrekord]="ajanlatkeresservice.OsszesRekord"
+                     (KeresesTovabb)="onKeresesTovabb()">
+  </app-toolbarfooter>
+  <app-errormodal [cim]="ajanlatkeresservice.cim"></app-errormodal>
+</div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>
+
+

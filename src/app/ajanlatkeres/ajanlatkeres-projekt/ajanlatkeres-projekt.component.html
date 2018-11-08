@@ -1,0 +1,6 @@
+<div class="alapkeret">
+  <h5>Korábbi projektek az email alapján</h5>
+  <app-projekt-tabla [Dto]="ajanlatkeresservice.ProjektDto" [enIdclick]="false"></app-projekt-tabla>
+  <app-errormodal [cim]="'Korábbi projektek az email alapján'"></app-errormodal>
+</div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

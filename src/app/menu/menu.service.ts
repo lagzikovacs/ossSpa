@@ -19,10 +19,10 @@ import {VolumeDto} from '../volume/volumedto';
 import {CsoportDto} from '../csoport/csoportdto';
 import {ProjektService} from '../projekt/projekt/projekt.service';
 import {IratService} from '../irat/irat/irat.service';
-import {UgynokService} from '../ugynok/ugynok.service';
+import {AjanlatkeresService} from '../ajanlatkeres/ajanlatkeres.service';
 import {IratDto} from '../irat/irat/iratdto';
 import {ProjektDto} from '../projekt/projekt/projektdto';
-import {UgynokDto} from '../ugynok/ugynokdto';
+import {AjanlatkeresDto} from '../ajanlatkeres/ajanlatkeresdto';
 import {TeendoService} from '../teendo/teendo.service';
 import {TeendoDto} from '../teendo/teendodto';
 import {FizetesimodService} from '../fizetesimod/fizetesimod.service';
@@ -60,7 +60,7 @@ import {FizetesimodContainerMode} from '../fizetesimod/fizetesimodcontainermode'
 import {PenznemContainerMode} from '../penznem/penznemcontainermode';
 import {FelhasznaloContainerMode} from '../felhasznalo/felhasznalocontainermode';
 import {CsoportContainerMode} from '../csoport/csoportcontainermode';
-import {UgynokContainerMode} from '../ugynok/ugynokcontainermode';
+import {AjanlatkeresContainerMode} from '../ajanlatkeres/ajanlatkerescontainermode';
 import {PenztarContainerMode} from '../penztar/penztarcontainermode';
 import {IratContainerMode} from '../irat/irat/iratcontainermode';
 import {ProjektContainerMode} from '../projekt/projekt/projektcontainermode';
@@ -102,7 +102,7 @@ export class MenuService {
               private _iratservice: IratService,
               private _dokumentumservice: DokumentumService,
               private _penztarservice: PenztarService,
-              private _ugynokservice: UgynokService,
+              private _ugynokservice: AjanlatkeresService,
               private _bizonylatservice: BizonylatService,
               private _particioservice: ParticioService,
               private _volumeservice: VolumeService,
@@ -207,9 +207,9 @@ export class MenuService {
         this._penztarservice.ekDto.minta = '';
         this._penztarservice.Dto = new Array<PenztarDto>();
         break;
-      case '/ugynok':
-        this._ugynokservice.ContainerMode = UgynokContainerMode.List;
-        this._ugynokservice.Dto = new Array<UgynokDto>();
+      case '/ajanlatkeres':
+        this._ugynokservice.ContainerMode = AjanlatkeresContainerMode.List;
+        this._ugynokservice.Dto = new Array<AjanlatkeresDto>();
       break;
 
 

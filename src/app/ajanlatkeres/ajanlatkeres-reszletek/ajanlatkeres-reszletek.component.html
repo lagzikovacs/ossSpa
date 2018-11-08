@@ -1,0 +1,65 @@
+<div class="alapkeret">
+  <table class="table ng table-bordered table-sm table-responsive" style="border: none">
+    <tbody>
+    <tr>
+      <td class="egylabel">Id:</td>
+      <td>{{ajanlatkeresservice.Dto[ajanlatkeresservice.DtoSelectedIndex].UGYNOKKOD}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Az ügynök neve:</td>
+      <td>{{ajanlatkeresservice.Dto[ajanlatkeresservice.DtoSelectedIndex].UGYNOKNEV}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Név:</td>
+      <td>{{ajanlatkeresservice.Dto[ajanlatkeresservice.DtoSelectedIndex].NEV}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Cím:</td>
+      <td>{{ajanlatkeresservice.Dto[ajanlatkeresservice.DtoSelectedIndex].CIM}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Email:</td>
+      <td>{{ajanlatkeresservice.Dto[ajanlatkeresservice.DtoSelectedIndex].EMAIL}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Telefonszám:</td>
+      <td>{{ajanlatkeresservice.Dto[ajanlatkeresservice.DtoSelectedIndex].TELEFONSZAM}}</td>
+    </tr>
+
+    <tr>
+      <td class="egylabel">Havi fogyasztás, kWh:</td>
+      <td>{{ajanlatkeresservice.Dto[ajanlatkeresservice.DtoSelectedIndex].HAVIFOGYASZTASKWH}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Havi számla, Ft:</td>
+      <td>{{ajanlatkeresservice.Dto[ajanlatkeresservice.DtoSelectedIndex].HAVISZAMLAFT}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Napelemek teljesítménye, kW:</td>
+      <td>{{ajanlatkeresservice.Dto[ajanlatkeresservice.DtoSelectedIndex].NAPELEMEKTELJESITMENYEKW}}</td>
+    </tr>
+
+
+    <tr>
+      <td class="egylabel">Megjegyzés:</td>
+      <td>{{ajanlatkeresservice.Dto[ajanlatkeresservice.DtoSelectedIndex].MEGJEGYZES}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Létrehozta:</td>
+      <td>{{ajanlatkeresservice.Dto[ajanlatkeresservice.DtoSelectedIndex].LETREHOZTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Létrehozva:</td>
+      <td>{{ajanlatkeresservice.Dto[ajanlatkeresservice.DtoSelectedIndex].LETREHOZVA | datetimehun}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosította:</td>
+      <td>{{ajanlatkeresservice.Dto[ajanlatkeresservice.DtoSelectedIndex].MODOSITOTTA}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Módosítva:</td>
+      <td>{{ajanlatkeresservice.Dto[ajanlatkeresservice.DtoSelectedIndex].MODOSITVA | datetimehun}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -71,9 +71,9 @@ import { CsoportTorlesComponent } from './csoport/csoport-torles/csoport-torles.
 import { CsoportFelhasznaloComponent } from './csoport/csoport-felhasznalo/csoport-felhasznalo.component';
 import { CsoportJogComponent } from './csoport/csoport-jog/csoport-jog.component';
 import { VolumeTesztComponent } from './volume/volume-teszt/volume-teszt.component';
-import { UgynokListComponent } from './ugynok/ugynok-list/ugynok-list.component';
-import { FeliratkozasEgyComponent } from './ugynok/ugynok-egy/ugynok-egy.component';
-import { FeliratkozasProjektComponent } from './ugynok/ugynok-projekt/ugynok-projekt.component';
+import { AjanlatkeresListComponent } from './ajanlatkeres/ajanlatkeres-list/ajanlatkeres-list.component';
+import { FeliratkozasEgyComponent } from './ajanlatkeres/ajanlatkeres-egy/ajanlatkeres-egy.component';
+import { AjanlatkeresProjektComponent } from './ajanlatkeres/ajanlatkeres-projekt/ajanlatkeres-projekt.component';
 import { ProjektTablaComponent } from './projekt/projekttabla/projekt-tabla.component';
 import { RiportComponent } from './riport/riport.component';
 import { KimenoszamlaComponent } from './riport/kimenoszamla/kimenoszamla.component';
@@ -135,7 +135,7 @@ import {UgyfelService} from './ugyfel/ugyfel.service';
 import {ParticioService} from './particio/particio.service';
 import {VolumeService} from './volume/volume.service';
 import {CsoportService} from './csoport/csoport.service';
-import {UgynokService} from './ugynok/ugynok.service';
+import {AjanlatkeresService} from './ajanlatkeres/ajanlatkeres.service';
 import {PenztarService} from './penztar/penztar.service';
 import { AfakulcsReszletekComponent } from './afakulcs/afakulcs-reszletek/afakulcs-reszletek.component';
 import { TeendoReszletekComponent } from './teendo/teendo-reszletek/teendo-reszletek.component';
@@ -148,7 +148,7 @@ import { TermekdijReszletekComponent } from './termekdij/termekdij-reszletek/ter
 import { CikkReszletekComponent } from './cikk/cikk-reszletek/cikk-reszletek.component';
 import { UgyfelReszletekComponent } from './ugyfel/ugyfel-reszletek/ugyfel-reszletek.component';
 import { PenztartetelSzerkesztesComponent } from './penztar/penztartetel/penztartetel-szerkesztes/penztartetel-szerkesztes.component';
-import { UgynokReszletekComponent } from './ugynok/ugynok-reszletek/ugynok-reszletek.component';
+import { AjanlatkeresReszletekComponent } from './ajanlatkeres/ajanlatkeres-reszletek/ajanlatkeres-reszletek.component';
 import { NavexportellenorzesComponent } from './navexportellenorzes/navexportellenorzes.component';
 import { IratReszletekComponent } from './irat/irat/irat-reszletek/irat-reszletek.component';
 import { DokumentumReszletekComponent } from './irat/dokumentum/dokumentum-reszletek/dokumentum-reszletek.component';
@@ -186,7 +186,7 @@ import { IrattipusContainerComponent } from './irattipus/irattipus-container/ira
 import { PenznemContainerComponent } from './penznem/penznem-container/penznem-container.component';
 import { TeendoContainerComponent } from './teendo/teendo-container/teendo-container.component';
 import { CsoportContainerComponent } from './csoport/csoport-container/csoport-container.component';
-import { UgynokContainerComponent } from './ugynok/ugynok-container/ugynok-container.component';
+import { AjanlatkeresContainerComponent } from './ajanlatkeres/ajanlatkeres-container/ajanlatkeres-container.component';
 import {PenztartetelListComponent} from './penztar/penztartetel/penztartetel-list/penztartetel-list.component';
 import {PenztarExportComponent} from './penztar/penztar-export/penztar-export.component';
 import {PenztarReszletekComponent} from './penztar/penztar-reszletek/penztar-reszletek.component';
@@ -256,7 +256,7 @@ import { UgyfelTerComponent } from './ugyfelter/ugyfel-ter/ugyfel-ter.component'
 import { UgyfelTerLinkComponent } from './ugyfelter/ugyfel-ter-link/ugyfel-ter-link.component';
 import {UgyfelterService} from "./ugyfelter/ugyfelter.service";
 import { UgyfelProjektComponent } from './ugyfel/ugyfel-projekt/ugyfel-projekt.component';
-import { UgynokSzerkesztesComponent } from './ugynok/ugynok-szerkesztes/ugynok-szerkesztes.component';
+import { AjanlatkeresSzerkesztesComponent } from './ajanlatkeres/ajanlatkeres-szerkesztes/ajanlatkeres-szerkesztes.component';
 import { UgyfelterlogComponent } from './ugyfelterlog/ugyfelterlog.component';
 import {UgyfelterlogService} from "./ugyfelterlog/ugyfelterlog.service";
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -280,7 +280,7 @@ const routes: Routes = [
   {path: 'projekt', component: ProjektContainerComponent, canActivate: [RoleGuard]},
   {path: 'irat', component: IratContainerComponent, canActivate: [RoleGuard]},
   {path: 'penztar', component: PenztarContainerComponent, canActivate: [RoleGuard]},
-  {path: 'ugynok', component: UgynokContainerComponent, canActivate: [RoleGuard]},
+  {path: 'ajanlatkeres', component: AjanlatkeresContainerComponent, canActivate: [RoleGuard]},
   {path: 'ugyfelterlog', component: UgyfelterlogComponent, canActivate: [RoleGuard]},
 
   {path: 'adoszamellenorzes', component: AdoszamellenorzesComponent, canActivate: [RoleGuard]},
@@ -384,9 +384,9 @@ if (environment.production) {
     CsoportFelhasznaloComponent,
     CsoportJogComponent,
     VolumeTesztComponent,
-    UgynokListComponent,
+    AjanlatkeresListComponent,
     FeliratkozasEgyComponent,
-    FeliratkozasProjektComponent,
+    AjanlatkeresProjektComponent,
     ProjektTablaComponent,
     RiportComponent,
     KimenoszamlaComponent,
@@ -451,7 +451,7 @@ if (environment.production) {
     CikkReszletekComponent,
     UgyfelReszletekComponent,
     PenztartetelSzerkesztesComponent,
-    UgynokReszletekComponent,
+    AjanlatkeresReszletekComponent,
     NavexportellenorzesComponent,
     IratReszletekComponent,
     DokumentumReszletekComponent,
@@ -490,7 +490,7 @@ if (environment.production) {
     PenznemContainerComponent,
     TeendoContainerComponent,
     CsoportContainerComponent,
-    UgynokContainerComponent,
+    AjanlatkeresContainerComponent,
     PenztarContainerComponent,
     PenztartetelContainerComponent,
     IratContainerComponent,
@@ -548,7 +548,7 @@ if (environment.production) {
     UgyfelTerComponent,
     UgyfelTerLinkComponent,
     UgyfelProjektComponent,
-    UgynokSzerkesztesComponent,
+    AjanlatkeresSzerkesztesComponent,
     UgyfelterlogComponent,
     DashboardComponent,
     FotozasComponent,
@@ -589,7 +589,7 @@ if (environment.production) {
     DokumentumService,
     PenztarService,
     PenztartetelService,
-    UgynokService,
+    AjanlatkeresService,
 
     BizonylatService,
     RiportService,

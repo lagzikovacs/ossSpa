@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {PenznemService} from '../../penznem/penznem.service';
@@ -33,6 +33,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   constructor(private _ugyfelservice: UgyfelService,
               private _penznemservice: PenznemService,
               private _fizetesimodservice: FizetesimodService,
+              private _cdr: ChangeDetectorRef,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
   }
@@ -51,6 +52,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this._ugyfelservice.ContainerMode = UgyfelContainerMode.List;
 
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.UgyfelZoom;
+    this._cdr.detectChanges();
   }
   PenznemZoom() {
     this._penznemservice.ekDto.minta = this.bizonylatservice.ComplexDtoEdited.Dto.PENZNEM || '';
@@ -59,6 +61,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this._penznemservice.ContainerMode = PenznemContainerMode.List;
 
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.PenznemZoom;
+    this._cdr.detectChanges();
   }
   FizetesimodZoom() {
     this._fizetesimodservice.ekDto.minta = this.bizonylatservice.ComplexDtoEdited.Dto.FIZETESIMOD || '';
@@ -67,6 +70,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this._fizetesimodservice.ContainerMode = FizetesimodContainerMode.List;
 
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.FizetesimodZoom;
+    this._cdr.detectChanges();
   }
 
   Fiztool(fm: string) {
@@ -114,6 +118,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
         this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.TetelSzerkesztes;
         this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
+        this._cdr.detectChanges();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -124,6 +129,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this.bizonylatservice.TetelDtoSelectedIndex = i;
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.TetelTorles;
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
+    this._cdr.detectChanges();
   }
   tetelModositas(i: number) {
     this.bizonylatservice.TetelDtoSelectedIndex = i;
@@ -133,6 +139,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this.bizonylatservice.TetelDtoEdited = Object.assign({}, this.bizonylatservice.ComplexDtoEdited.LstTetelDto[i]);
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.TetelSzerkesztes;
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
+    this._cdr.detectChanges();
   }
 
   onSubmit() {

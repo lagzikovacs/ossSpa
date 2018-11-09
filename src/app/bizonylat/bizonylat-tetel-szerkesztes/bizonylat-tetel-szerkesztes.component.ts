@@ -1,4 +1,4 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
 import {CikkService} from '../../cikk/cikk.service';
@@ -35,6 +35,7 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
               private _meservice: MeService,
               private _afakulcsservice: AfakulcsService,
               private _termekdijservice: TermekdijService,
+              private _cdr: ChangeDetectorRef,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
   }
@@ -47,6 +48,7 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
     this._cikkservice.ContainerMode = CikkContainerMode.List;
 
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.CikkZoom;
+    this._cdr.detectChanges();
   }
   MeZoom() {
     this._meservice.ekDto.minta = this.bizonylatservice.TetelDtoEdited.ME || '';
@@ -55,6 +57,7 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
     this._meservice.ContainerMode = MeContainerMode.List;
 
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.MeZoom;
+    this._cdr.detectChanges();
   }
   AfaZoom() {
     this._afakulcsservice.ekDto.minta = this.bizonylatservice.TetelDtoEdited.AFAKULCS || '';
@@ -63,6 +66,7 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
     this._afakulcsservice.ContainerMode = AfakulcsContainerMode.List;
 
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.AfakulcsZoom;
+    this._cdr.detectChanges();
   }
   TermekdijZoom() {
     this._termekdijservice.ekDto.minta = this.bizonylatservice.TetelDtoEdited.TERMEKDIJKT || '';
@@ -71,6 +75,7 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
     this._termekdijservice.ContainerMode = TermekdijContainerMode.List;
 
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.TermekdijZoom;
+    this._cdr.detectChanges();
   }
   TermekdijTorles() {
     this.bizonylatservice.TetelDtoEdited.TERMEKDIJKOD = null;
@@ -179,6 +184,7 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
 
         this.eppFrissit = false;
         this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
+        this._cdr.detectChanges();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -187,6 +193,7 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
   }
   cancel() {
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
+    this._cdr.detectChanges();
   }
   ngOnDestroy() {
     Object.keys(this).map(k => {

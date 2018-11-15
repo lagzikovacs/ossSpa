@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   connection = $.hubConnection('https://docport.hu/ossrest/api/osshub', {useDefaultPath: false});
   hubproxy = this.connection.createHubProxy('OssHub');
+  utolsouzenet = '';
 
   constructor(private _logonservice: LogonService,
               sessionservice: SessionService) {
@@ -29,19 +30,43 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.connection.stateChanged(function (change) {
-      console.log(change);
-    });
+    // this.connection.stateChanged(function (change) {
+    //   console.log(change);
+    // });
+    // this.connection.received(x => {
+    //   // itt részletes adatok jönnek
+    //   console.log(x);
+    // });
 
     this._subscription = this._logonservice.SzerepkorKivalasztvaObservable().subscribe(uzenet => {
       this.szerepkorkivalasztva = (uzenet.szerepkorkivalasztva as boolean);
 
       if (this.szerepkorkivalasztva) {
-        this.connection.start();
+        this.hubproxy.on('Uzenet', (message) => {
+          this.utolsouzenet = message;
+          this.beep();
+        });
+
+        this.connection.start()
+          .done((data: any) => {
+            this.utolsouzenet = 'OssHub OK';
+          })
+          .fail((error: any) => {
+            this.utolsouzenet = error;
+          });
       } else {
         this.connection.stop();
+        this.hubproxy.off('Uzenet');
+        this.utolsouzenet = '';
       }
     });
+  }
+
+  beep() {
+    const audio = new Audio();
+    audio.src = '../assets/Door Bell.mp3';
+    audio.load();
+    audio.play();
   }
 
   ngOnDestroy() {

@@ -1,18 +1,18 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../errormodal/errormodal.component';
-import {Szempont} from '../enums/szempont';
-import {LogonService} from '../logon/logon.service';
-import {NavexportellenorzesService} from './navexportellenorzes.service';
-import {JogKod} from '../enums/jogkod';
-import {SzMT} from '../dtos/szmt';
-import {NavfeltoltesDto} from './navfeltoltesdto';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {Szempont} from '../../enums/szempont';
+import {LogonService} from '../../logon/logon.service';
+import {NavfeltoltesService} from '../navfeltoltes.service';
+import {JogKod} from '../../enums/jogkod';
+import {SzMT} from '../../dtos/szmt';
+import {NavfeltoltesDto} from '../navfeltoltesdto';
 
 @Component({
   selector: 'app-navonlineszamla',
-  templateUrl: './navexportellenorzes.component.html',
-  styleUrls: ['./navexportellenorzes.component.css']
+  templateUrl: './navfeltoltesellenorzese.component.html',
+  styleUrls: ['./navfeltoltesellenorzese.component.css']
 })
-export class NavexportellenorzesComponent implements OnDestroy {
+export class NavfeltoltesellenorzeseComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Id', 'Bizonylat Id', 'Bizonylatszám', 'Ügyfél'];
@@ -22,10 +22,10 @@ export class NavexportellenorzesComponent implements OnDestroy {
 
   eppFrissit = false;
   mod = false;
-  navexportellenorzesservice: NavexportellenorzesService;
+  navexportellenorzesservice: NavfeltoltesService;
 
   constructor(private _logonservice: LogonService,
-              navexportellenorzesservice: NavexportellenorzesService  ) {
+              navexportellenorzesservice: NavfeltoltesService  ) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.CIKKMOD]);
     this.navexportellenorzesservice = navexportellenorzesservice;
   }

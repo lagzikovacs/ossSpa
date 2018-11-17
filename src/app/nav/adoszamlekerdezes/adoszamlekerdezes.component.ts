@@ -1,21 +1,21 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {NavexportellenorzesService} from '../navexportellenorzes.service';
+import {NavfeltoltesService} from '../navfeltoltes.service';
 
 @Component({
   selector: 'app-adoszamellenorzes',
-  templateUrl: './adoszamellenorzes.component.html',
-  styleUrls: ['./adoszamellenorzes.component.css']
+  templateUrl: './adoszamlekerdezes.component.html',
+  styleUrls: ['./adoszamlekerdezes.component.css']
 })
-export class AdoszamellenorzesComponent implements OnDestroy {
+export class AdoszamlekerdezesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   eppFrissit = false;
-  navexportellenorzesservice: NavexportellenorzesService;
+  navexportellenorzesservice: NavfeltoltesService;
   adoszam = '';
   valasz = '';
 
-  constructor(navexportellenorzesservice: NavexportellenorzesService  ) {
+  constructor(navexportellenorzesservice: NavfeltoltesService  ) {
     this.navexportellenorzesservice = navexportellenorzesservice;
   }
 

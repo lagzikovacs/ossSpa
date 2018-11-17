@@ -2,19 +2,18 @@ import { Injectable } from '@angular/core';
 import {LogonService} from '../logon/logon.service';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {NavfeltoltesDto} from './navfeltoltesdto';
-import {ZoomSources} from '../enums/zoomsources';
 import {environment} from '../../environments/environment';
 import {NavfeltoltesParameter} from './navfeltoltesparameter';
 import {NavfeltoltesResult} from './navfeltoltesresult';
-import {StringResult} from "../dtos/stringresult";
+import {StringResult} from '../dtos/stringresult';
 
 @Injectable({
   providedIn: 'root'
 })
-export class NavexportellenorzesService {
-  private readonly _controller = 'api/navexportellenorzes/';
+export class NavfeltoltesService {
+  private readonly _controller = 'api/navfeltoltes/';
 
-  cim = 'NAV export ellenőrzése';
+  cim = 'NAV feltöltés ellenőrzése';
   szempont = 0;
   minta = '';
   up = new NavfeltoltesParameter(0, environment.lapmeret);
@@ -39,7 +38,7 @@ export class NavexportellenorzesService {
   }
 
   public Adoszamellenorzes(adoszam: string): Promise<StringResult> {
-    const url = environment.BaseHref + this._controller + 'adoszamellenorzes';
+    const url = environment.BaseHref + this._controller + 'adoszamlekerdezes';
     const body = JSON.stringify(adoszam);
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

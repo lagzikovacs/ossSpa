@@ -8,7 +8,6 @@ import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {CikkContainerMode} from '../cikkcontainermode';
 import {CikkEgyMode} from '../cikkegymode';
-import {ProjektkapcsolatService} from '../../projekt/bizonylatesirat/projektkapcsolat.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import {AjanlatSzerkesztesMode} from '../../projekt/ajanlat/ajanlatszerkesztesmode';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
@@ -33,7 +32,6 @@ export class CikkListComponent implements OnInit, OnDestroy {
   cikkservice: CikkService;
 
   constructor(private _logonservice: LogonService,
-              private _projektkapcsolatservice: ProjektkapcsolatService,
               private _bizonylatservice: BizonylatService,
               private _ajanlatservice: AjanlatService,
               cikkservice: CikkService  ) {

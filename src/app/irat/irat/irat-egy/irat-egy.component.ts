@@ -13,6 +13,8 @@ import {BizonylatkapcsolatService} from '../../../bizonylat/bizonylatirat/bizony
 import {BizonylatKapcsolatContainerMode} from '../../../bizonylat/bizonylatirat/bizonylatkapcsolatcontainermode';
 import {VagolapService} from '../../../vagolap/vagolap.service';
 import {AbuComponent} from '../../../tools/abu/abu.component';
+import {LogonService} from "../../../logon/logon.service";
+import {JogKod} from "../../../enums/jogkod";
 
 @Component({
   selector: 'app-irat-egy',
@@ -27,13 +29,16 @@ export class IratEgyComponent implements OnDestroy {
   dokumentumservice: DokumentumService;
   eppFrissit = false;
   nincsProjekt = false;
+  mod = false;
 
-  constructor(private _projektkapcsolatservice: ProjektkapcsolatService,
+  constructor(private _logonservice: LogonService,
+              private _projektkapcsolatservice: ProjektkapcsolatService,
               private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
               private _projektservice: ProjektService,
               private _vagolapservice: VagolapService,
               iratservice: IratService,
               dokumentumservice: DokumentumService) {
+    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.IRATMOD]);
     this.iratservice = iratservice;
     this.dokumentumservice = dokumentumservice;
   }

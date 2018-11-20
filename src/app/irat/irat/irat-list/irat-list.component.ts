@@ -9,6 +9,8 @@ import {IratEgyMode} from '../irategymode';
 import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {DokumentumContainerMode} from '../../dokumentum/dokumentumcontainermode';
 import {IratSzerkesztesMode} from '../iratszerkesztesmode';
+import {LogonService} from "../../../logon/logon.service";
+import {JogKod} from "../../../enums/jogkod";
 
 @Component({
   selector: 'app-irat-list',
@@ -30,9 +32,12 @@ export class IratListComponent implements OnDestroy {
   eppFrissit = false;
   iratservice: IratService;
   dokumentumservice: DokumentumService;
+  mod = false;
 
-  constructor(iratservice: IratService,
+  constructor(private _logonservice: LogonService,
+              iratservice: IratService,
               dokumentumservice: DokumentumService) {
+    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.IRATMOD]);
     this.iratservice = iratservice;
     this.dokumentumservice = dokumentumservice;
   }

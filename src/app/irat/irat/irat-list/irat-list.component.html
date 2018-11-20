@@ -8,7 +8,7 @@
     [(szempont2)]="iratservice.szempont2"
     [(minta2)]="iratservice.minta2"
     [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-    [enUj]="!eppFrissit" (Uj)="onUj()">
+    [enUj]="!eppFrissit && mod" (Uj)="onUj()">
   </app-irattoolbar>
   <table class="table table-bordered table-sm table-responsive" style="border: none">
     <thead>

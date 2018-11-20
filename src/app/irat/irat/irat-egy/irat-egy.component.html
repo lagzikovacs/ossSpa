@@ -14,11 +14,11 @@
         <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>Részletesen
       </button>
 
-      <button [disabled]="eppFrissit"
+      <button [disabled]="eppFrissit || !mod"
               (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-minus" aria-hidden="true"></i>
       </button>
-      <button [disabled]="eppFrissit"
+      <button [disabled]="eppFrissit || !mod"
               (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-edit" aria-hidden="true"></i>
       </button>

@@ -1,0 +1,30 @@
+<div class="alapkeret">
+  Válasszon tételt:
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Kapcsolat</th>
+      <th>Tipus</th>
+      <th>Azonosító</th>
+      <th>Keletkezett</th>
+      <th>Irány</th>
+      <th>Tárgy</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of projektkapcsolatservice.Dto; let i = index">
+      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
+          (click)="setClickedRow(i)">{{item.PROJEKTKAPCSOLATKOD}}</td>
+      <td>{{item.KAPCSOLAT}}</td>
+      <td>{{item.TIPUS}}</td>
+      <td>{{item.AZONOSITO}}</td>
+      <td>{{item.KELETKEZETT | datehun}}</td>
+      <td>{{item.IRANY}}</td>
+      <td>{{item.TARGY}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <app-errormodal [cim]="projektkapcsolatservice.cim"></app-errormodal>
+</div>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

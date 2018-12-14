@@ -64,6 +64,16 @@ export class ProjektkapcsolatService {
 
     return this._httpClient.post<ProjektKapcsolatResult>(url, body, options).toPromise();
   }
+  public SelectForUgyfelter(projektkod: number): Promise<ProjektKapcsolatResult> {
+    const url = environment.BaseHref + this._controller + 'selectforugyfelter';
+    const body = projektkod;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<ProjektKapcsolatResult>(url, body, options).toPromise();
+  }
   public SelectByBizonylat(bizonylatkod: number): Promise<ProjektKapcsolatResult> {
     const url = environment.BaseHref + this._controller + 'selectbybizonylat';
     const body = bizonylatkod;
@@ -90,6 +100,21 @@ export class ProjektkapcsolatService {
     this.DtoSelectedIndex = -1;
 
     return this.Select(this.ProjektKod)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.Dto = res.Result;
+
+        return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
+      });
+  }
+  public KeresesForUgyfelter(): Promise<EmptyResult> {
+    this.Dto = new Array<ProjektKapcsolatDto>();
+    this.DtoSelectedIndex = -1;
+
+    return this.SelectForUgyfelter(this.ProjektKod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

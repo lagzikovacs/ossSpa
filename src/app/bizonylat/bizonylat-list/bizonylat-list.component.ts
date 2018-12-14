@@ -9,6 +9,8 @@ import {BizonylatkifizetesService} from '../bizonylatkifizetes/bizonylatkifizete
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
 import {BizonylatTipus} from '../bizonylattipus';
+import {LogonService} from "../../logon/logon.service";
+import {JogKod} from "../../enums/jogkod";
 
 @Component({
   selector: 'app-bizonylat-list',
@@ -26,10 +28,13 @@ export class BizonylatListComponent implements OnDestroy {
 
   bizonylatservice: BizonylatService;
   eppFrissit = false;
+  mod = false;
 
-  constructor(private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
+  constructor(private _logonservice: LogonService,
+              private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
               private _bizonylatkifizetesservice: BizonylatkifizetesService,
               bizonylatservice: BizonylatService) {
+    this.mod = this._logonservice.Jogaim.includes(JogKod[JogKod.BIZONYLATMOD]);
     this.bizonylatservice = bizonylatservice;
   }
 

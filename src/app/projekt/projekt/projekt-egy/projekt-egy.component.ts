@@ -9,9 +9,8 @@ import {ProjektkapcsolatService} from '../../bizonylatesirat/projektkapcsolat.se
 import {BizonylatesIratContainerMode} from '../../bizonylatesirat/bizonylatesiratcontainermode';
 import {SzamlazasirendContainerMode} from '../../szamlazasirend/szamlazasirendcontainermode';
 import {ProjektteendoContainerMode} from '../../projektteendo/projektteendocontainermode';
-import {VagolapService} from '../../../vagolap/vagolap.service';
-import {LogonService} from "../../../logon/logon.service";
-import {JogKod} from "../../../enums/jogkod";
+import {LogonService} from '../../../logon/logon.service';
+import {JogKod} from '../../../enums/jogkod';
 
 @Component({
   selector: 'app-projekt-egy',

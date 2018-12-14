@@ -214,7 +214,7 @@ import { BizonylatEgyComponent } from './bizonylat/bizonylat-egy/bizonylat-egy.c
 import { BizonylattoolbarComponent } from './bizonylat/bizonylattoolbar/bizonylattoolbar.component';
 import { BizonylattablaComponent } from './bizonylat/bizonylattabla/bizonylattabla.component';
 import { BizonylatSzerkesztesComponent } from './bizonylat/bizonylat-szerkesztes/bizonylat-szerkesztes.component';
-import { AdoszamlekerdezesComponent } from './nav/adoszamlekerdezes/adoszamlekerdezes.component';
+import { AdoszamellenorzesComponent } from './nav/adoszamellenorzes/adoszamellenorzes.component';
 import { SzamlalekerdezesComponent } from './nav/szamlalekerdezes/szamlalekerdezes.component';
 import { BizonylatKifizetesContainerComponent } from './bizonylat/bizonylatkifizetes/bizonylat-kifizetes-container/bizonylat-kifizetes-container.component';
 import { BizonylatKifizetesListComponent } from './bizonylat/bizonylatkifizetes/bizonylat-kifizetes-list/bizonylat-kifizetes-list.component';
@@ -254,15 +254,16 @@ import {IratmintaService} from './projekt/projekt/projekt-iratminta/iratminta.se
 import { EsemenynaploComponent } from './esemenynaplo/esemenynaplo.component';
 import { UgyfelTerComponent } from './ugyfelter/ugyfel-ter/ugyfel-ter.component';
 import { UgyfelTerLinkComponent } from './ugyfelter/ugyfel-ter-link/ugyfel-ter-link.component';
-import {UgyfelterService} from "./ugyfelter/ugyfelter.service";
+import {UgyfelterService} from './ugyfelter/ugyfelter.service';
 import { UgyfelProjektComponent } from './ugyfel/ugyfel-projekt/ugyfel-projekt.component';
 import { AjanlatkeresSzerkesztesComponent } from './ajanlatkeres/ajanlatkeres-szerkesztes/ajanlatkeres-szerkesztes.component';
 import { UgyfelterlogComponent } from './ugyfelterlog/ugyfelterlog.component';
-import {UgyfelterlogService} from "./ugyfelterlog/ugyfelterlog.service";
+import {UgyfelterlogService} from './ugyfelterlog/ugyfelterlog.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FotozasComponent } from './fotozas/fotozas/fotozas.component';
 import { FotozasLinkComponent } from './fotozas/fotozas-link/fotozas-link.component';
-import {NavfeltoltesService} from "./nav/navfeltoltes.service";
+import {NavfeltoltesService} from './nav/navfeltoltes.service';
+import { UgyfelTerBizonylatesiratListComponent } from './ugyfelter/ugyfel-ter-bizonylatesirat-list/ugyfel-ter-bizonylatesirat-list.component';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -293,7 +294,7 @@ const routes: Routes = [
     {path: 'megrendeles', component: BizonylatContainerComponent, canActivate: [RoleGuard]},
     {path: 'bejovoszamla', component: BizonylatContainerComponent, canActivate: [RoleGuard]},
   ]},
-  {path: 'adoszamlekerdezes', component: AdoszamlekerdezesComponent, canActivate: [RoleGuard]},
+  {path: 'adoszamellenorzes', component: AdoszamellenorzesComponent, canActivate: [RoleGuard]},
   {path: 'navfeltoltesellenorzese', component: NavfeltoltesellenorzeseComponent, canActivate: [RoleGuard]},
   {path: 'szamlalekerdezes', component: SzamlalekerdezesComponent, canActivate: [RoleGuard]},
 
@@ -511,7 +512,7 @@ if (environment.production) {
     BizonylattoolbarComponent,
     BizonylattablaComponent,
     BizonylatSzerkesztesComponent,
-    AdoszamlekerdezesComponent,
+    AdoszamellenorzesComponent,
     SzamlalekerdezesComponent,
     BizonylatKifizetesContainerComponent,
     BizonylatKifizetesListComponent,
@@ -554,6 +555,7 @@ if (environment.production) {
     DashboardComponent,
     FotozasComponent,
     FotozasLinkComponent,
+    UgyfelTerBizonylatesiratListComponent,
   ],
   imports: [
     BrowserModule,

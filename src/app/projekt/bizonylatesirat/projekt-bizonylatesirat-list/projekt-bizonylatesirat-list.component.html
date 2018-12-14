@@ -5,13 +5,13 @@
       <button [disabled]="eppFrissit" (click)="kereses()" class="btn btn-sm btn-outline-primary navgomb" style="margin-right: 3px">
         <i class="fa fa-search" aria-hidden="true"></i>
       </button>
-      <button [disabled]="eppFrissit" (click)="ujbizonylat()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit || !BizonylatMod" (click)="ujbizonylat()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Bizonylat
       </button>
-      <button [disabled]="eppFrissit" (click)="ujirat()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit || !IratMod" (click)="ujirat()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Irat
       </button>
-      <button [disabled]="eppFrissit" (click)="ujajanlat()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit || !AjanlatMod" (click)="ujajanlat()" class="btn btn-sm btn-outline-primary navgomb">
         <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Ajánlat
       </button>
       <button [disabled]="eppFrissit" (click)="vagolaprol()" class="btn btn-sm btn-outline-primary navgomb">
@@ -28,6 +28,7 @@
       <th>Tipus</th>
       <th>Azonosító</th>
       <th>Keletkezett</th>
+      <th>Irány</th>
       <th>Tárgy</th>
     </tr>
     </thead>
@@ -42,6 +43,7 @@
       <td>{{item.TIPUS}}</td>
       <td>{{item.AZONOSITO}}</td>
       <td>{{item.KELETKEZETT | datehun}}</td>
+      <td>{{item.IRANY}}</td>
       <td>{{item.TARGY}}</td>
     </tr>
     </tbody>

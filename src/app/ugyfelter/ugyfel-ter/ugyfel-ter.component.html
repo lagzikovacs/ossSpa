@@ -8,7 +8,11 @@
   </ng-container>
   <ng-container *ngIf="bejelentkezve">
     <p>Üdvözöljük <b>{{Dto.ugyfelDto.NEV}}</b> ({{Dto.ugyfelDto.CIM}}, {{Dto.ugyfelDto.TELEFON}}, {{Dto.ugyfelDto.EMAIL}}) az önnel kapcsolatos tárolt adatok a következők - válasszon projektet:</p>
-    <app-projekt-tabla [Dto]="Dto.projektDto" (idclick)="setClickedRow($event)"></app-projekt-tabla>
+    <app-projekt-tabla [Dto]="Dto.projektDto" (idclick)="setProjektClickedRow($event)"></app-projekt-tabla>
+  </ng-container>
+  <ng-container *ngIf="projektkod > 0">
+    Projekt Id: {{projektkod}}
+    <app-ugyfel-ter-bizonylatesirat-list></app-ugyfel-ter-bizonylatesirat-list>
   </ng-container>
   <app-errormodal [cim]="'Ügyféltér'"></app-errormodal>
 </div>

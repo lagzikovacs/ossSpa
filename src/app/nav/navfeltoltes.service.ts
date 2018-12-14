@@ -38,7 +38,7 @@ export class NavfeltoltesService {
   }
 
   public Adoszamellenorzes(adoszam: string): Promise<StringResult> {
-    const url = environment.BaseHref + this._controller + 'adoszamlekerdezes';
+    const url = environment.BaseHref + this._controller + 'adoszamellenorzes';
     const body = JSON.stringify(adoszam);
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

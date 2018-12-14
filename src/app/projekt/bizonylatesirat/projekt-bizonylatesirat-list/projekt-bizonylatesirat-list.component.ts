@@ -16,6 +16,7 @@ import {BizonylatEgyMode} from '../../../bizonylat/bizonylategymode';
 import {VagolapService} from '../../../vagolap/vagolap.service';
 import {VagolapMode} from '../../../vagolap/vagolapmode';
 import {AjanlatService} from '../../ajanlat/ajanlat.service';
+import {JogKod} from "../../../enums/jogkod";
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-list',
@@ -28,6 +29,10 @@ export class ProjektBizonylatesiratListComponent implements OnDestroy {
   projektkapcsolatservice: ProjektkapcsolatService;
   eppFrissit = false;
 
+  BizonylatMod = false;
+  IratMod = false;
+  AjanlatMod = false;
+
   constructor(private _logonservice: LogonService,
               private _iratservice: IratService,
               private _dokumentumservice: DokumentumService,
@@ -37,6 +42,9 @@ export class ProjektBizonylatesiratListComponent implements OnDestroy {
               private _vagolapservice: VagolapService,
               private _ajanlatservice: AjanlatService,
               projektkapcsolatservice: ProjektkapcsolatService) {
+    this.BizonylatMod = this._logonservice.Jogaim.includes(JogKod[JogKod.BIZONYLATMOD]);
+    this.IratMod = this._logonservice.Jogaim.includes(JogKod[JogKod.IRATMOD]);
+    this.AjanlatMod = this._logonservice.Jogaim.includes(JogKod[JogKod.AJANLATKESZITES]);
     this.projektkapcsolatservice = projektkapcsolatservice;
   }
 

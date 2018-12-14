@@ -14,6 +14,8 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
 import {VagolapService} from '../../vagolap/vagolap.service';
 import {AbuComponent} from '../../tools/abu/abu.component';
+import {LogonService} from '../../logon/logon.service';
+import {JogKod} from '../../enums/jogkod';
 
 @Component({
   selector: 'app-bizonylat-egy',
@@ -26,13 +28,16 @@ export class BizonylatEgyComponent implements OnDestroy {
 
   bizonylatservice: BizonylatService;
   eppFrissit = false;
+  mod = false;
 
-  constructor(private _projektkapcsolatservice: ProjektkapcsolatService,
+  constructor(private _logonservice: LogonService,
+              private _projektkapcsolatservice: ProjektkapcsolatService,
               private _bizonylatkifizetesservice: BizonylatkifizetesService,
               private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
               private _penztarsevice: PenztarService,
               private _vagolapservice: VagolapService,
               bizonylatservice: BizonylatService) {
+    this.mod = this._logonservice.Jogaim.includes(JogKod[JogKod.BIZONYLATMOD]);
     this.bizonylatservice = bizonylatservice;
   }
 

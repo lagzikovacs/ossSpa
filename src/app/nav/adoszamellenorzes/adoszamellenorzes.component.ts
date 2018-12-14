@@ -4,25 +4,25 @@ import {NavfeltoltesService} from '../navfeltoltes.service';
 
 @Component({
   selector: 'app-adoszamellenorzes',
-  templateUrl: './adoszamlekerdezes.component.html',
-  styleUrls: ['./adoszamlekerdezes.component.css']
+  templateUrl: './adoszamellenorzes.component.html',
+  styleUrls: ['./adoszamellenorzes.component.css']
 })
-export class AdoszamlekerdezesComponent implements OnDestroy {
+export class AdoszamellenorzesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   eppFrissit = false;
-  navexportellenorzesservice: NavfeltoltesService;
+  navfeltoltesservice: NavfeltoltesService;
   adoszam = '';
   valasz = '';
 
-  constructor(navexportellenorzesservice: NavfeltoltesService  ) {
-    this.navexportellenorzesservice = navexportellenorzesservice;
+  constructor(navfeltoltesservice: NavfeltoltesService  ) {
+    this.navfeltoltesservice = navfeltoltesservice;
   }
 
   onSubmit() {
     this.valasz = '';
     this.eppFrissit = true;
-    this.navexportellenorzesservice.Adoszamellenorzes(this.adoszam)
+    this.navfeltoltesservice.Adoszamellenorzes(this.adoszam)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

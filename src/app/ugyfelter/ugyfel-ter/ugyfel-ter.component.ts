@@ -3,6 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {UgyfelterService} from '../ugyfelter.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {UgyfelterDto} from '../ugyfelterdto';
+import {ProjektkapcsolatService} from '../../projekt/bizonylatesirat/projektkapcsolat.service';
+import {LogonService} from '../../logon/logon.service';
 
 @Component({
   selector: 'app-ugyfel-ter',
@@ -17,9 +19,12 @@ export class UgyfelTerComponent implements OnInit, OnDestroy {
   bejelentkezve = false;
   eppFrissit = false;
   Dto = new UgyfelterDto();
+  projektkod = 0;
 
   constructor(private _route: ActivatedRoute,
-              private _ugyfelterservice: UgyfelterService) { }
+              private _logonservice: LogonService,
+              private _ugyfelterservice: UgyfelterService,
+              private _projektkapcsolatservice: ProjektkapcsolatService) { }
 
   ngOnInit() {
     this._sub = this._route
@@ -37,8 +42,8 @@ export class UgyfelTerComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        // TODO logonservice-be beírni a sid-et stb
         this.Dto = res.Result;
+        this._logonservice.Sid = res.Result.sid;
 
         this.bejelentkezve = true;
         this.eppFrissit = false;
@@ -50,7 +55,13 @@ export class UgyfelTerComponent implements OnInit, OnDestroy {
   }
 
   setProjektClickedRow(i: number) {
-
+    this.projektkod = this.Dto.projektDto[i].PROJEKTKOD;
+    this._projektkapcsolatservice.ProjektKod = this.Dto.projektDto[i].PROJEKTKOD;
+    this._projektkapcsolatservice.KeresesForUgyfelter()
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
   }
 
   ngOnDestroy() {

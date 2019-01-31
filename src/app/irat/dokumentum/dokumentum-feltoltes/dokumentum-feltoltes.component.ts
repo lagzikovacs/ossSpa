@@ -35,8 +35,8 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
       this.fajlnev = this.file.name;
       reader.readAsDataURL(this.file);
       reader.onload = () => {
-        this.imageSrc = reader.result;
-        this.file64 = reader.result.split(',')[1];
+        this.imageSrc = reader.result as string;
+        this.file64 = (reader.result as string).split(',')[1];
       };
     }
   }

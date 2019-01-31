@@ -19,8 +19,8 @@ export class KimenoszamlaComponent implements OnDestroy {
   eppFrissit = false;
   megszakitani = false;
 
-  tol = '2018-01-01';
-  ig = '2018-12-31';
+  tol = '2019-01-01';
+  ig = '2019-12-31';
 
   tasktoken = '';
   szamlalo: any;

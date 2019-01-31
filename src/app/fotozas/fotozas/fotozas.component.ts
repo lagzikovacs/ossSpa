@@ -5,7 +5,7 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {FotozasDto} from '../fotozasdto';
 import {FajlBuf} from '../../irat/dokumentum/fajlbuf';
 import {DokumentumService} from '../../irat/dokumentum/dokumentum.service';
-import {LogonService} from "../../logon/logon.service";
+import {LogonService} from '../../logon/logon.service';
 
 @Component({
   selector: 'app-fotozas',
@@ -67,7 +67,7 @@ export class FotozasComponent implements OnInit, OnDestroy {
       this.fajlnev = this.file.name;
       reader.readAsDataURL(this.file);
       reader.onload = () => {
-        this.file64 = reader.result.split(',')[1];
+        this.file64 = (reader.result as string).split(',')[1];
       };
     }
   }

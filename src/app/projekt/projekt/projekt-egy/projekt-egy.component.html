@@ -89,10 +89,10 @@
     <app-projekt-napelem></app-projekt-napelem>
   </ng-container>
   <ng-container *ngIf="projektservice.EgyMode === 8">
-    <app-projekt-iratminta></app-projekt-iratminta>
+    <div [@rowanimation]><app-projekt-iratminta></app-projekt-iratminta></div>
   </ng-container>
   <ng-container *ngIf="projektservice.EgyMode === 9">
-    <app-projekt-bizonylatesirat-container></app-projekt-bizonylatesirat-container>
+    <div [@rowanimation]><app-projekt-bizonylatesirat-container></app-projekt-bizonylatesirat-container></div>
   </ng-container>
   <ng-container *ngIf="projektservice.EgyMode === 10">
     <app-projekt-szamlazasirend-container></app-projekt-szamlazasirend-container>
@@ -101,7 +101,7 @@
     <app-projekt-teendo-container></app-projekt-teendo-container>
   </ng-container>
   <ng-container *ngIf="projektservice.EgyMode === 12">
-    <app-projekt-datumok></app-projekt-datumok>
+    <div [@rowanimation]><app-projekt-datumok></app-projekt-datumok></div>
   </ng-container>
 
   <app-errormodal [cim]="projektservice.cim"></app-errormodal>

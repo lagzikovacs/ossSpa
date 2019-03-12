@@ -15,7 +15,7 @@ import {PenznemZoomParameter} from '../../../penznem/penznemzoomparameter';
 @Component({
   selector: 'app-projekt-szerkesztes',
   templateUrl: './projekt-szerkesztes.component.html',
-  styleUrls: ['./projekt-szerkesztes.component.css']
+  styleUrls: ['./projekt-szerkesztes.component.css'],
 })
 export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

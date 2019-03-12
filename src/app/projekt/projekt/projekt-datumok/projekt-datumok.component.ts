@@ -7,7 +7,7 @@ import {ProjektEgyMode} from '../projektegymode';
 @Component({
   selector: 'app-projekt-datumok',
   templateUrl: './projekt-datumok.component.html',
-  styleUrls: ['./projekt-datumok.component.css']
+  styleUrls: ['./projekt-datumok.component.css'],
 })
 export class ProjektDatumokComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

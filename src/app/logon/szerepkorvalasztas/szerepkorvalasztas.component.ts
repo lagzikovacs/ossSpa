@@ -4,12 +4,12 @@ import {LogonService} from '../logon.service';
 import {Router} from '@angular/router';
 import {CsoportService} from '../../csoport/csoport.service';
 import {SessionService} from '../../session/session.service';
-import {SessionDto} from "../../session/sessiondto";
+import {SessionDto} from '../../session/sessiondto';
 
 @Component({
   selector: 'app-szerepkorvalasztas',
   templateUrl: './szerepkorvalasztas.component.html',
-  styleUrls: ['./szerepkorvalasztas.component.css']
+  styleUrls: ['./szerepkorvalasztas.component.css'],
 })
 export class SzerepkorvalasztasComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) private errormodal: ErrormodalComponent;

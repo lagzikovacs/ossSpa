@@ -264,6 +264,7 @@ import { FotozasComponent } from './fotozas/fotozas/fotozas.component';
 import { FotozasLinkComponent } from './fotozas/fotozas-link/fotozas-link.component';
 import {NavfeltoltesService} from './nav/navfeltoltes.service';
 import { UgyfelTerBizonylatesiratListComponent } from './ugyfelter/ugyfel-ter-bizonylatesirat-list/ugyfel-ter-bizonylatesirat-list.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   {path: 'fooldal', component: FooldalComponent},
@@ -559,6 +560,7 @@ if (environment.production) {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
     FormsModule,

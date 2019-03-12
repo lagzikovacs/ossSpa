@@ -11,11 +11,13 @@ import {ProjektSzerkesztesMode} from '../projektszerkesztesmode';
 import {ProjektEgyMode} from '../projektegymode';
 import {UgyfelZoomParameter} from '../../../ugyfel/ugyfelzoomparameter';
 import {PenznemZoomParameter} from '../../../penznem/penznemzoomparameter';
+import {rowanimaton} from '../../../animation/rowAnimation';
 
 @Component({
   selector: 'app-projekt-szerkesztes',
   templateUrl: './projekt-szerkesztes.component.html',
   styleUrls: ['./projekt-szerkesztes.component.css'],
+  animations: [rowanimaton]
 })
 export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

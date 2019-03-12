@@ -1,10 +1,12 @@
 import {Component, OnDestroy} from '@angular/core';
 import {SzamlazasirendService} from '../szamlazasirend.service';
+import {rowanimaton} from '../../../animation/rowAnimation';
 
 @Component({
   selector: 'app-projekt-szamlazasirend-container',
   templateUrl: './projekt-szamlazasirend-container.component.html',
-  styleUrls: ['./projekt-szamlazasirend-container.component.css']
+  styleUrls: ['./projekt-szamlazasirend-container.component.css'],
+  animations: [rowanimaton]
 })
 export class ProjektSzamlazasirendContainerComponent implements OnDestroy {
   szamlazasirendservice: SzamlazasirendService;

@@ -2,13 +2,13 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {ProjektEgyMode} from '../projektegymode';
-import {rowanimaton} from '../../../animation/rowAnimation';
+import {rowanimation} from '../../../animation/rowAnimation';
 
 @Component({
   selector: 'app-projekt-statusz',
   templateUrl: './projekt-statusz.component.html',
   styleUrls: ['./projekt-statusz.component.css'],
-  animations: [rowanimaton]
+  animations: [rowanimation]
 })
 export class ProjektStatuszComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

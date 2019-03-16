@@ -3,13 +3,13 @@ import {ProjektService} from '../projekt.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {ProjektContainerMode} from '../projektcontainermode';
 import {ProjektEgyMode} from '../projektegymode';
-import {rowanimaton} from '../../../animation/rowAnimation';
+import {rowanimation} from '../../../animation/rowAnimation';
 
 @Component({
   selector: 'app-projekt-torles',
   templateUrl: './projekt-torles.component.html',
   styleUrls: ['./projekt-torles.component.css'],
-  animations: [rowanimaton]
+  animations: [rowanimation]
 })
 export class ProjektTorlesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

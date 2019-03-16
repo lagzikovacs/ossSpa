@@ -8,6 +8,7 @@ import {LogonService} from './logon/logon.service';
 })
 export class AppComponent {
   constructor(private _logonservice: LogonService) {
+    window.localStorage.clear();
   }
 
   @HostListener('window:beforeunload')

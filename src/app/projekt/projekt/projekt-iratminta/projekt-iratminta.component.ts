@@ -4,13 +4,13 @@ import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {b64toBlob} from '../../../tools/b64toBlob';
 import * as FileSaver from 'file-saver';
 import {IratmintaService} from './iratminta.service';
-import {rowanimaton} from '../../../animation/rowAnimation';
+import {rowanimation} from '../../../animation/rowAnimation';
 
 @Component({
   selector: 'app-projekt-iratminta',
   templateUrl: './projekt-iratminta.component.html',
   styleUrls: ['./projekt-iratminta.component.css'],
-  animations: [rowanimaton]
+  animations: [rowanimation]
 })
 export class ProjektIratmintaComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

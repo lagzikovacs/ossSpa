@@ -11,13 +11,13 @@ import {SzamlazasirendContainerMode} from '../../szamlazasirend/szamlazasirendco
 import {ProjektteendoContainerMode} from '../../projektteendo/projektteendocontainermode';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
-import {rowanimaton} from '../../../animation/rowAnimation';
+import {rowanimation} from '../../../animation/rowAnimation';
 
 @Component({
   selector: 'app-projekt-egy',
   templateUrl: './projekt-egy.component.html',
   styleUrls: ['./projekt-egy.component.css'],
-  animations: [rowanimaton]
+  animations: [rowanimation]
 })
 export class ProjektEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

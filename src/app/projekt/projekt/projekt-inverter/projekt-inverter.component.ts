@@ -2,13 +2,13 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {ProjektEgyMode} from '../projektegymode';
-import {rowanimaton} from '../../../animation/rowAnimation';
+import {rowanimation} from '../../../animation/rowAnimation';
 
 @Component({
   selector: 'app-projekt-inverter',
   templateUrl: './projekt-inverter.component.html',
   styleUrls: ['./projekt-inverter.component.css'],
-  animations: [rowanimaton]
+  animations: [rowanimation]
 })
 export class ProjektInverterComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

@@ -1,12 +1,12 @@
 import {Component, OnDestroy} from '@angular/core';
 import {ProjektService} from '../projekt.service';
-import {rowanimaton} from '../../../animation/rowAnimation';
+import {rowanimation} from '../../../animation/rowAnimation';
 
 @Component({
   selector: 'app-projekt-reszletek',
   templateUrl: './projekt-reszletek.component.html',
   styleUrls: ['./projekt-reszletek.component.css'],
-  animations: [rowanimaton]
+  animations: [rowanimation]
 })
 export class ProjektReszletekComponent implements OnDestroy {
   projektservice: ProjektService;

@@ -1,6 +1,6 @@
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
-export const rowanimaton = trigger('rowanimation', [
+export const rowanimation = trigger('rowanimation', [
   state('in', style({
     'opacity': '1',
     transform: 'translateX(0)'

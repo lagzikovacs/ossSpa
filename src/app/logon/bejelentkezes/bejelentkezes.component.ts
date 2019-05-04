@@ -60,8 +60,8 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
           case 0:
             throw nincsBesorolva;
           case 1:
-            this._logonservice.SzerepkorValasztas(this._logonservice.lehetsegesszerepkorokDto[0].PARTICIOKOD,
-              this._logonservice.lehetsegesszerepkorokDto[0].CSOPORTKOD)
+            this._logonservice.SzerepkorValasztas(this._logonservice.lehetsegesszerepkorokDto[0].Particiokod,
+              this._logonservice.lehetsegesszerepkorokDto[0].Csoportkod)
               .then(res2 => {
                 if (res2.Error != null) {
                   throw res2.Error;
@@ -99,6 +99,8 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
         }
       })
       .catch(err => {
+        console.log(err);
+
         this.eppFrissit = false;
         this.errormodal.show(err);
       });

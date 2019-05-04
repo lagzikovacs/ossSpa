@@ -1,11 +1,11 @@
 export class CsoportDto {
-  CSOPORTKOD: number;
-  PARTICIOKOD: number;
-  PARTICIOMEGNEVEZES: string;
-  CSOPORT1: string;
+  Csoportkod: number;
+  Particiokod: number;
+  Particiomegnevezes: string;
+  Csoport1: string;
 
-  LETREHOZVA: Date;
-  LETREHOZTA: string;
-  MODOSITVA: Date;
-  MODOSITOTTA: string;
+  Letrehozva: Date;
+  Letrehozta: string;
+  Modositva: Date;
+  Modositotta: string;
 }

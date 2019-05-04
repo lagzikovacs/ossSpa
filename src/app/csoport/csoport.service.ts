@@ -44,7 +44,7 @@ export class CsoportService {
               private _logonservice: LogonService) { }
 
   public Add(dto: CsoportDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'add';
+    const url = environment.CoreRef + this._controller + 'add';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -55,7 +55,7 @@ export class CsoportService {
   }
 
   public CreateNew(): Promise<CsoportResult> {
-    const url = environment.BaseHref + this._controller + 'createnew';
+    const url = environment.CoreRef + this._controller + 'createnew';
     const body = '';
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -66,7 +66,7 @@ export class CsoportService {
   }
 
   public Delete(dto: CsoportDto): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'delete';
+    const url = environment.CoreRef + this._controller + 'delete';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -77,7 +77,7 @@ export class CsoportService {
   }
 
   public Get(key: number): Promise<CsoportResult> {
-    const url = environment.BaseHref + this._controller + 'get';
+    const url = environment.CoreRef + this._controller + 'get';
     const body = key;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -88,7 +88,7 @@ export class CsoportService {
   }
 
   public Read(maszk: string): Promise<CsoportResult> {
-    const url = environment.BaseHref + this._controller + 'read';
+    const url = environment.CoreRef + this._controller + 'read';
     const body = maszk;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -99,7 +99,7 @@ export class CsoportService {
   }
 
   public Update(dto: CsoportDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'update';
+    const url = environment.CoreRef + this._controller + 'update';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -111,7 +111,7 @@ export class CsoportService {
 
 
   public SelectCsoportFelhasznalo(csoportkod: number): Promise<FelhasznaloResult> {
-    const url = environment.BaseHref + this._controller + 'selectcsoportfelhasznalo';
+    const url = environment.CoreRef + this._controller + 'selectcsoportfelhasznalo';
     const body = csoportkod;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -121,7 +121,7 @@ export class CsoportService {
     return this._httpClient.post<FelhasznaloResult>(url, JSON.stringify(body), options).toPromise();
   }
   public SelectCsoportJog(csoportkod: number): Promise<LehetsegesJogResult> {
-    const url = environment.BaseHref + this._controller + 'selectcsoportjog';
+    const url = environment.CoreRef + this._controller + 'selectcsoportjog';
     const body = csoportkod;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -132,7 +132,7 @@ export class CsoportService {
   }
 
   public CsoportFelhasznaloBeKi(par: CsoportFelhasznaloParameter): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'csoportfelhasznalobeki';
+    const url = environment.CoreRef + this._controller + 'csoportfelhasznalobeki';
     const body = par;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -142,7 +142,7 @@ export class CsoportService {
     return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
   }
   public CsoportJogBeKi(par: CsoportJogParameter): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'csoportjogbeki';
+    const url = environment.CoreRef + this._controller + 'csoportjogbeki';
     const body = par;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -153,7 +153,7 @@ export class CsoportService {
   }
 
   public Jogaim(): Promise<JogaimResult> {
-    const url = environment.BaseHref + this._controller + 'jogaim';
+    const url = environment.CoreRef + this._controller + 'jogaim';
     const body = null;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

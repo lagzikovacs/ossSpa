@@ -21,8 +21,8 @@ export class CsoportJogComponent implements OnDestroy {
   jog(i: number) {
     this.eppFrissit = true;
 
-    const par = new CsoportJogParameter(this.csoportservice.Dto[this.csoportservice.DtoSelectedIndex].CSOPORTKOD,
-      this.csoportservice.DtoCsoportLehetsegesJog[i].LEHETSEGESJOGKOD, !this.csoportservice.DtoCsoportLehetsegesJog[i].CSOPORTTAG);
+    const par = new CsoportJogParameter(this.csoportservice.Dto[this.csoportservice.DtoSelectedIndex].Csoportkod,
+      this.csoportservice.DtoCsoportLehetsegesJog[i].Lehetsegesjogkod, !this.csoportservice.DtoCsoportLehetsegesJog[i].Csoporttag);
 
     this.csoportservice.CsoportJogBeKi(par)
       .then(res => {
@@ -30,7 +30,7 @@ export class CsoportJogComponent implements OnDestroy {
           throw res.Error;
         }
 
-        this.csoportservice.DtoCsoportLehetsegesJog[i].CSOPORTTAG = !this.csoportservice.DtoCsoportLehetsegesJog[i].CSOPORTTAG;
+        this.csoportservice.DtoCsoportLehetsegesJog[i].Csoporttag = !this.csoportservice.DtoCsoportLehetsegesJog[i].Csoporttag;
         this.eppFrissit = false;
       })
       .catch(err => {

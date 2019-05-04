@@ -4,9 +4,9 @@
     <tbody>
     <tr *ngFor="let item of csoportservice.DtoCsoportLehetsegesJog; let i = index">
       <td>
-        <input type="checkbox" [checked]="item.CSOPORTTAG" (click)="jog(i)">
+        <input type="checkbox" [checked]="item.Csoporttag" (click)="jog(i)">
       </td>
-      <td>{{item.JOG}}</td>
+      <td>{{item.Jog}}</td>
     </tr>
     </tbody>
   </table>

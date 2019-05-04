@@ -35,7 +35,7 @@ export class LogonService {
   }
 
   public Bejelentkezes(Azonosito: string, Jelszo: string): Promise<LogonResult> {
-    const url = environment.BaseHref + this._controller + 'bejelentkezes';
+    const url = environment.CoreRef + this._controller + 'bejelentkezes';
     const body = new LogonParameter(Azonosito, Md5.hashStr(Jelszo).toString());
     const options = {headers: new HttpHeaders().set('Content-Type', 'application/json')};
 
@@ -46,7 +46,7 @@ export class LogonService {
   }
 
   public Szerepkorok(): Promise<SzerepkorokResult> {
-    const url = environment.BaseHref + this._controller + 'szerepkorok';
+    const url = environment.CoreRef + this._controller + 'szerepkorok';
     const body = '';
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -57,7 +57,7 @@ export class LogonService {
   }
 
   public SzerepkorValasztas(particiokod: number, csoportkod: number): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'szerepkorvalasztas';
+    const url = environment.CoreRef + this._controller + 'szerepkorvalasztas';
     const body = new SzerepkorvalasztasParameter(particiokod, csoportkod);
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -68,7 +68,7 @@ export class LogonService {
   }
 
   public Kijelentkezes(): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'kijelentkezes';
+    const url = environment.CoreRef + this._controller + 'kijelentkezes';
     const body = null;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

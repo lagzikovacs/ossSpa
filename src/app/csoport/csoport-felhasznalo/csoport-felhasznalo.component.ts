@@ -21,7 +21,7 @@ export class CsoportFelhasznaloComponent implements OnDestroy {
   felhasznalo(i: number) {
     this.eppFrissit = true;
 
-    const par = new CsoportFelhasznaloParameter(this.csoportservice.Dto[this.csoportservice.DtoSelectedIndex].CSOPORTKOD,
+    const par = new CsoportFelhasznaloParameter(this.csoportservice.Dto[this.csoportservice.DtoSelectedIndex].Csoportkod,
       this.csoportservice.DtoCsoportFelhasznalo[i].FELHASZNALOKOD, !this.csoportservice.DtoCsoportFelhasznalo[i].CSOPORTTAG);
 
     this.csoportservice.CsoportFelhasznaloBeKi(par)

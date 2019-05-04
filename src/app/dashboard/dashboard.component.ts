@@ -31,9 +31,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
               sessionservice: SessionService) {
     this.sessionservice = sessionservice;
 
-    console.log((_platformLocation as any).location);
-    console.log((_platformLocation as any).location.href);
-    console.log((_platformLocation as any).location.origin);
+    // console.log((_platformLocation as any).location);
+    // console.log((_platformLocation as any).location.href);
+    // console.log((_platformLocation as any).location.origin);
   }
 
   ngOnInit() {

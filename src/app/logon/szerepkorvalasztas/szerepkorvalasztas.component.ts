@@ -31,8 +31,8 @@ export class SzerepkorvalasztasComponent implements OnInit, OnDestroy {
 
   setClickedRow(i: number) {
     this.eppFrissit = true;
-    this.logonservice.SzerepkorValasztas(this.logonservice.lehetsegesszerepkorokDto[i].PARTICIOKOD,
-      this.logonservice.lehetsegesszerepkorokDto[i].CSOPORTKOD)
+    this.logonservice.SzerepkorValasztas(this.logonservice.lehetsegesszerepkorokDto[i].Particiokod,
+      this.logonservice.lehetsegesszerepkorokDto[i].Csoportkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

@@ -65,7 +65,7 @@ export class CsoportListComponent {
     this.csoportservice.uj = false;
 
     this.eppFrissit = true;
-    this.csoportservice.SelectCsoportFelhasznalo(this.csoportservice.Dto[i].CSOPORTKOD)
+    this.csoportservice.SelectCsoportFelhasznalo(this.csoportservice.Dto[i].Csoportkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -73,7 +73,7 @@ export class CsoportListComponent {
 
         this.csoportservice.DtoCsoportFelhasznalo = res.Result;
 
-        return this.csoportservice.SelectCsoportJog(this.csoportservice.Dto[i].CSOPORTKOD);
+        return this.csoportservice.SelectCsoportJog(this.csoportservice.Dto[i].Csoportkod);
       })
       .then(res1 => {
         if (res1.Error != null) {

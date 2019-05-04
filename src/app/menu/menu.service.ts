@@ -70,10 +70,10 @@ import {DokumentumContainerMode} from '../irat/dokumentum/dokumentumcontainermod
 import {DokumentumDto} from '../irat/dokumentum/dokumentumdto';
 import {BizonylatService} from '../bizonylat/bizonylat.service';
 import {BizonylatTipus} from '../bizonylat/bizonylattipus';
-import {BizonylatDto} from "../bizonylat/bizonylatdto";
-import {BizonylatContainerMode} from "../bizonylat/bizonylatcontainermode";
-import {VagolapService} from "../vagolap/vagolap.service";
-import {VagolapMode} from "../vagolap/vagolapmode";
+import {BizonylatDto} from '../bizonylat/bizonylatdto';
+import {BizonylatContainerMode} from '../bizonylat/bizonylatcontainermode';
+import {VagolapService} from '../vagolap/vagolap.service';
+import {VagolapMode} from '../vagolap/vagolapmode';
 
 @Injectable({
   providedIn: 'root'
@@ -116,7 +116,7 @@ export class MenuService {
   }
 
   public AngularMenu(): Promise<AngularmenuResult> {
-    const url = environment.BaseHref + this._controller + 'angularmenu';
+    const url = environment.CoreRef + this._controller + 'angularmenu';
     const body = '';
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

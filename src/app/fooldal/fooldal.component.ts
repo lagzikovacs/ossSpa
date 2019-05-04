@@ -33,7 +33,7 @@ export class FooldalComponent implements OnInit, OnDestroy {
 
   felhasznalo() {
     if (this.szerepkorkivalasztva) {
-      this._esemenynaploservice.Felhasznalokod = this._sessionservice.sessiondto.FELHASZNALOKOD;
+      this._esemenynaploservice.Felhasznalokod = this._sessionservice.sessiondto.Felhasznalokod;
     }
   }
 

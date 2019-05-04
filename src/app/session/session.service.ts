@@ -18,7 +18,7 @@ export class SessionService {
   }
 
   public Get(): Promise<SessionResult> {
-    const url = environment.BaseHref + this._controller + 'get';
+    const url = environment.CoreRef + this._controller + 'get';
     const body = '';
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

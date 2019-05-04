@@ -1,13 +1,13 @@
 export class SessionDto {
-  PARTICIO: string;
-  CSOPORT: string;
-  FELHASZNALOKOD: number;
-  FELHASZNALO: string;
-  AZONOSITO: string;
-  LOGOL: boolean;
-  IP: string;
-  HOST: string;
-  OSUSER: string;
-  LETREHOZVA: Date;
-  ERVENYES: Date;
+  Particio: string;
+  Csoport: string;
+  Felhasznalokod: number;
+  Felhasznalo: string;
+  Azonosito: string;
+  Logol: boolean;
+  Ip: string;
+  Host: string;
+  Osuser: string;
+  Letrehozva: Date;
+  Ervenyes: Date;
 }

@@ -27,15 +27,15 @@
       <td *ngIf="felhasznaloservice.zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
           (click)="selectforzoom(i)"><i class="fa fa-check" aria-hidden="true"></i></td>
       <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
-          (click)="setClickedRow(i)">{{item.FELHASZNALOKOD}}</td>
-      <td>{{item.AZONOSITO}}</td>
-      <td>{{item.NEV}}</td>
-      <td>{{item.TELEFON}}</td>
-      <td>{{item.EMAIL}}</td>
-      <td>{{item.STATUSZ}}</td>
-      <td>{{item.STATUSZKELTE | datehun}}</td>
-      <td *ngIf="item.LOGONLOG">Igen</td>
-      <td *ngIf="!item.LOGONLOG">Nem</td>
+          (click)="setClickedRow(i)">{{item.Felhasznalokod}}</td>
+      <td>{{item.Azonosito}}</td>
+      <td>{{item.Nev}}</td>
+      <td>{{item.Telefon}}</td>
+      <td>{{item.Email}}</td>
+      <td>{{item.Statusz}}</td>
+      <td>{{item.Statuszkelte | datehun}}</td>
+      <td *ngIf="item.Logonlog">Igen</td>
+      <td *ngIf="!item.Logonlog">Nem</td>
     </tr>
     </tbody>
   </table>

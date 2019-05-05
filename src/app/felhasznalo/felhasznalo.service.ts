@@ -36,7 +36,7 @@ export class FelhasznaloService {
               private _logonservice: LogonService) { }
 
   public Add(dto: FelhasznaloDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'add';
+    const url = environment.CoreRef + this._controller + 'add';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -47,7 +47,7 @@ export class FelhasznaloService {
   }
 
   public CreateNew(): Promise<FelhasznaloResult> {
-    const url = environment.BaseHref + this._controller + 'createnew';
+    const url = environment.CoreRef + this._controller + 'createnew';
     const body = '';
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -58,7 +58,7 @@ export class FelhasznaloService {
   }
 
   public Delete(dto: FelhasznaloDto): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'delete';
+    const url = environment.CoreRef + this._controller + 'delete';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -69,7 +69,7 @@ export class FelhasznaloService {
   }
 
   public Get(key: number): Promise<FelhasznaloResult> {
-    const url = environment.BaseHref + this._controller + 'get';
+    const url = environment.CoreRef + this._controller + 'get';
     const body = key;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -80,7 +80,7 @@ export class FelhasznaloService {
   }
 
   public Read(maszk: string): Promise<FelhasznaloResult> {
-    const url = environment.BaseHref + this._controller + 'read';
+    const url = environment.CoreRef + this._controller + 'read';
     const body = maszk;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -91,7 +91,7 @@ export class FelhasznaloService {
   }
 
   public Update(dto: FelhasznaloDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'update';
+    const url = environment.CoreRef + this._controller + 'update';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -102,7 +102,7 @@ export class FelhasznaloService {
   }
 
   public JelszoBeallitas(FelhasznaloKod: number, Jelszo: string, UtolsoModositas: any): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'jelszobeallitas';
+    const url = environment.CoreRef + this._controller + 'jelszobeallitas';
     const body = new JelszocsereParameter(FelhasznaloKod, '', Md5.hashStr(Jelszo).toString(), UtolsoModositas);
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -113,7 +113,7 @@ export class FelhasznaloService {
   }
 
   public JelszoCsere(RegiJelszo: string, UjJelszo: string): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'jelszocsere';
+    const url = environment.CoreRef + this._controller + 'jelszocsere';
     const body = new JelszocsereParameter(0, Md5.hashStr(RegiJelszo).toString(), Md5.hashStr(UjJelszo).toString(), null);
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

@@ -4,10 +4,10 @@
     <tbody>
     <tr *ngFor="let item of csoportservice.DtoCsoportFelhasznalo; let i = index">
       <td>
-        <input type="checkbox" [checked]="item.CSOPORTTAG" (click)="felhasznalo(i)">
+        <input type="checkbox" [checked]="item.Csoporttag" (click)="felhasznalo(i)">
       </td>
-      <td>{{item.AZONOSITO}}</td>
-      <td>{{item.NEV}}</td>
+      <td>{{item.Azonosito}}</td>
+      <td>{{item.Nev}}</td>
     </tr>
     </tbody>
   </table>

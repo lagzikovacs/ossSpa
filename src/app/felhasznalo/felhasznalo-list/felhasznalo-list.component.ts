@@ -73,7 +73,7 @@ export class FelhasznaloListComponent implements OnInit, OnDestroy {
 
   selectforzoom(i: number) {
     if (this.felhasznaloservice.zoomsource === ZoomSources.Projektteendo) {
-      this._projektteendoservice.DtoEdited.DEDIKALVA = this.felhasznaloservice.Dto[i].NEV;
+      this._projektteendoservice.DtoEdited.DEDIKALVA = this.felhasznaloservice.Dto[i].Nev;
 
       this.stopzoom();
     }

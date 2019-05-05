@@ -22,7 +22,7 @@ export class CsoportFelhasznaloComponent implements OnDestroy {
     this.eppFrissit = true;
 
     const par = new CsoportFelhasznaloParameter(this.csoportservice.Dto[this.csoportservice.DtoSelectedIndex].Csoportkod,
-      this.csoportservice.DtoCsoportFelhasznalo[i].FELHASZNALOKOD, !this.csoportservice.DtoCsoportFelhasznalo[i].CSOPORTTAG);
+      this.csoportservice.DtoCsoportFelhasznalo[i].Felhasznalokod, !this.csoportservice.DtoCsoportFelhasznalo[i].Csoporttag);
 
     this.csoportservice.CsoportFelhasznaloBeKi(par)
       .then(res => {
@@ -30,7 +30,7 @@ export class CsoportFelhasznaloComponent implements OnDestroy {
           throw res.Error;
         }
 
-        this.csoportservice.DtoCsoportFelhasznalo[i].CSOPORTTAG = !this.csoportservice.DtoCsoportFelhasznalo[i].CSOPORTTAG;
+        this.csoportservice.DtoCsoportFelhasznalo[i].Csoporttag = !this.csoportservice.DtoCsoportFelhasznalo[i].Csoporttag;
         this.eppFrissit = false;
       })
       .catch(err => {

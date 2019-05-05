@@ -1,15 +1,15 @@
 export class FelhasznaloDto {
-  FELHASZNALOKOD: number;
-  AZONOSITO: string;
-  NEV: string;
-  TELEFON: string;
-  EMAIL: string;
-  STATUSZ: string;
-  STATUSZKELTE: Date;
-  CSOPORTTAG: boolean;
-  LOGONLOG: boolean;
-  LETREHOZVA: Date;
-  LETREHOZTA: string;
-  MODOSITVA: Date;
-  MODOSITOTTA: string;
+  Felhasznalokod: number;
+  Azonosito: string;
+  Nev: string;
+  Telefon: string;
+  Email: string;
+  Statusz: string;
+  Statuszkelte: Date;
+  Csoporttag: boolean;
+  Logonlog: boolean;
+  Letrehozva: Date;
+  Letrehozta: string;
+  Modositva: Date;
+  Modositotta: string;
 }

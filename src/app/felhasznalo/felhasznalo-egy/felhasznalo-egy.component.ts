@@ -44,7 +44,7 @@ export class FelhasznaloEgyComponent implements OnDestroy {
     this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Jelszo;
   }
   tevekenyseg() {
-    this._esemenynaploservice.Felhasznalokod = this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex].FELHASZNALOKOD;
+    this._esemenynaploservice.Felhasznalokod = this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex].Felhasznalokod;
     this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Tevekenyseg;
   }
   ngOnDestroy() {

@@ -15,7 +15,7 @@ export class VerzioService {
   }
 
   public VerzioEsBuild(): Promise<StringResult> {
-    const url = environment.BaseHref + this._controller + 'verzioesbuild';
+    const url = environment.CoreRef + this._controller + 'verzioesbuild';
     const body = '';
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

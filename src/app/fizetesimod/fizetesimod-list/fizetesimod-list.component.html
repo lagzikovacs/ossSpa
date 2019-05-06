@@ -3,7 +3,7 @@
   <app-toolbar [Szurok]="szurok"
                [(szempont)]="fizetesimodservice.ekDto.szempont"
                [(minta)]="fizetesimodservice.ekDto.minta"
-               [enKereses]="!eppFrissit && mod" (Kereses)="onKereses()"
+               [enKereses]="!eppFrissit" (Kereses)="onKereses()"
                [enUj]="!eppFrissit" (Uj)="uj()"
                [visZoom]="fizetesimodservice.zoom" (StopZoom)="stopzoom()">
   </app-toolbar>

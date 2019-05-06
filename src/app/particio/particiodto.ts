@@ -1,51 +1,51 @@
 export class ParticioDto {
-  PARTICIOKOD: number;
-  MEGNEVEZES: string;
+  Particiokod: number;
+  Megnevezes: string;
 
-  SZALLITO_NEV: string;
-  SZALLITO_IRANYITOSZAM: string;
-  SZALLITO_HELYSEGNEV: string;
-  SZALLITO_UTCAHAZSZAM: string;
-  SZALLITO_BANKSZAMLA1: string;
-  SZALLITO_BANKSZAMLA2: string;
-  SZALLITO_ADOTORZSSZAM: string;
-  SZALLITO_ADOAFAKOD: string;
-  SZALLITO_ADOMEGYEKOD: string;
+  SzallitoNev: string;
+  SzallitoIranyitoszam: string;
+  SzallitoHelysegnev: string;
+  SzallitoUtcahazszam: string;
+  SzallitoBankszamla1: string;
+  SzallitoBankszamla2: string;
+  SzallitoAdotorzsszam: string;
+  SzallitoAdoafakod: string;
+  SzallitoAdomegyekod: string;
 
-  NAV_URL: string;
-  NAV_FELHASZNALOAZONOSITO: string;
-  NAV_FELHASZNALOJELSZO: string;
-  NAV_ALAIROKULCS: string;
-  NAV_CSEREKULCS: string;
+  NavUrl: string;
+  NavFelhasznaloazonosito: string;
+  NavFelhasznalojelszo: string;
+  NavAlairokulcs: string;
+  NavCserekulcs: string;
 
-  SMTP_KLIENSTIPUS: string;
-  SMTP_FELHASZNALOAZONOSITO: string;
-  SMTP_FELHASZNALOJELSZO: string;
-  SMTP_KULDONEVE: string;
-  SMTP_KULDOEMAILCIME: string;
-  SMTP_CUSTOMHOST: string;
-  SMTP_CUSTOMPORT: number;
-  SMTP_TLS: boolean;
-  HIBAERTESITESEMAILCIMEK: string;
+  SmtpKlienstipus: string;
+  SmtpFelhasznaloazonosito: string;
+  SmtpFelhasznalojelszo: string;
+  SmtpKuldoneve: string;
+  SmtpKuldoemailcime: string;
+  SmtpCustomhost: string;
+  SmtpCustomport: number;
+  SmtpTls: boolean;
+  Hibaertesitesemailcimek: string;
 
-  BIZONYLAT_BIZONYLATKEP_IRATKOD: number;
-  BIZONYLAT_EREDETIPELDANYOK_SZAMA: number;
-  BIZONYLAT_MASOLATOK_SZAMA: number;
+  BizonylatBizonylatkepIratkod: number;
+  BizonylatEredetipeldanyokSzama: number;
+  BizonylatMasolatokSzama: number;
 
-  PROJEKT_AJANLAT_IRATKOD: number;
-  PROJEKT_ELEGEDETTSEGIFELMERES_IRATKOD: number;
-  PROJEKT_KESZREJELENTES_DEMASZ_IRATKOD: number;
-  PROJEKT_KESZREJELENTES_ELMUEMASZ_IRATKOD: number;
-  PROJEKT_KESZREJELENTES_EON_IRATKOD: number;
-  PROJEKT_MUNKALAP_IRATKOD: number;
-  PROJEKT_SZALLITASISZERZODES_IRATKOD: number;
-  PROJEKT_SZERZODES_IRATKOD: number;
+  ProjektAjanlatIratkod: number;
+  ProjektElegedettsegifelmeresIratkod: number;
+  ProjektKeszrejelentesDemaszIratkod: number;
+  ProjektKeszrejelentesElmuemaszIratkod: number;
+  ProjektKeszrejelentesEonIratkod: number;
+  ProjektMunkalapIratkod: number;
+  ProjektSzallitasiszerzodesIratkod: number;
+  ProjektSzerzodesIratkod: number;
 
-  VOLUME_UJVOLUME_MAXMERET: number;
-  VOLUME_UJVOLUME_ELERESIUT: string;
+  VolumeUjvolumeMaxmeret: number;
+  VolumeUjvolumeEleresiut: string;
 
-  LETREHOZVA: Date;
-  LETREHOZTA: string;
-  MODOSITVA: Date;
-  MODOSITOTTA: string;
+  Letrehozva: Date;
+  Letrehozta: string;
+  Modositva: Date;
+  Modositotta: string;
 }

@@ -21,7 +21,7 @@ export class ParticioService {
               private _logonservice: LogonService) { }
 
   public Get(): Promise<ParticioResult> {
-    const url = environment.BaseHref + this._controller + 'get';
+    const url = environment.CoreRef + this._controller + 'get';
     const body = null;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -32,7 +32,7 @@ export class ParticioService {
   }
 
   public Update(dto: ParticioDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'update';
+    const url = environment.CoreRef + this._controller + 'update';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

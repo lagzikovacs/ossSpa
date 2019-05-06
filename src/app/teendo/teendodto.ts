@@ -1,9 +1,9 @@
 export class TeendoDto {
-  TEENDOKOD: number;
-  TEENDO1: string;
+  Teendokod: number;
+  Teendo1: string;
 
-  LETREHOZVA: Date;
-  LETREHOZTA: string;
-  MODOSITVA: Date;
-  MODOSITOTTA: string;
+  Letrehozva: Date;
+  Letrehozta: string;
+  Modositva: Date;
+  Modositotta: string;
 }

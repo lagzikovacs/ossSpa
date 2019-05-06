@@ -1,10 +1,10 @@
 export class AfakulcsDto {
-  AFAKULCSKOD: number;
-  AFAKULCS1: string;
-  AFAMERTEKE: number;
+  Afakulcskod: number;
+  Afakulcs1: string;
+  Afamerteke: number;
 
-  LETREHOZVA: Date;
-  LETREHOZTA: string;
-  MODOSITVA: Date;
-  MODOSITOTTA: string;
+  Letrehozva: Date;
+  Letrehozta: string;
+  Modositva: Date;
+  Modositotta: string;
 }

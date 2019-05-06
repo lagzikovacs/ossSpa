@@ -35,7 +35,7 @@ export class MeService {
               private _logonservice: LogonService) { }
 
   public Add(dto: MeDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'add';
+    const url = environment.CoreRef + this._controller + 'add';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -46,7 +46,7 @@ export class MeService {
   }
 
   public CreateNew(): Promise<MeResult> {
-    const url = environment.BaseHref + this._controller + 'createnew';
+    const url = environment.CoreRef + this._controller + 'createnew';
     const body = '';
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -57,7 +57,7 @@ export class MeService {
   }
 
   public Delete(dto: MeDto): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'delete';
+    const url = environment.CoreRef + this._controller + 'delete';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -68,7 +68,7 @@ export class MeService {
   }
 
   public Get(key: number): Promise<MeResult> {
-    const url = environment.BaseHref + this._controller + 'get';
+    const url = environment.CoreRef + this._controller + 'get';
     const body = key;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -79,7 +79,7 @@ export class MeService {
   }
 
   public Read(maszk: string): Promise<MeResult> {
-    const url = environment.BaseHref + this._controller + 'read';
+    const url = environment.CoreRef + this._controller + 'read';
     const body = maszk;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -90,7 +90,7 @@ export class MeService {
   }
 
   public Update(dto: MeDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'update';
+    const url = environment.CoreRef + this._controller + 'update';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -101,7 +101,7 @@ export class MeService {
   }
 
   public ZoomCheck(par: MeZoomParameter): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'zoomcheck';
+    const url = environment.CoreRef + this._controller + 'zoomcheck';
     const body = par;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

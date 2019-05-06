@@ -78,20 +78,20 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
 
   selectforzoom(i: number) {
     if (this.irattipusservice.zoomsource === ZoomSources.Irat) {
-      this._iratservice.DtoEdited.IRATTIPUSKOD = this.irattipusservice.Dto[i].IRATTIPUSKOD;
-      this._iratservice.DtoEdited.IRATTIPUS = this.irattipusservice.Dto[i].IRATTIPUS1;
+      this._iratservice.DtoEdited.IRATTIPUSKOD = this.irattipusservice.Dto[i].Irattipuskod;
+      this._iratservice.DtoEdited.IRATTIPUS = this.irattipusservice.Dto[i].Irattipus1;
 
       this.stopzoom();
     }
     if (this.irattipusservice.zoomsource === ZoomSources.Projektirat) {
-      this._projektkapcsolatservice.UjIratDto.IRATTIPUSKOD = this.irattipusservice.Dto[i].IRATTIPUSKOD;
-      this._projektkapcsolatservice.UjIratDto.IRATTIPUS = this.irattipusservice.Dto[i].IRATTIPUS1;
+      this._projektkapcsolatservice.UjIratDto.IRATTIPUSKOD = this.irattipusservice.Dto[i].Irattipuskod;
+      this._projektkapcsolatservice.UjIratDto.IRATTIPUS = this.irattipusservice.Dto[i].Irattipus1;
 
       this.stopzoom();
     }
     if (this.irattipusservice.zoomsource === ZoomSources.Bizonylatirat) {
-      this._bizonylatkapcsolatservice.UjIratDto.IRATTIPUSKOD = this.irattipusservice.Dto[i].IRATTIPUSKOD;
-      this._bizonylatkapcsolatservice.UjIratDto.IRATTIPUS = this.irattipusservice.Dto[i].IRATTIPUS1;
+      this._bizonylatkapcsolatservice.UjIratDto.IRATTIPUSKOD = this.irattipusservice.Dto[i].Irattipuskod;
+      this._bizonylatkapcsolatservice.UjIratDto.IRATTIPUS = this.irattipusservice.Dto[i].Irattipus1;
 
       this.stopzoom();
     }

@@ -1,9 +1,9 @@
 export class PenznemDto {
-  PENZNEMKOD: number;
-  PENZNEM1: string;
+  Penznemkod: number;
+  Penznem1: string;
 
-  LETREHOZVA: Date;
-  LETREHOZTA: string;
-  MODOSITVA: Date;
-  MODOSITOTTA: string;
+  Letrehozva: Date;
+  Letrehozta: string;
+  Modositva: Date;
+  Modositotta: string;
 }

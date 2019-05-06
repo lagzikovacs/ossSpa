@@ -75,12 +75,12 @@ export class MeListComponent implements OnInit, OnDestroy {
 
   selectforzoom(i: number) {
     if (this.meservice.zoomsource === ZoomSources.Cikk) {
-      this._cikkservice.DtoEdited.MEKOD = this.meservice.Dto[i].MEKOD;
-      this._cikkservice.DtoEdited.ME = this.meservice.Dto[i].ME;
+      this._cikkservice.DtoEdited.MEKOD = this.meservice.Dto[i].Mekod;
+      this._cikkservice.DtoEdited.ME = this.meservice.Dto[i].Me;
     }
     if (this.meservice.zoomsource === ZoomSources.Bizonylattetel) {
-      this._bizonylatservice.TetelDtoEdited.MEKOD = this.meservice.Dto[i].MEKOD;
-      this._bizonylatservice.TetelDtoEdited.ME = this.meservice.Dto[i].ME;
+      this._bizonylatservice.TetelDtoEdited.MEKOD = this.meservice.Dto[i].Mekod;
+      this._bizonylatservice.TetelDtoEdited.ME = this.meservice.Dto[i].Me;
     }
 
     this.stopzoom();

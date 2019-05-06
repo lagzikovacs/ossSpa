@@ -20,9 +20,9 @@
     <tbody>
     <tr *ngFor="let item of afakulcsservice.Dto; let i = index">
       <td *ngIf="afakulcsservice.zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="selectforzoom(i)"><i class="fa fa-check" aria-hidden="true"></i></td>
-      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.AFAKULCSKOD}}</td>
-      <td>{{item.AFAKULCS1}}</td>
-      <td>{{item.AFAMERTEKE}}</td>
+      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.Afakulcskod}}</td>
+      <td>{{item.Afakulcs1}}</td>
+      <td>{{item.Afamerteke}}</td>
     </tr>
     </tbody>
   </table>

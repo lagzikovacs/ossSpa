@@ -1,11 +1,11 @@
 export class TermekdijDto {
-  TERMEKDIJKOD: number;
-  TERMEKDIJKT: string;
-  TERMEKDIJMEGNEVEZES: string;
-  TERMEKDIJEGYSEGAR: number;
+  Termekdijkod: number;
+  Termekdijkt: string;
+  Termekdijmegnevezes: string;
+  Termekdijegysegar: number;
 
-  LETREHOZVA: Date;
-  LETREHOZTA: string;
-  MODOSITVA: Date;
-  MODOSITOTTA: string;
+  Letrehozva: Date;
+  Letrehozta: string;
+  Modositva: Date;
+  Modositotta: string;
 }

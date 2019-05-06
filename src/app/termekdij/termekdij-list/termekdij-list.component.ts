@@ -5,11 +5,11 @@ import {CikkService} from '../../cikk/cikk.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
-import {CikkSzerkesztesMode} from "../../cikk/cikkszerkesztesmode";
-import {TermekdijEgyMode} from "../termekdijegymode";
-import {TermekdijContainerMode} from "../termekdijcontainermode";
-import {BizonylatService} from "../../bizonylat/bizonylat.service";
-import {BizonylattetelSzerkesztesMode} from "../../bizonylat/bizonylattetelszerkesztesmode";
+import {CikkSzerkesztesMode} from '../../cikk/cikkszerkesztesmode';
+import {TermekdijEgyMode} from '../termekdijegymode';
+import {TermekdijContainerMode} from '../termekdijcontainermode';
+import {BizonylatService} from '../../bizonylat/bizonylat.service';
+import {BizonylattetelSzerkesztesMode} from '../../bizonylat/bizonylattetelszerkesztesmode';
 
 @Component({
   selector: 'app-termekdij-list',
@@ -75,16 +75,16 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
 
   selectforzoom(i: number) {
     if (this.termekdijservice.zoomsource === ZoomSources.Cikk) {
-      this._cikkservice.DtoEdited.TERMEKDIJKOD = this.termekdijservice.Dto[i].TERMEKDIJKOD;
-      this._cikkservice.DtoEdited.TERMEKDIJKT = this.termekdijservice.Dto[i].TERMEKDIJKT;
-      this._cikkservice.DtoEdited.TERMEKDIJMEGNEVEZES = this.termekdijservice.Dto[i].TERMEKDIJMEGNEVEZES;
-      this._cikkservice.DtoEdited.TERMEKDIJEGYSEGAR = this.termekdijservice.Dto[i].TERMEKDIJEGYSEGAR;
+      this._cikkservice.DtoEdited.TERMEKDIJKOD = this.termekdijservice.Dto[i].Termekdijkod;
+      this._cikkservice.DtoEdited.TERMEKDIJKT = this.termekdijservice.Dto[i].Termekdijkt;
+      this._cikkservice.DtoEdited.TERMEKDIJMEGNEVEZES = this.termekdijservice.Dto[i].Termekdijmegnevezes;
+      this._cikkservice.DtoEdited.TERMEKDIJEGYSEGAR = this.termekdijservice.Dto[i].Termekdijegysegar;
     }
     if (this.termekdijservice.zoomsource === ZoomSources.Bizonylattetel) {
-      this._bizonylatservice.TetelDtoEdited.TERMEKDIJKOD = this.termekdijservice.Dto[i].TERMEKDIJKOD;
-      this._bizonylatservice.TetelDtoEdited.TERMEKDIJKT = this.termekdijservice.Dto[i].TERMEKDIJKT;
-      this._bizonylatservice.TetelDtoEdited.TERMEKDIJMEGNEVEZES = this.termekdijservice.Dto[i].TERMEKDIJMEGNEVEZES;
-      this._bizonylatservice.TetelDtoEdited.TERMEKDIJEGYSEGAR = this.termekdijservice.Dto[i].TERMEKDIJEGYSEGAR;
+      this._bizonylatservice.TetelDtoEdited.TERMEKDIJKOD = this.termekdijservice.Dto[i].Termekdijkod;
+      this._bizonylatservice.TetelDtoEdited.TERMEKDIJKT = this.termekdijservice.Dto[i].Termekdijkt;
+      this._bizonylatservice.TetelDtoEdited.TERMEKDIJMEGNEVEZES = this.termekdijservice.Dto[i].Termekdijmegnevezes;
+      this._bizonylatservice.TetelDtoEdited.TERMEKDIJEGYSEGAR = this.termekdijservice.Dto[i].Termekdijegysegar;
     }
 
     this.stopzoom();

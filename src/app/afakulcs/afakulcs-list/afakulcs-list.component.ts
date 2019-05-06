@@ -75,14 +75,14 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
 
   selectforzoom(i: number) {
     if (this.afakulcsservice.zoomsource === ZoomSources.Cikk) {
-      this._cikkservice.DtoEdited.AFAKULCSKOD = this.afakulcsservice.Dto[i].AFAKULCSKOD;
-      this._cikkservice.DtoEdited.AFAKULCS = this.afakulcsservice.Dto[i].AFAKULCS1;
-      this._cikkservice.DtoEdited.AFAMERTEKE = this.afakulcsservice.Dto[i].AFAMERTEKE;
+      this._cikkservice.DtoEdited.AFAKULCSKOD = this.afakulcsservice.Dto[i].Afakulcskod;
+      this._cikkservice.DtoEdited.AFAKULCS = this.afakulcsservice.Dto[i].Afakulcs1;
+      this._cikkservice.DtoEdited.AFAMERTEKE = this.afakulcsservice.Dto[i].Afamerteke;
     }
     if (this.afakulcsservice.zoomsource === ZoomSources.Bizonylattetel) {
-      this._bizonylatservice.TetelDtoEdited.AFAKULCSKOD = this.afakulcsservice.Dto[i].AFAKULCSKOD;
-      this._bizonylatservice.TetelDtoEdited.AFAKULCS = this.afakulcsservice.Dto[i].AFAKULCS1;
-      this._bizonylatservice.TetelDtoEdited.AFAMERTEKE = this.afakulcsservice.Dto[i].AFAMERTEKE;
+      this._bizonylatservice.TetelDtoEdited.AFAKULCSKOD = this.afakulcsservice.Dto[i].Afakulcskod;
+      this._bizonylatservice.TetelDtoEdited.AFAKULCS = this.afakulcsservice.Dto[i].Afakulcs1;
+      this._bizonylatservice.TetelDtoEdited.AFAMERTEKE = this.afakulcsservice.Dto[i].Afamerteke;
     }
 
     this.stopzoom();

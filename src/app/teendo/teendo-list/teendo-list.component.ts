@@ -72,8 +72,8 @@ export class TeendoListComponent implements OnInit, OnDestroy {
 
   selectforzoom(i: number) {
     if (this.teendoservice.zoomsource === ZoomSources.Projektteendo) {
-      this._projektteendoservice.DtoEdited.TEENDOKOD = this.teendoservice.Dto[i].TEENDOKOD;
-      this._projektteendoservice.DtoEdited.TEENDO = this.teendoservice.Dto[i].TEENDO1;
+      this._projektteendoservice.DtoEdited.TEENDOKOD = this.teendoservice.Dto[i].Teendokod;
+      this._projektteendoservice.DtoEdited.TEENDO = this.teendoservice.Dto[i].Teendo1;
 
       this.stopzoom();
     }

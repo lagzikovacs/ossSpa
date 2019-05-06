@@ -19,8 +19,8 @@
     <tbody>
     <tr *ngFor="let item of penznemservice.Dto; let i = index">
       <td *ngIf="penznemservice.zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="selectforzoom(i)"><i class="fa fa-check" aria-hidden="true"></i></td>
-      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.PENZNEMKOD}}</td>
-      <td>{{item.PENZNEM1}}</td>
+      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.Penznemkod}}</td>
+      <td>{{item.Penznem1}}</td>
     </tr>
     </tbody>
   </table>

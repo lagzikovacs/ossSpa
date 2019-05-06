@@ -84,24 +84,24 @@ export class PenznemListComponent implements OnInit, OnDestroy {
 
   selectforzoom(i: number) {
     if (this.penznemservice.zoomsource === ZoomSources.Penztar) {
-      this._penztarservice.DtoEdited.PENZNEMKOD = this.penznemservice.Dto[i].PENZNEMKOD;
-      this._penztarservice.DtoEdited.PENZNEM = this.penznemservice.Dto[i].PENZNEM1;
+      this._penztarservice.DtoEdited.PENZNEMKOD = this.penznemservice.Dto[i].Penznemkod;
+      this._penztarservice.DtoEdited.PENZNEM = this.penznemservice.Dto[i].Penznem1;
     }
     if (this.penznemservice.zoomsource === ZoomSources.Projekt) {
-      this._projektservice.DtoEdited.PENZNEMKOD = this.penznemservice.Dto[i].PENZNEMKOD;
-      this._projektservice.DtoEdited.PENZNEM = this.penznemservice.Dto[i].PENZNEM1;
+      this._projektservice.DtoEdited.PENZNEMKOD = this.penznemservice.Dto[i].Penznemkod;
+      this._projektservice.DtoEdited.PENZNEM = this.penznemservice.Dto[i].Penznem1;
     }
     if (this.penznemservice.zoomsource === ZoomSources.Szamlazasirend) {
-      this._szamlazasirendservice.DtoEdited.PENZNEMKOD = this.penznemservice.Dto[i].PENZNEMKOD;
-      this._szamlazasirendservice.DtoEdited.PENZNEM = this.penznemservice.Dto[i].PENZNEM1;
+      this._szamlazasirendservice.DtoEdited.PENZNEMKOD = this.penznemservice.Dto[i].Penznemkod;
+      this._szamlazasirendservice.DtoEdited.PENZNEM = this.penznemservice.Dto[i].Penznem1;
     }
     if (this.penznemservice.zoomsource === ZoomSources.Bizonylatkifizetes) {
-      this._bizonylatkifizetesservice.DtoEdited.PENZNEMKOD = this.penznemservice.Dto[i].PENZNEMKOD;
-      this._bizonylatkifizetesservice.DtoEdited.PENZNEM = this.penznemservice.Dto[i].PENZNEM1;
+      this._bizonylatkifizetesservice.DtoEdited.PENZNEMKOD = this.penznemservice.Dto[i].Penznemkod;
+      this._bizonylatkifizetesservice.DtoEdited.PENZNEM = this.penznemservice.Dto[i].Penznem1;
     }
     if (this.penznemservice.zoomsource === ZoomSources.Bizonylat) {
-      this._bizonylatservice.ComplexDtoEdited.Dto.PENZNEMKOD = this.penznemservice.Dto[i].PENZNEMKOD;
-      this._bizonylatservice.ComplexDtoEdited.Dto.PENZNEM = this.penznemservice.Dto[i].PENZNEM1;
+      this._bizonylatservice.ComplexDtoEdited.Dto.PENZNEMKOD = this.penznemservice.Dto[i].Penznemkod;
+      this._bizonylatservice.ComplexDtoEdited.Dto.PENZNEM = this.penznemservice.Dto[i].Penznem1;
     }
 
     this.stopzoom();

@@ -1,9 +1,9 @@
 export class HelysegDto {
-  HELYSEGKOD: number;
-  HELYSEGNEV: string;
+  Helysegkod: number;
+  Helysegnev: string;
 
-  LETREHOZVA: Date;
-  LETREHOZTA: string;
-  MODOSITVA: Date;
-  MODOSITOTTA: string;
+  Letrehozva: Date;
+  Letrehozta: string;
+  Modositva: Date;
+  Modositotta: string;
 }

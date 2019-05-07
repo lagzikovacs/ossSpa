@@ -35,7 +35,7 @@ export class DokumentumService {
               private _logonservice: LogonService) { }
 
   public Select(iratkod: number): Promise<DokumentumResult> {
-    const url = environment.BaseHref + this._controller + 'select';
+    const url = environment.CoreRef + this._controller + 'select';
     const body = JSON.stringify(iratkod);
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -46,7 +46,7 @@ export class DokumentumService {
   }
 
   public Get(dokumentumkod: number): Promise<DokumentumResult> {
-    const url = environment.BaseHref + this._controller + 'get';
+    const url = environment.CoreRef + this._controller + 'get';
     const body = JSON.stringify(dokumentumkod);
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -57,7 +57,7 @@ export class DokumentumService {
   }
 
   public Delete(dto: DokumentumDto): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'delete';
+    const url = environment.CoreRef + this._controller + 'delete';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -68,7 +68,7 @@ export class DokumentumService {
   }
 
   public Ellenorzes(dokumentumkod: number): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'ellenorzes';
+    const url = environment.CoreRef + this._controller + 'ellenorzes';
     const body = JSON.stringify(dokumentumkod);
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -79,7 +79,7 @@ export class DokumentumService {
   }
 
   public Letoltes(lp: LetoltesParam): Promise<LetoltesResult> {
-    const url = environment.BaseHref + this._controller + 'letoltes';
+    const url = environment.CoreRef + this._controller + 'letoltes';
     const body = lp;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -89,7 +89,7 @@ export class DokumentumService {
     return this._httpClient.post<LetoltesResult>(url, body, options).toPromise();
   }
   public LetoltesPDF(dokumentumkod: number): Promise<LetoltesPDFResult> {
-    const url = environment.BaseHref + this._controller + 'letoltespdf';
+    const url = environment.CoreRef + this._controller + 'letoltespdf';
     const body = dokumentumkod;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -101,35 +101,35 @@ export class DokumentumService {
 
   public Kimentes(): Promise<EmptyResult> {
     return this.Letoltes(new LetoltesParam(
-      this.Dto[this.DtoSelectedIndex].DOKUMENTUMKOD,
-      this.Dto[this.DtoSelectedIndex].MERET))
+      this.Dto[this.DtoSelectedIndex].Dokumentumkod,
+      this.Dto[this.DtoSelectedIndex].Meret))
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
         const blob = b64toBlob(res.Result.b);
-        FileSaver.saveAs(blob, this.Dto[this.DtoSelectedIndex].MEGJEGYZES + this.Dto[this.DtoSelectedIndex].EXT);
+        FileSaver.saveAs(blob, this.Dto[this.DtoSelectedIndex].Megjegyzes + this.Dto[this.DtoSelectedIndex].Ext);
 
         return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
       });
   }
   public KimentesPDF(): Promise<EmptyResult> {
-    return this.LetoltesPDF(this.Dto[this.DtoSelectedIndex].DOKUMENTUMKOD)
+    return this.LetoltesPDF(this.Dto[this.DtoSelectedIndex].Dokumentumkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
         const blob = b64toBlob(res.Result);
-        FileSaver.saveAs(blob, this.Dto[this.DtoSelectedIndex].MEGJEGYZES + '.pdf');
+        FileSaver.saveAs(blob, this.Dto[this.DtoSelectedIndex].Megjegyzes + '.pdf');
 
         return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
       });
   }
 
   public FeltoltesAngular(fb: FajlBuf): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'feltoltesangular';
+    const url = environment.CoreRef + this._controller + 'feltoltesangular';
     const body = fb;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

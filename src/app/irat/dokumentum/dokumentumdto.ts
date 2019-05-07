@@ -1,14 +1,14 @@
 export class DokumentumDto {
-  DOKUMENTUMKOD: number;
-  VOLUMEKOD: number;
-  KONYVTAR: number;
-  MERET: number;
-  EXT: string;
-  HASH: string;
-  IRATKOD: number;
-  MEGJEGYZES: string;
-  LETREHOZVA: Date;
-  LETREHOZTA: string;
-  MODOSITVA: Date;
-  MODOSITOTTA: string;
+  Dokumentumkod: number;
+  Volumekod: number;
+  Konyvtar: number;
+  Meret: number;
+  Ext: string;
+  Hash: string;
+  Iratkod: number;
+  Megjegyzes: string;
+  Letrehozva: Date;
+  Letrehozta: string;
+  Modositva: Date;
+  Modositotta: string;
 }

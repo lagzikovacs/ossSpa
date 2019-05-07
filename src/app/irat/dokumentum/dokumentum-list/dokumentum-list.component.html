@@ -18,10 +18,10 @@
     <tbody>
     <tr *ngFor="let item of dokumentumservice.Dto; let i = index">
       <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="letoltes(i)"><i class="fa fa-arrow-down" aria-hidden="true"></i></td>
-      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.DOKUMENTUMKOD}}</td>
-      <td>{{item.MEGJEGYZES}}</td>
-      <td>{{item.MERET}}</td>
-      <td>{{item.EXT}}</td>
+      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.Dokumentumkod}}</td>
+      <td>{{item.Megjegyzes}}</td>
+      <td>{{item.Meret}}</td>
+      <td>{{item.Ext}}</td>
     </tr>
     </tbody>
   </table>

@@ -1,11 +1,11 @@
 export class VolumeDto {
-  VOLUMEKOD: number;
-  VOLUMENO: number;
-  ELERESIUT: string;
-  MAXMERET: number;
-  JELENLEGIMERET: number;
-  UTOLSOKONYVTAR: number;
-  FAJLOKSZAMAUTOLSOKONYVTARBAN: number;
-  ALLAPOT: string;
-  ALLAPOTKELTE: Date;
+  Volumekod: number;
+  Volumeno: number;
+  Eleresiut: string;
+  Maxmeret: number;
+  Jelenlegimeret: number;
+  Utolsokonyvtar: number;
+  Fajlokszamautolsokonyvtarban: number;
+  Allapot: string;
+  Allapotkelte: Date;
 }

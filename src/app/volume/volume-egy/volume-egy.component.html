@@ -1,6 +1,6 @@
 <div class="alapkeret">
   <h5>{{volumeservice.cim}}</h5>
-  <h6 *ngIf="volumeservice.DtoSelectedIndex !== -1">{{volumeservice.Dto[volumeservice.DtoSelectedIndex].VOLUMENO}}</h6>
+  <h6 *ngIf="volumeservice.DtoSelectedIndex !== -1">{{volumeservice.Dto[volumeservice.DtoSelectedIndex].Volumeno}}</h6>
   <div>
     <nav>
       <button [disabled]="eppFrissit || volumeservice.eppTesztel" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">

@@ -27,7 +27,7 @@ export class VolumeEgyComponent implements OnDestroy {
   }
   ellenorzes() {
     this.eppFrissit = true;
-    this.volumeservice.DokumentumkodByVolume(this.volumeservice.Dto[this.volumeservice.DtoSelectedIndex].VOLUMEKOD)
+    this.volumeservice.DokumentumkodByVolume(this.volumeservice.Dto[this.volumeservice.DtoSelectedIndex].Volumekod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

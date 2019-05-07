@@ -7,8 +7,8 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {LogonService} from '../logon/logon.service';
 import {VolumeResult} from './volumeresult';
 import {DokumentumkodByVolumeResult} from './dokumentumbyvolumeresult';
-import {VolumeContainerMode} from "./volumecontainermode";
-import {VolumeEgyMode} from "./volumeegymode";
+import {VolumeContainerMode} from './volumecontainermode';
+import {VolumeEgyMode} from './volumeegymode';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,7 @@ export class VolumeService {
               private _logonservice: LogonService) { }
 
   public Read(): Promise<VolumeResult> {
-    const url = environment.BaseHref + this._controller + 'read';
+    const url = environment.CoreRef + this._controller + 'read';
     const body = '';
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -44,7 +44,7 @@ export class VolumeService {
   }
 
   public DokumentumkodByVolume(volumekod: number): Promise<DokumentumkodByVolumeResult> {
-    const url = environment.BaseHref + this._controller + 'dokumentumkodbyvolume';
+    const url = environment.CoreRef + this._controller + 'dokumentumkodbyvolume';
     const body = volumekod;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

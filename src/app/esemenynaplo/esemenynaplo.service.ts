@@ -4,7 +4,7 @@ import {LogonService} from '../logon/logon.service';
 import {EsemenynaploResult} from './esemenynaploresult';
 import {environment} from '../../environments/environment';
 import {EsemenynaploParameter} from './esemenynaploparameter';
-import {EsemenynaploDto} from "./esemenynaplodto";
+import {EsemenynaploDto} from './esemenynaplodto';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +34,7 @@ export class EsemenynaploService {
               private _logonservice: LogonService) { }
 
   public Select(ep: EsemenynaploParameter): Promise<EsemenynaploResult> {
-    const url = environment.BaseHref + this._controller + 'select';
+    const url = environment.CoreRef + this._controller + 'select';
     const body = ep;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

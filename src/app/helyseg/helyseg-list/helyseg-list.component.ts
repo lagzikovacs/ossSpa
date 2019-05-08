@@ -72,8 +72,8 @@ export class HelysegListComponent implements OnInit, OnDestroy {
 
   selectforzoom(i: number) {
     if (this.helysegservice.zoomsource === ZoomSources.Ugyfel) {
-      this.ugyfelservice.DtoEdited.HELYSEGKOD = this.helysegservice.Dto[i].Helysegkod;
-      this.ugyfelservice.DtoEdited.HELYSEGNEV = this.helysegservice.Dto[i].Helysegnev;
+      this.ugyfelservice.DtoEdited.Helysegkod = this.helysegservice.Dto[i].Helysegkod;
+      this.ugyfelservice.DtoEdited.Helysegnev = this.helysegservice.Dto[i].Helysegnev;
 
       this.stopzoom();
     }

@@ -13,8 +13,8 @@ import {BizonylatkapcsolatService} from '../../../bizonylat/bizonylatirat/bizony
 import {BizonylatKapcsolatContainerMode} from '../../../bizonylat/bizonylatirat/bizonylatkapcsolatcontainermode';
 import {VagolapService} from '../../../vagolap/vagolap.service';
 import {AbuComponent} from '../../../tools/abu/abu.component';
-import {LogonService} from "../../../logon/logon.service";
-import {JogKod} from "../../../enums/jogkod";
+import {LogonService} from '../../../logon/logon.service';
+import {JogKod} from '../../../enums/jogkod';
 
 @Component({
   selector: 'app-irat-egy',
@@ -69,7 +69,7 @@ export class IratEgyComponent implements OnDestroy {
   }
   projekt() {
     this.eppFrissit = true;
-    this._projektkapcsolatservice.SelectByIrat(this.iratservice.Dto[this.iratservice.DtoSelectedIndex].IRATKOD)
+    this._projektkapcsolatservice.SelectByIrat(this.iratservice.Dto[this.iratservice.DtoSelectedIndex].Iratkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

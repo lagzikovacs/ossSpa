@@ -47,7 +47,7 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
     fb.Fajlnev = this.fajlnev;
     fb.Meret = this.file.size;
     fb.Megjegyzes = this.megjegyzes;
-    fb.IratKod = this._iratservice.Dto[this._iratservice.DtoSelectedIndex].IRATKOD;
+    fb.IratKod = this._iratservice.Dto[this._iratservice.DtoSelectedIndex].Iratkod;
 
     this.eppFrissit = true;
     this.dokumentumservice.FeltoltesAngular(fb)

@@ -50,7 +50,7 @@ export class BizonylatIratUjComponent implements OnInit, OnDestroy {
   }
 
   IrattipusZoom() {
-    this._irattipusservice.ekDto.minta = this.bizonylatkapcsolatservice.UjIratDto.IRATTIPUS || '';
+    this._irattipusservice.ekDto.minta = this.bizonylatkapcsolatservice.UjIratDto.Irattipus || '';
     this._irattipusservice.zoomsource = ZoomSources.Bizonylatirat;
     this._irattipusservice.zoom = true;
     this._irattipusservice.ContainerMode = IrattipusContainerMode.List;
@@ -59,8 +59,8 @@ export class BizonylatIratUjComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.bizonylatkapcsolatservice.UjIratDto.UGYFELKOD = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].UGYFELKOD;
-    this.bizonylatkapcsolatservice.UjIratDto.KELETKEZETT = moment(this.Keletkezett).toISOString(true);
+    this.bizonylatkapcsolatservice.UjIratDto.Ugyfelkod = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].UGYFELKOD;
+    this.bizonylatkapcsolatservice.UjIratDto.Keletkezett = moment(this.Keletkezett).toISOString(true);
 
     // TODO zoomcheck
     this._iratservice.Add(this.bizonylatkapcsolatservice.UjIratDto)

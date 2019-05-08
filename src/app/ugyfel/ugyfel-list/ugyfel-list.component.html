@@ -29,20 +29,20 @@
     <ng-container *ngFor="let item of ugyfelservice.Dto; let i = index">
       <tr>
         <td *ngIf="ugyfelservice.zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="selectforzoom(i)"><i class="fa fa-check" aria-hidden="true"></i></td>
-        <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.UGYFELKOD}}</td>
-        <td>{{item.NEV}}</td>
-        <td>{{item.IRANYITOSZAM}}</td>
-        <td>{{item.HELYSEGNEV}}</td>
-        <td>{{item.KOZTERULET}}</td>
-        <td>{{item.KOZTERULETTIPUS}}</td>
-        <td>{{item.HAZSZAM}}</td>
-        <td>{{item.ADOSZAM}}</td>
-        <td>{{item.EUADOSZAM}}</td>
-        <td>{{item.TELEFON}}</td>
-        <td>{{item.EMAIL}}</td>
+        <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.Ugyfelkod}}</td>
+        <td>{{item.Nev}}</td>
+        <td>{{item.Iranyitoszam}}</td>
+        <td>{{item.Helysegnev}}</td>
+        <td>{{item.Kozterulet}}</td>
+        <td>{{item.Kozterulettipus}}</td>
+        <td>{{item.Hazszam}}</td>
+        <td>{{item.Adoszam}}</td>
+        <td>{{item.Euadoszam}}</td>
+        <td>{{item.Telefon}}</td>
+        <td>{{item.Email}}</td>
       </tr>
-      <tr *ngIf="item.MEGJEGYZES !== null && item.MEGJEGYZES !== ''">
-        <td colspan="11">{{item.MEGJEGYZES}}</td>
+      <tr *ngIf="item.Megjegyzes !== null && item.Megjegyzes !== ''">
+        <td colspan="11">{{item.Megjegyzes}}</td>
       </tr>
     </ng-container>
     </tbody>

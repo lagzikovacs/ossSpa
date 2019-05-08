@@ -20,7 +20,7 @@ export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
               private _ugyfelterservice: UgyfelterService) { }
 
   ngOnInit() {
-    if (this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex].KIKULDESIKODIDOPONTJA !== null) {
+    if (this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex].Kikuldesikodidopontja !== null) {
       this.kikuldesidopontja();
       this._ugyfelterservice.GetLink(this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex])
         .then(res => {
@@ -42,7 +42,7 @@ export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
 
   kikuldesidopontja() {
     this.kikuldesikodidopontja =
-      moment(this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex].KIKULDESIKODIDOPONTJA).format('YYYY-MM-DD HH:mm:ss');
+      moment(this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex].Kikuldesikodidopontja).format('YYYY-MM-DD HH:mm:ss');
   }
 
   ugyfelterlink() {
@@ -54,7 +54,7 @@ export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
         }
 
         this.link = res.Result;
-        return this._ugyfelservice.Get(this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex].UGYFELKOD);
+        return this._ugyfelservice.Get(this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex].Ugyfelkod);
       })
       .then(res1 => {
         if (res1.Error !== null) {

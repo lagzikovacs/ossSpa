@@ -25,14 +25,14 @@
     </thead>
     <tbody>
     <tr *ngFor="let item of iratservice.Dto; let i = index">
-      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.IRATKOD}}</td>
-      <td>{{item.IRANY}}</td>
-      <td>{{item.KELETKEZETT | datehun}}</td>
-      <td>{{item.IRATTIPUS}}</td>
-      <td>{{item.UGYFELNEV}}</td>
-      <td>{{item.UGYFELCIM}}</td>
-      <td>{{item.KULDO}}</td>
-      <td>{{item.TARGY}}</td>
+      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.Iratkod}}</td>
+      <td>{{item.Irany}}</td>
+      <td>{{item.Keletkezett | datehun}}</td>
+      <td>{{item.Irattipus}}</td>
+      <td>{{item.Ugyfelnev}}</td>
+      <td>{{item.Ugyfelcim}}</td>
+      <td>{{item.Kuldo}}</td>
+      <td>{{item.Targy}}</td>
     </tr>
     </tbody>
   </table>

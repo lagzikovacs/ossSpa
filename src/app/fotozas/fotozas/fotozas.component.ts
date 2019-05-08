@@ -78,7 +78,7 @@ export class FotozasComponent implements OnInit, OnDestroy {
     fb.Fajlnev = this.fajlnev;
     fb.Meret = this.file.size;
     fb.Megjegyzes = this.megjegyzes;
-    fb.IratKod = this.Dto.iratDto[0].IRATKOD;
+    fb.IratKod = this.Dto.iratDto[0].Iratkod;
 
     this.eppFrissit = true;
     this._dokumentumservice.FeltoltesAngular(fb)

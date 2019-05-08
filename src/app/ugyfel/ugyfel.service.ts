@@ -10,10 +10,10 @@ import {NumberResult} from '../dtos/numberresult';
 import {EmptyResult} from '../dtos/emptyresult';
 import {UgyfelContainerMode} from './ugyfelcontainermode';
 import {UgyfelEgyMode} from './ugyfelegymode';
-import {UgyfelSzerkesztesMode} from "./ugyfelszerkesztesmode";
-import {UgyfelZoomParameter} from "./ugyfelzoomparameter";
-import {ProjektDto} from "../projekt/projekt/projektdto";
-import {ProjektParameter} from "../projekt/projekt/projektparameter";
+import {UgyfelSzerkesztesMode} from './ugyfelszerkesztesmode';
+import {UgyfelZoomParameter} from './ugyfelzoomparameter';
+import {ProjektDto} from '../projekt/projekt/projektdto';
+import {ProjektParameter} from '../projekt/projekt/projektparameter';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +45,7 @@ export class UgyfelService {
               private _logonservice: LogonService) { }
 
   public Add(dto: UgyfelDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'add';
+    const url = environment.CoreRef + this._controller + 'add';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -56,7 +56,7 @@ export class UgyfelService {
   }
 
   public CreateNew(): Promise<UgyfelResult> {
-    const url = environment.BaseHref + this._controller + 'createnew';
+    const url = environment.CoreRef + this._controller + 'createnew';
     const body = '';
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -67,7 +67,7 @@ export class UgyfelService {
   }
 
   public Delete(dto: UgyfelDto): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'delete';
+    const url = environment.CoreRef + this._controller + 'delete';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -78,7 +78,7 @@ export class UgyfelService {
   }
 
   public Get(key: number): Promise<UgyfelResult> {
-    const url = environment.BaseHref + this._controller + 'get';
+    const url = environment.CoreRef + this._controller + 'get';
     const body = key;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -89,7 +89,7 @@ export class UgyfelService {
   }
 
   public Select(up: UgyfelParameter): Promise<UgyfelResult> {
-    const url = environment.BaseHref + this._controller + 'select';
+    const url = environment.CoreRef + this._controller + 'select';
     const body = up;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -100,7 +100,7 @@ export class UgyfelService {
   }
 
   public Update(dto: UgyfelDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'update';
+    const url = environment.CoreRef + this._controller + 'update';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -111,7 +111,7 @@ export class UgyfelService {
   }
 
   public ZoomCheck(par: UgyfelZoomParameter): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'zoomcheck';
+    const url = environment.CoreRef + this._controller + 'zoomcheck';
     const body = par;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

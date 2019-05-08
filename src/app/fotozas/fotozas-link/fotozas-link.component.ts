@@ -20,7 +20,7 @@ export class FotozasLinkComponent implements OnInit, OnDestroy {
               private _fotozasservice: FotozasService) { }
 
   ngOnInit() {
-    if (this._iratservice.Dto[this._iratservice.DtoSelectedIndex].KIKULDESIKODIDOPONTJA !== null) {
+    if (this._iratservice.Dto[this._iratservice.DtoSelectedIndex].Kikuldesikodidopontja !== null) {
       this.kikuldesidopontja();
       this._fotozasservice.GetLink(this._iratservice.Dto[this._iratservice.DtoSelectedIndex])
         .then(res => {
@@ -42,7 +42,7 @@ export class FotozasLinkComponent implements OnInit, OnDestroy {
 
   kikuldesidopontja() {
     this.kikuldesikodidopontja =
-      moment(this._iratservice.Dto[this._iratservice.DtoSelectedIndex].KIKULDESIKODIDOPONTJA).format('YYYY-MM-DD HH:mm:ss');
+      moment(this._iratservice.Dto[this._iratservice.DtoSelectedIndex].Kikuldesikodidopontja).format('YYYY-MM-DD HH:mm:ss');
   }
 
   fotozaslink() {
@@ -54,7 +54,7 @@ export class FotozasLinkComponent implements OnInit, OnDestroy {
         }
 
         this.link = res.Result;
-        return this._iratservice.Get(this._iratservice.Dto[this._iratservice.DtoSelectedIndex].IRATKOD);
+        return this._iratservice.Get(this._iratservice.Dto[this._iratservice.DtoSelectedIndex].Iratkod);
       })
       .then(res1 => {
         if (res1.Error !== null) {

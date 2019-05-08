@@ -1,18 +1,18 @@
 export class IratDto {
-  IRATKOD: number;
-  PARTICIOKOD: number;
-  IRANY: string;
-  KELETKEZETT: any;
-  IRATTIPUSKOD: number;
-  IRATTIPUS: string;
-  UGYFELKOD: number;
-  UGYFELNEV: string;
-  UGYFELCIM: string;
-  KULDO: string;
-  TARGY: string;
-  KIKULDESIKODIDOPONTJA: any;
-  LETREHOZVA: any;
-  LETREHOZTA: string;
-  MODOSITVA: any;
-  MODOSITOTTA: string;
+  Iratkod: number;
+  Particiokod: number;
+  Irany: string;
+  Keletkezett: any;
+  Irattipuskod: number;
+  Irattipus: string;
+  Ugyfelkod: number;
+  Ugyfelnev: string;
+  Ugyfelcim: string;
+  Kuldo: string;
+  Targy: string;
+  Kikuldesikodidopontja: any;
+  Letrehozva: any;
+  Letrehozta: string;
+  Modositva: any;
+  Modositotta: string;
 }

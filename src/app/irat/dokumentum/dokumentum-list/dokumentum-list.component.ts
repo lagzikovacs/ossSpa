@@ -25,7 +25,7 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.eppFrissit = true;
     this.dokumentumservice.Dto = DokumentumDto[0];
-    this.dokumentumservice.Select(this._iratservice.Dto[this._iratservice.DtoSelectedIndex].IRATKOD)
+    this.dokumentumservice.Select(this._iratservice.Dto[this._iratservice.DtoSelectedIndex].Iratkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

@@ -38,7 +38,7 @@ export class IratService {
               private _logonservice: LogonService) { }
 
   public Add(dto: IratDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'add';
+    const url = environment.CoreRef + this._controller + 'add';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -49,7 +49,7 @@ export class IratService {
   }
 
   public CreateNew(): Promise<IratResult> {
-    const url = environment.BaseHref + this._controller + 'createnew';
+    const url = environment.CoreRef + this._controller + 'createnew';
     const body = '';
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -60,7 +60,7 @@ export class IratService {
   }
 
   public Delete(dto: IratDto): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'delete';
+    const url = environment.CoreRef + this._controller + 'delete';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -71,7 +71,7 @@ export class IratService {
   }
 
   public Get(iratkod: number): Promise<IratResult> {
-    const url = environment.BaseHref + this._controller + 'get';
+    const url = environment.CoreRef + this._controller + 'get';
     const body = iratkod;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -82,7 +82,7 @@ export class IratService {
   }
 
   public Select(ip: IratParameter): Promise<IratResult> {
-    const url = environment.BaseHref + this._controller + 'select';
+    const url = environment.CoreRef + this._controller + 'select';
     const body = ip;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -93,7 +93,7 @@ export class IratService {
   }
 
   public Update(dto: IratDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'update';
+    const url = environment.CoreRef + this._controller + 'update';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

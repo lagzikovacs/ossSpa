@@ -37,23 +37,23 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
     if (this.iratservice.uj) {
       this.Keletkezett = moment().format('YYYY-MM-DD');
     } else {
-      this.Keletkezett = moment(this.iratservice.DtoEdited.KELETKEZETT).format('YYYY-MM-DD');
+      this.Keletkezett = moment(this.iratservice.DtoEdited.Keletkezett).format('YYYY-MM-DD');
     }
   }
 
   onSubmit() {
     this.eppFrissit = true;
 
-    this._irattipusservice.ZoomCheck(new IrattipusZoomParameter(this.iratservice.DtoEdited.IRATTIPUSKOD,
-      this.iratservice.DtoEdited.IRATTIPUS))
+    this._irattipusservice.ZoomCheck(new IrattipusZoomParameter(this.iratservice.DtoEdited.Irattipuskod,
+      this.iratservice.DtoEdited.Irattipus))
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        if (this.iratservice.DtoEdited.UGYFELNEV || '' !== '') {
-          return this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.iratservice.DtoEdited.UGYFELKOD,
-            this.iratservice.DtoEdited.UGYFELNEV));
+        if (this.iratservice.DtoEdited.Ugyfelnev || '' !== '') {
+          return this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.iratservice.DtoEdited.Ugyfelkod,
+            this.iratservice.DtoEdited.Ugyfelnev));
         } else {
           return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
         }
@@ -107,7 +107,7 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   IrattipusZoom() {
-    this._irattipusservice.ekDto.minta = this.iratservice.DtoEdited.IRATTIPUS || '';
+    this._irattipusservice.ekDto.minta = this.iratservice.DtoEdited.Irattipus || '';
     this._irattipusservice.zoomsource = ZoomSources.Irat;
     this._irattipusservice.zoom = true;
     this._irattipusservice.ContainerMode = IrattipusContainerMode.List;
@@ -117,7 +117,7 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
 
   UgyfelZoom() {
     this._ugyfelservice.szempont = 0;
-    this._ugyfelservice.minta = this.iratservice.DtoEdited.UGYFELNEV || '';
+    this._ugyfelservice.minta = this.iratservice.DtoEdited.Ugyfelnev || '';
     this._ugyfelservice.zoomsource = ZoomSources.Irat;
     this._ugyfelservice.zoom = true;
     this._ugyfelservice.ContainerMode = UgyfelContainerMode.List;
@@ -125,9 +125,9 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
     this.iratservice.SzerkesztesMode = IratSzerkesztesMode.UgyfelZoom;
   }
   UgyfelTorles() {
-    this.iratservice.DtoEdited.UGYFELKOD = null;
-    this.iratservice.DtoEdited.UGYFELNEV = null;
-    this.iratservice.DtoEdited.UGYFELCIM = null;
+    this.iratservice.DtoEdited.Ugyfelkod = null;
+    this.iratservice.DtoEdited.Ugyfelnev = null;
+    this.iratservice.DtoEdited.Ugyfelcim = null;
   }
   ngOnDestroy() {
     Object.keys(this).map(k => {

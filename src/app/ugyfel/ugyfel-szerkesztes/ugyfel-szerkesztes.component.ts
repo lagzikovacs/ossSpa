@@ -27,8 +27,8 @@ export class UgyfelSzerkesztesComponent implements OnDestroy {
 
   onSubmit() {
     this.eppFrissit = true;
-    this._helysegservice.ZoomCheck(new HelysegZoomParameter(this.ugyfelservice.DtoEdited.HELYSEGKOD || 0,
-      this.ugyfelservice.DtoEdited.HELYSEGNEV || ''))
+    this._helysegservice.ZoomCheck(new HelysegZoomParameter(this.ugyfelservice.DtoEdited.Helysegkod || 0,
+      this.ugyfelservice.DtoEdited.Helysegnev || ''))
       .then(res => {
         if (res.Error !== null) {
           throw res.Error;
@@ -77,7 +77,7 @@ export class UgyfelSzerkesztesComponent implements OnDestroy {
     }
   }
   HelysegZoom() {
-    this._helysegservice.ekDto.minta = this.ugyfelservice.DtoEdited.HELYSEGNEV || '';
+    this._helysegservice.ekDto.minta = this.ugyfelservice.DtoEdited.Helysegnev || '';
     this._helysegservice.zoomsource = ZoomSources.Ugyfel;
     this._helysegservice.zoom = true;
     this._helysegservice.ContainerMode = HelysegContainerMode.List;

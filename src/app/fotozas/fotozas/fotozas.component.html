@@ -8,9 +8,9 @@
   </ng-container>
   <ng-container *ngIf="bejelentkezve">
     <div style="font-size: smaller;margin-bottom: 10px">(tető, inverter, óraszekrény/mérőóra, rákötés)</div>
-    <div>{{Dto.iratDto[0].UGYFELNEV}}</div>
-    <div>{{Dto.iratDto[0].UGYFELCIM}}</div>
-    <div><b>{{Dto.iratDto[0].TARGY}}</b></div>
+    <div>{{Dto.iratDto[0].Ugyfelnev}}</div>
+    <div>{{Dto.iratDto[0].Ugyfelcim}}</div>
+    <div><b>{{Dto.iratDto[0].Targy}}</b></div>
     <table class="table table-bordered table-sm table-responsive" style="border: none;margin-top: 10px;margin-bottom: 10px">
       <thead>
       <tr>
@@ -22,10 +22,10 @@
       </thead>
       <tbody>
       <tr *ngFor="let item of Dto.dokumentumDto">
-        <td>{{item.DOKUMENTUMKOD}}</td>
-        <td>{{item.MEGJEGYZES}}</td>
-        <td>{{item.MERET}}</td>
-        <td>{{item.EXT}}</td>
+        <td>{{item.Dokumentumkod}}</td>
+        <td>{{item.Megjegyzes}}</td>
+        <td>{{item.Meret}}</td>
+        <td>{{item.Ext}}</td>
       </tr>
       </tbody>
     </table>

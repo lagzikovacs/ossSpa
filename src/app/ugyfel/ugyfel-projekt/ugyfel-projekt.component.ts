@@ -27,7 +27,7 @@ export class UgyfelProjektComponent implements OnInit, OnDestroy {
 
     this.ugyfelservice.pp.fi = new Array<SzMT>();
     this.ugyfelservice.pp.fi.push(
-      new SzMT(Szempont.UgyfelKod, this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex].UGYFELKOD.toString()));
+      new SzMT(Szempont.UgyfelKod, this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex].Ugyfelkod.toString()));
 
     this._projektservice.Select(this.ugyfelservice.pp)
       .then(res => {

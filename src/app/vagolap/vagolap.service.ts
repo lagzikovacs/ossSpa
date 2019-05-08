@@ -18,10 +18,10 @@ export class VagolapService {
   iratotvagolapra() {
     const d = new VagolapDto();
     d.tipus = 0;
-    d.iratkod = this._iratservice.Dto[this._iratservice.DtoSelectedIndex].IRATKOD;
-    d.irattipus = this._iratservice.Dto[this._iratservice.DtoSelectedIndex].IRATTIPUS;
-    d.ugyfelnev = this._iratservice.Dto[this._iratservice.DtoSelectedIndex].UGYFELNEV;
-    d.ugyfelcim = this._iratservice.Dto[this._iratservice.DtoSelectedIndex].UGYFELCIM;
+    d.iratkod = this._iratservice.Dto[this._iratservice.DtoSelectedIndex].Iratkod;
+    d.irattipus = this._iratservice.Dto[this._iratservice.DtoSelectedIndex].Irattipus;
+    d.ugyfelnev = this._iratservice.Dto[this._iratservice.DtoSelectedIndex].Ugyfelnev;
+    d.ugyfelcim = this._iratservice.Dto[this._iratservice.DtoSelectedIndex].Ugyfelcim;
 
     this.Dto.push(d);
   }

@@ -50,7 +50,7 @@ export class ProjektBizonylatesiratUjiratComponent implements OnInit, OnDestroy 
   }
 
   IrattipusZoom() {
-    this._irattipusservice.ekDto.minta = this.projektkapcsolatservice.UjIratDto.IRATTIPUS || '';
+    this._irattipusservice.ekDto.minta = this.projektkapcsolatservice.UjIratDto.Irattipus || '';
     this._irattipusservice.zoomsource = ZoomSources.Projektirat;
     this._irattipusservice.zoom = true;
     this._irattipusservice.ContainerMode = IrattipusContainerMode.List;
@@ -59,8 +59,8 @@ export class ProjektBizonylatesiratUjiratComponent implements OnInit, OnDestroy 
   }
 
   onSubmit() {
-    this.projektkapcsolatservice.UjIratDto.UGYFELKOD = this.projektkapcsolatservice.UgyfelKod;
-    this.projektkapcsolatservice.UjIratDto.KELETKEZETT = moment(this.Keletkezett).toISOString(true);
+    this.projektkapcsolatservice.UjIratDto.Ugyfelkod = this.projektkapcsolatservice.UgyfelKod;
+    this.projektkapcsolatservice.UjIratDto.Keletkezett = moment(this.Keletkezett).toISOString(true);
 
     // TODO zoomcheck
     this._iratservice.Add(this.projektkapcsolatservice.UjIratDto)

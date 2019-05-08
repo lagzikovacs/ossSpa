@@ -35,28 +35,28 @@ export class CikkSzerkesztesComponent implements OnDestroy {
   }
 
   onSubmit() {
-    this._meservice.ZoomCheck(new MeZoomParameter(this.cikkservice.DtoEdited.MEKOD || 0,
-      this.cikkservice.DtoEdited.ME || ''))
+    this._meservice.ZoomCheck(new MeZoomParameter(this.cikkservice.DtoEdited.Mekod || 0,
+      this.cikkservice.DtoEdited.Me || ''))
       .then(res => {
         if (res.Error !== null) {
           throw res.Error;
         }
-        return this._afakulcsservice.ZoomCheck(new AfakulcsZoomParameter(this.cikkservice.DtoEdited.AFAKULCSKOD || 0,
-          this.cikkservice.DtoEdited.AFAKULCS || ''));
+        return this._afakulcsservice.ZoomCheck(new AfakulcsZoomParameter(this.cikkservice.DtoEdited.Afakulcskod || 0,
+          this.cikkservice.DtoEdited.Afakulcs || ''));
       })
       .then(res1 => {
         if (res1.Error !== null) {
           throw res1.Error;
         }
 
-        if ((this.cikkservice.DtoEdited.TERMEKDIJKT || '') !== '') {
-          return this._termekdijservice.ZoomCheck(new TermekdijZoomParameter(this.cikkservice.DtoEdited.TERMEKDIJKOD || 0,
-            this.cikkservice.DtoEdited.TERMEKDIJKT || ''));
+        if ((this.cikkservice.DtoEdited.Termekdijkt || '') !== '') {
+          return this._termekdijservice.ZoomCheck(new TermekdijZoomParameter(this.cikkservice.DtoEdited.Termekdijkod || 0,
+            this.cikkservice.DtoEdited.Termekdijkt || ''));
         } else {
-          this.cikkservice.DtoEdited.TERMEKDIJKOD = undefined;
-          this.cikkservice.DtoEdited.TERMEKDIJKT = undefined;
-          this.cikkservice.DtoEdited.TERMEKDIJMEGNEVEZES = undefined;
-          this.cikkservice.DtoEdited.TERMEKDIJEGYSEGAR = undefined;
+          this.cikkservice.DtoEdited.Termekdijkod = undefined;
+          this.cikkservice.DtoEdited.Termekdijkt = undefined;
+          this.cikkservice.DtoEdited.Termekdijmegnevezes = undefined;
+          this.cikkservice.DtoEdited.Termekdijegysegar = undefined;
           return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
         }
       })
@@ -108,7 +108,7 @@ export class CikkSzerkesztesComponent implements OnDestroy {
   }
 
   MeZoom() {
-    this._meservice.ekDto.minta = this.cikkservice.DtoEdited.ME || '';
+    this._meservice.ekDto.minta = this.cikkservice.DtoEdited.Me || '';
     this._meservice.zoomsource = ZoomSources.Cikk;
     this._meservice.zoom = true;
     this._meservice.ContainerMode = MeContainerMode.List;
@@ -116,7 +116,7 @@ export class CikkSzerkesztesComponent implements OnDestroy {
     this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.MeZoom;
   }
   AfakulcsZoom() {
-    this._afakulcsservice.ekDto.minta = this.cikkservice.DtoEdited.AFAKULCS || '';
+    this._afakulcsservice.ekDto.minta = this.cikkservice.DtoEdited.Afakulcs || '';
     this._afakulcsservice.zoomsource = ZoomSources.Cikk;
     this._afakulcsservice.zoom = true;
     this._afakulcsservice.ContainerMode = AfakulcsContainerMode.List;
@@ -124,7 +124,7 @@ export class CikkSzerkesztesComponent implements OnDestroy {
     this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.AfakulcsZoom;
   }
   TermekdijZoom() {
-    this._termekdijservice.ekDto.minta = this.cikkservice.DtoEdited.TERMEKDIJKT || '';
+    this._termekdijservice.ekDto.minta = this.cikkservice.DtoEdited.Termekdijkt || '';
     this._termekdijservice.zoomsource = ZoomSources.Cikk;
     this._termekdijservice.zoom = true;
     this._termekdijservice.ContainerMode = TermekdijContainerMode.List;

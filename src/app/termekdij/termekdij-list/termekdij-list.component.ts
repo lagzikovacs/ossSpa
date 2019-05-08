@@ -75,10 +75,10 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
 
   selectforzoom(i: number) {
     if (this.termekdijservice.zoomsource === ZoomSources.Cikk) {
-      this._cikkservice.DtoEdited.TERMEKDIJKOD = this.termekdijservice.Dto[i].Termekdijkod;
-      this._cikkservice.DtoEdited.TERMEKDIJKT = this.termekdijservice.Dto[i].Termekdijkt;
-      this._cikkservice.DtoEdited.TERMEKDIJMEGNEVEZES = this.termekdijservice.Dto[i].Termekdijmegnevezes;
-      this._cikkservice.DtoEdited.TERMEKDIJEGYSEGAR = this.termekdijservice.Dto[i].Termekdijegysegar;
+      this._cikkservice.DtoEdited.Termekdijkod = this.termekdijservice.Dto[i].Termekdijkod;
+      this._cikkservice.DtoEdited.Termekdijkt = this.termekdijservice.Dto[i].Termekdijkt;
+      this._cikkservice.DtoEdited.Termekdijmegnevezes = this.termekdijservice.Dto[i].Termekdijmegnevezes;
+      this._cikkservice.DtoEdited.Termekdijegysegar = this.termekdijservice.Dto[i].Termekdijegysegar;
     }
     if (this.termekdijservice.zoomsource === ZoomSources.Bizonylattetel) {
       this._bizonylatservice.TetelDtoEdited.TERMEKDIJKOD = this.termekdijservice.Dto[i].Termekdijkod;

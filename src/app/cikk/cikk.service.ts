@@ -46,7 +46,7 @@ export class CikkService {
               private _logonservice: LogonService) { }
 
   public Add(dto: CikkDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'add';
+    const url = environment.CoreRef + this._controller + 'add';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -57,7 +57,7 @@ export class CikkService {
   }
 
   public CreateNew(): Promise<CikkResult> {
-    const url = environment.BaseHref + this._controller + 'createnew';
+    const url = environment.CoreRef + this._controller + 'createnew';
     const body = '';
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -68,7 +68,7 @@ export class CikkService {
   }
 
   public Delete(dto: CikkDto): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'delete';
+    const url = environment.CoreRef + this._controller + 'delete';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -79,7 +79,7 @@ export class CikkService {
   }
 
   public Get(key: number): Promise<CikkResult> {
-    const url = environment.BaseHref + this._controller + 'get';
+    const url = environment.CoreRef + this._controller + 'get';
     const body = key;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -90,7 +90,7 @@ export class CikkService {
   }
 
   public Select(up: CikkParameter): Promise<CikkResult> {
-    const url = environment.BaseHref + this._controller + 'select';
+    const url = environment.CoreRef + this._controller + 'select';
     const body = up;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -101,7 +101,7 @@ export class CikkService {
   }
 
   public Update(dto: CikkDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'update';
+    const url = environment.CoreRef + this._controller + 'update';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -112,7 +112,7 @@ export class CikkService {
   }
 
   public Mozgas(par: CikkMozgasParameter): Promise<CikkMozgasResult> {
-    const url = environment.BaseHref + this._controller + 'mozgas';
+    const url = environment.CoreRef + this._controller + 'mozgas';
     const body = par;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -123,7 +123,7 @@ export class CikkService {
   }
 
   public ZoomCheck(par: CikkZoomParameter): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'zoomcheck';
+    const url = environment.CoreRef + this._controller + 'zoomcheck';
     const body = par;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

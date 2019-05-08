@@ -1,6 +1,6 @@
 <div class="alapkeret">
   <h5>{{cikkservice.cim}}</h5>
-  <h6 *ngIf="cikkservice.DtoSelectedIndex !== -1">{{cikkservice.Dto[cikkservice.DtoSelectedIndex].MEGNEVEZES}}</h6>
+  <h6 *ngIf="cikkservice.DtoSelectedIndex !== -1">{{cikkservice.Dto[cikkservice.DtoSelectedIndex].Megnevezes}}</h6>
   <div>
     <nav>
       <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">

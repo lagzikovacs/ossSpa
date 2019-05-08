@@ -51,7 +51,7 @@ export class CikkEgyComponent implements OnDestroy {
   }
   beszerzeskivet() {
     this.eppFrissit = true;
-    this.cikkservice.Mozgas(new CikkMozgasParameter(this.cikkservice.Dto[this.cikkservice.DtoSelectedIndex].CIKKKOD,
+    this.cikkservice.Mozgas(new CikkMozgasParameter(this.cikkservice.Dto[this.cikkservice.DtoSelectedIndex].Cikkkod,
       this.cikkservice.BizonylattipusKod))
       .then(res => {
         if (res.Error != null) {

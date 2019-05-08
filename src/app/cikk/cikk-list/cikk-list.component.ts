@@ -90,29 +90,29 @@ export class CikkListComponent implements OnInit, OnDestroy {
   selectforzoom(i: number) {
     if (this.cikkservice.zoomsource === ZoomSources.Ajanlat) {
       this._ajanlatservice.AjanlatParam.AjanlatBuf[this._ajanlatservice.AjanlattetelIndex].CikkKod =
-        this.cikkservice.Dto[i].CIKKKOD;
+        this.cikkservice.Dto[i].Cikkkod;
       this._ajanlatservice.AjanlatParam.AjanlatBuf[this._ajanlatservice.AjanlattetelIndex].CikkNev =
-        this.cikkservice.Dto[i].MEGNEVEZES;
+        this.cikkservice.Dto[i].Megnevezes;
       this._ajanlatservice.AjanlatParam.AjanlatBuf[this._ajanlatservice.AjanlattetelIndex].AfaMerteke =
-        this.cikkservice.Dto[i].AFAMERTEKE;
+        this.cikkservice.Dto[i].Afamerteke;
       this._ajanlatservice.AjanlatParam.AjanlatBuf[this._ajanlatservice.AjanlattetelIndex].EgysegAr =
-        this.cikkservice.Dto[i].EGYSEGAR;
+        this.cikkservice.Dto[i].Egysegar;
     }
     if (this.cikkservice.zoomsource === ZoomSources.Bizonylattetel) {
-      this._bizonylatservice.TetelDtoEdited.CIKKKOD = this.cikkservice.Dto[i].CIKKKOD;
-      this._bizonylatservice.TetelDtoEdited.MEGNEVEZES = this.cikkservice.Dto[i].MEGNEVEZES;
-      this._bizonylatservice.TetelDtoEdited.MEKOD = this.cikkservice.Dto[i].MEKOD;
-      this._bizonylatservice.TetelDtoEdited.ME = this.cikkservice.Dto[i].ME;
-      this._bizonylatservice.TetelDtoEdited.AFAKULCSKOD = this.cikkservice.Dto[i].AFAKULCSKOD;
-      this._bizonylatservice.TetelDtoEdited.AFAKULCS = this.cikkservice.Dto[i].AFAKULCS;
-      this._bizonylatservice.TetelDtoEdited.AFAMERTEKE = this.cikkservice.Dto[i].AFAMERTEKE;
-      this._bizonylatservice.TetelDtoEdited.EGYSEGAR = this.cikkservice.Dto[i].EGYSEGAR;
-      this._bizonylatservice.TetelDtoEdited.TOMEGKG = this.cikkservice.Dto[i].TOMEGKG;
+      this._bizonylatservice.TetelDtoEdited.CIKKKOD = this.cikkservice.Dto[i].Cikkkod;
+      this._bizonylatservice.TetelDtoEdited.MEGNEVEZES = this.cikkservice.Dto[i].Megnevezes;
+      this._bizonylatservice.TetelDtoEdited.MEKOD = this.cikkservice.Dto[i].Mekod;
+      this._bizonylatservice.TetelDtoEdited.ME = this.cikkservice.Dto[i].Me;
+      this._bizonylatservice.TetelDtoEdited.AFAKULCSKOD = this.cikkservice.Dto[i].Afakulcskod;
+      this._bizonylatservice.TetelDtoEdited.AFAKULCS = this.cikkservice.Dto[i].Afakulcs;
+      this._bizonylatservice.TetelDtoEdited.AFAMERTEKE = this.cikkservice.Dto[i].Afamerteke;
+      this._bizonylatservice.TetelDtoEdited.EGYSEGAR = this.cikkservice.Dto[i].Egysegar;
+      this._bizonylatservice.TetelDtoEdited.TOMEGKG = this.cikkservice.Dto[i].Tomegkg;
 
-      this._bizonylatservice.TetelDtoEdited.TERMEKDIJKOD = this.cikkservice.Dto[i].TERMEKDIJKOD;
-      this._bizonylatservice.TetelDtoEdited.TERMEKDIJKT = this.cikkservice.Dto[i].TERMEKDIJKT;
-      this._bizonylatservice.TetelDtoEdited.TERMEKDIJMEGNEVEZES = this.cikkservice.Dto[i].TERMEKDIJMEGNEVEZES;
-      this._bizonylatservice.TetelDtoEdited.TERMEKDIJEGYSEGAR = this.cikkservice.Dto[i].TERMEKDIJEGYSEGAR;
+      this._bizonylatservice.TetelDtoEdited.TERMEKDIJKOD = this.cikkservice.Dto[i].Termekdijkod;
+      this._bizonylatservice.TetelDtoEdited.TERMEKDIJKT = this.cikkservice.Dto[i].Termekdijkt;
+      this._bizonylatservice.TetelDtoEdited.TERMEKDIJMEGNEVEZES = this.cikkservice.Dto[i].Termekdijmegnevezes;
+      this._bizonylatservice.TetelDtoEdited.TERMEKDIJEGYSEGAR = this.cikkservice.Dto[i].Termekdijegysegar;
     }
 
     this.stopzoom();

@@ -1,16 +1,16 @@
 export class AjanlatkeresDto {
-  AJANLATKERESKOD: number;
-  UGYNOKNEV: string;
-  NEV: string;
-  CIM: string;
-  EMAIL: string;
-  TELEFONSZAM: string;
-  HAVIFOGYASZTASKWH: string;
-  HAVISZAMLAFT: string;
-  NAPELEMEKTELJESITMENYEKW: string;
-  MEGJEGYZES: string;
-  LETREHOZVA: any;
-  LETREHOZTA: string;
-  MODOSITVA: any;
-  MODOSITOTTA: string;
+  Ajanlatkereskod: number;
+  Ugynoknev: string;
+  Nev: string;
+  Cim: string;
+  Email: string;
+  Telefonszam: string;
+  Havifogyasztaskwh: string;
+  Haviszamlaft: string;
+  Napelemekteljesitmenyekw: string;
+  Megjegyzes: string;
+  Letrehozva: any;
+  Letrehozta: string;
+  Modositva: any;
+  Modositotta: string;
 }

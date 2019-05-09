@@ -29,7 +29,7 @@ export class AjanlatkeresProjektComponent implements OnInit, OnDestroy {
 
     this.ajanlatkeresservice.pp.fi = new Array<SzMT>();
     this.ajanlatkeresservice.pp.fi.push(
-      new SzMT(Szempont.UgyfelEmail, this.ajanlatkeresservice.Dto[this.ajanlatkeresservice.DtoSelectedIndex].EMAIL));
+      new SzMT(Szempont.UgyfelEmail, this.ajanlatkeresservice.Dto[this.ajanlatkeresservice.DtoSelectedIndex].Email));
 
     this.projektservice.Select(this.ajanlatkeresservice.pp)
       .then(res => {

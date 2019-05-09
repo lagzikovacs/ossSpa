@@ -39,7 +39,7 @@ export class AjanlatkeresService {
               private _logonservice: LogonService) { }
 
   public Add(dto: AjanlatkeresDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'add';
+    const url = environment.CoreRef + this._controller + 'add';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -50,7 +50,7 @@ export class AjanlatkeresService {
   }
 
   public CreateNew(): Promise<AjanlatkeresResult> {
-    const url = environment.BaseHref + this._controller + 'createnew';
+    const url = environment.CoreRef + this._controller + 'createnew';
     const body = '';
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -61,7 +61,7 @@ export class AjanlatkeresService {
   }
 
   public Delete(dto: AjanlatkeresDto): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'delete';
+    const url = environment.CoreRef + this._controller + 'delete';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -72,7 +72,7 @@ export class AjanlatkeresService {
   }
 
   public Get(key: number): Promise<AjanlatkeresResult> {
-    const url = environment.BaseHref + this._controller + 'get';
+    const url = environment.CoreRef + this._controller + 'get';
     const body = key;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -83,7 +83,7 @@ export class AjanlatkeresService {
   }
 
   public Select(fp: AjanlatkeresParameter): Promise<AjanlatkeresResult> {
-    const url = environment.BaseHref + this._controller + 'select';
+    const url = environment.CoreRef + this._controller + 'select';
     const body = fp;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -94,7 +94,7 @@ export class AjanlatkeresService {
   }
 
   public Update(dto: AjanlatkeresDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'update';
+    const url = environment.CoreRef + this._controller + 'update';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

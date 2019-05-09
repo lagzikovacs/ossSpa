@@ -4,8 +4,8 @@ import {ErrormodalComponent} from '../errormodal/errormodal.component';
 import {LogonService} from '../logon/logon.service';
 import {SessionService} from '../session/session.service';
 import {PlatformLocation} from '@angular/common';
-
-declare var $;
+import {environment} from '../../environments/environment';
+import * as signalR from '@aspnet/signalr';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,10 +21,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   szerepkorkivalasztva: boolean;
   sessionservice: SessionService;
 
-  connection = $.hubConnection('https://docport.hu/ossrest/api/osshub', {useDefaultPath: false});
-  hubproxy = this.connection.createHubProxy('OssHub');
   connected = false;
   utolsouzenet = '';
+
+  private _hubConnection: signalR.HubConnection = new signalR.HubConnectionBuilder().withUrl(environment.CoreRef + 'osshub').build();
 
   constructor(private _logonservice: LogonService,
               private _platformLocation: PlatformLocation,
@@ -37,14 +37,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // this.connection.stateChanged(function (change) {
-    //   console.log(change);
-    // });
-    // this.connection.received(x => {
-    //   // itt részletes adatok jönnek
-    //   console.log(x);
-    // });
-
     this._subscription = this._logonservice.SzerepkorKivalasztvaObservable().subscribe(uzenet => {
       this.szerepkorkivalasztva = (uzenet.szerepkorkivalasztva as boolean);
 
@@ -57,24 +49,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   startconnection() {
-    this.hubproxy.on('Uzenet', (message) => {
-      // TODO lehet listába tenni, stb.
-      this.utolsouzenet = message;
-      this.beep();
+    this._hubConnection.on('Uzenet', (message) => {
+        // TODO lehet listába tenni, stb.
+        this.utolsouzenet = message;
+        this.beep();
     });
-
-    this.connection.start()
-      .done((data: any) => {
+    this._hubConnection.start()
+      .then(() => {
         this.utolsouzenet = 'OssHub OK';
         this.connected = true;
       })
-      .fail((error: any) => {
+      .catch((error: any) => {
         this.utolsouzenet = error;
       });
   }
   stopconnection() {
-    this.connection.stop();
-    this.hubproxy.off('Uzenet');
+    this._hubConnection.stop();
+
     this.utolsouzenet = '';
     this.connected = false;
   }

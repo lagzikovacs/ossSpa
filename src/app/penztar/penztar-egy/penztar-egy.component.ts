@@ -23,7 +23,7 @@ export class PenztarEgyComponent implements OnDestroy {
               penztarservice: PenztarService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);
     this.penztarservice = penztarservice;
-    this.nyitva = this.penztarservice.Dto[this.penztarservice.DtoSelectedIndex].NYITVA;
+    this.nyitva = this.penztarservice.Dto[this.penztarservice.DtoSelectedIndex].Nyitva;
   }
 
   vissza() {

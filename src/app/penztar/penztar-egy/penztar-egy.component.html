@@ -1,6 +1,6 @@
 <div class="alapkeret">
   <h5>{{penztarservice.cim}}</h5>
-  <h6 *ngIf="penztarservice.DtoSelectedIndex !== -1">{{penztarservice.Dto[penztarservice.DtoSelectedIndex].PENZTAR1}} {{penztarservice.Dto[penztarservice.DtoSelectedIndex].EGYENLEG}} {{penztarservice.Dto[penztarservice.DtoSelectedIndex].PENZNEM}}</h6>
+  <h6 *ngIf="penztarservice.DtoSelectedIndex !== -1">{{penztarservice.Dto[penztarservice.DtoSelectedIndex].Penztar1}} {{penztarservice.Dto[penztarservice.DtoSelectedIndex].Egyenleg}} {{penztarservice.Dto[penztarservice.DtoSelectedIndex].Penznem}}</h6>
   <div>
     <nav>
       <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">

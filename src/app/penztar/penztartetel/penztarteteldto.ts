@@ -1,18 +1,18 @@
 export class PenztartetelDto {
-  PENZTARTETELKOD: number;
-  PENZTARKOD: number;
-  PENZTARBIZONYLATSZAM: string;
-  DATUM: any;
-  JOGCIM: string;
-  UGYFELKOD: number;
-  UGYFELNEV: string;
-  BIZONYLATSZAM: string;
-  BEVETEL: number;
-  KIADAS: number;
-  MEGJEGYZES: string;
+  Penztartetelkod: number;
+  Penztarkod: number;
+  Penztarbizonylatszam: string;
+  Datum: any;
+  Jogcim: string;
+  Ugyfelkod: number;
+  Ugyfelnev: string;
+  Bizonylatszam: string;
+  Bevetel: number;
+  Kiadas: number;
+  Megjegyzes: string;
 
-  LETREHOZVA: Date;
-  LETREHOZTA: string;
-  MODOSITVA: Date;
-  MODOSITOTTA: string;
+  Letrehozva: Date;
+  Letrehozta: string;
+  Modositva: Date;
+  Modositotta: string;
 }

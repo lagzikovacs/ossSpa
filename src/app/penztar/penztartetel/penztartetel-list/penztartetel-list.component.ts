@@ -33,7 +33,7 @@ export class PenztartetelListComponent implements OnDestroy {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);
     this.penztarservice = penztarservice;
     this.penztartetelservice = penztartetelservice;
-    this.nyitva = this.penztarservice.Dto[this.penztarservice.DtoSelectedIndex].NYITVA;
+    this.nyitva = this.penztarservice.Dto[this.penztarservice.DtoSelectedIndex].Nyitva;
   }
 
   onKereses() {
@@ -41,7 +41,7 @@ export class PenztartetelListComponent implements OnDestroy {
     this.penztartetelservice.ptp.rekordtol = 0;
     this.penztartetelservice.ptp.fi = new Array();
     this.penztartetelservice.ptp.fi.push(new SzMT(Szempont.SzuloKod,
-      this.penztarservice.Dto[this.penztarservice.DtoSelectedIndex].PENZTARKOD.toString()));
+      this.penztarservice.Dto[this.penztarservice.DtoSelectedIndex].Penztarkod.toString()));
     this.penztartetelservice.ptp.fi.push(new SzMT(this.szempontok[this.penztartetelservice.szempont],
       this.penztartetelservice.minta));
 

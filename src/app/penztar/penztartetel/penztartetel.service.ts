@@ -6,7 +6,7 @@ import {LogonService} from '../../logon/logon.service';
 import {NumberResult} from '../../dtos/numberresult';
 import {PenztartetelResult} from './penztartetelresult';
 import {PenztartetelParameter} from './penztartetelparameter';
-import {PenztartetelContainerMode} from "./penztartetelcontainermode";
+import {PenztartetelContainerMode} from './penztartetelcontainermode';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +31,7 @@ export class PenztartetelService {
               private _logonservice: LogonService) { }
 
   public Add(dto: PenztartetelDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'add';
+    const url = environment.CoreRef + this._controller + 'add';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -42,7 +42,7 @@ export class PenztartetelService {
   }
 
   public CreateNew(): Promise<PenztartetelResult> {
-    const url = environment.BaseHref + this._controller + 'createnew';
+    const url = environment.CoreRef + this._controller + 'createnew';
     const body = '';
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -53,7 +53,7 @@ export class PenztartetelService {
   }
 
   public Get(key: number): Promise<PenztartetelResult> {
-    const url = environment.BaseHref + this._controller + 'get';
+    const url = environment.CoreRef + this._controller + 'get';
     const body = key;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -64,7 +64,7 @@ export class PenztartetelService {
   }
 
   public Select(par: PenztartetelParameter): Promise<PenztartetelResult> {
-    const url = environment.BaseHref + this._controller + 'select';
+    const url = environment.CoreRef + this._controller + 'select';
     const body = par;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

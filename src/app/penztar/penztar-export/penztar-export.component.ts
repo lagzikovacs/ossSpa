@@ -36,7 +36,7 @@ export class PenztarExportComponent implements OnDestroy {
     this.megszakitani = false;
 
     const fi = [
-      new SzMT(Szempont.Null, this._penztarservice.Dto[this._penztarservice.DtoSelectedIndex].PENZTARKOD.toString()),
+      new SzMT(Szempont.Null, this._penztarservice.Dto[this._penztarservice.DtoSelectedIndex].Penztarkod.toString()),
       new SzMT(Szempont.Null, moment(this.tol).toISOString(true)),
       new SzMT(Szempont.Null, moment(this.ig).toISOString(true))
     ];

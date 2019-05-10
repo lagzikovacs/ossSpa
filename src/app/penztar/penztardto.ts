@@ -1,12 +1,12 @@
 export class PenztarDto {
-  PENZTARKOD: number;
-  PENZTAR1: string;
-  PENZNEMKOD: number;
-  PENZNEM: string;
-  NYITVA: boolean;
-  EGYENLEG: number;
-  LETREHOZVA: Date;
-  LETREHOZTA: string;
-  MODOSITVA: Date;
-  MODOSITOTTA: string;
+  Penztarkod: number;
+  Penztar1: string;
+  Penznemkod: number;
+  Penznem: string;
+  Nyitva: boolean;
+  Egyenleg: number;
+  Letrehozva: Date;
+  Letrehozta: string;
+  Modositva: Date;
+  Modositotta: string;
 }

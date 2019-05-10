@@ -26,8 +26,8 @@ export class PenztarSzerkesztesComponent implements OnDestroy {
 
   onSubmit() {
     this.eppFrissit = true;
-    this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.penztarservice.DtoEdited.PENZNEMKOD || 0,
-      this.penztarservice.DtoEdited.PENZNEM || ''))
+    this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.penztarservice.DtoEdited.Penznemkod || 0,
+      this.penztarservice.DtoEdited.Penznem || ''))
       .then(res => {
         if (res.Error !== null) {
           throw res.Error;
@@ -76,7 +76,7 @@ export class PenztarSzerkesztesComponent implements OnDestroy {
     }
   }
   PenznemZoom() {
-    this._penznemservice.ekDto.minta = this.penztarservice.DtoEdited.PENZNEM || '';
+    this._penznemservice.ekDto.minta = this.penztarservice.DtoEdited.Penznem || '';
     this._penznemservice.zoomsource = ZoomSources.Penztar;
     this._penznemservice.zoom = true;
 

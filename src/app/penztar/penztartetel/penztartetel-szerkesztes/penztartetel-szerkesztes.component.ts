@@ -74,8 +74,8 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnDestro
   }
 
   onSubmit() {
-    this.penztartetelservice.DtoEdited.PENZTARKOD = this._penztarservice.Dto[this._penztarservice.DtoSelectedIndex].PENZTARKOD;
-    this.penztartetelservice.DtoEdited.DATUM = moment(this.datum).toISOString(true);
+    this.penztartetelservice.DtoEdited.Penztarkod = this._penztarservice.Dto[this._penztarservice.DtoSelectedIndex].Penztarkod;
+    this.penztartetelservice.DtoEdited.Datum = moment(this.datum).toISOString(true);
 
     this.eppFrissit = true;
     this.penztartetelservice.Add(this.penztartetelservice.DtoEdited)
@@ -93,7 +93,7 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnDestro
 
         this.penztartetelservice.Dto.unshift(res1.Result[0]);
 
-        return this._penztarservice.ReadById(this._penztarservice.Dto[this._penztarservice.DtoSelectedIndex].PENZTARKOD);
+        return this._penztarservice.ReadById(this._penztarservice.Dto[this._penztarservice.DtoSelectedIndex].Penztarkod);
       })
       .then(res2 => {
         if (res2.Error != null) {

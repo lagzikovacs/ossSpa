@@ -10,7 +10,7 @@ import {PenztarResult} from './penztarresult';
 import {EmptyResult} from '../dtos/emptyresult';
 import {PenztarContainerMode} from './penztarcontainermode';
 import {PenztarEgyMode} from './penztaregymode';
-import {PenztarSzerkesztesMode} from "./penztarszerkesztesmode";
+import {PenztarSzerkesztesMode} from './penztarszerkesztesmode';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +36,7 @@ export class PenztarService {
               private _logonservice: LogonService) { }
 
   public Add(dto: PenztarDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'add';
+    const url = environment.CoreRef + this._controller + 'add';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -47,7 +47,7 @@ export class PenztarService {
   }
 
   public CreateNew(): Promise<PenztarResult> {
-    const url = environment.BaseHref + this._controller + 'createnew';
+    const url = environment.CoreRef + this._controller + 'createnew';
     const body = '';
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -58,7 +58,7 @@ export class PenztarService {
   }
 
   public Delete(dto: PenztarDto): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'delete';
+    const url = environment.CoreRef + this._controller + 'delete';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -69,7 +69,7 @@ export class PenztarService {
   }
 
   public Get(key: number): Promise<PenztarResult> {
-    const url = environment.BaseHref + this._controller + 'get';
+    const url = environment.CoreRef + this._controller + 'get';
     const body = key;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -80,7 +80,7 @@ export class PenztarService {
   }
 
   public Read(maszk: string): Promise<PenztarResult> {
-    const url = environment.BaseHref + this._controller + 'read';
+    const url = environment.CoreRef + this._controller + 'read';
     const body = maszk;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -90,7 +90,7 @@ export class PenztarService {
     return this._httpClient.post<PenztarResult>(url, JSON.stringify(body), options).toPromise();
   }
   public ReadById(key: number): Promise<PenztarResult> {
-    const url = environment.BaseHref + this._controller + 'readbyid';
+    const url = environment.CoreRef + this._controller + 'readbyid';
     const body = key;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -100,7 +100,7 @@ export class PenztarService {
     return this._httpClient.post<PenztarResult>(url, JSON.stringify(body), options).toPromise();
   }
   public ReadByCurrencyOpened(penznemkod: number): Promise<PenztarResult> {
-    const url = environment.BaseHref + this._controller + 'readbycurrencyopened';
+    const url = environment.CoreRef + this._controller + 'readbycurrencyopened';
     const body = penznemkod;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -111,7 +111,7 @@ export class PenztarService {
   }
 
   public Update(dto: PenztarDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'update';
+    const url = environment.CoreRef + this._controller + 'update';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

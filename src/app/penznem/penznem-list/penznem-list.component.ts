@@ -84,8 +84,8 @@ export class PenznemListComponent implements OnInit, OnDestroy {
 
   selectforzoom(i: number) {
     if (this.penznemservice.zoomsource === ZoomSources.Penztar) {
-      this._penztarservice.DtoEdited.PENZNEMKOD = this.penznemservice.Dto[i].Penznemkod;
-      this._penztarservice.DtoEdited.PENZNEM = this.penznemservice.Dto[i].Penznem1;
+      this._penztarservice.DtoEdited.Penznemkod = this.penznemservice.Dto[i].Penznemkod;
+      this._penztarservice.DtoEdited.Penznem = this.penznemservice.Dto[i].Penznem1;
     }
     if (this.penznemservice.zoomsource === ZoomSources.Projekt) {
       this._projektservice.DtoEdited.PENZNEMKOD = this.penznemservice.Dto[i].Penznemkod;

@@ -21,16 +21,16 @@
     <tbody>
     <ng-container *ngFor="let item of penztartetelservice.Dto; let i = index">
       <tr >
-        <td>{{item.PENZTARBIZONYLATSZAM}}</td>
-        <td>{{item.DATUM | datehun}}</td>
-        <td>{{item.JOGCIM}}</td>
-        <td>{{item.UGYFELNEV}}</td>
-        <td>{{item.BIZONYLATSZAM}}</td>
-        <td>{{item.BEVETEL}}</td>
-        <td>{{item.KIADAS}}</td>
+        <td>{{item.Penztarbizonylatszam}}</td>
+        <td>{{item.Datum | datehun}}</td>
+        <td>{{item.Jogcim}}</td>
+        <td>{{item.Ugyfelnev}}</td>
+        <td>{{item.Bizonylatszam}}</td>
+        <td>{{item.Bevetel}}</td>
+        <td>{{item.Kiadas}}</td>
       </tr>
-      <tr *ngIf="item.MEGJEGYZES !== null && item.MEGJEGYZES !== ''">
-        <td colspan="7">{{item.MEGJEGYZES}}</td>
+      <tr *ngIf="item.Megjegyzes !== null && item.Megjegyzes !== ''">
+        <td colspan="7">{{item.Megjegyzes}}</td>
       </tr>
     </ng-container>
     </tbody>

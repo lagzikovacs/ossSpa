@@ -50,7 +50,7 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
         this.projektteendoservice.DtoEdited.HATARIDO = moment(this.Hatarido).toISOString(true);
 
         if (this.projektteendoservice.uj) {
-          this.projektteendoservice.DtoEdited.PROJEKTKOD = this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD;
+          this.projektteendoservice.DtoEdited.PROJEKTKOD = this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod;
           return this.projektteendoservice.Add(this.projektteendoservice.DtoEdited);
         } else {
           return this.projektteendoservice.Update(this.projektteendoservice.DtoEdited);

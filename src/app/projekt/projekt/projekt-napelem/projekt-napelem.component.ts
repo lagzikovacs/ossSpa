@@ -24,7 +24,7 @@ export class ProjektNapelemComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.selected = this.projektservice.DtoEdited.NAPELEMALLAPOT || '';
+    this.selected = this.projektservice.DtoEdited.Napelemallapot || '';
   }
 
   change(entry) {
@@ -34,7 +34,7 @@ export class ProjektNapelemComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.eppFrissit = true;
 
-    this.projektservice.DtoEdited.NAPELEMALLAPOT = this.selected;
+    this.projektservice.DtoEdited.Napelemallapot = this.selected;
     this.projektservice.Update(this.projektservice.DtoEdited)
       .then(res => {
         if (res.Error !== null) {

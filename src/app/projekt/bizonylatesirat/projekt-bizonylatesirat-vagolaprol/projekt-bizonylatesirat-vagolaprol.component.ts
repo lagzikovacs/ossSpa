@@ -40,14 +40,14 @@ export class ProjektBizonylatesiratVagolaprolComponent implements OnInit, OnDest
       if (this._vagolapservice.Dto[i].selected) {
         if (this._vagolapservice.Dto[i].tipus === 0) {
           p = this.projektkapcsolatservice.AddIratToProjekt(new ProjektKapcsolatParameter(
-            this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD,
+            this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod,
             0,
             this._vagolapservice.Dto[i].iratkod,
             null
           ));
         } else {
           p = this.projektkapcsolatservice.AddBizonylatToProjekt(new ProjektKapcsolatParameter(
-            this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD,
+            this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod,
             this._vagolapservice.Dto[i].bizonylatkod,
             0,
             null

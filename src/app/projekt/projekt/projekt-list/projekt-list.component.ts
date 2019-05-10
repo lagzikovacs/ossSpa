@@ -98,8 +98,8 @@ export class ProjektListComponent implements OnDestroy {
   setClickedRow(i: number) {
     this.projektservice.DtoSelectedIndex = i;
 
-    const ProjektKod = this.projektservice.Dto[this.projektservice.DtoSelectedIndex].PROJEKTKOD;
-    const UgyfelKod = this.projektservice.Dto[this.projektservice.DtoSelectedIndex].UGYFELKOD;
+    const ProjektKod = this.projektservice.Dto[this.projektservice.DtoSelectedIndex].Projektkod;
+    const UgyfelKod = this.projektservice.Dto[this.projektservice.DtoSelectedIndex].Ugyfelkod;
 
     this._projektkapcsolatservice.ProjektKod = ProjektKod;
     this._projektkapcsolatservice.UgyfelKod = UgyfelKod;

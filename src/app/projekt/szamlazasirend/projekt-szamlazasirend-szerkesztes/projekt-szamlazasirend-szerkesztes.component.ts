@@ -39,7 +39,7 @@ export class ProjektSzamlazasirendSzerkesztesComponent implements OnInit, OnDest
         }
 
         if (this.szamlazasirendservice.uj) {
-          this.szamlazasirendservice.DtoEdited.PROJEKTKOD = this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD;
+          this.szamlazasirendservice.DtoEdited.PROJEKTKOD = this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod;
           return this.szamlazasirendservice.Add(this.szamlazasirendservice.DtoEdited);
         } else {
           return this.szamlazasirendservice.Update(this.szamlazasirendservice.DtoEdited);

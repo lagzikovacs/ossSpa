@@ -23,7 +23,7 @@ export class ProjektIratmintaComponent implements OnDestroy {
 
   szerzodes() {
     this.eppFrissit = true;
-      this._iratmintaservice.Szerzodes(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD)
+      this._iratmintaservice.Szerzodes(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -39,7 +39,7 @@ export class ProjektIratmintaComponent implements OnDestroy {
   }
   szallitasiszerzodes() {
     this.eppFrissit = true;
-    this._iratmintaservice.Szallitasiszerzodes(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD)
+    this._iratmintaservice.Szallitasiszerzodes(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -55,7 +55,7 @@ export class ProjektIratmintaComponent implements OnDestroy {
   }
   munkalap() {
     this.eppFrissit = true;
-    this._iratmintaservice.Munkalap(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD)
+    this._iratmintaservice.Munkalap(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -63,7 +63,7 @@ export class ProjektIratmintaComponent implements OnDestroy {
         const blob = b64toBlob(res.Result);
         FileSaver.saveAs(blob, 'Munkalap.docx');
 
-        return this._projektservice.Get(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD);
+        return this._projektservice.Get(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod);
       })
       .then(res1 => {
         if (res1.Error != null) {
@@ -80,7 +80,7 @@ export class ProjektIratmintaComponent implements OnDestroy {
   }
   elegedettseg() {
     this.eppFrissit = true;
-    this._iratmintaservice.Elegedettseg(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD)
+    this._iratmintaservice.Elegedettseg(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -96,7 +96,7 @@ export class ProjektIratmintaComponent implements OnDestroy {
   }
   elmuemasz() {
     this.eppFrissit = true;
-    this._iratmintaservice.KeszrejelentesElmuEmasz(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD)
+    this._iratmintaservice.KeszrejelentesElmuEmasz(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -112,7 +112,7 @@ export class ProjektIratmintaComponent implements OnDestroy {
   }
   eon() {
     this.eppFrissit = true;
-    this._iratmintaservice.KeszrejelentesEon(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD)
+    this._iratmintaservice.KeszrejelentesEon(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -128,7 +128,7 @@ export class ProjektIratmintaComponent implements OnDestroy {
   }
   demasz() {
     this.eppFrissit = true;
-    this._iratmintaservice.KeszrejelentesDemasz(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].PROJEKTKOD)
+    this._iratmintaservice.KeszrejelentesDemasz(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

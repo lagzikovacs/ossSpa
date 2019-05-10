@@ -24,7 +24,7 @@ export class ProjektInverterComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.selected = this.projektservice.DtoEdited.INVERTERALLAPOT || '';
+    this.selected = this.projektservice.DtoEdited.Inverterallapot || '';
   }
 
   change(entry) {
@@ -34,7 +34,7 @@ export class ProjektInverterComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.eppFrissit = true;
 
-    this.projektservice.DtoEdited.INVERTERALLAPOT = this.selected;
+    this.projektservice.DtoEdited.Inverterallapot = this.selected;
     this.projektservice.Update(this.projektservice.DtoEdited)
       .then(res => {
         if (res.Error !== null) {

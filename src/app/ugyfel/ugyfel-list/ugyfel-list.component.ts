@@ -97,9 +97,9 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
       this._iratservice.DtoEdited.Ugyfelcim = this.ugyfelservice.Dto[i].Cim;
     }
     if (this.ugyfelservice.zoomsource === ZoomSources.Projekt) {
-      this._projektservice.DtoEdited.UGYFELKOD = this.ugyfelservice.Dto[i].Ugyfelkod;
-      this._projektservice.DtoEdited.UGYFELNEV = this.ugyfelservice.Dto[i].Nev;
-      this._projektservice.DtoEdited.UGYFELCIM = this.ugyfelservice.Dto[i].Cim;
+      this._projektservice.DtoEdited.Ugyfelkod = this.ugyfelservice.Dto[i].Ugyfelkod;
+      this._projektservice.DtoEdited.Ugyfelnev = this.ugyfelservice.Dto[i].Nev;
+      this._projektservice.DtoEdited.Ugyfelcim = this.ugyfelservice.Dto[i].Cim;
     }
     if (this.ugyfelservice.zoomsource === ZoomSources.Bizonylat) {
       this._bizonylatservice.ComplexDtoEdited.Dto.UGYFELKOD = this.ugyfelservice.Dto[i].Ugyfelkod;

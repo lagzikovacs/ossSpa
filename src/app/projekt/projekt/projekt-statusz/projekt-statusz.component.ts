@@ -26,7 +26,7 @@ export class ProjektStatuszComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.selected = this.projektservice.DtoEdited.STATUSZ;
+    this.selected = this.projektservice.DtoEdited.Statusz;
   }
 
   change(i) {
@@ -36,7 +36,7 @@ export class ProjektStatuszComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.eppFrissit = true;
 
-    this.projektservice.DtoEdited.STATUSZ = this.selected;
+    this.projektservice.DtoEdited.Statusz = this.selected;
     this.projektservice.Update(this.projektservice.DtoEdited)
       .then(res => {
         if (res.Error !== null) {

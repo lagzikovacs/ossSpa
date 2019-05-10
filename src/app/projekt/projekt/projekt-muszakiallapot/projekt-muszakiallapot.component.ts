@@ -24,7 +24,7 @@ export class ProjektMuszakiallapotComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.selected = this.projektservice.DtoEdited.MUSZAKIALLAPOT || '';
+    this.selected = this.projektservice.DtoEdited.Muszakiallapot || '';
   }
 
   change(entry) {
@@ -34,7 +34,7 @@ export class ProjektMuszakiallapotComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.eppFrissit = true;
 
-    this.projektservice.DtoEdited.MUSZAKIALLAPOT = this.selected;
+    this.projektservice.DtoEdited.Muszakiallapot = this.selected;
     this.projektservice.Update(this.projektservice.DtoEdited)
       .then(res => {
         if (res.Error !== null) {

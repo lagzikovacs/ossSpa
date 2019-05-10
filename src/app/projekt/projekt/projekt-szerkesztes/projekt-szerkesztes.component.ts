@@ -37,15 +37,15 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.eppFrissit = true;
-    this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.projektservice.DtoEdited.UGYFELKOD || 0,
-      this.projektservice.DtoEdited.UGYFELNEV || ''))
+    this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.projektservice.DtoEdited.Ugyfelkod || 0,
+      this.projektservice.DtoEdited.Ugyfelnev || ''))
       .then(res => {
         if (res.Error !== null) {
           throw res.Error;
         }
 
-        return this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.projektservice.DtoEdited.PENZNEMKOD || 0,
-          this.projektservice.DtoEdited.PENZNEM || ''));
+        return this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.projektservice.DtoEdited.Penznemkod || 0,
+          this.projektservice.DtoEdited.Penznem || ''));
       })
       .then(res1 => {
         if (res1.Error !== null) {
@@ -97,7 +97,7 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
 
   UgyfelZoom() {
     this._ugyfelservice.szempont = 0;
-    this._ugyfelservice.minta = this.projektservice.DtoEdited.UGYFELNEV || '';
+    this._ugyfelservice.minta = this.projektservice.DtoEdited.Ugyfelnev || '';
     this._ugyfelservice.zoomsource = ZoomSources.Projekt;
     this._ugyfelservice.zoom = true;
     this._ugyfelservice.ContainerMode = UgyfelContainerMode.List;
@@ -105,7 +105,7 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
     this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.UgyfelZoom;
   }
   PenznemZoom() {
-    this._penznemservice.ekDto.minta = this.projektservice.DtoEdited.PENZNEM || '';
+    this._penznemservice.ekDto.minta = this.projektservice.DtoEdited.Penznem || '';
     this._penznemservice.zoomsource = ZoomSources.Projekt;
     this._penznemservice.zoom = true;
     this._penznemservice.ContainerMode = PenznemContainerMode.List;

@@ -24,15 +24,15 @@ export class ProjektDatumokComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.Keletkezett = moment(this.projektservice.DtoEdited.KELETKEZETT).format('YYYY-MM-DD');
-    this.Megrendelve = moment(this.projektservice.DtoEdited.MEGRENDELVE).format('YYYY-MM-DD');
-    this.KivHat = moment(this.projektservice.DtoEdited.KIVITELEZESIHATARIDO).format('YYYY-MM-DD');
+    this.Keletkezett = moment(this.projektservice.DtoEdited.Keletkezett).format('YYYY-MM-DD');
+    this.Megrendelve = moment(this.projektservice.DtoEdited.Megrendelve).format('YYYY-MM-DD');
+    this.KivHat = moment(this.projektservice.DtoEdited.Kivitelezesihatarido).format('YYYY-MM-DD');
   }
 
   onSubmit() {
-    this.projektservice.DtoEdited.KELETKEZETT = moment(this.Keletkezett).toISOString(true);
-    this.projektservice.DtoEdited.MEGRENDELVE = moment(this.Megrendelve).toISOString(true);
-    this.projektservice.DtoEdited.KIVITELEZESIHATARIDO = moment(this.KivHat).toISOString(true);
+    this.projektservice.DtoEdited.Keletkezett = moment(this.Keletkezett).toISOString(true);
+    this.projektservice.DtoEdited.Megrendelve = moment(this.Megrendelve).toISOString(true);
+    this.projektservice.DtoEdited.Kivitelezesihatarido = moment(this.KivHat).toISOString(true);
 
     this.eppFrissit = true;
     this.projektservice.Update(this.projektservice.DtoEdited)

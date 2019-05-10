@@ -26,51 +26,51 @@
   <tbody>
   <ng-container *ngFor="let item of Dto; let i = index">
     <tr>
-      <td *ngIf="enIdclick" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.PROJEKTKOD}}</td>
-      <td *ngIf="!enIdclick">{{item.PROJEKTKOD}}</td>
-      <td>{{item.STATUSZ}}</td>
+      <td *ngIf="enIdclick" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.Projektkod}}</td>
+      <td *ngIf="!enIdclick">{{item.Projektkod}}</td>
+      <td>{{item.Statusz}}</td>
       <td>
-        <div style="width: 200px">{{item.UGYFELNEV}}</div>
-        <div style="width: 250px">{{item.UGYFELCIM}}</div>
+        <div style="width: 200px">{{item.Ugyfelnev}}</div>
+        <div style="width: 250px">{{item.Ugyfelcim}}</div>
       </td>
       <td>
-        <div>{{item.UGYFELEMAIL}}</div>
-        <div>{{item.UGYFELTELEFONSZAM}}</div>
+        <div>{{item.Ugyfelemail}}</div>
+        <div>{{item.Ugyfeltelefonszam}}</div>
       </td>
       <td>
-        <div style="width: 300px">{{item.TELEPITESICIM}}</div>
-        <div style="width: 150px">{{item.PROJEKTJELLEGE}}</div>
+        <div style="width: 300px">{{item.Telepitesicim}}</div>
+        <div style="width: 150px">{{item.Projektjellege}}</div>
       </td>
       <td>
-        <div style="width:120px" [style.background-color]="MuszakiallapotColor(item.MUSZAKIALLAPOT)">{{item.MUSZAKIALLAPOT}}</div>
+        <div style="width:120px" [style.background-color]="MuszakiallapotColor(item.Muszakiallapot)">{{item.Muszakiallapot}}</div>
       </td>
       <td>
-        <div style="width: 250px" [style.background-color]="InverterNapelemColor(item.INVERTERALLAPOT)">
-          <div>{{item.INVERTER}}</div>
-          <div>{{item.INVERTERALLAPOT}}</div>
+        <div style="width: 250px" [style.background-color]="InverterNapelemColor(item.Inverterallapot)">
+          <div>{{item.Inverter}}</div>
+          <div>{{item.Inverterallapot}}</div>
         </div>
       </td>
       <td>
-        <div style="width: 250px" [style.background-color]="InverterNapelemColor(item.NAPELEMALLAPOT)">
-          <div>{{item.NAPELEM}}</div>
-          <div>{{item.NAPELEMALLAPOT}}</div>
+        <div style="width: 250px" [style.background-color]="InverterNapelemColor(item.Napelemallapot)">
+          <div>{{item.Napelem}}</div>
+          <div>{{item.Napelemallapot}}</div>
         </div>
       </td>
       <td>
         <div style="text-align: right">
-          <div>{{item.ACKVA | number: '1.2-2'}}</div>
-          <div>{{item.DCKW | number: '1.2-2'}}</div>
+          <div>{{item.Ackva | number: '1.2-2'}}</div>
+          <div>{{item.Dckw | number: '1.2-2'}}</div>
         </div>
       </td>
-      <td style="text-align: right">{{item.VALLALASIARNETTO | number: '1.2-2'}}</td>
-      <td>{{item.PENZNEM}}</td>
-      <td>{{item.MUNKALAPSZAM}}</td>
-      <td>{{item.KELETKEZETT | datehun}}</td>
-      <td>{{item.MEGRENDELVE | datehun}}</td>
-      <td>{{item.KIVITELEZESIHATARIDO | datehun}}</td>
+      <td style="text-align: right">{{item.Vallalasiarnetto | number: '1.2-2'}}</td>
+      <td>{{item.Penznem}}</td>
+      <td>{{item.Munkalapszam}}</td>
+      <td>{{item.Keletkezett | datehun}}</td>
+      <td>{{item.Megrendelve | datehun}}</td>
+      <td>{{item.Kivitelezesihatarido | datehun}}</td>
     </tr>
-    <tr *ngIf="item.MEGJEGYZES !== null && item.MEGJEGYZES !== ''">
-      <td colspan="15">{{item.MEGJEGYZES}}</td>
+    <tr *ngIf="item.Megjegyzes !== null && item.Megjegyzes !== ''">
+      <td colspan="15">{{item.Megjegyzes}}</td>
     </tr>
   </ng-container>
   </tbody>

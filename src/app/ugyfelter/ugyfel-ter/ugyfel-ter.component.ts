@@ -55,8 +55,8 @@ export class UgyfelTerComponent implements OnInit, OnDestroy {
   }
 
   setProjektClickedRow(i: number) {
-    this.projektkod = this.Dto.projektDto[i].PROJEKTKOD;
-    this._projektkapcsolatservice.ProjektKod = this.Dto.projektDto[i].PROJEKTKOD;
+    this.projektkod = this.Dto.projektDto[i].Projektkod;
+    this._projektkapcsolatservice.ProjektKod = this.Dto.projektDto[i].Projektkod;
     this._projektkapcsolatservice.KeresesForUgyfelter()
       .catch(err => {
         this.errormodal.show(err);

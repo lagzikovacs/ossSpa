@@ -20,7 +20,7 @@ export class ProjektBizonylatesiratLevalasztasComponent implements OnDestroy {
 
   ok() {
     this.eppFrissit = true;
-    this.projektkapcsolatservice.Delete(this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].PROJEKTKAPCSOLATKOD)
+    this.projektkapcsolatservice.Delete(this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Projektkapcsolatkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

@@ -1,15 +1,17 @@
 export class ProjektKapcsolatDto {
-  PROJEKTKOD: number;
-  PROJEKTKAPCSOLATKOD: number;
-  BIZONYLATKOD: number;
-  IRATKOD: number;
+  Projektkapcsolatkod: number;
+  Projektkod: number;
+  Bizonylatkod: number;
+  Iratkod: number;
 
-  KAPCSOLAT: string;
-  TIPUS: string;
-  AZONOSITO: string;
-  KELETKEZETT: any;
-  TARGY: string;
+  Kapcsolat: string;
+  Tipus: string;
+  Azonosito: string;
+  Keletkezett: any;
+  Targy: string;
+  Kulso: string;
+  Irany: string;
 
-  LETREHOZVA: Date;
-  LETREHOZTA: string;
+  Letrehozva: Date;
+  Letrehozta: string;
 }

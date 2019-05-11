@@ -80,7 +80,7 @@ export class IratEgyComponent implements OnDestroy {
           return new Promise<ProjektResult>((resolve, reject) => { resolve(new ProjektResult()); });
         } else {
           this.nincsProjekt = false;
-          return this._projektservice.Get(res.Result[0].PROJEKTKOD);
+          return this._projektservice.Get(res.Result[0].Projektkod);
         }
       })
       .then(res1 => {

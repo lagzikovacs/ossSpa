@@ -66,9 +66,9 @@ export class ProjektBizonylatesiratListComponent implements OnDestroy {
   setClickedRow(i: number) {
     this.projektkapcsolatservice.DtoSelectedIndex = i;
 
-    if (this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].BIZONYLATKOD !== null) {
+    if (this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Bizonylatkod !== null) {
       this.eppFrissit = true;
-      this._bizonylatservice.GetComplex(this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].BIZONYLATKOD)
+      this._bizonylatservice.GetComplex(this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Bizonylatkod)
         .then(res => {
           if (res.Error != null) {
             throw res.Error;
@@ -90,7 +90,7 @@ export class ProjektBizonylatesiratListComponent implements OnDestroy {
           }
 
           return this._bizonylatkapcsolatservice.Select(
-            this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].BIZONYLATKOD);
+            this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Bizonylatkod);
         })
         .then(res2 => {
           if (res2.Error != null) {
@@ -99,7 +99,7 @@ export class ProjektBizonylatesiratListComponent implements OnDestroy {
 
           this._bizonylatkapcsolatservice.Dto = res2.Result;
           return this._bizonylatkifizetesservice.Select(
-            this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].BIZONYLATKOD);
+            this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Bizonylatkod);
         })
         .then(res3 => {
           if (res3.Error != null) {
@@ -118,9 +118,9 @@ export class ProjektBizonylatesiratListComponent implements OnDestroy {
         });
     }
 
-    if (this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].IRATKOD !== null) {
+    if (this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Iratkod !== null) {
       this.eppFrissit = true;
-      this._iratservice.Get(this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].IRATKOD)
+      this._iratservice.Get(this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Iratkod)
         .then(res => {
           if (res.Error != null) {
             throw res.Error;

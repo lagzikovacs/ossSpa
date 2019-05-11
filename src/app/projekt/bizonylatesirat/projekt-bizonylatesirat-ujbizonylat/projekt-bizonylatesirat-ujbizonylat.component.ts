@@ -7,6 +7,7 @@ import {BizonylatTipus} from '../../../bizonylat/bizonylattipus';
 import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 import {UgyfelService} from '../../../ugyfel/ugyfel.service';
 import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
+import {UgyfelDto} from '../../../ugyfel/ugyfeldto';
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-ujbizonylat',
@@ -40,7 +41,7 @@ export class ProjektBizonylatesiratUjbizonylatComponent implements OnDestroy {
   }
   onSubmit() {
     let bizonylatDto: any;
-    let ugyfelDto: any;
+    let ugyfelDto: UgyfelDto;
 
     this._bizonylatservice.CreateNewComplex()
       .then(res => {
@@ -59,16 +60,16 @@ export class ProjektBizonylatesiratUjbizonylatComponent implements OnDestroy {
         ugyfelDto = res1.Result[0];
 
         bizonylatDto.BIZONYLATTIPUSKOD = this.entries[this.entryindex][1];
-        bizonylatDto.UGYFELKOD = ugyfelDto.UGYFELKOD;
-        bizonylatDto.UGYFELNEV = ugyfelDto.NEV;
-        bizonylatDto.UGYFELADOSZAM = ugyfelDto.ADOSZAM;
+        bizonylatDto.UGYFELKOD = ugyfelDto.Ugyfelkod;
+        bizonylatDto.UGYFELNEV = ugyfelDto.Nev;
+        bizonylatDto.UGYFELADOSZAM = ugyfelDto.Adoszam;
 
-        bizonylatDto.UGYFELIRANYITOSZAM = ugyfelDto.IRANYITOSZAM;
-        bizonylatDto.UGYFELHELYSEGKOD = ugyfelDto.HELYSEGKOD;
-        bizonylatDto.UGYFELHELYSEGNEV = ugyfelDto.HELYSEGNEV;
-        bizonylatDto.UGYFELKOZTERULET = ugyfelDto.KOZTERULET;
-        bizonylatDto.UGYFELKOZTERULETTIPUS = ugyfelDto.KOZTERULETTIPUS;
-        bizonylatDto.UGYFELHAZSZAM = ugyfelDto.HAZSZAM;
+        bizonylatDto.UGYFELIRANYITOSZAM = ugyfelDto.Iranyitoszam;
+        bizonylatDto.UGYFELHELYSEGKOD = ugyfelDto.Helysegkod;
+        bizonylatDto.UGYFELHELYSEGNEV = ugyfelDto.Helysegnev;
+        bizonylatDto.UGYFELKOZTERULET = ugyfelDto.Kozterulet;
+        bizonylatDto.UGYFELKOZTERULETTIPUS = ugyfelDto.Kozterulettipus;
+        bizonylatDto.UGYFELHAZSZAM = ugyfelDto.Hazszam;
 
         return this.projektkapcsolatservice.UjBizonylatToProjekt(new ProjektKapcsolatParameter(
           this.projektkapcsolatservice.ProjektKod,

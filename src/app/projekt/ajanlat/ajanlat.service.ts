@@ -26,7 +26,7 @@ export class AjanlatService {
               private _logonservice: LogonService) { }
 
   public CreateNew(): Promise<AjanlatParamResult> {
-    const url = environment.BaseHref + this._controller + 'createnew';
+    const url = environment.CoreRef + this._controller + 'createnew';
     const body = null;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -37,8 +37,7 @@ export class AjanlatService {
   }
 
   public AjanlatKeszites(ap: AjanlatParam): Promise<NumberResult> {
-    console.log(ap);
-    const url = environment.BaseHref + this._controller + 'ajanlatkeszites';
+    const url = environment.CoreRef + this._controller + 'ajanlatkeszites';
     const body = ap;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -49,7 +48,7 @@ export class AjanlatService {
   }
 
   public AjanlatCalc(ap: AjanlatParam): Promise<AjanlatParamResult> {
-    const url = environment.BaseHref + this._controller + 'ajanlatcalc';
+    const url = environment.CoreRef + this._controller + 'ajanlatcalc';
     const body = ap;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

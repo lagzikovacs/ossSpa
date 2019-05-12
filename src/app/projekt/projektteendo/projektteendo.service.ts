@@ -7,8 +7,8 @@ import {LogonService} from '../../logon/logon.service';
 import {ProjektteendoResult} from './projektteendoresult';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {ProjektteendoContainerMode} from './projektteendocontainermode';
-import {ProjektteendoEgyMode} from "./projekttendoegymode";
-import {ProjektteendoSzerkesztesMode} from "./projektteendoszerkesztesmode";
+import {ProjektteendoEgyMode} from './projekttendoegymode';
+import {ProjektteendoSzerkesztesMode} from './projektteendoszerkesztesmode';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +32,7 @@ export class ProjektteendoService {
               private _logonservice: LogonService) { }
 
   public Add(dto: ProjektteendoDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'add';
+    const url = environment.CoreRef + this._controller + 'add';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -43,7 +43,7 @@ export class ProjektteendoService {
   }
 
   public CreateNew(): Promise<ProjektteendoResult> {
-    const url = environment.BaseHref + this._controller + 'createnew';
+    const url = environment.CoreRef + this._controller + 'createnew';
     const body = '';
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -54,7 +54,7 @@ export class ProjektteendoService {
   }
 
   public Delete(dto: ProjektteendoDto): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'delete';
+    const url = environment.CoreRef + this._controller + 'delete';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -65,7 +65,7 @@ export class ProjektteendoService {
   }
 
   public Get(key: number): Promise<ProjektteendoResult> {
-    const url = environment.BaseHref + this._controller + 'get';
+    const url = environment.CoreRef + this._controller + 'get';
     const body = key;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -76,7 +76,7 @@ export class ProjektteendoService {
   }
 
   public Select(projektkod: number): Promise<ProjektteendoResult> {
-    const url = environment.BaseHref + this._controller + 'select';
+    const url = environment.CoreRef + this._controller + 'select';
     const body = projektkod;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -87,7 +87,7 @@ export class ProjektteendoService {
   }
 
   public Update(dto: ProjektteendoDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'update';
+    const url = environment.CoreRef + this._controller + 'update';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

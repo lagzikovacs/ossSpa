@@ -40,17 +40,17 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
   onSubmit() {
     // nem ellenőrzi, h a dedikált felhasználó létezik-e
 
-    this._teendoservice.ZoomCheck(new TeendoZoomParameter(this.projektteendoservice.DtoEdited.TEENDOKOD || 0,
-      this.projektteendoservice.DtoEdited.TEENDO || ''))
+    this._teendoservice.ZoomCheck(new TeendoZoomParameter(this.projektteendoservice.DtoEdited.Teendokod || 0,
+      this.projektteendoservice.DtoEdited.Teendo || ''))
       .then(res => {
         if (res.Error !== null) {
           throw res.Error;
         }
 
-        this.projektteendoservice.DtoEdited.HATARIDO = moment(this.Hatarido).toISOString(true);
+        this.projektteendoservice.DtoEdited.Hatarido = moment(this.Hatarido).toISOString(true);
 
         if (this.projektteendoservice.uj) {
-          this.projektteendoservice.DtoEdited.PROJEKTKOD = this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod;
+          this.projektteendoservice.DtoEdited.Projektkod = this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod;
           return this.projektteendoservice.Add(this.projektteendoservice.DtoEdited);
         } else {
           return this.projektteendoservice.Update(this.projektteendoservice.DtoEdited);
@@ -96,7 +96,7 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   FelhasznaloZoom() {
-    this._felhasznalosevice.ekDto.minta = this.projektteendoservice.DtoEdited.DEDIKALVA || '';
+    this._felhasznalosevice.ekDto.minta = this.projektteendoservice.DtoEdited.Dedikalva || '';
     this._felhasznalosevice.zoomsource = ZoomSources.Projektteendo;
     this._felhasznalosevice.zoom = true;
     this._felhasznalosevice.ContainerMode = FelhasznaloContainerMode.List;
@@ -104,7 +104,7 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
     this.projektteendoservice.SzerkesztesMode = ProjektteendoSzerkesztesMode.FelhasznaloZoom;
   }
   TeendoZoom() {
-    this._teendoservice.ekDto.minta = this.projektteendoservice.DtoEdited.TEENDO || '';
+    this._teendoservice.ekDto.minta = this.projektteendoservice.DtoEdited.Teendo || '';
     this._teendoservice.zoomsource = ZoomSources.Projektteendo;
     this._teendoservice.zoom = true;
     this._teendoservice.ContainerMode = TeendoContainerMode.List;

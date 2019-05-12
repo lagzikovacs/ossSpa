@@ -1,13 +1,13 @@
 export class SzamlazasirendDto {
-  SZAMLAZASIRENDKOD: number;
-  PROJEKTKOD: number;
-  OSSZEG: number;
-  PENZNEMKOD: number;
-  PENZNEM: string;
-  MEGJEGYZES: string;
+  Szamlazasirendkod: number;
+  Projektkod: number;
+  Osszeg: number;
+  Penznemkod: number;
+  Penznem: string;
+  Megjegyzes: string;
 
-  LETREHOZVA: Date;
-  LETREHOZTA: string;
-  MODOSITVA: Date;
-  MODOSITOTTA: string;
+  Letrehozva: Date;
+  Letrehozta: string;
+  Modositva: Date;
+  Modositotta: string;
 }

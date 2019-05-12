@@ -31,15 +31,15 @@ export class ProjektSzamlazasirendSzerkesztesComponent implements OnInit, OnDest
   }
 
   onSubmit() {
-    this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.szamlazasirendservice.DtoEdited.PENZNEMKOD || 0,
-      this.szamlazasirendservice.DtoEdited.PENZNEM || ''))
+    this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.szamlazasirendservice.DtoEdited.Penznemkod || 0,
+      this.szamlazasirendservice.DtoEdited.Penznem || ''))
       .then(res => {
         if (res.Error !== null) {
           throw res.Error;
         }
 
         if (this.szamlazasirendservice.uj) {
-          this.szamlazasirendservice.DtoEdited.PROJEKTKOD = this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod;
+          this.szamlazasirendservice.DtoEdited.Projektkod = this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod;
           return this.szamlazasirendservice.Add(this.szamlazasirendservice.DtoEdited);
         } else {
           return this.szamlazasirendservice.Update(this.szamlazasirendservice.DtoEdited);
@@ -84,7 +84,7 @@ export class ProjektSzamlazasirendSzerkesztesComponent implements OnInit, OnDest
   }
 
   PenznemZoom() {
-    this._penznemservice.ekDto.minta = this.szamlazasirendservice.DtoEdited.PENZNEM || '';
+    this._penznemservice.ekDto.minta = this.szamlazasirendservice.DtoEdited.Penznem || '';
     this._penznemservice.zoomsource = ZoomSources.Szamlazasirend;
     this._penznemservice.zoom = true;
     this._penznemservice.ContainerMode = PenznemContainerMode.List;

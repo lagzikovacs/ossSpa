@@ -1,15 +1,15 @@
 export class ProjektteendoDto {
-  PROJEKTTEENDOKOD: number;
-  PROJEKTKOD: number;
-  DEDIKALVA: string;
-  TEENDOKOD: number;
-  TEENDO: string;
-  HATARIDO: any;
-  ELVEGEZVE: any;
-  LEIRAS: string;
+  Projektteendokod: number;
+  Projektkod: number;
+  Dedikalva: string;
+  Teendokod: number;
+  Teendo: string;
+  Hatarido: any;
+  Elvegezve: any;
+  Leiras: string;
 
-  LETREHOZVA: Date;
-  LETREHOZTA: string;
-  MODOSITVA: Date;
-  MODOSITOTTA: string;
+  Letrehozva: Date;
+  Letrehozta: string;
+  Modositva: Date;
+  Modositotta: string;
 }

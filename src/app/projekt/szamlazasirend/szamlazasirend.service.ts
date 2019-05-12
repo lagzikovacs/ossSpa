@@ -7,8 +7,8 @@ import {environment} from '../../../environments/environment';
 import {SzamlazasirendResult} from './szamlazasirendresult';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {SzamlazasirendContainerMode} from './szamlazasirendcontainermode';
-import {SzamlazasirendEgyMode} from "./szamlazasirendegymode";
-import {SzamlazasirendSzerkesztesMode} from "./szamlazasirendszerkesztesmode";
+import {SzamlazasirendEgyMode} from './szamlazasirendegymode';
+import {SzamlazasirendSzerkesztesMode} from './szamlazasirendszerkesztesmode';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +32,7 @@ export class SzamlazasirendService {
               private _logonservice: LogonService) { }
 
   public Add(dto: SzamlazasirendDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'add';
+    const url = environment.CoreRef + this._controller + 'add';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -43,7 +43,7 @@ export class SzamlazasirendService {
   }
 
   public CreateNew(): Promise<SzamlazasirendResult> {
-    const url = environment.BaseHref + this._controller + 'createnew';
+    const url = environment.CoreRef + this._controller + 'createnew';
     const body = '';
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -54,7 +54,7 @@ export class SzamlazasirendService {
   }
 
   public Delete(dto: SzamlazasirendDto): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'delete';
+    const url = environment.CoreRef + this._controller + 'delete';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -65,7 +65,7 @@ export class SzamlazasirendService {
   }
 
   public Get(key: number): Promise<SzamlazasirendResult> {
-    const url = environment.BaseHref + this._controller + 'get';
+    const url = environment.CoreRef + this._controller + 'get';
     const body = key;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -76,7 +76,7 @@ export class SzamlazasirendService {
   }
 
   public Select(projektkod: number): Promise<SzamlazasirendResult> {
-    const url = environment.BaseHref + this._controller + 'select';
+    const url = environment.CoreRef + this._controller + 'select';
     const body = projektkod;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -87,7 +87,7 @@ export class SzamlazasirendService {
   }
 
   public Update(dto: SzamlazasirendDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'update';
+    const url = environment.CoreRef + this._controller + 'update';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

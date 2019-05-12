@@ -25,7 +25,7 @@ export class ProjektTeendoElvegezveComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.projektteendoservice.DtoEdited.ELVEGEZVE = moment(this.Elvegezve).toISOString(true);
+    this.projektteendoservice.DtoEdited.Elvegezve = moment(this.Elvegezve).toISOString(true);
     this.projektteendoservice.Update(this.projektteendoservice.DtoEdited)
     .then(res1 => {
       if (res1.Error !== null) {

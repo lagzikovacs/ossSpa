@@ -16,7 +16,7 @@ export class FotozasService {
               private _logonservice: LogonService) { }
 
   public CreateNewLink(dto: IratDto): Promise<StringResult> {
-    const url = environment.BaseHref + this._controller + 'createnewlink';
+    const url = environment.CoreRef + this._controller + 'createnewlink';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -27,7 +27,7 @@ export class FotozasService {
   }
 
   public GetLink(dto: IratDto): Promise<StringResult> {
-    const url = environment.BaseHref + this._controller + 'getlink';
+    const url = environment.CoreRef + this._controller + 'getlink';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -38,7 +38,7 @@ export class FotozasService {
   }
 
   public Check(linkparam: string): Promise<FotozasResult> {
-    const url = environment.BaseHref + this._controller + 'check';
+    const url = environment.CoreRef + this._controller + 'check';
     const body = JSON.stringify(linkparam);
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

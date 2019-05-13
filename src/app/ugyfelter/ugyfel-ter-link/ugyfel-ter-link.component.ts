@@ -3,6 +3,7 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {UgyfelterService} from '../ugyfelter.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import * as moment from 'moment';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-ugyfel-ter-link',
@@ -28,7 +29,7 @@ export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
             throw res.Error;
           }
 
-          this.link = res.Result;
+          this.link = environment.OSSRef + res.Result;
         })
         .catch(err => {
           this.eppFrissit = false;
@@ -53,7 +54,7 @@ export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        this.link = res.Result;
+        this.link = environment.OSSRef + res.Result;
         return this._ugyfelservice.Get(this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex].Ugyfelkod);
       })
       .then(res1 => {

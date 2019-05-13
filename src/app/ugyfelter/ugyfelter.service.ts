@@ -16,7 +16,7 @@ export class UgyfelterService {
               private _logonservice: LogonService) { }
 
   public CreateNewLink(dto: UgyfelDto): Promise<StringResult> {
-    const url = environment.BaseHref + this._controller + 'createnewlink';
+    const url = environment.CoreRef + this._controller + 'createnewlink';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -26,7 +26,7 @@ export class UgyfelterService {
     return this._httpClient.post<StringResult>(url, body, options).toPromise();
   }
   public GetLink(dto: UgyfelDto): Promise<StringResult> {
-    const url = environment.BaseHref + this._controller + 'getlink';
+    const url = environment.CoreRef + this._controller + 'getlink';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -37,7 +37,7 @@ export class UgyfelterService {
   }
 
   public UgyfelterCheck(linkparam: string): Promise<UgyfelterResult> {
-    const url = environment.BaseHref + this._controller + 'ugyfeltercheck';
+    const url = environment.CoreRef + this._controller + 'ugyfeltercheck';
     const body = JSON.stringify(linkparam);
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

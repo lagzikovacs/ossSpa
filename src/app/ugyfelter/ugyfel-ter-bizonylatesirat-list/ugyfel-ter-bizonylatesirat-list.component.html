@@ -15,13 +15,13 @@
     <tbody>
     <tr *ngFor="let item of projektkapcsolatservice.Dto; let i = index">
       <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
-          (click)="setClickedRow(i)">{{item.PROJEKTKAPCSOLATKOD}}</td>
-      <td>{{item.KAPCSOLAT}}</td>
-      <td>{{item.TIPUS}}</td>
-      <td>{{item.AZONOSITO}}</td>
-      <td>{{item.KELETKEZETT | datehun}}</td>
-      <td>{{item.IRANY}}</td>
-      <td>{{item.TARGY}}</td>
+          (click)="setClickedRow(i)">{{item.Projektkapcsolatkod}}</td>
+      <td>{{item.Kapcsolat}}</td>
+      <td>{{item.Tipus}}</td>
+      <td>{{item.Azonosito}}</td>
+      <td>{{item.Keletkezett | datehun}}</td>
+      <td>{{item.Irany}}</td>
+      <td>{{item.Targy}}</td>
     </tr>
     </tbody>
   </table>

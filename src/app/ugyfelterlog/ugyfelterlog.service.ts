@@ -25,7 +25,7 @@ export class UgyfelterlogService {
               private _logonservice: LogonService) { }
 
   public Select(ulp: UgyfelterlogParameter): Promise<UgyfelterlogResult> {
-    const url = environment.BaseHref + this._controller + 'select';
+    const url = environment.CoreRef + this._controller + 'select';
     const body = ulp;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

@@ -3,6 +3,7 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {IratService} from '../../irat/irat/irat.service';
 import {FotozasService} from '../fotozas.service';
 import * as moment from 'moment';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-fotozas-link',
@@ -28,7 +29,7 @@ export class FotozasLinkComponent implements OnInit, OnDestroy {
             throw res.Error;
           }
 
-          this.link = res.Result;
+          this.link = environment.OSSRef + res.Result;
         })
         .catch(err => {
           this.eppFrissit = false;
@@ -53,7 +54,7 @@ export class FotozasLinkComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        this.link = res.Result;
+        this.link = environment.OSSRef + res.Result;
         return this._iratservice.Get(this._iratservice.Dto[this._iratservice.DtoSelectedIndex].Iratkod);
       })
       .then(res1 => {

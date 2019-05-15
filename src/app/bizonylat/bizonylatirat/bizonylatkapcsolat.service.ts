@@ -32,7 +32,7 @@ export class BizonylatkapcsolatService {
               private _logonservice: LogonService) { }
 
   public AddIratToBizonylat(par: BizonylatKapcsolatParam): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'addirattobizonylat';
+    const url = environment.CoreRef + this._controller + 'addirattobizonylat';
     const body = par;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -43,7 +43,7 @@ export class BizonylatkapcsolatService {
   }
 
   public Delete(dto: BizonylatKapcsolatDto): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'delete';
+    const url = environment.CoreRef + this._controller + 'delete';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -54,7 +54,7 @@ export class BizonylatkapcsolatService {
   }
 
   public Get(bizonylatkapcsolatkod: number): Promise<BizonylatKapcsolatResult> {
-    const url = environment.BaseHref + this._controller + 'get';
+    const url = environment.CoreRef + this._controller + 'get';
     const body = bizonylatkapcsolatkod;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -65,7 +65,7 @@ export class BizonylatkapcsolatService {
   }
 
   public Select(bizonylatkod: number): Promise<BizonylatKapcsolatResult> {
-    const url = environment.BaseHref + this._controller + 'select';
+    const url = environment.CoreRef + this._controller + 'select';
     const body = bizonylatkod;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

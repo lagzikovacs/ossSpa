@@ -53,7 +53,7 @@ export class BizonylatIratListComponent implements OnDestroy {
     this.bizonylatkapcsolatservice.DtoSelectedIndex = i;
 
     this.eppFrissit = true;
-    this._iratservice.Get(this.bizonylatkapcsolatservice.Dto[this.bizonylatkapcsolatservice.DtoSelectedIndex].IRATKOD)
+    this._iratservice.Get(this.bizonylatkapcsolatservice.Dto[this.bizonylatkapcsolatservice.DtoSelectedIndex].Iratkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

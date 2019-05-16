@@ -19,7 +19,7 @@ export class RiportService {
               private _logonservice: LogonService) { }
 
   public TaskCheck(taskToken: string): Promise<RiportResult> {
-    const url = environment.BaseHref + this._controller + 'taskcheck';
+    const url = environment.CoreRef + this._controller + 'taskcheck';
     const body = taskToken;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -29,7 +29,7 @@ export class RiportService {
     return this._httpClient.post<RiportResult>(url, JSON.stringify(body), options).toPromise();
   }
   public TaskCancel(taskToken: string): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'taskcancel';
+    const url = environment.CoreRef + this._controller + 'taskcancel';
     const body = taskToken;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -41,7 +41,7 @@ export class RiportService {
 
 
   public KimenoSzamlaLstTaskStart(fi: SzMT[]): Promise<StringResult> {
-    const url = environment.BaseHref + this._controller + 'kimenoszamlalsttaskstart';
+    const url = environment.CoreRef + this._controller + 'kimenoszamlalsttaskstart';
     const body = fi;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -51,7 +51,7 @@ export class RiportService {
     return this._httpClient.post<StringResult>(url, body, options).toPromise();
   }
   public BejovoSzamlaLstTaskStart(fi: SzMT[]): Promise<StringResult> {
-    const url = environment.BaseHref + this._controller + 'bejovoszamlalsttaskstart';
+    const url = environment.CoreRef + this._controller + 'bejovoszamlalsttaskstart';
     const body = fi;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -63,7 +63,7 @@ export class RiportService {
 
 
   public KovetelesekLstTaskStart(fi: SzMT[]): Promise<StringResult> {
-    const url = environment.BaseHref + this._controller + 'koveteleseklsttaskstart';
+    const url = environment.CoreRef + this._controller + 'koveteleseklsttaskstart';
     const body = fi;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -73,7 +73,7 @@ export class RiportService {
     return this._httpClient.post<StringResult>(url, body, options).toPromise();
   }
   public TartozasokLstTaskStart(fi: SzMT[]): Promise<StringResult> {
-    const url = environment.BaseHref + this._controller + 'tartozasoklsttaskstart';
+    const url = environment.CoreRef + this._controller + 'tartozasoklsttaskstart';
     const body = fi;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -85,7 +85,7 @@ export class RiportService {
 
 
   public BeszerzesLstTaskStart(fi: SzMT[]): Promise<StringResult> {
-    const url = environment.BaseHref + this._controller + 'beszerzeslsttaskstart';
+    const url = environment.CoreRef + this._controller + 'beszerzeslsttaskstart';
     const body = fi;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -95,7 +95,7 @@ export class RiportService {
     return this._httpClient.post<StringResult>(url, body, options).toPromise();
   }
   public KeszletLstTaskStart(fi: SzMT[]): Promise<StringResult> {
-    const url = environment.BaseHref + this._controller + 'keszletlsttaskstart';
+    const url = environment.CoreRef + this._controller + 'keszletlsttaskstart';
     const body = fi;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -107,7 +107,7 @@ export class RiportService {
 
 
   public PenztarTetelLstTaskStart(fi: SzMT[]): Promise<StringResult> {
-    const url = environment.BaseHref + this._controller + 'penztartetellsttaskstart';
+    const url = environment.CoreRef + this._controller + 'penztartetellsttaskstart';
     const body = fi;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -117,7 +117,7 @@ export class RiportService {
     return this._httpClient.post<StringResult>(url, body, options).toPromise();
   }
   public ProjektLstTaskStart(fi: SzMT[]): Promise<StringResult> {
-    const url = environment.BaseHref + this._controller + 'projektlsttaskstart';
+    const url = environment.CoreRef + this._controller + 'projektlsttaskstart';
     const body = fi;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

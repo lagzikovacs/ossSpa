@@ -79,7 +79,7 @@ export class BizonylatService {
   }
 
   public BizonylatLeiro(bt: BizonylatTipus): Promise<BizonylatTipusLeiroResult> {
-    const url = environment.BaseHref + this._controller + 'bizonylatleiro';
+    const url = environment.CoreRef + this._controller + 'bizonylatleiro';
     const body = bt;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -105,7 +105,7 @@ export class BizonylatService {
   }
 
   public CreateNewComplex(): Promise<BizonylatComplexResult> {
-    const url = environment.BaseHref + this._controller + 'createnewcomplex';
+    const url = environment.CoreRef + this._controller + 'createnewcomplex';
     const body = '';
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -116,7 +116,7 @@ export class BizonylatService {
   }
 
   public Delete(dto: BizonylatDto): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'delete';
+    const url = environment.CoreRef + this._controller + 'delete';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -127,7 +127,7 @@ export class BizonylatService {
   }
 
   public Get(bizonylatkod: number): Promise<BizonylatResult> {
-    const url = environment.BaseHref + this._controller + 'get';
+    const url = environment.CoreRef + this._controller + 'get';
     const body = bizonylatkod;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -138,7 +138,7 @@ export class BizonylatService {
   }
 
   public GetComplex(bizonylatkod: number): Promise<BizonylatComplexResult> {
-    const url = environment.BaseHref + this._controller + 'getcomplex';
+    const url = environment.CoreRef + this._controller + 'getcomplex';
     const body = bizonylatkod;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -160,7 +160,7 @@ export class BizonylatService {
   }
 
   public Select(bp: BizonylatParameter): Promise<BizonylatResult> {
-    const url = environment.BaseHref + this._controller + 'select';
+    const url = environment.CoreRef + this._controller + 'select';
     const body = bp;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -171,7 +171,7 @@ export class BizonylatService {
   }
 
   public UjBizonylatMintaAlapjan(par: BizonylatMintaAlapjanParam): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'ujbizonylatmintaalapjan';
+    const url = environment.CoreRef + this._controller + 'ujbizonylatmintaalapjan';
     const body = par;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -182,7 +182,7 @@ export class BizonylatService {
   }
 
   public SzamlaTartalmiEllenorzese(bizonylatKod: number): Promise<StringResult> {
-    const url = environment.BaseHref + this._controller + 'szamlatartalmiellenorzese';
+    const url = environment.CoreRef + this._controller + 'szamlatartalmiellenorzese';
     const body = bizonylatKod;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -193,7 +193,7 @@ export class BizonylatService {
   }
 
   public LetoltesOsnxmlFormatumban(bizonylatKod: number): Promise<StringResult> {
-    const url = environment.BaseHref + this._controller + 'letoltesosnxmlformatumban';
+    const url = environment.CoreRef + this._controller + 'letoltesosnxmlformatumban';
     const body = bizonylatKod;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -204,7 +204,7 @@ export class BizonylatService {
   }
 
   public KifizetesRendben(dto: BizonylatDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'kifizetesrendben';
+    const url = environment.CoreRef + this._controller + 'kifizetesrendben';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -215,7 +215,7 @@ export class BizonylatService {
   }
 
   public Kiszallitva(dto: BizonylatDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'kiszallitva';
+    const url = environment.CoreRef + this._controller + 'kiszallitva';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -226,7 +226,7 @@ export class BizonylatService {
   }
 
   public Storno(dto: BizonylatDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'storno';
+    const url = environment.CoreRef + this._controller + 'storno';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -237,7 +237,7 @@ export class BizonylatService {
   }
 
   public Kibocsatas(par: BizonylatKibocsatasParam): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'kibocsatas';
+    const url = environment.CoreRef + this._controller + 'kibocsatas';
     const body = par;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -248,7 +248,7 @@ export class BizonylatService {
   }
 
   public BizonylattetelCalc(dto: BizonylatTetelDto): Promise<BizonylatTetelResult> {
-    const url = environment.BaseHref + this._controller + 'bizonylattetelcalc';
+    const url = environment.CoreRef + this._controller + 'bizonylattetelcalc';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -259,7 +259,7 @@ export class BizonylatService {
   }
 
   public Bruttobol(par: BruttobolParam): Promise<BizonylatTetelResult> {
-    const url = environment.BaseHref + this._controller + 'bruttobol';
+    const url = environment.CoreRef + this._controller + 'bruttobol';
     const body = par;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -270,7 +270,7 @@ export class BizonylatService {
   }
 
   public CreateNewTetel(bt: BizonylatTipus): Promise<BizonylatTetelResult> {
-    const url = environment.BaseHref + this._controller + 'createnewtetel';
+    const url = environment.CoreRef + this._controller + 'createnewtetel';
     const body = bt;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -281,7 +281,7 @@ export class BizonylatService {
   }
 
   public SumEsAfaEsTermekdij(dto: BizonylatComplexDto): Promise<BizonylatComplexResult> {
-    const url = environment.BaseHref + this._controller + 'sumesafaestermekdij';
+    const url = environment.CoreRef + this._controller + 'sumesafaestermekdij';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -292,7 +292,7 @@ export class BizonylatService {
   }
 
   public Save(dto: BizonylatComplexDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'save';
+    const url = environment.CoreRef + this._controller + 'save';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

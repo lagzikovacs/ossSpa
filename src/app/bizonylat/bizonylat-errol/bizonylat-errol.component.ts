@@ -35,7 +35,7 @@ export class BizonylatErrolComponent implements OnDestroy {
     if (!this.kesz) {
       this.eppFrissit = true;
       this._bizonylatservice.UjBizonylatMintaAlapjan(new BizonylatMintaAlapjanParam(
-        this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].BIZONYLATKOD,
+        this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Bizonylatkod,
         this.entries[this.entryindex][1]))
         .then(res => {
           if (res.Error != null) {

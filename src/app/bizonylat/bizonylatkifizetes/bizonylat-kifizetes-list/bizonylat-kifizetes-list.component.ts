@@ -27,7 +27,7 @@ export class BizonylatKifizetesListComponent implements OnDestroy {
 
   kereses() {
     this.eppFrissit = true;
-    this.bizonylatkifizetesservice.Select(this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].BIZONYLATKOD)
+    this.bizonylatkifizetesservice.Select(this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Bizonylatkod)
       .then(res => {
         this.eppFrissit = false;
 

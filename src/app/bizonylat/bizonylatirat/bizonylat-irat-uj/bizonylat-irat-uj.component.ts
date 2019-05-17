@@ -70,7 +70,7 @@ export class BizonylatIratUjComponent implements OnInit, OnDestroy {
         }
 
         return this.bizonylatkapcsolatservice.AddIratToBizonylat(new BizonylatKapcsolatParam(
-          this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].BIZONYLATKOD,
+          this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Bizonylatkod,
           res.Result
         ));
       })

@@ -34,7 +34,7 @@ export class BizonylatIratListComponent implements OnDestroy {
 
   kereses() {
     this.eppFrissit = true;
-    this.bizonylatkapcsolatservice.Select(this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].BIZONYLATKOD)
+    this.bizonylatkapcsolatservice.Select(this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Bizonylatkod)
       .then(res => {
         this.eppFrissit = false;
 

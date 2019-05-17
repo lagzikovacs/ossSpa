@@ -33,7 +33,7 @@ export class BizonylatIratVagolaprolComponent implements OnDestroy {
     for (let i = 0; i < this._vagolapservice.Dto.length; i++) {
       if (this._vagolapservice.Dto[i].tipus === 0 && this._vagolapservice.Dto[i].selected) {
         this.bizonylatkapcsolatservice.AddIratToBizonylat(new BizonylatKapcsolatParam(
-          this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].BIZONYLATKOD,
+          this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Bizonylatkod,
           this._vagolapservice.Dto[i].iratkod
         ))
           .then(res => {

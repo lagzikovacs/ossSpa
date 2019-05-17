@@ -20,7 +20,7 @@ export class BizonylatOSNxmlComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.eppFrissit = true;
-    this.bizonylatservice.LetoltesOsnxmlFormatumban(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATKOD)
+    this.bizonylatservice.LetoltesOsnxmlFormatumban(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

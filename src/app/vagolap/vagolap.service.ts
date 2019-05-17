@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {VagolapDto} from './vagolapdto';
-import {VagolapMode} from "./vagolapmode";
-import {IratService} from "../irat/irat/irat.service";
-import {BizonylatService} from "../bizonylat/bizonylat.service";
+import {VagolapMode} from './vagolapmode';
+import {IratService} from '../irat/irat/irat.service';
+import {BizonylatService} from '../bizonylat/bizonylat.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,7 @@ export class VagolapService {
   bizonylatotvagolapra() {
     const d = new VagolapDto();
     d.tipus = 1;
-    d.bizonylatkod = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].BIZONYLATKOD;
+    d.bizonylatkod = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Bizonylatkod;
     d.bizonylatszam = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].BIZONYLATSZAM;
     d.bizonylattipus = this._bizonylatservice.bizonylatLeiro.BizonylatNev;
     d.ugyfelnev = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].UGYFELNEV;

@@ -96,7 +96,7 @@ export class BizonylatEgyComponent implements OnDestroy {
     // most a complex miatt egyszerűbb újra lekérni
 
     this.eppFrissit = true;
-    this.bizonylatservice.GetComplex(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATKOD)
+    this.bizonylatservice.GetComplex(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

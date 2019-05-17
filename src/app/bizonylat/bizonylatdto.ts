@@ -1,5 +1,5 @@
 export class BizonylatDto {
-  BIZONYLATKOD: number;
+  Bizonylatkod: number;
   BIZONYLATTIPUSKOD: number;
   BIZONYLATSZAM: string;
   SZALLITONEV: string;

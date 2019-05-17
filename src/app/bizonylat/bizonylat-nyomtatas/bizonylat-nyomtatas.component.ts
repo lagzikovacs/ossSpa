@@ -37,11 +37,11 @@ export class BizonylatNyomtatasComponent implements OnDestroy {
     this.megszakitani = false;
 
     const fi = [
-      new SzMT(Szempont.BizonylatKod, this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].BIZONYLATKOD),
+      new SzMT(Szempont.BizonylatKod, this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Bizonylatkod),
       new SzMT(Szempont.NyomtatasTipus, this.entriest[this.selectedi])
     ];
 
-    this._bizonylatnyomtatasservice.BizonylatNyomtatasTaskStart(fi)
+    this._bizonylatnyomtatasservice.TaskStart(fi)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -56,7 +56,7 @@ export class BizonylatNyomtatasComponent implements OnDestroy {
       });
   }
   ciklus() {
-    this._bizonylatnyomtatasservice.BizonylatNyomtatasTaskCheck(this.tasktoken)
+    this._bizonylatnyomtatasservice.TaskCheck(this.tasktoken)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -72,7 +72,7 @@ export class BizonylatNyomtatasComponent implements OnDestroy {
         }
 
         if (res.Status === 'Completed') {
-          const blob = b64toBlob(res.BizonylatPdf);
+          const blob = b64toBlob(res.Riport);
           FileSaver.saveAs(blob, 'Bizonylat.pdf');
           this.eppFrissit = false;
         }
@@ -86,7 +86,7 @@ export class BizonylatNyomtatasComponent implements OnDestroy {
     clearInterval(this.szamlalo);
 
     if (this.megszakitani) {
-      this._bizonylatnyomtatasservice.BizonylatNyomtatasTaskCancel(this.tasktoken)
+      this._bizonylatnyomtatasservice.TaskCancel(this.tasktoken)
         .then(res => {
           if (res.Error != null) {
             throw res.Error;

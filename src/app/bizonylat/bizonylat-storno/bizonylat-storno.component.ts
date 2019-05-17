@@ -20,7 +20,7 @@ export class BizonylatStornoComponent implements OnDestroy {
   }
 
   ok() {
-    const stornozandoKod = this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATKOD;
+    const stornozandoKod = this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatkod;
     let stornozoKod = 0;
 
     this.eppFrissit = true;

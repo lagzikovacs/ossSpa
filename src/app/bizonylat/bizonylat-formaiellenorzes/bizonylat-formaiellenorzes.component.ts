@@ -20,7 +20,7 @@ export class BizonylatFormaiellenorzesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.eppFrissit = true;
-    this.bizonylatservice.SzamlaTartalmiEllenorzese(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATKOD)
+    this.bizonylatservice.SzamlaTartalmiEllenorzese(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

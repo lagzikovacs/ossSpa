@@ -56,7 +56,7 @@ export class BizonylatKifizetesSzerkesztesComponent implements OnInit, OnDestroy
 
   onSubmit() {
     this.bizonylatkifizetesservice.DtoEdited.BIZONYLATKOD =
-      this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].BIZONYLATKOD;
+      this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Bizonylatkod;
     this.bizonylatkifizetesservice.DtoEdited.DATUM = moment(this.Datum).toISOString(true);
 
     this.eppFrissit = true;

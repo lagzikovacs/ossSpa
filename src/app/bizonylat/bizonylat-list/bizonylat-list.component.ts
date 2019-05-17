@@ -85,7 +85,7 @@ export class BizonylatListComponent implements OnDestroy {
     this.bizonylatservice.DtoSelectedIndex = i;
 
     this.eppFrissit = true;
-    this.bizonylatservice.GetComplex(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATKOD)
+    this.bizonylatservice.GetComplex(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -96,7 +96,7 @@ export class BizonylatListComponent implements OnDestroy {
         this.bizonylatservice.AfaDto = res.Result[0].LstAfaDto;
         this.bizonylatservice.TermekdijDto = res.Result[0].LstTermekdijDto;
 
-        return this._bizonylatkapcsolatservice.Select(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATKOD);
+        return this._bizonylatkapcsolatservice.Select(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatkod);
       })
       .then(res1 => {
         if (res1.Error != null) {
@@ -104,7 +104,7 @@ export class BizonylatListComponent implements OnDestroy {
         }
 
         this._bizonylatkapcsolatservice.Dto = res1.Result;
-        return this._bizonylatkifizetesservice.Select(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATKOD);
+        return this._bizonylatkifizetesservice.Select(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatkod);
       })
       .then(res2 => {
         if (res2.Error != null) {

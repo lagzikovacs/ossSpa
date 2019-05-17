@@ -35,7 +35,7 @@ export class KeszletComponent implements OnDestroy {
     const fi = [
       new SzMT(Szempont.Null, moment(this.datum).toISOString(true))
     ];
-    this.riportservice.KeszletLstTaskStart(fi)
+    this.riportservice.KeszletTaskStart(fi)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

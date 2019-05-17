@@ -38,7 +38,7 @@ export class KimenoszamlaComponent implements OnDestroy {
       new SzMT(Szempont.Null, moment(this.ig).toISOString(true))
     ];
 
-    this.riportservice.KimenoSzamlaLstTaskStart(fi)
+    this.riportservice.KimenoSzamlaTaskStart(fi)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

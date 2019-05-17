@@ -35,7 +35,7 @@ export class TartozasComponent implements OnDestroy {
     const fi = [
       new SzMT(Szempont.Null, moment(this.datum).toISOString(true))
     ];
-    this.riportservice.TartozasokLstTaskStart(fi)
+    this.riportservice.TartozasokTaskStart(fi)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

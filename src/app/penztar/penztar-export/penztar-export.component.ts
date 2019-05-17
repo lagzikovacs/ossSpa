@@ -41,7 +41,7 @@ export class PenztarExportComponent implements OnDestroy {
       new SzMT(Szempont.Null, moment(this.ig).toISOString(true))
     ];
 
-    this.riportservice.PenztarTetelLstTaskStart(fi)
+    this.riportservice.PenztarTetelTaskStart(fi)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

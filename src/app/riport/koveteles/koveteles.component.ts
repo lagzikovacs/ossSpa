@@ -35,7 +35,7 @@ export class KovetelesComponent implements OnDestroy {
     const fi = [
       new SzMT(Szempont.Null, moment(this.datum).toISOString(true))
     ];
-    this.riportservice.KovetelesekLstTaskStart(fi)
+    this.riportservice.KovetelesekTaskStart(fi)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

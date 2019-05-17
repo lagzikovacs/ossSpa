@@ -38,7 +38,7 @@ export class BejovoszamlaComponent implements OnDestroy {
       new SzMT(Szempont.Null, moment(this.ig).toISOString(true))
     ];
 
-    this.riportservice.BejovoSzamlaLstTaskStart(fi)
+    this.riportservice.BejovoSzamlaTaskStart(fi)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

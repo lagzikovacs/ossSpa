@@ -40,7 +40,7 @@ export class BeszerzesComponent implements OnDestroy {
       new SzMT(Szempont.Null, this.reszletekis.toString())
     ];
 
-    this.riportservice.BeszerzesLstTaskStart(fi)
+    this.riportservice.BeszerzesTaskStart(fi)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

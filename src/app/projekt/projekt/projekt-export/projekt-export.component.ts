@@ -39,7 +39,7 @@ export class ProjektExportComponent implements OnDestroy {
       new SzMT(Szempont.Null, this.projektservice.statuszexporthoz)
     ];
 
-    this.riportservice.ProjektLstTaskStart(fi)
+    this.riportservice.ProjektTaskStart(fi)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

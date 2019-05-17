@@ -52,7 +52,7 @@ export class NgmComponent implements OnDestroy {
   adatszolgaltatas() {
     this.eppFrissit = true;
     this.result = '';
-    this.ngmservice.Adataszolgaltatas(this.np)
+    this.ngmservice.Adatszolgaltatas(this.np)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

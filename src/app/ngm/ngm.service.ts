@@ -16,8 +16,8 @@ export class NgmService {
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
 
-  public Adataszolgaltatas(np: NGMParam): Promise<StringResult> {
-    const url = environment.BaseHref + this._controller + 'adataszolgaltatas';
+  public Adatszolgaltatas(np: NGMParam): Promise<StringResult> {
+    const url = environment.CoreRef + this._controller + 'adatszolgaltatas';
     const body = np;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

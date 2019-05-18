@@ -96,8 +96,8 @@ export class PenznemListComponent implements OnInit, OnDestroy {
       this._szamlazasirendservice.DtoEdited.Penznem = this.penznemservice.Dto[i].Penznem1;
     }
     if (this.penznemservice.zoomsource === ZoomSources.Bizonylatkifizetes) {
-      this._bizonylatkifizetesservice.DtoEdited.PENZNEMKOD = this.penznemservice.Dto[i].Penznemkod;
-      this._bizonylatkifizetesservice.DtoEdited.PENZNEM = this.penznemservice.Dto[i].Penznem1;
+      this._bizonylatkifizetesservice.DtoEdited.Penznemkod = this.penznemservice.Dto[i].Penznemkod;
+      this._bizonylatkifizetesservice.DtoEdited.Penznem = this.penznemservice.Dto[i].Penznem1;
     }
     if (this.penznemservice.zoomsource === ZoomSources.Bizonylat) {
       this._bizonylatservice.ComplexDtoEdited.Dto.PENZNEMKOD = this.penznemservice.Dto[i].Penznemkod;

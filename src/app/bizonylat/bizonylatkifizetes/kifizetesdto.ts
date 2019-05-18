@@ -1,14 +1,14 @@
 export class KifizetesDto {
-  KIFIZETESKOD: number;
-  BIZONYLATKOD: number;
+  Kifizeteskod: number;
+  Bizonylatkod: number;
   DATUM: any;
-  OSSZEG: number;
-  PENZNEMKOD: number;
-  PENZNEM: string;
-  FIZETESIMODKOD: number;
-  FIZETESIMOD: string;
-  LETREHOZVA: any;
-  LETREHOZTA: string;
-  MODOSITVA: any;
-  MODOSITOTTA: string;
+  Datum: number;
+  Penznemkod: number;
+  Penznem: string;
+  Fizetesimodkod: number;
+  Fizetesimod: string;
+  Letrehozva: any;
+  Letrehozta: string;
+  Modositva: any;
+  Modositotta: string;
 }

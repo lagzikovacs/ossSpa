@@ -31,7 +31,7 @@ export class BizonylatkifizetesService {
               private _logonservice: LogonService) { }
 
   public Add(dto: KifizetesDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'add';
+    const url = environment.CoreRef + this._controller + 'add';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -42,7 +42,7 @@ export class BizonylatkifizetesService {
   }
 
   public CreateNew(): Promise<KifizetesResult> {
-    const url = environment.BaseHref + this._controller + 'createnew';
+    const url = environment.CoreRef + this._controller + 'createnew';
     const body = '';
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -53,7 +53,7 @@ export class BizonylatkifizetesService {
   }
 
   public Delete(dto: KifizetesDto): Promise<EmptyResult> {
-    const url = environment.BaseHref + this._controller + 'delete';
+    const url = environment.CoreRef + this._controller + 'delete';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -64,7 +64,7 @@ export class BizonylatkifizetesService {
   }
 
   public Get(key: number): Promise<KifizetesResult> {
-    const url = environment.BaseHref + this._controller + 'get';
+    const url = environment.CoreRef + this._controller + 'get';
     const body = key;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -75,7 +75,7 @@ export class BizonylatkifizetesService {
   }
 
   public Update(dto: KifizetesDto): Promise<NumberResult> {
-    const url = environment.BaseHref + this._controller + 'update';
+    const url = environment.CoreRef + this._controller + 'update';
     const body = dto;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -86,7 +86,7 @@ export class BizonylatkifizetesService {
   }
 
   public Select(bizonylatkod: number): Promise<KifizetesResult> {
-    const url = environment.BaseHref + this._controller + 'select';
+    const url = environment.CoreRef + this._controller + 'select';
     const body = bizonylatkod;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

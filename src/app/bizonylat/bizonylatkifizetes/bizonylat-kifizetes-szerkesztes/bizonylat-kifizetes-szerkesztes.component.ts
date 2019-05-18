@@ -38,7 +38,7 @@ export class BizonylatKifizetesSzerkesztesComponent implements OnInit, OnDestroy
   }
 
   PenznemZoom() {
-    this._penznemservice.ekDto.minta = this.bizonylatkifizetesservice.DtoEdited.PENZNEM || '';
+    this._penznemservice.ekDto.minta = this.bizonylatkifizetesservice.DtoEdited.Penznem || '';
     this._penznemservice.zoomsource = ZoomSources.Bizonylatkifizetes;
     this._penznemservice.zoom = true;
     this._penznemservice.ContainerMode = PenznemContainerMode.List;
@@ -46,7 +46,7 @@ export class BizonylatKifizetesSzerkesztesComponent implements OnInit, OnDestroy
     this.bizonylatkifizetesservice.SzerkesztesMode = BizonylatKifizetesSzerkesztesMode.PenznemZoom;
   }
   FizetesimodZoom() {
-    this._fizetesimodservice.ekDto.minta = this.bizonylatkifizetesservice.DtoEdited.FIZETESIMOD || '';
+    this._fizetesimodservice.ekDto.minta = this.bizonylatkifizetesservice.DtoEdited.Fizetesimod || '';
     this._fizetesimodservice.zoomsource = ZoomSources.Bizonylatkifizetes;
     this._fizetesimodservice.zoom = true;
     this._fizetesimodservice.ContainerMode = FizetesimodContainerMode.List;
@@ -55,20 +55,20 @@ export class BizonylatKifizetesSzerkesztesComponent implements OnInit, OnDestroy
   }
 
   onSubmit() {
-    this.bizonylatkifizetesservice.DtoEdited.BIZONYLATKOD =
+    this.bizonylatkifizetesservice.DtoEdited.Bizonylatkod =
       this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Bizonylatkod;
     this.bizonylatkifizetesservice.DtoEdited.DATUM = moment(this.Datum).toISOString(true);
 
     this.eppFrissit = true;
-    this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.bizonylatkifizetesservice.DtoEdited.PENZNEMKOD,
-      this.bizonylatkifizetesservice.DtoEdited.PENZNEM))
+    this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.bizonylatkifizetesservice.DtoEdited.Penznemkod,
+      this.bizonylatkifizetesservice.DtoEdited.Penznem))
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        return this._fizetesimodservice.ZoomCheck(new FizetesimodZoomParameter(this.bizonylatkifizetesservice.DtoEdited.FIZETESIMODKOD,
-          this.bizonylatkifizetesservice.DtoEdited.FIZETESIMOD));
+        return this._fizetesimodservice.ZoomCheck(new FizetesimodZoomParameter(this.bizonylatkifizetesservice.DtoEdited.Fizetesimodkod,
+          this.bizonylatkifizetesservice.DtoEdited.Fizetesimod));
       })
       .then(res1 => {
         if (res1.Error != null) {

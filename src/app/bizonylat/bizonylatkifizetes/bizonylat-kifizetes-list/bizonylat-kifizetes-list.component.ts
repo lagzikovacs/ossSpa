@@ -57,13 +57,13 @@ export class BizonylatKifizetesListComponent implements OnDestroy {
 
         this.bizonylatkifizetesservice.DtoEdited = res.Result[0];
         this.bizonylatkifizetesservice.DtoEdited.DATUM = moment().toISOString(true);
-        this.bizonylatkifizetesservice.DtoEdited.OSSZEG = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].BRUTTO;
-        this.bizonylatkifizetesservice.DtoEdited.PENZNEMKOD =
+        this.bizonylatkifizetesservice.DtoEdited.Datum = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].BRUTTO;
+        this.bizonylatkifizetesservice.DtoEdited.Penznemkod =
           this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].PENZNEMKOD;
-        this.bizonylatkifizetesservice.DtoEdited.PENZNEM = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].PENZNEM;
-        this.bizonylatkifizetesservice.DtoEdited.FIZETESIMODKOD =
+        this.bizonylatkifizetesservice.DtoEdited.Penznem = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].PENZNEM;
+        this.bizonylatkifizetesservice.DtoEdited.Fizetesimodkod =
           this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].FIZETESIMODKOD;
-        this.bizonylatkifizetesservice.DtoEdited.FIZETESIMOD =
+        this.bizonylatkifizetesservice.DtoEdited.Fizetesimod =
           this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].FIZETESIMOD;
 
         this.eppFrissit = false;

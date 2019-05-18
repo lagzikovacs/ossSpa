@@ -23,11 +23,11 @@
     <tbody>
     <tr *ngFor="let item of bizonylatkifizetesservice.Dto; let i = index">
       <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
-          (click)="setClickedRow(i)">{{item.KIFIZETESKOD}}</td>
+          (click)="setClickedRow(i)">{{item.Kifizeteskod}}</td>
       <td>{{item.DATUM | datehun}}</td>
-      <td>{{item.OSSZEG | number: '1.2-2'}}</td>
-      <td>{{item.PENZNEM}}</td>
-      <td>{{item.FIZETESIMOD}}</td>
+      <td>{{item.Datum | number: '1.2-2'}}</td>
+      <td>{{item.Penznem}}</td>
+      <td>{{item.Fizetesimod}}</td>
     </tr>
     </tbody>
   </table>

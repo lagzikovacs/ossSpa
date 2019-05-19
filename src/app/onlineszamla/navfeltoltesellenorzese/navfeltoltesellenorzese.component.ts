@@ -2,10 +2,10 @@ import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {Szempont} from '../../enums/szempont';
 import {LogonService} from '../../logon/logon.service';
-import {NavfeltoltesService} from '../navfeltoltes.service';
+import {OnlineszamlaService} from '../onlineszamla.service';
 import {JogKod} from '../../enums/jogkod';
 import {SzMT} from '../../dtos/szmt';
-import {NavfeltoltesDto} from '../navfeltoltesdto';
+import {OnlineszamlaDto} from '../onlineszamladto';
 
 @Component({
   selector: 'app-navonlineszamla',
@@ -22,16 +22,16 @@ export class NavfeltoltesellenorzeseComponent implements OnDestroy {
 
   eppFrissit = false;
   mod = false;
-  navexportellenorzesservice: NavfeltoltesService;
+  navexportellenorzesservice: OnlineszamlaService;
 
   constructor(private _logonservice: LogonService,
-              navexportellenorzesservice: NavfeltoltesService  ) {
+              navexportellenorzesservice: OnlineszamlaService  ) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.CIKKMOD]);
     this.navexportellenorzesservice = navexportellenorzesservice;
   }
 
   onKereses() {
-    this.navexportellenorzesservice.Dto = new Array<NavfeltoltesDto>();
+    this.navexportellenorzesservice.Dto = new Array<OnlineszamlaDto>();
     this.navexportellenorzesservice.DtoSelectedIndex = -1;
     this.navexportellenorzesservice.OsszesRekord = 0;
 

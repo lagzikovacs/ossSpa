@@ -5,8 +5,6 @@
 export const environment = {
   production: false,
   lapmeret: 5,
-  // BaseHref: 'https://docport.hu/ossrest/',
-  BaseHref: 'http://localhost:52643/',
 
   // CoreRef: 'https://docport.hu/osscore/',
   CoreRef: 'https://localhost:44308/',

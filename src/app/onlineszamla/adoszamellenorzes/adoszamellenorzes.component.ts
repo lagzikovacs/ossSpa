@@ -1,6 +1,6 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {NavfeltoltesService} from '../navfeltoltes.service';
+import {OnlineszamlaService} from '../onlineszamla.service';
 
 @Component({
   selector: 'app-adoszamellenorzes',
@@ -11,11 +11,11 @@ export class AdoszamellenorzesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   eppFrissit = false;
-  navfeltoltesservice: NavfeltoltesService;
+  navfeltoltesservice: OnlineszamlaService;
   adoszam = '';
   valasz = '';
 
-  constructor(navfeltoltesservice: NavfeltoltesService  ) {
+  constructor(navfeltoltesservice: OnlineszamlaService  ) {
     this.navfeltoltesservice = navfeltoltesservice;
   }
 

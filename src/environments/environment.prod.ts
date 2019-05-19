@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   lapmeret: 5,
-  BaseHref: 'https://docport.hu/ossrest/',
+  CoreRef: 'https://docport.hu/osscore/',
+  OSSRef: 'https://docport.hu/oss/',
   perAlldefault: '0 / 0'
 };

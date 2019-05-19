@@ -1,5 +1,5 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {NavfeltoltesService} from '../navfeltoltes.service';
+import {OnlineszamlaService} from '../onlineszamla.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
@@ -11,11 +11,11 @@ export class SzamlalekerdezesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   eppFrissit = false;
-  navexportellenorzesservice: NavfeltoltesService;
+  navexportellenorzesservice: OnlineszamlaService;
   szamlaszam = '';
   valasz = '';
 
-  constructor(navexportellenorzesservice: NavfeltoltesService  ) {
+  constructor(navexportellenorzesservice: OnlineszamlaService  ) {
     this.navexportellenorzesservice = navexportellenorzesservice;
   }
 

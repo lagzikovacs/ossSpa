@@ -1,6 +1,6 @@
 import {SzMT} from '../dtos/szmt';
 
-export class NavfeltoltesParameter {
+export class OnlineszamlaParameter {
   rekordtol: number;
   lapmeret: number;
   fi: SzMT[];

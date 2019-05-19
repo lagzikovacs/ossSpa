@@ -149,7 +149,7 @@ import { CikkReszletekComponent } from './cikk/cikk-reszletek/cikk-reszletek.com
 import { UgyfelReszletekComponent } from './ugyfel/ugyfel-reszletek/ugyfel-reszletek.component';
 import { PenztartetelSzerkesztesComponent } from './penztar/penztartetel/penztartetel-szerkesztes/penztartetel-szerkesztes.component';
 import { AjanlatkeresReszletekComponent } from './ajanlatkeres/ajanlatkeres-reszletek/ajanlatkeres-reszletek.component';
-import { NavfeltoltesellenorzeseComponent } from './nav/navfeltoltesellenorzese/navfeltoltesellenorzese.component';
+import { NavfeltoltesellenorzeseComponent } from './onlineszamla/navfeltoltesellenorzese/navfeltoltesellenorzese.component';
 import { IratReszletekComponent } from './irat/irat/irat-reszletek/irat-reszletek.component';
 import { DokumentumReszletekComponent } from './irat/dokumentum/dokumentum-reszletek/dokumentum-reszletek.component';
 import { VolumeReszletekComponent } from './volume/volume-reszletek/volume-reszletek.component';
@@ -214,8 +214,8 @@ import { BizonylatEgyComponent } from './bizonylat/bizonylat-egy/bizonylat-egy.c
 import { BizonylattoolbarComponent } from './bizonylat/bizonylattoolbar/bizonylattoolbar.component';
 import { BizonylattablaComponent } from './bizonylat/bizonylattabla/bizonylattabla.component';
 import { BizonylatSzerkesztesComponent } from './bizonylat/bizonylat-szerkesztes/bizonylat-szerkesztes.component';
-import { AdoszamellenorzesComponent } from './nav/adoszamellenorzes/adoszamellenorzes.component';
-import { SzamlalekerdezesComponent } from './nav/szamlalekerdezes/szamlalekerdezes.component';
+import { AdoszamellenorzesComponent } from './onlineszamla/adoszamellenorzes/adoszamellenorzes.component';
+import { SzamlalekerdezesComponent } from './onlineszamla/szamlalekerdezes/szamlalekerdezes.component';
 import { BizonylatKifizetesContainerComponent } from './bizonylat/bizonylatkifizetes/bizonylat-kifizetes-container/bizonylat-kifizetes-container.component';
 import { BizonylatKifizetesListComponent } from './bizonylat/bizonylatkifizetes/bizonylat-kifizetes-list/bizonylat-kifizetes-list.component';
 import { BizonylatKifizetesEgyComponent } from './bizonylat/bizonylatkifizetes/bizonylat-kifizetes-egy/bizonylat-kifizetes-egy.component';
@@ -262,7 +262,7 @@ import {UgyfelterlogService} from './ugyfelterlog/ugyfelterlog.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FotozasComponent } from './fotozas/fotozas/fotozas.component';
 import { FotozasLinkComponent } from './fotozas/fotozas-link/fotozas-link.component';
-import {NavfeltoltesService} from './nav/navfeltoltes.service';
+import {OnlineszamlaService} from './onlineszamla/onlineszamla.service';
 import { UgyfelTerBizonylatesiratListComponent } from './ugyfelter/ugyfel-ter-bizonylatesirat-list/ugyfel-ter-bizonylatesirat-list.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -597,7 +597,7 @@ if (environment.production) {
     AjanlatkeresService,
 
     BizonylatService,
-    NavfeltoltesService,
+    OnlineszamlaService,
     RiportService,
 
     ParticioService,

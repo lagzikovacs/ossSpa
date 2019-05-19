@@ -22,17 +22,17 @@
     <tbody>
     <ng-container *ngFor="let item of navexportellenorzesservice.Dto; let i = index">
       <tr>
-        <td>{{item.NAVFELTOLTESKOD}}</td>
-        <td>{{item.BIZONYLATKOD}}</td>
-        <td>{{item.BIZONYLATSZAM}}</td>
-        <td>{{item.UGYFELNEV}}</td>
-        <td>{{item.BIZONYLATKELTE | datehun}}</td>
-        <td>{{item.IDOPONT | datetimehun}}</td>
+        <td>{{item.Navfeltolteskod}}</td>
+        <td>{{item.Bizonylatkod}}</td>
+        <td>{{item.Bizonylatszam}}</td>
+        <td>{{item.Ugyfelnev}}</td>
+        <td>{{item.Bizonylatkelte | datehun}}</td>
+        <td>{{item.Idopont | datetimehun}}</td>
         <td>{{item.Statuszneve}}</td>
-        <td>{{item.TRANZAKCIOAZONOSITO}}</td>
+        <td>{{item.Tranzakcioazonosito}}</td>
       </tr>
-      <tr *ngIf="item.HIBA !== null && item.HIBA !== ''">
-        <td colspan="8">{{item.HIBA}}</td>
+      <tr *ngIf="item.Hiba !== null && item.Hiba !== ''">
+        <td colspan="8">{{item.Hiba}}</td>
       </tr>
     </ng-container>
     </tbody>

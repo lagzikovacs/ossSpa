@@ -1,8 +1,8 @@
 <div class="alapkeret">
-  <h5>{{navexportellenorzesservice.cim}}</h5>
+  <h5>{{onlineszamlaservice.cim}}</h5>
   <app-toolbar [Szurok]="szurok"
-               [(szempont)]="navexportellenorzesservice.szempont"
-               [(minta)]="navexportellenorzesservice.minta"
+               [(szempont)]="onlineszamlaservice.szempont"
+               [(minta)]="onlineszamlaservice.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
                [visUj]="false">
   </app-toolbar>
@@ -20,7 +20,7 @@
     </tr>
     </thead>
     <tbody>
-    <ng-container *ngFor="let item of navexportellenorzesservice.Dto; let i = index">
+    <ng-container *ngFor="let item of onlineszamlaservice.Dto; let i = index">
       <tr>
         <td>{{item.Navfeltolteskod}}</td>
         <td>{{item.Bizonylatkod}}</td>
@@ -37,12 +37,12 @@
     </ng-container>
     </tbody>
   </table>
-  <app-toolbarfooter [enKereses]="!navexportellenorzesservice.elsokereses && !eppFrissit"
-                     [rekordszam]="navexportellenorzesservice.Dto.length"
-                     [osszesrekord]="navexportellenorzesservice.OsszesRekord"
+  <app-toolbarfooter [enKereses]="!onlineszamlaservice.elsokereses && !eppFrissit"
+                     [rekordszam]="onlineszamlaservice.Dto.length"
+                     [osszesrekord]="onlineszamlaservice.OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">
   </app-toolbarfooter>
-  <app-errormodal [cim]="navexportellenorzesservice.cim"></app-errormodal>
+  <app-errormodal [cim]="onlineszamlaservice.cim"></app-errormodal>
 </div>
 <app-spinner *ngIf="eppFrissit"></app-spinner>
 

@@ -149,7 +149,7 @@ import { CikkReszletekComponent } from './cikk/cikk-reszletek/cikk-reszletek.com
 import { UgyfelReszletekComponent } from './ugyfel/ugyfel-reszletek/ugyfel-reszletek.component';
 import { PenztartetelSzerkesztesComponent } from './penztar/penztartetel/penztartetel-szerkesztes/penztartetel-szerkesztes.component';
 import { AjanlatkeresReszletekComponent } from './ajanlatkeres/ajanlatkeres-reszletek/ajanlatkeres-reszletek.component';
-import { NavfeltoltesellenorzeseComponent } from './onlineszamla/navfeltoltesellenorzese/navfeltoltesellenorzese.component';
+import { OnlineszamlaellenorzeseComponent } from './onlineszamla/onlineszamlaellenorzese/onlineszamlaellenorzese.component';
 import { IratReszletekComponent } from './irat/irat/irat-reszletek/irat-reszletek.component';
 import { DokumentumReszletekComponent } from './irat/dokumentum/dokumentum-reszletek/dokumentum-reszletek.component';
 import { VolumeReszletekComponent } from './volume/volume-reszletek/volume-reszletek.component';
@@ -296,7 +296,7 @@ const routes: Routes = [
     {path: 'bejovoszamla', component: BizonylatContainerComponent, canActivate: [RoleGuard]},
   ]},
   {path: 'adoszamellenorzes', component: AdoszamellenorzesComponent, canActivate: [RoleGuard]},
-  {path: 'navfeltoltesellenorzese', component: NavfeltoltesellenorzeseComponent, canActivate: [RoleGuard]},
+  {path: 'navfeltoltesellenorzese', component: OnlineszamlaellenorzeseComponent, canActivate: [RoleGuard]},
   {path: 'szamlalekerdezes', component: SzamlalekerdezesComponent, canActivate: [RoleGuard]},
 
   {path: 'riport', component: RiportComponent, canActivate: [RoleGuard], children: [
@@ -455,7 +455,7 @@ if (environment.production) {
     UgyfelReszletekComponent,
     PenztartetelSzerkesztesComponent,
     AjanlatkeresReszletekComponent,
-    NavfeltoltesellenorzeseComponent,
+    OnlineszamlaellenorzeseComponent,
     IratReszletekComponent,
     DokumentumReszletekComponent,
     VolumeReszletekComponent,

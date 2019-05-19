@@ -13,7 +13,7 @@ import {StringResult} from '../dtos/stringresult';
 export class OnlineszamlaService {
   private readonly _controller = 'api/onlineszamla/';
 
-  cim = 'NAV feltöltés ellenőrzése';
+  cim = 'Online számla ellenőrzése';
   szempont = 0;
   minta = '';
   up = new OnlineszamlaParameter(0, environment.lapmeret);

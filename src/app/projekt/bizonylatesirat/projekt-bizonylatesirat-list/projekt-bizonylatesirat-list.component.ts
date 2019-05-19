@@ -76,7 +76,7 @@ export class ProjektBizonylatesiratListComponent implements OnDestroy {
 
           this._bizonylatservice.Dto = [res.Result[0].Dto];
           this._bizonylatservice.DtoSelectedIndex = 0;
-          this._bizonylatservice.bizonylatTipus = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].BIZONYLATTIPUSKOD;
+          this._bizonylatservice.bizonylatTipus = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Bizonylattipuskod;
 
           this._bizonylatservice.TetelDto = res.Result[0].LstTetelDto;
           this._bizonylatservice.AfaDto = res.Result[0].LstAfaDto;

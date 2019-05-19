@@ -44,9 +44,9 @@ export class BizonylatKibocsatasComponent implements OnDestroy {
         if ((this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
             this.bizonylatservice.bizonylatTipus === BizonylatTipus.ElolegSzamla ||
             this.bizonylatservice.bizonylatTipus === BizonylatTipus.Szamla) &&
-            this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].FIZETESIMOD === 'Készpénz') {
+            this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Fizetesimod === 'Készpénz') {
 
-            return this._penztarsevice.ReadByCurrencyOpened(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].PENZNEMKOD);
+            return this._penztarsevice.ReadByCurrencyOpened(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Penznemkod);
         } else {
           this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
         }

@@ -79,8 +79,8 @@ export class MeListComponent implements OnInit, OnDestroy {
       this._cikkservice.DtoEdited.Me = this.meservice.Dto[i].Me;
     }
     if (this.meservice.zoomsource === ZoomSources.Bizonylattetel) {
-      this._bizonylatservice.TetelDtoEdited.MEKOD = this.meservice.Dto[i].Mekod;
-      this._bizonylatservice.TetelDtoEdited.ME = this.meservice.Dto[i].Me;
+      this._bizonylatservice.TetelDtoEdited.Mekod = this.meservice.Dto[i].Mekod;
+      this._bizonylatservice.TetelDtoEdited.Me = this.meservice.Dto[i].Me;
     }
 
     this.stopzoom();

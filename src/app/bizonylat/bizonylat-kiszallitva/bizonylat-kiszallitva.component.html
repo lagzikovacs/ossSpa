@@ -1,6 +1,6 @@
 <div class="alapkeret">
   <h5>{{bizonylatservice.bizonylatLeiro.BizonylatNev}} kiszállítva</h5>
-  <div>Kiszállítva: {{bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].KISZALLITVA | boolhun}}</div>
+  <div>Kiszállítva: {{bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].Kiszallitva | boolhun}}</div>
   <button class="btn btn-sm btn-primary" [disabled]="eppFrissit" (click)="modositas()">Módosítás</button>
   <app-errormodal [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"></app-errormodal>
 </div>

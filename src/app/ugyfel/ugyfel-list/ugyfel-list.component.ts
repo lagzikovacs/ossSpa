@@ -102,18 +102,18 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
       this._projektservice.DtoEdited.Ugyfelcim = this.ugyfelservice.Dto[i].Cim;
     }
     if (this.ugyfelservice.zoomsource === ZoomSources.Bizonylat) {
-      this._bizonylatservice.ComplexDtoEdited.Dto.UGYFELKOD = this.ugyfelservice.Dto[i].Ugyfelkod;
-      this._bizonylatservice.ComplexDtoEdited.Dto.UGYFELNEV = this.ugyfelservice.Dto[i].Nev;
-      this._bizonylatservice.ComplexDtoEdited.Dto.UGYFELCIM = this.ugyfelservice.Dto[i].Cim;
+      this._bizonylatservice.ComplexDtoEdited.Dto.Ugyfelkod = this.ugyfelservice.Dto[i].Ugyfelkod;
+      this._bizonylatservice.ComplexDtoEdited.Dto.Ugyfelnev = this.ugyfelservice.Dto[i].Nev;
+      this._bizonylatservice.ComplexDtoEdited.Dto.Ugyfelcim = this.ugyfelservice.Dto[i].Cim;
 
-      this._bizonylatservice.ComplexDtoEdited.Dto.UGYFELADOSZAM = this.ugyfelservice.Dto[i].Adoszam;
+      this._bizonylatservice.ComplexDtoEdited.Dto.Ugyfeladoszam = this.ugyfelservice.Dto[i].Adoszam;
 
-      this._bizonylatservice.ComplexDtoEdited.Dto.UGYFELIRANYITOSZAM = this.ugyfelservice.Dto[i].Iranyitoszam;
-      this._bizonylatservice.ComplexDtoEdited.Dto.UGYFELHELYSEGKOD = this.ugyfelservice.Dto[i].Helysegkod;
-      this._bizonylatservice.ComplexDtoEdited.Dto.UGYFELHELYSEGNEV = this.ugyfelservice.Dto[i].Helysegnev;
-      this._bizonylatservice.ComplexDtoEdited.Dto.UGYFELKOZTERULET = this.ugyfelservice.Dto[i].Kozterulet;
-      this._bizonylatservice.ComplexDtoEdited.Dto.UGYFELKOZTERULETTIPUS = this.ugyfelservice.Dto[i].Kozterulettipus;
-      this._bizonylatservice.ComplexDtoEdited.Dto.UGYFELHAZSZAM = this.ugyfelservice.Dto[i].Hazszam;
+      this._bizonylatservice.ComplexDtoEdited.Dto.Ugyfeliranyitoszam = this.ugyfelservice.Dto[i].Iranyitoszam;
+      this._bizonylatservice.ComplexDtoEdited.Dto.Ugyfelhelysegkod = this.ugyfelservice.Dto[i].Helysegkod;
+      this._bizonylatservice.ComplexDtoEdited.Dto.Ugyfelhelysegnev = this.ugyfelservice.Dto[i].Helysegnev;
+      this._bizonylatservice.ComplexDtoEdited.Dto.Ugyfelkozterulet = this.ugyfelservice.Dto[i].Kozterulet;
+      this._bizonylatservice.ComplexDtoEdited.Dto.Ugyfelkozterulettipus = this.ugyfelservice.Dto[i].Kozterulettipus;
+      this._bizonylatservice.ComplexDtoEdited.Dto.Ugyfelhazszam = this.ugyfelservice.Dto[i].Hazszam;
     }
 
     this.stopzoom();

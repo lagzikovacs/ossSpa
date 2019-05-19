@@ -42,13 +42,13 @@ export class BizonylatEgyComponent implements OnDestroy {
   }
 
   modositasenabled(): boolean {
-    return this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATSZAM === null;
+    return this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatszam === null;
   }
   torlesenabled(): boolean {
-    return this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATSZAM === null;
+    return this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatszam === null;
   }
   kibocsatasenabled(): boolean {
-    return this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATSZAM === null;
+    return this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatszam === null;
   }
   kiszallitvaenabled(): boolean {
     return this.bizonylatservice.bizonylatTipus === BizonylatTipus.Megrendeles;
@@ -58,19 +58,19 @@ export class BizonylatEgyComponent implements OnDestroy {
       this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
       this.bizonylatservice.bizonylatTipus === BizonylatTipus.DijBekero ||
       this.bizonylatservice.bizonylatTipus === BizonylatTipus.ElolegSzamla) &&
-      this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATSZAM !== null;
+      this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatszam !== null;
   }
   penztarenabled(): boolean {
     return (this.bizonylatservice.bizonylatTipus === BizonylatTipus.Szamla ||
       this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla) &&
-      this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATSZAM !== null &&
-      this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].FIZETESIMOD === 'Készpénz';
+      this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatszam !== null &&
+      this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Fizetesimod === 'Készpénz';
   }
   stornoenabled(): boolean {
-    return this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATSZAM !== null &&
+    return this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatszam !== null &&
       this.bizonylatservice.bizonylatLeiro.Stornozhato &&
-      !this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].EZSTORNOZOTT &&
-      !this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].EZSTORNOZO;
+      !this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Ezstornozott &&
+      !this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Ezstornozo;
   }
   formaiellenorzesenabled(): boolean {
     return (this.bizonylatservice.bizonylatTipus === BizonylatTipus.Szamla ||
@@ -125,7 +125,7 @@ export class BizonylatEgyComponent implements OnDestroy {
   }
   penztar() {
     this.eppFrissit = true;
-    this._penztarsevice.ReadByCurrencyOpened(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].PENZNEMKOD)
+    this._penztarsevice.ReadByCurrencyOpened(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Penznemkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

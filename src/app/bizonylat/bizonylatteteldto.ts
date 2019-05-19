@@ -1,29 +1,29 @@
 export class BizonylatTetelDto {
-  BIZONYLATTETELKOD: number;
-  BIZONYLATKOD: number;
-  CIKKKOD: number;
-  MEGNEVEZES: string;
-  MEGJEGYZES: string;
-  TOMEGKG: number;
-  OSSZTOMEGKG: number;
-  MEKOD: number;
-  ME: string;
-  AFAKULCSKOD: number;
-  AFAKULCS: string;
-  AFAMERTEKE: number;
-  EGYSEGAR: number;
-  MENNYISEG: number;
-  NETTO: number;
-  AFA: number;
-  BRUTTO: number;
+  Bizonylattetelkod: number;
+  Bizonylatkod: number;
+  Cikkkod: number;
+  Megnevezes: string;
+  Megjegyzes: string;
+  Tomegkg: number;
+  Ossztomegkg: number;
+  Mekod: number;
+  Me: string;
+  Afakulcskod: number;
+  Afakulcs: string;
+  Afamerteke: number;
+  Egysegar: number;
+  Mennyiseg: number;
+  Netto: number;
+  Afa: number;
+  Brutto: number;
 
-  KOZVETITETTSZOLGALTATAS: boolean;
-  EZELOLEG: boolean;
+  Kozvetitettszolgaltatas: boolean;
+  Ezeloleg: boolean;
 
-  TERMEKDIJAS: boolean;
-  TERMEKDIJKOD: number;
-  TERMEKDIJKT: string;
-  TERMEKDIJMEGNEVEZES: string;
-  TERMEKDIJEGYSEGAR: number;
-  TERMEKDIJ: number;
+  Termekdijas: boolean;
+  Termekdijkod: number;
+  Termekdijkt: string;
+  Termekdijmegnevezes: string;
+  Termekdijegysegar: number;
+  Termekdij: number;
 }

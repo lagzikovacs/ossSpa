@@ -11,12 +11,12 @@
   <tbody>
   <ng-container *ngFor="let item of Dto; let i = index">
     <tr>
-      <td *ngIf="enIdclick" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.BIZONYLATTERMEKDIJKOD}}</td>
-      <td *ngIf="!enIdclick">{{item.BIZONYLATTERMEKDIJKOD}}</td>
-      <td>{{item.TERMEKDIJKT}}</td>
-      <td style="text-align: right">{{item.OSSZTOMEGKG | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.TERMEKDIJEGYSEGAR | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.TERMEKDIJ | number: '1.2-2'}}</td>
+      <td *ngIf="enIdclick" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.Bizonylattermekdijkod}}</td>
+      <td *ngIf="!enIdclick">{{item.Bizonylattermekdijkod}}</td>
+      <td>{{item.Termekdijkt}}</td>
+      <td style="text-align: right">{{item.Ossztomegkg | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.Termekdijegysegar | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.Termekdij | number: '1.2-2'}}</td>
     </tr>
   </ng-container>
   </tbody>

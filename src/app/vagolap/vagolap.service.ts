@@ -29,10 +29,10 @@ export class VagolapService {
     const d = new VagolapDto();
     d.tipus = 1;
     d.bizonylatkod = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Bizonylatkod;
-    d.bizonylatszam = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].BIZONYLATSZAM;
+    d.bizonylatszam = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Bizonylatszam;
     d.bizonylattipus = this._bizonylatservice.bizonylatLeiro.BizonylatNev;
-    d.ugyfelnev = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].UGYFELNEV;
-    d.ugyfelcim = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].UGYFELCIM;
+    d.ugyfelnev = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Ugyfelnev;
+    d.ugyfelcim = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Ugyfelcim;
 
     this.Dto.push(d);
   }

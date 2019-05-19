@@ -21,7 +21,7 @@ export class BizonylatTetelTorlesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.megnevezes = this.bizonylatservice.ComplexDtoEdited.LstTetelDto[this.bizonylatservice.TetelDtoSelectedIndex].MEGNEVEZES;
+    this.megnevezes = this.bizonylatservice.ComplexDtoEdited.LstTetelDto[this.bizonylatservice.TetelDtoSelectedIndex].Megnevezes;
   }
 
   ok() {

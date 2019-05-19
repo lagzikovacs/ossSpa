@@ -1,10 +1,10 @@
 export class BizonylatAfaDto {
-  BIZONYLATAFAKOD: number;
-  BIZONYLATKOD: number;
-  AFAKULCSKOD: number;
-  AFAKULCS: string;
-  AFAMERTEKE: number;
-  NETTO: number;
-  AFA: number;
-  BRUTTO: number;
+  Bizonylatafakod: number;
+  Bizonylatkod: number;
+  Afakulcskod: number;
+  Afakulcs: string;
+  Afamerteke: number;
+  Netto: number;
+  Afa: number;
+  Brutto: number;
 }

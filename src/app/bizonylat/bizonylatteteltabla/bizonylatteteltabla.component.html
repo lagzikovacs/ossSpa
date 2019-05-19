@@ -30,24 +30,24 @@
           (click)="domodositas(i)">
         <i class="fa fa-edit" aria-hidden="true"></i></td>
 
-      <td>{{item.BIZONYLATTETELKOD}}</td>
-      <td>{{item.MEGNEVEZES}}</td>
-      <td style="text-align: right">{{item.MENNYISEG | number: '1.2-2'}}</td>
-      <td>{{item.ME}}</td>
-      <td style="text-align: right">{{item.EGYSEGAR | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.AFAMERTEKE | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.NETTO | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.AFA | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.BRUTTO | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.TOMEGKG | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.OSSZTOMEGKG | number: '1.2-2'}}</td>
-      <td>{{item.TERMEKDIJKT}}</td>
-      <td>{{item.TERMEKDIJMEGNEVEZES}}</td>
-      <td style="text-align: right">{{item.TERMEKDIJEGYSEGAR | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.TERMEKDIJ | number: '1.2-2'}}</td>
+      <td>{{item.Bizonylattetelkod}}</td>
+      <td>{{item.Megnevezes}}</td>
+      <td style="text-align: right">{{item.Mennyiseg | number: '1.2-2'}}</td>
+      <td>{{item.Me}}</td>
+      <td style="text-align: right">{{item.Egysegar | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.Afamerteke | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.Netto | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.Afa | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.Brutto | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.Tomegkg | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.Ossztomegkg | number: '1.2-2'}}</td>
+      <td>{{item.Termekdijkt}}</td>
+      <td>{{item.Termekdijmegnevezes}}</td>
+      <td style="text-align: right">{{item.Termekdijegysegar | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.Termekdij | number: '1.2-2'}}</td>
     </tr>
-    <tr *ngIf="item.MEGJEGYZES || '' !== ''">
-      <td colspan="15">{{item.MEGJEGYZES}}</td>
+    <tr *ngIf="item.Megjegyzes || '' !== ''">
+      <td colspan="15">{{item.Megjegyzes}}</td>
     </tr>
   </ng-container>
   </tbody>

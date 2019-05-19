@@ -25,30 +25,30 @@
       <td *ngIf="enIdclick" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.Bizonylatkod}}</td>
       <td *ngIf="!enIdclick">{{item.BIZONYLATKOD}}</td>
 
-      <td>{{item.BIZONYLATSZAM}}</td>
+      <td>{{item.Bizonylatszam}}</td>
       <td>
-        <div style="width: 250px">{{item.UGYFELNEV}}</div>
-        <div style="width: 250px">{{item.UGYFELCIM}}</div>
+        <div style="width: 250px">{{item.Ugyfelnev}}</div>
+        <div style="width: 250px">{{item.Ugyfelcim}}</div>
       </td>
 
-      <td>{{item.BIZONYLATKELTE | datehun}}</td>
-      <td>{{item.TELJESITESKELTE | datehun}}</td>
-      <td>{{item.FIZETESIMOD}}</td>
-      <td>{{item.FIZETESIHATARIDO | datehun}}</td>
-      <td>{{item.KIFIZETESRENDBEN | boolhun}}</td>
-      <td>{{item.KISZALLITVA | boolhun}}</td>
-      <td>{{item.PENZNEM}}</td>
-      <td style="text-align: right">{{item.ARFOLYAM | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.NETTO | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.AFA | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.BRUTTO | number: '1.2-2'}}</td>
-      <td *ngIf="item.EZSTORNOZO">igen</td>
-      <td *ngIf="!item.EZSTORNOZO"></td>
-      <td *ngIf="item.EZSTORNOZOTT">igen</td>
-      <td *ngIf="!item.EZSTORNOZOTT"></td>
+      <td>{{item.Bizonylatkelte | datehun}}</td>
+      <td>{{item.Teljesiteskelte | datehun}}</td>
+      <td>{{item.Fizetesimod}}</td>
+      <td>{{item.Fizetesihatarido | datehun}}</td>
+      <td>{{item.Kifizetesrendben | boolhun}}</td>
+      <td>{{item.Kiszallitva | boolhun}}</td>
+      <td>{{item.Penznem}}</td>
+      <td style="text-align: right">{{item.Arfolyam | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.Netto | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.Afa | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.Brutto | number: '1.2-2'}}</td>
+      <td *ngIf="item.Ezstornozo">igen</td>
+      <td *ngIf="!item.Ezstornozo"></td>
+      <td *ngIf="item.Ezstornozott">igen</td>
+      <td *ngIf="!item.Ezstornozott"></td>
     </tr>
-    <tr *ngIf="item.MEGJEGYZESFEJ || '' !== ''">
-      <td colspan="16">{{item.MEGJEGYZESFEJ}}</td>
+    <tr *ngIf="item.Megjegyzesfej || '' !== ''">
+      <td colspan="16">{{item.Megjegyzesfej}}</td>
     </tr>
   </ng-container>
   </tbody>

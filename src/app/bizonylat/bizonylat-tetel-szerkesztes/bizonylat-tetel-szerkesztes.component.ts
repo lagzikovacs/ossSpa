@@ -42,7 +42,7 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
 
   CikkZoom() {
     this._cikkservice.szempont = 0;
-    this._cikkservice.minta = this.bizonylatservice.TetelDtoEdited.MEGNEVEZES || '';
+    this._cikkservice.minta = this.bizonylatservice.TetelDtoEdited.Megnevezes || '';
     this._cikkservice.zoomsource = ZoomSources.Bizonylattetel;
     this._cikkservice.zoom = true;
     this._cikkservice.ContainerMode = CikkContainerMode.List;
@@ -51,7 +51,7 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
     this._cdr.detectChanges();
   }
   MeZoom() {
-    this._meservice.ekDto.minta = this.bizonylatservice.TetelDtoEdited.ME || '';
+    this._meservice.ekDto.minta = this.bizonylatservice.TetelDtoEdited.Me || '';
     this._meservice.zoomsource = ZoomSources.Bizonylattetel;
     this._meservice.zoom = true;
     this._meservice.ContainerMode = MeContainerMode.List;
@@ -60,7 +60,7 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
     this._cdr.detectChanges();
   }
   AfaZoom() {
-    this._afakulcsservice.ekDto.minta = this.bizonylatservice.TetelDtoEdited.AFAKULCS || '';
+    this._afakulcsservice.ekDto.minta = this.bizonylatservice.TetelDtoEdited.Afakulcs || '';
     this._afakulcsservice.zoomsource = ZoomSources.Bizonylattetel;
     this._afakulcsservice.zoom = true;
     this._afakulcsservice.ContainerMode = AfakulcsContainerMode.List;
@@ -69,7 +69,7 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
     this._cdr.detectChanges();
   }
   TermekdijZoom() {
-    this._termekdijservice.ekDto.minta = this.bizonylatservice.TetelDtoEdited.TERMEKDIJKT || '';
+    this._termekdijservice.ekDto.minta = this.bizonylatservice.TetelDtoEdited.Termekdijkt || '';
     this._termekdijservice.zoomsource = ZoomSources.Bizonylattetel;
     this._termekdijservice.zoom = true;
     this._termekdijservice.ContainerMode = TermekdijContainerMode.List;
@@ -78,10 +78,10 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
     this._cdr.detectChanges();
   }
   TermekdijTorles() {
-    this.bizonylatservice.TetelDtoEdited.TERMEKDIJKOD = null;
-    this.bizonylatservice.TetelDtoEdited.TERMEKDIJKT = null;
-    this.bizonylatservice.TetelDtoEdited.TERMEKDIJMEGNEVEZES = null;
-    this.bizonylatservice.TetelDtoEdited.TERMEKDIJEGYSEGAR = null;
+    this.bizonylatservice.TetelDtoEdited.Termekdijkod = null;
+    this.bizonylatservice.TetelDtoEdited.Termekdijkt = null;
+    this.bizonylatservice.TetelDtoEdited.Termekdijmegnevezes = null;
+    this.bizonylatservice.TetelDtoEdited.Termekdijegysegar = null;
   }
 
   bruttobol() {
@@ -120,37 +120,37 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
 
   onSubmit() {
     this.eppFrissit = true;
-    this._cikkservice.ZoomCheck(new CikkZoomParameter(this.bizonylatservice.TetelDtoEdited.CIKKKOD || 0,
-            this.bizonylatservice.TetelDtoEdited.MEGNEVEZES || ''))
+    this._cikkservice.ZoomCheck(new CikkZoomParameter(this.bizonylatservice.TetelDtoEdited.Cikkkod || 0,
+            this.bizonylatservice.TetelDtoEdited.Megnevezes || ''))
       .then(res1 => {
         if (res1.Error != null) {
           throw res1.Error;
         }
 
-        return this._meservice.ZoomCheck(new MeZoomParameter(this.bizonylatservice.TetelDtoEdited.MEKOD || 0,
-          this.bizonylatservice.TetelDtoEdited.ME || ''));
+        return this._meservice.ZoomCheck(new MeZoomParameter(this.bizonylatservice.TetelDtoEdited.Mekod || 0,
+          this.bizonylatservice.TetelDtoEdited.Me || ''));
       })
       .then(res2 => {
         if (res2.Error != null) {
           throw res2.Error;
         }
 
-        return this._afakulcsservice.ZoomCheck(new AfakulcsZoomParameter(this.bizonylatservice.TetelDtoEdited.AFAKULCSKOD || 0,
-          this.bizonylatservice.TetelDtoEdited.AFAKULCS || ''));
+        return this._afakulcsservice.ZoomCheck(new AfakulcsZoomParameter(this.bizonylatservice.TetelDtoEdited.Afakulcskod || 0,
+          this.bizonylatservice.TetelDtoEdited.Afakulcs || ''));
       })
       .then(res3 => {
         if (res3.Error != null) {
           throw res3.Error;
         }
 
-        if ((this.bizonylatservice.TetelDtoEdited.TERMEKDIJKT || '') !== '') {
-          return this._termekdijservice.ZoomCheck(new TermekdijZoomParameter(this.bizonylatservice.TetelDtoEdited.TERMEKDIJKOD || 0,
-            this.bizonylatservice.TetelDtoEdited.TERMEKDIJKT || ''));
+        if ((this.bizonylatservice.TetelDtoEdited.Termekdijkt || '') !== '') {
+          return this._termekdijservice.ZoomCheck(new TermekdijZoomParameter(this.bizonylatservice.TetelDtoEdited.Termekdijkod || 0,
+            this.bizonylatservice.TetelDtoEdited.Termekdijkt || ''));
         } else {
-          this.bizonylatservice.TetelDtoEdited.TERMEKDIJKOD = undefined;
-          this.bizonylatservice.TetelDtoEdited.TERMEKDIJKT = undefined;
-          this.bizonylatservice.TetelDtoEdited.TERMEKDIJMEGNEVEZES = undefined;
-          this.bizonylatservice.TetelDtoEdited.TERMEKDIJEGYSEGAR = undefined;
+          this.bizonylatservice.TetelDtoEdited.Termekdijkod = undefined;
+          this.bizonylatservice.TetelDtoEdited.Termekdijkt = undefined;
+          this.bizonylatservice.TetelDtoEdited.Termekdijmegnevezes = undefined;
+          this.bizonylatservice.TetelDtoEdited.Termekdijegysegar = undefined;
           return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
         }
       })

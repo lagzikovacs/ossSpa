@@ -81,10 +81,10 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
       this._cikkservice.DtoEdited.Termekdijegysegar = this.termekdijservice.Dto[i].Termekdijegysegar;
     }
     if (this.termekdijservice.zoomsource === ZoomSources.Bizonylattetel) {
-      this._bizonylatservice.TetelDtoEdited.TERMEKDIJKOD = this.termekdijservice.Dto[i].Termekdijkod;
-      this._bizonylatservice.TetelDtoEdited.TERMEKDIJKT = this.termekdijservice.Dto[i].Termekdijkt;
-      this._bizonylatservice.TetelDtoEdited.TERMEKDIJMEGNEVEZES = this.termekdijservice.Dto[i].Termekdijmegnevezes;
-      this._bizonylatservice.TetelDtoEdited.TERMEKDIJEGYSEGAR = this.termekdijservice.Dto[i].Termekdijegysegar;
+      this._bizonylatservice.TetelDtoEdited.Termekdijkod = this.termekdijservice.Dto[i].Termekdijkod;
+      this._bizonylatservice.TetelDtoEdited.Termekdijkt = this.termekdijservice.Dto[i].Termekdijkt;
+      this._bizonylatservice.TetelDtoEdited.Termekdijmegnevezes = this.termekdijservice.Dto[i].Termekdijmegnevezes;
+      this._bizonylatservice.TetelDtoEdited.Termekdijegysegar = this.termekdijservice.Dto[i].Termekdijegysegar;
     }
 
     this.stopzoom();

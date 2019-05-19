@@ -1,11 +1,11 @@
 export class BizonylatTermekdijDto {
-  BIZONYLATTERMEKDIJKOD: number;
-  BIZONYLATKOD: number;
-  OSSZTOMEGKG: number;
+  Bizonylattermekdijkod: number;
+  Bizonylatkod: number;
+  Ossztomegkg: number;
 
-  TERMEKDIJKOD: number;
-  TERMEKDIJKT: string;
-  TERMEKDIJMEGNEVEZES: string;
-  TERMEKDIJEGYSEGAR: number;
-  TERMEKDIJ: number;
+  Termekdijkod: number;
+  Termekdijkt: string;
+  Termekdijmegnevezes: string;
+  Termekdijegysegar: number;
+  Termekdij: number;
 }

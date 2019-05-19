@@ -80,9 +80,9 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
       this._cikkservice.DtoEdited.Afamerteke = this.afakulcsservice.Dto[i].Afamerteke;
     }
     if (this.afakulcsservice.zoomsource === ZoomSources.Bizonylattetel) {
-      this._bizonylatservice.TetelDtoEdited.AFAKULCSKOD = this.afakulcsservice.Dto[i].Afakulcskod;
-      this._bizonylatservice.TetelDtoEdited.AFAKULCS = this.afakulcsservice.Dto[i].Afakulcs1;
-      this._bizonylatservice.TetelDtoEdited.AFAMERTEKE = this.afakulcsservice.Dto[i].Afamerteke;
+      this._bizonylatservice.TetelDtoEdited.Afakulcskod = this.afakulcsservice.Dto[i].Afakulcskod;
+      this._bizonylatservice.TetelDtoEdited.Afakulcs = this.afakulcsservice.Dto[i].Afakulcs1;
+      this._bizonylatservice.TetelDtoEdited.Afamerteke = this.afakulcsservice.Dto[i].Afamerteke;
     }
 
     this.stopzoom();

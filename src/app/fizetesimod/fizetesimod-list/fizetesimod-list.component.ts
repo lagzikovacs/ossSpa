@@ -79,8 +79,8 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
       this._bizonylatkifizetesservice.DtoEdited.Fizetesimod = this.fizetesimodservice.Dto[i].Fizetesimod1;
     }
     if (this.fizetesimodservice.zoomsource === ZoomSources.Bizonylat) {
-      this._bizonylatservice.ComplexDtoEdited.Dto.FIZETESIMODKOD = this.fizetesimodservice.Dto[i].Fizetesimodkod;
-      this._bizonylatservice.ComplexDtoEdited.Dto.FIZETESIMOD = this.fizetesimodservice.Dto[i].Fizetesimod1;
+      this._bizonylatservice.ComplexDtoEdited.Dto.Fizetesimodkod = this.fizetesimodservice.Dto[i].Fizetesimodkod;
+      this._bizonylatservice.ComplexDtoEdited.Dto.Fizetesimod = this.fizetesimodservice.Dto[i].Fizetesimod1;
     }
 
     this.stopzoom();

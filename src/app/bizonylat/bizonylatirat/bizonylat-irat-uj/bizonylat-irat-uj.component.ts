@@ -59,7 +59,7 @@ export class BizonylatIratUjComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.bizonylatkapcsolatservice.UjIratDto.Ugyfelkod = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].UGYFELKOD;
+    this.bizonylatkapcsolatservice.UjIratDto.Ugyfelkod = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Ugyfelkod;
     this.bizonylatkapcsolatservice.UjIratDto.Keletkezett = moment(this.Keletkezett).toISOString(true);
 
     // TODO zoomcheck

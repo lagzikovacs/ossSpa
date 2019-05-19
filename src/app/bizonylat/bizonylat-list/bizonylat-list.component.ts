@@ -132,7 +132,7 @@ export class BizonylatListComponent implements OnDestroy {
         }
 
         this.bizonylatservice.ComplexDtoEdited = res.Result[0];
-        this.bizonylatservice.ComplexDtoEdited.Dto.BIZONYLATTIPUSKOD = this.bizonylatservice.bizonylatTipus;
+        this.bizonylatservice.ComplexDtoEdited.Dto.Bizonylattipuskod = this.bizonylatservice.bizonylatTipus;
 
         this.bizonylatservice.uj = true;
         this.eppFrissit = false;

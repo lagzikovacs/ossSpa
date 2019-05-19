@@ -59,17 +59,17 @@ export class ProjektBizonylatesiratUjbizonylatComponent implements OnDestroy {
 
         ugyfelDto = res1.Result[0];
 
-        bizonylatDto.BIZONYLATTIPUSKOD = this.entries[this.entryindex][1];
-        bizonylatDto.UGYFELKOD = ugyfelDto.Ugyfelkod;
-        bizonylatDto.UGYFELNEV = ugyfelDto.Nev;
-        bizonylatDto.UGYFELADOSZAM = ugyfelDto.Adoszam;
+        bizonylatDto.Bizonylattipuskod = this.entries[this.entryindex][1];
+        bizonylatDto.Ugyfelkod = ugyfelDto.Ugyfelkod;
+        bizonylatDto.Ugyfelnev = ugyfelDto.Nev;
+        bizonylatDto.Ugyfeladoszam = ugyfelDto.Adoszam;
 
-        bizonylatDto.UGYFELIRANYITOSZAM = ugyfelDto.Iranyitoszam;
-        bizonylatDto.UGYFELHELYSEGKOD = ugyfelDto.Helysegkod;
-        bizonylatDto.UGYFELHELYSEGNEV = ugyfelDto.Helysegnev;
-        bizonylatDto.UGYFELKOZTERULET = ugyfelDto.Kozterulet;
-        bizonylatDto.UGYFELKOZTERULETTIPUS = ugyfelDto.Kozterulettipus;
-        bizonylatDto.UGYFELHAZSZAM = ugyfelDto.Hazszam;
+        bizonylatDto.Ugyfeliranyitoszam = ugyfelDto.Iranyitoszam;
+        bizonylatDto.Ugyfelhelysegkod = ugyfelDto.Helysegkod;
+        bizonylatDto.Ugyfelhelysegnev = ugyfelDto.Helysegnev;
+        bizonylatDto.Ugyfelkozterulet = ugyfelDto.Kozterulet;
+        bizonylatDto.Ugyfelkozterulettipus = ugyfelDto.Kozterulettipus;
+        bizonylatDto.Ugyfelhazszam = ugyfelDto.Hazszam;
 
         return this.projektkapcsolatservice.UjBizonylatToProjekt(new ProjektKapcsolatParameter(
           this.projektkapcsolatservice.ProjektKod,

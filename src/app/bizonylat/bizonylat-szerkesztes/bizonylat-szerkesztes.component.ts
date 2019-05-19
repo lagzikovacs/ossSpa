@@ -39,14 +39,14 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.bizonylatservice.BizonylatKelte = moment(this.bizonylatservice.ComplexDtoEdited.Dto.BIZONYLATKELTE).format('YYYY-MM-DD');
-    this.bizonylatservice.TeljesitesKelte = moment(this.bizonylatservice.ComplexDtoEdited.Dto.TELJESITESKELTE).format('YYYY-MM-DD');
-    this.bizonylatservice.FizetesiHatarido = moment(this.bizonylatservice.ComplexDtoEdited.Dto.FIZETESIHATARIDO).format('YYYY-MM-DD');
+    this.bizonylatservice.BizonylatKelte = moment(this.bizonylatservice.ComplexDtoEdited.Dto.Bizonylatkelte).format('YYYY-MM-DD');
+    this.bizonylatservice.TeljesitesKelte = moment(this.bizonylatservice.ComplexDtoEdited.Dto.Teljesiteskelte).format('YYYY-MM-DD');
+    this.bizonylatservice.FizetesiHatarido = moment(this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesihatarido).format('YYYY-MM-DD');
   }
 
   UgyfelZoom() {
     this._ugyfelservice.szempont = 0;
-    this._ugyfelservice.minta = this.bizonylatservice.ComplexDtoEdited.Dto.UGYFELNEV || '';
+    this._ugyfelservice.minta = this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelnev || '';
     this._ugyfelservice.zoomsource = ZoomSources.Bizonylat;
     this._ugyfelservice.zoom = true;
     this._ugyfelservice.ContainerMode = UgyfelContainerMode.List;
@@ -55,7 +55,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this._cdr.detectChanges();
   }
   PenznemZoom() {
-    this._penznemservice.ekDto.minta = this.bizonylatservice.ComplexDtoEdited.Dto.PENZNEM || '';
+    this._penznemservice.ekDto.minta = this.bizonylatservice.ComplexDtoEdited.Dto.Penznem || '';
     this._penznemservice.zoomsource = ZoomSources.Bizonylat;
     this._penznemservice.zoom = true;
     this._penznemservice.ContainerMode = PenznemContainerMode.List;
@@ -64,7 +64,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this._cdr.detectChanges();
   }
   FizetesimodZoom() {
-    this._fizetesimodservice.ekDto.minta = this.bizonylatservice.ComplexDtoEdited.Dto.FIZETESIMOD || '';
+    this._fizetesimodservice.ekDto.minta = this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesimod || '';
     this._fizetesimodservice.zoomsource = ZoomSources.Bizonylat;
     this._fizetesimodservice.zoom = true;
     this._fizetesimodservice.ContainerMode = FizetesimodContainerMode.List;
@@ -85,8 +85,8 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
         }
 
         this.bizonylatservice.TeljesitesKelte = this.bizonylatservice.BizonylatKelte;
-        this.bizonylatservice.ComplexDtoEdited.Dto.FIZETESIMODKOD = res.Result[0].Fizetesimodkod;
-        this.bizonylatservice.ComplexDtoEdited.Dto.FIZETESIMOD = res.Result[0].Fizetesimod1;
+        this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesimodkod = res.Result[0].Fizetesimodkod;
+        this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesimod = res.Result[0].Fizetesimod1;
         this.bizonylatservice.FizetesiHatarido = this.bizonylatservice.BizonylatKelte;
         this.eppFrissit = false;
       })
@@ -143,15 +143,15 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.bizonylatservice.ComplexDtoEdited.Dto.UGYFELKOD,
-      this.bizonylatservice.ComplexDtoEdited.Dto.UGYFELNEV))
+    this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelkod,
+      this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelnev))
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        return this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.bizonylatservice.ComplexDtoEdited.Dto.PENZNEMKOD,
-          this.bizonylatservice.ComplexDtoEdited.Dto.PENZNEM));
+        return this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.bizonylatservice.ComplexDtoEdited.Dto.Penznemkod,
+          this.bizonylatservice.ComplexDtoEdited.Dto.Penznem));
       })
       .then(res1 => {
         if (res1.Error != null) {
@@ -159,8 +159,8 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
         }
 
         if (this.bizonylatservice.bizonylatLeiro.FizetesiModIs) {
-          return this._fizetesimodservice.ZoomCheck(new FizetesimodZoomParameter(this.bizonylatservice.ComplexDtoEdited.Dto.FIZETESIMODKOD,
-            this.bizonylatservice.ComplexDtoEdited.Dto.FIZETESIMOD));
+          return this._fizetesimodservice.ZoomCheck(new FizetesimodZoomParameter(this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesimodkod,
+            this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesimod));
         } else {
           return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
         }
@@ -170,9 +170,9 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
           throw res2.Error;
         }
 
-        this.bizonylatservice.ComplexDtoEdited.Dto.BIZONYLATKELTE = moment(this.bizonylatservice.BizonylatKelte).toISOString(true);
-        this.bizonylatservice.ComplexDtoEdited.Dto.TELJESITESKELTE = moment(this.bizonylatservice.TeljesitesKelte).toISOString(true);
-        this.bizonylatservice.ComplexDtoEdited.Dto.FIZETESIHATARIDO = moment(this.bizonylatservice.FizetesiHatarido).toISOString(true);
+        this.bizonylatservice.ComplexDtoEdited.Dto.Bizonylatkelte = moment(this.bizonylatservice.BizonylatKelte).toISOString(true);
+        this.bizonylatservice.ComplexDtoEdited.Dto.Teljesiteskelte = moment(this.bizonylatservice.TeljesitesKelte).toISOString(true);
+        this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesihatarido = moment(this.bizonylatservice.FizetesiHatarido).toISOString(true);
 
         return this.bizonylatservice.Save(this.bizonylatservice.ComplexDtoEdited);
       })

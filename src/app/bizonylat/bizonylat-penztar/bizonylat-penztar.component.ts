@@ -43,14 +43,14 @@ export class BizonylatPenztarComponent implements OnDestroy {
         Dto = res.Result[0];
 
         Dto.Penztarkod = this.bizonylatservice.BizonylatPenztarDto[this.penztarindex].Penztarkod;
-        Dto.Datum = this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATKELTE;
+        Dto.Datum = this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatkelte;
         Dto.Jogcim = this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla ? 'Bejövő számla' : 'Számla';
-        Dto.Ugyfelnev = this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].UGYFELNEV;
-        Dto.Bizonylatszam = this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BIZONYLATSZAM;
+        Dto.Ugyfelnev = this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Ugyfelnev;
+        Dto.Bizonylatszam = this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatszam;
         if (this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla) {
-          Dto.Kiadas = this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BRUTTO;
+          Dto.Kiadas = this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Brutto;
         } else {
-          Dto.Bevetel = this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].BRUTTO;
+          Dto.Bevetel = this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Brutto;
         }
         Dto.Megjegyzes = this.megjegyzes;
 

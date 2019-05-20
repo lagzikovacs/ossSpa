@@ -6,8 +6,8 @@ export const environment = {
   production: false,
   lapmeret: 5,
 
-  // CoreRef: 'https://docport.hu/osscore/',
-  CoreRef: 'https://localhost:44308/',
+  CoreRef: 'https://docport.hu/osscore/',
+  // CoreRef: 'https://localhost:44308/',
   // OSSRef: 'https://docport.hu/oss/',
   OSSRef: 'http://localhost:4200/',
 

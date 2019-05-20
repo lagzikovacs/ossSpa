@@ -53,6 +53,22 @@ export class ProjektIratmintaComponent implements OnDestroy {
         this.eppFrissit = false;
       });
   }
+  feltetelesszerzodes() {
+    this.eppFrissit = true;
+    this._iratmintaservice.Feltetelesszerzodes(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+        const blob = b64toBlob(res.Result);
+        FileSaver.saveAs(blob, 'Feltételes szerződés.docx');
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
+  }
   munkalap() {
     this.eppFrissit = true;
     this._iratmintaservice.Munkalap(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod)
@@ -128,7 +144,7 @@ export class ProjektIratmintaComponent implements OnDestroy {
   }
   demasz() {
     this.eppFrissit = true;
-    this._iratmintaservice.KeszrejelentesDemasz(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod)
+    this._iratmintaservice.KeszrejelentesNkm(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

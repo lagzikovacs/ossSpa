@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {LogonService} from "../../../logon/logon.service";
-import {IratmintaResult} from "../iratmintaresult";
-import {environment} from "../../../../environments/environment";
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {LogonService} from '../../../logon/logon.service';
+import {IratmintaResult} from '../iratmintaresult';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +33,16 @@ export class IratmintaService {
 
     return this._httpClient.post<IratmintaResult>(url, body, options).toPromise();
   }
+  public Feltetelesszerzodes(projektkod: number): Promise<IratmintaResult> {
+    const url = environment.CoreRef + this._controller + 'feltetelesszerzodes';
+    const body = projektkod;
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<IratmintaResult>(url, body, options).toPromise();
+  }
   public Munkalap(projektkod: number): Promise<IratmintaResult> {
     const url = environment.CoreRef + this._controller + 'munkalap';
     const body = projektkod;
@@ -53,8 +63,8 @@ export class IratmintaService {
 
     return this._httpClient.post<IratmintaResult>(url, body, options).toPromise();
   }
-  public KeszrejelentesDemasz(projektkod: number): Promise<IratmintaResult> {
-    const url = environment.CoreRef + this._controller + 'keszrejelentesdemasz';
+  public KeszrejelentesNkm(projektkod: number): Promise<IratmintaResult> {
+    const url = environment.CoreRef + this._controller + 'keszrejelentesnkm';
     const body = projektkod;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

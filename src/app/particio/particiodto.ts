@@ -40,6 +40,7 @@ export class ParticioDto {
   ProjektMunkalapIratkod: number;
   ProjektSzallitasiszerzodesIratkod: number;
   ProjektSzerzodesIratkod: number;
+  ProjektFeltetelesszerzodesIratkod: number;
 
   VolumeUjvolumeMaxmeret: number;
   VolumeUjvolumeEleresiut: string;

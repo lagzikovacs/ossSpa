@@ -24,7 +24,7 @@
     </div>
     <div class="row no-gutters editform-row">
       <div class="col-md-3">
-        <div class="editform-title">Készrejelentés Démász iratkód</div>
+        <div class="editform-title">Készrejelentés NKM iratkód</div>
       </div>
       <div class="col-md-1">
         <input type="text" class="form-control form-control-sm" id="m3"
@@ -34,7 +34,7 @@
     </div>
     <div class="row no-gutters editform-row">
       <div class="col-md-3">
-        <div class="editform-title">Készrejelentés Elmü/Émász iratkód</div>
+        <div class="editform-title">Készrejelentés ELMŰ-ÉMÁSZ iratkód</div>
       </div>
       <div class="col-md-1">
         <input type="text" class="form-control form-control-sm" id="m4"
@@ -44,7 +44,7 @@
     </div>
     <div class="row no-gutters editform-row">
       <div class="col-md-3">
-        <div class="editform-title">Készrejelentés Eon iratkód</div>
+        <div class="editform-title">Készrejelentés E.ON iratkód</div>
       </div>
       <div class="col-md-1">
         <input type="text" class="form-control form-control-sm" id="m5"
@@ -80,6 +80,16 @@
         <input type="text" class="form-control form-control-sm" id="m8"
                autocomplete="off"
                [(ngModel)]="particioservice.Dto.ProjektSzerzodesIratkod" name="m8">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-3">
+        <div class="editform-title">Feltételes szerződés iratkód</div>
+      </div>
+      <div class="col-md-1">
+        <input type="text" class="form-control form-control-sm" id="m9"
+               autocomplete="off"
+               [(ngModel)]="particioservice.Dto.ProjektFeltetelesszerzodesIratkod" name="m9">
       </div>
     </div>
 

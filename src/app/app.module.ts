@@ -267,7 +267,7 @@ import { UgyfelTerBizonylatesiratListComponent } from './ugyfelter/ugyfel-ter-bi
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 const routes: Routes = [
-  {path: 'fooldal', component: FooldalComponent},
+
 
   {path: 'irattipus', component: IrattipusContainerComponent, canActivate: [RoleGuard]},
   {path: 'teendo', component: TeendoContainerComponent, canActivate: [RoleGuard]},
@@ -318,11 +318,13 @@ const routes: Routes = [
   {path: 'jelszocsere', component: JelszocsereComponent, canActivate: [LoginGuard]},
   {path: 'vagolap', component: VagolapComponent, canActivate: [RoleGuard]},
 
+  {path: 'fooldal', component: FooldalComponent},
   {path: 'ugyfelter', component: UgyfelTerComponent},
   {path: 'fotozas', component: FotozasComponent},
 
-  {path: '', redirectTo: 'bejelentkezes', pathMatch: 'full'},
-  {path: '**', redirectTo: 'fooldal'}
+  {path: 'ugyfelter', redirectTo: 'ugyfelter', pathMatch: 'full'},
+  {path: 'fotozas', redirectTo: 'fotozas', pathMatch: 'full'},
+  {path: '**', redirectTo: 'bejelentkezes'}
 ];
 
 if (environment.production) {

@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {StringResult} from '../dtos/stringresult';
 import {environment} from '../../environments/environment';
 import {UgyfelDto} from '../ugyfel/ugyfeldto';
-import {UgyfelterResult} from "./ugyfelterresult";
+import {UgyfelterResult} from './ugyfelterresult';
 
 @Injectable({
   providedIn: 'root'

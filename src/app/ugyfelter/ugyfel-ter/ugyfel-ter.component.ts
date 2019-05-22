@@ -27,6 +27,8 @@ export class UgyfelTerComponent implements OnInit, OnDestroy {
               private _projektkapcsolatservice: ProjektkapcsolatService) { }
 
   ngOnInit() {
+    console.log('itt jártam');
+
     this._sub = this._route
       .queryParams
       .subscribe(params => {

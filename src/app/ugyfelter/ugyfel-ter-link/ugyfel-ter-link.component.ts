@@ -29,6 +29,8 @@ export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
             throw res.Error;
           }
 
+          console.log(environment.OSSRef);
+          console.log('én vagyok');
           this.link = environment.OSSRef + res.Result;
         })
         .catch(err => {

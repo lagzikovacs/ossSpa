@@ -56,8 +56,8 @@ export class BizonylatKifizetesListComponent implements OnDestroy {
         this.bizonylatkifizetesservice.DtoSelectedIndex = -1;
 
         this.bizonylatkifizetesservice.DtoEdited = res.Result[0];
-        this.bizonylatkifizetesservice.DtoEdited.DATUM = moment().toISOString(true);
-        this.bizonylatkifizetesservice.DtoEdited.Datum = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Brutto;
+        this.bizonylatkifizetesservice.DtoEdited.Datum = moment().toISOString(true);
+        this.bizonylatkifizetesservice.DtoEdited.Osszeg = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Brutto;
         this.bizonylatkifizetesservice.DtoEdited.Penznemkod =
           this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Penznemkod;
         this.bizonylatkifizetesservice.DtoEdited.Penznem = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Penznem;

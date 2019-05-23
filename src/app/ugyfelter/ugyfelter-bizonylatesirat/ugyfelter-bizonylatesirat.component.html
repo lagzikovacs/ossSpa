@@ -1,8 +1,8 @@
 <div class="alapkeret">
-  Válasszon tételt:
   <table class="table table-bordered table-sm table-responsive" style="border: none">
     <thead>
     <tr>
+      <th></th>
       <th>Id</th>
       <th>Kapcsolat</th>
       <th>Tipus</th>
@@ -13,9 +13,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let item of projektkapcsolatservice.Dto; let i = index">
-      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
-          (click)="setClickedRow(i)">{{item.Projektkapcsolatkod}}</td>
+    <tr *ngFor="let item of Dto; let i = index">
+      <td *ngIf="item.Kapcsolat=='Bizonylat'" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="bizonylatvalasztas(i)"><i class="fa fa-arrow-down" aria-hidden="true"></i></td>
+      <td *ngIf="item.Kapcsolat=='Irat'"></td>
+      <td *ngIf="item.Kapcsolat=='Bizonylat'">{{item.Projektkapcsolatkod}}</td>
+      <td *ngIf="item.Kapcsolat=='Irat'" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
+          (click)="iratvalasztas(i)">{{item.Projektkapcsolatkod}}</td>
       <td>{{item.Kapcsolat}}</td>
       <td>{{item.Tipus}}</td>
       <td>{{item.Azonosito}}</td>
@@ -25,6 +28,5 @@
     </tr>
     </tbody>
   </table>
-  <app-errormodal [cim]="projektkapcsolatservice.cim"></app-errormodal>
 </div>
 <app-spinner *ngIf="eppFrissit"></app-spinner>

@@ -34,7 +34,7 @@ export class BizonylatKifizetesSzerkesztesComponent implements OnInit, OnDestroy
   }
 
   ngOnInit() {
-    this.Datum = moment(this.bizonylatkifizetesservice.DtoEdited.DATUM).format('YYYY-MM-DD');
+    this.Datum = moment(this.bizonylatkifizetesservice.DtoEdited.Datum).format('YYYY-MM-DD');
   }
 
   PenznemZoom() {
@@ -57,7 +57,7 @@ export class BizonylatKifizetesSzerkesztesComponent implements OnInit, OnDestroy
   onSubmit() {
     this.bizonylatkifizetesservice.DtoEdited.Bizonylatkod =
       this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Bizonylatkod;
-    this.bizonylatkifizetesservice.DtoEdited.DATUM = moment(this.Datum).toISOString(true);
+    this.bizonylatkifizetesservice.DtoEdited.Datum = moment(this.Datum).toISOString(true);
 
     this.eppFrissit = true;
     this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.bizonylatkifizetesservice.DtoEdited.Penznemkod,

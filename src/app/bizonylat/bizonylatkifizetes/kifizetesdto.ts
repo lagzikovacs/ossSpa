@@ -1,8 +1,8 @@
 export class KifizetesDto {
   Kifizeteskod: number;
   Bizonylatkod: number;
-  DATUM: any;
-  Datum: number;
+  Datum: any;
+  Osszeg: number;
   Penznemkod: number;
   Penznem: string;
   Fizetesimodkod: number;

@@ -252,7 +252,7 @@ import { ProjektBizonylatesiratVagolaprolComponent } from './projekt/bizonylates
 import {AjanlatService} from './projekt/ajanlat/ajanlat.service';
 import {IratmintaService} from './projekt/projekt/projekt-iratminta/iratminta.service';
 import { EsemenynaploComponent } from './esemenynaplo/esemenynaplo.component';
-import { UgyfelTerComponent } from './ugyfelter/ugyfel-ter/ugyfel-ter.component';
+import { UgyfelterComponent } from './ugyfelter/ugyfelter/ugyfelter.component';
 import { UgyfelTerLinkComponent } from './ugyfelter/ugyfel-ter-link/ugyfel-ter-link.component';
 import {UgyfelterService} from './ugyfelter/ugyfelter.service';
 import { UgyfelProjektComponent } from './ugyfel/ugyfel-projekt/ugyfel-projekt.component';
@@ -263,8 +263,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FotozasComponent } from './fotozas/fotozas/fotozas.component';
 import { FotozasLinkComponent } from './fotozas/fotozas-link/fotozas-link.component';
 import {OnlineszamlaService} from './onlineszamla/onlineszamla.service';
-import { UgyfelTerBizonylatesiratListComponent } from './ugyfelter/ugyfel-ter-bizonylatesirat-list/ugyfel-ter-bizonylatesirat-list.component';
+import { UgyfelterBizonylatesiratComponent } from './ugyfelter/ugyfelter-bizonylatesirat/ugyfelter-bizonylatesirat.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { UgyfelterDokumentumComponent } from './ugyfelter/ugyfelter-dokumentum/ugyfelter-dokumentum.component';
 
 const routes: Routes = [
 
@@ -319,7 +320,7 @@ const routes: Routes = [
   {path: 'vagolap', component: VagolapComponent, canActivate: [RoleGuard]},
 
   {path: 'fooldal', component: FooldalComponent},
-  {path: 'ugyfelter', component: UgyfelTerComponent},
+  {path: 'ugyfelter', component: UgyfelterComponent},
   {path: 'fotozas', component: FotozasComponent},
 
   {path: 'ugyfelter', redirectTo: 'ugyfelter', pathMatch: 'full'},
@@ -550,7 +551,7 @@ if (environment.production) {
     BizonylatIratVagolaprolComponent,
     ProjektBizonylatesiratVagolaprolComponent,
     EsemenynaploComponent,
-    UgyfelTerComponent,
+    UgyfelterComponent,
     UgyfelTerLinkComponent,
     UgyfelProjektComponent,
     AjanlatkeresSzerkesztesComponent,
@@ -558,7 +559,8 @@ if (environment.production) {
     DashboardComponent,
     FotozasComponent,
     FotozasLinkComponent,
-    UgyfelTerBizonylatesiratListComponent,
+    UgyfelterBizonylatesiratComponent,
+    UgyfelterDokumentumComponent,
   ],
   imports: [
     BrowserModule,

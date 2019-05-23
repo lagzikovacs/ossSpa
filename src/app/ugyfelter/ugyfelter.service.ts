@@ -12,6 +12,7 @@ import {UgyfelterResult} from './ugyfelterresult';
 export class UgyfelterService {
   private readonly _controller = 'api/ugyfelter/';
 
+
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
 

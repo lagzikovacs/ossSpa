@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UgyfelTerComponent } from './ugyfel-ter.component';
+import { UgyfelterComponent } from './ugyfelter.component';
 
-describe('UgyfelTerComponent', () => {
-  let component: UgyfelTerComponent;
-  let fixture: ComponentFixture<UgyfelTerComponent>;
+describe('UgyfelterComponent', () => {
+  let component: UgyfelterComponent;
+  let fixture: ComponentFixture<UgyfelterComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UgyfelTerComponent ]
+      declarations: [ UgyfelterComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UgyfelTerComponent);
+    fixture = TestBed.createComponent(UgyfelterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

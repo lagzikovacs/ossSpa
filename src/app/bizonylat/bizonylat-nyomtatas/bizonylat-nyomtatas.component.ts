@@ -1,4 +1,4 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatnyomtatasService} from '../bizonylatnyomtatas.service';

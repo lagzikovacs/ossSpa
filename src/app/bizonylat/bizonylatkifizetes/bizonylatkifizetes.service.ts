@@ -7,8 +7,8 @@ import {environment} from '../../../environments/environment';
 import {NumberResult} from '../../dtos/numberresult';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {BizonylatKifizetesContainerMode} from './bizonylatkifizetescontainermode';
-import {BizonylatKifizetesSzerkesztesMode} from "./bizonylatkifizetesszerkesztesmode";
-import {BizonylatKifizetesEgyMode} from "./bizonylatkifizetesegymode";
+import {BizonylatKifizetesSzerkesztesMode} from './bizonylatkifizetesszerkesztesmode';
+import {BizonylatKifizetesEgyMode} from './bizonylatkifizetesegymode';
 
 @Injectable({
   providedIn: 'root'

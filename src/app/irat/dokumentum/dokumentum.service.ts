@@ -79,7 +79,7 @@ export class DokumentumService {
   }
 
   public Letoltes(lp: LetoltesParam): Promise<LetoltesResult> {
-    const url = environment.CoreRef + this._controller + 'letoltes';
+    const url = environment.CoreRef + this._controller + 'dokumentumvalasztas';
     const body = lp;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

@@ -15,7 +15,7 @@ export class UgyfelterDokumentumComponent implements OnDestroy {
   }
 
   dokumentumvalasztas(i: number) {
-    this.dokumentumclick.emit(this.Dto[i].Dokumentumkod);
+    this.dokumentumclick.emit(i);
   }
 
   ngOnDestroy() {

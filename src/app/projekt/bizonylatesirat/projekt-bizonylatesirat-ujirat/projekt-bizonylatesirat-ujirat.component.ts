@@ -63,6 +63,7 @@ export class ProjektBizonylatesiratUjiratComponent implements OnInit, OnDestroy 
     this.projektkapcsolatservice.UjIratDto.Keletkezett = moment(this.Keletkezett).toISOString(true);
 
     // TODO zoomcheck
+    this.eppFrissit = true;
     this._iratservice.Add(this.projektkapcsolatservice.UjIratDto)
       .then(res => {
         if (res.Error != null) {

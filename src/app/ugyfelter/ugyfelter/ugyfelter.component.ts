@@ -16,6 +16,7 @@ import {SzMT} from '../../dtos/szmt';
 import {BizonylatNyomtatasTipus} from '../../bizonylat/bizonylatnyomtatastipus';
 import * as FileSaver from 'file-saver';
 import {b64toBlob} from '../../tools/b64toBlob';
+import {LetoltesParam} from '../../irat/dokumentum/letoltesparam';
 
 @Component({
   selector: 'app-ugyfelter',
@@ -182,7 +183,47 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
   }
 
   dokumentumvalasztas(i: number) {
+    this.dokumentumkod = this.lstDokumentumDto[i].Dokumentumkod;
 
+    const meret = this.lstDokumentumDto[i].Meret;
+    const megjegyzes = this.lstDokumentumDto[i].Megjegyzes;
+    const ext = this.lstDokumentumDto[i].Ext.toLowerCase();
+
+    this.eppFrissit = true;
+    if (ext !== '.doc' && ext !== '.docx' && ext !== '.xls' && ext !== '.xlsx') {
+      this._dokumentumservice.Letoltes(new LetoltesParam(
+        this.dokumentumkod, meret))
+        .then(res => {
+          if (res.Error !== null) {
+            throw res.Error;
+          }
+
+          const blob = b64toBlob(res.Result.b);
+          FileSaver.saveAs(blob, megjegyzes + ext);
+
+          this.eppFrissit = false;
+        })
+        .catch(err => {
+          this.errormodal.show(err);
+          this.eppFrissit = false;
+        });
+    } else {
+      this._dokumentumservice.LetoltesPDF(this.dokumentumkod)
+        .then(res => {
+          if (res.Error !== null) {
+            throw res.Error;
+          }
+
+          const blob = b64toBlob(res.Result);
+          FileSaver.saveAs(blob, megjegyzes + '.pdf');
+
+          this.eppFrissit = false;
+        })
+        .catch(err => {
+          this.errormodal.show(err);
+          this.eppFrissit = false;
+        });
+    }
   }
 
   ngOnDestroy() {

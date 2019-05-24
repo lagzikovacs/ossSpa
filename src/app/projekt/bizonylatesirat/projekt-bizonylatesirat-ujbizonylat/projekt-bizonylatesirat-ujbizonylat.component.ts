@@ -43,6 +43,7 @@ export class ProjektBizonylatesiratUjbizonylatComponent implements OnDestroy {
     let bizonylatDto: any;
     let ugyfelDto: UgyfelDto;
 
+    this.eppFrissit = true;
     this._bizonylatservice.CreateNewComplex()
       .then(res => {
         if (res.Error != null) {

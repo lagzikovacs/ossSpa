@@ -63,6 +63,8 @@ export class BizonylatIratUjComponent implements OnInit, OnDestroy {
     this.bizonylatkapcsolatservice.UjIratDto.Keletkezett = moment(this.Keletkezett).toISOString(true);
 
     // TODO zoomcheck
+
+    this.eppFrissit = true;
     this._iratservice.Add(this.bizonylatkapcsolatservice.UjIratDto)
       .then(res => {
         if (res.Error != null) {

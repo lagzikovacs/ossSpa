@@ -22,6 +22,7 @@ export class AfakulcsSzerkesztesComponent implements OnDestroy {
 
   onSubmit() {
     this.eppFrissit = true;
+
     let p: Promise<NumberResult>;
 
     if (this.afakulcsservice.uj) {

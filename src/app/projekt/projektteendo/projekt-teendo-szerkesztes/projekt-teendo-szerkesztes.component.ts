@@ -40,6 +40,7 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
   onSubmit() {
     // nem ellenőrzi, h a dedikált felhasználó létezik-e
 
+    this.eppFrissit = true;
     this._teendoservice.ZoomCheck(new TeendoZoomParameter(this.projektteendoservice.DtoEdited.Teendokod || 0,
       this.projektteendoservice.DtoEdited.Teendo || ''))
       .then(res => {

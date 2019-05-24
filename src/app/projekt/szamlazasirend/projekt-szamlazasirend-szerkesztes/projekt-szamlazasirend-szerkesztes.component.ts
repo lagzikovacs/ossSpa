@@ -31,6 +31,8 @@ export class ProjektSzamlazasirendSzerkesztesComponent implements OnInit, OnDest
   }
 
   onSubmit() {
+    this.eppFrissit = true;
+
     this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.szamlazasirendservice.DtoEdited.Penznemkod || 0,
       this.szamlazasirendservice.DtoEdited.Penznem || ''))
       .then(res => {

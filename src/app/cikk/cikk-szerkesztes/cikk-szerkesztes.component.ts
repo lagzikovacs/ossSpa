@@ -35,6 +35,8 @@ export class CikkSzerkesztesComponent implements OnDestroy {
   }
 
   onSubmit() {
+    this.eppFrissit = true;
+
     this._meservice.ZoomCheck(new MeZoomParameter(this.cikkservice.DtoEdited.Mekod || 0,
       this.cikkservice.DtoEdited.Me || ''))
       .then(res => {

@@ -143,6 +143,8 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    this.eppFrissit = true;
+
     this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelkod,
       this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelnev))
       .then(res => {

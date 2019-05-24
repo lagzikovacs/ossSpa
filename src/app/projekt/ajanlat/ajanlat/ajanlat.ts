@@ -39,6 +39,7 @@ export class AjanlatComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.eppFrissit = true;
+
     this.ajanlatservice.AjanlatParam.ProjektKod = this.ajanlatservice.ProjektKod;
     this.ajanlatservice.AjanlatParam.Ervenyes = moment(this.ajanlatservice.AjanlatErvenyes).toISOString(true);
     this.ajanlatservice.AjanlatKeszites(this.ajanlatservice.AjanlatParam)

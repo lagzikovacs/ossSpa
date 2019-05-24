@@ -40,6 +40,7 @@ export class AjanlatTetelComponent implements OnDestroy {
 
   onSubmit() {
     this.eppFrissit = true;
+
     this.ajanlatservice.AjanlatCalc(this.ajanlatservice.AjanlatParam)
       .then(res => {
         if (res.Error != null) {

@@ -5,11 +5,13 @@ import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {IrattipusEgyMode} from '../irattipusegymode';
 import {IrattipusContainerMode} from '../irattipuscontainermode';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-irattipus-egy',
   templateUrl: './irattipus-egy.component.html',
-  styleUrls: ['./irattipus-egy.component.css']
+  styleUrls: ['./irattipus-egy.component.css'],
+  animations: [rowanimation]
 })
 export class IrattipusEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
@@ -38,6 +40,31 @@ export class IrattipusEgyComponent implements OnDestroy {
     this.irattipusservice.DtoEdited = Object.assign({}, this.irattipusservice.Dto[this.irattipusservice.DtoSelectedIndex]);
     this.irattipusservice.EgyMode = IrattipusEgyMode.Modositas;
   }
+
+  TorlesOk() {
+    this.eppFrissit = true;
+    this.irattipusservice.Delete(this.irattipusservice.Dto[this.irattipusservice.DtoSelectedIndex])
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.irattipusservice.Dto.splice(this.irattipusservice.DtoSelectedIndex, 1);
+        this.irattipusservice.DtoSelectedIndex = -1;
+
+        this.eppFrissit = false;
+        this.irattipusservice.ContainerMode = IrattipusContainerMode.List;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
+  }
+
+  TorlesCancel() {
+    this.irattipusservice.EgyMode = IrattipusEgyMode.Reszletek;
+  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

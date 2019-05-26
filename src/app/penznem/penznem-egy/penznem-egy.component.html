@@ -1,6 +1,8 @@
 <div class="alapkeret">
   <h5>{{penznemservice.cim}}</h5>
-  <h6 *ngIf="penznemservice.DtoSelectedIndex !== -1">{{penznemservice.Dto[penznemservice.DtoSelectedIndex].PENZNEM1}}</h6>
+  <div style="margin-bottom: 10px">
+    <div style="font-size: smaller">{{penznemservice.Dto[penznemservice.DtoSelectedIndex].Penznem1}}</div>
+  </div>
   <div>
     <nav>
       <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
@@ -28,15 +30,26 @@ Modositas = 3
 }-->
 
   <ng-container *ngIf="penznemservice.EgyMode === 1">
-    <app-penznem-reszletek></app-penznem-reszletek>
+    <div [@rowanimation]>
+      <app-penznem-reszletek></app-penznem-reszletek>
+    </div>
   </ng-container>
   <ng-container *ngIf="penznemservice.EgyMode === 2">
-    <app-penznem-torles></app-penznem-torles>
+    <div [@rowanimation]>
+      <app-tetel-torles [cim]="penznemservice.cim"
+                        [eppFrissit]="eppFrissit"
+                        (OkClick)="TorlesOk()"
+                        (CancelClick)="TorlesCancel()">
+      </app-tetel-torles>
+    </div>
   </ng-container>
   <ng-container *ngIf="penznemservice.EgyMode === 3">
-    <app-penznem-szerkesztes></app-penznem-szerkesztes>
+    <div [@rowanimation]>
+      <app-penznem-szerkesztes></app-penznem-szerkesztes>
+    </div>
   </ng-container>
 
   <app-errormodal [cim]="penznemservice.cim"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>
 

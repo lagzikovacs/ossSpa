@@ -6,11 +6,13 @@ import {JogKod} from '../../enums/jogkod';
 import {FelhasznaloContainerMode} from '../felhasznalocontainermode';
 import {FelhasznaloEgyMode} from '../felhasznaloegymode';
 import {EsemenynaploService} from '../../esemenynaplo/esemenynaplo.service';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-felhasznalo-egy',
   templateUrl: './felhasznalo-egy.component.html',
-  styleUrls: ['./felhasznalo-egy.component.css']
+  styleUrls: ['./felhasznalo-egy.component.css'],
+  animations: [rowanimation]
 })
 export class FelhasznaloEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
@@ -47,6 +49,31 @@ export class FelhasznaloEgyComponent implements OnDestroy {
     this._esemenynaploservice.Felhasznalokod = this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex].Felhasznalokod;
     this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Tevekenyseg;
   }
+
+  TorlesOk() {
+    this.eppFrissit = true;
+    this.felhasznaloservice.Delete(this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex])
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.felhasznaloservice.Dto.splice(this.felhasznaloservice.DtoSelectedIndex, 1);
+        this.felhasznaloservice.DtoSelectedIndex = -1;
+
+        this.eppFrissit = false;
+        this.felhasznaloservice.ContainerMode = FelhasznaloContainerMode.List;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
+  }
+
+  TorlesCancel() {
+    this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Reszletek;
+  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

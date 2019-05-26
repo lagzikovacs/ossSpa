@@ -5,11 +5,13 @@ import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {FizetesimodContainerMode} from '../fizetesimodcontainermode';
 import {FizetesimodEgyMode} from '../fizetesimodegymode';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-fizetesimod-egy',
   templateUrl: './fizetesimod-egy.component.html',
-  styleUrls: ['./fizetesimod-egy.component.css']
+  styleUrls: ['./fizetesimod-egy.component.css'],
+  animations: [rowanimation]
 })
 export class FizetesimodEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
@@ -38,6 +40,15 @@ export class FizetesimodEgyComponent implements OnDestroy {
     this.fizetesimodservice.DtoEdited = Object.assign({}, this.fizetesimodservice.Dto[this.fizetesimodservice.DtoSelectedIndex]);
     this.fizetesimodservice.EgyMode = FizetesimodEgyMode.Modositas;
   }
+
+  TorlesOk() {
+
+  }
+
+  TorlesCancel() {
+
+  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

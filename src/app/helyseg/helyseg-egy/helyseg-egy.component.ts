@@ -5,11 +5,13 @@ import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {HelysegContainerMode} from '../helysegcontainermode';
 import {HelysegEgyMode} from '../helysegegymode';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-helyseg-egy',
   templateUrl: './helyseg-egy.component.html',
-  styleUrls: ['./helyseg-egy.component.css']
+  styleUrls: ['./helyseg-egy.component.css'],
+  animations: [rowanimation]
 })
 export class HelysegEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
@@ -38,6 +40,31 @@ export class HelysegEgyComponent implements OnDestroy {
     this.helysegservice.DtoEdited = Object.assign({}, this.helysegservice.Dto[this.helysegservice.DtoSelectedIndex]);
     this.helysegservice.EgyMode = HelysegEgyMode.Modositas;
   }
+
+  TorlesOk() {
+    this.eppFrissit = true;
+    this.helysegservice.Delete(this.helysegservice.Dto[this.helysegservice.DtoSelectedIndex])
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.helysegservice.Dto.splice(this.helysegservice.DtoSelectedIndex, 1);
+        this.helysegservice.DtoSelectedIndex = -1;
+
+        this.eppFrissit = false;
+        this.helysegservice.ContainerMode = HelysegContainerMode.List;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
+  }
+
+  TorlesCancel() {
+    this.helysegservice.EgyMode = HelysegEgyMode.Reszletek;
+  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

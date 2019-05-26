@@ -2,11 +2,13 @@ import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {FelhasznaloService} from '../felhasznalo.service';
 import {FelhasznaloEgyMode} from '../felhasznaloegymode';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-felhasznalo-jelszo',
   templateUrl: './felhasznalo-jelszo.component.html',
-  styleUrls: ['./felhasznalo-jelszo.component.css']
+  styleUrls: ['./felhasznalo-jelszo.component.css'],
+  animations: [rowanimation]
 })
 export class FelhasznaloJelszoComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

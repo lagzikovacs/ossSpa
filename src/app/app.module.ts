@@ -27,7 +27,6 @@ import {SessionService} from './session/session.service';
 import {DateHunPipe} from './pipes/datehun.pipe';
 import {DatetimeHunPipe} from './pipes/datetimehun.pipe';
 import { FelhasznaloEgyComponent } from './felhasznalo/felhasznalo-egy/felhasznalo-egy.component';
-import { FelhasznaloTorlesComponent } from './felhasznalo/felhasznalo-torles/felhasznalo-torles.component';
 import { FelhasznaloSzerkesztesComponent } from './felhasznalo/felhasznalo-szerkesztes/felhasznalo-szerkesztes.component';
 import { FelhasznaloJelszoComponent } from './felhasznalo/felhasznalo-jelszo/felhasznalo-jelszo.component';
 import { BlankComponent } from './blank/blank.component';
@@ -58,9 +57,7 @@ import { DokumentumTorlesComponent } from './irat/dokumentum/dokumentum-torles/d
 import { IrattipusListComponent } from './irattipus/irattipus-list/irattipus-list.component';
 import { IrattipusEgyComponent } from './irattipus/irattipus-egy/irattipus-egy.component';
 import { IrattipusSzerkesztesComponent } from './irattipus/irattipus-szerkesztes/irattipus-szerkesztes.component';
-import { IrattipusTorlesComponent } from './irattipus/irattipus-torles/irattipus-torles.component';
 import { HelysegSzerkesztesComponent } from './helyseg/helyseg-szerkesztes/helyseg-szerkesztes.component';
-import { HelysegTorlesComponent } from './helyseg/helyseg-torles/helyseg-torles.component';
 import { UgyfelListComponent } from './ugyfel/ugyfel-list/ugyfel-list.component';
 import { UgyfelTorlesComponent } from './ugyfel/ugyfel-torles/ugyfel-torles.component';
 import { UgyfelSzerkesztesComponent } from './ugyfel/ugyfel-szerkesztes/ugyfel-szerkesztes.component';
@@ -104,18 +101,14 @@ import { PenznemEgyComponent } from './penznem/penznem-egy/penznem-egy.component
 import { FizetesimodEgyComponent } from './fizetesimod/fizetesimod-egy/fizetesimod-egy.component';
 import { TeendoEgyComponent } from './teendo/teendo-egy/teendo-egy.component';
 import { TermekdijSzerkesztesComponent } from './termekdij/termekdij-szerkesztes/termekdij-szerkesztes.component';
-import { TermekdijTorlesComponent } from './termekdij/termekdij-torles/termekdij-torles.component';
 import { AfakulcsSzerkesztesComponent } from './afakulcs/afakulcs-szerkesztes/afakulcs-szerkesztes.component';
 import { MeSzerkesztesComponent } from './me/me-szerkesztes/me-szerkesztes.component';
-import { MeTorlesComponent } from './me/me-torles/me-torles.component';
 import { CikkSzerkesztesComponent } from './cikk/cikk-szerkesztes/cikk-szerkesztes.component';
 import { CikkTorlesComponent } from './cikk/cikk-torles/cikk-torles.component';
 import { TeendoSzerkesztesComponent } from './teendo/teendo-szerkesztes/teendo-szerkesztes.component';
-import { TeendoTorlesComponent } from './teendo/teendo-torles/teendo-torles.component';
 import { FizetesimodSzerkesztesComponent } from './fizetesimod/fizetesimod-szerkesztes/fizetesimod-szerkesztes.component';
 import { FizetesimodTorlesComponent } from './fizetesimod/fizetesimod-torles/fizetesimod-torles.component';
 import { PenznemSzerkesztesComponent } from './penznem/penznem-szerkesztes/penznem-szerkesztes.component';
-import { PenznemTorlesComponent } from './penznem/penznem-torles/penznem-torles.component';
 import { CikkBeszerzesKivetComponent } from './cikk/cikk-beszerzes-kivet/cikk-beszerzes-kivet.component';
 import { PenztarListComponent } from './penztar/penztar-list/penztar-list.component';
 import { PenztarEgyComponent } from './penztar/penztar-egy/penztar-egy.component';
@@ -350,7 +343,6 @@ if (environment.production) {
     ToolbarComponent,
     ToolbarfooterComponent,
     FelhasznaloEgyComponent,
-    FelhasznaloTorlesComponent,
     FelhasznaloSzerkesztesComponent,
     FelhasznaloJelszoComponent,
     BlankComponent,
@@ -378,9 +370,7 @@ if (environment.production) {
     IrattipusListComponent,
     IrattipusEgyComponent,
     IrattipusSzerkesztesComponent,
-    IrattipusTorlesComponent,
     HelysegSzerkesztesComponent,
-    HelysegTorlesComponent,
     UgyfelTorlesComponent,
     UgyfelSzerkesztesComponent,
     CsoportListComponent,
@@ -423,18 +413,14 @@ if (environment.production) {
     FizetesimodEgyComponent,
     TeendoEgyComponent,
     TermekdijSzerkesztesComponent,
-    TermekdijTorlesComponent,
     AfakulcsSzerkesztesComponent,
     MeSzerkesztesComponent,
-    MeTorlesComponent,
     CikkSzerkesztesComponent,
     CikkTorlesComponent,
     TeendoSzerkesztesComponent,
-    TeendoTorlesComponent,
     FizetesimodSzerkesztesComponent,
     FizetesimodTorlesComponent,
     PenznemSzerkesztesComponent,
-    PenznemTorlesComponent,
     CikkBeszerzesKivetComponent,
     PenztarListComponent,
     PenztarEgyComponent,

@@ -5,11 +5,13 @@ import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {MeContainerMode} from '../mecontainermode';
 import {MeEgyMode} from '../meegymode';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-me-egy',
   templateUrl: './me-egy.component.html',
-  styleUrls: ['./me-egy.component.css']
+  styleUrls: ['./me-egy.component.css'],
+  animations: [rowanimation]
 })
 export class MeEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
@@ -38,6 +40,31 @@ export class MeEgyComponent implements OnDestroy {
     this.meservice.DtoEdited = Object.assign({}, this.meservice.Dto[this.meservice.DtoSelectedIndex]);
     this.meservice.EgyMode = MeEgyMode.Modositas;
   }
+
+  TorlesOk() {
+    this.eppFrissit = true;
+    this.meservice.Delete(this.meservice.Dto[this.meservice.DtoSelectedIndex])
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.meservice.Dto.splice(this.meservice.DtoSelectedIndex, 1);
+        this.meservice.DtoSelectedIndex = -1;
+
+        this.eppFrissit = false;
+        this.meservice.ContainerMode = MeContainerMode.List;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
+  }
+
+  TorlesCancel() {
+    this.meservice.EgyMode = MeEgyMode.Reszletek;
+  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

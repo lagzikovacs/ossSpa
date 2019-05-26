@@ -1,6 +1,8 @@
 <div class="alapkeret">
   <h5>{{teendoservice.cim}}</h5>
-  <h6 *ngIf="teendoservice.DtoSelectedIndex !== -1">{{teendoservice.Dto[teendoservice.DtoSelectedIndex].TEENDO1}}</h6>
+  <div style="margin-bottom: 10px">
+    <div style="font-size: smaller">{{teendoservice.Dto[teendoservice.DtoSelectedIndex].Teendo1}}</div>
+  </div>
   <div>
     <nav>
       <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
@@ -28,16 +30,27 @@ Modositas = 3
 }-->
 
   <ng-container *ngIf="teendoservice.EgyMode === 1">
-    <app-teendo-reszletek></app-teendo-reszletek>
+    <div [@rowanimation]>
+      <app-teendo-reszletek></app-teendo-reszletek>
+    </div>
   </ng-container>
   <ng-container *ngIf="teendoservice.EgyMode === 2">
-    <app-teendo-torles></app-teendo-torles>
+    <div [@rowanimation]>
+      <app-tetel-torles [cim]="teendoservice.cim"
+                        [eppFrissit]="eppFrissit"
+                        (OkClick)="TorlesOk()"
+                        (CancelClick)="TorlesCancel()">
+      </app-tetel-torles>
+    </div>
   </ng-container>
   <ng-container *ngIf="teendoservice.EgyMode === 3">
-    <app-teendo-szerkesztes></app-teendo-szerkesztes>
+    <div [@rowanimation]>
+      <app-teendo-szerkesztes></app-teendo-szerkesztes>
+    </div>
   </ng-container>
 
   <app-errormodal [cim]="teendoservice.cim"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>
-<app-spinner *ngIf="eppFrissit"></app-spinner>
+
 

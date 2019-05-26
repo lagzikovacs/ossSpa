@@ -1,6 +1,8 @@
 <div class="alapkeret">
   <h5>{{helysegservice.cim}}</h5>
-  <h6 *ngIf="helysegservice.DtoSelectedIndex !== -1">{{helysegservice.Dto[helysegservice.DtoSelectedIndex].HELYSEGNEV}}</h6>
+  <div style="margin-bottom: 10px">
+    <div style="font-size: smaller">{{helysegservice.Dto[helysegservice.DtoSelectedIndex].Helysegnev}}</div>
+  </div>
   <div>
     <nav>
       <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
@@ -28,14 +30,25 @@
   }-->
 
   <ng-container *ngIf="helysegservice.EgyMode === 1">
-    <app-helyseg-reszletek></app-helyseg-reszletek>
+    <div [@rowanimation]>
+      <app-helyseg-reszletek></app-helyseg-reszletek>
+    </div>
   </ng-container>
   <ng-container *ngIf="helysegservice.EgyMode === 2">
-    <app-helyseg-torles></app-helyseg-torles>
+    <div [@rowanimation]>
+      <app-tetel-torles [cim]="helysegservice.cim"
+                        [eppFrissit]="eppFrissit"
+                        (OkClick)="TorlesOk()"
+                        (CancelClick)="TorlesCancel()">
+      </app-tetel-torles>
+    </div>
   </ng-container>
   <ng-container *ngIf="helysegservice.EgyMode === 3">
-    <app-helyseg-szerkesztes></app-helyseg-szerkesztes>
+    <div [@rowanimation]>
+      <app-helyseg-szerkesztes></app-helyseg-szerkesztes>
+    </div>
   </ng-container>
 
   <app-errormodal [cim]="helysegservice.cim"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>

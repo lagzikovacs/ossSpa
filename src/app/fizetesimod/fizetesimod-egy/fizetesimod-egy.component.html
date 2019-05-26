@@ -1,6 +1,8 @@
 <div class="alapkeret">
   <h5>{{fizetesimodservice.cim}}</h5>
-  <h6 *ngIf="fizetesimodservice.DtoSelectedIndex !== -1">{{fizetesimodservice.Dto[fizetesimodservice.DtoSelectedIndex].FIZETESIMOD1}}</h6>
+  <div style="margin-bottom: 10px">
+    <div style="font-size: smaller">{{fizetesimodservice.Dto[fizetesimodservice.DtoSelectedIndex].Fizetesimod1}}</div>
+  </div>
   <div>
     <nav>
       <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
@@ -28,16 +30,27 @@ Modositas = 3
 }-->
 
   <ng-container *ngIf="fizetesimodservice.EgyMode === 1">
-    <app-fizetesimod-reszletek></app-fizetesimod-reszletek>
+    <div [@rowanimation]>
+      <app-fizetesimod-reszletek></app-fizetesimod-reszletek>
+    </div>
   </ng-container>
   <ng-container *ngIf="fizetesimodservice.EgyMode === 2">
-    <app-fizetesimod-torles></app-fizetesimod-torles>
+    <div [@rowanimation]>
+      <app-tetel-torles [cim]="fizetesimodservice.cim"
+                        [eppFrissit]="eppFrissit"
+                        (OkClick)="TorlesOk()"
+                        (CancelClick)="TorlesCancel()">
+      </app-tetel-torles>
+    </div>
   </ng-container>
   <ng-container *ngIf="fizetesimodservice.EgyMode === 3">
-    <app-fizetesimod-szerkesztes></app-fizetesimod-szerkesztes>
+    <div [@rowanimation]>
+      <app-fizetesimod-szerkesztes></app-fizetesimod-szerkesztes>
+    </div>
   </ng-container>
 
   <app-errormodal [cim]="fizetesimodservice.cim"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>
 
 

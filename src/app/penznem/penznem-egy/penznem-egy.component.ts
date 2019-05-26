@@ -5,11 +5,13 @@ import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {PenznemContainerMode} from '../penznemcontainermode';
 import {PenznemEgyMode} from '../penznemegymode';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-penznem-egy',
   templateUrl: './penznem-egy.component.html',
-  styleUrls: ['./penznem-egy.component.css']
+  styleUrls: ['./penznem-egy.component.css'],
+  animations: [rowanimation]
 })
 export class PenznemEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
@@ -37,6 +39,30 @@ export class PenznemEgyComponent implements OnDestroy {
     this.penznemservice.uj = false;
     this.penznemservice.DtoEdited = Object.assign({}, this.penznemservice.Dto[this.penznemservice.DtoSelectedIndex]);
     this.penznemservice.EgyMode = PenznemEgyMode.Modositas;
+  }
+
+  TorlesOk() {
+    this.eppFrissit = true;
+    this.penznemservice.Delete(this.penznemservice.Dto[this.penznemservice.DtoSelectedIndex])
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.penznemservice.Dto.splice(this.penznemservice.DtoSelectedIndex, 1);
+        this.penznemservice.DtoSelectedIndex = -1;
+
+        this.eppFrissit = false;
+        this.penznemservice.ContainerMode = PenznemContainerMode.List;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
+  }
+
+  TorlesCancel() {
+    this.penznemservice.EgyMode = PenznemEgyMode.Reszletek;
   }
 
   ngOnDestroy() {

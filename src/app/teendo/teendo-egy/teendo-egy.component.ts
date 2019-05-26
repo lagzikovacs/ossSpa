@@ -5,11 +5,13 @@ import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {TeendoContainerMode} from '../teendocontainermode';
 import {TeendoEgyMode} from '../teendoegymode';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-teendo-egy',
   templateUrl: './teendo-egy.component.html',
-  styleUrls: ['./teendo-egy.component.css']
+  styleUrls: ['./teendo-egy.component.css'],
+  animations: [rowanimation]
 })
 export class TeendoEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
@@ -37,6 +39,30 @@ export class TeendoEgyComponent implements OnDestroy {
     this.teendoservice.uj = false;
     this.teendoservice.DtoEdited = Object.assign({}, this.teendoservice.Dto[this.teendoservice.DtoSelectedIndex]);
     this.teendoservice.EgyMode = TeendoEgyMode.Modositas;
+  }
+
+  TorlesOk() {
+    this.eppFrissit = true;
+    this.teendoservice.Delete(this.teendoservice.Dto[this.teendoservice.DtoSelectedIndex])
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.teendoservice.Dto.splice(this.teendoservice.DtoSelectedIndex, 1);
+        this.teendoservice.DtoSelectedIndex = -1;
+
+        this.eppFrissit = false;
+        this.teendoservice.ContainerMode = TeendoContainerMode.List;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
+  }
+
+  TorlesCancel() {
+    this.teendoservice.EgyMode = TeendoEgyMode.Reszletek;
   }
 
   ngOnDestroy() {

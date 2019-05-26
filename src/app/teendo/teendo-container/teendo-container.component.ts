@@ -9,6 +9,8 @@ import {TeendoService} from '../teendo.service';
 export class TeendoContainerComponent implements OnDestroy {
   teendoservice: TeendoService;
 
+  ti = -1;
+
   constructor(teendoservice: TeendoService) {
     this.teendoservice = teendoservice;
   }

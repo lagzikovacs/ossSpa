@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {TeendoService} from '../teendo.service';
 import {JogKod} from '../../enums/jogkod';
@@ -15,6 +15,13 @@ import {ProjektteendoSzerkesztesMode} from '../../projekt/projektteendo/projektt
   styleUrls: ['./teendo-list.component.css']
 })
 export class TeendoListComponent implements OnInit, OnDestroy {
+
+  constructor(private _logonservice: LogonService,
+              teendoservice: TeendoService,
+              private _projektteendoservice: ProjektteendoService) {
+    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
+    this.teendoservice = teendoservice;
+  }
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Teendő'];
@@ -23,17 +30,19 @@ export class TeendoListComponent implements OnInit, OnDestroy {
   mod = false;
   teendoservice: TeendoService;
 
-  constructor(private _logonservice: LogonService,
-              teendoservice: TeendoService,
-              private _projektteendoservice: ProjektteendoService) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
-    this.teendoservice = teendoservice;
-  }
+  @Input() selectedindex: number;
+  @Output() selectedindexChange = new EventEmitter<number>();
 
   ngOnInit() {
     if (this.teendoservice.zoom) {
       this.onKereses();
     }
+  }
+
+  RowClick(i: number) {
+    this.selectedindexChange.emit(i);
+    console.log(i);
+    console.log(this.selectedindex);
   }
 
   onKereses() {

@@ -68,6 +68,31 @@ export class CikkEgyComponent implements OnDestroy {
         this.eppFrissit = false;
       });
   }
+
+  TorlesOk() {
+    this.eppFrissit = true;
+    this.cikkservice.Delete(this.cikkservice.Dto[this.cikkservice.DtoSelectedIndex])
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.cikkservice.Dto.splice(this.cikkservice.DtoSelectedIndex, 1);
+        this.cikkservice.DtoSelectedIndex = -1;
+
+        this.eppFrissit = false;
+        this.cikkservice.ContainerMode = CikkContainerMode.List;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
+  }
+
+  TorlesCancel() {
+    this.cikkservice.EgyMode = CikkEgyMode.Reszletek;
+  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

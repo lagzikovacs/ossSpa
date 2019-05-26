@@ -40,7 +40,11 @@
     <app-cikk-reszletek></app-cikk-reszletek>
   </ng-container>
   <ng-container *ngIf="cikkservice.EgyMode === 2">
-    <app-cikk-torles></app-cikk-torles>
+    <app-tetel-torles [cim]="cikkservice.cim"
+                      [eppFrissit]="eppFrissit"
+                      (OkClick)="TorlesOk()"
+                      (CancelClick)="TorlesCancel()">
+    </app-tetel-torles>
   </ng-container>
   <ng-container *ngIf="cikkservice.EgyMode === 3">
     <app-cikk-szerkesztes></app-cikk-szerkesztes>
@@ -50,6 +54,7 @@
   </ng-container>
 
   <app-errormodal [cim]="cikkservice.cim"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>
 
 

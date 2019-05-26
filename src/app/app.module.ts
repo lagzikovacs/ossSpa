@@ -104,7 +104,6 @@ import { TermekdijSzerkesztesComponent } from './termekdij/termekdij-szerkesztes
 import { AfakulcsSzerkesztesComponent } from './afakulcs/afakulcs-szerkesztes/afakulcs-szerkesztes.component';
 import { MeSzerkesztesComponent } from './me/me-szerkesztes/me-szerkesztes.component';
 import { CikkSzerkesztesComponent } from './cikk/cikk-szerkesztes/cikk-szerkesztes.component';
-import { CikkTorlesComponent } from './cikk/cikk-torles/cikk-torles.component';
 import { TeendoSzerkesztesComponent } from './teendo/teendo-szerkesztes/teendo-szerkesztes.component';
 import { FizetesimodSzerkesztesComponent } from './fizetesimod/fizetesimod-szerkesztes/fizetesimod-szerkesztes.component';
 import { FizetesimodTorlesComponent } from './fizetesimod/fizetesimod-torles/fizetesimod-torles.component';
@@ -416,7 +415,6 @@ if (environment.production) {
     AfakulcsSzerkesztesComponent,
     MeSzerkesztesComponent,
     CikkSzerkesztesComponent,
-    CikkTorlesComponent,
     TeendoSzerkesztesComponent,
     FizetesimodSzerkesztesComponent,
     FizetesimodTorlesComponent,

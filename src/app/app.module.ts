@@ -94,9 +94,9 @@ import { FizetesimodListComponent } from './fizetesimod/fizetesimod-list/fizetes
 import { PenznemListComponent } from './penznem/penznem-list/penznem-list.component';
 import { CikkListComponent } from './cikk/cikk-list/cikk-list.component';
 import { MeListComponent } from './me/me-list/me-list.component';
-import { AfakulcsListComponent } from './afakulcs/afakulcs-container/afakulcs-list/afakulcs-list.component';
+import { AfakulcsListComponent } from './afakulcs/afakulcs-list/afakulcs-list.component';
 import { TermekdijListComponent } from './termekdij/termekdij-list/termekdij-list.component';
-import { AfakulcsEgyComponent } from './afakulcs/afakulcs-container/afakulcs-egy/afakulcs-egy.component';
+import { AfakulcsEgyComponent } from './afakulcs/afakulcs-egy/afakulcs-egy.component';
 import { TermekdijEgyComponent } from './termekdij/termekdij-egy/termekdij-egy.component';
 import { MeEgyComponent } from './me/me-egy/me-egy.component';
 import { CikkEgyComponent } from './cikk/cikk-egy/cikk-egy.component';
@@ -105,8 +105,7 @@ import { FizetesimodEgyComponent } from './fizetesimod/fizetesimod-egy/fizetesim
 import { TeendoEgyComponent } from './teendo/teendo-egy/teendo-egy.component';
 import { TermekdijSzerkesztesComponent } from './termekdij/termekdij-szerkesztes/termekdij-szerkesztes.component';
 import { TermekdijTorlesComponent } from './termekdij/termekdij-torles/termekdij-torles.component';
-import { AfakulcsSzerkesztesComponent } from './afakulcs/afakulcs-container/afakulcs-egy/afakulcs-szerkesztes/afakulcs-szerkesztes.component';
-import { AfakulcsTorlesComponent } from './afakulcs/afakulcs-container/afakulcs-egy/afakulcs-torles/afakulcs-torles.component';
+import { AfakulcsSzerkesztesComponent } from './afakulcs/afakulcs-szerkesztes/afakulcs-szerkesztes.component';
 import { MeSzerkesztesComponent } from './me/me-szerkesztes/me-szerkesztes.component';
 import { MeTorlesComponent } from './me/me-torles/me-torles.component';
 import { CikkSzerkesztesComponent } from './cikk/cikk-szerkesztes/cikk-szerkesztes.component';
@@ -137,7 +136,7 @@ import {VolumeService} from './volume/volume.service';
 import {CsoportService} from './csoport/csoport.service';
 import {AjanlatkeresService} from './ajanlatkeres/ajanlatkeres.service';
 import {PenztarService} from './penztar/penztar.service';
-import { AfakulcsReszletekComponent } from './afakulcs/afakulcs-container/afakulcs-egy/afakulcs-reszletek/afakulcs-reszletek.component';
+import { AfakulcsReszletekComponent } from './afakulcs/afakulcs-reszletek/afakulcs-reszletek.component';
 import { TeendoReszletekComponent } from './teendo/teendo-reszletek/teendo-reszletek.component';
 import { FizetesimodReszletekComponent } from './fizetesimod/fizetesimod-reszletek/fizetesimod-reszletek.component';
 import { HelysegReszletekComponent } from './helyseg/helyseg-reszletek/helyseg-reszletek.component';
@@ -266,6 +265,7 @@ import {OnlineszamlaService} from './onlineszamla/onlineszamla.service';
 import { UgyfelterBizonylatesiratComponent } from './ugyfelter/ugyfelter-bizonylatesirat/ugyfelter-bizonylatesirat.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { UgyfelterDokumentumComponent } from './ugyfelter/ugyfelter-dokumentum/ugyfelter-dokumentum.component';
+import { TetelTorlesComponent } from './tools/tetel-torles/tetel-torles.component';
 
 const routes: Routes = [
 
@@ -425,7 +425,6 @@ if (environment.production) {
     TermekdijSzerkesztesComponent,
     TermekdijTorlesComponent,
     AfakulcsSzerkesztesComponent,
-    AfakulcsTorlesComponent,
     MeSzerkesztesComponent,
     MeTorlesComponent,
     CikkSzerkesztesComponent,
@@ -561,6 +560,7 @@ if (environment.production) {
     FotozasLinkComponent,
     UgyfelterBizonylatesiratComponent,
     UgyfelterDokumentumComponent,
+    TetelTorlesComponent,
   ],
   imports: [
     BrowserModule,

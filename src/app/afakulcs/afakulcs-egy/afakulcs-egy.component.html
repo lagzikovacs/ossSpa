@@ -1,6 +1,8 @@
 <div class="alapkeret">
   <h5>{{afakulcsservice.cim}}</h5>
-  <h6 *ngIf="afakulcsservice.DtoSelectedIndex !== -1">{{afakulcsservice.Dto[afakulcsservice.DtoSelectedIndex].AFAKULCS1}}</h6>
+  <div style="margin-bottom: 10px">
+    <div style="font-size: smaller">{{afakulcsservice.Dto[afakulcsservice.DtoSelectedIndex].Afakulcs1}}, {{afakulcsservice.Dto[afakulcsservice.DtoSelectedIndex].Afamerteke}}</div>
+  </div>
   <div>
     <nav>
       <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
@@ -22,19 +24,30 @@
   </div>
 
   <!--  export enum AfakulcsEgyMode {
+  Blank = 0,
   Reszletek = 1,
   Torles = 2,
   Modositas = 3
   }-->
 
   <ng-container *ngIf="afakulcsservice.EgyMode === 1">
-    <app-afakulcs-reszletek></app-afakulcs-reszletek>
+    <div [@rowanimation]>
+      <app-afakulcs-reszletek></app-afakulcs-reszletek>
+    </div>
   </ng-container>
   <ng-container *ngIf="afakulcsservice.EgyMode === 2">
-    <app-afakulcs-torles></app-afakulcs-torles>
+    <div [@rowanimation]>
+      <app-tetel-torles [cim]="afakulcsservice.cim"
+                        [eppFrissit]="eppFrissit"
+                        (OkClick)="TorlesOk()"
+                        (CancelClick)="TorlesCancel()">
+      </app-tetel-torles>
+    </div>
   </ng-container>
   <ng-container *ngIf="afakulcsservice.EgyMode === 3">
-    <app-afakulcs-szerkesztes></app-afakulcs-szerkesztes>
+    <div [@rowanimation]>
+      <app-afakulcs-szerkesztes></app-afakulcs-szerkesztes>
+    </div>
   </ng-container>
 
   <app-errormodal [cim]="afakulcsservice.cim"></app-errormodal>

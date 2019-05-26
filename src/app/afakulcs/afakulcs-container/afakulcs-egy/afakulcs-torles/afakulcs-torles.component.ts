@@ -1,8 +1,8 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {AfakulcsService} from '../afakulcs.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {AfakulcsEgyMode} from '../afakulcsegymode';
-import {AfakulcsContainerMode} from '../afakulcscontainermode';
+import {AfakulcsService} from '../../../afakulcs.service';
+import {ErrormodalComponent} from '../../../../errormodal/errormodal.component';
+import {AfakulcsEgyMode} from '../../../afakulcsegymode';
+import {AfakulcsContainerMode} from '../../../afakulcscontainermode';
 
 @Component({
   selector: 'app-afakulcs-torles',

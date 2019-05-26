@@ -1,15 +1,15 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {AfakulcsService} from '../afakulcs.service';
-import {CikkService} from '../../cikk/cikk.service';
-import {ZoomSources} from '../../enums/zoomsources';
-import {LogonService} from '../../logon/logon.service';
-import {JogKod} from '../../enums/jogkod';
-import {CikkSzerkesztesMode} from '../../cikk/cikkszerkesztesmode';
-import {AfakulcsContainerMode} from '../afakulcscontainermode';
-import {AfakulcsEgyMode} from '../afakulcsegymode';
-import {BizonylattetelSzerkesztesMode} from '../../bizonylat/bizonylattetelszerkesztesmode';
-import {BizonylatService} from '../../bizonylat/bizonylat.service';
+import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {AfakulcsService} from '../../afakulcs.service';
+import {CikkService} from '../../../cikk/cikk.service';
+import {ZoomSources} from '../../../enums/zoomsources';
+import {LogonService} from '../../../logon/logon.service';
+import {JogKod} from '../../../enums/jogkod';
+import {CikkSzerkesztesMode} from '../../../cikk/cikkszerkesztesmode';
+import {AfakulcsContainerMode} from '../../afakulcscontainermode';
+import {AfakulcsEgyMode} from '../../afakulcsegymode';
+import {BizonylattetelSzerkesztesMode} from '../../../bizonylat/bizonylattetelszerkesztesmode';
+import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 
 @Component({
   selector: 'app-afakulcs-list',

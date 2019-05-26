@@ -9,8 +9,8 @@ import {LogonService} from '../logon/logon.service';
 import {AfakulcsResult} from './afakulcsresult';
 import {EmptyResult} from '../dtos/emptyresult';
 import {AfakulcsZoomParameter} from './afakulcszoomparameter';
-import {AfakulcsContainerMode} from "./afakulcscontainermode";
-import {AfakulcsEgyMode} from "./afakulcsegymode";
+import {AfakulcsContainerMode} from './afakulcscontainermode';
+import {AfakulcsEgyMode} from './afakulcsegymode';
 
 @Injectable({
   providedIn: 'root'

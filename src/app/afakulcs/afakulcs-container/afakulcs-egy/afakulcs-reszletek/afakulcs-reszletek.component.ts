@@ -1,5 +1,5 @@
 import {Component, OnDestroy} from '@angular/core';
-import {AfakulcsService} from '../afakulcs.service';
+import {AfakulcsService} from '../../../afakulcs.service';
 
 @Component({
   selector: 'app-afakulcs-reszletek',

@@ -7,11 +7,13 @@ import {CikkMozgasParameter} from '../cikkmozgasparameter';
 import {CikkContainerMode} from '../cikkcontainermode';
 import {CikkEgyMode} from '../cikkegymode';
 import {CikkSzerkesztesMode} from '../cikkszerkesztesmode';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-cikk-egy',
   templateUrl: './cikk-egy.component.html',
-  styleUrls: ['./cikk-egy.component.css']
+  styleUrls: ['./cikk-egy.component.css'],
+  animations: [rowanimation]
 })
 export class CikkEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

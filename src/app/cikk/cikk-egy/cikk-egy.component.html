@@ -1,6 +1,8 @@
 <div class="alapkeret">
   <h5>{{cikkservice.cim}}</h5>
-  <h6 *ngIf="cikkservice.DtoSelectedIndex !== -1">{{cikkservice.Dto[cikkservice.DtoSelectedIndex].Megnevezes}}</h6>
+  <div style="margin-bottom: 10px">
+    <div style="font-size: smaller">{{cikkservice.Dto[cikkservice.DtoSelectedIndex].Megnevezes}}</div>
+  </div>
   <div>
     <nav>
       <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
@@ -37,20 +39,28 @@
   }-->
 
   <ng-container *ngIf="cikkservice.EgyMode === 1">
-    <app-cikk-reszletek></app-cikk-reszletek>
+    <div [@rowanimation]>
+      <app-cikk-reszletek></app-cikk-reszletek>
+    </div>
   </ng-container>
   <ng-container *ngIf="cikkservice.EgyMode === 2">
-    <app-tetel-torles [cim]="cikkservice.cim"
-                      [eppFrissit]="eppFrissit"
-                      (OkClick)="TorlesOk()"
-                      (CancelClick)="TorlesCancel()">
-    </app-tetel-torles>
+    <div [@rowanimation]>
+      <app-tetel-torles [cim]="cikkservice.cim"
+                        [eppFrissit]="eppFrissit"
+                        (OkClick)="TorlesOk()"
+                        (CancelClick)="TorlesCancel()">
+      </app-tetel-torles>
+    </div>
   </ng-container>
   <ng-container *ngIf="cikkservice.EgyMode === 3">
-    <app-cikk-szerkesztes></app-cikk-szerkesztes>
+    <div [@rowanimation]>
+      <app-cikk-szerkesztes></app-cikk-szerkesztes>
+    </div>
   </ng-container>
   <ng-container *ngIf="cikkservice.EgyMode === 4">
-    <app-cikk-beszerzes-kivet></app-cikk-beszerzes-kivet>
+    <div [@rowanimation]>
+      <app-cikk-beszerzes-kivet></app-cikk-beszerzes-kivet>
+    </div>
   </ng-container>
 
   <app-errormodal [cim]="cikkservice.cim"></app-errormodal>

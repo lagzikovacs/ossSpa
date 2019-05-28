@@ -17,3 +17,6 @@
 <ng-container *ngIf="afakulcsservice.ContainerMode === 3">
   <app-afakulcs-szerkesztes></app-afakulcs-szerkesztes>
 </ng-container>
+
+<app-errormodal [cim]="afakulcsservice.cim"></app-errormodal>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

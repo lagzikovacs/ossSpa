@@ -15,11 +15,13 @@ import {VagolapService} from '../../../vagolap/vagolap.service';
 import {AbuComponent} from '../../../tools/abu/abu.component';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
+import {rowanimation} from '../../../animation/rowAnimation';
 
 @Component({
   selector: 'app-irat-egy',
   templateUrl: './irat-egy.component.html',
-  styleUrls: ['./irat-egy.component.css']
+  styleUrls: ['./irat-egy.component.css'],
+  animations: [rowanimation]
 })
 export class IratEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
@@ -104,6 +106,30 @@ export class IratEgyComponent implements OnDestroy {
   vagolap() {
     this._vagolapservice.iratotvagolapra();
     this.abu.Uzenet('Az irat a vágólapra került!');
+  }
+
+  TorlesOk() {
+    this.eppFrissit = true;
+    this.iratservice.Delete(this.iratservice.Dto[this.iratservice.DtoSelectedIndex])
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.iratservice.Dto.splice(this.iratservice.DtoSelectedIndex, 1);
+        this.iratservice.DtoSelectedIndex = -1;
+
+        this.eppFrissit = false;
+        this.iratservice.ContainerMode = IratContainerMode.List;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
+  }
+
+  TorlesCancel() {
+    this.iratservice.EgyMode = IratEgyMode.Reszletek;
   }
 
   ngOnDestroy() {

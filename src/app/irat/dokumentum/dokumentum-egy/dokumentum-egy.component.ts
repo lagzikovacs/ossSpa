@@ -3,11 +3,13 @@ import {DokumentumService} from '../dokumentum.service';
 import {DokumentumContainerMode} from '../dokumentumcontainermode';
 import {DokumentumEgyMode} from '../dokumentumegymode';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {rowanimation} from '../../../animation/rowAnimation';
 
 @Component({
   selector: 'app-dokumentum-egy',
   templateUrl: './dokumentum-egy.component.html',
-  styleUrls: ['./dokumentum-egy.component.css']
+  styleUrls: ['./dokumentum-egy.component.css'],
+  animations: [rowanimation]
 })
 export class DokumentumEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
@@ -49,6 +51,30 @@ export class DokumentumEgyComponent implements OnDestroy {
         this.eppFrissit = false;
         this.errormodal.show(err);
       });
+  }
+
+  TorlesOk() {
+    this.eppFrissit = true;
+    this.dokumentumservice.Delete(this.dokumentumservice.Dto[this.dokumentumservice.DtoSelectedIndex])
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.dokumentumservice.Dto.splice(this.dokumentumservice.DtoSelectedIndex, 1);
+        this.dokumentumservice.DtoSelectedIndex = -1;
+
+        this.eppFrissit = false;
+        this.dokumentumservice.ContainerMode = DokumentumContainerMode.List;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
+  }
+
+  TorlesCancel() {
+    this.dokumentumservice.EgyMode = DokumentumEgyMode.Reszletek;
   }
 
   ngOnDestroy() {

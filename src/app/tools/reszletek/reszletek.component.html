@@ -1,0 +1,17 @@
+<div class="alapkeret">
+  <h5>{{cim}} részletesen</h5>
+  <table class="table ng table-bordered table-sm table-responsive" style="border: none">
+    <tbody>
+    <tr *ngFor="let colset of colsets; let i = index">
+      <td class="egylabel">{{colset.Title}}:</td>
+      <td>
+        <div *ngIf="colset.Type === 'INT'">{{item[colset.Name]}}</div>
+        <div *ngIf="colset.Type === 'NUMBER'">{{item[colset.Name] | number: '1.2-2'}}</div>
+        <div *ngIf="colset.Type === 'STRING'">{{item[colset.Name]}}</div>
+        <div *ngIf="colset.Type === 'DATE'">{{item[colset.Name] | datehun}}</div>
+        <div *ngIf="colset.Type === 'DATETIME'">{{item[colset.Name] | datetimehun}}</div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

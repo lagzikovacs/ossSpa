@@ -3,11 +3,13 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {CsoportService} from '../csoport.service';
 import {CsoportContainerMode} from '../csoportcontainermode';
 import {CsoportEgyMode} from '../csoportegymode';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-csoport-egy',
   templateUrl: './csoport-egy.component.html',
-  styleUrls: ['./csoport-egy.component.css']
+  styleUrls: ['./csoport-egy.component.css'],
+  animations: [rowanimation]
 })
 export class CsoportEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
@@ -38,6 +40,30 @@ export class CsoportEgyComponent implements OnDestroy {
   }
   jog() {
     this.csoportservice.EgyMode = CsoportEgyMode.Jog;
+  }
+
+  TorlesOk() {
+    this.eppFrissit = true;
+    this.csoportservice.Delete(this.csoportservice.Dto[this.csoportservice.DtoSelectedIndex])
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.csoportservice.Dto.splice(this.csoportservice.DtoSelectedIndex, 1);
+        this.csoportservice.DtoSelectedIndex = -1;
+
+        this.eppFrissit = false;
+        this.csoportservice.ContainerMode = CsoportContainerMode.List;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
+  }
+
+  TorlesCancel() {
+    this.csoportservice.EgyMode = CsoportEgyMode.Reszletek;
   }
 
   ngOnDestroy() {

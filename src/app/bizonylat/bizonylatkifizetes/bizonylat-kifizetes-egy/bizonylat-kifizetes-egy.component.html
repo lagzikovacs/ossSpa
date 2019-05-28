@@ -32,16 +32,27 @@ Modositas = 3
 }-->
 
   <ng-container *ngIf="bizonylatkifizetesservice.EgyMode === 1">
-    <app-bizonylat-kifizetes-reszletek></app-bizonylat-kifizetes-reszletek>
+    <div [@rowanimation]>
+      <app-bizonylat-kifizetes-reszletek></app-bizonylat-kifizetes-reszletek>
+    </div>
   </ng-container>
   <ng-container *ngIf="bizonylatkifizetesservice.EgyMode === 2">
-    <app-bizonylat-kifizetes-torles></app-bizonylat-kifizetes-torles>
+    <div [@rowanimation]>
+      <app-tetel-torles [cim]="bizonylatkifizetesservice.cim"
+                        [eppFrissit]="eppFrissit"
+                        (OkClick)="TorlesOk()"
+                        (CancelClick)="TorlesCancel()">
+      </app-tetel-torles>
+    </div>
   </ng-container>
   <ng-container *ngIf="bizonylatkifizetesservice.EgyMode === 3">
-    <app-bizonylat-kifizetes-szerkesztes></app-bizonylat-kifizetes-szerkesztes>
+    <div [@rowanimation]>
+      <app-bizonylat-kifizetes-szerkesztes></app-bizonylat-kifizetes-szerkesztes>
+    </div>
   </ng-container>
 
   <app-errormodal [cim]="bizonylatkifizetesservice.cim"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>
-<app-spinner *ngIf="eppFrissit"></app-spinner>
+
 

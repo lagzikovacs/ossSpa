@@ -33,7 +33,6 @@ import { BlankComponent } from './blank/blank.component';
 import { ProjektListComponent } from './projekt/projekt/projekt-list/projekt-list.component';
 import { ProjektEgyComponent } from './projekt/projekt/projekt-egy/projekt-egy.component';
 import { ProjektSzerkesztesComponent } from './projekt/projekt/projekt-szerkesztes/projekt-szerkesztes.component';
-import { ProjektTorlesComponent } from './projekt/projekt/projekt-torles/projekt-torles.component';
 import {ProjektToolbarComponent} from './projekt/projekttoolbar/projekttoolbar.component';
 import {ProjektService} from './projekt/projekt/projekt.service';
 import { ProjektMuszakiallapotComponent } from './projekt/projekt/projekt-muszakiallapot/projekt-muszakiallapot.component';
@@ -51,9 +50,7 @@ import {IratService} from './irat/irat/irat.service';
 import {DokumentumService} from './irat/dokumentum/dokumentum.service';
 import { DokumentumEgyComponent } from './irat/dokumentum/dokumentum-egy/dokumentum-egy.component';
 import { IratSzerkesztesComponent } from './irat/irat/irat-szerkesztes/irat-szerkesztes.component';
-import { IratTorlesComponent } from './irat/irat/irat-torles/irat-torles.component';
 import { DokumentumFeltoltesComponent } from './irat/dokumentum/dokumentum-feltoltes/dokumentum-feltoltes.component';
-import { DokumentumTorlesComponent } from './irat/dokumentum/dokumentum-torles/dokumentum-torles.component';
 import { IrattipusListComponent } from './irattipus/irattipus-list/irattipus-list.component';
 import { IrattipusEgyComponent } from './irattipus/irattipus-egy/irattipus-egy.component';
 import { IrattipusSzerkesztesComponent } from './irattipus/irattipus-szerkesztes/irattipus-szerkesztes.component';
@@ -63,7 +60,6 @@ import { UgyfelSzerkesztesComponent } from './ugyfel/ugyfel-szerkesztes/ugyfel-s
 import { CsoportListComponent } from './csoport/csoport-list/csoport-list.component';
 import { CsoportEgyComponent } from './csoport/csoport-egy/csoport-egy.component';
 import { CsoportSzerkesztesComponent } from './csoport/csoport-szerkesztes/csoport-szerkesztes.component';
-import { CsoportTorlesComponent } from './csoport/csoport-torles/csoport-torles.component';
 import { CsoportFelhasznaloComponent } from './csoport/csoport-felhasznalo/csoport-felhasznalo.component';
 import { CsoportJogComponent } from './csoport/csoport-jog/csoport-jog.component';
 import { VolumeTesztComponent } from './volume/volume-teszt/volume-teszt.component';
@@ -105,7 +101,6 @@ import { MeSzerkesztesComponent } from './me/me-szerkesztes/me-szerkesztes.compo
 import { CikkSzerkesztesComponent } from './cikk/cikk-szerkesztes/cikk-szerkesztes.component';
 import { TeendoSzerkesztesComponent } from './teendo/teendo-szerkesztes/teendo-szerkesztes.component';
 import { FizetesimodSzerkesztesComponent } from './fizetesimod/fizetesimod-szerkesztes/fizetesimod-szerkesztes.component';
-import { FizetesimodTorlesComponent } from './fizetesimod/fizetesimod-torles/fizetesimod-torles.component';
 import { PenznemSzerkesztesComponent } from './penznem/penznem-szerkesztes/penznem-szerkesztes.component';
 import { CikkBeszerzesKivetComponent } from './cikk/cikk-beszerzes-kivet/cikk-beszerzes-kivet.component';
 import { PenztarListComponent } from './penztar/penztar-list/penztar-list.component';
@@ -180,7 +175,6 @@ import { AjanlatkeresContainerComponent } from './ajanlatkeres/ajanlatkeres-cont
 import {PenztartetelListComponent} from './penztar/penztartetel/penztartetel-list/penztartetel-list.component';
 import {PenztarExportComponent} from './penztar/penztar-export/penztar-export.component';
 import {PenztarReszletekComponent} from './penztar/penztar-reszletek/penztar-reszletek.component';
-import {PenztarTorlesComponent} from './penztar/penztar-torles/penztar-torles.component';
 import {PenztarSzerkesztesComponent} from './penztar/penztar-szerkesztes/penztar-szerkesztes.component';
 import { PenztarContainerComponent } from './penztar/penztar-container/penztar-container.component';
 import { PenztartetelContainerComponent } from './penztar/penztartetel/penztartetel-container/penztartetel-container.component';
@@ -215,7 +209,6 @@ import { ProjektDatumokComponent } from './projekt/projekt/projekt-datumok/proje
 import { BizonylatReszletekComponent } from './bizonylat/bizonylat-reszletek/bizonylat-reszletek.component';
 import { BizonylatIratContainerComponent } from './bizonylat/bizonylatirat/bizonylat-irat-container/bizonylat-irat-container.component';
 import { BizonylatIratListComponent } from './bizonylat/bizonylatirat/bizonylat-irat-list/bizonylat-irat-list.component';
-import { BizonylatTorlesComponent } from './bizonylat/bizonylat-torles/bizonylat-torles.component';
 import { BizonylatIratLevalasztasComponent } from './bizonylat/bizonylatirat/bizonylat-irat-levalasztas/bizonylat-irat-levalasztas.component';
 import { BizonylatIratUjComponent } from './bizonylat/bizonylatirat/bizonylat-irat-uj/bizonylat-irat-uj.component';
 import { BizonylatteteltablaComponent } from './bizonylat/bizonylatteteltabla/bizonylatteteltabla.component';
@@ -228,7 +221,6 @@ import { BizonylatPenztarComponent } from './bizonylat/bizonylat-penztar/bizonyl
 import { BizonylatKifizetesrendbenComponent } from './bizonylat/bizonylat-kifizetesrendben/bizonylat-kifizetesrendben.component';
 import { BizonylatKiszallitvaComponent } from './bizonylat/bizonylat-kiszallitva/bizonylat-kiszallitva.component';
 import { BizonylatKifizetesReszletekComponent } from './bizonylat/bizonylatkifizetes/bizonylat-kifizetes-reszletek/bizonylat-kifizetes-reszletek.component';
-import { BizonylatKifizetesTorlesComponent } from './bizonylat/bizonylatkifizetes/bizonylat-kifizetes-torles/bizonylat-kifizetes-torles.component';
 import { BizonylatFormaiellenorzesComponent } from './bizonylat/bizonylat-formaiellenorzes/bizonylat-formaiellenorzes.component';
 import { BizonylatOSNxmlComponent } from './bizonylat/bizonylat-osnxml/bizonylat-osnxml.component';
 import { BoolHunPipe } from './pipes/boolhun.pipe';
@@ -257,6 +249,7 @@ import { UgyfelterBizonylatesiratComponent } from './ugyfelter/ugyfelter-bizonyl
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { UgyfelterDokumentumComponent } from './ugyfelter/ugyfelter-dokumentum/ugyfelter-dokumentum.component';
 import { TetelTorlesComponent } from './tools/tetel-torles/tetel-torles.component';
+import { ReszletekComponent } from './tools/reszletek/reszletek.component';
 
 const routes: Routes = [
 
@@ -348,7 +341,6 @@ if (environment.production) {
     ProjektToolbarComponent,
     ProjektEgyComponent,
     ProjektSzerkesztesComponent,
-    ProjektTorlesComponent,
     ProjektMuszakiallapotComponent,
     ProjektInverterComponent,
     ProjektNapelemComponent,
@@ -362,9 +354,7 @@ if (environment.production) {
     DokumentumListComponent,
     DokumentumEgyComponent,
     IratSzerkesztesComponent,
-    IratTorlesComponent,
     DokumentumFeltoltesComponent,
-    DokumentumTorlesComponent,
     IrattipusListComponent,
     IrattipusEgyComponent,
     IrattipusSzerkesztesComponent,
@@ -373,7 +363,6 @@ if (environment.production) {
     CsoportListComponent,
     CsoportEgyComponent,
     CsoportSzerkesztesComponent,
-    CsoportTorlesComponent,
     CsoportFelhasznaloComponent,
     CsoportJogComponent,
     VolumeTesztComponent,
@@ -415,12 +404,10 @@ if (environment.production) {
     CikkSzerkesztesComponent,
     TeendoSzerkesztesComponent,
     FizetesimodSzerkesztesComponent,
-    FizetesimodTorlesComponent,
     PenznemSzerkesztesComponent,
     CikkBeszerzesKivetComponent,
     PenztarListComponent,
     PenztarEgyComponent,
-    PenztarTorlesComponent,
     PenztarSzerkesztesComponent,
     FelhasznaloReszletekComponent,
     CsoportReszletekComponent,
@@ -508,7 +495,6 @@ if (environment.production) {
     BizonylatReszletekComponent,
     BizonylatIratContainerComponent,
     BizonylatIratListComponent,
-    BizonylatTorlesComponent,
     BizonylatIratLevalasztasComponent,
     BizonylatIratUjComponent,
     BizonylatteteltablaComponent,
@@ -521,7 +507,6 @@ if (environment.production) {
     BizonylatKifizetesrendbenComponent,
     BizonylatKiszallitvaComponent,
     BizonylatKifizetesReszletekComponent,
-    BizonylatKifizetesTorlesComponent,
     BizonylatFormaiellenorzesComponent,
     BizonylatOSNxmlComponent,
     BoolHunPipe,
@@ -543,6 +528,7 @@ if (environment.production) {
     UgyfelterBizonylatesiratComponent,
     UgyfelterDokumentumComponent,
     TetelTorlesComponent,
+    ReszletekComponent,
   ],
   imports: [
     BrowserModule,

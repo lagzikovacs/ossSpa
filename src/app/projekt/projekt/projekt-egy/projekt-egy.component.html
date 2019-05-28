@@ -71,7 +71,13 @@
     <div [@rowanimation]><app-projekt-reszletek></app-projekt-reszletek></div>
   </ng-container>
   <ng-container *ngIf="projektservice.EgyMode === 2">
-    <div [@rowanimation]><app-projekt-torles></app-projekt-torles></div>
+    <div [@rowanimation]>
+      <app-tetel-torles [cim]="projektservice.cim"
+                        [eppFrissit]="eppFrissit"
+                        (OkClick)="TorlesOk()"
+                        (CancelClick)="TorlesCancel()">
+      </app-tetel-torles>
+    </div>
   </ng-container>
   <ng-container *ngIf="projektservice.EgyMode === 3">
     <div [@rowanimation]><app-projekt-szerkesztes></app-projekt-szerkesztes></div>
@@ -105,5 +111,6 @@
   </ng-container>
 
   <app-errormodal [cim]="projektservice.cim"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>
-<app-spinner *ngIf="eppFrissit"></app-spinner>
+

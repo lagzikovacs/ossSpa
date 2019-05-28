@@ -3,11 +3,13 @@ import {BizonylatkifizetesService} from '../bizonylatkifizetes.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {BizonylatKifizetesContainerMode} from '../bizonylatkifizetescontainermode';
 import {BizonylatKifizetesEgyMode} from '../bizonylatkifizetesegymode';
+import {rowanimation} from '../../../animation/rowAnimation';
 
 @Component({
   selector: 'app-bizonylat-kifizetes-egy',
   templateUrl: './bizonylat-kifizetes-egy.component.html',
-  styleUrls: ['./bizonylat-kifizetes-egy.component.css']
+  styleUrls: ['./bizonylat-kifizetes-egy.component.css'],
+  animations: [rowanimation]
 })
 export class BizonylatKifizetesEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
@@ -33,6 +35,30 @@ export class BizonylatKifizetesEgyComponent implements OnDestroy {
     this.bizonylatkifizetesservice.DtoEdited =
       Object.assign({}, this.bizonylatkifizetesservice.Dto[this.bizonylatkifizetesservice.DtoSelectedIndex]);
     this.bizonylatkifizetesservice.EgyMode = BizonylatKifizetesEgyMode.Modositas;
+  }
+
+  TorlesOk() {
+    this.eppFrissit = true;
+    this.bizonylatkifizetesservice.Delete(this.bizonylatkifizetesservice.Dto[this.bizonylatkifizetesservice.DtoSelectedIndex])
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.bizonylatkifizetesservice.Dto.splice(this.bizonylatkifizetesservice.DtoSelectedIndex, 1);
+        this.bizonylatkifizetesservice.DtoSelectedIndex = -1;
+
+        this.eppFrissit = false;
+        this.bizonylatkifizetesservice.ContainerMode = BizonylatKifizetesContainerMode.List;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this.errormodal.show(err);
+      });
+  }
+
+  TorlesCancel() {
+    this.bizonylatkifizetesservice.EgyMode = BizonylatKifizetesEgyMode.Reszletek;
   }
 
   ngOnDestroy() {

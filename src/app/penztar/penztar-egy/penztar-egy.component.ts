@@ -5,11 +5,13 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {JogKod} from '../../enums/jogkod';
 import {PenztarContainerMode} from '../penztarcontainermode';
 import {PenztarEgyMode} from '../penztaregymode';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-penztar-egy',
   templateUrl: './penztar-egy.component.html',
-  styleUrls: ['./penztar-egy.component.css']
+  styleUrls: ['./penztar-egy.component.css'],
+  animations: [rowanimation]
 })
 export class PenztarEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
@@ -45,6 +47,30 @@ export class PenztarEgyComponent implements OnDestroy {
   }
   export() {
     this.penztarservice.EgyMode = PenztarEgyMode.Export;
+  }
+
+  TorlesOk() {
+    this.eppFrissit = true;
+    this.penztarservice.Delete(this.penztarservice.Dto[this.penztarservice.DtoSelectedIndex])
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.penztarservice.Dto.splice(this.penztarservice.DtoSelectedIndex, 1);
+        this.penztarservice.DtoSelectedIndex = -1;
+
+        this.eppFrissit = false;
+        this.penztarservice.ContainerMode = PenztarContainerMode.List;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
+  }
+
+  TorlesCancel() {
+    this.penztarservice.EgyMode = PenztarEgyMode.Reszletek;
   }
 
   ngOnDestroy() {

@@ -16,11 +16,13 @@ import {VagolapService} from '../../vagolap/vagolap.service';
 import {AbuComponent} from '../../tools/abu/abu.component';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-bizonylat-egy',
   templateUrl: './bizonylat-egy.component.html',
-  styleUrls: ['./bizonylat-egy.component.css']
+  styleUrls: ['./bizonylat-egy.component.css'],
+  animations: [rowanimation]
 })
 export class BizonylatEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
@@ -167,6 +169,30 @@ export class BizonylatEgyComponent implements OnDestroy {
   vagolap() {
     this._vagolapservice.bizonylatotvagolapra();
     this.abu.Uzenet('A(z) ' + this.bizonylatservice.bizonylatLeiro.BizonylatNev + ' a vágólapra került!');
+  }
+
+  TorlesOk() {
+    this.eppFrissit = true;
+    this.bizonylatservice.Delete(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex])
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.bizonylatservice.Dto.splice(this.bizonylatservice.DtoSelectedIndex, 1);
+        this.bizonylatservice.DtoSelectedIndex = -1;
+
+        this.eppFrissit = false;
+        this.bizonylatservice.ContainerMode = BizonylatContainerMode.List;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this.errormodal.show(err);
+      });
+  }
+
+  TorlesCancel() {
+    this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
   }
 
   ngOnDestroy() {

@@ -49,25 +49,42 @@
   }-->
 
   <ng-container *ngIf="iratservice.EgyMode === 1">
-    <app-irat-reszletek></app-irat-reszletek>
+    <div [@rowanimation]>
+      <app-irat-reszletek></app-irat-reszletek>
+    </div>
   </ng-container>
   <ng-container *ngIf="iratservice.EgyMode === 2">
-    <app-irat-torles></app-irat-torles>
+    <div [@rowanimation]>
+      <app-tetel-torles [cim]="iratservice.cim"
+                        [eppFrissit]="eppFrissit"
+                        (OkClick)="TorlesOk()"
+                        (CancelClick)="TorlesCancel()">
+      </app-tetel-torles>
+    </div>
   </ng-container>
   <ng-container *ngIf="iratservice.EgyMode === 3">
-    <app-irat-szerkesztes></app-irat-szerkesztes>
+    <div [@rowanimation]>
+      <app-irat-szerkesztes></app-irat-szerkesztes>
+    </div>
   </ng-container>
   <ng-container *ngIf="iratservice.EgyMode === 4">
-    <app-dokumentum-container></app-dokumentum-container>
+    <div [@rowanimation]>
+      <app-dokumentum-container></app-dokumentum-container>
+    </div>
   </ng-container>
   <ng-container *ngIf="iratservice.EgyMode === 5">
-    <app-irat-nincsprojekt *ngIf="nincsProjekt"></app-irat-nincsprojekt>
-    <app-projekt-reszletek *ngIf="!nincsProjekt"></app-projekt-reszletek>
+    <div [@rowanimation]>
+      <app-irat-nincsprojekt *ngIf="nincsProjekt"></app-irat-nincsprojekt>
+      <app-projekt-reszletek *ngIf="!nincsProjekt"></app-projekt-reszletek>
+    </div>
   </ng-container>
   <ng-container *ngIf="iratservice.EgyMode === 6">
-    <app-fotozas-link></app-fotozas-link>
+    <div [@rowanimation]>
+      <app-fotozas-link></app-fotozas-link>
+    </div>
   </ng-container>
 
   <app-errormodal [cim]="iratservice.cim"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>
-<app-spinner *ngIf="eppFrissit"></app-spinner>
+

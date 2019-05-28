@@ -39,20 +39,35 @@
   }-->
 
   <ng-container *ngIf="penztarservice.EgyMode === 1">
-    <app-penztar-reszletek></app-penztar-reszletek>
+    <div [@rowanimation]>
+      <app-penztar-reszletek></app-penztar-reszletek>
+    </div>
   </ng-container>
   <ng-container *ngIf="penztarservice.EgyMode === 2">
-    <app-penztar-torles></app-penztar-torles>
+    <div [@rowanimation]>
+      <app-tetel-torles [cim]="penztarservice.cim"
+                        [eppFrissit]="eppFrissit"
+                        (OkClick)="TorlesOk()"
+                        (CancelClick)="TorlesCancel()">
+      </app-tetel-torles>
+    </div>
   </ng-container>
   <ng-container *ngIf="penztarservice.EgyMode === 3">
-    <app-penztar-szerkesztes></app-penztar-szerkesztes>
+    <div [@rowanimation]>
+      <app-penztar-szerkesztes></app-penztar-szerkesztes>
+    </div>
   </ng-container>
   <ng-container *ngIf="penztarservice.EgyMode === 4">
-    <app-penztartetel-container></app-penztartetel-container>
+    <div [@rowanimation]>
+      <app-penztartetel-container></app-penztartetel-container>
+    </div>
   </ng-container>
   <ng-container *ngIf="penztarservice.EgyMode === 5">
-    <app-penztar-export></app-penztar-export>
+    <div [@rowanimation]>
+      <app-penztar-export></app-penztar-export>
+    </div>
   </ng-container>
 
   <app-errormodal [cim]="penztarservice.cim"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>

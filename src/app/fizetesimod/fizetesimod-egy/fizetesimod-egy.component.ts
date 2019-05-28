@@ -42,11 +42,27 @@ export class FizetesimodEgyComponent implements OnDestroy {
   }
 
   TorlesOk() {
+    this.eppFrissit = true;
+    this.fizetesimodservice.Delete(this.fizetesimodservice.Dto[this.fizetesimodservice.DtoSelectedIndex])
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
 
+        this.fizetesimodservice.Dto.splice(this.fizetesimodservice.DtoSelectedIndex, 1);
+        this.fizetesimodservice.DtoSelectedIndex = -1;
+
+        this.eppFrissit = false;
+        this.fizetesimodservice.ContainerMode = FizetesimodContainerMode.List;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
   }
 
   TorlesCancel() {
-
+    this.fizetesimodservice.EgyMode = FizetesimodEgyMode.Reszletek;
   }
 
   ngOnDestroy() {

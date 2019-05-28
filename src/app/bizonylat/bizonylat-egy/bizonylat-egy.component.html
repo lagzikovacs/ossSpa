@@ -82,54 +82,89 @@
   OSNxml = 14,
   }-->
   <ng-container *ngIf="bizonylatservice.EgyMode === 0">
-    <app-blank></app-blank>
+    <div [@rowanimation]>
+      <app-blank></app-blank>
+    </div>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 1">
-    <app-bizonylat-nyomtatas></app-bizonylat-nyomtatas>
+    <div [@rowanimation]>
+      <app-bizonylat-nyomtatas></app-bizonylat-nyomtatas>
+    </div>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 2">
-    <app-bizonylat-reszletek></app-bizonylat-reszletek>
+    <div [@rowanimation]>
+      <app-bizonylat-reszletek></app-bizonylat-reszletek>
+    </div>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 3">
-    <app-bizonylat-kifizetes-container></app-bizonylat-kifizetes-container>
+    <div [@rowanimation]>
+      <app-bizonylat-kifizetes-container></app-bizonylat-kifizetes-container>
+    </div>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 4">
-    <app-bizonylat-irat-container></app-bizonylat-irat-container>
+    <div [@rowanimation]>
+      <app-bizonylat-irat-container></app-bizonylat-irat-container>
+    </div>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 5">
-    <app-bizonylat-torles></app-bizonylat-torles>
+    <div [@rowanimation]>
+      <app-tetel-torles [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"
+                        [eppFrissit]="eppFrissit"
+                        (OkClick)="TorlesOk()"
+                        (CancelClick)="TorlesCancel()">
+      </app-tetel-torles>
+    </div>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 6">
-    <app-bizonylat-szerkesztes></app-bizonylat-szerkesztes>
+    <div [@rowanimation]>
+      <app-bizonylat-szerkesztes></app-bizonylat-szerkesztes>
+    </div>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 7">
-    <app-bizonylat-errol></app-bizonylat-errol>
+    <div [@rowanimation]>
+      <app-bizonylat-errol></app-bizonylat-errol>
+    </div>
   </ng-container>
 
   <ng-container *ngIf="bizonylatservice.EgyMode === 8">
-    <app-bizonylat-kibocsatas></app-bizonylat-kibocsatas>
+    <div [@rowanimation]>
+      <app-bizonylat-kibocsatas></app-bizonylat-kibocsatas>
+    </div>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 9">
-    <app-bizonylat-storno></app-bizonylat-storno>
+    <div [@rowanimation]>
+      <app-bizonylat-storno></app-bizonylat-storno>
+    </div>
   </ng-container>
 
   <ng-container *ngIf="bizonylatservice.EgyMode === 10">
-    <app-bizonylat-penztar></app-bizonylat-penztar>
+    <div [@rowanimation]>
+      <app-bizonylat-penztar></app-bizonylat-penztar>
+    </div>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 11">
-    <app-bizonylat-kifizetesrendben></app-bizonylat-kifizetesrendben>
+    <div [@rowanimation]>
+      <app-bizonylat-kifizetesrendben></app-bizonylat-kifizetesrendben>
+    </div>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 12">
-    <app-bizonylat-kiszallitva></app-bizonylat-kiszallitva>
+    <div [@rowanimation]>
+      <app-bizonylat-kiszallitva></app-bizonylat-kiszallitva>
+    </div>
   </ng-container>
 
   <ng-container *ngIf="bizonylatservice.EgyMode === 13">
-    <app-bizonylat-formaiellenorzes></app-bizonylat-formaiellenorzes>
+    <div [@rowanimation]>
+      <app-bizonylat-formaiellenorzes></app-bizonylat-formaiellenorzes>
+    </div>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 14">
-    <app-bizonylat-osnxml></app-bizonylat-osnxml>
+    <div [@rowanimation]>
+      <app-bizonylat-osnxml></app-bizonylat-osnxml>
+    </div>
   </ng-container>
 
   <app-errormodal [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>
-<app-spinner *ngIf="eppFrissit"></app-spinner>
+

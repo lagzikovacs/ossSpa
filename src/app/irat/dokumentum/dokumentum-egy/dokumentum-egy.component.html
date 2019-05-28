@@ -29,12 +29,21 @@
   Torles = 2,
   }-->
   <ng-container *ngIf="dokumentumservice.EgyMode === 1">
-    <app-dokumentum-reszletek></app-dokumentum-reszletek>
+    <div [@rowanimation]>
+      <app-dokumentum-reszletek></app-dokumentum-reszletek>
+    </div>
   </ng-container>
   <ng-container *ngIf="dokumentumservice.EgyMode === 2">
-    <app-dokumentum-torles></app-dokumentum-torles>
+    <div [@rowanimation]>
+      <app-tetel-torles [cim]="dokumentumservice.cim"
+                        [eppFrissit]="eppFrissit"
+                        (OkClick)="TorlesOk()"
+                        (CancelClick)="TorlesCancel()">
+      </app-tetel-torles>
+    </div>
   </ng-container>
 
   <app-errormodal [cim]="dokumentumservice.cim"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>
-<app-spinner *ngIf="eppFrissit"></app-spinner>
+

@@ -90,6 +90,31 @@ export class ProjektEgyComponent implements OnDestroy {
     this.projektservice.EgyMode = ProjektEgyMode.Teendo;
     this._projektteendoservice.ContainerMode = ProjektteendoContainerMode.List;
   }
+
+  TorlesOk() {
+    this.eppFrissit = true;
+    this.projektservice.Delete(this.projektservice.Dto[this.projektservice.DtoSelectedIndex])
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.projektservice.Dto.splice(this.projektservice.DtoSelectedIndex, 1);
+        this.projektservice.DtoSelectedIndex = -1;
+
+        this.eppFrissit = false;
+        this.projektservice.ContainerMode = ProjektContainerMode.List;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
+  }
+
+  TorlesCancel() {
+    this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
+  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

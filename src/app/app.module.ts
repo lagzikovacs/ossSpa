@@ -59,7 +59,6 @@ import { IrattipusEgyComponent } from './irattipus/irattipus-egy/irattipus-egy.c
 import { IrattipusSzerkesztesComponent } from './irattipus/irattipus-szerkesztes/irattipus-szerkesztes.component';
 import { HelysegSzerkesztesComponent } from './helyseg/helyseg-szerkesztes/helyseg-szerkesztes.component';
 import { UgyfelListComponent } from './ugyfel/ugyfel-list/ugyfel-list.component';
-import { UgyfelTorlesComponent } from './ugyfel/ugyfel-torles/ugyfel-torles.component';
 import { UgyfelSzerkesztesComponent } from './ugyfel/ugyfel-szerkesztes/ugyfel-szerkesztes.component';
 import { CsoportListComponent } from './csoport/csoport-list/csoport-list.component';
 import { CsoportEgyComponent } from './csoport/csoport-egy/csoport-egy.component';
@@ -370,7 +369,6 @@ if (environment.production) {
     IrattipusEgyComponent,
     IrattipusSzerkesztesComponent,
     HelysegSzerkesztesComponent,
-    UgyfelTorlesComponent,
     UgyfelSzerkesztesComponent,
     CsoportListComponent,
     CsoportEgyComponent,

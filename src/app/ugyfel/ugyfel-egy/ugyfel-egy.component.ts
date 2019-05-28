@@ -5,11 +5,13 @@ import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {UgyfelContainerMode} from '../ugyfelcontainermode';
 import {UgyfelEgyMode} from '../ugyfelegymode';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-ugyfel-egy',
   templateUrl: './ugyfel-egy.component.html',
-  styleUrls: ['./ugyfel-egy.component.css']
+  styleUrls: ['./ugyfel-egy.component.css'],
+  animations: [rowanimation]
 })
 export class UgyfelEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
@@ -45,6 +47,31 @@ export class UgyfelEgyComponent implements OnDestroy {
   ugyfelterlink() {
     this.ugyfelservice.EgyMode = UgyfelEgyMode.UgyfelterLink;
   }
+
+  TorlesOk() {
+    this.eppFrissit = true;
+    this.ugyfelservice.Delete(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex])
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.ugyfelservice.Dto.splice(this.ugyfelservice.DtoSelectedIndex, 1);
+        this.ugyfelservice.DtoSelectedIndex = -1;
+
+        this.eppFrissit = false;
+        this.ugyfelservice.ContainerMode = UgyfelContainerMode.List;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
+  }
+
+  TorlesCancel() {
+    this.ugyfelservice.EgyMode = UgyfelEgyMode.Reszletek;
+  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

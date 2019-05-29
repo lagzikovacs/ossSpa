@@ -249,6 +249,7 @@ import { UgyfelterDokumentumComponent } from './ugyfelter/ugyfelter-dokumentum/u
 import { TetelTorlesComponent } from './tools/tetel-torles/tetel-torles.component';
 import { ReszletekComponent } from './tools/reszletek/reszletek.component';
 import { UgyfeltoolbarComponent } from './ugyfel/ugyfeltoolbar/ugyfeltoolbar.component';
+import { UgyfelCsoportComponent } from './ugyfel/ugyfel-csoport/ugyfel-csoport.component';
 
 const routes: Routes = [
 
@@ -527,6 +528,7 @@ if (environment.production) {
     TetelTorlesComponent,
     ReszletekComponent,
     UgyfeltoolbarComponent,
+    UgyfelCsoportComponent,
   ],
   imports: [
     BrowserModule,

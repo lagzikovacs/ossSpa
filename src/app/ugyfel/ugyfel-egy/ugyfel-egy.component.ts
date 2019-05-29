@@ -41,6 +41,11 @@ export class UgyfelEgyComponent implements OnDestroy {
     this.ugyfelservice.DtoEdited = Object.assign({}, this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
     this.ugyfelservice.EgyMode = UgyfelEgyMode.Modositas;
   }
+  csoport() {
+    this.ugyfelservice.uj = false;
+    this.ugyfelservice.DtoEdited = Object.assign({}, this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
+    this.ugyfelservice.EgyMode = UgyfelEgyMode.Csoport;
+  }
   projekt() {
     this.ugyfelservice.EgyMode = UgyfelEgyMode.Projekt;
   }
@@ -69,6 +74,38 @@ export class UgyfelEgyComponent implements OnDestroy {
   }
 
   TorlesCancel() {
+    this.ugyfelservice.EgyMode = UgyfelEgyMode.Reszletek;
+  }
+
+  CsoportOk(selected: number) {
+    this.eppFrissit = true;
+
+    this.ugyfelservice.DtoEdited.Csoport = selected;
+    this.ugyfelservice.Update(this.ugyfelservice.DtoEdited)
+      .then(res1 => {
+        if (res1.Error !== null) {
+          throw res1.Error;
+        }
+
+        return this.ugyfelservice.Get(res1.Result);
+      })
+      .then(res2 => {
+        if (res2.Error !== null) {
+          throw res2.Error;
+        }
+
+        this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex] = res2.Result[0];
+
+        this.eppFrissit = false;
+        this.ugyfelservice.EgyMode = UgyfelEgyMode.Reszletek;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this.errormodal.show(err);
+      });
+  }
+
+  CsoportCancel() {
     this.ugyfelservice.EgyMode = UgyfelEgyMode.Reszletek;
   }
 

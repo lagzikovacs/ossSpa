@@ -3,5 +3,6 @@ export enum UgyfelEgyMode {
   Torles = 2,
   Modositas = 3,
   Projekt = 4,
-  UgyfelterLink = 5
+  UgyfelterLink = 5,
+  Csoport = 6
 }

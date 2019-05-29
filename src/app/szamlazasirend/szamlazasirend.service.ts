@@ -1,37 +1,37 @@
 import { Injectable } from '@angular/core';
-import {NumberResult} from '../../dtos/numberresult';
+import {SzamlazasirendDto} from './szamlazasirenddto';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
-import {ProjektteendoDto} from './projektteendodto';
-import {LogonService} from '../../logon/logon.service';
-import {ProjektteendoResult} from './projektteendoresult';
-import {EmptyResult} from '../../dtos/emptyresult';
-import {ProjektteendoContainerMode} from './projektteendocontainermode';
-import {ProjektteendoEgyMode} from './projekttendoegymode';
-import {ProjektteendoSzerkesztesMode} from './projektteendoszerkesztesmode';
+import {LogonService} from '../logon/logon.service';
+import {NumberResult} from '../dtos/numberresult';
+import {environment} from '../../environments/environment';
+import {SzamlazasirendResult} from './szamlazasirendresult';
+import {EmptyResult} from '../dtos/emptyresult';
+import {SzamlazasirendContainerMode} from './szamlazasirendcontainermode';
+import {SzamlazasirendEgyMode} from './szamlazasirendegymode';
+import {SzamlazasirendSzerkesztesMode} from './szamlazasirendszerkesztesmode';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProjektteendoService {
-  private readonly _controller = 'api/projektteendo/';
+export class SzamlazasirendService {
+  private readonly _controller = 'api/szamlazasirend/';
 
   ProjektKod = -1;
 
-  cim = 'Projekt teendő';
-  Dto: ProjektteendoDto[] = new Array<ProjektteendoDto>();
+  cim = 'Számlázási rend';
+  Dto: SzamlazasirendDto[] = new Array<SzamlazasirendDto>();
   DtoSelectedIndex = -1;
   uj = false;
-  DtoEdited = new ProjektteendoDto();
+  DtoEdited = new SzamlazasirendDto();
 
-  ContainerMode = ProjektteendoContainerMode.List;
-  EgyMode = ProjektteendoEgyMode.Reszletek;
-  SzerkesztesMode = ProjektteendoSzerkesztesMode.Blank;
+  ContainerMode = SzamlazasirendContainerMode.List;
+  EgyMode = SzamlazasirendEgyMode.Reszletek;
+  SzerkesztesMode = SzamlazasirendSzerkesztesMode.Blank;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
 
-  public Add(dto: ProjektteendoDto): Promise<NumberResult> {
+  public Add(dto: SzamlazasirendDto): Promise<NumberResult> {
     const url = environment.CoreRef + this._controller + 'add';
     const body = dto;
     const options = {
@@ -42,7 +42,7 @@ export class ProjektteendoService {
     return this._httpClient.post<NumberResult>(url, body, options).toPromise();
   }
 
-  public CreateNew(): Promise<ProjektteendoResult> {
+  public CreateNew(): Promise<SzamlazasirendResult> {
     const url = environment.CoreRef + this._controller + 'createnew';
     const body = '';
     const options = {
@@ -50,10 +50,10 @@ export class ProjektteendoService {
       params: new HttpParams().set('sid', this._logonservice.Sid)
     };
 
-    return this._httpClient.post<ProjektteendoResult>(url, body, options).toPromise();
+    return this._httpClient.post<SzamlazasirendResult>(url, body, options).toPromise();
   }
 
-  public Delete(dto: ProjektteendoDto): Promise<EmptyResult> {
+  public Delete(dto: SzamlazasirendDto): Promise<EmptyResult> {
     const url = environment.CoreRef + this._controller + 'delete';
     const body = dto;
     const options = {
@@ -64,7 +64,7 @@ export class ProjektteendoService {
     return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
   }
 
-  public Get(key: number): Promise<ProjektteendoResult> {
+  public Get(key: number): Promise<SzamlazasirendResult> {
     const url = environment.CoreRef + this._controller + 'get';
     const body = key;
     const options = {
@@ -72,10 +72,10 @@ export class ProjektteendoService {
       params: new HttpParams().set('sid', this._logonservice.Sid)
     };
 
-    return this._httpClient.post<ProjektteendoResult>(url, body, options).toPromise();
+    return this._httpClient.post<SzamlazasirendResult>(url, body, options).toPromise();
   }
 
-  public Select(projektkod: number): Promise<ProjektteendoResult> {
+  public Select(projektkod: number): Promise<SzamlazasirendResult> {
     const url = environment.CoreRef + this._controller + 'select';
     const body = projektkod;
     const options = {
@@ -83,10 +83,10 @@ export class ProjektteendoService {
       params: new HttpParams().set('sid', this._logonservice.Sid)
     };
 
-    return this._httpClient.post<ProjektteendoResult>(url, body, options).toPromise();
+    return this._httpClient.post<SzamlazasirendResult>(url, body, options).toPromise();
   }
 
-  public Update(dto: ProjektteendoDto): Promise<NumberResult> {
+  public Update(dto: SzamlazasirendDto): Promise<NumberResult> {
     const url = environment.CoreRef + this._controller + 'update';
     const body = dto;
     const options = {
@@ -98,7 +98,7 @@ export class ProjektteendoService {
   }
 
   public Kereses(): Promise<EmptyResult> {
-    this.Dto = new Array<ProjektteendoDto>();
+    this.Dto = new Array<SzamlazasirendDto>();
     this.DtoSelectedIndex = -1;
 
     return this.Select(this.ProjektKod)

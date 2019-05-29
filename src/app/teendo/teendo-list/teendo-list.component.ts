@@ -4,10 +4,10 @@ import {TeendoService} from '../teendo.service';
 import {JogKod} from '../../enums/jogkod';
 import {LogonService} from '../../logon/logon.service';
 import {ZoomSources} from '../../enums/zoomsources';
-import {ProjektteendoService} from '../../projekt/projektteendo/projektteendo.service';
+import {ProjektteendoService} from '../../projektteendo/projektteendo.service';
 import {TeendoContainerMode} from '../teendocontainermode';
 import {TeendoEgyMode} from '../teendoegymode';
-import {ProjektteendoSzerkesztesMode} from '../../projekt/projektteendo/projektteendoszerkesztesmode';
+import {ProjektteendoSzerkesztesMode} from '../../projektteendo/projektteendoszerkesztesmode';
 
 @Component({
   selector: 'app-teendo-list',

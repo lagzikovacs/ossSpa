@@ -32,17 +32,30 @@
   Elvegezve = 4
   }-->
   <ng-container *ngIf="projektteendoservice.EgyMode === 1">
-    <app-projekt-teendo-reszletek></app-projekt-teendo-reszletek>
+    <div [@rowanimation]>
+      <app-projekt-teendo-reszletek></app-projekt-teendo-reszletek>
+    </div>
   </ng-container>
   <ng-container *ngIf="projektteendoservice.EgyMode === 2">
-    <app-projekt-teendo-torles></app-projekt-teendo-torles>
+    <div [@rowanimation]>
+      <app-tetel-torles [cim]="projektteendoservice.cim"
+                        [eppFrissit]="eppFrissit"
+                        (OkClick)="TorlesOk()"
+                        (CancelClick)="TorlesCancel()">
+      </app-tetel-torles>
+    </div>
   </ng-container>
   <ng-container *ngIf="projektteendoservice.EgyMode === 3">
-    <app-projekt-teendo-szerkesztes></app-projekt-teendo-szerkesztes>
+    <div [@rowanimation]>
+      <app-projekt-teendo-szerkesztes></app-projekt-teendo-szerkesztes>
+    </div>
   </ng-container>
   <ng-container *ngIf="projektteendoservice.EgyMode === 4">
-    <app-projekt-teendo-elvegezve></app-projekt-teendo-elvegezve>
+    <div [@rowanimation]>
+      <app-projekt-teendo-elvegezve></app-projekt-teendo-elvegezve>
+    </div>
   </ng-container>
 
   <app-errormodal [cim]="projektteendoservice.cim"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>

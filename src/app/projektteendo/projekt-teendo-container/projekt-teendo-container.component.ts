@@ -1,6 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
 import {ProjektteendoService} from '../projektteendo.service';
-import {rowanimation} from '../../../animation/rowAnimation';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-projekt-teendo-container',

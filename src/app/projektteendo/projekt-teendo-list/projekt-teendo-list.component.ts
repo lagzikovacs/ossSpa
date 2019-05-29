@@ -1,7 +1,7 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ProjektteendoService} from '../projektteendo.service';
-import {LogonService} from '../../../logon/logon.service';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {LogonService} from '../../logon/logon.service';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {ProjektteendoContainerMode} from "../projektteendocontainermode";
 import {ProjektteendoEgyMode} from "../projekttendoegymode";
 

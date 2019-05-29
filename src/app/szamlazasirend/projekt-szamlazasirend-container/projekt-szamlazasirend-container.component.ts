@@ -1,6 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
 import {SzamlazasirendService} from '../szamlazasirend.service';
-import {rowanimation} from '../../../animation/rowAnimation';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-projekt-szamlazasirend-container',

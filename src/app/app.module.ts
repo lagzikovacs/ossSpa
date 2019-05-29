@@ -40,8 +40,8 @@ import { ProjektInverterComponent } from './projekt/projekt/projekt-inverter/pro
 import { ProjektNapelemComponent } from './projekt/projekt/projekt-napelem/projekt-napelem.component';
 import { ProjektIratmintaComponent } from './projekt/projekt/projekt-iratminta/projekt-iratminta.component';
 import { ProjektBizonylatesiratListComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-list/projekt-bizonylatesirat-list.component';
-import { ProjektSzamlazasirendListComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-list/projekt-szamlazasirend-list.component';
-import { ProjektTeendoListComponent } from './projekt/projektteendo/projekt-teendo-list/projekt-teendo-list.component';
+import { ProjektSzamlazasirendListComponent } from './szamlazasirend/projekt-szamlazasirend-list/projekt-szamlazasirend-list.component';
+import { ProjektTeendoListComponent } from './projektteendo/projekt-teendo-list/projekt-teendo-list.component';
 import { IratListComponent } from './irat/irat/irat-list/irat-list.component';
 import { IratEgyComponent } from './irat/irat/irat-egy/irat-egy.component';
 import {IratToolbarComponent} from './irat/irat/irattolbar/irattoolbar.component';
@@ -140,15 +140,13 @@ import { DokumentumReszletekComponent } from './irat/dokumentum/dokumentum-reszl
 import { VolumeReszletekComponent } from './volume/volume-reszletek/volume-reszletek.component';
 import { ProjektReszletekComponent } from './projekt/projekt/projekt-reszletek/projekt-reszletek.component';
 import { ProjektStatuszComponent } from './projekt/projekt/projekt-statusz/projekt-statusz.component';
-import { ProjektSzamlazasirendEgyComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-egy/projekt-szamlazasirend-egy.component';
-import { ProjektSzamlazasirendSzerkesztesComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-szerkesztes/projekt-szamlazasirend-szerkesztes.component';
-import { ProjektSzamlazasirendTorlesComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-torles/projekt-szamlazasirend-torles.component';
-import { ProjektSzamlazasirendReszletekComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-reszletek/projekt-szamlazasirend-reszletek.component';
-import { ProjektTeendoEgyComponent } from './projekt/projektteendo/projekt-teendo-egy/projekt-teendo-egy.component';
-import { ProjektTeendoSzerkesztesComponent } from './projekt/projektteendo/projekt-teendo-szerkesztes/projekt-teendo-szerkesztes.component';
-import { ProjektTeendoTorlesComponent } from './projekt/projektteendo/projekt-teendo-torles/projekt-teendo-torles.component';
-import { ProjektTeendoReszletekComponent } from './projekt/projektteendo/projekt-teendo-reszletek/projekt-teendo-reszletek.component';
-import { ProjektTeendoElvegezveComponent } from './projekt/projektteendo/projekt-teendo-elvegezve/projekt-teendo-elvegezve.component';
+import { ProjektSzamlazasirendEgyComponent } from './szamlazasirend/projekt-szamlazasirend-egy/projekt-szamlazasirend-egy.component';
+import { ProjektSzamlazasirendSzerkesztesComponent } from './szamlazasirend/projekt-szamlazasirend-szerkesztes/projekt-szamlazasirend-szerkesztes.component';
+import { ProjektSzamlazasirendReszletekComponent } from './szamlazasirend/projekt-szamlazasirend-reszletek/projekt-szamlazasirend-reszletek.component';
+import { ProjektTeendoEgyComponent } from './projektteendo/projekt-teendo-egy/projekt-teendo-egy.component';
+import { ProjektTeendoSzerkesztesComponent } from './projektteendo/projekt-teendo-szerkesztes/projekt-teendo-szerkesztes.component';
+import { ProjektTeendoReszletekComponent } from './projektteendo/projekt-teendo-reszletek/projekt-teendo-reszletek.component';
+import { ProjektTeendoElvegezveComponent } from './projektteendo/projekt-teendo-elvegezve/projekt-teendo-elvegezve.component';
 import { ProjektBizonylatesiratUjbizonylatComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-ujbizonylat/projekt-bizonylatesirat-ujbizonylat.component';
 import { ProjektBizonylatesiratUjiratComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-ujirat/projekt-bizonylatesirat-ujirat.component';
 import { AjanlatComponent } from './projekt/ajanlat/ajanlat/ajanlat';
@@ -181,8 +179,8 @@ import { PenztartetelContainerComponent } from './penztar/penztartetel/penztarte
 import { IratContainerComponent } from './irat/irat/irat-container/irat-container.component';
 import { DokumentumContainerComponent } from './irat/dokumentum/dokumentum-container/dokumentum-container.component';
 import { ProjektContainerComponent } from './projekt/projekt/projekt-container/projekt-container.component';
-import { ProjektSzamlazasirendContainerComponent } from './projekt/szamlazasirend/projekt-szamlazasirend-container/projekt-szamlazasirend-container.component';
-import { ProjektTeendoContainerComponent } from './projekt/projektteendo/projekt-teendo-container/projekt-teendo-container.component';
+import { ProjektSzamlazasirendContainerComponent } from './szamlazasirend/projekt-szamlazasirend-container/projekt-szamlazasirend-container.component';
+import { ProjektTeendoContainerComponent } from './projektteendo/projekt-teendo-container/projekt-teendo-container.component';
 import { ProjektBizonylatesiratContainerComponent } from './projekt/bizonylatesirat/projekt-bizonylatesirat-container/projekt-bizonylatesirat-container.component';
 import {PenztartetelService} from './penztar/penztartetel/penztartetel.service';
 import {BizonylatService} from './bizonylat/bizonylat.service';
@@ -434,11 +432,9 @@ if (environment.production) {
     ProjektStatuszComponent,
     ProjektSzamlazasirendEgyComponent,
     ProjektSzamlazasirendSzerkesztesComponent,
-    ProjektSzamlazasirendTorlesComponent,
     ProjektSzamlazasirendReszletekComponent,
     ProjektTeendoEgyComponent,
     ProjektTeendoSzerkesztesComponent,
-    ProjektTeendoTorlesComponent,
     ProjektTeendoReszletekComponent,
     ProjektTeendoElvegezveComponent,
     ProjektBizonylatesiratUjbizonylatComponent,

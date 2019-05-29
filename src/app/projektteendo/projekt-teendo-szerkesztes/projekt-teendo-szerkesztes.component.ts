@@ -1,17 +1,17 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {TeendoService} from '../../../teendo/teendo.service';
+import {TeendoService} from '../../teendo/teendo.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
-import {FelhasznaloService} from '../../../felhasznalo/felhasznalo.service';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {FelhasznaloService} from '../../felhasznalo/felhasznalo.service';
 import {ProjektteendoService} from '../projektteendo.service';
-import {ZoomSources} from '../../../enums/zoomsources';
+import {ZoomSources} from '../../enums/zoomsources';
 import * as moment from 'moment';
-import {TeendoZoomParameter} from '../../../teendo/teendozoomparameter';
-import {ProjektService} from '../../projekt/projekt.service';
+import {TeendoZoomParameter} from '../../teendo/teendozoomparameter';
+import {ProjektService} from '../../projekt/projekt/projekt.service';
 import {ProjektteendoEgyMode} from '../projekttendoegymode';
 import {ProjektteendoContainerMode} from '../projektteendocontainermode';
-import {FelhasznaloContainerMode} from '../../../felhasznalo/felhasznalocontainermode';
-import {TeendoContainerMode} from '../../../teendo/teendocontainermode';
+import {FelhasznaloContainerMode} from '../../felhasznalo/felhasznalocontainermode';
+import {TeendoContainerMode} from '../../teendo/teendocontainermode';
 import {ProjektteendoSzerkesztesMode} from '../projektteendoszerkesztesmode';
 
 @Component({

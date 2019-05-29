@@ -1,14 +1,16 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
-import {LogonService} from '../../../logon/logon.service';
 import {ProjektteendoService} from '../projektteendo.service';
 import {ProjektteendoContainerMode} from '../projektteendocontainermode';
 import {ProjektteendoEgyMode} from '../projekttendoegymode';
+import {rowanimation} from '../../animation/rowAnimation';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {LogonService} from '../../logon/logon.service';
 
 @Component({
   selector: 'app-projekt-teendo-egy',
   templateUrl: './projekt-teendo-egy.component.html',
-  styleUrls: ['./projekt-teendo-egy.component.css']
+  styleUrls: ['./projekt-teendo-egy.component.css'],
+  animations: [rowanimation]
 })
 export class ProjektTeendoEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
@@ -39,6 +41,30 @@ export class ProjektTeendoEgyComponent implements OnDestroy {
     this.projektteendoservice.uj = false;
     this.projektteendoservice.DtoEdited = Object.assign({}, this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex]);
     this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Elvegezve;
+  }
+
+  TorlesOk() {
+    this.eppFrissit = true;
+    this.projektteendoservice.Delete(this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex])
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.projektteendoservice.Dto.splice(this.projektteendoservice.DtoSelectedIndex, 1);
+        this.projektteendoservice.DtoSelectedIndex = -1;
+
+        this.eppFrissit = false;
+        this.projektteendoservice.ContainerMode = ProjektteendoContainerMode.List;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
+  }
+
+  TorlesCancel() {
+    this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Reszletek;
   }
 
   ngOnDestroy() {

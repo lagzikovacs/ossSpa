@@ -250,6 +250,7 @@ import { TetelTorlesComponent } from './tools/tetel-torles/tetel-torles.componen
 import { ReszletekComponent } from './tools/reszletek/reszletek.component';
 import { UgyfeltoolbarComponent } from './ugyfel/ugyfeltoolbar/ugyfeltoolbar.component';
 import { UgyfelCsoportComponent } from './ugyfel/ugyfel-csoport/ugyfel-csoport.component';
+import { UgyfelVcardComponent } from './ugyfel/ugyfel-vcard/ugyfel-vcard.component';
 
 const routes: Routes = [
 
@@ -529,6 +530,7 @@ if (environment.production) {
     ReszletekComponent,
     UgyfeltoolbarComponent,
     UgyfelCsoportComponent,
+    UgyfelVcardComponent,
   ],
   imports: [
     BrowserModule,

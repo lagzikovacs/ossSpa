@@ -52,7 +52,7 @@
         <td>{{item.Euadoszam}}</td>
         <td>{{item.Telefon}}</td>
         <td>{{item.Email}}</td>
-        <td>{{item.Egyeblink}}</td>
+        <td><a target="_blank" rel="noopener noreferrer" href={{item.Egyeblink}}>{{item.Egyeblink}}</a></td>
         <td>{{item.Ajanlotta}}</td>
       </tr>
       <tr *ngIf="item.Megjegyzes !== null && item.Megjegyzes !== ''">

@@ -4,5 +4,6 @@ export enum UgyfelEgyMode {
   Modositas = 3,
   Projekt = 4,
   UgyfelterLink = 5,
-  Csoport = 6
+  Csoport = 6,
+  Vcard = 7
 }

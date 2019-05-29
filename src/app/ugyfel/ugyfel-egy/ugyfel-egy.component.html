@@ -29,6 +29,9 @@
       <button [disabled]="eppFrissit" (click)="ugyfelterlink()" class="btn btn-sm btn-outline-primary navgomb">
         Ügyféltér link
       </button>
+      <button [disabled]="eppFrissit" (click)="vcard()" class="btn btn-sm btn-outline-primary navgomb">
+        vCard
+      </button>
     </nav>
   </div>
 
@@ -38,7 +41,8 @@
     Modositas = 3,
     Projekt = 4,
     UgyfelterLink = 5,
-    Csoport = 6
+    Csoport = 6,
+    Vcard = 7
     }-->
 
   <ng-container *ngIf="ugyfelservice.EgyMode === 1">
@@ -77,6 +81,11 @@
   <ng-container *ngIf="ugyfelservice.EgyMode === 5">
     <div [@rowanimation]>
       <app-ugyfel-ter-link></app-ugyfel-ter-link>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="ugyfelservice.EgyMode === 7">
+    <div [@rowanimation]>
+      <app-ugyfel-vcard></app-ugyfel-vcard>
     </div>
   </ng-container>
 

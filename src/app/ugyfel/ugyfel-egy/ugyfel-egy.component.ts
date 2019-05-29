@@ -52,6 +52,9 @@ export class UgyfelEgyComponent implements OnDestroy {
   ugyfelterlink() {
     this.ugyfelservice.EgyMode = UgyfelEgyMode.UgyfelterLink;
   }
+  vcard() {
+    this.ugyfelservice.EgyMode = UgyfelEgyMode.Vcard;
+  }
 
   TorlesOk() {
     this.eppFrissit = true;

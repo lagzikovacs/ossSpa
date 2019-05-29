@@ -248,6 +248,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { UgyfelterDokumentumComponent } from './ugyfelter/ugyfelter-dokumentum/ugyfelter-dokumentum.component';
 import { TetelTorlesComponent } from './tools/tetel-torles/tetel-torles.component';
 import { ReszletekComponent } from './tools/reszletek/reszletek.component';
+import { UgyfeltoolbarComponent } from './ugyfel/ugyfeltoolbar/ugyfeltoolbar.component';
 
 const routes: Routes = [
 
@@ -525,6 +526,7 @@ if (environment.production) {
     UgyfelterDokumentumComponent,
     TetelTorlesComponent,
     ReszletekComponent,
+    UgyfeltoolbarComponent,
   ],
   imports: [
     BrowserModule,

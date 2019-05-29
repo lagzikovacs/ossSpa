@@ -22,6 +22,7 @@ export class UgyfelService {
   private readonly _controller = 'api/ugyfel/';
 
   cim = 'Ügyfél';
+  csoportszempont = 0;
   szempont = 0;
   minta = '';
   up = new UgyfelParameter(0, environment.lapmeret);

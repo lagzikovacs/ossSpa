@@ -1,6 +1,9 @@
 export class UgyfelDto {
   Ugyfelkod: number;
+  Csoport: number;
   Nev: string;
+  Ceg: string;
+  Beosztas: string;
   Iranyitoszam: string;
   Helysegkod: number;
   Helysegnev: string;
@@ -12,6 +15,8 @@ export class UgyfelDto {
   Euadoszam: string;
   Telefon: string;
   Email: string;
+  Egyeblink: string;
+  Ajanlotta: string;
   Megjegyzes: string;
   Kikuldesikodidopontja: any;
   Letrehozva: any;

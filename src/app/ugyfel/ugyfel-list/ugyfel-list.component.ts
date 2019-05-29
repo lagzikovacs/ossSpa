@@ -24,9 +24,11 @@ import {BizonylatSzerkesztesMode} from '../../bizonylat/bizonylatszerkesztesmode
 export class UgyfelListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
-  szurok = ['Ügyfél', 'Email'];
+  csoportszurok = ['Mind', 'Kiemelt'];
+  szurok = ['Név', 'Cég', 'Beosztás', 'Helységnév', 'Telefon', 'Email', 'Egyéb link', 'Ajánlotta'];
   szempontok = [
-    Szempont.Nev, Szempont.UgyfelEmail
+    Szempont.Nev, Szempont.Ceg, Szempont.Beosztas, Szempont.Telepules, Szempont.UgyfelTelefonszam, Szempont.UgyfelEmail,
+    Szempont.Egyeblink, Szempont.Ajanlo
   ];
 
   eppFrissit = false;
@@ -55,8 +57,8 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
 
     this.ugyfelservice.elsokereses = true;
     this.ugyfelservice.up.rekordtol = 0;
+    this.ugyfelservice.up.csoport = this.ugyfelservice.csoportszempont;
     this.ugyfelservice.up.fi = new Array<SzMT>();
-
     this.ugyfelservice.up.fi.push(new SzMT(this.szempontok[this.ugyfelservice.szempont], this.ugyfelservice.minta));
 
     this.onKeresesTovabb();

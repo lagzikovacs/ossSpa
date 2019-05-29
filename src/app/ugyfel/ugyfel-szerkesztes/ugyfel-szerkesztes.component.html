@@ -13,6 +13,28 @@
                [(ngModel)]="ugyfelservice.DtoEdited.Nev" name="nev">
       </div>
     </div>
+
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Cég</div>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control form-control-sm" id="ceg"
+               maxlength="200" autocomplete="off"
+               [(ngModel)]="ugyfelservice.DtoEdited.Ceg" name="ceg">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Beosztás</div>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control form-control-sm" id="beosztas"
+               maxlength="200" autocomplete="off"
+               [(ngModel)]="ugyfelservice.DtoEdited.Beosztas" name="beosztas">
+      </div>
+    </div>
+
     <div class="row no-gutters editform-row">
       <div class="col-md-2">
         <div class="editform-title">Irányítószám</div>
@@ -110,6 +132,28 @@
                [(ngModel)]="ugyfelservice.DtoEdited.Email" name="email">
       </div>
     </div>
+
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Egyéb link</div>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control form-control-sm" id="egyeblink"
+               maxlength="200" autocomplete="off"
+               [(ngModel)]="ugyfelservice.DtoEdited.Egyeblink" name="egyeblink">
+      </div>
+    </div>
+    <div class="row no-gutters editform-row">
+      <div class="col-md-2">
+        <div class="editform-title">Ajánlotta</div>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control form-control-sm" id="ajanlotta"
+               maxlength="200" autocomplete="off"
+               [(ngModel)]="ugyfelservice.DtoEdited.Ajanlotta" name="ajanlotta">
+      </div>
+    </div>
+
     <div class="row no-gutters editform-row">
       <div class="col-md-2">
         <div class="editform-title">Megjegyzés</div>

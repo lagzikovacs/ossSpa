@@ -54,5 +54,9 @@ export enum Szempont {
   SzuksegesAramerosseg = 53,
   Cim = 54,
   Ugynoknev = 55,
+  Ceg = 56,
+  Beosztas = 57,
+  Egyeblink = 58,
+  Ajanlo = 59
 }
 

@@ -1,19 +1,24 @@
 <div class="alapkeret">
   <h5 *ngIf="!ugyfelservice.zoom">{{ugyfelservice.cim}}</h5>
   <h5 *ngIf="ugyfelservice.zoom">{{ugyfelservice.cim}} - zoom</h5>
-  <app-toolbar [Szurok]="szurok"
-               [(szempont)]="ugyfelservice.szempont"
-               [(minta)]="ugyfelservice.minta"
-               [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit && mod" (Uj)="onUj()"
-               [visZoom]="ugyfelservice.zoom" (StopZoom)="stopzoom()">
-  </app-toolbar>
+  <app-ugyfeltoolbar [Csoportszurok]="csoportszurok"
+                     [Szurok]="szurok"
+                     [(csoportszempont)]="ugyfelservice.csoportszempont"
+                     [(szempont)]="ugyfelservice.szempont"
+                     [(minta)]="ugyfelservice.minta"
+                     [enKereses]="!eppFrissit" (Kereses)="onKereses()"
+                     [enUj]="!eppFrissit && mod" (Uj)="onUj()"
+                     [visZoom]="ugyfelservice.zoom" (StopZoom)="stopzoom()">
+  </app-ugyfeltoolbar>
   <table class="table table-bordered table-sm table-responsive" style="border: none">
     <thead>
     <tr>
       <th *ngIf="ugyfelservice.zoom"></th>
       <th>Id</th>
+      <th></th>
       <th>Név</th>
+      <th>Cég</th>
+      <th>Beosztás</th>
       <th>Irányítószám</th>
       <th>Helységnév</th>
       <th>Közterület</th>
@@ -23,6 +28,8 @@
       <th>EU adószám</th>
       <th>Telefon</th>
       <th>Email</th>
+      <th>Egyéb link</th>
+      <th>Ajánlotta</th>
     </tr>
     </thead>
     <tbody>
@@ -30,7 +37,12 @@
       <tr>
         <td *ngIf="ugyfelservice.zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="selectforzoom(i)"><i class="fa fa-check" aria-hidden="true"></i></td>
         <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.Ugyfelkod}}</td>
-        <td>{{item.Nev}}</td>
+        <td>{{item.Csoport}}</td>
+        <td>
+          <div style="width: 200px">{{item.Nev}}</div>
+        </td>
+        <td>{{item.Ceg}}</td>
+        <td>{{item.Beosztas}}</td>
         <td>{{item.Iranyitoszam}}</td>
         <td>{{item.Helysegnev}}</td>
         <td>{{item.Kozterulet}}</td>
@@ -40,6 +52,8 @@
         <td>{{item.Euadoszam}}</td>
         <td>{{item.Telefon}}</td>
         <td>{{item.Email}}</td>
+        <td>{{item.Egyeblink}}</td>
+        <td>{{item.Ajanlotta}}</td>
       </tr>
       <tr *ngIf="item.Megjegyzes !== null && item.Megjegyzes !== ''">
         <td colspan="11">{{item.Megjegyzes}}</td>

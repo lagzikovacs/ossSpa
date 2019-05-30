@@ -85,7 +85,9 @@
   </ng-container>
   <ng-container *ngIf="ugyfelservice.EgyMode === 7">
     <div [@rowanimation]>
-      <app-ugyfel-vcard></app-ugyfel-vcard>
+      <app-ugyfel-vcard [item]="ugyfelservice.DtoEdited"
+                        (LetoltesClick)="VcardLetoles()">
+      </app-ugyfel-vcard>
     </div>
   </ng-container>
 

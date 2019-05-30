@@ -1,3 +1,34 @@
-<p>
-  ugyfel-vcard works!
-</p>
+<div class="alapkeret">
+  <h5>vCard</h5>
+  <table class="table ng table-bordered table-sm table-responsive" style="border: none">
+    <tbody>
+    <tr>
+      <td class="egylabel">Név:</td>
+      <td>{{item.Nev}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Cég:</td>
+      <td>{{item.Ceg}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Beosztás:</td>
+      <td>{{item.Beosztas}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Cím:</td>
+      <td>{{item.Iranyitoszam}} {{item.Helysegnev}}, {{item.Kozterulet}} {{item.Kozterulettipus}} {{item.Hazszam}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Telefon:</td>
+      <td>{{item.Telefon}}</td>
+    </tr>
+    <tr>
+      <td class="egylabel">Email:</td>
+      <td>{{item.Email}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <button [disabled]="eppFrissit" (click)="letoltesClick()" class="btn btn-sm btn-outline-primary navgomb">
+    Letöltés
+  </button>
+</div>

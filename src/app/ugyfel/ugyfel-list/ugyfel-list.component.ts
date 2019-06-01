@@ -85,6 +85,10 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
 
         this.ugyfelservice.up.rekordtol += this.ugyfelservice.up.lapmeret;
         this.eppFrissit = false;
+
+        if (this.ugyfelservice.zoom) {
+          window.scrollTo(0, document.body.scrollHeight);
+        }
       })
       .catch(err => {
         this.errormodal.show(err);

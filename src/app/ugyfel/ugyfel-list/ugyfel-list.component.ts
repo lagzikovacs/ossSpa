@@ -25,10 +25,10 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   csoportszurok = ['Mind', 'Kiemelt'];
-  szurok = ['Név', 'Cég', 'Beosztás', 'Helységnév', 'Telefon', 'Email', 'Egyéb link', 'Ajánlotta'];
+  szurok = ['Név', 'Cég', 'Beosztás', 'Helységnév', 'Telefon', 'Email', 'Egyéb link', 'Ajánlotta', 'Id'];
   szempontok = [
     Szempont.Nev, Szempont.Ceg, Szempont.Beosztas, Szempont.Telepules, Szempont.UgyfelTelefonszam, Szempont.UgyfelEmail,
-    Szempont.Egyeblink, Szempont.Ajanlo
+    Szempont.Egyeblink, Szempont.Ajanlo, Szempont.Kod
   ];
 
   eppFrissit = false;

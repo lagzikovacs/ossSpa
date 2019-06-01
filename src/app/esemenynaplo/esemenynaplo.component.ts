@@ -13,13 +13,14 @@ export class EsemenynaploComponent implements OnDestroy {
 
   esemenynaploservice: EsemenynaploService;
   eppFrissit = false;
+  elsokereses = true;
 
   constructor(esemenynaploservice: EsemenynaploService) {
     this.esemenynaploservice = esemenynaploservice;
   }
 
   onKereses() {
-    this.esemenynaploservice.elsokereses = true;
+    this.elsokereses = true;
     this.esemenynaploservice.ep.rekordtol = 0;
     this.esemenynaploservice.ep.felhasznalokod = this.esemenynaploservice.Felhasznalokod;
 
@@ -33,9 +34,9 @@ export class EsemenynaploComponent implements OnDestroy {
           throw res.Error;
         }
 
-        if (this.esemenynaploservice.elsokereses) {
+        if (this.elsokereses) {
           this.esemenynaploservice.Dto = res.Result;
-          this.esemenynaploservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.esemenynaploservice.Dto];
           res.Result.forEach(element => {

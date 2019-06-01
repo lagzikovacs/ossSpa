@@ -22,6 +22,7 @@ export class PenztarListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
+  elsokereses = true;
   penztarservice: PenztarService;
 
   constructor(private _logonservice: LogonService,
@@ -36,7 +37,7 @@ export class PenztarListComponent implements OnInit, OnDestroy {
   }
 
   onKereses() {
-    this.penztarservice.elsokereses = true;
+    this.elsokereses = true;
     this.penztarservice.ekDto.rekordtol = 0;
 
     this.onKeresesTovabb();
@@ -50,9 +51,9 @@ export class PenztarListComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        if (this.penztarservice.elsokereses) {
+        if (this.elsokereses) {
           this.penztarservice.Dto = res.Result;
-          this.penztarservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.penztarservice.Dto];
           res.Result.forEach(element => {
@@ -77,7 +78,6 @@ export class PenztarListComponent implements OnInit, OnDestroy {
     this.penztarservice.DtoSelectedIndex = i;
     this.penztarservice.uj = false;
     this._penztartetelservice.Dto = new Array<PenztartetelDto>();
-    this._penztartetelservice.elsokereses = true;
     this._penztartetelservice.OsszesRekord = 0;
     this.penztarservice.ContainerMode = PenztarContainerMode.Egy;
     this.penztarservice.EgyMode = PenztarEgyMode.Tetelek;

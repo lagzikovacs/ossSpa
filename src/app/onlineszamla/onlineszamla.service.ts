@@ -18,7 +18,7 @@ export class OnlineszamlaService {
   minta = '';
   up = new OnlineszamlaParameter(0, environment.lapmeret);
   OsszesRekord = 0;
-  elsokereses = true;
+
   Dto: OnlineszamlaDto[] = new Array<OnlineszamlaDto>();
   DtoSelectedIndex = -1;
   DtoEdited = new OnlineszamlaDto();

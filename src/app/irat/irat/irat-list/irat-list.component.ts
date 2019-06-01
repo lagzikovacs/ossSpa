@@ -33,6 +33,7 @@ export class IratListComponent implements OnDestroy {
   iratservice: IratService;
   dokumentumservice: DokumentumService;
   mod = false;
+  elsokereses = true;
 
   constructor(private _logonservice: LogonService,
               iratservice: IratService,
@@ -47,7 +48,7 @@ export class IratListComponent implements OnDestroy {
     this.iratservice.DtoSelectedIndex = -1;
     this.iratservice.OsszesRekord = 0;
 
-    this.iratservice.elsokereses = true;
+    this.elsokereses = true;
     this.iratservice.ip.rekordtol = 0;
     this.iratservice.ip.fi = new Array<SzMT>();
 
@@ -71,9 +72,9 @@ export class IratListComponent implements OnDestroy {
           throw res.Error;
         }
 
-        if (this.iratservice.elsokereses) {
+        if (this.elsokereses) {
           this.iratservice.Dto = res.Result;
-          this.iratservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.iratservice.Dto];
           res.Result.forEach(element => {

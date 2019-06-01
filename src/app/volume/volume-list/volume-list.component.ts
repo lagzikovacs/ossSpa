@@ -13,6 +13,7 @@ export class VolumeListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   eppFrissit = false;
+  elsokereses = true;
   volumeservice: VolumeService;
 
   constructor(volumeservice: VolumeService) {
@@ -24,7 +25,7 @@ export class VolumeListComponent implements OnInit, OnDestroy {
   }
 
   onKereses() {
-    this.volumeservice.elsokereses = true;
+    this.elsokereses = true;
     this.volumeservice.ekDto.rekordtol = 0;
 
     this.onKeresesTovabb();
@@ -38,9 +39,9 @@ export class VolumeListComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        if (this.volumeservice.elsokereses) {
+        if (this.elsokereses) {
           this.volumeservice.Dto = res.Result;
-          this.volumeservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.volumeservice.Dto];
           res.Result.forEach(element => {

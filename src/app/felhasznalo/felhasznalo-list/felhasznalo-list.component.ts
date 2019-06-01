@@ -22,6 +22,7 @@ export class FelhasznaloListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
+  elsokereses = true;
   felhasznaloservice: FelhasznaloService;
 
   constructor(private _logonservice: LogonService,
@@ -38,7 +39,7 @@ export class FelhasznaloListComponent implements OnInit, OnDestroy {
   }
 
   onKereses() {
-    this.felhasznaloservice.elsokereses = true;
+    this.elsokereses = true;
     this.felhasznaloservice.ekDto.rekordtol = 0;
 
     this.onKeresesTovabb();
@@ -52,9 +53,9 @@ export class FelhasznaloListComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        if (this.felhasznaloservice.elsokereses) {
+        if (this.elsokereses) {
           this.felhasznaloservice.Dto = res.Result;
-          this.felhasznaloservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.felhasznaloservice.Dto];
           res.Result.forEach(element => {

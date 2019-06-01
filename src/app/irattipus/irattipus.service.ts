@@ -10,7 +10,7 @@ import {IrattipusResult} from './irattipusresult';
 import {ZoomSources} from '../enums/zoomsources';
 import {IrattipusEgyMode} from './irattipusegymode';
 import {IrattipusContainerMode} from './irattipuscontainermode';
-import {IrattipusZoomParameter} from "./irattipuszoomparameter";
+import {IrattipusZoomParameter} from './irattipuszoomparameter';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class IrattipusService {
 
   cim = 'Irattipus';
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-  elsokereses = true;
+
   Dto: IrattipusDto[] = new Array<IrattipusDto>();
   DtoSelectedIndex = -1;
   uj = false;

@@ -37,7 +37,7 @@
     </ng-container>
     </tbody>
   </table>
-  <app-toolbarfooter [enKereses]="!onlineszamlaservice.elsokereses && !eppFrissit"
+  <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
                      [rekordszam]="onlineszamlaservice.Dto.length"
                      [osszesrekord]="onlineszamlaservice.OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">

@@ -23,6 +23,7 @@ export class PenztartetelListComponent implements OnDestroy {
 
   eppFrissit = false;
   mod = false;
+  elsokereses = true;
   nyitva = false;
   penztarservice: PenztarService;
   penztartetelservice: PenztartetelService;
@@ -37,7 +38,7 @@ export class PenztartetelListComponent implements OnDestroy {
   }
 
   onKereses() {
-    this.penztartetelservice.elsokereses = true;
+    this.elsokereses = true;
     this.penztartetelservice.ptp.rekordtol = 0;
     this.penztartetelservice.ptp.fi = new Array();
     this.penztartetelservice.ptp.fi.push(new SzMT(Szempont.SzuloKod,
@@ -56,9 +57,9 @@ export class PenztartetelListComponent implements OnDestroy {
           throw res.Error;
         }
 
-        if (this.penztartetelservice.elsokereses) {
+        if (this.elsokereses) {
           this.penztartetelservice.Dto = res.Result;
-          this.penztartetelservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.penztartetelservice.Dto];
           res.Result.forEach(element => {

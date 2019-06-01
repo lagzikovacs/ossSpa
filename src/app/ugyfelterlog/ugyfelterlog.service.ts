@@ -15,7 +15,7 @@ export class UgyfelterlogService {
   cim = 'Ügyféltér log';
   szempont = 0;
   minta = '';
-  elsokereses = false;
+
   Dto = new Array<UgyfelterlogDto>();
   DtoSelectedIndex = -1;
   OsszesRekord = 0;

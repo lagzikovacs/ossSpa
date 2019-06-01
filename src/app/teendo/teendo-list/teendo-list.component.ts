@@ -28,6 +28,7 @@ export class TeendoListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
+  elsokereses = true;
   teendoservice: TeendoService;
 
   @Input() selectedindex: number;
@@ -46,7 +47,7 @@ export class TeendoListComponent implements OnInit, OnDestroy {
   }
 
   onKereses() {
-    this.teendoservice.elsokereses = true;
+    this.elsokereses = true;
     this.teendoservice.ekDto.rekordtol = 0;
 
     this.onKeresesTovabb();
@@ -60,9 +61,9 @@ export class TeendoListComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        if (this.teendoservice.elsokereses) {
+        if (this.elsokereses) {
           this.teendoservice.Dto = res.Result;
-          this.teendoservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.teendoservice.Dto];
           res.Result.forEach(element => {

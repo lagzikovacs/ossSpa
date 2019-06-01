@@ -20,7 +20,7 @@ export class TeendoService {
 
   cim = 'Teendő';
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-  elsokereses = true;
+
   Dto: TeendoDto[] = new Array<TeendoDto>();
   DtoSelectedIndex = -1;
   uj = false;

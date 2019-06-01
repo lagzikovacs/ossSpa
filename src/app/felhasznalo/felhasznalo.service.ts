@@ -21,7 +21,7 @@ export class FelhasznaloService {
 
   cim = 'Felhasználó';
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-  elsokereses = true;
+
   Dto: FelhasznaloDto[] = new Array<FelhasznaloDto>();
   DtoSelectedIndex = -1;
   uj = false;

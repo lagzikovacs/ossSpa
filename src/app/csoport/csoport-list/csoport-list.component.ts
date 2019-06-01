@@ -1,9 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
 import {CsoportService} from '../csoport.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {CsoportContainerMode} from "../csoportcontainermode";
-import {CsoportEgyMode} from "../csoportegymode";
+import {CsoportContainerMode} from '../csoportcontainermode';
+import {CsoportEgyMode} from '../csoportegymode';
 
 @Component({
   selector: 'app-csoport-list',
@@ -16,6 +15,7 @@ export class CsoportListComponent {
   szurok = ['Csoport'];
 
   eppFrissit = false;
+  elsokereses = true;
   csoportservice: CsoportService;
 
   constructor(csoportservice: CsoportService) {
@@ -23,7 +23,7 @@ export class CsoportListComponent {
   }
 
   onKereses() {
-    this.csoportservice.elsokereses = true;
+    this.elsokereses = true;
     this.csoportservice.ekDto.rekordtol = 0;
 
     this.onKeresesTovabb();
@@ -37,9 +37,9 @@ export class CsoportListComponent {
           throw res.Error;
         }
 
-        if (this.csoportservice.elsokereses) {
+        if (this.elsokereses) {
           this.csoportservice.Dto = res.Result;
-          this.csoportservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.csoportservice.Dto];
           res.Result.forEach(element => {

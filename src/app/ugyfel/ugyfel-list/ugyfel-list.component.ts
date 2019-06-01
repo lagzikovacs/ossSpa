@@ -33,6 +33,7 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
+  elsokereses = true;
   ugyfelservice: UgyfelService;
 
   constructor(private _logonservice: LogonService,
@@ -55,7 +56,7 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
     this.ugyfelservice.DtoSelectedIndex = -1;
     this.ugyfelservice.OsszesRekord = 0;
 
-    this.ugyfelservice.elsokereses = true;
+    this.elsokereses = true;
     this.ugyfelservice.up.rekordtol = 0;
     this.ugyfelservice.up.csoport = this.ugyfelservice.csoportszempont;
     this.ugyfelservice.up.fi = new Array<SzMT>();
@@ -71,9 +72,9 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        if (this.ugyfelservice.elsokereses) {
+        if (this.elsokereses) {
           this.ugyfelservice.Dto = res.Result;
-          this.ugyfelservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.ugyfelservice.Dto];
           res.Result.forEach(element => {

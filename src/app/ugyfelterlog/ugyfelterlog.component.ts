@@ -15,7 +15,7 @@ export class UgyfelterlogComponent implements OnDestroy {
 
   ugyfelterlogservice: UgyfelterlogService;
   eppFrissit = false;
-
+  elsokereses = false;
 
   szurok = ['Id', 'Név'];
 
@@ -33,7 +33,7 @@ export class UgyfelterlogComponent implements OnDestroy {
     this.ugyfelterlogservice.DtoSelectedIndex = -1;
     this.ugyfelterlogservice.OsszesRekord = 0;
 
-    this.ugyfelterlogservice.elsokereses = true;
+    this.elsokereses = true;
     this.ugyfelterlogservice.ulp.rekordtol = 0;
     this.ugyfelterlogservice.ulp.fi = new Array<SzMT>();
 
@@ -49,9 +49,9 @@ export class UgyfelterlogComponent implements OnDestroy {
           throw res.Error;
         }
 
-        if (this.ugyfelterlogservice.elsokereses) {
+        if (this.elsokereses) {
           this.ugyfelterlogservice.Dto = res.Result;
-          this.ugyfelterlogservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.ugyfelterlogservice.Dto];
           res.Result.forEach(element => {

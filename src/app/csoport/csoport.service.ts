@@ -26,7 +26,7 @@ export class CsoportService {
 
   cim = 'Csoport';
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-  elsokereses = true;
+
   Dto: CsoportDto[] = new Array<CsoportDto>();
   DtoSelectedIndex = -1;
   uj = false;

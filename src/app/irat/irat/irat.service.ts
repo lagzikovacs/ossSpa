@@ -24,7 +24,7 @@ export class IratService {
   minta2 = '';
   ip = new IratParameter(0, environment.lapmeret);
   OsszesRekord = 0;
-  elsokereses = true;
+
   Dto: IratDto[] = new Array<IratDto>();
   DtoSelectedIndex = -1;
   uj = false;

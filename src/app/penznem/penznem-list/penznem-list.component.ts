@@ -29,6 +29,7 @@ export class PenznemListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
+  elsokereses = true;
   penznemservice: PenznemService;
 
   constructor(private _logonservice: LogonService,
@@ -49,7 +50,7 @@ export class PenznemListComponent implements OnInit, OnDestroy {
   }
 
   onKereses() {
-    this.penznemservice.elsokereses = true;
+    this.elsokereses = true;
     this.penznemservice.ekDto.rekordtol = 0;
 
     this.onKeresesTovabb();
@@ -63,9 +64,9 @@ export class PenznemListComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        if (this.penznemservice.elsokereses) {
+        if (this.elsokereses) {
           this.penznemservice.Dto = res.Result;
-          this.penznemservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.penznemservice.Dto];
           res.Result.forEach(element => {

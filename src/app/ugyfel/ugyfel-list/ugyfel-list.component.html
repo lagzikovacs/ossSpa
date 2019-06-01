@@ -61,7 +61,7 @@
     </ng-container>
     </tbody>
   </table>
-  <app-toolbarfooter [enKereses]="!ugyfelservice.elsokereses && !eppFrissit"
+  <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
                      [rekordszam]="ugyfelservice.Dto.length"
                      [osszesrekord]="ugyfelservice.OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">

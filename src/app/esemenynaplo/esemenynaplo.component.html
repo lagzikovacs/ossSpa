@@ -27,7 +27,7 @@
     </tr>
     </tbody>
   </table>
-  <app-toolbarfooter [enKereses]="!esemenynaploservice.elsokereses && !eppFrissit"
+  <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
                      [rekordszam]="esemenynaploservice.Dto.length"
                      [osszesrekord]="esemenynaploservice.OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">

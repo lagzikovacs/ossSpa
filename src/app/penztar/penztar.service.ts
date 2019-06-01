@@ -20,7 +20,7 @@ export class PenztarService {
 
   cim = 'Pénztár';
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-  elsokereses = true;
+
   Dto: PenztarDto[] = new Array<PenztarDto>();
   DtoSelectedIndex = -1;
   uj = false;

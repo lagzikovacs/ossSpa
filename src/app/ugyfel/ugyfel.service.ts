@@ -27,7 +27,7 @@ export class UgyfelService {
   minta = '';
   up = new UgyfelParameter(0, environment.lapmeret);
   OsszesRekord = 0;
-  elsokereses = true;
+
   Dto: UgyfelDto[] = new Array<UgyfelDto>();
   DtoSelectedIndex = -1;
   uj = false;

@@ -22,6 +22,7 @@ export class OnlineszamlaellenorzeseComponent implements OnDestroy {
 
   eppFrissit = false;
   mod = false;
+  elsokereses = true;
   onlineszamlaservice: OnlineszamlaService;
 
   constructor(private _logonservice: LogonService,
@@ -35,7 +36,7 @@ export class OnlineszamlaellenorzeseComponent implements OnDestroy {
     this.onlineszamlaservice.DtoSelectedIndex = -1;
     this.onlineszamlaservice.OsszesRekord = 0;
 
-    this.onlineszamlaservice.elsokereses = true;
+    this.elsokereses = true;
     this.onlineszamlaservice.up.rekordtol = 0;
     this.onlineszamlaservice.up.fi = new Array<SzMT>();
 
@@ -52,9 +53,9 @@ export class OnlineszamlaellenorzeseComponent implements OnDestroy {
           throw res.Error;
         }
 
-        if (this.onlineszamlaservice.elsokereses) {
+        if (this.elsokereses) {
           this.onlineszamlaservice.Dto = res.Result;
-          this.onlineszamlaservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.onlineszamlaservice.Dto];
           res.Result.forEach(element => {

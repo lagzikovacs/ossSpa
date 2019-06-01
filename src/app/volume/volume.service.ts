@@ -18,7 +18,7 @@ export class VolumeService {
 
   cim = 'Volume';
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-  elsokereses = true;
+
   Dto: VolumeDto[] = new Array<VolumeDto>();
   DtoSelectedIndex = -1;
   DtoEdited = new VolumeDto();

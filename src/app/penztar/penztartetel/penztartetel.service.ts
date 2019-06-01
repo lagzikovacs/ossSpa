@@ -19,7 +19,7 @@ export class PenztartetelService {
   minta = '';
   ptp = new PenztartetelParameter(0, environment.lapmeret);
   OsszesRekord = 0;
-  elsokereses = true;
+
   Dto: PenztartetelDto[] = new Array<PenztartetelDto>();
   DtoSelectedIndex = -1;
   uj = false;

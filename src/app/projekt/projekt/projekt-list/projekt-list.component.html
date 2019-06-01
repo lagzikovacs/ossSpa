@@ -12,7 +12,7 @@
                       [enExport]="!eppFrissit" (Export)="onExport($event)">
   </app-projekttoolbar>
   <app-projekt-tabla [Dto]="projektservice.Dto" (idclick)="setClickedRow($event)"></app-projekt-tabla>
-  <app-toolbarfooter [enKereses]="!projektservice.elsokereses && !eppFrissit"
+  <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
                      [rekordszam]="projektservice.Dto.length"
                      [osszesrekord]="projektservice.OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">

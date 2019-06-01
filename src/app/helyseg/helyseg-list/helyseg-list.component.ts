@@ -21,6 +21,7 @@ export class HelysegListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
+  elsokereses = true;
   helysegservice: HelysegService;
 
   constructor(private _logonservice: LogonService,
@@ -37,7 +38,7 @@ export class HelysegListComponent implements OnInit, OnDestroy {
   }
 
   onKereses() {
-    this.helysegservice.elsokereses = true;
+    this.elsokereses = true;
     this.helysegservice.ekDto.rekordtol = 0;
 
     this.onKeresesTovabb();
@@ -51,9 +52,9 @@ export class HelysegListComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        if (this.helysegservice.elsokereses) {
+        if (this.elsokereses) {
           this.helysegservice.Dto = res.Result;
-          this.helysegservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.helysegservice.Dto];
           res.Result.forEach(element => {

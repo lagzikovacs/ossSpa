@@ -20,7 +20,7 @@ export class PenznemService {
 
   cim = 'Pénznem';
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-  elsokereses = true;
+
   Dto: PenznemDto[] = new Array<PenznemDto>();
   DtoSelectedIndex = -1;
   uj = false;

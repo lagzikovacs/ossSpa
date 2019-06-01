@@ -8,9 +8,9 @@ import {LogonService} from '../logon/logon.service';
 import {NumberResult} from '../dtos/numberresult';
 import {MeResult} from './meresult';
 import {EmptyResult} from '../dtos/emptyresult';
-import {MeZoomParameter} from "./mezoomparameter";
-import {MeContainerMode} from "./mecontainermode";
-import {MeEgyMode} from "./meegymode";
+import {MeZoomParameter} from './mezoomparameter';
+import {MeContainerMode} from './mecontainermode';
+import {MeEgyMode} from './meegymode';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class MeService {
 
   cim = 'Mennyiségi egység';
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-  elsokereses = true;
+
   Dto: MeDto[] = new Array<MeDto>();
   DtoSelectedIndex = -1;
   uj = false;

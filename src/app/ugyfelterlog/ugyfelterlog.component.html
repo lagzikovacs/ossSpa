@@ -26,7 +26,7 @@
     </tr>
     </tbody>
   </table>
-  <app-toolbarfooter [enKereses]="!ugyfelterlogservice.elsokereses && !eppFrissit"
+  <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
                      [rekordszam]="ugyfelterlogservice.Dto.length"
                      [osszesrekord]="ugyfelterlogservice.OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">

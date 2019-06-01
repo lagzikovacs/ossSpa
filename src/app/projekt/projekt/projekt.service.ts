@@ -26,7 +26,7 @@ export class ProjektService {
   minta = '';
   pp = new ProjektParameter(0, environment.lapmeret);
   OsszesRekord = 0;
-  elsokereses = true;
+
   Dto: ProjektDto[] = new Array<ProjektDto>();
   DtoSelectedIndex = -1;
   uj = false;

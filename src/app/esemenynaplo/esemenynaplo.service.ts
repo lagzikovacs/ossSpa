@@ -16,7 +16,7 @@ export class EsemenynaploService {
 
   ep = new EsemenynaploParameter(0, environment.lapmeret);
   OsszesRekord = 0;
-  elsokereses = true;
+
   Dto: EsemenynaploDto[] = new Array<EsemenynaploDto>();
 
   private _felhasznalokod = -1;

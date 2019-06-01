@@ -25,6 +25,7 @@
     </tr>
     </tbody>
   </table>
+
   <app-errormodal [cim]="dokumentumservice.cim"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>
-<app-spinner *ngIf="eppFrissit"></app-spinner>

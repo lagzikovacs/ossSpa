@@ -12,5 +12,7 @@
     <h6>{{index}}/{{volumeservice.dbv.length}}</h6>
     <div *ngFor="let h of hibalista">{{h}}</div>
   </div>
+
   <app-errormodal [cim]="volumeservice.cim"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>

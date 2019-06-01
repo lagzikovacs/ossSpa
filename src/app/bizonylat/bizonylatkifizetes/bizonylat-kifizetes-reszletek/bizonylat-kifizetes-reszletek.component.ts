@@ -11,7 +11,6 @@ export class BizonylatKifizetesReszletekComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatkifizetesservice: BizonylatkifizetesService;
-  eppFrissit = false;
 
   constructor(bizonylatkifizetesservice: BizonylatkifizetesService) {
     this.bizonylatkifizetesservice = bizonylatkifizetesservice;

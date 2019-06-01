@@ -10,6 +10,7 @@
     Új ügyféltér link
   </button>
   <p *ngIf="kikuldesikodidopontja !== ''">Ha új linket készít, a régi érvényessége megszűnik!</p>
+
   <app-errormodal [cim]="'Ügyféltér link'"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>
-<app-spinner *ngIf="eppFrissit"></app-spinner>

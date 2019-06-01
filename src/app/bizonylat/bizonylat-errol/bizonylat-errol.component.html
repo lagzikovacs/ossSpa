@@ -32,6 +32,7 @@
       </div>
     </ng-container>
   </form>
+
   <app-errormodal [cim]="'Új bizonylat'"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>
-<app-spinner *ngIf="eppFrissit"></app-spinner>

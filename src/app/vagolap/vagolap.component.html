@@ -34,6 +34,7 @@
     </tr>
     </tbody>
   </table>
+
   <app-errormodal [cim]="vagolapservice.cim"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>
-<app-spinner *ngIf="eppFrissit"></app-spinner>

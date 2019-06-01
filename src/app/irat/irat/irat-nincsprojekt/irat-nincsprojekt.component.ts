@@ -6,9 +6,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
   styleUrls: ['./irat-nincsprojekt.component.css']
 })
 export class IratNincsprojektComponent implements OnDestroy {
-
-  constructor() { }
-
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

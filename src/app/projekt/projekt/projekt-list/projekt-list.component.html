@@ -17,8 +17,9 @@
                      [osszesrekord]="projektservice.OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">
   </app-toolbarfooter>
+
   <app-errormodal [cim]="projektservice.cim"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>
-<app-spinner *ngIf="eppFrissit"></app-spinner>
 
 

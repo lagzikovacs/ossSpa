@@ -85,6 +85,7 @@
   <ng-container *ngIf="bizonylatservice.BizonylatPenztarDto.length === 0">
     <div>Nincs a bizonylat pénznemének megfelelő nyitott pénztár!</div>
   </ng-container>
+
   <app-errormodal [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>
-<app-spinner *ngIf="eppFrissit"></app-spinner>

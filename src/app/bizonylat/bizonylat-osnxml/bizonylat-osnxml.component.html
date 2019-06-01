@@ -1,6 +1,7 @@
 <div class="alapkeret">
   <h5>{{bizonylatservice.bizonylatLeiro.BizonylatNev}} OSN xml</h5>
   <div>{{result}}</div>
+
   <app-errormodal [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>
-<app-spinner *ngIf="eppFrissit"></app-spinner>

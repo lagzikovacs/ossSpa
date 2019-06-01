@@ -29,5 +29,8 @@
     </tr>
   </ng-container>
   </tbody>
-</table><app-errormodal [cim]="szamlazasirendservice.cim"></app-errormodal>
+  </table>
+
+  <app-errormodal [cim]="szamlazasirendservice.cim"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>

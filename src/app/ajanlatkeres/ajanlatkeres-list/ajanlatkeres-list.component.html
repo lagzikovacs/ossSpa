@@ -44,8 +44,9 @@
                      [osszesrekord]="ajanlatkeresservice.OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">
   </app-toolbarfooter>
+
   <app-errormodal [cim]="ajanlatkeresservice.cim"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>
-<app-spinner *ngIf="eppFrissit"></app-spinner>
 
 

@@ -28,6 +28,7 @@
       <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ellenőrzés</button>
     </div>
   </form>
+
   <app-errormodal [cim]="'Adószám ellenőrzés'"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>
-<app-spinner *ngIf="eppFrissit"></app-spinner>

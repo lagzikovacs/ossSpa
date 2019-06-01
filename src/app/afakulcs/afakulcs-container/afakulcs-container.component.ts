@@ -36,7 +36,6 @@ export class AfakulcsContainerComponent implements OnInit, OnDestroy {
           }
 
           this.afakulcsservice.ReszletekSettings = res1.Result;
-          console.log(this.afakulcsservice.ReszletekSettings);
 
           this.eppFrissit = false;
         })

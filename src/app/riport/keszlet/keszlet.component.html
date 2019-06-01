@@ -19,6 +19,7 @@
       <button class="btn btn-sm btn-secondary" style="margin-left:3px;" [disabled]="!eppFrissit" type="button" (click)="megsem()">Stop</button>
     </div>
   </form>
+
   <app-errormodal [cim]="riportservice.cim"></app-errormodal>
+  <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>
-<app-spinner *ngIf="eppFrissit"></app-spinner>

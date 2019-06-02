@@ -1,8 +1,8 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {BizonylatkifizetesService} from '../bizonylatkifizetes.service';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
-import {BizonylatService} from '../../bizonylat.service';
-import {LogonService} from '../../../logon/logon.service';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {BizonylatService} from '../../bizonylat/bizonylat.service';
+import {LogonService} from '../../logon/logon.service';
 import {BizonylatKifizetesContainerMode} from '../bizonylatkifizetescontainermode';
 import {BizonylatKifizetesEgyMode} from '../bizonylatkifizetesegymode';
 import {BizonylatKifizetesSzerkesztesMode} from '../bizonylatkifizetesszerkesztesmode';

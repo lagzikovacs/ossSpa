@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
-import {LogonService} from '../../logon/logon.service';
+import {LogonService} from '../logon/logon.service';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {KifizetesDto} from './kifizetesdto';
 import {KifizetesResult} from './kifizetesresult';
-import {environment} from '../../../environments/environment';
-import {NumberResult} from '../../dtos/numberresult';
-import {EmptyResult} from '../../dtos/emptyresult';
+import {environment} from '../../environments/environment';
+import {NumberResult} from '../dtos/numberresult';
+import {EmptyResult} from '../dtos/emptyresult';
 import {BizonylatKifizetesContainerMode} from './bizonylatkifizetescontainermode';
 import {BizonylatKifizetesSzerkesztesMode} from './bizonylatkifizetesszerkesztesmode';
 import {BizonylatKifizetesEgyMode} from './bizonylatkifizetesegymode';
+import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
+import {ColumnSettings} from '../tools/reszletek/columnsettings';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +28,9 @@ export class BizonylatkifizetesService {
   ContainerMode = BizonylatKifizetesContainerMode.Blank;
   EgyMode = BizonylatKifizetesEgyMode.Reszletek;
   SzerkesztesMode = BizonylatKifizetesSzerkesztesMode.Blank;
+
+  GridSettings: ColumnSettings[] = undefined;
+  ReszletekSettings: ColumnSettings[] = undefined;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
@@ -94,5 +99,27 @@ export class BizonylatkifizetesService {
     };
 
     return this._httpClient.post<KifizetesResult>(url, body, options).toPromise();
+  }
+
+  public GetGridSettings(): Promise<ColumnSettingsResult> {
+    const url = environment.CoreRef + this._controller + 'getgridsettings';
+    const body = '';
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
+  }
+
+  public GetReszletekSettings(): Promise<ColumnSettingsResult> {
+    const url = environment.CoreRef + this._controller + 'getreszleteksettings';
+    const body = '';
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
   }
 }

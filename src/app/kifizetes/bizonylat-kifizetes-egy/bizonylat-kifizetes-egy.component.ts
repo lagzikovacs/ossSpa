@@ -1,9 +1,9 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {BizonylatkifizetesService} from '../bizonylatkifizetes.service';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {BizonylatKifizetesContainerMode} from '../bizonylatkifizetescontainermode';
 import {BizonylatKifizetesEgyMode} from '../bizonylatkifizetesegymode';
-import {rowanimation} from '../../../animation/rowAnimation';
+import {rowanimation} from '../../animation/rowAnimation';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-bizonylat-kifizetes-egy',
@@ -16,6 +16,7 @@ export class BizonylatKifizetesEgyComponent implements OnDestroy {
 
   bizonylatkifizetesservice: BizonylatkifizetesService;
   eppFrissit = false;
+  ri = -1;
 
   constructor(bizonylatkifizetesservice: BizonylatkifizetesService) {
     this.bizonylatkifizetesservice = bizonylatkifizetesservice;

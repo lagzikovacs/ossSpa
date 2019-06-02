@@ -1,18 +1,18 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BizonylatkifizetesService} from '../bizonylatkifizetes.service';
-import {PenznemService} from '../../../primitiv/penznem/penznem.service';
-import {FizetesimodService} from '../../../primitiv/fizetesimod/fizetesimod.service';
-import {ZoomSources} from '../../../enums/zoomsources';
-import {PenznemContainerMode} from '../../../primitiv/penznem/penznemcontainermode';
-import {FizetesimodContainerMode} from '../../../primitiv/fizetesimod/fizetesimodcontainermode';
+import {PenznemService} from '../../primitiv/penznem/penznem.service';
+import {FizetesimodService} from '../../primitiv/fizetesimod/fizetesimod.service';
+import {ZoomSources} from '../../enums/zoomsources';
+import {PenznemContainerMode} from '../../primitiv/penznem/penznemcontainermode';
+import {FizetesimodContainerMode} from '../../primitiv/fizetesimod/fizetesimodcontainermode';
 import {BizonylatKifizetesSzerkesztesMode} from '../bizonylatkifizetesszerkesztesmode';
 import * as moment from 'moment';
-import {PenznemZoomParameter} from '../../../primitiv/penznem/penznemzoomparameter';
-import {FizetesimodZoomParameter} from '../../../primitiv/fizetesimod/fiztesimodzoomparameter';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
+import {FizetesimodZoomParameter} from '../../primitiv/fizetesimod/fiztesimodzoomparameter';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatKifizetesContainerMode} from '../bizonylatkifizetescontainermode';
 import {BizonylatKifizetesEgyMode} from '../bizonylatkifizetesegymode';
-import {BizonylatService} from '../../bizonylat.service';
+import {BizonylatService} from '../../bizonylat/bizonylat.service';
 
 @Component({
   selector: 'app-bizonylat-kifizetes-szerkesztes',

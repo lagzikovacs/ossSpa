@@ -185,10 +185,10 @@ import { BizonylattablaComponent } from './bizonylat/bizonylattabla/bizonylattab
 import { BizonylatSzerkesztesComponent } from './bizonylat/bizonylat-szerkesztes/bizonylat-szerkesztes.component';
 import { AdoszamellenorzesComponent } from './onlineszamla/adoszamellenorzes/adoszamellenorzes.component';
 import { SzamlalekerdezesComponent } from './onlineszamla/szamlalekerdezes/szamlalekerdezes.component';
-import { BizonylatKifizetesContainerComponent } from './bizonylat/bizonylatkifizetes/bizonylat-kifizetes-container/bizonylat-kifizetes-container.component';
-import { BizonylatKifizetesListComponent } from './bizonylat/bizonylatkifizetes/bizonylat-kifizetes-list/bizonylat-kifizetes-list.component';
-import { BizonylatKifizetesEgyComponent } from './bizonylat/bizonylatkifizetes/bizonylat-kifizetes-egy/bizonylat-kifizetes-egy.component';
-import { BizonylatKifizetesSzerkesztesComponent } from './bizonylat/bizonylatkifizetes/bizonylat-kifizetes-szerkesztes/bizonylat-kifizetes-szerkesztes.component';
+import { BizonylatKifizetesContainerComponent } from './kifizetes/bizonylat-kifizetes-container/bizonylat-kifizetes-container.component';
+import { BizonylatKifizetesListComponent } from './kifizetes/bizonylat-kifizetes-list/bizonylat-kifizetes-list.component';
+import { BizonylatKifizetesEgyComponent } from './kifizetes/bizonylat-kifizetes-egy/bizonylat-kifizetes-egy.component';
+import { BizonylatKifizetesSzerkesztesComponent } from './kifizetes/bizonylat-kifizetes-szerkesztes/bizonylat-kifizetes-szerkesztes.component';
 import { BizonylatNyomtatasComponent } from './bizonylatnyomtatas/bizonylat-nyomtatas/bizonylat-nyomtatas.component';
 import { ProjektDatumokComponent } from './projekt/projekt-datumok/projekt-datumok.component';
 import { BizonylatReszletekComponent } from './bizonylat/bizonylat-reszletek/bizonylat-reszletek.component';
@@ -205,7 +205,6 @@ import { BizonylatStornoComponent } from './bizonylat/bizonylat-storno/bizonylat
 import { BizonylatPenztarComponent } from './bizonylat/bizonylat-penztar/bizonylat-penztar.component';
 import { BizonylatKifizetesrendbenComponent } from './bizonylat/bizonylat-kifizetesrendben/bizonylat-kifizetesrendben.component';
 import { BizonylatKiszallitvaComponent } from './bizonylat/bizonylat-kiszallitva/bizonylat-kiszallitva.component';
-import { BizonylatKifizetesReszletekComponent } from './bizonylat/bizonylatkifizetes/bizonylat-kifizetes-reszletek/bizonylat-kifizetes-reszletek.component';
 import { BizonylatFormaiellenorzesComponent } from './bizonylat/bizonylat-formaiellenorzes/bizonylat-formaiellenorzes.component';
 import { BizonylatOSNxmlComponent } from './bizonylat/bizonylat-osnxml/bizonylat-osnxml.component';
 import { BoolHunPipe } from './pipes/boolhun.pipe';
@@ -479,7 +478,6 @@ if (environment.production) {
     BizonylatPenztarComponent,
     BizonylatKifizetesrendbenComponent,
     BizonylatKiszallitvaComponent,
-    BizonylatKifizetesReszletekComponent,
     BizonylatFormaiellenorzesComponent,
     BizonylatOSNxmlComponent,
     BoolHunPipe,

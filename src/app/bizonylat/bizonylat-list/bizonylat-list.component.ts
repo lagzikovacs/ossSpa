@@ -5,7 +5,7 @@ import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {BizonylatkapcsolatService} from '../../bizonylatkapcsolat/bizonylatkapcsolat.service';
-import {BizonylatkifizetesService} from '../bizonylatkifizetes/bizonylatkifizetes.service';
+import {BizonylatkifizetesService} from '../../kifizetes/bizonylatkifizetes.service';
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
 import {BizonylatTipus} from '../bizonylattipus';

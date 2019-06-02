@@ -6,8 +6,8 @@ import {JogKod} from '../../../enums/jogkod';
 import {FizetesimodContainerMode} from '../fizetesimodcontainermode';
 import {FizetesimodEgyMode} from '../fizetesimodegymode';
 import {ZoomSources} from '../../../enums/zoomsources';
-import {BizonylatkifizetesService} from '../../../bizonylat/bizonylatkifizetes/bizonylatkifizetes.service';
-import {BizonylatKifizetesSzerkesztesMode} from '../../../bizonylat/bizonylatkifizetes/bizonylatkifizetesszerkesztesmode';
+import {BizonylatkifizetesService} from '../../../kifizetes/bizonylatkifizetes.service';
+import {BizonylatKifizetesSzerkesztesMode} from '../../../kifizetes/bizonylatkifizetesszerkesztesmode';
 import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 import {BizonylatSzerkesztesMode} from '../../../bizonylat/bizonylatszerkesztesmode';
 

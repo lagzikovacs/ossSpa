@@ -15,3 +15,6 @@ Uj = 3
 <ng-container *ngIf="bizonylatkifizetesservice.ContainerMode === 3">
   <app-bizonylat-kifizetes-szerkesztes></app-bizonylat-kifizetes-szerkesztes>
 </ng-container>
+
+<app-errormodal [cim]="bizonylatkifizetesservice.cim"></app-errormodal>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

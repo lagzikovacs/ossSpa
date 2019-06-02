@@ -11,7 +11,7 @@ import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {AjanlatContainerMode} from '../../ajanlat/ajanlatcontainermode';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {BizonylatkapcsolatService} from '../../bizonylatkapcsolat/bizonylatkapcsolat.service';
-import {BizonylatkifizetesService} from '../../bizonylat/bizonylatkifizetes/bizonylatkifizetes.service';
+import {BizonylatkifizetesService} from '../../kifizetes/bizonylatkifizetes.service';
 import {BizonylatEgyMode} from '../../bizonylat/bizonylategymode';
 import {VagolapService} from '../../vagolap/vagolap.service';
 import {VagolapMode} from '../../vagolap/vagolapmode';

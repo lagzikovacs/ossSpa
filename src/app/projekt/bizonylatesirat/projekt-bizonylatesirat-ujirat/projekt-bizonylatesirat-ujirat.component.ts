@@ -2,14 +2,14 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import * as moment from 'moment';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
-import {IrattipusService} from '../../../irattipus/irattipus.service';
+import {IrattipusService} from '../../../primitiv/irattipus/irattipus.service';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {IratService} from '../../../irat/irat/irat.service';
 import {ProjektService} from '../../projekt/projekt.service';
 import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
 import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 import {BizonylatesiratSzerkesztesMode} from '../bizonylatesiratszerkesztesmode';
-import {IrattipusContainerMode} from '../../../irattipus/irattipuscontainermode';
+import {IrattipusContainerMode} from '../../../primitiv/irattipus/irattipuscontainermode';
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-ujirat',

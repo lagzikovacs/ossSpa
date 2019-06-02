@@ -2,15 +2,15 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {ProjektService} from '../projekt.service';
 import {UgyfelService} from '../../../ugyfel/ugyfel.service';
-import {PenznemService} from '../../../penznem/penznem.service';
+import {PenznemService} from '../../../primitiv/penznem/penznem.service';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {UgyfelContainerMode} from '../../../ugyfel/ugyfelcontainermode';
-import {PenznemContainerMode} from '../../../penznem/penznemcontainermode';
+import {PenznemContainerMode} from '../../../primitiv/penznem/penznemcontainermode';
 import {ProjektContainerMode} from '../projektcontainermode';
 import {ProjektSzerkesztesMode} from '../projektszerkesztesmode';
 import {ProjektEgyMode} from '../projektegymode';
 import {UgyfelZoomParameter} from '../../../ugyfel/ugyfelzoomparameter';
-import {PenznemZoomParameter} from '../../../penznem/penznemzoomparameter';
+import {PenznemZoomParameter} from '../../../primitiv/penznem/penznemzoomparameter';
 import {rowanimation} from '../../../animation/rowAnimation';
 
 @Component({

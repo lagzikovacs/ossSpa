@@ -1,13 +1,13 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {UgyfelService} from '../ugyfel.service';
-import {HelysegService} from '../../helyseg/helyseg.service';
+import {HelysegService} from '../../primitiv/helyseg/helyseg.service';
 import {ZoomSources} from '../../enums/zoomsources';
-import {HelysegZoomParameter} from '../../helyseg/helysegzoomparameter';
+import {HelysegZoomParameter} from '../../primitiv/helyseg/helysegzoomparameter';
 import {UgyfelContainerMode} from '../ugyfelcontainermode';
 import {UgyfelEgyMode} from '../ugyfelegymode';
 import {UgyfelSzerkesztesMode} from '../ugyfelszerkesztesmode';
-import {HelysegContainerMode} from '../../helyseg/helysegcontainermode';
+import {HelysegContainerMode} from '../../primitiv/helyseg/helysegcontainermode';
 
 @Component({
   selector: 'app-ugyfel-szerkesztes',

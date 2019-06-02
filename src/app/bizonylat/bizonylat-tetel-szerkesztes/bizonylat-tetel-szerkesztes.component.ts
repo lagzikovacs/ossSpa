@@ -2,22 +2,22 @@ import {ChangeDetectorRef, Component, OnDestroy, ViewChild} from '@angular/core'
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
 import {CikkService} from '../../cikk/cikk.service';
-import {MeService} from '../../me/me.service';
-import {AfakulcsService} from '../../afakulcs/afakulcs.service';
-import {TermekdijService} from '../../termekdij/termekdij.service';
+import {MeService} from '../../primitiv/me/me.service';
+import {AfakulcsService} from '../../primitiv/afakulcs/afakulcs.service';
+import {TermekdijService} from '../../primitiv/termekdij/termekdij.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import {CikkContainerMode} from '../../cikk/cikkcontainermode';
-import {MeContainerMode} from '../../me/mecontainermode';
-import {AfakulcsContainerMode} from '../../afakulcs/afakulcscontainermode';
-import {TermekdijContainerMode} from '../../termekdij/termekdijcontainermode';
+import {MeContainerMode} from '../../primitiv/me/mecontainermode';
+import {AfakulcsContainerMode} from '../../primitiv/afakulcs/afakulcscontainermode';
+import {TermekdijContainerMode} from '../../primitiv/termekdij/termekdijcontainermode';
 import {BizonylattetelSzerkesztesMode} from '../bizonylattetelszerkesztesmode';
 import {BruttobolParam} from '../bruttobolparam';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {CikkZoomParameter} from '../../cikk/cikkzoomparameter';
 import {EmptyResult} from '../../dtos/emptyresult';
-import {TermekdijZoomParameter} from '../../termekdij/termekdijzoomparameter';
-import {AfakulcsZoomParameter} from '../../afakulcs/afakulcszoomparameter';
-import {MeZoomParameter} from '../../me/mezoomparameter';
+import {TermekdijZoomParameter} from '../../primitiv/termekdij/termekdijzoomparameter';
+import {AfakulcsZoomParameter} from '../../primitiv/afakulcs/afakulcszoomparameter';
+import {MeZoomParameter} from '../../primitiv/me/mezoomparameter';
 
 @Component({
   selector: 'app-bizonylat-tetel-szerkesztes',

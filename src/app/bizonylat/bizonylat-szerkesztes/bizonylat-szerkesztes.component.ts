@@ -1,20 +1,20 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
-import {PenznemService} from '../../penznem/penznem.service';
-import {PenznemContainerMode} from '../../penznem/penznemcontainermode';
+import {PenznemService} from '../../primitiv/penznem/penznem.service';
+import {PenznemContainerMode} from '../../primitiv/penznem/penznemcontainermode';
 import {UgyfelContainerMode} from '../../ugyfel/ugyfelcontainermode';
 import {ZoomSources} from '../../enums/zoomsources';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
-import {FizetesimodService} from '../../fizetesimod/fizetesimod.service';
-import {FizetesimodContainerMode} from '../../fizetesimod/fizetesimodcontainermode';
+import {FizetesimodService} from '../../primitiv/fizetesimod/fizetesimod.service';
+import {FizetesimodContainerMode} from '../../primitiv/fizetesimod/fizetesimodcontainermode';
 import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylattetelSzerkesztesMode} from '../bizonylattetelszerkesztesmode';
 import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
-import {PenznemZoomParameter} from '../../penznem/penznemzoomparameter';
-import {FizetesimodZoomParameter} from '../../fizetesimod/fiztesimodzoomparameter';
+import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
+import {FizetesimodZoomParameter} from '../../primitiv/fizetesimod/fiztesimodzoomparameter';
 import {EmptyResult} from '../../dtos/emptyresult';
 import * as moment from 'moment';
 

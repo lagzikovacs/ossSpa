@@ -1,17 +1,17 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {IratService} from '../irat.service';
-import {IrattipusService} from '../../../irattipus/irattipus.service';
+import {IrattipusService} from '../../../primitiv/irattipus/irattipus.service';
 import {ZoomSources} from '../../../enums/zoomsources';
 import * as moment from 'moment';
 import {NumberResult} from '../../../dtos/numberresult';
 import {UgyfelService} from '../../../ugyfel/ugyfel.service';
 import {IratContainerMode} from '../iratcontainermode';
-import {IrattipusContainerMode} from '../../../irattipus/irattipuscontainermode';
+import {IrattipusContainerMode} from '../../../primitiv/irattipus/irattipuscontainermode';
 import {UgyfelContainerMode} from '../../../ugyfel/ugyfelcontainermode';
 import {IratSzerkesztesMode} from '../iratszerkesztesmode';
 import {IratEgyMode} from '../irategymode';
-import {IrattipusZoomParameter} from '../../../irattipus/irattipuszoomparameter';
+import {IrattipusZoomParameter} from '../../../primitiv/irattipus/irattipuszoomparameter';
 import {EmptyResult} from '../../../dtos/emptyresult';
 import {UgyfelZoomParameter} from '../../../ugyfel/ugyfelzoomparameter';
 

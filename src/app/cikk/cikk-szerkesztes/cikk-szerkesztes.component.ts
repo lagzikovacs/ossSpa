@@ -1,20 +1,20 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {CikkService} from '../cikk.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {MeService} from '../../me/me.service';
-import {AfakulcsService} from '../../afakulcs/afakulcs.service';
-import {TermekdijService} from '../../termekdij/termekdij.service';
+import {MeService} from '../../primitiv/me/me.service';
+import {AfakulcsService} from '../../primitiv/afakulcs/afakulcs.service';
+import {TermekdijService} from '../../primitiv/termekdij/termekdij.service';
 import {ZoomSources} from '../../enums/zoomsources';
-import {MeZoomParameter} from '../../me/mezoomparameter';
-import {AfakulcsZoomParameter} from '../../afakulcs/afakulcszoomparameter';
+import {MeZoomParameter} from '../../primitiv/me/mezoomparameter';
+import {AfakulcsZoomParameter} from '../../primitiv/afakulcs/afakulcszoomparameter';
 import {EmptyResult} from '../../dtos/emptyresult';
-import {TermekdijZoomParameter} from '../../termekdij/termekdijzoomparameter';
+import {TermekdijZoomParameter} from '../../primitiv/termekdij/termekdijzoomparameter';
 import {CikkContainerMode} from '../cikkcontainermode';
 import {CikkEgyMode} from '../cikkegymode';
-import {MeContainerMode} from '../../me/mecontainermode';
-import {AfakulcsContainerMode} from '../../afakulcs/afakulcscontainermode';
+import {MeContainerMode} from '../../primitiv/me/mecontainermode';
+import {AfakulcsContainerMode} from '../../primitiv/afakulcs/afakulcscontainermode';
 import {CikkSzerkesztesMode} from '../cikkszerkesztesmode';
-import {TermekdijContainerMode} from '../../termekdij/termekdijcontainermode';
+import {TermekdijContainerMode} from '../../primitiv/termekdij/termekdijcontainermode';
 
 @Component({
   selector: 'app-cikk-szerkesztes',

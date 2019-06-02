@@ -3,11 +3,13 @@ import {VolumeService} from '../volume.service';
 import {VolumeContainerMode} from '../volumecontainermode';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {VolumeEgyMode} from '../volumeegymode';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-volume-egy',
   templateUrl: './volume-egy.component.html',
-  styleUrls: ['./volume-egy.component.css']
+  styleUrls: ['./volume-egy.component.css'],
+  animations: [rowanimation]
 })
 export class VolumeEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

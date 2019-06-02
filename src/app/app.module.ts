@@ -127,7 +127,6 @@ import { AjanlatkeresReszletekComponent } from './ajanlatkeres/ajanlatkeres-resz
 import { OnlineszamlaellenorzeseComponent } from './onlineszamla/onlineszamlaellenorzese/onlineszamlaellenorzese.component';
 import { IratReszletekComponent } from './irat/irat-reszletek/irat-reszletek.component';
 import { DokumentumReszletekComponent } from './dokumentum/dokumentum-reszletek/dokumentum-reszletek.component';
-import { VolumeReszletekComponent } from './volume/volume-reszletek/volume-reszletek.component';
 import { ProjektReszletekComponent } from './projekt/projekt-reszletek/projekt-reszletek.component';
 import { ProjektStatuszComponent } from './projekt/projekt-statusz/projekt-statusz.component';
 import { ProjektSzamlazasirendEgyComponent } from './szamlazasirend/projekt-szamlazasirend-egy/projekt-szamlazasirend-egy.component';
@@ -410,7 +409,6 @@ if (environment.production) {
     OnlineszamlaellenorzeseComponent,
     IratReszletekComponent,
     DokumentumReszletekComponent,
-    VolumeReszletekComponent,
     ProjektReszletekComponent,
     ProjektStatuszComponent,
     ProjektSzamlazasirendEgyComponent,

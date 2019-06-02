@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {ColumnSettings} from './columnsettings';
 
 @Component({
@@ -10,6 +10,13 @@ export class ReszletekComponent implements OnDestroy {
   @Input() cim: string;
   @Input() item: any;
   @Input() colsets: ColumnSettings[];
+
+  @Input() selectedindex: number;
+  @Output() selectedindexChange = new EventEmitter<number>();
+
+  RowClick(i: number) {
+    this.selectedindexChange.emit(i);
+  }
 
   ngOnDestroy() {
     Object.keys(this).map(k => {

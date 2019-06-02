@@ -19,6 +19,7 @@ export class FizetesimodEgyComponent implements OnDestroy {
   fizetesimodservice: FizetesimodService;
   mod = false;
   eppFrissit = false;
+  ri = -1;
 
   constructor(private _logonservice: LogonService,
               fizetesimodservice: FizetesimodService) {

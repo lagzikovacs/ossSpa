@@ -19,6 +19,7 @@ export class MeEgyComponent implements OnDestroy {
   meservice: MeService;
   mod = false;
   eppFrissit = false;
+  ri = -1;
 
   constructor(private _logonservice: LogonService,
               meservice: MeService) {

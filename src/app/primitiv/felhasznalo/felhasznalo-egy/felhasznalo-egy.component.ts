@@ -20,6 +20,7 @@ export class FelhasznaloEgyComponent implements OnDestroy {
   felhasznaloservice: FelhasznaloService;
   mod = false;
   eppFrissit = false;
+  ri = -1;
 
   constructor(private _logonservice: LogonService,
               private _esemenynaploservice: EsemenynaploService,

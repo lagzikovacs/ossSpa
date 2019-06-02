@@ -19,6 +19,7 @@ export class PenznemEgyComponent implements OnDestroy {
   penznemservice: PenznemService;
   mod = false;
   eppFrissit = false;
+  ri = -1;
 
   constructor(private _logonservice: LogonService,
               penznemservice: PenznemService) {

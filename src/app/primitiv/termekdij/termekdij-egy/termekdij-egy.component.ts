@@ -19,6 +19,7 @@ export class TermekdijEgyComponent implements OnDestroy {
   termekdijservice: TermekdijService;
   mod = false;
   eppFrissit = false;
+  ri = -1;
 
   constructor(private _logonservice: LogonService,
               termekdijservice: TermekdijService) {

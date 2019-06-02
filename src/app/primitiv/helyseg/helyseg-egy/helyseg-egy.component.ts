@@ -19,6 +19,7 @@ export class HelysegEgyComponent implements OnDestroy {
   helysegservice: HelysegService;
   mod = false;
   eppFrissit = false;
+  ri = -1;
 
   constructor(private _logonservice: LogonService,
               helysegservice: HelysegService) {

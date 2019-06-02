@@ -15,6 +15,7 @@ import {ProjektteendoSzerkesztesMode} from '../../../projektteendo/projektteendo
   styleUrls: ['./teendo-list.component.css']
 })
 export class TeendoListComponent implements OnInit, OnDestroy {
+  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   constructor(private _logonservice: LogonService,
               teendoservice: TeendoService,
@@ -22,7 +23,6 @@ export class TeendoListComponent implements OnInit, OnDestroy {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.teendoservice = teendoservice;
   }
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Teendő'];
 
@@ -31,19 +31,10 @@ export class TeendoListComponent implements OnInit, OnDestroy {
   elsokereses = true;
   teendoservice: TeendoService;
 
-  @Input() selectedindex: number;
-  @Output() selectedindexChange = new EventEmitter<number>();
-
   ngOnInit() {
     if (this.teendoservice.zoom) {
       this.onKereses();
     }
-  }
-
-  RowClick(i: number) {
-    this.selectedindexChange.emit(i);
-    console.log(i);
-    console.log(this.selectedindex);
   }
 
   onKereses() {

@@ -19,6 +19,7 @@ export class IrattipusEgyComponent implements OnDestroy {
   irattipusservice: IrattipusService;
   mod = false;
   eppFrissit = false;
+  ri = -1;
 
   constructor(private _logonservice: LogonService,
               irattipusservice: IrattipusService) {

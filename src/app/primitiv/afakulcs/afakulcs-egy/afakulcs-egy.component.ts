@@ -19,6 +19,7 @@ export class AfakulcsEgyComponent implements OnDestroy {
   afakulcsservice: AfakulcsService;
   mod = false;
   eppFrissit = false;
+  ri = -1;
 
   constructor(private _logonservice: LogonService,
               afakulcsservice: AfakulcsService) {

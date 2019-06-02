@@ -19,6 +19,7 @@ export class TeendoEgyComponent implements OnDestroy {
   teendoservice: TeendoService;
   mod = false;
   eppFrissit = false;
+  ri = -1;
 
   constructor(private _logonservice: LogonService,
               teendoservice: TeendoService) {

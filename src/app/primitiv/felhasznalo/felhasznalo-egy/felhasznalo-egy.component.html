@@ -43,7 +43,8 @@ Tevekenyseg = 5
     <div [@rowanimation]>
       <app-reszletek [cim]="felhasznaloservice.cim"
                      [item]="felhasznaloservice.Dto[felhasznaloservice.DtoSelectedIndex]"
-                     [colsets]="felhasznaloservice.ReszletekSettings">
+                     [colsets]="felhasznaloservice.ReszletekSettings"
+                     [(selectedindex)]="ri">
       </app-reszletek>
     </div>
   </ng-container>

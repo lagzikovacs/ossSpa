@@ -13,8 +13,6 @@ export class TeendoContainerComponent implements OnInit, OnDestroy {
   teendoservice: TeendoService;
   eppFrissit = false;
 
-  ti = -1;
-
   constructor(teendoservice: TeendoService) {
     this.teendoservice = teendoservice;
   }

@@ -33,7 +33,8 @@ Modositas = 3
     <div [@rowanimation]>
       <app-reszletek [cim]="teendoservice.cim"
                      [item]="teendoservice.Dto[teendoservice.DtoSelectedIndex]"
-                     [colsets]="teendoservice.ReszletekSettings">
+                     [colsets]="teendoservice.ReszletekSettings"
+                     [(selectedindex)]="ri">
       </app-reszletek>
     </div>
   </ng-container>

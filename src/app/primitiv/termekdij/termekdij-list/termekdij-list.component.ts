@@ -23,7 +23,7 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
-  elsokereses = true;
+
   termekdijservice: TermekdijService;
 
   constructor(private _logonservice: LogonService,
@@ -41,7 +41,7 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
   }
 
   onKereses() {
-    this.elsokereses = true;
+    this.termekdijservice.elsokereses = true;
     this.termekdijservice.ekDto.rekordtol = 0;
 
     this.onKeresesTovabb();
@@ -55,9 +55,9 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        if (this.elsokereses) {
+        if (this.termekdijservice.elsokereses) {
           this.termekdijservice.Dto = res.Result;
-          this.elsokereses = false;
+          this.termekdijservice.elsokereses = false;
         } else {
           const buf = [...this.termekdijservice.Dto];
           res.Result.forEach(element => {

@@ -22,7 +22,7 @@ export class TermekdijService {
 
   cim = 'Termékdíj';
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-
+  elsokereses = true;
   Dto: TermekdijDto[] = new Array<TermekdijDto>();
   DtoSelectedIndex = -1;
   uj = false;

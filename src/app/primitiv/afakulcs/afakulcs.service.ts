@@ -22,7 +22,7 @@ export class AfakulcsService {
 
   cim = 'ÁFA kulcs';
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-
+  elsokereses = true;
   Dto: AfakulcsDto[] = new Array<AfakulcsDto>();
   DtoSelectedIndex = -1;
   uj = false;

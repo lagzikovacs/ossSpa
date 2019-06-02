@@ -23,7 +23,6 @@ export class MeListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
-  elsokereses = true;
   meservice: MeService;
 
   constructor(private _logonservice: LogonService,
@@ -41,7 +40,7 @@ export class MeListComponent implements OnInit, OnDestroy {
   }
 
   onKereses() {
-    this.elsokereses = true;
+    this.meservice.elsokereses = true;
     this.meservice.ekDto.rekordtol = 0;
 
     this.onKeresesTovabb();
@@ -55,9 +54,9 @@ export class MeListComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        if (this.elsokereses) {
+        if (this.meservice.elsokereses) {
           this.meservice.Dto = res.Result;
-          this.elsokereses = false;
+          this.meservice.elsokereses = false;
         } else {
           const buf = [...this.meservice.Dto];
           res.Result.forEach(element => {

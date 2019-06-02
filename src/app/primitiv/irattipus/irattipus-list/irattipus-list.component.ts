@@ -25,7 +25,6 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
-  elsokereses = true;
   irattipusservice: IrattipusService;
 
   constructor(private _logonservice: LogonService,
@@ -44,7 +43,7 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
   }
 
   onKereses() {
-    this.elsokereses = true;
+    this.irattipusservice.elsokereses = true;
     this.irattipusservice.ekDto.rekordtol = 0;
 
     this.onKeresesTovabb();
@@ -58,9 +57,9 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        if (this.elsokereses) {
+        if (this.irattipusservice.elsokereses) {
           this.irattipusservice.Dto = res.Result;
-          this.elsokereses = false;
+          this.irattipusservice.elsokereses = false;
         } else {
           const buf = [...this.irattipusservice.Dto];
           res.Result.forEach(element => {

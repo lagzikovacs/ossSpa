@@ -21,7 +21,6 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
 
   szurok = ['ÁFA kulcs'];
 
-  elsokereses = true;
   eppFrissit = false;
   mod = false;
   afakulcsservice: AfakulcsService;
@@ -41,7 +40,7 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
   }
 
   onKereses() {
-    this.elsokereses = true;
+    this.afakulcsservice.elsokereses = true;
     this.afakulcsservice.ekDto.rekordtol = 0;
 
     this.onKeresesTovabb();
@@ -55,9 +54,9 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        if (this.elsokereses) {
+        if (this.afakulcsservice.elsokereses) {
           this.afakulcsservice.Dto = res.Result;
-          this.elsokereses = false;
+          this.afakulcsservice.elsokereses = false;
         } else {
           const buf = [...this.afakulcsservice.Dto];
           res.Result.forEach(element => {

@@ -28,7 +28,7 @@ export class TeendoListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
-  elsokereses = true;
+
   teendoservice: TeendoService;
 
   ngOnInit() {
@@ -38,7 +38,7 @@ export class TeendoListComponent implements OnInit, OnDestroy {
   }
 
   onKereses() {
-    this.elsokereses = true;
+    this.teendoservice.elsokereses = true;
     this.teendoservice.ekDto.rekordtol = 0;
 
     this.onKeresesTovabb();
@@ -52,9 +52,9 @@ export class TeendoListComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        if (this.elsokereses) {
+        if (this.teendoservice.elsokereses) {
           this.teendoservice.Dto = res.Result;
-          this.elsokereses = false;
+          this.teendoservice.elsokereses = false;
         } else {
           const buf = [...this.teendoservice.Dto];
           res.Result.forEach(element => {

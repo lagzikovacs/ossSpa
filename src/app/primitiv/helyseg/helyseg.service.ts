@@ -22,7 +22,7 @@ export class HelysegService {
 
   cim = 'Helység';
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-
+  elsokereses = true;
   Dto: HelysegDto[] = new Array<HelysegDto>();
   DtoSelectedIndex = -1;
   uj = false;

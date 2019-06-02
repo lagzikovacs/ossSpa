@@ -29,7 +29,7 @@ export class CikkListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
-  elsokereses = true;
+
   cikkservice: CikkService;
 
   constructor(private _logonservice: LogonService,
@@ -51,7 +51,7 @@ export class CikkListComponent implements OnInit, OnDestroy {
     this.cikkservice.DtoSelectedIndex = -1;
     this.cikkservice.OsszesRekord = 0;
 
-    this.elsokereses = true;
+    this.cikkservice.elsokereses = true;
     this.cikkservice.up.rekordtol = 0;
     this.cikkservice.up.fi = new Array<SzMT>();
 
@@ -67,9 +67,9 @@ export class CikkListComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        if (this.elsokereses) {
+        if (this.cikkservice.elsokereses) {
           this.cikkservice.Dto = res.Result;
-          this.elsokereses = false;
+          this.cikkservice.elsokereses = false;
         } else {
           const buf = [...this.cikkservice.Dto];
           res.Result.forEach(element => {

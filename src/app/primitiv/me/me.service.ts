@@ -22,7 +22,7 @@ export class MeService {
 
   cim = 'Mennyiségi egység';
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-
+  elsokereses = true;
   Dto: MeDto[] = new Array<MeDto>();
   DtoSelectedIndex = -1;
   uj = false;

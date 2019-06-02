@@ -23,7 +23,6 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
-  elsokereses = true;
   fizetesimodservice: FizetesimodService;
 
   constructor(private _logonservice: LogonService,
@@ -41,7 +40,7 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
   }
 
   onKereses() {
-    this.elsokereses = true;
+    this.fizetesimodservice.elsokereses = true;
     this.fizetesimodservice.ekDto.rekordtol = 0;
 
     this.onKeresesTovabb();
@@ -55,9 +54,9 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        if (this.elsokereses) {
+        if (this.fizetesimodservice.elsokereses) {
           this.fizetesimodservice.Dto = res.Result;
-          this.elsokereses = false;
+          this.fizetesimodservice.elsokereses = false;
         } else {
           const buf = [...this.fizetesimodservice.Dto];
           res.Result.forEach(element => {

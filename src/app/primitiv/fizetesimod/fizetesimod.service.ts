@@ -22,7 +22,7 @@ export class FizetesimodService {
 
   cim = 'Fizetési mód';
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-
+  elsokereses = true;
   Dto: FizetesimodDto[] = new Array<FizetesimodDto>();
   DtoSelectedIndex = -1;
   uj = false;

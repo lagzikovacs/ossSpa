@@ -17,3 +17,6 @@
 <ng-container *ngIf="irattipusservice.ContainerMode === 3">
   <app-irattipus-szerkesztes></app-irattipus-szerkesztes>
 </ng-container>
+
+<app-errormodal [cim]="irattipusservice.cim"></app-errormodal>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

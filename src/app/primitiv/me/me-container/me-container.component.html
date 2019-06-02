@@ -17,3 +17,6 @@
 <ng-container *ngIf="meservice.ContainerMode === 3">
   <app-me-szerkesztes></app-me-szerkesztes>
 </ng-container>
+
+<app-errormodal [cim]="meservice.cim"></app-errormodal>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

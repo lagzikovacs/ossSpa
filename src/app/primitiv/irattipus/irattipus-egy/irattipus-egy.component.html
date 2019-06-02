@@ -31,7 +31,10 @@ Modositas = 3
 
   <ng-container *ngIf="irattipusservice.EgyMode === 1">
     <div [@rowanimation]>
-      <app-irattipus-reszletek></app-irattipus-reszletek>
+      <app-reszletek [cim]="irattipusservice.cim"
+                     [item]="irattipusservice.Dto[irattipusservice.DtoSelectedIndex]"
+                     [colsets]="irattipusservice.ReszletekSettings">
+      </app-reszletek>
     </div>
   </ng-container>
   <ng-container *ngIf="irattipusservice.EgyMode === 2">

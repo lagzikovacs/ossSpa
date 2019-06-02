@@ -131,7 +131,6 @@ import { ProjektReszletekComponent } from './projekt/projekt-reszletek/projekt-r
 import { ProjektStatuszComponent } from './projekt/projekt-statusz/projekt-statusz.component';
 import { ProjektSzamlazasirendEgyComponent } from './szamlazasirend/projekt-szamlazasirend-egy/projekt-szamlazasirend-egy.component';
 import { ProjektSzamlazasirendSzerkesztesComponent } from './szamlazasirend/projekt-szamlazasirend-szerkesztes/projekt-szamlazasirend-szerkesztes.component';
-import { ProjektSzamlazasirendReszletekComponent } from './szamlazasirend/projekt-szamlazasirend-reszletek/projekt-szamlazasirend-reszletek.component';
 import { ProjektTeendoEgyComponent } from './projektteendo/projekt-teendo-egy/projekt-teendo-egy.component';
 import { ProjektTeendoSzerkesztesComponent } from './projektteendo/projekt-teendo-szerkesztes/projekt-teendo-szerkesztes.component';
 import { ProjektTeendoReszletekComponent } from './projektteendo/projekt-teendo-reszletek/projekt-teendo-reszletek.component';
@@ -413,7 +412,6 @@ if (environment.production) {
     ProjektStatuszComponent,
     ProjektSzamlazasirendEgyComponent,
     ProjektSzamlazasirendSzerkesztesComponent,
-    ProjektSzamlazasirendReszletekComponent,
     ProjektTeendoEgyComponent,
     ProjektTeendoSzerkesztesComponent,
     ProjektTeendoReszletekComponent,

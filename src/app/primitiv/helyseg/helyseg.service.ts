@@ -11,6 +11,7 @@ import {ZoomSources} from '../../enums/zoomsources';
 import {LogonService} from '../../logon/logon.service';
 import {NumberResult} from '../../dtos/numberresult';
 import {EmptyResult} from '../../dtos/emptyresult';
+import {ColumnSettings} from '../../tools/reszletek/columnsettings';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,9 @@ export class HelysegService {
 
   ContainerMode = HelysegContainerMode.List;
   EgyMode = HelysegEgyMode.Reszletek;
+
+  GridSettings: ColumnSettings[] = undefined;
+  ReszletekSettings: ColumnSettings[] = undefined;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

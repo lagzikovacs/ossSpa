@@ -11,6 +11,7 @@ import {EmptyResult} from '../../dtos/emptyresult';
 import {MeZoomParameter} from './mezoomparameter';
 import {MeContainerMode} from './mecontainermode';
 import {MeEgyMode} from './meegymode';
+import {ColumnSettings} from '../../tools/reszletek/columnsettings';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,9 @@ export class MeService {
 
   ContainerMode = MeContainerMode.List;
   EgyMode = MeEgyMode.Reszletek;
+
+  GridSettings: ColumnSettings[] = undefined;
+  ReszletekSettings: ColumnSettings[] = undefined;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

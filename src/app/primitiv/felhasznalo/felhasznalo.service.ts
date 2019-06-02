@@ -12,6 +12,8 @@ import {ZoomSources} from '../../enums/zoomsources';
 import {LogonService} from '../../logon/logon.service';
 import {NumberResult} from '../../dtos/numberresult';
 import {EmptyResult} from '../../dtos/emptyresult';
+import {ColumnSettings} from '../../tools/reszletek/columnsettings';
+import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +33,9 @@ export class FelhasznaloService {
 
   ContainerMode = FelhasznaloContainerMode.List;
   EgyMode = FelhasznaloEgyMode.Reszletek;
+
+  GridSettings: ColumnSettings[] = undefined;
+  ReszletekSettings: ColumnSettings[] = undefined;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
@@ -121,5 +126,27 @@ export class FelhasznaloService {
     };
 
     return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
+  }
+
+  public GetGridSettings(): Promise<ColumnSettingsResult> {
+    const url = environment.CoreRef + this._controller + 'getgridsettings';
+    const body = '';
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
+  }
+
+  public GetReszletekSettings(): Promise<ColumnSettingsResult> {
+    const url = environment.CoreRef + this._controller + 'getreszleteksettings';
+    const body = '';
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
   }
 }

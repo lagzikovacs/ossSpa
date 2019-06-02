@@ -11,6 +11,7 @@ import {EmptyResult} from '../../dtos/emptyresult';
 import {FizetesimodEgyMode} from './fizetesimodegymode';
 import {FizetesimodContainerMode} from './fizetesimodcontainermode';
 import {FizetesimodZoomParameter} from './fiztesimodzoomparameter';
+import {ColumnSettings} from '../../tools/reszletek/columnsettings';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,9 @@ export class FizetesimodService {
 
   ContainerMode = FizetesimodContainerMode.List;
   EgyMode = FizetesimodEgyMode.Reszletek;
+
+  GridSettings: ColumnSettings[] = undefined;
+  ReszletekSettings: ColumnSettings[] = undefined;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

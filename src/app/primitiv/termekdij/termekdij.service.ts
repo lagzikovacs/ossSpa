@@ -11,6 +11,7 @@ import {NumberResult} from '../../dtos/numberresult';
 import {TermekdijZoomParameter} from './termekdijzoomparameter';
 import {TermekdijContainerMode} from './termekdijcontainermode';
 import {TermekdijEgyMode} from './termekdijegymode';
+import {ColumnSettings} from '../../tools/reszletek/columnsettings';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,9 @@ export class TermekdijService {
 
   ContainerMode = TermekdijContainerMode.List;
   EgyMode = TermekdijEgyMode.Reszletek;
+
+  GridSettings: ColumnSettings[] = undefined;
+  ReszletekSettings: ColumnSettings[] = undefined;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

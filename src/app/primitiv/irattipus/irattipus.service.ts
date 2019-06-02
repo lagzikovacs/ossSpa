@@ -11,6 +11,7 @@ import {ZoomSources} from '../../enums/zoomsources';
 import {IrattipusEgyMode} from './irattipusegymode';
 import {IrattipusContainerMode} from './irattipuscontainermode';
 import {IrattipusZoomParameter} from './irattipuszoomparameter';
+import {ColumnSettings} from '../../tools/reszletek/columnsettings';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,9 @@ export class IrattipusService {
 
   ContainerMode = IrattipusContainerMode.List;
   EgyMode = IrattipusEgyMode.Reszletek;
+
+  GridSettings: ColumnSettings[] = undefined;
+  ReszletekSettings: ColumnSettings[] = undefined;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

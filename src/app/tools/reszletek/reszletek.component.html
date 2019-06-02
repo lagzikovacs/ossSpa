@@ -10,6 +10,7 @@
         <div *ngIf="colset.Type === 'STRING'">{{item[colset.Name]}}</div>
         <div *ngIf="colset.Type === 'DATE'">{{item[colset.Name] | datehun}}</div>
         <div *ngIf="colset.Type === 'DATETIME'">{{item[colset.Name] | datetimehun}}</div>
+        <div *ngIf="colset.Type === 'BOOL'">{{item[colset.Name] | boolhun}}</div>
       </td>
     </tr>
     </tbody>

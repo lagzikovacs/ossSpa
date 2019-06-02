@@ -17,3 +17,6 @@
 <ng-container *ngIf="felhasznaloservice.ContainerMode === 3">
   <app-felhasznalo-szerkesztes></app-felhasznalo-szerkesztes>
 </ng-container>
+
+<app-errormodal [cim]="felhasznaloservice.cim"></app-errormodal>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

@@ -11,6 +11,7 @@ import {NumberResult} from '../../dtos/numberresult';
 import {PenznemZoomParameter} from './penznemzoomparameter';
 import {PenznemEgyMode} from './penznemegymode';
 import {PenznemContainerMode} from './penznemcontainermode';
+import {ColumnSettings} from '../../tools/reszletek/columnsettings';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,9 @@ export class PenznemService {
 
   ContainerMode = PenznemContainerMode.List;
   EgyMode = PenznemEgyMode.Reszletek;
+
+  GridSettings: ColumnSettings[] = undefined;
+  ReszletekSettings: ColumnSettings[] = undefined;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

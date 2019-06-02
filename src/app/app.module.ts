@@ -121,13 +121,6 @@ import {VolumeService} from './volume/volume.service';
 import {CsoportService} from './csoport/csoport.service';
 import {AjanlatkeresService} from './ajanlatkeres/ajanlatkeres.service';
 import {PenztarService} from './penztar/penztar.service';
-import { TeendoReszletekComponent } from './primitiv/teendo/teendo-reszletek/teendo-reszletek.component';
-import { FizetesimodReszletekComponent } from './primitiv/fizetesimod/fizetesimod-reszletek/fizetesimod-reszletek.component';
-import { HelysegReszletekComponent } from './primitiv/helyseg/helyseg-reszletek/helyseg-reszletek.component';
-import { IrattipusReszletekComponent } from './primitiv/irattipus/irattipus-reszletek/irattipus-reszletek.component';
-import { MeReszletekComponent } from './primitiv/me/me-reszletek/me-reszletek.component';
-import { PenznemReszletekComponent } from './primitiv/penznem/penznem-reszletek/penznem-reszletek.component';
-import { TermekdijReszletekComponent } from './primitiv/termekdij/termekdij-reszletek/termekdij-reszletek.component';
 import { CikkReszletekComponent } from './cikk/cikk-reszletek/cikk-reszletek.component';
 import { UgyfelReszletekComponent } from './ugyfel/ugyfel-reszletek/ugyfel-reszletek.component';
 import { PenztartetelSzerkesztesComponent } from './penztar/penztartetel/penztartetel-szerkesztes/penztartetel-szerkesztes.component';
@@ -412,13 +405,6 @@ if (environment.production) {
     PenztarReszletekComponent,
     PenztarExportComponent,
     PenztartetelListComponent,
-    TeendoReszletekComponent,
-    FizetesimodReszletekComponent,
-    HelysegReszletekComponent,
-    IrattipusReszletekComponent,
-    MeReszletekComponent,
-    PenznemReszletekComponent,
-    TermekdijReszletekComponent,
     CikkReszletekComponent,
     UgyfelReszletekComponent,
     PenztartetelSzerkesztesComponent,

@@ -16,6 +16,7 @@ export class DokumentumEgyComponent implements OnDestroy {
 
   dokumentumservice: DokumentumService;
   eppFrissit = false;
+  ri = -1;
 
   constructor(dokumentumservice: DokumentumService) {
     this.dokumentumservice = dokumentumservice;

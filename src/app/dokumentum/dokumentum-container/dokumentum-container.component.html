@@ -14,3 +14,6 @@
 <ng-container *ngIf="dokumentumservice.ContainerMode === 3">
   <app-dokumentum-feltoltes></app-dokumentum-feltoltes>
 </ng-container>
+
+<app-errormodal [cim]="dokumentumservice.cim"></app-errormodal>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

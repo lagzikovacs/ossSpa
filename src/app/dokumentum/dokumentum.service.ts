@@ -14,6 +14,8 @@ import {b64toBlob} from '../tools/b64toBlob';
 import {NumberResult} from '../dtos/numberresult';
 import {FajlBuf} from './fajlbuf';
 import {LetoltesPDFResult} from './letoltespdfresult';
+import {ColumnSettings} from '../tools/reszletek/columnsettings';
+import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +32,9 @@ export class DokumentumService {
 
   ContainerMode = DokumentumContainerMode.List;
   EgyMode = DokumentumEgyMode.Reszletek;
+
+  GridSettings: ColumnSettings[] = undefined;
+  ReszletekSettings: ColumnSettings[] = undefined;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
@@ -137,5 +142,27 @@ export class DokumentumService {
     };
 
     return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+  }
+
+  public GetGridSettings(): Promise<ColumnSettingsResult> {
+    const url = environment.CoreRef + this._controller + 'getgridsettings';
+    const body = '';
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
+  }
+
+  public GetReszletekSettings(): Promise<ColumnSettingsResult> {
+    const url = environment.CoreRef + this._controller + 'getreszleteksettings';
+    const body = '';
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
   }
 }

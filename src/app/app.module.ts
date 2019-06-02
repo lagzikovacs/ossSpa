@@ -133,7 +133,6 @@ import { ProjektSzamlazasirendEgyComponent } from './szamlazasirend/projekt-szam
 import { ProjektSzamlazasirendSzerkesztesComponent } from './szamlazasirend/projekt-szamlazasirend-szerkesztes/projekt-szamlazasirend-szerkesztes.component';
 import { ProjektTeendoEgyComponent } from './projektteendo/projekt-teendo-egy/projekt-teendo-egy.component';
 import { ProjektTeendoSzerkesztesComponent } from './projektteendo/projekt-teendo-szerkesztes/projekt-teendo-szerkesztes.component';
-import { ProjektTeendoReszletekComponent } from './projektteendo/projekt-teendo-reszletek/projekt-teendo-reszletek.component';
 import { ProjektTeendoElvegezveComponent } from './projektteendo/projekt-teendo-elvegezve/projekt-teendo-elvegezve.component';
 import { ProjektBizonylatesiratUjbizonylatComponent } from './projektkapcsolat/projekt-bizonylatesirat-ujbizonylat/projekt-bizonylatesirat-ujbizonylat.component';
 import { ProjektBizonylatesiratUjiratComponent } from './projektkapcsolat/projekt-bizonylatesirat-ujirat/projekt-bizonylatesirat-ujirat.component';
@@ -414,7 +413,6 @@ if (environment.production) {
     ProjektSzamlazasirendSzerkesztesComponent,
     ProjektTeendoEgyComponent,
     ProjektTeendoSzerkesztesComponent,
-    ProjektTeendoReszletekComponent,
     ProjektTeendoElvegezveComponent,
     ProjektBizonylatesiratUjbizonylatComponent,
     ProjektBizonylatesiratUjiratComponent,

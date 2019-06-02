@@ -17,6 +17,7 @@ export class ProjektTeendoEgyComponent implements OnDestroy {
 
   projektteendoservice: ProjektteendoService;
   eppFrissit = false;
+  ri = -1;
 
   constructor(private _logonservice: LogonService,
               projektteendoservice: ProjektteendoService) {

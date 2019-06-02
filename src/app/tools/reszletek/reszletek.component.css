@@ -1,6 +1,7 @@
 .table tr.active td {
-  background-color: #007bff !important;
-  color: white;
+  background-color: silver;
+  /*background-color: #007bff !important;*/
+  /*color: white;*/
 }
 .table thead tr th {
   font-weight: normal;

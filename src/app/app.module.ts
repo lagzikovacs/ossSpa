@@ -105,7 +105,6 @@ import { PenznemSzerkesztesComponent } from './primitiv/penznem/penznem-szerkesz
 import { CikkBeszerzesKivetComponent } from './cikk/cikk-beszerzes-kivet/cikk-beszerzes-kivet.component';
 import { PenztarListComponent } from './penztar/penztar-list/penztar-list.component';
 import { PenztarEgyComponent } from './penztar/penztar-egy/penztar-egy.component';
-import { CsoportReszletekComponent } from './csoport/csoport-reszletek/csoport-reszletek.component';
 import {IrattipusService} from './primitiv/irattipus/irattipus.service';
 import {TeendoService} from './primitiv/teendo/teendo.service';
 import {FizetesimodService} from './primitiv/fizetesimod/fizetesimod.service';
@@ -401,7 +400,6 @@ if (environment.production) {
     PenztarListComponent,
     PenztarEgyComponent,
     PenztarSzerkesztesComponent,
-    CsoportReszletekComponent,
     PenztarReszletekComponent,
     PenztarExportComponent,
     PenztartetelListComponent,

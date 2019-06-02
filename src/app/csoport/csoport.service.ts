@@ -17,6 +17,8 @@ import {CsoportJogParameter} from './csoportjogparameter';
 import {JogaimResult} from './jogaimresult';
 import {CsoportContainerMode} from './csoportcontainermode';
 import {CsoportEgyMode} from './csoportegymode';
+import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
+import {ColumnSettings} from '../tools/reszletek/columnsettings';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +41,9 @@ export class CsoportService {
 
   ContainerMode = CsoportContainerMode.List;
   EgyMode = CsoportEgyMode.Reszletek;
+
+  GridSettings: ColumnSettings[] = undefined;
+  ReszletekSettings: ColumnSettings[] = undefined;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
@@ -161,5 +166,27 @@ export class CsoportService {
     };
 
     return this._httpClient.post<JogaimResult>(url, body, options).toPromise();
+  }
+
+  public GetGridSettings(): Promise<ColumnSettingsResult> {
+    const url = environment.CoreRef + this._controller + 'getgridsettings';
+    const body = '';
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
+  }
+
+  public GetReszletekSettings(): Promise<ColumnSettingsResult> {
+    const url = environment.CoreRef + this._controller + 'getreszleteksettings';
+    const body = '';
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
   }
 }

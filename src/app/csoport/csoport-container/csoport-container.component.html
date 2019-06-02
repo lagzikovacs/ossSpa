@@ -17,3 +17,6 @@
 <ng-container *ngIf="csoportservice.ContainerMode === 3">
   <app-csoport-szerkesztes></app-csoport-szerkesztes>
 </ng-container>
+
+<app-errormodal [cim]="csoportservice.cim"></app-errormodal>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

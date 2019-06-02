@@ -16,6 +16,7 @@ export class CsoportEgyComponent implements OnDestroy {
 
   csoportservice: CsoportService;
   eppFrissit = false;
+  ri = -1;
 
   constructor(csoportservice: CsoportService) {
     this.csoportservice = csoportservice;

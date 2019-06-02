@@ -4,14 +4,14 @@ import {IrattipusService} from '../irattipus.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
 import {ZoomSources} from '../../../enums/zoomsources';
-import {ProjektkapcsolatService} from '../../../projekt/bizonylatesirat/projektkapcsolat.service';
-import {IratService} from '../../../irat/irat/irat.service';
+import {ProjektkapcsolatService} from '../../../projektkapcsolat/projektkapcsolat.service';
+import {IratService} from '../../../irat/irat.service';
 import {IrattipusEgyMode} from '../irattipusegymode';
 import {IrattipusContainerMode} from '../irattipuscontainermode';
-import {IratSzerkesztesMode} from '../../../irat/irat/iratszerkesztesmode';
-import {BizonylatesiratSzerkesztesMode} from '../../../projekt/bizonylatesirat/bizonylatesiratszerkesztesmode';
-import {BizonylatkapcsolatService} from '../../../bizonylat/bizonylatirat/bizonylatkapcsolat.service';
-import {BizonylatKapcsolatSzerkesztesMode} from '../../../bizonylat/bizonylatirat/bizonylatkapcsolatszerkesztesmode';
+import {IratSzerkesztesMode} from '../../../irat/iratszerkesztesmode';
+import {BizonylatesiratSzerkesztesMode} from '../../../projektkapcsolat/bizonylatesiratszerkesztesmode';
+import {BizonylatkapcsolatService} from '../../../bizonylatkapcsolat/bizonylatkapcsolat.service';
+import {BizonylatKapcsolatSzerkesztesMode} from '../../../bizonylatkapcsolat/bizonylatkapcsolatszerkesztesmode';
 
 @Component({
   selector: 'app-irattipus-list',

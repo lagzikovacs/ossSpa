@@ -1,5 +1,5 @@
 import {UgyfelDto} from '../ugyfel/ugyfeldto';
-import {ProjektDto} from '../projekt/projekt/projektdto';
+import {ProjektDto} from '../projekt/projektdto';
 
 export class UgyfelterDto {
   sid: string;

@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {UgyfelService} from '../ugyfel.service';
-import {ProjektService} from '../../projekt/projekt/projekt.service';
+import {ProjektService} from '../../projekt/projekt.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {ProjektDto} from '../../projekt/projekt/projektdto';
+import {ProjektDto} from '../../projekt/projektdto';
 import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
 

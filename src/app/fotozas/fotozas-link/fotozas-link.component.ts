@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {IratService} from '../../irat/irat/irat.service';
+import {IratService} from '../../irat/irat.service';
 import {FotozasService} from '../fotozas.service';
 import * as moment from 'moment';
 import {environment} from '../../../environments/environment';

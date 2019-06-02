@@ -43,7 +43,7 @@
     </ng-container>
     </tbody>
   </table>
-  <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
+  <app-toolbarfooter [enKereses]="!cikkservice.elsokereses && !eppFrissit"
                      [rekordszam]="cikkservice.Dto.length"
                      [osszesrekord]="cikkservice.OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">

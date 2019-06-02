@@ -1,5 +1,5 @@
-import {IratDto} from '../irat/irat/iratdto';
-import {DokumentumDto} from '../irat/dokumentum/dokumentumdto';
+import {IratDto} from '../irat/iratdto';
+import {DokumentumDto} from '../dokumentum/dokumentumdto';
 
 export class FotozasDto {
   sid: string;

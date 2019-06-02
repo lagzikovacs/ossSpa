@@ -7,12 +7,12 @@ import {SzMT} from '../../dtos/szmt';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ZoomSources} from '../../enums/zoomsources';
-import {IratService} from '../../irat/irat/irat.service';
+import {IratService} from '../../irat/irat.service';
 import {UgyfelContainerMode} from '../ugyfelcontainermode';
 import {UgyfelEgyMode} from '../ugyfelegymode';
-import {ProjektService} from '../../projekt/projekt/projekt.service';
-import {ProjektSzerkesztesMode} from '../../projekt/projekt/projektszerkesztesmode';
-import {IratSzerkesztesMode} from '../../irat/irat/iratszerkesztesmode';
+import {ProjektService} from '../../projekt/projekt.service';
+import {ProjektSzerkesztesMode} from '../../projekt/projektszerkesztesmode';
+import {IratSzerkesztesMode} from '../../irat/iratszerkesztesmode';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {BizonylatSzerkesztesMode} from '../../bizonylat/bizonylatszerkesztesmode';
 

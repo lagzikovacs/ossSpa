@@ -2,9 +2,9 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {AjanlatkeresService} from '../ajanlatkeres.service';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
-import {ProjektService} from '../../projekt/projekt/projekt.service';
+import {ProjektService} from '../../projekt/projekt.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {ProjektDto} from '../../projekt/projekt/projektdto';
+import {ProjektDto} from '../../projekt/projektdto';
 
 @Component({
   selector: 'app-ajanlatkeres-projekt',

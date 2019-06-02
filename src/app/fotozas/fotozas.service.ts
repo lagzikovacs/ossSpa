@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {StringResult} from '../dtos/stringresult';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {IratDto} from '../irat/irat/iratdto';
+import {IratDto} from '../irat/iratdto';
 import {LogonService} from '../logon/logon.service';
 import {FotozasResult} from './fotozasresult';
 

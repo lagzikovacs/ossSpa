@@ -4,7 +4,7 @@ import {Szempont} from '../../enums/szempont';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {SzMT} from '../../dtos/szmt';
 import {AjanlatkeresDto} from '../ajanlatkeresdto';
-import {ProjektDto} from '../../projekt/projekt/projektdto';
+import {ProjektDto} from '../../projekt/projektdto';
 import {AjanlatkeresContainerMode} from '../ajanlatkerescontainermode';
 import {AjanlatkeresEgyMode} from '../ajanlatkeresegymode';
 import {JogKod} from '../../enums/jogkod';

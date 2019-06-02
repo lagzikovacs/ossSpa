@@ -12,8 +12,8 @@ import {UgyfelContainerMode} from './ugyfelcontainermode';
 import {UgyfelEgyMode} from './ugyfelegymode';
 import {UgyfelSzerkesztesMode} from './ugyfelszerkesztesmode';
 import {UgyfelZoomParameter} from './ugyfelzoomparameter';
-import {ProjektDto} from '../projekt/projekt/projektdto';
-import {ProjektParameter} from '../projekt/projekt/projektparameter';
+import {ProjektDto} from '../projekt/projektdto';
+import {ProjektParameter} from '../projekt/projektparameter';
 
 @Injectable({
   providedIn: 'root'

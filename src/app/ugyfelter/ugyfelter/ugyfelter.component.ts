@@ -3,20 +3,20 @@ import {ActivatedRoute} from '@angular/router';
 import {UgyfelterService} from '../ugyfelter.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {UgyfelterDto} from '../ugyfelterdto';
-import {ProjektkapcsolatService} from '../../projekt/bizonylatesirat/projektkapcsolat.service';
+import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
 import {LogonService} from '../../logon/logon.service';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
-import {ProjektDto} from '../../projekt/projekt/projektdto';
-import {ProjektKapcsolatDto} from '../../projekt/bizonylatesirat/projektkapcsolatdto';
-import {DokumentumDto} from '../../irat/dokumentum/dokumentumdto';
-import {DokumentumService} from '../../irat/dokumentum/dokumentum.service';
+import {ProjektDto} from '../../projekt/projektdto';
+import {ProjektKapcsolatDto} from '../../projektkapcsolat/projektkapcsolatdto';
+import {DokumentumDto} from '../../dokumentum/dokumentumdto';
+import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {Szempont} from '../../enums/szempont';
-import {BizonylatnyomtatasService} from '../../bizonylat/bizonylatnyomtatas.service';
+import {BizonylatnyomtatasService} from '../../bizonylatnyomtatas/bizonylatnyomtatas.service';
 import {SzMT} from '../../dtos/szmt';
-import {BizonylatNyomtatasTipus} from '../../bizonylat/bizonylatnyomtatastipus';
+import {BizonylatNyomtatasTipus} from '../../bizonylatnyomtatas/bizonylatnyomtatastipus';
 import * as FileSaver from 'file-saver';
 import {b64toBlob} from '../../tools/b64toBlob';
-import {LetoltesParam} from '../../irat/dokumentum/letoltesparam';
+import {LetoltesParam} from '../../dokumentum/letoltesparam';
 
 @Component({
   selector: 'app-ugyfelter',

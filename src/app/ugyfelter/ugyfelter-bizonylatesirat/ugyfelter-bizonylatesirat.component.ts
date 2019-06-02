@@ -1,8 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {ProjektkapcsolatService} from '../../projekt/bizonylatesirat/projektkapcsolat.service';
-import {BizonylatService} from '../../bizonylat/bizonylat.service';
-import {BizonylatnyomtatasService} from '../../bizonylat/bizonylatnyomtatas.service';
-import {BizonylatKapcsolatDto} from '../../bizonylat/bizonylatirat/bizonylatkapcsolatdto';
+import {BizonylatKapcsolatDto} from '../../bizonylatkapcsolat/bizonylatkapcsolatdto';
 
 @Component({
   selector: 'app-ugyfelter-bizonylatesirat',

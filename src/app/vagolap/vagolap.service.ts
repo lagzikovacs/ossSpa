@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {VagolapDto} from './vagolapdto';
 import {VagolapMode} from './vagolapmode';
-import {IratService} from '../irat/irat/irat.service';
+import {IratService} from '../irat/irat.service';
 import {BizonylatService} from '../bizonylat/bizonylat.service';
 
 @Injectable({

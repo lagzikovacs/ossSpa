@@ -9,10 +9,10 @@ import {JogKod} from '../../enums/jogkod';
 import {CikkContainerMode} from '../cikkcontainermode';
 import {CikkEgyMode} from '../cikkegymode';
 import {ZoomSources} from '../../enums/zoomsources';
-import {AjanlatSzerkesztesMode} from '../../projekt/ajanlat/ajanlatszerkesztesmode';
+import {AjanlatSzerkesztesMode} from '../../ajanlat/ajanlatszerkesztesmode';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {BizonylattetelSzerkesztesMode} from '../../bizonylat/bizonylattetelszerkesztesmode';
-import {AjanlatService} from '../../projekt/ajanlat/ajanlat.service';
+import {AjanlatService} from '../../ajanlat/ajanlat.service';
 
 @Component({
   selector: 'app-cikk-list',

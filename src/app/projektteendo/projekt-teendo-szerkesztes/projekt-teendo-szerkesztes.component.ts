@@ -7,7 +7,7 @@ import {ProjektteendoService} from '../projektteendo.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import * as moment from 'moment';
 import {TeendoZoomParameter} from '../../primitiv/teendo/teendozoomparameter';
-import {ProjektService} from '../../projekt/projekt/projekt.service';
+import {ProjektService} from '../../projekt/projekt.service';
 import {ProjektteendoEgyMode} from '../projekttendoegymode';
 import {ProjektteendoContainerMode} from '../projektteendocontainermode';
 import {FelhasznaloContainerMode} from '../../primitiv/felhasznalo/felhasznalocontainermode';

@@ -1,13 +1,13 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatContainerMode} from '../bizonylatcontainermode';
-import {ProjektkapcsolatService} from '../../projekt/bizonylatesirat/projektkapcsolat.service';
-import {BizonylatesIratContainerMode} from '../../projekt/bizonylatesirat/bizonylatesiratcontainermode';
+import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
+import {BizonylatesIratContainerMode} from '../../projektkapcsolat/bizonylatesiratcontainermode';
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {BizonylatkifizetesService} from '../bizonylatkifizetes/bizonylatkifizetes.service';
 import {BizonylatKifizetesContainerMode} from '../bizonylatkifizetes/bizonylatkifizetescontainermode';
-import {BizonylatKapcsolatContainerMode} from '../bizonylatirat/bizonylatkapcsolatcontainermode';
-import {BizonylatkapcsolatService} from '../bizonylatirat/bizonylatkapcsolat.service';
+import {BizonylatKapcsolatContainerMode} from '../../bizonylatkapcsolat/bizonylatkapcsolatcontainermode';
+import {BizonylatkapcsolatService} from '../../bizonylatkapcsolat/bizonylatkapcsolat.service';
 import {BizonylatTipus} from '../bizonylattipus';
 import {PenztarService} from '../../penztar/penztar.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';

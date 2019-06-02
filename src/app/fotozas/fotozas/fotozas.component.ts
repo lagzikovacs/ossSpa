@@ -3,8 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {FotozasService} from '../fotozas.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {FotozasDto} from '../fotozasdto';
-import {FajlBuf} from '../../irat/dokumentum/fajlbuf';
-import {DokumentumService} from '../../irat/dokumentum/dokumentum.service';
+import {FajlBuf} from '../../dokumentum/fajlbuf';
+import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {LogonService} from '../../logon/logon.service';
 
 @Component({

@@ -4,7 +4,7 @@ import {PenznemService} from '../../primitiv/penznem/penznem.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {ProjektService} from '../../projekt/projekt/projekt.service';
+import {ProjektService} from '../../projekt/projekt.service';
 import {SzamlazasirendEgyMode} from '../szamlazasirendegymode';
 import {SzamlazasirendContainerMode} from '../szamlazasirendcontainermode';
 import {PenznemContainerMode} from '../../primitiv/penznem/penznemcontainermode';

@@ -1,7 +1,7 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {VolumeService} from '../volume.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {DokumentumService} from '../../irat/dokumentum/dokumentum.service';
+import {DokumentumService} from '../../dokumentum/dokumentum.service';
 
 @Component({
   selector: 'app-volume-teszt',

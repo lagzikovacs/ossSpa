@@ -33,6 +33,7 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
+  utsr = -1;
 
   ugyfelservice: UgyfelService;
 

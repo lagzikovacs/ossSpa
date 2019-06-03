@@ -11,77 +11,13 @@
                      [visZoom]="ugyfelservice.zoom" (StopZoom)="stopzoom()">
   </app-ugyfeltoolbar>
 
-  <table class="table table-bordered table-sm table-responsive" style="border: none">
-    <thead>
-    <tr>
-      <th *ngIf="ugyfelservice.zoom"></th>
-      <th>Id</th>
-      <th></th>
-      <th>
-        <div style="white-space: nowrap">
-          <div>Név</div>
-          <div>Cím</div>
-        </div>
-      </th>
-      <th>
-        <div style="white-space: nowrap">
-          <div>Cég</div>
-          <div>Beosztás</div>
-        </div>
-      </th>
-      <th>
-        <div style="white-space: nowrap">
-          <div>Email</div>
-          <div>Telefon</div>
-        </div>
-      </th>
-      <th>
-        <div style="white-space: nowrap">
-          <div>Adószám</div>
-          <div>EU adószám</div>
-        </div>
-      </th>
-      <th>
-        <div style="white-space: nowrap">
-          <div>Egyéb link</div>
-          <div>Ajánlotta</div>
-        </div>
-      </th>
-    </tr>
-    </thead>
-    <tbody>
-    <ng-container *ngFor="let item of ugyfelservice.Dto; let i = index">
-      <tr>
-        <td *ngIf="ugyfelservice.zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="selectforzoom(i)"><i class="fa fa-check" aria-hidden="true"></i></td>
-        <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.Ugyfelkod}}</td>
-        <td>{{item.Csoport}}</td>
-        <td>
-          <div style="width: 200px">{{item.Nev}}</div>
-          <div style="width: 300px">{{item.Cim}}</div>
-        </td>
-        <td>
-          <div style="width: 200px">{{item.Ceg}}</div>
-          <div style="width: 200px">{{item.Beosztas}}</div>
-        </td>
-        <td>
-          <div>{{item.Email}}</div>
-          <div>{{item.Telefon}}</div>
-        </td>
-        <td>
-          <div>{{item.Adoszam}}</div>
-          <div>{{item.Euadoszam}}</div>
-        </td>
-        <td>
-          <div>{{item.Egyeblink}}</div>
-          <div>{{item.Ajanlotta}}</div>
-        </td>
-      </tr>
-      <tr *ngIf="item.Megjegyzes !== null && item.Megjegyzes !== ''">
-        <td colspan="11">{{item.Megjegyzes}}</td>
-      </tr>
-    </ng-container>
-    </tbody>
-  </table>
+  <app-ugyfel-tabla [items]="ugyfelservice.Dto"
+                    [zoom]="ugyfelservice.zoom"
+                    [(selectedrow)]="utsr"
+                    (forid)="setClickedRow($event)"
+                    (forzoom)="selectforzoom($event)">
+  </app-ugyfel-tabla>
+
   <app-toolbarfooter [enKereses]="!ugyfelservice.elsokereses && !eppFrissit"
                      [rekordszam]="ugyfelservice.Dto.length"
                      [osszesrekord]="ugyfelservice.OsszesRekord"

@@ -18,3 +18,6 @@ Uj = 3
   <app-ajanlatkeres-szerkesztes></app-ajanlatkeres-szerkesztes>
 </ng-container>
 
+<app-errormodal [cim]="ajanlatkeresservice.cim"></app-errormodal>
+<app-spinner *ngIf="eppFrissit"></app-spinner>
+

@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {enableProdMode, NgModule} from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu/menu.component';
 import {RouterModule, Routes} from '@angular/router';
@@ -120,12 +119,8 @@ import {VolumeService} from './volume/volume.service';
 import {CsoportService} from './csoport/csoport.service';
 import {AjanlatkeresService} from './ajanlatkeres/ajanlatkeres.service';
 import {PenztarService} from './penztar/penztar.service';
-import { UgyfelReszletekComponent } from './ugyfel/ugyfel-reszletek/ugyfel-reszletek.component';
 import { PenztartetelSzerkesztesComponent } from './penztar/penztartetel/penztartetel-szerkesztes/penztartetel-szerkesztes.component';
-import { AjanlatkeresReszletekComponent } from './ajanlatkeres/ajanlatkeres-reszletek/ajanlatkeres-reszletek.component';
 import { OnlineszamlaellenorzeseComponent } from './onlineszamla/onlineszamlaellenorzese/onlineszamlaellenorzese.component';
-import { IratReszletekComponent } from './irat/irat-reszletek/irat-reszletek.component';
-import { ProjektReszletekComponent } from './projekt/projekt-reszletek/projekt-reszletek.component';
 import { ProjektStatuszComponent } from './projekt/projekt-statusz/projekt-statusz.component';
 import { ProjektSzamlazasirendEgyComponent } from './szamlazasirend/projekt-szamlazasirend-egy/projekt-szamlazasirend-egy.component';
 import { ProjektSzamlazasirendSzerkesztesComponent } from './szamlazasirend/projekt-szamlazasirend-szerkesztes/projekt-szamlazasirend-szerkesztes.component';
@@ -157,7 +152,6 @@ import { CsoportContainerComponent } from './csoport/csoport-container/csoport-c
 import { AjanlatkeresContainerComponent } from './ajanlatkeres/ajanlatkeres-container/ajanlatkeres-container.component';
 import {PenztartetelListComponent} from './penztar/penztartetel/penztartetel-list/penztartetel-list.component';
 import {PenztarExportComponent} from './penztar/penztar-export/penztar-export.component';
-import {PenztarReszletekComponent} from './penztar/penztar-reszletek/penztar-reszletek.component';
 import {PenztarSzerkesztesComponent} from './penztar/penztar-szerkesztes/penztar-szerkesztes.component';
 import { PenztarContainerComponent } from './penztar/penztar-container/penztar-container.component';
 import { PenztartetelContainerComponent } from './penztar/penztartetel/penztartetel-container/penztartetel-container.component';
@@ -394,15 +388,10 @@ if (environment.production) {
     PenztarListComponent,
     PenztarEgyComponent,
     PenztarSzerkesztesComponent,
-    PenztarReszletekComponent,
     PenztarExportComponent,
     PenztartetelListComponent,
-    UgyfelReszletekComponent,
     PenztartetelSzerkesztesComponent,
-    AjanlatkeresReszletekComponent,
     OnlineszamlaellenorzeseComponent,
-    IratReszletekComponent,
-    ProjektReszletekComponent,
     ProjektStatuszComponent,
     ProjektSzamlazasirendEgyComponent,
     ProjektSzamlazasirendSzerkesztesComponent,

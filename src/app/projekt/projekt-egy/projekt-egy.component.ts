@@ -25,6 +25,7 @@ export class ProjektEgyComponent implements OnDestroy {
   projektservice: ProjektService;
   eppFrissit = false;
   mod = false;
+  ri = -1;
 
   constructor(private _logonservice: LogonService,
               private _projektkapcsolatservice: ProjektkapcsolatService,

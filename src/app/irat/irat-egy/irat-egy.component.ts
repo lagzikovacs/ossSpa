@@ -26,23 +26,26 @@ import {rowanimation} from '../../animation/rowAnimation';
 export class IratEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
   @ViewChild(AbuComponent) abu: AbuComponent;
-
+  projektservice: ProjektService;
   iratservice: IratService;
   dokumentumservice: DokumentumService;
   eppFrissit = false;
   nincsProjekt = false;
   mod = false;
+  ri = -1;
+  pri = -1;
 
   constructor(private _logonservice: LogonService,
               private _projektkapcsolatservice: ProjektkapcsolatService,
               private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
-              private _projektservice: ProjektService,
               private _vagolapservice: VagolapService,
               iratservice: IratService,
-              dokumentumservice: DokumentumService) {
+              dokumentumservice: DokumentumService,
+              projektservice: ProjektService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.IRATMOD]);
     this.iratservice = iratservice;
     this.dokumentumservice = dokumentumservice;
+    this.projektservice = projektservice;
   }
 
   vissza() {
@@ -82,7 +85,7 @@ export class IratEgyComponent implements OnDestroy {
           return new Promise<ProjektResult>((resolve, reject) => { resolve(new ProjektResult()); });
         } else {
           this.nincsProjekt = false;
-          return this._projektservice.Get(res.Result[0].Projektkod);
+          return this.projektservice.Get(res.Result[0].Projektkod);
         }
       })
       .then(res1 => {
@@ -91,8 +94,8 @@ export class IratEgyComponent implements OnDestroy {
         }
 
         if (!this.nincsProjekt) {
-          this._projektservice.Dto = res1.Result;
-          this._projektservice.DtoSelectedIndex = 0;
+          this.projektservice.Dto = res1.Result;
+          this.projektservice.DtoSelectedIndex = 0;
         }
 
         this.iratservice.EgyMode = IratEgyMode.Projekt;

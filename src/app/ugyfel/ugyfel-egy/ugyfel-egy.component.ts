@@ -21,6 +21,7 @@ export class UgyfelEgyComponent implements OnDestroy {
   mod = false;
   eppFrissit = false;
   nincsProjekt = false;
+  ri = -1;
 
   constructor(private _logonservice: LogonService,
               ugyfelservice: UgyfelService) {

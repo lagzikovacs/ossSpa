@@ -20,6 +20,7 @@ export class PenztarEgyComponent implements OnDestroy {
   mod = false;
   nyitva = false;
   eppFrissit = false;
+  ri = -1;
 
   constructor(private _logonservice: LogonService,
               penztarservice: PenztarService) {

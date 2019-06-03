@@ -17,3 +17,6 @@
 <ng-container *ngIf="ugyfelservice.ContainerMode === 3">
   <app-ugyfel-szerkesztes></app-ugyfel-szerkesztes>
 </ng-container>
+
+<app-errormodal [cim]="ugyfelservice.cim"></app-errormodal>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

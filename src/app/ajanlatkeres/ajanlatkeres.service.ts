@@ -11,6 +11,8 @@ import {AjanlatkeresContainerMode} from './ajanlatkerescontainermode';
 import {AjanlatkeresEgyMode} from './ajanlatkeresegymode';
 import {NumberResult} from '../dtos/numberresult';
 import {EmptyResult} from '../dtos/emptyresult';
+import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
+import {ColumnSettings} from '../tools/reszletek/columnsettings';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +36,9 @@ export class AjanlatkeresService {
 
   ContainerMode = AjanlatkeresContainerMode.List;
   EgyMode = AjanlatkeresEgyMode.Reszletek;
+
+  GridSettings: ColumnSettings[] = undefined;
+  ReszletekSettings: ColumnSettings[] = undefined;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
@@ -102,5 +107,27 @@ export class AjanlatkeresService {
     };
 
     return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+  }
+
+  public GetGridSettings(): Promise<ColumnSettingsResult> {
+    const url = environment.CoreRef + this._controller + 'getgridsettings';
+    const body = '';
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
+  }
+
+  public GetReszletekSettings(): Promise<ColumnSettingsResult> {
+    const url = environment.CoreRef + this._controller + 'getreszleteksettings';
+    const body = '';
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
   }
 }

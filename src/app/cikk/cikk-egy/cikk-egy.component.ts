@@ -21,6 +21,7 @@ export class CikkEgyComponent implements OnDestroy {
   cikkservice: CikkService;
   mod = false;
   eppFrissit = false;
+  ri = -1;
 
   constructor(private _logonservice: LogonService,
               cikkservice: CikkService) {

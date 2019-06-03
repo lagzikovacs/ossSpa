@@ -17,3 +17,6 @@
 <ng-container *ngIf="cikkservice.ContainerMode === 3">
   <app-cikk-szerkesztes></app-cikk-szerkesztes>
 </ng-container>
+
+<app-errormodal [cim]="cikkservice.cim"></app-errormodal>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

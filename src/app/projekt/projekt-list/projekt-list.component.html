@@ -11,8 +11,8 @@
                       [enUj]="!eppFrissit && mod" (Uj)="onUj()"
                       [enExport]="!eppFrissit" (Export)="onExport($event)">
   </app-projekttoolbar>
-  <app-projekt-tabla [Dto]="projektservice.Dto" (idclick)="setClickedRow($event)"></app-projekt-tabla>
-  <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
+  <app-projekt-tabla [Dto]="projektservice.Dto" [(selectedrow)]="pi" (forid)="setClickedRow($event)"></app-projekt-tabla>
+  <app-toolbarfooter [enKereses]="!projektservice.elsokereses && !eppFrissit"
                      [rekordszam]="projektservice.Dto.length"
                      [osszesrekord]="projektservice.OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">

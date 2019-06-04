@@ -32,6 +32,7 @@ export class ProjektService {
   DtoSelectedIndex = -1;
   uj = false;
   DtoEdited = new ProjektDto();
+  elsokereses = true;
 
   ContainerMode = ProjektContainerMode.List;
   EgyMode = ProjektEgyMode.Reszletek;

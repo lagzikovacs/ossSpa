@@ -31,6 +31,7 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
   bejelentkezve = false;
   eppFrissit = false;
   Dto = new UgyfelterDto();
+  pi = -1;
 
   ugyfelDto = new UgyfelDto();
   lstProjektDto: ProjektDto[];

@@ -42,7 +42,8 @@ export class ProjektListComponent implements OnDestroy {
 
   mod = false;
   eppFrissit = false;
-  elsokereses = true;
+  pi = -1;
+
   projektservice: ProjektService;
 
   constructor(private _logonservice: LogonService,
@@ -56,7 +57,7 @@ export class ProjektListComponent implements OnDestroy {
   }
 
   onKereses() {
-    this.elsokereses = true;
+    this.projektservice.elsokereses = true;
     this.projektservice.pp.rekordtol = 0;
     this.projektservice.pp.statusz = this.projektservice.statuszszempont;
     this.projektservice.pp.fi = new Array();
@@ -75,9 +76,9 @@ export class ProjektListComponent implements OnDestroy {
           throw res.Error;
         }
 
-        if (this.elsokereses) {
+        if (this.projektservice.elsokereses) {
           this.projektservice.Dto = res.Result;
-          this.elsokereses = false;
+          this.projektservice.elsokereses = false;
         } else {
           const buf = [...this.projektservice.Dto];
           res.Result.forEach(element => {

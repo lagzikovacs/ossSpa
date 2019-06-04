@@ -8,11 +8,19 @@ import {ProjektDto} from '../projektdto';
 })
 export class ProjektTablaComponent implements OnDestroy {
   @Input() Dto: ProjektDto[] = new Array<ProjektDto>();
+  @Input() megjegyzesIs = true;
   @Input() enIdclick = true;
-  @Output() idclick = new EventEmitter<number>();
 
-  setClickedRow(i: number) {
-    this.idclick.emit(i);
+  @Input() selectedrow: number;
+  @Output() selectedrowChange = new EventEmitter<number>();
+
+  @Output() forid = new EventEmitter<number>();
+
+  clickforrow(i: number) {
+    this.selectedrowChange.emit(i);
+  }
+  clickforid(i: number) {
+    this.forid.emit(i);
   }
 
   MuszakiallapotColor(muszakiallapot: string) {

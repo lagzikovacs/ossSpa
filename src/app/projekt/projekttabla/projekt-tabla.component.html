@@ -25,8 +25,8 @@
   </thead>
   <tbody>
   <ng-container *ngFor="let item of Dto; let i = index">
-    <tr>
-      <td *ngIf="enIdclick" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.Projektkod}}</td>
+    <tr (click)="clickforrow(i)" [class.active]="i == selectedrow">
+      <td *ngIf="enIdclick" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="clickforid(i)">{{item.Projektkod}}</td>
       <td *ngIf="!enIdclick">{{item.Projektkod}}</td>
       <td>{{item.Statusz}}</td>
       <td>
@@ -69,7 +69,7 @@
       <td>{{item.Megrendelve | datehun}}</td>
       <td>{{item.Kivitelezesihatarido | datehun}}</td>
     </tr>
-    <tr *ngIf="item.Megjegyzes !== null && item.Megjegyzes !== ''">
+    <tr *ngIf="item.Megjegyzes !== null && item.Megjegyzes !== '' && megjegyzesIs" (click)="clickforrow(i)" [class.active]="i == selectedrow">
       <td colspan="15">{{item.Megjegyzes}}</td>
     </tr>
   </ng-container>

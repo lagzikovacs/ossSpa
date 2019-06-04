@@ -10,7 +10,7 @@
 
   <ng-container *ngIf="bejelentkezve">
     <p>Üdvözöljük <b>{{ugyfelDto.Nev}}</b> ({{ugyfelDto.Cim}}, {{ugyfelDto.Telefon}}, {{ugyfelDto.Email}}) az önnel kapcsolatos tárolt adatok a következők:</p>
-    <app-projekt-tabla [Dto]="lstProjektDto" (idclick)="projektvalasztas($event)"></app-projekt-tabla>
+    <app-projekt-tabla [Dto]="lstProjektDto" [megjegyzesIs]="false" [(selectedrow)]="pi" (forid)="projektvalasztas($event)"></app-projekt-tabla>
   </ng-container>
 
   <ng-container *ngIf="projektkod > 0">

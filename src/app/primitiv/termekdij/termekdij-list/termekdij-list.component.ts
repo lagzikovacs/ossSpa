@@ -23,6 +23,7 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
+  ti = -1;
 
   termekdijservice: TermekdijService;
 

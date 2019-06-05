@@ -29,6 +29,7 @@ export class CikkListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
+  ti = -1;
 
   cikkservice: CikkService;
 

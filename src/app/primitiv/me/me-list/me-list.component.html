@@ -8,22 +8,13 @@
                [enUj]="!eppFrissit && mod" (Uj)="uj()"
                [visZoom]="meservice.zoom" (StopZoom)="stopzoom()">
   </app-toolbar>
-  <table class="table table-bordered table-sm table-responsive" style="border: none">
-    <thead>
-    <tr>
-      <th *ngIf="meservice.zoom"></th>
-      <th>Id</th>
-      <th>Mennyiségi egység</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of meservice.Dto; let i = index">
-      <td *ngIf="meservice.zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="selectforzoom(i)"><i class="fa fa-check" aria-hidden="true"></i></td>
-      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.Mekod}}</td>
-      <td>{{item.Me}}</td>
-    </tr>
-    </tbody>
-  </table>
+  <app-tabla [items]="meservice.Dto"
+             [colsets]="meservice.GridSettings"
+             [zoom]="meservice.zoom"
+             [(selectedrow)]="ti"
+             (forzoom)="selectforzoom($event)"
+             (forid)="setClickedRow($event)">
+  </app-tabla>
 
   <app-errormodal [cim]="meservice.cim"></app-errormodal>
   <app-spinner *ngIf="eppFrissit"></app-spinner>

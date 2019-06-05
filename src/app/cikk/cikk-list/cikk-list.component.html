@@ -8,41 +8,14 @@
                [enUj]="!eppFrissit && mod" (Uj)="onUj()"
                [visZoom]="cikkservice.zoom" (StopZoom)="stopzoom()">
   </app-toolbar>
-  <table class="table table-bordered table-sm table-responsive" style="border: none">
-    <thead>
-    <tr>
-      <th *ngIf="cikkservice.zoom"></th>
-      <th>Id</th>
-      <th>Megnevezés</th>
-      <th>Me</th>
-      <th>ÁFA kulcs</th>
-      <th>Egységár</th>
-      <th>Készletet képez</th>
-      <th>Tömeg, kg</th>
-      <th>Termékdíj KT</th>
-      <th>Termékdíj megnevezés</th>
-      <th>Termékdíj egységár</th>
-    </tr>
-    </thead>
-    <tbody>
-    <ng-container *ngFor="let item of cikkservice.Dto; let i = index">
-      <tr>
-        <td *ngIf="cikkservice.zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="selectforzoom(i)"><i class="fa fa-check" aria-hidden="true"></i></td>
-        <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.Cikkkod}}</td>
-        <td>{{item.Megnevezes}}</td>
-        <td>{{item.Me}}</td>
-        <td>{{item.Afakulcs}}</td>
-        <td style="text-align: right">{{item.Egysegar | number: '1.2-2'}}</td>
-        <td *ngIf="item.Keszletetkepez">igen</td>
-        <td *ngIf="!item.Keszletetkepez">nem</td>
-        <td style="text-align: right">{{item.Tomegkg | number: '1.2-2'}}</td>
-        <td>{{item.Termekdijkt}}</td>
-        <td>{{item.Termekdijmegnevezes}}</td>
-        <td style="text-align: right">{{item.Termekdijegysegar | number: '1.2-2'}}</td>
-      </tr>
-    </ng-container>
-    </tbody>
-  </table>
+  <app-tabla [items]="cikkservice.Dto"
+             [colsets]="cikkservice.GridSettings"
+             [zoom]="cikkservice.zoom"
+             [(selectedrow)]="ti"
+             (forzoom)="selectforzoom($event)"
+             (forid)="setClickedRow($event)">
+  </app-tabla>
+
   <app-toolbarfooter [enKereses]="!cikkservice.elsokereses && !eppFrissit"
                      [rekordszam]="cikkservice.Dto.length"
                      [osszesrekord]="cikkservice.OsszesRekord"

@@ -23,6 +23,8 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
+  ti = -1;
+
   afakulcsservice: AfakulcsService;
 
   constructor(private _logonservice: LogonService,

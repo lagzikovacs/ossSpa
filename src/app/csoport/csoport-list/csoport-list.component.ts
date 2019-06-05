@@ -16,6 +16,8 @@ export class CsoportListComponent {
 
   eppFrissit = false;
   elsokereses = true;
+  ti = -1;
+
   csoportservice: CsoportService;
 
   constructor(csoportservice: CsoportService) {

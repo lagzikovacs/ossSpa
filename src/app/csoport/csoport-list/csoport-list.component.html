@@ -6,22 +6,13 @@
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
                [enUj]="!eppFrissit" (Uj)="uj()">
   </app-toolbar>
-  <table class="table table-bordered table-sm table-responsive" style="border: none">
-    <thead>
-    <tr>
-      <th *ngIf="csoportservice.zoom"></th>
-      <th>Id</th>
-      <th>Csoport</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of csoportservice.Dto; let i = index">
-      <td *ngIf="csoportservice.zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="selectforzoom(i)"><i class="fa fa-check" aria-hidden="true"></i></td>
-      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.Csoportkod}}</td>
-      <td>{{item.Csoport1}}</td>
-    </tr>
-    </tbody>
-  </table>
+  <app-tabla [items]="csoportservice.Dto"
+             [colsets]="csoportservice.GridSettings"
+             [zoom]="csoportservice.zoom"
+             [(selectedrow)]="ti"
+             (forzoom)="selectforzoom($event)"
+             (forid)="setClickedRow($event)">
+  </app-tabla>
 
   <app-errormodal [cim]="csoportservice.cim"></app-errormodal>
   <app-spinner *ngIf="eppFrissit"></app-spinner>

@@ -21,6 +21,8 @@ export class HelysegListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
+  ti = -1;
+
   helysegservice: HelysegService;
 
   constructor(private _logonservice: LogonService,

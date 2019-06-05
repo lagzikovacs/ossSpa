@@ -8,24 +8,13 @@
                [enUj]="!eppFrissit && mod" (Uj)="uj()"
                [visZoom]="teendoservice.zoom" (StopZoom)="stopzoom()">
   </app-toolbar>
-  <table class="table table-bordered table-sm table-responsive" style="border: none">
-    <thead>
-    <tr>
-      <th *ngIf="teendoservice.zoom"></th>
-      <th>Id</th>
-      <th>Teendő</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of teendoservice.Dto; let i = index">
-      <td *ngIf="teendoservice.zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
-          (click)="selectforzoom(i)"><i class="fa fa-check" aria-hidden="true"></i></td>
-      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
-          (click)="setClickedRow(i)">{{item.Teendokod}}</td>
-      <td>{{item.Teendo1}}</td>
-    </tr>
-    </tbody>
-  </table>
+  <app-tabla [items]="teendoservice.Dto"
+             [colsets]="teendoservice.GridSettings"
+             [zoom]="teendoservice.zoom"
+             [(selectedrow)]="ti"
+             (forzoom)="selectforzoom($event)"
+             (forid)="setClickedRow($event)">
+  </app-tabla>
 
   <app-errormodal [cim]="teendoservice.cim"></app-errormodal>
   <app-spinner *ngIf="eppFrissit"></app-spinner>

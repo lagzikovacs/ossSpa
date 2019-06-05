@@ -23,6 +23,8 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
+  ti = -1;
+
   fizetesimodservice: FizetesimodService;
 
   constructor(private _logonservice: LogonService,

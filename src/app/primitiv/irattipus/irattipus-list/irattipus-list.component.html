@@ -8,22 +8,13 @@
                [enUj]="!eppFrissit && mod" (Uj)="uj()"
                [visZoom]="irattipusservice.zoom" (StopZoom)="stopzoom()">
   </app-toolbar>
-  <table class="table table-bordered table-sm table-responsive" style="border: none">
-    <thead>
-      <tr>
-        <th *ngIf="irattipusservice.zoom"></th>
-        <th>Id</th>
-        <th>Irattipus</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of irattipusservice.Dto; let i = index">
-        <td *ngIf="irattipusservice.zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="selectforzoom(i)"><i class="fa fa-check" aria-hidden="true"></i></td>
-        <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer" (click)="setClickedRow(i)">{{item.Irattipuskod}}</td>
-        <td>{{item.Irattipus1}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <app-tabla [items]="irattipusservice.Dto"
+             [colsets]="irattipusservice.GridSettings"
+             [zoom]="irattipusservice.zoom"
+             [(selectedrow)]="ti"
+             (forzoom)="selectforzoom($event)"
+             (forid)="setClickedRow($event)">
+  </app-tabla>
 
   <app-errormodal [cim]="irattipusservice.cim"></app-errormodal>
   <app-spinner *ngIf="eppFrissit"></app-spinner>

@@ -30,6 +30,7 @@ export class PenznemListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
+  ti = -1;
 
   penznemservice: PenznemService;
 

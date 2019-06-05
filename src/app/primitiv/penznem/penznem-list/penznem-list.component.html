@@ -8,22 +8,13 @@
                [enUj]="!eppFrissit && mod" (Uj)="uj()"
                [visZoom]="penznemservice.zoom" (StopZoom)="stopzoom()">
   </app-toolbar>
-  <table class="table table-bordered table-sm table-responsive" style="border: none">
-    <thead>
-    <tr>
-      <th *ngIf="penznemservice.zoom"></th>
-      <th>Id</th>
-      <th>Pénznem</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of penznemservice.Dto; let i = index">
-      <td *ngIf="penznemservice.zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="selectforzoom(i)"><i class="fa fa-check" aria-hidden="true"></i></td>
-      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.Penznemkod}}</td>
-      <td>{{item.Penznem1}}</td>
-    </tr>
-    </tbody>
-  </table>
+  <app-tabla [items]="penznemservice.Dto"
+             [colsets]="penznemservice.GridSettings"
+             [zoom]="penznemservice.zoom"
+             [(selectedrow)]="ti"
+             (forzoom)="selectforzoom($event)"
+             (forid)="setClickedRow($event)">
+  </app-tabla>
 
   <app-errormodal [cim]="penznemservice.cim"></app-errormodal>
   <app-spinner *ngIf="eppFrissit"></app-spinner>

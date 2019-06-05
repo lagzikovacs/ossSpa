@@ -28,6 +28,7 @@ export class TeendoListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
+  ti = -1
 
   teendoservice: TeendoService;
 

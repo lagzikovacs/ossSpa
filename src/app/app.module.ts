@@ -230,6 +230,7 @@ import { UgyfeltoolbarComponent } from './ugyfel/ugyfeltoolbar/ugyfeltoolbar.com
 import { UgyfelCsoportComponent } from './ugyfel/ugyfel-csoport/ugyfel-csoport.component';
 import { UgyfelVcardComponent } from './ugyfel/ugyfel-vcard/ugyfel-vcard.component';
 import { UgyfelTablaComponent } from './ugyfel/ugyfel-tabla/ugyfel-tabla.component';
+import { TablaComponent } from './tools/tabla/tabla.component';
 
 const routes: Routes = [
 
@@ -490,6 +491,7 @@ if (environment.production) {
     UgyfelCsoportComponent,
     UgyfelVcardComponent,
     UgyfelTablaComponent,
+    TablaComponent,
   ],
   imports: [
     BrowserModule,

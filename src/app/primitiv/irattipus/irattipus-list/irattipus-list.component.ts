@@ -25,6 +25,8 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
+  ti = -1;
+
   irattipusservice: IrattipusService;
 
   constructor(private _logonservice: LogonService,

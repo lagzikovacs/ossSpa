@@ -23,6 +23,8 @@ export class MeListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
   mod = false;
+  ti = -1;
+
   meservice: MeService;
 
   constructor(private _logonservice: LogonService,

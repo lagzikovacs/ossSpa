@@ -1,0 +1,28 @@
+<table class="table table-bordered table-sm table-responsive" style="border: none">
+  <thead>
+  <tr>
+    <th *ngIf="zoom"></th>
+    <th *ngFor="let cs of colsets">{{cs.Title}}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngFor="let item of items; let i = index">
+    <tr (click)="clickforrow(i)" [class.active]="i == selectedrow">
+      <td *ngIf="zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="clickforzoom(i)">
+        <i class="fa fa-check" aria-hidden="true"></i>
+      </td>
+
+      <td *ngFor="let cs of colsets; let j = index">
+        <div *ngIf="cs.Type === 'INT' && j === 0" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer" (click)="clickforid(i)">{{item[cs.Name]}}</div>
+        <div *ngIf="cs.Type === 'INT' && j > 0" style="text-align: right">{{item[cs.Name]}}</div>
+
+        <div *ngIf="cs.Type === 'NUMBER'" style="text-align: right">{{item[cs.Name] | number: '1.2-2'}}</div>
+        <div *ngIf="cs.Type === 'STRING'" [class]="cs.Classname">{{item[cs.Name]}}</div>
+        <div *ngIf="cs.Type === 'DATE'" [class]="'datum'">{{item[cs.Name] | datehun}}</div>
+        <div *ngIf="cs.Type === 'DATETIME'" [class]="'idobelyeg'">{{item[cs.Name] | datetimehun}}</div>
+        <div *ngIf="cs.Type === 'BOOL'">{{item[cs.Name] | boolhun}}</div>
+      </td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>

@@ -1,11 +1,11 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
-import {PenztarService} from '../../penztar.service';
-import {LogonService} from '../../../logon/logon.service';
-import {JogKod} from '../../../enums/jogkod';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {PenztarService} from '../../penztar/penztar.service';
+import {LogonService} from '../../logon/logon.service';
+import {JogKod} from '../../enums/jogkod';
 import {PenztartetelService} from '../penztartetel.service';
-import {Szempont} from '../../../enums/szempont';
-import {SzMT} from '../../../dtos/szmt';
+import {Szempont} from '../../enums/szempont';
+import {SzMT} from '../../dtos/szmt';
 import {PenztartetelContainerMode} from '../penztartetelcontainermode';
 
 @Component({
@@ -24,6 +24,7 @@ export class PenztartetelListComponent implements OnDestroy {
   eppFrissit = false;
   mod = false;
   elsokereses = true;
+  ti = -1;
   nyitva = false;
   penztarservice: PenztarService;
   penztartetelservice: PenztartetelService;

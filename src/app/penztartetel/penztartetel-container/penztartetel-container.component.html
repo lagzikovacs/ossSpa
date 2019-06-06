@@ -10,3 +10,6 @@ Uj = 2
 <ng-container *ngIf="penztartetelservice.ContainerMode === 2">
   <app-penztartetel-szerkesztes></app-penztartetel-szerkesztes>
 </ng-container>
+
+<app-errormodal [cim]="penztartetelservice.cim"></app-errormodal>
+<app-spinner *ngIf="eppFrissit"></app-spinner>

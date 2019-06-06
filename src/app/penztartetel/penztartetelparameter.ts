@@ -1,4 +1,4 @@
-import {SzMT} from '../../dtos/szmt';
+import {SzMT} from '../dtos/szmt';
 
 export class PenztartetelParameter {
   rekordtol: number;

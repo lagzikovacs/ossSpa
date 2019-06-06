@@ -2,8 +2,8 @@ import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatEgyMode} from '../bizonylategymode';
-import {PenztartetelService} from '../../penztar/penztartetel/penztartetel.service';
-import {PenztartetelDto} from '../../penztar/penztartetel/penztarteteldto';
+import {PenztartetelService} from '../../penztartetel/penztartetel.service';
+import {PenztartetelDto} from '../../penztartetel/penztarteteldto';
 import {BizonylatTipus} from '../bizonylattipus';
 
 @Component({

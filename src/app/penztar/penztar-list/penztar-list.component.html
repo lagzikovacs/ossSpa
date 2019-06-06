@@ -6,28 +6,13 @@
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
                [enUj]="!eppFrissit && mod" (Uj)="uj()">
   </app-toolbar>
-  <table class="table table-bordered table-sm table-responsive" style="border: none">
-    <thead>
-    <tr>
-      <th *ngIf="penztarservice.zoom"></th>
-      <th>Id</th>
-      <th>Pénztár</th>
-      <th>Pénznem</th>
-      <th>Egyenleg</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of penztarservice.Dto; let i = index">
-      <td *ngIf="penztarservice.zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
-          (click)="selectforzoom(i)"><i class="fa fa-check" aria-hidden="true"></i></td>
-      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
-          (click)="setClickedRow(i)">{{item.Penztarkod}}</td>
-      <td>{{item.Penztar1}}</td>
-      <td>{{item.Penznem}}</td>
-      <td>{{item.Egyenleg}}</td>
-    </tr>
-    </tbody>
-  </table>
+  <app-tabla [items]="penztarservice.Dto"
+             [colsets]="penztarservice.GridSettings"
+             [zoom]="penztarservice.zoom"
+             [(selectedrow)]="ti"
+             (forzoom)="selectforzoom($event)"
+             (forid)="setClickedRow($event)">
+  </app-tabla>
 
   <app-errormodal [cim]="penztarservice.cim"></app-errormodal>
   <app-spinner *ngIf="eppFrissit"></app-spinner>

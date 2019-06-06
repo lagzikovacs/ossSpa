@@ -3,11 +3,11 @@ import {PenztarService} from '../penztar.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
-import {PenztartetelService} from '../penztartetel/penztartetel.service';
-import {PenztartetelDto} from '../penztartetel/penztarteteldto';
+import {PenztartetelService} from '../../penztartetel/penztartetel.service';
+import {PenztartetelDto} from '../../penztartetel/penztarteteldto';
 import {PenztarContainerMode} from '../penztarcontainermode';
 import {PenztarEgyMode} from '../penztaregymode';
-import {PenztartetelContainerMode} from '../penztartetel/penztartetelcontainermode';
+import {PenztartetelContainerMode} from '../../penztartetel/penztartetelcontainermode';
 import {PenztarSzerkesztesMode} from '../penztarszerkesztesmode';
 
 @Component({
@@ -23,6 +23,7 @@ export class PenztarListComponent implements OnInit, OnDestroy {
   eppFrissit = false;
   mod = false;
   elsokereses = true;
+  ti = -1;
   penztarservice: PenztarService;
 
   constructor(private _logonservice: LogonService,

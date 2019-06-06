@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {PenztartetelService} from '../penztartetel.service';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import * as moment from 'moment';
-import {PenztarService} from '../../penztar.service';
+import {PenztarService} from '../../penztar/penztar.service';
 import {PenztartetelContainerMode} from '../penztartetelcontainermode';
 
 @Component({

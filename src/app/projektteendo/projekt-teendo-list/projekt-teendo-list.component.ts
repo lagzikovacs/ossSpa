@@ -2,8 +2,8 @@ import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ProjektteendoService} from '../projektteendo.service';
 import {LogonService} from '../../logon/logon.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {ProjektteendoContainerMode} from "../projektteendocontainermode";
-import {ProjektteendoEgyMode} from "../projekttendoegymode";
+import {ProjektteendoContainerMode} from '../projektteendocontainermode';
+import {ProjektteendoEgyMode} from '../projekttendoegymode';
 
 @Component({
   selector: 'app-projekt-teendo-list',
@@ -15,6 +15,7 @@ export class ProjektTeendoListComponent implements OnDestroy {
 
   projektteendoservice: ProjektteendoService;
   eppFrissit = false;
+  ti = -1;
 
   constructor(private _logonservice: LogonService,
               projektteendoservice: ProjektteendoService) {

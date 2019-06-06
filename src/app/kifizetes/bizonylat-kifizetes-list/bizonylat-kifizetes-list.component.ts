@@ -18,6 +18,7 @@ export class BizonylatKifizetesListComponent implements OnDestroy {
 
   bizonylatkifizetesservice: BizonylatkifizetesService;
   eppFrissit = false;
+  ti = -1;
 
   constructor(private _logonservice: LogonService,
               private _bizonylatservice: BizonylatService,

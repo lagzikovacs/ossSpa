@@ -10,30 +10,11 @@
       </button>
     </nav>
   </div>
-  <table class="table table-bordered table-sm table-responsive" style="border: none">
-    <thead>
-    <tr>
-      <th>Id</th>
-      <th>Dedikálva</th>
-      <th>Határidő</th>
-      <th>Elvégezve</th>
-      <th>Teendő</th>
-      <th>Leírás</th>
-    </tr>
-    </thead>
-    <tbody>
-    <ng-container *ngFor="let item of projektteendoservice.Dto; let i = index">
-      <tr>
-        <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer" (click)="setClickedRow(i)">{{item.Projektteendokod}}</td>
-        <td>{{item.Dedikalva}}</td>
-        <td>{{item.Hatarido | datehun}}</td>
-        <td>{{item.Elvegezve | datehun}}</td>
-        <td>{{item.Teendo}}</td>
-        <td style="min-width: 500px">{{item.Leiras}}</td>
-      </tr>
-    </ng-container>
-    </tbody>
-  </table>
+  <app-tabla [items]="projektteendoservice.Dto"
+             [colsets]="projektteendoservice.GridSettings"
+             [(selectedrow)]="ti"
+             (forid)="setClickedRow($event)">
+  </app-tabla>
 
   <app-errormodal [cim]="projektteendoservice.cim"></app-errormodal>
   <app-spinner *ngIf="eppFrissit"></app-spinner>

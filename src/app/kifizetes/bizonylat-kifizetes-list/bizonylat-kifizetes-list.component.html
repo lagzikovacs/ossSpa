@@ -10,27 +10,11 @@
       </button>
     </nav>
   </div>
-  <table class="table table-bordered table-sm table-responsive" style="border: none">
-    <thead>
-    <tr>
-      <th>Id</th>
-      <th>Dátum</th>
-      <th>Összeg</th>
-      <th>Pénznem</th>
-      <th>Fizetési mód</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of bizonylatkifizetesservice.Dto; let i = index">
-      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
-          (click)="setClickedRow(i)">{{item.Kifizeteskod}}</td>
-      <td>{{item.Datum | datehun}}</td>
-      <td>{{item.Osszeg | number: '1.2-2'}}</td>
-      <td>{{item.Penznem}}</td>
-      <td>{{item.Fizetesimod}}</td>
-    </tr>
-    </tbody>
-  </table>
+  <app-tabla [items]="bizonylatkifizetesservice.Dto"
+             [colsets]="bizonylatkifizetesservice.GridSettings"
+             [(selectedrow)]="ti"
+             (forid)="setClickedRow($event)">
+  </app-tabla>
 
   <app-errormodal [cim]="bizonylatkifizetesservice.cim"></app-errormodal>
   <app-spinner *ngIf="eppFrissit"></app-spinner>

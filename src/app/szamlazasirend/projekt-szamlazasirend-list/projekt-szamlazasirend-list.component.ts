@@ -15,6 +15,7 @@ export class ProjektSzamlazasirendListComponent implements OnDestroy {
 
   szamlazasirendservice: SzamlazasirendService;
   eppFrissit = false;
+  ti = -1;
 
   constructor(private _logonservice: LogonService,
               szamlazasirendservice: SzamlazasirendService) {

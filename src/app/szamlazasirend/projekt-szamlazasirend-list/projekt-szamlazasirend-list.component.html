@@ -10,26 +10,11 @@
       </button>
     </nav>
   </div>
-  <table class="table table-bordered table-sm table-responsive" style="border: none">
-  <thead>
-  <tr>
-    <th>Id</th>
-    <th>Összeg</th>
-    <th>Pénznem</th>
-    <th>Megjegyzés</th>
-  </tr>
-  </thead>
-  <tbody>
-  <ng-container *ngFor="let item of szamlazasirendservice.Dto; let i = index">
-    <tr>
-      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer" (click)="setClickedRow(i)">{{item.Szamlazasirendkod}}</td>
-      <td>{{item.Osszeg}}</td>
-      <td>{{item.Penznem}}</td>
-      <td>{{item.Megjegyzes}}</td>
-    </tr>
-  </ng-container>
-  </tbody>
-  </table>
+  <app-tabla [items]="szamlazasirendservice.Dto"
+             [colsets]="szamlazasirendservice.GridSettings"
+             [(selectedrow)]="ti"
+             (forid)="setClickedRow($event)">
+  </app-tabla>
 
   <app-errormodal [cim]="szamlazasirendservice.cim"></app-errormodal>
   <app-spinner *ngIf="eppFrissit"></app-spinner>

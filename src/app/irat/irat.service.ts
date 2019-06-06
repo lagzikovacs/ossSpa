@@ -31,6 +31,7 @@ export class IratService {
   DtoSelectedIndex = -1;
   uj = false;
   DtoEdited = new IratDto();
+  elsokereses = true;
 
   ContainerMode = IratContainerMode.List;
   EgyMode = IratEgyMode.Dokumentum;

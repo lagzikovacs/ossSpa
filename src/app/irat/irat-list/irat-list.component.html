@@ -10,33 +10,12 @@
     [enKereses]="!eppFrissit" (Kereses)="onKereses()"
     [enUj]="!eppFrissit && mod" (Uj)="onUj()">
   </app-irattoolbar>
-  <table class="table table-bordered table-sm table-responsive" style="border: none">
-    <thead>
-    <tr>
-      <th>Id</th>
-      <th>Irány</th>
-      <th>Keletkezett</th>
-      <th>Irattipus</th>
-      <th>Ügyfélnév</th>
-      <th>Ügyfélcím</th>
-      <th>Küldő</th>
-      <th>Tárgy</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of iratservice.Dto; let i = index">
-      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.Iratkod}}</td>
-      <td>{{item.Irany}}</td>
-      <td>{{item.Keletkezett | datehun}}</td>
-      <td>{{item.Irattipus}}</td>
-      <td>{{item.Ugyfelnev}}</td>
-      <td>{{item.Ugyfelcim}}</td>
-      <td>{{item.Kuldo}}</td>
-      <td>{{item.Targy}}</td>
-    </tr>
-    </tbody>
-  </table>
-  <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
+  <app-tabla [items]="iratservice.Dto"
+             [colsets]="iratservice.GridSettings"
+             [(selectedrow)]="ti"
+             (forid)="setClickedRow($event)">
+  </app-tabla>
+  <app-toolbarfooter [enKereses]="!iratservice.elsokereses && !eppFrissit"
                      [rekordszam]="iratservice.Dto.length"
                      [osszesrekord]="iratservice.OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">

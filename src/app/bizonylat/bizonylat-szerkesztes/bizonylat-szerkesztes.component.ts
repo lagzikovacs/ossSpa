@@ -17,6 +17,7 @@ import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter'
 import {FizetesimodZoomParameter} from '../../primitiv/fizetesimod/fiztesimodzoomparameter';
 import {EmptyResult} from '../../dtos/emptyresult';
 import * as moment from 'moment';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-bizonylat-szerkesztes',
@@ -135,7 +136,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this.bizonylatservice.teteluj = false;
     this.bizonylatservice.Setszvesz();
 
-    this.bizonylatservice.TetelDtoEdited = Object.assign({}, this.bizonylatservice.ComplexDtoEdited.LstTetelDto[i]);
+    this.bizonylatservice.TetelDtoEdited = deepCopy(this.bizonylatservice.ComplexDtoEdited.LstTetelDto[i]);
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.TetelSzerkesztes;
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
     this._cdr.detectChanges();

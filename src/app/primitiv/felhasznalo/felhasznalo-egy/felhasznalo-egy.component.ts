@@ -7,6 +7,7 @@ import {FelhasznaloContainerMode} from '../felhasznalocontainermode';
 import {FelhasznaloEgyMode} from '../felhasznaloegymode';
 import {EsemenynaploService} from '../../../esemenynaplo/esemenynaplo.service';
 import {rowanimation} from '../../../animation/rowAnimation';
+import {deepCopy} from '../../../tools/deepCopy';
 
 @Component({
   selector: 'app-felhasznalo-egy',
@@ -39,7 +40,7 @@ export class FelhasznaloEgyComponent implements OnDestroy {
   }
   modositas() {
     this.felhasznaloservice.uj = false;
-    this.felhasznaloservice.DtoEdited = Object.assign({}, this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex]);
+    this.felhasznaloservice.DtoEdited = deepCopy(this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex]);
     this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Modositas;
   }
   jelszo() {

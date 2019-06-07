@@ -6,6 +6,7 @@ import {JogKod} from '../../enums/jogkod';
 import {PenztarContainerMode} from '../penztarcontainermode';
 import {PenztarEgyMode} from '../penztaregymode';
 import {rowanimation} from '../../animation/rowAnimation';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-penztar-egy',
@@ -39,7 +40,7 @@ export class PenztarEgyComponent implements OnDestroy {
   }
   modositas() {
     this.penztarservice.uj = false;
-    this.penztarservice.DtoEdited = Object.assign({}, this.penztarservice.Dto[this.penztarservice.DtoSelectedIndex]);
+    this.penztarservice.DtoEdited = deepCopy(this.penztarservice.Dto[this.penztarservice.DtoSelectedIndex]);
     this.penztarservice.EgyMode = PenztarEgyMode.Modositas;
   }
   tetelek() {

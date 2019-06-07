@@ -6,6 +6,7 @@ import {JogKod} from '../../../enums/jogkod';
 import {HelysegContainerMode} from '../helysegcontainermode';
 import {HelysegEgyMode} from '../helysegegymode';
 import {rowanimation} from '../../../animation/rowAnimation';
+import {deepCopy} from '../../../tools/deepCopy';
 
 @Component({
   selector: 'app-helyseg-egy',
@@ -37,7 +38,7 @@ export class HelysegEgyComponent implements OnDestroy {
   }
   modositas() {
     this.helysegservice.uj = false;
-    this.helysegservice.DtoEdited = Object.assign({}, this.helysegservice.Dto[this.helysegservice.DtoSelectedIndex]);
+    this.helysegservice.DtoEdited = deepCopy(this.helysegservice.Dto[this.helysegservice.DtoSelectedIndex]);
     this.helysegservice.EgyMode = HelysegEgyMode.Modositas;
   }
 

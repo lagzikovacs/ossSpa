@@ -5,6 +5,7 @@ import {SzamlazasirendContainerMode} from '../szamlazasirendcontainermode';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {LogonService} from '../../logon/logon.service';
 import {rowanimation} from '../../animation/rowAnimation';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-projekt-szamlazasirend-egy',
@@ -34,7 +35,7 @@ export class ProjektSzamlazasirendEgyComponent implements OnDestroy {
   }
   modositas() {
     this.szamlazasirendservice.uj = false;
-    this.szamlazasirendservice.DtoEdited = Object.assign({}, this.szamlazasirendservice.Dto[this.szamlazasirendservice.DtoSelectedIndex]);
+    this.szamlazasirendservice.DtoEdited = deepCopy(this.szamlazasirendservice.Dto[this.szamlazasirendservice.DtoSelectedIndex]);
     this.szamlazasirendservice.EgyMode = SzamlazasirendEgyMode.Modositas;
   }
 

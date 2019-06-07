@@ -7,6 +7,7 @@ import {UgyfelContainerMode} from '../ugyfelcontainermode';
 import {UgyfelEgyMode} from '../ugyfelegymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import * as FileSaver from 'file-saver';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-ugyfel-egy',
@@ -39,12 +40,12 @@ export class UgyfelEgyComponent implements OnDestroy {
   }
   modositas() {
     this.ugyfelservice.uj = false;
-    this.ugyfelservice.DtoEdited = Object.assign({}, this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
+    this.ugyfelservice.DtoEdited = deepCopy(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
     this.ugyfelservice.EgyMode = UgyfelEgyMode.Modositas;
   }
   csoport() {
     this.ugyfelservice.uj = false;
-    this.ugyfelservice.DtoEdited = Object.assign({}, this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
+    this.ugyfelservice.DtoEdited = deepCopy(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
     this.ugyfelservice.EgyMode = UgyfelEgyMode.Csoport;
   }
   projekt() {
@@ -55,7 +56,7 @@ export class UgyfelEgyComponent implements OnDestroy {
   }
   vcard() {
     this.ugyfelservice.uj = false;
-    this.ugyfelservice.DtoEdited = Object.assign({}, this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
+    this.ugyfelservice.DtoEdited = deepCopy(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
     this.ugyfelservice.EgyMode = UgyfelEgyMode.Vcard;
   }
 

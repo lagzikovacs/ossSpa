@@ -5,6 +5,7 @@ import {ProjektteendoEgyMode} from '../projekttendoegymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {LogonService} from '../../logon/logon.service';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-projekt-teendo-egy',
@@ -34,12 +35,12 @@ export class ProjektTeendoEgyComponent implements OnDestroy {
   }
   modositas() {
     this.projektteendoservice.uj = false;
-    this.projektteendoservice.DtoEdited = Object.assign({}, this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex]);
+    this.projektteendoservice.DtoEdited = deepCopy(this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex]);
     this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Modositas;
   }
   elvegezve() {
     this.projektteendoservice.uj = false;
-    this.projektteendoservice.DtoEdited = Object.assign({}, this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex]);
+    this.projektteendoservice.DtoEdited = deepCopy(this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex]);
     this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Elvegezve;
   }
 

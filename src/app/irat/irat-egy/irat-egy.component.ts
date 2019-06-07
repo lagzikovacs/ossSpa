@@ -16,6 +16,7 @@ import {AbuComponent} from '../../tools/abu/abu.component';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-irat-egy',
@@ -61,7 +62,7 @@ export class IratEgyComponent implements OnDestroy {
   }
   modositas() {
     this.iratservice.uj = false;
-    this.iratservice.DtoEdited = Object.assign({}, this.iratservice.Dto[this.iratservice.DtoSelectedIndex]);
+    this.iratservice.DtoEdited = deepCopy(this.iratservice.Dto[this.iratservice.DtoSelectedIndex]);
     this.iratservice.EgyMode = IratEgyMode.Modositas;
   }
   dokumentum() {

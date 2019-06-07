@@ -4,6 +4,7 @@ import {CsoportService} from '../csoport.service';
 import {CsoportContainerMode} from '../csoportcontainermode';
 import {CsoportEgyMode} from '../csoportegymode';
 import {rowanimation} from '../../animation/rowAnimation';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-csoport-egy',
@@ -32,7 +33,7 @@ export class CsoportEgyComponent implements OnDestroy {
   }
   modositas() {
     this.csoportservice.uj = false;
-    this.csoportservice.DtoEdited = Object.assign({}, this.csoportservice.Dto[this.csoportservice.DtoSelectedIndex]);
+    this.csoportservice.DtoEdited = deepCopy(this.csoportservice.Dto[this.csoportservice.DtoSelectedIndex]);
     this.csoportservice.EgyMode = CsoportEgyMode.Modositas;
   }
   felhasznalo() {

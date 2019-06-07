@@ -8,6 +8,7 @@ import {CikkContainerMode} from '../cikkcontainermode';
 import {CikkEgyMode} from '../cikkegymode';
 import {CikkSzerkesztesMode} from '../cikkszerkesztesmode';
 import {rowanimation} from '../../animation/rowAnimation';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-cikk-egy',
@@ -39,7 +40,7 @@ export class CikkEgyComponent implements OnDestroy {
   }
   modositas() {
     this.cikkservice.uj = false;
-    this.cikkservice.DtoEdited = Object.assign({}, this.cikkservice.Dto[this.cikkservice.DtoSelectedIndex]);
+    this.cikkservice.DtoEdited = deepCopy(this.cikkservice.Dto[this.cikkservice.DtoSelectedIndex]);
     this.cikkservice.EgyMode = CikkEgyMode.Modositas;
     this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.Blank;
   }

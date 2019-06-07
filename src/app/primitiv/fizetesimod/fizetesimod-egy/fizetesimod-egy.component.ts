@@ -6,6 +6,7 @@ import {JogKod} from '../../../enums/jogkod';
 import {FizetesimodContainerMode} from '../fizetesimodcontainermode';
 import {FizetesimodEgyMode} from '../fizetesimodegymode';
 import {rowanimation} from '../../../animation/rowAnimation';
+import {deepCopy} from '../../../tools/deepCopy';
 
 @Component({
   selector: 'app-fizetesimod-egy',
@@ -37,7 +38,7 @@ export class FizetesimodEgyComponent implements OnDestroy {
   }
   modositas() {
     this.fizetesimodservice.uj = false;
-    this.fizetesimodservice.DtoEdited = Object.assign({}, this.fizetesimodservice.Dto[this.fizetesimodservice.DtoSelectedIndex]);
+    this.fizetesimodservice.DtoEdited = deepCopy(this.fizetesimodservice.Dto[this.fizetesimodservice.DtoSelectedIndex]);
     this.fizetesimodservice.EgyMode = FizetesimodEgyMode.Modositas;
   }
 

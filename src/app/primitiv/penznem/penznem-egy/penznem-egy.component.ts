@@ -6,6 +6,7 @@ import {JogKod} from '../../../enums/jogkod';
 import {PenznemContainerMode} from '../penznemcontainermode';
 import {PenznemEgyMode} from '../penznemegymode';
 import {rowanimation} from '../../../animation/rowAnimation';
+import {deepCopy} from '../../../tools/deepCopy';
 
 @Component({
   selector: 'app-penznem-egy',
@@ -37,7 +38,7 @@ export class PenznemEgyComponent implements OnDestroy {
   }
   modositas() {
     this.penznemservice.uj = false;
-    this.penznemservice.DtoEdited = Object.assign({}, this.penznemservice.Dto[this.penznemservice.DtoSelectedIndex]);
+    this.penznemservice.DtoEdited = deepCopy(this.penznemservice.Dto[this.penznemservice.DtoSelectedIndex]);
     this.penznemservice.EgyMode = PenznemEgyMode.Modositas;
   }
 

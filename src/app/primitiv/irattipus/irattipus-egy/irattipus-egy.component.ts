@@ -6,6 +6,7 @@ import {JogKod} from '../../../enums/jogkod';
 import {IrattipusEgyMode} from '../irattipusegymode';
 import {IrattipusContainerMode} from '../irattipuscontainermode';
 import {rowanimation} from '../../../animation/rowAnimation';
+import {deepCopy} from '../../../tools/deepCopy';
 
 @Component({
   selector: 'app-irattipus-egy',
@@ -37,7 +38,7 @@ export class IrattipusEgyComponent implements OnDestroy {
   }
   modositas() {
     this.irattipusservice.uj = false;
-    this.irattipusservice.DtoEdited = Object.assign({}, this.irattipusservice.Dto[this.irattipusservice.DtoSelectedIndex]);
+    this.irattipusservice.DtoEdited = deepCopy(this.irattipusservice.Dto[this.irattipusservice.DtoSelectedIndex]);
     this.irattipusservice.EgyMode = IrattipusEgyMode.Modositas;
   }
 

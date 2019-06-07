@@ -6,6 +6,7 @@ import {rowanimation} from '../../../animation/rowAnimation';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
+import {deepCopy} from '../../../tools/deepCopy';
 
 @Component({
   selector: 'app-me-egy',
@@ -37,7 +38,7 @@ export class MeEgyComponent implements OnDestroy {
   }
   modositas() {
     this.meservice.uj = false;
-    this.meservice.DtoEdited = Object.assign({}, this.meservice.Dto[this.meservice.DtoSelectedIndex]);
+    this.meservice.DtoEdited = deepCopy(this.meservice.Dto[this.meservice.DtoSelectedIndex]);
     this.meservice.EgyMode = MeEgyMode.Modositas;
   }
 

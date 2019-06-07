@@ -6,6 +6,7 @@ import {JogKod} from '../../../enums/jogkod';
 import {TeendoContainerMode} from '../teendocontainermode';
 import {TeendoEgyMode} from '../teendoegymode';
 import {rowanimation} from '../../../animation/rowAnimation';
+import {deepCopy} from '../../../tools/deepCopy';
 
 @Component({
   selector: 'app-teendo-egy',
@@ -37,7 +38,7 @@ export class TeendoEgyComponent implements OnDestroy {
   }
   modositas() {
     this.teendoservice.uj = false;
-    this.teendoservice.DtoEdited = Object.assign({}, this.teendoservice.Dto[this.teendoservice.DtoSelectedIndex]);
+    this.teendoservice.DtoEdited = deepCopy(this.teendoservice.Dto[this.teendoservice.DtoSelectedIndex]);
     this.teendoservice.EgyMode = TeendoEgyMode.Modositas;
   }
 

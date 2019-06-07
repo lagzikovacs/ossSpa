@@ -12,6 +12,7 @@ import {ProjektteendoContainerMode} from '../../projektteendo/projektteendoconta
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-projekt-egy',
@@ -46,28 +47,28 @@ export class ProjektEgyComponent implements OnDestroy {
   }
   modositas() {
     this.projektservice.uj = false;
-    this.projektservice.DtoEdited = Object.assign({}, this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
+    this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     this.projektservice.EgyMode = ProjektEgyMode.Modositas;
   }
 
   stsz() {
     this.projektservice.uj = false;
-    this.projektservice.DtoEdited = Object.assign({}, this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
+    this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     this.projektservice.EgyMode = ProjektEgyMode.Statusz;
   }
   muszakiallapot() {
     this.projektservice.uj = false;
-    this.projektservice.DtoEdited = Object.assign({}, this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
+    this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     this.projektservice.EgyMode = ProjektEgyMode.Muszakiallapot;
   }
   inverter() {
     this.projektservice.uj = false;
-    this.projektservice.DtoEdited = Object.assign({}, this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
+    this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     this.projektservice.EgyMode = ProjektEgyMode.Inverter;
   }
   napelem() {
     this.projektservice.uj = false;
-    this.projektservice.DtoEdited = Object.assign({}, this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
+    this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     this.projektservice.EgyMode = ProjektEgyMode.Napelem;
   }
   iratminta() {
@@ -75,7 +76,7 @@ export class ProjektEgyComponent implements OnDestroy {
   }
   datumok() {
     this.projektservice.uj = false;
-    this.projektservice.DtoEdited = Object.assign({}, this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
+    this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     this.projektservice.EgyMode = ProjektEgyMode.Datumok;
   }
   bizonylatesirat() {

@@ -6,6 +6,7 @@ import {JogKod} from '../../../enums/jogkod';
 import {TermekdijContainerMode} from '../termekdijcontainermode';
 import {TermekdijEgyMode} from '../termekdijegymode';
 import {rowanimation} from '../../../animation/rowAnimation';
+import {deepCopy} from '../../../tools/deepCopy';
 
 @Component({
   selector: 'app-termekdij-egy',
@@ -37,7 +38,7 @@ export class TermekdijEgyComponent implements OnDestroy {
   }
   modositas() {
     this.termekdijservice.uj = false;
-    this.termekdijservice.DtoEdited = Object.assign({}, this.termekdijservice.Dto[this.termekdijservice.DtoSelectedIndex]);
+    this.termekdijservice.DtoEdited = deepCopy(this.termekdijservice.Dto[this.termekdijservice.DtoSelectedIndex]);
     this.termekdijservice.EgyMode = TermekdijEgyMode.Modositas;
   }
 

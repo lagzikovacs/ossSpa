@@ -4,6 +4,7 @@ import {BizonylatKifizetesContainerMode} from '../bizonylatkifizetescontainermod
 import {BizonylatKifizetesEgyMode} from '../bizonylatkifizetesegymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-bizonylat-kifizetes-egy',
@@ -33,7 +34,7 @@ export class BizonylatKifizetesEgyComponent implements OnDestroy {
   modositas() {
     this.bizonylatkifizetesservice.uj = false;
     this.bizonylatkifizetesservice.DtoEdited =
-      Object.assign({}, this.bizonylatkifizetesservice.Dto[this.bizonylatkifizetesservice.DtoSelectedIndex]);
+      deepCopy(this.bizonylatkifizetesservice.Dto[this.bizonylatkifizetesservice.DtoSelectedIndex]);
     this.bizonylatkifizetesservice.EgyMode = BizonylatKifizetesEgyMode.Modositas;
   }
 

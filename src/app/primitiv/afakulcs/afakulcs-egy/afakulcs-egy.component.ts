@@ -6,6 +6,7 @@ import {JogKod} from '../../../enums/jogkod';
 import {AfakulcsContainerMode} from '../afakulcscontainermode';
 import {AfakulcsEgyMode} from '../afakulcsegymode';
 import {rowanimation} from '../../../animation/rowAnimation';
+import {deepCopy} from '../../../tools/deepCopy';
 
 @Component({
   selector: 'app-afakulcs-egy',
@@ -37,7 +38,7 @@ export class AfakulcsEgyComponent implements OnDestroy {
   }
   modositas() {
     this.afakulcsservice.uj = false;
-    this.afakulcsservice.DtoEdited = Object.assign({}, this.afakulcsservice.Dto[this.afakulcsservice.DtoSelectedIndex]);
+    this.afakulcsservice.DtoEdited = deepCopy(this.afakulcsservice.Dto[this.afakulcsservice.DtoSelectedIndex]);
     this.afakulcsservice.EgyMode = AfakulcsEgyMode.Modositas;
   }
 

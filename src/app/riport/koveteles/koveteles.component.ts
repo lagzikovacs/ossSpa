@@ -9,8 +9,7 @@ import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-koveteles',
-  templateUrl: './koveteles.component.html',
-  styleUrls: ['./koveteles.component.css']
+  templateUrl: './koveteles.component.html'
 })
 export class KovetelesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

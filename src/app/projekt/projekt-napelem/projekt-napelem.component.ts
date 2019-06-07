@@ -7,7 +7,6 @@ import {rowanimation} from '../../animation/rowAnimation';
 @Component({
   selector: 'app-projekt-napelem',
   templateUrl: './projekt-napelem.component.html',
-  styleUrls: ['./projekt-napelem.component.css'],
   animations: [rowanimation]
 })
 export class ProjektNapelemComponent implements OnInit, OnDestroy {

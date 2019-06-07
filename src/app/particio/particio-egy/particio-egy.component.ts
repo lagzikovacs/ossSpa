@@ -1,12 +1,11 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ParticioService} from "../particio.service";
-import {ErrormodalComponent} from "../../errormodal/errormodal.component";
-import {ParticioEgyMode} from "../particioegymode";
+import {ParticioService} from '../particio.service';
+import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {ParticioEgyMode} from '../particioegymode';
 
 @Component({
   selector: 'app-particio-egy',
-  templateUrl: './particio-egy.component.html',
-  styleUrls: ['./particio-egy.component.css']
+  templateUrl: './particio-egy.component.html'
 })
 export class ParticioEgyComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

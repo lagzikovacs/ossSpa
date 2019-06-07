@@ -12,8 +12,7 @@ import {PenztarSzerkesztesMode} from '../penztarszerkesztesmode';
 
 @Component({
   selector: 'app-penztar-list',
-  templateUrl: './penztar-list.component.html',
-  styleUrls: ['./penztar-list.component.css']
+  templateUrl: './penztar-list.component.html'
 })
 export class PenztarListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

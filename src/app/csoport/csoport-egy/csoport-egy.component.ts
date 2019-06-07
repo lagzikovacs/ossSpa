@@ -8,7 +8,6 @@ import {rowanimation} from '../../animation/rowAnimation';
 @Component({
   selector: 'app-csoport-egy',
   templateUrl: './csoport-egy.component.html',
-  styleUrls: ['./csoport-egy.component.css'],
   animations: [rowanimation]
 })
 export class CsoportEgyComponent implements OnDestroy {

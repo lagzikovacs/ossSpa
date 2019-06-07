@@ -5,8 +5,7 @@ import {ParticioEgyMode} from '../particioegymode';
 
 @Component({
   selector: 'app-particio-smtp',
-  templateUrl: './particio-smtp.component.html',
-  styleUrls: ['./particio-smtp.component.css']
+  templateUrl: './particio-smtp.component.html'
 })
 export class ParticioSmtpComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

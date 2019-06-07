@@ -11,8 +11,7 @@ import {ProjektteendoSzerkesztesMode} from '../../../projektteendo/projektteendo
 
 @Component({
   selector: 'app-teendo-list',
-  templateUrl: './teendo-list.component.html',
-  styleUrls: ['./teendo-list.component.css']
+  templateUrl: './teendo-list.component.html'
 })
 export class TeendoListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

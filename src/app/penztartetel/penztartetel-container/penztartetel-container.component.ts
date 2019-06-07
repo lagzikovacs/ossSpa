@@ -4,8 +4,7 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-penztartetel-container',
-  templateUrl: './penztartetel-container.component.html',
-  styleUrls: ['./penztartetel-container.component.css']
+  templateUrl: './penztartetel-container.component.html'
 })
 export class PenztartetelContainerComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

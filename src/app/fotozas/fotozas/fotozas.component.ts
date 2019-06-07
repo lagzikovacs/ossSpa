@@ -9,8 +9,7 @@ import {LogonService} from '../../logon/logon.service';
 
 @Component({
   selector: 'app-fotozas',
-  templateUrl: './fotozas.component.html',
-  styleUrls: ['./fotozas.component.css']
+  templateUrl: './fotozas.component.html'
 })
 export class FotozasComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

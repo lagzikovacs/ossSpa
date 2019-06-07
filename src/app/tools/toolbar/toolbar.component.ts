@@ -2,8 +2,7 @@ import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Ou
 
 @Component({
   selector: 'app-toolbar',
-  templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.css']
+  templateUrl: './toolbar.component.html'
 })
 export class ToolbarComponent implements AfterViewInit, OnDestroy  {
   @Input() Szurok: string[] = [];

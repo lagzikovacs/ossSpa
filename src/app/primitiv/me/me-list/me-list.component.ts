@@ -13,8 +13,7 @@ import {BizonylattetelSzerkesztesMode} from '../../../bizonylat/bizonylattetelsz
 
 @Component({
   selector: 'app-me-list',
-  templateUrl: './me-list.component.html',
-  styleUrls: ['./me-list.component.css']
+  templateUrl: './me-list.component.html'
 })
 export class MeListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

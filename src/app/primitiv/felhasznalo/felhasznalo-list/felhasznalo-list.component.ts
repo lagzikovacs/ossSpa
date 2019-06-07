@@ -11,8 +11,7 @@ import {ProjektteendoSzerkesztesMode} from '../../../projektteendo/projektteendo
 
 @Component({
   selector: 'app-felhasznalo-list',
-  templateUrl: './felhasznalo-list.component.html',
-  styleUrls: ['./felhasznalo-list.component.css']
+  templateUrl: './felhasznalo-list.component.html'
 })
 export class FelhasznaloListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

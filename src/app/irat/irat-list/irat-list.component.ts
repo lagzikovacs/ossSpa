@@ -14,8 +14,7 @@ import {JogKod} from '../../enums/jogkod';
 
 @Component({
   selector: 'app-irat-list',
-  templateUrl: './irat-list.component.html',
-  styleUrls: ['./irat-list.component.css']
+  templateUrl: './irat-list.component.html'
 })
 export class IratListComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

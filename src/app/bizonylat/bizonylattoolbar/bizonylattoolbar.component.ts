@@ -2,8 +2,7 @@ import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Ou
 
 @Component({
   selector: 'app-bizonylattoolbar',
-  templateUrl: './bizonylattoolbar.component.html',
-  styleUrls: ['./bizonylattoolbar.component.css']
+  templateUrl: './bizonylattoolbar.component.html'
 })
 export class BizonylattoolbarComponent implements AfterViewInit, OnDestroy {
   @Input() Megrendeles = false;

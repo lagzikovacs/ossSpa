@@ -11,8 +11,7 @@ import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-ujbizonylat',
-  templateUrl: './projekt-bizonylatesirat-ujbizonylat.component.html',
-  styleUrls: ['./projekt-bizonylatesirat-ujbizonylat.component.css']
+  templateUrl: './projekt-bizonylatesirat-ujbizonylat.component.html'
 })
 export class ProjektBizonylatesiratUjbizonylatComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

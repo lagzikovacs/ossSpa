@@ -6,8 +6,7 @@ import {VolumeEgyMode} from '../volumeegymode';
 
 @Component({
   selector: 'app-volume-list',
-  templateUrl: './volume-list.component.html',
-  styleUrls: ['./volume-list.component.css']
+  templateUrl: './volume-list.component.html'
 })
 export class VolumeListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

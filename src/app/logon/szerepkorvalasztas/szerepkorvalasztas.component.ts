@@ -8,8 +8,7 @@ import {SessionDto} from '../../session/sessiondto';
 
 @Component({
   selector: 'app-szerepkorvalasztas',
-  templateUrl: './szerepkorvalasztas.component.html',
-  styleUrls: ['./szerepkorvalasztas.component.css'],
+  templateUrl: './szerepkorvalasztas.component.html'
 })
 export class SzerepkorvalasztasComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) private errormodal: ErrormodalComponent;

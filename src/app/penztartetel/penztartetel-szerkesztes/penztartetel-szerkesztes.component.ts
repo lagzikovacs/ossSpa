@@ -7,8 +7,7 @@ import {PenztartetelContainerMode} from '../penztartetelcontainermode';
 
 @Component({
   selector: 'app-penztartetel-szerkesztes',
-  templateUrl: './penztartetel-szerkesztes.component.html',
-  styleUrls: ['./penztartetel-szerkesztes.component.css']
+  templateUrl: './penztartetel-szerkesztes.component.html'
 })
 export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

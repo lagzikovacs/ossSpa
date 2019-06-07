@@ -8,8 +8,7 @@ import {Szempont} from '../../enums/szempont';
 
 @Component({
   selector: 'app-ugyfel-projekt',
-  templateUrl: './ugyfel-projekt.component.html',
-  styleUrls: ['./ugyfel-projekt.component.css']
+  templateUrl: './ugyfel-projekt.component.html'
 })
 export class UgyfelProjektComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

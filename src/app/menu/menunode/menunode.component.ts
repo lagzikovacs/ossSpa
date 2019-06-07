@@ -3,8 +3,7 @@ import {AngularmenuDto} from '../angularmenudto';
 
 @Component({
   selector: 'app-menunode',
-  templateUrl: './menunode.component.html',
-  styleUrls: ['./menunode.component.css']
+  templateUrl: './menunode.component.html'
 })
 export class MenunodeComponent implements OnDestroy {
   @Input() menunode: AngularmenuDto;

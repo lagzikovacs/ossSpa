@@ -4,8 +4,7 @@ import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-helyseg-container',
-  templateUrl: './helyseg-container.component.html',
-  styleUrls: ['./helyseg-container.component.css']
+  templateUrl: './helyseg-container.component.html'
 })
 export class HelysegContainerComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

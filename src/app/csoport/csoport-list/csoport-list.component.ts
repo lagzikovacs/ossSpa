@@ -6,8 +6,7 @@ import {CsoportEgyMode} from '../csoportegymode';
 
 @Component({
   selector: 'app-csoport-list',
-  templateUrl: './csoport-list.component.html',
-  styleUrls: ['./csoport-list.component.css']
+  templateUrl: './csoport-list.component.html'
 })
 export class CsoportListComponent {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

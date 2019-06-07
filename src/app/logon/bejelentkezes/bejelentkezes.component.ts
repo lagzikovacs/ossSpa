@@ -9,8 +9,7 @@ import {SessionDto} from '../../session/sessiondto';
 
 @Component({
   selector: 'app-bejelentkezes',
-  templateUrl: './bejelentkezes.component.html',
-  styleUrls: ['./bejelentkezes.component.css'],
+  templateUrl: './bejelentkezes.component.html'
 })
 export class BejelentkezesComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) private errormodal: ErrormodalComponent;

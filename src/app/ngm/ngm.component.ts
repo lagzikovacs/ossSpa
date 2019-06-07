@@ -7,8 +7,7 @@ import {NGMMode} from './ngmmode';
 
 @Component({
   selector: 'app-ngm',
-  templateUrl: './ngm.component.html',
-  styleUrls: ['./ngm.component.css']
+  templateUrl: './ngm.component.html'
 })
 export class NgmComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

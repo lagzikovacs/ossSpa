@@ -9,8 +9,7 @@ import {SzMT} from '../../dtos/szmt';
 
 @Component({
   selector: 'app-keszlet',
-  templateUrl: './keszlet.component.html',
-  styleUrls: ['./keszlet.component.css']
+  templateUrl: './keszlet.component.html'
 })
 export class KeszletComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

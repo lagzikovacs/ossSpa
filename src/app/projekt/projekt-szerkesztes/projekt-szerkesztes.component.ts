@@ -16,7 +16,6 @@ import {rowanimation} from '../../animation/rowAnimation';
 @Component({
   selector: 'app-projekt-szerkesztes',
   templateUrl: './projekt-szerkesztes.component.html',
-  styleUrls: ['./projekt-szerkesztes.component.css'],
   animations: [rowanimation]
 })
 export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {

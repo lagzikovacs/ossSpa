@@ -1,11 +1,10 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {IrattipusService} from "../irattipus.service";
+import {IrattipusService} from '../irattipus.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-irattipus-container',
-  templateUrl: './irattipus-container.component.html',
-  styleUrls: ['./irattipus-container.component.css']
+  templateUrl: './irattipus-container.component.html'
 })
 export class IrattipusContainerComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

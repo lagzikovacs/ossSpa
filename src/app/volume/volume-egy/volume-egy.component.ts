@@ -8,7 +8,6 @@ import {rowanimation} from '../../animation/rowAnimation';
 @Component({
   selector: 'app-volume-egy',
   templateUrl: './volume-egy.component.html',
-  styleUrls: ['./volume-egy.component.css'],
   animations: [rowanimation]
 })
 export class VolumeEgyComponent implements OnDestroy {

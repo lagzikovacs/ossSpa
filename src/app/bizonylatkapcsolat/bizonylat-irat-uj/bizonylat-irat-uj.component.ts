@@ -13,8 +13,7 @@ import {BizonylatKapcsolatSzerkesztesMode} from '../bizonylatkapcsolatszerkeszte
 
 @Component({
   selector: 'app-bizonylat-irat-uj',
-  templateUrl: './bizonylat-irat-uj.component.html',
-  styleUrls: ['./bizonylat-irat-uj.component.css']
+  templateUrl: './bizonylat-irat-uj.component.html'
 })
 export class BizonylatIratUjComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

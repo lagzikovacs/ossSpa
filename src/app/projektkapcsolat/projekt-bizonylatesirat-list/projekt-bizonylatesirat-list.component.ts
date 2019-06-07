@@ -16,12 +16,11 @@ import {BizonylatEgyMode} from '../../bizonylat/bizonylategymode';
 import {VagolapService} from '../../vagolap/vagolap.service';
 import {VagolapMode} from '../../vagolap/vagolapmode';
 import {AjanlatService} from '../../ajanlat/ajanlat.service';
-import {JogKod} from "../../enums/jogkod";
+import {JogKod} from '../../enums/jogkod';
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-list',
-  templateUrl: './projekt-bizonylatesirat-list.component.html',
-  styleUrls: ['./projekt-bizonylatesirat-list.component.css']
+  templateUrl: './projekt-bizonylatesirat-list.component.html'
 })
 export class ProjektBizonylatesiratListComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

@@ -7,8 +7,7 @@ import {NumberResult} from '../../../dtos/numberresult';
 
 @Component({
   selector: 'app-fizetesimod-szerkesztes',
-  templateUrl: './fizetesimod-szerkesztes.component.html',
-  styleUrls: ['./fizetesimod-szerkesztes.component.css']
+  templateUrl: './fizetesimod-szerkesztes.component.html'
 })
 export class FizetesimodSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

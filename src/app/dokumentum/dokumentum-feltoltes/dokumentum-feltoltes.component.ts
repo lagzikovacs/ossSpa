@@ -7,8 +7,7 @@ import {IratService} from '../../irat/irat.service';
 
 @Component({
   selector: 'app-dokumentum-feltoltes',
-  templateUrl: './dokumentum-feltoltes.component.html',
-  styleUrls: ['./dokumentum-feltoltes.component.css']
+  templateUrl: './dokumentum-feltoltes.component.html'
 })
 export class DokumentumFeltoltesComponent implements OnDestroy {
   @ViewChild('fileInput') fileInput: ElementRef;

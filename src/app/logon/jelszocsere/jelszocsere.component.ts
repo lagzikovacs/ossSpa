@@ -5,8 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-jelszocsere',
-  templateUrl: './jelszocsere.component.html',
-  styleUrls: ['./jelszocsere.component.css']
+  templateUrl: './jelszocsere.component.html'
 })
 export class JelszocsereComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

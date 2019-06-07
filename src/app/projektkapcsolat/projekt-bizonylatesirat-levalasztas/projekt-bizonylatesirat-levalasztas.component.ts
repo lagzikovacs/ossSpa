@@ -5,8 +5,7 @@ import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-levalasztas',
-  templateUrl: './projekt-bizonylatesirat-levalasztas.component.html',
-  styleUrls: ['./projekt-bizonylatesirat-levalasztas.component.css']
+  templateUrl: './projekt-bizonylatesirat-levalasztas.component.html'
 })
 export class ProjektBizonylatesiratLevalasztasComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

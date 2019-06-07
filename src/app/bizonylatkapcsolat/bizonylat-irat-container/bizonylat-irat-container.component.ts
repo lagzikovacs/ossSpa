@@ -3,8 +3,7 @@ import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
 
 @Component({
   selector: 'app-bizonylat-irat-container',
-  templateUrl: './bizonylat-irat-container.component.html',
-  styleUrls: ['./bizonylat-irat-container.component.css']
+  templateUrl: './bizonylat-irat-container.component.html'
 })
 export class BizonylatIratContainerComponent implements OnDestroy {
   bizonylatkapcsolatservice: BizonylatkapcsolatService;

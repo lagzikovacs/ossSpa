@@ -9,8 +9,7 @@ import {b64toBlob} from '../../tools/b64toBlob';
 
 @Component({
   selector: 'app-bejovoszamla',
-  templateUrl: './bejovoszamla.component.html',
-  styleUrls: ['./bejovoszamla.component.css']
+  templateUrl: './bejovoszamla.component.html'
 })
 export class BejovoszamlaComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

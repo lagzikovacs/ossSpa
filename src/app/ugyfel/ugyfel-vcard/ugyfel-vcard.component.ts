@@ -3,8 +3,7 @@ import {UgyfelDto} from '../ugyfeldto';
 
 @Component({
   selector: 'app-ugyfel-vcard',
-  templateUrl: './ugyfel-vcard.component.html',
-  styleUrls: ['./ugyfel-vcard.component.css']
+  templateUrl: './ugyfel-vcard.component.html'
 })
 export class UgyfelVcardComponent implements OnDestroy {
   @Input() item: UgyfelDto;

@@ -2,8 +2,7 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 
 @Component({
   selector: 'app-ugyfel-csoport',
-  templateUrl: './ugyfel-csoport.component.html',
-  styleUrls: ['./ugyfel-csoport.component.css']
+  templateUrl: './ugyfel-csoport.component.html'
 })
 export class UgyfelCsoportComponent implements OnDestroy {
   @Input() eppFrissit: boolean;

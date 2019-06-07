@@ -4,8 +4,7 @@ import {OnlineszamlaService} from '../onlineszamla.service';
 
 @Component({
   selector: 'app-adoszamellenorzes',
-  templateUrl: './adoszamellenorzes.component.html',
-  styleUrls: ['./adoszamellenorzes.component.css']
+  templateUrl: './adoszamellenorzes.component.html'
 })
 export class AdoszamellenorzesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

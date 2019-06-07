@@ -7,8 +7,7 @@ import {NumberResult} from '../../../dtos/numberresult';
 
 @Component({
   selector: 'app-termekdij-szerkesztes',
-  templateUrl: './termekdij-szerkesztes.component.html',
-  styleUrls: ['./termekdij-szerkesztes.component.css']
+  templateUrl: './termekdij-szerkesztes.component.html'
 })
 export class TermekdijSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

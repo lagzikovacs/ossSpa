@@ -20,8 +20,7 @@ import {LetoltesParam} from '../../dokumentum/letoltesparam';
 
 @Component({
   selector: 'app-ugyfelter',
-  templateUrl: './ugyfelter.component.html',
-  styleUrls: ['./ugyfelter.component.css']
+  templateUrl: './ugyfelter.component.html'
 })
 export class UgyfelterComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

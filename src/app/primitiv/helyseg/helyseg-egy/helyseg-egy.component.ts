@@ -10,7 +10,6 @@ import {rowanimation} from '../../../animation/rowAnimation';
 @Component({
   selector: 'app-helyseg-egy',
   templateUrl: './helyseg-egy.component.html',
-  styleUrls: ['./helyseg-egy.component.css'],
   animations: [rowanimation]
 })
 export class HelysegEgyComponent implements OnDestroy {

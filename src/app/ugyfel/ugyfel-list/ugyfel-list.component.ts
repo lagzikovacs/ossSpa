@@ -18,8 +18,7 @@ import {BizonylatSzerkesztesMode} from '../../bizonylat/bizonylatszerkesztesmode
 
 @Component({
   selector: 'app-ugyfel-list',
-  templateUrl: './ugyfel-list.component.html',
-  styleUrls: ['./ugyfel-list.component.css']
+  templateUrl: './ugyfel-list.component.html'
 })
 export class UgyfelListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

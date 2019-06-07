@@ -18,8 +18,7 @@ import {TermekdijContainerMode} from '../../primitiv/termekdij/termekdijcontaine
 
 @Component({
   selector: 'app-cikk-szerkesztes',
-  templateUrl: './cikk-szerkesztes.component.html',
-  styleUrls: ['./cikk-szerkesztes.component.css']
+  templateUrl: './cikk-szerkesztes.component.html'
 })
 export class CikkSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

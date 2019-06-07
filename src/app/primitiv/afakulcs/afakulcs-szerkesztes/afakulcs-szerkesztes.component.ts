@@ -7,8 +7,7 @@ import {AfakulcsEgyMode} from '../afakulcsegymode';
 
 @Component({
   selector: 'app-afakulcs-szerkesztes',
-  templateUrl: './afakulcs-szerkesztes.component.html',
-  styleUrls: ['./afakulcs-szerkesztes.component.css']
+  templateUrl: './afakulcs-szerkesztes.component.html'
 })
 export class AfakulcsSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

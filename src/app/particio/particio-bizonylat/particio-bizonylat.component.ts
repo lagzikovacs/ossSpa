@@ -5,8 +5,7 @@ import {ParticioEgyMode} from '../particioegymode';
 
 @Component({
   selector: 'app-particio-bizonylat',
-  templateUrl: './particio-bizonylat.component.html',
-  styleUrls: ['./particio-bizonylat.component.css']
+  templateUrl: './particio-bizonylat.component.html'
 })
 export class ParticioBizonylatComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

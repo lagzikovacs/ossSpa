@@ -2,8 +2,7 @@ import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, On
 
 @Component({
   selector: 'app-ugyfeltoolbar',
-  templateUrl: './ugyfeltoolbar.component.html',
-  styleUrls: ['./ugyfeltoolbar.component.css']
+  templateUrl: './ugyfeltoolbar.component.html'
 })
 export class UgyfeltoolbarComponent implements AfterViewInit, OnDestroy {
   @Input() Csoportszurok: string[] = [];

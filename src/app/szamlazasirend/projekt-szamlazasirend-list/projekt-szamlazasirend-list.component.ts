@@ -7,8 +7,7 @@ import {SzamlazasirendEgyMode} from '../szamlazasirendegymode';
 
 @Component({
   selector: 'app-projekt-szamlazasirend-list',
-  templateUrl: './projekt-szamlazasirend-list.component.html',
-  styleUrls: ['./projekt-szamlazasirend-list.component.css']
+  templateUrl: './projekt-szamlazasirend-list.component.html'
 })
 export class ProjektSzamlazasirendListComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

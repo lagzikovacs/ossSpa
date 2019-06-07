@@ -8,8 +8,7 @@ import {BizonylatTipus} from '../bizonylattipus';
 
 @Component({
   selector: 'app-bizonylat-penztar',
-  templateUrl: './bizonylat-penztar.component.html',
-  styleUrls: ['./bizonylat-penztar.component.css']
+  templateUrl: './bizonylat-penztar.component.html'
 })
 export class BizonylatPenztarComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

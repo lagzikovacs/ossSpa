@@ -11,8 +11,7 @@ import {UgyfelSzerkesztesMode} from '../../../ugyfel/ugyfelszerkesztesmode';
 
 @Component({
   selector: 'app-helyseg-list',
-  templateUrl: './helyseg-list.component.html',
-  styleUrls: ['./helyseg-list.component.css']
+  templateUrl: './helyseg-list.component.html'
 })
 export class HelysegListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

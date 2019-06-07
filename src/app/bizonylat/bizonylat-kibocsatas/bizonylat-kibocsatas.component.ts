@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {BizonylatKibocsatasParam} from '../bizonylatkibocsatasparam';
@@ -8,8 +8,7 @@ import {PenztarService} from '../../penztar/penztar.service';
 
 @Component({
   selector: 'app-bizonylat-kibocsatas',
-  templateUrl: './bizonylat-kibocsatas.component.html',
-  styleUrls: ['./bizonylat-kibocsatas.component.css']
+  templateUrl: './bizonylat-kibocsatas.component.html'
 })
 export class BizonylatKibocsatasComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

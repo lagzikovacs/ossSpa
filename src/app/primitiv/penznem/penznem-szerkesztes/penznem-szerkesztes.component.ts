@@ -7,8 +7,7 @@ import {PenznemContainerMode} from '../penznemcontainermode';
 
 @Component({
   selector: 'app-penznem-szerkesztes',
-  templateUrl: './penznem-szerkesztes.component.html',
-  styleUrls: ['./penznem-szerkesztes.component.css']
+  templateUrl: './penznem-szerkesztes.component.html'
 })
 export class PenznemSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

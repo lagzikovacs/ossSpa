@@ -4,8 +4,7 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-bizonylat-kifizetesrendben',
-  templateUrl: './bizonylat-kifizetesrendben.component.html',
-  styleUrls: ['./bizonylat-kifizetesrendben.component.css']
+  templateUrl: './bizonylat-kifizetesrendben.component.html'
 })
 export class BizonylatKifizetesrendbenComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

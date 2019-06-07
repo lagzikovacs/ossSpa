@@ -9,7 +9,6 @@ import {rowanimation} from '../animation/rowAnimation';
 @Component({
   selector: 'app-projekt-iratminta',
   templateUrl: './projekt-iratminta.component.html',
-  styleUrls: ['./projekt-iratminta.component.css'],
   animations: [rowanimation]
 })
 export class ProjektIratmintaComponent implements OnDestroy {

@@ -7,7 +7,6 @@ import {rowanimation} from '../../animation/rowAnimation';
 @Component({
   selector: 'app-projekt-inverter',
   templateUrl: './projekt-inverter.component.html',
-  styleUrls: ['./projekt-inverter.component.css'],
   animations: [rowanimation]
 })
 export class ProjektInverterComponent implements OnInit, OnDestroy {

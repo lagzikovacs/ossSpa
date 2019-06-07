@@ -5,8 +5,7 @@ import {VagolapMode} from './vagolapmode';
 
 @Component({
   selector: 'app-vagolap',
-  templateUrl: './vagolap.component.html',
-  styleUrls: ['./vagolap.component.css']
+  templateUrl: './vagolap.component.html'
 })
 export class VagolapComponent implements OnInit, OnDestroy {
   vagolapservice: VagolapService;

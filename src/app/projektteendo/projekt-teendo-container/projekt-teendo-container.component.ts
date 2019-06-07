@@ -6,7 +6,6 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 @Component({
   selector: 'app-projekt-teendo-container',
   templateUrl: './projekt-teendo-container.component.html',
-  styleUrls: ['./projekt-teendo-container.component.css'],
   animations: [rowanimation]
 })
 export class ProjektTeendoContainerComponent implements OnInit, OnDestroy {

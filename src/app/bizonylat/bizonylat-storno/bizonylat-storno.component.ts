@@ -6,8 +6,7 @@ import {BizonylatContainerMode} from '../bizonylatcontainermode';
 
 @Component({
   selector: 'app-bizonylat-storno',
-  templateUrl: './bizonylat-storno.component.html',
-  styleUrls: ['./bizonylat-storno.component.css']
+  templateUrl: './bizonylat-storno.component.html'
 })
 export class BizonylatStornoComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

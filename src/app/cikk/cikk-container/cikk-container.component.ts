@@ -4,8 +4,7 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-cikk-container',
-  templateUrl: './cikk-container.component.html',
-  styleUrls: ['./cikk-container.component.css']
+  templateUrl: './cikk-container.component.html'
 })
 export class CikkContainerComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

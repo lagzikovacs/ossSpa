@@ -16,8 +16,7 @@ import {BizonylatService} from '../../bizonylat/bizonylat.service';
 
 @Component({
   selector: 'app-bizonylat-kifizetes-szerkesztes',
-  templateUrl: './bizonylat-kifizetes-szerkesztes.component.html',
-  styleUrls: ['./bizonylat-kifizetes-szerkesztes.component.css']
+  templateUrl: './bizonylat-kifizetes-szerkesztes.component.html'
 })
 export class BizonylatKifizetesSzerkesztesComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

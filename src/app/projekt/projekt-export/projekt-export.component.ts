@@ -10,8 +10,7 @@ import {ProjektContainerMode} from '../projektcontainermode';
 
 @Component({
   selector: 'app-projekt-export',
-  templateUrl: './projekt-export.component.html',
-  styleUrls: ['./projekt-export.component.css']
+  templateUrl: './projekt-export.component.html'
 })
 export class ProjektExportComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

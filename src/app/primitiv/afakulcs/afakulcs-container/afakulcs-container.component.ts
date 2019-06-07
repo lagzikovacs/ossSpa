@@ -4,8 +4,7 @@ import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-afakulcs-container',
-  templateUrl: './afakulcs-container.component.html',
-  styleUrls: ['./afakulcs-container.component.css']
+  templateUrl: './afakulcs-container.component.html'
 })
 export class AfakulcsContainerComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

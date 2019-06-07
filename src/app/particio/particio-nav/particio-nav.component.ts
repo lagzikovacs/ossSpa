@@ -5,8 +5,7 @@ import {ParticioEgyMode} from '../particioegymode';
 
 @Component({
   selector: 'app-particio-nav',
-  templateUrl: './particio-nav.component.html',
-  styleUrls: ['./particio-nav.component.css']
+  templateUrl: './particio-nav.component.html'
 })
 export class ParticioNavComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

@@ -4,8 +4,7 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-ugyfel-container',
-  templateUrl: './ugyfel-container.component.html',
-  styleUrls: ['./ugyfel-container.component.css']
+  templateUrl: './ugyfel-container.component.html'
 })
 export class UgyfelContainerComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

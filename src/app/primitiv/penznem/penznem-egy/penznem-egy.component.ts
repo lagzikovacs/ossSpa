@@ -10,7 +10,6 @@ import {rowanimation} from '../../../animation/rowAnimation';
 @Component({
   selector: 'app-penznem-egy',
   templateUrl: './penznem-egy.component.html',
-  styleUrls: ['./penznem-egy.component.css'],
   animations: [rowanimation]
 })
 export class PenznemEgyComponent implements OnDestroy {

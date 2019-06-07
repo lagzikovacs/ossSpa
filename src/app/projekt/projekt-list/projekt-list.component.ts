@@ -16,8 +16,7 @@ import {LogonService} from '../../logon/logon.service';
 
 @Component({
   selector: 'app-projekt-list',
-  templateUrl: './projekt-list.component.html',
-  styleUrls: ['./projekt-list.component.css']
+  templateUrl: './projekt-list.component.html'
 })
 export class ProjektListComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

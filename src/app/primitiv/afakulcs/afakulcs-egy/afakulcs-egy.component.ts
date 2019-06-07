@@ -10,7 +10,6 @@ import {rowanimation} from '../../../animation/rowAnimation';
 @Component({
   selector: 'app-afakulcs-egy',
   templateUrl: './afakulcs-egy.component.html',
-  styleUrls: ['./afakulcs-egy.component.css'],
   animations: [rowanimation]
 })
 export class AfakulcsEgyComponent implements OnDestroy {

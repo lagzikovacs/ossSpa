@@ -8,8 +8,7 @@ import {DokumentumEgyMode} from '../dokumentumegymode';
 
 @Component({
   selector: 'app-dokumentum-list',
-  templateUrl: './dokumentum-list.component.html',
-  styleUrls: ['./dokumentum-list.component.css']
+  templateUrl: './dokumentum-list.component.html'
 })
 export class DokumentumListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

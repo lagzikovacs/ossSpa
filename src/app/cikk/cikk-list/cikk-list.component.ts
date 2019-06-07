@@ -16,8 +16,7 @@ import {AjanlatService} from '../../ajanlat/ajanlat.service';
 
 @Component({
   selector: 'app-cikk-list',
-  templateUrl: './cikk-list.component.html',
-  styleUrls: ['./cikk-list.component.css']
+  templateUrl: './cikk-list.component.html'
 })
 export class CikkListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

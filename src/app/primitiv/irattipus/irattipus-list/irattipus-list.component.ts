@@ -15,8 +15,7 @@ import {BizonylatKapcsolatSzerkesztesMode} from '../../../bizonylatkapcsolat/biz
 
 @Component({
   selector: 'app-irattipus-list',
-  templateUrl: './irattipus-list.component.html',
-  styleUrls: ['./irattipus-list.component.css']
+  templateUrl: './irattipus-list.component.html'
 })
 export class IrattipusListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

@@ -10,7 +10,6 @@ import {rowanimation} from '../../../animation/rowAnimation';
 @Component({
   selector: 'app-fizetesimod-egy',
   templateUrl: './fizetesimod-egy.component.html',
-  styleUrls: ['./fizetesimod-egy.component.css'],
   animations: [rowanimation]
 })
 export class FizetesimodEgyComponent implements OnDestroy {

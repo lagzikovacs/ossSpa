@@ -2,14 +2,11 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {LogonService} from '../logon/logon.service';
 import {Subscription} from 'rxjs/index';
 import {SessionService} from '../session/session.service';
-import {ErrormodalComponent} from '../errormodal/errormodal.component';
-import {SessionDto} from '../session/sessiondto';
 import {EsemenynaploService} from '../esemenynaplo/esemenynaplo.service';
 
 @Component({
   selector: 'app-fooldal',
-  templateUrl: './fooldal.component.html',
-  styleUrls: ['./fooldal.component.css']
+  templateUrl: './fooldal.component.html'
 })
 export class FooldalComponent implements OnInit, OnDestroy {
   szerepkorkivalasztva: boolean;

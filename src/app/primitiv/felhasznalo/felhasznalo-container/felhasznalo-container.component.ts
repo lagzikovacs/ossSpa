@@ -4,8 +4,7 @@ import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-felhasznalo-container',
-  templateUrl: './felhasznalo-container.component.html',
-  styleUrls: ['./felhasznalo-container.component.css']
+  templateUrl: './felhasznalo-container.component.html'
 })
 export class FelhasznaloContainerComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

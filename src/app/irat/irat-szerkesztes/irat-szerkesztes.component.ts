@@ -16,8 +16,7 @@ import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
 
 @Component({
   selector: 'app-irat-szerkesztes',
-  templateUrl: './irat-szerkesztes.component.html',
-  styleUrls: ['./irat-szerkesztes.component.css']
+  templateUrl: './irat-szerkesztes.component.html'
 })
 export class IratSzerkesztesComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

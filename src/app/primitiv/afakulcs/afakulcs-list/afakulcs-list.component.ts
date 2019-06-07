@@ -13,8 +13,7 @@ import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 
 @Component({
   selector: 'app-afakulcs-list',
-  templateUrl: './afakulcs-list.component.html',
-  styleUrls: ['./afakulcs-list.component.css']
+  templateUrl: './afakulcs-list.component.html'
 })
 export class AfakulcsListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

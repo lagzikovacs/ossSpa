@@ -6,7 +6,6 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 @Component({
   selector: 'app-projekt-szamlazasirend-container',
   templateUrl: './projekt-szamlazasirend-container.component.html',
-  styleUrls: ['./projekt-szamlazasirend-container.component.css'],
   animations: [rowanimation]
 })
 export class ProjektSzamlazasirendContainerComponent implements OnInit, OnDestroy {

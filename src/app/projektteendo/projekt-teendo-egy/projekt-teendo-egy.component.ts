@@ -9,7 +9,6 @@ import {LogonService} from '../../logon/logon.service';
 @Component({
   selector: 'app-projekt-teendo-egy',
   templateUrl: './projekt-teendo-egy.component.html',
-  styleUrls: ['./projekt-teendo-egy.component.css'],
   animations: [rowanimation]
 })
 export class ProjektTeendoEgyComponent implements OnDestroy {

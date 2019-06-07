@@ -21,7 +21,6 @@ import {rowanimation} from '../../animation/rowAnimation';
 @Component({
   selector: 'app-bizonylat-egy',
   templateUrl: './bizonylat-egy.component.html',
-  styleUrls: ['./bizonylat-egy.component.css'],
   animations: [rowanimation]
 })
 export class BizonylatEgyComponent implements OnDestroy {

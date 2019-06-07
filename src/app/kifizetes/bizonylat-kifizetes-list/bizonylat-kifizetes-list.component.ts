@@ -10,8 +10,7 @@ import * as moment from 'moment';
 
 @Component({
   selector: 'app-bizonylat-kifizetes-list',
-  templateUrl: './bizonylat-kifizetes-list.component.html',
-  styleUrls: ['./bizonylat-kifizetes-list.component.css']
+  templateUrl: './bizonylat-kifizetes-list.component.html'
 })
 export class BizonylatKifizetesListComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

@@ -10,7 +10,6 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 @Component({
   selector: 'app-ajanlatkeres-egy',
   templateUrl: './ajanlatkeres-egy.component.html',
-  styleUrls: ['./ajanlatkeres-egy.component.css'],
   animations: [rowanimation]
 })
 export class FeliratkozasEgyComponent implements OnDestroy {

@@ -7,8 +7,7 @@ import {HelysegEgyMode} from '../helysegegymode';
 
 @Component({
   selector: 'app-helyseg-szerkesztes',
-  templateUrl: './helyseg-szerkesztes.component.html',
-  styleUrls: ['./helyseg-szerkesztes.component.css']
+  templateUrl: './helyseg-szerkesztes.component.html'
 })
 export class HelysegSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

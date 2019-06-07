@@ -7,8 +7,7 @@ import {ProjektteendoEgyMode} from '../projekttendoegymode';
 
 @Component({
   selector: 'app-projekt-teendo-list',
-  templateUrl: './projekt-teendo-list.component.html',
-  styleUrls: ['./projekt-teendo-list.component.css']
+  templateUrl: './projekt-teendo-list.component.html'
 })
 export class ProjektTeendoListComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

@@ -7,8 +7,7 @@ import {UgyfelterlogDto} from './ugyfelterlogdto';
 
 @Component({
   selector: 'app-ugyfelterlog',
-  templateUrl: './ugyfelterlog.component.html',
-  styleUrls: ['./ugyfelterlog.component.css']
+  templateUrl: './ugyfelterlog.component.html'
 })
 export class UgyfelterlogComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

@@ -7,8 +7,7 @@ import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-ugyfel-ter-link',
-  templateUrl: './ugyfel-ter-link.component.html',
-  styleUrls: ['./ugyfel-ter-link.component.css']
+  templateUrl: './ugyfel-ter-link.component.html'
 })
 export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

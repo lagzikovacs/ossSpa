@@ -20,8 +20,7 @@ import * as moment from 'moment';
 
 @Component({
   selector: 'app-bizonylat-szerkesztes',
-  templateUrl: './bizonylat-szerkesztes.component.html',
-  styleUrls: ['./bizonylat-szerkesztes.component.css']
+  templateUrl: './bizonylat-szerkesztes.component.html'
 })
 export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

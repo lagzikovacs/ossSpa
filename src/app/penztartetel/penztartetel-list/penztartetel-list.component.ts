@@ -10,8 +10,7 @@ import {PenztartetelContainerMode} from '../penztartetelcontainermode';
 
 @Component({
   selector: 'app-penztartetel-list',
-  templateUrl: './penztartetel-list.component.html',
-  styleUrls: ['./penztartetel-list.component.css']
+  templateUrl: './penztartetel-list.component.html'
 })
 export class PenztartetelListComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

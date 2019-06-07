@@ -4,8 +4,7 @@ import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-teendo-container',
-  templateUrl: './teendo-container.component.html',
-  styleUrls: ['./teendo-container.component.css']
+  templateUrl: './teendo-container.component.html'
 })
 export class TeendoContainerComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

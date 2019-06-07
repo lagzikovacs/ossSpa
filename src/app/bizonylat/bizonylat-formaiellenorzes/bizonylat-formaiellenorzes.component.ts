@@ -4,8 +4,7 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-bizonylat-formaiellenorzes',
-  templateUrl: './bizonylat-formaiellenorzes.component.html',
-  styleUrls: ['./bizonylat-formaiellenorzes.component.css']
+  templateUrl: './bizonylat-formaiellenorzes.component.html'
 })
 export class BizonylatFormaiellenorzesComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

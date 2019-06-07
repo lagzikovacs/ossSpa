@@ -5,8 +5,7 @@ import {SessionService} from '../session/session.service';
 
 @Component({
   selector: 'app-esemenynaplo',
-  templateUrl: './esemenynaplo.component.html',
-  styleUrls: ['./esemenynaplo.component.css']
+  templateUrl: './esemenynaplo.component.html'
 })
 export class EsemenynaploComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

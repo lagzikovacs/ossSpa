@@ -7,7 +7,6 @@ import {rowanimation} from '../../../animation/rowAnimation';
 @Component({
   selector: 'app-felhasznalo-jelszo',
   templateUrl: './felhasznalo-jelszo.component.html',
-  styleUrls: ['./felhasznalo-jelszo.component.css'],
   animations: [rowanimation]
 })
 export class FelhasznaloJelszoComponent implements OnDestroy {

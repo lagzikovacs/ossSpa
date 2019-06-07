@@ -7,7 +7,6 @@ import {rowanimation} from '../../animation/rowAnimation';
 @Component({
   selector: 'app-projekt-muszakiallapot',
   templateUrl: './projekt-muszakiallapot.component.html',
-  styleUrls: ['./projekt-muszakiallapot.component.css'],
   animations: [rowanimation]
 })
 export class ProjektMuszakiallapotComponent implements OnInit, OnDestroy {

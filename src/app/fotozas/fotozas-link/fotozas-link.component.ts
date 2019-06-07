@@ -7,8 +7,7 @@ import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-fotozas-link',
-  templateUrl: './fotozas-link.component.html',
-  styleUrls: ['./fotozas-link.component.css']
+  templateUrl: './fotozas-link.component.html'
 })
 export class FotozasLinkComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

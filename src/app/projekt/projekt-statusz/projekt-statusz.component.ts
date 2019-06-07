@@ -7,7 +7,6 @@ import {rowanimation} from '../../animation/rowAnimation';
 @Component({
   selector: 'app-projekt-statusz',
   templateUrl: './projekt-statusz.component.html',
-  styleUrls: ['./projekt-statusz.component.css'],
   animations: [rowanimation]
 })
 export class ProjektStatuszComponent implements OnInit, OnDestroy {

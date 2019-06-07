@@ -9,8 +9,7 @@ import {VerzioService} from '../verzio.service';
 
 @Component({
   selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+  templateUrl: './menu.component.html'
 })
 export class MenuComponent implements OnInit, OnDestroy {
   public bejelentkezve = false;

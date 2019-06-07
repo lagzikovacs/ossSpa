@@ -2,8 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 
 @Component({
   selector: 'app-irat-nincsprojekt',
-  templateUrl: './irat-nincsprojekt.component.html',
-  styleUrls: ['./irat-nincsprojekt.component.css']
+  templateUrl: './irat-nincsprojekt.component.html'
 })
 export class IratNincsprojektComponent implements OnDestroy {
   ngOnDestroy() {

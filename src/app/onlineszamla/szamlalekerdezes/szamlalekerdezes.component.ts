@@ -4,8 +4,7 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-szamlalekerdezes',
-  templateUrl: './szamlalekerdezes.component.html',
-  styleUrls: ['./szamlalekerdezes.component.css']
+  templateUrl: './szamlalekerdezes.component.html'
 })
 export class SzamlalekerdezesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

@@ -10,7 +10,6 @@ import {rowanimation} from '../../../animation/rowAnimation';
 @Component({
   selector: 'app-termekdij-egy',
   templateUrl: './termekdij-egy.component.html',
-  styleUrls: ['./termekdij-egy.component.css'],
   animations: [rowanimation]
 })
 export class TermekdijEgyComponent implements OnDestroy {

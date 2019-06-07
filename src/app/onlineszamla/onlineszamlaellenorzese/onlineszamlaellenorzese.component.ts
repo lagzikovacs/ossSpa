@@ -9,8 +9,7 @@ import {OnlineszamlaDto} from '../onlineszamladto';
 
 @Component({
   selector: 'app-navonlineszamla',
-  templateUrl: './onlineszamlaellenorzese.component.html',
-  styleUrls: ['./onlineszamlaellenorzese.component.css']
+  templateUrl: './onlineszamlaellenorzese.component.html'
 })
 export class OnlineszamlaellenorzeseComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

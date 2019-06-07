@@ -8,8 +8,7 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-bizonylat-irat-vagolaprol',
-  templateUrl: './bizonylat-irat-vagolaprol.component.html',
-  styleUrls: ['./bizonylat-irat-vagolaprol.component.css']
+  templateUrl: './bizonylat-irat-vagolaprol.component.html'
 })
 export class BizonylatIratVagolaprolComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

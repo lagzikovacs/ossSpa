@@ -5,8 +5,7 @@ import {ParticioEgyMode} from '../particioegymode';
 
 @Component({
   selector: 'app-particio-volume',
-  templateUrl: './particio-volume.component.html',
-  styleUrls: ['./particio-volume.component.css']
+  templateUrl: './particio-volume.component.html'
 })
 export class ParticioVolumeComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

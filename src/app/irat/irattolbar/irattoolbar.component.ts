@@ -4,8 +4,7 @@ declare let $: any;
 
 @Component({
   selector: 'app-irattoolbar',
-  templateUrl: './irattoolbar.component.html',
-  styleUrls: ['./irattoolbar.component.css'],
+  templateUrl: './irattoolbar.component.html'
 })
 export class IratToolbarComponent implements AfterViewInit, OnDestroy {
   @Input() szurok: string[] = [];

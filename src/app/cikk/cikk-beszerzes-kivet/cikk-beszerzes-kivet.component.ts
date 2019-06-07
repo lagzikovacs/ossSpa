@@ -3,8 +3,7 @@ import {CikkService} from '../cikk.service';
 
 @Component({
   selector: 'app-cikk-beszerzes-kivet',
-  templateUrl: './cikk-beszerzes-kivet.component.html',
-  styleUrls: ['./cikk-beszerzes-kivet.component.css']
+  templateUrl: './cikk-beszerzes-kivet.component.html'
 })
 export class CikkBeszerzesKivetComponent implements OnDestroy {
   cikkservice: CikkService;

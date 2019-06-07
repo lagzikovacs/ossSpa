@@ -12,8 +12,7 @@ import {LogonService} from '../../logon/logon.service';
 
 @Component({
   selector: 'app-ajanlatkeres-list',
-  templateUrl: './ajanlatkeres-list.component.html',
-  styleUrls: ['./ajanlatkeres-list.component.css']
+  templateUrl: './ajanlatkeres-list.component.html'
 })
 export class AjanlatkeresListComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

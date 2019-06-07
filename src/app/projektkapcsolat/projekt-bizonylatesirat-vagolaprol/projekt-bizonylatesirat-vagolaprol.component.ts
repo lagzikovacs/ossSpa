@@ -9,8 +9,7 @@ import {NumberResult} from '../../dtos/numberresult';
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-vagolaprol',
-  templateUrl: './projekt-bizonylatesirat-vagolaprol.component.html',
-  styleUrls: ['./projekt-bizonylatesirat-vagolaprol.component.css']
+  templateUrl: './projekt-bizonylatesirat-vagolaprol.component.html'
 })
 export class ProjektBizonylatesiratVagolaprolComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

@@ -1,11 +1,10 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {PenznemService} from "../penznem.service";
+import {PenznemService} from '../penznem.service';
 import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-penznem-container',
-  templateUrl: './penznem-container.component.html',
-  styleUrls: ['./penznem-container.component.css']
+  templateUrl: './penznem-container.component.html'
 })
 export class PenznemContainerComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

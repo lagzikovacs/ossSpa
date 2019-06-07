@@ -9,8 +9,7 @@ import {b64toBlob} from '../../tools/b64toBlob';
 
 @Component({
   selector: 'app-beszerzes',
-  templateUrl: './beszerzes.component.html',
-  styleUrls: ['./beszerzes.component.css']
+  templateUrl: './beszerzes.component.html'
 })
 export class BeszerzesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

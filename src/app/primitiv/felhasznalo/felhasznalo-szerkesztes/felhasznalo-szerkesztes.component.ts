@@ -7,8 +7,7 @@ import {FelhasznaloEgyMode} from '../felhasznaloegymode';
 
 @Component({
   selector: 'app-felhasznalo-szerkesztes',
-  templateUrl: './felhasznalo-szerkesztes.component.html',
-  styleUrls: ['./felhasznalo-szerkesztes.component.css']
+  templateUrl: './felhasznalo-szerkesztes.component.html'
 })
 export class FelhasznaloSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

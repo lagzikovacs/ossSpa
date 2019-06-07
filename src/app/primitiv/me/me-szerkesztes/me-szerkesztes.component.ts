@@ -7,8 +7,7 @@ import {MeEgyMode} from '../meegymode';
 
 @Component({
   selector: 'app-me-szerkesztes',
-  templateUrl: './me-szerkesztes.component.html',
-  styleUrls: ['./me-szerkesztes.component.css']
+  templateUrl: './me-szerkesztes.component.html'
 })
 export class MeSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

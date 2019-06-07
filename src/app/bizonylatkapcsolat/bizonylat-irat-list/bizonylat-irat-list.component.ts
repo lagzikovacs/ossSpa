@@ -14,8 +14,7 @@ import {VagolapMode} from '../../vagolap/vagolapmode';
 
 @Component({
   selector: 'app-bizonylat-irat-list',
-  templateUrl: './bizonylat-irat-list.component.html',
-  styleUrls: ['./bizonylat-irat-list.component.css']
+  templateUrl: './bizonylat-irat-list.component.html'
 })
 export class BizonylatIratListComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

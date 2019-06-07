@@ -7,8 +7,7 @@ import {TeendoEgyMode} from '../teendoegymode';
 
 @Component({
   selector: 'app-teendo-szerkesztes',
-  templateUrl: './teendo-szerkesztes.component.html',
-  styleUrls: ['./teendo-szerkesztes.component.css']
+  templateUrl: './teendo-szerkesztes.component.html'
 })
 export class TeendoSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

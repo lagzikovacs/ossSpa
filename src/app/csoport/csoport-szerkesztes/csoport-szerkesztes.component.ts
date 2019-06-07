@@ -7,8 +7,7 @@ import {CsoportEgyMode} from '../csoportegymode';
 
 @Component({
   selector: 'app-csoport-szerkesztes',
-  templateUrl: './csoport-szerkesztes.component.html',
-  styleUrls: ['./csoport-szerkesztes.component.css']
+  templateUrl: './csoport-szerkesztes.component.html'
 })
 export class CsoportSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

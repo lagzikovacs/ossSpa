@@ -4,8 +4,7 @@ import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-fizetesimod-container',
-  templateUrl: './fizetesimod-container.component.html',
-  styleUrls: ['./fizetesimod-container.component.css']
+  templateUrl: './fizetesimod-container.component.html'
 })
 export class FizetesimodContainerComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

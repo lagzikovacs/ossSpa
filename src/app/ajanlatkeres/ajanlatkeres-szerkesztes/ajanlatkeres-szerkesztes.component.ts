@@ -7,8 +7,7 @@ import {NumberResult} from '../../dtos/numberresult';
 
 @Component({
   selector: 'app-ajanlatkeres-szerkesztes',
-  templateUrl: './ajanlatkeres-szerkesztes.component.html',
-  styleUrls: ['./ajanlatkeres-szerkesztes.component.css']
+  templateUrl: './ajanlatkeres-szerkesztes.component.html'
 })
 export class AjanlatkeresSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) private errormodal: ErrormodalComponent;

@@ -4,8 +4,7 @@ declare let $: any;
 
 @Component({
   selector: 'app-projekttoolbar',
-  templateUrl: './projekttoolbar.component.html',
-  styleUrls: ['./projekttoolbar.component.css'],
+  templateUrl: './projekttoolbar.component.html'
 })
 export class ProjektToolbarComponent implements AfterViewInit, OnDestroy {
   @Input() Statuszszurok: string[] = [];

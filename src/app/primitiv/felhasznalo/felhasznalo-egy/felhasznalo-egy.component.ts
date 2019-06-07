@@ -11,7 +11,6 @@ import {rowanimation} from '../../../animation/rowAnimation';
 @Component({
   selector: 'app-felhasznalo-egy',
   templateUrl: './felhasznalo-egy.component.html',
-  styleUrls: ['./felhasznalo-egy.component.css'],
   animations: [rowanimation]
 })
 export class FelhasznaloEgyComponent implements OnDestroy {

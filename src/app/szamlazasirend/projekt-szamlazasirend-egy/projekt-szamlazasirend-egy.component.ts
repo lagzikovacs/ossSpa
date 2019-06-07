@@ -9,7 +9,6 @@ import {rowanimation} from '../../animation/rowAnimation';
 @Component({
   selector: 'app-projekt-szamlazasirend-egy',
   templateUrl: './projekt-szamlazasirend-egy.component.html',
-  styleUrls: ['./projekt-szamlazasirend-egy.component.css'],
   animations: [rowanimation]
 })
 export class ProjektSzamlazasirendEgyComponent implements OnDestroy {

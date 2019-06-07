@@ -21,8 +21,7 @@ import {MeZoomParameter} from '../../primitiv/me/mezoomparameter';
 
 @Component({
   selector: 'app-bizonylat-tetel-szerkesztes',
-  templateUrl: './bizonylat-tetel-szerkesztes.component.html',
-  styleUrls: ['./bizonylat-tetel-szerkesztes.component.css']
+  templateUrl: './bizonylat-tetel-szerkesztes.component.html'
 })
 export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

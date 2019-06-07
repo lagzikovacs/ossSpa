@@ -11,7 +11,6 @@ import * as FileSaver from 'file-saver';
 @Component({
   selector: 'app-ugyfel-egy',
   templateUrl: './ugyfel-egy.component.html',
-  styleUrls: ['./ugyfel-egy.component.css'],
   animations: [rowanimation]
 })
 export class UgyfelEgyComponent implements OnDestroy {

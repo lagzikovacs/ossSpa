@@ -5,8 +5,7 @@ import {DokumentumService} from '../../dokumentum/dokumentum.service';
 
 @Component({
   selector: 'app-volume-teszt',
-  templateUrl: './volume-teszt.component.html',
-  styleUrls: ['./volume-teszt.component.css']
+  templateUrl: './volume-teszt.component.html'
 })
 export class VolumeTesztComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

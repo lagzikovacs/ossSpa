@@ -5,8 +5,7 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-csoport-jog',
-  templateUrl: './csoport-jog.component.html',
-  styleUrls: ['./csoport-jog.component.css']
+  templateUrl: './csoport-jog.component.html'
 })
 export class CsoportJogComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

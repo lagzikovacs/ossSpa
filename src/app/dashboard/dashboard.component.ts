@@ -9,8 +9,7 @@ import * as signalR from '@aspnet/signalr';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) private errormodal: ErrormodalComponent;

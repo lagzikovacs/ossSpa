@@ -7,8 +7,7 @@ import {BizonylatMintaAlapjanParam} from '../bizonylatmintaalapjan';
 
 @Component({
   selector: 'app-bizonylat-errol',
-  templateUrl: './bizonylat-errol.component.html',
-  styleUrls: ['./bizonylat-errol.component.css']
+  templateUrl: './bizonylat-errol.component.html'
 })
 export class BizonylatErrolComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

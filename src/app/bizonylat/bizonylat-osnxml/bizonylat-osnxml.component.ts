@@ -4,8 +4,7 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-bizonylat-osnxml',
-  templateUrl: './bizonylat-osnxml.component.html',
-  styleUrls: ['./bizonylat-osnxml.component.css']
+  templateUrl: './bizonylat-osnxml.component.html'
 })
 export class BizonylatOSNxmlComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

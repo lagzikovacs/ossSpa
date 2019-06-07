@@ -10,7 +10,6 @@ import {rowanimation} from '../../../animation/rowAnimation';
 @Component({
   selector: 'app-irattipus-egy',
   templateUrl: './irattipus-egy.component.html',
-  styleUrls: ['./irattipus-egy.component.css'],
   animations: [rowanimation]
 })
 export class IrattipusEgyComponent implements OnDestroy {

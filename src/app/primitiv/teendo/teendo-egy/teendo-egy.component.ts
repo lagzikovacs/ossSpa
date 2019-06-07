@@ -10,7 +10,6 @@ import {rowanimation} from '../../../animation/rowAnimation';
 @Component({
   selector: 'app-teendo-egy',
   templateUrl: './teendo-egy.component.html',
-  styleUrls: ['./teendo-egy.component.css'],
   animations: [rowanimation]
 })
 export class TeendoEgyComponent implements OnDestroy {

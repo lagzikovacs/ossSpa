@@ -4,8 +4,7 @@ import {BizonylatDto} from '../bizonylatdto';
 
 @Component({
   selector: 'app-bizonylat-reszletek',
-  templateUrl: './bizonylat-reszletek.component.html',
-  styleUrls: ['./bizonylat-reszletek.component.css']
+  templateUrl: './bizonylat-reszletek.component.html'
 })
 export class BizonylatReszletekComponent implements OnInit, OnDestroy {
   bizonylatservice: BizonylatService;

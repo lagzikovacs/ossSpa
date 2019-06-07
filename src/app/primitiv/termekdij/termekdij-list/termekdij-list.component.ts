@@ -13,8 +13,7 @@ import {BizonylattetelSzerkesztesMode} from '../../../bizonylat/bizonylattetelsz
 
 @Component({
   selector: 'app-termekdij-list',
-  templateUrl: './termekdij-list.component.html',
-  styleUrls: ['./termekdij-list.component.css']
+  templateUrl: './termekdij-list.component.html'
 })
 export class TermekdijListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

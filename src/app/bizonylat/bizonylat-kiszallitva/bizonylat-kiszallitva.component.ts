@@ -4,8 +4,7 @@ import {BizonylatService} from '../bizonylat.service';
 
 @Component({
   selector: 'app-bizonylat-kiszallitva',
-  templateUrl: './bizonylat-kiszallitva.component.html',
-  styleUrls: ['./bizonylat-kiszallitva.component.css']
+  templateUrl: './bizonylat-kiszallitva.component.html'
 })
 export class BizonylatKiszallitvaComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

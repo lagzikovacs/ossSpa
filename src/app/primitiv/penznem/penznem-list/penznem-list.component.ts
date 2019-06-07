@@ -20,8 +20,7 @@ import {PenznemEgyMode} from '../penznemegymode';
 
 @Component({
   selector: 'app-penznem-list',
-  templateUrl: './penznem-list.component.html',
-  styleUrls: ['./penznem-list.component.css']
+  templateUrl: './penznem-list.component.html'
 })
 export class PenznemListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

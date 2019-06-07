@@ -8,7 +8,6 @@ import {rowanimation} from '../../animation/rowAnimation';
 @Component({
   selector: 'app-dokumentum-egy',
   templateUrl: './dokumentum-egy.component.html',
-  styleUrls: ['./dokumentum-egy.component.css'],
   animations: [rowanimation]
 })
 export class DokumentumEgyComponent implements OnDestroy {

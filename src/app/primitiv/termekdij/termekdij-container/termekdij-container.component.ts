@@ -4,8 +4,7 @@ import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-termekdij-container',
-  templateUrl: './termekdij-container.component.html',
-  styleUrls: ['./termekdij-container.component.css']
+  templateUrl: './termekdij-container.component.html'
 })
 export class TermekdijContainerComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

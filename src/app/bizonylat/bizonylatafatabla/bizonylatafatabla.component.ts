@@ -3,8 +3,7 @@ import {BizonylatAfaDto} from '../bizonylatafadto';
 
 @Component({
   selector: 'app-bizonylatafatabla',
-  templateUrl: './bizonylatafatabla.component.html',
-  styleUrls: ['./bizonylatafatabla.component.css']
+  templateUrl: './bizonylatafatabla.component.html'
 })
 export class BizonylatafatablaComponent implements OnDestroy {
   @Input() Dto: BizonylatAfaDto[] = new Array<BizonylatAfaDto>();

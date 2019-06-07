@@ -10,8 +10,7 @@ import {AjanlatService} from '../ajanlat.service';
 
 @Component({
   selector: 'app-ajanlat',
-  templateUrl: './ajanlat.html',
-  styleUrls: ['./ajanlat.css']
+  templateUrl: './ajanlat.html'
 })
 export class AjanlatComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

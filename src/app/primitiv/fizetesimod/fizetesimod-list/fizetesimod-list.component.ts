@@ -13,8 +13,7 @@ import {BizonylatSzerkesztesMode} from '../../../bizonylat/bizonylatszerkesztesm
 
 @Component({
   selector: 'app-fizetesimod-list',
-  templateUrl: './fizetesimod-list.component.html',
-  styleUrls: ['./fizetesimod-list.component.css']
+  templateUrl: './fizetesimod-list.component.html'
 })
 export class FizetesimodListComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

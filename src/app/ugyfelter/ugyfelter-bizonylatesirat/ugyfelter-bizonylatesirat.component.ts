@@ -3,17 +3,13 @@ import {BizonylatKapcsolatDto} from '../../bizonylatkapcsolat/bizonylatkapcsolat
 
 @Component({
   selector: 'app-ugyfelter-bizonylatesirat',
-  templateUrl: './ugyfelter-bizonylatesirat.component.html',
-  styleUrls: ['./ugyfelter-bizonylatesirat.component.css']
+  templateUrl: './ugyfelter-bizonylatesirat.component.html'
 })
 export class UgyfelterBizonylatesiratComponent implements OnDestroy {
   eppFrissit = false;
   @Input() Dto: BizonylatKapcsolatDto[];
   @Output() bizonylatclick = new EventEmitter<number>();
   @Output() iratclick = new EventEmitter<number>();
-
-  constructor() {
-  }
 
   bizonylatvalasztas(i: number) {
     this.bizonylatclick.emit(i);

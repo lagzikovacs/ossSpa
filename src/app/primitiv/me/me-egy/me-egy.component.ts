@@ -10,7 +10,6 @@ import {JogKod} from '../../../enums/jogkod';
 @Component({
   selector: 'app-me-egy',
   templateUrl: './me-egy.component.html',
-  styleUrls: ['./me-egy.component.css'],
   animations: [rowanimation]
 })
 export class MeEgyComponent implements OnDestroy {

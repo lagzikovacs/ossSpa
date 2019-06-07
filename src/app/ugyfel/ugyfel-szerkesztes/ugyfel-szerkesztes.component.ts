@@ -11,8 +11,7 @@ import {HelysegContainerMode} from '../../primitiv/helyseg/helysegcontainermode'
 
 @Component({
   selector: 'app-ugyfel-szerkesztes',
-  templateUrl: './ugyfel-szerkesztes.component.html',
-  styleUrls: ['./ugyfel-szerkesztes.component.css']
+  templateUrl: './ugyfel-szerkesztes.component.html'
 })
 export class UgyfelSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

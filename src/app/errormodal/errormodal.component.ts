@@ -5,8 +5,7 @@ declare let $: any;
 
 @Component({
   selector: 'app-errormodal',
-  templateUrl: './errormodal.component.html',
-  styleUrls: ['./errormodal.component.css']
+  templateUrl: './errormodal.component.html'
 })
 export class ErrormodalComponent implements OnDestroy {
   // egyedi azonosításhoz, h a jquery ezt a példányt találja meg

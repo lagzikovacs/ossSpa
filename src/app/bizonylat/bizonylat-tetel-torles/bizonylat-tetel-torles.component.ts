@@ -6,8 +6,7 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-bizonylat-tetel-torles',
-  templateUrl: './bizonylat-tetel-torles.component.html',
-  styleUrls: ['./bizonylat-tetel-torles.component.css']
+  templateUrl: './bizonylat-tetel-torles.component.html'
 })
 export class BizonylatTetelTorlesComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

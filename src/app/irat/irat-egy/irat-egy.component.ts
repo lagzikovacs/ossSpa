@@ -20,7 +20,6 @@ import {rowanimation} from '../../animation/rowAnimation';
 @Component({
   selector: 'app-irat-egy',
   templateUrl: './irat-egy.component.html',
-  styleUrls: ['./irat-egy.component.css'],
   animations: [rowanimation]
 })
 export class IratEgyComponent implements OnDestroy {

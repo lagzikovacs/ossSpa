@@ -4,8 +4,7 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-irat-container',
-  templateUrl: './irat-container.component.html',
-  styleUrls: ['./irat-container.component.css']
+  templateUrl: './irat-container.component.html'
 })
 export class IratContainerComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

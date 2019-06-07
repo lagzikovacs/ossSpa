@@ -8,8 +8,7 @@ import {ProjektDto} from '../../projekt/projektdto';
 
 @Component({
   selector: 'app-ajanlatkeres-projekt',
-  templateUrl: './ajanlatkeres-projekt.component.html',
-  styleUrls: ['./ajanlatkeres-projekt.component.css']
+  templateUrl: './ajanlatkeres-projekt.component.html'
 })
 export class AjanlatkeresProjektComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

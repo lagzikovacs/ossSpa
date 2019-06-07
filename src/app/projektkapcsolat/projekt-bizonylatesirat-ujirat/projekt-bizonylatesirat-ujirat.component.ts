@@ -13,8 +13,7 @@ import {IrattipusContainerMode} from '../../primitiv/irattipus/irattipuscontaine
 
 @Component({
   selector: 'app-projekt-bizonylatesirat-ujirat',
-  templateUrl: './projekt-bizonylatesirat-ujirat.component.html',
-  styleUrls: ['./projekt-bizonylatesirat-ujirat.component.css']
+  templateUrl: './projekt-bizonylatesirat-ujirat.component.html'
 })
 export class ProjektBizonylatesiratUjiratComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

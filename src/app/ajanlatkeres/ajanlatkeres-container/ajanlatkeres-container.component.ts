@@ -4,8 +4,7 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-ajanlatkeres-container',
-  templateUrl: './ajanlatkeres-container.component.html',
-  styleUrls: ['./ajanlatkeres-container.component.css']
+  templateUrl: './ajanlatkeres-container.component.html'
 })
 export class AjanlatkeresContainerComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

@@ -9,13 +9,12 @@ import {BizonylatkifizetesService} from '../../kifizetes/bizonylatkifizetes.serv
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
 import {BizonylatTipus} from '../bizonylattipus';
-import {LogonService} from "../../logon/logon.service";
-import {JogKod} from "../../enums/jogkod";
+import {LogonService} from '../../logon/logon.service';
+import {JogKod} from '../../enums/jogkod';
 
 @Component({
   selector: 'app-bizonylat-list',
-  templateUrl: './bizonylat-list.component.html',
-  styleUrls: ['./bizonylat-list.component.css']
+  templateUrl: './bizonylat-list.component.html'
 })
 export class BizonylatListComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

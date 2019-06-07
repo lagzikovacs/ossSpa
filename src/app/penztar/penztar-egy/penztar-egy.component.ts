@@ -10,7 +10,6 @@ import {rowanimation} from '../../animation/rowAnimation';
 @Component({
   selector: 'app-penztar-egy',
   templateUrl: './penztar-egy.component.html',
-  styleUrls: ['./penztar-egy.component.css'],
   animations: [rowanimation]
 })
 export class PenztarEgyComponent implements OnDestroy {

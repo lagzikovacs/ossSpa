@@ -5,8 +5,7 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
   selector: 'app-bizonylat-irat-levalasztas',
-  templateUrl: './bizonylat-irat-levalasztas.component.html',
-  styleUrls: ['./bizonylat-irat-levalasztas.component.css']
+  templateUrl: './bizonylat-irat-levalasztas.component.html'
 })
 export class BizonylatIratLevalasztasComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

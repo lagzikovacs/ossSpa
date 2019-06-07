@@ -10,8 +10,7 @@ import {RiportService} from '../../riport/riport.service';
 
 @Component({
   selector: 'app-penztar-export',
-  templateUrl: './penztar-export.component.html',
-  styleUrls: ['./penztar-export.component.css']
+  templateUrl: './penztar-export.component.html'
 })
 export class PenztarExportComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

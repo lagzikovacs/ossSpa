@@ -9,8 +9,7 @@ import {b64toBlob} from '../../tools/b64toBlob';
 
 @Component({
   selector: 'app-kimenoszamla',
-  templateUrl: './kimenoszamla.component.html',
-  styleUrls: ['./kimenoszamla.component.css']
+  templateUrl: './kimenoszamla.component.html'
 })
 export class KimenoszamlaComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

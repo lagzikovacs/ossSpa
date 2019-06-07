@@ -12,7 +12,6 @@ import {rowanimation} from '../../animation/rowAnimation';
 @Component({
   selector: 'app-cikk-egy',
   templateUrl: './cikk-egy.component.html',
-  styleUrls: ['./cikk-egy.component.css'],
   animations: [rowanimation]
 })
 export class CikkEgyComponent implements OnDestroy {

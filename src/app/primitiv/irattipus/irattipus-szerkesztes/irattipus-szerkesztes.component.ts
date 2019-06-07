@@ -7,8 +7,7 @@ import {NumberResult} from '../../../dtos/numberresult';
 
 @Component({
   selector: 'app-irattipus-szerkesztes',
-  templateUrl: './irattipus-szerkesztes.component.html',
-  styleUrls: ['./irattipus-szerkesztes.component.css']
+  templateUrl: './irattipus-szerkesztes.component.html'
 })
 export class IrattipusSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

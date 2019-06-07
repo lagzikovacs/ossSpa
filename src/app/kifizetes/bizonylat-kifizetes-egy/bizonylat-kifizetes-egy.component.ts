@@ -8,7 +8,6 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 @Component({
   selector: 'app-bizonylat-kifizetes-egy',
   templateUrl: './bizonylat-kifizetes-egy.component.html',
-  styleUrls: ['./bizonylat-kifizetes-egy.component.css'],
   animations: [rowanimation]
 })
 export class BizonylatKifizetesEgyComponent implements OnDestroy {

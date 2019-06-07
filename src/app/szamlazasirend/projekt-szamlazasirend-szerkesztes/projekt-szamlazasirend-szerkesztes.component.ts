@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {SzamlazasirendService} from '../szamlazasirend.service';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
 import {ZoomSources} from '../../enums/zoomsources';
@@ -12,10 +12,9 @@ import {SzamlazasirendSzerkesztesMode} from '../szamlazasirendszerkesztesmode';
 
 @Component({
   selector: 'app-projekt-szamlazasirend-szerkesztes',
-  templateUrl: './projekt-szamlazasirend-szerkesztes.component.html',
-  styleUrls: ['./projekt-szamlazasirend-szerkesztes.component.css']
+  templateUrl: './projekt-szamlazasirend-szerkesztes.component.html'
 })
-export class ProjektSzamlazasirendSzerkesztesComponent implements OnInit, OnDestroy {
+export class ProjektSzamlazasirendSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szamlazasirendservice: SzamlazasirendService;
@@ -25,9 +24,6 @@ export class ProjektSzamlazasirendSzerkesztesComponent implements OnInit, OnDest
               private _penznemservice: PenznemService,
               private _projektservice: ProjektService) {
     this.szamlazasirendservice = szamlazasirendservice;
-  }
-
-  ngOnInit() {
   }
 
   onSubmit() {

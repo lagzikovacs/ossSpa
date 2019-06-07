@@ -16,8 +16,7 @@ import {ProjektteendoSzerkesztesMode} from '../projektteendoszerkesztesmode';
 
 @Component({
   selector: 'app-projekt-teendo-szerkesztes',
-  templateUrl: './projekt-teendo-szerkesztes.component.html',
-  styleUrls: ['./projekt-teendo-szerkesztes.component.css']
+  templateUrl: './projekt-teendo-szerkesztes.component.html'
 })
 export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

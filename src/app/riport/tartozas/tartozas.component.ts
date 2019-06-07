@@ -9,8 +9,7 @@ import {SzMT} from '../../dtos/szmt';
 
 @Component({
   selector: 'app-tartozas',
-  templateUrl: './tartozas.component.html',
-  styleUrls: ['./tartozas.component.css']
+  templateUrl: './tartozas.component.html'
 })
 export class TartozasComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

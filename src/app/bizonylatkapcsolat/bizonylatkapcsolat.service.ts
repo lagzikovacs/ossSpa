@@ -9,7 +9,7 @@ import {EmptyResult} from '../dtos/emptyresult';
 import {BizonylatKapcsolatParam} from './bizonylatkapcsolatparam';
 import {BizonylatKapcsolatContainerMode} from './bizonylatkapcsolatcontainermode';
 import {IratDto} from '../irat/iratdto';
-import {BizonylatKapcsolatSzerkesztesMode} from "./bizonylatkapcsolatszerkesztesmode";
+import {BizonylatKapcsolatSzerkesztesMode} from './bizonylatkapcsolatszerkesztesmode';
 
 @Injectable({
   providedIn: 'root'

@@ -4,8 +4,7 @@ import {MenuService} from '../menu.service';
 
 @Component({
   selector: 'app-menuitem',
-  templateUrl: './menuitem.component.html',
-  styleUrls: ['./menuitem.component.css']
+  templateUrl: './menuitem.component.html'
 })
 export class MenuitemComponent implements OnDestroy {
   @Input() menunode: AngularmenuDto;

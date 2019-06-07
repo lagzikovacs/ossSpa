@@ -10,8 +10,7 @@ import {b64toBlob} from '../../tools/b64toBlob';
 
 @Component({
   selector: 'app-bizonylat-nyomtatas',
-  templateUrl: './bizonylat-nyomtatas.component.html',
-  styleUrls: ['./bizonylat-nyomtatas.component.css']
+  templateUrl: './bizonylat-nyomtatas.component.html'
 })
 export class BizonylatNyomtatasComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;

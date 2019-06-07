@@ -12,7 +12,7 @@ export enum BizonylatesIratContainerMode {
 }-->
 
 <ng-container *ngIf="projektkapcsolatservice.ContainerMode === 1">
-  <app-projekt-bizonylatesirat-list></app-projekt-bizonylatesirat-list>
+  <app-projektkapcsolat-list></app-projektkapcsolat-list>
 </ng-container>
 <ng-container *ngIf="projektkapcsolatservice.ContainerMode === 2">
   <app-bizonylat-egy></app-bizonylat-egy>
@@ -21,17 +21,17 @@ export enum BizonylatesIratContainerMode {
   <app-irat-egy></app-irat-egy>
 </ng-container>
 <ng-container *ngIf="projektkapcsolatservice.ContainerMode === 4">
-  <app-projekt-bizonylatesirat-ujbizonylat></app-projekt-bizonylatesirat-ujbizonylat>
+  <app-projektkapcsolat-ujbizonylat></app-projektkapcsolat-ujbizonylat>
 </ng-container>
 <ng-container *ngIf="projektkapcsolatservice.ContainerMode === 5">
-  <app-projekt-bizonylatesirat-ujirat></app-projekt-bizonylatesirat-ujirat>
+  <app-projektkapcsolat-ujirat></app-projektkapcsolat-ujirat>
 </ng-container>
 <ng-container *ngIf="projektkapcsolatservice.ContainerMode === 6">
   <app-ajanlat></app-ajanlat>
 </ng-container>
 <ng-container *ngIf="projektkapcsolatservice.ContainerMode === 7">
-  <app-projekt-bizonylatesirat-levalasztas></app-projekt-bizonylatesirat-levalasztas>
+  <app-projektkapcsolat-levalasztas></app-projektkapcsolat-levalasztas>
 </ng-container>
 <ng-container *ngIf="projektkapcsolatservice.ContainerMode === 8">
-  <app-projekt-bizonylatesirat-vagolaprol></app-projekt-bizonylatesirat-vagolaprol>
+  <app-projektkapcsolat-vagolaprol></app-projektkapcsolat-vagolaprol>
 </ng-container>

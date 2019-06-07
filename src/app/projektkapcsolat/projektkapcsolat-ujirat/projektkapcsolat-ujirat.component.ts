@@ -12,10 +12,10 @@ import {BizonylatesiratSzerkesztesMode} from '../bizonylatesiratszerkesztesmode'
 import {IrattipusContainerMode} from '../../primitiv/irattipus/irattipuscontainermode';
 
 @Component({
-  selector: 'app-projekt-bizonylatesirat-ujirat',
-  templateUrl: './projekt-bizonylatesirat-ujirat.component.html'
+  selector: 'app-projektkapcsolat-ujirat',
+  templateUrl: './projektkapcsolat-ujirat.component.html'
 })
-export class ProjektBizonylatesiratUjiratComponent implements OnInit, OnDestroy {
+export class ProjektkapcsolatUjiratComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektkapcsolatservice: ProjektkapcsolatService;

@@ -4,10 +4,10 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 
 @Component({
-  selector: 'app-projekt-bizonylatesirat-levalasztas',
-  templateUrl: './projekt-bizonylatesirat-levalasztas.component.html'
+  selector: 'app-projektkapcsolat-levalasztas',
+  templateUrl: './projektkapcsolat-levalasztas.component.html'
 })
-export class ProjektBizonylatesiratLevalasztasComponent implements OnDestroy {
+export class ProjektkapcsolatLevalasztasComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektkapcsolatservice: ProjektkapcsolatService;

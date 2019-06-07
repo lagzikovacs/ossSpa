@@ -3,11 +3,11 @@ import {rowanimation} from '../../animation/rowAnimation';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 
 @Component({
-  selector: 'app-projekt-bizonylatesirat-container',
-  templateUrl: './projekt-bizonylatesirat-container.component.html',
+  selector: 'app-projektkapcsolat-container',
+  templateUrl: './projektkapcsolat-container.component.html',
   animations: [rowanimation]
 })
-export class ProjektBizonylatesiratContainerComponent implements OnDestroy {
+export class ProjektkapcsolatContainerComponent implements OnDestroy {
   projektkapcsolatservice: ProjektkapcsolatService;
 
   constructor(projektkapcsolatservice: ProjektkapcsolatService) {

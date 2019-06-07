@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {ProjektService} from '../../projekt/projekt.service';
@@ -8,10 +8,10 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {NumberResult} from '../../dtos/numberresult';
 
 @Component({
-  selector: 'app-projekt-bizonylatesirat-vagolaprol',
-  templateUrl: './projekt-bizonylatesirat-vagolaprol.component.html'
+  selector: 'app-projektkapcsolat-vagolaprol',
+  templateUrl: './projektkapcsolat-vagolaprol.component.html'
 })
-export class ProjektBizonylatesiratVagolaprolComponent implements OnInit, OnDestroy {
+export class ProjektkapcsolatVagolaprolComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektkapcsolatservice: ProjektkapcsolatService;
@@ -21,9 +21,6 @@ export class ProjektBizonylatesiratVagolaprolComponent implements OnInit, OnDest
               private _vagolapservice: VagolapService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.projektkapcsolatservice = projektkapcsolatservice;
-  }
-
-  ngOnInit() {
   }
 
   ok() {

@@ -19,10 +19,10 @@ import {AjanlatService} from '../../ajanlat/ajanlat.service';
 import {JogKod} from '../../enums/jogkod';
 
 @Component({
-  selector: 'app-projekt-bizonylatesirat-list',
-  templateUrl: './projekt-bizonylatesirat-list.component.html'
+  selector: 'app-projektkapcsolat-list',
+  templateUrl: './projektkapcsolat-list.component.html'
 })
-export class ProjektBizonylatesiratListComponent implements OnDestroy {
+export class ProjektkapcsolatListComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektkapcsolatservice: ProjektkapcsolatService;

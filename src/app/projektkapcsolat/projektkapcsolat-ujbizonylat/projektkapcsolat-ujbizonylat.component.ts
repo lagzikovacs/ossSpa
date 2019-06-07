@@ -10,10 +10,10 @@ import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 
 @Component({
-  selector: 'app-projekt-bizonylatesirat-ujbizonylat',
-  templateUrl: './projekt-bizonylatesirat-ujbizonylat.component.html'
+  selector: 'app-projektkapcsolat-ujbizonylat',
+  templateUrl: './projektkapcsolat-ujbizonylat.component.html'
 })
-export class ProjektBizonylatesiratUjbizonylatComponent implements OnDestroy {
+export class ProjektkapcsolatUjbizonylatComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   projektkapcsolatservice: ProjektkapcsolatService;

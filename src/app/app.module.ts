@@ -38,7 +38,7 @@ import { ProjektMuszakiallapotComponent } from './projekt/projekt-muszakiallapot
 import { ProjektInverterComponent } from './projekt/projekt-inverter/projekt-inverter.component';
 import { ProjektNapelemComponent } from './projekt/projekt-napelem/projekt-napelem.component';
 import { ProjektIratmintaComponent } from './iratminta/projekt-iratminta.component';
-import { ProjektBizonylatesiratListComponent } from './projektkapcsolat/projekt-bizonylatesirat-list/projekt-bizonylatesirat-list.component';
+import { ProjektkapcsolatListComponent } from './projektkapcsolat/projektkapcsolat-list/projektkapcsolat-list.component';
 import { SzamlazasirendListComponent } from './szamlazasirend/szamlazasirend-list/szamlazasirend-list.component';
 import { ProjektTeendoListComponent } from './projektteendo/projekt-teendo-list/projekt-teendo-list.component';
 import { IratListComponent } from './irat/irat-list/irat-list.component';
@@ -127,8 +127,8 @@ import { SzamlazasirendSzerkesztesComponent } from './szamlazasirend/szamlazasir
 import { ProjektTeendoEgyComponent } from './projektteendo/projekt-teendo-egy/projekt-teendo-egy.component';
 import { ProjektTeendoSzerkesztesComponent } from './projektteendo/projekt-teendo-szerkesztes/projekt-teendo-szerkesztes.component';
 import { ProjektTeendoElvegezveComponent } from './projektteendo/projekt-teendo-elvegezve/projekt-teendo-elvegezve.component';
-import { ProjektBizonylatesiratUjbizonylatComponent } from './projektkapcsolat/projekt-bizonylatesirat-ujbizonylat/projekt-bizonylatesirat-ujbizonylat.component';
-import { ProjektBizonylatesiratUjiratComponent } from './projektkapcsolat/projekt-bizonylatesirat-ujirat/projekt-bizonylatesirat-ujirat.component';
+import { ProjektkapcsolatUjbizonylatComponent } from './projektkapcsolat/projektkapcsolat-ujbizonylat/projektkapcsolat-ujbizonylat.component';
+import { ProjektkapcsolatUjiratComponent } from './projektkapcsolat/projektkapcsolat-ujirat/projektkapcsolat-ujirat.component';
 import { AjanlatComponent } from './ajanlat/ajanlat/ajanlat';
 import { VolumeContainerComponent } from './volume/volume-container/volume-container.component';
 import { VolumeEgyComponent } from './volume/volume-egy/volume-egy.component';
@@ -160,11 +160,11 @@ import { DokumentumContainerComponent } from './dokumentum/dokumentum-container/
 import { ProjektContainerComponent } from './projekt/projekt-container/projekt-container.component';
 import { SzamlazasirendContainerComponent } from './szamlazasirend/szamlazasirend-container/szamlazasirend-container.component';
 import { ProjektTeendoContainerComponent } from './projektteendo/projekt-teendo-container/projekt-teendo-container.component';
-import { ProjektBizonylatesiratContainerComponent } from './projektkapcsolat/projekt-bizonylatesirat-container/projekt-bizonylatesirat-container.component';
+import { ProjektkapcsolatContainerComponent } from './projektkapcsolat/projektkapcsolat-container/projektkapcsolat-container.component';
 import {PenztartetelService} from './penztartetel/penztartetel.service';
 import {BizonylatService} from './bizonylat/bizonylat.service';
 import {RiportService} from './riport/riport.service';
-import { ProjektBizonylatesiratLevalasztasComponent } from './projektkapcsolat/projekt-bizonylatesirat-levalasztas/projekt-bizonylatesirat-levalasztas.component';
+import { ProjektkapcsolatLevalasztasComponent } from './projektkapcsolat/projektkapcsolat-levalasztas/projektkapcsolat-levalasztas.component';
 import { ProjektExportComponent } from './projekt/projekt-export/projekt-export.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { IratNincsprojektComponent } from './irat/irat-nincsprojekt/irat-nincsprojekt.component';
@@ -206,7 +206,7 @@ import { VagolapComponent } from './vagolap/vagolap.component';
 import {VagolapService} from './vagolap/vagolap.service';
 import { AbuComponent } from './tools/abu/abu.component';
 import { BizonylatIratVagolaprolComponent } from './bizonylatkapcsolat/bizonylat-irat-vagolaprol/bizonylat-irat-vagolaprol.component';
-import { ProjektBizonylatesiratVagolaprolComponent } from './projektkapcsolat/projekt-bizonylatesirat-vagolaprol/projekt-bizonylatesirat-vagolaprol.component';
+import { ProjektkapcsolatVagolaprolComponent } from './projektkapcsolat/projektkapcsolat-vagolaprol/projektkapcsolat-vagolaprol.component';
 import {AjanlatService} from './ajanlat/ajanlat.service';
 import {IratmintaService} from './iratminta/iratminta.service';
 import { EsemenynaploComponent } from './esemenynaplo/esemenynaplo.component';
@@ -326,7 +326,7 @@ if (environment.production) {
     ProjektInverterComponent,
     ProjektNapelemComponent,
     ProjektIratmintaComponent,
-    ProjektBizonylatesiratListComponent,
+    ProjektkapcsolatListComponent,
     SzamlazasirendListComponent,
     ProjektTeendoListComponent,
     IratListComponent,
@@ -400,8 +400,8 @@ if (environment.production) {
     ProjektTeendoEgyComponent,
     ProjektTeendoSzerkesztesComponent,
     ProjektTeendoElvegezveComponent,
-    ProjektBizonylatesiratUjbizonylatComponent,
-    ProjektBizonylatesiratUjiratComponent,
+    ProjektkapcsolatUjbizonylatComponent,
+    ProjektkapcsolatUjiratComponent,
     AjanlatComponent,
     VolumeContainerComponent,
     VolumeEgyComponent,
@@ -431,8 +431,8 @@ if (environment.production) {
     ProjektContainerComponent,
     SzamlazasirendContainerComponent,
     ProjektTeendoContainerComponent,
-    ProjektBizonylatesiratContainerComponent,
-    ProjektBizonylatesiratLevalasztasComponent,
+    ProjektkapcsolatContainerComponent,
+    ProjektkapcsolatLevalasztasComponent,
     ProjektExportComponent,
     SpinnerComponent,
     IratNincsprojektComponent,
@@ -473,7 +473,7 @@ if (environment.production) {
     VagolapComponent,
     AbuComponent,
     BizonylatIratVagolaprolComponent,
-    ProjektBizonylatesiratVagolaprolComponent,
+    ProjektkapcsolatVagolaprolComponent,
     EsemenynaploComponent,
     UgyfelterComponent,
     UgyfelTerLinkComponent,

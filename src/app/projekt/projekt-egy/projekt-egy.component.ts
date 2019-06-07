@@ -109,6 +109,7 @@ export class ProjektEgyComponent implements OnDestroy {
 
         this.projektservice.Dto[this.projektservice.DtoSelectedIndex] = res1.Result[0];
 
+        this.eppFrissit = false;
         this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
       })
       .catch(err => {

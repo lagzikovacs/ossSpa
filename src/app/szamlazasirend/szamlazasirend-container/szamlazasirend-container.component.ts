@@ -4,11 +4,11 @@ import {rowanimation} from '../../animation/rowAnimation';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 
 @Component({
-  selector: 'app-projekt-szamlazasirend-container',
-  templateUrl: './projekt-szamlazasirend-container.component.html',
+  selector: 'app-szamlazasirend-container',
+  templateUrl: './szamlazasirend-container.component.html',
   animations: [rowanimation]
 })
-export class ProjektSzamlazasirendContainerComponent implements OnInit, OnDestroy {
+export class SzamlazasirendContainerComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szamlazasirendservice: SzamlazasirendService;

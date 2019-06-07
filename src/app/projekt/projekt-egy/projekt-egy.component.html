@@ -89,16 +89,34 @@
     <div [@rowanimation]><app-projekt-szerkesztes></app-projekt-szerkesztes></div>
   </ng-container>
   <ng-container *ngIf="projektservice.EgyMode === 4">
-    <div [@rowanimation]><app-projekt-statusz></app-projekt-statusz></div>
+    <div [@rowanimation]><app-projekt-statusz [eppFrissit]="eppFrissit"
+                                              (OkClick)="SegedOk()"
+                                              (CancelClick)="SegedCancel()">
+    </app-projekt-statusz></div>
   </ng-container>
   <ng-container *ngIf="projektservice.EgyMode === 5">
-    <div [@rowanimation]><app-projekt-muszakiallapot></app-projekt-muszakiallapot></div>
+    <div [@rowanimation]>
+      <app-projekt-muszakiallapot [eppFrissit]="eppFrissit"
+                                  (OkClick)="SegedOk()"
+                                  (CancelClick)="SegedCancel()">
+      </app-projekt-muszakiallapot>
+    </div>
   </ng-container>
   <ng-container *ngIf="projektservice.EgyMode === 6">
-    <div [@rowanimation]><app-projekt-inverter></app-projekt-inverter></div>
+    <div [@rowanimation]>
+      <app-projekt-inverter [eppFrissit]="eppFrissit"
+                            (OkClick)="SegedOk()"
+                            (CancelClick)="SegedCancel()">
+      </app-projekt-inverter>
+    </div>
   </ng-container>
   <ng-container *ngIf="projektservice.EgyMode === 7">
-    <div [@rowanimation]><app-projekt-napelem></app-projekt-napelem></div>
+    <div [@rowanimation]>
+      <app-projekt-napelem [eppFrissit]="eppFrissit"
+                           (OkClick)="SegedOk()"
+                           (CancelClick)="SegedCancel()">
+      </app-projekt-napelem>
+    </div>
   </ng-container>
   <ng-container *ngIf="projektservice.EgyMode === 8">
     <div [@rowanimation]><app-projekt-iratminta></app-projekt-iratminta></div>
@@ -107,13 +125,18 @@
     <div [@rowanimation]><app-projekt-bizonylatesirat-container></app-projekt-bizonylatesirat-container></div>
   </ng-container>
   <ng-container *ngIf="projektservice.EgyMode === 10">
-    <div [@rowanimation]><app-projekt-szamlazasirend-container></app-projekt-szamlazasirend-container></div>
+    <div [@rowanimation]><app-szamlazasirend-container></app-szamlazasirend-container></div>
   </ng-container>
   <ng-container *ngIf="projektservice.EgyMode === 11">
     <div [@rowanimation]><app-projekt-teendo-container></app-projekt-teendo-container></div>
   </ng-container>
   <ng-container *ngIf="projektservice.EgyMode === 12">
-    <div [@rowanimation]><app-projekt-datumok></app-projekt-datumok></div>
+    <div [@rowanimation]>
+      <app-projekt-datumok [eppFrissit]="eppFrissit"
+                           (OkClick)="SegedOk()"
+                           (CancelClick)="SegedCancel()">
+      </app-projekt-datumok>
+    </div>
   </ng-container>
 
   <app-errormodal [cim]="projektservice.cim"></app-errormodal>

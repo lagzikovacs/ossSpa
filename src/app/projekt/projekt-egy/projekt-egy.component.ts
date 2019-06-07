@@ -92,6 +92,34 @@ export class ProjektEgyComponent implements OnDestroy {
     this._projektteendoservice.ContainerMode = ProjektteendoContainerMode.List;
   }
 
+  SegedOk() {
+    this.eppFrissit = true;
+    this.projektservice.Update(this.projektservice.DtoEdited)
+      .then(res => {
+        if (res.Error !== null) {
+          throw res.Error;
+        }
+
+        return this.projektservice.Get(res.Result);
+      })
+      .then(res1 => {
+        if (res1.Error !== null) {
+          throw res1.Error;
+        }
+
+        this.projektservice.Dto[this.projektservice.DtoSelectedIndex] = res1.Result[0];
+
+        this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
+  }
+  SegedCancel() {
+    this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
+  }
+
   TorlesOk() {
     this.eppFrissit = true;
     this.projektservice.Delete(this.projektservice.Dto[this.projektservice.DtoSelectedIndex])

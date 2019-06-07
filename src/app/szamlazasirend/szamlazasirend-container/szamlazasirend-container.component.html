@@ -6,13 +6,13 @@ Uj = 3
 }-->
 
 <ng-container *ngIf="szamlazasirendservice.ContainerMode === 1">
-  <app-projekt-szamlazasirend-list></app-projekt-szamlazasirend-list>
+  <app-szamlazasirend-list></app-szamlazasirend-list>
 </ng-container>
 <ng-container *ngIf="szamlazasirendservice.ContainerMode === 2">
-  <app-projekt-szamlazasirend-egy></app-projekt-szamlazasirend-egy>
+  <app-szamlazasirend-egy></app-szamlazasirend-egy>
 </ng-container>
 <ng-container *ngIf="szamlazasirendservice.ContainerMode === 3">
-  <app-projekt-szamlazasirend-szerkesztes></app-projekt-szamlazasirend-szerkesztes>
+  <app-szamlazasirend-szerkesztes></app-szamlazasirend-szerkesztes>
 </ng-container>
 
 <app-errormodal [cim]="szamlazasirendservice.cim"></app-errormodal>

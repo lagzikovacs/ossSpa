@@ -8,11 +8,11 @@ import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
-  selector: 'app-projekt-szamlazasirend-egy',
-  templateUrl: './projekt-szamlazasirend-egy.component.html',
+  selector: 'app-szamlazasirend-egy',
+  templateUrl: './szamlazasirend-egy.component.html',
   animations: [rowanimation]
 })
-export class ProjektSzamlazasirendEgyComponent implements OnDestroy {
+export class SzamlazasirendEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szamlazasirendservice: SzamlazasirendService;

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {ProjektEgyMode} from '../projektegymode';
@@ -16,7 +16,10 @@ export class ProjektNapelemComponent implements OnInit, OnDestroy {
 
   entries = ['', 'Nincs megrendelve', 'Megrendelve', 'Raktárban', 'Kiszállítva/telepítve', 'Harmadik fél biztosítja'];
   selected = '';
-  eppFrissit = false;
+  @Input() eppFrissit: boolean;
+
+  @Output() OkClick = new EventEmitter<void>();
+  @Output() CancelClick = new EventEmitter<void>();
 
   constructor(projektservice: ProjektService) {
     this.projektservice = projektservice;
@@ -31,36 +34,12 @@ export class ProjektNapelemComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.eppFrissit = true;
-
     this.projektservice.DtoEdited.Napelemallapot = this.selected;
-    this.projektservice.Update(this.projektservice.DtoEdited)
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
 
-        return this.projektservice.Get(res.Result);
-      })
-      .then(res1 => {
-        if (res1.Error !== null) {
-          throw res1.Error;
-        }
-
-        this.projektservice.Dto[this.projektservice.DtoSelectedIndex] = res1.Result[0];
-        this.navigal();
-      })
-      .catch(err => {
-        this.errormodal.show(err);
-        this.eppFrissit = false;
-      });
+    this.OkClick.emit();
   }
   cancel() {
-    this.navigal();
-  }
-
-  navigal() {
-    this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
+    this.CancelClick.emit();
   }
 
   ngOnDestroy() {

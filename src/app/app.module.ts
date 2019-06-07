@@ -39,7 +39,7 @@ import { ProjektInverterComponent } from './projekt/projekt-inverter/projekt-inv
 import { ProjektNapelemComponent } from './projekt/projekt-napelem/projekt-napelem.component';
 import { ProjektIratmintaComponent } from './iratminta/projekt-iratminta.component';
 import { ProjektBizonylatesiratListComponent } from './projektkapcsolat/projekt-bizonylatesirat-list/projekt-bizonylatesirat-list.component';
-import { ProjektSzamlazasirendListComponent } from './szamlazasirend/projekt-szamlazasirend-list/projekt-szamlazasirend-list.component';
+import { SzamlazasirendListComponent } from './szamlazasirend/szamlazasirend-list/szamlazasirend-list.component';
 import { ProjektTeendoListComponent } from './projektteendo/projekt-teendo-list/projekt-teendo-list.component';
 import { IratListComponent } from './irat/irat-list/irat-list.component';
 import { IratEgyComponent } from './irat/irat-egy/irat-egy.component';
@@ -122,8 +122,8 @@ import {PenztarService} from './penztar/penztar.service';
 import { PenztartetelSzerkesztesComponent } from './penztartetel/penztartetel-szerkesztes/penztartetel-szerkesztes.component';
 import { OnlineszamlaellenorzeseComponent } from './onlineszamla/onlineszamlaellenorzese/onlineszamlaellenorzese.component';
 import { ProjektStatuszComponent } from './projekt/projekt-statusz/projekt-statusz.component';
-import { ProjektSzamlazasirendEgyComponent } from './szamlazasirend/projekt-szamlazasirend-egy/projekt-szamlazasirend-egy.component';
-import { ProjektSzamlazasirendSzerkesztesComponent } from './szamlazasirend/projekt-szamlazasirend-szerkesztes/projekt-szamlazasirend-szerkesztes.component';
+import { SzamlazasirendEgyComponent } from './szamlazasirend/szamlazasirend-egy/szamlazasirend-egy.component';
+import { SzamlazasirendSzerkesztesComponent } from './szamlazasirend/szamlazasirend-szerkesztes/szamlazasirend-szerkesztes.component';
 import { ProjektTeendoEgyComponent } from './projektteendo/projekt-teendo-egy/projekt-teendo-egy.component';
 import { ProjektTeendoSzerkesztesComponent } from './projektteendo/projekt-teendo-szerkesztes/projekt-teendo-szerkesztes.component';
 import { ProjektTeendoElvegezveComponent } from './projektteendo/projekt-teendo-elvegezve/projekt-teendo-elvegezve.component';
@@ -158,7 +158,7 @@ import { PenztartetelContainerComponent } from './penztartetel/penztartetel-cont
 import { IratContainerComponent } from './irat/irat-container/irat-container.component';
 import { DokumentumContainerComponent } from './dokumentum/dokumentum-container/dokumentum-container.component';
 import { ProjektContainerComponent } from './projekt/projekt-container/projekt-container.component';
-import { ProjektSzamlazasirendContainerComponent } from './szamlazasirend/projekt-szamlazasirend-container/projekt-szamlazasirend-container.component';
+import { SzamlazasirendContainerComponent } from './szamlazasirend/szamlazasirend-container/szamlazasirend-container.component';
 import { ProjektTeendoContainerComponent } from './projektteendo/projekt-teendo-container/projekt-teendo-container.component';
 import { ProjektBizonylatesiratContainerComponent } from './projektkapcsolat/projekt-bizonylatesirat-container/projekt-bizonylatesirat-container.component';
 import {PenztartetelService} from './penztartetel/penztartetel.service';
@@ -327,7 +327,7 @@ if (environment.production) {
     ProjektNapelemComponent,
     ProjektIratmintaComponent,
     ProjektBizonylatesiratListComponent,
-    ProjektSzamlazasirendListComponent,
+    SzamlazasirendListComponent,
     ProjektTeendoListComponent,
     IratListComponent,
     IratEgyComponent,
@@ -395,8 +395,8 @@ if (environment.production) {
     PenztartetelSzerkesztesComponent,
     OnlineszamlaellenorzeseComponent,
     ProjektStatuszComponent,
-    ProjektSzamlazasirendEgyComponent,
-    ProjektSzamlazasirendSzerkesztesComponent,
+    SzamlazasirendEgyComponent,
+    SzamlazasirendSzerkesztesComponent,
     ProjektTeendoEgyComponent,
     ProjektTeendoSzerkesztesComponent,
     ProjektTeendoElvegezveComponent,
@@ -429,7 +429,7 @@ if (environment.production) {
     IratContainerComponent,
     DokumentumContainerComponent,
     ProjektContainerComponent,
-    ProjektSzamlazasirendContainerComponent,
+    SzamlazasirendContainerComponent,
     ProjektTeendoContainerComponent,
     ProjektBizonylatesiratContainerComponent,
     ProjektBizonylatesiratLevalasztasComponent,

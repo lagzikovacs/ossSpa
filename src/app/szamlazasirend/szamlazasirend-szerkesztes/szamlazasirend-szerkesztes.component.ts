@@ -11,10 +11,10 @@ import {PenznemContainerMode} from '../../primitiv/penznem/penznemcontainermode'
 import {SzamlazasirendSzerkesztesMode} from '../szamlazasirendszerkesztesmode';
 
 @Component({
-  selector: 'app-projekt-szamlazasirend-szerkesztes',
-  templateUrl: './projekt-szamlazasirend-szerkesztes.component.html'
+  selector: 'app-szamlazasirend-szerkesztes',
+  templateUrl: './szamlazasirend-szerkesztes.component.html'
 })
-export class ProjektSzamlazasirendSzerkesztesComponent implements OnDestroy {
+export class SzamlazasirendSzerkesztesComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szamlazasirendservice: SzamlazasirendService;

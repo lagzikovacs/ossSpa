@@ -6,10 +6,10 @@ import {SzamlazasirendContainerMode} from '../szamlazasirendcontainermode';
 import {SzamlazasirendEgyMode} from '../szamlazasirendegymode';
 
 @Component({
-  selector: 'app-projekt-szamlazasirend-list',
-  templateUrl: './projekt-szamlazasirend-list.component.html'
+  selector: 'app-szamlazasirend-list',
+  templateUrl: './szamlazasirend-list.component.html'
 })
-export class ProjektSzamlazasirendListComponent implements OnDestroy {
+export class SzamlazasirendListComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szamlazasirendservice: SzamlazasirendService;

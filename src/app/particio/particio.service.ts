@@ -14,7 +14,6 @@ export class ParticioService {
   private readonly _controller = 'api/particio/';
 
   cim = 'Partíció';
-  Dto = new ParticioDto();
   EgyMode = ParticioEgyMode.Szallito;
 
   constructor(private _httpClient: HttpClient,

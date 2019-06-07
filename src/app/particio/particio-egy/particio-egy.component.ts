@@ -2,6 +2,8 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ParticioService} from '../particio.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {ParticioEgyMode} from '../particioegymode';
+import {ParticioDto} from '../particiodto';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-particio-egy',
@@ -11,6 +13,8 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   particioservice: ParticioService;
+  Ori = new ParticioDto();
+  Dto = new ParticioDto();
   eppFrissit = false;
 
   constructor(particioservice: ParticioService) {
@@ -24,7 +28,10 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
         if (res.Error != null) {
           throw res.Error;
         }
-        this.particioservice.Dto = res.Result[0];
+
+        this.Ori = res.Result[0];
+        this.Dto = deepCopy(this.Ori);
+
         this.eppFrissit = false;
       })
       .catch(err => {
@@ -50,6 +57,38 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
   }
   volume() {
     this.particioservice.EgyMode = ParticioEgyMode.Volume;
+  }
+
+  SzerkesztesOk(Mod: ParticioDto) {
+    this.eppFrissit = true;
+    this.particioservice.Update(Mod)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        return this.particioservice.Get();
+      })
+      .then(res1 => {
+        if (res1.Error != null) {
+          throw res1.Error;
+        }
+
+        this.Ori = res1.Result[0];
+        this.Dto = deepCopy(this.Ori);
+
+        this.eppFrissit = false;
+        this.particioservice.EgyMode = ParticioEgyMode.Blank;
+      })
+      .catch(err => {
+        this.errormodal.show(err);
+        this.eppFrissit = false;
+      });
+  }
+  SzerkesztesCancel() {
+    this.Dto = deepCopy(this.Ori);
+
+    this.particioservice.EgyMode = ParticioEgyMode.Blank;
   }
 
   ngOnDestroy() {

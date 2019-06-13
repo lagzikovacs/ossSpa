@@ -129,7 +129,7 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
           this._iratservice.DtoSelectedIndex = 0;
 
           this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.EgyIrat;
-          this._iratservice.ContainerMode = IratContainerMode.List;
+          this._iratservice.ContainerMode = IratContainerMode.Egy;
           this._iratservice.EgyMode = IratEgyMode.Dokumentum;
           this._dokumentumservice.ContainerMode = DokumentumContainerMode.List;
           this.eppFrissit = false;

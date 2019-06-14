@@ -231,6 +231,7 @@ import { UgyfelCsoportComponent } from './ugyfel/ugyfel-csoport/ugyfel-csoport.c
 import { UgyfelVcardComponent } from './ugyfel/ugyfel-vcard/ugyfel-vcard.component';
 import { UgyfelTablaComponent } from './ugyfel/ugyfel-tabla/ugyfel-tabla.component';
 import { TablaComponent } from './tools/tabla/tabla.component';
+import {StartupService} from './startup/startup.service';
 
 const routes: Routes = [
 
@@ -540,6 +541,8 @@ if (environment.production) {
     FelhasznaloService,
     CsoportService,
     LogonService,
+
+    StartupService,
 
     MenuService,
     VerzioService,

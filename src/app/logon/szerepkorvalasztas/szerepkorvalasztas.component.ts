@@ -2,9 +2,9 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {LogonService} from '../logon.service';
 import {Router} from '@angular/router';
-import {CsoportService} from '../../csoport/csoport.service';
 import {SessionService} from '../../session/session.service';
 import {SessionDto} from '../../session/sessiondto';
+import {StartupService} from '../../startup/startup.service';
 
 @Component({
   selector: 'app-szerepkorvalasztas',
@@ -17,8 +17,8 @@ export class SzerepkorvalasztasComponent implements OnInit, OnDestroy {
   eppFrissit = false;
 
   constructor(private _router: Router,
-              private _csoportservice: CsoportService,
               private _sessionservice: SessionService,
+              private _startupservice: StartupService,
               logonservice: LogonService) {
     this.logonservice = logonservice;
   }
@@ -30,32 +30,14 @@ export class SzerepkorvalasztasComponent implements OnInit, OnDestroy {
 
   setClickedRow(i: number) {
     this.eppFrissit = true;
-    this.logonservice.SzerepkorValasztas(this.logonservice.lehetsegesszerepkorokDto[i].Particiokod,
+
+    this._startupservice.SzerepkorValasztas(this.logonservice.lehetsegesszerepkorokDto[i].Particiokod,
       this.logonservice.lehetsegesszerepkorokDto[i].Csoportkod)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        return this._csoportservice.Jogaim();
-      })
-      .then(res1 => {
-        if (res1.Error != null) {
-          throw res1.Error;
-        }
-
-        this.logonservice.Jogaim = res1.Result;
-
-        return this._sessionservice.Get();
-      })
       .then(res2 => {
         if (res2.Error != null) {
           throw res2.Error;
         }
 
-        this._sessionservice.sessiondto = res2.Result[0];
-
-        this.logonservice.SzerepkorKivalasztva = true;
         this.eppFrissit = false;
         this._router.navigate(['/fooldal']);
       })

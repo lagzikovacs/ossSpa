@@ -17,6 +17,8 @@ import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
+import {ProjektContainerMode} from '../../projekt/projektcontainermode';
+import {ProjektEgyMode} from '../../projekt/projektegymode';
 
 @Component({
   selector: 'app-irat-egy',

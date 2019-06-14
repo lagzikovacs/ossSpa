@@ -15,7 +15,6 @@ import {EmptyResult} from '../dtos/emptyresult';
 })
 export class LogonService {
   lehetsegesszerepkorokDto: CsoportDto[];
-  readonly BaseHref: string;
   Sid = '';
   Jogaim: any[] = new Array<any>();
   private readonly _controller = 'api/logon/';

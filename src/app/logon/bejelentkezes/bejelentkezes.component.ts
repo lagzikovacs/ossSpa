@@ -3,9 +3,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {LogonService} from '../logon.service';
-import {CsoportService} from '../../csoport/csoport.service';
 import {SessionService} from '../../session/session.service';
 import {SessionDto} from '../../session/sessiondto';
+import {StartupService} from '../../startup/startup.service';
 
 @Component({
   selector: 'app-bejelentkezes',
@@ -20,8 +20,8 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
   constructor(private _router: Router,
               private fb: FormBuilder,
               private _logonservice: LogonService,
-              private _csoportservice: CsoportService,
-              private _sessionservice: SessionService) {
+              private _sessionservice: SessionService,
+              private _startupservice: StartupService) {
   }
 
   ngOnInit() {
@@ -59,32 +59,13 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
           case 0:
             throw nincsBesorolva;
           case 1:
-            this._logonservice.SzerepkorValasztas(this._logonservice.lehetsegesszerepkorokDto[0].Particiokod,
+            this._startupservice.SzerepkorValasztas(this._logonservice.lehetsegesszerepkorokDto[0].Particiokod,
               this._logonservice.lehetsegesszerepkorokDto[0].Csoportkod)
-              .then(res2 => {
-                if (res2.Error != null) {
-                  throw res2.Error;
-                }
-
-                return this._csoportservice.Jogaim();
-              })
-              .then(res3 => {
-                if (res3.Error != null) {
-                  throw res3.Error;
-                }
-
-                this._logonservice.Jogaim = res3.Result;
-
-                return this._sessionservice.Get();
-              })
               .then(res4 => {
                 if (res4.Error != null) {
                   throw res4.Error;
                 }
 
-                this._sessionservice.sessiondto = res4.Result[0];
-
-                this._logonservice.SzerepkorKivalasztva = true;
                 this.eppFrissit = false;
                 this._router.navigate(['/fooldal']);
               })

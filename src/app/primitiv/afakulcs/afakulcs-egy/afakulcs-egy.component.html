@@ -5,19 +5,19 @@
   </div>
   <div>
     <nav>
-      <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-arrow-left" style="margin-right: 3px" aria-hidden="true"></i>Vissza
       </button>
-      <button [disabled]="eppFrissit" (click)="reszletek()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit" (click)="reszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>Részletesen
       </button>
 
       <button [disabled]="eppFrissit || afakulcsservice.DtoSelectedIndex === -1 || !mod"
-              (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
+              (click)="torles()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-minus" aria-hidden="true"></i>
       </button>
       <button [disabled]="eppFrissit || afakulcsservice.DtoSelectedIndex === -1 || !mod"
-              (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
+              (click)="modositas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-edit" aria-hidden="true"></i>
       </button>
     </nav>

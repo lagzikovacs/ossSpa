@@ -3,14 +3,14 @@
   <h6 *ngIf="volumeservice.DtoSelectedIndex !== -1">{{volumeservice.Dto[volumeservice.DtoSelectedIndex].Volumeno}}</h6>
   <div>
     <nav>
-      <button [disabled]="eppFrissit || volumeservice.eppTesztel" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit || volumeservice.eppTesztel" (click)="vissza()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-arrow-left" style="margin-right: 3px" aria-hidden="true"></i>Vissza
       </button>
-      <button [disabled]="eppFrissit || volumeservice.eppTesztel" (click)="reszletek()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit || volumeservice.eppTesztel" (click)="reszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>Részletesen
       </button>
 
-      <button [disabled]="eppFrissit || volumeservice.eppTesztel || volumeservice.DtoSelectedIndex === -1" (click)="ellenorzes()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit || volumeservice.eppTesztel || volumeservice.DtoSelectedIndex === -1" (click)="ellenorzes()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Ellenőrzés
       </button>
     </nav>

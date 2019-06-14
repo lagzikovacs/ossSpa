@@ -3,28 +3,28 @@
   <h6 *ngIf="penztarservice.DtoSelectedIndex !== -1">{{penztarservice.Dto[penztarservice.DtoSelectedIndex].Penztar1}} {{penztarservice.Dto[penztarservice.DtoSelectedIndex].Egyenleg}} {{penztarservice.Dto[penztarservice.DtoSelectedIndex].Penznem}}</h6>
   <div>
     <nav>
-      <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-arrow-left" style="margin-right: 3px" aria-hidden="true"></i>Vissza
       </button>
-      <button [disabled]="eppFrissit" (click)="reszletek()" class="btn btn-sm btn-outline-primary navgomb">
+      <button [disabled]="eppFrissit" (click)="reszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>Részletesen
       </button>
 
       <button [disabled]="eppFrissit || penztarservice.DtoSelectedIndex === -1 || !mod || !nyitva"
-              (click)="torles()" class="btn btn-sm btn-outline-primary navgomb">
+              (click)="torles()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-minus" aria-hidden="true"></i>
       </button>
       <button [disabled]="eppFrissit || penztarservice.DtoSelectedIndex === -1 || !mod || !nyitva"
-              (click)="modositas()" class="btn btn-sm btn-outline-primary navgomb">
+              (click)="modositas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-edit" aria-hidden="true"></i>
       </button>
 
       <button [disabled]="eppFrissit || penztarservice.DtoSelectedIndex === -1"
-              (click)="tetelek()" class="btn btn-sm btn-outline-primary navgomb">
+              (click)="tetelek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Tételek
       </button>
       <button [disabled]="eppFrissit || penztarservice.DtoSelectedIndex === -1"
-              (click)="export()" class="btn btn-sm btn-outline-primary navgomb">
+              (click)="export()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Export
       </button>
     </nav>

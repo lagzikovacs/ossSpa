@@ -1,32 +1,40 @@
-<div class="row no-gutters" style="paddig-top: 6px;padding-bottom: 6px">
-  <div style="margin-right: 6px">
+<div class="row no-gutters toolbarmargins">
+  <div class="toolbarcontrolmargins">
     <select [disabled]="!enKereses" #Statuszszempont type="text" class="form-control form-control-sm">
       <option *ngFor="let s of Statuszszurok; let i = index" [value]="i" [selected]="i == _statuszszempont">{{s}}</option>
     </select>
   </div>
-  <div style="margin-right: 6px">
+  <div class="toolbarcontrolmargins">
     <select [disabled]="!enKereses" #Teendoszempont type="text" class="form-control form-control-sm">
       <option *ngFor="let t of Teendoszurok; let i = index" [value]="i" [selected]="i == _teendoszempont">{{t}}</option>
     </select>
   </div>
-  <div style="margin-right: 6px">
+  <div class="toolbarcontrolmargins">
     <select [disabled]="!enKereses" #Szempont type="text" class="form-control form-control-sm">
       <option *ngFor="let sz of Szurok; let i = index" [value]="i" [selected]="i == _szempont">{{sz}}</option>
     </select>
   </div>
-  <div style="width: 120px; margin-right: 6px">
+  <div class="toolbarcontrolmargins" style="width: 120px">
     <input [disabled]="!enKereses" #Minta type="text" class="form-control form-control-sm">
   </div>
 
   <div class="float-right" role="toolbar" aria-label="Gombok">
     <div class="btn-group btn-group-sm" role="group" aria-label="Gombok">
-      <button [disabled]="!enKereses" (click)="doKereses()" style="margin-right:6px;" class="btn btn-outline-primary" type="button">
+      <button [disabled]="!enKereses"
+              (click)="doKereses()"
+              class="btn btn-outline-primary toolbarcontrolmargins"
+              type="button">
         <i class="fa fa-search" aria-hidden="true"></i>
       </button>
-      <button [disabled]="!enUj" (click)="doUj()" type="button" style="margin-right:3px;" class="btn btn-sm btn-outline-primary">
+      <button [disabled]="!enUj"
+              (click)="doUj()"
+              class="btn btn-sm btn-outline-primary toolbarcontrolmarginskozel"
+              type="button">
         <i class="fa fa-plus" aria-hidden="true"></i>
       </button>
-      <button (click)="doExport()" class="btn btn-sm btn-outline-primary" type="button">
+      <button (click)="doExport()"
+              class="btn btn-sm btn-outline-primary toolbarcontrolmarginskozel"
+              type="button">
         Export
       </button>
     </div>

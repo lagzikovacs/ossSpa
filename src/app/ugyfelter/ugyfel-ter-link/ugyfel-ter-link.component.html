@@ -6,7 +6,7 @@
       <textarea class="form-control" rows="3" id="regilink" readonly="true" [(ngModel)]="link"></textarea>
     </div>
   </ng-container>
-  <button [disabled]="eppFrissit" (click)="ugyfelterlink()" class="btn btn-sm btn-outline-primary navgomb">
+  <button [disabled]="eppFrissit" (click)="ugyfelterlink()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
     Új ügyféltér link
   </button>
   <p *ngIf="kikuldesikodidopontja !== ''">Ha új linket készít, a régi érvényessége megszűnik!</p>

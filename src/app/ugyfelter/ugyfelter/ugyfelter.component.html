@@ -1,9 +1,11 @@
 <div class="alapkeret">
   <h5>Ügyféltér</h5>
 
+  <img src="assets/gsg.jpg" style="margin-top: 8px;margin-bottom: 8px" alt="GSG">
+
   <ng-container *ngIf="!bejelentkezve">
     <p>Üdvözöljük, ön a GridSolar Group Kft. informatikai rendszerét (OSS) használja. Kérjük a levélben kapott linket kezelje bizalmasan!</p>
-    <button [disabled]="eppFrissit" (click)="folytatas()" class="btn btn-sm btn-outline-primary navgomb">
+    <button [disabled]="eppFrissit" (click)="folytatas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
       Folytatás
     </button>
   </ng-container>

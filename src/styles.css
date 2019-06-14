@@ -20,14 +20,7 @@ html, body {
   padding: 8px;
   margin-bottom: 5px;
 }
-.ukeret {
-  border-left: 1px solid lightgrey;
-  border-right: 1px solid lightgrey;
-  border-bottom: 1px solid lightgrey;
 
-  padding: 8px;
-  margin-bottom: 5px;
-}
 
 .editform-row {
   margin-bottom: 5px;
@@ -45,22 +38,7 @@ html, body {
   }
 }
 
-.navgomb {
-  margin-right: 5px;
-  margin-bottom: 5px;
-}
 
-.egypanel {
-  float: left;
-  width: 300px;
-  border: solid 1px silver;
-  margin-right: 10px;
-  margin-bottom: 5px;
-  padding: 10px
-}
-.egytable {
-  border: none;
-}
 .egylabel {
   text-align: left;
   font-style: italic;
@@ -68,3 +46,18 @@ html, body {
   padding-right: 10px;
 }
 
+
+
+
+
+.toolbarmargins {
+  margin-top: 6px;
+}
+.toolbarcontrolmargins {
+  margin-right: 6px;
+  margin-bottom: 6px;
+}
+.toolbarcontrolmarginskozel {
+  margin-right: 3px;
+  margin-bottom: 6px;
+}

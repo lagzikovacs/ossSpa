@@ -7,6 +7,9 @@ import {ProjektService} from '../projekt/projekt.service';
 import {IratService} from '../irat/irat.service';
 import {AfakulcsService} from '../primitiv/afakulcs/afakulcs.service';
 import {FelhasznaloService} from '../primitiv/felhasznalo/felhasznalo.service';
+import {FizetesimodService} from '../primitiv/fizetesimod/fizetesimod.service';
+import {HelysegService} from '../primitiv/helyseg/helyseg.service';
+import {IrattipusService} from '../primitiv/irattipus/irattipus.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +21,9 @@ export class StartupService {
               private _sessionservice: SessionService,
               private _afakulcsservice: AfakulcsService,
               private _felhasznaloservice: FelhasznaloService,
+              private _fizetesimodservice: FizetesimodService,
+              private _helysegservice: HelysegService,
+              private _irattipusservice: IrattipusService,
 
               private _projektservice: ProjektService,
               private _iratservice: IratService) { }
@@ -83,6 +89,60 @@ export class StartupService {
         }
 
         this._felhasznaloservice.ReszletekSettings = res6.Result;
+
+        return this._fizetesimodservice.GetGridSettings();
+      })
+      .then(res7 => {
+        if (res7.Error != null) {
+          throw res7.Error;
+        }
+
+        this._fizetesimodservice.GridSettings = res7.Result;
+
+        return this._fizetesimodservice.GetReszletekSettings();
+      })
+      .then(res8 => {
+        if (res8.Error != null) {
+          throw res8.Error;
+        }
+
+        this._fizetesimodservice.ReszletekSettings = res8.Result;
+
+        return this._helysegservice.GetGridSettings();
+      })
+      .then(res9 => {
+        if (res9.Error != null) {
+          throw res9.Error;
+        }
+
+        this._helysegservice.GridSettings = res9.Result;
+
+        return this._helysegservice.GetReszletekSettings();
+      })
+      .then(res10 => {
+        if (res10.Error != null) {
+          throw res10.Error;
+        }
+
+        this._helysegservice.ReszletekSettings = res10.Result;
+
+        return this._irattipusservice.GetGridSettings();
+      })
+      .then(res11 => {
+        if (res11.Error != null) {
+          throw res11.Error;
+        }
+
+        this._irattipusservice.GridSettings = res11.Result;
+
+        return this._irattipusservice.GetReszletekSettings();
+      })
+      .then(res12 => {
+        if (res12.Error != null) {
+          throw res12.Error;
+        }
+
+        this._irattipusservice.ReszletekSettings = res12.Result;
 
         return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
       });

@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, Input, OnDestroy} from '@angular/core';
 import {rowanimation} from '../../animation/rowAnimation';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 

@@ -18,7 +18,7 @@ export enum BizonylatesIratContainerMode {
   <app-bizonylat-egy></app-bizonylat-egy>
 </ng-container>
 <ng-container *ngIf="projektkapcsolatservice.ContainerMode === 3">
-  <app-irat-container></app-irat-container>
+  <app-irat-container [enProjekt]="false"></app-irat-container>
 </ng-container>
 <ng-container *ngIf="projektkapcsolatservice.ContainerMode === 4">
   <app-projektkapcsolat-ujbizonylat></app-projektkapcsolat-ujbizonylat>

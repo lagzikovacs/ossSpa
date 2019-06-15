@@ -1,4 +1,4 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
 import {IratService} from '../irat.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {IratContainerMode} from '../iratcontainermode';
@@ -36,6 +36,8 @@ export class IratEgyComponent implements OnDestroy {
   mod = false;
   ri = -1;
   pri = -1;
+
+  @Input() enProjekt = true;
 
   constructor(private _logonservice: LogonService,
               private _projektkapcsolatservice: ProjektkapcsolatService,

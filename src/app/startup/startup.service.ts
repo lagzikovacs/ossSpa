@@ -10,13 +10,26 @@ import {FelhasznaloService} from '../primitiv/felhasznalo/felhasznalo.service';
 import {FizetesimodService} from '../primitiv/fizetesimod/fizetesimod.service';
 import {HelysegService} from '../primitiv/helyseg/helyseg.service';
 import {IrattipusService} from '../primitiv/irattipus/irattipus.service';
+import {MeService} from '../primitiv/me/me.service';
+import {PenznemService} from '../primitiv/penznem/penznem.service';
+import {TeendoService} from '../primitiv/teendo/teendo.service';
+import {TermekdijService} from '../primitiv/termekdij/termekdij.service';
+import {CikkService} from '../cikk/cikk.service';
+import {UgyfelService} from '../ugyfel/ugyfel.service';
+import {ProjektteendoService} from '../projektteendo/projektteendo.service';
+import {StartupResult} from './startupresult';
+import {environment} from '../../environments/environment';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {SzamlazasirendService} from '../szamlazasirend/szamlazasirend.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StartupService {
+  private readonly _controller = 'api/startup/';
 
-  constructor(private _logonservice: LogonService,
+  constructor(private _httpClient: HttpClient,
+              private _logonservice: LogonService,
               private _csoportservice: CsoportService,
               private _sessionservice: SessionService,
               private _afakulcsservice: AfakulcsService,
@@ -24,9 +37,27 @@ export class StartupService {
               private _fizetesimodservice: FizetesimodService,
               private _helysegservice: HelysegService,
               private _irattipusservice: IrattipusService,
-
+              private _meservice: MeService,
+              private _penznemservice: PenznemService,
+              private _teendoservice: TeendoService,
+              private _termekdijservice: TermekdijService,
+              private _cikkservice: CikkService,
+              private _ugyfelservice: UgyfelService,
               private _projektservice: ProjektService,
+              private _projektteendoservice: ProjektteendoService,
+              private _szamlazasirendservice: SzamlazasirendService,
               private _iratservice: IratService) { }
+
+  public Get(): Promise<StartupResult> {
+    const url = environment.CoreRef + this._controller + 'get';
+    const body = '';
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this._logonservice.Sid)
+    };
+
+    return this._httpClient.post<StartupResult>(url, body, options).toPromise();
+  }
 
   public SzerepkorValasztas(particiokod: number, csoportkod: number): Promise<EmptyResult> {
     return this._logonservice.SzerepkorValasztas(particiokod, csoportkod)
@@ -52,101 +83,51 @@ export class StartupService {
         }
 
         this._sessionservice.sessiondto = res2.Result[0];
-        this._logonservice.SzerepkorKivalasztva = true;
 
-        return this._afakulcsservice.GetGridSettings();
+        return this.Get();
       })
       .then(res3 => {
         if (res3.Error != null) {
           throw res3.Error;
         }
 
-        this._afakulcsservice.GridSettings = res3.Result;
+        this._afakulcsservice.GridSettings = res3.Afakulcs_Grid;
+        this._afakulcsservice.ReszletekSettings = res3.Afakulcs_Reszletek;
+        this._felhasznaloservice.GridSettings = res3.Felhasznalo_Grid;
+        this._felhasznaloservice.ReszletekSettings = res3.Felhasznalo_Reszletek;
+        this._fizetesimodservice.GridSettings = res3.Fizetesimod_Grid;
+        this._fizetesimodservice.ReszletekSettings = res3.Fizetesimod_Reszletek;
+        this._helysegservice.GridSettings = res3.Helyseg_Grid;
+        this._helysegservice.ReszletekSettings = res3.Helyseg_Reszletek;
+        this._irattipusservice.GridSettings = res3.Irattipus_Grid;
+        this._irattipusservice.ReszletekSettings = res3.Irattipus_Reszletek;
+        this._meservice.GridSettings = res3.Me_Grid;
+        this._meservice.ReszletekSettings = res3.Me_Reszletek;
+        this._penznemservice.GridSettings = res3.Penznem_Grid;
+        this._penznemservice.ReszletekSettings = res3.Penznem_Reszletek;
+        this._teendoservice.GridSettings = res3.Teendo_Grid;
+        this._teendoservice.ReszletekSettings = res3.Teendo_Reszletek;
+        this._termekdijservice.GridSettings = res3.Termekdij_Grid;
+        this._termekdijservice.ReszletekSettings = res3.Termekdij_Reszletek;
 
-        return this._afakulcsservice.GetReszletekSettings();
-      })
-      .then(res4 => {
-        if (res4.Error != null) {
-          throw res4.Error;
-        }
+        this._cikkservice.GridSettings = res3.Cikk_Grid;
+        this._cikkservice.ReszletekSettings = res3.Cikk_Reszletek;
+        this._ugyfelservice.GridSettings = res3.Ugyfel_Grid;
+        this._ugyfelservice.ReszletekSettings = res3.Ugyfel_Reszletek;
 
-        this._afakulcsservice.ReszletekSettings = res4.Result;
+        this._projektservice.GridSettings = res3.Projekt_Grid;
+        this._projektservice.ReszletekSettings = res3.Projekt_Reszletek;
+        this._projektteendoservice.GridSettings = res3.Projektteendo_Grid;
+        this._projektteendoservice.ReszletekSettings = res3.Projektteendo_Reszletek;
+        this._szamlazasirendservice.GridSettings = res3.Szamlazasirend_Grid;
+        this._szamlazasirendservice.ReszletekSettings = res3.Szamlazasirend_Reszletek;
 
-        return this._felhasznaloservice.GetGridSettings();
-      })
-      .then(res5 => {
-        if (res5.Error != null) {
-          throw res5.Error;
-        }
+        this._iratservice.GridSettings = res3.Irat_Grid;
+        this._iratservice.ReszletekSettings = res3.Irat_Reszletek;
 
-        this._felhasznaloservice.GridSettings = res5.Result;
-
-        return this._felhasznaloservice.GetReszletekSettings();
-      })
-      .then(res6 => {
-        if (res6.Error != null) {
-          throw res6.Error;
-        }
-
-        this._felhasznaloservice.ReszletekSettings = res6.Result;
-
-        return this._fizetesimodservice.GetGridSettings();
-      })
-      .then(res7 => {
-        if (res7.Error != null) {
-          throw res7.Error;
-        }
-
-        this._fizetesimodservice.GridSettings = res7.Result;
-
-        return this._fizetesimodservice.GetReszletekSettings();
-      })
-      .then(res8 => {
-        if (res8.Error != null) {
-          throw res8.Error;
-        }
-
-        this._fizetesimodservice.ReszletekSettings = res8.Result;
-
-        return this._helysegservice.GetGridSettings();
-      })
-      .then(res9 => {
-        if (res9.Error != null) {
-          throw res9.Error;
-        }
-
-        this._helysegservice.GridSettings = res9.Result;
-
-        return this._helysegservice.GetReszletekSettings();
-      })
-      .then(res10 => {
-        if (res10.Error != null) {
-          throw res10.Error;
-        }
-
-        this._helysegservice.ReszletekSettings = res10.Result;
-
-        return this._irattipusservice.GetGridSettings();
-      })
-      .then(res11 => {
-        if (res11.Error != null) {
-          throw res11.Error;
-        }
-
-        this._irattipusservice.GridSettings = res11.Result;
-
-        return this._irattipusservice.GetReszletekSettings();
-      })
-      .then(res12 => {
-        if (res12.Error != null) {
-          throw res12.Error;
-        }
-
-        this._irattipusservice.ReszletekSettings = res12.Result;
+        this._logonservice.SzerepkorKivalasztva = true;
 
         return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
       });
   }
-
-  //
 }

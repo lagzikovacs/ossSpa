@@ -29,7 +29,7 @@
       <button [disabled]="eppFrissit" (click)="fotozaslink()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Fotózás link
       </button>
-      <button [disabled]="eppFrissit" (click)="projekt()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="eppFrissit || !enProjekt" (click)="projekt()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Projekt
       </button>
       <button [disabled]="eppFrissit" (click)="vagolap()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">

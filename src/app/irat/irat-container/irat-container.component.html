@@ -9,11 +9,8 @@
   <app-irat-list></app-irat-list>
 </ng-container>
 <ng-container *ngIf="iratservice.ContainerMode === 2">
-  <app-irat-egy></app-irat-egy>
+  <app-irat-egy [enProjekt]="enProjekt"></app-irat-egy>
 </ng-container>
 <ng-container *ngIf="iratservice.ContainerMode === 3">
   <app-irat-szerkesztes></app-irat-szerkesztes>
 </ng-container>
-
-<app-errormodal [cim]="iratservice.cim"></app-errormodal>
-<app-spinner *ngIf="eppFrissit"></app-spinner>

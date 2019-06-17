@@ -1,27 +1,26 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {BizonylatkifizetesService} from '../bizonylatkifizetes.service';
+import {KifizetesService} from '../kifizetes.service';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {LogonService} from '../../logon/logon.service';
-import {BizonylatKifizetesContainerMode} from '../bizonylatkifizetescontainermode';
-import {BizonylatKifizetesEgyMode} from '../bizonylatkifizetesegymode';
-import {BizonylatKifizetesSzerkesztesMode} from '../bizonylatkifizetesszerkesztesmode';
+import {KifizetesContainerMode} from '../kifizetescontainermode';
+import {KifizetesEgyMode} from '../kifizetesegymode';
+import {KifizetesSzerkesztesMode} from '../kifizetesszerkesztesmode';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-bizonylat-kifizetes-list',
-  templateUrl: './bizonylat-kifizetes-list.component.html'
+  selector: 'app-kifizetes-list',
+  templateUrl: './kifizetes-list.component.html'
 })
-export class BizonylatKifizetesListComponent implements OnDestroy {
+export class KifizetesListComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
-  bizonylatkifizetesservice: BizonylatkifizetesService;
+  bizonylatkifizetesservice: KifizetesService;
   eppFrissit = false;
   ti = -1;
 
-  constructor(private _logonservice: LogonService,
-              private _bizonylatservice: BizonylatService,
-              bizonylatkifizetesservice: BizonylatkifizetesService) {
+  constructor(private _bizonylatservice: BizonylatService,
+              bizonylatkifizetesservice: KifizetesService) {
     this.bizonylatkifizetesservice = bizonylatkifizetesservice;
   }
 
@@ -41,8 +40,8 @@ export class BizonylatKifizetesListComponent implements OnDestroy {
   setClickedRow(i: number) {
     this.bizonylatkifizetesservice.DtoSelectedIndex = i;
     this.bizonylatkifizetesservice.uj = false;
-    this.bizonylatkifizetesservice.ContainerMode = BizonylatKifizetesContainerMode.Egy;
-    this.bizonylatkifizetesservice.EgyMode = BizonylatKifizetesEgyMode.Reszletek;
+    this.bizonylatkifizetesservice.ContainerMode = KifizetesContainerMode.Egy;
+    this.bizonylatkifizetesservice.EgyMode = KifizetesEgyMode.Reszletek;
   }
   uj() {
     this.eppFrissit = true;
@@ -68,8 +67,8 @@ export class BizonylatKifizetesListComponent implements OnDestroy {
 
         this.eppFrissit = false;
 
-        this.bizonylatkifizetesservice.ContainerMode = BizonylatKifizetesContainerMode.Uj;
-        this.bizonylatkifizetesservice.SzerkesztesMode = BizonylatKifizetesSzerkesztesMode.Blank;
+        this.bizonylatkifizetesservice.ContainerMode = KifizetesContainerMode.Uj;
+        this.bizonylatkifizetesservice.SzerkesztesMode = KifizetesSzerkesztesMode.Blank;
       })
       .catch(err => {
         this.eppFrissit = false;

@@ -4,8 +4,8 @@ import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
 import {BizonylatesIratContainerMode} from '../../projektkapcsolat/bizonylatesiratcontainermode';
 import {BizonylatEgyMode} from '../bizonylategymode';
-import {BizonylatkifizetesService} from '../../kifizetes/bizonylatkifizetes.service';
-import {BizonylatKifizetesContainerMode} from '../../kifizetes/bizonylatkifizetescontainermode';
+import {KifizetesService} from '../../kifizetes/kifizetes.service';
+import {KifizetesContainerMode} from '../../kifizetes/kifizetescontainermode';
 import {BizonylatKapcsolatContainerMode} from '../../bizonylatkapcsolat/bizonylatkapcsolatcontainermode';
 import {BizonylatkapcsolatService} from '../../bizonylatkapcsolat/bizonylatkapcsolat.service';
 import {BizonylatTipus} from '../bizonylattipus';
@@ -33,7 +33,7 @@ export class BizonylatEgyComponent implements OnDestroy {
 
   constructor(private _logonservice: LogonService,
               private _projektkapcsolatservice: ProjektkapcsolatService,
-              private _bizonylatkifizetesservice: BizonylatkifizetesService,
+              private _bizonylatkifizetesservice: KifizetesService,
               private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
               private _penztarsevice: PenztarService,
               private _vagolapservice: VagolapService,
@@ -153,7 +153,7 @@ export class BizonylatEgyComponent implements OnDestroy {
   }
   kifizetes() {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Kifizetes;
-    this._bizonylatkifizetesservice.ContainerMode = BizonylatKifizetesContainerMode.List;
+    this._bizonylatkifizetesservice.ContainerMode = KifizetesContainerMode.List;
   }
   irat() {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Irat;

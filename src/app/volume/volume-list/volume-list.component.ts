@@ -14,6 +14,7 @@ export class VolumeListComponent implements OnInit, OnDestroy {
   eppFrissit = false;
   elsokereses = true;
   volumeservice: VolumeService;
+  ti = -1;
 
   constructor(volumeservice: VolumeService) {
     this.volumeservice = volumeservice;

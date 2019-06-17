@@ -177,10 +177,10 @@ import { BizonylattablaComponent } from './bizonylat/bizonylattabla/bizonylattab
 import { BizonylatSzerkesztesComponent } from './bizonylat/bizonylat-szerkesztes/bizonylat-szerkesztes.component';
 import { AdoszamellenorzesComponent } from './onlineszamla/adoszamellenorzes/adoszamellenorzes.component';
 import { SzamlalekerdezesComponent } from './onlineszamla/szamlalekerdezes/szamlalekerdezes.component';
-import { BizonylatKifizetesContainerComponent } from './kifizetes/bizonylat-kifizetes-container/bizonylat-kifizetes-container.component';
-import { BizonylatKifizetesListComponent } from './kifizetes/bizonylat-kifizetes-list/bizonylat-kifizetes-list.component';
-import { BizonylatKifizetesEgyComponent } from './kifizetes/bizonylat-kifizetes-egy/bizonylat-kifizetes-egy.component';
-import { BizonylatKifizetesSzerkesztesComponent } from './kifizetes/bizonylat-kifizetes-szerkesztes/bizonylat-kifizetes-szerkesztes.component';
+import { KifizetesContainerComponent } from './kifizetes/kifizetes-container/kifizetes-container.component';
+import { KifizetesListComponent } from './kifizetes/kifizetes-list/kifizetes-list.component';
+import { KifizetesEgyComponent } from './kifizetes/kifizetes-egy/kifizetes-egy.component';
+import { KifizetesSzerkesztesComponent } from './kifizetes/kifizetes-szerkesztes/kifizetes-szerkesztes.component';
 import { BizonylatNyomtatasComponent } from './bizonylatnyomtatas/bizonylat-nyomtatas/bizonylat-nyomtatas.component';
 import { ProjektDatumokComponent } from './projekt/projekt-datumok/projekt-datumok.component';
 import { BizonylatReszletekComponent } from './bizonylat/bizonylat-reszletek/bizonylat-reszletek.component';
@@ -446,10 +446,10 @@ if (environment.production) {
     BizonylatSzerkesztesComponent,
     AdoszamellenorzesComponent,
     SzamlalekerdezesComponent,
-    BizonylatKifizetesContainerComponent,
-    BizonylatKifizetesListComponent,
-    BizonylatKifizetesEgyComponent,
-    BizonylatKifizetesSzerkesztesComponent,
+    KifizetesContainerComponent,
+    KifizetesListComponent,
+    KifizetesEgyComponent,
+    KifizetesSzerkesztesComponent,
     BizonylatNyomtatasComponent,
     ProjektDatumokComponent,
     BizonylatReszletekComponent,

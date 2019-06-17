@@ -5,14 +5,14 @@ import {LogonService} from '../../../logon/logon.service';
 import {PenztarService} from '../../../penztar/penztar.service';
 import {ProjektService} from '../../../projekt/projekt.service';
 import {SzamlazasirendService} from '../../../szamlazasirend/szamlazasirend.service';
-import {BizonylatkifizetesService} from '../../../kifizetes/bizonylatkifizetes.service';
+import {KifizetesService} from '../../../kifizetes/kifizetes.service';
 import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 import {JogKod} from '../../../enums/jogkod';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {PenztarSzerkesztesMode} from '../../../penztar/penztarszerkesztesmode';
 import {ProjektSzerkesztesMode} from '../../../projekt/projektszerkesztesmode';
 import {SzamlazasirendSzerkesztesMode} from '../../../szamlazasirend/szamlazasirendszerkesztesmode';
-import {BizonylatKifizetesSzerkesztesMode} from '../../../kifizetes/bizonylatkifizetesszerkesztesmode';
+import {KifizetesSzerkesztesMode} from '../../../kifizetes/kifizetesszerkesztesmode';
 import {BizonylatSzerkesztesMode} from '../../../bizonylat/bizonylatszerkesztesmode';
 import {PenznemContainerMode} from '../penznemcontainermode';
 import {PenznemEgyMode} from '../penznemegymode';
@@ -37,7 +37,7 @@ export class PenznemListComponent implements OnInit, OnDestroy {
               private _penztarservice: PenztarService,
               private _projektservice: ProjektService,
               private _szamlazasirendservice: SzamlazasirendService,
-              private _bizonylatkifizetesservice: BizonylatkifizetesService,
+              private _bizonylatkifizetesservice: KifizetesService,
               private _bizonylatservice: BizonylatService,
               penznemservice: PenznemService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
@@ -125,7 +125,7 @@ export class PenznemListComponent implements OnInit, OnDestroy {
       this._szamlazasirendservice.SzerkesztesMode = SzamlazasirendSzerkesztesMode.Blank;
     }
     if (this.penznemservice.zoomsource === ZoomSources.Bizonylatkifizetes) {
-      this._bizonylatkifizetesservice.SzerkesztesMode = BizonylatKifizetesSzerkesztesMode.Blank;
+      this._bizonylatkifizetesservice.SzerkesztesMode = KifizetesSzerkesztesMode.Blank;
     }
     if (this.penznemservice.zoomsource === ZoomSources.Bizonylat) {
       this._bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;

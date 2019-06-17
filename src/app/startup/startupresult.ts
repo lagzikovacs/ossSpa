@@ -36,4 +36,22 @@ export class StartupResult {
 
   Irat_Grid: ColumnSettings[];
   Irat_Reszletek: ColumnSettings[];
+
+  Csoport_Grid: ColumnSettings[];
+  Csoport_Reszletek: ColumnSettings[];
+
+  Ajanlatkeres_Grid: ColumnSettings[];
+  Ajanlatkeres_Reszletek: ColumnSettings[];
+
+  Penztar_Grid: ColumnSettings[];
+  Penztar_Reszletek: ColumnSettings[];
+  Penztartetel_Grid: ColumnSettings[];
+  Penztartetel_Reszletek: ColumnSettings[];
+
+  Kifizetes_Grid: ColumnSettings[];
+  Kifizetes_Reszletek: ColumnSettings[];
+  Dokumentum_Grid: ColumnSettings[];
+  Dokumentum_Reszletek: ColumnSettings[];
+  Volume_Grid: ColumnSettings[];
+  Volume_Reszletek: ColumnSettings[];
 }

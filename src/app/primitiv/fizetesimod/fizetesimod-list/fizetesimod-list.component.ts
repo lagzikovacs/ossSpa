@@ -6,8 +6,8 @@ import {JogKod} from '../../../enums/jogkod';
 import {FizetesimodContainerMode} from '../fizetesimodcontainermode';
 import {FizetesimodEgyMode} from '../fizetesimodegymode';
 import {ZoomSources} from '../../../enums/zoomsources';
-import {BizonylatkifizetesService} from '../../../kifizetes/bizonylatkifizetes.service';
-import {BizonylatKifizetesSzerkesztesMode} from '../../../kifizetes/bizonylatkifizetesszerkesztesmode';
+import {KifizetesService} from '../../../kifizetes/kifizetes.service';
+import {KifizetesSzerkesztesMode} from '../../../kifizetes/kifizetesszerkesztesmode';
 import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 import {BizonylatSzerkesztesMode} from '../../../bizonylat/bizonylatszerkesztesmode';
 
@@ -27,7 +27,7 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
   fizetesimodservice: FizetesimodService;
 
   constructor(private _logonservice: LogonService,
-              private _bizonylatkifizetesservice: BizonylatkifizetesService,
+              private _bizonylatkifizetesservice: KifizetesService,
               private _bizonylatservice: BizonylatService,
               fizetesimodservice: FizetesimodService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
@@ -94,7 +94,7 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
     this.fizetesimodservice.zoom = false;
 
     if (this.fizetesimodservice.zoomsource === ZoomSources.Bizonylatkifizetes) {
-      this._bizonylatkifizetesservice.SzerkesztesMode = BizonylatKifizetesSzerkesztesMode.Blank;
+      this._bizonylatkifizetesservice.SzerkesztesMode = KifizetesSzerkesztesMode.Blank;
     }
     if (this.fizetesimodservice.zoomsource === ZoomSources.Bizonylat) {
       this._bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;

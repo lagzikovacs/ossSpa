@@ -1,34 +1,34 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {BizonylatkifizetesService} from '../bizonylatkifizetes.service';
+import {KifizetesService} from '../kifizetes.service';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
 import {FizetesimodService} from '../../primitiv/fizetesimod/fizetesimod.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import {PenznemContainerMode} from '../../primitiv/penznem/penznemcontainermode';
 import {FizetesimodContainerMode} from '../../primitiv/fizetesimod/fizetesimodcontainermode';
-import {BizonylatKifizetesSzerkesztesMode} from '../bizonylatkifizetesszerkesztesmode';
+import {KifizetesSzerkesztesMode} from '../kifizetesszerkesztesmode';
 import * as moment from 'moment';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
 import {FizetesimodZoomParameter} from '../../primitiv/fizetesimod/fiztesimodzoomparameter';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {BizonylatKifizetesContainerMode} from '../bizonylatkifizetescontainermode';
-import {BizonylatKifizetesEgyMode} from '../bizonylatkifizetesegymode';
+import {KifizetesContainerMode} from '../kifizetescontainermode';
+import {KifizetesEgyMode} from '../kifizetesegymode';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 
 @Component({
-  selector: 'app-bizonylat-kifizetes-szerkesztes',
-  templateUrl: './bizonylat-kifizetes-szerkesztes.component.html'
+  selector: 'app-kifizetes-szerkesztes',
+  templateUrl: './kifizetes-szerkesztes.component.html'
 })
-export class BizonylatKifizetesSzerkesztesComponent implements OnInit, OnDestroy {
+export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
-  bizonylatkifizetesservice: BizonylatkifizetesService;
+  bizonylatkifizetesservice: KifizetesService;
   eppFrissit = false;
   Datum: any;
 
   constructor(private _penznemservice: PenznemService,
               private _fizetesimodservice: FizetesimodService,
               private _bizonylatservice: BizonylatService,
-              bizonylatkifizetesservice: BizonylatkifizetesService) {
+              bizonylatkifizetesservice: KifizetesService) {
     this.bizonylatkifizetesservice = bizonylatkifizetesservice;
   }
 
@@ -42,7 +42,7 @@ export class BizonylatKifizetesSzerkesztesComponent implements OnInit, OnDestroy
     this._penznemservice.zoom = true;
     this._penznemservice.ContainerMode = PenznemContainerMode.List;
 
-    this.bizonylatkifizetesservice.SzerkesztesMode = BizonylatKifizetesSzerkesztesMode.PenznemZoom;
+    this.bizonylatkifizetesservice.SzerkesztesMode = KifizetesSzerkesztesMode.PenznemZoom;
   }
   FizetesimodZoom() {
     this._fizetesimodservice.ekDto.minta = this.bizonylatkifizetesservice.DtoEdited.Fizetesimod || '';
@@ -50,7 +50,7 @@ export class BizonylatKifizetesSzerkesztesComponent implements OnInit, OnDestroy
     this._fizetesimodservice.zoom = true;
     this._fizetesimodservice.ContainerMode = FizetesimodContainerMode.List;
 
-    this.bizonylatkifizetesservice.SzerkesztesMode = BizonylatKifizetesSzerkesztesMode.FizetesimodZoom;
+    this.bizonylatkifizetesservice.SzerkesztesMode = KifizetesSzerkesztesMode.FizetesimodZoom;
   }
 
   onSubmit() {
@@ -111,9 +111,9 @@ export class BizonylatKifizetesSzerkesztesComponent implements OnInit, OnDestroy
   }
   navigal() {
     if (this.bizonylatkifizetesservice.uj) {
-      this.bizonylatkifizetesservice.ContainerMode = BizonylatKifizetesContainerMode.List;
+      this.bizonylatkifizetesservice.ContainerMode = KifizetesContainerMode.List;
     } else {
-      this.bizonylatkifizetesservice.EgyMode = BizonylatKifizetesEgyMode.Reszletek;
+      this.bizonylatkifizetesservice.EgyMode = KifizetesEgyMode.Reszletek;
     }
   }
 

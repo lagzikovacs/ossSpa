@@ -21,6 +21,12 @@ import {StartupResult} from './startupresult';
 import {environment} from '../../environments/environment';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {SzamlazasirendService} from '../szamlazasirend/szamlazasirend.service';
+import {AjanlatkeresService} from '../ajanlatkeres/ajanlatkeres.service';
+import {PenztarService} from '../penztar/penztar.service';
+import {PenztartetelService} from '../penztartetel/penztartetel.service';
+import {VolumeService} from '../volume/volume.service';
+import {KifizetesService} from '../kifizetes/kifizetes.service';
+import {DokumentumService} from '../dokumentum/dokumentum.service';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +52,13 @@ export class StartupService {
               private _projektservice: ProjektService,
               private _projektteendoservice: ProjektteendoService,
               private _szamlazasirendservice: SzamlazasirendService,
-              private _iratservice: IratService) { }
+              private _iratservice: IratService,
+              private _ajanlatkeresservice: AjanlatkeresService,
+              private _penztarservice: PenztarService,
+              private _penztartetelservice: PenztartetelService,
+              private _kifizetesservice: KifizetesService,
+              private _dokumentumservice: DokumentumService,
+              private _volumeservice: VolumeService,) { }
 
   public Get(): Promise<StartupResult> {
     const url = environment.CoreRef + this._controller + 'get';
@@ -124,6 +136,24 @@ export class StartupService {
 
         this._iratservice.GridSettings = res3.Irat_Grid;
         this._iratservice.ReszletekSettings = res3.Irat_Reszletek;
+
+        this._csoportservice.GridSettings = res3.Csoport_Grid;
+        this._csoportservice.ReszletekSettings = res3.Csoport_Reszletek;
+
+        this._ajanlatkeresservice.GridSettings = res3.Ajanlatkeres_Grid;
+        this._ajanlatkeresservice.ReszletekSettings = res3.Ajanlatkeres_Reszletek;
+
+        this._penztarservice.GridSettings = res3.Penztar_Grid;
+        this._penztarservice.ReszletekSettings = res3.Penztar_Reszletek;
+        this._penztartetelservice.GridSettings = res3.Penztartetel_Grid;
+        this._penztartetelservice.ReszletekSettings = res3.Penztartetel_Reszletek;
+
+        this._kifizetesservice.GridSettings = res3.Kifizetes_Grid;
+        this._kifizetesservice.ReszletekSettings = res3.Kifizetes_Reszletek;
+        this._dokumentumservice.GridSettings = res3.Dokumentum_Grid;
+        this._dokumentumservice.ReszletekSettings = res3.Dokumentum_Reszletek;
+        this._volumeservice.GridSettings = res3.Volume_Grid;
+        this._volumeservice.ReszletekSettings = res3.Volume_Reszletek;
 
         this._logonservice.SzerepkorKivalasztva = true;
 

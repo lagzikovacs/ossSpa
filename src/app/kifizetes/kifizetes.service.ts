@@ -6,16 +6,16 @@ import {KifizetesResult} from './kifizetesresult';
 import {environment} from '../../environments/environment';
 import {NumberResult} from '../dtos/numberresult';
 import {EmptyResult} from '../dtos/emptyresult';
-import {BizonylatKifizetesContainerMode} from './bizonylatkifizetescontainermode';
-import {BizonylatKifizetesSzerkesztesMode} from './bizonylatkifizetesszerkesztesmode';
-import {BizonylatKifizetesEgyMode} from './bizonylatkifizetesegymode';
+import {KifizetesContainerMode} from './kifizetescontainermode';
+import {KifizetesSzerkesztesMode} from './kifizetesszerkesztesmode';
+import {KifizetesEgyMode} from './kifizetesegymode';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BizonylatkifizetesService {
+export class KifizetesService {
   private readonly _controller = 'api/kifizetes/';
 
   cim = 'Kifizetés';
@@ -25,9 +25,9 @@ export class BizonylatkifizetesService {
   uj = false;
   DtoEdited = new KifizetesDto();
 
-  ContainerMode = BizonylatKifizetesContainerMode.Blank;
-  EgyMode = BizonylatKifizetesEgyMode.Reszletek;
-  SzerkesztesMode = BizonylatKifizetesSzerkesztesMode.Blank;
+  ContainerMode = KifizetesContainerMode.Blank;
+  EgyMode = KifizetesEgyMode.Reszletek;
+  SzerkesztesMode = KifizetesSzerkesztesMode.Blank;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

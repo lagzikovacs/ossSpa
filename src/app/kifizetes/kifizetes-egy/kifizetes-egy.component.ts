@@ -1,41 +1,41 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {BizonylatkifizetesService} from '../bizonylatkifizetes.service';
-import {BizonylatKifizetesContainerMode} from '../bizonylatkifizetescontainermode';
-import {BizonylatKifizetesEgyMode} from '../bizonylatkifizetesegymode';
+import {KifizetesService} from '../kifizetes.service';
+import {KifizetesContainerMode} from '../kifizetescontainermode';
+import {KifizetesEgyMode} from '../kifizetesegymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
-  selector: 'app-bizonylat-kifizetes-egy',
-  templateUrl: './bizonylat-kifizetes-egy.component.html',
+  selector: 'app-kifizetes-egy',
+  templateUrl: './kifizetes-egy.component.html',
   animations: [rowanimation]
 })
-export class BizonylatKifizetesEgyComponent implements OnDestroy {
+export class KifizetesEgyComponent implements OnDestroy {
   @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
-  bizonylatkifizetesservice: BizonylatkifizetesService;
+  bizonylatkifizetesservice: KifizetesService;
   eppFrissit = false;
   ri = -1;
 
-  constructor(bizonylatkifizetesservice: BizonylatkifizetesService) {
+  constructor(bizonylatkifizetesservice: KifizetesService) {
     this.bizonylatkifizetesservice = bizonylatkifizetesservice;
   }
 
   vissza() {
-    this.bizonylatkifizetesservice.ContainerMode = BizonylatKifizetesContainerMode.List;
+    this.bizonylatkifizetesservice.ContainerMode = KifizetesContainerMode.List;
   }
   reszletek() {
-    this.bizonylatkifizetesservice.EgyMode = BizonylatKifizetesEgyMode.Reszletek;
+    this.bizonylatkifizetesservice.EgyMode = KifizetesEgyMode.Reszletek;
   }
   torles() {
-    this.bizonylatkifizetesservice.EgyMode = BizonylatKifizetesEgyMode.Torles;
+    this.bizonylatkifizetesservice.EgyMode = KifizetesEgyMode.Torles;
   }
   modositas() {
     this.bizonylatkifizetesservice.uj = false;
     this.bizonylatkifizetesservice.DtoEdited =
       deepCopy(this.bizonylatkifizetesservice.Dto[this.bizonylatkifizetesservice.DtoSelectedIndex]);
-    this.bizonylatkifizetesservice.EgyMode = BizonylatKifizetesEgyMode.Modositas;
+    this.bizonylatkifizetesservice.EgyMode = KifizetesEgyMode.Modositas;
   }
 
   TorlesOk() {
@@ -50,7 +50,7 @@ export class BizonylatKifizetesEgyComponent implements OnDestroy {
         this.bizonylatkifizetesservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this.bizonylatkifizetesservice.ContainerMode = BizonylatKifizetesContainerMode.List;
+        this.bizonylatkifizetesservice.ContainerMode = KifizetesContainerMode.List;
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -59,7 +59,7 @@ export class BizonylatKifizetesEgyComponent implements OnDestroy {
   }
 
   TorlesCancel() {
-    this.bizonylatkifizetesservice.EgyMode = BizonylatKifizetesEgyMode.Reszletek;
+    this.bizonylatkifizetesservice.EgyMode = KifizetesEgyMode.Reszletek;
   }
 
   ngOnDestroy() {

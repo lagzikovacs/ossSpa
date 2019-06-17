@@ -11,7 +11,7 @@ import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {AjanlatContainerMode} from '../../ajanlat/ajanlatcontainermode';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {BizonylatkapcsolatService} from '../../bizonylatkapcsolat/bizonylatkapcsolat.service';
-import {BizonylatkifizetesService} from '../../kifizetes/bizonylatkifizetes.service';
+import {KifizetesService} from '../../kifizetes/kifizetes.service';
 import {BizonylatEgyMode} from '../../bizonylat/bizonylategymode';
 import {VagolapService} from '../../vagolap/vagolap.service';
 import {VagolapMode} from '../../vagolap/vagolapmode';
@@ -37,7 +37,7 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
               private _dokumentumservice: DokumentumService,
               private _bizonylatservice: BizonylatService,
               private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
-              private _bizonylatkifizetesservice: BizonylatkifizetesService,
+              private _bizonylatkifizetesservice: KifizetesService,
               private _vagolapservice: VagolapService,
               private _ajanlatservice: AjanlatService,
               projektkapcsolatservice: ProjektkapcsolatService) {

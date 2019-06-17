@@ -5,7 +5,7 @@ import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {BizonylatkapcsolatService} from '../../bizonylatkapcsolat/bizonylatkapcsolat.service';
-import {BizonylatkifizetesService} from '../../kifizetes/bizonylatkifizetes.service';
+import {KifizetesService} from '../../kifizetes/kifizetes.service';
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
 import {BizonylatTipus} from '../bizonylattipus';
@@ -31,7 +31,7 @@ export class BizonylatListComponent implements OnDestroy {
 
   constructor(private _logonservice: LogonService,
               private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
-              private _bizonylatkifizetesservice: BizonylatkifizetesService,
+              private _bizonylatkifizetesservice: KifizetesService,
               bizonylatservice: BizonylatService) {
     this.mod = this._logonservice.Jogaim.includes(JogKod[JogKod.BIZONYLATMOD]);
     this.bizonylatservice = bizonylatservice;

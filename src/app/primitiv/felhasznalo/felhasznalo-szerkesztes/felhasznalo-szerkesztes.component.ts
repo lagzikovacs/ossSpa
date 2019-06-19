@@ -1,21 +1,20 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {Component, OnDestroy} from '@angular/core';
 import {FelhasznaloService} from '../felhasznalo.service';
 import {NumberResult} from '../../../dtos/numberresult';
 import {FelhasznaloContainerMode} from '../felhasznalocontainermode';
 import {FelhasznaloEgyMode} from '../felhasznaloegymode';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-felhasznalo-szerkesztes',
   templateUrl: './felhasznalo-szerkesztes.component.html'
 })
 export class FelhasznaloSzerkesztesComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   felhasznaloservice: FelhasznaloService;
   eppFrissit = false;
 
-  constructor(felhasznaloservice: FelhasznaloService) {
+  constructor(felhasznaloservice: FelhasznaloService,
+              private _errorservice: ErrorService) {
     this.felhasznaloservice = felhasznaloservice;
   }
 
@@ -52,8 +51,8 @@ export class FelhasznaloSzerkesztesComponent implements OnDestroy {
         this.navigal();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   cancel() {

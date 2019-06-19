@@ -1,19 +1,17 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {LogonService} from '../logon.service';
 import {SessionService} from '../../session/session.service';
 import {SessionDto} from '../../session/sessiondto';
 import {StartupService} from '../../startup/startup.service';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-bejelentkezes',
   templateUrl: './bejelentkezes.component.html'
 })
 export class BejelentkezesComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) private errormodal: ErrormodalComponent;
-
   form: FormGroup;
   public eppFrissit = false;
 
@@ -21,7 +19,8 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
               private fb: FormBuilder,
               private _logonservice: LogonService,
               private _sessionservice: SessionService,
-              private _startupservice: StartupService) {
+              private _startupservice: StartupService,
+              private _errorservice: ErrorService) {
   }
 
   ngOnInit() {
@@ -70,8 +69,7 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
                 this._router.navigate(['/fooldal']);
               })
               .catch(err => {
-                this.eppFrissit = false;
-                this.errormodal.show(err);
+                throw err;
               });
             break;
           default:
@@ -79,10 +77,8 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
         }
       })
       .catch(err => {
-        console.log(err);
-
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
 

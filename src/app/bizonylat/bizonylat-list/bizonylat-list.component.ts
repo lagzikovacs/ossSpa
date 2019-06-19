@@ -1,6 +1,5 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import {BizonylatContainerMode} from '../bizonylatcontainermode';
@@ -11,14 +10,13 @@ import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
 import {BizonylatTipus} from '../bizonylattipus';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-bizonylat-list',
   templateUrl: './bizonylat-list.component.html'
 })
 export class BizonylatListComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   megrendelesszurok = ['Mind', 'Nincs kiszállítva'];
   szurok = ['Id', 'Bizonylatszám', 'Ügyfél'];
   szempontok = [
@@ -32,6 +30,7 @@ export class BizonylatListComponent implements OnDestroy {
   constructor(private _logonservice: LogonService,
               private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
               private _bizonylatkifizetesservice: KifizetesService,
+              private _errorservice: ErrorService,
               bizonylatservice: BizonylatService) {
     this.mod = this._logonservice.Jogaim.includes(JogKod[JogKod.BIZONYLATMOD]);
     this.bizonylatservice = bizonylatservice;
@@ -76,7 +75,7 @@ export class BizonylatListComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
 
@@ -118,7 +117,7 @@ export class BizonylatListComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
 
@@ -140,7 +139,7 @@ export class BizonylatListComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
 

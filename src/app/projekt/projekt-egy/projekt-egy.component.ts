@@ -1,5 +1,4 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {Component, OnDestroy} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {ProjektContainerMode} from '../projektcontainermode';
 import {ProjektEgyMode} from '../projektegymode';
@@ -13,6 +12,7 @@ import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-projekt-egy',
@@ -20,8 +20,6 @@ import {deepCopy} from '../../tools/deepCopy';
   animations: [rowanimation]
 })
 export class ProjektEgyComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   projektservice: ProjektService;
   eppFrissit = false;
   mod = false;
@@ -31,6 +29,7 @@ export class ProjektEgyComponent implements OnDestroy {
               private _projektkapcsolatservice: ProjektkapcsolatService,
               private _szamlazasirendservice: SzamlazasirendService,
               private _projektteendoservice: ProjektteendoService,
+              private _errorservice: ErrorService,
               projektservice: ProjektService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PROJEKTMOD]);
     this.projektservice = projektservice;
@@ -113,8 +112,8 @@ export class ProjektEgyComponent implements OnDestroy {
         this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   SegedCancel() {
@@ -136,8 +135,8 @@ export class ProjektEgyComponent implements OnDestroy {
         this.projektservice.ContainerMode = ProjektContainerMode.List;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

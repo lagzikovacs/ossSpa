@@ -1,5 +1,4 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {Component, OnDestroy} from '@angular/core';
 import {UgyfelService} from '../ugyfel.service';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
@@ -8,6 +7,7 @@ import {UgyfelEgyMode} from '../ugyfelegymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import * as FileSaver from 'file-saver';
 import {deepCopy} from '../../tools/deepCopy';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-ugyfel-egy',
@@ -15,8 +15,6 @@ import {deepCopy} from '../../tools/deepCopy';
   animations: [rowanimation]
 })
 export class UgyfelEgyComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   ugyfelservice: UgyfelService;
   mod = false;
   eppFrissit = false;
@@ -24,6 +22,7 @@ export class UgyfelEgyComponent implements OnDestroy {
   ri = -1;
 
   constructor(private _logonservice: LogonService,
+              private _errorservice: ErrorService,
               ugyfelservice: UgyfelService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.UGYFELEKMOD]);
     this.ugyfelservice = ugyfelservice;
@@ -75,8 +74,8 @@ export class UgyfelEgyComponent implements OnDestroy {
         this.ugyfelservice.ContainerMode = UgyfelContainerMode.List;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -108,7 +107,7 @@ export class UgyfelEgyComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
 

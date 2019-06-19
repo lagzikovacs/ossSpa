@@ -1,23 +1,20 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {SzamlazasirendService} from '../szamlazasirend.service';
-import {LogonService} from '../../logon/logon.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {SzamlazasirendContainerMode} from '../szamlazasirendcontainermode';
 import {SzamlazasirendEgyMode} from '../szamlazasirendegymode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-szamlazasirend-list',
   templateUrl: './szamlazasirend-list.component.html'
 })
 export class SzamlazasirendListComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   szamlazasirendservice: SzamlazasirendService;
   eppFrissit = false;
   ti = -1;
 
-  constructor(private _logonservice: LogonService,
-              szamlazasirendservice: SzamlazasirendService) {
+  constructor(szamlazasirendservice: SzamlazasirendService,
+              private _errorservice: ErrorService) {
     this.szamlazasirendservice = szamlazasirendservice;
   }
 
@@ -28,8 +25,8 @@ export class SzamlazasirendListComponent implements OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   setClickedRow(i: number) {
@@ -54,8 +51,8 @@ export class SzamlazasirendListComponent implements OnDestroy {
         this.szamlazasirendservice.ContainerMode = SzamlazasirendContainerMode.Uj;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   ngOnDestroy() {

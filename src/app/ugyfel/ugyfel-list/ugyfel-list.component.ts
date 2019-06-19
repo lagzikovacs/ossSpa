@@ -1,5 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Szempont} from '../../enums/szempont';
 import {UgyfelService} from '../ugyfel.service';
 import {UgyfelDto} from '../ugyfeldto';
@@ -15,14 +14,13 @@ import {ProjektSzerkesztesMode} from '../../projekt/projektszerkesztesmode';
 import {IratSzerkesztesMode} from '../../irat/iratszerkesztesmode';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {BizonylatSzerkesztesMode} from '../../bizonylat/bizonylatszerkesztesmode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-ugyfel-list',
   templateUrl: './ugyfel-list.component.html'
 })
 export class UgyfelListComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   csoportszurok = ['Mind', 'Kiemelt'];
   szurok = ['Név', 'Cég', 'Beosztás', 'Helységnév', 'Telefon', 'Email', 'Egyéb link', 'Ajánlotta', 'Id'];
   szempontok = [
@@ -40,6 +38,7 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
               private _iratservice: IratService,
               private _projektservice: ProjektService,
               private _bizonylatservice: BizonylatService,
+              private _errorservice: ErrorService,
               ugyfelservice: UgyfelService  ) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.UGYFELEKMOD]);
     this.ugyfelservice = ugyfelservice;
@@ -92,8 +91,8 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
         }
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -162,8 +161,8 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
         this.ugyfelservice.ContainerMode = UgyfelContainerMode.Uj;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

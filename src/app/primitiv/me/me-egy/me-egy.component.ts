@@ -1,12 +1,12 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {MeService} from '../me.service';
 import {MeContainerMode} from '../mecontainermode';
 import {MeEgyMode} from '../meegymode';
 import {rowanimation} from '../../../animation/rowAnimation';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
 import {deepCopy} from '../../../tools/deepCopy';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-me-egy',
@@ -14,14 +14,13 @@ import {deepCopy} from '../../../tools/deepCopy';
   animations: [rowanimation]
 })
 export class MeEgyComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   meservice: MeService;
   mod = false;
   eppFrissit = false;
   ri = -1;
 
   constructor(private _logonservice: LogonService,
+              private _errorservice: ErrorService,
               meservice: MeService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.meservice = meservice;
@@ -57,8 +56,8 @@ export class MeEgyComponent implements OnDestroy {
         this.meservice.ContainerMode = MeContainerMode.List;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

@@ -1,21 +1,20 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {Component, OnDestroy} from '@angular/core';
 import {TeendoService} from '../teendo.service';
 import {NumberResult} from '../../../dtos/numberresult';
 import {TeendoContainerMode} from '../teendocontainermode';
 import {TeendoEgyMode} from '../teendoegymode';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-teendo-szerkesztes',
   templateUrl: './teendo-szerkesztes.component.html'
 })
 export class TeendoSzerkesztesComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   teendoservice: TeendoService;
   eppFrissit = false;
 
-  constructor(teendoservice: TeendoService) {
+  constructor(teendoservice: TeendoService,
+              private _errorservice: ErrorService) {
     this.teendoservice = teendoservice;
   }
 
@@ -52,8 +51,8 @@ export class TeendoSzerkesztesComponent implements OnDestroy {
         this.navigal();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   cancel() {

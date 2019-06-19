@@ -1,10 +1,10 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {ProjektService} from '../projekt/projekt.service';
-import {ErrormodalComponent} from '../errormodal/errormodal.component';
 import {b64toBlob} from '../tools/b64toBlob';
 import * as FileSaver from 'file-saver';
 import {IratmintaService} from './iratminta.service';
 import {rowanimation} from '../animation/rowAnimation';
+import {ErrorService} from '../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-projekt-iratminta',
@@ -12,12 +12,11 @@ import {rowanimation} from '../animation/rowAnimation';
   animations: [rowanimation]
 })
 export class ProjektIratmintaComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   eppFrissit = false;
 
   constructor(private _projektservice: ProjektService,
-              private _iratmintaservice: IratmintaService) {
+              private _iratmintaservice: IratmintaService,
+              private _errorservice: ErrorService) {
   }
 
   szerzodes() {
@@ -32,8 +31,8 @@ export class ProjektIratmintaComponent implements OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   szallitasiszerzodes() {
@@ -48,8 +47,8 @@ export class ProjektIratmintaComponent implements OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   feltetelesszerzodes() {
@@ -64,8 +63,8 @@ export class ProjektIratmintaComponent implements OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   munkalap() {
@@ -89,8 +88,8 @@ export class ProjektIratmintaComponent implements OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   elegedettseg() {
@@ -105,8 +104,8 @@ export class ProjektIratmintaComponent implements OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   elmuemasz() {
@@ -121,8 +120,8 @@ export class ProjektIratmintaComponent implements OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   eon() {
@@ -137,8 +136,8 @@ export class ProjektIratmintaComponent implements OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   demasz() {
@@ -153,8 +152,8 @@ export class ProjektIratmintaComponent implements OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   ngOnDestroy() {

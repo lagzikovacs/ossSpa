@@ -1,19 +1,17 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {Component, OnDestroy} from '@angular/core';
 import {Szempont} from '../../enums/szempont';
 import {LogonService} from '../../logon/logon.service';
 import {OnlineszamlaService} from '../onlineszamla.service';
 import {JogKod} from '../../enums/jogkod';
 import {SzMT} from '../../dtos/szmt';
 import {OnlineszamlaDto} from '../onlineszamladto';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-navonlineszamla',
   templateUrl: './onlineszamlaellenorzese.component.html'
 })
 export class OnlineszamlaellenorzeseComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   szurok = ['Id', 'Bizonylat Id', 'Bizonylatszám', 'Ügyfél'];
   szempontok = [
     Szempont.Kod, Szempont.BizonylatKod, Szempont.Bizonylatszam, Szempont.Ugyfel
@@ -25,7 +23,8 @@ export class OnlineszamlaellenorzeseComponent implements OnDestroy {
   onlineszamlaservice: OnlineszamlaService;
 
   constructor(private _logonservice: LogonService,
-              onlineszamlaservice: OnlineszamlaService  ) {
+              private _errorservice: ErrorService,
+              onlineszamlaservice: OnlineszamlaService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.CIKKMOD]);
     this.onlineszamlaservice = onlineszamlaservice;
   }
@@ -68,8 +67,8 @@ export class OnlineszamlaellenorzeseComponent implements OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

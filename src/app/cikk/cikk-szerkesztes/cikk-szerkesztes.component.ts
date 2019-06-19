@@ -1,6 +1,5 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {CikkService} from '../cikk.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {MeService} from '../../primitiv/me/me.service';
 import {AfakulcsService} from '../../primitiv/afakulcs/afakulcs.service';
 import {TermekdijService} from '../../primitiv/termekdij/termekdij.service';
@@ -15,13 +14,13 @@ import {MeContainerMode} from '../../primitiv/me/mecontainermode';
 import {AfakulcsContainerMode} from '../../primitiv/afakulcs/afakulcscontainermode';
 import {CikkSzerkesztesMode} from '../cikkszerkesztesmode';
 import {TermekdijContainerMode} from '../../primitiv/termekdij/termekdijcontainermode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-cikk-szerkesztes',
   templateUrl: './cikk-szerkesztes.component.html'
 })
 export class CikkSzerkesztesComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   cikkservice: CikkService;
   eppFrissit = false;
@@ -29,7 +28,8 @@ export class CikkSzerkesztesComponent implements OnDestroy {
   constructor(cikkservice: CikkService,
               private _meservice: MeService,
               private _afakulcsservice: AfakulcsService,
-              private _termekdijservice: TermekdijService) {
+              private _termekdijservice: TermekdijService,
+              private _errorservice: ErrorService) {
     this.cikkservice = cikkservice;
   }
 
@@ -92,8 +92,8 @@ export class CikkSzerkesztesComponent implements OnDestroy {
         this.navigal();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

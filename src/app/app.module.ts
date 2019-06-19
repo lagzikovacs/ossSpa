@@ -11,7 +11,6 @@ import {LogonService} from './logon/logon.service';
 import {MenuService} from './menu/menu.service';
 import {HttpClientModule} from '@angular/common/http';
 import { BejelentkezesComponent } from './logon/bejelentkezes/bejelentkezes.component';
-import { ErrormodalComponent } from './errormodal/errormodal.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FelhasznaloListComponent } from './primitiv/felhasznalo/felhasznalo-list/felhasznalo-list.component';
 import {FelhasznaloService} from './primitiv/felhasznalo/felhasznalo.service';
@@ -232,10 +231,10 @@ import { UgyfelVcardComponent } from './ugyfel/ugyfel-vcard/ugyfel-vcard.compone
 import { UgyfelTablaComponent } from './ugyfel/ugyfel-tabla/ugyfel-tabla.component';
 import { TablaComponent } from './tools/tabla/tabla.component';
 import {StartupService} from './startup/startup.service';
+import {ErrorService} from './tools/errorbox/error.service';
+import { ErrorboxComponent } from './tools/errorbox/errorbox.component';
 
 const routes: Routes = [
-
-
   {path: 'irattipus', component: IrattipusContainerComponent, canActivate: [RoleGuard]},
   {path: 'teendo', component: TeendoContainerComponent, canActivate: [RoleGuard]},
   {path: 'fizetesimod', component: FizetesimodContainerComponent, canActivate: [RoleGuard]},
@@ -309,7 +308,6 @@ if (environment.production) {
     MenunodeComponent,
     MenuitemComponent,
     BejelentkezesComponent,
-    ErrormodalComponent,
     FelhasznaloListComponent,
     SzerepkorvalasztasComponent,
     JelszocsereComponent,
@@ -493,6 +491,7 @@ if (environment.production) {
     UgyfelVcardComponent,
     UgyfelTablaComponent,
     TablaComponent,
+    ErrorboxComponent,
   ],
   imports: [
     BrowserModule,
@@ -547,7 +546,8 @@ if (environment.production) {
     MenuService,
     VerzioService,
     SessionService,
-    VagolapService
+    VagolapService,
+    ErrorService
   ],
   bootstrap: [AppComponent]
 })

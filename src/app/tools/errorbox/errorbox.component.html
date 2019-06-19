@@ -1,8 +1,8 @@
-<div [id]="idrandom" class="modal fade" role="dialog"  data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);" data-keyboard="false">
+<div id="errorbox" class="modal fade" role="dialog"  data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);" data-keyboard="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">{{cim}}</h5>
+        <h5 class="modal-title">Hiba</h5>
       </div>
       <div id="projektmodal" class="modal-body" style="color: red">
         <ng-container *ngIf="ahibastring">
@@ -14,9 +14,8 @@
         </ng-container>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" (click)="halejart()">Ok</button>
+        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" (click)="onClose()">Ok</button>
       </div>
     </div>
   </div>
 </div>
-

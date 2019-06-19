@@ -1,20 +1,19 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {BizonylatContainerMode} from '../bizonylatcontainermode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-bizonylat-storno',
   templateUrl: './bizonylat-storno.component.html'
 })
 export class BizonylatStornoComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   bizonylatservice: BizonylatService;
   eppFrissit = false;
 
-  constructor(bizonylatservice: BizonylatService) {
+  constructor(bizonylatservice: BizonylatService,
+              private _errorservice: ErrorService) {
     this.bizonylatservice = bizonylatservice;
   }
 
@@ -54,7 +53,7 @@ export class BizonylatStornoComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   cancel() {

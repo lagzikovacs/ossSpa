@@ -1,17 +1,15 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {UgyfelterlogService} from './ugyfelterlog.service';
 import {Szempont} from '../enums/szempont';
-import {ErrormodalComponent} from '../errormodal/errormodal.component';
 import {SzMT} from '../dtos/szmt';
 import {UgyfelterlogDto} from './ugyfelterlogdto';
+import {ErrorService} from '../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-ugyfelterlog',
   templateUrl: './ugyfelterlog.component.html'
 })
 export class UgyfelterlogComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   ugyfelterlogservice: UgyfelterlogService;
   eppFrissit = false;
   elsokereses = false;
@@ -22,8 +20,8 @@ export class UgyfelterlogComponent implements OnDestroy {
     Szempont.Kod, Szempont.Nev
   ];
 
-
-  constructor(ugyfelterlogservice: UgyfelterlogService) {
+  constructor(ugyfelterlogservice: UgyfelterlogService,
+              private _errorservice: ErrorService) {
     this.ugyfelterlogservice = ugyfelterlogservice;
   }
 
@@ -64,8 +62,8 @@ export class UgyfelterlogComponent implements OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   ngOnDestroy() {

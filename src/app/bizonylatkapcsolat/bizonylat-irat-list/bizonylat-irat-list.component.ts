@@ -1,7 +1,5 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {Component, OnDestroy} from '@angular/core';
 import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
-import {LogonService} from '../../logon/logon.service';
 import {BizonylatKapcsolatContainerMode} from '../bizonylatkapcsolatcontainermode';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {IratService} from '../../irat/irat.service';
@@ -11,22 +9,22 @@ import {DokumentumContainerMode} from '../../dokumentum/dokumentumcontainermode'
 import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {VagolapService} from '../../vagolap/vagolap.service';
 import {VagolapMode} from '../../vagolap/vagolapmode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-bizonylat-irat-list',
   templateUrl: './bizonylat-irat-list.component.html'
 })
 export class BizonylatIratListComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatkapcsolatservice: BizonylatkapcsolatService;
   eppFrissit = false;
 
-  constructor(private _logonservice: LogonService,
-              private _bizonylatservice: BizonylatService,
+  constructor(private _bizonylatservice: BizonylatService,
               private _iratservice: IratService,
               private _dokumentumservice: DokumentumService,
               private _vagolapservice: VagolapService,
+              private _errorservice: ErrorService,
               bizonylatkapcsolatservice: BizonylatkapcsolatService) {
     this.bizonylatkapcsolatservice = bizonylatkapcsolatservice;
   }
@@ -41,7 +39,7 @@ export class BizonylatIratListComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   levalasztas(i: number) {
@@ -69,7 +67,7 @@ export class BizonylatIratListComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   uj() {

@@ -1,21 +1,20 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {FizetesimodService} from '../fizetesimod.service';
 import {FizetesimodContainerMode} from '../fizetesimodcontainermode';
 import {FizetesimodEgyMode} from '../fizetesimodegymode';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {NumberResult} from '../../../dtos/numberresult';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-fizetesimod-szerkesztes',
   templateUrl: './fizetesimod-szerkesztes.component.html'
 })
 export class FizetesimodSzerkesztesComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   fizetesimodservice: FizetesimodService;
   eppFrissit = false;
 
-  constructor(fizetesimodservice: FizetesimodService) {
+  constructor(fizetesimodservice: FizetesimodService,
+              private _errorservice: ErrorService) {
     this.fizetesimodservice = fizetesimodservice;
   }
 
@@ -52,8 +51,8 @@ export class FizetesimodSzerkesztesComponent implements OnDestroy {
         this.navigal();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   cancel() {

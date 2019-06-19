@@ -1,21 +1,21 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {CsoportService} from '../csoport.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {NumberResult} from '../../dtos/numberresult';
 import {CsoportContainerMode} from '../csoportcontainermode';
 import {CsoportEgyMode} from '../csoportegymode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-csoport-szerkesztes',
   templateUrl: './csoport-szerkesztes.component.html'
 })
 export class CsoportSzerkesztesComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   csoportservice: CsoportService;
   eppFrissit = false;
 
-  constructor(csoportservice: CsoportService) {
+  constructor(csoportservice: CsoportService,
+              private _errorservice: ErrorService) {
     this.csoportservice = csoportservice;
   }
 
@@ -52,8 +52,8 @@ export class CsoportSzerkesztesComponent implements OnDestroy {
         this.navigal();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   cancel() {

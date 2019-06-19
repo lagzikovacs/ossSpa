@@ -1,25 +1,23 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {KifizetesService} from '../kifizetes.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
-import {LogonService} from '../../logon/logon.service';
 import {KifizetesContainerMode} from '../kifizetescontainermode';
 import {KifizetesEgyMode} from '../kifizetesegymode';
 import {KifizetesSzerkesztesMode} from '../kifizetesszerkesztesmode';
 import * as moment from 'moment';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-kifizetes-list',
   templateUrl: './kifizetes-list.component.html'
 })
 export class KifizetesListComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   bizonylatkifizetesservice: KifizetesService;
   eppFrissit = false;
   ti = -1;
 
   constructor(private _bizonylatservice: BizonylatService,
+              private _errorservice: ErrorService,
               bizonylatkifizetesservice: KifizetesService) {
     this.bizonylatkifizetesservice = bizonylatkifizetesservice;
   }
@@ -34,7 +32,7 @@ export class KifizetesListComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   setClickedRow(i: number) {
@@ -72,7 +70,7 @@ export class KifizetesListComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
 

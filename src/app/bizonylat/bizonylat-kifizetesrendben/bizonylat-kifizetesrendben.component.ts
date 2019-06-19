@@ -1,18 +1,17 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-bizonylat-kifizetesrendben',
   templateUrl: './bizonylat-kifizetesrendben.component.html'
 })
 export class BizonylatKifizetesrendbenComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   bizonylatservice: BizonylatService;
   eppFrissit = false;
 
-  constructor(bizonylatservice: BizonylatService) {
+  constructor(bizonylatservice: BizonylatService,
+              private _errorservice: ErrorService) {
     this.bizonylatservice = bizonylatservice;
   }
 
@@ -35,8 +34,8 @@ export class BizonylatKifizetesrendbenComponent implements OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

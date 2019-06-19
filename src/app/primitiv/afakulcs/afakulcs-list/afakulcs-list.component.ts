@@ -1,5 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AfakulcsService} from '../afakulcs.service';
 import {CikkService} from '../../../cikk/cikk.service';
 import {ZoomSources} from '../../../enums/zoomsources';
@@ -10,14 +9,13 @@ import {AfakulcsContainerMode} from '../afakulcscontainermode';
 import {AfakulcsEgyMode} from '../afakulcsegymode';
 import {BizonylattetelSzerkesztesMode} from '../../../bizonylat/bizonylattetelszerkesztesmode';
 import {BizonylatService} from '../../../bizonylat/bizonylat.service';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-afakulcs-list',
   templateUrl: './afakulcs-list.component.html'
 })
 export class AfakulcsListComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   szurok = ['ÁFA kulcs'];
 
   eppFrissit = false;
@@ -29,6 +27,7 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
   constructor(private _logonservice: LogonService,
               private _cikkservice: CikkService,
               private _bizonylatservice: BizonylatService,
+              private _errorservice: ErrorService,
               afakulcsservice: AfakulcsService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.afakulcsservice = afakulcsservice;
@@ -69,8 +68,8 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -122,8 +121,8 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
         this.afakulcsservice.ContainerMode = AfakulcsContainerMode.Uj;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

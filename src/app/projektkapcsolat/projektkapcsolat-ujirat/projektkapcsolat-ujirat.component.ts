@@ -1,30 +1,27 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import * as moment from 'moment';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {IrattipusService} from '../../primitiv/irattipus/irattipus.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import {IratService} from '../../irat/irat.service';
-import {ProjektService} from '../../projekt/projekt.service';
 import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
 import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 import {BizonylatesiratSzerkesztesMode} from '../bizonylatesiratszerkesztesmode';
 import {IrattipusContainerMode} from '../../primitiv/irattipus/irattipuscontainermode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-projektkapcsolat-ujirat',
   templateUrl: './projektkapcsolat-ujirat.component.html'
 })
 export class ProjektkapcsolatUjiratComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   projektkapcsolatservice: ProjektkapcsolatService;
   eppFrissit = false;
   Keletkezett: any;
 
   constructor(private _irattipusservice: IrattipusService,
               private _iratservice: IratService,
-              private _projektservice: ProjektService,
+              private _errorservice: ErrorService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.projektkapcsolatservice = projektkapcsolatservice;
   }
@@ -43,8 +40,8 @@ export class ProjektkapcsolatUjiratComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -93,8 +90,8 @@ export class ProjektkapcsolatUjiratComponent implements OnInit, OnDestroy {
         this.navigal();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   cancel() {

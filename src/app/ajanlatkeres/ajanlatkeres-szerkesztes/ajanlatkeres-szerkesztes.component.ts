@@ -1,21 +1,20 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {Component, OnDestroy} from '@angular/core';
 import {AjanlatkeresService} from '../ajanlatkeres.service';
 import {AjanlatkeresContainerMode} from '../ajanlatkerescontainermode';
 import {AjanlatkeresEgyMode} from '../ajanlatkeresegymode';
 import {NumberResult} from '../../dtos/numberresult';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-ajanlatkeres-szerkesztes',
   templateUrl: './ajanlatkeres-szerkesztes.component.html'
 })
 export class AjanlatkeresSzerkesztesComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) private errormodal: ErrormodalComponent;
-
   ajanlatkeresservice: AjanlatkeresService;
   public eppFrissit = false;
 
-  constructor(ajanlatkeresservice: AjanlatkeresService) {
+  constructor(ajanlatkeresservice: AjanlatkeresService,
+              private _errorservice: ErrorService) {
     this.ajanlatkeresservice = ajanlatkeresservice;
   }
 
@@ -53,7 +52,7 @@ export class AjanlatkeresSzerkesztesComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   cancel() {

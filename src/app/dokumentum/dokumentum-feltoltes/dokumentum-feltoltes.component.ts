@@ -2,8 +2,8 @@ import {Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 import {DokumentumService} from '../dokumentum.service';
 import {DokumentumContainerMode} from '../dokumentumcontainermode';
 import {FajlBuf} from '../fajlbuf';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {IratService} from '../../irat/irat.service';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-dokumentum-feltoltes',
@@ -11,7 +11,6 @@ import {IratService} from '../../irat/irat.service';
 })
 export class DokumentumFeltoltesComponent implements OnDestroy {
   @ViewChild('fileInput') fileInput: ElementRef;
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   dokumentumservice: DokumentumService;
   eppFrissit = false;
@@ -23,6 +22,7 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
   imageSrc: string;
 
   constructor(private _iratservice: IratService,
+              private _errorservice: ErrorService,
               dokumentumservice: DokumentumService) {
     this.dokumentumservice = dokumentumservice;
   }
@@ -69,7 +69,7 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   cancel() {

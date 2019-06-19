@@ -1,5 +1,4 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {Component, OnDestroy} from '@angular/core';
 import {PenztarService} from '../../penztar/penztar.service';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
@@ -7,14 +6,13 @@ import {PenztartetelService} from '../penztartetel.service';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import {PenztartetelContainerMode} from '../penztartetelcontainermode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-penztartetel-list',
   templateUrl: './penztartetel-list.component.html'
 })
 export class PenztartetelListComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   szurok = ['Id', 'Pénztárbizonylatszám', 'Ügyfél', 'Bizonylatszám'];
   szempontok = [
     Szempont.Kod, Szempont.PenztarBizonylatszam, Szempont.Ugyfel, Szempont.Bizonylatszam
@@ -29,6 +27,7 @@ export class PenztartetelListComponent implements OnDestroy {
   penztartetelservice: PenztartetelService;
 
   constructor(private _logonservice: LogonService,
+              private _errorservice: ErrorService,
               penztarservice: PenztarService,
               penztartetelservice: PenztartetelService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);
@@ -73,8 +72,8 @@ export class PenztartetelListComponent implements OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -92,8 +91,8 @@ export class PenztartetelListComponent implements OnDestroy {
         this.penztartetelservice.ContainerMode = PenztartetelContainerMode.Uj;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

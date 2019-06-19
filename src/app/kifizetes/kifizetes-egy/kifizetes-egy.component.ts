@@ -1,10 +1,10 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {KifizetesService} from '../kifizetes.service';
 import {KifizetesContainerMode} from '../kifizetescontainermode';
 import {KifizetesEgyMode} from '../kifizetesegymode';
 import {rowanimation} from '../../animation/rowAnimation';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {deepCopy} from '../../tools/deepCopy';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-kifizetes-egy',
@@ -12,13 +12,12 @@ import {deepCopy} from '../../tools/deepCopy';
   animations: [rowanimation]
 })
 export class KifizetesEgyComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   bizonylatkifizetesservice: KifizetesService;
   eppFrissit = false;
   ri = -1;
 
-  constructor(bizonylatkifizetesservice: KifizetesService) {
+  constructor(bizonylatkifizetesservice: KifizetesService,
+              private _errorservice: ErrorService) {
     this.bizonylatkifizetesservice = bizonylatkifizetesservice;
   }
 
@@ -54,7 +53,7 @@ export class KifizetesEgyComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
 

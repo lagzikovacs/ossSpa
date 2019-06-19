@@ -1,24 +1,23 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {LogonService} from '../logon.service';
 import {Router} from '@angular/router';
 import {SessionService} from '../../session/session.service';
 import {SessionDto} from '../../session/sessiondto';
 import {StartupService} from '../../startup/startup.service';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-szerepkorvalasztas',
   templateUrl: './szerepkorvalasztas.component.html'
 })
 export class SzerepkorvalasztasComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) private errormodal: ErrormodalComponent;
-
   logonservice: LogonService;
   eppFrissit = false;
 
   constructor(private _router: Router,
               private _sessionservice: SessionService,
               private _startupservice: StartupService,
+              private _errorservice: ErrorService,
               logonservice: LogonService) {
     this.logonservice = logonservice;
   }
@@ -43,7 +42,7 @@ export class SzerepkorvalasztasComponent implements OnInit, OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
 

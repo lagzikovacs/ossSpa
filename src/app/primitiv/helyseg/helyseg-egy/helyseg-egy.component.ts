@@ -1,5 +1,4 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {Component, OnDestroy} from '@angular/core';
 import {HelysegService} from '../helyseg.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
@@ -7,6 +6,7 @@ import {HelysegContainerMode} from '../helysegcontainermode';
 import {HelysegEgyMode} from '../helysegegymode';
 import {rowanimation} from '../../../animation/rowAnimation';
 import {deepCopy} from '../../../tools/deepCopy';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-helyseg-egy',
@@ -14,14 +14,13 @@ import {deepCopy} from '../../../tools/deepCopy';
   animations: [rowanimation]
 })
 export class HelysegEgyComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   helysegservice: HelysegService;
   mod = false;
   eppFrissit = false;
   ri = -1;
 
   constructor(private _logonservice: LogonService,
+              private _errorservice: ErrorService,
               helysegservice: HelysegService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.helysegservice = helysegservice;
@@ -57,8 +56,8 @@ export class HelysegEgyComponent implements OnDestroy {
         this.helysegservice.ContainerMode = HelysegContainerMode.List;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

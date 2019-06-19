@@ -1,21 +1,20 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {TermekdijService} from '../termekdij.service';
 import {TermekdijContainerMode} from '../termekdijcontainermode';
 import {TermekdijEgyMode} from '../termekdijegymode';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {NumberResult} from '../../../dtos/numberresult';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-termekdij-szerkesztes',
   templateUrl: './termekdij-szerkesztes.component.html'
 })
 export class TermekdijSzerkesztesComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   termekdijservice: TermekdijService;
   eppFrissit = false;
 
-  constructor(termekdijservice: TermekdijService) {
+  constructor(termekdijservice: TermekdijService,
+              private _errorservice: ErrorService) {
     this.termekdijservice = termekdijservice;
   }
 
@@ -52,8 +51,8 @@ export class TermekdijSzerkesztesComponent implements OnDestroy {
         this.navigal();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   cancel() {

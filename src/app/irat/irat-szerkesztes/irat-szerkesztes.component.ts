@@ -1,5 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {IratService} from '../irat.service';
 import {IrattipusService} from '../../primitiv/irattipus/irattipus.service';
 import {ZoomSources} from '../../enums/zoomsources';
@@ -13,20 +12,20 @@ import {IratEgyMode} from '../irategymode';
 import {IrattipusZoomParameter} from '../../primitiv/irattipus/irattipuszoomparameter';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-irat-szerkesztes',
   templateUrl: './irat-szerkesztes.component.html'
 })
 export class IratSzerkesztesComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   iratservice: IratService;
   eppFrissit = false;
   Keletkezett: any;
 
   constructor(private _irattipusservice: IrattipusService,
               private _ugyfelservice: UgyfelService,
+              private _errorservice: ErrorService,
               iratservice: IratService) {
     this.iratservice = iratservice;
   }
@@ -90,7 +89,7 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   cancel() {

@@ -1,19 +1,19 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
 import {BizonylatKapcsolatContainerMode} from '../bizonylatkapcsolatcontainermode';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-bizonylat-irat-levalasztas',
   templateUrl: './bizonylat-irat-levalasztas.component.html'
 })
 export class BizonylatIratLevalasztasComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatkapcsolatservice: BizonylatkapcsolatService;
   eppFrissit = false;
 
-  constructor(bizonylatkapcsolatservice: BizonylatkapcsolatService) {
+  constructor(bizonylatkapcsolatservice: BizonylatkapcsolatService,
+              private _errorservice: ErrorService) {
     this.bizonylatkapcsolatservice = bizonylatkapcsolatservice;
   }
 
@@ -33,7 +33,7 @@ export class BizonylatIratLevalasztasComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   cancel() {

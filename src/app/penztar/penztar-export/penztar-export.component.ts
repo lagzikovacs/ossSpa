@@ -1,20 +1,18 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import * as moment from 'moment';
 import * as FileSaver from 'file-saver';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {PenztarService} from '../penztar.service';
 import {b64toBlob} from '../../tools/b64toBlob';
 import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
 import {RiportService} from '../../riport/riport.service';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-penztar-export',
   templateUrl: './penztar-export.component.html'
 })
 export class PenztarExportComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   riportservice: RiportService;
   eppFrissit = false;
   megszakitani = false;
@@ -26,7 +24,8 @@ export class PenztarExportComponent implements OnDestroy {
   szamlalo: any;
 
   constructor(riportservice: RiportService,
-              private _penztarservice: PenztarService) {
+              private _penztarservice: PenztarService,
+              private _errorservice: ErrorService) {
     this.riportservice = riportservice;
   }
 
@@ -50,8 +49,8 @@ export class PenztarExportComponent implements OnDestroy {
         this.ciklus();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   ciklus() {
@@ -77,8 +76,8 @@ export class PenztarExportComponent implements OnDestroy {
         }
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   next() {
@@ -94,8 +93,8 @@ export class PenztarExportComponent implements OnDestroy {
           this.eppFrissit = false;
         })
         .catch(err => {
-          this.errormodal.show(err);
           this.eppFrissit = false;
+          this._errorservice.Error = err;
         });
     } else {
       this.ciklus();

@@ -1,23 +1,20 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {ProjektteendoService} from '../projektteendo.service';
-import {LogonService} from '../../logon/logon.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {ProjektteendoContainerMode} from '../projektteendocontainermode';
 import {ProjektteendoEgyMode} from '../projekttendoegymode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-projekt-teendo-list',
   templateUrl: './projekt-teendo-list.component.html'
 })
 export class ProjektTeendoListComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   projektteendoservice: ProjektteendoService;
   eppFrissit = false;
   ti = -1;
 
-  constructor(private _logonservice: LogonService,
-              projektteendoservice: ProjektteendoService) {
+  constructor(projektteendoservice: ProjektteendoService,
+              private _errorservice: ErrorService) {
     this.projektteendoservice = projektteendoservice;
   }
 
@@ -28,8 +25,8 @@ export class ProjektTeendoListComponent implements OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   setClickedRow(i: number) {
@@ -54,8 +51,8 @@ export class ProjektTeendoListComponent implements OnDestroy {
         this.projektteendoservice.ContainerMode = ProjektteendoContainerMode.Uj;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

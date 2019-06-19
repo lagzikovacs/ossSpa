@@ -1,6 +1,5 @@
 import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
 import {IratService} from '../irat.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {IratContainerMode} from '../iratcontainermode';
 import {IratEgyMode} from '../irategymode';
 import {DokumentumService} from '../../dokumentum/dokumentum.service';
@@ -17,8 +16,7 @@ import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
-import {ProjektContainerMode} from '../../projekt/projektcontainermode';
-import {ProjektEgyMode} from '../../projekt/projektegymode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-irat-egy',
@@ -26,7 +24,6 @@ import {ProjektEgyMode} from '../../projekt/projektegymode';
   animations: [rowanimation]
 })
 export class IratEgyComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
   @ViewChild(AbuComponent) abu: AbuComponent;
   projektservice: ProjektService;
   iratservice: IratService;
@@ -43,6 +40,7 @@ export class IratEgyComponent implements OnDestroy {
               private _projektkapcsolatservice: ProjektkapcsolatService,
               private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
               private _vagolapservice: VagolapService,
+              private _errorservice: ErrorService,
               iratservice: IratService,
               dokumentumservice: DokumentumService,
               projektservice: ProjektService) {
@@ -107,7 +105,7 @@ export class IratEgyComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   vagolap() {
@@ -130,8 +128,8 @@ export class IratEgyComponent implements OnDestroy {
         this.iratservice.ContainerMode = IratContainerMode.List;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

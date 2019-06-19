@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {LogonService} from '../logon/logon.service';
 import {Subscription} from 'rxjs/index';
 import {SessionService} from '../session/session.service';

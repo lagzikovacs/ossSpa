@@ -4,8 +4,8 @@ import {AngularmenuDto} from '../angularmenudto';
 import {Router} from '@angular/router';
 import {LogonService} from '../../logon/logon.service';
 import {MenuService} from '../menu.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {VerzioService} from '../verzio.service';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-menu',
@@ -18,12 +18,11 @@ export class MenuComponent implements OnInit, OnDestroy {
   public angularmenudto: AngularmenuDto[];
   private subscription: Subscription;
 
-  @ViewChild(ErrormodalComponent) private errormodal: ErrormodalComponent;
-
   constructor(private _router: Router,
               private _logonservice: LogonService,
               private _menuservice: MenuService,
-              private _verzioservice: VerzioService) { }
+              private _verzioservice: VerzioService,
+              private _errorservice: ErrorService) { }
 
   ngOnInit() {
     this.bejelentkezve = this._logonservice.isBejelentkezve();
@@ -48,7 +47,7 @@ export class MenuComponent implements OnInit, OnDestroy {
             this.verzioesbuild = 'OSS ' + res1.Result;
           })
           .catch(err => {
-            this.errormodal.show(err);
+            this._errorservice.Error = err;
           });
       }
 
@@ -75,7 +74,7 @@ export class MenuComponent implements OnInit, OnDestroy {
         this._router.navigate(['/fooldal']);
       })
       .catch(err => {
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
 }

@@ -1,6 +1,5 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import * as moment from 'moment';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
 import {IratService} from '../../irat/irat.service';
 import {IrattipusService} from '../../primitiv/irattipus/irattipus.service';
@@ -10,13 +9,13 @@ import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {BizonylatKapcsolatParam} from '../bizonylatkapcsolatparam';
 import {BizonylatKapcsolatContainerMode} from '../bizonylatkapcsolatcontainermode';
 import {BizonylatKapcsolatSzerkesztesMode} from '../bizonylatkapcsolatszerkesztesmode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-bizonylat-irat-uj',
   templateUrl: './bizonylat-irat-uj.component.html'
 })
 export class BizonylatIratUjComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatkapcsolatservice: BizonylatkapcsolatService;
   eppFrissit = false;
@@ -25,6 +24,7 @@ export class BizonylatIratUjComponent implements OnInit, OnDestroy {
   constructor(private _irattipusservice: IrattipusService,
               private _iratservice: IratService,
               private _bizonylatservice: BizonylatService,
+              private _errorservice: ErrorService,
               bizonylatkapcsolatservice: BizonylatkapcsolatService) {
     this.bizonylatkapcsolatservice = bizonylatkapcsolatservice;
   }
@@ -43,8 +43,8 @@ export class BizonylatIratUjComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -93,7 +93,7 @@ export class BizonylatIratUjComponent implements OnInit, OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   cancel() {

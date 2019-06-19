@@ -1,7 +1,6 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CikkService} from '../cikk.service';
 import {Szempont} from '../../enums/szempont';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {CikkDto} from '../cikkdto';
 import {SzMT} from '../../dtos/szmt';
 import {LogonService} from '../../logon/logon.service';
@@ -13,13 +12,13 @@ import {AjanlatSzerkesztesMode} from '../../ajanlat/ajanlatszerkesztesmode';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {BizonylattetelSzerkesztesMode} from '../../bizonylat/bizonylattetelszerkesztesmode';
 import {AjanlatService} from '../../ajanlat/ajanlat.service';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-cikk-list',
   templateUrl: './cikk-list.component.html'
 })
 export class CikkListComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Megnevezés', 'Id'];
   szempontok = [
@@ -35,6 +34,7 @@ export class CikkListComponent implements OnInit, OnDestroy {
   constructor(private _logonservice: LogonService,
               private _bizonylatservice: BizonylatService,
               private _ajanlatservice: AjanlatService,
+              private _errorservice: ErrorService,
               cikkservice: CikkService  ) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.CIKKMOD]);
     this.cikkservice = cikkservice;
@@ -87,8 +87,8 @@ export class CikkListComponent implements OnInit, OnDestroy {
         }
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -156,8 +156,8 @@ export class CikkListComponent implements OnInit, OnDestroy {
         this.cikkservice.ContainerMode = CikkContainerMode.Uj;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   ngOnDestroy() {

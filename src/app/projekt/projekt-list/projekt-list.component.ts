@@ -1,5 +1,4 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {Component, OnDestroy} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
@@ -13,14 +12,13 @@ import {BizonylatesIratContainerMode} from '../../projektkapcsolat/bizonylatesir
 import {AjanlatService} from '../../ajanlat/ajanlat.service';
 import {JogKod} from '../../enums/jogkod';
 import {LogonService} from '../../logon/logon.service';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-projekt-list',
   templateUrl: './projekt-list.component.html'
 })
 export class ProjektListComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   statuszszurok = [
     '(0) Mind', '(1) Ajánlat', '(2) Fut', '(3) Kész', '(4) Pályázatra vár', '(5) Mástól megrendelte',
     '(6) Döglött', '(7) Csak érdeklődött', '(8) Helyszíni felmérést kér', '(9) Kommunikál, van remény',
@@ -51,6 +49,7 @@ export class ProjektListComponent implements OnDestroy {
               private _szamlazasirendservice: SzamlazasirendService,
               private _projektteendoservice: ProjektteendoService,
               private _ajanlatservice: AjanlatService,
+              private _errorservice: ErrorService,
               projektservice: ProjektService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PROJEKTMOD]);
     this.projektservice = projektservice;
@@ -92,8 +91,8 @@ export class ProjektListComponent implements OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -128,7 +127,7 @@ export class ProjektListComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
 
@@ -148,7 +147,7 @@ export class ProjektListComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
 

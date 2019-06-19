@@ -1,20 +1,18 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import * as FileSaver from 'file-saver';
 import {RiportService} from '../../riport/riport.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import {ProjektService} from '../projekt.service';
 import {b64toBlob} from '../../tools/b64toBlob';
 import {ProjektContainerMode} from '../projektcontainermode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-projekt-export',
   templateUrl: './projekt-export.component.html'
 })
 export class ProjektExportComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   projektservice: ProjektService;
   riportservice: RiportService;
   eppFrissit = false;
@@ -24,6 +22,7 @@ export class ProjektExportComponent implements OnDestroy {
   szamlalo: any;
 
   constructor(projektservice: ProjektService,
+              private _errorservice: ErrorService,
               riportservice: RiportService) {
     this.projektservice = projektservice,
     this.riportservice = riportservice;
@@ -48,8 +47,8 @@ export class ProjektExportComponent implements OnDestroy {
         this.ciklus();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   ciklus() {
@@ -75,8 +74,8 @@ export class ProjektExportComponent implements OnDestroy {
         }
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   next() {
@@ -92,8 +91,8 @@ export class ProjektExportComponent implements OnDestroy {
           this.eppFrissit = false;
         })
         .catch(err => {
-          this.errormodal.show(err);
           this.eppFrissit = false;
+          this._errorservice.Error = err;
         });
     } else {
       this.ciklus();

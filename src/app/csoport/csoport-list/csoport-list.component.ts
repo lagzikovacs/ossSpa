@@ -1,15 +1,14 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {CsoportService} from '../csoport.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {CsoportContainerMode} from '../csoportcontainermode';
 import {CsoportEgyMode} from '../csoportegymode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-csoport-list',
   templateUrl: './csoport-list.component.html'
 })
 export class CsoportListComponent {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   szurok = ['Csoport'];
 
@@ -19,7 +18,8 @@ export class CsoportListComponent {
 
   csoportservice: CsoportService;
 
-  constructor(csoportservice: CsoportService) {
+  constructor(csoportservice: CsoportService,
+              private _errorservice: ErrorService) {
     this.csoportservice = csoportservice;
   }
 
@@ -52,8 +52,8 @@ export class CsoportListComponent {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -88,8 +88,8 @@ export class CsoportListComponent {
         this.csoportservice.EgyMode = CsoportEgyMode.Reszletek;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -109,8 +109,8 @@ export class CsoportListComponent {
         this.csoportservice.ContainerMode = CsoportContainerMode.Uj;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 }

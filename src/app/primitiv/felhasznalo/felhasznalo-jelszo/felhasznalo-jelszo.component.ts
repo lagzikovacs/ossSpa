@@ -1,8 +1,8 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {Component, OnDestroy} from '@angular/core';
 import {FelhasznaloService} from '../felhasznalo.service';
 import {FelhasznaloEgyMode} from '../felhasznaloegymode';
 import {rowanimation} from '../../../animation/rowAnimation';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-felhasznalo-jelszo',
@@ -10,20 +10,19 @@ import {rowanimation} from '../../../animation/rowAnimation';
   animations: [rowanimation]
 })
 export class FelhasznaloJelszoComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   felhasznaloservice: FelhasznaloService;
   eppFrissit = false;
   jelszo = '';
   jelszoujra = '';
 
-  constructor(felhasznaloservice: FelhasznaloService) {
+  constructor(felhasznaloservice: FelhasznaloService,
+              private _errorservice: ErrorService) {
     this.felhasznaloservice = felhasznaloservice;
   }
 
   onSubmit() {
     if (this.jelszo !== this.jelszoujra) {
-      this.errormodal.show('A jelszó két példánya nem azonos!');
+      this._errorservice.Error = 'A jelszó két példánya nem azonos!';
       return;
     }
 
@@ -48,7 +47,7 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
         this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Reszletek;
       })
       .catch(err => {
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
         this.eppFrissit = false;
       });
   }

@@ -1,7 +1,5 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TeendoService} from '../../primitiv/teendo/teendo.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {FelhasznaloService} from '../../primitiv/felhasznalo/felhasznalo.service';
 import {ProjektteendoService} from '../projektteendo.service';
 import {ZoomSources} from '../../enums/zoomsources';
@@ -13,14 +11,13 @@ import {ProjektteendoContainerMode} from '../projektteendocontainermode';
 import {FelhasznaloContainerMode} from '../../primitiv/felhasznalo/felhasznalocontainermode';
 import {TeendoContainerMode} from '../../primitiv/teendo/teendocontainermode';
 import {ProjektteendoSzerkesztesMode} from '../projektteendoszerkesztesmode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-projekt-teendo-szerkesztes',
   templateUrl: './projekt-teendo-szerkesztes.component.html'
 })
 export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   projektteendoservice: ProjektteendoService;
   eppFrissit = false;
   Hatarido: any;
@@ -28,7 +25,8 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
   constructor(projektteendoservice: ProjektteendoService,
               private _felhasznalosevice: FelhasznaloService,
               private _teendoservice: TeendoService,
-              private _projektservice: ProjektService) {
+              private _projektservice: ProjektService,
+              private _errorservice: ErrorService) {
     this.projektteendoservice = projektteendoservice;
   }
 
@@ -78,8 +76,8 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
         this.navigal();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

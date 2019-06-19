@@ -1,24 +1,23 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AjanlatkeresService} from '../ajanlatkeres.service';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import {ProjektService} from '../../projekt/projekt.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {ProjektDto} from '../../projekt/projektdto';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-ajanlatkeres-projekt',
   templateUrl: './ajanlatkeres-projekt.component.html'
 })
 export class AjanlatkeresProjektComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   ajanlatkeresservice: AjanlatkeresService;
   projektservice: ProjektService;
   eppFrissit = false;
 
   constructor(ajanlatkeresservice: AjanlatkeresService,
-              projektservice: ProjektService) {
+              projektservice: ProjektService,
+              private _errorservice: ErrorService) {
     this.ajanlatkeresservice = ajanlatkeresservice;
     this.projektservice = projektservice;
   }
@@ -41,8 +40,8 @@ export class AjanlatkeresProjektComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

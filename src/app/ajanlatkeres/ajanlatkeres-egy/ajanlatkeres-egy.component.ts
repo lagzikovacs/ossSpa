@@ -1,11 +1,11 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {AjanlatkeresService} from '../ajanlatkeres.service';
 import {AjanlatkeresContainerMode} from '../ajanlatkerescontainermode';
 import {AjanlatkeresEgyMode} from '../ajanlatkeresegymode';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-ajanlatkeres-egy',
@@ -13,14 +13,13 @@ import {ErrormodalComponent} from '../../errormodal/errormodal.component';
   animations: [rowanimation]
 })
 export class FeliratkozasEgyComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   ajanlatkeresservice: AjanlatkeresService;
   enprojekt = false;
   eppFrissit = false;
   ri = -1;
 
   constructor(private _logonservice: LogonService,
+              private _errorservice: ErrorService,
               ajanlatkeresservice: AjanlatkeresService) {
     this.enprojekt = _logonservice.Jogaim.includes(JogKod[JogKod.PROJEKT]);
     this.ajanlatkeresservice = ajanlatkeresservice;

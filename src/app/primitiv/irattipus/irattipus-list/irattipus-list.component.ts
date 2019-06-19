@@ -1,5 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {IrattipusService} from '../irattipus.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
@@ -12,14 +11,13 @@ import {IratSzerkesztesMode} from '../../../irat/iratszerkesztesmode';
 import {BizonylatesiratSzerkesztesMode} from '../../../projektkapcsolat/bizonylatesiratszerkesztesmode';
 import {BizonylatkapcsolatService} from '../../../bizonylatkapcsolat/bizonylatkapcsolat.service';
 import {BizonylatKapcsolatSzerkesztesMode} from '../../../bizonylatkapcsolat/bizonylatkapcsolatszerkesztesmode';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-irattipus-list',
   templateUrl: './irattipus-list.component.html'
 })
 export class IrattipusListComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   szurok = ['Irattipus'];
 
   eppFrissit = false;
@@ -32,6 +30,7 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
               private _iratservice: IratService,
               private _projektkapcsolatservice: ProjektkapcsolatService,
               private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
+              private _errorservice: ErrorService,
               irattipusservice: IrattipusService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.irattipusservice = irattipusservice;
@@ -76,8 +75,8 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
         }
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -138,8 +137,8 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
         this.irattipusservice.ContainerMode = IrattipusContainerMode.Uj;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

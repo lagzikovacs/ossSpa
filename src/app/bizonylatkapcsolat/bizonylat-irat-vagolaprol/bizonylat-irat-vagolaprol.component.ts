@@ -1,30 +1,30 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
 import {BizonylatKapcsolatContainerMode} from '../bizonylatkapcsolatcontainermode';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {BizonylatKapcsolatParam} from '../bizonylatkapcsolatparam';
 import {VagolapService} from '../../vagolap/vagolap.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-bizonylat-irat-vagolaprol',
   templateUrl: './bizonylat-irat-vagolaprol.component.html'
 })
 export class BizonylatIratVagolaprolComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatkapcsolatservice: BizonylatkapcsolatService;
   eppFrissit = false;
 
   constructor(private _bizonylatservice: BizonylatService,
               private _vagolapservice: VagolapService,
+              private _errorservice: ErrorService,
               bizonylatkapcsolatservice: BizonylatkapcsolatService) {
     this.bizonylatkapcsolatservice = bizonylatkapcsolatservice;
   }
 
   ok() {
     if (this._vagolapservice.kijeloltiratokszama() === 0) {
-      this.errormodal.show('Nincs kijelölt tétel!');
+      this._errorservice.Error = 'Nincs kijelölt tétel!';
       return;
     }
 
@@ -51,7 +51,7 @@ export class BizonylatIratVagolaprolComponent implements OnDestroy {
           })
           .catch(err => {
             this.eppFrissit = false;
-            this.errormodal.show(err);
+            this._errorservice.Error = err;
           });
       }
     }

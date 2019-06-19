@@ -1,7 +1,6 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {UgyfelterService} from '../ugyfelter.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {UgyfelterDto} from '../ugyfelterdto';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
 import {LogonService} from '../../logon/logon.service';
@@ -17,14 +16,13 @@ import {BizonylatNyomtatasTipus} from '../../bizonylatnyomtatas/bizonylatnyomtat
 import * as FileSaver from 'file-saver';
 import {b64toBlob} from '../../tools/b64toBlob';
 import {LetoltesParam} from '../../dokumentum/letoltesparam';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-ugyfelter',
   templateUrl: './ugyfelter.component.html'
 })
 export class UgyfelterComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   up: string;
   private _sub: any;
   bejelentkezve = false;
@@ -50,7 +48,8 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
               private _ugyfelterservice: UgyfelterService,
               private _projektkapcsolatservice: ProjektkapcsolatService,
               private _bizonylatnyomtatasservice: BizonylatnyomtatasService,
-              private _dokumentumservice: DokumentumService) { }
+              private _dokumentumservice: DokumentumService,
+              private _errorservice: ErrorService) { }
 
   ngOnInit() {
     this._sub = this._route
@@ -77,8 +76,8 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -99,8 +98,8 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -126,8 +125,8 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
         this.bizonylatnyomtatasciklus();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   bizonylatnyomtatasciklus() {
@@ -151,7 +150,7 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   bizonylatnyomtatasciklusnext() {
@@ -177,8 +176,8 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -204,8 +203,8 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
           this.eppFrissit = false;
         })
         .catch(err => {
-          this.errormodal.show(err);
           this.eppFrissit = false;
+          this._errorservice.Error = err;
         });
     } else {
       this._dokumentumservice.LetoltesPDF(this.dokumentumkod)
@@ -220,8 +219,8 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
           this.eppFrissit = false;
         })
         .catch(err => {
-          this.errormodal.show(err);
           this.eppFrissit = false;
+          this._errorservice.Error = err;
         });
     }
   }

@@ -1,23 +1,23 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {IratService} from '../../irat/irat.service';
 import {FotozasService} from '../fotozas.service';
 import * as moment from 'moment';
 import {environment} from '../../../environments/environment';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-fotozas-link',
   templateUrl: './fotozas-link.component.html'
 })
 export class FotozasLinkComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   link = '';
   eppFrissit = false;
   kikuldesikodidopontja: any;
 
   constructor(private _iratservice: IratService,
-              private _fotozasservice: FotozasService) { }
+              private _fotozasservice: FotozasService,
+              private _errorservice: ErrorService) { }
 
   ngOnInit() {
     if (this._iratservice.Dto[this._iratservice.DtoSelectedIndex].Kikuldesikodidopontja !== null) {
@@ -32,7 +32,7 @@ export class FotozasLinkComponent implements OnInit, OnDestroy {
         })
         .catch(err => {
           this.eppFrissit = false;
-          this.errormodal.show(err);
+          this._errorservice.Error = err;
         });
     } else {
       this.kikuldesikodidopontja = '';
@@ -67,7 +67,7 @@ export class FotozasLinkComponent implements OnInit, OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
 

@@ -1,12 +1,12 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {FizetesimodService} from '../fizetesimod.service';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
 import {FizetesimodContainerMode} from '../fizetesimodcontainermode';
 import {FizetesimodEgyMode} from '../fizetesimodegymode';
 import {rowanimation} from '../../../animation/rowAnimation';
 import {deepCopy} from '../../../tools/deepCopy';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-fizetesimod-egy',
@@ -14,14 +14,13 @@ import {deepCopy} from '../../../tools/deepCopy';
   animations: [rowanimation]
 })
 export class FizetesimodEgyComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   fizetesimodservice: FizetesimodService;
   mod = false;
   eppFrissit = false;
   ri = -1;
 
   constructor(private _logonservice: LogonService,
+              private _errorservice: ErrorService,
               fizetesimodservice: FizetesimodService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.fizetesimodservice = fizetesimodservice;
@@ -57,8 +56,8 @@ export class FizetesimodEgyComponent implements OnDestroy {
         this.fizetesimodservice.ContainerMode = FizetesimodContainerMode.List;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

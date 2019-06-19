@@ -1,22 +1,21 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {VolumeService} from '../volume.service';
 import {VolumeContainerMode} from '../volumecontainermode';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {VolumeEgyMode} from '../volumeegymode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-volume-list',
   templateUrl: './volume-list.component.html'
 })
 export class VolumeListComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   eppFrissit = false;
   elsokereses = true;
   volumeservice: VolumeService;
   ti = -1;
 
-  constructor(volumeservice: VolumeService) {
+  constructor(volumeservice: VolumeService,
+              private _errorservice: ErrorService) {
     this.volumeservice = volumeservice;
   }
 
@@ -53,8 +52,8 @@ export class VolumeListComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

@@ -1,20 +1,19 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {Component, OnDestroy} from '@angular/core';
 import {OnlineszamlaService} from '../onlineszamla.service';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-adoszamellenorzes',
   templateUrl: './adoszamellenorzes.component.html'
 })
 export class AdoszamellenorzesComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   eppFrissit = false;
   navfeltoltesservice: OnlineszamlaService;
   adoszam = '';
   valasz = '';
 
-  constructor(navfeltoltesservice: OnlineszamlaService  ) {
+  constructor(navfeltoltesservice: OnlineszamlaService,
+              private _errorservice: ErrorService) {
     this.navfeltoltesservice = navfeltoltesservice;
   }
 
@@ -32,7 +31,7 @@ export class AdoszamellenorzesComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
 

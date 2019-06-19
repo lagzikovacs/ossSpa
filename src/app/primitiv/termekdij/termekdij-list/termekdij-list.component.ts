@@ -1,8 +1,7 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TermekdijService} from '../termekdij.service';
 import {TermekdijEgyMode} from '../termekdijegymode';
 import {TermekdijContainerMode} from '../termekdijcontainermode';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {LogonService} from '../../../logon/logon.service';
 import {CikkService} from '../../../cikk/cikk.service';
 import {BizonylatService} from '../../../bizonylat/bizonylat.service';
@@ -10,14 +9,13 @@ import {JogKod} from '../../../enums/jogkod';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {CikkSzerkesztesMode} from '../../../cikk/cikkszerkesztesmode';
 import {BizonylattetelSzerkesztesMode} from '../../../bizonylat/bizonylattetelszerkesztesmode';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-termekdij-list',
   templateUrl: './termekdij-list.component.html'
 })
 export class TermekdijListComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   szurok = ['KT'];
 
   eppFrissit = false;
@@ -29,6 +27,7 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
   constructor(private _logonservice: LogonService,
               private _cikkservice: CikkService,
               private _bizonylatservice: BizonylatService,
+              private _errorservice: ErrorService,
               termekdijservice: TermekdijService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.termekdijservice = termekdijservice;
@@ -73,8 +72,8 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
         }
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -128,8 +127,8 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
         this.termekdijservice.ContainerMode = TermekdijContainerMode.Uj;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

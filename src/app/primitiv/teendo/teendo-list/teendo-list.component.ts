@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TeendoService} from '../teendo.service';
 import {JogKod} from '../../../enums/jogkod';
 import {LogonService} from '../../../logon/logon.service';
@@ -8,15 +7,16 @@ import {ProjektteendoService} from '../../../projektteendo/projektteendo.service
 import {TeendoContainerMode} from '../teendocontainermode';
 import {TeendoEgyMode} from '../teendoegymode';
 import {ProjektteendoSzerkesztesMode} from '../../../projektteendo/projektteendoszerkesztesmode';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-teendo-list',
   templateUrl: './teendo-list.component.html'
 })
 export class TeendoListComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   constructor(private _logonservice: LogonService,
+              private _errorservice: ErrorService,
               teendoservice: TeendoService,
               private _projektteendoservice: ProjektteendoService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
@@ -70,8 +70,8 @@ export class TeendoListComponent implements OnInit, OnDestroy {
         }
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -114,8 +114,8 @@ export class TeendoListComponent implements OnInit, OnDestroy {
         this.teendoservice.ContainerMode = TeendoContainerMode.Uj;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

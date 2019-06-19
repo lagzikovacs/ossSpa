@@ -1,6 +1,5 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {VolumeService} from '../volume.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {DokumentumService} from '../../dokumentum/dokumentum.service';
 
 @Component({
@@ -8,8 +7,6 @@ import {DokumentumService} from '../../dokumentum/dokumentum.service';
   templateUrl: './volume-teszt.component.html'
 })
 export class VolumeTesztComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   volumeservice: VolumeService;
   dokumentumservice: DokumentumService;
   index = 0;

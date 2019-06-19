@@ -1,7 +1,6 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {AjanlatkeresService} from '../ajanlatkeres.service';
 import {Szempont} from '../../enums/szempont';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {SzMT} from '../../dtos/szmt';
 import {AjanlatkeresDto} from '../ajanlatkeresdto';
 import {ProjektDto} from '../../projekt/projektdto';
@@ -9,14 +8,13 @@ import {AjanlatkeresContainerMode} from '../ajanlatkerescontainermode';
 import {AjanlatkeresEgyMode} from '../ajanlatkeresegymode';
 import {JogKod} from '../../enums/jogkod';
 import {LogonService} from '../../logon/logon.service';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-ajanlatkeres-list',
   templateUrl: './ajanlatkeres-list.component.html'
 })
 export class AjanlatkeresListComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   szurok = ['Id', 'Ügynök', 'Név', 'Cím', 'Email', 'Telefonszám'];
 
   szempontok = [
@@ -29,6 +27,7 @@ export class AjanlatkeresListComponent implements OnDestroy {
   ajanlatkeresservice: AjanlatkeresService;
 
   constructor(private _logonservice: LogonService,
+              private _errorservice: ErrorService,
               ajanlatkeresservice: AjanlatkeresService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.AJANLATKERESMOD]);
     this.ajanlatkeresservice = ajanlatkeresservice;
@@ -71,8 +70,8 @@ export class AjanlatkeresListComponent implements OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   setClickedRow(i: number) {
@@ -99,7 +98,7 @@ export class AjanlatkeresListComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   ngOnDestroy() {

@@ -1,17 +1,15 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {BizonylatTipus} from '../bizonylattipus';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {BizonylatMintaAlapjanParam} from '../bizonylatmintaalapjan';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-bizonylat-errol',
   templateUrl: './bizonylat-errol.component.html'
 })
 export class BizonylatErrolComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   eppFrissit = false;
   entries = [
     ['Díjbekérő', BizonylatTipus.DijBekero],
@@ -25,7 +23,9 @@ export class BizonylatErrolComponent implements OnDestroy {
   kesz = false;
   ujbizonylatkod = 0;
 
-  constructor(private _bizonylatservice: BizonylatService) { }
+  constructor(private _bizonylatservice: BizonylatService,
+              private _errorservice: ErrorService) {
+  }
 
   change(i) {
     this.entryindex = i;
@@ -48,7 +48,7 @@ export class BizonylatErrolComponent implements OnDestroy {
         })
         .catch(err => {
           this.eppFrissit = false;
-          this.errormodal.show(err);
+          this._errorservice.Error = err;
         });
     } else {
       this.navigal();

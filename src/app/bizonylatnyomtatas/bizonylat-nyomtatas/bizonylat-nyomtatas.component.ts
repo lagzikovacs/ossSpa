@@ -1,19 +1,18 @@
-import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatnyomtatasService} from '../bizonylatnyomtatas.service';
 import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
 import {BizonylatNyomtatasTipus} from '../bizonylatnyomtatastipus';
 import * as FileSaver from 'file-saver';
 import {b64toBlob} from '../../tools/b64toBlob';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-bizonylat-nyomtatas',
   templateUrl: './bizonylat-nyomtatas.component.html'
 })
 export class BizonylatNyomtatasComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   entries = ['Minta', 'Eredeti', 'Másolat'];
   entriest = [BizonylatNyomtatasTipus.Minta, BizonylatNyomtatasTipus.Eredeti, BizonylatNyomtatasTipus.Masolat];
@@ -24,7 +23,8 @@ export class BizonylatNyomtatasComponent implements OnDestroy {
   szamlalo: any;
 
   constructor(private _bizonylatnyomtatasservice: BizonylatnyomtatasService,
-              private _bizonylatservice: BizonylatService) {
+              private _bizonylatservice: BizonylatService,
+              private _errorservice: ErrorService) {
   }
 
   change(i) {
@@ -50,8 +50,8 @@ export class BizonylatNyomtatasComponent implements OnDestroy {
         this.ciklus();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   ciklus() {
@@ -78,7 +78,7 @@ export class BizonylatNyomtatasComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   next() {
@@ -95,7 +95,7 @@ export class BizonylatNyomtatasComponent implements OnDestroy {
         })
         .catch(err => {
           this.eppFrissit = false;
-          this.errormodal.show(err);
+          this._errorservice.Error = err;
         });
     } else {
       this.ciklus();

@@ -1,12 +1,12 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {PenztarService} from '../penztar.service';
 import {LogonService} from '../../logon/logon.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {JogKod} from '../../enums/jogkod';
 import {PenztarContainerMode} from '../penztarcontainermode';
 import {PenztarEgyMode} from '../penztaregymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-penztar-egy',
@@ -14,8 +14,6 @@ import {deepCopy} from '../../tools/deepCopy';
   animations: [rowanimation]
 })
 export class PenztarEgyComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   penztarservice: PenztarService;
   mod = false;
   nyitva = false;
@@ -23,6 +21,7 @@ export class PenztarEgyComponent implements OnDestroy {
   ri = -1;
 
   constructor(private _logonservice: LogonService,
+              private _errorservice: ErrorService,
               penztarservice: PenztarService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);
     this.penztarservice = penztarservice;
@@ -65,8 +64,8 @@ export class PenztarEgyComponent implements OnDestroy {
         this.penztarservice.ContainerMode = PenztarContainerMode.List;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

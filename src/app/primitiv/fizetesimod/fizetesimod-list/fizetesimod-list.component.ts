@@ -1,5 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FizetesimodService} from '../fizetesimod.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
@@ -10,14 +9,13 @@ import {KifizetesService} from '../../../kifizetes/kifizetes.service';
 import {KifizetesSzerkesztesMode} from '../../../kifizetes/kifizetesszerkesztesmode';
 import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 import {BizonylatSzerkesztesMode} from '../../../bizonylat/bizonylatszerkesztesmode';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-fizetesimod-list',
   templateUrl: './fizetesimod-list.component.html'
 })
 export class FizetesimodListComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   szurok = ['Fizetési mód'];
 
   eppFrissit = false;
@@ -29,6 +27,7 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
   constructor(private _logonservice: LogonService,
               private _bizonylatkifizetesservice: KifizetesService,
               private _bizonylatservice: BizonylatService,
+              private _errorservice: ErrorService,
               fizetesimodservice: FizetesimodService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.fizetesimodservice = fizetesimodservice;
@@ -73,8 +72,8 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
         }
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -124,8 +123,8 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
         this.fizetesimodservice.ContainerMode = FizetesimodContainerMode.Uj;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

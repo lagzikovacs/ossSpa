@@ -1,5 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MeService} from '../me.service';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {CikkService} from '../../../cikk/cikk.service';
@@ -10,14 +9,13 @@ import {MeEgyMode} from '../meegymode';
 import {MeContainerMode} from '../mecontainermode';
 import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 import {BizonylattetelSzerkesztesMode} from '../../../bizonylat/bizonylattetelszerkesztesmode';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-me-list',
   templateUrl: './me-list.component.html'
 })
 export class MeListComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   szurok = ['Mennyiségi egység'];
 
   eppFrissit = false;
@@ -29,6 +27,7 @@ export class MeListComponent implements OnInit, OnDestroy {
   constructor(private _logonservice: LogonService,
               private _cikkservice: CikkService,
               private _bizonylatservice: BizonylatService,
+              private _errorservice: ErrorService,
               meservice: MeService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.meservice = meservice;
@@ -73,8 +72,8 @@ export class MeListComponent implements OnInit, OnDestroy {
         }
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -124,8 +123,8 @@ export class MeListComponent implements OnInit, OnDestroy {
         this.meservice.ContainerMode = MeContainerMode.Uj;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

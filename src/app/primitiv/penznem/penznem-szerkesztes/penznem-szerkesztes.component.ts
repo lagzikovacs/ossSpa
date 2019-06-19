@@ -1,21 +1,20 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {PenznemService} from '../penznem.service';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {NumberResult} from '../../../dtos/numberresult';
 import {PenznemEgyMode} from '../penznemegymode';
 import {PenznemContainerMode} from '../penznemcontainermode';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-penznem-szerkesztes',
   templateUrl: './penznem-szerkesztes.component.html'
 })
 export class PenznemSzerkesztesComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   penznemservice: PenznemService;
   eppFrissit = false;
 
-  constructor(penznemservice: PenznemService) {
+  constructor(penznemservice: PenznemService,
+              private _errorservice: ErrorService) {
     this.penznemservice = penznemservice;
   }
 
@@ -52,8 +51,8 @@ export class PenznemSzerkesztesComponent implements OnDestroy {
         this.navigal();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   cancel() {

@@ -1,21 +1,20 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {AfakulcsService} from '../afakulcs.service';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {NumberResult} from '../../../dtos/numberresult';
 import {AfakulcsContainerMode} from '../afakulcscontainermode';
 import {AfakulcsEgyMode} from '../afakulcsegymode';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-afakulcs-szerkesztes',
   templateUrl: './afakulcs-szerkesztes.component.html'
 })
 export class AfakulcsSzerkesztesComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   afakulcsservice: AfakulcsService;
   eppFrissit = false;
 
-  constructor(afakulcsservice: AfakulcsService) {
+  constructor(afakulcsservice: AfakulcsService,
+              private _errorservice: ErrorService) {
     this.afakulcsservice = afakulcsservice;
   }
 
@@ -53,8 +52,8 @@ export class AfakulcsSzerkesztesComponent implements OnDestroy {
         this.navigal();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   cancel() {

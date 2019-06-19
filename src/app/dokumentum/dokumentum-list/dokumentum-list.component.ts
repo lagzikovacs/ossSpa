@@ -1,23 +1,22 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DokumentumService} from '../dokumentum.service';
 import {IratService} from '../../irat/irat.service';
 import {DokumentumDto} from '../dokumentumdto';
 import {DokumentumContainerMode} from '../dokumentumcontainermode';
 import {DokumentumEgyMode} from '../dokumentumegymode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-dokumentum-list',
   templateUrl: './dokumentum-list.component.html'
 })
 export class DokumentumListComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   dokumentumservice: DokumentumService;
   eppFrissit = false;
 
   constructor(dokumentumservice: DokumentumService,
-              private _iratservice: IratService) {
+              private _iratservice: IratService,
+              private _errorservice: ErrorService) {
     this.dokumentumservice = dokumentumservice;
   }
 
@@ -34,8 +33,8 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -49,7 +48,7 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   setClickedRow(i: number) {

@@ -1,25 +1,24 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
 import {ZoomSources} from '../../enums/zoomsources';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {PenztarService} from '../penztar.service';
 import {PenztarContainerMode} from '../penztarcontainermode';
 import {PenztarEgyMode} from '../penztaregymode';
 import {PenztarSzerkesztesMode} from '../penztarszerkesztesmode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-penztar-szerkesztes',
   templateUrl: './penztar-szerkesztes.component.html'
 })
 export class PenztarSzerkesztesComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   penztarservice: PenztarService;
   eppFrissit = false;
 
   constructor(penztarservice: PenztarService,
-              private _penznemservice: PenznemService) {
+              private _penznemservice: PenznemService,
+              private _errorservice: ErrorService) {
     this.penztarservice = penztarservice;
   }
 
@@ -60,8 +59,8 @@ export class PenztarSzerkesztesComponent implements OnDestroy {
         this.navigal();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   cancel() {

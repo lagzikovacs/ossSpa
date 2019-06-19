@@ -1,31 +1,30 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {ProjektService} from '../../projekt/projekt.service';
 import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
 import {VagolapService} from '../../vagolap/vagolap.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {NumberResult} from '../../dtos/numberresult';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-projektkapcsolat-vagolaprol',
   templateUrl: './projektkapcsolat-vagolaprol.component.html'
 })
 export class ProjektkapcsolatVagolaprolComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   projektkapcsolatservice: ProjektkapcsolatService;
   eppFrissit = false;
 
   constructor(private _projektservice: ProjektService,
               private _vagolapservice: VagolapService,
+              private _errorservice: ErrorService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.projektkapcsolatservice = projektkapcsolatservice;
   }
 
   ok() {
     if (this._vagolapservice.kijeloltekszama() === 0) {
-      this.errormodal.show('Nincs kijelölt tétel!');
+      this._errorservice.Error = 'Nincs kijelölt tétel!';
       return;
     }
 
@@ -66,7 +65,7 @@ export class ProjektkapcsolatVagolaprolComponent implements OnDestroy {
           })
           .catch(err => {
             this.eppFrissit = false;
-            this.errormodal.show(err);
+            this._errorservice.Error = err;
           });
       }
     }

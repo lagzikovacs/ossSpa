@@ -1,6 +1,5 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {IratService} from '../irat.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
 import {IratDto} from '../iratdto';
@@ -11,14 +10,13 @@ import {DokumentumContainerMode} from '../../dokumentum/dokumentumcontainermode'
 import {IratSzerkesztesMode} from '../iratszerkesztesmode';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-irat-list',
   templateUrl: './irat-list.component.html'
 })
 export class IratListComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   szurok = ['Id', 'Keletkezett', 'Ügyfél', 'Tárgy', 'Irattipus', 'Küldő'];
   szurok2 = ['-', 'Keletkezett', 'Ügyfél', 'Tárgy', 'Irattipus', 'Küldő'];
 
@@ -35,6 +33,7 @@ export class IratListComponent implements OnDestroy {
   ti = -1;
 
   constructor(private _logonservice: LogonService,
+              private _errorservice: ErrorService,
               iratservice: IratService,
               dokumentumservice: DokumentumService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.IRATMOD]);
@@ -52,7 +51,7 @@ export class IratListComponent implements OnDestroy {
     this.iratservice.ip.fi = new Array<SzMT>();
 
     if (this.iratservice.szempont === this.iratservice.szempont2 && this.iratservice.szempont !== 0) {
-      this.errormodal.show('Ne válasszon azonos szempontokat!');
+      this._errorservice.Error = 'Ne válasszon azonos szempontokat!';
       return;
     }
 
@@ -87,8 +86,8 @@ export class IratListComponent implements OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   setClickedRow(i: number) {
@@ -117,8 +116,8 @@ export class IratListComponent implements OnDestroy {
         this.iratservice.SzerkesztesMode = IratSzerkesztesMode.Blank;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

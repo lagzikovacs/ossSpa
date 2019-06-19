@@ -1,28 +1,27 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {SzamlazasirendService} from '../szamlazasirend.service';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {ProjektService} from '../../projekt/projekt.service';
 import {SzamlazasirendEgyMode} from '../szamlazasirendegymode';
 import {SzamlazasirendContainerMode} from '../szamlazasirendcontainermode';
 import {PenznemContainerMode} from '../../primitiv/penznem/penznemcontainermode';
 import {SzamlazasirendSzerkesztesMode} from '../szamlazasirendszerkesztesmode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-szamlazasirend-szerkesztes',
   templateUrl: './szamlazasirend-szerkesztes.component.html'
 })
 export class SzamlazasirendSzerkesztesComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   szamlazasirendservice: SzamlazasirendService;
   eppFrissit = false;
 
   constructor(szamlazasirendservice: SzamlazasirendService,
               private _penznemservice: PenznemService,
-              private _projektservice: ProjektService) {
+              private _projektservice: ProjektService,
+              private _errorservice: ErrorService) {
     this.szamlazasirendservice = szamlazasirendservice;
   }
 
@@ -65,8 +64,8 @@ export class SzamlazasirendSzerkesztesComponent implements OnDestroy {
         this.navigal();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

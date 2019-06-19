@@ -1,21 +1,20 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {Component, OnDestroy} from '@angular/core';
 import {MeService} from '../me.service';
 import {NumberResult} from '../../../dtos/numberresult';
 import {MeContainerMode} from '../mecontainermode';
 import {MeEgyMode} from '../meegymode';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-me-szerkesztes',
   templateUrl: './me-szerkesztes.component.html'
 })
 export class MeSzerkesztesComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   meservice: MeService;
   eppFrissit = false;
 
-  constructor(meservice: MeService) {
+  constructor(meservice: MeService,
+              private _errorservice: ErrorService) {
     this.meservice = meservice;
   }
 
@@ -53,7 +52,7 @@ export class MeSzerkesztesComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   cancel() {

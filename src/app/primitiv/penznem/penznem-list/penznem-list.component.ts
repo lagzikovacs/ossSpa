@@ -1,6 +1,5 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PenznemService} from '../penznem.service';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {LogonService} from '../../../logon/logon.service';
 import {PenztarService} from '../../../penztar/penztar.service';
 import {ProjektService} from '../../../projekt/projekt.service';
@@ -16,6 +15,7 @@ import {KifizetesSzerkesztesMode} from '../../../kifizetes/kifizetesszerkesztesm
 import {BizonylatSzerkesztesMode} from '../../../bizonylat/bizonylatszerkesztesmode';
 import {PenznemContainerMode} from '../penznemcontainermode';
 import {PenznemEgyMode} from '../penznemegymode';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 
 @Component({
@@ -23,8 +23,6 @@ import {PenznemEgyMode} from '../penznemegymode';
   templateUrl: './penznem-list.component.html'
 })
 export class PenznemListComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   szurok = ['Pénznem'];
 
   eppFrissit = false;
@@ -39,6 +37,7 @@ export class PenznemListComponent implements OnInit, OnDestroy {
               private _szamlazasirendservice: SzamlazasirendService,
               private _bizonylatkifizetesservice: KifizetesService,
               private _bizonylatservice: BizonylatService,
+              private _errorservice: ErrorService,
               penznemservice: PenznemService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.penznemservice = penznemservice;
@@ -83,8 +82,8 @@ export class PenznemListComponent implements OnInit, OnDestroy {
         }
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -156,7 +155,7 @@ export class PenznemListComponent implements OnInit, OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   ngOnDestroy() {

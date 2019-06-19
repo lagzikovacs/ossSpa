@@ -1,5 +1,4 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {Component, OnDestroy} from '@angular/core';
 import {UgyfelService} from '../ugyfel.service';
 import {HelysegService} from '../../primitiv/helyseg/helyseg.service';
 import {ZoomSources} from '../../enums/zoomsources';
@@ -8,19 +7,19 @@ import {UgyfelContainerMode} from '../ugyfelcontainermode';
 import {UgyfelEgyMode} from '../ugyfelegymode';
 import {UgyfelSzerkesztesMode} from '../ugyfelszerkesztesmode';
 import {HelysegContainerMode} from '../../primitiv/helyseg/helysegcontainermode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-ugyfel-szerkesztes',
   templateUrl: './ugyfel-szerkesztes.component.html'
 })
 export class UgyfelSzerkesztesComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   ugyfelservice: UgyfelService;
   eppFrissit = false;
 
   constructor(ugyfelservice: UgyfelService,
-              private _helysegservice: HelysegService) {
+              private _helysegservice: HelysegService,
+              private _errorservice: ErrorService) {
     this.ugyfelservice = ugyfelservice;
   }
 
@@ -62,7 +61,7 @@ export class UgyfelSzerkesztesComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   cancel() {

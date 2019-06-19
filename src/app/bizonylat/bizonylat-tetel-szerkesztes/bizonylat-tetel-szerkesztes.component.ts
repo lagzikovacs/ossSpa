@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnDestroy, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
 import {CikkService} from '../../cikk/cikk.service';
@@ -12,19 +12,18 @@ import {AfakulcsContainerMode} from '../../primitiv/afakulcs/afakulcscontainermo
 import {TermekdijContainerMode} from '../../primitiv/termekdij/termekdijcontainermode';
 import {BizonylattetelSzerkesztesMode} from '../bizonylattetelszerkesztesmode';
 import {BruttobolParam} from '../bruttobolparam';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {CikkZoomParameter} from '../../cikk/cikkzoomparameter';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {TermekdijZoomParameter} from '../../primitiv/termekdij/termekdijzoomparameter';
 import {AfakulcsZoomParameter} from '../../primitiv/afakulcs/afakulcszoomparameter';
 import {MeZoomParameter} from '../../primitiv/me/mezoomparameter';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-bizonylat-tetel-szerkesztes',
   templateUrl: './bizonylat-tetel-szerkesztes.component.html'
 })
 export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   bizonylatservice: BizonylatService;
   eppFrissit = false;
@@ -34,6 +33,7 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
               private _meservice: MeService,
               private _afakulcsservice: AfakulcsService,
               private _termekdijservice: TermekdijService,
+              private _errorservice: ErrorService,
               private _cdr: ChangeDetectorRef,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
@@ -96,7 +96,7 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
 
@@ -113,7 +113,7 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
 
@@ -187,7 +187,7 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   cancel() {

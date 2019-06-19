@@ -1,5 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
@@ -12,6 +11,7 @@ import {ProjektEgyMode} from '../projektegymode';
 import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
 import {rowanimation} from '../../animation/rowAnimation';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-projekt-szerkesztes',
@@ -19,14 +19,13 @@ import {rowanimation} from '../../animation/rowAnimation';
   animations: [rowanimation]
 })
 export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   projektservice: ProjektService;
   eppFrissit = false;
   Keletkezett: any;
 
   constructor(private _ugyfelservice: UgyfelService,
               private _penznemservice: PenznemService,
+              private _errorservice: ErrorService,
               projektservice: ProjektService) {
     this.projektservice = projektservice;
   }
@@ -79,8 +78,8 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
         this.navigal();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   cancel() {

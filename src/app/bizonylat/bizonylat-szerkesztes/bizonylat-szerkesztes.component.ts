@@ -10,7 +10,6 @@ import {FizetesimodService} from '../../primitiv/fizetesimod/fizetesimod.service
 import {FizetesimodContainerMode} from '../../primitiv/fizetesimod/fizetesimodcontainermode';
 import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {BizonylatEgyMode} from '../bizonylategymode';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylattetelSzerkesztesMode} from '../bizonylattetelszerkesztesmode';
 import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
@@ -18,14 +17,13 @@ import {FizetesimodZoomParameter} from '../../primitiv/fizetesimod/fiztesimodzoo
 import {EmptyResult} from '../../dtos/emptyresult';
 import * as moment from 'moment';
 import {deepCopy} from '../../tools/deepCopy';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-bizonylat-szerkesztes',
   templateUrl: './bizonylat-szerkesztes.component.html'
 })
 export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   bizonylatservice: BizonylatService;
   eppFrissit = false;
   fizerr = 'Ismeretlen fizetési mód: ';
@@ -33,6 +31,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   constructor(private _ugyfelservice: UgyfelService,
               private _penznemservice: PenznemService,
               private _fizetesimodservice: FizetesimodService,
+              private _errorservice: ErrorService,
               private _cdr: ChangeDetectorRef,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
@@ -92,7 +91,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   Bk() {
@@ -122,7 +121,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   tetelTorles(i: number) {
@@ -203,7 +202,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   cancel() {

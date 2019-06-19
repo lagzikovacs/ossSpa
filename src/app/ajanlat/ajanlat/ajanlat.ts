@@ -1,27 +1,24 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
-import {LogonService} from '../../logon/logon.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatesIratContainerMode} from '../../projektkapcsolat/bizonylatesiratcontainermode';
 import {AjanlatSzerkesztesMode} from '../ajanlatszerkesztesmode';
 import {AjanlatContainerMode} from '../ajanlatcontainermode';
 import * as moment from 'moment';
 import {AjanlatService} from '../ajanlat.service';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-ajanlat',
   templateUrl: './ajanlat.html'
 })
 export class AjanlatComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   ajanlatservice: AjanlatService;
   projektkapcsolatservice: ProjektkapcsolatService;
   eppFrissit = false;
 
-  constructor(private _logonservice: LogonService,
-              ajanlatservice: AjanlatService,
-              projektkapcsolatservice: ProjektkapcsolatService) {
+  constructor(ajanlatservice: AjanlatService,
+              projektkapcsolatservice: ProjektkapcsolatService,
+              private _errorservice: ErrorService) {
     this.ajanlatservice = ajanlatservice;
     this.projektkapcsolatservice = projektkapcsolatservice;
   }
@@ -61,7 +58,7 @@ export class AjanlatComponent implements OnInit, OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   cancel() {

@@ -1,9 +1,9 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {VolumeService} from '../volume.service';
 import {VolumeContainerMode} from '../volumecontainermode';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {VolumeEgyMode} from '../volumeegymode';
 import {rowanimation} from '../../animation/rowAnimation';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-volume-egy',
@@ -11,12 +11,11 @@ import {rowanimation} from '../../animation/rowAnimation';
   animations: [rowanimation]
 })
 export class VolumeEgyComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   volumeservice: VolumeService;
   eppFrissit = false;
 
-  constructor(volumeservice: VolumeService) {
+  constructor(volumeservice: VolumeService,
+              private _errorservice: ErrorService) {
     this.volumeservice = volumeservice;
   }
 
@@ -39,8 +38,8 @@ export class VolumeEgyComponent implements OnDestroy {
         this.volumeservice.EgyMode = VolumeEgyMode.Teszt;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   ngOnDestroy() {

@@ -1,12 +1,12 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {PenznemService} from '../penznem.service';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
 import {PenznemContainerMode} from '../penznemcontainermode';
 import {PenznemEgyMode} from '../penznemegymode';
 import {rowanimation} from '../../../animation/rowAnimation';
 import {deepCopy} from '../../../tools/deepCopy';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-penznem-egy',
@@ -14,14 +14,13 @@ import {deepCopy} from '../../../tools/deepCopy';
   animations: [rowanimation]
 })
 export class PenznemEgyComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   penznemservice: PenznemService;
   mod = false;
   eppFrissit = false;
   ri = -1;
 
   constructor(private _logonservice: LogonService,
+              private _errorservice: ErrorService,
               penznemservice: PenznemService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.penznemservice = penznemservice;
@@ -57,8 +56,8 @@ export class PenznemEgyComponent implements OnDestroy {
         this.penznemservice.ContainerMode = PenznemContainerMode.List;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

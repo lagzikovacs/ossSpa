@@ -1,17 +1,15 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 import {PenztartetelService} from '../penztartetel.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import * as moment from 'moment';
 import {PenztarService} from '../../penztar/penztar.service';
 import {PenztartetelContainerMode} from '../penztartetelcontainermode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-penztartetel-szerkesztes',
   templateUrl: './penztartetel-szerkesztes.component.html'
 })
 export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   @ViewChild('jogcim') jogcimInput: ElementRef;
   @ViewChild('ugyfel') ugyfelInput: ElementRef;
   @ViewChild('bizonylatszam') bizonylatszamInput: ElementRef;
@@ -23,7 +21,8 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnDestro
   datum = moment().format('YYYY-MM-DD');
 
   constructor(penztartetelservice: PenztartetelService,
-              private _penztarservice: PenztarService) {
+              private _penztarservice: PenztarService,
+              private _errorservice: ErrorService) {
     this.penztartetelservice = penztartetelservice;
   }
 
@@ -104,8 +103,8 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnDestro
         this.navigal();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   cancel() {

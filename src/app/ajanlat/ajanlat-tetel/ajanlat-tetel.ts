@@ -1,25 +1,24 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
 import {AjanlatSzerkesztesMode} from '../ajanlatszerkesztesmode';
 import {AjanlatContainerMode} from '../ajanlatcontainermode';
 import {CikkService} from '../../cikk/cikk.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import {CikkContainerMode} from '../../cikk/cikkcontainermode';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {AjanlatService} from '../ajanlat.service';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-ajanlat-tetel',
   templateUrl: './ajanlat-tetel.html'
 })
 export class AjanlatTetelComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   ajanlatservice: AjanlatService;
   projektkapcsolatservice: ProjektkapcsolatService;
   eppFrissit = false;
 
   constructor(private _cikkservice: CikkService,
+              private _errorservice: ErrorService,
               ajanlatservice: AjanlatService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.ajanlatservice = ajanlatservice;
@@ -53,7 +52,7 @@ export class AjanlatTetelComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   cancel() {

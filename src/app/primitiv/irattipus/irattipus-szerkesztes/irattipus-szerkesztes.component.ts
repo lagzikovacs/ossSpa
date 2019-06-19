@@ -1,21 +1,20 @@
 import {IrattipusService} from '../irattipus.service';
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {IrattipusContainerMode} from '../irattipuscontainermode';
 import {IrattipusEgyMode} from '../irattipusegymode';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {NumberResult} from '../../../dtos/numberresult';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-irattipus-szerkesztes',
   templateUrl: './irattipus-szerkesztes.component.html'
 })
 export class IrattipusSzerkesztesComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   irattipusservice: IrattipusService;
   eppFrissit = false;
 
-  constructor(irattipusservice: IrattipusService) {
+  constructor(irattipusservice: IrattipusService,
+              private _errorservice: ErrorService) {
     this.irattipusservice = irattipusservice;
   }
 
@@ -52,8 +51,8 @@ export class IrattipusSzerkesztesComponent implements OnDestroy {
         this.navigal();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   cancel() {

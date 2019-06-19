@@ -2,22 +2,21 @@ import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {BizonylatKibocsatasParam} from '../bizonylatkibocsatasparam';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatTipus} from '../bizonylattipus';
 import {PenztarService} from '../../penztar/penztar.service';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-bizonylat-kibocsatas',
   templateUrl: './bizonylat-kibocsatas.component.html'
 })
 export class BizonylatKibocsatasComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   bizonylatservice: BizonylatService;
   eppFrissit = false;
   bizonylatszam = '';
 
   constructor(private _penztarsevice: PenztarService,
+              private _errorservice: ErrorService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
   }
@@ -61,7 +60,7 @@ export class BizonylatKibocsatasComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   cancel() {

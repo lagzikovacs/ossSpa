@@ -1,21 +1,19 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HelysegService} from '../helyseg.service';
 import {LogonService} from '../../../logon/logon.service';
 import {UgyfelService} from '../../../ugyfel/ugyfel.service';
 import {JogKod} from '../../../enums/jogkod';
 import {HelysegContainerMode} from '../helysegcontainermode';
 import {ZoomSources} from '../../../enums/zoomsources';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
 import {HelysegEgyMode} from '../helysegegymode';
 import {UgyfelSzerkesztesMode} from '../../../ugyfel/ugyfelszerkesztesmode';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-helyseg-list',
   templateUrl: './helyseg-list.component.html'
 })
 export class HelysegListComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   szurok = ['Helység'];
 
   eppFrissit = false;
@@ -25,6 +23,7 @@ export class HelysegListComponent implements OnInit, OnDestroy {
   helysegservice: HelysegService;
 
   constructor(private _logonservice: LogonService,
+              private _errorservice: ErrorService,
               helysegservice: HelysegService,
               private ugyfelservice: UgyfelService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
@@ -70,8 +69,8 @@ export class HelysegListComponent implements OnInit, OnDestroy {
         }
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -112,8 +111,8 @@ export class HelysegListComponent implements OnInit, OnDestroy {
         this.helysegservice.ContainerMode = HelysegContainerMode.Uj;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

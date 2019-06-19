@@ -1,19 +1,17 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {RiportService} from '../riport.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import * as moment from 'moment';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import * as FileSaver from 'file-saver';
 import {b64toBlob} from '../../tools/b64toBlob';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-bejovoszamla',
   templateUrl: './bejovoszamla.component.html'
 })
 export class BejovoszamlaComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   riportservice: RiportService;
   eppFrissit = false;
   megszakitani = false;
@@ -24,7 +22,8 @@ export class BejovoszamlaComponent implements OnDestroy {
   tasktoken = '';
   szamlalo: any;
 
-  constructor(riportservice: RiportService) {
+  constructor(riportservice: RiportService,
+              private _errorservice: ErrorService) {
     this.riportservice = riportservice;
   }
 
@@ -47,8 +46,8 @@ export class BejovoszamlaComponent implements OnDestroy {
         this.ciklus();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   ciklus() {
@@ -74,8 +73,8 @@ export class BejovoszamlaComponent implements OnDestroy {
         }
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   next() {
@@ -91,8 +90,8 @@ export class BejovoszamlaComponent implements OnDestroy {
           this.eppFrissit = false;
         })
         .catch(err => {
-          this.errormodal.show(err);
           this.eppFrissit = false;
+          this._errorservice.Error = err;
         });
     } else {
       this.ciklus();

@@ -1,5 +1,4 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {Component, OnDestroy} from '@angular/core';
 import {TeendoService} from '../teendo.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
@@ -7,6 +6,7 @@ import {TeendoContainerMode} from '../teendocontainermode';
 import {TeendoEgyMode} from '../teendoegymode';
 import {rowanimation} from '../../../animation/rowAnimation';
 import {deepCopy} from '../../../tools/deepCopy';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-teendo-egy',
@@ -14,14 +14,13 @@ import {deepCopy} from '../../../tools/deepCopy';
   animations: [rowanimation]
 })
 export class TeendoEgyComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   teendoservice: TeendoService;
   mod = false;
   eppFrissit = false;
   ri = -1;
 
   constructor(private _logonservice: LogonService,
+              private _errorservice: ErrorService,
               teendoservice: TeendoService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.teendoservice = teendoservice;
@@ -57,8 +56,8 @@ export class TeendoEgyComponent implements OnDestroy {
         this.teendoservice.ContainerMode = TeendoContainerMode.List;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

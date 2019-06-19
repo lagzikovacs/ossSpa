@@ -1,7 +1,6 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {LogonService} from '../../logon/logon.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 import {IratService} from '../../irat/irat.service';
 import {IratContainerMode} from '../../irat/iratcontainermode';
@@ -17,14 +16,13 @@ import {VagolapService} from '../../vagolap/vagolap.service';
 import {VagolapMode} from '../../vagolap/vagolapmode';
 import {AjanlatService} from '../../ajanlat/ajanlat.service';
 import {JogKod} from '../../enums/jogkod';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-projektkapcsolat-list',
   templateUrl: './projektkapcsolat-list.component.html'
 })
 export class ProjektkapcsolatListComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   projektkapcsolatservice: ProjektkapcsolatService;
   eppFrissit = false;
 
@@ -40,6 +38,7 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
               private _bizonylatkifizetesservice: KifizetesService,
               private _vagolapservice: VagolapService,
               private _ajanlatservice: AjanlatService,
+              private _errorservice: ErrorService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.BizonylatMod = this._logonservice.Jogaim.includes(JogKod[JogKod.BIZONYLATMOD]);
     this.IratMod = this._logonservice.Jogaim.includes(JogKod[JogKod.IRATMOD]);
@@ -55,7 +54,7 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   levalasztas(i: number) {
@@ -113,7 +112,7 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
         })
         .catch(err => {
           this.eppFrissit = false;
-          this.errormodal.show(err);
+          this._errorservice.Error = err;
         });
     }
 
@@ -136,7 +135,7 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
         })
         .catch(err => {
           this.eppFrissit = false;
-          this.errormodal.show(err);
+          this._errorservice.Error = err;
         });
     }
   }
@@ -162,7 +161,7 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   vagolaprol() {

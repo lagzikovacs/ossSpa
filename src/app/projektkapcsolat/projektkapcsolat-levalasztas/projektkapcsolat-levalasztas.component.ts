@@ -1,19 +1,18 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-projektkapcsolat-levalasztas',
   templateUrl: './projektkapcsolat-levalasztas.component.html'
 })
 export class ProjektkapcsolatLevalasztasComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   projektkapcsolatservice: ProjektkapcsolatService;
   eppFrissit = false;
 
-  constructor(projektkapcsolatservice: ProjektkapcsolatService) {
+  constructor(projektkapcsolatservice: ProjektkapcsolatService,
+              private _errorservice: ErrorService) {
     this.projektkapcsolatservice = projektkapcsolatservice;
   }
 
@@ -32,8 +31,8 @@ export class ProjektkapcsolatLevalasztasComponent implements OnDestroy {
         this.navigal();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   cancel() {

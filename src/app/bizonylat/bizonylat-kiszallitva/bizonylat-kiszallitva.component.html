@@ -3,6 +3,5 @@
   <div>Kiszállítva: {{bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].Kiszallitva | boolhun}}</div>
   <button class="btn btn-sm btn-primary" [disabled]="eppFrissit" (click)="modositas()">Módosítás</button>
 
-  <app-errormodal [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"></app-errormodal>
   <app-spinner *ngIf="eppFrissit"></app-spinner>
 </div>

@@ -1,11 +1,10 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {SzamlazasirendService} from '../szamlazasirend.service';
 import {SzamlazasirendEgyMode} from '../szamlazasirendegymode';
 import {SzamlazasirendContainerMode} from '../szamlazasirendcontainermode';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {LogonService} from '../../logon/logon.service';
 import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-szamlazasirend-egy',
@@ -13,14 +12,12 @@ import {deepCopy} from '../../tools/deepCopy';
   animations: [rowanimation]
 })
 export class SzamlazasirendEgyComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   szamlazasirendservice: SzamlazasirendService;
   eppFrissit = false;
   ri = -1;
 
-  constructor(private _logonservice: LogonService,
-              szamlazasirendservice: SzamlazasirendService) {
+  constructor(szamlazasirendservice: SzamlazasirendService,
+              private _errorservice: ErrorService) {
     this.szamlazasirendservice = szamlazasirendservice;
   }
 
@@ -54,8 +51,8 @@ export class SzamlazasirendEgyComponent implements OnDestroy {
         this.szamlazasirendservice.ContainerMode = SzamlazasirendContainerMode.List;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

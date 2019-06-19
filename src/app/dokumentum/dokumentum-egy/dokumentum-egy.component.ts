@@ -1,9 +1,9 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {DokumentumService} from '../dokumentum.service';
 import {DokumentumContainerMode} from '../dokumentumcontainermode';
 import {DokumentumEgyMode} from '../dokumentumegymode';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {rowanimation} from '../../animation/rowAnimation';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-dokumentum-egy',
@@ -11,13 +11,12 @@ import {rowanimation} from '../../animation/rowAnimation';
   animations: [rowanimation]
 })
 export class DokumentumEgyComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   dokumentumservice: DokumentumService;
   eppFrissit = false;
   ri = -1;
 
-  constructor(dokumentumservice: DokumentumService) {
+  constructor(dokumentumservice: DokumentumService,
+              private _errorservice: ErrorService) {
     this.dokumentumservice = dokumentumservice;
   }
 
@@ -38,7 +37,7 @@ export class DokumentumEgyComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   letoltesPDF() {
@@ -49,7 +48,7 @@ export class DokumentumEgyComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
 
@@ -68,8 +67,8 @@ export class DokumentumEgyComponent implements OnDestroy {
         this.dokumentumservice.ContainerMode = DokumentumContainerMode.List;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

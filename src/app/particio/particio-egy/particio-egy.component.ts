@@ -1,23 +1,22 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ParticioService} from '../particio.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {ParticioEgyMode} from '../particioegymode';
 import {ParticioDto} from '../particiodto';
 import {deepCopy} from '../../tools/deepCopy';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-particio-egy',
   templateUrl: './particio-egy.component.html'
 })
 export class ParticioEgyComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   particioservice: ParticioService;
   Ori = new ParticioDto();
   Dto = new ParticioDto();
   eppFrissit = false;
 
-  constructor(particioservice: ParticioService) {
+  constructor(particioservice: ParticioService,
+              private _errorservice: ErrorService) {
     this.particioservice = particioservice;
   }
 
@@ -35,8 +34,8 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -81,8 +80,8 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
         this.particioservice.EgyMode = ParticioEgyMode.Blank;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   SzerkesztesCancel() {

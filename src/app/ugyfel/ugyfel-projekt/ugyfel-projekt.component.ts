@@ -1,22 +1,21 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UgyfelService} from '../ugyfel.service';
 import {ProjektService} from '../../projekt/projekt.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {ProjektDto} from '../../projekt/projektdto';
 import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-ugyfel-projekt',
   templateUrl: './ugyfel-projekt.component.html'
 })
 export class UgyfelProjektComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   ugyfelservice: UgyfelService;
   eppFrissit = false;
 
   constructor(private _projektservice: ProjektService,
+              private _errorservice: ErrorService,
               ugyfelservice: UgyfelService) {
     this.ugyfelservice = ugyfelservice;
   }
@@ -40,7 +39,7 @@ export class UgyfelProjektComponent implements OnInit, OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   ngOnDestroy() {

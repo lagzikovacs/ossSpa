@@ -1,21 +1,20 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import * as moment from 'moment';
 import {ProjektteendoService} from '../projektteendo.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {ProjektteendoEgyMode} from '../projekttendoegymode';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-projekt-teendo-elvegezve',
   templateUrl: './projekt-teendo-elvegezve.component.html'
 })
 export class ProjektTeendoElvegezveComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   projektteendoservice: ProjektteendoService;
   eppFrissit = false;
   Elvegezve: any;
 
-  constructor(projektteendoservice: ProjektteendoService) {
+  constructor(projektteendoservice: ProjektteendoService,
+              private _errorservice: ErrorService) {
     this.projektteendoservice = projektteendoservice;
   }
 
@@ -46,8 +45,8 @@ export class ProjektTeendoElvegezveComponent implements OnInit, OnDestroy {
       this.navigal();
     })
     .catch(err => {
-      this.errormodal.show(err);
       this.eppFrissit = false;
+      this._errorservice.Error = err;
     });
   }
 

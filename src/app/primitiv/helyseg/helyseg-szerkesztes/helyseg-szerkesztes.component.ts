@@ -1,21 +1,20 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {Component, OnDestroy} from '@angular/core';
 import {HelysegService} from '../helyseg.service';
 import {NumberResult} from '../../../dtos/numberresult';
 import {HelysegContainerMode} from '../helysegcontainermode';
 import {HelysegEgyMode} from '../helysegegymode';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-helyseg-szerkesztes',
   templateUrl: './helyseg-szerkesztes.component.html'
 })
 export class HelysegSzerkesztesComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   helysegservice: HelysegService;
   eppFrissit = false;
 
-  constructor(helysegservice: HelysegService) {
+  constructor(helysegservice: HelysegService,
+              private _errorservice: ErrorService) {
     this.helysegservice = helysegservice;
   }
 
@@ -52,8 +51,8 @@ export class HelysegSzerkesztesComponent implements OnDestroy {
         this.navigal();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   cancel() {

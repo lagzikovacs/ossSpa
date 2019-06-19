@@ -1,21 +1,18 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
-import {LogonService} from '../../logon/logon.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 import {BizonylatTipus} from '../../bizonylat/bizonylattipus';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-projektkapcsolat-ujbizonylat',
   templateUrl: './projektkapcsolat-ujbizonylat.component.html'
 })
 export class ProjektkapcsolatUjbizonylatComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   projektkapcsolatservice: ProjektkapcsolatService;
   eppFrissit = false;
   entries = [
@@ -28,9 +25,9 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnDestroy {
   ];
   entryindex = 4;
 
-  constructor(private _logonservice: LogonService,
-              private _bizonylatservice: BizonylatService,
+  constructor(private _bizonylatservice: BizonylatService,
               private _ugyfelservice: UgyfelService,
+              private _errorservice: ErrorService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.projektkapcsolatservice = projektkapcsolatservice;
   }
@@ -94,8 +91,8 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnDestroy {
         this.navigal();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   cancel() {

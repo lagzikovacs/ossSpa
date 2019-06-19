@@ -1,11 +1,10 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {ProjektteendoService} from '../projektteendo.service';
 import {ProjektteendoContainerMode} from '../projektteendocontainermode';
 import {ProjektteendoEgyMode} from '../projekttendoegymode';
 import {rowanimation} from '../../animation/rowAnimation';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {LogonService} from '../../logon/logon.service';
 import {deepCopy} from '../../tools/deepCopy';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-projekt-teendo-egy',
@@ -13,14 +12,12 @@ import {deepCopy} from '../../tools/deepCopy';
   animations: [rowanimation]
 })
 export class ProjektTeendoEgyComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   projektteendoservice: ProjektteendoService;
   eppFrissit = false;
   ri = -1;
 
-  constructor(private _logonservice: LogonService,
-              projektteendoservice: ProjektteendoService) {
+  constructor(projektteendoservice: ProjektteendoService,
+              private _errorservice: ErrorService) {
     this.projektteendoservice = projektteendoservice;
   }
 
@@ -59,8 +56,8 @@ export class ProjektTeendoEgyComponent implements OnDestroy {
         this.projektteendoservice.ContainerMode = ProjektteendoContainerMode.List;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

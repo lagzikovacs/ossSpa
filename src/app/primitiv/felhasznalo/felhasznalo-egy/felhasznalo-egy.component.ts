@@ -1,5 +1,4 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../../errormodal/errormodal.component';
+import {Component, OnDestroy} from '@angular/core';
 import {FelhasznaloService} from '../felhasznalo.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
@@ -8,6 +7,7 @@ import {FelhasznaloEgyMode} from '../felhasznaloegymode';
 import {EsemenynaploService} from '../../../esemenynaplo/esemenynaplo.service';
 import {rowanimation} from '../../../animation/rowAnimation';
 import {deepCopy} from '../../../tools/deepCopy';
+import {ErrorService} from '../../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-felhasznalo-egy',
@@ -15,8 +15,6 @@ import {deepCopy} from '../../../tools/deepCopy';
   animations: [rowanimation]
 })
 export class FelhasznaloEgyComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   felhasznaloservice: FelhasznaloService;
   mod = false;
   eppFrissit = false;
@@ -24,6 +22,7 @@ export class FelhasznaloEgyComponent implements OnDestroy {
 
   constructor(private _logonservice: LogonService,
               private _esemenynaploservice: EsemenynaploService,
+              private _errorservice: ErrorService,
               felhasznaloservice: FelhasznaloService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.FELHASZNALOMOD]);
     this.felhasznaloservice = felhasznaloservice;
@@ -66,8 +65,8 @@ export class FelhasznaloEgyComponent implements OnDestroy {
         this.felhasznaloservice.ContainerMode = FelhasznaloContainerMode.List;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

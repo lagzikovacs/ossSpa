@@ -1,18 +1,16 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {PenztartetelService} from '../../penztartetel/penztartetel.service';
 import {PenztartetelDto} from '../../penztartetel/penztarteteldto';
 import {BizonylatTipus} from '../bizonylattipus';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-bizonylat-penztar',
   templateUrl: './bizonylat-penztar.component.html'
 })
 export class BizonylatPenztarComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   bizonylatservice: BizonylatService;
   eppFrissit = false;
   penztarindex = -1;
@@ -20,6 +18,7 @@ export class BizonylatPenztarComponent implements OnDestroy {
   megjegyzes = '';
 
   constructor(private _penztartetelservice: PenztartetelService,
+              private _errorservice: ErrorService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
   }
@@ -64,7 +63,7 @@ export class BizonylatPenztarComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   cancel() {

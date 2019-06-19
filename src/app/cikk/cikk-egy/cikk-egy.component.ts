@@ -1,6 +1,5 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {CikkService} from '../cikk.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {CikkMozgasParameter} from '../cikkmozgasparameter';
@@ -9,6 +8,7 @@ import {CikkEgyMode} from '../cikkegymode';
 import {CikkSzerkesztesMode} from '../cikkszerkesztesmode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-cikk-egy',
@@ -16,7 +16,6 @@ import {deepCopy} from '../../tools/deepCopy';
   animations: [rowanimation]
 })
 export class CikkEgyComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   cikkservice: CikkService;
   mod = false;
@@ -24,6 +23,7 @@ export class CikkEgyComponent implements OnDestroy {
   ri = -1;
 
   constructor(private _logonservice: LogonService,
+              private _errorservice: ErrorService,
               cikkservice: CikkService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.CIKKMOD]);
     this.cikkservice = cikkservice;
@@ -67,8 +67,8 @@ export class CikkEgyComponent implements OnDestroy {
         this.cikkservice.EgyMode = CikkEgyMode.BeszerzesKivet;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -87,8 +87,8 @@ export class CikkEgyComponent implements OnDestroy {
         this.cikkservice.ContainerMode = CikkContainerMode.List;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

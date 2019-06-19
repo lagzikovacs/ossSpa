@@ -1,10 +1,10 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {Component, OnDestroy} from '@angular/core';
 import {CsoportService} from '../csoport.service';
 import {CsoportContainerMode} from '../csoportcontainermode';
 import {CsoportEgyMode} from '../csoportegymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-csoport-egy',
@@ -12,13 +12,13 @@ import {deepCopy} from '../../tools/deepCopy';
   animations: [rowanimation]
 })
 export class CsoportEgyComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
 
   csoportservice: CsoportService;
   eppFrissit = false;
   ri = -1;
 
-  constructor(csoportservice: CsoportService) {
+  constructor(csoportservice: CsoportService,
+              private _errorservice: ErrorService) {
     this.csoportservice = csoportservice;
   }
 
@@ -58,8 +58,8 @@ export class CsoportEgyComponent implements OnDestroy {
         this.csoportservice.ContainerMode = CsoportContainerMode.List;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 

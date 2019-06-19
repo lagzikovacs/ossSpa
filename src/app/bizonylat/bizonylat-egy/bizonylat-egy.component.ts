@@ -10,13 +10,13 @@ import {BizonylatKapcsolatContainerMode} from '../../bizonylatkapcsolat/bizonyla
 import {BizonylatkapcsolatService} from '../../bizonylatkapcsolat/bizonylatkapcsolat.service';
 import {BizonylatTipus} from '../bizonylattipus';
 import {PenztarService} from '../../penztar/penztar.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
 import {VagolapService} from '../../vagolap/vagolap.service';
 import {AbuComponent} from '../../tools/abu/abu.component';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-bizonylat-egy',
@@ -24,7 +24,6 @@ import {rowanimation} from '../../animation/rowAnimation';
   animations: [rowanimation]
 })
 export class BizonylatEgyComponent implements OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
   @ViewChild(AbuComponent) abu: AbuComponent;
 
   bizonylatservice: BizonylatService;
@@ -37,6 +36,7 @@ export class BizonylatEgyComponent implements OnDestroy {
               private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
               private _penztarsevice: PenztarService,
               private _vagolapservice: VagolapService,
+              private _errorservice: ErrorService,
               bizonylatservice: BizonylatService) {
     this.mod = this._logonservice.Jogaim.includes(JogKod[JogKod.BIZONYLATMOD]);
     this.bizonylatservice = bizonylatservice;
@@ -112,7 +112,7 @@ export class BizonylatEgyComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   nyomtatas() {
@@ -139,7 +139,7 @@ export class BizonylatEgyComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
   storno() {
@@ -186,7 +186,7 @@ export class BizonylatEgyComponent implements OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
 

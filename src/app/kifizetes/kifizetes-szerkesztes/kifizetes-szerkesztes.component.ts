@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {KifizetesService} from '../kifizetes.service';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
 import {FizetesimodService} from '../../primitiv/fizetesimod/fizetesimod.service';
@@ -9,18 +9,16 @@ import {KifizetesSzerkesztesMode} from '../kifizetesszerkesztesmode';
 import * as moment from 'moment';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
 import {FizetesimodZoomParameter} from '../../primitiv/fizetesimod/fiztesimodzoomparameter';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {KifizetesContainerMode} from '../kifizetescontainermode';
 import {KifizetesEgyMode} from '../kifizetesegymode';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-kifizetes-szerkesztes',
   templateUrl: './kifizetes-szerkesztes.component.html'
 })
 export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   bizonylatkifizetesservice: KifizetesService;
   eppFrissit = false;
   Datum: any;
@@ -28,6 +26,7 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
   constructor(private _penznemservice: PenznemService,
               private _fizetesimodservice: FizetesimodService,
               private _bizonylatservice: BizonylatService,
+              private _errorservice: ErrorService,
               bizonylatkifizetesservice: KifizetesService) {
     this.bizonylatkifizetesservice = bizonylatkifizetesservice;
   }
@@ -102,8 +101,8 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
         this.navigal();
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
   cancel() {

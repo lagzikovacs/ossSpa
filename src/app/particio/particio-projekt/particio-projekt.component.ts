@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {ParticioDto} from '../particiodto';
 
 @Component({

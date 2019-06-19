@@ -1,16 +1,12 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ProjektService} from '../projekt.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import * as moment from 'moment';
-import {ProjektEgyMode} from '../projektegymode';
 
 @Component({
   selector: 'app-projekt-datumok',
   templateUrl: './projekt-datumok.component.html'
 })
 export class ProjektDatumokComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   projektservice: ProjektService;
   @Input() eppFrissit: boolean;
 

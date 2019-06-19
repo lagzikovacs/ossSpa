@@ -1,18 +1,17 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs/index';
-import {ErrormodalComponent} from '../errormodal/errormodal.component';
 import {LogonService} from '../logon/logon.service';
 import {SessionService} from '../session/session.service';
 import {PlatformLocation} from '@angular/common';
 import {environment} from '../../environments/environment';
 import * as signalR from '@aspnet/signalr';
+import {StartupService} from '../startup/startup.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) private errormodal: ErrormodalComponent;
 
   eppFrissit = false;
 
@@ -26,13 +25,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private _hubConnection: signalR.HubConnection = new signalR.HubConnectionBuilder().withUrl(environment.CoreRef + 'osshub').build();
 
   constructor(private _logonservice: LogonService,
-              private _platformLocation: PlatformLocation,
               sessionservice: SessionService) {
     this.sessionservice = sessionservice;
-
-    // console.log((_platformLocation as any).location);
-    // console.log((_platformLocation as any).location.href);
-    // console.log((_platformLocation as any).location.origin);
   }
 
   ngOnInit() {

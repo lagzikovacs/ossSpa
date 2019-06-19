@@ -1,7 +1,5 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ProjektService} from '../projekt.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
-import {ProjektEgyMode} from '../projektegymode';
 import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
@@ -10,8 +8,6 @@ import {rowanimation} from '../../animation/rowAnimation';
   animations: [rowanimation]
 })
 export class ProjektStatuszComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   projektservice: ProjektService;
 
   entries = ['(0) Mind', '(1) Ajánlat', '(2) Fut', '(3) Kész', '(4) Pályázatra vár', '(5) Mástól megrendelte', '(6) Döglött',

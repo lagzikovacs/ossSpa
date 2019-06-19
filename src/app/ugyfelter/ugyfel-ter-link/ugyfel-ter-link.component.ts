@@ -1,23 +1,22 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UgyfelterService} from '../ugyfelter.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import * as moment from 'moment';
 import {environment} from '../../../environments/environment';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-ugyfel-ter-link',
   templateUrl: './ugyfel-ter-link.component.html'
 })
 export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
-
   link = '';
   eppFrissit = false;
   kikuldesikodidopontja: any;
 
   constructor(private _ugyfelservice: UgyfelService,
-              private _ugyfelterservice: UgyfelterService) { }
+              private _ugyfelterservice: UgyfelterService,
+              private _errorservice: ErrorService) { }
 
   ngOnInit() {
     if (this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex].Kikuldesikodidopontja !== null) {
@@ -34,7 +33,7 @@ export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
         })
         .catch(err => {
           this.eppFrissit = false;
-          this.errormodal.show(err);
+          this._errorservice.Error = err;
         });
     } else {
       this.kikuldesikodidopontja = '';
@@ -69,7 +68,7 @@ export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
 

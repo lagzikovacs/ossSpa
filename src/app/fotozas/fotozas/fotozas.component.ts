@@ -1,18 +1,17 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FotozasService} from '../fotozas.service';
-import {ErrormodalComponent} from '../../errormodal/errormodal.component';
 import {FotozasDto} from '../fotozasdto';
 import {FajlBuf} from '../../dokumentum/fajlbuf';
 import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {LogonService} from '../../logon/logon.service';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-fotozas',
   templateUrl: './fotozas.component.html'
 })
 export class FotozasComponent implements OnInit, OnDestroy {
-  @ViewChild(ErrormodalComponent) errormodal: ErrormodalComponent;
   @ViewChild('fileInput') fileInput: ElementRef;
 
   fp: string;
@@ -29,7 +28,8 @@ export class FotozasComponent implements OnInit, OnDestroy {
   constructor(private _route: ActivatedRoute,
               private _logonservice: LogonService,
               private _dokumentumservice: DokumentumService,
-              private _fotozasservice: FotozasService) { }
+              private _fotozasservice: FotozasService,
+              private _errorservice: ErrorService) { }
 
   ngOnInit() {
     this._sub = this._route
@@ -54,8 +54,8 @@ export class FotozasComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
       })
       .catch(err => {
-        this.errormodal.show(err);
         this.eppFrissit = false;
+        this._errorservice.Error = err;
       });
   }
 
@@ -102,7 +102,7 @@ export class FotozasComponent implements OnInit, OnDestroy {
       })
       .catch(err => {
         this.eppFrissit = false;
-        this.errormodal.show(err);
+        this._errorservice.Error = err;
       });
   }
 

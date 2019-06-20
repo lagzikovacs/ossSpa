@@ -4,6 +4,7 @@ import {VolumeContainerMode} from '../volumecontainermode';
 import {VolumeEgyMode} from '../volumeegymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-volume-egy',
@@ -12,9 +13,18 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 })
 export class VolumeEgyComponent implements OnDestroy {
   volumeservice: VolumeService;
-  eppFrissit = false;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(volumeservice: VolumeService,
+              private _spinnerservice: SpinnerService,
               private _errorservice: ErrorService) {
     this.volumeservice = volumeservice;
   }

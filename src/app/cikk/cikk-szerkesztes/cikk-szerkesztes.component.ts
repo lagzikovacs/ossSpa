@@ -15,21 +15,30 @@ import {AfakulcsContainerMode} from '../../primitiv/afakulcs/afakulcscontainermo
 import {CikkSzerkesztesMode} from '../cikkszerkesztesmode';
 import {TermekdijContainerMode} from '../../primitiv/termekdij/termekdijcontainermode';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-cikk-szerkesztes',
   templateUrl: './cikk-szerkesztes.component.html'
 })
 export class CikkSzerkesztesComponent implements OnDestroy {
-
   cikkservice: CikkService;
-  eppFrissit = false;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(cikkservice: CikkService,
               private _meservice: MeService,
               private _afakulcsservice: AfakulcsService,
               private _termekdijservice: TermekdijService,
-              private _errorservice: ErrorService) {
+              private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService) {
     this.cikkservice = cikkservice;
   }
 

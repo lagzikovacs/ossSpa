@@ -2,27 +2,22 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs/index';
 import {LogonService} from '../logon/logon.service';
 import {SessionService} from '../session/session.service';
-import {PlatformLocation} from '@angular/common';
 import {environment} from '../../environments/environment';
 import * as signalR from '@aspnet/signalr';
-import {StartupService} from '../startup/startup.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-
-  eppFrissit = false;
-
   private _subscription: Subscription;
+  private _hubConnection: signalR.HubConnection = new signalR.HubConnectionBuilder().withUrl(environment.CoreRef + 'osshub').build();
+
   szerepkorkivalasztva: boolean;
   sessionservice: SessionService;
 
   connected = false;
   utolsouzenet = '';
-
-  private _hubConnection: signalR.HubConnection = new signalR.HubConnectionBuilder().withUrl(environment.CoreRef + 'osshub').build();
 
   constructor(private _logonservice: LogonService,
               sessionservice: SessionService) {

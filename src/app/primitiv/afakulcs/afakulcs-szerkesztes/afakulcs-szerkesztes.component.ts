@@ -4,6 +4,7 @@ import {NumberResult} from '../../../dtos/numberresult';
 import {AfakulcsContainerMode} from '../afakulcscontainermode';
 import {AfakulcsEgyMode} from '../afakulcsegymode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
+import {SpinnerService} from '../../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-afakulcs-szerkesztes',
@@ -11,9 +12,18 @@ import {ErrorService} from '../../../tools/errorbox/error.service';
 })
 export class AfakulcsSzerkesztesComponent implements OnDestroy {
   afakulcsservice: AfakulcsService;
-  eppFrissit = false;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(afakulcsservice: AfakulcsService,
+              private _spinnerservice: SpinnerService,
               private _errorservice: ErrorService) {
     this.afakulcsservice = afakulcsservice;
   }

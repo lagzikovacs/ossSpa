@@ -13,6 +13,7 @@ import {JogKod} from '../../enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-projekt-egy',
@@ -21,15 +22,24 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 })
 export class ProjektEgyComponent implements OnDestroy {
   projektservice: ProjektService;
-  eppFrissit = false;
   mod = false;
   ri = -1;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(private _logonservice: LogonService,
               private _projektkapcsolatservice: ProjektkapcsolatService,
               private _szamlazasirendservice: SzamlazasirendService,
               private _projektteendoservice: ProjektteendoService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               projektservice: ProjektService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PROJEKTMOD]);
     this.projektservice = projektservice;

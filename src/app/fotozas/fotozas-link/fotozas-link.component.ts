@@ -4,20 +4,29 @@ import {FotozasService} from '../fotozas.service';
 import * as moment from 'moment';
 import {environment} from '../../../environments/environment';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-fotozas-link',
   templateUrl: './fotozas-link.component.html'
 })
 export class FotozasLinkComponent implements OnInit, OnDestroy {
-
   link = '';
-  eppFrissit = false;
   kikuldesikodidopontja: any;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(private _iratservice: IratService,
               private _fotozasservice: FotozasService,
-              private _errorservice: ErrorService) { }
+              private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService) { }
 
   ngOnInit() {
     if (this._iratservice.Dto[this._iratservice.DtoSelectedIndex].Kikuldesikodidopontja !== null) {

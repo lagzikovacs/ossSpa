@@ -7,6 +7,7 @@ import {ProjektService} from '../projekt.service';
 import {b64toBlob} from '../../tools/b64toBlob';
 import {ProjektContainerMode} from '../projektcontainermode';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-projekt-export',
@@ -15,14 +16,23 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 export class ProjektExportComponent implements OnDestroy {
   projektservice: ProjektService;
   riportservice: RiportService;
-  eppFrissit = false;
   megszakitani = false;
 
   tasktoken = '';
   szamlalo: any;
 
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
   constructor(projektservice: ProjektService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               riportservice: RiportService) {
     this.projektservice = projektservice,
     this.riportservice = riportservice;

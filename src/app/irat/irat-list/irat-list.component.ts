@@ -11,6 +11,7 @@ import {IratSzerkesztesMode} from '../iratszerkesztesmode';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-irat-list',
@@ -26,14 +27,23 @@ export class IratListComponent implements OnDestroy {
     Szempont.Kuldo
   ];
 
-  eppFrissit = false;
   iratservice: IratService;
   dokumentumservice: DokumentumService;
   mod = false;
   ti = -1;
 
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               iratservice: IratService,
               dokumentumservice: DokumentumService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.IRATMOD]);

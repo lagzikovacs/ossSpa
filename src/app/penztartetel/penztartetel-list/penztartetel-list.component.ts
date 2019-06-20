@@ -7,6 +7,7 @@ import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import {PenztartetelContainerMode} from '../penztartetelcontainermode';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-penztartetel-list',
@@ -18,7 +19,6 @@ export class PenztartetelListComponent implements OnDestroy {
     Szempont.Kod, Szempont.PenztarBizonylatszam, Szempont.Ugyfel, Szempont.Bizonylatszam
   ];
 
-  eppFrissit = false;
   mod = false;
   elsokereses = true;
   ti = -1;
@@ -26,8 +26,18 @@ export class PenztartetelListComponent implements OnDestroy {
   penztarservice: PenztarService;
   penztartetelservice: PenztartetelService;
 
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               penztarservice: PenztarService,
               penztartetelservice: PenztartetelService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);

@@ -4,18 +4,27 @@ import {NumberResult} from '../../dtos/numberresult';
 import {CsoportContainerMode} from '../csoportcontainermode';
 import {CsoportEgyMode} from '../csoportegymode';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-csoport-szerkesztes',
   templateUrl: './csoport-szerkesztes.component.html'
 })
 export class CsoportSzerkesztesComponent implements OnDestroy {
-
   csoportservice: CsoportService;
-  eppFrissit = false;
 
-  constructor(csoportservice: CsoportService,
-              private _errorservice: ErrorService) {
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
+  constructor(private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
+              csoportservice: CsoportService) {
     this.csoportservice = csoportservice;
   }
 

@@ -6,7 +6,6 @@ import {BizonylatKapcsolatDto} from '../../bizonylatkapcsolat/bizonylatkapcsolat
   templateUrl: './ugyfelter-bizonylatesirat.component.html'
 })
 export class UgyfelterBizonylatesiratComponent implements OnDestroy {
-  eppFrissit = false;
   @Input() Dto: BizonylatKapcsolatDto[];
   @Output() bizonylatclick = new EventEmitter<number>();
   @Output() iratclick = new EventEmitter<number>();

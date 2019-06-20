@@ -6,7 +6,6 @@ import {DokumentumDto} from '../../dokumentum/dokumentumdto';
   templateUrl: './ugyfelter-dokumentum.component.html'
 })
 export class UgyfelterDokumentumComponent implements OnDestroy {
-  eppFrissit = false;
   @Input() Dto: DokumentumDto[];
   @Output() dokumentumclick = new EventEmitter<number>();
 

@@ -6,6 +6,7 @@ import {FajlBuf} from '../../dokumentum/fajlbuf';
 import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {LogonService} from '../../logon/logon.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-fotozas',
@@ -17,7 +18,6 @@ export class FotozasComponent implements OnInit, OnDestroy {
   fp: string;
   private _sub: any;
   bejelentkezve = false;
-  eppFrissit = false;
   Dto = new FotozasDto();
 
   file: any;
@@ -25,11 +25,21 @@ export class FotozasComponent implements OnInit, OnDestroy {
   fajlnev = '';
   megjegyzes = '';
 
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
   constructor(private _route: ActivatedRoute,
               private _logonservice: LogonService,
               private _dokumentumservice: DokumentumService,
               private _fotozasservice: FotozasService,
-              private _errorservice: ErrorService) { }
+              private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService) { }
 
   ngOnInit() {
     this._sub = this._route

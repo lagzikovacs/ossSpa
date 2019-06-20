@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import * as FileSaver from 'file-saver';
 import {b64toBlob} from '../../tools/b64toBlob';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-kimenoszamla',
@@ -13,7 +14,6 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 })
 export class KimenoszamlaComponent implements OnDestroy {
   riportservice: RiportService;
-  eppFrissit = false;
   megszakitani = false;
 
   tol = '2019-01-01';
@@ -22,7 +22,17 @@ export class KimenoszamlaComponent implements OnDestroy {
   tasktoken = '';
   szamlalo: any;
 
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
   constructor(riportservice: RiportService,
+              private _spinnerservice: SpinnerService,
               private _errorservice: ErrorService) {
     this.riportservice = riportservice;
   }

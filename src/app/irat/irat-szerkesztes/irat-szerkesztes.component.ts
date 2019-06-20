@@ -13,6 +13,7 @@ import {IrattipusZoomParameter} from '../../primitiv/irattipus/irattipuszoompara
 import {EmptyResult} from '../../dtos/emptyresult';
 import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-irat-szerkesztes',
@@ -20,12 +21,21 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 })
 export class IratSzerkesztesComponent implements OnInit, OnDestroy {
   iratservice: IratService;
-  eppFrissit = false;
   Keletkezett: any;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(private _irattipusservice: IrattipusService,
               private _ugyfelservice: UgyfelService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               iratservice: IratService) {
     this.iratservice = iratservice;
   }

@@ -4,6 +4,7 @@ import {NumberResult} from '../../../dtos/numberresult';
 import {PenznemEgyMode} from '../penznemegymode';
 import {PenznemContainerMode} from '../penznemcontainermode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
+import {SpinnerService} from '../../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-penznem-szerkesztes',
@@ -11,10 +12,19 @@ import {ErrorService} from '../../../tools/errorbox/error.service';
 })
 export class PenznemSzerkesztesComponent implements OnDestroy {
   penznemservice: PenznemService;
-  eppFrissit = false;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(penznemservice: PenznemService,
-              private _errorservice: ErrorService) {
+              private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService) {
     this.penznemservice = penznemservice;
   }
 

@@ -7,6 +7,7 @@ import {PenztarEgyMode} from '../penztaregymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-penztar-egy',
@@ -17,11 +18,20 @@ export class PenztarEgyComponent implements OnDestroy {
   penztarservice: PenztarService;
   mod = false;
   nyitva = false;
-  eppFrissit = false;
   ri = -1;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               penztarservice: PenztarService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);
     this.penztarservice = penztarservice;

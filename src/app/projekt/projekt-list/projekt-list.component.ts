@@ -13,6 +13,7 @@ import {AjanlatService} from '../../ajanlat/ajanlat.service';
 import {JogKod} from '../../enums/jogkod';
 import {LogonService} from '../../logon/logon.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-projekt-list',
@@ -39,10 +40,18 @@ export class ProjektListComponent implements OnDestroy {
   ];
 
   mod = false;
-  eppFrissit = false;
   pi = -1;
 
   projektservice: ProjektService;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(private _logonservice: LogonService,
               private _projektkapcsolatservice: ProjektkapcsolatService,
@@ -50,6 +59,7 @@ export class ProjektListComponent implements OnDestroy {
               private _projektteendoservice: ProjektteendoService,
               private _ajanlatservice: AjanlatService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               projektservice: ProjektService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PROJEKTMOD]);
     this.projektservice = projektservice;

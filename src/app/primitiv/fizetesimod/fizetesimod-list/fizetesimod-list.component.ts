@@ -10,6 +10,7 @@ import {KifizetesSzerkesztesMode} from '../../../kifizetes/kifizetesszerkesztesm
 import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 import {BizonylatSzerkesztesMode} from '../../../bizonylat/bizonylatszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
+import {SpinnerService} from '../../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-fizetesimod-list',
@@ -17,17 +18,25 @@ import {ErrorService} from '../../../tools/errorbox/error.service';
 })
 export class FizetesimodListComponent implements OnInit, OnDestroy {
   szurok = ['Fizetési mód'];
-
-  eppFrissit = false;
   mod = false;
   ti = -1;
 
   fizetesimodservice: FizetesimodService;
 
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
   constructor(private _logonservice: LogonService,
               private _bizonylatkifizetesservice: KifizetesService,
               private _bizonylatservice: BizonylatService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               fizetesimodservice: FizetesimodService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.fizetesimodservice = fizetesimodservice;

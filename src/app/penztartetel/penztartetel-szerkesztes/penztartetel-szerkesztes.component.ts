@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import {PenztarService} from '../../penztar/penztar.service';
 import {PenztartetelContainerMode} from '../penztartetelcontainermode';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-penztartetel-szerkesztes',
@@ -17,12 +18,21 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnDestro
   @ViewChild('kiadas') kiadasInput: ElementRef;
 
   penztartetelservice: PenztartetelService;
-  eppFrissit = false;
   datum = moment().format('YYYY-MM-DD');
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(penztartetelservice: PenztartetelService,
               private _penztarservice: PenztarService,
-              private _errorservice: ErrorService) {
+              private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService) {
     this.penztartetelservice = penztartetelservice;
   }
 

@@ -5,6 +5,7 @@ import {ProjektDto} from '../../projekt/projektdto';
 import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-ugyfel-projekt',
@@ -12,10 +13,19 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 })
 export class UgyfelProjektComponent implements OnInit, OnDestroy {
   ugyfelservice: UgyfelService;
-  eppFrissit = false;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(private _projektservice: ProjektService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               ugyfelservice: UgyfelService) {
     this.ugyfelservice = ugyfelservice;
   }

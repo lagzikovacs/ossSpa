@@ -7,6 +7,7 @@ import {PenztarContainerMode} from '../penztarcontainermode';
 import {PenztarEgyMode} from '../penztaregymode';
 import {PenztarSzerkesztesMode} from '../penztarszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-penztar-szerkesztes',
@@ -14,11 +15,20 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 })
 export class PenztarSzerkesztesComponent implements OnDestroy {
   penztarservice: PenztarService;
-  eppFrissit = false;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(penztarservice: PenztarService,
               private _penznemservice: PenznemService,
-              private _errorservice: ErrorService) {
+              private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService) {
     this.penztarservice = penztarservice;
   }
 

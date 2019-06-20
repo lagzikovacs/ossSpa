@@ -5,6 +5,7 @@ import {SessionService} from '../../session/session.service';
 import {SessionDto} from '../../session/sessiondto';
 import {StartupService} from '../../startup/startup.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-szerepkorvalasztas',
@@ -12,12 +13,21 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 })
 export class SzerepkorvalasztasComponent implements OnInit, OnDestroy {
   logonservice: LogonService;
-  eppFrissit = false;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(private _router: Router,
               private _sessionservice: SessionService,
               private _startupservice: StartupService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               logonservice: LogonService) {
     this.logonservice = logonservice;
   }

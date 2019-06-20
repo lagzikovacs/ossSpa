@@ -9,6 +9,7 @@ import {CikkSzerkesztesMode} from '../cikkszerkesztesmode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-cikk-egy',
@@ -16,14 +17,22 @@ import {ErrorService} from '../../tools/errorbox/error.service';
   animations: [rowanimation]
 })
 export class CikkEgyComponent implements OnDestroy {
-
   cikkservice: CikkService;
   mod = false;
-  eppFrissit = false;
   ri = -1;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               cikkservice: CikkService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.CIKKMOD]);
     this.cikkservice = cikkservice;

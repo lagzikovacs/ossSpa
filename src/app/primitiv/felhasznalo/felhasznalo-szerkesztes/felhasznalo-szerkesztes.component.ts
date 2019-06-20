@@ -4,6 +4,7 @@ import {NumberResult} from '../../../dtos/numberresult';
 import {FelhasznaloContainerMode} from '../felhasznalocontainermode';
 import {FelhasznaloEgyMode} from '../felhasznaloegymode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
+import {SpinnerService} from '../../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-felhasznalo-szerkesztes',
@@ -11,9 +12,18 @@ import {ErrorService} from '../../../tools/errorbox/error.service';
 })
 export class FelhasznaloSzerkesztesComponent implements OnDestroy {
   felhasznaloservice: FelhasznaloService;
-  eppFrissit = false;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(felhasznaloservice: FelhasznaloService,
+              private _spinnerservice: SpinnerService,
               private _errorservice: ErrorService) {
     this.felhasznaloservice = felhasznaloservice;
   }

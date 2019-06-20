@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import {b64toBlob} from '../../tools/b64toBlob';
 import * as FileSaver from 'file-saver';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-koveteles',
@@ -13,7 +14,6 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 })
 export class KovetelesComponent implements OnDestroy {
   riportservice: RiportService;
-  eppFrissit = false;
   megszakitani = false;
 
   datum = moment().format('YYYY-MM-DD');
@@ -21,7 +21,17 @@ export class KovetelesComponent implements OnDestroy {
   tasktoken = '';
   szamlalo: any;
 
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
   constructor(riportservice: RiportService,
+              private _spinnerservice: SpinnerService,
               private _errorservice: ErrorService) {
     this.riportservice = riportservice;
   }

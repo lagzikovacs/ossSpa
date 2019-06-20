@@ -4,6 +4,7 @@ import {Szempont} from '../enums/szempont';
 import {SzMT} from '../dtos/szmt';
 import {UgyfelterlogDto} from './ugyfelterlogdto';
 import {ErrorService} from '../tools/errorbox/error.service';
+import {SpinnerService} from '../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-ugyfelterlog',
@@ -11,7 +12,6 @@ import {ErrorService} from '../tools/errorbox/error.service';
 })
 export class UgyfelterlogComponent implements OnDestroy {
   ugyfelterlogservice: UgyfelterlogService;
-  eppFrissit = false;
   elsokereses = false;
 
   szurok = ['Id', 'Név'];
@@ -20,7 +20,17 @@ export class UgyfelterlogComponent implements OnDestroy {
     Szempont.Kod, Szempont.Nev
   ];
 
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
   constructor(ugyfelterlogservice: UgyfelterlogService,
+              private _spinnerservice: SpinnerService,
               private _errorservice: ErrorService) {
     this.ugyfelterlogservice = ugyfelterlogservice;
   }

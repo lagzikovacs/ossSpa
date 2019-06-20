@@ -165,7 +165,6 @@ import {BizonylatService} from './bizonylat/bizonylat.service';
 import {RiportService} from './riport/riport.service';
 import { ProjektkapcsolatLevalasztasComponent } from './projektkapcsolat/projektkapcsolat-levalasztas/projektkapcsolat-levalasztas.component';
 import { ProjektExportComponent } from './projekt/projekt-export/projekt-export.component';
-import { SpinnerComponent } from './spinner/spinner.component';
 import { IratNincsprojektComponent } from './irat/irat-nincsprojekt/irat-nincsprojekt.component';
 import { AjanlatTetelComponent } from './ajanlat/ajanlat-tetel/ajanlat-tetel';
 import { BizonylatContainerComponent } from './bizonylat/bizonylat-container/bizonylat-container.component';
@@ -435,7 +434,6 @@ if (environment.production) {
     ProjektkapcsolatContainerComponent,
     ProjektkapcsolatLevalasztasComponent,
     ProjektExportComponent,
-    SpinnerComponent,
     IratNincsprojektComponent,
     AjanlatTetelComponent,
     BizonylatContainerComponent,

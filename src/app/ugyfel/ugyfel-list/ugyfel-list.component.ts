@@ -15,6 +15,7 @@ import {IratSzerkesztesMode} from '../../irat/iratszerkesztesmode';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {BizonylatSzerkesztesMode} from '../../bizonylat/bizonylatszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-ugyfel-list',
@@ -28,17 +29,26 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
     Szempont.Egyeblink, Szempont.Ajanlo, Szempont.Kod
   ];
 
-  eppFrissit = false;
   mod = false;
   utsr = -1;
 
   ugyfelservice: UgyfelService;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(private _logonservice: LogonService,
               private _iratservice: IratService,
               private _projektservice: ProjektService,
               private _bizonylatservice: BizonylatService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               ugyfelservice: UgyfelService  ) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.UGYFELEKMOD]);
     this.ugyfelservice = ugyfelservice;

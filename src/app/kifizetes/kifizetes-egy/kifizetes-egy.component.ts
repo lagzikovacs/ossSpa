@@ -5,6 +5,7 @@ import {KifizetesEgyMode} from '../kifizetesegymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-kifizetes-egy',
@@ -13,10 +14,19 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 })
 export class KifizetesEgyComponent implements OnDestroy {
   bizonylatkifizetesservice: KifizetesService;
-  eppFrissit = false;
   ri = -1;
 
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
   constructor(bizonylatkifizetesservice: KifizetesService,
+              private _spinnerservice: SpinnerService,
               private _errorservice: ErrorService) {
     this.bizonylatkifizetesservice = bizonylatkifizetesservice;
   }

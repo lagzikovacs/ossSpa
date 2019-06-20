@@ -8,6 +8,7 @@ import {UgyfelEgyMode} from '../ugyfelegymode';
 import {UgyfelSzerkesztesMode} from '../ugyfelszerkesztesmode';
 import {HelysegContainerMode} from '../../primitiv/helyseg/helysegcontainermode';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-ugyfel-szerkesztes',
@@ -15,10 +16,19 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 })
 export class UgyfelSzerkesztesComponent implements OnDestroy {
   ugyfelservice: UgyfelService;
-  eppFrissit = false;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(ugyfelservice: UgyfelService,
               private _helysegservice: HelysegService,
+              private _spinnerservice: SpinnerService,
               private _errorservice: ErrorService) {
     this.ugyfelservice = ugyfelservice;
   }

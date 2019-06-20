@@ -2,18 +2,27 @@ import {Component, OnDestroy} from '@angular/core';
 import {CsoportService} from '../csoport.service';
 import {CsoportFelhasznaloParameter} from '../csoportfelhasznaloparameter';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-csoport-felhasznalo',
   templateUrl: './csoport-felhasznalo.component.html'
 })
 export class CsoportFelhasznaloComponent implements OnDestroy {
-
   csoportservice: CsoportService;
-  eppFrissit = false;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(csoportservice: CsoportService,
-              private _errorservice: ErrorService) {
+              private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService) {
     this.csoportservice = csoportservice;
   }
 

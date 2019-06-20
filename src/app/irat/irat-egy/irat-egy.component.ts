@@ -17,6 +17,7 @@ import {JogKod} from '../../enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-irat-egy',
@@ -28,7 +29,6 @@ export class IratEgyComponent implements OnDestroy {
   projektservice: ProjektService;
   iratservice: IratService;
   dokumentumservice: DokumentumService;
-  eppFrissit = false;
   nincsProjekt = false;
   mod = false;
   ri = -1;
@@ -36,11 +36,21 @@ export class IratEgyComponent implements OnDestroy {
 
   @Input() enProjekt = true;
 
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
   constructor(private _logonservice: LogonService,
               private _projektkapcsolatservice: ProjektkapcsolatService,
               private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
               private _vagolapservice: VagolapService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               iratservice: IratService,
               dokumentumservice: DokumentumService,
               projektservice: ProjektService) {

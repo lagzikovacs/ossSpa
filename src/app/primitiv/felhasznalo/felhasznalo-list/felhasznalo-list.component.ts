@@ -8,6 +8,7 @@ import {FelhasznaloContainerMode} from '../felhasznalocontainermode';
 import {FelhasznaloEgyMode} from '../felhasznaloegymode';
 import {ProjektteendoSzerkesztesMode} from '../../../projektteendo/projektteendoszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
+import {SpinnerService} from '../../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-felhasznalo-list',
@@ -15,15 +16,23 @@ import {ErrorService} from '../../../tools/errorbox/error.service';
 })
 export class FelhasznaloListComponent implements OnInit, OnDestroy {
   szurok = ['Név'];
-
-  eppFrissit = false;
   mod = false;
   ti = -1;
 
   felhasznaloservice: FelhasznaloService;
 
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               felhasznaloservice: FelhasznaloService,
               private _projektteendoservice: ProjektteendoService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.FELHASZNALOMOD]);

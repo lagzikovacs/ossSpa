@@ -4,6 +4,7 @@ import {ParticioEgyMode} from '../particioegymode';
 import {ParticioDto} from '../particiodto';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-particio-egy',
@@ -13,10 +14,19 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
   particioservice: ParticioService;
   Ori = new ParticioDto();
   Dto = new ParticioDto();
-  eppFrissit = false;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(particioservice: ParticioService,
-              private _errorservice: ErrorService) {
+              private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService) {
     this.particioservice = particioservice;
   }
 

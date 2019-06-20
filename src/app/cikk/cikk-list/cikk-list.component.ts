@@ -13,28 +13,37 @@ import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {BizonylattetelSzerkesztesMode} from '../../bizonylat/bizonylattetelszerkesztesmode';
 import {AjanlatService} from '../../ajanlat/ajanlat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-cikk-list',
   templateUrl: './cikk-list.component.html'
 })
 export class CikkListComponent implements OnInit, OnDestroy {
+  cikkservice: CikkService;
 
   szurok = ['Megnevezés', 'Id'];
   szempontok = [
     Szempont.Megnevezes, Szempont.Kod
   ];
 
-  eppFrissit = false;
   mod = false;
   ti = -1;
 
-  cikkservice: CikkService;
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(private _logonservice: LogonService,
               private _bizonylatservice: BizonylatService,
               private _ajanlatservice: AjanlatService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               cikkservice: CikkService  ) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.CIKKMOD]);
     this.cikkservice = cikkservice;

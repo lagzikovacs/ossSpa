@@ -4,6 +4,7 @@ import {TermekdijContainerMode} from '../termekdijcontainermode';
 import {TermekdijEgyMode} from '../termekdijegymode';
 import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
+import {SpinnerService} from '../../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-termekdij-szerkesztes',
@@ -11,10 +12,19 @@ import {ErrorService} from '../../../tools/errorbox/error.service';
 })
 export class TermekdijSzerkesztesComponent implements OnDestroy {
   termekdijservice: TermekdijService;
-  eppFrissit = false;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(termekdijservice: TermekdijService,
-              private _errorservice: ErrorService) {
+              private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService) {
     this.termekdijservice = termekdijservice;
   }
 

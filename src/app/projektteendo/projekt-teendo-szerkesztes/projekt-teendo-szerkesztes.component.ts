@@ -12,6 +12,7 @@ import {FelhasznaloContainerMode} from '../../primitiv/felhasznalo/felhasznaloco
 import {TeendoContainerMode} from '../../primitiv/teendo/teendocontainermode';
 import {ProjektteendoSzerkesztesMode} from '../projektteendoszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-projekt-teendo-szerkesztes',
@@ -19,13 +20,22 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 })
 export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
   projektteendoservice: ProjektteendoService;
-  eppFrissit = false;
   Hatarido: any;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(projektteendoservice: ProjektteendoService,
               private _felhasznalosevice: FelhasznaloService,
               private _teendoservice: TeendoService,
               private _projektservice: ProjektService,
+              private _spinnerservice: SpinnerService,
               private _errorservice: ErrorService) {
     this.projektteendoservice = projektteendoservice;
   }

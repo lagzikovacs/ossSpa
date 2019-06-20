@@ -17,6 +17,7 @@ import * as FileSaver from 'file-saver';
 import {b64toBlob} from '../../tools/b64toBlob';
 import {LetoltesParam} from '../../dokumentum/letoltesparam';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-ugyfelter',
@@ -26,7 +27,6 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
   up: string;
   private _sub: any;
   bejelentkezve = false;
-  eppFrissit = false;
   Dto = new UgyfelterDto();
   pi = -1;
 
@@ -43,12 +43,22 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
   tasktoken = '';
   szamlalo: any;
 
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
   constructor(private _route: ActivatedRoute,
               private _logonservice: LogonService,
               private _ugyfelterservice: UgyfelterService,
               private _projektkapcsolatservice: ProjektkapcsolatService,
               private _bizonylatnyomtatasservice: BizonylatnyomtatasService,
               private _dokumentumservice: DokumentumService,
+              private _spinnerservice: SpinnerService,
               private _errorservice: ErrorService) { }
 
   ngOnInit() {

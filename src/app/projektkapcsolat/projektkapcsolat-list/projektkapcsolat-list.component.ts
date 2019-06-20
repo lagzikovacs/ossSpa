@@ -17,6 +17,7 @@ import {VagolapMode} from '../../vagolap/vagolapmode';
 import {AjanlatService} from '../../ajanlat/ajanlat.service';
 import {JogKod} from '../../enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-projektkapcsolat-list',
@@ -24,11 +25,19 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 })
 export class ProjektkapcsolatListComponent implements OnDestroy {
   projektkapcsolatservice: ProjektkapcsolatService;
-  eppFrissit = false;
 
   BizonylatMod = false;
   IratMod = false;
   AjanlatMod = false;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(private _logonservice: LogonService,
               private _iratservice: IratService,
@@ -39,6 +48,7 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
               private _vagolapservice: VagolapService,
               private _ajanlatservice: AjanlatService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.BizonylatMod = this._logonservice.Jogaim.includes(JogKod[JogKod.BIZONYLATMOD]);
     this.IratMod = this._logonservice.Jogaim.includes(JogKod[JogKod.IRATMOD]);

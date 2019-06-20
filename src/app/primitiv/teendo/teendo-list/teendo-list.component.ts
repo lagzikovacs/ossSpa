@@ -8,28 +8,36 @@ import {TeendoContainerMode} from '../teendocontainermode';
 import {TeendoEgyMode} from '../teendoegymode';
 import {ProjektteendoSzerkesztesMode} from '../../../projektteendo/projektteendoszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
+import {SpinnerService} from '../../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-teendo-list',
   templateUrl: './teendo-list.component.html'
 })
 export class TeendoListComponent implements OnInit, OnDestroy {
+  szurok = ['Teendő'];
+  mod = false;
+  ti = -1
+
+  teendoservice: TeendoService;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               teendoservice: TeendoService,
               private _projektteendoservice: ProjektteendoService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.teendoservice = teendoservice;
   }
-
-  szurok = ['Teendő'];
-
-  eppFrissit = false;
-  mod = false;
-  ti = -1
-
-  teendoservice: TeendoService;
 
   ngOnInit() {
     if (this.teendoservice.zoom) {

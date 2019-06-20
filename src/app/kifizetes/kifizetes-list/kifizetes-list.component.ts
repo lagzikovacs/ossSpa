@@ -6,6 +6,7 @@ import {KifizetesEgyMode} from '../kifizetesegymode';
 import {KifizetesSzerkesztesMode} from '../kifizetesszerkesztesmode';
 import * as moment from 'moment';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-kifizetes-list',
@@ -13,11 +14,20 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 })
 export class KifizetesListComponent implements OnDestroy {
   bizonylatkifizetesservice: KifizetesService;
-  eppFrissit = false;
   ti = -1;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(private _bizonylatservice: BizonylatService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               bizonylatkifizetesservice: KifizetesService) {
     this.bizonylatkifizetesservice = bizonylatkifizetesservice;
   }

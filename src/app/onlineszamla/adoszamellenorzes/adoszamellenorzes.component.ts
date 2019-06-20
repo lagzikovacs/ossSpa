@@ -1,18 +1,28 @@
 import {Component, OnDestroy} from '@angular/core';
 import {OnlineszamlaService} from '../onlineszamla.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-adoszamellenorzes',
   templateUrl: './adoszamellenorzes.component.html'
 })
 export class AdoszamellenorzesComponent implements OnDestroy {
-  eppFrissit = false;
   navfeltoltesservice: OnlineszamlaService;
   adoszam = '';
   valasz = '';
 
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
   constructor(navfeltoltesservice: OnlineszamlaService,
+              private _spinnerservice: SpinnerService,
               private _errorservice: ErrorService) {
     this.navfeltoltesservice = navfeltoltesservice;
   }

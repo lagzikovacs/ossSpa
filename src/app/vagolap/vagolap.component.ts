@@ -9,7 +9,6 @@ import {VagolapMode} from './vagolapmode';
 })
 export class VagolapComponent implements OnInit, OnDestroy {
   vagolapservice: VagolapService;
-  eppFrissit = false;
 
   constructor(vagolapservice: VagolapService) {
     this.vagolapservice = vagolapservice;

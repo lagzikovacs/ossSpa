@@ -2,6 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {FelhasznaloService} from '../../primitiv/felhasznalo/felhasznalo.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-jelszocsere',
@@ -9,14 +10,23 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 })
 export class JelszocsereComponent implements OnDestroy {
   felhasznaloservice: FelhasznaloService;
-  eppFrissit = false;
   regijelszo = '';
   jelszo = '';
   jelszoujra = '';
 
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
   constructor(private _router: Router,
               private _route: ActivatedRoute,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               felhasznaloservice: FelhasznaloService) {
     this.felhasznaloservice = felhasznaloservice;
   }

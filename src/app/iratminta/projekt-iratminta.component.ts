@@ -5,6 +5,7 @@ import * as FileSaver from 'file-saver';
 import {IratmintaService} from './iratminta.service';
 import {rowanimation} from '../animation/rowAnimation';
 import {ErrorService} from '../tools/errorbox/error.service';
+import {SpinnerService} from '../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-projekt-iratminta',
@@ -12,10 +13,18 @@ import {ErrorService} from '../tools/errorbox/error.service';
   animations: [rowanimation]
 })
 export class ProjektIratmintaComponent implements OnDestroy {
-  eppFrissit = false;
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(private _projektservice: ProjektService,
               private _iratmintaservice: IratmintaService,
+              private _spinnerservice: SpinnerService,
               private _errorservice: ErrorService) {
   }
 

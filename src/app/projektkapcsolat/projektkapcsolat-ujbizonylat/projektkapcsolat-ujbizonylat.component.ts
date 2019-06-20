@@ -7,6 +7,7 @@ import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-projektkapcsolat-ujbizonylat',
@@ -14,7 +15,6 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 })
 export class ProjektkapcsolatUjbizonylatComponent implements OnDestroy {
   projektkapcsolatservice: ProjektkapcsolatService;
-  eppFrissit = false;
   entries = [
     ['Díjbekérő', BizonylatTipus.DijBekero],
     ['Előlegszámla', BizonylatTipus.ElolegSzamla],
@@ -25,9 +25,19 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnDestroy {
   ];
   entryindex = 4;
 
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
   constructor(private _bizonylatservice: BizonylatService,
               private _ugyfelservice: UgyfelService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.projektkapcsolatservice = projektkapcsolatservice;
   }

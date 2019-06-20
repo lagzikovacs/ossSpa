@@ -3,23 +3,31 @@ import {CsoportService} from '../csoport.service';
 import {CsoportContainerMode} from '../csoportcontainermode';
 import {CsoportEgyMode} from '../csoportegymode';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-csoport-list',
   templateUrl: './csoport-list.component.html'
 })
 export class CsoportListComponent {
+  csoportservice: CsoportService;
 
   szurok = ['Csoport'];
-
-  eppFrissit = false;
   elsokereses = true;
   ti = -1;
 
-  csoportservice: CsoportService;
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
-  constructor(csoportservice: CsoportService,
-              private _errorservice: ErrorService) {
+  constructor(private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
+              csoportservice: CsoportService) {
     this.csoportservice = csoportservice;
   }
 

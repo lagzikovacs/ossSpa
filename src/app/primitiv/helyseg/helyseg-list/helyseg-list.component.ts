@@ -8,6 +8,7 @@ import {ZoomSources} from '../../../enums/zoomsources';
 import {HelysegEgyMode} from '../helysegegymode';
 import {UgyfelSzerkesztesMode} from '../../../ugyfel/ugyfelszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
+import {SpinnerService} from '../../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-helyseg-list',
@@ -15,15 +16,23 @@ import {ErrorService} from '../../../tools/errorbox/error.service';
 })
 export class HelysegListComponent implements OnInit, OnDestroy {
   szurok = ['Helység'];
-
-  eppFrissit = false;
   mod = false;
   ti = -1;
 
   helysegservice: HelysegService;
 
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               helysegservice: HelysegService,
               private ugyfelservice: UgyfelService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);

@@ -10,6 +10,7 @@ import {MeContainerMode} from '../mecontainermode';
 import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 import {BizonylattetelSzerkesztesMode} from '../../../bizonylat/bizonylattetelszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
+import {SpinnerService} from '../../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-me-list',
@@ -17,17 +18,25 @@ import {ErrorService} from '../../../tools/errorbox/error.service';
 })
 export class MeListComponent implements OnInit, OnDestroy {
   szurok = ['Mennyiségi egység'];
-
-  eppFrissit = false;
   mod = false;
   ti = -1;
 
   meservice: MeService;
 
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
   constructor(private _logonservice: LogonService,
               private _cikkservice: CikkService,
               private _bizonylatservice: BizonylatService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               meservice: MeService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.meservice = meservice;

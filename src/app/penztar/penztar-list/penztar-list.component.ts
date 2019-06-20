@@ -9,6 +9,7 @@ import {PenztarEgyMode} from '../penztaregymode';
 import {PenztartetelContainerMode} from '../../penztartetel/penztartetelcontainermode';
 import {PenztarSzerkesztesMode} from '../penztarszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-penztar-list',
@@ -17,14 +18,23 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 export class PenztarListComponent implements OnInit, OnDestroy {
   szurok = ['Pénztár'];
 
-  eppFrissit = false;
   mod = false;
   elsokereses = true;
   ti = -1;
   penztarservice: PenztarService;
 
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               penztarservice: PenztarService,
               private _penztartetelservice: PenztartetelService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);

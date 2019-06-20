@@ -5,6 +5,7 @@ import {CsoportEgyMode} from '../csoportegymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-csoport-egy',
@@ -12,13 +13,21 @@ import {ErrorService} from '../../tools/errorbox/error.service';
   animations: [rowanimation]
 })
 export class CsoportEgyComponent implements OnDestroy {
-
   csoportservice: CsoportService;
-  eppFrissit = false;
   ri = -1;
 
-  constructor(csoportservice: CsoportService,
-              private _errorservice: ErrorService) {
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
+  constructor(private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
+              csoportservice: CsoportService) {
     this.csoportservice = csoportservice;
   }
 

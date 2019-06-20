@@ -3,6 +3,7 @@ import {FelhasznaloService} from '../felhasznalo.service';
 import {FelhasznaloEgyMode} from '../felhasznaloegymode';
 import {rowanimation} from '../../../animation/rowAnimation';
 import {ErrorService} from '../../../tools/errorbox/error.service';
+import {SpinnerService} from '../../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-felhasznalo-jelszo',
@@ -11,12 +12,21 @@ import {ErrorService} from '../../../tools/errorbox/error.service';
 })
 export class FelhasznaloJelszoComponent implements OnDestroy {
   felhasznaloservice: FelhasznaloService;
-  eppFrissit = false;
   jelszo = '';
   jelszoujra = '';
 
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
   constructor(felhasznaloservice: FelhasznaloService,
-              private _errorservice: ErrorService) {
+              private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService) {
     this.felhasznaloservice = felhasznaloservice;
   }
 

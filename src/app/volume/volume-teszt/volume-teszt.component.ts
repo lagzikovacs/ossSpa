@@ -11,7 +11,6 @@ export class VolumeTesztComponent implements OnDestroy {
   dokumentumservice: DokumentumService;
   index = 0;
   hibalista: string[];
-  eppFrissit = false;
 
   constructor(volumeservice: VolumeService,
               dokumentumservice: DokumentumService) {

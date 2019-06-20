@@ -15,11 +15,9 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 export class FeliratkozasEgyComponent implements OnDestroy {
   ajanlatkeresservice: AjanlatkeresService;
   enprojekt = false;
-  eppFrissit = false;
   ri = -1;
 
   constructor(private _logonservice: LogonService,
-              private _errorservice: ErrorService,
               ajanlatkeresservice: AjanlatkeresService) {
     this.enprojekt = _logonservice.Jogaim.includes(JogKod[JogKod.PROJEKT]);
     this.ajanlatkeresservice = ajanlatkeresservice;

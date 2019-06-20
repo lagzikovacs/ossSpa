@@ -1,10 +1,11 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {BizonylatKibocsatasParam} from '../bizonylatkibocsatasparam';
 import {BizonylatTipus} from '../bizonylattipus';
 import {PenztarService} from '../../penztar/penztar.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-bizonylat-kibocsatas',
@@ -12,11 +13,21 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 })
 export class BizonylatKibocsatasComponent implements OnDestroy {
   bizonylatservice: BizonylatService;
-  eppFrissit = false;
   bizonylatszam = '';
+  private _keszpenzes = false;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(private _penztarsevice: PenztarService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
   }
@@ -44,19 +55,22 @@ export class BizonylatKibocsatasComponent implements OnDestroy {
             this.bizonylatservice.bizonylatTipus === BizonylatTipus.Szamla) &&
             this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Fizetesimod === 'Készpénz') {
 
+            this._keszpenzes = true;
             return this._penztarsevice.ReadByCurrencyOpened(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Penznemkod);
         } else {
           this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
         }
       })
       .then(res2 => {
-        if (res2.Error != null) {
-          throw res2.Error;
+        if (this._keszpenzes) {
+          if (res2.Error != null) {
+            throw res2.Error;
+          }
+
+          this.bizonylatservice.BizonylatPenztarDto = res2.Result;
+
+          this.bizonylatservice.EgyMode = BizonylatEgyMode.Penztar;
         }
-
-        this.bizonylatservice.BizonylatPenztarDto = res2.Result;
-
-        this.bizonylatservice.EgyMode = BizonylatEgyMode.Penztar;
       })
       .catch(err => {
         this.eppFrissit = false;

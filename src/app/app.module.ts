@@ -233,6 +233,8 @@ import { TablaComponent } from './tools/tabla/tabla.component';
 import {StartupService} from './startup/startup.service';
 import {ErrorService} from './tools/errorbox/error.service';
 import { ErrorboxComponent } from './tools/errorbox/errorbox.component';
+import { GspinnerComponent } from './tools/spinner/spinner.component';
+import {SpinnerService} from './tools/spinner/spinner.service';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusContainerComponent, canActivate: [RoleGuard]},
@@ -492,6 +494,7 @@ if (environment.production) {
     UgyfelTablaComponent,
     TablaComponent,
     ErrorboxComponent,
+    GspinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -547,7 +550,8 @@ if (environment.production) {
     VerzioService,
     SessionService,
     VagolapService,
-    ErrorService
+    ErrorService,
+    SpinnerService
   ],
   bootstrap: [AppComponent]
 })

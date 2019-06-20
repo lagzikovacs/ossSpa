@@ -7,6 +7,7 @@ import {ZoomSources} from '../../enums/zoomsources';
 import {CikkContainerMode} from '../../cikk/cikkcontainermode';
 import {AjanlatService} from '../ajanlat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-ajanlat-tetel',
@@ -15,10 +16,19 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 export class AjanlatTetelComponent implements OnDestroy {
   ajanlatservice: AjanlatService;
   projektkapcsolatservice: ProjektkapcsolatService;
-  eppFrissit = false;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(private _cikkservice: CikkService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               ajanlatservice: AjanlatService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.ajanlatservice = ajanlatservice;

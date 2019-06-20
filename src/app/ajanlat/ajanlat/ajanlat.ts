@@ -6,6 +6,7 @@ import {AjanlatContainerMode} from '../ajanlatcontainermode';
 import * as moment from 'moment';
 import {AjanlatService} from '../ajanlat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-ajanlat',
@@ -14,11 +15,20 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 export class AjanlatComponent implements OnInit, OnDestroy {
   ajanlatservice: AjanlatService;
   projektkapcsolatservice: ProjektkapcsolatService;
-  eppFrissit = false;
 
-  constructor(ajanlatservice: AjanlatService,
-              projektkapcsolatservice: ProjektkapcsolatService,
-              private _errorservice: ErrorService) {
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
+  constructor(private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
+              ajanlatservice: AjanlatService,
+              projektkapcsolatservice: ProjektkapcsolatService) {
     this.ajanlatservice = ajanlatservice;
     this.projektkapcsolatservice = projektkapcsolatservice;
   }

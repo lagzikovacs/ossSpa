@@ -2,18 +2,27 @@ import {Component, OnDestroy} from '@angular/core';
 import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
 import {BizonylatKapcsolatContainerMode} from '../bizonylatkapcsolatcontainermode';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-bizonylat-irat-levalasztas',
   templateUrl: './bizonylat-irat-levalasztas.component.html'
 })
 export class BizonylatIratLevalasztasComponent implements OnDestroy {
-
   bizonylatkapcsolatservice: BizonylatkapcsolatService;
-  eppFrissit = false;
 
-  constructor(bizonylatkapcsolatservice: BizonylatkapcsolatService,
-              private _errorservice: ErrorService) {
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
+  constructor(private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
+              bizonylatkapcsolatservice: BizonylatkapcsolatService) {
     this.bizonylatkapcsolatservice = bizonylatkapcsolatservice;
   }
 

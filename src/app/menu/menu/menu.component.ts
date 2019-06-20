@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs/index';
 import {AngularmenuDto} from '../angularmenudto';
 import {Router} from '@angular/router';

@@ -10,21 +10,30 @@ import {BizonylatKapcsolatParam} from '../bizonylatkapcsolatparam';
 import {BizonylatKapcsolatContainerMode} from '../bizonylatkapcsolatcontainermode';
 import {BizonylatKapcsolatSzerkesztesMode} from '../bizonylatkapcsolatszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-bizonylat-irat-uj',
   templateUrl: './bizonylat-irat-uj.component.html'
 })
 export class BizonylatIratUjComponent implements OnInit, OnDestroy {
-
   bizonylatkapcsolatservice: BizonylatkapcsolatService;
-  eppFrissit = false;
   Keletkezett: any;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(private _irattipusservice: IrattipusService,
               private _iratservice: IratService,
               private _bizonylatservice: BizonylatService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               bizonylatkapcsolatservice: BizonylatkapcsolatService) {
     this.bizonylatkapcsolatservice = bizonylatkapcsolatservice;
   }

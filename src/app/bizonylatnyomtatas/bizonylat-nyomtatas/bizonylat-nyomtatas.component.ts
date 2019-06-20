@@ -7,6 +7,7 @@ import {BizonylatNyomtatasTipus} from '../bizonylatnyomtatastipus';
 import * as FileSaver from 'file-saver';
 import {b64toBlob} from '../../tools/b64toBlob';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-bizonylat-nyomtatas',
@@ -17,14 +18,23 @@ export class BizonylatNyomtatasComponent implements OnDestroy {
   entries = ['Minta', 'Eredeti', 'Másolat'];
   entriest = [BizonylatNyomtatasTipus.Minta, BizonylatNyomtatasTipus.Eredeti, BizonylatNyomtatasTipus.Masolat];
   selectedi = 0;
-  eppFrissit = false;
   megszakitani = false;
   tasktoken = '';
   szamlalo: any;
 
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
   constructor(private _bizonylatnyomtatasservice: BizonylatnyomtatasService,
               private _bizonylatservice: BizonylatService,
-              private _errorservice: ErrorService) {
+              private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService) {
   }
 
   change(i) {

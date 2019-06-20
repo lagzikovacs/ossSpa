@@ -5,6 +5,7 @@ import {SzMT} from '../../dtos/szmt';
 import {ProjektService} from '../../projekt/projekt.service';
 import {ProjektDto} from '../../projekt/projektdto';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-ajanlatkeres-projekt',
@@ -13,11 +14,20 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 export class AjanlatkeresProjektComponent implements OnInit, OnDestroy {
   ajanlatkeresservice: AjanlatkeresService;
   projektservice: ProjektService;
-  eppFrissit = false;
 
-  constructor(ajanlatkeresservice: AjanlatkeresService,
-              projektservice: ProjektService,
-              private _errorservice: ErrorService) {
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
+
+  constructor(private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
+              ajanlatkeresservice: AjanlatkeresService,
+              projektservice: ProjektService) {
     this.ajanlatkeresservice = ajanlatkeresservice;
     this.projektservice = projektservice;
   }

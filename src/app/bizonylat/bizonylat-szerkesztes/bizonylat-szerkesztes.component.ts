@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
@@ -18,6 +18,7 @@ import {EmptyResult} from '../../dtos/emptyresult';
 import * as moment from 'moment';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-bizonylat-szerkesztes',
@@ -25,13 +26,22 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 })
 export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   bizonylatservice: BizonylatService;
-  eppFrissit = false;
   fizerr = 'Ismeretlen fizetési mód: ';
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(private _ugyfelservice: UgyfelService,
               private _penznemservice: PenznemService,
               private _fizetesimodservice: FizetesimodService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               private _cdr: ChangeDetectorRef,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;

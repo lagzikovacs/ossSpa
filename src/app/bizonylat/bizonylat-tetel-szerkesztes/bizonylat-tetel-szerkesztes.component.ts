@@ -18,6 +18,7 @@ import {TermekdijZoomParameter} from '../../primitiv/termekdij/termekdijzoompara
 import {AfakulcsZoomParameter} from '../../primitiv/afakulcs/afakulcszoomparameter';
 import {MeZoomParameter} from '../../primitiv/me/mezoomparameter';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-bizonylat-tetel-szerkesztes',
@@ -26,14 +27,23 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
 
   bizonylatservice: BizonylatService;
-  eppFrissit = false;
   bruttoosszeg = 0;
+
+  private _eppFrissit = false;
+  get eppFrissit(): boolean {
+    return this._eppFrissit;
+  }
+  set eppFrissit(value: boolean) {
+    this._eppFrissit = value;
+    this._spinnerservice.Run = value;
+  }
 
   constructor(private _cikkservice: CikkService,
               private _meservice: MeService,
               private _afakulcsservice: AfakulcsService,
               private _termekdijservice: TermekdijService,
               private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
               private _cdr: ChangeDetectorRef,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;

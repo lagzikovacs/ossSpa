@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {IrattipusService} from '../irattipus.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
@@ -19,6 +19,8 @@ export class IrattipusEgyComponent implements OnDestroy {
   mod = false;
   ri = -1;
 
+  @Output() torlesutan = new EventEmitter<void>();
+
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -36,9 +38,6 @@ export class IrattipusEgyComponent implements OnDestroy {
     this.irattipusservice = irattipusservice;
   }
 
-  vissza() {
-    this.irattipusservice.ContainerMode = IrattipusContainerMode.List;
-  }
   reszletek() {
     this.irattipusservice.EgyMode = IrattipusEgyMode.Reszletek;
   }
@@ -63,7 +62,7 @@ export class IrattipusEgyComponent implements OnDestroy {
         this.irattipusservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this.irattipusservice.ContainerMode = IrattipusContainerMode.List;
+        this.torlesutan.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

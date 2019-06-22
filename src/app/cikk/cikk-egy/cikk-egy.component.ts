@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {CikkService} from '../cikk.service';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
@@ -20,6 +20,8 @@ export class CikkEgyComponent implements OnDestroy {
   cikkservice: CikkService;
   mod = false;
   ri = -1;
+
+  @Output() torlesutan = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -90,7 +92,7 @@ export class CikkEgyComponent implements OnDestroy {
         this.cikkservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this.cikkservice.ContainerMode = CikkContainerMode.List;
+        this.torlesutan.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

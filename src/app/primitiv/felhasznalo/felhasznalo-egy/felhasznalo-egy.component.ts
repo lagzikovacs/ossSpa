@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {FelhasznaloService} from '../felhasznalo.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
@@ -19,6 +19,8 @@ export class FelhasznaloEgyComponent implements OnDestroy {
   felhasznaloservice: FelhasznaloService;
   mod = false;
   ri = -1;
+
+  @Output() torlesutan = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -69,7 +71,7 @@ export class FelhasznaloEgyComponent implements OnDestroy {
         this.felhasznaloservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this.felhasznaloservice.ContainerMode = FelhasznaloContainerMode.List;
+        this.torlesutan.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {CsoportService} from '../csoport.service';
 import {CsoportContainerMode} from '../csoportcontainermode';
 import {CsoportEgyMode} from '../csoportegymode';
@@ -15,6 +15,8 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 export class CsoportEgyComponent implements OnDestroy {
   csoportservice: CsoportService;
   ri = -1;
+
+  @Output() torlesutan = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -61,7 +63,7 @@ export class CsoportEgyComponent implements OnDestroy {
         this.csoportservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this.csoportservice.ContainerMode = CsoportContainerMode.List;
+        this.torlesutan.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

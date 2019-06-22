@@ -29,9 +29,6 @@ export class VolumeEgyComponent implements OnDestroy {
     this.volumeservice = volumeservice;
   }
 
-  vissza() {
-    this.volumeservice.ContainerMode = VolumeContainerMode.List;
-  }
   reszletek() {
     this.volumeservice.EgyMode = VolumeEgyMode.Reszletek;
   }

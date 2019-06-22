@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {KifizetesService} from '../kifizetes.service';
 import {KifizetesContainerMode} from '../kifizetescontainermode';
 import {KifizetesEgyMode} from '../kifizetesegymode';
@@ -15,6 +15,8 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 export class KifizetesEgyComponent implements OnDestroy {
   bizonylatkifizetesservice: KifizetesService;
   ri = -1;
+
+  @Output() torlesutan = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -56,7 +58,7 @@ export class KifizetesEgyComponent implements OnDestroy {
         this.bizonylatkifizetesservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this.bizonylatkifizetesservice.ContainerMode = KifizetesContainerMode.List;
+        this.torlesutan.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

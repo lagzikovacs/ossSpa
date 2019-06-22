@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {MeService} from '../me.service';
 import {MeContainerMode} from '../mecontainermode';
 import {MeEgyMode} from '../meegymode';
@@ -19,6 +19,8 @@ export class MeEgyComponent implements OnDestroy {
   mod = false;
   ri = -1;
 
+  @Output() torlesutan = new EventEmitter<void>();
+
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -36,9 +38,6 @@ export class MeEgyComponent implements OnDestroy {
     this.meservice = meservice;
   }
 
-  vissza() {
-    this.meservice.ContainerMode = MeContainerMode.List;
-  }
   reszletek() {
     this.meservice.EgyMode = MeEgyMode.Reszletek;
   }
@@ -63,7 +62,7 @@ export class MeEgyComponent implements OnDestroy {
         this.meservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this.meservice.ContainerMode = MeContainerMode.List;
+        this.torlesutan.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

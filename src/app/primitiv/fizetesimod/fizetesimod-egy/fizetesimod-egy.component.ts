@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {FizetesimodService} from '../fizetesimod.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
@@ -19,6 +19,8 @@ export class FizetesimodEgyComponent implements OnDestroy {
   mod = false;
   ri = -1;
 
+  @Output() torlesutan = new EventEmitter<void>();
+
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -36,9 +38,6 @@ export class FizetesimodEgyComponent implements OnDestroy {
     this.fizetesimodservice = fizetesimodservice;
   }
 
-  vissza() {
-    this.fizetesimodservice.ContainerMode = FizetesimodContainerMode.List;
-  }
   reszletek() {
     this.fizetesimodservice.EgyMode = FizetesimodEgyMode.Reszletek;
   }
@@ -63,7 +62,7 @@ export class FizetesimodEgyComponent implements OnDestroy {
         this.fizetesimodservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this.fizetesimodservice.ContainerMode = FizetesimodContainerMode.List;
+        this.torlesutan.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

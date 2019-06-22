@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
 import {IratService} from '../irat.service';
 import {IratContainerMode} from '../iratcontainermode';
 import {IratEgyMode} from '../irategymode';
@@ -35,6 +35,7 @@ export class IratEgyComponent implements OnDestroy {
   pri = -1;
 
   @Input() enProjekt = true;
+  @Output() torlesutan = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -129,7 +130,7 @@ export class IratEgyComponent implements OnDestroy {
         this.iratservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this.iratservice.ContainerMode = IratContainerMode.List;
+        this.torlesutan.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {TeendoService} from '../teendo.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
@@ -19,6 +19,8 @@ export class TeendoEgyComponent implements OnDestroy {
   mod = false;
   ri = -1;
 
+  @Output() torlesutan = new EventEmitter<void>();
+
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -36,9 +38,6 @@ export class TeendoEgyComponent implements OnDestroy {
     this.teendoservice = teendoservice;
   }
 
-  vissza() {
-    this.teendoservice.ContainerMode = TeendoContainerMode.List;
-  }
   reszletek() {
     this.teendoservice.EgyMode = TeendoEgyMode.Reszletek;
   }
@@ -63,7 +62,7 @@ export class TeendoEgyComponent implements OnDestroy {
         this.teendoservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this.teendoservice.ContainerMode = TeendoContainerMode.List;
+        this.torlesutan.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

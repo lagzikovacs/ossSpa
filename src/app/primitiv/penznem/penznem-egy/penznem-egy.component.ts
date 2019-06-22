@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {PenznemService} from '../penznem.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
@@ -19,6 +19,8 @@ export class PenznemEgyComponent implements OnDestroy {
   mod = false;
   ri = -1;
 
+  @Output() torlesutan = new EventEmitter<void>();
+
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -36,9 +38,6 @@ export class PenznemEgyComponent implements OnDestroy {
     this.penznemservice = penznemservice;
   }
 
-  vissza() {
-    this.penznemservice.ContainerMode = PenznemContainerMode.List;
-  }
   reszletek() {
     this.penznemservice.EgyMode = PenznemEgyMode.Reszletek;
   }
@@ -63,7 +62,7 @@ export class PenznemEgyComponent implements OnDestroy {
         this.penznemservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this.penznemservice.ContainerMode = PenznemContainerMode.List;
+        this.torlesutan.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

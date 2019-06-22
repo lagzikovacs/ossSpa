@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {SzamlazasirendService} from '../szamlazasirend.service';
 import {SzamlazasirendEgyMode} from '../szamlazasirendegymode';
 import {SzamlazasirendContainerMode} from '../szamlazasirendcontainermode';
@@ -16,6 +16,8 @@ export class SzamlazasirendEgyComponent implements OnDestroy {
   szamlazasirendservice: SzamlazasirendService;
   ri = -1;
 
+  @Output() torlesutan = new EventEmitter<void>();
+
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -31,9 +33,6 @@ export class SzamlazasirendEgyComponent implements OnDestroy {
     this.szamlazasirendservice = szamlazasirendservice;
   }
 
-  vissza() {
-    this.szamlazasirendservice.ContainerMode = SzamlazasirendContainerMode.List;
-  }
   reszletek() {
     this.szamlazasirendservice.EgyMode = SzamlazasirendEgyMode.Reszletek;
   }
@@ -58,7 +57,7 @@ export class SzamlazasirendEgyComponent implements OnDestroy {
         this.szamlazasirendservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this.szamlazasirendservice.ContainerMode = SzamlazasirendContainerMode.List;
+        this.torlesutan.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

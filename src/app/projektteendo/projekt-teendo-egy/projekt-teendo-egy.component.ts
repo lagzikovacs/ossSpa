@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {ProjektteendoService} from '../projektteendo.service';
 import {ProjektteendoContainerMode} from '../projektteendocontainermode';
 import {ProjektteendoEgyMode} from '../projekttendoegymode';
@@ -16,6 +16,8 @@ export class ProjektTeendoEgyComponent implements OnDestroy {
   projektteendoservice: ProjektteendoService;
   ri = -1;
 
+  @Output() torlesutan = new EventEmitter<void>();
+
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -31,9 +33,6 @@ export class ProjektTeendoEgyComponent implements OnDestroy {
     this.projektteendoservice = projektteendoservice;
   }
 
-  vissza() {
-    this.projektteendoservice.ContainerMode = ProjektteendoContainerMode.List;
-  }
   reszletek() {
     this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Reszletek;
   }
@@ -63,7 +62,7 @@ export class ProjektTeendoEgyComponent implements OnDestroy {
         this.projektteendoservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this.projektteendoservice.ContainerMode = ProjektteendoContainerMode.List;
+        this.torlesutan.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

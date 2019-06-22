@@ -259,7 +259,6 @@ export class MenuService {
         break;
       case '/csoport':
         this._csoportservice.ContainerMode = CsoportContainerMode.List;
-        this._csoportservice.zoom = false;
         this._csoportservice.Dto = new Array<CsoportDto>();
         break;
       case '/vagolap':

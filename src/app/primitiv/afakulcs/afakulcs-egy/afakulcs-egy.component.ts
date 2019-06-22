@@ -63,7 +63,6 @@ export class AfakulcsEgyComponent implements OnDestroy {
         this.afakulcsservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this.afakulcsservice.DtoSelectedIndex = -1;
         this.torlesutan.emit();
       })
       .catch(err => {

@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {PenztarService} from '../penztar.service';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
@@ -19,6 +19,8 @@ export class PenztarEgyComponent implements OnDestroy {
   mod = false;
   nyitva = false;
   ri = -1;
+
+  @Output() torlesutan = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -68,7 +70,7 @@ export class PenztarEgyComponent implements OnDestroy {
         this.penztarservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this.penztarservice.ContainerMode = PenztarContainerMode.List;
+        this.torlesutan.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {TermekdijService} from '../termekdij.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
@@ -19,6 +19,8 @@ export class TermekdijEgyComponent implements OnDestroy {
   mod = false;
   ri = -1;
 
+  @Output() torlesutan = new EventEmitter<void>();
+
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -36,9 +38,6 @@ export class TermekdijEgyComponent implements OnDestroy {
     this.termekdijservice = termekdijservice;
   }
 
-  vissza() {
-    this.termekdijservice.ContainerMode = TermekdijContainerMode.List;
-  }
   reszletek() {
     this.termekdijservice.EgyMode = TermekdijEgyMode.Reszletek;
   }
@@ -63,7 +62,7 @@ export class TermekdijEgyComponent implements OnDestroy {
         this.termekdijservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this.termekdijservice.ContainerMode = TermekdijContainerMode.List;
+        this.torlesutan.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

@@ -1,10 +1,14 @@
 <div class="alapkeret">
   <h5>{{volumeservice.cim}}</h5>
-  <app-tabla [items]="volumeservice.Dto"
+  <app-tabla #tabla
+             [items]="volumeservice.Dto"
              [colsets]="volumeservice.GridSettings"
-             [(selectedrow)]="ti"
-             (forid)="setClickedRow($event)">
+             (forid)="setClickedRow($event)"
+             [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #gridegy>
+    <app-volume-egy (torlesutan)="torlesutan()"></app-volume-egy>
+  </ng-template>
 </div>
 
 

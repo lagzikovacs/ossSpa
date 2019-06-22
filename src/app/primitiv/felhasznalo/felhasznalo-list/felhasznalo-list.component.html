@@ -8,11 +8,15 @@
                [enUj]="!eppFrissit && mod" (Uj)="uj()"
                [visZoom]="felhasznaloservice.zoom" (StopZoom)="stopzoom()">
   </app-toolbar>
-  <app-tabla [items]="felhasznaloservice.Dto"
+  <app-tabla #tabla
+             [items]="felhasznaloservice.Dto"
              [colsets]="felhasznaloservice.GridSettings"
              [zoom]="felhasznaloservice.zoom"
-             [(selectedrow)]="ti"
              (forzoom)="selectforzoom($event)"
-             (forid)="setClickedRow($event)">
+             (forid)="setClickedRow($event)"
+             [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #gridegy>
+    <app-felhasznalo-egy (torlesutan)="torlesutan()"></app-felhasznalo-egy>
+  </ng-template>
 </div>

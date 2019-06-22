@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {AfakulcsService} from '../afakulcs.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
@@ -19,6 +19,8 @@ export class AfakulcsEgyComponent implements OnDestroy {
   mod = false;
   ri = -1;
 
+  @Output() torlesutan = new EventEmitter<void>();
+
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -36,9 +38,6 @@ export class AfakulcsEgyComponent implements OnDestroy {
     this.afakulcsservice = afakulcsservice;
   }
 
-  vissza() {
-    this.afakulcsservice.ContainerMode = AfakulcsContainerMode.List;
-  }
   reszletek() {
     this.afakulcsservice.EgyMode = AfakulcsEgyMode.Reszletek;
   }
@@ -64,7 +63,8 @@ export class AfakulcsEgyComponent implements OnDestroy {
         this.afakulcsservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this.afakulcsservice.ContainerMode = AfakulcsContainerMode.List;
+        this.afakulcsservice.DtoSelectedIndex = -1;
+        this.torlesutan.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

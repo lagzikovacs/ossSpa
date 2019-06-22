@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output, TemplateRef} from '@angular/core';
 import {ColumnSettings} from '../reszletek/columnsettings';
 
 @Component({
@@ -11,20 +11,37 @@ export class TablaComponent implements OnDestroy {
   @Input() colsets: ColumnSettings[];
   @Input() zoom = false;
 
-  @Input() selectedrow: number;
-  @Output() selectedrowChange = new EventEmitter<number>();
+  @Input() egyTemplate: TemplateRef<any>;
 
   @Output() forzoom = new EventEmitter<number>();
   @Output() forid = new EventEmitter<number>();
 
-  clickforrow(i: number) {
-    this.selectedrowChange.emit(i);
+  clickedrowindex = -1;
+  clickedidindex = -1;
+
+  clearselections() {
+    this.clickedrowindex = -1;
+    this.clickedidindex = -1;
   }
+
+  clickforid(i: number) {
+    this.clickedidindex = i;
+    this.clickedrowindex = this.clickedidindex;
+
+    this.forid.emit(this.clickedidindex);
+  }
+
+  clickforrow(i: number) {
+    this.clickedrowindex = i;
+    // először clickforid aztán clickforrow is, clickforrow felülírná DtoSelectedindex-et
+    if (this.clickedrowindex !== this.clickedidindex) {
+      this.clickedidindex = -1;
+      this.forid.emit(-1);
+    }
+  }
+
   clickforzoom(i: number) {
     this.forzoom.emit(i);
-  }
-  clickforid(i: number) {
-    this.forid.emit(i);
   }
 
   ngOnDestroy() {

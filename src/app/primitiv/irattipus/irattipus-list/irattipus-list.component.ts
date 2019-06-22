@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {IrattipusService} from '../irattipus.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
@@ -13,16 +13,17 @@ import {BizonylatkapcsolatService} from '../../../bizonylatkapcsolat/bizonylatka
 import {BizonylatKapcsolatSzerkesztesMode} from '../../../bizonylatkapcsolat/bizonylatkapcsolatszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {TablaComponent} from '../../../tools/tabla/tabla.component';
 
 @Component({
   selector: 'app-irattipus-list',
   templateUrl: './irattipus-list.component.html'
 })
 export class IrattipusListComponent implements OnInit, OnDestroy {
+  @ViewChild('tabla') tabla: TablaComponent;
+
   szurok = ['Irattipus'];
   mod = false;
-  ti = -1;
-
   irattipusservice: IrattipusService;
 
   private _eppFrissit = false;
@@ -54,6 +55,8 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.irattipusservice.elsokereses = true;
     this.irattipusservice.ekDto.rekordtol = 0;
+
+    this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
@@ -126,7 +129,6 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.irattipusservice.DtoSelectedIndex = i;
     this.irattipusservice.uj = false;
-    this.irattipusservice.ContainerMode = IrattipusContainerMode.Egy;
     this.irattipusservice.EgyMode = IrattipusEgyMode.Reszletek;
   }
 
@@ -149,6 +151,10 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
+  }
+
+  torlesutan() {
+    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

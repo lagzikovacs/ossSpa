@@ -1,15 +1,6 @@
 <div class="alapkeret">
-  <h5>{{ajanlatkeresservice.cim}}</h5>
-  <h6 *ngIf="ajanlatkeresservice.DtoSelectedIndex !== -1">
-    {{ajanlatkeresservice.Dto[ajanlatkeresservice.DtoSelectedIndex].Ajanlatkereskod}}
-    {{ajanlatkeresservice.Dto[ajanlatkeresservice.DtoSelectedIndex].Nev}},
-    {{ajanlatkeresservice.Dto[ajanlatkeresservice.DtoSelectedIndex].Cim}}
-  </h6>
   <div>
     <nav>
-      <button (click)="vissza()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-arrow-left" style="margin-right: 3px" aria-hidden="true"></i>Vissza
-      </button>
       <button (click)="reszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>Részletesen
       </button>

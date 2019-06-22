@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {PenznemService} from '../penznem.service';
 import {LogonService} from '../../../logon/logon.service';
 import {PenztarService} from '../../../penztar/penztar.service';
@@ -17,6 +17,7 @@ import {PenznemContainerMode} from '../penznemcontainermode';
 import {PenznemEgyMode} from '../penznemegymode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {TablaComponent} from '../../../tools/tabla/tabla.component';
 
 
 @Component({
@@ -24,10 +25,10 @@ import {SpinnerService} from '../../../tools/spinner/spinner.service';
   templateUrl: './penznem-list.component.html'
 })
 export class PenznemListComponent implements OnInit, OnDestroy {
+  @ViewChild('tabla') tabla: TablaComponent;
+
   szurok = ['Pénznem'];
   mod = false;
-  ti = -1;
-
   penznemservice: PenznemService;
 
   private _eppFrissit = false;
@@ -61,6 +62,8 @@ export class PenznemListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.penznemservice.elsokereses = true;
     this.penznemservice.ekDto.rekordtol = 0;
+
+    this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
@@ -143,7 +146,6 @@ export class PenznemListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.penznemservice.DtoSelectedIndex = i;
     this.penznemservice.uj = false;
-    this.penznemservice.ContainerMode = PenznemContainerMode.Egy;
     this.penznemservice.EgyMode = PenznemEgyMode.Reszletek;
   }
 
@@ -167,6 +169,11 @@ export class PenznemListComponent implements OnInit, OnDestroy {
         this._errorservice.Error = err;
       });
   }
+
+  torlesutan() {
+    this.tabla.clearselections();
+  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

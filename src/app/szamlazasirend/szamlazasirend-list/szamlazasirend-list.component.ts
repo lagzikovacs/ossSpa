@@ -1,17 +1,19 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {SzamlazasirendService} from '../szamlazasirend.service';
 import {SzamlazasirendContainerMode} from '../szamlazasirendcontainermode';
 import {SzamlazasirendEgyMode} from '../szamlazasirendegymode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {TablaComponent} from '../../tools/tabla/tabla.component';
 
 @Component({
   selector: 'app-szamlazasirend-list',
   templateUrl: './szamlazasirend-list.component.html'
 })
 export class SzamlazasirendListComponent implements OnDestroy {
+  @ViewChild('tabla') tabla: TablaComponent;
+
   szamlazasirendservice: SzamlazasirendService;
-  ti = -1;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -29,6 +31,8 @@ export class SzamlazasirendListComponent implements OnDestroy {
   }
 
   kereses() {
+    this.tabla.clearselections();
+
     this.eppFrissit = true;
     this.szamlazasirendservice.Kereses()
       .then(res => {
@@ -42,7 +46,6 @@ export class SzamlazasirendListComponent implements OnDestroy {
   setClickedRow(i: number) {
     this.szamlazasirendservice.DtoSelectedIndex = i;
     this.szamlazasirendservice.uj = false;
-    this.szamlazasirendservice.ContainerMode = SzamlazasirendContainerMode.Egy;
     this.szamlazasirendservice.EgyMode = SzamlazasirendEgyMode.Reszletek;
   }
   uj() {
@@ -65,6 +68,11 @@ export class SzamlazasirendListComponent implements OnDestroy {
         this._errorservice.Error = err;
       });
   }
+
+  torlesutan() {
+    this.tabla.clearselections();
+  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

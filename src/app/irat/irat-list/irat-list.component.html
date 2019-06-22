@@ -10,11 +10,15 @@
     [enKereses]="!eppFrissit" (Kereses)="onKereses()"
     [enUj]="!eppFrissit && mod" (Uj)="onUj()">
   </app-irattoolbar>
-  <app-tabla [items]="iratservice.Dto"
+  <app-tabla #tabla
+             [items]="iratservice.Dto"
              [colsets]="iratservice.GridSettings"
-             [(selectedrow)]="ti"
-             (forid)="setClickedRow($event)">
+             (forid)="setClickedRow($event)"
+             [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #gridegy>
+    <app-irat-egy (torlesutan)="torlesutan()"></app-irat-egy>
+  </ng-template>
   <app-toolbarfooter [enKereses]="!iratservice.elsokereses && !eppFrissit"
                      [rekordszam]="iratservice.Dto.length"
                      [osszesrekord]="iratservice.OsszesRekord"

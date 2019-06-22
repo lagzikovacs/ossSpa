@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {CikkService} from '../cikk.service';
 import {Szempont} from '../../enums/szempont';
 import {CikkDto} from '../cikkdto';
@@ -14,12 +14,15 @@ import {BizonylattetelSzerkesztesMode} from '../../bizonylat/bizonylattetelszerk
 import {AjanlatService} from '../../ajanlat/ajanlat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {TablaComponent} from '../../tools/tabla/tabla.component';
 
 @Component({
   selector: 'app-cikk-list',
   templateUrl: './cikk-list.component.html'
 })
 export class CikkListComponent implements OnInit, OnDestroy {
+  @ViewChild('tabla') tabla: TablaComponent;
+
   cikkservice: CikkService;
 
   szurok = ['Megnevezés', 'Id'];
@@ -65,6 +68,8 @@ export class CikkListComponent implements OnInit, OnDestroy {
     this.cikkservice.up.fi = new Array<SzMT>();
 
     this.cikkservice.up.fi.push(new SzMT(this.szempontok[this.cikkservice.szempont], this.cikkservice.minta));
+
+    this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
@@ -145,7 +150,6 @@ export class CikkListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.cikkservice.DtoSelectedIndex = i;
     this.cikkservice.uj = false;
-    this.cikkservice.ContainerMode = CikkContainerMode.Egy;
     this.cikkservice.EgyMode = CikkEgyMode.Reszletek;
   }
 
@@ -169,6 +173,11 @@ export class CikkListComponent implements OnInit, OnDestroy {
         this._errorservice.Error = err;
       });
   }
+
+  torlesutan() {
+    this.tabla.clearselections();
+  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

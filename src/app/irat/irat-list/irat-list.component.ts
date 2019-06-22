@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {IratService} from '../irat.service';
 import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
@@ -12,12 +12,15 @@ import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {TablaComponent} from '../../tools/tabla/tabla.component';
 
 @Component({
   selector: 'app-irat-list',
   templateUrl: './irat-list.component.html'
 })
 export class IratListComponent implements OnDestroy {
+  @ViewChild('tabla') tabla: TablaComponent;
+
   szurok = ['Id', 'Keletkezett', 'Ügyfél', 'Tárgy', 'Irattipus', 'Küldő'];
   szurok2 = ['-', 'Keletkezett', 'Ügyfél', 'Tárgy', 'Irattipus', 'Küldő'];
 
@@ -30,7 +33,6 @@ export class IratListComponent implements OnDestroy {
   iratservice: IratService;
   dokumentumservice: DokumentumService;
   mod = false;
-  ti = -1;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -70,6 +72,8 @@ export class IratListComponent implements OnDestroy {
       this.iratservice.ip.fi.push(new SzMT(this.szempontok[this.iratservice.szempont2], this.iratservice.minta2));
     }
 
+    this.tabla.clearselections();
+
     this.onKeresesTovabb();
   }
   onKeresesTovabb() {
@@ -104,7 +108,6 @@ export class IratListComponent implements OnDestroy {
     this.iratservice.DtoSelectedIndex = i;
     this.iratservice.uj = false;
 
-    this.iratservice.ContainerMode = IratContainerMode.Egy;
     this.iratservice.EgyMode = IratEgyMode.Dokumentum;
     this.dokumentumservice.ContainerMode = DokumentumContainerMode.List;
   }
@@ -129,6 +132,10 @@ export class IratListComponent implements OnDestroy {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
+  }
+
+  torlesutan() {
+    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

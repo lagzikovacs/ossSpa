@@ -97,6 +97,7 @@ export class ProjektkapcsolatUjiratComponent implements OnInit, OnDestroy {
 
         this.projektkapcsolatservice.Dto.unshift(res2.Result[0]);
 
+        this.eppFrissit = false;
         this.navigal();
       })
       .catch(err => {

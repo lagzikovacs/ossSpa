@@ -31,9 +31,6 @@ export class CsoportEgyComponent implements OnDestroy {
     this.csoportservice = csoportservice;
   }
 
-  vissza() {
-    this.csoportservice.ContainerMode = CsoportContainerMode.List;
-  }
   reszletek() {
     this.csoportservice.EgyMode = CsoportEgyMode.Reszletek;
   }

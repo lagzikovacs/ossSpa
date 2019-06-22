@@ -7,11 +7,15 @@
                [enUj]="!eppFrissit" (Uj)="uj()"
                [visZoom]="fizetesimodservice.zoom" (StopZoom)="stopzoom()">
   </app-toolbar>
-  <app-tabla [items]="fizetesimodservice.Dto"
+  <app-tabla #tabla
+             [items]="fizetesimodservice.Dto"
              [colsets]="fizetesimodservice.GridSettings"
              [zoom]="fizetesimodservice.zoom"
-             [(selectedrow)]="ti"
              (forzoom)="selectforzoom($event)"
-             (forid)="setClickedRow($event)">
+             (forid)="setClickedRow($event)"
+             [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #gridegy>
+    <app-fizetesimod-egy (torlesutan)="torlesutan()"></app-fizetesimod-egy>
+  </ng-template>
 </div>

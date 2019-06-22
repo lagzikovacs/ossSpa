@@ -1,17 +1,19 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ProjektteendoService} from '../projektteendo.service';
 import {ProjektteendoContainerMode} from '../projektteendocontainermode';
 import {ProjektteendoEgyMode} from '../projekttendoegymode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {TablaComponent} from '../../tools/tabla/tabla.component';
 
 @Component({
   selector: 'app-projekt-teendo-list',
   templateUrl: './projekt-teendo-list.component.html'
 })
 export class ProjektTeendoListComponent implements OnDestroy {
+  @ViewChild('tabla') tabla: TablaComponent;
+
   projektteendoservice: ProjektteendoService;
-  ti = -1;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -29,6 +31,8 @@ export class ProjektTeendoListComponent implements OnDestroy {
   }
 
   kereses() {
+    this.tabla.clearselections();
+
     this.eppFrissit = true;
     this.projektteendoservice.Kereses()
       .then(res => {
@@ -42,7 +46,6 @@ export class ProjektTeendoListComponent implements OnDestroy {
   setClickedRow(i: number) {
     this.projektteendoservice.DtoSelectedIndex = i;
     this.projektteendoservice.uj = false;
-    this.projektteendoservice.ContainerMode = ProjektteendoContainerMode.Egy;
     this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Reszletek;
   }
   uj() {
@@ -64,6 +67,10 @@ export class ProjektTeendoListComponent implements OnDestroy {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
+  }
+
+  torlesutan() {
+    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

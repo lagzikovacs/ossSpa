@@ -1,18 +1,20 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {VolumeService} from '../volume.service';
 import {VolumeContainerMode} from '../volumecontainermode';
 import {VolumeEgyMode} from '../volumeegymode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {TablaComponent} from '../../tools/tabla/tabla.component';
 
 @Component({
   selector: 'app-volume-list',
   templateUrl: './volume-list.component.html'
 })
 export class VolumeListComponent implements OnInit, OnDestroy {
+  @ViewChild('tabla') tabla: TablaComponent;
+
   elsokereses = true;
   volumeservice: VolumeService;
-  ti = -1;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -36,6 +38,8 @@ export class VolumeListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.elsokereses = true;
     this.volumeservice.ekDto.rekordtol = 0;
+
+    this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
@@ -69,9 +73,13 @@ export class VolumeListComponent implements OnInit, OnDestroy {
 
   setClickedRow(i: number) {
     this.volumeservice.DtoSelectedIndex = i;
-    this.volumeservice.ContainerMode = VolumeContainerMode.Egy;
     this.volumeservice.EgyMode = VolumeEgyMode.Reszletek;
   }
+
+  torlesutan() {
+    this.tabla.clearselections();
+  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

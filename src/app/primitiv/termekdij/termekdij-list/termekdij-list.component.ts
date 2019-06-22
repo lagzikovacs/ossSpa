@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {TermekdijService} from '../termekdij.service';
 import {TermekdijEgyMode} from '../termekdijegymode';
 import {TermekdijContainerMode} from '../termekdijcontainermode';
@@ -11,16 +11,17 @@ import {CikkSzerkesztesMode} from '../../../cikk/cikkszerkesztesmode';
 import {BizonylattetelSzerkesztesMode} from '../../../bizonylat/bizonylattetelszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {TablaComponent} from '../../../tools/tabla/tabla.component';
 
 @Component({
   selector: 'app-termekdij-list',
   templateUrl: './termekdij-list.component.html'
 })
 export class TermekdijListComponent implements OnInit, OnDestroy {
+  @ViewChild('tabla') tabla: TablaComponent;
+
   szurok = ['KT'];
   mod = false;
-  ti = -1;
-
   termekdijservice: TermekdijService;
 
   private _eppFrissit = false;
@@ -51,6 +52,8 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.termekdijservice.elsokereses = true;
     this.termekdijservice.ekDto.rekordtol = 0;
+
+    this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
@@ -116,7 +119,6 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.termekdijservice.DtoSelectedIndex = i;
     this.termekdijservice.uj = false;
-    this.termekdijservice.ContainerMode = TermekdijContainerMode.Egy;
     this.termekdijservice.EgyMode = TermekdijEgyMode.Reszletek;
   }
 
@@ -139,6 +141,10 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
+  }
+
+  torlesutan() {
+    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

@@ -38,9 +38,6 @@ export class CikkEgyComponent implements OnDestroy {
     this.cikkservice = cikkservice;
   }
 
-  vissza() {
-    this.cikkservice.ContainerMode = CikkContainerMode.List;
-  }
   reszletek() {
     this.cikkservice.EgyMode = CikkEgyMode.Reszletek;
   }

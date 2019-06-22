@@ -8,11 +8,15 @@
                [enUj]="!eppFrissit && mod" (Uj)="uj()"
                [visZoom]="teendoservice.zoom" (StopZoom)="stopzoom()">
   </app-toolbar>
-  <app-tabla [items]="teendoservice.Dto"
+  <app-tabla #tabla
+             [items]="teendoservice.Dto"
              [colsets]="teendoservice.GridSettings"
              [zoom]="teendoservice.zoom"
-             [(selectedrow)]="ti"
              (forzoom)="selectforzoom($event)"
-             (forid)="setClickedRow($event)">
+             (forid)="setClickedRow($event)"
+             [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #gridegy>
+    <app-teendo-egy (torlesutan)="torlesutan()"></app-teendo-egy>
+  </ng-template>
 </div>

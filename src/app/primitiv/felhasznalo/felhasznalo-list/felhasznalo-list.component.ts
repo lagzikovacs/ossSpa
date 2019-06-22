@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FelhasznaloService} from '../felhasznalo.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
@@ -9,16 +9,17 @@ import {FelhasznaloEgyMode} from '../felhasznaloegymode';
 import {ProjektteendoSzerkesztesMode} from '../../../projektteendo/projektteendoszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {TablaComponent} from '../../../tools/tabla/tabla.component';
 
 @Component({
   selector: 'app-felhasznalo-list',
   templateUrl: './felhasznalo-list.component.html'
 })
 export class FelhasznaloListComponent implements OnInit, OnDestroy {
+  @ViewChild('tabla') tabla: TablaComponent;
+
   szurok = ['Név'];
   mod = false;
-  ti = -1;
-
   felhasznaloservice: FelhasznaloService;
 
   private _eppFrissit = false;
@@ -48,6 +49,8 @@ export class FelhasznaloListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.felhasznaloservice.elsokereses = true;
     this.felhasznaloservice.ekDto.rekordtol = 0;
+
+    this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
@@ -101,7 +104,6 @@ export class FelhasznaloListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.felhasznaloservice.DtoSelectedIndex = i;
     this.felhasznaloservice.uj = false;
-    this.felhasznaloservice.ContainerMode = FelhasznaloContainerMode.Egy;
     this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Reszletek;
   }
 
@@ -124,6 +126,10 @@ export class FelhasznaloListComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
+  }
+
+  torlesutan() {
+    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

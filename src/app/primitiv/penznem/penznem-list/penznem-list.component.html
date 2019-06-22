@@ -8,11 +8,15 @@
                [enUj]="!eppFrissit && mod" (Uj)="uj()"
                [visZoom]="penznemservice.zoom" (StopZoom)="stopzoom()">
   </app-toolbar>
-  <app-tabla [items]="penznemservice.Dto"
+  <app-tabla #tabla
+             [items]="penznemservice.Dto"
              [colsets]="penznemservice.GridSettings"
              [zoom]="penznemservice.zoom"
-             [(selectedrow)]="ti"
              (forzoom)="selectforzoom($event)"
-             (forid)="setClickedRow($event)">
+             (forid)="setClickedRow($event)"
+             [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #gridegy>
+    <app-penznem-egy (torlesutan)="torlesutan()"></app-penznem-egy>
+  </ng-template>
 </div>

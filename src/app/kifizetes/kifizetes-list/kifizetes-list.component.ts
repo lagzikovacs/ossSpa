@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {KifizetesService} from '../kifizetes.service';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {KifizetesContainerMode} from '../kifizetescontainermode';
@@ -7,14 +7,16 @@ import {KifizetesSzerkesztesMode} from '../kifizetesszerkesztesmode';
 import * as moment from 'moment';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {TablaComponent} from '../../tools/tabla/tabla.component';
 
 @Component({
   selector: 'app-kifizetes-list',
   templateUrl: './kifizetes-list.component.html'
 })
 export class KifizetesListComponent implements OnDestroy {
+  @ViewChild('tabla') tabla: TablaComponent;
+
   bizonylatkifizetesservice: KifizetesService;
-  ti = -1;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -33,6 +35,8 @@ export class KifizetesListComponent implements OnDestroy {
   }
 
   kereses() {
+    this.tabla.clearselections();
+
     this.eppFrissit = true;
     this.bizonylatkifizetesservice.Select(this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Bizonylatkod)
       .then(res => {
@@ -48,7 +52,6 @@ export class KifizetesListComponent implements OnDestroy {
   setClickedRow(i: number) {
     this.bizonylatkifizetesservice.DtoSelectedIndex = i;
     this.bizonylatkifizetesservice.uj = false;
-    this.bizonylatkifizetesservice.ContainerMode = KifizetesContainerMode.Egy;
     this.bizonylatkifizetesservice.EgyMode = KifizetesEgyMode.Reszletek;
   }
   uj() {
@@ -82,6 +85,10 @@ export class KifizetesListComponent implements OnDestroy {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
+  }
+
+  torlesutan() {
+    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

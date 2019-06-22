@@ -4,7 +4,7 @@
                [(szempont)]="ajanlatkeresservice.szempont"
                [(minta)]="ajanlatkeresservice.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [visUj]="true" [enUj]="mod" (Uj)="uj()">
+               [visUj]="false">
   </app-toolbar>
   <table class="table table-bordered table-sm table-responsive" style="border: none">
     <thead>
@@ -22,7 +22,7 @@
     </thead>
     <tbody>
       <ng-container *ngFor="let item of ajanlatkeresservice.Dto; let i = index">
-        <tr>
+        <tr [class.active]="i == ajanlatkeresservice.DtoSelectedIndex">
           <td style="text-align: right;color: blue;text-decoration: underline;cursor: pointer" (click)="setClickedRow(i)">{{item.Ajanlatkereskod}}</td>
           <td>{{item.Ugynoknev}}</td>
           <td>{{item.Nev}}</td>
@@ -33,8 +33,10 @@
           <td style="text-align: right">{{item.Haviszamlaft | number: '1.2-2'}}</td>
           <td style="text-align: right">{{item.Napelemekteljesitmenyekw | number: '1.2-2'}}</td>
         </tr>
-        <tr *ngIf="item.Megjegyzes || '' !== ''">
-          <td colspan="9">{{item.Megjegyzes}}</td>
+        <tr *ngIf="i === ajanlatkeresservice.DtoSelectedIndex" [class.active]="i === ajanlatkeresservice.DtoSelectedIndex">
+          <td colspan="9">
+            <app-ajanlatkeres-egy></app-ajanlatkeres-egy>
+          </td>
         </tr>
       </ng-container>
     </tbody>

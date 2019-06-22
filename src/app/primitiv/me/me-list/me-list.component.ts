@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MeService} from '../me.service';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {CikkService} from '../../../cikk/cikk.service';
@@ -11,16 +11,17 @@ import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 import {BizonylattetelSzerkesztesMode} from '../../../bizonylat/bizonylattetelszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {TablaComponent} from '../../../tools/tabla/tabla.component';
 
 @Component({
   selector: 'app-me-list',
   templateUrl: './me-list.component.html'
 })
 export class MeListComponent implements OnInit, OnDestroy {
+  @ViewChild('tabla') tabla: TablaComponent;
+
   szurok = ['Mennyiségi egység'];
   mod = false;
-  ti = -1;
-
   meservice: MeService;
 
   private _eppFrissit = false;
@@ -51,6 +52,8 @@ export class MeListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.meservice.elsokereses = true;
     this.meservice.ekDto.rekordtol = 0;
+
+    this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
@@ -112,7 +115,6 @@ export class MeListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.meservice.DtoSelectedIndex = i;
     this.meservice.uj = false;
-    this.meservice.ContainerMode = MeContainerMode.Egy;
     this.meservice.EgyMode = MeEgyMode.Reszletek;
   }
 
@@ -135,6 +137,10 @@ export class MeListComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
+  }
+
+  torlesutan() {
+    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

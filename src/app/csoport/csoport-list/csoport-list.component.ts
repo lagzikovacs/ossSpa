@@ -1,20 +1,21 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {CsoportService} from '../csoport.service';
 import {CsoportContainerMode} from '../csoportcontainermode';
 import {CsoportEgyMode} from '../csoportegymode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {TablaComponent} from '../../tools/tabla/tabla.component';
 
 @Component({
   selector: 'app-csoport-list',
   templateUrl: './csoport-list.component.html'
 })
-export class CsoportListComponent {
-  csoportservice: CsoportService;
+export class CsoportListComponent implements OnDestroy {
+  @ViewChild('tabla') tabla: TablaComponent;
 
+  csoportservice: CsoportService;
   szurok = ['Csoport'];
   elsokereses = true;
-  ti = -1;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -34,6 +35,8 @@ export class CsoportListComponent {
   onKereses() {
     this.elsokereses = true;
     this.csoportservice.ekDto.rekordtol = 0;
+
+    this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
@@ -92,7 +95,6 @@ export class CsoportListComponent {
         this.csoportservice.DtoCsoportLehetsegesJog = res1.Result;
 
         this.eppFrissit = false;
-        this.csoportservice.ContainerMode = CsoportContainerMode.Egy;
         this.csoportservice.EgyMode = CsoportEgyMode.Reszletek;
       })
       .catch(err => {
@@ -120,5 +122,15 @@ export class CsoportListComponent {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
+  }
+
+  torlesutan() {
+    this.tabla.clearselections();
+  }
+
+  ngOnDestroy() {
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

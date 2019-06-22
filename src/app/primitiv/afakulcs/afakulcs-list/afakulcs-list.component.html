@@ -8,12 +8,16 @@
                [enUj]="!eppFrissit && mod" (Uj)="uj()"
                [visZoom]="afakulcsservice.zoom" (StopZoom)="stopzoom()">
   </app-toolbar>
-  <app-tabla [items]="afakulcsservice.Dto"
+  <app-tabla #tabla
+             [items]="afakulcsservice.Dto"
              [colsets]="afakulcsservice.GridSettings"
              [zoom]="afakulcsservice.zoom"
-             [(selectedrow)]="ti"
              (forzoom)="selectforzoom($event)"
-             (forid)="setClickedRow($event)">
+             (forid)="setClickedRow($event)"
+             [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #gridegy>
+    <app-afakulcs-egy (torlesutan)="torlesutan()"></app-afakulcs-egy>
+  </ng-template>
 </div>
 

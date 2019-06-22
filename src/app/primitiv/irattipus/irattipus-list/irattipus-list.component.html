@@ -8,11 +8,15 @@
                [enUj]="!eppFrissit && mod" (Uj)="uj()"
                [visZoom]="irattipusservice.zoom" (StopZoom)="stopzoom()">
   </app-toolbar>
-  <app-tabla [items]="irattipusservice.Dto"
+  <app-tabla #tabla
+             [items]="irattipusservice.Dto"
              [colsets]="irattipusservice.GridSettings"
              [zoom]="irattipusservice.zoom"
-             [(selectedrow)]="ti"
              (forzoom)="selectforzoom($event)"
-             (forid)="setClickedRow($event)">
+             (forid)="setClickedRow($event)"
+             [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #gridegy>
+    <app-irattipus-egy (torlesutan)="torlesutan()"></app-irattipus-egy>
+  </ng-template>
 </div>

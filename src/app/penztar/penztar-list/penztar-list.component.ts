@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {PenztarService} from '../penztar.service';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
@@ -10,17 +10,18 @@ import {PenztartetelContainerMode} from '../../penztartetel/penztartetelcontaine
 import {PenztarSzerkesztesMode} from '../penztarszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {TablaComponent} from '../../tools/tabla/tabla.component';
 
 @Component({
   selector: 'app-penztar-list',
   templateUrl: './penztar-list.component.html'
 })
 export class PenztarListComponent implements OnInit, OnDestroy {
-  szurok = ['Pénztár'];
+  @ViewChild('tabla') tabla: TablaComponent;
 
+  szurok = ['Pénztár'];
   mod = false;
   elsokereses = true;
-  ti = -1;
   penztarservice: PenztarService;
 
   private _eppFrissit = false;
@@ -48,6 +49,8 @@ export class PenztarListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.elsokereses = true;
     this.penztarservice.ekDto.rekordtol = 0;
+
+    this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
@@ -88,7 +91,6 @@ export class PenztarListComponent implements OnInit, OnDestroy {
     this.penztarservice.uj = false;
     this._penztartetelservice.Dto = new Array<PenztartetelDto>();
     this._penztartetelservice.OsszesRekord = 0;
-    this.penztarservice.ContainerMode = PenztarContainerMode.Egy;
     this.penztarservice.EgyMode = PenztarEgyMode.Tetelek;
     this._penztartetelservice.ContainerMode = PenztartetelContainerMode.List;
   }
@@ -113,6 +115,10 @@ export class PenztarListComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
+  }
+
+  torlesutan() {
+    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

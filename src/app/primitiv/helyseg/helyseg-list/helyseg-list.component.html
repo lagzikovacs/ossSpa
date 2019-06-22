@@ -8,11 +8,15 @@
                [enUj]="!eppFrissit && mod" (Uj)="uj()"
                [visZoom]="helysegservice.zoom" (StopZoom)="stopzoom()">
   </app-toolbar>
-  <app-tabla [items]="helysegservice.Dto"
+  <app-tabla #tabla
+             [items]="helysegservice.Dto"
              [colsets]="helysegservice.GridSettings"
              [zoom]="helysegservice.zoom"
-             [(selectedrow)]="ti"
              (forzoom)="selectforzoom($event)"
-             (forid)="setClickedRow($event)">
+             (forid)="setClickedRow($event)"
+             [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #gridegy>
+    <app-helyseg-egy (torlesutan)="torlesutan()"></app-helyseg-egy>
+  </ng-template>
 </div>

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FizetesimodService} from '../fizetesimod.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
@@ -11,16 +11,17 @@ import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 import {BizonylatSzerkesztesMode} from '../../../bizonylat/bizonylatszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {TablaComponent} from '../../../tools/tabla/tabla.component';
 
 @Component({
   selector: 'app-fizetesimod-list',
   templateUrl: './fizetesimod-list.component.html'
 })
 export class FizetesimodListComponent implements OnInit, OnDestroy {
+  @ViewChild('tabla') tabla: TablaComponent;
+
   szurok = ['Fizetési mód'];
   mod = false;
-  ti = -1;
-
   fizetesimodservice: FizetesimodService;
 
   private _eppFrissit = false;
@@ -51,6 +52,8 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.fizetesimodservice.elsokereses = true;
     this.fizetesimodservice.ekDto.rekordtol = 0;
+
+    this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
@@ -112,7 +115,6 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.fizetesimodservice.DtoSelectedIndex = i;
     this.fizetesimodservice.uj = false;
-    this.fizetesimodservice.ContainerMode = FizetesimodContainerMode.Egy;
     this.fizetesimodservice.EgyMode = FizetesimodEgyMode.Reszletek;
   }
 
@@ -135,6 +137,10 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
+  }
+
+  torlesutan() {
+    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

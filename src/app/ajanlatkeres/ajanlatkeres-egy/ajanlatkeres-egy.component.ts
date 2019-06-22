@@ -1,11 +1,9 @@
 import {Component, OnDestroy} from '@angular/core';
 import {AjanlatkeresService} from '../ajanlatkeres.service';
-import {AjanlatkeresContainerMode} from '../ajanlatkerescontainermode';
 import {AjanlatkeresEgyMode} from '../ajanlatkeresegymode';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
-import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-ajanlatkeres-egy',
@@ -23,9 +21,6 @@ export class FeliratkozasEgyComponent implements OnDestroy {
     this.ajanlatkeresservice = ajanlatkeresservice;
   }
 
-  vissza() {
-    this.ajanlatkeresservice.ContainerMode = AjanlatkeresContainerMode.List;
-  }
   reszletek() {
     this.ajanlatkeresservice.EgyMode = AjanlatkeresEgyMode.Reszletek;
   }

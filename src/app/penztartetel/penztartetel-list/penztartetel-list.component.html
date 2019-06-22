@@ -6,9 +6,9 @@
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
                [enUj]="!eppFrissit && mod && nyitva" (Uj)="onUj()">
   </app-toolbar>
-  <app-tabla [items]="penztartetelservice.Dto"
-             [colsets]="penztartetelservice.GridSettings"
-             [(selectedrow)]="ti">
+  <app-tabla #tabla
+             [items]="penztartetelservice.Dto"
+             [colsets]="penztartetelservice.GridSettings">
   </app-tabla>
 
   <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"

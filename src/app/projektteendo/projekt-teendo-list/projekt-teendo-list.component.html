@@ -10,9 +10,13 @@
       </button>
     </nav>
   </div>
-  <app-tabla [items]="projektteendoservice.Dto"
+  <app-tabla #tabla
+             [items]="projektteendoservice.Dto"
              [colsets]="projektteendoservice.GridSettings"
-             [(selectedrow)]="ti"
-             (forid)="setClickedRow($event)">
+             (forid)="setClickedRow($event)"
+             [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #gridegy>
+    <app-projekt-teendo-egy (torlesutan)="torlesutan()"></app-projekt-teendo-egy>
+  </ng-template>
 </div>

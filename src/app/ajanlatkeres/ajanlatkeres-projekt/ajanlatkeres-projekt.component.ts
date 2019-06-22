@@ -39,6 +39,7 @@ export class AjanlatkeresProjektComponent implements OnInit, OnDestroy {
     this.ajanlatkeresservice.pp.fi.push(
       new SzMT(Szempont.UgyfelEmail, this.ajanlatkeresservice.Dto[this.ajanlatkeresservice.DtoSelectedIndex].Email));
 
+    this.eppFrissit = true;
     this.projektservice.Select(this.ajanlatkeresservice.pp)
       .then(res => {
         if (res.Error != null) {

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {HelysegService} from '../helyseg.service';
 import {LogonService} from '../../../logon/logon.service';
 import {UgyfelService} from '../../../ugyfel/ugyfel.service';
@@ -9,16 +9,17 @@ import {HelysegEgyMode} from '../helysegegymode';
 import {UgyfelSzerkesztesMode} from '../../../ugyfel/ugyfelszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {TablaComponent} from '../../../tools/tabla/tabla.component';
 
 @Component({
   selector: 'app-helyseg-list',
   templateUrl: './helyseg-list.component.html'
 })
 export class HelysegListComponent implements OnInit, OnDestroy {
+  @ViewChild('tabla') tabla: TablaComponent;
+
   szurok = ['Helység'];
   mod = false;
-  ti = -1;
-
   helysegservice: HelysegService;
 
   private _eppFrissit = false;
@@ -48,6 +49,8 @@ export class HelysegListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.helysegservice.elsokereses = true;
     this.helysegservice.ekDto.rekordtol = 0;
+
+    this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
@@ -100,7 +103,6 @@ export class HelysegListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.helysegservice.DtoSelectedIndex = i;
     this.helysegservice.uj = false;
-    this.helysegservice.ContainerMode = HelysegContainerMode.Egy;
     this.helysegservice.EgyMode = HelysegEgyMode.Reszletek;
   }
 
@@ -123,6 +125,10 @@ export class HelysegListComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
+  }
+
+  torlesutan() {
+    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

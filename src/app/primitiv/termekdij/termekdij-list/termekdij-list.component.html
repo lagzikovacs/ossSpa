@@ -8,11 +8,15 @@
                [enUj]="!eppFrissit && mod" (Uj)="uj()"
                [visZoom]="termekdijservice.zoom" (StopZoom)="stopzoom()">
   </app-toolbar>
-  <app-tabla [items]="termekdijservice.Dto"
+  <app-tabla #tabla
+             [items]="termekdijservice.Dto"
              [colsets]="termekdijservice.GridSettings"
              [zoom]="termekdijservice.zoom"
-             [(selectedrow)]="ti"
              (forzoom)="selectforzoom($event)"
-             (forid)="setClickedRow($event)">
+             (forid)="setClickedRow($event)"
+             [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #gridegy>
+    <app-termekdij-egy (torlesutan)="torlesutan()"></app-termekdij-egy>
+  </ng-template>
 </div>

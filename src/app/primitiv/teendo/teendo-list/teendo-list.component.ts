@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {TeendoService} from '../teendo.service';
 import {JogKod} from '../../../enums/jogkod';
 import {LogonService} from '../../../logon/logon.service';
@@ -9,16 +9,17 @@ import {TeendoEgyMode} from '../teendoegymode';
 import {ProjektteendoSzerkesztesMode} from '../../../projektteendo/projektteendoszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {TablaComponent} from '../../../tools/tabla/tabla.component';
 
 @Component({
   selector: 'app-teendo-list',
   templateUrl: './teendo-list.component.html'
 })
 export class TeendoListComponent implements OnInit, OnDestroy {
+  @ViewChild('tabla') tabla: TablaComponent;
+
   szurok = ['Teendő'];
   mod = false;
-  ti = -1
-
   teendoservice: TeendoService;
 
   private _eppFrissit = false;
@@ -48,6 +49,8 @@ export class TeendoListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.teendoservice.elsokereses = true;
     this.teendoservice.ekDto.rekordtol = 0;
+
+    this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
@@ -102,7 +105,6 @@ export class TeendoListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.teendoservice.DtoSelectedIndex = i;
     this.teendoservice.uj = false;
-    this.teendoservice.ContainerMode = TeendoContainerMode.Egy;
     this.teendoservice.EgyMode = TeendoEgyMode.Reszletek;
   }
 
@@ -125,6 +127,10 @@ export class TeendoListComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
+  }
+
+  torlesutan() {
+    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

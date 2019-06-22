@@ -13,7 +13,8 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-ajanlatkeres-list',
-  templateUrl: './ajanlatkeres-list.component.html'
+  templateUrl: './ajanlatkeres-list.component.html',
+  styleUrls: ['./ajanlatkeres-list.component.css']
 })
 export class AjanlatkeresListComponent implements OnDestroy {
   szurok = ['Id', 'Ügynök', 'Név', 'Cím', 'Email', 'Telefonszám'];
@@ -23,7 +24,6 @@ export class AjanlatkeresListComponent implements OnDestroy {
     Szempont.Telefonszam
   ];
 
-  mod = false;
   ajanlatkeresservice: AjanlatkeresService;
 
   private _eppFrissit = false;
@@ -35,11 +35,9 @@ export class AjanlatkeresListComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(private _logonservice: LogonService,
-              private _errorservice: ErrorService,
+  constructor(private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               ajanlatkeresservice: AjanlatkeresService) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.AJANLATKERESMOD]);
     this.ajanlatkeresservice = ajanlatkeresservice;
   }
 
@@ -88,28 +86,8 @@ export class AjanlatkeresListComponent implements OnDestroy {
     this.ajanlatkeresservice.ProjektDto = new Array<ProjektDto>();
 
     this.ajanlatkeresservice.DtoSelectedIndex = i;
-    this.ajanlatkeresservice.ContainerMode = AjanlatkeresContainerMode.Egy;
+    // this.ajanlatkeresservice.ContainerMode = AjanlatkeresContainerMode.Egy;
     this.ajanlatkeresservice.EgyMode = AjanlatkeresEgyMode.Reszletek;
-  }
-  uj() {
-    this.eppFrissit = true;
-    this.ajanlatkeresservice.CreateNew()
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
-
-        this.ajanlatkeresservice.uj = true;
-        this.ajanlatkeresservice.DtoEdited = res.Result[0];
-        this.ajanlatkeresservice.DtoSelectedIndex = -1;
-        this.eppFrissit = false;
-
-        this.ajanlatkeresservice.ContainerMode = AjanlatkeresContainerMode.Uj;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
   }
   ngOnDestroy() {
     Object.keys(this).map(k => {

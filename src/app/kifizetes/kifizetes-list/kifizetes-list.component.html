@@ -10,10 +10,14 @@
       </button>
     </nav>
   </div>
-  <app-tabla [items]="bizonylatkifizetesservice.Dto"
+  <app-tabla #tabla
+             [items]="bizonylatkifizetesservice.Dto"
              [colsets]="bizonylatkifizetesservice.GridSettings"
-             [(selectedrow)]="ti"
-             (forid)="setClickedRow($event)">
+             (forid)="setClickedRow($event)"
+             [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #gridegy>
+    <app-kifizetes-egy (torlesutan)="torlesutan()"></app-kifizetes-egy>
+  </ng-template>
 </div>
 

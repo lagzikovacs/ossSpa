@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {AfakulcsService} from '../afakulcs.service';
 import {CikkService} from '../../../cikk/cikk.service';
 import {ZoomSources} from '../../../enums/zoomsources';
@@ -11,17 +11,17 @@ import {BizonylattetelSzerkesztesMode} from '../../../bizonylat/bizonylattetelsz
 import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {TablaComponent} from '../../../tools/tabla/tabla.component';
 
 @Component({
   selector: 'app-afakulcs-list',
   templateUrl: './afakulcs-list.component.html'
 })
 export class AfakulcsListComponent implements OnInit, OnDestroy {
+  @ViewChild('tabla') tabla: TablaComponent;
+
   szurok = ['ÁFA kulcs'];
-
   mod = false;
-  ti = -1;
-
   afakulcsservice: AfakulcsService;
 
   private _eppFrissit = false;
@@ -52,6 +52,9 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.afakulcsservice.elsokereses = true;
     this.afakulcsservice.ekDto.rekordtol = 0;
+    this.afakulcsservice.DtoSelectedIndex = -1;
+
+    this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
@@ -111,7 +114,6 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.afakulcsservice.DtoSelectedIndex = i;
     this.afakulcsservice.uj = false;
-    this.afakulcsservice.ContainerMode = AfakulcsContainerMode.Egy;
     this.afakulcsservice.EgyMode = AfakulcsEgyMode.Reszletek;
   }
 
@@ -134,6 +136,10 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
+  }
+
+  torlesutan() {
+    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

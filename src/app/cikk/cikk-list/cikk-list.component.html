@@ -8,14 +8,17 @@
                [enUj]="!eppFrissit && mod" (Uj)="onUj()"
                [visZoom]="cikkservice.zoom" (StopZoom)="stopzoom()">
   </app-toolbar>
-  <app-tabla [items]="cikkservice.Dto"
+  <app-tabla #tabla
+             [items]="cikkservice.Dto"
              [colsets]="cikkservice.GridSettings"
              [zoom]="cikkservice.zoom"
-             [(selectedrow)]="ti"
              (forzoom)="selectforzoom($event)"
-             (forid)="setClickedRow($event)">
+             (forid)="setClickedRow($event)"
+             [egyTemplate]="gridegy">
   </app-tabla>
-
+  <ng-template #gridegy>
+    <app-cikk-egy (torlesutan)="torlesutan()"></app-cikk-egy>
+  </ng-template>
   <app-toolbarfooter [enKereses]="!cikkservice.elsokereses && !eppFrissit"
                      [rekordszam]="cikkservice.Dto.length"
                      [osszesrekord]="cikkservice.OsszesRekord"

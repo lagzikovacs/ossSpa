@@ -6,12 +6,16 @@
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
                [enUj]="!eppFrissit" (Uj)="uj()">
   </app-toolbar>
-  <app-tabla [items]="csoportservice.Dto"
+  <app-tabla #tabla
+             [items]="csoportservice.Dto"
              [colsets]="csoportservice.GridSettings"
              [zoom]="csoportservice.zoom"
-             [(selectedrow)]="ti"
              (forzoom)="selectforzoom($event)"
-             (forid)="setClickedRow($event)">
+             (forid)="setClickedRow($event)"
+             [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #gridegy>
+    <app-csoport-egy (torlesutan)="torlesutan()"></app-csoport-egy>
+  </ng-template>
 </div>
 

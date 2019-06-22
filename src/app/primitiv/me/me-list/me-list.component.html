@@ -8,11 +8,15 @@
                [enUj]="!eppFrissit && mod" (Uj)="uj()"
                [visZoom]="meservice.zoom" (StopZoom)="stopzoom()">
   </app-toolbar>
-  <app-tabla [items]="meservice.Dto"
+  <app-tabla #tabla
+             [items]="meservice.Dto"
              [colsets]="meservice.GridSettings"
              [zoom]="meservice.zoom"
-             [(selectedrow)]="ti"
              (forzoom)="selectforzoom($event)"
-             (forid)="setClickedRow($event)">
+             (forid)="setClickedRow($event)"
+             [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #gridegy>
+    <app-me-egy (torlesutan)="torlesutan()"></app-me-egy>
+  </ng-template>
 </div>

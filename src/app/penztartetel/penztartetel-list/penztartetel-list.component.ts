@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {PenztarService} from '../../penztar/penztar.service';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
@@ -8,12 +8,15 @@ import {SzMT} from '../../dtos/szmt';
 import {PenztartetelContainerMode} from '../penztartetelcontainermode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {TablaComponent} from '../../tools/tabla/tabla.component';
 
 @Component({
   selector: 'app-penztartetel-list',
   templateUrl: './penztartetel-list.component.html'
 })
 export class PenztartetelListComponent implements OnDestroy {
+  @ViewChild('tabla') tabla: TablaComponent;
+
   szurok = ['Id', 'Pénztárbizonylatszám', 'Ügyfél', 'Bizonylatszám'];
   szempontok = [
     Szempont.Kod, Szempont.PenztarBizonylatszam, Szempont.Ugyfel, Szempont.Bizonylatszam
@@ -54,6 +57,8 @@ export class PenztartetelListComponent implements OnDestroy {
       this.penztarservice.Dto[this.penztarservice.DtoSelectedIndex].Penztarkod.toString()));
     this.penztartetelservice.ptp.fi.push(new SzMT(this.szempontok[this.penztartetelservice.szempont],
       this.penztartetelservice.minta));
+
+    this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
@@ -104,6 +109,10 @@ export class PenztartetelListComponent implements OnDestroy {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
+  }
+
+  torlesutan() {
+    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

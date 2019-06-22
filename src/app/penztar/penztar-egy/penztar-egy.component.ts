@@ -38,9 +38,6 @@ export class PenztarEgyComponent implements OnDestroy {
     this.nyitva = this.penztarservice.Dto[this.penztarservice.DtoSelectedIndex].Nyitva;
   }
 
-  vissza() {
-    this.penztarservice.ContainerMode = PenztarContainerMode.List;
-  }
   reszletek() {
     this.penztarservice.EgyMode = PenztarEgyMode.Reszletek;
   }

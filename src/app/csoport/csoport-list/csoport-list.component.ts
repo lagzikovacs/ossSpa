@@ -68,13 +68,13 @@ export class CsoportListComponent implements OnDestroy {
       });
   }
 
-  selectforzoom(i: number) {
-
-  }
-
   setClickedRow(i: number) {
     this.csoportservice.DtoSelectedIndex = i;
     this.csoportservice.uj = false;
+
+    if (this.csoportservice.DtoSelectedIndex === -1) {
+      return;
+    }
 
     this.eppFrissit = true;
     this.csoportservice.SelectCsoportFelhasznalo(this.csoportservice.Dto[i].Csoportkod)

@@ -1,16 +1,6 @@
 <div class="alapkeret">
-  <h5>{{bizonylatkifizetesservice.cim}}</h5>
-  <div style="margin-bottom: 10px; font-size: smaller">
-      {{bizonylatkifizetesservice.Dto[bizonylatkifizetesservice.DtoSelectedIndex].Datum | datehun}}
-      {{bizonylatkifizetesservice.Dto[bizonylatkifizetesservice.DtoSelectedIndex].Osszeg | number: '1.2-2'}}
-      {{bizonylatkifizetesservice.Dto[bizonylatkifizetesservice.DtoSelectedIndex].Penznem}}
-      {{bizonylatkifizetesservice.Dto[bizonylatkifizetesservice.DtoSelectedIndex].Fizetesimod}}
-  </div>
   <div>
     <nav>
-      <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-arrow-left" style="margin-right: 3px" aria-hidden="true"></i>Vissza
-      </button>
       <button [disabled]="eppFrissit" (click)="reszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>Részletesen
       </button>

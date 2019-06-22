@@ -31,9 +31,6 @@ export class KifizetesEgyComponent implements OnDestroy {
     this.bizonylatkifizetesservice = bizonylatkifizetesservice;
   }
 
-  vissza() {
-    this.bizonylatkifizetesservice.ContainerMode = KifizetesContainerMode.List;
-  }
   reszletek() {
     this.bizonylatkifizetesservice.EgyMode = KifizetesEgyMode.Reszletek;
   }

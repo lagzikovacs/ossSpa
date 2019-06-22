@@ -9,8 +9,6 @@
   <app-tabla #tabla
              [items]="csoportservice.Dto"
              [colsets]="csoportservice.GridSettings"
-             [zoom]="csoportservice.zoom"
-             (forzoom)="selectforzoom($event)"
              (forid)="setClickedRow($event)"
              [egyTemplate]="gridegy">
   </app-tabla>

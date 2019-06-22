@@ -16,9 +16,10 @@ import {ColumnSettings} from '../tools/reszletek/columnsettings';
 export class PenztartetelService {
   private readonly _controller = 'api/penztartetel/';
 
-  cim = 'Pénztártétel';
+  cim = 'Pénztártételek';
   szempont = 0;
   minta = '';
+  elsokereses = true;
   ptp = new PenztartetelParameter(0, environment.lapmeret);
   OsszesRekord = 0;
 

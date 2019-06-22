@@ -11,7 +11,7 @@
              [colsets]="penztartetelservice.GridSettings">
   </app-tabla>
 
-  <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
+  <app-toolbarfooter [enKereses]="!penztartetelservice.elsokereses && !eppFrissit"
                      [rekordszam]="penztartetelservice.Dto.length"
                      [osszesrekord]="penztartetelservice.OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">

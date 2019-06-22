@@ -32,8 +32,6 @@ export class CsoportService {
   Dto: CsoportDto[] = new Array<CsoportDto>();
   DtoSelectedIndex = -1;
   uj = false;
-  zoom = false;
-  zoomsource: ZoomSources;
   DtoEdited = new CsoportDto();
 
   DtoCsoportFelhasznalo: FelhasznaloDto[] = new Array<FelhasznaloDto>();

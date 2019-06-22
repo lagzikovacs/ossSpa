@@ -60,12 +60,6 @@ export class IratEgyComponent implements OnDestroy {
     this.projektservice = projektservice;
   }
 
-  vissza() {
-    this._projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
-    this._bizonylatkapcsolatservice.ContainerMode = BizonylatKapcsolatContainerMode.List;
-    this.iratservice.ContainerMode = IratContainerMode.List;
-    // TODO talán problémát okozhat...
-  }
   reszletek() {
     this.iratservice.EgyMode = IratEgyMode.Reszletek;
   }

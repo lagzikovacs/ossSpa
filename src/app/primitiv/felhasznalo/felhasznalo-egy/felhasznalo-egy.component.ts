@@ -38,9 +38,6 @@ export class FelhasznaloEgyComponent implements OnDestroy {
     this.felhasznaloservice = felhasznaloservice;
   }
 
-  vissza() {
-    this.felhasznaloservice.ContainerMode = FelhasznaloContainerMode.List;
-  }
   reszletek() {
     this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Reszletek;
   }

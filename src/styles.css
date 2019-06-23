@@ -25,6 +25,7 @@ html, body {
 
 .editform-row {
   margin-bottom: 5px;
+  margin-left: 20px;
 }
 
 @media(max-width:963px) {

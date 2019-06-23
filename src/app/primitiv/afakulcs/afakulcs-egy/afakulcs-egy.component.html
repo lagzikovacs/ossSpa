@@ -1,15 +1,16 @@
 <div class="alapkeret">
   <div>
     <nav>
-      <button [disabled]="eppFrissit" (click)="reszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>Részletesen
+      <button [disabled]="eppFrissit"
+              (click)="reszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+        <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>
       </button>
 
-      <button [disabled]="eppFrissit || afakulcsservice.DtoSelectedIndex === -1 || !mod"
+      <button [disabled]="eppFrissit || !mod"
               (click)="torles()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-minus" aria-hidden="true"></i>
       </button>
-      <button [disabled]="eppFrissit || afakulcsservice.DtoSelectedIndex === -1 || !mod"
+      <button [disabled]="eppFrissit || !mod"
               (click)="modositas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-edit" aria-hidden="true"></i>
       </button>

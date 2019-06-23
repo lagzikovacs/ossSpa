@@ -23,6 +23,7 @@ export class StartupResult {
   Termekdij_Reszletek: ColumnSettings[];
 
   Cikk_Grid: ColumnSettings[];
+  BeszerzesKivet_Grid: ColumnSettings[];
   Cikk_Reszletek: ColumnSettings[];
   Ugyfel_Grid: ColumnSettings[];
   Ugyfel_Reszletek: ColumnSettings[];

@@ -2,36 +2,10 @@
   <h5 *ngIf="cikkservice.BizonylattipusKod === 3">Beszerzés</h5>
   <h5 *ngIf="cikkservice.BizonylattipusKod === 2">Kivét</h5>
 
-  <table class="table table-bordered table-sm table-responsive" style="border: none">
-    <thead>
-    <tr>
-      <th>Bizonylatszám</th>
-      <th>Ügyfél</th>
-      <th>A teljesítés kelte</th>
-      <th>Mennyiség</th>
-      <th>Me</th>
-      <th>Egységár</th>
-      <th>Pénznem</th>
-      <th>Netto</th>
-      <th>Netto Ft</th>
-    </tr>
-    </thead>
-    <tbody>
-    <ng-container *ngFor="let item of cikkservice.MozgasDto">
-      <tr>
-        <td>{{item.Bizonylatszam}}</td>
-        <td>{{item.Ugyfelnev}}</td>
-        <td>{{item.Teljesiteskelte | datehun}}</td>
-        <td>{{item.Mennyiseg}}</td>
-        <td>{{item.Me}}</td>
-        <td>{{item.Egysegar}}</td>
-        <td>{{item.Penznem}}</td>
-        <td>{{item.Netto}}</td>
-        <td>{{item.Nettoft}}</td>
-      </tr>
-    </ng-container>
-    </tbody>
-  </table>
+  <app-tabla #tabla
+             [items]="cikkservice.MozgasDto"
+             [colsets]="cikkservice.BeszerzesKivetGridSettings">
+  </app-tabla>
 </div>
 
 

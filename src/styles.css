@@ -42,6 +42,9 @@ html, body {
 .oszlop5 {
   width: 300px;
 }
+.oszlop6 {
+  width: 360px;
+}
 
 @media(max-width:963px) {
   .editform-title {

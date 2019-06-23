@@ -46,6 +46,7 @@ export class CikkService {
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;
+  BeszerzesKivetGridSettings: ColumnSettings[] = undefined;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

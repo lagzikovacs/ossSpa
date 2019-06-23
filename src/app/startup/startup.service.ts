@@ -123,6 +123,7 @@ export class StartupService {
         this._termekdijservice.ReszletekSettings = res3.Termekdij_Reszletek;
 
         this._cikkservice.GridSettings = res3.Cikk_Grid;
+        this._cikkservice.BeszerzesKivetGridSettings = res3.BeszerzesKivet_Grid;
         this._cikkservice.ReszletekSettings = res3.Cikk_Reszletek;
         this._ugyfelservice.GridSettings = res3.Ugyfel_Grid;
         this._ugyfelservice.ReszletekSettings = res3.Ugyfel_Reszletek;

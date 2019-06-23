@@ -5,18 +5,15 @@
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Pénznem</div>
-      </div>
-      <div class="col-md-2">
-        <input type="text" class="form-control form-control-sm" id="irattipus1"
+      <div>
+        <div class="egylabel">Pénznem</div>
+        <input type="text" class="form-control form-control-sm oszlop2" id="irattipus1"
                maxlength="3" required autocomplete="off"
                [(ngModel)]="penznemservice.DtoEdited.Penznem1" name="irattipus1">
       </div>
     </div>
 
-    <div class="row no-gutters" style="margin-bottom: 10px">
-      <div class="col-md-2"></div>
+    <div class="row no-gutters editform-row">
       <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
     </div>

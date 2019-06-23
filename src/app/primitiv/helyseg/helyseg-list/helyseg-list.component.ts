@@ -18,7 +18,7 @@ import {TablaComponent} from '../../../tools/tabla/tabla.component';
 export class HelysegListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
-  szurok = ['Helység'];
+  szurok = ['Helységnév'];
   mod = false;
   helysegservice: HelysegService;
 

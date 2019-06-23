@@ -5,38 +5,31 @@
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">KT</div>
-      </div>
-      <div class="col-md-2">
-        <input type="text" class="form-control form-control-sm" id="kt"
+      <div>
+        <div class="egylabel">KT</div>
+        <input type="text" class="form-control form-control-sm oszlop2" id="kt"
                maxlength="30" required autocomplete="off"
                [(ngModel)]="termekdijservice.DtoEdited.Termekdijkt" name="kt">
       </div>
     </div>
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Megnevezés</div>
-      </div>
-      <div class="col-md-4">
-        <input type="text" class="form-control form-control-sm" id="megnevezes"
+      <div>
+        <div class="egylabel">Megnevezés</div>
+        <input type="text" class="form-control form-control-sm oszlop4" id="megnevezes"
                maxlength="50" required autocomplete="off"
                [(ngModel)]="termekdijservice.DtoEdited.Termekdijmegnevezes" name="megnevezes">
       </div>
     </div>
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Egységár</div>
-      </div>
-      <div class="col-md-1">
-        <input type="number" class="form-control form-control-sm" id="egysegar"
+      <div>
+        <div class="egylabel">Egységár</div>
+        <input type="number" class="form-control form-control-sm oszlop2" id="egysegar"
                required autocomplete="off"
                [(ngModel)]="termekdijservice.DtoEdited.Termekdijegysegar" name="egysegar">
       </div>
     </div>
 
-    <div class="row no-gutters" style="margin-bottom: 10px">
-      <div class="col-md-2"></div>
+    <div class="row no-gutters editform-row">
       <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
     </div>

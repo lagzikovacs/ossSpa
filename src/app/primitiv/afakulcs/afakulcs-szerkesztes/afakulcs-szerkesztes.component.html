@@ -6,17 +6,17 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div>ÁFA kulcs</div>
-        <input type="text" class="form-control form-control-sm" id="afakulcs"
-               maxlength="10" required autocomplete="off" style="width: 120px"
+        <div class="egylabel">ÁFA kulcs</div>
+        <input type="text" class="form-control form-control-sm oszlop2" id="afakulcs"
+               maxlength="10" required autocomplete="off"
                [(ngModel)]="afakulcsservice.DtoEdited.Afakulcs1" name="afakulcs">
       </div>
     </div>
     <div class="row no-gutters editform-row">
       <div>
-        <div>Az ÁFA mértéke, %</div>
-        <input type="number" class="form-control form-control-sm" id="egysegar"
-               required autocomplete="off" style="width: 80px"
+        <div class="egylabel">Az ÁFA mértéke, %</div>
+        <input type="number" class="form-control form-control-sm oszlop1" id="egysegar"
+               required autocomplete="off"
                [(ngModel)]="afakulcsservice.DtoEdited.Afamerteke" name="egysegar">
       </div>
     </div>

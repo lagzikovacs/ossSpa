@@ -24,8 +24,23 @@ html, body {
 
 
 .editform-row {
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   margin-left: 20px;
+}
+.oszlop1 {
+  width: 60px;
+}
+.oszlop2 {
+  width: 120px;
+}
+.oszlop3 {
+  width: 180px;
+}
+.oszlop4 {
+  width: 240px;
+}
+.oszlop5 {
+  width: 300px;
 }
 
 @media(max-width:963px) {
@@ -44,7 +59,7 @@ html, body {
 .egylabel {
   text-align: left;
   font-style: italic;
-  font-size: smaller;
+  /*font-size: smaller;*/
   padding-right: 10px;
 }
 

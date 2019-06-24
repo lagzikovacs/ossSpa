@@ -27,6 +27,7 @@ import {PenztartetelService} from '../penztartetel/penztartetel.service';
 import {VolumeService} from '../volume/volume.service';
 import {KifizetesService} from '../kifizetes/kifizetes.service';
 import {DokumentumService} from '../dokumentum/dokumentum.service';
+import {UgyfelterlogService} from '../ugyfelterlog/ugyfelterlog.service';
 
 @Injectable({
   providedIn: 'root'
@@ -58,7 +59,8 @@ export class StartupService {
               private _penztartetelservice: PenztartetelService,
               private _kifizetesservice: KifizetesService,
               private _dokumentumservice: DokumentumService,
-              private _volumeservice: VolumeService,) { }
+              private _volumeservice: VolumeService,
+              private _ugyfelterlogservice: UgyfelterlogService) { }
 
   public Get(): Promise<StartupResult> {
     const url = environment.CoreRef + this._controller + 'get';
@@ -155,6 +157,8 @@ export class StartupService {
         this._dokumentumservice.ReszletekSettings = res3.Dokumentum_Reszletek;
         this._volumeservice.GridSettings = res3.Volume_Grid;
         this._volumeservice.ReszletekSettings = res3.Volume_Reszletek;
+        this._ugyfelterlogservice.GridSettings = res3.Ugyfelterlog_Grid;
+        this._ugyfelterlogservice.ReszletekSettings = res3.Ugyfelterlog_Reszletek;
 
         this._logonservice.SzerepkorKivalasztva = true;
 

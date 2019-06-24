@@ -55,4 +55,6 @@ export class StartupResult {
   Dokumentum_Reszletek: ColumnSettings[];
   Volume_Grid: ColumnSettings[];
   Volume_Reszletek: ColumnSettings[];
+  Ugyfelterlog_Grid: ColumnSettings[];
+  Ugyfelterlog_Reszletek: ColumnSettings[];
 }

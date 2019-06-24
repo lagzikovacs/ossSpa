@@ -110,6 +110,7 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnDestro
 
         this._penztarservice.Dto[this._penztarservice.DtoSelectedIndex] = res2.Result[0];
 
+        this.eppFrissit = false;
         this.navigal();
       })
       .catch(err => {

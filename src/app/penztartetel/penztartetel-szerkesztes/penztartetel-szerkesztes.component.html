@@ -4,19 +4,16 @@
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Dátum</div>
-      </div>
-      <div class="col-md-2">
-        <input type="date" class="form-control form-control-sm" id="datum"
+      <div>
+        <div class="egylabel">Dátum</div>
+        <input type="date" class="form-control form-control-sm oszlop3" id="datum"
                [(ngModel)]="datum" name="datum">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Jogcím</div>
-      </div>
-      <div class="col-md-4">
+      <div>
+        <div class="egylabel">Jogcím</div>
         <select #jogcim type="text" class="form-control form-control-sm"
                 [(ngModel)]="penztartetelservice.DtoEdited.Jogcim" name="jogcim"
                 (change)="jogcimchange()">
@@ -30,59 +27,53 @@
         </select>
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Ügyfél</div>
-      </div>
-      <div class="col-md-4">
-        <input #ugyfel type="text" class="form-control form-control-sm" id="ugyfel"
+      <div>
+        <div class="egylabel">Ügyfél</div>
+        <input #ugyfel type="text" class="form-control form-control-sm oszlop4" id="ugyfel"
                autocomplete="off"
                [(ngModel)]="penztartetelservice.DtoEdited.Ugyfelnev" name="ugyfel">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Bizonylatszám</div>
-      </div>
-      <div class="col-md-2">
-        <input #bizonylatszam type="text" class="form-control form-control-sm" id="bizonylatszam"
+      <div>
+        <div class="egylabel">Bizonylatszám</div>
+        <input #bizonylatszam type="text" class="form-control form-control-sm oszlop2" id="bizonylatszam"
                autocomplete="off"
                [(ngModel)]="penztartetelservice.DtoEdited.Bizonylatszam" name="bizonylatszam">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Bevétel</div>
-      </div>
-      <div class="col-md-2">
-        <input #bevetel type="text" class="form-control form-control-sm" id="bevetel"
+      <div>
+        <div class="egylabel">Bevétel</div>
+        <input #bevetel type="text" class="form-control form-control-sm oszlop2" id="bevetel"
                autocomplete="off"
                [(ngModel)]="penztartetelservice.DtoEdited.Bevetel" name="bevetel">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Kiadás</div>
-      </div>
-      <div class="col-md-2">
-        <input #kiadas type="text" class="form-control form-control-sm" id="kiadas"
+      <div>
+        <div class="egylabel">Kiadás</div>
+        <input #kiadas type="text" class="form-control form-control-sm oszlop2" id="kiadas"
                autocomplete="off"
                [(ngModel)]="penztartetelservice.DtoEdited.Kiadas" name="kiadas">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Megjegyzés</div>
-      </div>
-      <div class="col-md-4">
-        <input type="text" class="form-control form-control-sm" id="megjegyzes"
+      <div>
+        <div class="egylabel">Megjegyzés</div>
+        <input type="text" class="form-control form-control-sm oszlop4" id="megjegyzes"
                autocomplete="off"
                [(ngModel)]="penztartetelservice.DtoEdited.Megjegyzes" name="megjegyzes">
       </div>
     </div>
 
-    <div class="row no-gutters" style="margin-bottom: 10px">
-      <div class="col-md-2"></div>
+    <div class="row no-gutters editform-row">
       <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
     </div>

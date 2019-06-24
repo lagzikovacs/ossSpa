@@ -6,26 +6,13 @@
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
                [visUj]="false">
   </app-toolbar>
-  <table class="table table-bordered table-sm table-responsive" style="border: none">
-    <thead>
-    <tr>
-      <th>Id</th>
-      <th>Név</th>
-      <th>Cím</th>
-      <th>Létrehozta</th>
-      <th>Létrehozva</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of ugyfelterlogservice.Dto; let i = index">
-      <td>{{item.Ugyfelterlogkod}}</td>
-      <td>{{item.Ugyfelnev}}</td>
-      <td>{{item.Ugyfelcim}}</td>
-      <td>{{item.Letrehozta}}</td>
-      <td>{{item.Letrehozva | datetimehun}}</td>
-    </tr>
-    </tbody>
-  </table>
+
+  <app-tabla #tabla
+             [items]="ugyfelterlogservice.Dto"
+             [colsets]="ugyfelterlogservice.GridSettings"
+             [idlink]="false">
+  </app-tabla>
+
   <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
                      [rekordszam]="ugyfelterlogservice.Dto.length"
                      [osszesrekord]="ugyfelterlogservice.OsszesRekord"

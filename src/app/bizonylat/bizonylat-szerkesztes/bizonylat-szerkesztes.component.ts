@@ -208,6 +208,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
           this.bizonylatservice.TermekdijDto = res4.Result[0].LstTermekdijDto;
         }
 
+        this.eppFrissit = false;
         this.navigal();
       })
       .catch(err => {

@@ -4,17 +4,13 @@ import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import {AjanlatkeresDto} from '../ajanlatkeresdto';
 import {ProjektDto} from '../../projekt/projektdto';
-import {AjanlatkeresContainerMode} from '../ajanlatkerescontainermode';
 import {AjanlatkeresEgyMode} from '../ajanlatkeresegymode';
-import {JogKod} from '../../enums/jogkod';
-import {LogonService} from '../../logon/logon.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-ajanlatkeres-list',
-  templateUrl: './ajanlatkeres-list.component.html',
-  styleUrls: ['./ajanlatkeres-list.component.css']
+  templateUrl: './ajanlatkeres-list.component.html'
 })
 export class AjanlatkeresListComponent implements OnDestroy {
   szurok = ['Id', 'Ügynök', 'Név', 'Cím', 'Email', 'Telefonszám'];
@@ -86,7 +82,6 @@ export class AjanlatkeresListComponent implements OnDestroy {
     this.ajanlatkeresservice.ProjektDto = new Array<ProjektDto>();
 
     this.ajanlatkeresservice.DtoSelectedIndex = i;
-    // this.ajanlatkeresservice.ContainerMode = AjanlatkeresContainerMode.Egy;
     this.ajanlatkeresservice.EgyMode = AjanlatkeresEgyMode.Reszletek;
   }
   ngOnDestroy() {

@@ -6,41 +6,17 @@
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
                [visUj]="false">
   </app-toolbar>
-  <table class="table table-bordered table-sm table-responsive" style="border: none">
-    <thead>
-    <tr>
-      <th>Id</th>
-      <th>Ügynöknév</th>
-      <th>Név</th>
-      <th>Cím</th>
-      <th>Email</th>
-      <th>Telefonszam</th>
-      <th>Havi fogyasztás, kWh</th>
-      <th>Havi számla, Ft</th>
-      <th>Napelemek teljesítménye, kW</th>
-    </tr>
-    </thead>
-    <tbody>
-      <ng-container *ngFor="let item of ajanlatkeresservice.Dto; let i = index">
-        <tr [class.active]="i == ajanlatkeresservice.DtoSelectedIndex">
-          <td style="text-align: right;color: blue;text-decoration: underline;cursor: pointer" (click)="setClickedRow(i)">{{item.Ajanlatkereskod}}</td>
-          <td>{{item.Ugynoknev}}</td>
-          <td>{{item.Nev}}</td>
-          <td>{{item.Cim}}</td>
-          <td>{{item.Email}}</td>
-          <td>{{item.Telefonszam}}</td>
-          <td style="text-align: right">{{item.Havifogyasztaskwh | number: '1.2-2'}}</td>
-          <td style="text-align: right">{{item.Haviszamlaft | number: '1.2-2'}}</td>
-          <td style="text-align: right">{{item.Napelemekteljesitmenyekw | number: '1.2-2'}}</td>
-        </tr>
-        <tr *ngIf="i === ajanlatkeresservice.DtoSelectedIndex" [class.active]="i === ajanlatkeresservice.DtoSelectedIndex">
-          <td colspan="9">
-            <app-ajanlatkeres-egy></app-ajanlatkeres-egy>
-          </td>
-        </tr>
-      </ng-container>
-    </tbody>
-  </table>
+
+  <app-tabla #tabla
+             [items]="ajanlatkeresservice.Dto"
+             [colsets]="ajanlatkeresservice.GridSettings"
+             (forid)="setClickedRow($event)"
+             [egyTemplate]="gridegy">
+  </app-tabla>
+  <ng-template #gridegy>
+    <app-ajanlatkeres-egy></app-ajanlatkeres-egy>
+  </ng-template>
+
   <app-toolbarfooter [enKereses]="!ajanlatkeresservice.elsokereses && !eppFrissit"
                      [rekordszam]="ajanlatkeresservice.Dto.length"
                      [osszesrekord]="ajanlatkeresservice.OsszesRekord"

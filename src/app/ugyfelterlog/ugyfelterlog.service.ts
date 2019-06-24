@@ -5,6 +5,7 @@ import {UgyfelterlogParameter} from './ugyfelterlogparameter';
 import {LogonService} from '../logon/logon.service';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {UgyfelterlogResult} from './ugyfelterlogresult';
+import {ColumnSettings} from '../tools/reszletek/columnsettings';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,9 @@ export class UgyfelterlogService {
   DtoSelectedIndex = -1;
   OsszesRekord = 0;
   ulp = new UgyfelterlogParameter(0, environment.lapmeret);
+
+  GridSettings: ColumnSettings[] = undefined;
+  ReszletekSettings: ColumnSettings[] = undefined;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

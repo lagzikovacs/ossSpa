@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {DokumentumService} from '../dokumentum.service';
 import {IratService} from '../../irat/irat.service';
 import {DokumentumDto} from '../dokumentumdto';
@@ -6,12 +6,15 @@ import {DokumentumContainerMode} from '../dokumentumcontainermode';
 import {DokumentumEgyMode} from '../dokumentumegymode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {TablaComponent} from '../../tools/tabla/tabla.component';
 
 @Component({
   selector: 'app-dokumentum-list',
   templateUrl: './dokumentum-list.component.html'
 })
 export class DokumentumListComponent implements OnInit, OnDestroy {
+  @ViewChild('tabla') tabla: TablaComponent;
+
   dokumentumservice: DokumentumService;
 
   private _eppFrissit = false;
@@ -64,7 +67,6 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.dokumentumservice.DtoSelectedIndex = i;
     this.dokumentumservice.uj = false;
-    this.dokumentumservice.ContainerMode = DokumentumContainerMode.Egy;
     this.dokumentumservice.EgyMode = DokumentumEgyMode.Reszletek;
   }
   feltoltes() {
@@ -72,6 +74,10 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
     this.dokumentumservice.DtoEdited = new DokumentumDto();
     this.dokumentumservice.uj = true;
     this.dokumentumservice.ContainerMode = DokumentumContainerMode.Feltoltes;
+  }
+
+  torlesutan() {
+    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

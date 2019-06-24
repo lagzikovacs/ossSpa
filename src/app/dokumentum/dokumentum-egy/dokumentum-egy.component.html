@@ -1,14 +1,6 @@
 <div class="alapkeret">
-  <h5>{{dokumentumservice.cim}}</h5>
-  <!--<h6 *ngIf="dokumentumservice.DtoMegjegyzesdex !== -1">{{dokumentumservice.Dto[dokumentumservice.DtoSelectedIndex].MEGJEGYZES}}</h6>-->
-  <div style="margin-bottom: 10px">
-    <div style="font-size: smaller">{{dokumentumservice.Dto[dokumentumservice.DtoSelectedIndex].Dokumentumkod}} {{dokumentumservice.Dto[dokumentumservice.DtoSelectedIndex].Megjegyzes}}</div>
-  </div>
   <div>
     <nav>
-      <button (click)="vissza()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-arrow-left" style="margin-right: 3px" aria-hidden="true"></i>Vissza
-      </button>
       <button (click)="reszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>
       </button>

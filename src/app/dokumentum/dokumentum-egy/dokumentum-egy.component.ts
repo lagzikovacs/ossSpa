@@ -30,9 +30,6 @@ export class DokumentumEgyComponent implements OnDestroy {
     this.dokumentumservice = dokumentumservice;
   }
 
-  vissza() {
-    this.dokumentumservice.ContainerMode = DokumentumContainerMode.List;
-  }
   reszletek() {
     this.dokumentumservice.EgyMode = DokumentumEgyMode.Reszletek;
   }

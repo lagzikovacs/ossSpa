@@ -38,9 +38,6 @@ export class UgyfelEgyComponent implements OnDestroy {
     this.ugyfelservice = ugyfelservice;
   }
 
-  vissza() {
-    this.ugyfelservice.ContainerMode = UgyfelContainerMode.List;
-  }
   reszletek() {
     this.ugyfelservice.EgyMode = UgyfelEgyMode.Reszletek;
   }

@@ -1,13 +1,6 @@
 <div class="alapkeret">
-  <h5>{{ugyfelservice.cim}}</h5>
-  <div style="margin-bottom: 10px">
-    <div style="font-size: smaller">{{ugyfelservice.Dto[ugyfelservice.DtoSelectedIndex].Nev}}, {{ugyfelservice.Dto[ugyfelservice.DtoSelectedIndex].Cim}}</div>
-  </div>
   <div>
     <nav>
-      <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-arrow-left" style="margin-right: 3px" aria-hidden="true"></i>Vissza
-      </button>
       <button [disabled]="eppFrissit" (click)="reszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>
       </button>

@@ -3,170 +3,145 @@
   <h5 *ngIf="!ugyfelservice.uj">{{ugyfelservice.cim}} módosítása</h5>
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Név</div>
-      </div>
-      <div class="col-md-4">
-        <input type="text" class="form-control form-control-sm" id="nev"
+      <div>
+        <div class="egylabel">Név</div>
+        <input type="text" class="form-control form-control-sm oszlop4" id="nev"
                maxlength="200" required autocomplete="off"
                [(ngModel)]="ugyfelservice.DtoEdited.Nev" name="nev">
       </div>
     </div>
 
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Cég</div>
-      </div>
-      <div class="col-md-4">
-        <input type="text" class="form-control form-control-sm" id="ceg"
+      <div>
+        <div class="egylabel">Cég</div>
+        <input type="text" class="form-control form-control-sm oszlop4" id="ceg"
                maxlength="200" autocomplete="off"
                [(ngModel)]="ugyfelservice.DtoEdited.Ceg" name="ceg">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Beosztás</div>
-      </div>
-      <div class="col-md-4">
-        <input type="text" class="form-control form-control-sm" id="beosztas"
+      <div>
+        <div class="egylabel">Beosztás</div>
+        <input type="text" class="form-control form-control-sm oszlop4" id="beosztas"
                maxlength="200" autocomplete="off"
                [(ngModel)]="ugyfelservice.DtoEdited.Beosztas" name="beosztas">
       </div>
     </div>
 
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Irányítószám</div>
-      </div>
-      <div class="col-md-1">
-        <input type="text" class="form-control form-control-sm" id="iranyitoszam"
+      <div>
+        <div class="egylabel">Irányítószám</div>
+        <input type="text" class="form-control form-control-sm oszlop1" id="iranyitoszam"
                maxlength="20" required autocomplete="off"
                [(ngModel)]="ugyfelservice.DtoEdited.Iranyitoszam" name="iranyitoszam">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Helységnév</div>
-      </div>
-      <div class="col-md-3">
-        <input type="text" class="form-control form-control-sm" id="helysegnev"
-               maxlength="100" required autocomplete="off" style="background-color: aquamarine"
+      <div>
+        <div class="egylabel">Helységnév</div>
+        <input type="text" class="form-control form-control-sm oszlop3" id="helysegnev"
+               maxlength="100" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="ugyfelservice.DtoEdited.Helysegnev" name="helysegnev">
-      </div>
-      <div class="col-md-1">
-        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="HelysegZoom()">...</button>
+        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="HelysegZoom()">...</button>
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Közterület</div>
-      </div>
-      <div class="col-md-3">
-        <input type="text" class="form-control form-control-sm" id="kozterulet"
+      <div>
+        <div class="egylabel">Közterület</div>
+        <input type="text" class="form-control form-control-sm oszlop3" id="kozterulet"
                maxlength="100" required autocomplete="off"
                [(ngModel)]="ugyfelservice.DtoEdited.Kozterulet" name="kozterulet">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Közterület tipus</div>
-      </div>
-      <div class="col-md-2">
-        <input type="text" class="form-control form-control-sm" id="kozterulettipus"
+      <div>
+        <div class="egylabel">Közterület tipus</div>
+        <input type="text" class="form-control form-control-sm oszlop2" id="kozterulettipus"
                maxlength="20" required autocomplete="off"
                [(ngModel)]="ugyfelservice.DtoEdited.Kozterulettipus" name="kozterulettipus">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Házszám</div>
-      </div>
-      <div class="col-md-1">
-        <input type="text" class="form-control form-control-sm" id="hazszam"
+      <div>
+        <div class="egylabel">Házszám</div>
+        <input type="text" class="form-control form-control-sm oszlop1" id="hazszam"
                maxlength="10" required autocomplete="off"
                [(ngModel)]="ugyfelservice.DtoEdited.Hazszam" name="hazszam">
       </div>
     </div>
 
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Adószám</div>
-      </div>
-      <div class="col-md-2">
-        <input type="text" class="form-control form-control-sm" id="adoszam"
+      <div>
+        <div class="egylabel">Adószám</div>
+        <input type="text" class="form-control form-control-sm oszlop2" style="display: inline-block" id="adoszam"
                maxlength="20" autocomplete="off"
                [(ngModel)]="ugyfelservice.DtoEdited.Adoszam" name="adoszam">
-      </div>
-      <div class="col-md-8" style="color: red">
-        <div style="margin-left: 5px">Magánszemélynél legyen üres, egyébként a megfelelő formátumú!</div>
+        <div style="margin-left: 5px;color: red; display: inline-block">Magánszemélynél legyen üres, egyébként a megfelelő formátumú!</div>
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">EU adószám</div>
-      </div>
-      <div class="col-md-2">
-        <input type="text" class="form-control form-control-sm" id="euadoszam"
+      <div>
+        <div class="egylabel">EU adószám</div>
+        <input type="text" class="form-control form-control-sm oszlop2" id="euadoszam"
                maxlength="20" autocomplete="off"
                [(ngModel)]="ugyfelservice.DtoEdited.Euadoszam" name="euadoszam">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Telefon</div>
-      </div>
-      <div class="col-md-2">
-        <input type="text" class="form-control form-control-sm" id="telefon"
+      <div>
+        <div class="egylabel">Telefon</div>
+        <input type="text" class="form-control form-control-sm oszlop2" id="telefon"
                maxlength="20" required autocomplete="off"
                [(ngModel)]="ugyfelservice.DtoEdited.Telefon" name="telefon">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Email</div>
-      </div>
-      <div class="col-md-3">
-        <input type="text" class="form-control form-control-sm" id="email"
+      <div>
+        <div class="egylabel">Email</div>
+        <input type="text" class="form-control form-control-sm oszlop3" id="email"
                maxlength="50" required autocomplete="off"
                [(ngModel)]="ugyfelservice.DtoEdited.Email" name="email">
       </div>
     </div>
 
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Egyéb link</div>
-      </div>
-      <div class="col-md-4">
-        <input type="text" class="form-control form-control-sm" id="egyeblink"
+      <div>
+        <div class="egylabel">Egyéb link</div>
+        <input type="text" class="form-control form-control-sm oszlop4" id="egyeblink"
                maxlength="200" autocomplete="off"
                [(ngModel)]="ugyfelservice.DtoEdited.Egyeblink" name="egyeblink">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Ajánlotta</div>
-      </div>
-      <div class="col-md-4">
-        <input type="text" class="form-control form-control-sm" id="ajanlotta"
+      <div>
+        <div class="egylabel">Ajánlotta</div>
+        <input type="text" class="form-control form-control-sm oszlop4" id="ajanlotta"
                maxlength="200" autocomplete="off"
                [(ngModel)]="ugyfelservice.DtoEdited.Ajanlotta" name="ajanlotta">
       </div>
     </div>
 
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Megjegyzés</div>
-      </div>
-      <div class="col-md-4">
-        <input type="text" class="form-control form-control-sm" id="megjegyzes"
+      <div>
+        <div class="egylabel">Megjegyzés</div>
+        <input type="text" class="form-control form-control-sm oszlop4" id="megjegyzes"
                maxlength="200" autocomplete="off"
                [(ngModel)]="ugyfelservice.DtoEdited.Megjegyzes" name="megjegyzes">
       </div>
     </div>
 
-    <div class="row no-gutters" style="margin-bottom: 10px">
-      <div class="col-md-2"></div>
+    <div class="row no-gutters editform-row">
       <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
     </div>

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Szempont} from '../../enums/szempont';
 import {UgyfelService} from '../ugyfel.service';
 import {UgyfelDto} from '../ugyfeldto';
@@ -16,12 +16,15 @@ import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {BizonylatSzerkesztesMode} from '../../bizonylat/bizonylatszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {UgyfelTablaComponent} from '../ugyfel-tabla/ugyfel-tabla.component';
 
 @Component({
   selector: 'app-ugyfel-list',
   templateUrl: './ugyfel-list.component.html'
 })
 export class UgyfelListComponent implements OnInit, OnDestroy {
+  @ViewChild('tabla') tabla: UgyfelTablaComponent;
+
   csoportszurok = ['Mind', 'Kiemelt'];
   szurok = ['Név', 'Cég', 'Beosztás', 'Helységnév', 'Telefon', 'Email', 'Egyéb link', 'Ajánlotta', 'Id'];
   szempontok = [
@@ -151,7 +154,6 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.ugyfelservice.DtoSelectedIndex = i;
     this.ugyfelservice.uj = false;
-    this.ugyfelservice.ContainerMode = UgyfelContainerMode.Egy;
     this.ugyfelservice.EgyMode = UgyfelEgyMode.Reszletek;
   }
 
@@ -174,6 +176,10 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
+  }
+
+  torlesutan() {
+    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

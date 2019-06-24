@@ -11,12 +11,16 @@
                      [visZoom]="ugyfelservice.zoom" (StopZoom)="stopzoom()">
   </app-ugyfeltoolbar>
 
-  <app-ugyfel-tabla [items]="ugyfelservice.Dto"
+  <app-ugyfel-tabla #tabla
+                    [items]="ugyfelservice.Dto"
                     [zoom]="ugyfelservice.zoom"
-                    [(selectedrow)]="utsr"
                     (forid)="setClickedRow($event)"
-                    (forzoom)="selectforzoom($event)">
+                    (forzoom)="selectforzoom($event)"
+                    [egyTemplate]="gridegy">
   </app-ugyfel-tabla>
+  <ng-template #gridegy>
+    <app-ugyfel-egy (torlesutan)="torlesutan()"></app-ugyfel-egy>
+  </ng-template>
 
   <app-toolbarfooter [enKereses]="!ugyfelservice.elsokereses && !eppFrissit"
                      [rekordszam]="ugyfelservice.Dto.length"

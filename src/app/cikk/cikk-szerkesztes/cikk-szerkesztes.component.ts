@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {CikkService} from '../cikk.service';
 import {MeService} from '../../primitiv/me/me.service';
 import {AfakulcsService} from '../../primitiv/afakulcs/afakulcs.service';
@@ -8,8 +8,6 @@ import {MeZoomParameter} from '../../primitiv/me/mezoomparameter';
 import {AfakulcsZoomParameter} from '../../primitiv/afakulcs/afakulcszoomparameter';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {TermekdijZoomParameter} from '../../primitiv/termekdij/termekdijzoomparameter';
-import {CikkContainerMode} from '../cikkcontainermode';
-import {CikkEgyMode} from '../cikkegymode';
 import {CikkSzerkesztesMode} from '../cikkszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
@@ -20,6 +18,8 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 })
 export class CikkSzerkesztesComponent implements OnDestroy {
   cikkservice: CikkService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -95,7 +95,7 @@ export class CikkSzerkesztesComponent implements OnDestroy {
         }
 
         this.eppFrissit = false;
-        this.navigal();
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -104,14 +104,7 @@ export class CikkSzerkesztesComponent implements OnDestroy {
   }
 
   cancel() {
-    this.navigal();
-  }
-  navigal() {
-    if (this.cikkservice.uj) {
-      this.cikkservice.ContainerMode = CikkContainerMode.List;
-    } else {
-      this.cikkservice.EgyMode = CikkEgyMode.Reszletek;
-    }
+    this.KontenerKeres.emit();
   }
 
   MeZoom() {

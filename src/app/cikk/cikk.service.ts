@@ -11,8 +11,6 @@ import {EmptyResult} from '../dtos/emptyresult';
 import {CikkMozgasResult} from './cikkmozgasresult';
 import {CikkMozgasParameter} from './cikkmozgasparameter';
 import {CikkMozgasTetelDto} from './cikkmozgasteteldto';
-import {CikkContainerMode} from './cikkcontainermode';
-import {CikkEgyMode} from './cikkegymode';
 import {CikkSzerkesztesMode} from './cikkszerkesztesmode';
 import {CikkZoomParameter} from './cikkzoomparameter';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
@@ -40,8 +38,6 @@ export class CikkService {
   BizonylattipusKod: number;
   MozgasDto: CikkMozgasTetelDto[] = new Array<CikkMozgasTetelDto>();
 
-  ContainerMode = CikkContainerMode.List;
-  EgyMode = CikkEgyMode.Reszletek;
   SzerkesztesMode = CikkSzerkesztesMode.Blank;
 
   GridSettings: ColumnSettings[] = undefined;

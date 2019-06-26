@@ -6,7 +6,6 @@ import {MeService} from '../../primitiv/me/me.service';
 import {AfakulcsService} from '../../primitiv/afakulcs/afakulcs.service';
 import {TermekdijService} from '../../primitiv/termekdij/termekdij.service';
 import {ZoomSources} from '../../enums/zoomsources';
-import {CikkContainerMode} from '../../cikk/cikkcontainermode';
 import {BizonylattetelSzerkesztesMode} from '../bizonylattetelszerkesztesmode';
 import {BruttobolParam} from '../bruttobolparam';
 import {CikkZoomParameter} from '../../cikk/cikkzoomparameter';
@@ -51,7 +50,6 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
     this._cikkservice.minta = this.bizonylatservice.TetelDtoEdited.Megnevezes || '';
     this._cikkservice.zoomsource = ZoomSources.Bizonylattetel;
     this._cikkservice.zoom = true;
-    this._cikkservice.ContainerMode = CikkContainerMode.List;
 
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.CikkZoom;
     this._cdr.detectChanges();

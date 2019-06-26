@@ -3,13 +3,12 @@ import {CikkService} from '../cikk.service';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {CikkMozgasParameter} from '../cikkmozgasparameter';
-import {CikkContainerMode} from '../cikkcontainermode';
-import {CikkEgyMode} from '../cikkegymode';
 import {CikkSzerkesztesMode} from '../cikkszerkesztesmode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {EgyMode} from '../../enums/egymode';
 
 @Component({
   selector: 'app-cikk-egy',
@@ -17,6 +16,7 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   animations: [rowanimation]
 })
 export class CikkEgyComponent implements OnDestroy {
+  egymode = EgyMode.Reszletek;
   cikkservice: CikkService;
   mod = false;
   ri = -1;
@@ -41,15 +41,15 @@ export class CikkEgyComponent implements OnDestroy {
   }
 
   reszletek() {
-    this.cikkservice.EgyMode = CikkEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
   }
   torles () {
-    this.cikkservice.EgyMode = CikkEgyMode.Torles;
+    this.egymode = EgyMode.Torles;
   }
   modositas() {
     this.cikkservice.uj = false;
     this.cikkservice.DtoEdited = deepCopy(this.cikkservice.Dto[this.cikkservice.DtoSelectedIndex]);
-    this.cikkservice.EgyMode = CikkEgyMode.Modositas;
+    this.egymode = EgyMode.Modositas;
     this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.Blank;
   }
   beszerzes() {
@@ -72,7 +72,7 @@ export class CikkEgyComponent implements OnDestroy {
         this.cikkservice.MozgasDto = res.Result;
 
         this.eppFrissit = false;
-        this.cikkservice.EgyMode = CikkEgyMode.BeszerzesKivet;
+        this.egymode = EgyMode.BeszerzesKivet;
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -101,7 +101,11 @@ export class CikkEgyComponent implements OnDestroy {
   }
 
   TorlesCancel() {
-    this.cikkservice.EgyMode = CikkEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  EgyReszletek() {
+    this.egymode = EgyMode.Reszletek;
   }
 
   ngOnDestroy() {

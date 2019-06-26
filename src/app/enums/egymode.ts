@@ -4,5 +4,6 @@ export enum EgyMode {
   Torles = 2,
   Modositas = 3,
   Jelszo = 4,
-  Tevekenyseg = 5
+  Tevekenyseg = 5,
+  BeszerzesKivet = 6
 }

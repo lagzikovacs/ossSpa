@@ -1,12 +1,10 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {CikkService} from '../cikk.service';
 import {Szempont} from '../../enums/szempont';
 import {CikkDto} from '../cikkdto';
 import {SzMT} from '../../dtos/szmt';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
-import {CikkContainerMode} from '../cikkcontainermode';
-import {CikkEgyMode} from '../cikkegymode';
 import {ZoomSources} from '../../enums/zoomsources';
 import {AjanlatSzerkesztesMode} from '../../ajanlat/ajanlatszerkesztesmode';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
@@ -24,6 +22,8 @@ export class CikkListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
   cikkservice: CikkService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   szurok = ['Megnevezés', 'Id'];
   szempontok = [
@@ -150,7 +150,6 @@ export class CikkListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.cikkservice.DtoSelectedIndex = i;
     this.cikkservice.uj = false;
-    this.cikkservice.EgyMode = CikkEgyMode.Reszletek;
   }
 
   onUj() {
@@ -166,7 +165,7 @@ export class CikkListComponent implements OnInit, OnDestroy {
         this.cikkservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this.cikkservice.ContainerMode = CikkContainerMode.Uj;
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

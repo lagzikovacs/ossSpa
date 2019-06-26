@@ -1,19 +1,7 @@
-<!--export enum CikkContainerMode {
-  Blank = 0,
-  List = 1,
-  Egy = 2,
-  Uj = 3
-}-->
+<ng-container *ngIf="kontenermode === 1">
+  <app-cikk-list (KontenerKeres)="KontenerUj()"></app-cikk-list>
+</ng-container>
 
-<ng-container *ngIf="cikkservice.ContainerMode === 0">
-  <app-blank></app-blank>
-</ng-container>
-<ng-container *ngIf="cikkservice.ContainerMode === 1">
-  <app-cikk-list></app-cikk-list>
-</ng-container>
-<ng-container *ngIf="cikkservice.ContainerMode === 2">
-  <app-cikk-egy></app-cikk-egy>
-</ng-container>
-<ng-container *ngIf="cikkservice.ContainerMode === 3">
-  <app-cikk-szerkesztes></app-cikk-szerkesztes>
+<ng-container *ngIf="kontenermode === 2">
+  <app-cikk-szerkesztes (KontenerKeres)="KontenerList()"></app-cikk-szerkesztes>
 </ng-container>

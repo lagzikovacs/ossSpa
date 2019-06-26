@@ -4,7 +4,6 @@ import {AjanlatSzerkesztesMode} from '../ajanlatszerkesztesmode';
 import {AjanlatContainerMode} from '../ajanlatcontainermode';
 import {CikkService} from '../../cikk/cikk.service';
 import {ZoomSources} from '../../enums/zoomsources';
-import {CikkContainerMode} from '../../cikk/cikkcontainermode';
 import {AjanlatService} from '../ajanlat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
@@ -41,7 +40,6 @@ export class AjanlatTetelComponent implements OnDestroy {
       this.ajanlatservice.AjanlatParam.AjanlatBuf[this.ajanlatservice.AjanlattetelIndex].CikkNev || '';
     this._cikkservice.zoomsource = ZoomSources.Ajanlat;
     this._cikkservice.zoom = true;
-    this._cikkservice.ContainerMode = CikkContainerMode.List;
 
     this.ajanlatservice.AjanlatSzerkesztesMode = AjanlatSzerkesztesMode.CikkZoom;
   }

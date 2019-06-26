@@ -49,7 +49,6 @@ import {VolumeContainerMode} from '../volume/volumecontainermode';
 import {ParticioService} from '../particio/particio.service';
 import {ParticioEgyMode} from '../particio/particioegymode';
 import {UgyfelContainerMode} from '../ugyfel/ugyfelcontainermode';
-import {CikkContainerMode} from '../cikk/cikkcontainermode';
 import {CsoportContainerMode} from '../csoport/csoportcontainermode';
 import {AjanlatkeresContainerMode} from '../ajanlatkeres/ajanlatkerescontainermode';
 import {PenztarContainerMode} from '../penztar/penztarcontainermode';
@@ -148,7 +147,6 @@ export class MenuService {
         this._termekdijservice.Dto = new Array<TermekdijDto>();
         break;
       case '/cikk':
-        this._cikkservice.ContainerMode = CikkContainerMode.List;
         this._cikkservice.zoom = false;
         this._cikkservice.Dto = new Array<CikkDto>();
         break;

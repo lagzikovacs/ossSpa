@@ -48,17 +48,8 @@ import {ProjektteendoDto} from '../projektteendo/projektteendodto';
 import {VolumeContainerMode} from '../volume/volumecontainermode';
 import {ParticioService} from '../particio/particio.service';
 import {ParticioEgyMode} from '../particio/particioegymode';
-import {HelysegContainerMode} from '../primitiv/helyseg/helysegcontainermode';
 import {UgyfelContainerMode} from '../ugyfel/ugyfelcontainermode';
-import {MeContainerMode} from '../primitiv/me/mecontainermode';
-import {AfakulcsContainerMode} from '../primitiv/afakulcs/afakulcscontainermode';
-import {TermekdijContainerMode} from '../primitiv/termekdij/termekdijcontainermode';
 import {CikkContainerMode} from '../cikk/cikkcontainermode';
-import {IrattipusContainerMode} from '../primitiv/irattipus/irattipuscontainermode';
-import {TeendoContainerMode} from '../primitiv/teendo/teendocontainermode';
-import {FizetesimodContainerMode} from '../primitiv/fizetesimod/fizetesimodcontainermode';
-import {PenznemContainerMode} from '../primitiv/penznem/penznemcontainermode';
-import {FelhasznaloContainerMode} from '../primitiv/felhasznalo/felhasznalocontainermode';
 import {CsoportContainerMode} from '../csoport/csoportcontainermode';
 import {AjanlatkeresContainerMode} from '../ajanlatkeres/ajanlatkerescontainermode';
 import {PenztarContainerMode} from '../penztar/penztarcontainermode';
@@ -129,37 +120,30 @@ export class MenuService {
   menuclick(utvonal: string) {
     switch (utvonal) {
       case '/irattipus':
-        this._irattipusservice.ContainerMode = IrattipusContainerMode.List;
         this._irattipusservice.zoom = false;
         this._irattipusservice.Dto = new Array<IrattipusDto>();
         break;
       case '/projektteendo':
-        this._teendoservice.ContainerMode = TeendoContainerMode.List;
         this._teendoservice.zoom = false;
         this._teendoservice.Dto = new Array<TeendoDto>();
         break;
       case '/fizetesimod':
-        this._fizetesimodservice.ContainerMode = FizetesimodContainerMode.List;
         this._fizetesimodservice.zoom = false;
         this._fizetesimodservice.Dto = new Array<FizetesimodDto>();
         break;
       case '/penznem':
-        this._penznemservice.ContainerMode = PenznemContainerMode.List;
         this._penznemservice.zoom = false;
         this._penznemservice.Dto = new Array<PenznemDto>();
         break;
       case '/me':
-        this._meservice.ContainerMode = MeContainerMode.List;
         this._meservice.zoom = false;
         this._meservice.Dto = new Array<MeDto>();
         break;
       case '/afakulcs':
-        this._afakulcsservice.ContainerMode = AfakulcsContainerMode.List;
         this._afakulcsservice.zoom = false;
         this._afakulcsservice.Dto = new Array<AfakulcsDto>();
         break;
       case '/termekdij':
-        this._termekdijservice.ContainerMode = TermekdijContainerMode.List;
         this._termekdijservice.zoom = false;
         this._termekdijservice.Dto = new Array<TermekdijDto>();
         break;
@@ -169,7 +153,6 @@ export class MenuService {
         this._cikkservice.Dto = new Array<CikkDto>();
         break;
       case '/helyseg':
-        this._helysegservice.ContainerMode = HelysegContainerMode.List;
         this._helysegservice.zoom = false;
         this._helysegservice.Dto = new Array<HelysegDto>();
         break;
@@ -253,7 +236,6 @@ export class MenuService {
         this._volumeservice.Dto = new Array<VolumeDto>();
         break;
       case '/felhasznalo':
-        this._felhasznaloservice.ContainerMode = FelhasznaloContainerMode.List;
         this._felhasznaloservice.zoom = false;
         this._felhasznaloservice.Dto = new Array<FelhasznaloDto>();
         break;

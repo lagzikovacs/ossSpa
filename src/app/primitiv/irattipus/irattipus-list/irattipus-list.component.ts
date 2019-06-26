@@ -1,12 +1,10 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {IrattipusService} from '../irattipus.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {ProjektkapcsolatService} from '../../../projektkapcsolat/projektkapcsolat.service';
 import {IratService} from '../../../irat/irat.service';
-import {IrattipusEgyMode} from '../irattipusegymode';
-import {IrattipusContainerMode} from '../irattipuscontainermode';
 import {IratSzerkesztesMode} from '../../../irat/iratszerkesztesmode';
 import {BizonylatesiratSzerkesztesMode} from '../../../projektkapcsolat/bizonylatesiratszerkesztesmode';
 import {BizonylatkapcsolatService} from '../../../bizonylatkapcsolat/bizonylatkapcsolat.service';
@@ -25,6 +23,8 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
   szurok = ['Irattipus'];
   mod = false;
   irattipusservice: IrattipusService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -129,7 +129,6 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.irattipusservice.DtoSelectedIndex = i;
     this.irattipusservice.uj = false;
-    this.irattipusservice.EgyMode = IrattipusEgyMode.Reszletek;
   }
 
   uj() {
@@ -145,7 +144,7 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
         this.irattipusservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this.irattipusservice.ContainerMode = IrattipusContainerMode.Uj;
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

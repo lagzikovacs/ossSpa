@@ -1,11 +1,9 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {FelhasznaloService} from '../felhasznalo.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {ProjektteendoService} from '../../../projektteendo/projektteendo.service';
-import {FelhasznaloContainerMode} from '../felhasznalocontainermode';
-import {FelhasznaloEgyMode} from '../felhasznaloegymode';
 import {ProjektteendoSzerkesztesMode} from '../../../projektteendo/projektteendoszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
@@ -21,6 +19,8 @@ export class FelhasznaloListComponent implements OnInit, OnDestroy {
   szurok = ['Név'];
   mod = false;
   felhasznaloservice: FelhasznaloService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -104,7 +104,6 @@ export class FelhasznaloListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.felhasznaloservice.DtoSelectedIndex = i;
     this.felhasznaloservice.uj = false;
-    this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Reszletek;
   }
 
   uj() {
@@ -120,7 +119,7 @@ export class FelhasznaloListComponent implements OnInit, OnDestroy {
         this.felhasznaloservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this.felhasznaloservice.ContainerMode = FelhasznaloContainerMode.Uj;
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

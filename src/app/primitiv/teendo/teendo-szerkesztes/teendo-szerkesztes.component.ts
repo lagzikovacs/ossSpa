@@ -1,8 +1,6 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {TeendoService} from '../teendo.service';
 import {NumberResult} from '../../../dtos/numberresult';
-import {TeendoContainerMode} from '../teendocontainermode';
-import {TeendoEgyMode} from '../teendoegymode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 
@@ -12,6 +10,8 @@ import {SpinnerService} from '../../../tools/spinner/spinner.service';
 })
 export class TeendoSzerkesztesComponent implements OnDestroy {
   teendoservice: TeendoService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -58,7 +58,7 @@ export class TeendoSzerkesztesComponent implements OnDestroy {
         }
 
         this.eppFrissit = false;
-        this.navigal();
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -66,14 +66,7 @@ export class TeendoSzerkesztesComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.navigal();
-  }
-  navigal() {
-    if (this.teendoservice.uj) {
-      this.teendoservice.ContainerMode = TeendoContainerMode.List;
-    } else {
-      this.teendoservice.EgyMode = TeendoEgyMode.Reszletek;
-    }
+    this.KontenerKeres.emit();
   }
 
   ngOnDestroy() {

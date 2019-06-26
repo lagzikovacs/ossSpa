@@ -9,8 +9,6 @@ import {TermekdijResult} from './termekdijresult';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {NumberResult} from '../../dtos/numberresult';
 import {TermekdijZoomParameter} from './termekdijzoomparameter';
-import {TermekdijContainerMode} from './termekdijcontainermode';
-import {TermekdijEgyMode} from './termekdijegymode';
 import {ColumnSettings} from '../../tools/reszletek/columnsettings';
 import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 
@@ -29,9 +27,6 @@ export class TermekdijService {
   zoom = false;
   zoomsource: ZoomSources;
   DtoEdited = new TermekdijDto();
-
-  ContainerMode = TermekdijContainerMode.List;
-  EgyMode = TermekdijEgyMode.Reszletek;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

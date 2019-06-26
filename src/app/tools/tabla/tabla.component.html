@@ -20,8 +20,8 @@
       </td>
 
       <td *ngFor="let cs of colsets; let j = index">
-        <div *ngIf="cs.Type === 'INT' && j === 0 && idlink" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer" (click)="clickforid(i)">{{item[cs.Name]}}</div>
-        <div *ngIf="cs.Type === 'INT' && j === 0 && !idlink" style="text-align: right" >{{item[cs.Name]}}</div>
+        <div *ngIf="cs.Type === 'INT' && j === 0 && enIdclick" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer" (click)="clickforid(i)">{{item[cs.Name]}}</div>
+        <div *ngIf="cs.Type === 'INT' && j === 0 && !enIdclick" style="text-align: right" >{{item[cs.Name]}}</div>
         <div *ngIf="cs.Type === 'INT' && j > 0" style="text-align: right">{{item[cs.Name]}}</div>
 
         <div *ngIf="cs.Type === 'NUMBER'" style="text-align: right">{{item[cs.Name] | number: '1.2-2'}}</div>

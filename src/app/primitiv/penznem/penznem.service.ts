@@ -9,8 +9,6 @@ import {PenznemResult} from './penznemresult';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {NumberResult} from '../../dtos/numberresult';
 import {PenznemZoomParameter} from './penznemzoomparameter';
-import {PenznemEgyMode} from './penznemegymode';
-import {PenznemContainerMode} from './penznemcontainermode';
 import {ColumnSettings} from '../../tools/reszletek/columnsettings';
 import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 
@@ -29,9 +27,6 @@ export class PenznemService {
   zoom = false;
   zoomsource: ZoomSources;
   DtoEdited = new PenznemDto();
-
-  ContainerMode = PenznemContainerMode.List;
-  EgyMode = PenznemEgyMode.Reszletek;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

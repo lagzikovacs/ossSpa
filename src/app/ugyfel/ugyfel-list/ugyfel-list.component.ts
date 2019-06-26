@@ -74,6 +74,8 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
     this.ugyfelservice.up.fi = new Array<SzMT>();
     this.ugyfelservice.up.fi.push(new SzMT(this.szempontok[this.ugyfelservice.szempont], this.ugyfelservice.minta));
 
+    this.tabla.clearselections();
+
     this.onKeresesTovabb();
   }
   onKeresesTovabb() {

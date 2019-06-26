@@ -3,7 +3,6 @@ import * as moment from 'moment';
 import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
 import {IratService} from '../../irat/irat.service';
 import {IrattipusService} from '../../primitiv/irattipus/irattipus.service';
-import {IrattipusContainerMode} from '../../primitiv/irattipus/irattipuscontainermode';
 import {ZoomSources} from '../../enums/zoomsources';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {BizonylatKapcsolatParam} from '../bizonylatkapcsolatparam';
@@ -61,7 +60,6 @@ export class BizonylatIratUjComponent implements OnInit, OnDestroy {
     this._irattipusservice.ekDto.minta = this.bizonylatkapcsolatservice.UjIratDto.Irattipus || '';
     this._irattipusservice.zoomsource = ZoomSources.Bizonylatirat;
     this._irattipusservice.zoom = true;
-    this._irattipusservice.ContainerMode = IrattipusContainerMode.List;
 
     this.bizonylatkapcsolatservice.SzerkesztesMode = BizonylatKapcsolatSzerkesztesMode.IrattipusZoom;
   }

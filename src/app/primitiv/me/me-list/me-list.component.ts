@@ -1,12 +1,10 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {MeService} from '../me.service';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {CikkService} from '../../../cikk/cikk.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
 import {CikkSzerkesztesMode} from '../../../cikk/cikkszerkesztesmode';
-import {MeEgyMode} from '../meegymode';
-import {MeContainerMode} from '../mecontainermode';
 import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 import {BizonylattetelSzerkesztesMode} from '../../../bizonylat/bizonylattetelszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
@@ -23,6 +21,8 @@ export class MeListComponent implements OnInit, OnDestroy {
   szurok = ['Mennyiségi egység'];
   mod = false;
   meservice: MeService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -115,7 +115,6 @@ export class MeListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.meservice.DtoSelectedIndex = i;
     this.meservice.uj = false;
-    this.meservice.EgyMode = MeEgyMode.Reszletek;
   }
 
   uj() {
@@ -131,7 +130,7 @@ export class MeListComponent implements OnInit, OnDestroy {
         this.meservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this.meservice.ContainerMode = MeContainerMode.Uj;
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

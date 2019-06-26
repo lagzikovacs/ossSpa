@@ -11,7 +11,14 @@
                       [enUj]="!eppFrissit && mod" (Uj)="onUj()"
                       [enExport]="!eppFrissit" (Export)="onExport($event)">
   </app-projekttoolbar>
-  <app-projekt-tabla [Dto]="projektservice.Dto" [(selectedrow)]="pi" (forid)="setClickedRow($event)"></app-projekt-tabla>
+  <app-projekt-tabla #tabla
+                     [Dto]="projektservice.Dto"
+                     (forid)="setClickedRow($event)"
+                     [egyTemplate]="gridegy">
+  </app-projekt-tabla>
+  <ng-template #gridegy>
+    <app-projekt-egy (torlesutan)="torlesutan()"></app-projekt-egy>
+  </ng-template>
   <app-toolbarfooter [enKereses]="!projektservice.elsokereses && !eppFrissit"
                      [rekordszam]="projektservice.Dto.length"
                      [osszesrekord]="projektservice.OsszesRekord"

@@ -234,6 +234,8 @@ import {ErrorService} from './tools/errorbox/error.service';
 import { ErrorboxComponent } from './tools/errorbox/errorbox.component';
 import { GspinnerComponent } from './tools/spinner/spinner.component';
 import {SpinnerService} from './tools/spinner/spinner.service';
+import { UgyfelterProjektTablaComponent } from './ugyfelter/ugyfelter-projekt-tabla/ugyfelter-projekt-tabla.component';
+import { ProjektkapcsolatTablaComponent } from './projektkapcsolat/projektkapcsolat-tabla/projektkapcsolat-tabla.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusContainerComponent, canActivate: [RoleGuard]},
@@ -493,6 +495,8 @@ if (environment.production) {
     TablaComponent,
     ErrorboxComponent,
     GspinnerComponent,
+    UgyfelterProjektTablaComponent,
+    ProjektkapcsolatTablaComponent,
   ],
   imports: [
     BrowserModule,

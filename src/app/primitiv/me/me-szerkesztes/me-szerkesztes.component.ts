@@ -1,8 +1,6 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {MeService} from '../me.service';
 import {NumberResult} from '../../../dtos/numberresult';
-import {MeContainerMode} from '../mecontainermode';
-import {MeEgyMode} from '../meegymode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 
@@ -12,6 +10,8 @@ import {SpinnerService} from '../../../tools/spinner/spinner.service';
 })
 export class MeSzerkesztesComponent implements OnDestroy {
   meservice: MeService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -58,7 +58,7 @@ export class MeSzerkesztesComponent implements OnDestroy {
         }
 
         this.eppFrissit = false;
-        this.navigal();
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -66,14 +66,7 @@ export class MeSzerkesztesComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.navigal();
-  }
-  navigal() {
-    if (this.meservice.uj) {
-      this.meservice.ContainerMode = MeContainerMode.List;
-    } else {
-      this.meservice.EgyMode = MeEgyMode.Reszletek;
-    }
+    this.KontenerKeres.emit();
   }
   ngOnDestroy() {
     Object.keys(this).map(k => {

@@ -1,12 +1,10 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {AfakulcsService} from '../afakulcs.service';
 import {CikkService} from '../../../cikk/cikk.service';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
 import {CikkSzerkesztesMode} from '../../../cikk/cikkszerkesztesmode';
-import {AfakulcsContainerMode} from '../afakulcscontainermode';
-import {AfakulcsEgyMode} from '../afakulcsegymode';
 import {BizonylattetelSzerkesztesMode} from '../../../bizonylat/bizonylattetelszerkesztesmode';
 import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 import {ErrorService} from '../../../tools/errorbox/error.service';
@@ -23,6 +21,8 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
   szurok = ['ÁFA kulcs'];
   mod = false;
   afakulcsservice: AfakulcsService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -114,7 +114,6 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.afakulcsservice.DtoSelectedIndex = i;
     this.afakulcsservice.uj = false;
-    this.afakulcsservice.EgyMode = AfakulcsEgyMode.Reszletek;
   }
 
   uj() {
@@ -130,7 +129,7 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
         this.afakulcsservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this.afakulcsservice.ContainerMode = AfakulcsContainerMode.Uj;
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {PenznemService} from '../penznem.service';
 import {LogonService} from '../../../logon/logon.service';
 import {PenztarService} from '../../../penztar/penztar.service';
@@ -13,8 +13,6 @@ import {ProjektSzerkesztesMode} from '../../../projekt/projektszerkesztesmode';
 import {SzamlazasirendSzerkesztesMode} from '../../../szamlazasirend/szamlazasirendszerkesztesmode';
 import {KifizetesSzerkesztesMode} from '../../../kifizetes/kifizetesszerkesztesmode';
 import {BizonylatSzerkesztesMode} from '../../../bizonylat/bizonylatszerkesztesmode';
-import {PenznemContainerMode} from '../penznemcontainermode';
-import {PenznemEgyMode} from '../penznemegymode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
@@ -30,6 +28,8 @@ export class PenznemListComponent implements OnInit, OnDestroy {
   szurok = ['Pénznem'];
   mod = false;
   penznemservice: PenznemService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -146,7 +146,6 @@ export class PenznemListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.penznemservice.DtoSelectedIndex = i;
     this.penznemservice.uj = false;
-    this.penznemservice.EgyMode = PenznemEgyMode.Reszletek;
   }
 
   uj() {
@@ -162,7 +161,7 @@ export class PenznemListComponent implements OnInit, OnDestroy {
         this.penznemservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this.penznemservice.ContainerMode = PenznemContainerMode.Uj;
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

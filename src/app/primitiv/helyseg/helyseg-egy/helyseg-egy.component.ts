@@ -2,12 +2,11 @@ import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {HelysegService} from '../helyseg.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
-import {HelysegContainerMode} from '../helysegcontainermode';
-import {HelysegEgyMode} from '../helysegegymode';
 import {rowanimation} from '../../../animation/rowAnimation';
 import {deepCopy} from '../../../tools/deepCopy';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {EgyMode} from '../../../enums/egymode';
 
 @Component({
   selector: 'app-helyseg-egy',
@@ -15,6 +14,7 @@ import {SpinnerService} from '../../../tools/spinner/spinner.service';
   animations: [rowanimation]
 })
 export class HelysegEgyComponent implements OnDestroy {
+  egymode = EgyMode.Reszletek;
   helysegservice: HelysegService;
   mod = false;
   ri = -1;
@@ -39,15 +39,15 @@ export class HelysegEgyComponent implements OnDestroy {
   }
 
   reszletek() {
-    this.helysegservice.EgyMode = HelysegEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
   }
   torles () {
-    this.helysegservice.EgyMode = HelysegEgyMode.Torles;
+    this.egymode = EgyMode.Torles;
   }
   modositas() {
     this.helysegservice.uj = false;
     this.helysegservice.DtoEdited = deepCopy(this.helysegservice.Dto[this.helysegservice.DtoSelectedIndex]);
-    this.helysegservice.EgyMode = HelysegEgyMode.Modositas;
+    this.egymode = EgyMode.Modositas;
   }
 
   TorlesOk() {
@@ -71,7 +71,11 @@ export class HelysegEgyComponent implements OnDestroy {
   }
 
   TorlesCancel() {
-    this.helysegservice.EgyMode = HelysegEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  EgyReszletek() {
+    this.egymode = EgyMode.Reszletek;
   }
 
   ngOnDestroy() {

@@ -3,8 +3,6 @@ import {TeendoDto} from './teendodto';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {TeendoResult} from './teendoresult';
 import {TeendoZoomParameter} from './teendozoomparameter';
-import {TeendoEgyMode} from './teendoegymode';
-import {TeendoContainerMode} from './teendocontainermode';
 import {environment} from '../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
 import {ZoomSources} from '../../enums/zoomsources';
@@ -29,9 +27,6 @@ export class TeendoService {
   zoom = false;
   zoomsource: ZoomSources;
   DtoEdited = new TeendoDto();
-
-  ContainerMode = TeendoContainerMode.List;
-  EgyMode = TeendoEgyMode.Reszletek;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

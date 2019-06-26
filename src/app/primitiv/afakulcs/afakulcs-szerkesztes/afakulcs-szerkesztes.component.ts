@@ -1,8 +1,6 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {AfakulcsService} from '../afakulcs.service';
 import {NumberResult} from '../../../dtos/numberresult';
-import {AfakulcsContainerMode} from '../afakulcscontainermode';
-import {AfakulcsEgyMode} from '../afakulcsegymode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 
@@ -12,6 +10,8 @@ import {SpinnerService} from '../../../tools/spinner/spinner.service';
 })
 export class AfakulcsSzerkesztesComponent implements OnDestroy {
   afakulcsservice: AfakulcsService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -59,7 +59,7 @@ export class AfakulcsSzerkesztesComponent implements OnDestroy {
         }
 
         this.eppFrissit = false;
-        this.navigal();
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -67,14 +67,7 @@ export class AfakulcsSzerkesztesComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.navigal();
-  }
-  navigal() {
-    if (this.afakulcsservice.uj) {
-      this.afakulcsservice.ContainerMode = AfakulcsContainerMode.List;
-    } else {
-      this.afakulcsservice.EgyMode = AfakulcsEgyMode.Reszletek;
-    }
+    this.KontenerKeres.emit();
   }
 
   ngOnDestroy() {

@@ -19,33 +19,17 @@
       </button>
     </nav>
   </div>
-  <table class="table table-bordered table-sm table-responsive" style="border: none">
-    <thead>
-    <tr>
-      <th></th>
-      <th>Id</th>
-      <th>Kapcsolat</th>
-      <th>Tipus</th>
-      <th>Azonosító</th>
-      <th>Keletkezett</th>
-      <th>Irány</th>
-      <th>Tárgy</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of projektkapcsolatservice.Dto; let i = index">
-      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer;padding-left: 8px;padding-right: 8px"
-          (click)="levalasztas(i)">
-          <i class="fa fa-minus" aria-hidden="true"></i></td>
-      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
-          (click)="setClickedRow(i)">{{item.Projektkapcsolatkod}}</td>
-      <td>{{item.Kapcsolat}}</td>
-      <td>{{item.Tipus}}</td>
-      <td>{{item.Azonosito}}</td>
-      <td>{{item.Keletkezett | datehun}}</td>
-      <td>{{item.Irany}}</td>
-      <td>{{item.Targy}}</td>
-    </tr>
-    </tbody>
-  </table>
+  <app-projektkapcsolat-tabla #tabla
+                              [items]="projektkapcsolatservice.Dto"
+                              (forid)="setClickedRow($event)"
+                              (forlevalasztas)="levalasztas($event)"
+                              [egyBizonylat]="bizonylategy"
+                              [egyIrat]="irategy">
+  </app-projektkapcsolat-tabla>
+  <ng-template #bizonylategy>
+    <app-bizonylat-egy (torlesutan)="torlesutan()"></app-bizonylat-egy>
+  </ng-template>
+  <ng-template #irategy>
+    <app-irat-egy [enProjekt]="false" (torlesutan)="torlesutan()"></app-irat-egy>
+  </ng-template>
 </div>

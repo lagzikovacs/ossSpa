@@ -2,13 +2,12 @@ import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {FelhasznaloService} from '../felhasznalo.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
-import {FelhasznaloContainerMode} from '../felhasznalocontainermode';
-import {FelhasznaloEgyMode} from '../felhasznaloegymode';
 import {EsemenynaploService} from '../../../esemenynaplo/esemenynaplo.service';
 import {rowanimation} from '../../../animation/rowAnimation';
 import {deepCopy} from '../../../tools/deepCopy';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {EgyMode} from '../../../enums/egymode';
 
 @Component({
   selector: 'app-felhasznalo-egy',
@@ -16,6 +15,7 @@ import {SpinnerService} from '../../../tools/spinner/spinner.service';
   animations: [rowanimation]
 })
 export class FelhasznaloEgyComponent implements OnDestroy {
+  egymode = EgyMode.Reszletek;
   felhasznaloservice: FelhasznaloService;
   mod = false;
   ri = -1;
@@ -41,22 +41,22 @@ export class FelhasznaloEgyComponent implements OnDestroy {
   }
 
   reszletek() {
-    this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
   }
   torles () {
-    this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Torles;
+    this.egymode = EgyMode.Torles;
   }
   modositas() {
     this.felhasznaloservice.uj = false;
     this.felhasznaloservice.DtoEdited = deepCopy(this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex]);
-    this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Modositas;
+    this.egymode = EgyMode.Modositas;
   }
   jelszo() {
-    this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Jelszo;
+    this.egymode = EgyMode.Jelszo;
   }
   tevekenyseg() {
     this._esemenynaploservice.Felhasznalokod = this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex].Felhasznalokod;
-    this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Tevekenyseg;
+    this.egymode = EgyMode.Tevekenyseg;
   }
 
   TorlesOk() {
@@ -80,7 +80,11 @@ export class FelhasznaloEgyComponent implements OnDestroy {
   }
 
   TorlesCancel() {
-    this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  EgyReszletek() {
+    this.egymode = EgyMode.Reszletek;
   }
 
   ngOnDestroy() {

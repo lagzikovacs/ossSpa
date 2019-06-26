@@ -1,20 +1,8 @@
-<!--export enum PenznemContainerMode {
-  Blank = 0,
-  List = 1,
-  Egy = 2,
-  Uj = 3
-}-->
+<ng-container *ngIf="kontenermode === 1">
+  <app-penznem-list (KontenerKeres)="KontenerUj()"></app-penznem-list>
+</ng-container>
 
-<ng-container *ngIf="penznemservice.ContainerMode === 0">
-  <app-blank></app-blank>
-</ng-container>
-<ng-container *ngIf="penznemservice.ContainerMode === 1">
-  <app-penznem-list></app-penznem-list>
-</ng-container>
-<ng-container *ngIf="penznemservice.ContainerMode === 2">
-  <app-penznem-egy></app-penznem-egy>
-</ng-container>
-<ng-container *ngIf="penznemservice.ContainerMode === 3">
-  <app-penznem-szerkesztes></app-penznem-szerkesztes>
+<ng-container *ngIf="kontenermode === 2">
+  <app-penznem-szerkesztes (KontenerKeres)="KontenerList()"></app-penznem-szerkesztes>
 </ng-container>
 

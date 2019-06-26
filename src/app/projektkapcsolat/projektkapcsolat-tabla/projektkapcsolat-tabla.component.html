@@ -1,0 +1,46 @@
+<table class="table table-bordered table-sm table-responsive" style="border: none">
+  <thead>
+  <tr>
+    <th></th>
+    <th>Id</th>
+    <th>Kapcsolat</th>
+    <th>Tipus</th>
+    <th>Azonosító</th>
+    <th>Keletkezett</th>
+    <th>Irány</th>
+    <th>Tárgy</th>
+  </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let item of items; let i = index">
+      <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
+        <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer;padding-left: 8px;padding-right: 8px"
+            (click)="clickforlevalasztas(i)">
+          <i class="fa fa-minus" aria-hidden="true"></i>
+        </td>
+
+        <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
+            (click)="clickforid(i)">{{item.Projektkapcsolatkod}}
+        </td>
+
+        <td>{{item.Kapcsolat}}</td>
+        <td>{{item.Tipus}}</td>
+        <td>{{item.Azonosito}}</td>
+        <td>{{item.Keletkezett | datehun}}</td>
+        <td>{{item.Irany}}</td>
+        <td>{{item.Targy}}</td>
+      </tr>
+
+      <tr *ngIf="i === clickedidindex && bizonylatOk" [class.active]="i === clickedidindex">
+        <td colspan="100">
+          <ng-template *ngTemplateOutlet="egyBizonylat"></ng-template>
+        </td>
+      </tr>
+      <tr *ngIf="i === clickedidindex && iratOk" [class.active]="i === clickedidindex">
+        <td colspan="100">
+          <ng-template *ngTemplateOutlet="egyIrat"></ng-template>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>

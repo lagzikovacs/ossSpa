@@ -2,12 +2,11 @@ import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {FizetesimodService} from '../fizetesimod.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
-import {FizetesimodContainerMode} from '../fizetesimodcontainermode';
-import {FizetesimodEgyMode} from '../fizetesimodegymode';
 import {rowanimation} from '../../../animation/rowAnimation';
 import {deepCopy} from '../../../tools/deepCopy';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {EgyMode} from '../../../enums/egymode';
 
 @Component({
   selector: 'app-fizetesimod-egy',
@@ -15,6 +14,7 @@ import {SpinnerService} from '../../../tools/spinner/spinner.service';
   animations: [rowanimation]
 })
 export class FizetesimodEgyComponent implements OnDestroy {
+  egymode = EgyMode.Reszletek;
   fizetesimodservice: FizetesimodService;
   mod = false;
   ri = -1;
@@ -39,15 +39,15 @@ export class FizetesimodEgyComponent implements OnDestroy {
   }
 
   reszletek() {
-    this.fizetesimodservice.EgyMode = FizetesimodEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
   }
   torles () {
-    this.fizetesimodservice.EgyMode = FizetesimodEgyMode.Torles;
+    this.egymode = EgyMode.Torles;
   }
   modositas() {
     this.fizetesimodservice.uj = false;
     this.fizetesimodservice.DtoEdited = deepCopy(this.fizetesimodservice.Dto[this.fizetesimodservice.DtoSelectedIndex]);
-    this.fizetesimodservice.EgyMode = FizetesimodEgyMode.Modositas;
+    this.egymode = EgyMode.Modositas;
   }
 
   TorlesOk() {
@@ -71,7 +71,11 @@ export class FizetesimodEgyComponent implements OnDestroy {
   }
 
   TorlesCancel() {
-    this.fizetesimodservice.EgyMode = FizetesimodEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  EgyReszletek() {
+    this.egymode = EgyMode.Reszletek;
   }
 
   ngOnDestroy() {

@@ -45,9 +45,6 @@ export class ProjektEgyComponent implements OnDestroy {
     this.projektservice = projektservice;
   }
 
-  vissza() {
-    this.projektservice.ContainerMode = ProjektContainerMode.List;
-  }
   reszletek() {
     this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
   }

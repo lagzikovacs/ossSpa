@@ -1,8 +1,6 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {PenznemService} from '../penznem.service';
 import {NumberResult} from '../../../dtos/numberresult';
-import {PenznemEgyMode} from '../penznemegymode';
-import {PenznemContainerMode} from '../penznemcontainermode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 
@@ -12,6 +10,8 @@ import {SpinnerService} from '../../../tools/spinner/spinner.service';
 })
 export class PenznemSzerkesztesComponent implements OnDestroy {
   penznemservice: PenznemService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -58,7 +58,7 @@ export class PenznemSzerkesztesComponent implements OnDestroy {
         }
 
         this.eppFrissit = false;
-        this.navigal();
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -66,14 +66,7 @@ export class PenznemSzerkesztesComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.navigal();
-  }
-  navigal() {
-    if (this.penznemservice.uj) {
-      this.penznemservice.ContainerMode = PenznemContainerMode.List;
-    } else {
-      this.penznemservice.EgyMode = PenznemEgyMode.Reszletek;
-    }
+    this.KontenerKeres.emit();
   }
   ngOnDestroy() {
     Object.keys(this).map(k => {

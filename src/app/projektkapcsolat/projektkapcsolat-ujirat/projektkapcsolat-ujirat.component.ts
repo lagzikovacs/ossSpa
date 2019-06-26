@@ -7,7 +7,6 @@ import {IratService} from '../../irat/irat.service';
 import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
 import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 import {BizonylatesiratSzerkesztesMode} from '../bizonylatesiratszerkesztesmode';
-import {IrattipusContainerMode} from '../../primitiv/irattipus/irattipuscontainermode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 
@@ -59,7 +58,6 @@ export class ProjektkapcsolatUjiratComponent implements OnInit, OnDestroy {
     this._irattipusservice.ekDto.minta = this.projektkapcsolatservice.UjIratDto.Irattipus || '';
     this._irattipusservice.zoomsource = ZoomSources.Projektirat;
     this._irattipusservice.zoom = true;
-    this._irattipusservice.ContainerMode = IrattipusContainerMode.List;
 
     this.projektkapcsolatservice.SzerkesztesMode = BizonylatesiratSzerkesztesMode.IrattipusZoom;
   }

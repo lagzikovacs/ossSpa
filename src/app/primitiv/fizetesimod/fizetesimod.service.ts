@@ -8,8 +8,6 @@ import {ZoomSources} from '../../enums/zoomsources';
 import {FizetesimodResult} from './fizetesimodresult';
 import {NumberResult} from '../../dtos/numberresult';
 import {EmptyResult} from '../../dtos/emptyresult';
-import {FizetesimodEgyMode} from './fizetesimodegymode';
-import {FizetesimodContainerMode} from './fizetesimodcontainermode';
 import {FizetesimodZoomParameter} from './fiztesimodzoomparameter';
 import {ColumnSettings} from '../../tools/reszletek/columnsettings';
 import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
@@ -29,9 +27,6 @@ export class FizetesimodService {
   zoom = false;
   zoomsource: ZoomSources;
   DtoEdited = new FizetesimodDto();
-
-  ContainerMode = FizetesimodContainerMode.List;
-  EgyMode = FizetesimodEgyMode.Reszletek;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

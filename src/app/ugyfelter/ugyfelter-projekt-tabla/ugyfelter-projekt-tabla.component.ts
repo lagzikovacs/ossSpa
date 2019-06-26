@@ -1,44 +1,26 @@
-import {Component, EventEmitter, Input, OnDestroy, Output, TemplateRef} from '@angular/core';
-import {ProjektDto} from '../projektdto';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {ProjektDto} from '../../projekt/projektdto';
 
 @Component({
-  selector: 'app-projekt-tabla',
-  templateUrl: './projekt-tabla.component.html',
-  styleUrls: ['./projekt-tabla.component.css']
+  selector: 'app-ugyfelter-projekt-tabla',
+  templateUrl: './ugyfelter-projekt-tabla.component.html'
 })
-export class ProjektTablaComponent implements OnDestroy {
+export class UgyfelterProjektTablaComponent implements OnDestroy {
   @Input() Dto: ProjektDto[] = new Array<ProjektDto>();
   @Input() megjegyzesIs = true;
   @Input() enIdclick = true;
 
-  @Input() egyTemplate: TemplateRef<any>;
+  @Input() selectedrow: number;
+  @Output() selectedrowChange = new EventEmitter<number>();
 
   @Output() forid = new EventEmitter<number>();
 
-  clickedrowindex = -1;
-  clickedidindex = -1;
-
-  clearselections() {
-    this.clickedrowindex = -1;
-    this.clickedidindex = -1;
-  }
-
-  clickforid(i: number) {
-    this.clickedidindex = i;
-    this.clickedrowindex = this.clickedidindex;
-
-    this.forid.emit(this.clickedidindex);
-  }
-
   clickforrow(i: number) {
-    this.clickedrowindex = i;
-    // először clickforid aztán clickforrow is, clickforrow felülírná az eseményeket
-    if (this.clickedrowindex !== this.clickedidindex) {
-      this.clickedidindex = -1;
-      this.forid.emit(-1);
-    }
+    this.selectedrowChange.emit(i);
   }
-
+  clickforid(i: number) {
+    this.forid.emit(i);
+  }
 
   MuszakiallapotColor(muszakiallapot: string) {
     switch (muszakiallapot) {

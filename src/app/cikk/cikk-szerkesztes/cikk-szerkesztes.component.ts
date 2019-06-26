@@ -10,10 +10,7 @@ import {EmptyResult} from '../../dtos/emptyresult';
 import {TermekdijZoomParameter} from '../../primitiv/termekdij/termekdijzoomparameter';
 import {CikkContainerMode} from '../cikkcontainermode';
 import {CikkEgyMode} from '../cikkegymode';
-import {MeContainerMode} from '../../primitiv/me/mecontainermode';
-import {AfakulcsContainerMode} from '../../primitiv/afakulcs/afakulcscontainermode';
 import {CikkSzerkesztesMode} from '../cikkszerkesztesmode';
-import {TermekdijContainerMode} from '../../primitiv/termekdij/termekdijcontainermode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 
@@ -121,7 +118,6 @@ export class CikkSzerkesztesComponent implements OnDestroy {
     this._meservice.ekDto.minta = this.cikkservice.DtoEdited.Me || '';
     this._meservice.zoomsource = ZoomSources.Cikk;
     this._meservice.zoom = true;
-    this._meservice.ContainerMode = MeContainerMode.List;
 
     this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.MeZoom;
   }
@@ -129,7 +125,6 @@ export class CikkSzerkesztesComponent implements OnDestroy {
     this._afakulcsservice.ekDto.minta = this.cikkservice.DtoEdited.Afakulcs || '';
     this._afakulcsservice.zoomsource = ZoomSources.Cikk;
     this._afakulcsservice.zoom = true;
-    this._afakulcsservice.ContainerMode = AfakulcsContainerMode.List;
 
     this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.AfakulcsZoom;
   }
@@ -137,7 +132,6 @@ export class CikkSzerkesztesComponent implements OnDestroy {
     this._termekdijservice.ekDto.minta = this.cikkservice.DtoEdited.Termekdijkt || '';
     this._termekdijservice.zoomsource = ZoomSources.Cikk;
     this._termekdijservice.zoom = true;
-    this._termekdijservice.ContainerMode = TermekdijContainerMode.List;
 
     this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.TermekdijZoom;
   }

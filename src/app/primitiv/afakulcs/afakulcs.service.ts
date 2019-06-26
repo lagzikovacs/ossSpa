@@ -9,8 +9,6 @@ import {LogonService} from '../../logon/logon.service';
 import {AfakulcsResult} from './afakulcsresult';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {AfakulcsZoomParameter} from './afakulcszoomparameter';
-import {AfakulcsContainerMode} from './afakulcscontainermode';
-import {AfakulcsEgyMode} from './afakulcsegymode';
 import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 import {ColumnSettings} from '../../tools/reszletek/columnsettings';
 
@@ -29,9 +27,6 @@ export class AfakulcsService {
   zoom = false;
   zoomsource: ZoomSources;
   DtoEdited = new AfakulcsDto();
-
-  ContainerMode = AfakulcsContainerMode.List;
-  EgyMode = AfakulcsEgyMode.Reszletek;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

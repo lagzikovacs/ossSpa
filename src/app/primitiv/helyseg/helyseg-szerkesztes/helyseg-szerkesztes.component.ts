@@ -1,8 +1,6 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {HelysegService} from '../helyseg.service';
 import {NumberResult} from '../../../dtos/numberresult';
-import {HelysegContainerMode} from '../helysegcontainermode';
-import {HelysegEgyMode} from '../helysegegymode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 
@@ -12,6 +10,8 @@ import {SpinnerService} from '../../../tools/spinner/spinner.service';
 })
 export class HelysegSzerkesztesComponent implements OnDestroy {
   helysegservice: HelysegService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -58,7 +58,7 @@ export class HelysegSzerkesztesComponent implements OnDestroy {
         }
 
         this.eppFrissit = false;
-        this.navigal();
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -66,14 +66,7 @@ export class HelysegSzerkesztesComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.navigal();
-  }
-  navigal() {
-    if (this.helysegservice.uj) {
-      this.helysegservice.ContainerMode = HelysegContainerMode.List;
-    } else {
-      this.helysegservice.EgyMode = HelysegEgyMode.Reszletek;
-    }
+    this.KontenerKeres.emit();
   }
 
   ngOnDestroy() {

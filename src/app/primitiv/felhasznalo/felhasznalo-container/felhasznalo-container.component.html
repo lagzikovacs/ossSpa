@@ -1,19 +1,7 @@
-<!--export enum FelhasznaloContainerMode {
-  Blank = 0,
-  List = 1,
-  Egy = 2,
-  Uj = 3
-}-->
+<ng-container *ngIf="kontenermode === 1">
+  <app-felhasznalo-list (KontenerKeres)="KontenerUj()"></app-felhasznalo-list>
+</ng-container>
 
-<ng-container *ngIf="felhasznaloservice.ContainerMode === 0">
-  <app-blank></app-blank>
-</ng-container>
-<ng-container *ngIf="felhasznaloservice.ContainerMode === 1">
-  <app-felhasznalo-list></app-felhasznalo-list>
-</ng-container>
-<ng-container *ngIf="felhasznaloservice.ContainerMode === 2">
-  <app-felhasznalo-egy></app-felhasznalo-egy>
-</ng-container>
-<ng-container *ngIf="felhasznaloservice.ContainerMode === 3">
-  <app-felhasznalo-szerkesztes></app-felhasznalo-szerkesztes>
+<ng-container *ngIf="kontenermode === 2">
+  <app-felhasznalo-szerkesztes (KontenerKeres)="KontenerList()"></app-felhasznalo-szerkesztes>
 </ng-container>

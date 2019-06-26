@@ -1,20 +1,8 @@
-<!--export enum TeendoContainerMode {
-  Blank = 0,
-  List = 1,
-  Egy = 2,
-  Uj = 3
-}-->
+<ng-container *ngIf="kontenermode === 1">
+  <app-teendo-list (KontenerKeres)="KontenerUj()"></app-teendo-list>
+</ng-container>
 
-<ng-container *ngIf="teendoservice.ContainerMode === 0">
-  <app-blank></app-blank>
-</ng-container>
-<ng-container *ngIf="teendoservice.ContainerMode === 1">
-  <app-teendo-list></app-teendo-list>
-</ng-container>
-<ng-container *ngIf="teendoservice.ContainerMode === 2">
-  <app-teendo-egy></app-teendo-egy>
-</ng-container>
-<ng-container *ngIf="teendoservice.ContainerMode === 3">
-  <app-teendo-szerkesztes></app-teendo-szerkesztes>
+<ng-container *ngIf="kontenermode === 2">
+  <app-teendo-szerkesztes (KontenerKeres)="KontenerList()"></app-teendo-szerkesztes>
 </ng-container>
 

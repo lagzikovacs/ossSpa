@@ -2,12 +2,11 @@ import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {TermekdijService} from '../termekdij.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
-import {TermekdijContainerMode} from '../termekdijcontainermode';
-import {TermekdijEgyMode} from '../termekdijegymode';
 import {rowanimation} from '../../../animation/rowAnimation';
 import {deepCopy} from '../../../tools/deepCopy';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {EgyMode} from '../../../enums/egymode';
 
 @Component({
   selector: 'app-termekdij-egy',
@@ -15,6 +14,7 @@ import {SpinnerService} from '../../../tools/spinner/spinner.service';
   animations: [rowanimation]
 })
 export class TermekdijEgyComponent implements OnDestroy {
+  egymode = EgyMode.Reszletek;
   termekdijservice: TermekdijService;
   mod = false;
   ri = -1;
@@ -39,15 +39,15 @@ export class TermekdijEgyComponent implements OnDestroy {
   }
 
   reszletek() {
-    this.termekdijservice.EgyMode = TermekdijEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
   }
   torles () {
-    this.termekdijservice.EgyMode = TermekdijEgyMode.Torles;
+    this.egymode = EgyMode.Torles;
   }
   modositas() {
     this.termekdijservice.uj = false;
     this.termekdijservice.DtoEdited = deepCopy(this.termekdijservice.Dto[this.termekdijservice.DtoSelectedIndex]);
-    this.termekdijservice.EgyMode = TermekdijEgyMode.Modositas;
+    this.egymode = EgyMode.Modositas;
   }
 
   TorlesOk() {
@@ -71,7 +71,11 @@ export class TermekdijEgyComponent implements OnDestroy {
   }
 
   TorlesCancel() {
-    this.termekdijservice.EgyMode = TermekdijEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  EgyReszletek() {
+    this.egymode = EgyMode.Reszletek;
   }
 
   ngOnDestroy() {

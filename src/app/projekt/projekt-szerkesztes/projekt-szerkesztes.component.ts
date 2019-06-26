@@ -4,7 +4,6 @@ import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import {UgyfelContainerMode} from '../../ugyfel/ugyfelcontainermode';
-import {PenznemContainerMode} from '../../primitiv/penznem/penznemcontainermode';
 import {ProjektContainerMode} from '../projektcontainermode';
 import {ProjektSzerkesztesMode} from '../projektszerkesztesmode';
 import {ProjektEgyMode} from '../projektegymode';
@@ -116,7 +115,6 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
     this._penznemservice.ekDto.minta = this.projektservice.DtoEdited.Penznem || '';
     this._penznemservice.zoomsource = ZoomSources.Projekt;
     this._penznemservice.zoom = true;
-    this._penznemservice.ContainerMode = PenznemContainerMode.List;
 
     this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.PenznemZoom;
   }

@@ -1,8 +1,6 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {FelhasznaloService} from '../felhasznalo.service';
 import {NumberResult} from '../../../dtos/numberresult';
-import {FelhasznaloContainerMode} from '../felhasznalocontainermode';
-import {FelhasznaloEgyMode} from '../felhasznaloegymode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 
@@ -12,6 +10,8 @@ import {SpinnerService} from '../../../tools/spinner/spinner.service';
 })
 export class FelhasznaloSzerkesztesComponent implements OnDestroy {
   felhasznaloservice: FelhasznaloService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -58,7 +58,7 @@ export class FelhasznaloSzerkesztesComponent implements OnDestroy {
         }
 
         this.eppFrissit = false;
-        this.navigal();
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -66,14 +66,7 @@ export class FelhasznaloSzerkesztesComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.navigal();
-  }
-  navigal() {
-    if (this.felhasznaloservice.uj) {
-      this.felhasznaloservice.ContainerMode = FelhasznaloContainerMode.List;
-    } else {
-      this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Reszletek;
-    }
+    this.KontenerKeres.emit();
   }
   ngOnDestroy() {
     Object.keys(this).map(k => {

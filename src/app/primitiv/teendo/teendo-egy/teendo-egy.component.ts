@@ -2,12 +2,11 @@ import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {TeendoService} from '../teendo.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
-import {TeendoContainerMode} from '../teendocontainermode';
-import {TeendoEgyMode} from '../teendoegymode';
 import {rowanimation} from '../../../animation/rowAnimation';
 import {deepCopy} from '../../../tools/deepCopy';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {EgyMode} from '../../../enums/egymode';
 
 @Component({
   selector: 'app-teendo-egy',
@@ -15,6 +14,7 @@ import {SpinnerService} from '../../../tools/spinner/spinner.service';
   animations: [rowanimation]
 })
 export class TeendoEgyComponent implements OnDestroy {
+  egymode = EgyMode.Reszletek;
   teendoservice: TeendoService;
   mod = false;
   ri = -1;
@@ -39,15 +39,15 @@ export class TeendoEgyComponent implements OnDestroy {
   }
 
   reszletek() {
-    this.teendoservice.EgyMode = TeendoEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
   }
   torles () {
-    this.teendoservice.EgyMode = TeendoEgyMode.Torles;
+    this.egymode = EgyMode.Torles;
   }
   modositas() {
     this.teendoservice.uj = false;
     this.teendoservice.DtoEdited = deepCopy(this.teendoservice.Dto[this.teendoservice.DtoSelectedIndex]);
-    this.teendoservice.EgyMode = TeendoEgyMode.Modositas;
+    this.egymode = EgyMode.Modositas;
   }
 
   TorlesOk() {
@@ -71,7 +71,11 @@ export class TeendoEgyComponent implements OnDestroy {
   }
 
   TorlesCancel() {
-    this.teendoservice.EgyMode = TeendoEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  EgyReszletek() {
+    this.egymode = EgyMode.Reszletek;
   }
 
   ngOnDestroy() {

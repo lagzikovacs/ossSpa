@@ -2,12 +2,11 @@ import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {AfakulcsService} from '../afakulcs.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
-import {AfakulcsContainerMode} from '../afakulcscontainermode';
-import {AfakulcsEgyMode} from '../afakulcsegymode';
 import {rowanimation} from '../../../animation/rowAnimation';
 import {deepCopy} from '../../../tools/deepCopy';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {EgyMode} from '../../../enums/egymode';
 
 @Component({
   selector: 'app-afakulcs-egy',
@@ -15,6 +14,7 @@ import {SpinnerService} from '../../../tools/spinner/spinner.service';
   animations: [rowanimation]
 })
 export class AfakulcsEgyComponent implements OnDestroy {
+  egymode = EgyMode.Reszletek;
   afakulcsservice: AfakulcsService;
   mod = false;
   ri = -1;
@@ -39,15 +39,16 @@ export class AfakulcsEgyComponent implements OnDestroy {
   }
 
   reszletek() {
-    this.afakulcsservice.EgyMode = AfakulcsEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
   }
   torles () {
-    this.afakulcsservice.EgyMode = AfakulcsEgyMode.Torles;
+    this.egymode = EgyMode.Torles;
   }
   modositas() {
     this.afakulcsservice.uj = false;
     this.afakulcsservice.DtoEdited = deepCopy(this.afakulcsservice.Dto[this.afakulcsservice.DtoSelectedIndex]);
-    this.afakulcsservice.EgyMode = AfakulcsEgyMode.Modositas;
+
+    this.egymode = EgyMode.Modositas;
   }
 
   TorlesOk() {
@@ -72,7 +73,11 @@ export class AfakulcsEgyComponent implements OnDestroy {
   }
 
   TorlesCancel() {
-    this.afakulcsservice.EgyMode = AfakulcsEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  EgyReszletek() {
+    this.egymode = EgyMode.Reszletek;
   }
 
   ngOnDestroy() {

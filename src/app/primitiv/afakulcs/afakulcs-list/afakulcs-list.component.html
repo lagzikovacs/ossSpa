@@ -1,6 +1,7 @@
 <div class="alapkeret">
   <h5 *ngIf="!afakulcsservice.zoom">{{afakulcsservice.cim}}</h5>
   <h5 *ngIf="afakulcsservice.zoom">{{afakulcsservice.cim}} - zoom</h5>
+
   <app-toolbar [Szurok]="szurok"
                [(szempont)]="afakulcsservice.ekDto.szempont"
                [(minta)]="afakulcsservice.ekDto.minta"
@@ -8,6 +9,7 @@
                [enUj]="!eppFrissit && mod" (Uj)="uj()"
                [visZoom]="afakulcsservice.zoom" (StopZoom)="stopzoom()">
   </app-toolbar>
+
   <app-tabla #tabla
              [items]="afakulcsservice.Dto"
              [colsets]="afakulcsservice.GridSettings"
@@ -16,6 +18,7 @@
              (forid)="setClickedRow($event)"
              [egyTemplate]="gridegy">
   </app-tabla>
+
   <ng-template #gridegy>
     <app-afakulcs-egy (torlesutan)="torlesutan()"></app-afakulcs-egy>
   </ng-template>

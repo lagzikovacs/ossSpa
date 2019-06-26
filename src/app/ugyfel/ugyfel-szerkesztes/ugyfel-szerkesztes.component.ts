@@ -6,7 +6,6 @@ import {HelysegZoomParameter} from '../../primitiv/helyseg/helysegzoomparameter'
 import {UgyfelContainerMode} from '../ugyfelcontainermode';
 import {UgyfelEgyMode} from '../ugyfelegymode';
 import {UgyfelSzerkesztesMode} from '../ugyfelszerkesztesmode';
-import {HelysegContainerMode} from '../../primitiv/helyseg/helysegcontainermode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 
@@ -88,7 +87,6 @@ export class UgyfelSzerkesztesComponent implements OnDestroy {
     this._helysegservice.ekDto.minta = this.ugyfelservice.DtoEdited.Helysegnev || '';
     this._helysegservice.zoomsource = ZoomSources.Ugyfel;
     this._helysegservice.zoom = true;
-    this._helysegservice.ContainerMode = HelysegContainerMode.List;
 
     this.ugyfelservice.SzerkesztesMode = UgyfelSzerkesztesMode.HelysegZoom;
   }

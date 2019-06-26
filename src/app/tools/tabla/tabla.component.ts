@@ -11,7 +11,7 @@ export class TablaComponent implements OnDestroy {
   @Input() colsets: ColumnSettings[];
   @Input() zoom = false;
   @Input() letoltes = false;
-  @Input() idlink = true;
+  @Input() enIdclick = true;
 
   @Input() egyTemplate: TemplateRef<any>;
 

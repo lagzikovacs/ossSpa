@@ -2,12 +2,10 @@ import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
-import {PenznemContainerMode} from '../../primitiv/penznem/penznemcontainermode';
 import {UgyfelContainerMode} from '../../ugyfel/ugyfelcontainermode';
 import {ZoomSources} from '../../enums/zoomsources';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
 import {FizetesimodService} from '../../primitiv/fizetesimod/fizetesimod.service';
-import {FizetesimodContainerMode} from '../../primitiv/fizetesimod/fizetesimodcontainermode';
 import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {BizonylattetelSzerkesztesMode} from '../bizonylattetelszerkesztesmode';
@@ -67,7 +65,6 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this._penznemservice.ekDto.minta = this.bizonylatservice.ComplexDtoEdited.Dto.Penznem || '';
     this._penznemservice.zoomsource = ZoomSources.Bizonylat;
     this._penznemservice.zoom = true;
-    this._penznemservice.ContainerMode = PenznemContainerMode.List;
 
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.PenznemZoom;
     this._cdr.detectChanges();
@@ -76,7 +73,6 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this._fizetesimodservice.ekDto.minta = this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesimod || '';
     this._fizetesimodservice.zoomsource = ZoomSources.Bizonylat;
     this._fizetesimodservice.zoom = true;
-    this._fizetesimodservice.ContainerMode = FizetesimodContainerMode.List;
 
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.FizetesimodZoom;
     this._cdr.detectChanges();

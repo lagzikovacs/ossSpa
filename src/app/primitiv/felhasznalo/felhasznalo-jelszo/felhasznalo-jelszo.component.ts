@@ -1,6 +1,5 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {FelhasznaloService} from '../felhasznalo.service';
-import {FelhasznaloEgyMode} from '../felhasznaloegymode';
 import {rowanimation} from '../../../animation/rowAnimation';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
@@ -14,6 +13,8 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
   felhasznaloservice: FelhasznaloService;
   jelszo = '';
   jelszoujra = '';
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -54,7 +55,7 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
         this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex] = res1.Result[0];
 
         this.eppFrissit = false;
-        this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Reszletek;
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this._errorservice.Error = err;
@@ -63,7 +64,7 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
   }
 
   cancel() {
-    this.felhasznaloservice.EgyMode = FelhasznaloEgyMode.Reszletek;
+    this.KontenerKeres.emit();
   }
 
   ngOnDestroy() {

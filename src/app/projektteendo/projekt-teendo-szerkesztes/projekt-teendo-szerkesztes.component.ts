@@ -8,8 +8,6 @@ import {TeendoZoomParameter} from '../../primitiv/teendo/teendozoomparameter';
 import {ProjektService} from '../../projekt/projekt.service';
 import {ProjektteendoEgyMode} from '../projekttendoegymode';
 import {ProjektteendoContainerMode} from '../projektteendocontainermode';
-import {FelhasznaloContainerMode} from '../../primitiv/felhasznalo/felhasznalocontainermode';
-import {TeendoContainerMode} from '../../primitiv/teendo/teendocontainermode';
 import {ProjektteendoSzerkesztesMode} from '../projektteendoszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
@@ -107,7 +105,6 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
     this._felhasznalosevice.ekDto.minta = this.projektteendoservice.DtoEdited.Dedikalva || '';
     this._felhasznalosevice.zoomsource = ZoomSources.Projektteendo;
     this._felhasznalosevice.zoom = true;
-    this._felhasznalosevice.ContainerMode = FelhasznaloContainerMode.List;
 
     this.projektteendoservice.SzerkesztesMode = ProjektteendoSzerkesztesMode.FelhasznaloZoom;
   }
@@ -115,7 +112,6 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
     this._teendoservice.ekDto.minta = this.projektteendoservice.DtoEdited.Teendo || '';
     this._teendoservice.zoomsource = ZoomSources.Projektteendo;
     this._teendoservice.zoom = true;
-    this._teendoservice.ContainerMode = TeendoContainerMode.List;
 
     this.projektteendoservice.SzerkesztesMode = ProjektteendoSzerkesztesMode.TeendoZoom;
   }

@@ -1,20 +1,8 @@
-<!--export enum HelysegContainerMode {
-  Blank = 0,
-  List = 1,
-  Egy = 2,
-  Uj = 3
-}-->
+<ng-container *ngIf="kontenermode === 1">
+  <app-helyseg-list (KontenerKeres)="KontenerUj()"></app-helyseg-list>
+</ng-container>
 
-<ng-container *ngIf="helysegservice.ContainerMode === 0">
-  <app-blank></app-blank>
-</ng-container>
-<ng-container *ngIf="helysegservice.ContainerMode === 1">
-  <app-helyseg-list></app-helyseg-list>
-</ng-container>
-<ng-container *ngIf="helysegservice.ContainerMode === 2">
-  <app-helyseg-egy></app-helyseg-egy>
-</ng-container>
-<ng-container *ngIf="helysegservice.ContainerMode === 3">
-  <app-helyseg-szerkesztes></app-helyseg-szerkesztes>
+<ng-container *ngIf="kontenermode === 2">
+  <app-helyseg-szerkesztes (KontenerKeres)="KontenerList()"></app-helyseg-szerkesztes>
 </ng-container>
 

@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {LogonService} from '../../logon/logon.service';
 import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
@@ -18,12 +18,15 @@ import {AjanlatService} from '../../ajanlat/ajanlat.service';
 import {JogKod} from '../../enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {ProjektkapcsolatTablaComponent} from '../projektkapcsolat-tabla/projektkapcsolat-tabla.component';
 
 @Component({
   selector: 'app-projektkapcsolat-list',
   templateUrl: './projektkapcsolat-list.component.html'
 })
 export class ProjektkapcsolatListComponent implements OnDestroy {
+  @ViewChild('tabla') tabla: ProjektkapcsolatTablaComponent;
+
   projektkapcsolatservice: ProjektkapcsolatService;
 
   BizonylatMod = false;
@@ -58,6 +61,7 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
 
   kereses() {
     this.eppFrissit = true;
+    this.tabla.clearselections();
     this.projektkapcsolatservice.Kereses()
       .then(res => {
         this.eppFrissit = false;
@@ -72,7 +76,13 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
     this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.Levalasztas;
   }
   setClickedRow(i: number) {
+    this.tabla.bizonylatOk = false;
+    this.tabla.iratOk = false;
     this.projektkapcsolatservice.DtoSelectedIndex = i;
+
+    if (this.projektkapcsolatservice.DtoSelectedIndex === -1) {
+      return;
+    }
 
     if (this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Bizonylatkod !== null) {
       this.eppFrissit = true;
@@ -116,9 +126,11 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
 
           this._bizonylatkifizetesservice.Dto = res3.Result;
 
-          this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.EgyBizonylat;
+          // this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.EgyBizonylat;
           this._bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
           this.eppFrissit = false;
+
+          this.tabla.bizonylatOk = true;
         })
         .catch(err => {
           this.eppFrissit = false;
@@ -137,11 +149,13 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
           this._iratservice.Dto = res.Result;
           this._iratservice.DtoSelectedIndex = 0;
 
-          this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.EgyIrat;
+          // this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.EgyIrat;
           this._iratservice.ContainerMode = IratContainerMode.Egy;
           this._iratservice.EgyMode = IratEgyMode.Dokumentum;
           this._dokumentumservice.ContainerMode = DokumentumContainerMode.List;
           this.eppFrissit = false;
+
+          this.tabla.iratOk = true;
         })
         .catch(err => {
           this.eppFrissit = false;
@@ -149,6 +163,7 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
         });
     }
   }
+
   ujbizonylat() {
     this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.UjBizonylat;
   }
@@ -178,6 +193,11 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
     this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.Vagolap;
     this._vagolapservice.Mode = VagolapMode.Projekt;
   }
+
+  torlesutan() {
+    this.tabla.clearselections();
+  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

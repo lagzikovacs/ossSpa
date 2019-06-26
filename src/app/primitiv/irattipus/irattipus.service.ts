@@ -8,8 +8,6 @@ import {EmptyResult} from '../../dtos/emptyresult';
 import {IrattipusDto} from './irattipusdto';
 import {IrattipusResult} from './irattipusresult';
 import {ZoomSources} from '../../enums/zoomsources';
-import {IrattipusEgyMode} from './irattipusegymode';
-import {IrattipusContainerMode} from './irattipuscontainermode';
 import {IrattipusZoomParameter} from './irattipuszoomparameter';
 import {ColumnSettings} from '../../tools/reszletek/columnsettings';
 import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
@@ -29,9 +27,6 @@ export class IrattipusService {
   zoom = false;
   zoomsource: ZoomSources;
   DtoEdited = new IrattipusDto();
-
-  ContainerMode = IrattipusContainerMode.List;
-  EgyMode = IrattipusEgyMode.Reszletek;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

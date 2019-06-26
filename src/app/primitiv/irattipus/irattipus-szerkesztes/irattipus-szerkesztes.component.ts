@@ -1,7 +1,5 @@
 import {IrattipusService} from '../irattipus.service';
-import {Component, OnDestroy} from '@angular/core';
-import {IrattipusContainerMode} from '../irattipuscontainermode';
-import {IrattipusEgyMode} from '../irattipusegymode';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
@@ -12,6 +10,8 @@ import {SpinnerService} from '../../../tools/spinner/spinner.service';
 })
 export class IrattipusSzerkesztesComponent implements OnDestroy {
   irattipusservice: IrattipusService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -58,7 +58,7 @@ export class IrattipusSzerkesztesComponent implements OnDestroy {
         }
 
         this.eppFrissit = false;
-        this.navigal();
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -66,14 +66,7 @@ export class IrattipusSzerkesztesComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.navigal();
-  }
-  navigal() {
-    if (this.irattipusservice.uj) {
-      this.irattipusservice.ContainerMode = IrattipusContainerMode.List;
-    } else {
-      this.irattipusservice.EgyMode = IrattipusEgyMode.Reszletek;
-    }
+    this.KontenerKeres.emit();
   }
 
   ngOnDestroy() {

@@ -1,7 +1,5 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {FizetesimodService} from '../fizetesimod.service';
-import {FizetesimodContainerMode} from '../fizetesimodcontainermode';
-import {FizetesimodEgyMode} from '../fizetesimodegymode';
 import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
@@ -12,6 +10,8 @@ import {SpinnerService} from '../../../tools/spinner/spinner.service';
 })
 export class FizetesimodSzerkesztesComponent implements OnDestroy {
   fizetesimodservice: FizetesimodService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -58,7 +58,7 @@ export class FizetesimodSzerkesztesComponent implements OnDestroy {
         }
 
         this.eppFrissit = false;
-        this.navigal();
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -66,14 +66,7 @@ export class FizetesimodSzerkesztesComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.navigal();
-  }
-  navigal() {
-    if (this.fizetesimodservice.uj) {
-      this.fizetesimodservice.ContainerMode = FizetesimodContainerMode.List;
-    } else {
-      this.fizetesimodservice.EgyMode = FizetesimodEgyMode.Reszletek;
-    }
+    this.KontenerKeres.emit();
   }
   ngOnDestroy() {
     Object.keys(this).map(k => {

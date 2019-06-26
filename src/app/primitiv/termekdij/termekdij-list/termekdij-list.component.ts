@@ -1,7 +1,5 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {TermekdijService} from '../termekdij.service';
-import {TermekdijEgyMode} from '../termekdijegymode';
-import {TermekdijContainerMode} from '../termekdijcontainermode';
 import {LogonService} from '../../../logon/logon.service';
 import {CikkService} from '../../../cikk/cikk.service';
 import {BizonylatService} from '../../../bizonylat/bizonylat.service';
@@ -23,6 +21,8 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
   szurok = ['KT'];
   mod = false;
   termekdijservice: TermekdijService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -119,7 +119,6 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.termekdijservice.DtoSelectedIndex = i;
     this.termekdijservice.uj = false;
-    this.termekdijservice.EgyMode = TermekdijEgyMode.Reszletek;
   }
 
   uj() {
@@ -135,7 +134,7 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
         this.termekdijservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this.termekdijservice.ContainerMode = TermekdijContainerMode.Uj;
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

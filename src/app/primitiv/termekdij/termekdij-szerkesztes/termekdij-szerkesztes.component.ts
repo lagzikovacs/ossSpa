@@ -1,7 +1,5 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {TermekdijService} from '../termekdij.service';
-import {TermekdijContainerMode} from '../termekdijcontainermode';
-import {TermekdijEgyMode} from '../termekdijegymode';
 import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
@@ -12,6 +10,8 @@ import {SpinnerService} from '../../../tools/spinner/spinner.service';
 })
 export class TermekdijSzerkesztesComponent implements OnDestroy {
   termekdijservice: TermekdijService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -58,7 +58,7 @@ export class TermekdijSzerkesztesComponent implements OnDestroy {
         }
 
         this.eppFrissit = false;
-        this.navigal();
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -66,14 +66,7 @@ export class TermekdijSzerkesztesComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.navigal();
-  }
-  navigal() {
-    if (this.termekdijservice.uj) {
-      this.termekdijservice.ContainerMode = TermekdijContainerMode.List;
-    } else {
-      this.termekdijservice.EgyMode = TermekdijEgyMode.Reszletek;
-    }
+    this.KontenerKeres.emit();
   }
   ngOnDestroy() {
     Object.keys(this).map(k => {

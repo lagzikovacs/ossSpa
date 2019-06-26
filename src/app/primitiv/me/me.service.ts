@@ -9,8 +9,6 @@ import {NumberResult} from '../../dtos/numberresult';
 import {MeResult} from './meresult';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {MeZoomParameter} from './mezoomparameter';
-import {MeContainerMode} from './mecontainermode';
-import {MeEgyMode} from './meegymode';
 import {ColumnSettings} from '../../tools/reszletek/columnsettings';
 import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 
@@ -29,9 +27,6 @@ export class MeService {
   zoom = false;
   zoomsource: ZoomSources;
   DtoEdited = new MeDto();
-
-  ContainerMode = MeContainerMode.List;
-  EgyMode = MeEgyMode.Reszletek;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

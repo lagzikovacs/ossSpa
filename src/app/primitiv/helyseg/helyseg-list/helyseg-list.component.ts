@@ -1,11 +1,9 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {HelysegService} from '../helyseg.service';
 import {LogonService} from '../../../logon/logon.service';
 import {UgyfelService} from '../../../ugyfel/ugyfel.service';
 import {JogKod} from '../../../enums/jogkod';
-import {HelysegContainerMode} from '../helysegcontainermode';
 import {ZoomSources} from '../../../enums/zoomsources';
-import {HelysegEgyMode} from '../helysegegymode';
 import {UgyfelSzerkesztesMode} from '../../../ugyfel/ugyfelszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
@@ -21,6 +19,8 @@ export class HelysegListComponent implements OnInit, OnDestroy {
   szurok = ['Helységnév'];
   mod = false;
   helysegservice: HelysegService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -103,7 +103,6 @@ export class HelysegListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.helysegservice.DtoSelectedIndex = i;
     this.helysegservice.uj = false;
-    this.helysegservice.EgyMode = HelysegEgyMode.Reszletek;
   }
 
   uj() {
@@ -119,7 +118,7 @@ export class HelysegListComponent implements OnInit, OnDestroy {
         this.helysegservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this.helysegservice.ContainerMode = HelysegContainerMode.Uj;
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

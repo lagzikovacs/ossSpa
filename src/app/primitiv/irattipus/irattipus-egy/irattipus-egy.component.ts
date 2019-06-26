@@ -2,12 +2,11 @@ import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {IrattipusService} from '../irattipus.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
-import {IrattipusEgyMode} from '../irattipusegymode';
-import {IrattipusContainerMode} from '../irattipuscontainermode';
 import {rowanimation} from '../../../animation/rowAnimation';
 import {deepCopy} from '../../../tools/deepCopy';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {EgyMode} from '../../../enums/egymode';
 
 @Component({
   selector: 'app-irattipus-egy',
@@ -15,6 +14,7 @@ import {SpinnerService} from '../../../tools/spinner/spinner.service';
   animations: [rowanimation]
 })
 export class IrattipusEgyComponent implements OnDestroy {
+  egymode = EgyMode.Reszletek;
   irattipusservice: IrattipusService;
   mod = false;
   ri = -1;
@@ -39,15 +39,15 @@ export class IrattipusEgyComponent implements OnDestroy {
   }
 
   reszletek() {
-    this.irattipusservice.EgyMode = IrattipusEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
   }
   torles () {
-    this.irattipusservice.EgyMode = IrattipusEgyMode.Torles;
+    this.egymode = EgyMode.Torles;
   }
   modositas() {
     this.irattipusservice.uj = false;
     this.irattipusservice.DtoEdited = deepCopy(this.irattipusservice.Dto[this.irattipusservice.DtoSelectedIndex]);
-    this.irattipusservice.EgyMode = IrattipusEgyMode.Modositas;
+    this.egymode = EgyMode.Modositas;
   }
 
   TorlesOk() {
@@ -71,7 +71,11 @@ export class IrattipusEgyComponent implements OnDestroy {
   }
 
   TorlesCancel() {
-    this.irattipusservice.EgyMode = IrattipusEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  EgyReszletek() {
+    this.egymode = EgyMode.Reszletek;
   }
 
   ngOnDestroy() {

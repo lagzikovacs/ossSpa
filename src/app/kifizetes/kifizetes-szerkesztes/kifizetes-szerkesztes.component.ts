@@ -3,8 +3,6 @@ import {KifizetesService} from '../kifizetes.service';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
 import {FizetesimodService} from '../../primitiv/fizetesimod/fizetesimod.service';
 import {ZoomSources} from '../../enums/zoomsources';
-import {PenznemContainerMode} from '../../primitiv/penznem/penznemcontainermode';
-import {FizetesimodContainerMode} from '../../primitiv/fizetesimod/fizetesimodcontainermode';
 import {KifizetesSzerkesztesMode} from '../kifizetesszerkesztesmode';
 import * as moment from 'moment';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
@@ -49,7 +47,6 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
     this._penznemservice.ekDto.minta = this.bizonylatkifizetesservice.DtoEdited.Penznem || '';
     this._penznemservice.zoomsource = ZoomSources.Bizonylatkifizetes;
     this._penznemservice.zoom = true;
-    this._penznemservice.ContainerMode = PenznemContainerMode.List;
 
     this.bizonylatkifizetesservice.SzerkesztesMode = KifizetesSzerkesztesMode.PenznemZoom;
   }
@@ -57,7 +54,6 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
     this._fizetesimodservice.ekDto.minta = this.bizonylatkifizetesservice.DtoEdited.Fizetesimod || '';
     this._fizetesimodservice.zoomsource = ZoomSources.Bizonylatkifizetes;
     this._fizetesimodservice.zoom = true;
-    this._fizetesimodservice.ContainerMode = FizetesimodContainerMode.List;
 
     this.bizonylatkifizetesservice.SzerkesztesMode = KifizetesSzerkesztesMode.FizetesimodZoom;
   }

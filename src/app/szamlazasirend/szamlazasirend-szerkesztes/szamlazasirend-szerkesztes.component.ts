@@ -6,7 +6,6 @@ import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter'
 import {ProjektService} from '../../projekt/projekt.service';
 import {SzamlazasirendEgyMode} from '../szamlazasirendegymode';
 import {SzamlazasirendContainerMode} from '../szamlazasirendcontainermode';
-import {PenznemContainerMode} from '../../primitiv/penznem/penznemcontainermode';
 import {SzamlazasirendSzerkesztesMode} from '../szamlazasirendszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
@@ -94,7 +93,6 @@ export class SzamlazasirendSzerkesztesComponent implements OnDestroy {
     this._penznemservice.ekDto.minta = this.szamlazasirendservice.DtoEdited.Penznem || '';
     this._penznemservice.zoomsource = ZoomSources.Szamlazasirend;
     this._penznemservice.zoom = true;
-    this._penznemservice.ContainerMode = PenznemContainerMode.List;
 
     this.szamlazasirendservice.SzerkesztesMode = SzamlazasirendSzerkesztesMode.PenznemZoom;
   }

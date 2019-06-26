@@ -1,20 +1,8 @@
-<!--export enum AfakulcsContainerMode {
-  Blank = 0,
-  List = 1,
-  Egy = 2,
-  Uj = 3
-}-->
+<ng-container *ngIf="kontenermode === 1">
+  <app-afakulcs-list (KontenerKeres)="KontenerUj()"></app-afakulcs-list>
+</ng-container>
 
-<ng-container *ngIf="afakulcsservice.ContainerMode === 0">
-  <app-blank></app-blank>
-</ng-container>
-<ng-container *ngIf="afakulcsservice.ContainerMode === 1">
-  <app-afakulcs-list></app-afakulcs-list>
-</ng-container>
-<ng-container *ngIf="afakulcsservice.ContainerMode === 2">
-  <app-afakulcs-egy></app-afakulcs-egy>
-</ng-container>
-<ng-container *ngIf="afakulcsservice.ContainerMode === 3">
-  <app-afakulcs-szerkesztes></app-afakulcs-szerkesztes>
+<ng-container *ngIf="kontenermode === 2">
+  <app-afakulcs-szerkesztes (KontenerKeres)="KontenerList()"></app-afakulcs-szerkesztes>
 </ng-container>
 

@@ -1,9 +1,7 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {FizetesimodService} from '../fizetesimod.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
-import {FizetesimodContainerMode} from '../fizetesimodcontainermode';
-import {FizetesimodEgyMode} from '../fizetesimodegymode';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {KifizetesService} from '../../../kifizetes/kifizetes.service';
 import {KifizetesSzerkesztesMode} from '../../../kifizetes/kifizetesszerkesztesmode';
@@ -23,6 +21,8 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
   szurok = ['Fizetési mód'];
   mod = false;
   fizetesimodservice: FizetesimodService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -115,7 +115,6 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.fizetesimodservice.DtoSelectedIndex = i;
     this.fizetesimodservice.uj = false;
-    this.fizetesimodservice.EgyMode = FizetesimodEgyMode.Reszletek;
   }
 
   uj() {
@@ -131,7 +130,7 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
         this.fizetesimodservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this.fizetesimodservice.ContainerMode = FizetesimodContainerMode.Uj;
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
@@ -14,12 +14,15 @@ import {JogKod} from '../../enums/jogkod';
 import {LogonService} from '../../logon/logon.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {ProjektTablaComponent} from '../projekttabla/projekt-tabla.component';
 
 @Component({
   selector: 'app-projekt-list',
   templateUrl: './projekt-list.component.html'
 })
 export class ProjektListComponent implements OnDestroy {
+  @ViewChild('tabla') tabla: ProjektTablaComponent;
+
   statuszszurok = [
     '(0) Mind', '(1) Ajánlat', '(2) Fut', '(3) Kész', '(4) Pályázatra vár', '(5) Mástól megrendelte',
     '(6) Döglött', '(7) Csak érdeklődött', '(8) Helyszíni felmérést kér', '(9) Kommunikál, van remény',
@@ -75,6 +78,8 @@ export class ProjektListComponent implements OnDestroy {
     }
     this.projektservice.pp.fi.push(new SzMT(this.szempontok[this.projektservice.szempont], this.projektservice.minta));
 
+    this.tabla.clearselections();
+
     this.onKeresesTovabb();
   }
   onKeresesTovabb() {
@@ -109,6 +114,10 @@ export class ProjektListComponent implements OnDestroy {
   setClickedRow(i: number) {
     this.projektservice.DtoSelectedIndex = i;
 
+    if (this.projektservice.DtoSelectedIndex === -1) {
+      return;
+    }
+
     const ProjektKod = this.projektservice.Dto[this.projektservice.DtoSelectedIndex].Projektkod;
     const UgyfelKod = this.projektservice.Dto[this.projektservice.DtoSelectedIndex].Ugyfelkod;
 
@@ -127,11 +136,10 @@ export class ProjektListComponent implements OnDestroy {
         return this._projektteendoservice.Kereses();
       })
       .then(res2 => {
-        this.projektservice.ContainerMode = ProjektContainerMode.Egy;
+        // this._projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
+
         this.projektservice.EgyMode = ProjektEgyMode.Bizonylatesirat;
         this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
-
-        this._projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
 
         this.eppFrissit = false;
       })
@@ -164,6 +172,10 @@ export class ProjektListComponent implements OnDestroy {
   onExport(sszi: number) {
     this.projektservice.statuszexporthoz = this.statuszszurok[sszi];
     this.projektservice.ContainerMode = ProjektContainerMode.Export;
+  }
+
+  torlesutan() {
+    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

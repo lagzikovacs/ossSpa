@@ -8,6 +8,8 @@ import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {PenztartetelService} from '../../penztartetel/penztartetel.service';
+import {PenztartetelContainerMode} from '../../penztartetel/penztartetelcontainermode';
 
 @Component({
   selector: 'app-penztar-egy',
@@ -34,7 +36,8 @@ export class PenztarEgyComponent implements OnDestroy {
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
-              penztarservice: PenztarService) {
+              penztarservice: PenztarService,
+              private _penztartetelservice: PenztartetelService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);
     this.penztarservice = penztarservice;
     this.nyitva = this.penztarservice.Dto[this.penztarservice.DtoSelectedIndex].Nyitva;
@@ -53,6 +56,7 @@ export class PenztarEgyComponent implements OnDestroy {
   }
   tetelek() {
     this.penztarservice.EgyMode = PenztarEgyMode.Tetelek;
+    this._penztartetelservice.ContainerMode = PenztartetelContainerMode.List;
   }
   export() {
     this.penztarservice.EgyMode = PenztarEgyMode.Export;

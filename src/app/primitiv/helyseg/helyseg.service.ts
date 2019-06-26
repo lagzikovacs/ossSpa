@@ -3,8 +3,6 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {HelysegDto} from './helysegdto';
 import {HelysegResult} from './helysegresult';
 import {HelysegZoomParameter} from './helysegzoomparameter';
-import {HelysegContainerMode} from './helysegcontainermode';
-import {HelysegEgyMode} from './helysegegymode';
 import {environment} from '../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
 import {ZoomSources} from '../../enums/zoomsources';
@@ -29,9 +27,6 @@ export class HelysegService {
   zoom = false;
   zoomsource: ZoomSources;
   DtoEdited = new HelysegDto();
-
-  ContainerMode = HelysegContainerMode.List;
-  EgyMode = HelysegEgyMode.Reszletek;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

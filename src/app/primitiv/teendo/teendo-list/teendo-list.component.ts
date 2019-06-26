@@ -1,11 +1,9 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {TeendoService} from '../teendo.service';
 import {JogKod} from '../../../enums/jogkod';
 import {LogonService} from '../../../logon/logon.service';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {ProjektteendoService} from '../../../projektteendo/projektteendo.service';
-import {TeendoContainerMode} from '../teendocontainermode';
-import {TeendoEgyMode} from '../teendoegymode';
 import {ProjektteendoSzerkesztesMode} from '../../../projektteendo/projektteendoszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
@@ -21,6 +19,8 @@ export class TeendoListComponent implements OnInit, OnDestroy {
   szurok = ['Teendő'];
   mod = false;
   teendoservice: TeendoService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -105,7 +105,6 @@ export class TeendoListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.teendoservice.DtoSelectedIndex = i;
     this.teendoservice.uj = false;
-    this.teendoservice.EgyMode = TeendoEgyMode.Reszletek;
   }
 
   uj() {
@@ -121,7 +120,7 @@ export class TeendoListComponent implements OnInit, OnDestroy {
         this.teendoservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this.teendoservice.ContainerMode = TeendoContainerMode.Uj;
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

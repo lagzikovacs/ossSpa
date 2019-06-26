@@ -7,9 +7,6 @@ import {AfakulcsService} from '../../primitiv/afakulcs/afakulcs.service';
 import {TermekdijService} from '../../primitiv/termekdij/termekdij.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import {CikkContainerMode} from '../../cikk/cikkcontainermode';
-import {MeContainerMode} from '../../primitiv/me/mecontainermode';
-import {AfakulcsContainerMode} from '../../primitiv/afakulcs/afakulcscontainermode';
-import {TermekdijContainerMode} from '../../primitiv/termekdij/termekdijcontainermode';
 import {BizonylattetelSzerkesztesMode} from '../bizonylattetelszerkesztesmode';
 import {BruttobolParam} from '../bruttobolparam';
 import {CikkZoomParameter} from '../../cikk/cikkzoomparameter';
@@ -63,7 +60,6 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
     this._meservice.ekDto.minta = this.bizonylatservice.TetelDtoEdited.Me || '';
     this._meservice.zoomsource = ZoomSources.Bizonylattetel;
     this._meservice.zoom = true;
-    this._meservice.ContainerMode = MeContainerMode.List;
 
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.MeZoom;
     this._cdr.detectChanges();
@@ -72,7 +68,6 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
     this._afakulcsservice.ekDto.minta = this.bizonylatservice.TetelDtoEdited.Afakulcs || '';
     this._afakulcsservice.zoomsource = ZoomSources.Bizonylattetel;
     this._afakulcsservice.zoom = true;
-    this._afakulcsservice.ContainerMode = AfakulcsContainerMode.List;
 
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.AfakulcsZoom;
     this._cdr.detectChanges();
@@ -81,7 +76,6 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
     this._termekdijservice.ekDto.minta = this.bizonylatservice.TetelDtoEdited.Termekdijkt || '';
     this._termekdijservice.zoomsource = ZoomSources.Bizonylattetel;
     this._termekdijservice.zoom = true;
-    this._termekdijservice.ContainerMode = TermekdijContainerMode.List;
 
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.TermekdijZoom;
     this._cdr.detectChanges();

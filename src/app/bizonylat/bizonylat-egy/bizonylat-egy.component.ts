@@ -1,4 +1,4 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
@@ -29,6 +29,8 @@ export class BizonylatEgyComponent implements OnDestroy {
 
   bizonylatservice: BizonylatService;
   mod = false;
+
+  @Output() torlesutan = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -192,6 +194,7 @@ export class BizonylatEgyComponent implements OnDestroy {
         this.bizonylatservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
+        this.torlesutan.emit();
         this.bizonylatservice.ContainerMode = BizonylatContainerMode.List;
       })
       .catch(err => {

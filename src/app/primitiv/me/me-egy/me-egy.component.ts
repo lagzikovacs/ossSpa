@@ -1,13 +1,12 @@
 import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {MeService} from '../me.service';
-import {MeContainerMode} from '../mecontainermode';
-import {MeEgyMode} from '../meegymode';
 import {rowanimation} from '../../../animation/rowAnimation';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
 import {deepCopy} from '../../../tools/deepCopy';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {EgyMode} from '../../../enums/egymode';
 
 @Component({
   selector: 'app-me-egy',
@@ -15,6 +14,7 @@ import {SpinnerService} from '../../../tools/spinner/spinner.service';
   animations: [rowanimation]
 })
 export class MeEgyComponent implements OnDestroy {
+  egymode = EgyMode.Reszletek;
   meservice: MeService;
   mod = false;
   ri = -1;
@@ -39,15 +39,15 @@ export class MeEgyComponent implements OnDestroy {
   }
 
   reszletek() {
-    this.meservice.EgyMode = MeEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
   }
   torles () {
-    this.meservice.EgyMode = MeEgyMode.Torles;
+    this.egymode = EgyMode.Torles;
   }
   modositas() {
     this.meservice.uj = false;
     this.meservice.DtoEdited = deepCopy(this.meservice.Dto[this.meservice.DtoSelectedIndex]);
-    this.meservice.EgyMode = MeEgyMode.Modositas;
+    this.egymode = EgyMode.Modositas;
   }
 
   TorlesOk() {
@@ -71,7 +71,11 @@ export class MeEgyComponent implements OnDestroy {
   }
 
   TorlesCancel() {
-    this.meservice.EgyMode = MeEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  EgyReszletek() {
+    this.egymode = EgyMode.Reszletek;
   }
 
   ngOnDestroy() {

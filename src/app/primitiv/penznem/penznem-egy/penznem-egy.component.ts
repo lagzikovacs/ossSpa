@@ -2,12 +2,11 @@ import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {PenznemService} from '../penznem.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
-import {PenznemContainerMode} from '../penznemcontainermode';
-import {PenznemEgyMode} from '../penznemegymode';
 import {rowanimation} from '../../../animation/rowAnimation';
 import {deepCopy} from '../../../tools/deepCopy';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {EgyMode} from '../../../enums/egymode';
 
 @Component({
   selector: 'app-penznem-egy',
@@ -15,6 +14,7 @@ import {SpinnerService} from '../../../tools/spinner/spinner.service';
   animations: [rowanimation]
 })
 export class PenznemEgyComponent implements OnDestroy {
+  egymode = EgyMode.Reszletek;
   penznemservice: PenznemService;
   mod = false;
   ri = -1;
@@ -39,15 +39,15 @@ export class PenznemEgyComponent implements OnDestroy {
   }
 
   reszletek() {
-    this.penznemservice.EgyMode = PenznemEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
   }
   torles () {
-    this.penznemservice.EgyMode = PenznemEgyMode.Torles;
+    this.egymode = EgyMode.Torles;
   }
   modositas() {
     this.penznemservice.uj = false;
     this.penznemservice.DtoEdited = deepCopy(this.penznemservice.Dto[this.penznemservice.DtoSelectedIndex]);
-    this.penznemservice.EgyMode = PenznemEgyMode.Modositas;
+    this.egymode = EgyMode.Modositas;
   }
 
   TorlesOk() {
@@ -71,7 +71,11 @@ export class PenznemEgyComponent implements OnDestroy {
   }
 
   TorlesCancel() {
-    this.penznemservice.EgyMode = PenznemEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  EgyReszletek() {
+    this.egymode = EgyMode.Reszletek;
   }
 
   ngOnDestroy() {

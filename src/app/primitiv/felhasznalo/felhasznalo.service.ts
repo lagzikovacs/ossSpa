@@ -4,8 +4,6 @@ import {FelhasznaloDto} from './felhasznalodto';
 import {FelhasznaloResult} from './felhasznaloresult';
 import {Md5} from 'ts-md5';
 import {JelszocsereParameter} from './jelszocsereparameter';
-import {FelhasznaloEgyMode} from './felhasznaloegymode';
-import {FelhasznaloContainerMode} from './felhasznalocontainermode';
 import {environment} from '../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
 import {ZoomSources} from '../../enums/zoomsources';
@@ -30,9 +28,6 @@ export class FelhasznaloService {
   zoom = false;
   zoomsource: ZoomSources;
   DtoEdited = new FelhasznaloDto();
-
-  ContainerMode = FelhasznaloContainerMode.List;
-  EgyMode = FelhasznaloEgyMode.Reszletek;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

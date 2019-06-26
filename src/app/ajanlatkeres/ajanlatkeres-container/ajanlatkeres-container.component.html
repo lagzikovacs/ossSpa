@@ -1,21 +1,7 @@
-<!--export eUgynokContainerModeMode {
-Blank = 0,
-List = 1,
-Egy = 2,
-Uj = 3
-}-->
-
-<ng-container *ngIf="ajanlatkeresservice.ContainerMode === 0">
-  <app-blank></app-blank>
-</ng-container>
-<ng-container *ngIf="ajanlatkeresservice.ContainerMode === 1">
+<ng-container *ngIf="kontenermode === 1">
   <app-ajanlatkeres-list></app-ajanlatkeres-list>
 </ng-container>
-<ng-container *ngIf="ajanlatkeresservice.ContainerMode === 2">
-  <app-ajanlatkeres-egy></app-ajanlatkeres-egy>
-</ng-container>
-<ng-container *ngIf="ajanlatkeresservice.ContainerMode === 3">
-  <app-ajanlatkeres-szerkesztes></app-ajanlatkeres-szerkesztes>
-</ng-container>
+
+
 
 

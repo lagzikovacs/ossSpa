@@ -212,7 +212,6 @@ import { UgyfelterComponent } from './ugyfelter/ugyfelter/ugyfelter.component';
 import { UgyfelTerLinkComponent } from './ugyfelter/ugyfel-ter-link/ugyfel-ter-link.component';
 import {UgyfelterService} from './ugyfelter/ugyfelter.service';
 import { UgyfelProjektComponent } from './ugyfel/ugyfel-projekt/ugyfel-projekt.component';
-import { AjanlatkeresSzerkesztesComponent } from './ajanlatkeres/ajanlatkeres-szerkesztes/ajanlatkeres-szerkesztes.component';
 import { UgyfelterlogComponent } from './ugyfelterlog/ugyfelterlog.component';
 import {UgyfelterlogService} from './ugyfelterlog/ugyfelterlog.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -479,7 +478,6 @@ if (environment.production) {
     UgyfelterComponent,
     UgyfelTerLinkComponent,
     UgyfelProjektComponent,
-    AjanlatkeresSzerkesztesComponent,
     UgyfelterlogComponent,
     DashboardComponent,
     FotozasComponent,

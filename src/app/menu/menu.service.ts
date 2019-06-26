@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {AngularmenuDto} from './angularmenudto';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {LogonService} from '../logon/logon.service';
@@ -48,7 +47,6 @@ import {ProjektteendoDto} from '../projektteendo/projektteendodto';
 import {VolumeContainerMode} from '../volume/volumecontainermode';
 import {ParticioService} from '../particio/particio.service';
 import {ParticioEgyMode} from '../particio/particioegymode';
-import {AjanlatkeresContainerMode} from '../ajanlatkeres/ajanlatkerescontainermode';
 import {PenztarContainerMode} from '../penztar/penztarcontainermode';
 import {IratContainerMode} from '../irat/iratcontainermode';
 import {ProjektContainerMode} from '../projekt/projektcontainermode';
@@ -186,7 +184,6 @@ export class MenuService {
         this._penztarservice.Dto = new Array<PenztarDto>();
         break;
       case '/ajanlatkeres':
-        this._ugynokservice.ContainerMode = AjanlatkeresContainerMode.List;
         this._ugynokservice.Dto = new Array<AjanlatkeresDto>();
       break;
 

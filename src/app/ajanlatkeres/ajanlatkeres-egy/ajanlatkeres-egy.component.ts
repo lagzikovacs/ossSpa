@@ -1,9 +1,9 @@
 import {Component, OnDestroy} from '@angular/core';
 import {AjanlatkeresService} from '../ajanlatkeres.service';
-import {AjanlatkeresEgyMode} from '../ajanlatkeresegymode';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
+import {EgyMode} from '../../enums/egymode';
 
 @Component({
   selector: 'app-ajanlatkeres-egy',
@@ -11,6 +11,7 @@ import {rowanimation} from '../../animation/rowAnimation';
   animations: [rowanimation]
 })
 export class FeliratkozasEgyComponent implements OnDestroy {
+  egymode = EgyMode.Reszletek;
   ajanlatkeresservice: AjanlatkeresService;
   enprojekt = false;
   ri = -1;
@@ -22,10 +23,10 @@ export class FeliratkozasEgyComponent implements OnDestroy {
   }
 
   reszletek() {
-    this.ajanlatkeresservice.EgyMode = AjanlatkeresEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
   }
   projekt() {
-    this.ajanlatkeresservice.EgyMode = AjanlatkeresEgyMode.Projekt;
+    this.egymode = EgyMode.Projekt;
   }
   ngOnDestroy() {
     Object.keys(this).map(k => {

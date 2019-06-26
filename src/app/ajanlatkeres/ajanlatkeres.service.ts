@@ -7,8 +7,6 @@ import {AjanlatkeresDto} from './ajanlatkeresdto';
 import {AjanlatkeresParameter} from './ajanlatkeresparameter';
 import {ProjektDto} from '../projekt/projektdto';
 import {ProjektParameter} from '../projekt/projektparameter';
-import {AjanlatkeresContainerMode} from './ajanlatkerescontainermode';
-import {AjanlatkeresEgyMode} from './ajanlatkeresegymode';
 import {NumberResult} from '../dtos/numberresult';
 import {EmptyResult} from '../dtos/emptyresult';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
@@ -33,9 +31,6 @@ export class AjanlatkeresService {
 
   pp = new ProjektParameter(0, environment.lapmeret);
   ProjektDto: ProjektDto[] = new Array<ProjektDto>();
-
-  ContainerMode = AjanlatkeresContainerMode.List;
-  EgyMode = AjanlatkeresEgyMode.Reszletek;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

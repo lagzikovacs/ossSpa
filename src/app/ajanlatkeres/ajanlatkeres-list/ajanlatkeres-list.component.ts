@@ -1,20 +1,21 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {AjanlatkeresService} from '../ajanlatkeres.service';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import {AjanlatkeresDto} from '../ajanlatkeresdto';
 import {ProjektDto} from '../../projekt/projektdto';
-import {AjanlatkeresEgyMode} from '../ajanlatkeresegymode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {TablaComponent} from '../../tools/tabla/tabla.component';
 
 @Component({
   selector: 'app-ajanlatkeres-list',
   templateUrl: './ajanlatkeres-list.component.html'
 })
 export class AjanlatkeresListComponent implements OnDestroy {
-  szurok = ['Id', 'Ügynök', 'Név', 'Cím', 'Email', 'Telefonszám'];
+  @ViewChild('tabla') tabla: TablaComponent;
 
+  szurok = ['Id', 'Ügynök', 'Név', 'Cím', 'Email', 'Telefonszám'];
   szempontok = [
     Szempont.Kod, Szempont.Ugynoknev, Szempont.Nev, Szempont.Cim, Szempont.Email,
     Szempont.Telefonszam
@@ -48,6 +49,8 @@ export class AjanlatkeresListComponent implements OnDestroy {
 
     this.ajanlatkeresservice.fp.fi.push(new SzMT(this.szempontok[this.ajanlatkeresservice.szempont], this.ajanlatkeresservice.minta));
 
+    this.tabla.clearselections();
+
     this.onKeresesTovabb();
   }
   onKeresesTovabb() {
@@ -80,9 +83,7 @@ export class AjanlatkeresListComponent implements OnDestroy {
   }
   setClickedRow(i: number) {
     this.ajanlatkeresservice.ProjektDto = new Array<ProjektDto>();
-
     this.ajanlatkeresservice.DtoSelectedIndex = i;
-    this.ajanlatkeresservice.EgyMode = AjanlatkeresEgyMode.Reszletek;
   }
   ngOnDestroy() {
     Object.keys(this).map(k => {

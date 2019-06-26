@@ -5,5 +5,10 @@ export enum EgyMode {
   Modositas = 3,
   Jelszo = 4,
   Tevekenyseg = 5,
-  BeszerzesKivet = 6
+  BeszerzesKivet = 6,
+
+  Csoport = 7,
+  Projekt = 8,
+  UgyfelterLink = 9,
+  Vcard = 10
 }

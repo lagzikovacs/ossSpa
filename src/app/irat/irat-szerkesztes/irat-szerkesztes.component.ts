@@ -5,7 +5,6 @@ import {ZoomSources} from '../../enums/zoomsources';
 import * as moment from 'moment';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {IratContainerMode} from '../iratcontainermode';
-import {UgyfelContainerMode} from '../../ugyfel/ugyfelcontainermode';
 import {IratSzerkesztesMode} from '../iratszerkesztesmode';
 import {IratEgyMode} from '../irategymode';
 import {IrattipusZoomParameter} from '../../primitiv/irattipus/irattipuszoomparameter';
@@ -125,7 +124,6 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
     this._ugyfelservice.minta = this.iratservice.DtoEdited.Ugyfelnev || '';
     this._ugyfelservice.zoomsource = ZoomSources.Irat;
     this._ugyfelservice.zoom = true;
-    this._ugyfelservice.ContainerMode = UgyfelContainerMode.List;
 
     this.iratservice.SzerkesztesMode = IratSzerkesztesMode.UgyfelZoom;
   }

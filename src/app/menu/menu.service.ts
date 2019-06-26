@@ -48,7 +48,6 @@ import {ProjektteendoDto} from '../projektteendo/projektteendodto';
 import {VolumeContainerMode} from '../volume/volumecontainermode';
 import {ParticioService} from '../particio/particio.service';
 import {ParticioEgyMode} from '../particio/particioegymode';
-import {UgyfelContainerMode} from '../ugyfel/ugyfelcontainermode';
 import {CsoportContainerMode} from '../csoport/csoportcontainermode';
 import {AjanlatkeresContainerMode} from '../ajanlatkeres/ajanlatkerescontainermode';
 import {PenztarContainerMode} from '../penztar/penztarcontainermode';
@@ -155,7 +154,6 @@ export class MenuService {
         this._helysegservice.Dto = new Array<HelysegDto>();
         break;
       case '/ugyfel':
-        this._ugyfelservice.ContainerMode = UgyfelContainerMode.List;
         this._ugyfelservice.zoom = false;
         this._ugyfelservice.Dto = new Array<UgyfelDto>();
       break;

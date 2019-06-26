@@ -1,14 +1,13 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {UgyfelService} from '../ugyfel.service';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
-import {UgyfelContainerMode} from '../ugyfelcontainermode';
-import {UgyfelEgyMode} from '../ugyfelegymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import * as FileSaver from 'file-saver';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {EgyMode} from '../../enums/egymode';
 
 @Component({
   selector: 'app-ugyfel-egy',
@@ -16,10 +15,13 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   animations: [rowanimation]
 })
 export class UgyfelEgyComponent implements OnDestroy {
+  egymode = EgyMode.Reszletek;
   ugyfelservice: UgyfelService;
   mod = false;
   nincsProjekt = false;
   ri = -1;
+
+  @Output() torlesutan = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -39,31 +41,31 @@ export class UgyfelEgyComponent implements OnDestroy {
   }
 
   reszletek() {
-    this.ugyfelservice.EgyMode = UgyfelEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
   }
   torles() {
-    this.ugyfelservice.EgyMode = UgyfelEgyMode.Torles;
+    this.egymode = EgyMode.Torles;
   }
   modositas() {
     this.ugyfelservice.uj = false;
     this.ugyfelservice.DtoEdited = deepCopy(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
-    this.ugyfelservice.EgyMode = UgyfelEgyMode.Modositas;
+    this.egymode = EgyMode.Modositas;
   }
   csoport() {
     this.ugyfelservice.uj = false;
     this.ugyfelservice.DtoEdited = deepCopy(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
-    this.ugyfelservice.EgyMode = UgyfelEgyMode.Csoport;
+    this.egymode = EgyMode.Csoport;
   }
   projekt() {
-    this.ugyfelservice.EgyMode = UgyfelEgyMode.Projekt;
+    this.egymode = EgyMode.Projekt;
   }
   ugyfelterlink() {
-    this.ugyfelservice.EgyMode = UgyfelEgyMode.UgyfelterLink;
+    this.egymode = EgyMode.UgyfelterLink;
   }
   vcard() {
     this.ugyfelservice.uj = false;
     this.ugyfelservice.DtoEdited = deepCopy(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
-    this.ugyfelservice.EgyMode = UgyfelEgyMode.Vcard;
+    this.egymode = EgyMode.Vcard;
   }
 
   TorlesOk() {
@@ -78,7 +80,7 @@ export class UgyfelEgyComponent implements OnDestroy {
         this.ugyfelservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this.ugyfelservice.ContainerMode = UgyfelContainerMode.List;
+        this.torlesutan.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -87,7 +89,11 @@ export class UgyfelEgyComponent implements OnDestroy {
   }
 
   TorlesCancel() {
-    this.ugyfelservice.EgyMode = UgyfelEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  EgyReszletek() {
+    this.egymode = EgyMode.Reszletek;
   }
 
   CsoportOk(selected: number) {
@@ -110,7 +116,7 @@ export class UgyfelEgyComponent implements OnDestroy {
         this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex] = res2.Result[0];
 
         this.eppFrissit = false;
-        this.ugyfelservice.EgyMode = UgyfelEgyMode.Reszletek;
+        this.egymode = EgyMode.Reszletek;
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -119,7 +125,7 @@ export class UgyfelEgyComponent implements OnDestroy {
   }
 
   CsoportCancel() {
-    this.ugyfelservice.EgyMode = UgyfelEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
   }
 
   VcardLetoles() {

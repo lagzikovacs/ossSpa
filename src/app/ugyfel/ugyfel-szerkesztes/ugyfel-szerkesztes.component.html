@@ -7,23 +7,21 @@
     <div class="row no-gutters editform-row">
       <div>
         <div class="egylabel">Név</div>
-        <input type="text" class="form-control form-control-sm oszlop4" id="nev"
+        <input type="text" class="form-control form-control-sm oszlop6" id="nev"
                maxlength="200" required autocomplete="off"
                [(ngModel)]="ugyfelservice.DtoEdited.Nev" name="nev">
       </div>
     </div>
 
     <div class="row no-gutters editform-row">
-      <div>
+      <div style="margin-right: 5px">
         <div class="egylabel">Cég</div>
-        <input type="text" class="form-control form-control-sm oszlop4" id="ceg"
+        <input type="text" class="form-control form-control-sm oszlop6" id="ceg"
                maxlength="200" autocomplete="off"
                [(ngModel)]="ugyfelservice.DtoEdited.Ceg" name="ceg">
       </div>
-    </div>
 
-    <div class="row no-gutters editform-row">
-      <div>
+      <div style="display: inline-block; margin-right: 5px">
         <div class="egylabel">Beosztás</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="beosztas"
                maxlength="200" autocomplete="off"
@@ -32,16 +30,14 @@
     </div>
 
     <div class="row no-gutters editform-row">
-      <div>
-        <div class="egylabel">Irányítószám</div>
+      <div style="margin-right: 5px">
+        <div class="egylabel">Ir. szám</div>
         <input type="text" class="form-control form-control-sm oszlop1" id="iranyitoszam"
                maxlength="20" required autocomplete="off"
                [(ngModel)]="ugyfelservice.DtoEdited.Iranyitoszam" name="iranyitoszam">
       </div>
-    </div>
 
-    <div class="row no-gutters editform-row">
-      <div>
+      <div style="display: inline-block; margin-right: 5px">
         <div class="egylabel">Helységnév</div>
         <input type="text" class="form-control form-control-sm oszlop3" id="helysegnev"
                maxlength="100" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
@@ -74,17 +70,30 @@
     </div>
 
     <div class="row no-gutters editform-row">
-      <div>
-        <div class="egylabel">Adószám</div>
-        <input type="text" class="form-control form-control-sm oszlop2" style="display: inline-block" id="adoszam"
-               maxlength="20" autocomplete="off"
-               [(ngModel)]="ugyfelservice.DtoEdited.Adoszam" name="adoszam">
-        <div style="margin-left: 5px;color: red; display: inline-block">Magánszemélynél legyen üres, egyébként a megfelelő formátumú!</div>
+      <div style="margin-right: 5px">
+        <div class="egylabel">Telefon</div>
+        <input type="text" class="form-control form-control-sm oszlop3" id="telefon"
+               maxlength="20" required autocomplete="off"
+               [(ngModel)]="ugyfelservice.DtoEdited.Telefon" name="telefon">
+      </div>
+
+      <div style="display: inline-block; margin-right: 5px">
+        <div class="egylabel">Email</div>
+        <input type="text" class="form-control form-control-sm oszlop4" id="email"
+               maxlength="50" required autocomplete="off"
+               [(ngModel)]="ugyfelservice.DtoEdited.Email" name="email">
       </div>
     </div>
 
     <div class="row no-gutters editform-row">
-      <div>
+      <div style="margin-right: 5px">
+        <div class="egylabel">Adószám</div>
+        <input type="text" class="form-control form-control-sm oszlop2" style="display: inline-block" id="adoszam"
+               maxlength="20" autocomplete="off"
+               [(ngModel)]="ugyfelservice.DtoEdited.Adoszam" name="adoszam">
+      </div>
+
+      <div style="display: inline-block; margin-right: 5px">
         <div class="egylabel">EU adószám</div>
         <input type="text" class="form-control form-control-sm oszlop2" id="euadoszam"
                maxlength="20" autocomplete="off"
@@ -93,36 +102,16 @@
     </div>
 
     <div class="row no-gutters editform-row">
-      <div>
-        <div class="egylabel">Telefon</div>
-        <input type="text" class="form-control form-control-sm oszlop2" id="telefon"
-               maxlength="20" required autocomplete="off"
-               [(ngModel)]="ugyfelservice.DtoEdited.Telefon" name="telefon">
-      </div>
-    </div>
-
-    <div class="row no-gutters editform-row">
-      <div>
-        <div class="egylabel">Email</div>
-        <input type="text" class="form-control form-control-sm oszlop3" id="email"
-               maxlength="50" required autocomplete="off"
-               [(ngModel)]="ugyfelservice.DtoEdited.Email" name="email">
-      </div>
-    </div>
-
-    <div class="row no-gutters editform-row">
-      <div>
+      <div style="margin-right: 5px">
         <div class="egylabel">Egyéb link</div>
-        <input type="text" class="form-control form-control-sm oszlop4" id="egyeblink"
+        <input type="text" class="form-control form-control-sm oszlop6" id="egyeblink"
                maxlength="200" autocomplete="off"
                [(ngModel)]="ugyfelservice.DtoEdited.Egyeblink" name="egyeblink">
       </div>
-    </div>
 
-    <div class="row no-gutters editform-row">
-      <div>
+      <div style="display: inline-block; margin-right: 5px">
         <div class="egylabel">Ajánlotta</div>
-        <input type="text" class="form-control form-control-sm oszlop4" id="ajanlotta"
+        <input type="text" class="form-control form-control-sm oszlop6" id="ajanlotta"
                maxlength="200" autocomplete="off"
                [(ngModel)]="ugyfelservice.DtoEdited.Ajanlotta" name="ajanlotta">
       </div>
@@ -131,7 +120,7 @@
     <div class="row no-gutters editform-row">
       <div>
         <div class="egylabel">Megjegyzés</div>
-        <input type="text" class="form-control form-control-sm oszlop4" id="megjegyzes"
+        <input type="text" class="form-control form-control-sm oszlop6" id="megjegyzes"
                maxlength="200" autocomplete="off"
                [(ngModel)]="ugyfelservice.DtoEdited.Megjegyzes" name="megjegyzes">
       </div>
@@ -143,14 +132,6 @@
     </div>
   </form>
 
-<!--  export enum UgyfelSzerkesztesMode {
-  Blank = 0,
-  HelysegZoom = 1
-  }-->
-
-  <ng-container *ngIf="ugyfelservice.SzerkesztesMode === 0">
-    <app-blank></app-blank>
-  </ng-container>
   <ng-container *ngIf="ugyfelservice.SzerkesztesMode === 1">
     <app-helyseg-container></app-helyseg-container>
   </ng-container>

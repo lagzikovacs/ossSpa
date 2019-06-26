@@ -1,20 +1,8 @@
-<!--export enum UgyfelContainerMode {
-  Blank = 0,
-  List = 1,
-  Egy = 2,
-  Uj = 3
-}-->
+<ng-container *ngIf="kontenermode === 1">
+  <app-ugyfel-list (KontenerKeres)="KontenerUj()"></app-ugyfel-list>
+</ng-container>
 
-<ng-container *ngIf="ugyfelservice.ContainerMode === 0">
-  <app-blank></app-blank>
-</ng-container>
-<ng-container *ngIf="ugyfelservice.ContainerMode === 1">
-  <app-ugyfel-list></app-ugyfel-list>
-</ng-container>
-<ng-container *ngIf="ugyfelservice.ContainerMode === 2">
-  <app-ugyfel-egy></app-ugyfel-egy>
-</ng-container>
-<ng-container *ngIf="ugyfelservice.ContainerMode === 3">
-  <app-ugyfel-szerkesztes></app-ugyfel-szerkesztes>
+<ng-container *ngIf="kontenermode === 2">
+  <app-ugyfel-szerkesztes (KontenerKeres)="KontenerList()"></app-ugyfel-szerkesztes>
 </ng-container>
 

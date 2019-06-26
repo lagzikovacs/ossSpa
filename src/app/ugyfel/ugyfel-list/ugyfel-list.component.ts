@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {Szempont} from '../../enums/szempont';
 import {UgyfelService} from '../ugyfel.service';
 import {UgyfelDto} from '../ugyfeldto';
@@ -7,8 +7,6 @@ import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ZoomSources} from '../../enums/zoomsources';
 import {IratService} from '../../irat/irat.service';
-import {UgyfelContainerMode} from '../ugyfelcontainermode';
-import {UgyfelEgyMode} from '../ugyfelegymode';
 import {ProjektService} from '../../projekt/projekt.service';
 import {ProjektSzerkesztesMode} from '../../projekt/projektszerkesztesmode';
 import {IratSzerkesztesMode} from '../../irat/iratszerkesztesmode';
@@ -33,9 +31,9 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
   ];
 
   mod = false;
-  utsr = -1;
-
   ugyfelservice: UgyfelService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -156,7 +154,6 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.ugyfelservice.DtoSelectedIndex = i;
     this.ugyfelservice.uj = false;
-    this.ugyfelservice.EgyMode = UgyfelEgyMode.Reszletek;
   }
 
   onUj() {
@@ -172,7 +169,7 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
         this.ugyfelservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this.ugyfelservice.ContainerMode = UgyfelContainerMode.Uj;
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

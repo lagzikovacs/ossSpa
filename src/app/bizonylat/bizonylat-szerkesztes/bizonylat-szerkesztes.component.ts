@@ -2,7 +2,6 @@ import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
-import {UgyfelContainerMode} from '../../ugyfel/ugyfelcontainermode';
 import {ZoomSources} from '../../enums/zoomsources';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
 import {FizetesimodService} from '../../primitiv/fizetesimod/fizetesimod.service';
@@ -56,7 +55,6 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this._ugyfelservice.minta = this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelnev || '';
     this._ugyfelservice.zoomsource = ZoomSources.Bizonylat;
     this._ugyfelservice.zoom = true;
-    this._ugyfelservice.ContainerMode = UgyfelContainerMode.List;
 
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.UgyfelZoom;
     this._cdr.detectChanges();

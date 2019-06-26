@@ -8,8 +8,6 @@ import {UgyfelResult} from './ugyfelresult';
 import {ZoomSources} from '../enums/zoomsources';
 import {NumberResult} from '../dtos/numberresult';
 import {EmptyResult} from '../dtos/emptyresult';
-import {UgyfelContainerMode} from './ugyfelcontainermode';
-import {UgyfelEgyMode} from './ugyfelegymode';
 import {UgyfelSzerkesztesMode} from './ugyfelszerkesztesmode';
 import {UgyfelZoomParameter} from './ugyfelzoomparameter';
 import {ProjektDto} from '../projekt/projektdto';
@@ -37,8 +35,6 @@ export class UgyfelService {
   zoomsource: ZoomSources;
   DtoEdited = new UgyfelDto();
 
-  ContainerMode = UgyfelContainerMode.List;
-  EgyMode = UgyfelEgyMode.Reszletek;
   SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
 
   pp = new ProjektParameter(0, environment.lapmeret);

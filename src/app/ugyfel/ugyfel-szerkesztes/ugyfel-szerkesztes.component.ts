@@ -1,10 +1,8 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {UgyfelService} from '../ugyfel.service';
 import {HelysegService} from '../../primitiv/helyseg/helyseg.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import {HelysegZoomParameter} from '../../primitiv/helyseg/helysegzoomparameter';
-import {UgyfelContainerMode} from '../ugyfelcontainermode';
-import {UgyfelEgyMode} from '../ugyfelegymode';
 import {UgyfelSzerkesztesMode} from '../ugyfelszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
@@ -15,6 +13,8 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 })
 export class UgyfelSzerkesztesComponent implements OnDestroy {
   ugyfelservice: UgyfelService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -66,7 +66,7 @@ export class UgyfelSzerkesztesComponent implements OnDestroy {
         }
 
         this.eppFrissit = false;
-        this.navigal();
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -74,15 +74,9 @@ export class UgyfelSzerkesztesComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.navigal();
+    this.KontenerKeres.emit();
   }
-  navigal() {
-    if (this.ugyfelservice.uj) {
-      this.ugyfelservice.ContainerMode = UgyfelContainerMode.List;
-    } else {
-      this.ugyfelservice.EgyMode = UgyfelEgyMode.Reszletek;
-    }
-  }
+
   HelysegZoom() {
     this._helysegservice.ekDto.minta = this.ugyfelservice.DtoEdited.Helysegnev || '';
     this._helysegservice.zoomsource = ZoomSources.Ugyfel;

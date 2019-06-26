@@ -4,27 +4,20 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Azonosító</div>
-      </div>
-      <div class="col-md-2">
+      <div style="margin-right: 5px">
+        <div class="egylabel">Azonosító</div>
         <input type="text" class="form-control form-control-sm" id="azonosito"
                formControlName="azonosito" autocomplete="off" #azonosito>
       </div>
-    </div>
 
-    <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Jelszó</div>
-      </div>
-      <div class="col-md-2">
+      <div style="display: inline-block; margin-right: 5px">
+        <div class="egylabel">Jelszó</div>
         <input type="password" class="form-control form-control-sm" id="jelszo"
                formControlName="jelszo" autocomplete="off" #jelszo>
       </div>
     </div>
 
-    <div class="row no-gutters">
-      <div class="col-md-2"></div>
+    <div class="row no-gutters editform-row">
       <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.valid || eppFrissit">Bejelentkezés</button>
     </div>
   </form>

@@ -3,7 +3,6 @@ import {NumberResult} from '../dtos/numberresult';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {EgyszeruKeresesDto} from '../dtos/egyszerukeresesdto';
-import {ZoomSources} from '../enums/zoomsources';
 import {CsoportDto} from './csoportdto';
 import {LogonService} from '../logon/logon.service';
 import {CsoportResult} from './csoportresult';
@@ -15,8 +14,6 @@ import {LehetsegesJogDto} from './lehetsegesjogdto';
 import {CsoportFelhasznaloParameter} from './csoportfelhasznaloparameter';
 import {CsoportJogParameter} from './csoportjogparameter';
 import {JogaimResult} from './jogaimresult';
-import {CsoportContainerMode} from './csoportcontainermode';
-import {CsoportEgyMode} from './csoportegymode';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
 
@@ -36,9 +33,6 @@ export class CsoportService {
 
   DtoCsoportFelhasznalo: FelhasznaloDto[] = new Array<FelhasznaloDto>();
   DtoCsoportLehetsegesJog: LehetsegesJogDto[] = new Array<LehetsegesJogDto>();
-
-  ContainerMode = CsoportContainerMode.List;
-  EgyMode = CsoportEgyMode.Reszletek;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

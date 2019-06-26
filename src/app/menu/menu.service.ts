@@ -48,7 +48,6 @@ import {ProjektteendoDto} from '../projektteendo/projektteendodto';
 import {VolumeContainerMode} from '../volume/volumecontainermode';
 import {ParticioService} from '../particio/particio.service';
 import {ParticioEgyMode} from '../particio/particioegymode';
-import {CsoportContainerMode} from '../csoport/csoportcontainermode';
 import {AjanlatkeresContainerMode} from '../ajanlatkeres/ajanlatkerescontainermode';
 import {PenztarContainerMode} from '../penztar/penztarcontainermode';
 import {IratContainerMode} from '../irat/iratcontainermode';
@@ -236,7 +235,6 @@ export class MenuService {
         this._felhasznaloservice.Dto = new Array<FelhasznaloDto>();
         break;
       case '/csoport':
-        this._csoportservice.ContainerMode = CsoportContainerMode.List;
         this._csoportservice.Dto = new Array<CsoportDto>();
         break;
       case '/vagolap':

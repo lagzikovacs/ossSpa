@@ -1,7 +1,5 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output, ViewChild} from '@angular/core';
 import {CsoportService} from '../csoport.service';
-import {CsoportContainerMode} from '../csoportcontainermode';
-import {CsoportEgyMode} from '../csoportegymode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
@@ -16,6 +14,8 @@ export class CsoportListComponent implements OnDestroy {
   csoportservice: CsoportService;
   szurok = ['Csoport'];
   elsokereses = true;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -95,7 +95,6 @@ export class CsoportListComponent implements OnDestroy {
         this.csoportservice.DtoCsoportLehetsegesJog = res1.Result;
 
         this.eppFrissit = false;
-        this.csoportservice.EgyMode = CsoportEgyMode.Reszletek;
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -116,7 +115,7 @@ export class CsoportListComponent implements OnDestroy {
         this.csoportservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this.csoportservice.ContainerMode = CsoportContainerMode.Uj;
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

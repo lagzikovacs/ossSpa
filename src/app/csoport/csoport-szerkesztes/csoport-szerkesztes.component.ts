@@ -1,8 +1,6 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {CsoportService} from '../csoport.service';
 import {NumberResult} from '../../dtos/numberresult';
-import {CsoportContainerMode} from '../csoportcontainermode';
-import {CsoportEgyMode} from '../csoportegymode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 
@@ -12,6 +10,8 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 })
 export class CsoportSzerkesztesComponent implements OnDestroy {
   csoportservice: CsoportService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -58,7 +58,7 @@ export class CsoportSzerkesztesComponent implements OnDestroy {
         }
 
         this.eppFrissit = false;
-        this.navigal();
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -66,15 +66,9 @@ export class CsoportSzerkesztesComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.navigal();
+    this.KontenerKeres.emit();
   }
-  navigal() {
-    if (this.csoportservice.uj) {
-      this.csoportservice.ContainerMode = CsoportContainerMode.List;
-    } else {
-      this.csoportservice.EgyMode = CsoportEgyMode.Reszletek;
-    }
-  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

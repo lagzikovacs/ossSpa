@@ -1,11 +1,10 @@
 import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {CsoportService} from '../csoport.service';
-import {CsoportContainerMode} from '../csoportcontainermode';
-import {CsoportEgyMode} from '../csoportegymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {EgyMode} from '../../enums/egymode';
 
 @Component({
   selector: 'app-csoport-egy',
@@ -13,6 +12,7 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   animations: [rowanimation]
 })
 export class CsoportEgyComponent implements OnDestroy {
+  egymode = EgyMode.Reszletek;
   csoportservice: CsoportService;
   ri = -1;
 
@@ -34,21 +34,21 @@ export class CsoportEgyComponent implements OnDestroy {
   }
 
   reszletek() {
-    this.csoportservice.EgyMode = CsoportEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
   }
   torles () {
-    this.csoportservice.EgyMode = CsoportEgyMode.Torles;
+    this.egymode = EgyMode.Torles;
   }
   modositas() {
     this.csoportservice.uj = false;
     this.csoportservice.DtoEdited = deepCopy(this.csoportservice.Dto[this.csoportservice.DtoSelectedIndex]);
-    this.csoportservice.EgyMode = CsoportEgyMode.Modositas;
+    this.egymode = EgyMode.Modositas;
   }
   felhasznalo() {
-    this.csoportservice.EgyMode = CsoportEgyMode.Felhasznalo;
+    this.egymode = EgyMode.Felhasznalo;
   }
   jog() {
-    this.csoportservice.EgyMode = CsoportEgyMode.Jog;
+    this.egymode = EgyMode.Jog;
   }
 
   TorlesOk() {
@@ -72,7 +72,11 @@ export class CsoportEgyComponent implements OnDestroy {
   }
 
   TorlesCancel() {
-    this.csoportservice.EgyMode = CsoportEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  EgyReszletek() {
+    this.egymode = EgyMode.Reszletek;
   }
 
   ngOnDestroy() {

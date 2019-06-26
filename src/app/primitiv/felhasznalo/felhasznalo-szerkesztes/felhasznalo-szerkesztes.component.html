@@ -5,39 +5,39 @@
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
     <div class="row no-gutters editform-row">
-      <div>
+      <div style="margin-right: 5px">
         <div class="egylabel">Azonosító</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="azonosito"
                maxlength="30" required autocomplete="off"
                [(ngModel)]="felhasznaloservice.DtoEdited.Azonosito" name="azonosito">
       </div>
-    </div>
-    <div class="row no-gutters editform-row">
-      <div>
+
+      <div style="display: inline-block; margin-right: 5px">
         <div class="egylabel">Név</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="nev"
                maxlength="100" required autocomplete="off"
                [(ngModel)]="felhasznaloservice.DtoEdited.Nev" name="nev">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div>
+      <div style="margin-right: 5px">
         <div class="egylabel">Telefon</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="telefon"
                maxlength="50" required autocomplete="off"
                [(ngModel)]="felhasznaloservice.DtoEdited.Telefon" name="telefon">
       </div>
-    </div>
-    <div class="row no-gutters editform-row">
-      <div>
+
+      <div style="display: inline-block; margin-right: 5px">
         <div class="egylabel">Email</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="email"
                maxlength="50" required autocomplete="off"
                [(ngModel)]="felhasznaloservice.DtoEdited.Email" name="email">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div>
+      <div style="margin-right: 5px">
         <div class="egylabel">Státusz</div>
         <select type="text" class="form-control form-control-sm"
                 [(ngModel)]="felhasznaloservice.DtoEdited.Statusz" name="statusz">
@@ -45,9 +45,8 @@
           <option>Tiltott</option>
         </select>
       </div>
-    </div>
-    <div class="row no-gutters editform-row">
-      <div>
+
+      <div style="display: inline-block; margin-right: 5px">
         <div class="egylabel">Log</div>
         <select type="text" class="form-control form-control-sm"
                 [(ngModel)]="felhasznaloservice.DtoEdited.Logonlog" name="log">

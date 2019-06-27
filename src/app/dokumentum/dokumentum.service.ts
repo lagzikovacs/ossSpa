@@ -5,8 +5,6 @@ import {environment} from '../../environments/environment';
 import {DokumentumResult} from './dokumentumresult';
 import {DokumentumDto} from './dokumentumdto';
 import {EmptyResult} from '../dtos/emptyresult';
-import {DokumentumContainerMode} from './dokumentumcontainermode';
-import {DokumentumEgyMode} from './dokumentumegymode';
 import {LetoltesResult} from './letoltesresult';
 import {LetoltesParam} from './letoltesparam';
 import * as FileSaver from 'file-saver';
@@ -29,9 +27,6 @@ export class DokumentumService {
   DtoSelectedIndex = -1;
   uj = false;
   DtoEdited = new DokumentumDto();
-
-  ContainerMode = DokumentumContainerMode.List;
-  EgyMode = DokumentumEgyMode.Reszletek;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

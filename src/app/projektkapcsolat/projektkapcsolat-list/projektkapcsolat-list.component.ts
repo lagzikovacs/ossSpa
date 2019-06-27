@@ -3,7 +3,6 @@ import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {LogonService} from '../../logon/logon.service';
 import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 import {IratService} from '../../irat/irat.service';
-import {DokumentumContainerMode} from '../../dokumentum/dokumentumcontainermode';
 import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {AjanlatContainerMode} from '../../ajanlat/ajanlatcontainermode';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
@@ -150,7 +149,7 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
           // this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.EgyIrat;
           // this._iratservice.ContainerMode = IratContainerMode.Egy;
           // this._iratservice.EgyMode = IratEgyMode.Dokumentum;
-          this._dokumentumservice.ContainerMode = DokumentumContainerMode.List;
+          // this._dokumentumservice.ContainerMode = DokumentumContainerMode.List;
           this.eppFrissit = false;
 
           this.tabla.iratOk = true;

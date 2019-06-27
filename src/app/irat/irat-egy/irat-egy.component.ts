@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
 import {IratService} from '../irat.service';
 import {DokumentumService} from '../../dokumentum/dokumentum.service';
-import {DokumentumContainerMode} from '../../dokumentum/dokumentumcontainermode';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
 import {ProjektService} from '../../projekt/projekt.service';
 import {ProjektResult} from '../../projekt/projektresult';
@@ -72,7 +71,6 @@ export class IratEgyComponent implements OnDestroy {
   }
   dokumentum() {
     this.egymode = EgyMode.Dokumentum;
-    this.dokumentumservice.ContainerMode = DokumentumContainerMode.List;
   }
   fotozaslink() {
     this.egymode = EgyMode.FotozasLink;

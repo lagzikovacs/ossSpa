@@ -50,7 +50,6 @@ import {ParticioEgyMode} from '../particio/particioegymode';
 import {ProjektContainerMode} from '../projekt/projektcontainermode';
 import {PlatformLocation} from '@angular/common';
 import {DokumentumService} from '../dokumentum/dokumentum.service';
-import {DokumentumContainerMode} from '../dokumentum/dokumentumcontainermode';
 import {DokumentumDto} from '../dokumentum/dokumentumdto';
 import {BizonylatService} from '../bizonylat/bizonylat.service';
 import {BizonylatTipus} from '../bizonylat/bizonylattipus';
@@ -172,7 +171,6 @@ export class MenuService {
         this._iratservice.minta2 = '';
 
         this._iratservice.Dto = new Array<IratDto>();
-        this._dokumentumservice.ContainerMode = DokumentumContainerMode.List;
         this._dokumentumservice.Dto = new Array<DokumentumDto>();
       break;
       case '/penztar':

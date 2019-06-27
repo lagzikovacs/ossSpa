@@ -1,10 +1,9 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {DokumentumService} from '../dokumentum.service';
-import {DokumentumContainerMode} from '../dokumentumcontainermode';
-import {DokumentumEgyMode} from '../dokumentumegymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {EgyMode} from '../../enums/egymode';
 
 @Component({
   selector: 'app-dokumentum-egy',
@@ -12,8 +11,11 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   animations: [rowanimation]
 })
 export class DokumentumEgyComponent implements OnDestroy {
+  egymode = EgyMode.Reszletek;
   dokumentumservice: DokumentumService;
   ri = -1;
+
+  @Output() torlesutan = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -31,10 +33,10 @@ export class DokumentumEgyComponent implements OnDestroy {
   }
 
   reszletek() {
-    this.dokumentumservice.EgyMode = DokumentumEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
   }
   torles() {
-    this.dokumentumservice.EgyMode = DokumentumEgyMode.Torles;
+    this.egymode = EgyMode.Torles;
   }
   letoltes() {
     this.eppFrissit = true;
@@ -71,7 +73,7 @@ export class DokumentumEgyComponent implements OnDestroy {
         this.dokumentumservice.DtoSelectedIndex = -1;
 
         this.eppFrissit = false;
-        this.dokumentumservice.ContainerMode = DokumentumContainerMode.List;
+        this.torlesutan.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -80,7 +82,11 @@ export class DokumentumEgyComponent implements OnDestroy {
   }
 
   TorlesCancel() {
-    this.dokumentumservice.EgyMode = DokumentumEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  EgyReszletek() {
+    this.egymode = EgyMode.Reszletek;
   }
 
   ngOnDestroy() {

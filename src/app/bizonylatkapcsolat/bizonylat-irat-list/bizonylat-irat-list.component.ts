@@ -3,7 +3,6 @@ import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
 import {BizonylatKapcsolatContainerMode} from '../bizonylatkapcsolatcontainermode';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {IratService} from '../../irat/irat.service';
-import {DokumentumContainerMode} from '../../dokumentum/dokumentumcontainermode';
 import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {VagolapService} from '../../vagolap/vagolap.service';
 import {VagolapMode} from '../../vagolap/vagolapmode';
@@ -69,7 +68,7 @@ export class BizonylatIratListComponent implements OnDestroy {
         this.bizonylatkapcsolatservice.ContainerMode = BizonylatKapcsolatContainerMode.Egy;
         // this._iratservice.ContainerMode = IratContainerMode.List;
         // this._iratservice.EgyMode = IratEgyMode.Dokumentum;
-        this._dokumentumservice.ContainerMode = DokumentumContainerMode.List;
+        // this._dokumentumservice.ContainerMode = DokumentumContainerMode.List;
         this.eppFrissit = false;
       })
       .catch(err => {

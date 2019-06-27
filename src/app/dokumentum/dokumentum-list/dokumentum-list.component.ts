@@ -1,9 +1,7 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {DokumentumService} from '../dokumentum.service';
 import {IratService} from '../../irat/irat.service';
 import {DokumentumDto} from '../dokumentumdto';
-import {DokumentumContainerMode} from '../dokumentumcontainermode';
-import {DokumentumEgyMode} from '../dokumentumegymode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
@@ -16,6 +14,8 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
   dokumentumservice: DokumentumService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -67,13 +67,13 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
   setClickedRow(i: number) {
     this.dokumentumservice.DtoSelectedIndex = i;
     this.dokumentumservice.uj = false;
-    this.dokumentumservice.EgyMode = DokumentumEgyMode.Reszletek;
   }
   feltoltes() {
     // csak h üres rekordot mutasson
     this.dokumentumservice.DtoEdited = new DokumentumDto();
     this.dokumentumservice.uj = true;
-    this.dokumentumservice.ContainerMode = DokumentumContainerMode.Feltoltes;
+
+    this.KontenerKeres.emit();
   }
 
   torlesutan() {

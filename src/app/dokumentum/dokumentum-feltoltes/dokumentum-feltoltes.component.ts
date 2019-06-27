@@ -1,6 +1,5 @@
-import {Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnDestroy, Output, ViewChild} from '@angular/core';
 import {DokumentumService} from '../dokumentum.service';
-import {DokumentumContainerMode} from '../dokumentumcontainermode';
 import {FajlBuf} from '../fajlbuf';
 import {IratService} from '../../irat/irat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
@@ -20,6 +19,8 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
   fajlnev = '';
   megjegyzes = '';
   imageSrc: string;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -75,7 +76,7 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
         this.dokumentumservice.Dto.unshift(res1.Result[0]);
 
         this.eppFrissit = false;
-        this.navigal();
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -83,11 +84,9 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.navigal();
+    this.KontenerKeres.emit();
   }
-  navigal() {
-    this.dokumentumservice.ContainerMode = DokumentumContainerMode.List;
-  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

@@ -4,7 +4,6 @@ import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
 import {IratDto} from '../iratdto';
 import {DokumentumService} from '../../dokumentum/dokumentum.service';
-import {DokumentumContainerMode} from '../../dokumentum/dokumentumcontainermode';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
@@ -108,8 +107,6 @@ export class IratListComponent implements OnDestroy {
   setClickedRow(i: number) {
     this.iratservice.DtoSelectedIndex = i;
     this.iratservice.uj = false;
-
-    this.dokumentumservice.ContainerMode = DokumentumContainerMode.List;
   }
 
   onUj() {

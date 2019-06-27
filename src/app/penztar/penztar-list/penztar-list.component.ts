@@ -4,8 +4,6 @@ import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {PenztartetelService} from '../../penztartetel/penztartetel.service';
 import {PenztartetelDto} from '../../penztartetel/penztarteteldto';
-import {PenztartetelContainerMode} from '../../penztartetel/penztartetelcontainermode';
-import {PenztarSzerkesztesMode} from '../penztarszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
@@ -92,7 +90,6 @@ export class PenztarListComponent implements OnInit, OnDestroy {
     this.penztarservice.uj = false;
     this._penztartetelservice.Dto = new Array<PenztartetelDto>();
     this._penztartetelservice.OsszesRekord = 0;
-    this._penztartetelservice.ContainerMode = PenztartetelContainerMode.List;
   }
 
   uj() {

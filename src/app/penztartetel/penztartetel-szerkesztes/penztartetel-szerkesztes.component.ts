@@ -1,8 +1,7 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, Output, ViewChild} from '@angular/core';
 import {PenztartetelService} from '../penztartetel.service';
 import * as moment from 'moment';
 import {PenztarService} from '../../penztar/penztar.service';
-import {PenztartetelContainerMode} from '../penztartetelcontainermode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 
@@ -19,6 +18,8 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnDestro
 
   penztartetelservice: PenztartetelService;
   datum = moment().format('YYYY-MM-DD');
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -111,7 +112,7 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnDestro
         this._penztarservice.Dto[this._penztarservice.DtoSelectedIndex] = res2.Result[0];
 
         this.eppFrissit = false;
-        this.navigal();
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -119,10 +120,7 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnDestro
       });
   }
   cancel() {
-    this.navigal();
-  }
-  navigal() {
-    this.penztartetelservice.ContainerMode = PenztartetelContainerMode.List;
+    this.KontenerKeres.emit();
   }
 
   ngOnDestroy() {

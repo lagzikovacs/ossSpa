@@ -7,7 +7,6 @@ import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {PenztartetelService} from '../../penztartetel/penztartetel.service';
-import {PenztartetelContainerMode} from '../../penztartetel/penztartetelcontainermode';
 import {EgyMode} from '../../enums/egymode';
 
 @Component({
@@ -56,7 +55,6 @@ export class PenztarEgyComponent implements OnDestroy {
   }
   tetelek() {
     this.egymode = EgyMode.Tetelek;
-    this._penztartetelservice.ContainerMode = PenztartetelContainerMode.List;
   }
   export() {
     this.egymode = EgyMode.Export;

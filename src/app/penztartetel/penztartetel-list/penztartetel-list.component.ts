@@ -1,11 +1,10 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output, ViewChild} from '@angular/core';
 import {PenztarService} from '../../penztar/penztar.service';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {PenztartetelService} from '../penztartetel.service';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
-import {PenztartetelContainerMode} from '../penztartetelcontainermode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
@@ -26,6 +25,8 @@ export class PenztartetelListComponent implements OnDestroy {
   nyitva = false;
   penztarservice: PenztarService;
   penztartetelservice: PenztartetelService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -101,7 +102,8 @@ export class PenztartetelListComponent implements OnDestroy {
         this.penztartetelservice.DtoEdited = res.Result[0];
         this.penztartetelservice.uj = true;
         this.eppFrissit = false;
-        this.penztartetelservice.ContainerMode = PenztartetelContainerMode.Uj;
+
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

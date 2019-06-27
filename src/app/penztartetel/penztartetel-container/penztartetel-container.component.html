@@ -1,13 +1,7 @@
-<!--
-export enum PenztartetelContainerMode {
-List = 1,
-Uj = 2
-}-->
-
-<ng-container *ngIf="penztartetelservice.ContainerMode === 1">
-  <app-penztartetel-list></app-penztartetel-list>
+<ng-container *ngIf="kontenermode === 1">
+  <app-penztartetel-list (KontenerKeres)="KontenerUj()"></app-penztartetel-list>
 </ng-container>
-<ng-container *ngIf="penztartetelservice.ContainerMode === 2">
-  <app-penztartetel-szerkesztes></app-penztartetel-szerkesztes>
+<ng-container *ngIf="kontenermode === 2">
+  <app-penztartetel-szerkesztes (KontenerKeres)="KontenerList()"></app-penztartetel-szerkesztes>
 </ng-container>
 

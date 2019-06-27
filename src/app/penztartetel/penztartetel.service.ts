@@ -6,7 +6,6 @@ import {LogonService} from '../logon/logon.service';
 import {NumberResult} from '../dtos/numberresult';
 import {PenztartetelResult} from './penztartetelresult';
 import {PenztartetelParameter} from './penztartetelparameter';
-import {PenztartetelContainerMode} from './penztartetelcontainermode';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
 
@@ -15,8 +14,8 @@ import {ColumnSettings} from '../tools/reszletek/columnsettings';
 })
 export class PenztartetelService {
   private readonly _controller = 'api/penztartetel/';
-
   cim = 'Pénztártételek';
+
   szempont = 0;
   minta = '';
   elsokereses = true;
@@ -24,11 +23,9 @@ export class PenztartetelService {
   OsszesRekord = 0;
 
   Dto: PenztartetelDto[] = new Array<PenztartetelDto>();
-  DtoSelectedIndex = -1;
-  uj = false;
   DtoEdited = new PenztartetelDto();
-
-  ContainerMode = PenztartetelContainerMode.List;
+  uj = false;
+  DtoSelectedIndex = -1;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

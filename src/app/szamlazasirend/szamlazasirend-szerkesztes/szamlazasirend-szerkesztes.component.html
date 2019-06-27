@@ -3,56 +3,45 @@
   <h5 *ngIf="!szamlazasirendservice.uj">{{szamlazasirendservice.cim}} módosítása</h5>
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Összeg</div>
-      </div>
-      <div class="col-md-2">
-        <input type="number" class="form-control form-control-sm" id="osszeg"
+      <div>
+        <div class="egylabel">Összeg</div>
+        <input type="number" class="form-control form-control-sm oszlop3" id="osszeg"
                required autocomplete="off"
                [(ngModel)]="szamlazasirendservice.DtoEdited.Osszeg" name="osszeg">
       </div>
-    </div>
-    <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Pénznem</div>
-      </div>
-      <div class="col-md-1">
-        <input type="text" class="form-control form-control-sm" id="penznem"
-               maxlength="3" required autocomplete="off" style="background-color: aquamarine"
+
+      <div>
+        <div class="egylabel">Pénznem</div>
+        <input type="text" class="form-control form-control-sm oszlop2" id="penznem"
+               maxlength="3" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="szamlazasirendservice.DtoEdited.Penznem" name="penznem">
-      </div>
-      <div class="col-md-1">
-        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="PenznemZoom()">...</button>
+        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="PenznemZoom()">...</button>
       </div>
     </div>
-    <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Megjegyzés</div>
+
+    <ng-container *ngIf="szamlazasirendservice.SzerkesztesMode === 1">
+      <div class="row no-gutters editform-row">
+        <app-penznem-container></app-penznem-container>
       </div>
-      <div class="col-md-6">
-        <input type="text" class="form-control form-control-sm" id="megjegyzes"
+    </ng-container>
+
+    <div class="row no-gutters editform-row">
+      <div>
+        <div class="egylabel">Megjegyzés</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="megjegyzes"
                autocomplete="off"
                [(ngModel)]="szamlazasirendservice.DtoEdited.Megjegyzes" name="megjegyzes">
       </div>
     </div>
 
-    <div class="row no-gutters" style="margin-bottom: 10px">
-      <div class="col-md-2"></div>
+    <div class="row no-gutters editform-row">
       <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
     </div>
   </form>
 
-<!--  export enum ProjektSzerkesztesMode {
-  Blank = 0,
-  PenznemZoom = 1
-  }-->
-  <ng-container *ngIf="szamlazasirendservice.SzerkesztesMode === 0">
-    <app-blank></app-blank>
-  </ng-container>
-  <ng-container *ngIf="szamlazasirendservice.SzerkesztesMode === 1">
-    <app-penznem-container></app-penznem-container>
-  </ng-container>
+
 </div>
 

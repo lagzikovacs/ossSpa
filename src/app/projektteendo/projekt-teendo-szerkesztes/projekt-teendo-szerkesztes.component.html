@@ -3,55 +3,46 @@
   <h5 *ngIf="!projektteendoservice.uj">{{projektteendoservice.cim}} módosítása</h5>
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Dedikálva</div>
-      </div>
-      <div class="col-md-3">
-        <input type="text" class="form-control form-control-sm" id="dedikalva"
-               autocomplete="off" style="background-color: aquamarine"
+      <div>
+        <div class="egylabel">Dedikálva</div>
+        <input type="text" class="form-control form-control-sm oszlop3" id="dedikalva"
+               autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="projektteendoservice.DtoEdited.Dedikalva" name="dedikalva">
-      </div>
-      <div class="col-md-1">
-        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="FelhasznaloZoom()">...</button>
+        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="FelhasznaloZoom()">...</button>
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Határidő</div>
-      </div>
-      <div class="col-md-2">
-        <input type="date" class="form-control form-control-sm" id="hatarido"
+      <div>
+        <div class="egylabel">Határidő</div>
+        <input type="date" class="form-control form-control-sm oszlop3" id="hatarido"
                autocomplete="off"
                [(ngModel)]="Hatarido" name="hatarido">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Teendő</div>
-      </div>
-      <div class="col-md-5">
-        <input type="text" class="form-control form-control-sm" id="teendo"
-               maxlength="100" required autocomplete="off" style="background-color: aquamarine"
+      <div>
+        <div class="egylabel">Teendő</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="teendo"
+               maxlength="100" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="projektteendoservice.DtoEdited.Teendo" name="teendo">
-      </div>
-      <div class="col-md-1">
-        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="TeendoZoom()">...</button>
+        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="TeendoZoom()">...</button>
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Leírás</div>
-      </div>
-      <div class="col-md-6">
-        <input type="text" class="form-control form-control-sm" id="leiras"
+      <div>
+        <div class="egylabel">Leírás</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="leiras"
                autocomplete="off"
                [(ngModel)]="projektteendoservice.DtoEdited.Leiras" name="leiras">
       </div>
     </div>
 
-    <div class="row no-gutters" style="margin-bottom: 10px">
-      <div class="col-md-2"></div>
+    <div class="row no-gutters editform-row">
       <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
     </div>

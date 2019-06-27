@@ -5,84 +5,68 @@
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Ügyfél</div>
-      </div>
-      <div class="col-md-4">
-        <input type="text" class="form-control form-control-sm" id="ugyfelnev"
-               maxlength="200" required autocomplete="off" style="background-color: aquamarine"
+      <div style="margin-right: 5px">
+        <div class="egylabel">Ügyfél</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="ugyfelnev"
+               maxlength="200" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="projektservice.DtoEdited.Ugyfelnev" name="ugyfelnev">
-      </div>
-      <div class="col-md-1">
-        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="UgyfelZoom()">...</button>
+        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="UgyfelZoom()">...</button>
       </div>
     </div>
-    <div class="row no-gutters editform-row">
-      <div class="col-md-2">
 
-      </div>
-      <div class="col-md-4">
-        <input type="text" class="form-control form-control-sm" id="ugyfelcim"
+    <div class="row no-gutters editform-row">
+      <div style="margin-right: 5px">
+        <input type="text" class="form-control form-control-sm oszlop6" id="ugyfelcim"
                autocomplete="off" readonly="true"
                [(ngModel)]="projektservice.DtoEdited.Ugyfelcim" name="ugyfelcim">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Telepítési cím</div>
-      </div>
-      <div class="col-md-4">
-        <input type="text" class="form-control form-control-sm" id="telepitesicim"
+      <div style="margin-right: 5px">
+        <div class="egylabel">Telepítési cím</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="telepitesicim"
                autocomplete="off"
                [(ngModel)]="projektservice.DtoEdited.Telepitesicim" name="telepitesicim">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">A projekt jellege</div>
-      </div>
-      <div class="col-md-4">
-        <input type="text" class="form-control form-control-sm" id="projektjellege"
+      <div style="margin-right: 5px">
+        <div class="egylabel">A projekt jellege</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="projektjellege"
                autocomplete="off"
                [(ngModel)]="projektservice.DtoEdited.Projektjellege" name="projektjellege">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Vállalási ár</div>
-      </div>
-      <div class="col-md-2">
-        <input type="number" class="form-control form-control-sm" id="kuldo"
+      <div style="margin-right: 5px">
+        <div class="egylabel">Vállalási ár</div>
+        <input type="number" class="form-control form-control-sm oszlop3" id="kuldo"
                required
                [(ngModel)]="projektservice.DtoEdited.Vallalasiarnetto" name="kuldo">
       </div>
-    </div>
-    <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Pénznem</div>
-      </div>
-      <div class="col-md-1">
-        <input type="text" class="form-control form-control-sm" id="penznem"
-               maxlength="30" required autocomplete="off" style="background-color: aquamarine"
+
+      <div style="display: inline-block; margin-right: 5px">
+        <div class="egylabel">Pénznem</div>
+        <input type="text" class="form-control form-control-sm oszlop2" id="penznem"
+               maxlength="30" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="projektservice.DtoEdited.Penznem" name="penznem">
-      </div>
-      <div class="col-md-1">
-        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="PenznemZoom()">...</button>
+        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="PenznemZoom()">...</button>
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Megjegyzés</div>
-      </div>
-      <div class="col-md-4">
-        <input type="text" class="form-control form-control-sm" id="megjegyzes"
+      <div style="margin-right: 5px">
+        <div class="egylabel">Megjegyzés</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="megjegyzes"
                autocomplete="off"
                [(ngModel)]="projektservice.DtoEdited.Megjegyzes" name="megjegyzes">
       </div>
     </div>
 
-    <div class="row no-gutters" style="margin-bottom: 10px">
-      <div class="col-md-2"></div>
+    <div class="row no-gutters editform-row">
       <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
     </div>

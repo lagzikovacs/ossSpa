@@ -4,31 +4,27 @@
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Napelem</div>
-      </div>
-      <div class="col-md-3">
-        <input type="text" class="form-control form-control-sm" id="inverter"
+      <div>
+        <div class="egylabel">Napelem</div>
+        <input type="text" class="form-control form-control-sm oszlop4" id="napelem"
                maxlength="50" autocomplete="off"
                [(ngModel)]="projektservice.DtoEdited.Napelem"
-               name="inverter">
+               name="napelem">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">DC, kW</div>
-      </div>
-      <div class="col-md-2">
-        <input type="number" class="form-control form-control-sm" id="dckw"
+      <div>
+        <div class="egylabel">DC, kW</div>
+        <input type="number" class="form-control form-control-sm oszlop2" id="dckw"
                [(ngModel)]="projektservice.DtoEdited.Dckw"
                name="dckw">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Napelem státusz</div>
-      </div>
-      <div class="col-md-4">
+      <div>
+        <div class="egylabel">Napelem státusz</div>
         <div *ngFor="let entry of entries" class="form-check">
           <input class="form-check-input" type="radio" name="radiogroup" id="entry"
                  [checked]="entry === selected" (change)="change(entry)">
@@ -39,8 +35,7 @@
       </div>
     </div>
 
-    <div class="row no-gutters" style="margin-bottom: 10px">
-      <div class="col-md-2"></div>
+    <div class="row no-gutters editform-row">
       <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
     </div>

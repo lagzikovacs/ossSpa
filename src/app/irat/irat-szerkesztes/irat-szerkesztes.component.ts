@@ -1,12 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {IratService} from '../irat.service';
 import {IrattipusService} from '../../primitiv/irattipus/irattipus.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import * as moment from 'moment';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
-import {IratContainerMode} from '../iratcontainermode';
 import {IratSzerkesztesMode} from '../iratszerkesztesmode';
-import {IratEgyMode} from '../irategymode';
 import {IrattipusZoomParameter} from '../../primitiv/irattipus/irattipuszoomparameter';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
@@ -20,6 +18,8 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 export class IratSzerkesztesComponent implements OnInit, OnDestroy {
   iratservice: IratService;
   Keletkezett: any;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -93,7 +93,7 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
         }
 
         this.eppFrissit = false;
-        this.navigal();
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -101,14 +101,7 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
       });
   }
   cancel() {
-    this.navigal();
-  }
-  navigal() {
-    if (this.iratservice.uj) {
-      this.iratservice.ContainerMode = IratContainerMode.List;
-    } else {
-      this.iratservice.EgyMode = IratEgyMode.Reszletek;
-    }
+    this.KontenerKeres.emit();
   }
 
   IrattipusZoom() {

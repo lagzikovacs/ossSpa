@@ -1,13 +1,10 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
 import {IratService} from '../irat.service';
 import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
 import {IratDto} from '../iratdto';
-import {IratContainerMode} from '../iratcontainermode';
-import {IratEgyMode} from '../irategymode';
 import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {DokumentumContainerMode} from '../../dokumentum/dokumentumcontainermode';
-import {IratSzerkesztesMode} from '../iratszerkesztesmode';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
@@ -33,6 +30,10 @@ export class IratListComponent implements OnDestroy {
   iratservice: IratService;
   dokumentumservice: DokumentumService;
   mod = false;
+
+  @Input() enProjekt = true;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -108,7 +109,6 @@ export class IratListComponent implements OnDestroy {
     this.iratservice.DtoSelectedIndex = i;
     this.iratservice.uj = false;
 
-    this.iratservice.EgyMode = IratEgyMode.Dokumentum;
     this.dokumentumservice.ContainerMode = DokumentumContainerMode.List;
   }
 
@@ -125,8 +125,7 @@ export class IratListComponent implements OnDestroy {
         this.iratservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this.iratservice.ContainerMode = IratContainerMode.Uj;
-        this.iratservice.SzerkesztesMode = IratSzerkesztesMode.Blank;
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

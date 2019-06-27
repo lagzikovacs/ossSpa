@@ -47,7 +47,6 @@ import {ProjektteendoDto} from '../projektteendo/projektteendodto';
 import {VolumeContainerMode} from '../volume/volumecontainermode';
 import {ParticioService} from '../particio/particio.service';
 import {ParticioEgyMode} from '../particio/particioegymode';
-import {IratContainerMode} from '../irat/iratcontainermode';
 import {ProjektContainerMode} from '../projekt/projektcontainermode';
 import {PlatformLocation} from '@angular/common';
 import {DokumentumService} from '../dokumentum/dokumentum.service';
@@ -172,7 +171,6 @@ export class MenuService {
         this._iratservice.minta = '';
         this._iratservice.minta2 = '';
 
-        this._iratservice.ContainerMode = IratContainerMode.List;
         this._iratservice.Dto = new Array<IratDto>();
         this._dokumentumservice.ContainerMode = DokumentumContainerMode.List;
         this._dokumentumservice.Dto = new Array<DokumentumDto>();

@@ -16,5 +16,8 @@ export enum EgyMode {
   Jog = 12,
 
   Tetelek = 13,
-  Export = 14
+  Export = 14,
+
+  Dokumentum = 15,
+  FotozasLink = 16
 }

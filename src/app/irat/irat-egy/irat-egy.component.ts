@@ -1,15 +1,11 @@
 import {Component, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
 import {IratService} from '../irat.service';
-import {IratContainerMode} from '../iratcontainermode';
-import {IratEgyMode} from '../irategymode';
 import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {DokumentumContainerMode} from '../../dokumentum/dokumentumcontainermode';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
-import {BizonylatesIratContainerMode} from '../../projektkapcsolat/bizonylatesiratcontainermode';
 import {ProjektService} from '../../projekt/projekt.service';
 import {ProjektResult} from '../../projekt/projektresult';
 import {BizonylatkapcsolatService} from '../../bizonylatkapcsolat/bizonylatkapcsolat.service';
-import {BizonylatKapcsolatContainerMode} from '../../bizonylatkapcsolat/bizonylatkapcsolatcontainermode';
 import {VagolapService} from '../../vagolap/vagolap.service';
 import {AbuComponent} from '../../tools/abu/abu.component';
 import {LogonService} from '../../logon/logon.service';
@@ -18,6 +14,7 @@ import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {EgyMode} from '../../enums/egymode';
 
 @Component({
   selector: 'app-irat-egy',
@@ -26,6 +23,7 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 })
 export class IratEgyComponent implements OnDestroy {
   @ViewChild(AbuComponent) abu: AbuComponent;
+  egymode = EgyMode.Dokumentum;
   projektservice: ProjektService;
   iratservice: IratService;
   dokumentumservice: DokumentumService;
@@ -62,22 +60,22 @@ export class IratEgyComponent implements OnDestroy {
   }
 
   reszletek() {
-    this.iratservice.EgyMode = IratEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
   }
   torles() {
-    this.iratservice.EgyMode = IratEgyMode.Torles;
+    this.egymode = EgyMode.Torles;
   }
   modositas() {
     this.iratservice.uj = false;
     this.iratservice.DtoEdited = deepCopy(this.iratservice.Dto[this.iratservice.DtoSelectedIndex]);
-    this.iratservice.EgyMode = IratEgyMode.Modositas;
+    this.egymode = EgyMode.Modositas;
   }
   dokumentum() {
-    this.iratservice.EgyMode = IratEgyMode.Dokumentum;
+    this.egymode = EgyMode.Dokumentum;
     this.dokumentumservice.ContainerMode = DokumentumContainerMode.List;
   }
   fotozaslink() {
-    this.iratservice.EgyMode = IratEgyMode.FotozasLink;
+    this.egymode = EgyMode.FotozasLink;
   }
   projekt() {
     this.eppFrissit = true;
@@ -105,7 +103,7 @@ export class IratEgyComponent implements OnDestroy {
           this.projektservice.DtoSelectedIndex = 0;
         }
 
-        this.iratservice.EgyMode = IratEgyMode.Projekt;
+        this.egymode = EgyMode.Projekt;
         this.eppFrissit = false;
       })
       .catch(err => {
@@ -139,7 +137,11 @@ export class IratEgyComponent implements OnDestroy {
   }
 
   TorlesCancel() {
-    this.iratservice.EgyMode = IratEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  EgyReszletek() {
+    this.egymode = EgyMode.Reszletek;
   }
 
   ngOnDestroy() {

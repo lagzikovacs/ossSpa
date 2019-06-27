@@ -3,9 +3,7 @@ import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {LogonService} from '../../logon/logon.service';
 import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 import {IratService} from '../../irat/irat.service';
-import {IratContainerMode} from '../../irat/iratcontainermode';
 import {DokumentumContainerMode} from '../../dokumentum/dokumentumcontainermode';
-import {IratEgyMode} from '../../irat/irategymode';
 import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {AjanlatContainerMode} from '../../ajanlat/ajanlatcontainermode';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
@@ -150,8 +148,8 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
           this._iratservice.DtoSelectedIndex = 0;
 
           // this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.EgyIrat;
-          this._iratservice.ContainerMode = IratContainerMode.Egy;
-          this._iratservice.EgyMode = IratEgyMode.Dokumentum;
+          // this._iratservice.ContainerMode = IratContainerMode.Egy;
+          // this._iratservice.EgyMode = IratEgyMode.Dokumentum;
           this._dokumentumservice.ContainerMode = DokumentumContainerMode.List;
           this.eppFrissit = false;
 

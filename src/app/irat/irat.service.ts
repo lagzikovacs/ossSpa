@@ -6,8 +6,6 @@ import {environment} from '../../environments/environment';
 import {IratDto} from './iratdto';
 import {IratResult} from './iratresult';
 import {NumberResult} from '../dtos/numberresult';
-import {IratContainerMode} from './iratcontainermode';
-import {IratEgyMode} from './irategymode';
 import {EmptyResult} from '../dtos/emptyresult';
 import {IratSzerkesztesMode} from './iratszerkesztesmode';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
@@ -33,8 +31,6 @@ export class IratService {
   DtoEdited = new IratDto();
   elsokereses = true;
 
-  ContainerMode = IratContainerMode.List;
-  EgyMode = IratEgyMode.Dokumentum;
   SzerkesztesMode = IratSzerkesztesMode.Blank;
 
   GridSettings: ColumnSettings[] = undefined;

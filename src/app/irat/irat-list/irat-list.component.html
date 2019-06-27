@@ -17,7 +17,8 @@
              [egyTemplate]="gridegy">
   </app-tabla>
   <ng-template #gridegy>
-    <app-irat-egy (torlesutan)="torlesutan()"></app-irat-egy>
+    <app-irat-egy [enProjekt]="enProjekt"
+                  (torlesutan)="torlesutan()"></app-irat-egy>
   </ng-template>
   <app-toolbarfooter [enKereses]="!iratservice.elsokereses && !eppFrissit"
                      [rekordszam]="iratservice.Dto.length"

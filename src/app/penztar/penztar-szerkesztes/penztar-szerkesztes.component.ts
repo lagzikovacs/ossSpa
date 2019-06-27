@@ -1,10 +1,8 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
 import {ZoomSources} from '../../enums/zoomsources';
 import {PenztarService} from '../penztar.service';
-import {PenztarContainerMode} from '../penztarcontainermode';
-import {PenztarEgyMode} from '../penztaregymode';
 import {PenztarSzerkesztesMode} from '../penztarszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
@@ -15,6 +13,8 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 })
 export class PenztarSzerkesztesComponent implements OnDestroy {
   penztarservice: PenztarService;
+
+  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -66,7 +66,7 @@ export class PenztarSzerkesztesComponent implements OnDestroy {
         }
 
         this.eppFrissit = false;
-        this.navigal();
+        this.KontenerKeres.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -74,15 +74,9 @@ export class PenztarSzerkesztesComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.navigal();
+    this.KontenerKeres.emit();
   }
-  navigal() {
-    if (this.penztarservice.uj) {
-      this.penztarservice.ContainerMode = PenztarContainerMode.List;
-    } else {
-      this.penztarservice.EgyMode = PenztarEgyMode.Reszletek;
-    }
-  }
+
   PenznemZoom() {
     this._penznemservice.ekDto.minta = this.penztarservice.DtoEdited.Penznem || '';
     this._penznemservice.zoomsource = ZoomSources.Penztar;

@@ -18,16 +18,18 @@ import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 })
 export class FelhasznaloService {
   private readonly _controller = 'api/felhasznalo/';
-
   cim = 'Felhasználó';
+
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
   elsokereses = true;
+
   Dto: FelhasznaloDto[] = new Array<FelhasznaloDto>();
-  DtoSelectedIndex = -1;
+  DtoEdited = new FelhasznaloDto();
   uj = false;
+  DtoSelectedIndex = -1;
+
   zoom = false;
   zoomsource: ZoomSources;
-  DtoEdited = new FelhasznaloDto();
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

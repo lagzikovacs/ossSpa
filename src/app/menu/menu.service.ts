@@ -47,7 +47,6 @@ import {ProjektteendoDto} from '../projektteendo/projektteendodto';
 import {VolumeContainerMode} from '../volume/volumecontainermode';
 import {ParticioService} from '../particio/particio.service';
 import {ParticioEgyMode} from '../particio/particioegymode';
-import {PenztarContainerMode} from '../penztar/penztarcontainermode';
 import {IratContainerMode} from '../irat/iratcontainermode';
 import {ProjektContainerMode} from '../projekt/projektcontainermode';
 import {PlatformLocation} from '@angular/common';
@@ -179,7 +178,6 @@ export class MenuService {
         this._dokumentumservice.Dto = new Array<DokumentumDto>();
       break;
       case '/penztar':
-        this._penztarservice.ContainerMode = PenztarContainerMode.List;
         this._penztarservice.ekDto.minta = '';
         this._penztarservice.Dto = new Array<PenztarDto>();
         break;

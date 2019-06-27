@@ -13,5 +13,8 @@ export enum EgyMode {
   Vcard = 10,
 
   Felhasznalo = 11,
-  Jog = 12
+  Jog = 12,
+
+  Tetelek = 13,
+  Export = 14
 }

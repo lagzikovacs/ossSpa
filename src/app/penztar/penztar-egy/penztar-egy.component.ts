@@ -2,14 +2,13 @@ import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {PenztarService} from '../penztar.service';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
-import {PenztarContainerMode} from '../penztarcontainermode';
-import {PenztarEgyMode} from '../penztaregymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {PenztartetelService} from '../../penztartetel/penztartetel.service';
 import {PenztartetelContainerMode} from '../../penztartetel/penztartetelcontainermode';
+import {EgyMode} from '../../enums/egymode';
 
 @Component({
   selector: 'app-penztar-egy',
@@ -17,6 +16,7 @@ import {PenztartetelContainerMode} from '../../penztartetel/penztartetelcontaine
   animations: [rowanimation]
 })
 export class PenztarEgyComponent implements OnDestroy {
+  egymode = EgyMode.Reszletek;
   penztarservice: PenztarService;
   mod = false;
   nyitva = false;
@@ -44,22 +44,22 @@ export class PenztarEgyComponent implements OnDestroy {
   }
 
   reszletek() {
-    this.penztarservice.EgyMode = PenztarEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
   }
   torles () {
-    this.penztarservice.EgyMode = PenztarEgyMode.Torles;
+    this.egymode = EgyMode.Torles;
   }
   modositas() {
     this.penztarservice.uj = false;
     this.penztarservice.DtoEdited = deepCopy(this.penztarservice.Dto[this.penztarservice.DtoSelectedIndex]);
-    this.penztarservice.EgyMode = PenztarEgyMode.Modositas;
+    this.egymode = EgyMode.Modositas;
   }
   tetelek() {
-    this.penztarservice.EgyMode = PenztarEgyMode.Tetelek;
+    this.egymode = EgyMode.Tetelek;
     this._penztartetelservice.ContainerMode = PenztartetelContainerMode.List;
   }
   export() {
-    this.penztarservice.EgyMode = PenztarEgyMode.Export;
+    this.egymode = EgyMode.Export;
   }
 
   TorlesOk() {
@@ -83,7 +83,11 @@ export class PenztarEgyComponent implements OnDestroy {
   }
 
   TorlesCancel() {
-    this.penztarservice.EgyMode = PenztarEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  EgyReszletek() {
+    this.egymode = EgyMode.Reszletek;
   }
 
   ngOnDestroy() {

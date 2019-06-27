@@ -1,11 +1,9 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {PenztarService} from '../penztar.service';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {PenztartetelService} from '../../penztartetel/penztartetel.service';
 import {PenztartetelDto} from '../../penztartetel/penztarteteldto';
-import {PenztarContainerMode} from '../penztarcontainermode';
-import {PenztarEgyMode} from '../penztaregymode';
 import {PenztartetelContainerMode} from '../../penztartetel/penztartetelcontainermode';
 import {PenztarSzerkesztesMode} from '../penztarszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
@@ -23,6 +21,9 @@ export class PenztarListComponent implements OnInit, OnDestroy {
   mod = false;
   elsokereses = true;
   penztarservice: PenztarService;
+
+  @Output() KontenerKeresUj = new EventEmitter<void>();
+  @Output() KontenerKeresTetel = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -91,7 +92,6 @@ export class PenztarListComponent implements OnInit, OnDestroy {
     this.penztarservice.uj = false;
     this._penztartetelservice.Dto = new Array<PenztartetelDto>();
     this._penztartetelservice.OsszesRekord = 0;
-    this.penztarservice.EgyMode = PenztarEgyMode.Tetelek;
     this._penztartetelservice.ContainerMode = PenztartetelContainerMode.List;
   }
 
@@ -108,8 +108,7 @@ export class PenztarListComponent implements OnInit, OnDestroy {
         this.penztarservice.DtoSelectedIndex = -1;
         this.eppFrissit = false;
 
-        this.penztarservice.ContainerMode = PenztarContainerMode.Uj;
-        this.penztarservice.SzerkesztesMode = PenztarSzerkesztesMode.Blank;
+        this.KontenerKeresUj.emit();
       })
       .catch(err => {
         this.eppFrissit = false;

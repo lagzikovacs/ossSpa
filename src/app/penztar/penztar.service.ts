@@ -8,8 +8,6 @@ import {LogonService} from '../logon/logon.service';
 import {NumberResult} from '../dtos/numberresult';
 import {PenztarResult} from './penztarresult';
 import {EmptyResult} from '../dtos/emptyresult';
-import {PenztarContainerMode} from './penztarcontainermode';
-import {PenztarEgyMode} from './penztaregymode';
 import {PenztarSzerkesztesMode} from './penztarszerkesztesmode';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
@@ -19,19 +17,18 @@ import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 })
 export class PenztarService {
   private readonly _controller = 'api/penztar/';
-
   cim = 'Pénztár';
+
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
 
   Dto: PenztarDto[] = new Array<PenztarDto>();
-  DtoSelectedIndex = -1;
+  DtoEdited = new PenztarDto();
   uj = false;
+  DtoSelectedIndex = -1;
+
   zoom = false;
   zoomsource: ZoomSources;
-  DtoEdited = new PenztarDto();
 
-  ContainerMode = PenztarContainerMode.List;
-  EgyMode = PenztarEgyMode.Reszletek;
   SzerkesztesMode = PenztarSzerkesztesMode.Blank;
 
   GridSettings: ColumnSettings[] = undefined;

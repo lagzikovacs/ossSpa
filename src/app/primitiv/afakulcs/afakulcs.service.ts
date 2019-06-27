@@ -17,16 +17,18 @@ import {ColumnSettings} from '../../tools/reszletek/columnsettings';
 })
 export class AfakulcsService {
   private readonly _controller = 'api/afakulcs/';
-
   cim = 'ÁFA kulcs';
+
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
   elsokereses = true;
+
   Dto: AfakulcsDto[] = new Array<AfakulcsDto>();
-  DtoSelectedIndex = -1;
+  DtoEdited = new AfakulcsDto();
   uj = false;
+  DtoSelectedIndex = -1;
+
   zoom = false;
   zoomsource: ZoomSources;
-  DtoEdited = new AfakulcsDto();
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

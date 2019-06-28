@@ -13,7 +13,6 @@ export class CsoportListComponent implements OnDestroy {
 
   csoportservice: CsoportService;
   szurok = ['Csoport'];
-  elsokereses = true;
 
   @Output() KontenerKeres = new EventEmitter<void>();
 
@@ -33,7 +32,7 @@ export class CsoportListComponent implements OnDestroy {
   }
 
   onKereses() {
-    this.elsokereses = true;
+    this.csoportservice.elsokereses = true;
     this.csoportservice.ekDto.rekordtol = 0;
 
     this.tabla.clearselections();
@@ -49,9 +48,9 @@ export class CsoportListComponent implements OnDestroy {
           throw res.Error;
         }
 
-        if (this.elsokereses) {
+        if (this.csoportservice.elsokereses) {
           this.csoportservice.Dto = res.Result;
-          this.elsokereses = false;
+          this.csoportservice.elsokereses = false;
         } else {
           const buf = [...this.csoportservice.Dto];
           res.Result.forEach(element => {
@@ -68,10 +67,8 @@ export class CsoportListComponent implements OnDestroy {
       });
   }
 
-  setClickedRow(i: number) {
+  onId(i: number) {
     this.csoportservice.DtoSelectedIndex = i;
-    this.csoportservice.uj = false;
-
     if (this.csoportservice.DtoSelectedIndex === -1) {
       return;
     }
@@ -102,28 +99,15 @@ export class CsoportListComponent implements OnDestroy {
       });
   }
 
-  uj() {
-    this.eppFrissit = true;
-    this.csoportservice.CreateNew()
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
-
-        this.csoportservice.uj = true;
-        this.csoportservice.DtoEdited = res.Result[0];
-        this.csoportservice.DtoSelectedIndex = -1;
-        this.eppFrissit = false;
-
-        this.KontenerKeres.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+  onUj() {
+    this.tabla.ujtetelstart();
   }
 
-  torlesutan() {
+  onUjkesz() {
+    this.tabla.ujtetelstop();
+  }
+
+  onTorlesutan() {
     this.tabla.clearselections();
   }
 

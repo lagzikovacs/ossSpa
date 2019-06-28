@@ -22,14 +22,14 @@ import {ColumnSettings} from '../tools/reszletek/columnsettings';
 })
 export class CsoportService {
   private readonly _controller = 'api/csoport/';
-
   cim = 'Csoport';
+
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
+  elsokereses = true;
 
   Dto: CsoportDto[] = new Array<CsoportDto>();
-  DtoSelectedIndex = -1;
-  uj = false;
   DtoEdited = new CsoportDto();
+  DtoSelectedIndex = -1;
 
   DtoCsoportFelhasznalo: FelhasznaloDto[] = new Array<FelhasznaloDto>();
   DtoCsoportLehetsegesJog: LehetsegesJogDto[] = new Array<LehetsegesJogDto>();

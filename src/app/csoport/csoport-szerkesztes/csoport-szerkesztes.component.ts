@@ -1,17 +1,19 @@
-import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {CsoportService} from '../csoport.service';
 import {NumberResult} from '../../dtos/numberresult';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-csoport-szerkesztes',
   templateUrl: './csoport-szerkesztes.component.html'
 })
-export class CsoportSzerkesztesComponent implements OnDestroy {
+export class CsoportSzerkesztesComponent implements OnInit, OnDestroy {
   csoportservice: CsoportService;
 
-  @Output() KontenerKeres = new EventEmitter<void>();
+  @Input() uj = false;
+  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -28,11 +30,32 @@ export class CsoportSzerkesztesComponent implements OnDestroy {
     this.csoportservice = csoportservice;
   }
 
+  ngOnInit() {
+    if (this.uj) {
+      this.eppFrissit = true;
+      this.csoportservice.CreateNew()
+        .then(res => {
+          if (res.Error !== null) {
+            throw res.Error;
+          }
+
+          this.csoportservice.DtoEdited = res.Result[0];
+          this.eppFrissit = false;
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.csoportservice.DtoEdited = deepCopy(this.csoportservice.Dto[this.csoportservice.DtoSelectedIndex]);
+    }
+  }
+
   onSubmit() {
     this.eppFrissit = true;
     let p: Promise<NumberResult>;
 
-    if (this.csoportservice.uj) {
+    if (this.uj) {
       p = this.csoportservice.Add(this.csoportservice.DtoEdited);
     } else {
       p = this.csoportservice.Update(this.csoportservice.DtoEdited);
@@ -51,22 +74,22 @@ export class CsoportSzerkesztesComponent implements OnDestroy {
           throw res1.Error;
         }
 
-        if (this.csoportservice.uj) {
+        if (this.uj) {
           this.csoportservice.Dto.unshift(res1.Result[0]);
         } else {
           this.csoportservice.Dto[this.csoportservice.DtoSelectedIndex] = res1.Result[0];
         }
 
         this.eppFrissit = false;
-        this.KontenerKeres.emit();
+        this.eventSzerkeszteskesz.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
-  cancel() {
-    this.KontenerKeres.emit();
+  OnCancel() {
+    this.eventSzerkeszteskesz.emit();
   }
 
   ngOnDestroy() {

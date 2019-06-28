@@ -138,7 +138,6 @@ import { HelysegListComponent } from './primitiv/helyseg/helyseg-list/helyseg-li
 import { UgyfelContainerComponent } from './ugyfel/ugyfel-container/ugyfel-container.component';
 import {UgyfelEgyComponent} from './ugyfel/ugyfel-egy/ugyfel-egy.component';
 import { CikkContainerComponent } from './cikk/cikk-container/cikk-container.component';
-import { CsoportContainerComponent } from './csoport/csoport-container/csoport-container.component';
 import { AjanlatkeresContainerComponent } from './ajanlatkeres/ajanlatkeres-container/ajanlatkeres-container.component';
 import {PenztartetelListComponent} from './penztartetel/penztartetel-list/penztartetel-list.component';
 import {PenztarExportComponent} from './penztar/penztar-export/penztar-export.component';
@@ -271,7 +270,7 @@ const routes: Routes = [
   {path: 'particio', component: ParticioEgyComponent, canActivate: [RoleGuard]},
   {path: 'volume', component: VolumeContainerComponent, canActivate: [RoleGuard]},
   {path: 'felhasznalo', component: FelhasznaloListComponent, canActivate: [RoleGuard]},
-  {path: 'csoport', component: CsoportContainerComponent, canActivate: [RoleGuard]},
+  {path: 'csoport', component: CsoportListComponent, canActivate: [RoleGuard]},
   {path: 'bejelentkezes', component: BejelentkezesComponent},
   {path: 'szerepkorvalasztas', component: SzerepkorvalasztasComponent, canActivate: [LoginGuard]},
   {path: 'jelszocsere', component: JelszocsereComponent, canActivate: [LoginGuard]},
@@ -405,7 +404,6 @@ if (environment.production) {
     UgyfelListComponent,
     UgyfelEgyComponent,
     CikkContainerComponent,
-    CsoportContainerComponent,
     AjanlatkeresContainerComponent,
     PenztarContainerComponent,
     PenztartetelContainerComponent,

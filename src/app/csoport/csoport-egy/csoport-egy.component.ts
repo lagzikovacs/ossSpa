@@ -14,9 +14,8 @@ import {EgyMode} from '../../enums/egymode';
 export class CsoportEgyComponent implements OnDestroy {
   egymode = EgyMode.Reszletek;
   csoportservice: CsoportService;
-  ri = -1;
 
-  @Output() torlesutan = new EventEmitter<void>();
+  @Output() eventTorlesutan = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -33,49 +32,48 @@ export class CsoportEgyComponent implements OnDestroy {
     this.csoportservice = csoportservice;
   }
 
-  reszletek() {
+  doReszletek() {
     this.egymode = EgyMode.Reszletek;
   }
-  torles () {
+  doTorles () {
     this.egymode = EgyMode.Torles;
   }
-  modositas() {
-    this.csoportservice.uj = false;
-    this.csoportservice.DtoEdited = deepCopy(this.csoportservice.Dto[this.csoportservice.DtoSelectedIndex]);
+  doModositas() {
     this.egymode = EgyMode.Modositas;
   }
-  felhasznalo() {
+  doFelhasznalo() {
     this.egymode = EgyMode.Felhasznalo;
   }
-  jog() {
+  doJog() {
     this.egymode = EgyMode.Jog;
   }
 
-  TorlesOk() {
-    this.eppFrissit = true;
-    this.csoportservice.Delete(this.csoportservice.Dto[this.csoportservice.DtoSelectedIndex])
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
 
-        this.csoportservice.Dto.splice(this.csoportservice.DtoSelectedIndex, 1);
-        this.csoportservice.DtoSelectedIndex = -1;
+      this.csoportservice.Delete(this.csoportservice.Dto[this.csoportservice.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
 
-        this.eppFrissit = false;
-        this.torlesutan.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+          this.csoportservice.Dto.splice(this.csoportservice.DtoSelectedIndex, 1);
+          this.csoportservice.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.eventTorlesutan.emit();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
   }
 
-  TorlesCancel() {
-    this.egymode = EgyMode.Reszletek;
-  }
-
-  EgyReszletek() {
+  onModositaskesz() {
     this.egymode = EgyMode.Reszletek;
   }
 

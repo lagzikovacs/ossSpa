@@ -4,16 +4,22 @@
                [(szempont)]="csoportservice.ekDto.szempont"
                [(minta)]="csoportservice.ekDto.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit" (Uj)="uj()">
+               [enUj]="!eppFrissit" (Uj)="onUj()">
   </app-toolbar>
   <app-tabla #tabla
              [items]="csoportservice.Dto"
              [colsets]="csoportservice.GridSettings"
-             (forid)="setClickedRow($event)"
+             (forid)="onId($event)"
+             [ujTemplate]="griduj"
              [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #griduj>
+    <app-csoport-szerkesztes [uj] = "true"
+                             (eventSzerkeszteskesz)="onUjkesz()">
+    </app-csoport-szerkesztes>
+  </ng-template>
   <ng-template #gridegy>
-    <app-csoport-egy (torlesutan)="torlesutan()"></app-csoport-egy>
+    <app-csoport-egy (eventTorlesutan)="onTorlesutan()"></app-csoport-egy>
   </ng-template>
 </div>
 

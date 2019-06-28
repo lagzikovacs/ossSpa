@@ -16,10 +16,9 @@ import {EgyMode} from '../../../enums/egymode';
 export class TermekdijEgyComponent implements OnDestroy {
   egymode = EgyMode.Reszletek;
   termekdijservice: TermekdijService;
-  mod = false;
-  ri = -1;
+  jog = false;
 
-  @Output() torlesutan = new EventEmitter<void>();
+  @Output() eventTorlesutan = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -34,47 +33,46 @@ export class TermekdijEgyComponent implements OnDestroy {
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               termekdijservice: TermekdijService) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.termekdijservice = termekdijservice;
   }
 
-  reszletek() {
+  doReszletek() {
     this.egymode = EgyMode.Reszletek;
   }
-  torles () {
+  doTorles () {
     this.egymode = EgyMode.Torles;
   }
-  modositas() {
-    this.termekdijservice.uj = false;
-    this.termekdijservice.DtoEdited = deepCopy(this.termekdijservice.Dto[this.termekdijservice.DtoSelectedIndex]);
+  doModositas() {
     this.egymode = EgyMode.Modositas;
   }
 
-  TorlesOk() {
-    this.eppFrissit = true;
-    this.termekdijservice.Delete(this.termekdijservice.Dto[this.termekdijservice.DtoSelectedIndex])
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
 
-        this.termekdijservice.Dto.splice(this.termekdijservice.DtoSelectedIndex, 1);
-        this.termekdijservice.DtoSelectedIndex = -1;
+      this.termekdijservice.Delete(this.termekdijservice.Dto[this.termekdijservice.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
 
-        this.eppFrissit = false;
-        this.torlesutan.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+          this.termekdijservice.Dto.splice(this.termekdijservice.DtoSelectedIndex, 1);
+          this.termekdijservice.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.eventTorlesutan.emit();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
   }
 
-  TorlesCancel() {
-    this.egymode = EgyMode.Reszletek;
-  }
-
-  EgyReszletek() {
+  onModositaskesz() {
     this.egymode = EgyMode.Reszletek;
   }
 

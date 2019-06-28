@@ -1,17 +1,19 @@
-import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FelhasznaloService} from '../felhasznalo.service';
 import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {deepCopy} from '../../../tools/deepCopy';
 
 @Component({
   selector: 'app-felhasznalo-szerkesztes',
   templateUrl: './felhasznalo-szerkesztes.component.html'
 })
-export class FelhasznaloSzerkesztesComponent implements OnDestroy {
+export class FelhasznaloSzerkesztesComponent implements OnInit, OnDestroy {
   felhasznaloservice: FelhasznaloService;
 
-  @Output() KontenerKeres = new EventEmitter<void>();
+  @Input() uj = false;
+  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -28,11 +30,32 @@ export class FelhasznaloSzerkesztesComponent implements OnDestroy {
     this.felhasznaloservice = felhasznaloservice;
   }
 
+  ngOnInit() {
+    if (this.uj) {
+      this.eppFrissit = true;
+      this.felhasznaloservice.CreateNew()
+        .then(res => {
+          if (res.Error !== null) {
+            throw res.Error;
+          }
+
+          this.felhasznaloservice.DtoEdited = res.Result[0];
+          this.eppFrissit = false;
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.felhasznaloservice.DtoEdited = deepCopy(this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex]);
+    }
+  }
+
   onSubmit() {
     this.eppFrissit = true;
     let p: Promise<NumberResult>;
 
-    if (this.felhasznaloservice.uj) {
+    if (this.uj) {
       p = this.felhasznaloservice.Add(this.felhasznaloservice.DtoEdited);
     } else {
       p = this.felhasznaloservice.Update(this.felhasznaloservice.DtoEdited);
@@ -51,14 +74,14 @@ export class FelhasznaloSzerkesztesComponent implements OnDestroy {
           throw res1.Error;
         }
 
-        if (this.felhasznaloservice.uj) {
+        if (this.uj) {
           this.felhasznaloservice.Dto.unshift(res1.Result[0]);
         } else {
           this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex] = res1.Result[0];
         }
 
         this.eppFrissit = false;
-        this.KontenerKeres.emit();
+        this.eventSzerkeszteskesz.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -66,7 +89,7 @@ export class FelhasznaloSzerkesztesComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.KontenerKeres.emit();
+    this.eventSzerkeszteskesz.emit();
   }
   ngOnDestroy() {
     Object.keys(this).map(k => {

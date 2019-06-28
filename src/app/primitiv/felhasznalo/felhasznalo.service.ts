@@ -25,7 +25,6 @@ export class FelhasznaloService {
 
   Dto: FelhasznaloDto[] = new Array<FelhasznaloDto>();
   DtoEdited = new FelhasznaloDto();
-  uj = false;
   DtoSelectedIndex = -1;
 
   zoom = false;

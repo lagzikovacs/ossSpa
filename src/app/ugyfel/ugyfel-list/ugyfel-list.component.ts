@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {Szempont} from '../../enums/szempont';
 import {UgyfelService} from '../ugyfel.service';
 import {UgyfelDto} from '../ugyfeldto';
@@ -44,6 +44,22 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  private _elsokereses = true;
+  @Output() elsokeresesChange = new EventEmitter<boolean>();
+  @Input() get elsokereses() { return this._elsokereses; }
+  set elsokereses(value: boolean) {
+    this._elsokereses = value;
+    this.elsokeresesChange.emit(this._elsokereses);
+  }
+
+  private _osszesrekord = 0;
+  @Output() osszesrekordChange = new EventEmitter<number>();
+  @Input() get osszesrekord() { return this._osszesrekord; }
+  set osszesrekord(value: number) {
+    this._osszesrekord = value;
+    this.osszesrekordChange.emit(this._osszesrekord);
+  }
+
   constructor(private _logonservice: LogonService,
               private _iratservice: IratService,
               private _projektservice: ProjektService,
@@ -64,9 +80,9 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.ugyfelservice.Dto = new Array<UgyfelDto>();
     this.ugyfelservice.DtoSelectedIndex = -1;
-    this.ugyfelservice.OsszesRekord = 0;
+    this.osszesrekord = 0;
 
-    this.ugyfelservice.elsokereses = true;
+    this.elsokereses = true;
     this.ugyfelservice.up.rekordtol = 0;
     this.ugyfelservice.up.csoport = this.ugyfelservice.csoportszempont;
     this.ugyfelservice.up.fi = new Array<SzMT>();
@@ -84,9 +100,9 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        if (this.ugyfelservice.elsokereses) {
+        if (this.elsokereses) {
           this.ugyfelservice.Dto = res.Result;
-          this.ugyfelservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.ugyfelservice.Dto];
           res.Result.forEach(element => {
@@ -94,7 +110,7 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
           });
           this.ugyfelservice.Dto = buf;
         }
-        this.ugyfelservice.OsszesRekord = res.OsszesRekord;
+        this.osszesrekord = res.OsszesRekord;
 
         this.ugyfelservice.up.rekordtol += this.ugyfelservice.up.lapmeret;
         this.eppFrissit = false;

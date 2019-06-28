@@ -20,8 +20,6 @@ export class FelhasznaloListComponent implements OnInit, OnDestroy {
   mod = false;
   felhasznaloservice: FelhasznaloService;
 
-  @Output() KontenerKeres = new EventEmitter<void>();
-
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -86,14 +84,14 @@ export class FelhasznaloListComponent implements OnInit, OnDestroy {
       });
   }
 
-  selectforzoom(i: number) {
+  onStartzoom(i: number) {
     if (this.felhasznaloservice.zoomsource === ZoomSources.Projektteendo) {
       this._projektteendoservice.DtoEdited.Dedikalva = this.felhasznaloservice.Dto[i].Nev;
 
-      this.stopzoom();
+      this.onStopzoom();
     }
   }
-  stopzoom() {
+  onStopzoom() {
     this.felhasznaloservice.zoom = false;
 
     if (this.felhasznaloservice.zoomsource === ZoomSources.Projektteendo) {
@@ -101,33 +99,19 @@ export class FelhasznaloListComponent implements OnInit, OnDestroy {
     }
   }
 
-  setClickedRow(i: number) {
+  onId(i: number) {
     this.felhasznaloservice.DtoSelectedIndex = i;
-    this.felhasznaloservice.uj = false;
   }
 
-  uj() {
-    this.eppFrissit = true;
-    this.felhasznaloservice.CreateNew()
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
-
-        this.felhasznaloservice.uj = true;
-        this.felhasznaloservice.DtoEdited = res.Result[0];
-        this.felhasznaloservice.DtoSelectedIndex = -1;
-        this.eppFrissit = false;
-
-        this.KontenerKeres.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+  onUj() {
+    this.tabla.ujtetelstart();
   }
 
-  torlesutan() {
+  onUjkesz() {
+    this.tabla.ujtetelstop();
+  }
+
+  onTorlesutan() {
     this.tabla.clearselections();
   }
 

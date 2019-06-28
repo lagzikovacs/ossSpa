@@ -22,8 +22,6 @@ export class MeListComponent implements OnInit, OnDestroy {
   mod = false;
   meservice: MeService;
 
-  @Output() KontenerKeres = new EventEmitter<void>();
-
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -89,7 +87,7 @@ export class MeListComponent implements OnInit, OnDestroy {
       });
   }
 
-  selectforzoom(i: number) {
+  onStartzoom(i: number) {
     if (this.meservice.zoomsource === ZoomSources.Cikk) {
       this._cikkservice.DtoEdited.Mekod = this.meservice.Dto[i].Mekod;
       this._cikkservice.DtoEdited.Me = this.meservice.Dto[i].Me;
@@ -99,9 +97,9 @@ export class MeListComponent implements OnInit, OnDestroy {
       this._bizonylatservice.TetelDtoEdited.Me = this.meservice.Dto[i].Me;
     }
 
-    this.stopzoom();
+    this.onStopzoom();
   }
-  stopzoom() {
+  onStopzoom() {
     this.meservice.zoom = false;
 
     if (this.meservice.zoomsource === ZoomSources.Cikk) {
@@ -112,33 +110,19 @@ export class MeListComponent implements OnInit, OnDestroy {
     }
   }
 
-  setClickedRow(i: number) {
+  onId(i: number) {
     this.meservice.DtoSelectedIndex = i;
-    this.meservice.uj = false;
   }
 
-  uj() {
-    this.eppFrissit = true;
-    this.meservice.CreateNew()
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
-
-        this.meservice.uj = true;
-        this.meservice.DtoEdited = res.Result[0];
-        this.meservice.DtoSelectedIndex = -1;
-        this.eppFrissit = false;
-
-        this.KontenerKeres.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+  onUj() {
+    this.tabla.ujtetelstart();
   }
 
-  torlesutan() {
+  onUjkesz() {
+    this.tabla.ujtetelstop();
+  }
+
+  onTorlesutan() {
     this.tabla.clearselections();
   }
 

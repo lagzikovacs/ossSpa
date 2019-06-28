@@ -5,18 +5,24 @@
                [(szempont)]="meservice.ekDto.szempont"
                [(minta)]="meservice.ekDto.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit && mod" (Uj)="uj()"
-               [visZoom]="meservice.zoom" (StopZoom)="stopzoom()">
+               [enUj]="!eppFrissit && mod" (Uj)="onUj()"
+               [visZoom]="meservice.zoom" (StopZoom)="onStopzoom()">
   </app-toolbar>
   <app-tabla #tabla
              [items]="meservice.Dto"
              [colsets]="meservice.GridSettings"
              [zoom]="meservice.zoom"
-             (forzoom)="selectforzoom($event)"
-             (forid)="setClickedRow($event)"
+             (forzoom)="onStartzoom($event)"
+             (forid)="onId($event)"
+             [ujTemplate]="griduj"
              [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #griduj>
+    <app-me-szerkesztes [uj] = "true"
+                        (eventSzerkeszteskesz)="onUjkesz()">
+    </app-me-szerkesztes>
+  </ng-template>
   <ng-template #gridegy>
-    <app-me-egy (torlesutan)="torlesutan()"></app-me-egy>
+    <app-me-egy (eventTorlesutan)="onTorlesutan()"></app-me-egy>
   </ng-template>
 </div>

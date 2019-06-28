@@ -1,6 +1,6 @@
 <div class="alapkeret">
-  <h5 *ngIf="felhasznaloservice.uj">Új {{felhasznaloservice.cim | lowercase}}</h5>
-  <h5 *ngIf="!felhasznaloservice.uj">{{felhasznaloservice.cim}} módosítása</h5>
+  <h5 *ngIf="uj">Új {{felhasznaloservice.cim | lowercase}}</h5>
+  <h5 *ngIf="!uj">{{felhasznaloservice.cim}} módosítása</h5>
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 

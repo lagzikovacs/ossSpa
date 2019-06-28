@@ -1,17 +1,19 @@
-import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {TeendoService} from '../teendo.service';
 import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {deepCopy} from '../../../tools/deepCopy';
 
 @Component({
   selector: 'app-teendo-szerkesztes',
   templateUrl: './teendo-szerkesztes.component.html'
 })
-export class TeendoSzerkesztesComponent implements OnDestroy {
+export class TeendoSzerkesztesComponent implements OnInit, OnDestroy {
   teendoservice: TeendoService;
 
-  @Output() KontenerKeres = new EventEmitter<void>();
+  @Input() uj = false;
+  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -28,11 +30,32 @@ export class TeendoSzerkesztesComponent implements OnDestroy {
     this.teendoservice = teendoservice;
   }
 
+  ngOnInit() {
+    if (this.uj) {
+      this.eppFrissit = true;
+      this.teendoservice.CreateNew()
+        .then(res => {
+          if (res.Error !== null) {
+            throw res.Error;
+          }
+
+          this.teendoservice.DtoEdited = res.Result[0];
+          this.eppFrissit = false;
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.teendoservice.DtoEdited = deepCopy(this.teendoservice.Dto[this.teendoservice.DtoSelectedIndex]);
+    }
+  }
+
   onSubmit() {
     this.eppFrissit = true;
     let p: Promise<NumberResult>;
 
-    if (this.teendoservice.uj) {
+    if (this.uj) {
       p = this.teendoservice.Add(this.teendoservice.DtoEdited);
     } else {
       p = this.teendoservice.Update(this.teendoservice.DtoEdited);
@@ -51,14 +74,14 @@ export class TeendoSzerkesztesComponent implements OnDestroy {
           throw res1.Error;
         }
 
-        if (this.teendoservice.uj) {
+        if (this.uj) {
           this.teendoservice.Dto.unshift(res1.Result[0]);
         } else {
           this.teendoservice.Dto[this.teendoservice.DtoSelectedIndex] = res1.Result[0];
         }
 
         this.eppFrissit = false;
-        this.KontenerKeres.emit();
+        this.eventSzerkeszteskesz.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -66,7 +89,7 @@ export class TeendoSzerkesztesComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.KontenerKeres.emit();
+    this.eventSzerkeszteskesz.emit();
   }
 
   ngOnDestroy() {

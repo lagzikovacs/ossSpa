@@ -21,19 +21,19 @@ import {ColumnSettings} from '../tools/reszletek/columnsettings';
 })
 export class CikkService {
   private readonly _controller = 'api/cikk/';
-
   cim = 'Cikk';
+
   szempont = 0;
   minta = '';
   up = new CikkParameter(0, environment.lapmeret);
-  OsszesRekord = 0;
-  elsokereses = true;
+
   Dto: CikkDto[] = new Array<CikkDto>();
-  DtoSelectedIndex = -1;
+  DtoEdited = new CikkDto();
   uj = false;
+  DtoSelectedIndex = -1;
+
   zoom = false;
   zoomsource: ZoomSources;
-  DtoEdited = new CikkDto();
 
   BizonylattipusKod: number;
   MozgasDto: CikkMozgasTetelDto[] = new Array<CikkMozgasTetelDto>();

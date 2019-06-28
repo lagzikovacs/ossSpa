@@ -5,18 +5,24 @@
                [(szempont)]="felhasznaloservice.ekDto.szempont"
                [(minta)]="felhasznaloservice.ekDto.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit && mod" (Uj)="uj()"
-               [visZoom]="felhasznaloservice.zoom" (StopZoom)="stopzoom()">
+               [enUj]="!eppFrissit && mod" (Uj)="onUj()"
+               [visZoom]="felhasznaloservice.zoom" (StopZoom)="onStopzoom()">
   </app-toolbar>
   <app-tabla #tabla
              [items]="felhasznaloservice.Dto"
              [colsets]="felhasznaloservice.GridSettings"
              [zoom]="felhasznaloservice.zoom"
-             (forzoom)="selectforzoom($event)"
-             (forid)="setClickedRow($event)"
+             (forzoom)="onStartzoom($event)"
+             (forid)="onId($event)"
+             [ujTemplate]="griduj"
              [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #griduj>
+    <app-felhasznalo-szerkesztes [uj] = "true"
+                                 (eventSzerkeszteskesz)="onUjkesz()">
+    </app-felhasznalo-szerkesztes>
+  </ng-template>
   <ng-template #gridegy>
-    <app-felhasznalo-egy (torlesutan)="torlesutan()"></app-felhasznalo-egy>
+    <app-felhasznalo-egy (eventTorlesutan)="onTorlesutan()"></app-felhasznalo-egy>
   </ng-template>
 </div>

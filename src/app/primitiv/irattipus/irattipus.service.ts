@@ -17,16 +17,17 @@ import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 })
 export class IrattipusService {
   private readonly _controller = 'api/irattipus/';
-
   cim = 'Irattipus';
+
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
   elsokereses = true;
+
   Dto: IrattipusDto[] = new Array<IrattipusDto>();
+  DtoEdited = new IrattipusDto();
   DtoSelectedIndex = -1;
-  uj = false;
+
   zoom = false;
   zoomsource: ZoomSources;
-  DtoEdited = new IrattipusDto();
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

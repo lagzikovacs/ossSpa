@@ -17,16 +17,17 @@ import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 })
 export class TeendoService {
   private readonly _controller = 'api/teendo/';
-
   cim = 'Teendő';
+
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
   elsokereses = true;
+
   Dto: TeendoDto[] = new Array<TeendoDto>();
+  DtoEdited = new TeendoDto();
   DtoSelectedIndex = -1;
-  uj = false;
+
   zoom = false;
   zoomsource: ZoomSources;
-  DtoEdited = new TeendoDto();
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

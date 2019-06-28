@@ -1,17 +1,19 @@
-import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FizetesimodService} from '../fizetesimod.service';
 import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {deepCopy} from '../../../tools/deepCopy';
 
 @Component({
   selector: 'app-fizetesimod-szerkesztes',
   templateUrl: './fizetesimod-szerkesztes.component.html'
 })
-export class FizetesimodSzerkesztesComponent implements OnDestroy {
+export class FizetesimodSzerkesztesComponent implements OnInit, OnDestroy {
   fizetesimodservice: FizetesimodService;
 
-  @Output() KontenerKeres = new EventEmitter<void>();
+  @Input() uj = false;
+  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -28,11 +30,32 @@ export class FizetesimodSzerkesztesComponent implements OnDestroy {
     this.fizetesimodservice = fizetesimodservice;
   }
 
+  ngOnInit() {
+    if (this.uj) {
+      this.eppFrissit = true;
+      this.fizetesimodservice.CreateNew()
+        .then(res => {
+          if (res.Error !== null) {
+            throw res.Error;
+          }
+
+          this.fizetesimodservice.DtoEdited = res.Result[0];
+          this.eppFrissit = false;
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.fizetesimodservice.DtoEdited = deepCopy(this.fizetesimodservice.Dto[this.fizetesimodservice.DtoSelectedIndex]);
+    }
+  }
+
   onSubmit() {
     this.eppFrissit = true;
     let p: Promise<NumberResult>;
 
-    if (this.fizetesimodservice.uj) {
+    if (this.uj) {
       p = this.fizetesimodservice.Add(this.fizetesimodservice.DtoEdited);
     } else {
       p = this.fizetesimodservice.Update(this.fizetesimodservice.DtoEdited);
@@ -51,14 +74,14 @@ export class FizetesimodSzerkesztesComponent implements OnDestroy {
           throw res1.Error;
         }
 
-        if (this.fizetesimodservice.uj) {
+        if (this.uj) {
           this.fizetesimodservice.Dto.unshift(res1.Result[0]);
         } else {
           this.fizetesimodservice.Dto[this.fizetesimodservice.DtoSelectedIndex] = res1.Result[0];
         }
 
         this.eppFrissit = false;
-        this.KontenerKeres.emit();
+        this.eventSzerkeszteskesz.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -66,7 +89,7 @@ export class FizetesimodSzerkesztesComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.KontenerKeres.emit();
+    this.eventSzerkeszteskesz.emit();
   }
   ngOnDestroy() {
     Object.keys(this).map(k => {

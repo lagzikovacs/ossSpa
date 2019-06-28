@@ -4,7 +4,6 @@ import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
 import {EsemenynaploService} from '../../../esemenynaplo/esemenynaplo.service';
 import {rowanimation} from '../../../animation/rowAnimation';
-import {deepCopy} from '../../../tools/deepCopy';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {EgyMode} from '../../../enums/egymode';
@@ -17,10 +16,9 @@ import {EgyMode} from '../../../enums/egymode';
 export class FelhasznaloEgyComponent implements OnDestroy {
   egymode = EgyMode.Reszletek;
   felhasznaloservice: FelhasznaloService;
-  mod = false;
-  ri = -1;
+  jog = false;
 
-  @Output() torlesutan = new EventEmitter<void>();
+  @Output() eventTorlesutan = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -36,54 +34,53 @@ export class FelhasznaloEgyComponent implements OnDestroy {
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               felhasznaloservice: FelhasznaloService) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.FELHASZNALOMOD]);
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.FELHASZNALOMOD]);
     this.felhasznaloservice = felhasznaloservice;
   }
 
-  reszletek() {
+  doReszletek() {
     this.egymode = EgyMode.Reszletek;
   }
-  torles () {
+  doTorles () {
     this.egymode = EgyMode.Torles;
   }
-  modositas() {
-    this.felhasznaloservice.uj = false;
-    this.felhasznaloservice.DtoEdited = deepCopy(this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex]);
+  doModositas() {
     this.egymode = EgyMode.Modositas;
   }
-  jelszo() {
+  doJelszo() {
     this.egymode = EgyMode.Jelszo;
   }
-  tevekenyseg() {
+  doTevekenyseg() {
     this._esemenynaploservice.Felhasznalokod = this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex].Felhasznalokod;
     this.egymode = EgyMode.Tevekenyseg;
   }
 
-  TorlesOk() {
-    this.eppFrissit = true;
-    this.felhasznaloservice.Delete(this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex])
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
 
-        this.felhasznaloservice.Dto.splice(this.felhasznaloservice.DtoSelectedIndex, 1);
-        this.felhasznaloservice.DtoSelectedIndex = -1;
+      this.felhasznaloservice.Delete(this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
 
-        this.eppFrissit = false;
-        this.torlesutan.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+          this.felhasznaloservice.Dto.splice(this.felhasznaloservice.DtoSelectedIndex, 1);
+          this.felhasznaloservice.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.eventTorlesutan.emit();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
   }
 
-  TorlesCancel() {
-    this.egymode = EgyMode.Reszletek;
-  }
-
-  EgyReszletek() {
+  onModositaskesz() {
     this.egymode = EgyMode.Reszletek;
   }
 

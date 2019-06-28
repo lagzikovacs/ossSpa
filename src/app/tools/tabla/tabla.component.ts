@@ -13,6 +13,7 @@ export class TablaComponent implements OnDestroy {
   @Input() letoltes = false;
   @Input() enIdclick = true;
 
+  @Input() ujTemplate: TemplateRef<any>;
   @Input() egyTemplate: TemplateRef<any>;
 
   @Output() fordownload = new EventEmitter<number>();
@@ -22,10 +23,22 @@ export class TablaComponent implements OnDestroy {
   clickedrowindex = -1;
   clickedidindex = -1;
   clickeddownloadindex = -1;
+  ujtetel = false;
 
   clearselections() {
+    this.ujtetel = false;
+
     this.clickedrowindex = -1;
     this.clickedidindex = -1;
+  }
+
+  ujtetelstart() {
+    this.clearselections();
+
+    this.ujtetel = true;
+  }
+  ujtetelstop() {
+    this.ujtetel = false;
   }
 
   clickfordownload(i: number) {
@@ -37,6 +50,8 @@ export class TablaComponent implements OnDestroy {
   }
 
   clickforid(i: number) {
+    this.ujtetel = false;
+
     this.clickedidindex = i;
     this.clickedrowindex = this.clickedidindex;
     this.clickeddownloadindex = this.clickedidindex;
@@ -45,6 +60,8 @@ export class TablaComponent implements OnDestroy {
   }
 
   clickforrow(i: number) {
+    this.ujtetel = false;
+
     this.clickedrowindex = i;
     // először clickforid vagy clickfordownload, aztán clickforrow is, clickforrow felülírná az eseményeket
     if (this.clickedrowindex !== this.clickedidindex && this.clickedrowindex !== this.clickeddownloadindex) {

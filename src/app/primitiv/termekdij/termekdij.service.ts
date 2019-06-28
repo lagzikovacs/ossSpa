@@ -17,16 +17,17 @@ import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 })
 export class TermekdijService {
   private readonly _controller = 'api/termekdij/';
-
   cim = 'Termékdíj';
+
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
   elsokereses = true;
+
   Dto: TermekdijDto[] = new Array<TermekdijDto>();
+  DtoEdited = new TermekdijDto();
   DtoSelectedIndex = -1;
-  uj = false;
+
   zoom = false;
   zoomsource: ZoomSources;
-  DtoEdited = new TermekdijDto();
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

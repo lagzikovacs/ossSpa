@@ -20,20 +20,20 @@ import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 })
 export class UgyfelService {
   private readonly _controller = 'api/ugyfel/';
-
   cim = 'Ügyfél';
+
   csoportszempont = 0;
   szempont = 0;
   minta = '';
   up = new UgyfelParameter(0, environment.lapmeret);
-  OsszesRekord = 0;
-  elsokereses = true;
+
   Dto: UgyfelDto[] = new Array<UgyfelDto>();
-  DtoSelectedIndex = -1;
+  DtoEdited = new UgyfelDto();
   uj = false;
+  DtoSelectedIndex = -1;
+
   zoom = false;
   zoomsource: ZoomSources;
-  DtoEdited = new UgyfelDto();
 
   SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
 

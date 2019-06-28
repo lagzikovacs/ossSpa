@@ -5,18 +5,24 @@
                [(szempont)]="teendoservice.ekDto.szempont"
                [(minta)]="teendoservice.ekDto.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit && mod" (Uj)="uj()"
-               [visZoom]="teendoservice.zoom" (StopZoom)="stopzoom()">
+               [enUj]="!eppFrissit && mod" (Uj)="onUj()"
+               [visZoom]="teendoservice.zoom" (StopZoom)="onStopzoom()">
   </app-toolbar>
   <app-tabla #tabla
              [items]="teendoservice.Dto"
              [colsets]="teendoservice.GridSettings"
              [zoom]="teendoservice.zoom"
-             (forzoom)="selectforzoom($event)"
-             (forid)="setClickedRow($event)"
+             (forzoom)="onStartzoom($event)"
+             (forid)="onId($event)"
+             [ujTemplate]="griduj"
              [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #griduj>
+    <app-teendo-szerkesztes [uj] = "true"
+                            (eventSzerkeszteskesz)="onUjkesz()">
+    </app-teendo-szerkesztes>
+  </ng-template>
   <ng-template #gridegy>
-    <app-teendo-egy (torlesutan)="torlesutan()"></app-teendo-egy>
+    <app-teendo-egy (eventTorlesutan)="onTorlesutan()"></app-teendo-egy>
   </ng-template>
 </div>

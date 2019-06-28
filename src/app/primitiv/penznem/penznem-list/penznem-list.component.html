@@ -5,18 +5,24 @@
                [(szempont)]="penznemservice.ekDto.szempont"
                [(minta)]="penznemservice.ekDto.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit && mod" (Uj)="uj()"
-               [visZoom]="penznemservice.zoom" (StopZoom)="stopzoom()">
+               [enUj]="!eppFrissit && mod" (Uj)="onUj()"
+               [visZoom]="penznemservice.zoom" (StopZoom)="onStopzoom()">
   </app-toolbar>
   <app-tabla #tabla
              [items]="penznemservice.Dto"
              [colsets]="penznemservice.GridSettings"
              [zoom]="penznemservice.zoom"
-             (forzoom)="selectforzoom($event)"
-             (forid)="setClickedRow($event)"
+             (forzoom)="onStartzoom($event)"
+             (forid)="onId($event)"
+             [ujTemplate]="griduj"
              [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #griduj>
+    <app-penznem-szerkesztes [uj] = "true"
+                             (eventSzerkeszteskesz)="onUjkesz()">
+    </app-penznem-szerkesztes>
+  </ng-template>
   <ng-template #gridegy>
-    <app-penznem-egy (torlesutan)="torlesutan()"></app-penznem-egy>
+    <app-penznem-egy (eventTorlesutan)="onTorlesutan()"></app-penznem-egy>
   </ng-template>
 </div>

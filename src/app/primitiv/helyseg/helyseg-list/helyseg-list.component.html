@@ -5,18 +5,24 @@
                [(szempont)]="helysegservice.ekDto.szempont"
                [(minta)]="helysegservice.ekDto.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit && mod" (Uj)="uj()"
-               [visZoom]="helysegservice.zoom" (StopZoom)="stopzoom()">
+               [enUj]="!eppFrissit && mod" (Uj)="onUj()"
+               [visZoom]="helysegservice.zoom" (StopZoom)="onStopzoom()">
   </app-toolbar>
   <app-tabla #tabla
              [items]="helysegservice.Dto"
              [colsets]="helysegservice.GridSettings"
              [zoom]="helysegservice.zoom"
-             (forzoom)="selectforzoom($event)"
-             (forid)="setClickedRow($event)"
+             (forzoom)="onStartzoom($event)"
+             (forid)="onId($event)"
+             [ujTemplate]="griduj"
              [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #griduj>
+    <app-helyseg-szerkesztes [uj] = "true"
+                             (eventSzerkeszteskesz)="onUjkesz()">
+    </app-helyseg-szerkesztes>
+  </ng-template>
   <ng-template #gridegy>
-    <app-helyseg-egy (torlesutan)="torlesutan()"></app-helyseg-egy>
+    <app-helyseg-egy (eventTorlesutan)="onTorlesutan()"></app-helyseg-egy>
   </ng-template>
 </div>

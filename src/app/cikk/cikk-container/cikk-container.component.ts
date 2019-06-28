@@ -9,6 +9,8 @@ import {KontenerMode} from '../../enums/kontenermode';
 export class CikkContainerComponent implements OnDestroy {
   kontenermode = KontenerMode.List;
   cikkservice: CikkService;
+  elsokereses = true;
+  osszesrekord = 0;
 
   constructor(cikkservice: CikkService) {
     this.cikkservice = cikkservice;

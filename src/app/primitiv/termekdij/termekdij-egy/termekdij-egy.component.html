@@ -1,16 +1,16 @@
 <div class="alapkeret">
   <div>
     <nav>
-      <button [disabled]="eppFrissit" (click)="reszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="eppFrissit" (click)="doReszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>
       </button>
 
-      <button [disabled]="eppFrissit || !mod"
-              (click)="torles()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="eppFrissit || !jog"
+              (click)="doTorles()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-minus" aria-hidden="true"></i>
       </button>
-      <button [disabled]="eppFrissit || !mod"
-              (click)="modositas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="eppFrissit || !jog"
+              (click)="doModositas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-edit" aria-hidden="true"></i>
       </button>
     </nav>
@@ -26,8 +26,7 @@
     <div [@rowanimation]>
       <app-reszletek [cim]="termekdijservice.cim"
                      [item]="termekdijservice.Dto[termekdijservice.DtoSelectedIndex]"
-                     [colsets]="termekdijservice.ReszletekSettings"
-                     [(selectedindex)]="ri">
+                     [colsets]="termekdijservice.ReszletekSettings">
       </app-reszletek>
     </div>
   </ng-container>
@@ -35,14 +34,14 @@
     <div [@rowanimation]>
       <app-tetel-torles [cim]="termekdijservice.cim"
                         [eppFrissit]="eppFrissit"
-                        (OkClick)="TorlesOk()"
-                        (CancelClick)="TorlesCancel()">
+                        (eventTorles)="onTorles($event)">
       </app-tetel-torles>
     </div>
   </ng-container>
   <ng-container *ngIf="egymode === 3">
     <div [@rowanimation]>
-      <app-termekdij-szerkesztes (KontenerKeres)="EgyReszletek()">
+      <app-termekdij-szerkesztes [uj]="false"
+                                 (eventSzerkeszteskesz)="onModositaskesz()">
       </app-termekdij-szerkesztes>
     </div>
   </ng-container>

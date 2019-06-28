@@ -22,8 +22,6 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
   mod = false;
   fizetesimodservice: FizetesimodService;
 
-  @Output() KontenerKeres = new EventEmitter<void>();
-
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -89,7 +87,7 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
       });
   }
 
-  selectforzoom(i: number) {
+  onStartzoom(i: number) {
     if (this.fizetesimodservice.zoomsource === ZoomSources.Bizonylatkifizetes) {
       this._bizonylatkifizetesservice.DtoEdited.Fizetesimodkod = this.fizetesimodservice.Dto[i].Fizetesimodkod;
       this._bizonylatkifizetesservice.DtoEdited.Fizetesimod = this.fizetesimodservice.Dto[i].Fizetesimod1;
@@ -99,9 +97,9 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
       this._bizonylatservice.ComplexDtoEdited.Dto.Fizetesimod = this.fizetesimodservice.Dto[i].Fizetesimod1;
     }
 
-    this.stopzoom();
+    this.onStopzoom();
   }
-  stopzoom() {
+  onStopzoom() {
     this.fizetesimodservice.zoom = false;
 
     if (this.fizetesimodservice.zoomsource === ZoomSources.Bizonylatkifizetes) {
@@ -112,33 +110,19 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
     }
   }
 
-  setClickedRow(i: number) {
+  onId(i: number) {
     this.fizetesimodservice.DtoSelectedIndex = i;
-    this.fizetesimodservice.uj = false;
   }
 
-  uj() {
-    this.eppFrissit = true;
-    this.fizetesimodservice.CreateNew()
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
-
-        this.fizetesimodservice.uj = true;
-        this.fizetesimodservice.DtoEdited = res.Result[0];
-        this.fizetesimodservice.DtoSelectedIndex = -1;
-        this.eppFrissit = false;
-
-        this.KontenerKeres.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+  onUj() {
+    this.tabla.ujtetelstart();
   }
 
-  torlesutan() {
+  onUjkesz() {
+    this.tabla.ujtetelstop();
+  }
+
+  onTorlesutan() {
     this.tabla.clearselections();
   }
 

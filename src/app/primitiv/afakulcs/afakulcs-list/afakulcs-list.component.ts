@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {AfakulcsService} from '../afakulcs.service';
 import {CikkService} from '../../../cikk/cikk.service';
 import {ZoomSources} from '../../../enums/zoomsources';
@@ -19,10 +19,8 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
   szurok = ['ÁFA kulcs'];
-  mod = false;
+  jog = false;
   afakulcsservice: AfakulcsService;
-
-  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -39,7 +37,7 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               afakulcsservice: AfakulcsService) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.afakulcsservice = afakulcsservice;
   }
 
@@ -86,7 +84,7 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
       });
   }
 
-  selectforzoom(i: number) {
+  onStartzoom(i: number) {
     if (this.afakulcsservice.zoomsource === ZoomSources.Cikk) {
       this._cikkservice.DtoEdited.Afakulcskod = this.afakulcsservice.Dto[i].Afakulcskod;
       this._cikkservice.DtoEdited.Afakulcs = this.afakulcsservice.Dto[i].Afakulcs1;
@@ -98,9 +96,10 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
       this._bizonylatservice.TetelDtoEdited.Afamerteke = this.afakulcsservice.Dto[i].Afamerteke;
     }
 
-    this.stopzoom();
+    this.onStopzoom();
   }
-  stopzoom() {
+
+  onStopzoom() {
     this.afakulcsservice.zoom = false;
 
     if (this.afakulcsservice.zoomsource === ZoomSources.Cikk) {
@@ -111,33 +110,19 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
     }
   }
 
-  setClickedRow(i: number) {
+  onId(i: number) {
     this.afakulcsservice.DtoSelectedIndex = i;
-    this.afakulcsservice.uj = false;
   }
 
-  uj() {
-    this.eppFrissit = true;
-    this.afakulcsservice.CreateNew()
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
-
-        this.afakulcsservice.uj = true;
-        this.afakulcsservice.DtoEdited = res.Result[0];
-        this.afakulcsservice.DtoSelectedIndex = -1;
-        this.eppFrissit = false;
-
-        this.KontenerKeres.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+  onUj() {
+    this.tabla.ujtetelstart();
   }
 
-  torlesutan() {
+  onUjkesz() {
+    this.tabla.ujtetelstop();
+  }
+
+  onTorlesutan() {
     this.tabla.clearselections();
   }
 

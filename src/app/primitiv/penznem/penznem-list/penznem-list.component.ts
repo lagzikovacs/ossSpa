@@ -29,8 +29,6 @@ export class PenznemListComponent implements OnInit, OnDestroy {
   mod = false;
   penznemservice: PenznemService;
 
-  @Output() KontenerKeres = new EventEmitter<void>();
-
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -99,7 +97,7 @@ export class PenznemListComponent implements OnInit, OnDestroy {
       });
   }
 
-  selectforzoom(i: number) {
+  onStartzoom(i: number) {
     if (this.penznemservice.zoomsource === ZoomSources.Penztar) {
       this._penztarservice.DtoEdited.Penznemkod = this.penznemservice.Dto[i].Penznemkod;
       this._penztarservice.DtoEdited.Penznem = this.penznemservice.Dto[i].Penznem1;
@@ -121,9 +119,9 @@ export class PenznemListComponent implements OnInit, OnDestroy {
       this._bizonylatservice.ComplexDtoEdited.Dto.Penznem = this.penznemservice.Dto[i].Penznem1;
     }
 
-    this.stopzoom();
+    this.onStopzoom();
   }
-  stopzoom() {
+  onStopzoom() {
     this.penznemservice.zoom = false;
 
     if (this.penznemservice.zoomsource === ZoomSources.Penztar) {
@@ -143,33 +141,19 @@ export class PenznemListComponent implements OnInit, OnDestroy {
     }
   }
 
-  setClickedRow(i: number) {
+  onId(i: number) {
     this.penznemservice.DtoSelectedIndex = i;
-    this.penznemservice.uj = false;
   }
 
-  uj() {
-    this.eppFrissit = true;
-    this.penznemservice.CreateNew()
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
-
-        this.penznemservice.uj = true;
-        this.penznemservice.DtoEdited = res.Result[0];
-        this.penznemservice.DtoSelectedIndex = -1;
-        this.eppFrissit = false;
-
-        this.KontenerKeres.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+  onUj() {
+    this.tabla.ujtetelstart();
   }
 
-  torlesutan() {
+  onUjkesz() {
+    this.tabla.ujtetelstop();
+  }
+
+  onTorlesutan() {
     this.tabla.clearselections();
   }
 

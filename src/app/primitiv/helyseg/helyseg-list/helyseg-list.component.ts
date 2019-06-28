@@ -20,8 +20,6 @@ export class HelysegListComponent implements OnInit, OnDestroy {
   mod = false;
   helysegservice: HelysegService;
 
-  @Output() KontenerKeres = new EventEmitter<void>();
-
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -86,47 +84,33 @@ export class HelysegListComponent implements OnInit, OnDestroy {
       });
   }
 
-  selectforzoom(i: number) {
+  onStartzoom(i: number) {
     if (this.helysegservice.zoomsource === ZoomSources.Ugyfel) {
       this.ugyfelservice.DtoEdited.Helysegkod = this.helysegservice.Dto[i].Helysegkod;
       this.ugyfelservice.DtoEdited.Helysegnev = this.helysegservice.Dto[i].Helysegnev;
 
-      this.stopzoom();
+      this.onStopzoom();
     }
   }
-  stopzoom() {
+  onStopzoom() {
     this.helysegservice.zoom = false;
 
     this.ugyfelservice.SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
   }
 
-  setClickedRow(i: number) {
+  onId(i: number) {
     this.helysegservice.DtoSelectedIndex = i;
-    this.helysegservice.uj = false;
   }
 
-  uj() {
-    this.eppFrissit = true;
-    this.helysegservice.CreateNew()
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
-
-        this.helysegservice.uj = true;
-        this.helysegservice.DtoEdited = res.Result[0];
-        this.helysegservice.DtoSelectedIndex = -1;
-        this.eppFrissit = false;
-
-        this.KontenerKeres.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+  onUj() {
+    this.tabla.ujtetelstart();
   }
 
-  torlesutan() {
+  onUjkesz() {
+    this.tabla.ujtetelstop();
+  }
+
+  onTorlesutan() {
     this.tabla.clearselections();
   }
 

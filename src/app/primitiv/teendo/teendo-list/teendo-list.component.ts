@@ -20,8 +20,6 @@ export class TeendoListComponent implements OnInit, OnDestroy {
   mod = false;
   teendoservice: TeendoService;
 
-  @Output() KontenerKeres = new EventEmitter<void>();
-
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -86,15 +84,15 @@ export class TeendoListComponent implements OnInit, OnDestroy {
       });
   }
 
-  selectforzoom(i: number) {
+  onStartzoom(i: number) {
     if (this.teendoservice.zoomsource === ZoomSources.Projektteendo) {
       this._projektteendoservice.DtoEdited.Teendokod = this.teendoservice.Dto[i].Teendokod;
       this._projektteendoservice.DtoEdited.Teendo = this.teendoservice.Dto[i].Teendo1;
 
-      this.stopzoom();
+      this.onStopzoom();
     }
   }
-  stopzoom() {
+  onStopzoom() {
     this.teendoservice.zoom = false;
 
     if (this.teendoservice.zoomsource === ZoomSources.Projektteendo) {
@@ -102,33 +100,19 @@ export class TeendoListComponent implements OnInit, OnDestroy {
     }
   }
 
-  setClickedRow(i: number) {
+  onId(i: number) {
     this.teendoservice.DtoSelectedIndex = i;
-    this.teendoservice.uj = false;
   }
 
-  uj() {
-    this.eppFrissit = true;
-    this.teendoservice.CreateNew()
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
-
-        this.teendoservice.uj = true;
-        this.teendoservice.DtoEdited = res.Result[0];
-        this.teendoservice.DtoSelectedIndex = -1;
-        this.eppFrissit = false;
-
-        this.KontenerKeres.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+  onUj() {
+    this.tabla.ujtetelstart();
   }
 
-  torlesutan() {
+  onUjkesz() {
+    this.tabla.ujtetelstop();
+  }
+
+  onTorlesutan() {
     this.tabla.clearselections();
   }
 

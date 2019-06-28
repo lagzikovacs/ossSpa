@@ -3,7 +3,6 @@ import {AfakulcsService} from '../afakulcs.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
 import {rowanimation} from '../../../animation/rowAnimation';
-import {deepCopy} from '../../../tools/deepCopy';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {EgyMode} from '../../../enums/egymode';
@@ -16,10 +15,9 @@ import {EgyMode} from '../../../enums/egymode';
 export class AfakulcsEgyComponent implements OnDestroy {
   egymode = EgyMode.Reszletek;
   afakulcsservice: AfakulcsService;
-  mod = false;
-  ri = -1;
+  jog = false;
 
-  @Output() torlesutan = new EventEmitter<void>();
+  @Output() eventTorlesutan = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -34,49 +32,46 @@ export class AfakulcsEgyComponent implements OnDestroy {
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               afakulcsservice: AfakulcsService) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.afakulcsservice = afakulcsservice;
   }
 
-  reszletek() {
+  doReszletek() {
     this.egymode = EgyMode.Reszletek;
   }
-  torles () {
+  doTorles () {
     this.egymode = EgyMode.Torles;
   }
-  modositas() {
-    this.afakulcsservice.uj = false;
-    this.afakulcsservice.DtoEdited = deepCopy(this.afakulcsservice.Dto[this.afakulcsservice.DtoSelectedIndex]);
-
+  doModositas() {
     this.egymode = EgyMode.Modositas;
   }
 
-  TorlesOk() {
-    this.eppFrissit = true;
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
 
-    this.afakulcsservice.Delete(this.afakulcsservice.Dto[this.afakulcsservice.DtoSelectedIndex])
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+      this.afakulcsservice.Delete(this.afakulcsservice.Dto[this.afakulcsservice.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
 
-        this.afakulcsservice.Dto.splice(this.afakulcsservice.DtoSelectedIndex, 1);
-        this.afakulcsservice.DtoSelectedIndex = -1;
+          this.afakulcsservice.Dto.splice(this.afakulcsservice.DtoSelectedIndex, 1);
+          this.afakulcsservice.DtoSelectedIndex = -1;
 
-        this.eppFrissit = false;
-        this.torlesutan.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+          this.eppFrissit = false;
+          this.eventTorlesutan.emit();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
   }
 
-  TorlesCancel() {
-    this.egymode = EgyMode.Reszletek;
-  }
-
-  EgyReszletek() {
+  onModositaskesz() {
     this.egymode = EgyMode.Reszletek;
   }
 

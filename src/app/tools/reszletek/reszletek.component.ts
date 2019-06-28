@@ -15,6 +15,7 @@ export class ReszletekComponent implements OnDestroy {
   @Output() selectedindexChange = new EventEmitter<number>();
 
   RowClick(i: number) {
+    this.selectedindex = i;
     this.selectedindexChange.emit(i);
   }
 

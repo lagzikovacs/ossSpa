@@ -24,8 +24,6 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
   mod = false;
   irattipusservice: IrattipusService;
 
-  @Output() KontenerKeres = new EventEmitter<void>();
-
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -92,27 +90,27 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
       });
   }
 
-  selectforzoom(i: number) {
+  onStartzoom(i: number) {
     if (this.irattipusservice.zoomsource === ZoomSources.Irat) {
       this._iratservice.DtoEdited.Irattipuskod = this.irattipusservice.Dto[i].Irattipuskod;
       this._iratservice.DtoEdited.Irattipus = this.irattipusservice.Dto[i].Irattipus1;
 
-      this.stopzoom();
+      this.onStopzoom();
     }
     if (this.irattipusservice.zoomsource === ZoomSources.Projektirat) {
       this._projektkapcsolatservice.UjIratDto.Irattipuskod = this.irattipusservice.Dto[i].Irattipuskod;
       this._projektkapcsolatservice.UjIratDto.Irattipus = this.irattipusservice.Dto[i].Irattipus1;
 
-      this.stopzoom();
+      this.onStopzoom();
     }
     if (this.irattipusservice.zoomsource === ZoomSources.Bizonylatirat) {
       this._bizonylatkapcsolatservice.UjIratDto.Irattipuskod = this.irattipusservice.Dto[i].Irattipuskod;
       this._bizonylatkapcsolatservice.UjIratDto.Irattipus = this.irattipusservice.Dto[i].Irattipus1;
 
-      this.stopzoom();
+      this.onStopzoom();
     }
   }
-  stopzoom() {
+  onStopzoom() {
     this.irattipusservice.zoom = false;
 
     if (this.irattipusservice.zoomsource === ZoomSources.Irat) {
@@ -126,33 +124,19 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
     }
   }
 
-  setClickedRow(i: number) {
+  onId(i: number) {
     this.irattipusservice.DtoSelectedIndex = i;
-    this.irattipusservice.uj = false;
   }
 
-  uj() {
-    this.eppFrissit = true;
-    this.irattipusservice.CreateNew()
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
-
-        this.irattipusservice.uj = true;
-        this.irattipusservice.DtoEdited = res.Result[0];
-        this.irattipusservice.DtoSelectedIndex = -1;
-        this.eppFrissit = false;
-
-        this.KontenerKeres.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+  onUj() {
+    this.tabla.ujtetelstart();
   }
 
-  torlesutan() {
+  onUjkesz() {
+    this.tabla.ujtetelstop();
+  }
+
+  onTorlesutan() {
     this.tabla.clearselections();
   }
 

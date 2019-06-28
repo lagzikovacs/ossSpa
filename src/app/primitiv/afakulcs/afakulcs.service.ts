@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {NumberResult} from '../../dtos/numberresult';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
 import {AfakulcsDto} from './afakulcsdto';
 import {ZoomSources} from '../../enums/zoomsources';
 import {LogonService} from '../../logon/logon.service';
@@ -11,6 +10,7 @@ import {EmptyResult} from '../../dtos/emptyresult';
 import {AfakulcsZoomParameter} from './afakulcszoomparameter';
 import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 import {ColumnSettings} from '../../tools/reszletek/columnsettings';
+import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,6 @@ export class AfakulcsService {
 
   Dto: AfakulcsDto[] = new Array<AfakulcsDto>();
   DtoEdited = new AfakulcsDto();
-  uj = false;
   DtoSelectedIndex = -1;
 
   zoom = false;

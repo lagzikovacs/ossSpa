@@ -5,18 +5,24 @@
                [(szempont)]="irattipusservice.ekDto.szempont"
                [(minta)]="irattipusservice.ekDto.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit && mod" (Uj)="uj()"
-               [visZoom]="irattipusservice.zoom" (StopZoom)="stopzoom()">
+               [enUj]="!eppFrissit && mod" (Uj)="onUj()"
+               [visZoom]="irattipusservice.zoom" (StopZoom)="onStopzoom()">
   </app-toolbar>
   <app-tabla #tabla
              [items]="irattipusservice.Dto"
              [colsets]="irattipusservice.GridSettings"
              [zoom]="irattipusservice.zoom"
-             (forzoom)="selectforzoom($event)"
-             (forid)="setClickedRow($event)"
+             (forzoom)="onStartzoom($event)"
+             (forid)="onId($event)"
+             [ujTemplate]="griduj"
              [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #griduj>
+    <app-irattipus-szerkesztes [uj] = "true"
+                               (eventSzerkeszteskesz)="onUjkesz()">
+    </app-irattipus-szerkesztes>
+  </ng-template>
   <ng-template #gridegy>
-    <app-irattipus-egy (torlesutan)="torlesutan()"></app-irattipus-egy>
+    <app-irattipus-egy (eventTorlesutan)="onTorlesutan()"></app-irattipus-egy>
   </ng-template>
 </div>

@@ -1,17 +1,19 @@
-import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {TermekdijService} from '../termekdij.service';
 import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {deepCopy} from '../../../tools/deepCopy';
 
 @Component({
   selector: 'app-termekdij-szerkesztes',
   templateUrl: './termekdij-szerkesztes.component.html'
 })
-export class TermekdijSzerkesztesComponent implements OnDestroy {
+export class TermekdijSzerkesztesComponent implements OnInit, OnDestroy {
   termekdijservice: TermekdijService;
 
-  @Output() KontenerKeres = new EventEmitter<void>();
+  @Input() uj = false;
+  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -28,11 +30,32 @@ export class TermekdijSzerkesztesComponent implements OnDestroy {
     this.termekdijservice = termekdijservice;
   }
 
+  ngOnInit() {
+    if (this.uj) {
+      this.eppFrissit = true;
+      this.termekdijservice.CreateNew()
+        .then(res => {
+          if (res.Error !== null) {
+            throw res.Error;
+          }
+
+          this.termekdijservice.DtoEdited = res.Result[0];
+          this.eppFrissit = false;
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.termekdijservice.DtoEdited = deepCopy(this.termekdijservice.Dto[this.termekdijservice.DtoSelectedIndex]);
+    }
+  }
+
   onSubmit() {
     this.eppFrissit = true;
     let p: Promise<NumberResult>;
 
-    if (this.termekdijservice.uj) {
+    if (this.uj) {
       p = this.termekdijservice.Add(this.termekdijservice.DtoEdited);
     } else {
       p = this.termekdijservice.Update(this.termekdijservice.DtoEdited);
@@ -51,14 +74,14 @@ export class TermekdijSzerkesztesComponent implements OnDestroy {
           throw res1.Error;
         }
 
-        if (this.termekdijservice.uj) {
+        if (this.uj) {
           this.termekdijservice.Dto.unshift(res1.Result[0]);
         } else {
           this.termekdijservice.Dto[this.termekdijservice.DtoSelectedIndex] = res1.Result[0];
         }
 
         this.eppFrissit = false;
-        this.KontenerKeres.emit();
+        this.eventSzerkeszteskesz.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -66,7 +89,7 @@ export class TermekdijSzerkesztesComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.KontenerKeres.emit();
+    this.eventSzerkeszteskesz.emit();
   }
   ngOnDestroy() {
     Object.keys(this).map(k => {

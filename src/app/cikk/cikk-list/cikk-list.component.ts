@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {CikkService} from '../cikk.service';
 import {Szempont} from '../../enums/szempont';
 import {CikkDto} from '../cikkdto';
@@ -42,6 +42,22 @@ export class CikkListComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  private _elsokereses = true;
+  @Output() elsokeresesChange = new EventEmitter<boolean>();
+  @Input() get elsokereses() { return this._elsokereses; }
+  set elsokereses(value: boolean) {
+    this._elsokereses = value;
+    this.elsokeresesChange.emit(this._elsokereses);
+  }
+
+  private _osszesrekord = 0;
+  @Output() osszesrekordChange = new EventEmitter<number>();
+  @Input() get osszesrekord() { return this._osszesrekord; }
+  set osszesrekord(value: number) {
+    this._osszesrekord = value;
+    this.osszesrekordChange.emit(this._osszesrekord);
+  }
+
   constructor(private _logonservice: LogonService,
               private _bizonylatservice: BizonylatService,
               private _ajanlatservice: AjanlatService,
@@ -61,9 +77,9 @@ export class CikkListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.cikkservice.Dto = new Array<CikkDto>();
     this.cikkservice.DtoSelectedIndex = -1;
-    this.cikkservice.OsszesRekord = 0;
+    this.osszesrekord = 0;
 
-    this.cikkservice.elsokereses = true;
+    this.elsokereses = true;
     this.cikkservice.up.rekordtol = 0;
     this.cikkservice.up.fi = new Array<SzMT>();
 
@@ -81,9 +97,9 @@ export class CikkListComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        if (this.cikkservice.elsokereses) {
+        if (this.elsokereses) {
           this.cikkservice.Dto = res.Result;
-          this.cikkservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.cikkservice.Dto];
           res.Result.forEach(element => {
@@ -91,7 +107,7 @@ export class CikkListComponent implements OnInit, OnDestroy {
           });
           this.cikkservice.Dto = buf;
         }
-        this.cikkservice.OsszesRekord = res.OsszesRekord;
+        this.osszesrekord = res.OsszesRekord;
 
         this.cikkservice.up.rekordtol += this.cikkservice.up.lapmeret;
         this.eppFrissit = false;

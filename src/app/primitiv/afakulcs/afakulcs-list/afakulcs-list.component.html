@@ -6,21 +6,26 @@
                [(szempont)]="afakulcsservice.ekDto.szempont"
                [(minta)]="afakulcsservice.ekDto.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit && mod" (Uj)="uj()"
-               [visZoom]="afakulcsservice.zoom" (StopZoom)="stopzoom()">
+               [enUj]="!eppFrissit && jog" (Uj)="onUj()"
+               [visZoom]="afakulcsservice.zoom" (StopZoom)="onStopzoom()">
   </app-toolbar>
 
   <app-tabla #tabla
              [items]="afakulcsservice.Dto"
              [colsets]="afakulcsservice.GridSettings"
              [zoom]="afakulcsservice.zoom"
-             (forzoom)="selectforzoom($event)"
-             (forid)="setClickedRow($event)"
+             (forzoom)="onStartzoom($event)"
+             (forid)="onId($event)"
+             [ujTemplate]="griduj"
              [egyTemplate]="gridegy">
   </app-tabla>
-
+  <ng-template #griduj>
+    <app-afakulcs-szerkesztes [uj] = "true"
+                              (eventSzerkeszteskesz)="onUjkesz()">
+    </app-afakulcs-szerkesztes>
+  </ng-template>
   <ng-template #gridegy>
-    <app-afakulcs-egy (torlesutan)="torlesutan()"></app-afakulcs-egy>
+    <app-afakulcs-egy (eventTorlesutan)="onTorlesutan()"></app-afakulcs-egy>
   </ng-template>
 </div>
 

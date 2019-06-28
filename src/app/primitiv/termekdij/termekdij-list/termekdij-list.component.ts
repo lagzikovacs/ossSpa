@@ -22,8 +22,6 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
   mod = false;
   termekdijservice: TermekdijService;
 
-  @Output() KontenerKeres = new EventEmitter<void>();
-
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -89,7 +87,7 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
       });
   }
 
-  selectforzoom(i: number) {
+  onStartzoom(i: number) {
     if (this.termekdijservice.zoomsource === ZoomSources.Cikk) {
       this._cikkservice.DtoEdited.Termekdijkod = this.termekdijservice.Dto[i].Termekdijkod;
       this._cikkservice.DtoEdited.Termekdijkt = this.termekdijservice.Dto[i].Termekdijkt;
@@ -103,9 +101,9 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
       this._bizonylatservice.TetelDtoEdited.Termekdijegysegar = this.termekdijservice.Dto[i].Termekdijegysegar;
     }
 
-    this.stopzoom();
+    this.onStopzoom();
   }
-  stopzoom() {
+  onStopzoom() {
     this.termekdijservice.zoom = false;
 
     if (this.termekdijservice.zoomsource === ZoomSources.Cikk) {
@@ -116,33 +114,19 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
     }
   }
 
-  setClickedRow(i: number) {
+  onId(i: number) {
     this.termekdijservice.DtoSelectedIndex = i;
-    this.termekdijservice.uj = false;
   }
 
-  uj() {
-    this.eppFrissit = true;
-    this.termekdijservice.CreateNew()
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
-
-        this.termekdijservice.uj = true;
-        this.termekdijservice.DtoEdited = res.Result[0];
-        this.termekdijservice.DtoSelectedIndex = -1;
-        this.eppFrissit = false;
-
-        this.KontenerKeres.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+  onUj() {
+    this.tabla.ujtetelstart();
   }
 
-  torlesutan() {
+  onUjkesz() {
+    this.tabla.ujtetelstop();
+  }
+
+  onTorlesutan() {
     this.tabla.clearselections();
   }
 

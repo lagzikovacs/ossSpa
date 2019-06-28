@@ -10,11 +10,15 @@ export class TetelTorlesComponent implements OnDestroy {
   @Output() OkClick = new EventEmitter<void>();
   @Output() CancelClick = new EventEmitter<void>();
 
+  @Output() eventTorles = new EventEmitter<boolean>();
+
   okClick() {
+    this.eventTorles.emit(true);
     this.OkClick.emit();
   }
 
   cancelClick() {
+    this.eventTorles.emit(false);
     this.CancelClick.emit();
   }
 

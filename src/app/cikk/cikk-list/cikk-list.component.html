@@ -19,9 +19,9 @@
   <ng-template #gridegy>
     <app-cikk-egy (torlesutan)="torlesutan()"></app-cikk-egy>
   </ng-template>
-  <app-toolbarfooter [enKereses]="!cikkservice.elsokereses && !eppFrissit"
+  <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
                      [rekordszam]="cikkservice.Dto.length"
-                     [osszesrekord]="cikkservice.OsszesRekord"
+                     [osszesrekord]="osszesrekord"
                      (KeresesTovabb)="onKeresesTovabb()">
   </app-toolbarfooter>
 </div>

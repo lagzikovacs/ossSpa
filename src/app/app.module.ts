@@ -133,20 +133,11 @@ import { VolumeContainerComponent } from './volume/volume-container/volume-conta
 import { VolumeEgyComponent } from './volume/volume-egy/volume-egy.component';
 import { VolumeListComponent } from './volume/volume-list/volume-list.component';
 import { ParticioEgyComponent } from './particio/particio-egy/particio-egy.component';
-import { HelysegContainerComponent } from './primitiv/helyseg/helyseg-container/helyseg-container.component';
 import { HelysegEgyComponent } from './primitiv/helyseg/helyseg-egy/helyseg-egy.component';
 import { HelysegListComponent } from './primitiv/helyseg/helyseg-list/helyseg-list.component';
 import { UgyfelContainerComponent } from './ugyfel/ugyfel-container/ugyfel-container.component';
 import {UgyfelEgyComponent} from './ugyfel/ugyfel-egy/ugyfel-egy.component';
-import { AfakulcsContainerComponent } from './primitiv/afakulcs/afakulcs-container/afakulcs-container.component';
 import { CikkContainerComponent } from './cikk/cikk-container/cikk-container.component';
-import { MeContainerComponent } from './primitiv/me/me-container/me-container.component';
-import { TermekdijContainerComponent } from './primitiv/termekdij/termekdij-container/termekdij-container.component';
-import { FelhasznaloContainerComponent } from './primitiv/felhasznalo/felhasznalo-container/felhasznalo-container.component';
-import { FizetesimodContainerComponent } from './primitiv/fizetesimod/fizetesimod-container/fizetesimod-container.component';
-import { IrattipusContainerComponent } from './primitiv/irattipus/irattipus-container/irattipus-container.component';
-import { PenznemContainerComponent } from './primitiv/penznem/penznem-container/penznem-container.component';
-import { TeendoContainerComponent } from './primitiv/teendo/teendo-container/teendo-container.component';
 import { CsoportContainerComponent } from './csoport/csoport-container/csoport-container.component';
 import { AjanlatkeresContainerComponent } from './ajanlatkeres/ajanlatkeres-container/ajanlatkeres-container.component';
 import {PenztartetelListComponent} from './penztartetel/penztartetel-list/penztartetel-list.component';
@@ -237,15 +228,15 @@ import { UgyfelterProjektTablaComponent } from './ugyfelter/ugyfelter-projekt-ta
 import { ProjektkapcsolatTablaComponent } from './projektkapcsolat/projektkapcsolat-tabla/projektkapcsolat-tabla.component';
 
 const routes: Routes = [
-  {path: 'irattipus', component: IrattipusContainerComponent, canActivate: [RoleGuard]},
-  {path: 'teendo', component: TeendoContainerComponent, canActivate: [RoleGuard]},
-  {path: 'fizetesimod', component: FizetesimodContainerComponent, canActivate: [RoleGuard]},
-  {path: 'penznem', component: PenznemContainerComponent, canActivate: [RoleGuard]},
-  {path: 'me', component: MeContainerComponent, canActivate: [RoleGuard]},
-  {path: 'afakulcs', component: AfakulcsContainerComponent, canActivate: [RoleGuard]},
-  {path: 'termekdij', component: TermekdijContainerComponent, canActivate: [RoleGuard]},
+  {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
+  {path: 'teendo', component: TeendoListComponent, canActivate: [RoleGuard]},
+  {path: 'fizetesimod', component: FizetesimodListComponent, canActivate: [RoleGuard]},
+  {path: 'penznem', component: PenznemListComponent, canActivate: [RoleGuard]},
+  {path: 'me', component: MeListComponent, canActivate: [RoleGuard]},
+  {path: 'afakulcs', component: AfakulcsListComponent, canActivate: [RoleGuard]},
+  {path: 'termekdij', component: TermekdijListComponent, canActivate: [RoleGuard]},
   {path: 'cikk', component: CikkContainerComponent, canActivate: [RoleGuard]},
-  {path: 'helyseg', component: HelysegContainerComponent, canActivate: [RoleGuard]},
+  {path: 'helyseg', component: HelysegListComponent, canActivate: [RoleGuard]},
   {path: 'ugyfel', component: UgyfelContainerComponent, canActivate: [RoleGuard]},
 
   {path: 'projekt', component: ProjektContainerComponent, canActivate: [RoleGuard]},
@@ -279,7 +270,7 @@ const routes: Routes = [
 
   {path: 'particio', component: ParticioEgyComponent, canActivate: [RoleGuard]},
   {path: 'volume', component: VolumeContainerComponent, canActivate: [RoleGuard]},
-  {path: 'felhasznalo', component: FelhasznaloContainerComponent, canActivate: [RoleGuard]},
+  {path: 'felhasznalo', component: FelhasznaloListComponent, canActivate: [RoleGuard]},
   {path: 'csoport', component: CsoportContainerComponent, canActivate: [RoleGuard]},
   {path: 'bejelentkezes', component: BejelentkezesComponent},
   {path: 'szerepkorvalasztas', component: SzerepkorvalasztasComponent, canActivate: [LoginGuard]},
@@ -408,21 +399,12 @@ if (environment.production) {
     VolumeEgyComponent,
     VolumeListComponent,
     ParticioEgyComponent,
-    HelysegContainerComponent,
     HelysegEgyComponent,
     HelysegListComponent,
     UgyfelContainerComponent,
     UgyfelListComponent,
     UgyfelEgyComponent,
-    AfakulcsContainerComponent,
     CikkContainerComponent,
-    MeContainerComponent,
-    TermekdijContainerComponent,
-    FelhasznaloContainerComponent,
-    FizetesimodContainerComponent,
-    IrattipusContainerComponent,
-    PenznemContainerComponent,
-    TeendoContainerComponent,
     CsoportContainerComponent,
     AjanlatkeresContainerComponent,
     PenztarContainerComponent,

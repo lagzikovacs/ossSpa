@@ -17,16 +17,17 @@ import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 })
 export class FizetesimodService {
   private readonly _controller = 'api/fizetesimod/';
-
   cim = 'Fizetési mód';
+
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
   elsokereses = true;
+
   Dto: FizetesimodDto[] = new Array<FizetesimodDto>();
+  DtoEdited = new FizetesimodDto();
   DtoSelectedIndex = -1;
-  uj = false;
+
   zoom = false;
   zoomsource: ZoomSources;
-  DtoEdited = new FizetesimodDto();
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

@@ -9,6 +9,8 @@ import {KontenerMode} from '../../enums/kontenermode';
 export class UgyfelContainerComponent implements OnDestroy {
   kontenermode = KontenerMode.List;
   ugyfelservice: UgyfelService;
+  elsokereses = true;
+  osszesrekord = 0;
 
   constructor(ugyfelservice: UgyfelService) {
     this.ugyfelservice = ugyfelservice;

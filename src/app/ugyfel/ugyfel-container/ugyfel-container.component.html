@@ -1,5 +1,7 @@
 <ng-container *ngIf="kontenermode === 1">
-  <app-ugyfel-list (KontenerKeres)="KontenerUj()"></app-ugyfel-list>
+  <app-ugyfel-list [(elsokereses)] ="elsokereses"
+                   [(osszesrekord)] = "osszesrekord"
+                   (KontenerKeres)="KontenerUj()"></app-ugyfel-list>
 </ng-container>
 
 <ng-container *ngIf="kontenermode === 2">

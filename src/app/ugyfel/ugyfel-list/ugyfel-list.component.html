@@ -22,9 +22,9 @@
     <app-ugyfel-egy (torlesutan)="torlesutan()"></app-ugyfel-egy>
   </ng-template>
 
-  <app-toolbarfooter [enKereses]="!ugyfelservice.elsokereses && !eppFrissit"
+  <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
                      [rekordszam]="ugyfelservice.Dto.length"
-                     [osszesrekord]="ugyfelservice.OsszesRekord"
+                     [osszesrekord]="osszesrekord"
                      (KeresesTovabb)="onKeresesTovabb()">
   </app-toolbarfooter>
 </div>

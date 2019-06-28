@@ -14,7 +14,7 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
   jelszo = '';
   jelszoujra = '';
 
-  @Output() KontenerKeres = new EventEmitter<void>();
+  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -55,7 +55,7 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
         this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex] = res1.Result[0];
 
         this.eppFrissit = false;
-        this.KontenerKeres.emit();
+        this.eventSzerkeszteskesz.emit();
       })
       .catch(err => {
         this._errorservice.Error = err;
@@ -63,8 +63,8 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
       });
   }
 
-  cancel() {
-    this.KontenerKeres.emit();
+  onCancel() {
+    this.eventSzerkeszteskesz.emit();
   }
 
   ngOnDestroy() {

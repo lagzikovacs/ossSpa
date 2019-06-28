@@ -1,17 +1,19 @@
-import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {MeService} from '../me.service';
 import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {deepCopy} from '../../../tools/deepCopy';
 
 @Component({
   selector: 'app-me-szerkesztes',
   templateUrl: './me-szerkesztes.component.html'
 })
-export class MeSzerkesztesComponent implements OnDestroy {
+export class MeSzerkesztesComponent implements OnInit, OnDestroy {
   meservice: MeService;
 
-  @Output() KontenerKeres = new EventEmitter<void>();
+  @Input() uj = false;
+  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -28,11 +30,32 @@ export class MeSzerkesztesComponent implements OnDestroy {
     this.meservice = meservice;
   }
 
+  ngOnInit() {
+    if (this.uj) {
+      this.eppFrissit = true;
+      this.meservice.CreateNew()
+        .then(res => {
+          if (res.Error !== null) {
+            throw res.Error;
+          }
+
+          this.meservice.DtoEdited = res.Result[0];
+          this.eppFrissit = false;
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.meservice.DtoEdited = deepCopy(this.meservice.Dto[this.meservice.DtoSelectedIndex]);
+    }
+  }
+
   onSubmit() {
     this.eppFrissit = true;
     let p: Promise<NumberResult>;
 
-    if (this.meservice.uj) {
+    if (this.uj) {
       p = this.meservice.Add(this.meservice.DtoEdited);
     } else {
       p = this.meservice.Update(this.meservice.DtoEdited);
@@ -51,14 +74,14 @@ export class MeSzerkesztesComponent implements OnDestroy {
           throw res1.Error;
         }
 
-        if (this.meservice.uj) {
+        if (this.uj) {
           this.meservice.Dto.unshift(res1.Result[0]);
         } else {
           this.meservice.Dto[this.meservice.DtoSelectedIndex] = res1.Result[0];
         }
 
         this.eppFrissit = false;
-        this.KontenerKeres.emit();
+        this.eventSzerkeszteskesz.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -66,7 +89,7 @@ export class MeSzerkesztesComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.KontenerKeres.emit();
+    this.eventSzerkeszteskesz.emit();
   }
   ngOnDestroy() {
     Object.keys(this).map(k => {

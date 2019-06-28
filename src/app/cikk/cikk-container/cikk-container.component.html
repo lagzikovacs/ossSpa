@@ -1,5 +1,7 @@
 <ng-container *ngIf="kontenermode === 1">
-  <app-cikk-list (KontenerKeres)="KontenerUj()"></app-cikk-list>
+  <app-cikk-list [(elsokereses)] ="elsokereses"
+                 [(osszesrekord)] = "osszesrekord"
+                 (KontenerKeres)="KontenerUj()"></app-cikk-list>
 </ng-container>
 
 <ng-container *ngIf="kontenermode === 2">

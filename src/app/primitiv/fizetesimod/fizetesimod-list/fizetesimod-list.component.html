@@ -4,18 +4,24 @@
                [(szempont)]="fizetesimodservice.ekDto.szempont"
                [(minta)]="fizetesimodservice.ekDto.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit" (Uj)="uj()"
-               [visZoom]="fizetesimodservice.zoom" (StopZoom)="stopzoom()">
+               [enUj]="!eppFrissit" (Uj)="onUj()"
+               [visZoom]="fizetesimodservice.zoom" (StopZoom)="onStopzoom()">
   </app-toolbar>
   <app-tabla #tabla
              [items]="fizetesimodservice.Dto"
              [colsets]="fizetesimodservice.GridSettings"
              [zoom]="fizetesimodservice.zoom"
-             (forzoom)="selectforzoom($event)"
-             (forid)="setClickedRow($event)"
+             (forzoom)="onStartzoom($event)"
+             (forid)="onId($event)"
+             [ujTemplate]="griduj"
              [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #griduj>
+    <app-fizetesimod-szerkesztes [uj] = "true"
+                                 (eventSzerkeszteskesz)="onUjkesz()">
+    </app-fizetesimod-szerkesztes>
+  </ng-template>
   <ng-template #gridegy>
-    <app-fizetesimod-egy (torlesutan)="torlesutan()"></app-fizetesimod-egy>
+    <app-fizetesimod-egy (eventTorlesutan)="onTorlesutan()"></app-fizetesimod-egy>
   </ng-template>
 </div>

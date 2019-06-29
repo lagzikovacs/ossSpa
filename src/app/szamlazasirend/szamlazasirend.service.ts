@@ -6,8 +6,6 @@ import {NumberResult} from '../dtos/numberresult';
 import {environment} from '../../environments/environment';
 import {SzamlazasirendResult} from './szamlazasirendresult';
 import {EmptyResult} from '../dtos/emptyresult';
-import {SzamlazasirendContainerMode} from './szamlazasirendcontainermode';
-import {SzamlazasirendEgyMode} from './szamlazasirendegymode';
 import {SzamlazasirendSzerkesztesMode} from './szamlazasirendszerkesztesmode';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
@@ -22,12 +20,9 @@ export class SzamlazasirendService {
 
   cim = 'Számlázási rend';
   Dto: SzamlazasirendDto[] = new Array<SzamlazasirendDto>();
-  DtoSelectedIndex = -1;
-  uj = false;
   DtoEdited = new SzamlazasirendDto();
+  DtoSelectedIndex = -1;
 
-  ContainerMode = SzamlazasirendContainerMode.List;
-  EgyMode = SzamlazasirendEgyMode.Reszletek;
   SzerkesztesMode = SzamlazasirendSzerkesztesMode.Blank;
 
   GridSettings: ColumnSettings[] = undefined;

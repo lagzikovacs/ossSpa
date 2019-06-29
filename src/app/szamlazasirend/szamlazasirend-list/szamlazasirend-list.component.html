@@ -2,10 +2,10 @@
   <h5>{{szamlazasirendservice.cim}}</h5>
   <div>
     <nav>
-      <button [disabled]="eppFrissit" (click)="kereses()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins" style="margin-right: 3px">
+      <button [disabled]="eppFrissit" (click)="onKereses()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins" style="margin-right: 3px">
         <i class="fa fa-search" aria-hidden="true"></i>
       </button>
-      <button [disabled]="eppFrissit" (click)="uj()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="eppFrissit" (click)="onUj()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-plus" aria-hidden="true"></i>
       </button>
     </nav>
@@ -13,10 +13,16 @@
   <app-tabla #tabla
              [items]="szamlazasirendservice.Dto"
              [colsets]="szamlazasirendservice.GridSettings"
-             (forid)="setClickedRow($event)"
+             (forid)="onId($event)"
+             [ujTemplate]="griduj"
              [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #griduj>
+    <app-szamlazasirend-szerkesztes [uj] = "true"
+                                    (eventSzerkeszteskesz)="onUjkesz()">
+    </app-szamlazasirend-szerkesztes>
+  </ng-template>
   <ng-template #gridegy>
-    <app-szamlazasirend-egy (torlesutan)="torlesutan()"></app-szamlazasirend-egy>
+    <app-szamlazasirend-egy (eventTorlesutan)="onTorlesutan()"></app-szamlazasirend-egy>
   </ng-template>
 </div>

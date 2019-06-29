@@ -1,7 +1,5 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {SzamlazasirendService} from '../szamlazasirend.service';
-import {SzamlazasirendContainerMode} from '../szamlazasirendcontainermode';
-import {SzamlazasirendEgyMode} from '../szamlazasirendegymode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
@@ -30,7 +28,7 @@ export class SzamlazasirendListComponent implements OnDestroy {
     this.szamlazasirendservice = szamlazasirendservice;
   }
 
-  kereses() {
+  onKereses() {
     this.tabla.clearselections();
 
     this.eppFrissit = true;
@@ -43,33 +41,20 @@ export class SzamlazasirendListComponent implements OnDestroy {
         this._errorservice.Error = err;
       });
   }
-  setClickedRow(i: number) {
+
+  onId(i: number) {
     this.szamlazasirendservice.DtoSelectedIndex = i;
-    this.szamlazasirendservice.uj = false;
-    this.szamlazasirendservice.EgyMode = SzamlazasirendEgyMode.Reszletek;
-  }
-  uj() {
-    this.eppFrissit = true;
-    this.szamlazasirendservice.CreateNew()
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
-
-        this.szamlazasirendservice.uj = true;
-        this.szamlazasirendservice.DtoEdited = res.Result[0];
-        this.szamlazasirendservice.DtoSelectedIndex = -1;
-        this.eppFrissit = false;
-
-        this.szamlazasirendservice.ContainerMode = SzamlazasirendContainerMode.Uj;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
   }
 
-  torlesutan() {
+  onUj() {
+    this.tabla.ujtetelstart();
+  }
+
+  onUjkesz() {
+    this.tabla.ujtetelstop();
+  }
+
+  onTorlesutan() {
     this.tabla.clearselections();
   }
 

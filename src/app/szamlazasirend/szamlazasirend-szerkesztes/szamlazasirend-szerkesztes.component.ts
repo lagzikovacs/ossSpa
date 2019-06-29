@@ -1,21 +1,24 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {SzamlazasirendService} from '../szamlazasirend.service';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
 import {ProjektService} from '../../projekt/projekt.service';
-import {SzamlazasirendEgyMode} from '../szamlazasirendegymode';
-import {SzamlazasirendContainerMode} from '../szamlazasirendcontainermode';
 import {SzamlazasirendSzerkesztesMode} from '../szamlazasirendszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {deepCopy} from '../../tools/deepCopy';
+import {propCopy} from '../../tools/propCopy';
 
 @Component({
   selector: 'app-szamlazasirend-szerkesztes',
   templateUrl: './szamlazasirend-szerkesztes.component.html'
 })
-export class SzamlazasirendSzerkesztesComponent implements OnDestroy {
+export class SzamlazasirendSzerkesztesComponent implements OnInit, OnDestroy {
   szamlazasirendservice: SzamlazasirendService;
+
+  @Input() uj = false;
+  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -34,6 +37,27 @@ export class SzamlazasirendSzerkesztesComponent implements OnDestroy {
     this.szamlazasirendservice = szamlazasirendservice;
   }
 
+  ngOnInit() {
+    if (this.uj) {
+      this.eppFrissit = true;
+      this.szamlazasirendservice.CreateNew()
+        .then(res => {
+          if (res.Error !== null) {
+            throw res.Error;
+          }
+
+          this.szamlazasirendservice.DtoEdited = res.Result[0];
+          this.eppFrissit = false;
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.szamlazasirendservice.DtoEdited = deepCopy(this.szamlazasirendservice.Dto[this.szamlazasirendservice.DtoSelectedIndex]);
+    }
+  }
+
   onSubmit() {
     this.eppFrissit = true;
 
@@ -44,7 +68,7 @@ export class SzamlazasirendSzerkesztesComponent implements OnDestroy {
           throw res.Error;
         }
 
-        if (this.szamlazasirendservice.uj) {
+        if (this.uj) {
           this.szamlazasirendservice.DtoEdited.Projektkod = this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod;
           return this.szamlazasirendservice.Add(this.szamlazasirendservice.DtoEdited);
         } else {
@@ -63,14 +87,14 @@ export class SzamlazasirendSzerkesztesComponent implements OnDestroy {
           throw res2.Error;
         }
 
-        if (this.szamlazasirendservice.uj) {
+        if (this.uj) {
           this.szamlazasirendservice.Dto.unshift(res2.Result[0]);
         } else {
-          this.szamlazasirendservice.Dto[this.szamlazasirendservice.DtoSelectedIndex] = res2.Result[0];
+          propCopy(res2.Result[0], this.szamlazasirendservice.Dto[this.szamlazasirendservice.DtoSelectedIndex]);
         }
 
         this.eppFrissit = false;
-        this.navigal();
+        this.eventSzerkeszteskesz.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -78,15 +102,8 @@ export class SzamlazasirendSzerkesztesComponent implements OnDestroy {
       });
   }
 
-  cancel() {
-    this.navigal();
-  }
-  navigal() {
-    if (this.szamlazasirendservice.uj) {
-      this.szamlazasirendservice.ContainerMode = SzamlazasirendContainerMode.List;
-    } else {
-      this.szamlazasirendservice.EgyMode = SzamlazasirendEgyMode.Reszletek;
-    }
+  onCancel() {
+    this.eventSzerkeszteskesz.emit();
   }
 
   PenznemZoom() {

@@ -1,11 +1,9 @@
 import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {SzamlazasirendService} from '../szamlazasirend.service';
-import {SzamlazasirendEgyMode} from '../szamlazasirendegymode';
-import {SzamlazasirendContainerMode} from '../szamlazasirendcontainermode';
 import {rowanimation} from '../../animation/rowAnimation';
-import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {EgyMode} from '../../enums/egymode';
 
 @Component({
   selector: 'app-szamlazasirend-egy',
@@ -13,10 +11,10 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   animations: [rowanimation]
 })
 export class SzamlazasirendEgyComponent implements OnDestroy {
+  egymode = EgyMode.Reszletek;
   szamlazasirendservice: SzamlazasirendService;
-  ri = -1;
 
-  @Output() torlesutan = new EventEmitter<void>();
+  @Output() eventTorlesutan = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -33,40 +31,43 @@ export class SzamlazasirendEgyComponent implements OnDestroy {
     this.szamlazasirendservice = szamlazasirendservice;
   }
 
-  reszletek() {
-    this.szamlazasirendservice.EgyMode = SzamlazasirendEgyMode.Reszletek;
+  doReszletek() {
+    this.egymode = EgyMode.Reszletek;
   }
-  torles () {
-    this.szamlazasirendservice.EgyMode = SzamlazasirendEgyMode.Torles;
+  doTorles () {
+    this.egymode = EgyMode.Torles;
   }
-  modositas() {
-    this.szamlazasirendservice.uj = false;
-    this.szamlazasirendservice.DtoEdited = deepCopy(this.szamlazasirendservice.Dto[this.szamlazasirendservice.DtoSelectedIndex]);
-    this.szamlazasirendservice.EgyMode = SzamlazasirendEgyMode.Modositas;
+  doModositas() {
+    this.egymode = EgyMode.Modositas;
   }
 
-  TorlesOk() {
-    this.eppFrissit = true;
-    this.szamlazasirendservice.Delete(this.szamlazasirendservice.Dto[this.szamlazasirendservice.DtoSelectedIndex])
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
 
-        this.szamlazasirendservice.Dto.splice(this.szamlazasirendservice.DtoSelectedIndex, 1);
-        this.szamlazasirendservice.DtoSelectedIndex = -1;
+      this.szamlazasirendservice.Delete(this.szamlazasirendservice.Dto[this.szamlazasirendservice.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
 
-        this.eppFrissit = false;
-        this.torlesutan.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+          this.szamlazasirendservice.Dto.splice(this.szamlazasirendservice.DtoSelectedIndex, 1);
+          this.szamlazasirendservice.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.eventTorlesutan.emit();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
   }
 
-  TorlesCancel() {
-    this.szamlazasirendservice.EgyMode = SzamlazasirendEgyMode.Reszletek;
+  onModositaskesz() {
+    this.egymode = EgyMode.Reszletek;
   }
 
   ngOnDestroy() {

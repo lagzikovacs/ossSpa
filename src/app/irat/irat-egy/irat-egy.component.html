@@ -1,29 +1,29 @@
 <div class="alapkeret">
   <div>
     <nav>
-      <button [disabled]="eppFrissit" (click)="reszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="eppFrissit" (click)="doReszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>
       </button>
 
-      <button [disabled]="eppFrissit || !mod"
-              (click)="torles()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="eppFrissit || !jog"
+              (click)="doTorles()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-minus" aria-hidden="true"></i>
       </button>
-      <button [disabled]="eppFrissit || !mod"
-              (click)="modositas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="eppFrissit || !jog"
+              (click)="doModositas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-edit" aria-hidden="true"></i>
       </button>
 
-      <button [disabled]="eppFrissit" (click)="dokumentum()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="eppFrissit" (click)="doDokumentum()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Dokumentum
       </button>
-      <button [disabled]="eppFrissit" (click)="fotozaslink()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="eppFrissit" (click)="doFotozaslink()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Fotózás link
       </button>
-      <button [disabled]="eppFrissit || !enProjekt" (click)="projekt()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="eppFrissit || !enProjekt" (click)="doProjekt()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Projekt
       </button>
-      <button [disabled]="eppFrissit" (click)="vagolap()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="eppFrissit" (click)="doVagolap()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-angle-right" style="margin-right: 3px" aria-hidden="true"></i>
         Vágólapra
       </button>
@@ -35,8 +35,7 @@
     <div [@rowanimation]>
       <app-reszletek [cim]="iratservice.cim"
                      [item]="iratservice.Dto[iratservice.DtoSelectedIndex]"
-                     [colsets]="iratservice.ReszletekSettings"
-                     [(selectedindex)]="ri">
+                     [colsets]="iratservice.ReszletekSettings">
       </app-reszletek>
     </div>
   </ng-container>
@@ -44,14 +43,15 @@
     <div [@rowanimation]>
       <app-tetel-torles [cim]="iratservice.cim"
                         [eppFrissit]="eppFrissit"
-                        (OkClick)="TorlesOk()"
-                        (CancelClick)="TorlesCancel()">
+                        (eventTorles)="onTorles($event)">
       </app-tetel-torles>
     </div>
   </ng-container>
   <ng-container *ngIf="egymode === 3">
     <div [@rowanimation]>
-      <app-irat-szerkesztes></app-irat-szerkesztes>
+      <app-irat-szerkesztes [uj]="false"
+                            (eventSzerkeszteskesz)="onModositaskesz()">
+      </app-irat-szerkesztes>
     </div>
   </ng-container>
 
@@ -68,8 +68,7 @@
       <app-reszletek *ngIf="!nincsProjekt"
                      [cim]="projektservice.cim"
                      [item]="projektservice.Dto[projektservice.DtoSelectedIndex]"
-                     [colsets]="projektservice.ReszletekSettings"
-                     [(selectedindex)]="pri">
+                     [colsets]="projektservice.ReszletekSettings">
       </app-reszletek>
     </div>
   </ng-container>

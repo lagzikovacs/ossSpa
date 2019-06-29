@@ -80,9 +80,9 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
 
         this.eppFrissit = false;
 
-        if (this.irattipusservice.zoom) {
-          window.scrollTo(0, document.body.scrollHeight);
-        }
+        // if (this.irattipusservice.zoom) {
+        //   window.scrollTo(0, document.body.scrollHeight);
+        // }
       })
       .catch(err => {
         this.eppFrissit = false;

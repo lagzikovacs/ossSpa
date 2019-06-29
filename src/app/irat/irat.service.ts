@@ -23,13 +23,12 @@ export class IratService {
   minta = '';
   minta2 = '';
   ip = new IratParameter(0, environment.lapmeret);
+  elsokereses = true;
   OsszesRekord = 0;
 
   Dto: IratDto[] = new Array<IratDto>();
-  DtoSelectedIndex = -1;
-  uj = false;
   DtoEdited = new IratDto();
-  elsokereses = true;
+  DtoSelectedIndex = -1;
 
   SzerkesztesMode = IratSzerkesztesMode.Blank;
 

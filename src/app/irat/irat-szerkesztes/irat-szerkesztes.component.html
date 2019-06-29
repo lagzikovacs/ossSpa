@@ -1,6 +1,6 @@
 <div class="alapkeret">
-  <h5 *ngIf="iratservice.uj">Új {{iratservice.cim | lowercase}}</h5>
-  <h5 *ngIf="!iratservice.uj">{{iratservice.cim}} módosítása</h5>
+  <h5 *ngIf="uj">Új {{iratservice.cim | lowercase}}</h5>
+  <h5 *ngIf="!uj">{{iratservice.cim}} módosítása</h5>
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
@@ -34,6 +34,12 @@
       </div>
     </div>
 
+    <ng-container *ngIf="iratservice.SzerkesztesMode === 1">
+      <div class="row no-gutters editform-row">
+        <app-irattipus-list></app-irattipus-list>
+      </div>
+    </ng-container>
+
     <div class="row no-gutters editform-row">
       <div>
         <div class="egylabel">Ügyfél</div>
@@ -47,6 +53,12 @@
         </button>
       </div>
     </div>
+
+    <ng-container *ngIf="iratservice.SzerkesztesMode === 2">
+      <div class="row no-gutters editform-row">
+        <app-ugyfel-list></app-ugyfel-list>
+      </div>
+    </ng-container>
 
     <div class="row no-gutters editform-row">
       <div>
@@ -79,17 +91,4 @@
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
     </div>
   </form>
-
-<!--  export enum IratSzerkesztesMode {
-  Blank = 0,
-  IrattipusZoom = 1,
-  UgyfelZoom = 2,
-  }-->
-
-  <ng-container *ngIf="iratservice.SzerkesztesMode === 1">
-    <app-irattipus-list></app-irattipus-list>
-  </ng-container>
-  <ng-container *ngIf="iratservice.SzerkesztesMode === 2">
-    <app-ugyfel-list></app-ugyfel-list>
-  </ng-container>
 </div>

@@ -77,9 +77,9 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
 
         this.eppFrissit = false;
 
-        if (this.fizetesimodservice.zoom) {
-          window.scrollTo(0, document.body.scrollHeight);
-        }
+        // if (this.fizetesimodservice.zoom) {
+        //   window.scrollTo(0, document.body.scrollHeight);
+        // }
       })
       .catch(err => {
         this.eppFrissit = false;

@@ -10,7 +10,6 @@ import {AbuComponent} from '../../tools/abu/abu.component';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
-import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {EgyMode} from '../../enums/egymode';
@@ -27,12 +26,10 @@ export class IratEgyComponent implements OnDestroy {
   iratservice: IratService;
   dokumentumservice: DokumentumService;
   nincsProjekt = false;
-  mod = false;
-  ri = -1;
-  pri = -1;
+  jog = false;
 
   @Input() enProjekt = true;
-  @Output() torlesutan = new EventEmitter<void>();
+  @Output() eventTorlesutan = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -45,37 +42,34 @@ export class IratEgyComponent implements OnDestroy {
 
   constructor(private _logonservice: LogonService,
               private _projektkapcsolatservice: ProjektkapcsolatService,
-              private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
               private _vagolapservice: VagolapService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               iratservice: IratService,
               dokumentumservice: DokumentumService,
               projektservice: ProjektService) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.IRATMOD]);
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.IRATMOD]);
     this.iratservice = iratservice;
     this.dokumentumservice = dokumentumservice;
     this.projektservice = projektservice;
   }
 
-  reszletek() {
+  doReszletek() {
     this.egymode = EgyMode.Reszletek;
   }
-  torles() {
+  doTorles() {
     this.egymode = EgyMode.Torles;
   }
-  modositas() {
-    this.iratservice.uj = false;
-    this.iratservice.DtoEdited = deepCopy(this.iratservice.Dto[this.iratservice.DtoSelectedIndex]);
+  doModositas() {
     this.egymode = EgyMode.Modositas;
   }
-  dokumentum() {
+  doDokumentum() {
     this.egymode = EgyMode.Dokumentum;
   }
-  fotozaslink() {
+  doFotozaslink() {
     this.egymode = EgyMode.FotozasLink;
   }
-  projekt() {
+  doProjekt() {
     this.eppFrissit = true;
     this._projektkapcsolatservice.SelectByIrat(this.iratservice.Dto[this.iratservice.DtoSelectedIndex].Iratkod)
       .then(res => {
@@ -109,36 +103,37 @@ export class IratEgyComponent implements OnDestroy {
         this._errorservice.Error = err;
       });
   }
-  vagolap() {
+  doVagolap() {
     this._vagolapservice.iratotvagolapra();
     this.abu.Uzenet('Az irat a vágólapra került!');
   }
 
-  TorlesOk() {
-    this.eppFrissit = true;
-    this.iratservice.Delete(this.iratservice.Dto[this.iratservice.DtoSelectedIndex])
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
 
-        this.iratservice.Dto.splice(this.iratservice.DtoSelectedIndex, 1);
-        this.iratservice.DtoSelectedIndex = -1;
+      this.projektservice.Delete(this.projektservice.Dto[this.projektservice.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
 
-        this.eppFrissit = false;
-        this.torlesutan.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+          this.projektservice.Dto.splice(this.projektservice.DtoSelectedIndex, 1);
+          this.projektservice.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.eventTorlesutan.emit();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
   }
 
-  TorlesCancel() {
-    this.egymode = EgyMode.Reszletek;
-  }
-
-  EgyReszletek() {
+  onModositaskesz() {
     this.egymode = EgyMode.Reszletek;
   }
 

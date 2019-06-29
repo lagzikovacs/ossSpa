@@ -107,9 +107,9 @@ export class CikkListComponent implements OnInit, OnDestroy {
         this.cikkservice.up.rekordtol += this.cikkservice.up.lapmeret;
         this.eppFrissit = false;
 
-        if (this.cikkservice.zoom) {
-          window.scrollTo(0, document.body.scrollHeight);
-        }
+        // if (this.cikkservice.zoom) {
+        //   window.scrollTo(0, document.body.scrollHeight);
+        // }
       })
       .catch(err => {
         this.eppFrissit = false;

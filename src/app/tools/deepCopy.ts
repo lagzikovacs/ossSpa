@@ -25,7 +25,7 @@ export function deepCopy(obj) {
     return copy;
   }
 
-  // Ha obeject ténylegesen object akkor propokat rekuzívan másolja
+  // Ha object ténylegesen object akkor propokat rekuzívan másolja
   if (obj instanceof Object) {
     copy = {};
     for (let attr in obj) {

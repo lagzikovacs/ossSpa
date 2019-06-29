@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {IratService} from '../irat.service';
 import {IrattipusService} from '../../primitiv/irattipus/irattipus.service';
 import {ZoomSources} from '../../enums/zoomsources';
@@ -10,6 +10,8 @@ import {EmptyResult} from '../../dtos/emptyresult';
 import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {deepCopy} from '../../tools/deepCopy';
+import {propCopy} from '../../tools/propCopy';
 
 @Component({
   selector: 'app-irat-szerkesztes',
@@ -19,7 +21,8 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
   iratservice: IratService;
   Keletkezett: any;
 
-  @Output() KontenerKeres = new EventEmitter<void>();
+  @Input() uj = false;
+  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -39,9 +42,26 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (this.iratservice.uj) {
+    if (this.uj) {
+      this.eppFrissit = true;
+      this.iratservice.CreateNew()
+        .then(res => {
+          if (res.Error !== null) {
+            throw res.Error;
+          }
+
+          this.iratservice.DtoEdited = res.Result[0];
+          this.eppFrissit = false;
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+
       this.Keletkezett = moment().format('YYYY-MM-DD');
     } else {
+      this.iratservice.DtoEdited = deepCopy(this.iratservice.Dto[this.iratservice.DtoSelectedIndex]);
+
       this.Keletkezett = moment(this.iratservice.DtoEdited.Keletkezett).format('YYYY-MM-DD');
     }
   }
@@ -68,7 +88,9 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
           throw res1.Error;
         }
 
-        if (this.iratservice.uj) {
+        this.iratservice.DtoEdited.Keletkezett = moment(this.Keletkezett).toISOString(true);
+
+        if (this.uj) {
           return this.iratservice.Add(this.iratservice.DtoEdited);
         } else {
           return this.iratservice.Update(this.iratservice.DtoEdited);
@@ -86,14 +108,14 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
           throw res3.Error;
         }
 
-        if (this.iratservice.uj) {
+        if (this.uj) {
           this.iratservice.Dto.unshift(res3.Result[0]);
         } else {
-          this.iratservice.Dto[this.iratservice.DtoSelectedIndex] = res3.Result[0];
+          propCopy(res3.Result[0], this.iratservice.Dto[this.iratservice.DtoSelectedIndex]);
         }
 
         this.eppFrissit = false;
-        this.KontenerKeres.emit();
+        this.eventSzerkeszteskesz.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -101,7 +123,7 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
       });
   }
   cancel() {
-    this.KontenerKeres.emit();
+    this.eventSzerkeszteskesz.emit();
   }
 
   IrattipusZoom() {

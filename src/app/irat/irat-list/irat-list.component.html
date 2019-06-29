@@ -8,14 +8,20 @@
     [(szempont2)]="iratservice.szempont2"
     [(minta2)]="iratservice.minta2"
     [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-    [enUj]="!eppFrissit && mod" (Uj)="onUj()">
+    [enUj]="!eppFrissit && jog" (Uj)="onUj()">
   </app-irattoolbar>
   <app-tabla #tabla
              [items]="iratservice.Dto"
              [colsets]="iratservice.GridSettings"
-             (forid)="setClickedRow($event)"
+             (forid)="onId($event)"
+             [ujTemplate]="griduj"
              [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #griduj>
+    <app-irat-szerkesztes [uj] = "true"
+                          (eventSzerkeszteskesz)="onUjkesz()">
+    </app-irat-szerkesztes>
+  </ng-template>
   <ng-template #gridegy>
     <app-irat-egy [enProjekt]="enProjekt"
                   (torlesutan)="torlesutan()"></app-irat-egy>

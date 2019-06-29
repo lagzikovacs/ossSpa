@@ -28,11 +28,9 @@ export class IratListComponent implements OnDestroy {
 
   iratservice: IratService;
   dokumentumservice: DokumentumService;
-  mod = false;
+  jog = false;
 
   @Input() enProjekt = true;
-
-  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -48,7 +46,7 @@ export class IratListComponent implements OnDestroy {
               private _spinnerservice: SpinnerService,
               iratservice: IratService,
               dokumentumservice: DokumentumService) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.IRATMOD]);
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.IRATMOD]);
     this.iratservice = iratservice;
     this.dokumentumservice = dokumentumservice;
   }
@@ -104,30 +102,17 @@ export class IratListComponent implements OnDestroy {
         this._errorservice.Error = err;
       });
   }
-  setClickedRow(i: number) {
+
+  onId(i: number) {
     this.iratservice.DtoSelectedIndex = i;
-    this.iratservice.uj = false;
   }
 
   onUj() {
-    this.eppFrissit = true;
-    this.iratservice.CreateNew()
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
+    this.tabla.ujtetelstart();
+  }
 
-        this.iratservice.uj = true;
-        this.iratservice.DtoEdited = res.Result[0];
-        this.iratservice.DtoSelectedIndex = -1;
-        this.eppFrissit = false;
-
-        this.KontenerKeres.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+  onUjkesz() {
+    this.tabla.ujtetelstop();
   }
 
   torlesutan() {

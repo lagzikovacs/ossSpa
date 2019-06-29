@@ -139,7 +139,6 @@ import {PenztarExportComponent} from './penztar/penztar-export/penztar-export.co
 import {PenztarSzerkesztesComponent} from './penztar/penztar-szerkesztes/penztar-szerkesztes.component';
 import { PenztarContainerComponent } from './penztar/penztar-container/penztar-container.component';
 import { PenztartetelContainerComponent } from './penztartetel/penztartetel-container/penztartetel-container.component';
-import { IratContainerComponent } from './irat/irat-container/irat-container.component';
 import { DokumentumContainerComponent } from './dokumentum/dokumentum-container/dokumentum-container.component';
 import { ProjektContainerComponent } from './projekt/projekt-container/projekt-container.component';
 import { SzamlazasirendContainerComponent } from './szamlazasirend/szamlazasirend-container/szamlazasirend-container.component';
@@ -234,7 +233,7 @@ const routes: Routes = [
   {path: 'ugyfel', component: UgyfelListComponent, canActivate: [RoleGuard]},
 
   {path: 'projekt', component: ProjektContainerComponent, canActivate: [RoleGuard]},
-  {path: 'irat', component: IratContainerComponent, canActivate: [RoleGuard]},
+  {path: 'irat', component: IratListComponent, canActivate: [RoleGuard]},
   {path: 'penztar', component: PenztarContainerComponent, canActivate: [RoleGuard]},
   {path: 'ajanlatkeres', component: AjanlatkeresListComponent, canActivate: [RoleGuard]},
   {path: 'ugyfelterlog', component: UgyfelterlogComponent, canActivate: [RoleGuard]},
@@ -397,7 +396,6 @@ if (environment.production) {
     UgyfelEgyComponent,
     PenztarContainerComponent,
     PenztartetelContainerComponent,
-    IratContainerComponent,
     DokumentumContainerComponent,
     ProjektContainerComponent,
     SzamlazasirendContainerComponent,

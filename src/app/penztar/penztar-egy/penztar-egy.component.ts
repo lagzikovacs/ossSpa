@@ -15,7 +15,7 @@ import {EgyMode} from '../../enums/egymode';
   animations: [rowanimation]
 })
 export class PenztarEgyComponent implements OnDestroy {
-  egymode = EgyMode.Reszletek;
+  egymode = EgyMode.Tetelek;
   penztarservice: PenztarService;
   jog = false;
   nyitva = false;

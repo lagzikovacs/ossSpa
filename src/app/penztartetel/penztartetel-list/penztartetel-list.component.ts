@@ -21,12 +21,10 @@ export class PenztartetelListComponent implements OnDestroy {
     Szempont.Kod, Szempont.PenztarBizonylatszam, Szempont.Ugyfel, Szempont.Bizonylatszam
   ];
 
-  mod = false;
+  jog = false;
   nyitva = false;
   penztarservice: PenztarService;
   penztartetelservice: PenztartetelService;
-
-  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -42,7 +40,7 @@ export class PenztartetelListComponent implements OnDestroy {
               private _spinnerservice: SpinnerService,
               penztarservice: PenztarService,
               penztartetelservice: PenztartetelService) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);
     this.penztarservice = penztarservice;
     this.penztartetelservice = penztartetelservice;
     this.nyitva = this.penztarservice.Dto[this.penztarservice.DtoSelectedIndex].Nyitva;
@@ -92,23 +90,11 @@ export class PenztartetelListComponent implements OnDestroy {
   }
 
   onUj() {
-    this.eppFrissit = true;
-    this.penztartetelservice.CreateNew()
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
+    this.tabla.ujtetelstart();
+  }
 
-        this.penztartetelservice.DtoEdited = res.Result[0];
-        this.penztartetelservice.uj = true;
-        this.eppFrissit = false;
-
-        this.KontenerKeres.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+  onUjkesz() {
+    this.tabla.ujtetelstop();
   }
 
   ngOnDestroy() {

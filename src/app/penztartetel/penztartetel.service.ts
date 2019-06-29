@@ -24,7 +24,6 @@ export class PenztartetelService {
 
   Dto: PenztartetelDto[] = new Array<PenztartetelDto>();
   DtoEdited = new PenztartetelDto();
-  uj = false;
   DtoSelectedIndex = -1;
 
   GridSettings: ColumnSettings[] = undefined;

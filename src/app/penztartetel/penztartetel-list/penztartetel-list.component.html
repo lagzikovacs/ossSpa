@@ -4,12 +4,17 @@
                [(szempont)]="penztartetelservice.szempont"
                [(minta)]="penztartetelservice.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit && mod && nyitva" (Uj)="onUj()">
+               [enUj]="!eppFrissit && jog && nyitva" (Uj)="onUj()">
   </app-toolbar>
   <app-tabla #tabla
              [items]="penztartetelservice.Dto"
-             [colsets]="penztartetelservice.GridSettings">
+             [colsets]="penztartetelservice.GridSettings"
+             [ujTemplate]="griduj">
   </app-tabla>
+  <ng-template #griduj>
+    <app-penztartetel-szerkesztes (eventSzerkeszteskesz)="onUjkesz()">
+    </app-penztartetel-szerkesztes>
+  </ng-template>
 
   <app-toolbarfooter [enKereses]="!penztartetelservice.elsokereses && !eppFrissit"
                      [rekordszam]="penztartetelservice.Dto.length"

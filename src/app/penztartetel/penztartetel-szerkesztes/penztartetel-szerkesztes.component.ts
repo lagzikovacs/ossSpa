@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {PenztartetelService} from '../penztartetel.service';
 import * as moment from 'moment';
 import {PenztarService} from '../../penztar/penztar.service';
@@ -9,7 +9,7 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   selector: 'app-penztartetel-szerkesztes',
   templateUrl: './penztartetel-szerkesztes.component.html'
 })
-export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnDestroy {
+export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild('jogcim') jogcimInput: ElementRef;
   @ViewChild('ugyfel') ugyfelInput: ElementRef;
   @ViewChild('bizonylatszam') bizonylatszamInput: ElementRef;
@@ -19,7 +19,7 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnDestro
   penztartetelservice: PenztartetelService;
   datum = moment().format('YYYY-MM-DD');
 
-  @Output() KontenerKeres = new EventEmitter<void>();
+  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -35,6 +35,23 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnDestro
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService) {
     this.penztartetelservice = penztartetelservice;
+  }
+
+  ngOnInit() {
+    this.eppFrissit = true;
+    this.penztartetelservice.CreateNew()
+      .then(res => {
+        if (res.Error !== null) {
+          throw res.Error;
+        }
+
+        this.penztartetelservice.DtoEdited = res.Result[0];
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this._errorservice.Error = err;
+        });
   }
 
   ngAfterViewInit() {
@@ -112,7 +129,7 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnDestro
         this._penztarservice.Dto[this._penztarservice.DtoSelectedIndex] = res2.Result[0];
 
         this.eppFrissit = false;
-        this.KontenerKeres.emit();
+        this.eventSzerkeszteskesz.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -120,7 +137,7 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnDestro
       });
   }
   cancel() {
-    this.KontenerKeres.emit();
+    this.eventSzerkeszteskesz.emit();
   }
 
   ngOnDestroy() {

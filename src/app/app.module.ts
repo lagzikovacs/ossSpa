@@ -139,7 +139,6 @@ import {PenztarExportComponent} from './penztar/penztar-export/penztar-export.co
 import {PenztarSzerkesztesComponent} from './penztar/penztar-szerkesztes/penztar-szerkesztes.component';
 import { PenztarContainerComponent } from './penztar/penztar-container/penztar-container.component';
 import { PenztartetelContainerComponent } from './penztartetel/penztartetel-container/penztartetel-container.component';
-import { DokumentumContainerComponent } from './dokumentum/dokumentum-container/dokumentum-container.component';
 import { ProjektContainerComponent } from './projekt/projekt-container/projekt-container.component';
 import { SzamlazasirendContainerComponent } from './szamlazasirend/szamlazasirend-container/szamlazasirend-container.component';
 import { ProjektTeendoContainerComponent } from './projektteendo/projekt-teendo-container/projekt-teendo-container.component';
@@ -396,7 +395,6 @@ if (environment.production) {
     UgyfelEgyComponent,
     PenztarContainerComponent,
     PenztartetelContainerComponent,
-    DokumentumContainerComponent,
     ProjektContainerComponent,
     SzamlazasirendContainerComponent,
     ProjektTeendoContainerComponent,

@@ -15,8 +15,6 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
 
   dokumentumservice: DokumentumService;
 
-  @Output() KontenerKeres = new EventEmitter<void>();
-
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -64,19 +62,20 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
         this._errorservice.Error = err;
       });
   }
-  setClickedRow(i: number) {
+
+  onId(i: number) {
     this.dokumentumservice.DtoSelectedIndex = i;
-    this.dokumentumservice.uj = false;
-  }
-  feltoltes() {
-    // csak h üres rekordot mutasson
-    this.dokumentumservice.DtoEdited = new DokumentumDto();
-    this.dokumentumservice.uj = true;
-
-    this.KontenerKeres.emit();
   }
 
-  torlesutan() {
+  onUj() {
+    this.tabla.ujtetelstart();
+  }
+
+  onUjkesz() {
+    this.tabla.ujtetelstop();
+  }
+
+  onTorlesutan() {
     this.tabla.clearselections();
   }
 

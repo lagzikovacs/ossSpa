@@ -24,9 +24,8 @@ export class DokumentumService {
   cim = 'Dokumentum';
 
   Dto: DokumentumDto[] = new Array<DokumentumDto>();
-  DtoSelectedIndex = -1;
-  uj = false;
   DtoEdited = new DokumentumDto();
+  DtoSelectedIndex = -1;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

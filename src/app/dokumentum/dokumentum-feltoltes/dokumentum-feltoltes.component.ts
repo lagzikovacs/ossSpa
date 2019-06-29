@@ -20,7 +20,7 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
   megjegyzes = '';
   imageSrc: string;
 
-  @Output() KontenerKeres = new EventEmitter<void>();
+  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -76,7 +76,7 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
         this.dokumentumservice.Dto.unshift(res1.Result[0]);
 
         this.eppFrissit = false;
-        this.KontenerKeres.emit();
+        this.eventSzerkeszteskesz.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -84,7 +84,7 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.KontenerKeres.emit();
+    this.eventSzerkeszteskesz.emit();
   }
 
   ngOnDestroy() {

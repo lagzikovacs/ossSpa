@@ -1,7 +1,7 @@
 <div class="alapkeret">
   <h5>{{dokumentumservice.cim}}</h5>
   <nav>
-    <button [disabled]="eppFrissit" (click)="feltoltes()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+    <button [disabled]="eppFrissit" (click)="onUj()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
       Feltöltés
     </button>
   </nav>
@@ -10,11 +10,16 @@
              [items]="dokumentumservice.Dto"
              [colsets]="dokumentumservice.GridSettings"
              [letoltes]="true"
-             (forid)="setClickedRow($event)"
+             (forid)="onId($event)"
              (fordownload)="letoltes($event)"
+             [ujTemplate]="griduj"
              [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #griduj>
+    <app-dokumentum-feltoltes (eventSzerkeszteskesz)="onUjkesz()">
+    </app-dokumentum-feltoltes>
+  </ng-template>
   <ng-template #gridegy>
-    <app-dokumentum-egy (torlesutan)="torlesutan()"></app-dokumentum-egy>
+    <app-dokumentum-egy (eventTorlesutan)="onTorlesutan()"></app-dokumentum-egy>
   </ng-template>
 </div>

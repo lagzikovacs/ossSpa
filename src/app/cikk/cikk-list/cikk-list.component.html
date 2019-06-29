@@ -5,23 +5,29 @@
                [(szempont)]="cikkservice.szempont"
                [(minta)]="cikkservice.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit && mod" (Uj)="onUj()"
-               [visZoom]="cikkservice.zoom" (StopZoom)="stopzoom()">
+               [enUj]="!eppFrissit && jog" (Uj)="onUj()"
+               [visZoom]="cikkservice.zoom" (StopZoom)="onStopzoom()">
   </app-toolbar>
   <app-tabla #tabla
              [items]="cikkservice.Dto"
              [colsets]="cikkservice.GridSettings"
              [zoom]="cikkservice.zoom"
-             (forzoom)="selectforzoom($event)"
-             (forid)="setClickedRow($event)"
+             (forzoom)="onStartzoom($event)"
+             (forid)="onId($event)"
+             [ujTemplate]="griduj"
              [egyTemplate]="gridegy">
   </app-tabla>
-  <ng-template #gridegy>
-    <app-cikk-egy (torlesutan)="torlesutan()"></app-cikk-egy>
+  <ng-template #griduj>
+    <app-cikk-szerkesztes [uj] = "true"
+                          (eventSzerkeszteskesz)="onUjkesz()">
+    </app-cikk-szerkesztes>
   </ng-template>
-  <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
+  <ng-template #gridegy>
+    <app-cikk-egy (eventTorlesutan)="onTorlesutan()"></app-cikk-egy>
+  </ng-template>
+  <app-toolbarfooter [enKereses]="!cikkservice.elsokereses && !eppFrissit"
                      [rekordszam]="cikkservice.Dto.length"
-                     [osszesrekord]="osszesrekord"
+                     [osszesrekord]="cikkservice.osszesrekord"
                      (KeresesTovabb)="onKeresesTovabb()">
   </app-toolbarfooter>
 </div>

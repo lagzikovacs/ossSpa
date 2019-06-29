@@ -26,10 +26,11 @@ export class UgyfelService {
   szempont = 0;
   minta = '';
   up = new UgyfelParameter(0, environment.lapmeret);
+  elsokereses = true;
+  osszesrekord = 0;
 
   Dto: UgyfelDto[] = new Array<UgyfelDto>();
   DtoEdited = new UgyfelDto();
-  uj = false;
   DtoSelectedIndex = -1;
 
   zoom = false;

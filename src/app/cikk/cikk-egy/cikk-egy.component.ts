@@ -18,10 +18,9 @@ import {EgyMode} from '../../enums/egymode';
 export class CikkEgyComponent implements OnDestroy {
   egymode = EgyMode.Reszletek;
   cikkservice: CikkService;
-  mod = false;
-  ri = -1;
+  jog = false;
 
-  @Output() torlesutan = new EventEmitter<void>();
+  @Output() eventTorlesutan = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -36,27 +35,24 @@ export class CikkEgyComponent implements OnDestroy {
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               cikkservice: CikkService) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.CIKKMOD]);
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.CIKKMOD]);
     this.cikkservice = cikkservice;
   }
 
-  reszletek() {
+  doReszletek() {
     this.egymode = EgyMode.Reszletek;
   }
-  torles () {
+  doTorles () {
     this.egymode = EgyMode.Torles;
   }
-  modositas() {
-    this.cikkservice.uj = false;
-    this.cikkservice.DtoEdited = deepCopy(this.cikkservice.Dto[this.cikkservice.DtoSelectedIndex]);
+  doModositas() {
     this.egymode = EgyMode.Modositas;
-    this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.Blank;
   }
-  beszerzes() {
+  doBeszerzes() {
     this.cikkservice.BizonylattipusKod = 3;
     this.beszerzeskivet();
   }
-  kivet() {
+  doKivet() {
     this.cikkservice.BizonylattipusKod = 2;
     this.beszerzeskivet();
   }
@@ -80,31 +76,32 @@ export class CikkEgyComponent implements OnDestroy {
       });
   }
 
-  TorlesOk() {
-    this.eppFrissit = true;
-    this.cikkservice.Delete(this.cikkservice.Dto[this.cikkservice.DtoSelectedIndex])
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
 
-        this.cikkservice.Dto.splice(this.cikkservice.DtoSelectedIndex, 1);
-        this.cikkservice.DtoSelectedIndex = -1;
+      this.cikkservice.Delete(this.cikkservice.Dto[this.cikkservice.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
 
-        this.eppFrissit = false;
-        this.torlesutan.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+          this.cikkservice.Dto.splice(this.cikkservice.DtoSelectedIndex, 1);
+          this.cikkservice.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.eventTorlesutan.emit();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
   }
 
-  TorlesCancel() {
-    this.egymode = EgyMode.Reszletek;
-  }
-
-  EgyReszletek() {
+  onModositaskesz() {
     this.egymode = EgyMode.Reszletek;
   }
 

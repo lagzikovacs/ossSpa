@@ -29,11 +29,9 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
     Szempont.Nev, Szempont.Ceg, Szempont.Beosztas, Szempont.Telepules, Szempont.UgyfelTelefonszam, Szempont.UgyfelEmail,
     Szempont.Egyeblink, Szempont.Ajanlo, Szempont.Kod
   ];
-
-  mod = false;
+  jog = false;
   ugyfelservice: UgyfelService;
 
-  @Output() KontenerKeres = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -44,21 +42,21 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  private _elsokereses = true;
-  @Output() elsokeresesChange = new EventEmitter<boolean>();
-  @Input() get elsokereses() { return this._elsokereses; }
-  set elsokereses(value: boolean) {
-    this._elsokereses = value;
-    this.elsokeresesChange.emit(this._elsokereses);
-  }
-
-  private _osszesrekord = 0;
-  @Output() osszesrekordChange = new EventEmitter<number>();
-  @Input() get osszesrekord() { return this._osszesrekord; }
-  set osszesrekord(value: number) {
-    this._osszesrekord = value;
-    this.osszesrekordChange.emit(this._osszesrekord);
-  }
+  // private _elsokereses = true;
+  // @Output() elsokeresesChange = new EventEmitter<boolean>();
+  // @Input() get elsokereses() { return this._elsokereses; }
+  // set elsokereses(value: boolean) {
+  //   this._elsokereses = value;
+  //   this.elsokeresesChange.emit(this._elsokereses);
+  // }
+  //
+  // private _osszesrekord = 0;
+  // @Output() osszesrekordChange = new EventEmitter<number>();
+  // @Input() get osszesrekord() { return this._osszesrekord; }
+  // set osszesrekord(value: number) {
+  //   this._osszesrekord = value;
+  //   this.osszesrekordChange.emit(this._osszesrekord);
+  // }
 
   constructor(private _logonservice: LogonService,
               private _iratservice: IratService,
@@ -67,7 +65,7 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               ugyfelservice: UgyfelService  ) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.UGYFELEKMOD]);
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.UGYFELEKMOD]);
     this.ugyfelservice = ugyfelservice;
   }
 
@@ -80,9 +78,9 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.ugyfelservice.Dto = new Array<UgyfelDto>();
     this.ugyfelservice.DtoSelectedIndex = -1;
-    this.osszesrekord = 0;
+    this.ugyfelservice.osszesrekord = 0;
 
-    this.elsokereses = true;
+    this.ugyfelservice.elsokereses = true;
     this.ugyfelservice.up.rekordtol = 0;
     this.ugyfelservice.up.csoport = this.ugyfelservice.csoportszempont;
     this.ugyfelservice.up.fi = new Array<SzMT>();
@@ -100,9 +98,9 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        if (this.elsokereses) {
+        if (this.ugyfelservice.elsokereses) {
           this.ugyfelservice.Dto = res.Result;
-          this.elsokereses = false;
+          this.ugyfelservice.elsokereses = false;
         } else {
           const buf = [...this.ugyfelservice.Dto];
           res.Result.forEach(element => {
@@ -110,7 +108,7 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
           });
           this.ugyfelservice.Dto = buf;
         }
-        this.osszesrekord = res.OsszesRekord;
+        this.ugyfelservice.osszesrekord = res.OsszesRekord;
 
         this.ugyfelservice.up.rekordtol += this.ugyfelservice.up.lapmeret;
         this.eppFrissit = false;
@@ -125,7 +123,7 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
       });
   }
 
-  selectforzoom(i: number) {
+  onStartzoom(i: number) {
     if (this.ugyfelservice.zoomsource === ZoomSources.Irat) {
       this._iratservice.DtoEdited.Ugyfelkod = this.ugyfelservice.Dto[i].Ugyfelkod;
       this._iratservice.DtoEdited.Ugyfelnev = this.ugyfelservice.Dto[i].Nev;
@@ -151,9 +149,9 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
       this._bizonylatservice.ComplexDtoEdited.Dto.Ugyfelhazszam = this.ugyfelservice.Dto[i].Hazszam;
     }
 
-    this.stopzoom();
+    this.onStopzoom();
   }
-  stopzoom() {
+  onStopzoom() {
     this.ugyfelservice.zoom = false;
 
     if (this.ugyfelservice.zoomsource === ZoomSources.Irat) {
@@ -167,33 +165,19 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
     }
   }
 
-  setClickedRow(i: number) {
+  onId(i: number) {
     this.ugyfelservice.DtoSelectedIndex = i;
-    this.ugyfelservice.uj = false;
   }
 
   onUj() {
-    this.eppFrissit = true;
-    this.ugyfelservice.CreateNew()
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
-
-        this.ugyfelservice.uj = true;
-        this.ugyfelservice.DtoEdited = res.Result[0];
-        this.ugyfelservice.DtoSelectedIndex = -1;
-        this.eppFrissit = false;
-
-        this.KontenerKeres.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+    this.tabla.ujtetelstart();
   }
 
-  torlesutan() {
+  onUjkesz() {
+    this.tabla.ujtetelstop();
+  }
+
+  onTorlesutan() {
     this.tabla.clearselections();
   }
 

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {UgyfelService} from '../ugyfel.service';
 import {HelysegService} from '../../primitiv/helyseg/helyseg.service';
 import {ZoomSources} from '../../enums/zoomsources';
@@ -6,15 +6,17 @@ import {HelysegZoomParameter} from '../../primitiv/helyseg/helysegzoomparameter'
 import {UgyfelSzerkesztesMode} from '../ugyfelszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-ugyfel-szerkesztes',
   templateUrl: './ugyfel-szerkesztes.component.html'
 })
-export class UgyfelSzerkesztesComponent implements OnDestroy {
+export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
   ugyfelservice: UgyfelService;
 
-  @Output() KontenerKeres = new EventEmitter<void>();
+  @Input() uj = false;
+  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -32,6 +34,27 @@ export class UgyfelSzerkesztesComponent implements OnDestroy {
     this.ugyfelservice = ugyfelservice;
   }
 
+  ngOnInit() {
+    if (this.uj) {
+      this.eppFrissit = true;
+      this.ugyfelservice.CreateNew()
+        .then(res => {
+          if (res.Error !== null) {
+            throw res.Error;
+          }
+
+          this.ugyfelservice.DtoEdited = res.Result[0];
+          this.eppFrissit = false;
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.ugyfelservice.DtoEdited = deepCopy(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
+    }
+  }
+
   onSubmit() {
     this.eppFrissit = true;
     this._helysegservice.ZoomCheck(new HelysegZoomParameter(this.ugyfelservice.DtoEdited.Helysegkod || 0,
@@ -41,7 +64,7 @@ export class UgyfelSzerkesztesComponent implements OnDestroy {
           throw res.Error;
         }
 
-        if (this.ugyfelservice.uj) {
+        if (this.uj) {
           return this.ugyfelservice.Add(this.ugyfelservice.DtoEdited);
         } else {
           return this.ugyfelservice.Update(this.ugyfelservice.DtoEdited);
@@ -59,22 +82,22 @@ export class UgyfelSzerkesztesComponent implements OnDestroy {
           throw res2.Error;
         }
 
-        if (this.ugyfelservice.uj) {
+        if (this.uj) {
           this.ugyfelservice.Dto.unshift(res2.Result[0]);
         } else {
           this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex] = res2.Result[0];
         }
 
         this.eppFrissit = false;
-        this.KontenerKeres.emit();
+        this.eventSzerkeszteskesz.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
-  cancel() {
-    this.KontenerKeres.emit();
+  onCancel() {
+    this.eventSzerkeszteskesz.emit();
   }
 
   HelysegZoom() {

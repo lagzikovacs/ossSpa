@@ -37,41 +37,48 @@
   </tr>
   </thead>
   <tbody>
-  <ng-container *ngFor="let item of items; let i = index">
-    <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
-      <td *ngIf="zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="clickforzoom(i)">
-        <i class="fa fa-check" aria-hidden="true"></i>
-      </td>
-      <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="clickforid(i)">
-        {{item.Ugyfelkod}}
-      </td>
-      <td>{{item.Csoport}}</td>
-      <td>
-        <div style="width: 200px">{{item.Nev}}</div>
-        <div style="width: 300px">{{item.Cim}}</div>
-      </td>
-      <td>
-        <div style="width: 200px">{{item.Ceg}}</div>
-        <div style="width: 200px">{{item.Beosztas}}</div>
-      </td>
-      <td>
-        <div>{{item.Email}}</div>
-        <div>{{item.Telefon}}</div>
-      </td>
-      <td>
-        <div>{{item.Adoszam}}</div>
-        <div>{{item.Euadoszam}}</div>
-      </td>
-      <td>
-        <div>{{item.Egyeblink}}</div>
-        <div>{{item.Ajanlotta}}</div>
-      </td>
-    </tr>
-    <tr *ngIf="i === clickedidindex && egyTemplate !== undefined" [class.active]="i === clickedidindex">
+    <tr *ngIf="ujtetel && ujTemplate !== undefined" class="active">
       <td colspan="100">
-        <ng-template *ngTemplateOutlet="egyTemplate"></ng-template>
+        <ng-template *ngTemplateOutlet="ujTemplate"></ng-template>
       </td>
     </tr>
-  </ng-container>
+
+    <ng-container *ngFor="let item of items; let i = index">
+      <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
+        <td *ngIf="zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="clickforzoom(i)">
+          <i class="fa fa-check" aria-hidden="true"></i>
+        </td>
+        <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="clickforid(i)">
+          {{item.Ugyfelkod}}
+        </td>
+        <td>{{item.Csoport}}</td>
+        <td>
+          <div style="width: 200px">{{item.Nev}}</div>
+          <div style="width: 300px">{{item.Cim}}</div>
+        </td>
+        <td>
+          <div style="width: 200px">{{item.Ceg}}</div>
+          <div style="width: 200px">{{item.Beosztas}}</div>
+        </td>
+        <td>
+          <div>{{item.Email}}</div>
+          <div>{{item.Telefon}}</div>
+        </td>
+        <td>
+          <div>{{item.Adoszam}}</div>
+          <div>{{item.Euadoszam}}</div>
+        </td>
+        <td>
+          <div>{{item.Egyeblink}}</div>
+          <div>{{item.Ajanlotta}}</div>
+        </td>
+      </tr>
+
+      <tr *ngIf="i === clickedidindex && egyTemplate !== undefined" [class.active]="i === clickedidindex">
+        <td colspan="100">
+          <ng-template *ngTemplateOutlet="egyTemplate"></ng-template>
+        </td>
+      </tr>
+    </ng-container>
   </tbody>
 </table>

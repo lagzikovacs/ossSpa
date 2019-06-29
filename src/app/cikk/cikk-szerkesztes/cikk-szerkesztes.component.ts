@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {CikkService} from '../cikk.service';
 import {MeService} from '../../primitiv/me/me.service';
 import {AfakulcsService} from '../../primitiv/afakulcs/afakulcs.service';
@@ -11,15 +11,17 @@ import {TermekdijZoomParameter} from '../../primitiv/termekdij/termekdijzoompara
 import {CikkSzerkesztesMode} from '../cikkszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-cikk-szerkesztes',
   templateUrl: './cikk-szerkesztes.component.html'
 })
-export class CikkSzerkesztesComponent implements OnDestroy {
+export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
   cikkservice: CikkService;
 
-  @Output() KontenerKeres = new EventEmitter<void>();
+  @Input() uj = false;
+  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -37,6 +39,29 @@ export class CikkSzerkesztesComponent implements OnDestroy {
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService) {
     this.cikkservice = cikkservice;
+  }
+
+  ngOnInit() {
+    this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.Blank;
+
+    if (this.uj) {
+      this.eppFrissit = true;
+      this.cikkservice.CreateNew()
+        .then(res => {
+          if (res.Error !== null) {
+            throw res.Error;
+          }
+
+          this.cikkservice.DtoEdited = res.Result[0];
+          this.eppFrissit = false;
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.cikkservice.DtoEdited = deepCopy(this.cikkservice.Dto[this.cikkservice.DtoSelectedIndex]);
+    }
   }
 
   onSubmit() {
@@ -71,8 +96,9 @@ export class CikkSzerkesztesComponent implements OnDestroy {
         if (res2.Error !== null) {
           throw res2.Error;
         }
+
         // itt a zoom már le van ellenőrizve
-        if (this.cikkservice.uj) {
+        if (this.uj) {
           return this.cikkservice.Add(this.cikkservice.DtoEdited);
         } else {
           return this.cikkservice.Update(this.cikkservice.DtoEdited);
@@ -88,14 +114,14 @@ export class CikkSzerkesztesComponent implements OnDestroy {
         if (res4.Error !== null) {
           throw res4.Error;
         }
-        if (this.cikkservice.uj) {
+        if (this.uj) {
           this.cikkservice.Dto.unshift(res4.Result[0]);
         } else {
           this.cikkservice.Dto[this.cikkservice.DtoSelectedIndex] = res4.Result[0];
         }
 
         this.eppFrissit = false;
-        this.KontenerKeres.emit();
+        this.eventSzerkeszteskesz.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -103,8 +129,8 @@ export class CikkSzerkesztesComponent implements OnDestroy {
       });
   }
 
-  cancel() {
-    this.KontenerKeres.emit();
+  onCancel() {
+    this.eventSzerkeszteskesz.emit();
   }
 
   MeZoom() {

@@ -133,9 +133,7 @@ import { VolumeListComponent } from './volume/volume-list/volume-list.component'
 import { ParticioEgyComponent } from './particio/particio-egy/particio-egy.component';
 import { HelysegEgyComponent } from './primitiv/helyseg/helyseg-egy/helyseg-egy.component';
 import { HelysegListComponent } from './primitiv/helyseg/helyseg-list/helyseg-list.component';
-import { UgyfelContainerComponent } from './ugyfel/ugyfel-container/ugyfel-container.component';
 import {UgyfelEgyComponent} from './ugyfel/ugyfel-egy/ugyfel-egy.component';
-import { CikkContainerComponent } from './cikk/cikk-container/cikk-container.component';
 import { AjanlatkeresContainerComponent } from './ajanlatkeres/ajanlatkeres-container/ajanlatkeres-container.component';
 import {PenztartetelListComponent} from './penztartetel/penztartetel-list/penztartetel-list.component';
 import {PenztarExportComponent} from './penztar/penztar-export/penztar-export.component';
@@ -232,9 +230,9 @@ const routes: Routes = [
   {path: 'me', component: MeListComponent, canActivate: [RoleGuard]},
   {path: 'afakulcs', component: AfakulcsListComponent, canActivate: [RoleGuard]},
   {path: 'termekdij', component: TermekdijListComponent, canActivate: [RoleGuard]},
-  {path: 'cikk', component: CikkContainerComponent, canActivate: [RoleGuard]},
+  {path: 'cikk', component: CikkListComponent, canActivate: [RoleGuard]},
   {path: 'helyseg', component: HelysegListComponent, canActivate: [RoleGuard]},
-  {path: 'ugyfel', component: UgyfelContainerComponent, canActivate: [RoleGuard]},
+  {path: 'ugyfel', component: UgyfelListComponent, canActivate: [RoleGuard]},
 
   {path: 'projekt', component: ProjektContainerComponent, canActivate: [RoleGuard]},
   {path: 'irat', component: IratContainerComponent, canActivate: [RoleGuard]},
@@ -260,7 +258,7 @@ const routes: Routes = [
     {path: 'bejovoszamla', component: BejovoszamlaComponent},
     {path: 'koveteles', component: KovetelesComponent},
     {path: 'tartozas', component: TartozasComponent},
-    {path: 'beszerzes', component: BeszerzesComponent},
+    {path: 'doBeszerzes', component: BeszerzesComponent},
     {path: 'keszlet', component: KeszletComponent},
     {path: 'ngm', component: NgmComponent}
   ]},
@@ -396,10 +394,8 @@ if (environment.production) {
     ParticioEgyComponent,
     HelysegEgyComponent,
     HelysegListComponent,
-    UgyfelContainerComponent,
     UgyfelListComponent,
     UgyfelEgyComponent,
-    CikkContainerComponent,
     AjanlatkeresContainerComponent,
     PenztarContainerComponent,
     PenztartetelContainerComponent,

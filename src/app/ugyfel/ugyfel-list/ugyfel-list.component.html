@@ -7,24 +7,30 @@
                      [(szempont)]="ugyfelservice.szempont"
                      [(minta)]="ugyfelservice.minta"
                      [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-                     [enUj]="!eppFrissit && mod" (Uj)="onUj()"
-                     [visZoom]="ugyfelservice.zoom" (StopZoom)="stopzoom()">
+                     [enUj]="!eppFrissit && jog" (Uj)="onUj()"
+                     [visZoom]="ugyfelservice.zoom" (StopZoom)="onStopzoom()">
   </app-ugyfeltoolbar>
 
   <app-ugyfel-tabla #tabla
                     [items]="ugyfelservice.Dto"
                     [zoom]="ugyfelservice.zoom"
-                    (forid)="setClickedRow($event)"
-                    (forzoom)="selectforzoom($event)"
+                    (forid)="onId($event)"
+                    (forzoom)="onStartzoom($event)"
+                    [ujTemplate]="griduj"
                     [egyTemplate]="gridegy">
   </app-ugyfel-tabla>
+  <ng-template #griduj>
+    <app-ugyfel-szerkesztes [uj] = "true"
+                            (eventSzerkeszteskesz)="onUjkesz()">
+    </app-ugyfel-szerkesztes>
+  </ng-template>
   <ng-template #gridegy>
-    <app-ugyfel-egy (torlesutan)="torlesutan()"></app-ugyfel-egy>
+    <app-ugyfel-egy (eventTorlesutan)="onTorlesutan()"></app-ugyfel-egy>
   </ng-template>
 
-  <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
+  <app-toolbarfooter [enKereses]="!ugyfelservice.elsokereses && !eppFrissit"
                      [rekordszam]="ugyfelservice.Dto.length"
-                     [osszesrekord]="osszesrekord"
+                     [osszesrekord]="ugyfelservice.osszesrekord"
                      (KeresesTovabb)="onKeresesTovabb()">
   </app-toolbarfooter>
 </div>

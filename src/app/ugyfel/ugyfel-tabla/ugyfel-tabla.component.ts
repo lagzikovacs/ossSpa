@@ -10,6 +10,7 @@ export class UgyfelTablaComponent implements OnDestroy {
   @Input() items: UgyfelDto[];
   @Input() zoom = false;
 
+  @Input() ujTemplate: TemplateRef<any>;
   @Input() egyTemplate: TemplateRef<any>;
 
   @Output() forzoom = new EventEmitter<number>();
@@ -17,13 +18,27 @@ export class UgyfelTablaComponent implements OnDestroy {
 
   clickedrowindex = -1;
   clickedidindex = -1;
+  ujtetel = false;
 
   clearselections() {
+    this.ujtetel = false;
+
     this.clickedrowindex = -1;
     this.clickedidindex = -1;
   }
 
+  ujtetelstart() {
+    this.clearselections();
+
+    this.ujtetel = true;
+  }
+  ujtetelstop() {
+    this.ujtetel = false;
+  }
+
   clickforid(i: number) {
+    this.ujtetel = false;
+
     this.clickedidindex = i;
     this.clickedrowindex = this.clickedidindex;
 
@@ -31,6 +46,8 @@ export class UgyfelTablaComponent implements OnDestroy {
   }
 
   clickforrow(i: number) {
+    this.ujtetel = false;
+
     this.clickedrowindex = i;
     // először clickforid aztán clickforrow is, clickforrow felülírná DtoSelectedindex-et
     if (this.clickedrowindex !== this.clickedidindex) {

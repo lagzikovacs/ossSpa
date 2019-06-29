@@ -17,11 +17,10 @@ import {EgyMode} from '../../enums/egymode';
 export class UgyfelEgyComponent implements OnDestroy {
   egymode = EgyMode.Reszletek;
   ugyfelservice: UgyfelService;
-  mod = false;
+  jog = false;
   nincsProjekt = false;
-  ri = -1;
 
-  @Output() torlesutan = new EventEmitter<void>();
+  @Output() eventTorlesutan = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -36,95 +35,58 @@ export class UgyfelEgyComponent implements OnDestroy {
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               ugyfelservice: UgyfelService) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.UGYFELEKMOD]);
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.UGYFELEKMOD]);
     this.ugyfelservice = ugyfelservice;
   }
 
-  reszletek() {
+  doReszletek() {
     this.egymode = EgyMode.Reszletek;
   }
-  torles() {
+  doTorles() {
     this.egymode = EgyMode.Torles;
   }
-  modositas() {
-    this.ugyfelservice.uj = false;
-    this.ugyfelservice.DtoEdited = deepCopy(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
+  doModositas() {
     this.egymode = EgyMode.Modositas;
   }
-  csoport() {
-    this.ugyfelservice.uj = false;
-    this.ugyfelservice.DtoEdited = deepCopy(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
+  doCsoport() {
     this.egymode = EgyMode.Csoport;
   }
-  projekt() {
+  doProjekt() {
     this.egymode = EgyMode.Projekt;
   }
-  ugyfelterlink() {
+  doUgyfelterlink() {
     this.egymode = EgyMode.UgyfelterLink;
   }
-  vcard() {
-    this.ugyfelservice.uj = false;
-    this.ugyfelservice.DtoEdited = deepCopy(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
+  doVcard() {
     this.egymode = EgyMode.Vcard;
   }
 
-  TorlesOk() {
-    this.eppFrissit = true;
-    this.ugyfelservice.Delete(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex])
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
 
-        this.ugyfelservice.Dto.splice(this.ugyfelservice.DtoSelectedIndex, 1);
-        this.ugyfelservice.DtoSelectedIndex = -1;
+      this.ugyfelservice.Delete(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
 
-        this.eppFrissit = false;
-        this.torlesutan.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+          this.ugyfelservice.Dto.splice(this.ugyfelservice.DtoSelectedIndex, 1);
+          this.ugyfelservice.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.eventTorlesutan.emit();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
   }
 
-  TorlesCancel() {
-    this.egymode = EgyMode.Reszletek;
-  }
-
-  EgyReszletek() {
-    this.egymode = EgyMode.Reszletek;
-  }
-
-  CsoportOk(selected: number) {
-    this.eppFrissit = true;
-
-    this.ugyfelservice.DtoEdited.Csoport = selected;
-    this.ugyfelservice.Update(this.ugyfelservice.DtoEdited)
-      .then(res1 => {
-        if (res1.Error !== null) {
-          throw res1.Error;
-        }
-
-        return this.ugyfelservice.Get(res1.Result);
-      })
-      .then(res2 => {
-        if (res2.Error !== null) {
-          throw res2.Error;
-        }
-
-        this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex] = res2.Result[0];
-
-        this.eppFrissit = false;
-        this.egymode = EgyMode.Reszletek;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
-  }
-
-  CsoportCancel() {
+  onModositaskesz() {
     this.egymode = EgyMode.Reszletek;
   }
 

@@ -26,10 +26,11 @@ export class CikkService {
   szempont = 0;
   minta = '';
   up = new CikkParameter(0, environment.lapmeret);
+  elsokereses = true;
+  osszesrekord = 0;
 
   Dto: CikkDto[] = new Array<CikkDto>();
   DtoEdited = new CikkDto();
-  uj = false;
   DtoSelectedIndex = -1;
 
   zoom = false;

@@ -11,19 +11,34 @@ export class ProjektTablaComponent implements OnDestroy {
   @Input() megjegyzesIs = true;
   @Input() enIdclick = true;
 
+  @Input() ujTemplate: TemplateRef<any>;
   @Input() egyTemplate: TemplateRef<any>;
 
   @Output() forid = new EventEmitter<number>();
 
   clickedrowindex = -1;
   clickedidindex = -1;
+  ujtetel = false;
 
   clearselections() {
+    this.ujtetel = false;
+
     this.clickedrowindex = -1;
     this.clickedidindex = -1;
   }
 
+  ujtetelstart() {
+    this.clearselections();
+
+    this.ujtetel = true;
+  }
+  ujtetelstop() {
+    this.ujtetel = false;
+  }
+
   clickforid(i: number) {
+    this.ujtetel = false;
+
     this.clickedidindex = i;
     this.clickedrowindex = this.clickedidindex;
 
@@ -31,6 +46,8 @@ export class ProjektTablaComponent implements OnDestroy {
   }
 
   clickforrow(i: number) {
+    this.ujtetel = false;
+
     this.clickedrowindex = i;
     // először clickforid aztán clickforrow is, clickforrow felülírná az eseményeket
     if (this.clickedrowindex !== this.clickedidindex) {

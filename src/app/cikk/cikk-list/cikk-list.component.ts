@@ -22,16 +22,11 @@ export class CikkListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
   cikkservice: CikkService;
-
-  @Output() KontenerKeres = new EventEmitter<void>();
-
   szurok = ['Megnevezés', 'Id'];
   szempontok = [
     Szempont.Megnevezes, Szempont.Kod
   ];
-
-  mod = false;
-  ti = -1;
+  jog = false;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -42,21 +37,21 @@ export class CikkListComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  private _elsokereses = true;
-  @Output() elsokeresesChange = new EventEmitter<boolean>();
-  @Input() get elsokereses() { return this._elsokereses; }
-  set elsokereses(value: boolean) {
-    this._elsokereses = value;
-    this.elsokeresesChange.emit(this._elsokereses);
-  }
-
-  private _osszesrekord = 0;
-  @Output() osszesrekordChange = new EventEmitter<number>();
-  @Input() get osszesrekord() { return this._osszesrekord; }
-  set osszesrekord(value: number) {
-    this._osszesrekord = value;
-    this.osszesrekordChange.emit(this._osszesrekord);
-  }
+  // private _elsokereses = true;
+  // @Output() elsokeresesChange = new EventEmitter<boolean>();
+  // @Input() get elsokereses() { return this._elsokereses; }
+  // set elsokereses(value: boolean) {
+  //   this._elsokereses = value;
+  //   this.elsokeresesChange.emit(this._elsokereses);
+  // }
+  //
+  // private _osszesrekord = 0;
+  // @Output() osszesrekordChange = new EventEmitter<number>();
+  // @Input() get osszesrekord() { return this._osszesrekord; }
+  // set osszesrekord(value: number) {
+  //   this._osszesrekord = value;
+  //   this.osszesrekordChange.emit(this._osszesrekord);
+  // }
 
   constructor(private _logonservice: LogonService,
               private _bizonylatservice: BizonylatService,
@@ -64,7 +59,7 @@ export class CikkListComponent implements OnInit, OnDestroy {
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               cikkservice: CikkService  ) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.CIKKMOD]);
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.CIKKMOD]);
     this.cikkservice = cikkservice;
   }
 
@@ -77,9 +72,9 @@ export class CikkListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.cikkservice.Dto = new Array<CikkDto>();
     this.cikkservice.DtoSelectedIndex = -1;
-    this.osszesrekord = 0;
+    this.cikkservice.osszesrekord = 0;
 
-    this.elsokereses = true;
+    this.cikkservice.elsokereses = true;
     this.cikkservice.up.rekordtol = 0;
     this.cikkservice.up.fi = new Array<SzMT>();
 
@@ -97,9 +92,9 @@ export class CikkListComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        if (this.elsokereses) {
+        if (this.cikkservice.elsokereses) {
           this.cikkservice.Dto = res.Result;
-          this.elsokereses = false;
+          this.cikkservice.elsokereses = false;
         } else {
           const buf = [...this.cikkservice.Dto];
           res.Result.forEach(element => {
@@ -107,7 +102,7 @@ export class CikkListComponent implements OnInit, OnDestroy {
           });
           this.cikkservice.Dto = buf;
         }
-        this.osszesrekord = res.OsszesRekord;
+        this.cikkservice.osszesrekord = res.OsszesRekord;
 
         this.cikkservice.up.rekordtol += this.cikkservice.up.lapmeret;
         this.eppFrissit = false;
@@ -122,7 +117,7 @@ export class CikkListComponent implements OnInit, OnDestroy {
       });
   }
 
-  selectforzoom(i: number) {
+  onStartzoom(i: number) {
     if (this.cikkservice.zoomsource === ZoomSources.Ajanlat) {
       this._ajanlatservice.AjanlatParam.AjanlatBuf[this._ajanlatservice.AjanlattetelIndex].CikkKod =
         this.cikkservice.Dto[i].Cikkkod;
@@ -150,9 +145,9 @@ export class CikkListComponent implements OnInit, OnDestroy {
       this._bizonylatservice.TetelDtoEdited.Termekdijegysegar = this.cikkservice.Dto[i].Termekdijegysegar;
     }
 
-    this.stopzoom();
+    this.onStopzoom();
   }
-  stopzoom() {
+  onStopzoom() {
     this.cikkservice.zoom = false;
 
     if (this.cikkservice.zoomsource === ZoomSources.Ajanlat) {
@@ -163,33 +158,19 @@ export class CikkListComponent implements OnInit, OnDestroy {
     }
   }
 
-  setClickedRow(i: number) {
+  onId(i: number) {
     this.cikkservice.DtoSelectedIndex = i;
-    this.cikkservice.uj = false;
   }
 
   onUj() {
-    this.eppFrissit = true;
-    this.cikkservice.CreateNew()
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
-
-        this.cikkservice.uj = true;
-        this.cikkservice.DtoEdited = res.Result[0];
-        this.cikkservice.DtoSelectedIndex = -1;
-        this.eppFrissit = false;
-
-        this.KontenerKeres.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+    this.tabla.ujtetelstart();
   }
 
-  torlesutan() {
+  onUjkesz() {
+    this.tabla.ujtetelstop();
+  }
+
+  onTorlesutan() {
     this.tabla.clearselections();
   }
 

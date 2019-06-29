@@ -129,7 +129,6 @@ import { ProjektTeendoElvegezveComponent } from './projektteendo/projekt-teendo-
 import { ProjektkapcsolatUjbizonylatComponent } from './projektkapcsolat/projektkapcsolat-ujbizonylat/projektkapcsolat-ujbizonylat.component';
 import { ProjektkapcsolatUjiratComponent } from './projektkapcsolat/projektkapcsolat-ujirat/projektkapcsolat-ujirat.component';
 import { AjanlatComponent } from './ajanlat/ajanlat/ajanlat';
-import { VolumeContainerComponent } from './volume/volume-container/volume-container.component';
 import { VolumeEgyComponent } from './volume/volume-egy/volume-egy.component';
 import { VolumeListComponent } from './volume/volume-list/volume-list.component';
 import { ParticioEgyComponent } from './particio/particio-egy/particio-egy.component';
@@ -268,7 +267,7 @@ const routes: Routes = [
   ]},
 
   {path: 'particio', component: ParticioEgyComponent, canActivate: [RoleGuard]},
-  {path: 'volume', component: VolumeContainerComponent, canActivate: [RoleGuard]},
+  {path: 'volume', component: VolumeListComponent, canActivate: [RoleGuard]},
   {path: 'felhasznalo', component: FelhasznaloListComponent, canActivate: [RoleGuard]},
   {path: 'csoport', component: CsoportListComponent, canActivate: [RoleGuard]},
   {path: 'bejelentkezes', component: BejelentkezesComponent},
@@ -394,7 +393,6 @@ if (environment.production) {
     ProjektkapcsolatUjbizonylatComponent,
     ProjektkapcsolatUjiratComponent,
     AjanlatComponent,
-    VolumeContainerComponent,
     VolumeEgyComponent,
     VolumeListComponent,
     ParticioEgyComponent,

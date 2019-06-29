@@ -44,7 +44,6 @@ import {SzamlazasirendService} from '../szamlazasirend/szamlazasirend.service';
 import {ProjektteendoService} from '../projektteendo/projektteendo.service';
 import {SzamlazasirendDto} from '../szamlazasirend/szamlazasirenddto';
 import {ProjektteendoDto} from '../projektteendo/projektteendodto';
-import {VolumeContainerMode} from '../volume/volumecontainermode';
 import {ParticioService} from '../particio/particio.service';
 import {ParticioEgyMode} from '../particio/particioegymode';
 import {ProjektContainerMode} from '../projekt/projektcontainermode';
@@ -218,7 +217,6 @@ export class MenuService {
         this._particioservice.EgyMode = ParticioEgyMode.Szallito;
         break;
       case '/volume':
-        this._volumeservice.ContainerMode = VolumeContainerMode.List;
         this._volumeservice.Dto = new Array<VolumeDto>();
         break;
       case '/felhasznalo':

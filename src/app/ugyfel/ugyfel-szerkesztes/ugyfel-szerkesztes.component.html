@@ -46,6 +46,12 @@
       </div>
     </div>
 
+    <ng-container *ngIf="ugyfelservice.SzerkesztesMode === 1">
+      <div class="row no-gutters editform-row">
+        <app-helyseg-list></app-helyseg-list>
+      </div>
+    </ng-container>
+
     <div class="row no-gutters editform-row">
       <div style="margin-right: 5px">
         <div class="egylabel">Közterület</div>
@@ -131,9 +137,5 @@
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
     </div>
   </form>
-
-  <ng-container *ngIf="ugyfelservice.SzerkesztesMode === 1">
-    <app-helyseg-list></app-helyseg-list>
-  </ng-container>
 </div>
 

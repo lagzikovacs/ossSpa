@@ -7,8 +7,6 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {LogonService} from '../logon/logon.service';
 import {VolumeResult} from './volumeresult';
 import {DokumentumkodByVolumeResult} from './dokumentumbyvolumeresult';
-import {VolumeContainerMode} from './volumecontainermode';
-import {VolumeEgyMode} from './volumeegymode';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 
@@ -27,9 +25,6 @@ export class VolumeService {
 
   dbv: number[] = new Array<number>();
   eppTesztel = false;
-
-  ContainerMode = VolumeContainerMode.List;
-  EgyMode = VolumeEgyMode.Reszletek;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

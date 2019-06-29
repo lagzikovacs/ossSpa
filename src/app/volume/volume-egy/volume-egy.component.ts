@@ -1,10 +1,9 @@
 import {Component, OnDestroy} from '@angular/core';
 import {VolumeService} from '../volume.service';
-import {VolumeContainerMode} from '../volumecontainermode';
-import {VolumeEgyMode} from '../volumeegymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {EgyMode} from '../../enums/egymode';
 
 @Component({
   selector: 'app-volume-egy',
@@ -12,6 +11,7 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   animations: [rowanimation]
 })
 export class VolumeEgyComponent implements OnDestroy {
+  egymode = EgyMode.Reszletek;
   volumeservice: VolumeService;
 
   private _eppFrissit = false;
@@ -30,7 +30,7 @@ export class VolumeEgyComponent implements OnDestroy {
   }
 
   reszletek() {
-    this.volumeservice.EgyMode = VolumeEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
   }
   ellenorzes() {
     this.eppFrissit = true;
@@ -42,7 +42,7 @@ export class VolumeEgyComponent implements OnDestroy {
 
         this.eppFrissit = false;
         this.volumeservice.dbv = res.Result;
-        this.volumeservice.EgyMode = VolumeEgyMode.Teszt;
+        this.egymode = EgyMode.Teszt;
       })
       .catch(err => {
         this.eppFrissit = false;

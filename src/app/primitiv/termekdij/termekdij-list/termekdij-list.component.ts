@@ -77,9 +77,9 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
 
         this.eppFrissit = false;
 
-        if (this.termekdijservice.zoom) {
+/*        if (this.termekdijservice.zoom) {
           window.scrollTo(0, document.body.scrollHeight);
-        }
+        }*/
       })
       .catch(err => {
         this.eppFrissit = false;

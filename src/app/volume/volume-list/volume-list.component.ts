@@ -1,7 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {VolumeService} from '../volume.service';
-import {VolumeContainerMode} from '../volumecontainermode';
-import {VolumeEgyMode} from '../volumeegymode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
@@ -73,7 +71,6 @@ export class VolumeListComponent implements OnInit, OnDestroy {
 
   setClickedRow(i: number) {
     this.volumeservice.DtoSelectedIndex = i;
-    this.volumeservice.EgyMode = VolumeEgyMode.Reszletek;
   }
 
   torlesutan() {

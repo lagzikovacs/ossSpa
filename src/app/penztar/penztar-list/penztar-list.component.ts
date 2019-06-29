@@ -16,12 +16,9 @@ export class PenztarListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
   szurok = ['Pénztár'];
-  mod = false;
+  jog = false;
   elsokereses = true;
   penztarservice: PenztarService;
-
-  @Output() KontenerKeresUj = new EventEmitter<void>();
-  @Output() KontenerKeresTetel = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -37,7 +34,7 @@ export class PenztarListComponent implements OnInit, OnDestroy {
               private _spinnerservice: SpinnerService,
               penztarservice: PenztarService,
               private _penztartetelservice: PenztartetelService) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);
     this.penztarservice = penztarservice;
   }
 
@@ -81,39 +78,22 @@ export class PenztarListComponent implements OnInit, OnDestroy {
       });
   }
 
-  selectforzoom(i: number) {
-    this.setClickedRow(i);
-  }
-
-  setClickedRow(i: number) {
+  onId(i: number) {
     this.penztarservice.DtoSelectedIndex = i;
-    this.penztarservice.uj = false;
+
     this._penztartetelservice.Dto = new Array<PenztartetelDto>();
     this._penztartetelservice.OsszesRekord = 0;
   }
 
-  uj() {
-    this.eppFrissit = true;
-    this.penztarservice.CreateNew()
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
-
-        this.penztarservice.uj = true;
-        this.penztarservice.DtoEdited = res.Result[0];
-        this.penztarservice.DtoSelectedIndex = -1;
-        this.eppFrissit = false;
-
-        this.KontenerKeresUj.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+  onUj() {
+    this.tabla.ujtetelstart();
   }
 
-  torlesutan() {
+  onUjkesz() {
+    this.tabla.ujtetelstop();
+  }
+
+  onTorlesutan() {
     this.tabla.clearselections();
   }
 

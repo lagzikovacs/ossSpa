@@ -4,18 +4,22 @@
                [(szempont)]="penztarservice.ekDto.szempont"
                [(minta)]="penztarservice.ekDto.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit && mod" (Uj)="uj()">
+               [enUj]="!eppFrissit && jog" (Uj)="onUj()">
   </app-toolbar>
   <app-tabla #tabla
              [items]="penztarservice.Dto"
              [colsets]="penztarservice.GridSettings"
-             [zoom]="penztarservice.zoom"
-             (forzoom)="selectforzoom($event)"
-             (forid)="setClickedRow($event)"
+             (forid)="onId($event)"
+             [ujTemplate]="griduj"
              [egyTemplate]="gridegy">
   </app-tabla>
+  <ng-template #griduj>
+    <app-penztar-szerkesztes [uj] = "true"
+                             (eventSzerkeszteskesz)="onUjkesz()">
+    </app-penztar-szerkesztes>
+  </ng-template>
   <ng-template #gridegy>
-    <app-penztar-egy (torlesutan)="torlesutan()"></app-penztar-egy>
+    <app-penztar-egy (eventTorlesutan)="onTorlesutan()"></app-penztar-egy>
   </ng-template>
 </div>
 

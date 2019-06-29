@@ -23,11 +23,7 @@ export class PenztarService {
 
   Dto: PenztarDto[] = new Array<PenztarDto>();
   DtoEdited = new PenztarDto();
-  uj = false;
   DtoSelectedIndex = -1;
-
-  zoom = false;
-  zoomsource: ZoomSources;
 
   SzerkesztesMode = PenztarSzerkesztesMode.Blank;
 

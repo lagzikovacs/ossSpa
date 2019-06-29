@@ -66,9 +66,7 @@
     PenznemZoom = 1,
     FizetesimodZoom = 2,
     }-->
-  <ng-container *ngIf="bizonylatkifizetesservice.SzerkesztesMode === 0">
-    <app-blank></app-blank>
-  </ng-container>
+
   <ng-container *ngIf="bizonylatkifizetesservice.SzerkesztesMode === 1">
     <app-penznem-list></app-penznem-list>
   </ng-container>

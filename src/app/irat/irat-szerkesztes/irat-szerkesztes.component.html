@@ -85,9 +85,7 @@
   IrattipusZoom = 1,
   UgyfelZoom = 2,
   }-->
-  <ng-container *ngIf="iratservice.SzerkesztesMode === 0">
-    <app-blank></app-blank>
-  </ng-container>
+
   <ng-container *ngIf="iratservice.SzerkesztesMode === 1">
     <app-irattipus-list></app-irattipus-list>
   </ng-container>

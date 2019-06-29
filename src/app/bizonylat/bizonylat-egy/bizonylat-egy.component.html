@@ -81,11 +81,7 @@
   Formaiellenorzes = 13,
   OSNxml = 14,
   }-->
-  <ng-container *ngIf="bizonylatservice.EgyMode === 0">
-    <div [@rowanimation]>
-      <app-blank></app-blank>
-    </div>
-  </ng-container>
+
   <ng-container *ngIf="bizonylatservice.EgyMode === 1">
     <div [@rowanimation]>
       <app-bizonylat-nyomtatas></app-bizonylat-nyomtatas>

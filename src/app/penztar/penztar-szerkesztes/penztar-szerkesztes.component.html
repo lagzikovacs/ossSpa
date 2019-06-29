@@ -35,9 +35,6 @@
   PenznemZoom = 1,
   }-->
 
-  <ng-container *ngIf="penztarservice.SzerkesztesMode === 0">
-    <app-blank></app-blank>
-  </ng-container>
   <ng-container *ngIf="penztarservice.SzerkesztesMode === 1">
     <app-penznem-list></app-penznem-list>
   </ng-container>

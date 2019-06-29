@@ -36,9 +36,7 @@
   Volume = 6
   }-->
 
-  <ng-container *ngIf="particioservice.EgyMode === 0">
-    <app-blank></app-blank>
-  </ng-container>
+
   <ng-container *ngIf="particioservice.EgyMode === 1">
     <app-particio-szallito [eppFrissit]="eppFrissit"
                            [Dto]="Dto"

@@ -77,9 +77,7 @@
   UgyfelZoom = 1,
   PenznemZoom = 2
     }-->
-  <ng-container *ngIf="projektservice.SzerkesztesMode === 0">
-    <app-blank></app-blank>
-  </ng-container>
+
   <ng-container *ngIf="projektservice.SzerkesztesMode === 1">
     <app-ugyfel-container></app-ugyfel-container>
   </ng-container>

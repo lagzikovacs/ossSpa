@@ -66,9 +66,6 @@
   CikkZoom = 1
   }-->
 
-  <ng-container *ngIf="ajanlatservice.AjanlatSzerkesztesMode === 0">
-    <app-blank></app-blank>
-  </ng-container>
   <ng-container *ngIf="ajanlatservice.AjanlatSzerkesztesMode === 1">
     <app-cikk-container></app-cikk-container>
   </ng-container>

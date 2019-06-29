@@ -27,7 +27,6 @@ import {DatetimeHunPipe} from './pipes/datetimehun.pipe';
 import { FelhasznaloEgyComponent } from './primitiv/felhasznalo/felhasznalo-egy/felhasznalo-egy.component';
 import { FelhasznaloSzerkesztesComponent } from './primitiv/felhasznalo/felhasznalo-szerkesztes/felhasznalo-szerkesztes.component';
 import { FelhasznaloJelszoComponent } from './primitiv/felhasznalo/felhasznalo-jelszo/felhasznalo-jelszo.component';
-import { BlankComponent } from './blank/blank.component';
 import { ProjektListComponent } from './projekt/projekt-list/projekt-list.component';
 import { ProjektEgyComponent } from './projekt/projekt-egy/projekt-egy.component';
 import { ProjektSzerkesztesComponent } from './projekt/projekt-szerkesztes/projekt-szerkesztes.component';
@@ -307,7 +306,6 @@ if (environment.production) {
     FelhasznaloEgyComponent,
     FelhasznaloSzerkesztesComponent,
     FelhasznaloJelszoComponent,
-    BlankComponent,
     ProjektListComponent,
     ProjektToolbarComponent,
     ProjektEgyComponent,

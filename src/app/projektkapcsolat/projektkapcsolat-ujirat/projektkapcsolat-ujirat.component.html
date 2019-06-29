@@ -61,9 +61,6 @@
   IrattipusZoom = 1,
   }-->
 
-  <ng-container *ngIf="projektkapcsolatservice.SzerkesztesMode === 0">
-    <app-blank></app-blank>
-  </ng-container>
   <ng-container *ngIf="projektkapcsolatservice.SzerkesztesMode === 1">
     <app-irattipus-list></app-irattipus-list>
   </ng-container>

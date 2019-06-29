@@ -53,9 +53,7 @@
   FelhasznaloZoom = 1,
   TeendoZoom = 2
   }-->
-  <ng-container *ngIf="projektteendoservice.SzerkesztesMode === 0">
-    <app-blank></app-blank>
-  </ng-container>
+
   <ng-container *ngIf="projektteendoservice.SzerkesztesMode === 1">
     <app-felhasznalo-list></app-felhasznalo-list>
   </ng-container>

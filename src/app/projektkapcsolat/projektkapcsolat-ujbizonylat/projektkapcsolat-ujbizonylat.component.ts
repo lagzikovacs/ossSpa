@@ -98,6 +98,7 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnDestroy {
         }
 
         this.projektkapcsolatservice.Dto.unshift(res3.Result[0]);
+        this.eppFrissit = false;
         this.navigal();
       })
       .catch(err => {

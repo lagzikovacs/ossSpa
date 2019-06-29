@@ -134,7 +134,6 @@ import { ParticioEgyComponent } from './particio/particio-egy/particio-egy.compo
 import { HelysegEgyComponent } from './primitiv/helyseg/helyseg-egy/helyseg-egy.component';
 import { HelysegListComponent } from './primitiv/helyseg/helyseg-list/helyseg-list.component';
 import {UgyfelEgyComponent} from './ugyfel/ugyfel-egy/ugyfel-egy.component';
-import { AjanlatkeresContainerComponent } from './ajanlatkeres/ajanlatkeres-container/ajanlatkeres-container.component';
 import {PenztartetelListComponent} from './penztartetel/penztartetel-list/penztartetel-list.component';
 import {PenztarExportComponent} from './penztar/penztar-export/penztar-export.component';
 import {PenztarSzerkesztesComponent} from './penztar/penztar-szerkesztes/penztar-szerkesztes.component';
@@ -237,7 +236,7 @@ const routes: Routes = [
   {path: 'projekt', component: ProjektContainerComponent, canActivate: [RoleGuard]},
   {path: 'irat', component: IratContainerComponent, canActivate: [RoleGuard]},
   {path: 'penztar', component: PenztarContainerComponent, canActivate: [RoleGuard]},
-  {path: 'ajanlatkeres', component: AjanlatkeresContainerComponent, canActivate: [RoleGuard]},
+  {path: 'ajanlatkeres', component: AjanlatkeresListComponent, canActivate: [RoleGuard]},
   {path: 'ugyfelterlog', component: UgyfelterlogComponent, canActivate: [RoleGuard]},
 
   {path: 'bizonylat', children: [
@@ -396,7 +395,6 @@ if (environment.production) {
     HelysegListComponent,
     UgyfelListComponent,
     UgyfelEgyComponent,
-    AjanlatkeresContainerComponent,
     PenztarContainerComponent,
     PenztartetelContainerComponent,
     IratContainerComponent,

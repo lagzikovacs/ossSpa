@@ -1,9 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import * as moment from 'moment';
 import {ProjektteendoService} from '../projektteendo.service';
-import {ProjektteendoEgyMode} from '../projekttendoegymode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {propCopy} from '../../tools/propCopy';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-projekt-teendo-elvegezve',
@@ -12,6 +13,8 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 export class ProjektTeendoElvegezveComponent implements OnInit, OnDestroy {
   projektteendoservice: ProjektteendoService;
   Elvegezve: any;
+
+  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -30,6 +33,8 @@ export class ProjektTeendoElvegezveComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.Elvegezve = moment().format('YYYY-MM-DD');
+
+    this.projektteendoservice.DtoEdited = deepCopy(this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex]);
   }
 
   onSubmit() {
@@ -49,10 +54,10 @@ export class ProjektTeendoElvegezveComponent implements OnInit, OnDestroy {
         throw res2.Error;
       }
 
-      this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex] = res2.Result[0];
+      propCopy(res2.Result[0], this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex]);
 
       this.eppFrissit = false;
-      this.navigal();
+      this.eventSzerkeszteskesz.emit();
     })
     .catch(err => {
       this.eppFrissit = false;
@@ -61,11 +66,7 @@ export class ProjektTeendoElvegezveComponent implements OnInit, OnDestroy {
   }
 
   cancel() {
-    this.navigal();
-  }
-
-  navigal() {
-    this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Reszletek;
+    this.eventSzerkeszteskesz.emit();
   }
 
   ngOnDestroy() {

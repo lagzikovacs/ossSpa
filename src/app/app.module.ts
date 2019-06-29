@@ -138,7 +138,6 @@ import {PenztartetelListComponent} from './penztartetel/penztartetel-list/penzta
 import {PenztarExportComponent} from './penztar/penztar-export/penztar-export.component';
 import {PenztarSzerkesztesComponent} from './penztar/penztar-szerkesztes/penztar-szerkesztes.component';
 import { ProjektContainerComponent } from './projekt/projekt-container/projekt-container.component';
-import { ProjektTeendoContainerComponent } from './projektteendo/projekt-teendo-container/projekt-teendo-container.component';
 import { ProjektkapcsolatContainerComponent } from './projektkapcsolat/projektkapcsolat-container/projektkapcsolat-container.component';
 import {PenztartetelService} from './penztartetel/penztartetel.service';
 import {BizonylatService} from './bizonylat/bizonylat.service';
@@ -391,7 +390,6 @@ if (environment.production) {
     UgyfelListComponent,
     UgyfelEgyComponent,
     ProjektContainerComponent,
-    ProjektTeendoContainerComponent,
     ProjektkapcsolatContainerComponent,
     ProjektkapcsolatLevalasztasComponent,
     ProjektExportComponent,

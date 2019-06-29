@@ -6,8 +6,6 @@ import {ProjektteendoDto} from './projektteendodto';
 import {LogonService} from '../logon/logon.service';
 import {ProjektteendoResult} from './projektteendoresult';
 import {EmptyResult} from '../dtos/emptyresult';
-import {ProjektteendoContainerMode} from './projektteendocontainermode';
-import {ProjektteendoEgyMode} from './projekttendoegymode';
 import {ProjektteendoSzerkesztesMode} from './projektteendoszerkesztesmode';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
@@ -22,12 +20,9 @@ export class ProjektteendoService {
 
   cim = 'Projekt teendő';
   Dto: ProjektteendoDto[] = new Array<ProjektteendoDto>();
-  DtoSelectedIndex = -1;
-  uj = false;
   DtoEdited = new ProjektteendoDto();
+  DtoSelectedIndex = -1;
 
-  ContainerMode = ProjektteendoContainerMode.List;
-  EgyMode = ProjektteendoEgyMode.Reszletek;
   SzerkesztesMode = ProjektteendoSzerkesztesMode.Blank;
 
   GridSettings: ColumnSettings[] = undefined;

@@ -21,5 +21,7 @@ export enum EgyMode {
   Dokumentum = 15,
   FotozasLink = 16,
 
-  Teszt = 17
+  Teszt = 17,
+
+  Elvegezve = 18
 }

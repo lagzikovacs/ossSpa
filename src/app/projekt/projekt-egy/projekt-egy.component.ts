@@ -6,7 +6,6 @@ import {ProjektteendoService} from '../../projektteendo/projektteendo.service';
 import {SzamlazasirendService} from '../../szamlazasirend/szamlazasirend.service';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
 import {BizonylatesIratContainerMode} from '../../projektkapcsolat/bizonylatesiratcontainermode';
-import {ProjektteendoContainerMode} from '../../projektteendo/projektteendocontainermode';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
@@ -93,7 +92,6 @@ export class ProjektEgyComponent implements OnDestroy {
   }
   teendo() {
     this.projektservice.EgyMode = ProjektEgyMode.Teendo;
-    this._projektteendoservice.ContainerMode = ProjektteendoContainerMode.List;
   }
 
   SegedOk() {

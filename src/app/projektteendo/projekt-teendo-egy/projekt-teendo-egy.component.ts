@@ -1,11 +1,10 @@
 import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {ProjektteendoService} from '../projektteendo.service';
-import {ProjektteendoContainerMode} from '../projektteendocontainermode';
-import {ProjektteendoEgyMode} from '../projekttendoegymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {EgyMode} from '../../enums/egymode';
 
 @Component({
   selector: 'app-projekt-teendo-egy',
@@ -13,10 +12,10 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   animations: [rowanimation]
 })
 export class ProjektTeendoEgyComponent implements OnDestroy {
+  egymode = EgyMode.Reszletek;
   projektteendoservice: ProjektteendoService;
-  ri = -1;
 
-  @Output() torlesutan = new EventEmitter<void>();
+  @Output() eventTorlesutan = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -33,45 +32,46 @@ export class ProjektTeendoEgyComponent implements OnDestroy {
     this.projektteendoservice = projektteendoservice;
   }
 
-  reszletek() {
-    this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Reszletek;
+  doReszletek() {
+    this.egymode = EgyMode.Reszletek;
   }
-  torles () {
-    this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Torles;
+  doTorles () {
+    this.egymode = EgyMode.Torles;
   }
-  modositas() {
-    this.projektteendoservice.uj = false;
-    this.projektteendoservice.DtoEdited = deepCopy(this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex]);
-    this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Modositas;
+  doModositas() {
+    this.egymode = EgyMode.Modositas;
   }
-  elvegezve() {
-    this.projektteendoservice.uj = false;
-    this.projektteendoservice.DtoEdited = deepCopy(this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex]);
-    this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Elvegezve;
+  doElvegezve() {
+    this.egymode = EgyMode.Elvegezve;
   }
 
-  TorlesOk() {
-    this.eppFrissit = true;
-    this.projektteendoservice.Delete(this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex])
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
 
-        this.projektteendoservice.Dto.splice(this.projektteendoservice.DtoSelectedIndex, 1);
-        this.projektteendoservice.DtoSelectedIndex = -1;
+      this.projektteendoservice.Delete(this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
 
-        this.eppFrissit = false;
-        this.torlesutan.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+          this.projektteendoservice.Dto.splice(this.projektteendoservice.DtoSelectedIndex, 1);
+          this.projektteendoservice.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.eventTorlesutan.emit();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
   }
 
-  TorlesCancel() {
-    this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Reszletek;
+  onModositaskesz() {
+    this.egymode = EgyMode.Reszletek;
   }
 
   ngOnDestroy() {

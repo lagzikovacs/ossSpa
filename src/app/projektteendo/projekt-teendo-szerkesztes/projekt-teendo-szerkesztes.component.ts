@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {TeendoService} from '../../primitiv/teendo/teendo.service';
 import {FelhasznaloService} from '../../primitiv/felhasznalo/felhasznalo.service';
 import {ProjektteendoService} from '../projektteendo.service';
@@ -6,11 +6,11 @@ import {ZoomSources} from '../../enums/zoomsources';
 import * as moment from 'moment';
 import {TeendoZoomParameter} from '../../primitiv/teendo/teendozoomparameter';
 import {ProjektService} from '../../projekt/projekt.service';
-import {ProjektteendoEgyMode} from '../projekttendoegymode';
-import {ProjektteendoContainerMode} from '../projektteendocontainermode';
 import {ProjektteendoSzerkesztesMode} from '../projektteendoszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {propCopy} from '../../tools/propCopy';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-projekt-teendo-szerkesztes',
@@ -19,6 +19,9 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
   projektteendoservice: ProjektteendoService;
   Hatarido: any;
+
+  @Input() uj = false;
+  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -40,6 +43,25 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.Hatarido = moment().format('YYYY-MM-DD');
+
+    if (this.uj) {
+      this.eppFrissit = true;
+      this.projektteendoservice.CreateNew()
+        .then(res => {
+          if (res.Error !== null) {
+            throw res.Error;
+          }
+
+          this.projektteendoservice.DtoEdited = res.Result[0];
+          this.eppFrissit = false;
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.projektteendoservice.DtoEdited = deepCopy(this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex]);
+    }
   }
 
   onSubmit() {
@@ -55,7 +77,7 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
 
         this.projektteendoservice.DtoEdited.Hatarido = moment(this.Hatarido).toISOString(true);
 
-        if (this.projektteendoservice.uj) {
+        if (this.uj) {
           this.projektteendoservice.DtoEdited.Projektkod = this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod;
           return this.projektteendoservice.Add(this.projektteendoservice.DtoEdited);
         } else {
@@ -74,14 +96,14 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
           throw res2.Error;
         }
 
-        if (this.projektteendoservice.uj) {
+        if (this.uj) {
           this.projektteendoservice.Dto.unshift(res2.Result[0]);
         } else {
-          this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex] = res2.Result[0];
+          propCopy(res2.Result[0], this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex]);
         }
 
         this.eppFrissit = false;
-        this.navigal();
+        this.eventSzerkeszteskesz.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -89,16 +111,8 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
       });
   }
 
-  cancel() {
-    this.navigal();
-  }
-
-  navigal() {
-    if (this.projektteendoservice.uj) {
-      this.projektteendoservice.ContainerMode = ProjektteendoContainerMode.List;
-    } else {
-      this.projektteendoservice.EgyMode = ProjektteendoEgyMode.Reszletek;
-    }
+  onCancel() {
+    this.eventSzerkeszteskesz.emit();
   }
 
   FelhasznaloZoom() {

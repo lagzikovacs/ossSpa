@@ -1,6 +1,6 @@
 <div class="alapkeret">
-  <h5 *ngIf="projektteendoservice.uj">Új {{projektteendoservice.cim | lowercase}}</h5>
-  <h5 *ngIf="!projektteendoservice.uj">{{projektteendoservice.cim}} módosítása</h5>
+  <h5 *ngIf="uj">Új {{projektteendoservice.cim | lowercase}}</h5>
+  <h5 *ngIf="!uj">{{projektteendoservice.cim}} módosítása</h5>
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
@@ -13,6 +13,12 @@
         <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="FelhasznaloZoom()">...</button>
       </div>
     </div>
+
+    <ng-container *ngIf="projektteendoservice.SzerkesztesMode === 1">
+      <div class="row no-gutters editform-row">
+        <app-felhasznalo-list></app-felhasznalo-list>
+      </div>
+    </ng-container>
 
     <div class="row no-gutters editform-row">
       <div>
@@ -33,6 +39,12 @@
       </div>
     </div>
 
+    <ng-container *ngIf="projektteendoservice.SzerkesztesMode === 2">
+      <div class="row no-gutters editform-row">
+        <app-teendo-list></app-teendo-list>
+      </div>
+    </ng-container>
+
     <div class="row no-gutters editform-row">
       <div>
         <div class="egylabel">Leírás</div>
@@ -44,21 +56,8 @@
 
     <div class="row no-gutters editform-row">
       <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
-      <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
+      <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>
-
-<!--  export enum ProjektteendoSzerkesztesMode {
-  Blank = 0,
-  FelhasznaloZoom = 1,
-  TeendoZoom = 2
-  }-->
-
-  <ng-container *ngIf="projektteendoservice.SzerkesztesMode === 1">
-    <app-felhasznalo-list></app-felhasznalo-list>
-  </ng-container>
-  <ng-container *ngIf="projektteendoservice.SzerkesztesMode === 2">
-    <app-teendo-list></app-teendo-list>
-  </ng-container>
 </div>
 

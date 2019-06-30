@@ -7,6 +7,7 @@ import {VagolapService} from '../../vagolap/vagolap.service';
 import {NumberResult} from '../../dtos/numberresult';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {ProjektKapcsolatResult} from '../projektkapcsolatresult';
 
 @Component({
   selector: 'app-projektkapcsolat-vagolaprol',
@@ -14,6 +15,7 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 })
 export class ProjektkapcsolatVagolaprolComponent implements OnDestroy {
   projektkapcsolatservice: ProjektkapcsolatService;
+  ci = 0;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -38,56 +40,75 @@ export class ProjektkapcsolatVagolaprolComponent implements OnDestroy {
       return;
     }
 
+    this.ci = 0;
+    this.ciklus();
+  }
+
+  add(): Promise<ProjektKapcsolatResult> {
     let p: Promise<NumberResult>;
+
+    if (this._vagolapservice.Dto[this.ci].tipus === 0) {
+      p = this.projektkapcsolatservice.AddIratToProjekt(new ProjektKapcsolatParameter(
+        this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod,
+        0,
+        this._vagolapservice.Dto[this.ci].iratkod,
+        null
+      ));
+    } else {
+      p = this.projektkapcsolatservice.AddBizonylatToProjekt(new ProjektKapcsolatParameter(
+        this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod,
+        this._vagolapservice.Dto[this.ci].bizonylatkod,
+        0,
+        null
+      ));
+    }
+
+    return p.then(res => {
+      if (res.Error != null) {
+        throw res.Error;
+      }
+
+      return this.projektkapcsolatservice.Get(res.Result);
+    });
+  }
+
+  ciklus() {
     this.eppFrissit = true;
-
-    for (let i = 0; i < this._vagolapservice.Dto.length; i++) {
-      if (this._vagolapservice.Dto[i].selected) {
-        if (this._vagolapservice.Dto[i].tipus === 0) {
-          p = this.projektkapcsolatservice.AddIratToProjekt(new ProjektKapcsolatParameter(
-            this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod,
-            0,
-            this._vagolapservice.Dto[i].iratkod,
-            null
-          ));
-        } else {
-          p = this.projektkapcsolatservice.AddBizonylatToProjekt(new ProjektKapcsolatParameter(
-            this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod,
-            this._vagolapservice.Dto[i].bizonylatkod,
-            0,
-            null
-          ));
-        }
-
-        p.then(res => {
-          if (res.Error != null) {
-            throw res.Error;
-          }
-
-          return this.projektkapcsolatservice.Get(res.Result);
-        })
-          .then(res1 => {
-            if (res1.Error != null) {
-              throw res1.Error;
+    if (this.ci < this._vagolapservice.Dto.length) {
+      if (this._vagolapservice.Dto[this.ci].selected) {
+        this.add()
+          .then(res => {
+            if (res.Error != null) {
+              throw res.Error;
             }
 
-            this.projektkapcsolatservice.Dto.unshift(res1.Result[0]);
+            this.projektkapcsolatservice.Dto.unshift(res.Result[0]);
+
+            ++this.ci;
+            this.ciklus();
           })
           .catch(err => {
             this.eppFrissit = false;
             this._errorservice.Error = err;
           });
+      } else {
+        ++this.ci;
+        this.ciklus();
       }
+    } else {
+      this.eppFrissit = false;
+      this.navigal();
     }
-    this.eppFrissit = false;
-    this.navigal();
   }
+
   cancel() {
     this.navigal();
   }
+
   navigal() {
     this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
   }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

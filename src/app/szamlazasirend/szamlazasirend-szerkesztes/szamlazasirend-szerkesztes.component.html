@@ -21,12 +21,6 @@
       </div>
     </div>
 
-    <ng-container *ngIf="szamlazasirendservice.SzerkesztesMode === 1">
-      <div class="row no-gutters editform-row">
-        <app-penznem-list></app-penznem-list>
-      </div>
-    </ng-container>
-
     <div class="row no-gutters editform-row">
       <div>
         <div class="egylabel">Megjegyzés</div>
@@ -42,6 +36,8 @@
     </div>
   </form>
 
-
+  <ng-container *ngIf="szamlazasirendservice.SzerkesztesMode === 1">
+    <app-penznem-list></app-penznem-list>
+  </ng-container>
 </div>
 

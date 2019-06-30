@@ -14,12 +14,6 @@
       </div>
     </div>
 
-    <ng-container *ngIf="projektteendoservice.SzerkesztesMode === 1">
-      <div class="row no-gutters editform-row">
-        <app-felhasznalo-list></app-felhasznalo-list>
-      </div>
-    </ng-container>
-
     <div class="row no-gutters editform-row">
       <div>
         <div class="egylabel">Határidő</div>
@@ -39,12 +33,6 @@
       </div>
     </div>
 
-    <ng-container *ngIf="projektteendoservice.SzerkesztesMode === 2">
-      <div class="row no-gutters editform-row">
-        <app-teendo-list></app-teendo-list>
-      </div>
-    </ng-container>
-
     <div class="row no-gutters editform-row">
       <div>
         <div class="egylabel">Leírás</div>
@@ -59,5 +47,12 @@
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>
+
+  <ng-container *ngIf="projektteendoservice.SzerkesztesMode === 1">
+    <app-felhasznalo-list></app-felhasznalo-list>
+  </ng-container>
+  <ng-container *ngIf="projektteendoservice.SzerkesztesMode === 2">
+    <app-teendo-list></app-teendo-list>
+  </ng-container>
 </div>
 

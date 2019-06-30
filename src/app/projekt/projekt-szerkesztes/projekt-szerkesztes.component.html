@@ -22,12 +22,6 @@
       </div>
     </div>
 
-    <ng-container *ngIf="projektservice.SzerkesztesMode === 1">
-      <div class="row no-gutters editform-row">
-        <app-ugyfel-list></app-ugyfel-list>
-      </div>
-    </ng-container>
-
     <div class="row no-gutters editform-row">
       <div style="margin-right: 5px">
         <div class="egylabel">Telepítési cím</div>
@@ -63,12 +57,6 @@
       </div>
     </div>
 
-    <ng-container *ngIf="projektservice.SzerkesztesMode === 2">
-      <div class="row no-gutters editform-row">
-        <app-penznem-list></app-penznem-list>
-      </div>
-    </ng-container>
-
     <div class="row no-gutters editform-row">
       <div style="margin-right: 5px">
         <div class="egylabel">Megjegyzés</div>
@@ -83,4 +71,11 @@
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
     </div>
   </form>
+
+  <ng-container *ngIf="projektservice.SzerkesztesMode === 1">
+    <app-ugyfel-list></app-ugyfel-list>
+  </ng-container>
+  <ng-container *ngIf="projektservice.SzerkesztesMode === 2">
+    <app-penznem-list></app-penznem-list>
+  </ng-container>
 </div>

@@ -3,7 +3,6 @@ import {ProjektService} from '../projekt.service';
 import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
 import {ProjektContainerMode} from '../projektcontainermode';
-import {ProjektEgyMode} from '../projektegymode';
 import {ProjektSzerkesztesMode} from '../projektszerkesztesmode';
 import {ProjektteendoService} from '../../projektteendo/projektteendo.service';
 import {SzamlazasirendService} from '../../szamlazasirend/szamlazasirend.service';
@@ -123,6 +122,7 @@ export class ProjektListComponent implements OnDestroy {
 
     this._projektkapcsolatservice.ProjektKod = ProjektKod;
     this._projektkapcsolatservice.UgyfelKod = UgyfelKod;
+
     this._szamlazasirendservice.ProjektKod = ProjektKod;
     this._projektteendoservice.ProjektKod = ProjektKod;
     this._ajanlatservice.ProjektKod = ProjektKod;
@@ -138,7 +138,6 @@ export class ProjektListComponent implements OnDestroy {
       .then(res2 => {
         this._projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
 
-        this.projektservice.EgyMode = ProjektEgyMode.Bizonylatesirat;
         this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
 
         this.eppFrissit = false;

@@ -78,6 +78,7 @@
       <tr *ngIf="item.Megjegyzes !== null && item.Megjegyzes !== '' && megjegyzesIs" (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
         <td colspan="100">{{item.Megjegyzes}}</td>
       </tr>
+
       <tr *ngIf="i === clickedidindex && egyTemplate !== undefined" [class.active]="i === clickedidindex">
         <td colspan="100">
           <ng-template *ngTemplateOutlet="egyTemplate"></ng-template>

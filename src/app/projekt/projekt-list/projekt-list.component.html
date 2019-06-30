@@ -22,7 +22,7 @@
                              (eventSzerkeszteskesz)="onUjkesz()"></app-projekt-szerkesztes>
   </ng-template>
   <ng-template #gridegy>
-    <app-projekt-egy (torlesutan)="torlesutan()"></app-projekt-egy>
+    <app-projekt-egy (eventTorlesutan)="torlesutan()"></app-projekt-egy>
   </ng-template>
   <app-toolbarfooter [enKereses]="!projektservice.elsokereses && !eppFrissit"
                      [rekordszam]="projektservice.Dto.length"

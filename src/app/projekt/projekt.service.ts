@@ -8,7 +8,6 @@ import {ProjektResult} from './projektresult';
 import {NumberResult} from '../dtos/numberresult';
 import {ProjektContainerMode} from './projektcontainermode';
 import {ProjektSzerkesztesMode} from './projektszerkesztesmode';
-import {ProjektEgyMode} from './projektegymode';
 import {EmptyResult} from '../dtos/emptyresult';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
@@ -34,7 +33,6 @@ export class ProjektService {
   DtoSelectedIndex = -1;
 
   ContainerMode = ProjektContainerMode.List;
-  EgyMode = ProjektEgyMode.Reszletek;
   SzerkesztesMode = ProjektSzerkesztesMode.Blank;
 
   GridSettings: ColumnSettings[] = undefined;

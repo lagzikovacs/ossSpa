@@ -3,6 +3,7 @@ export enum EgyMode {
   Reszletek = 1,
   Torles = 2,
   Modositas = 3,
+
   Jelszo = 4,
   Tevekenyseg = 5,
   BeszerzesKivet = 6,
@@ -23,5 +24,15 @@ export enum EgyMode {
 
   Teszt = 17,
 
-  Elvegezve = 18
+  Elvegezve = 18,
+
+  Statusz = 19,
+  Muszakiallapot = 20,
+  Inverter = 21,
+  Napelem = 22,
+  Iratminta = 23,
+  Bizonylatesirat = 24,
+  Szamlazasirend = 25,
+  Teendo = 26,
+  Datumok = 27,
 }

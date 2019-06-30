@@ -1,9 +1,5 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {ProjektService} from '../projekt.service';
-import {ProjektContainerMode} from '../projektcontainermode';
-import {ProjektEgyMode} from '../projektegymode';
-import {ProjektteendoService} from '../../projektteendo/projektteendo.service';
-import {SzamlazasirendService} from '../../szamlazasirend/szamlazasirend.service';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
 import {BizonylatesIratContainerMode} from '../../projektkapcsolat/bizonylatesiratcontainermode';
 import {LogonService} from '../../logon/logon.service';
@@ -12,6 +8,7 @@ import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {EgyMode} from '../../enums/egymode';
 
 @Component({
   selector: 'app-projekt-egy',
@@ -19,8 +16,11 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   animations: [rowanimation]
 })
 export class ProjektEgyComponent implements OnDestroy {
+  egymode = EgyMode.Reszletek;
   projektservice: ProjektService;
-  mod = false;
+  jog = false;
+
+  @Output() eventTorlesutan = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -33,60 +33,58 @@ export class ProjektEgyComponent implements OnDestroy {
 
   constructor(private _logonservice: LogonService,
               private _projektkapcsolatservice: ProjektkapcsolatService,
-              private _szamlazasirendservice: SzamlazasirendService,
-              private _projektteendoservice: ProjektteendoService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               projektservice: ProjektService) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PROJEKTMOD]);
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PROJEKTMOD]);
     this.projektservice = projektservice;
   }
 
   reszletek() {
-    this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
   }
   torles () {
-    this.projektservice.EgyMode = ProjektEgyMode.Torles;
+    this.egymode = EgyMode.Torles;
   }
   modositas() {
-    this.projektservice.EgyMode = ProjektEgyMode.Modositas;
+    this.egymode = EgyMode.Modositas;
   }
   onModositaskesz() {
-    this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
   }
 
   stsz() {
     this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
-    this.projektservice.EgyMode = ProjektEgyMode.Statusz;
+    this.egymode = EgyMode.Statusz;
   }
   muszakiallapot() {
     this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
-    this.projektservice.EgyMode = ProjektEgyMode.Muszakiallapot;
+    this.egymode = EgyMode.Muszakiallapot;
   }
   inverter() {
     this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
-    this.projektservice.EgyMode = ProjektEgyMode.Inverter;
+    this.egymode = EgyMode.Inverter;
   }
   napelem() {
     this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
-    this.projektservice.EgyMode = ProjektEgyMode.Napelem;
+    this.egymode = EgyMode.Napelem;
   }
   iratminta() {
-    this.projektservice.EgyMode = ProjektEgyMode.Iratminta;
+    this.egymode = EgyMode.Iratminta;
   }
   datumok() {
     this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
-    this.projektservice.EgyMode = ProjektEgyMode.Datumok;
+    this.egymode = EgyMode.Datumok;
   }
   bizonylatesirat() {
-    this.projektservice.EgyMode = ProjektEgyMode.Bizonylatesirat;
+    this.egymode = EgyMode.Bizonylatesirat;
     this._projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
   }
   szamlazasirend() {
-    this.projektservice.EgyMode = ProjektEgyMode.Szamlazasirend;
+    this.egymode = EgyMode.Szamlazasirend;
   }
   teendo() {
-    this.projektservice.EgyMode = ProjektEgyMode.Teendo;
+    this.egymode = EgyMode.Teendo;
   }
 
   SegedOk() {
@@ -107,7 +105,7 @@ export class ProjektEgyComponent implements OnDestroy {
         this.projektservice.Dto[this.projektservice.DtoSelectedIndex] = res1.Result[0];
 
         this.eppFrissit = false;
-        this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
+        this.egymode = EgyMode.Reszletek;
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -115,31 +113,33 @@ export class ProjektEgyComponent implements OnDestroy {
       });
   }
   SegedCancel() {
-    this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
+    this.egymode = EgyMode.Reszletek;
   }
 
-  TorlesOk() {
-    this.eppFrissit = true;
-    this.projektservice.Delete(this.projektservice.Dto[this.projektservice.DtoSelectedIndex])
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
 
-        this.projektservice.Dto.splice(this.projektservice.DtoSelectedIndex, 1);
-        this.projektservice.DtoSelectedIndex = -1;
+      this.projektservice.Delete(this.projektservice.Dto[this.projektservice.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
 
-        this.eppFrissit = false;
-        this.projektservice.ContainerMode = ProjektContainerMode.List;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
-  }
+          this.projektservice.Dto.splice(this.projektservice.DtoSelectedIndex, 1);
+          this.projektservice.DtoSelectedIndex = -1;
 
-  TorlesCancel() {
-    this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
+          this.eppFrissit = false;
+
+          this.eventTorlesutan.emit();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
   }
 
   ngOnDestroy() {

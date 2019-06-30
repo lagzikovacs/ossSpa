@@ -1,11 +1,10 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import * as FileSaver from 'file-saver';
 import {RiportService} from '../../riport/riport.service';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import {ProjektService} from '../projekt.service';
 import {b64toBlob} from '../../tools/b64toBlob';
-import {ProjektContainerMode} from '../projektcontainermode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 
@@ -20,6 +19,9 @@ export class ProjektExportComponent implements OnDestroy {
 
   tasktoken = '';
   szamlalo: any;
+
+  @Input() projektcsoport = '';
+  @Output() eventBezar = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -38,13 +40,13 @@ export class ProjektExportComponent implements OnDestroy {
     this.riportservice = riportservice;
   }
 
-  submit() {
+  onSubmit() {
     this.eppFrissit = true;
     this.megszakitani = false;
 
     const fi = [
       new SzMT(Szempont.Null, this.projektservice.statuszszempont.toString()),
-      new SzMT(Szempont.Null, this.projektservice.statuszexporthoz)
+      new SzMT(Szempont.Null, this.projektcsoport)
     ];
 
     this.riportservice.ProjektTaskStart(fi)
@@ -81,6 +83,8 @@ export class ProjektExportComponent implements OnDestroy {
           const blob = b64toBlob(res.Riport);
           FileSaver.saveAs(blob, 'Projekt.xls');
           this.eppFrissit = false;
+
+          this.eventBezar.emit();
         }
       })
       .catch(err => {
@@ -109,9 +113,10 @@ export class ProjektExportComponent implements OnDestroy {
     }
   }
 
-  megsem() {
-    this.megszakitani = true;
+  onCancel() {
+    this.eventBezar.emit();
   }
+
   ngOnDestroy() {
     clearInterval(this.szamlalo);
 
@@ -119,7 +124,5 @@ export class ProjektExportComponent implements OnDestroy {
       (this[k]) = null;
     });
   }
-  vissza() {
-    this.projektservice.ContainerMode = ProjektContainerMode.List;
-  }
+
 }

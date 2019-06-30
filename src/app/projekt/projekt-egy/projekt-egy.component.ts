@@ -16,7 +16,7 @@ import {EgyMode} from '../../enums/egymode';
   animations: [rowanimation]
 })
 export class ProjektEgyComponent implements OnDestroy {
-  egymode = EgyMode.Reszletek;
+  egymode = EgyMode.Bizonylatesirat;
   projektservice: ProjektService;
   jog = false;
 

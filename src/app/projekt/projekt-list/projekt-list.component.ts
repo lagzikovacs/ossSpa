@@ -2,7 +2,6 @@ import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
-import {ProjektContainerMode} from '../projektcontainermode';
 import {ProjektSzerkesztesMode} from '../projektszerkesztesmode';
 import {ProjektteendoService} from '../../projektteendo/projektteendo.service';
 import {SzamlazasirendService} from '../../szamlazasirend/szamlazasirend.service';
@@ -42,7 +41,8 @@ export class ProjektListComponent implements OnDestroy {
   ];
 
   mod = false;
-  pi = -1;
+  export = false;
+  projektcsoport = '';
 
   projektservice: ProjektService;
 
@@ -68,6 +68,8 @@ export class ProjektListComponent implements OnDestroy {
   }
 
   onKereses() {
+    this.export = false;
+
     this.projektservice.elsokereses = true;
     this.projektservice.pp.rekordtol = 0;
     this.projektservice.pp.statusz = this.projektservice.statuszszempont;
@@ -157,8 +159,11 @@ export class ProjektListComponent implements OnDestroy {
   }
 
   onExport(sszi: number) {
-    this.projektservice.statuszexporthoz = this.statuszszurok[sszi];
-    this.projektservice.ContainerMode = ProjektContainerMode.Export;
+    this.projektcsoport = this.statuszszurok[sszi];
+    this.export = true;
+  }
+  doExportbezar() {
+    this.export = false;
   }
 
   torlesutan() {

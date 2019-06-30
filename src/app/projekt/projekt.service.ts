@@ -6,7 +6,6 @@ import {ProjektParameter} from './projektparameter';
 import {environment} from '../../environments/environment';
 import {ProjektResult} from './projektresult';
 import {NumberResult} from '../dtos/numberresult';
-import {ProjektContainerMode} from './projektcontainermode';
 import {ProjektSzerkesztesMode} from './projektszerkesztesmode';
 import {EmptyResult} from '../dtos/emptyresult';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
@@ -20,7 +19,6 @@ export class ProjektService {
 
   cim = 'Projekt';
   statuszszempont = 0;
-  statuszexporthoz = '';
   teendoszempont = 0;
   szempont = 0;
   minta = '';
@@ -32,7 +30,6 @@ export class ProjektService {
   DtoEdited = new ProjektDto();
   DtoSelectedIndex = -1;
 
-  ContainerMode = ProjektContainerMode.List;
   SzerkesztesMode = ProjektSzerkesztesMode.Blank;
 
   GridSettings: ColumnSettings[] = undefined;

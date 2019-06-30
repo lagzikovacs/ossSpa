@@ -46,7 +46,6 @@ import {SzamlazasirendDto} from '../szamlazasirend/szamlazasirenddto';
 import {ProjektteendoDto} from '../projektteendo/projektteendodto';
 import {ParticioService} from '../particio/particio.service';
 import {ParticioEgyMode} from '../particio/particioegymode';
-import {ProjektContainerMode} from '../projekt/projektcontainermode';
 import {PlatformLocation} from '@angular/common';
 import {DokumentumService} from '../dokumentum/dokumentum.service';
 import {DokumentumDto} from '../dokumentum/dokumentumdto';
@@ -157,7 +156,6 @@ export class MenuService {
         this._projektservice.szempont = 0;
         this._projektservice.minta = '';
 
-        this._projektservice.ContainerMode = ProjektContainerMode.List;
         this._projektservice.Dto = new Array<ProjektDto>();
         this._projektkapcsolatservice.Dto = new Array<ProjektKapcsolatDto>();
         this._szamlazasirendservice.Dto = new Array<SzamlazasirendDto>();

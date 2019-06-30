@@ -11,6 +11,12 @@
                       [enUj]="!eppFrissit && mod" (Uj)="onUj()"
                       [enExport]="!eppFrissit" (Export)="onExport($event)">
   </app-projekttoolbar>
+
+  <ng-container *ngIf="export">
+    <app-projekt-export [projektcsoport]="projektcsoport"
+                        (eventBezar)="doExportbezar()"></app-projekt-export>
+  </ng-container>
+
   <app-projekt-tabla #tabla
                      [Dto]="projektservice.Dto"
                      (forid)="setClickedRow($event)"

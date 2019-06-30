@@ -137,7 +137,6 @@ import {UgyfelEgyComponent} from './ugyfel/ugyfel-egy/ugyfel-egy.component';
 import {PenztartetelListComponent} from './penztartetel/penztartetel-list/penztartetel-list.component';
 import {PenztarExportComponent} from './penztar/penztar-export/penztar-export.component';
 import {PenztarSzerkesztesComponent} from './penztar/penztar-szerkesztes/penztar-szerkesztes.component';
-import { ProjektContainerComponent } from './projekt/projekt-container/projekt-container.component';
 import { ProjektkapcsolatContainerComponent } from './projektkapcsolat/projektkapcsolat-container/projektkapcsolat-container.component';
 import {PenztartetelService} from './penztartetel/penztartetel.service';
 import {BizonylatService} from './bizonylat/bizonylat.service';
@@ -227,7 +226,7 @@ const routes: Routes = [
   {path: 'helyseg', component: HelysegListComponent, canActivate: [RoleGuard]},
   {path: 'ugyfel', component: UgyfelListComponent, canActivate: [RoleGuard]},
 
-  {path: 'projekt', component: ProjektContainerComponent, canActivate: [RoleGuard]},
+  {path: 'projekt', component: ProjektListComponent, canActivate: [RoleGuard]},
   {path: 'irat', component: IratListComponent, canActivate: [RoleGuard]},
   {path: 'penztar', component: PenztarListComponent, canActivate: [RoleGuard]},
   {path: 'ajanlatkeres', component: AjanlatkeresListComponent, canActivate: [RoleGuard]},
@@ -389,7 +388,6 @@ if (environment.production) {
     HelysegListComponent,
     UgyfelListComponent,
     UgyfelEgyComponent,
-    ProjektContainerComponent,
     ProjektkapcsolatContainerComponent,
     ProjektkapcsolatLevalasztasComponent,
     ProjektExportComponent,

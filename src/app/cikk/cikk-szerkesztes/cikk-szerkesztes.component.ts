@@ -12,6 +12,7 @@ import {CikkSzerkesztesMode} from '../cikkszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
+import {propCopy} from '../../tools/propCopy';
 
 @Component({
   selector: 'app-cikk-szerkesztes',
@@ -117,7 +118,7 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
         if (this.uj) {
           this.cikkservice.Dto.unshift(res4.Result[0]);
         } else {
-          this.cikkservice.Dto[this.cikkservice.DtoSelectedIndex] = res4.Result[0];
+          propCopy(res4.Result[0], this.cikkservice.Dto[this.cikkservice.DtoSelectedIndex]);
         }
 
         this.eppFrissit = false;

@@ -4,6 +4,7 @@ import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {deepCopy} from '../../../tools/deepCopy';
+import {propCopy} from '../../../tools/propCopy';
 
 @Component({
   selector: 'app-termekdij-szerkesztes',
@@ -77,7 +78,7 @@ export class TermekdijSzerkesztesComponent implements OnInit, OnDestroy {
         if (this.uj) {
           this.termekdijservice.Dto.unshift(res1.Result[0]);
         } else {
-          this.termekdijservice.Dto[this.termekdijservice.DtoSelectedIndex] = res1.Result[0];
+          propCopy(res1.Result[0], this.termekdijservice.Dto[this.termekdijservice.DtoSelectedIndex]);
         }
 
         this.eppFrissit = false;

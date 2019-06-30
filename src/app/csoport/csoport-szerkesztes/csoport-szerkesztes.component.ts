@@ -4,6 +4,7 @@ import {NumberResult} from '../../dtos/numberresult';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
+import {propCopy} from '../../tools/propCopy';
 
 @Component({
   selector: 'app-csoport-szerkesztes',
@@ -77,7 +78,7 @@ export class CsoportSzerkesztesComponent implements OnInit, OnDestroy {
         if (this.uj) {
           this.csoportservice.Dto.unshift(res1.Result[0]);
         } else {
-          this.csoportservice.Dto[this.csoportservice.DtoSelectedIndex] = res1.Result[0];
+          propCopy(res1.Result[0], this.csoportservice.Dto[this.csoportservice.DtoSelectedIndex]);
         }
 
         this.eppFrissit = false;

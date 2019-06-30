@@ -4,6 +4,7 @@ import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {deepCopy} from '../../../tools/deepCopy';
+import {propCopy} from '../../../tools/propCopy';
 
 @Component({
   selector: 'app-afakulcs-szerkesztes',
@@ -78,7 +79,7 @@ export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
         if (this.uj) {
           this.afakulcsservice.Dto.unshift(res1.Result[0]);
         } else {
-          this.afakulcsservice.Dto[this.afakulcsservice.DtoSelectedIndex] = res1.Result[0];
+          propCopy(res1.Result[0], this.afakulcsservice.Dto[this.afakulcsservice.DtoSelectedIndex]);
         }
 
         this.eppFrissit = false;

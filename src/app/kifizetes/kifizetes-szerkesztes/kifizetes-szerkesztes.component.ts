@@ -12,6 +12,7 @@ import {KifizetesEgyMode} from '../kifizetesegymode';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {propCopy} from '../../tools/propCopy';
 
 @Component({
   selector: 'app-kifizetes-szerkesztes',
@@ -100,7 +101,7 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
         if (this.bizonylatkifizetesservice.uj) {
           this.bizonylatkifizetesservice.Dto.unshift(res3.Result[0]);
         } else {
-          this.bizonylatkifizetesservice.Dto[this.bizonylatkifizetesservice.DtoSelectedIndex] = res3.Result[0];
+          propCopy(res3.Result[0], this.bizonylatkifizetesservice.Dto[this.bizonylatkifizetesservice.DtoSelectedIndex]);
         }
 
         this.eppFrissit = false;

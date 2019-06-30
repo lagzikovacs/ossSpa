@@ -9,6 +9,7 @@ import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {EgyMode} from '../../enums/egymode';
+import {propCopy} from '../../tools/propCopy';
 
 @Component({
   selector: 'app-projekt-egy',
@@ -102,7 +103,7 @@ export class ProjektEgyComponent implements OnDestroy {
           throw res1.Error;
         }
 
-        this.projektservice.Dto[this.projektservice.DtoSelectedIndex] = res1.Result[0];
+        propCopy(res1.Result[0], this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
 
         this.eppFrissit = false;
         this.egymode = EgyMode.Reszletek;

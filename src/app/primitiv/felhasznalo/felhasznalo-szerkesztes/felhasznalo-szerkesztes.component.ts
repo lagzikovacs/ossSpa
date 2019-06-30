@@ -4,6 +4,7 @@ import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {deepCopy} from '../../../tools/deepCopy';
+import {propCopy} from '../../../tools/propCopy';
 
 @Component({
   selector: 'app-felhasznalo-szerkesztes',
@@ -77,7 +78,7 @@ export class FelhasznaloSzerkesztesComponent implements OnInit, OnDestroy {
         if (this.uj) {
           this.felhasznaloservice.Dto.unshift(res1.Result[0]);
         } else {
-          this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex] = res1.Result[0];
+          propCopy(res1.Result[0], this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex]);
         }
 
         this.eppFrissit = false;

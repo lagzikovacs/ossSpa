@@ -3,6 +3,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {UgyfelService} from '../ugyfel.service';
 import {deepCopy} from '../../tools/deepCopy';
+import {propCopy} from '../../tools/propCopy';
 
 @Component({
   selector: 'app-ugyfel-csoport',
@@ -56,7 +57,7 @@ export class UgyfelCsoportComponent implements OnInit, OnDestroy {
           throw res2.Error;
         }
 
-        this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex] = res2.Result[0];
+        propCopy(res2.Result[0], this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
 
         this.eppFrissit = false;
         this.eventSzerkeszteskesz.emit();

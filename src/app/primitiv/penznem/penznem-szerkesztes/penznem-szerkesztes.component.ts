@@ -4,6 +4,7 @@ import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {deepCopy} from '../../../tools/deepCopy';
+import {propCopy} from '../../../tools/propCopy';
 
 @Component({
   selector: 'app-penznem-szerkesztes',
@@ -77,7 +78,7 @@ export class PenznemSzerkesztesComponent implements OnInit, OnDestroy {
         if (this.uj) {
           this.penznemservice.Dto.unshift(res1.Result[0]);
         } else {
-          this.penznemservice.Dto[this.penznemservice.DtoSelectedIndex] = res1.Result[0];
+          propCopy(res1.Result[0], this.penznemservice.Dto[this.penznemservice.DtoSelectedIndex]);
         }
 
         this.eppFrissit = false;

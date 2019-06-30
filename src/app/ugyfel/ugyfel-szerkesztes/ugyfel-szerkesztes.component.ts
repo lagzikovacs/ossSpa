@@ -7,6 +7,7 @@ import {UgyfelSzerkesztesMode} from '../ugyfelszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
+import {propCopy} from '../../tools/propCopy';
 
 @Component({
   selector: 'app-ugyfel-szerkesztes',
@@ -85,7 +86,7 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
         if (this.uj) {
           this.ugyfelservice.Dto.unshift(res2.Result[0]);
         } else {
-          this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex] = res2.Result[0];
+          propCopy(res2.Result[0], this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
         }
 
         this.eppFrissit = false;

@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import {PenztarService} from '../../penztar/penztar.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {propCopy} from '../../tools/propCopy';
 
 @Component({
   selector: 'app-penztartetel-szerkesztes',
@@ -126,7 +127,7 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnInit, 
           throw res2.Error;
         }
 
-        this._penztarservice.Dto[this._penztarservice.DtoSelectedIndex] = res2.Result[0];
+        propCopy(res2.Result[0], this._penztarservice.Dto[this._penztarservice.DtoSelectedIndex]);
 
         this.eppFrissit = false;
         this.eventSzerkeszteskesz.emit();

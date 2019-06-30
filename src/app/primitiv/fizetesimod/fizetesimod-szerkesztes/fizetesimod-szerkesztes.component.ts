@@ -4,6 +4,7 @@ import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {deepCopy} from '../../../tools/deepCopy';
+import {propCopy} from '../../../tools/propCopy';
 
 @Component({
   selector: 'app-fizetesimod-szerkesztes',
@@ -77,7 +78,7 @@ export class FizetesimodSzerkesztesComponent implements OnInit, OnDestroy {
         if (this.uj) {
           this.fizetesimodservice.Dto.unshift(res1.Result[0]);
         } else {
-          this.fizetesimodservice.Dto[this.fizetesimodservice.DtoSelectedIndex] = res1.Result[0];
+          propCopy(res1.Result[0], this.fizetesimodservice.Dto[this.fizetesimodservice.DtoSelectedIndex]);
         }
 
         this.eppFrissit = false;

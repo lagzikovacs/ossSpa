@@ -136,7 +136,7 @@ export class ProjektListComponent implements OnDestroy {
         return this._projektteendoservice.Kereses();
       })
       .then(res2 => {
-        // this._projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
+        this._projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
 
         this.projektservice.EgyMode = ProjektEgyMode.Bizonylatesirat;
         this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
@@ -150,23 +150,11 @@ export class ProjektListComponent implements OnDestroy {
   }
 
   onUj() {
-    this.eppFrissit = true;
-    this.projektservice.CreateNew()
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
+    this.tabla.ujtetelstart();
+  }
 
-        this.projektservice.DtoEdited = res.Result[0];
-        this.projektservice.uj = true;
-        this.eppFrissit = false;
-        this.projektservice.ContainerMode = ProjektContainerMode.Uj;
-        this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+  onUjkesz() {
+    this.tabla.ujtetelstop();
   }
 
   onExport(sszi: number) {

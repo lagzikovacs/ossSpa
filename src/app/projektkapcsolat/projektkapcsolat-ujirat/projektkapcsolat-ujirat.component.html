@@ -4,53 +4,49 @@
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Irány</div>
-      </div>
-      <div class="col-md-2">
-        <select type="text" class="form-control form-control-sm"
+      <div>
+        <div class="egylabel">Irány</div>
+        <select type="text" class="form-control form-control-sm" style="margin-right: 4px;display: inline-block"
                 [(ngModel)]="projektkapcsolatservice.UjIratDto.Irany" name="irany">
           <option>Be</option>
           <option>Ki</option>
           <option>Belső</option>
         </select>
       </div>
-    </div>
-    <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Keletkezett</div>
-      </div>
-      <div class="col-md-2">
-        <input type="date" class="form-control form-control-sm" id="keletkezett"
+
+      <div>
+        <div class="egylabel">Keletkezett</div>
+        <input type="date" class="form-control form-control-sm oszlop3" style="margin-left: 4px; background-color: aquamarine; display: inline-block" id="keletkezett"
                [(ngModel)]="Keletkezett" name="keletkezett">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Irattipus</div>
-      </div>
-      <div class="col-md-3">
-        <input type="text" class="form-control form-control-sm" id="irattipus"
-               maxlength="30" required autocomplete="off" style="background-color: aquamarine"
+      <div>
+        <div class="egylabel">Irattipus</div>
+        <input type="text" class="form-control form-control-sm oszlop4" id="irattipus"
+               maxlength="30" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="projektkapcsolatservice.UjIratDto.Irattipus" name="irattipus">
-      </div>
-      <div class="col-md-1">
-        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="IrattipusZoom()">...</button>
+        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="IrattipusZoom()">...</button>
       </div>
     </div>
-    <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Tárgy</div>
+
+    <ng-container *ngIf="projektkapcsolatservice.SzerkesztesMode === 1">
+      <div class="row no-gutters editform-row">
+        <app-irattipus-list></app-irattipus-list>
       </div>
-      <div class="col-md-4">
-        <input type="text" class="form-control form-control-sm" id="targy"
+    </ng-container>
+
+    <div class="row no-gutters editform-row">
+      <div>
+        <div class="egylabel">Tárgy</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="targy"
                maxlength="200" autocomplete="off"
                [(ngModel)]="projektkapcsolatservice.UjIratDto.Targy" name="targy">
       </div>
     </div>
 
-    <div class="row no-gutters" style="margin-bottom: 10px">
-      <div class="col-md-2"></div>
+    <div class="row no-gutters editform-row">
       <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
     </div>
@@ -61,7 +57,5 @@
   IrattipusZoom = 1,
   }-->
 
-  <ng-container *ngIf="projektkapcsolatservice.SzerkesztesMode === 1">
-    <app-irattipus-list></app-irattipus-list>
-  </ng-container>
+
 </div>

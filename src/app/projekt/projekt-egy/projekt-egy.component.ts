@@ -21,7 +21,6 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 export class ProjektEgyComponent implements OnDestroy {
   projektservice: ProjektService;
   mod = false;
-  ri = -1;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -50,28 +49,25 @@ export class ProjektEgyComponent implements OnDestroy {
     this.projektservice.EgyMode = ProjektEgyMode.Torles;
   }
   modositas() {
-    this.projektservice.uj = false;
-    this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     this.projektservice.EgyMode = ProjektEgyMode.Modositas;
+  }
+  onModositaskesz() {
+    this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
   }
 
   stsz() {
-    this.projektservice.uj = false;
     this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     this.projektservice.EgyMode = ProjektEgyMode.Statusz;
   }
   muszakiallapot() {
-    this.projektservice.uj = false;
     this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     this.projektservice.EgyMode = ProjektEgyMode.Muszakiallapot;
   }
   inverter() {
-    this.projektservice.uj = false;
     this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     this.projektservice.EgyMode = ProjektEgyMode.Inverter;
   }
   napelem() {
-    this.projektservice.uj = false;
     this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     this.projektservice.EgyMode = ProjektEgyMode.Napelem;
   }
@@ -79,7 +75,6 @@ export class ProjektEgyComponent implements OnDestroy {
     this.projektservice.EgyMode = ProjektEgyMode.Iratminta;
   }
   datumok() {
-    this.projektservice.uj = false;
     this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     this.projektservice.EgyMode = ProjektEgyMode.Datumok;
   }

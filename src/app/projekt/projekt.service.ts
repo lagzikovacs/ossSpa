@@ -26,13 +26,12 @@ export class ProjektService {
   szempont = 0;
   minta = '';
   pp = new ProjektParameter(0, environment.lapmeret);
+  elsokereses = true;
   OsszesRekord = 0;
 
   Dto: ProjektDto[] = new Array<ProjektDto>();
-  DtoSelectedIndex = -1;
-  uj = false;
   DtoEdited = new ProjektDto();
-  elsokereses = true;
+  DtoSelectedIndex = -1;
 
   ContainerMode = ProjektContainerMode.List;
   EgyMode = ProjektEgyMode.Reszletek;

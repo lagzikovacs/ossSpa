@@ -62,8 +62,7 @@
     <div [@rowanimation]>
       <app-reszletek [cim]="projektservice.cim"
                      [item]="projektservice.Dto[projektservice.DtoSelectedIndex]"
-                     [colsets]="projektservice.ReszletekSettings"
-                     [(selectedindex)]="ri">
+                     [colsets]="projektservice.ReszletekSettings">
       </app-reszletek>
     </div>
   </ng-container>
@@ -77,7 +76,11 @@
     </div>
   </ng-container>
   <ng-container *ngIf="projektservice.EgyMode === 3">
-    <div [@rowanimation]><app-projekt-szerkesztes></app-projekt-szerkesztes></div>
+    <div [@rowanimation]>
+      <app-projekt-szerkesztes [uj]="false"
+                               (eventSzerkeszteskesz)="onModositaskesz()">
+      </app-projekt-szerkesztes>
+    </div>
   </ng-container>
   <ng-container *ngIf="projektservice.EgyMode === 4">
     <div [@rowanimation]><app-projekt-statusz [eppFrissit]="eppFrissit"

@@ -1,16 +1,16 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
 import {ZoomSources} from '../../enums/zoomsources';
-import {ProjektContainerMode} from '../projektcontainermode';
 import {ProjektSzerkesztesMode} from '../projektszerkesztesmode';
-import {ProjektEgyMode} from '../projektegymode';
 import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
 import {rowanimation} from '../../animation/rowAnimation';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {deepCopy} from '../../tools/deepCopy';
+import {propCopy} from '../../tools/propCopy';
 
 @Component({
   selector: 'app-projekt-szerkesztes',
@@ -20,6 +20,9 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
   projektservice: ProjektService;
   Keletkezett: any;
+
+  @Input() uj = false;
+  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -39,6 +42,24 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    if (this.uj) {
+      this.eppFrissit = true;
+      this.projektservice.CreateNew()
+        .then(res => {
+          if (res.Error !== null) {
+            throw res.Error;
+          }
+
+          this.projektservice.DtoEdited = res.Result[0];
+          this.eppFrissit = false;
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
+    }
   }
 
   onSubmit() {
@@ -58,7 +79,7 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
           throw res1.Error;
         }
 
-        if (this.projektservice.uj) {
+        if (this.uj) {
           return this.projektservice.Add(this.projektservice.DtoEdited);
         } else {
           return this.projektservice.Update(this.projektservice.DtoEdited);
@@ -76,14 +97,14 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
           throw res3.Error;
         }
 
-        if (this.projektservice.uj) {
+        if (this.uj) {
           this.projektservice.Dto.unshift(res3.Result[0]);
         } else {
-          this.projektservice.Dto[this.projektservice.DtoSelectedIndex] = res3.Result[0];
+          propCopy(res3.Result[0], this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
         }
 
         this.eppFrissit = false;
-        this.navigal();
+        this.eventSzerkeszteskesz.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -91,14 +112,7 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
       });
   }
   cancel() {
-    this.navigal();
-  }
-  navigal() {
-    if (this.projektservice.uj) {
-      this.projektservice.ContainerMode = ProjektContainerMode.List;
-    } else {
-      this.projektservice.EgyMode = ProjektEgyMode.Reszletek;
-    }
+    this.eventSzerkeszteskesz.emit();
   }
 
   UgyfelZoom() {

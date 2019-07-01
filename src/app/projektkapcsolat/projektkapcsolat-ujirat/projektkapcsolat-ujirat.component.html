@@ -31,12 +31,6 @@
       </div>
     </div>
 
-    <ng-container *ngIf="projektkapcsolatservice.SzerkesztesMode === 1">
-      <div class="row no-gutters editform-row">
-        <app-irattipus-list></app-irattipus-list>
-      </div>
-    </ng-container>
-
     <div class="row no-gutters editform-row">
       <div>
         <div class="egylabel">Tárgy</div>
@@ -52,10 +46,7 @@
     </div>
   </form>
 
-<!--  export enum BizonylatesiratSzerkesztesMode {
-  Blank = 0,
-  IrattipusZoom = 1,
-  }-->
-
-
+  <ng-container *ngIf="projektkapcsolatservice.SzerkesztesMode === 1">
+      <app-irattipus-list></app-irattipus-list>
+  </ng-container>
 </div>

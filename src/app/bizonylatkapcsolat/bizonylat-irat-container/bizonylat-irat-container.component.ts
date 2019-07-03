@@ -10,6 +10,7 @@ export class BizonylatIratContainerComponent implements OnDestroy {
 
   constructor(bizonylatkapcsolatservice: BizonylatkapcsolatService) {
     this.bizonylatkapcsolatservice = bizonylatkapcsolatservice;
+    console.log('app-bizonylat-irat-container');
   }
 
   ngOnDestroy() {

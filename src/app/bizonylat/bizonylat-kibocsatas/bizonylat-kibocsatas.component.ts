@@ -58,6 +58,7 @@ export class BizonylatKibocsatasComponent implements OnDestroy {
             this._keszpenzes = true;
             return this._penztarsevice.ReadByCurrencyOpened(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Penznemkod);
         } else {
+          this.eppFrissit = false;
           this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
         }
       })
@@ -69,6 +70,7 @@ export class BizonylatKibocsatasComponent implements OnDestroy {
 
           this.bizonylatservice.BizonylatPenztarDto = res2.Result;
 
+          this.eppFrissit = false;
           this.bizonylatservice.EgyMode = BizonylatEgyMode.Penztar;
         }
       })

@@ -24,7 +24,7 @@
   </ng-template>
   <ng-template #gridegy>
     <app-irat-egy [enProjekt]="enProjekt"
-                  (torlesutan)="torlesutan()"></app-irat-egy>
+                  (eventTorlesutan)="torlesutan()"></app-irat-egy>
   </ng-template>
   <app-toolbarfooter [enKereses]="!iratservice.elsokereses && !eppFrissit"
                      [rekordszam]="iratservice.Dto.length"

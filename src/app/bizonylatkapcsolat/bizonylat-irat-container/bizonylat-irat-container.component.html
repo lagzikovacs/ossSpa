@@ -8,7 +8,9 @@ Levalasztas = 4,
 Vagolap = 5
 }-->
 
+
 <ng-container *ngIf="bizonylatkapcsolatservice.ContainerMode === 1">
+  {{bizonylatkapcsolatservice.ContainerMode}}
   <app-bizonylat-irat-list></app-bizonylat-irat-list>
 </ng-container>
 <ng-container *ngIf="bizonylatkapcsolatservice.ContainerMode === 2">

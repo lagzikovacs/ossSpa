@@ -96,6 +96,7 @@ export class BizonylatIratUjComponent implements OnInit, OnDestroy {
 
         this.bizonylatkapcsolatservice.Dto.unshift(res2.Result[0]);
 
+        this.eppFrissit = false;
         this.navigal();
       })
       .catch(err => {

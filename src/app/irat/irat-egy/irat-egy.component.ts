@@ -112,14 +112,14 @@ export class IratEgyComponent implements OnDestroy {
     if (ok) {
       this.eppFrissit = true;
 
-      this.projektservice.Delete(this.projektservice.Dto[this.projektservice.DtoSelectedIndex])
+      this.iratservice.Delete(this.iratservice.Dto[this.iratservice.DtoSelectedIndex])
         .then(res => {
           if (res.Error != null) {
             throw res.Error;
           }
 
-          this.projektservice.Dto.splice(this.projektservice.DtoSelectedIndex, 1);
-          this.projektservice.DtoSelectedIndex = -1;
+          this.iratservice.Dto.splice(this.iratservice.DtoSelectedIndex, 1);
+          this.iratservice.DtoSelectedIndex = -1;
 
           this.eppFrissit = false;
           this.eventTorlesutan.emit();

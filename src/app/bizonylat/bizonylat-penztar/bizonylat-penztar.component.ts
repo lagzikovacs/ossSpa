@@ -69,6 +69,7 @@ export class BizonylatPenztarComponent implements OnDestroy {
           throw res1.Error;
         }
 
+        this.eppFrissit = false;
         this.bizonylatservice.EgyMode = BizonylatEgyMode.Blank;
       })
       .catch(err => {

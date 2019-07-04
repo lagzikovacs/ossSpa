@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {FelhasznaloService} from '../felhasznalo.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
@@ -8,6 +8,10 @@ import {ProjektteendoSzerkesztesMode} from '../../../projektteendo/projektteendo
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
+import {environment} from '../../../../environments/environment';
+import {EgyszeruKeresesDto} from '../../../dtos/egyszerukeresesdto';
+import {FelhasznaloDto} from '../felhasznalodto';
+import {deepCopy} from '../../../tools/deepCopy';
 
 @Component({
   selector: 'app-felhasznalo-list',
@@ -17,8 +21,10 @@ export class FelhasznaloListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
   szurok = ['Név'];
-  mod = false;
-  felhasznaloservice: FelhasznaloService;
+  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
+  elsokereses = true;
+  jog = false;
+  zoom = false;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -29,24 +35,35 @@ export class FelhasznaloListComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  @Input() set maszk(value: string) {
+    if (value !== undefined) {
+      this.ekDto.minta = value || '';
+      this.zoom = true;
+    }
+  }
+  @Output() eventSelectzoom = new EventEmitter<FelhasznaloDto>();
+  @Output() eventStopzoom = new EventEmitter<void>();
+
+  felhasznaloservice: FelhasznaloService;
+
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
-              felhasznaloservice: FelhasznaloService,
-              private _projektteendoservice: ProjektteendoService) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.FELHASZNALOMOD]);
+              private _projektteendoservice: ProjektteendoService,
+              felhasznaloservice: FelhasznaloService) {
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.FELHASZNALOMOD]);
     this.felhasznaloservice = felhasznaloservice;
   }
 
   ngOnInit() {
-    if (this.felhasznaloservice.zoom) {
+    if (this.zoom) {
       this.onKereses();
     }
   }
 
   onKereses() {
-    this.felhasznaloservice.elsokereses = true;
-    this.felhasznaloservice.ekDto.rekordtol = 0;
+    this.elsokereses = true;
+    this.ekDto.rekordtol = 0;
 
     this.tabla.clearselections();
 
@@ -55,15 +72,15 @@ export class FelhasznaloListComponent implements OnInit, OnDestroy {
 
   onKeresesTovabb() {
     this.eppFrissit = true;
-    this.felhasznaloservice.Read(this.felhasznaloservice.ekDto.minta)
+    this.felhasznaloservice.Read(this.ekDto.minta)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        if (this.felhasznaloservice.elsokereses) {
+        if (this.elsokereses) {
           this.felhasznaloservice.Dto = res.Result;
-          this.felhasznaloservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.felhasznaloservice.Dto];
           res.Result.forEach(element => {
@@ -85,18 +102,14 @@ export class FelhasznaloListComponent implements OnInit, OnDestroy {
   }
 
   onStartzoom(i: number) {
-    if (this.felhasznaloservice.zoomsource === ZoomSources.Projektteendo) {
-      this._projektteendoservice.DtoEdited.Dedikalva = this.felhasznaloservice.Dto[i].Nev;
+    this.eventSelectzoom.emit(deepCopy(this.felhasznaloservice.Dto[i]));
 
-      this.onStopzoom();
-    }
+    this.onStopzoom();
   }
   onStopzoom() {
-    this.felhasznaloservice.zoom = false;
+    this.zoom = false;
 
-    if (this.felhasznaloservice.zoomsource === ZoomSources.Projektteendo) {
-      this._projektteendoservice.SzerkesztesMode = ProjektteendoSzerkesztesMode.Blank;
-    }
+    this.eventStopzoom.emit();
   }
 
   onId(i: number) {

@@ -5,8 +5,6 @@ import {FelhasznaloResult} from './felhasznaloresult';
 import {Md5} from 'ts-md5';
 import {JelszocsereParameter} from './jelszocsereparameter';
 import {environment} from '../../../environments/environment';
-import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
-import {ZoomSources} from '../../enums/zoomsources';
 import {LogonService} from '../../logon/logon.service';
 import {NumberResult} from '../../dtos/numberresult';
 import {EmptyResult} from '../../dtos/emptyresult';
@@ -20,15 +18,8 @@ export class FelhasznaloService {
   private readonly _controller = 'api/felhasznalo/';
   cim = 'Felhasználó';
 
-  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-  elsokereses = true;
-
   Dto: FelhasznaloDto[] = new Array<FelhasznaloDto>();
-  DtoEdited = new FelhasznaloDto();
   DtoSelectedIndex = -1;
-
-  zoom = false;
-  zoomsource: ZoomSources;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

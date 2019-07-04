@@ -5,15 +5,15 @@ import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {deepCopy} from '../../../tools/deepCopy';
 import {propCopy} from '../../../tools/propCopy';
+import {AfakulcsDto} from '../afakulcsdto';
 
 @Component({
   selector: 'app-afakulcs-szerkesztes',
   templateUrl: './afakulcs-szerkesztes.component.html'
 })
 export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
-  afakulcsservice: AfakulcsService;
-
   @Input() uj = false;
+  DtoEdited = new AfakulcsDto();
   @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
@@ -25,9 +25,11 @@ export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(afakulcsservice: AfakulcsService,
-              private _spinnerservice: SpinnerService,
-              private _errorservice: ErrorService) {
+  afakulcsservice: AfakulcsService;
+
+  constructor(private _spinnerservice: SpinnerService,
+              private _errorservice: ErrorService,
+              afakulcsservice: AfakulcsService) {
     this.afakulcsservice = afakulcsservice;
   }
 
@@ -40,7 +42,7 @@ export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
             throw res.Error;
           }
 
-          this.afakulcsservice.DtoEdited = res.Result[0];
+          this.DtoEdited = res.Result[0];
           this.eppFrissit = false;
         })
         .catch(err => {
@@ -48,7 +50,7 @@ export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.afakulcsservice.DtoEdited = deepCopy(this.afakulcsservice.Dto[this.afakulcsservice.DtoSelectedIndex]);
+      this.DtoEdited = deepCopy(this.afakulcsservice.Dto[this.afakulcsservice.DtoSelectedIndex]);
     }
   }
 
@@ -58,9 +60,9 @@ export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
     let p: Promise<NumberResult>;
 
     if (this.uj) {
-      p = this.afakulcsservice.Add(this.afakulcsservice.DtoEdited);
+      p = this.afakulcsservice.Add(this.DtoEdited);
     } else {
-      p = this.afakulcsservice.Update(this.afakulcsservice.DtoEdited);
+      p = this.afakulcsservice.Update(this.DtoEdited);
     }
 
     p

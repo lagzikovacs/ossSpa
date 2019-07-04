@@ -11,6 +11,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {propCopy} from '../../tools/propCopy';
 import {deepCopy} from '../../tools/deepCopy';
+import {FelhasznaloDto} from '../../primitiv/felhasznalo/felhasznalodto';
 
 @Component({
   selector: 'app-projekt-teendo-szerkesztes',
@@ -116,12 +117,15 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   FelhasznaloZoom() {
-    this._felhasznalosevice.ekDto.minta = this.projektteendoservice.DtoEdited.Dedikalva || '';
-    this._felhasznalosevice.zoomsource = ZoomSources.Projektteendo;
-    this._felhasznalosevice.zoom = true;
-
     this.projektteendoservice.SzerkesztesMode = ProjektteendoSzerkesztesMode.FelhasznaloZoom;
   }
+  onFelhasznaloSelectzoom(Dto: FelhasznaloDto) {
+    this.projektteendoservice.DtoEdited.Dedikalva = Dto.Nev;
+  }
+  onFelhasznaloStopzoom() {
+    this.projektteendoservice.SzerkesztesMode = ProjektteendoSzerkesztesMode.Blank;
+  }
+
   TeendoZoom() {
     this._teendoservice.ekDto.minta = this.projektteendoservice.DtoEdited.Teendo || '';
     this._teendoservice.zoomsource = ZoomSources.Projektteendo;

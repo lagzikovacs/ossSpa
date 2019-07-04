@@ -13,6 +13,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {propCopy} from '../../tools/propCopy';
+import {AfakulcsDto} from '../../primitiv/afakulcs/afakulcsdto';
 
 @Component({
   selector: 'app-cikk-szerkesztes',
@@ -141,13 +142,19 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
 
     this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.MeZoom;
   }
-  AfakulcsZoom() {
-    this._afakulcsservice.ekDto.minta = this.cikkservice.DtoEdited.Afakulcs || '';
-    this._afakulcsservice.zoomsource = ZoomSources.Cikk;
-    this._afakulcsservice.zoom = true;
 
+  AfakulcsZoom() {
     this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.AfakulcsZoom;
   }
+  onAfakulcsSelectzoom(Dto: AfakulcsDto) {
+    this.cikkservice.DtoEdited.Afakulcskod = Dto.Afakulcskod;
+    this.cikkservice.DtoEdited.Afakulcs = Dto.Afakulcs1;
+    this.cikkservice.DtoEdited.Afamerteke = Dto.Afamerteke;
+  }
+  onAfakulcsStopzoom() {
+    this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.Blank;
+  }
+
   TermekdijZoom() {
     this._termekdijservice.ekDto.minta = this.cikkservice.DtoEdited.Termekdijkt || '';
     this._termekdijservice.zoomsource = ZoomSources.Cikk;

@@ -15,6 +15,7 @@ import {AfakulcsZoomParameter} from '../../primitiv/afakulcs/afakulcszoomparamet
 import {MeZoomParameter} from '../../primitiv/me/mezoomparameter';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {AfakulcsDto} from '../../primitiv/afakulcs/afakulcsdto';
 
 @Component({
   selector: 'app-bizonylat-tetel-szerkesztes',
@@ -62,14 +63,21 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.MeZoom;
     this._cdr.detectChanges();
   }
-  AfaZoom() {
-    this._afakulcsservice.ekDto.minta = this.bizonylatservice.TetelDtoEdited.Afakulcs || '';
-    this._afakulcsservice.zoomsource = ZoomSources.Bizonylattetel;
-    this._afakulcsservice.zoom = true;
 
+  AfakulcsZoom() {
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.AfakulcsZoom;
     this._cdr.detectChanges();
   }
+  onAfakulcsSelectzoom(Dto: AfakulcsDto) {
+    this.bizonylatservice.TetelDtoEdited.Afakulcskod = Dto.Afakulcskod;
+    this.bizonylatservice.TetelDtoEdited.Afakulcs = Dto.Afakulcs1;
+    this.bizonylatservice.TetelDtoEdited.Afamerteke = Dto.Afamerteke;
+  }
+  onAfakulcsStopzoom() {
+    this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
+    this._cdr.detectChanges();
+  }
+
   TermekdijZoom() {
     this._termekdijservice.ekDto.minta = this.bizonylatservice.TetelDtoEdited.Termekdijkt || '';
     this._termekdijservice.zoomsource = ZoomSources.Bizonylattetel;

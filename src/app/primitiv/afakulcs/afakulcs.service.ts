@@ -3,14 +3,12 @@ import {NumberResult} from '../../dtos/numberresult';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {AfakulcsDto} from './afakulcsdto';
-import {ZoomSources} from '../../enums/zoomsources';
 import {LogonService} from '../../logon/logon.service';
 import {AfakulcsResult} from './afakulcsresult';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {AfakulcsZoomParameter} from './afakulcszoomparameter';
 import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 import {ColumnSettings} from '../../tools/reszletek/columnsettings';
-import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
 
 @Injectable({
   providedIn: 'root'
@@ -19,15 +17,8 @@ export class AfakulcsService {
   private readonly _controller = 'api/afakulcs/';
   cim = 'ÁFA kulcs';
 
-  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-  elsokereses = true;
-
   Dto: AfakulcsDto[] = new Array<AfakulcsDto>();
-  DtoEdited = new AfakulcsDto();
   DtoSelectedIndex = -1;
-
-  zoom = false;
-  zoomsource: ZoomSources;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

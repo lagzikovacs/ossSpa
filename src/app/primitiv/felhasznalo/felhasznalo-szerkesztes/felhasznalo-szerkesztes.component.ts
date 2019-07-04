@@ -5,6 +5,7 @@ import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {deepCopy} from '../../../tools/deepCopy';
 import {propCopy} from '../../../tools/propCopy';
+import {FelhasznaloDto} from '../felhasznalodto';
 
 @Component({
   selector: 'app-felhasznalo-szerkesztes',
@@ -14,6 +15,7 @@ export class FelhasznaloSzerkesztesComponent implements OnInit, OnDestroy {
   felhasznaloservice: FelhasznaloService;
 
   @Input() uj = false;
+  DtoEdited = new FelhasznaloDto();
   @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
@@ -40,7 +42,7 @@ export class FelhasznaloSzerkesztesComponent implements OnInit, OnDestroy {
             throw res.Error;
           }
 
-          this.felhasznaloservice.DtoEdited = res.Result[0];
+          this.DtoEdited = res.Result[0];
           this.eppFrissit = false;
         })
         .catch(err => {
@@ -48,7 +50,7 @@ export class FelhasznaloSzerkesztesComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.felhasznaloservice.DtoEdited = deepCopy(this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex]);
+      this.DtoEdited = deepCopy(this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex]);
     }
   }
 
@@ -57,9 +59,9 @@ export class FelhasznaloSzerkesztesComponent implements OnInit, OnDestroy {
     let p: Promise<NumberResult>;
 
     if (this.uj) {
-      p = this.felhasznaloservice.Add(this.felhasznaloservice.DtoEdited);
+      p = this.felhasznaloservice.Add(this.DtoEdited);
     } else {
-      p = this.felhasznaloservice.Update(this.felhasznaloservice.DtoEdited);
+      p = this.felhasznaloservice.Update(this.DtoEdited);
     }
 
     p

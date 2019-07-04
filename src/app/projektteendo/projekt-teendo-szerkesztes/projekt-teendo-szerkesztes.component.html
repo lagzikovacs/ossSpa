@@ -49,7 +49,9 @@
   </form>
 
   <ng-container *ngIf="projektteendoservice.SzerkesztesMode === 1">
-    <app-felhasznalo-list></app-felhasznalo-list>
+    <app-felhasznalo-list [maszk]="this.projektteendoservice.DtoEdited.Dedikalva || ''"
+                          (eventSelectzoom)="onFelhasznaloSelectzoom($event)"
+                          (eventStopzoom)="onFelhasznaloStopzoom()"></app-felhasznalo-list>
   </ng-container>
   <ng-container *ngIf="projektteendoservice.SzerkesztesMode === 2">
     <app-teendo-list></app-teendo-list>

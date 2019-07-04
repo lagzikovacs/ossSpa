@@ -1,17 +1,17 @@
 <div class="alapkeret">
-  <h5 *ngIf="!felhasznaloservice.zoom">{{felhasznaloservice.cim}}</h5>
-  <h5 *ngIf="felhasznaloservice.zoom">{{felhasznaloservice.cim}} - zoom</h5>
+  <h5 *ngIf="!zoom">{{felhasznaloservice.cim}}</h5>
+  <h5 *ngIf="zoom">{{felhasznaloservice.cim}} - zoom</h5>
   <app-toolbar [Szurok]="szurok"
-               [(szempont)]="felhasznaloservice.ekDto.szempont"
-               [(minta)]="felhasznaloservice.ekDto.minta"
+               [(szempont)]="ekDto.szempont"
+               [(minta)]="ekDto.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit && mod" (Uj)="onUj()"
-               [visZoom]="felhasznaloservice.zoom" (StopZoom)="onStopzoom()">
+               [enUj]="!eppFrissit && jog" (Uj)="onUj()"
+               [visZoom]="zoom" (StopZoom)="onStopzoom()">
   </app-toolbar>
   <app-tabla #tabla
              [items]="felhasznaloservice.Dto"
              [colsets]="felhasznaloservice.GridSettings"
-             [zoom]="felhasznaloservice.zoom"
+             [zoom]="zoom"
              (forzoom)="onStartzoom($event)"
              (forid)="onId($event)"
              [ujTemplate]="griduj"

@@ -130,7 +130,6 @@ export class MenuService {
         this._meservice.Dto = new Array<MeDto>();
         break;
       case '/afakulcs':
-        this._afakulcsservice.zoom = false;
         this._afakulcsservice.Dto = new Array<AfakulcsDto>();
         break;
       case '/termekdij':
@@ -218,7 +217,6 @@ export class MenuService {
         this._volumeservice.Dto = new Array<VolumeDto>();
         break;
       case '/felhasznalo':
-        this._felhasznaloservice.zoom = false;
         this._felhasznaloservice.Dto = new Array<FelhasznaloDto>();
         break;
       case '/csoport':

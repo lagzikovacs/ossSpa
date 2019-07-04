@@ -116,7 +116,7 @@
              maxlength="10" required autocomplete="off" style="background-color: aquamarine">
     </div>
     <div class="col-md-1">
-      <button class="btn btn-sm btn-outline-primary" (click)="AfaZoom()"
+      <button class="btn btn-sm btn-outline-primary" (click)="AfakulcsZoom()"
               style="margin-left: 4px" type="button">...</button>
     </div>
   </div>
@@ -232,7 +232,9 @@
     <app-me-list></app-me-list>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.TetelSzerkesztesMode === 3">
-    <app-afakulcs-list></app-afakulcs-list>
+    <app-afakulcs-list [maszk]="this.bizonylatservice.TetelDtoEdited.Afakulcs || ''"
+                       (eventSelectzoom)="onAfakulcsSelectzoom($event)"
+                       (eventStopzoom)="onAfakulcsStopzoom()"></app-afakulcs-list>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.TetelSzerkesztesMode === 4">
     <app-termekdij-list></app-termekdij-list>

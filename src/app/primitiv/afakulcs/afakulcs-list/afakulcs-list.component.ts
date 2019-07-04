@@ -1,15 +1,14 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {AfakulcsService} from '../afakulcs.service';
-import {CikkService} from '../../../cikk/cikk.service';
-import {ZoomSources} from '../../../enums/zoomsources';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
-import {CikkSzerkesztesMode} from '../../../cikk/cikkszerkesztesmode';
-import {BizonylattetelSzerkesztesMode} from '../../../bizonylat/bizonylattetelszerkesztesmode';
-import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
+import {AfakulcsDto} from '../afakulcsdto';
+import {deepCopy} from '../../../tools/deepCopy';
+import {environment} from '../../../../environments/environment.prod';
+import {EgyszeruKeresesDto} from '../../../dtos/egyszerukeresesdto';
 
 @Component({
   selector: 'app-afakulcs-list',
@@ -19,8 +18,10 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
   szurok = ['ÁFA kulcs'];
+  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
+  elsokereses = true;
   jog = false;
-  afakulcsservice: AfakulcsService;
+  zoom = false;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -31,9 +32,18 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  @Input() set maszk(value: string) {
+    if (value !== undefined) {
+      this.ekDto.minta = value || '';
+      this.zoom = true;
+    }
+  }
+  @Output() eventSelectzoom = new EventEmitter<AfakulcsDto>();
+  @Output() eventStopzoom = new EventEmitter<void>();
+
+  afakulcsservice: AfakulcsService;
+
   constructor(private _logonservice: LogonService,
-              private _cikkservice: CikkService,
-              private _bizonylatservice: BizonylatService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               afakulcsservice: AfakulcsService) {
@@ -42,14 +52,14 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (this.afakulcsservice.zoom) {
+    if (this.zoom) {
       this.onKereses();
     }
   }
 
   onKereses() {
-    this.afakulcsservice.elsokereses = true;
-    this.afakulcsservice.ekDto.rekordtol = 0;
+    this.elsokereses = true;
+    this.ekDto.rekordtol = 0;
     this.afakulcsservice.DtoSelectedIndex = -1;
 
     this.tabla.clearselections();
@@ -59,15 +69,15 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
 
   onKeresesTovabb() {
     this.eppFrissit = true;
-    this.afakulcsservice.Read(this.afakulcsservice.ekDto.minta)
+    this.afakulcsservice.Read(this.ekDto.minta)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        if (this.afakulcsservice.elsokereses) {
+        if (this.elsokereses) {
           this.afakulcsservice.Dto = res.Result;
-          this.afakulcsservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.afakulcsservice.Dto];
           res.Result.forEach(element => {
@@ -85,29 +95,15 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
   }
 
   onStartzoom(i: number) {
-    if (this.afakulcsservice.zoomsource === ZoomSources.Cikk) {
-      this._cikkservice.DtoEdited.Afakulcskod = this.afakulcsservice.Dto[i].Afakulcskod;
-      this._cikkservice.DtoEdited.Afakulcs = this.afakulcsservice.Dto[i].Afakulcs1;
-      this._cikkservice.DtoEdited.Afamerteke = this.afakulcsservice.Dto[i].Afamerteke;
-    }
-    if (this.afakulcsservice.zoomsource === ZoomSources.Bizonylattetel) {
-      this._bizonylatservice.TetelDtoEdited.Afakulcskod = this.afakulcsservice.Dto[i].Afakulcskod;
-      this._bizonylatservice.TetelDtoEdited.Afakulcs = this.afakulcsservice.Dto[i].Afakulcs1;
-      this._bizonylatservice.TetelDtoEdited.Afamerteke = this.afakulcsservice.Dto[i].Afamerteke;
-    }
+    this.eventSelectzoom.emit(deepCopy(this.afakulcsservice.Dto[i]));
 
     this.onStopzoom();
   }
 
   onStopzoom() {
-    this.afakulcsservice.zoom = false;
+    this.zoom = false;
 
-    if (this.afakulcsservice.zoomsource === ZoomSources.Cikk) {
-      this._cikkservice.SzerkesztesMode = CikkSzerkesztesMode.Blank;
-    }
-    if (this.afakulcsservice.zoomsource === ZoomSources.Bizonylattetel) {
-      this._bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
-    }
+    this.eventStopzoom.emit();
   }
 
   onId(i: number) {

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {MeService} from '../me.service';
 import {ZoomSources} from '../../../enums/zoomsources';
 import {CikkService} from '../../../cikk/cikk.service';
@@ -10,6 +10,10 @@ import {BizonylattetelSzerkesztesMode} from '../../../bizonylat/bizonylattetelsz
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
+import {environment} from '../../../../environments/environment';
+import {EgyszeruKeresesDto} from '../../../dtos/egyszerukeresesdto';
+import {MeDto} from '../medto';
+import {deepCopy} from '../../../tools/deepCopy';
 
 @Component({
   selector: 'app-me-list',
@@ -19,8 +23,10 @@ export class MeListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
   szurok = ['Mennyiségi egység'];
-  mod = false;
-  meservice: MeService;
+  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
+  elsokereses = true;
+  jog = false;
+  zoom = false;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -31,25 +37,34 @@ export class MeListComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  @Input() set maszk(value: string) {
+    if (value !== undefined) {
+      this.ekDto.minta = value || '';
+      this.zoom = true;
+    }
+  }
+  @Output() eventSelectzoom = new EventEmitter<MeDto>();
+  @Output() eventStopzoom = new EventEmitter<void>();
+
+  meservice: MeService;
+
   constructor(private _logonservice: LogonService,
-              private _cikkservice: CikkService,
-              private _bizonylatservice: BizonylatService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               meservice: MeService) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.meservice = meservice;
   }
 
   ngOnInit() {
-    if (this.meservice.zoom) {
+    if (this.zoom) {
       this.onKereses();
     }
   }
 
   onKereses() {
-    this.meservice.elsokereses = true;
-    this.meservice.ekDto.rekordtol = 0;
+    this.elsokereses = true;
+    this.ekDto.rekordtol = 0;
 
     this.tabla.clearselections();
 
@@ -58,15 +73,15 @@ export class MeListComponent implements OnInit, OnDestroy {
 
   onKeresesTovabb() {
     this.eppFrissit = true;
-    this.meservice.Read(this.meservice.ekDto.minta)
+    this.meservice.Read(this.ekDto.minta)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        if (this.meservice.elsokereses) {
+        if (this.elsokereses) {
           this.meservice.Dto = res.Result;
-          this.meservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.meservice.Dto];
           res.Result.forEach(element => {
@@ -88,26 +103,14 @@ export class MeListComponent implements OnInit, OnDestroy {
   }
 
   onStartzoom(i: number) {
-    if (this.meservice.zoomsource === ZoomSources.Cikk) {
-      this._cikkservice.DtoEdited.Mekod = this.meservice.Dto[i].Mekod;
-      this._cikkservice.DtoEdited.Me = this.meservice.Dto[i].Me;
-    }
-    if (this.meservice.zoomsource === ZoomSources.Bizonylattetel) {
-      this._bizonylatservice.TetelDtoEdited.Mekod = this.meservice.Dto[i].Mekod;
-      this._bizonylatservice.TetelDtoEdited.Me = this.meservice.Dto[i].Me;
-    }
+    this.eventSelectzoom.emit(deepCopy(this.meservice.Dto[i]));
 
     this.onStopzoom();
   }
   onStopzoom() {
-    this.meservice.zoom = false;
+    this.zoom = false;
 
-    if (this.meservice.zoomsource === ZoomSources.Cikk) {
-      this._cikkservice.SzerkesztesMode = CikkSzerkesztesMode.Blank;
-    }
-    if (this.meservice.zoomsource === ZoomSources.Bizonylattetel) {
-      this._bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
-    }
+    this.eventStopzoom.emit();
   }
 
   onId(i: number) {

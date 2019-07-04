@@ -12,6 +12,7 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {propCopy} from '../../tools/propCopy';
 import {deepCopy} from '../../tools/deepCopy';
 import {FelhasznaloDto} from '../../primitiv/felhasznalo/felhasznalodto';
+import {TeendoDto} from '../../primitiv/teendo/teendodto';
 
 @Component({
   selector: 'app-projekt-teendo-szerkesztes',
@@ -127,11 +128,14 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   TeendoZoom() {
-    this._teendoservice.ekDto.minta = this.projektteendoservice.DtoEdited.Teendo || '';
-    this._teendoservice.zoomsource = ZoomSources.Projektteendo;
-    this._teendoservice.zoom = true;
-
     this.projektteendoservice.SzerkesztesMode = ProjektteendoSzerkesztesMode.TeendoZoom;
+  }
+  onTeendoSelectzoom(Dto: TeendoDto) {
+    this.projektteendoservice.DtoEdited.Teendokod = Dto.Teendokod;
+    this.projektteendoservice.DtoEdited.Teendo = Dto.Teendo1;
+  }
+  onTeendoStopzoom() {
+    this.projektteendoservice.SzerkesztesMode = ProjektteendoSzerkesztesMode.Blank;
   }
 
   ngOnDestroy() {

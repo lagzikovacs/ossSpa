@@ -8,6 +8,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {propCopy} from '../../tools/propCopy';
+import {HelysegDto} from '../../primitiv/helyseg/helysegdto';
 
 @Component({
   selector: 'app-ugyfel-szerkesztes',
@@ -102,11 +103,14 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   HelysegZoom() {
-    this._helysegservice.ekDto.minta = this.ugyfelservice.DtoEdited.Helysegnev || '';
-    this._helysegservice.zoomsource = ZoomSources.Ugyfel;
-    this._helysegservice.zoom = true;
-
     this.ugyfelservice.SzerkesztesMode = UgyfelSzerkesztesMode.HelysegZoom;
+  }
+  onHelysegSelectzoom(Dto: HelysegDto) {
+    this.ugyfelservice.DtoEdited.Helysegkod = Dto.Helysegkod;
+    this.ugyfelservice.DtoEdited.Helysegnev = Dto.Helysegnev;
+  }
+  onHelysegStopzoom() {
+    this.ugyfelservice.SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
   }
 
   ngOnDestroy() {

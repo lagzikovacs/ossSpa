@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {HelysegService} from '../helyseg.service';
 import {LogonService} from '../../../logon/logon.service';
 import {UgyfelService} from '../../../ugyfel/ugyfel.service';
@@ -8,6 +8,10 @@ import {UgyfelSzerkesztesMode} from '../../../ugyfel/ugyfelszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
+import {environment} from '../../../../environments/environment';
+import {EgyszeruKeresesDto} from '../../../dtos/egyszerukeresesdto';
+import {HelysegDto} from '../helysegdto';
+import {deepCopy} from '../../../tools/deepCopy';
 
 @Component({
   selector: 'app-helyseg-list',
@@ -17,8 +21,10 @@ export class HelysegListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
   szurok = ['Helységnév'];
-  mod = false;
-  helysegservice: HelysegService;
+  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
+  elsokereses = true;
+  jog = false;
+  zoom = false;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -29,24 +35,35 @@ export class HelysegListComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  @Input() set maszk(value: string) {
+    if (value !== undefined) {
+      this.ekDto.minta = value || '';
+      this.zoom = true;
+    }
+  }
+  @Output() eventSelectzoom = new EventEmitter<HelysegDto>();
+  @Output() eventStopzoom = new EventEmitter<void>();
+
+  helysegservice: HelysegService;
+
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               helysegservice: HelysegService,
               private ugyfelservice: UgyfelService) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.helysegservice = helysegservice;
   }
 
   ngOnInit() {
-    if (this.helysegservice.zoom) {
+    if (this.zoom) {
       this.onKereses();
     }
   }
 
   onKereses() {
-    this.helysegservice.elsokereses = true;
-    this.helysegservice.ekDto.rekordtol = 0;
+    this.elsokereses = true;
+    this.ekDto.rekordtol = 0;
 
     this.tabla.clearselections();
 
@@ -55,15 +72,15 @@ export class HelysegListComponent implements OnInit, OnDestroy {
 
   onKeresesTovabb() {
     this.eppFrissit = true;
-    this.helysegservice.Read(this.helysegservice.ekDto.minta)
+    this.helysegservice.Read(this.ekDto.minta)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        if (this.helysegservice.elsokereses) {
+        if (this.elsokereses) {
           this.helysegservice.Dto = res.Result;
-          this.helysegservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.helysegservice.Dto];
           res.Result.forEach(element => {
@@ -85,15 +102,12 @@ export class HelysegListComponent implements OnInit, OnDestroy {
   }
 
   onStartzoom(i: number) {
-    if (this.helysegservice.zoomsource === ZoomSources.Ugyfel) {
-      this.ugyfelservice.DtoEdited.Helysegkod = this.helysegservice.Dto[i].Helysegkod;
-      this.ugyfelservice.DtoEdited.Helysegnev = this.helysegservice.Dto[i].Helysegnev;
+    this.eventSelectzoom.emit(deepCopy(this.helysegservice.Dto[i]));
 
-      this.onStopzoom();
-    }
+    this.onStopzoom();
   }
   onStopzoom() {
-    this.helysegservice.zoom = false;
+    this.zoom = false;
 
     this.ugyfelservice.SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
   }

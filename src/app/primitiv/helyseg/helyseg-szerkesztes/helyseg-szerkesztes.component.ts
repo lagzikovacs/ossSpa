@@ -5,15 +5,15 @@ import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {deepCopy} from '../../../tools/deepCopy';
 import {propCopy} from '../../../tools/propCopy';
+import {HelysegDto} from '../helysegdto';
 
 @Component({
   selector: 'app-helyseg-szerkesztes',
   templateUrl: './helyseg-szerkesztes.component.html'
 })
 export class HelysegSzerkesztesComponent implements OnInit, OnDestroy {
-  helysegservice: HelysegService;
-
   @Input() uj = false;
+  DtoEdited = new HelysegDto();
   @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
@@ -25,9 +25,11 @@ export class HelysegSzerkesztesComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(helysegservice: HelysegService,
-              private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService) {
+  helysegservice: HelysegService;
+
+  constructor(private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
+              helysegservice: HelysegService) {
     this.helysegservice = helysegservice;
   }
 
@@ -40,7 +42,7 @@ export class HelysegSzerkesztesComponent implements OnInit, OnDestroy {
             throw res.Error;
           }
 
-          this.helysegservice.DtoEdited = res.Result[0];
+          this.DtoEdited = res.Result[0];
           this.eppFrissit = false;
         })
         .catch(err => {
@@ -48,7 +50,7 @@ export class HelysegSzerkesztesComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.helysegservice.DtoEdited = deepCopy(this.helysegservice.Dto[this.helysegservice.DtoSelectedIndex]);
+      this.DtoEdited = deepCopy(this.helysegservice.Dto[this.helysegservice.DtoSelectedIndex]);
     }
   }
 
@@ -57,9 +59,9 @@ export class HelysegSzerkesztesComponent implements OnInit, OnDestroy {
     let p: Promise<NumberResult>;
 
     if (this.uj) {
-      p = this.helysegservice.Add(this.helysegservice.DtoEdited);
+      p = this.helysegservice.Add(this.DtoEdited);
     } else {
-      p = this.helysegservice.Update(this.helysegservice.DtoEdited);
+      p = this.helysegservice.Update(this.DtoEdited);
     }
 
     p

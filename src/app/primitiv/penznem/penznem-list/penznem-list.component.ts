@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {PenznemService} from '../penznem.service';
 import {LogonService} from '../../../logon/logon.service';
 import {PenztarService} from '../../../penztar/penztar.service';
@@ -16,6 +16,10 @@ import {BizonylatSzerkesztesMode} from '../../../bizonylat/bizonylatszerkesztesm
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
+import {environment} from '../../../../environments/environment';
+import {EgyszeruKeresesDto} from '../../../dtos/egyszerukeresesdto';
+import {PenznemDto} from '../penznemdto';
+import {deepCopy} from '../../../tools/deepCopy';
 
 
 @Component({
@@ -26,8 +30,10 @@ export class PenznemListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
   szurok = ['Pénznem'];
-  mod = false;
-  penznemservice: PenznemService;
+  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
+  elsokereses = true;
+  jog = false;
+  zoom = false;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -38,28 +44,34 @@ export class PenznemListComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  @Input() set maszk(value: string) {
+    if (value !== undefined) {
+      this.ekDto.minta = value || '';
+      this.zoom = true;
+    }
+  }
+  @Output() eventSelectzoom = new EventEmitter<PenznemDto>();
+  @Output() eventStopzoom = new EventEmitter<void>();
+
+  penznemservice: PenznemService;
+
   constructor(private _logonservice: LogonService,
-              private _penztarservice: PenztarService,
-              private _projektservice: ProjektService,
-              private _szamlazasirendservice: SzamlazasirendService,
-              private _bizonylatkifizetesservice: KifizetesService,
-              private _bizonylatservice: BizonylatService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               penznemservice: PenznemService) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.penznemservice = penznemservice;
   }
 
   ngOnInit() {
-    if (this.penznemservice.zoom) {
+    if (this.zoom) {
       this.onKereses();
     }
   }
 
   onKereses() {
-    this.penznemservice.elsokereses = true;
-    this.penznemservice.ekDto.rekordtol = 0;
+    this.elsokereses = true;
+    this.ekDto.rekordtol = 0;
 
     this.tabla.clearselections();
 
@@ -68,15 +80,15 @@ export class PenznemListComponent implements OnInit, OnDestroy {
 
   onKeresesTovabb() {
     this.eppFrissit = true;
-    this.penznemservice.Read(this.penznemservice.ekDto.minta)
+    this.penznemservice.Read(this.ekDto.minta)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        if (this.penznemservice.elsokereses) {
+        if (this.elsokereses) {
           this.penznemservice.Dto = res.Result;
-          this.penznemservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.penznemservice.Dto];
           res.Result.forEach(element => {
@@ -98,47 +110,14 @@ export class PenznemListComponent implements OnInit, OnDestroy {
   }
 
   onStartzoom(i: number) {
-    if (this.penznemservice.zoomsource === ZoomSources.Penztar) {
-      this._penztarservice.DtoEdited.Penznemkod = this.penznemservice.Dto[i].Penznemkod;
-      this._penztarservice.DtoEdited.Penznem = this.penznemservice.Dto[i].Penznem1;
-    }
-    if (this.penznemservice.zoomsource === ZoomSources.Projekt) {
-      this._projektservice.DtoEdited.Penznemkod = this.penznemservice.Dto[i].Penznemkod;
-      this._projektservice.DtoEdited.Penznem = this.penznemservice.Dto[i].Penznem1;
-    }
-    if (this.penznemservice.zoomsource === ZoomSources.Szamlazasirend) {
-      this._szamlazasirendservice.DtoEdited.Penznemkod = this.penznemservice.Dto[i].Penznemkod;
-      this._szamlazasirendservice.DtoEdited.Penznem = this.penznemservice.Dto[i].Penznem1;
-    }
-    if (this.penznemservice.zoomsource === ZoomSources.Bizonylatkifizetes) {
-      this._bizonylatkifizetesservice.DtoEdited.Penznemkod = this.penznemservice.Dto[i].Penznemkod;
-      this._bizonylatkifizetesservice.DtoEdited.Penznem = this.penznemservice.Dto[i].Penznem1;
-    }
-    if (this.penznemservice.zoomsource === ZoomSources.Bizonylat) {
-      this._bizonylatservice.ComplexDtoEdited.Dto.Penznemkod = this.penznemservice.Dto[i].Penznemkod;
-      this._bizonylatservice.ComplexDtoEdited.Dto.Penznem = this.penznemservice.Dto[i].Penznem1;
-    }
+    this.eventSelectzoom.emit(deepCopy(this.penznemservice.Dto[i]));
 
     this.onStopzoom();
   }
   onStopzoom() {
-    this.penznemservice.zoom = false;
+    this.zoom = false;
 
-    if (this.penznemservice.zoomsource === ZoomSources.Penztar) {
-      this._penztarservice.SzerkesztesMode = PenztarSzerkesztesMode.Blank;
-    }
-    if (this.penznemservice.zoomsource === ZoomSources.Projekt) {
-      this._projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
-    }
-    if (this.penznemservice.zoomsource === ZoomSources.Szamlazasirend) {
-      this._szamlazasirendservice.SzerkesztesMode = SzamlazasirendSzerkesztesMode.Blank;
-    }
-    if (this.penznemservice.zoomsource === ZoomSources.Bizonylatkifizetes) {
-      this._bizonylatkifizetesservice.SzerkesztesMode = KifizetesSzerkesztesMode.Blank;
-    }
-    if (this.penznemservice.zoomsource === ZoomSources.Bizonylat) {
-      this._bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
-    }
+    this.eventStopzoom.emit();
   }
 
   onId(i: number) {

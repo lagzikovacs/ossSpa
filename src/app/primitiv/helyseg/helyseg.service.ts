@@ -19,15 +19,8 @@ export class HelysegService {
   private readonly _controller = 'api/helyseg/';
   cim = 'Helység';
 
-  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-  elsokereses = true;
-
   Dto: HelysegDto[] = new Array<HelysegDto>();
-  DtoEdited = new HelysegDto();
   DtoSelectedIndex = -1;
-
-  zoom = false;
-  zoomsource: ZoomSources;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

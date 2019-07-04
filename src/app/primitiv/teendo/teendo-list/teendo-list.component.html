@@ -1,17 +1,17 @@
 <div class="alapkeret">
-  <h5 *ngIf="!teendoservice.zoom">{{teendoservice.cim}}</h5>
-  <h5 *ngIf="teendoservice.zoom">{{teendoservice.cim}} - zoom</h5>
+  <h5 *ngIf="!zoom">{{teendoservice.cim}}</h5>
+  <h5 *ngIf="zoom">{{teendoservice.cim}} - zoom</h5>
   <app-toolbar [Szurok]="szurok"
-               [(szempont)]="teendoservice.ekDto.szempont"
-               [(minta)]="teendoservice.ekDto.minta"
+               [(szempont)]="ekDto.szempont"
+               [(minta)]="ekDto.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit && mod" (Uj)="onUj()"
-               [visZoom]="teendoservice.zoom" (StopZoom)="onStopzoom()">
+               [enUj]="!eppFrissit && jog" (Uj)="onUj()"
+               [visZoom]="zoom" (StopZoom)="onStopzoom()">
   </app-toolbar>
   <app-tabla #tabla
              [items]="teendoservice.Dto"
              [colsets]="teendoservice.GridSettings"
-             [zoom]="teendoservice.zoom"
+             [zoom]="zoom"
              (forzoom)="onStartzoom($event)"
              (forid)="onId($event)"
              [ujTemplate]="griduj"

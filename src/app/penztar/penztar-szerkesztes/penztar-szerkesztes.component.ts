@@ -8,6 +8,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {propCopy} from '../../tools/propCopy';
+import {PenznemDto} from '../../primitiv/penznem/penznemdto';
 
 @Component({
   selector: 'app-penztar-szerkesztes',
@@ -102,11 +103,14 @@ export class PenztarSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   PenznemZoom() {
-    this._penznemservice.ekDto.minta = this.penztarservice.DtoEdited.Penznem || '';
-    this._penznemservice.zoomsource = ZoomSources.Penztar;
-    this._penznemservice.zoom = true;
-
     this.penztarservice.SzerkesztesMode = PenztarSzerkesztesMode.PenznemZoom;
+  }
+  onPenznemSelectzoom(Dto: PenznemDto) {
+    this.penztarservice.DtoEdited.Penznemkod = Dto.Penznemkod;
+    this.penztarservice.DtoEdited.Penznem = Dto.Penznem1;
+  }
+  onPenznemStopzoom() {
+    this.penztarservice.SzerkesztesMode = PenztarSzerkesztesMode.Blank;
   }
 
   ngOnDestroy() {

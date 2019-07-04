@@ -9,6 +9,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {propCopy} from '../../tools/propCopy';
+import {PenznemDto} from '../../primitiv/penznem/penznemdto';
 
 @Component({
   selector: 'app-szamlazasirend-szerkesztes',
@@ -107,11 +108,14 @@ export class SzamlazasirendSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   PenznemZoom() {
-    this._penznemservice.ekDto.minta = this.szamlazasirendservice.DtoEdited.Penznem || '';
-    this._penznemservice.zoomsource = ZoomSources.Szamlazasirend;
-    this._penznemservice.zoom = true;
-
     this.szamlazasirendservice.SzerkesztesMode = SzamlazasirendSzerkesztesMode.PenznemZoom;
+  }
+  onPenznemSelectzoom(Dto: PenznemDto) {
+    this.szamlazasirendservice.DtoEdited.Penznemkod = Dto.Penznemkod;
+    this.szamlazasirendservice.DtoEdited.Penznem = Dto.Penznem1;
+  }
+  onPenznemStopzoom() {
+    this.szamlazasirendservice.SzerkesztesMode = SzamlazasirendSzerkesztesMode.Blank;
   }
 
   ngOnDestroy() {

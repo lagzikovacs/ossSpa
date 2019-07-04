@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {TermekdijService} from '../termekdij.service';
 import {LogonService} from '../../../logon/logon.service';
 import {CikkService} from '../../../cikk/cikk.service';
@@ -10,6 +10,10 @@ import {BizonylattetelSzerkesztesMode} from '../../../bizonylat/bizonylattetelsz
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
+import {environment} from '../../../../environments/environment';
+import {EgyszeruKeresesDto} from '../../../dtos/egyszerukeresesdto';
+import {TermekdijDto} from '../termekdijdto';
+import {deepCopy} from '../../../tools/deepCopy';
 
 @Component({
   selector: 'app-termekdij-list',
@@ -19,8 +23,10 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
   szurok = ['KT'];
-  mod = false;
-  termekdijservice: TermekdijService;
+  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
+  elsokereses = true;
+  jog = false;
+  zoom = false;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -31,25 +37,34 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  @Input() set maszk(value: string) {
+    if (value !== undefined) {
+      this.ekDto.minta = value || '';
+      this.zoom = true;
+    }
+  }
+  @Output() eventSelectzoom = new EventEmitter<TermekdijDto>();
+  @Output() eventStopzoom = new EventEmitter<void>();
+
+  termekdijservice: TermekdijService;
+
   constructor(private _logonservice: LogonService,
-              private _cikkservice: CikkService,
-              private _bizonylatservice: BizonylatService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               termekdijservice: TermekdijService) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.termekdijservice = termekdijservice;
   }
 
   ngOnInit() {
-    if (this.termekdijservice.zoom) {
+    if (this.zoom) {
       this.onKereses();
     }
   }
 
   onKereses() {
-    this.termekdijservice.elsokereses = true;
-    this.termekdijservice.ekDto.rekordtol = 0;
+    this.elsokereses = true;
+    this.ekDto.rekordtol = 0;
 
     this.tabla.clearselections();
 
@@ -58,15 +73,15 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
 
   onKeresesTovabb() {
     this.eppFrissit = true;
-    this.termekdijservice.Read(this.termekdijservice.ekDto.minta)
+    this.termekdijservice.Read(this.ekDto.minta)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        if (this.termekdijservice.elsokereses) {
+        if (this.elsokereses) {
           this.termekdijservice.Dto = res.Result;
-          this.termekdijservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.termekdijservice.Dto];
           res.Result.forEach(element => {
@@ -88,30 +103,14 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
   }
 
   onStartzoom(i: number) {
-    if (this.termekdijservice.zoomsource === ZoomSources.Cikk) {
-      this._cikkservice.DtoEdited.Termekdijkod = this.termekdijservice.Dto[i].Termekdijkod;
-      this._cikkservice.DtoEdited.Termekdijkt = this.termekdijservice.Dto[i].Termekdijkt;
-      this._cikkservice.DtoEdited.Termekdijmegnevezes = this.termekdijservice.Dto[i].Termekdijmegnevezes;
-      this._cikkservice.DtoEdited.Termekdijegysegar = this.termekdijservice.Dto[i].Termekdijegysegar;
-    }
-    if (this.termekdijservice.zoomsource === ZoomSources.Bizonylattetel) {
-      this._bizonylatservice.TetelDtoEdited.Termekdijkod = this.termekdijservice.Dto[i].Termekdijkod;
-      this._bizonylatservice.TetelDtoEdited.Termekdijkt = this.termekdijservice.Dto[i].Termekdijkt;
-      this._bizonylatservice.TetelDtoEdited.Termekdijmegnevezes = this.termekdijservice.Dto[i].Termekdijmegnevezes;
-      this._bizonylatservice.TetelDtoEdited.Termekdijegysegar = this.termekdijservice.Dto[i].Termekdijegysegar;
-    }
+    this.eventSelectzoom.emit(deepCopy(this.termekdijservice.Dto[i]));
 
     this.onStopzoom();
   }
   onStopzoom() {
-    this.termekdijservice.zoom = false;
+    this.zoom = false;
 
-    if (this.termekdijservice.zoomsource === ZoomSources.Cikk) {
-      this._cikkservice.SzerkesztesMode = CikkSzerkesztesMode.Blank;
-    }
-    if (this.termekdijservice.zoomsource === ZoomSources.Bizonylattetel) {
-      this._bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
-    }
+    this.eventStopzoom.emit();
   }
 
   onId(i: number) {

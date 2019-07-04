@@ -19,15 +19,8 @@ export class IrattipusService {
   private readonly _controller = 'api/irattipus/';
   cim = 'Irattipus';
 
-  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-  elsokereses = true;
-
   Dto: IrattipusDto[] = new Array<IrattipusDto>();
-  DtoEdited = new IrattipusDto();
   DtoSelectedIndex = -1;
-
-  zoom = false;
-  zoomsource: ZoomSources;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

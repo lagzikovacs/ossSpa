@@ -1,17 +1,17 @@
 <div class="alapkeret">
-  <h5 *ngIf="!irattipusservice.zoom">{{irattipusservice.cim}}</h5>
-  <h5 *ngIf="irattipusservice.zoom">{{irattipusservice.cim}} - zoom</h5>
+  <h5 *ngIf="!zoom">{{irattipusservice.cim}}</h5>
+  <h5 *ngIf="zoom">{{irattipusservice.cim}} - zoom</h5>
   <app-toolbar [Szurok]="szurok"
-               [(szempont)]="irattipusservice.ekDto.szempont"
-               [(minta)]="irattipusservice.ekDto.minta"
+               [(szempont)]="ekDto.szempont"
+               [(minta)]="ekDto.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit && mod" (Uj)="onUj()"
-               [visZoom]="irattipusservice.zoom" (StopZoom)="onStopzoom()">
+               [enUj]="!eppFrissit && jog" (Uj)="onUj()"
+               [visZoom]="zoom" (StopZoom)="onStopzoom()">
   </app-toolbar>
   <app-tabla #tabla
              [items]="irattipusservice.Dto"
              [colsets]="irattipusservice.GridSettings"
-             [zoom]="irattipusservice.zoom"
+             [zoom]="zoom"
              (forzoom)="onStartzoom($event)"
              (forid)="onId($event)"
              [ujTemplate]="griduj"

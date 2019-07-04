@@ -5,15 +5,15 @@ import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {deepCopy} from '../../../tools/deepCopy';
 import {propCopy} from '../../../tools/propCopy';
+import {FizetesimodDto} from '../fizetesimoddto';
 
 @Component({
   selector: 'app-fizetesimod-szerkesztes',
   templateUrl: './fizetesimod-szerkesztes.component.html'
 })
 export class FizetesimodSzerkesztesComponent implements OnInit, OnDestroy {
-  fizetesimodservice: FizetesimodService;
-
   @Input() uj = false;
+  DtoEdited = new FizetesimodDto();
   @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
@@ -25,9 +25,11 @@ export class FizetesimodSzerkesztesComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(fizetesimodservice: FizetesimodService,
-              private _spinnerservice: SpinnerService,
-              private _errorservice: ErrorService) {
+  fizetesimodservice: FizetesimodService;
+
+  constructor(private _spinnerservice: SpinnerService,
+              private _errorservice: ErrorService,
+              fizetesimodservice: FizetesimodService,) {
     this.fizetesimodservice = fizetesimodservice;
   }
 
@@ -40,7 +42,7 @@ export class FizetesimodSzerkesztesComponent implements OnInit, OnDestroy {
             throw res.Error;
           }
 
-          this.fizetesimodservice.DtoEdited = res.Result[0];
+          this.DtoEdited = res.Result[0];
           this.eppFrissit = false;
         })
         .catch(err => {
@@ -48,7 +50,7 @@ export class FizetesimodSzerkesztesComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.fizetesimodservice.DtoEdited = deepCopy(this.fizetesimodservice.Dto[this.fizetesimodservice.DtoSelectedIndex]);
+      this.DtoEdited = deepCopy(this.fizetesimodservice.Dto[this.fizetesimodservice.DtoSelectedIndex]);
     }
   }
 
@@ -57,9 +59,9 @@ export class FizetesimodSzerkesztesComponent implements OnInit, OnDestroy {
     let p: Promise<NumberResult>;
 
     if (this.uj) {
-      p = this.fizetesimodservice.Add(this.fizetesimodservice.DtoEdited);
+      p = this.fizetesimodservice.Add(this.DtoEdited);
     } else {
-      p = this.fizetesimodservice.Update(this.fizetesimodservice.DtoEdited);
+      p = this.fizetesimodservice.Update(this.DtoEdited);
     }
 
     p

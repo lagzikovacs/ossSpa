@@ -110,30 +110,24 @@ export class MenuService {
   menuclick(utvonal: string) {
     switch (utvonal) {
       case '/irattipus':
-        this._irattipusservice.zoom = false;
         this._irattipusservice.Dto = new Array<IrattipusDto>();
         break;
       case '/projektteendo':
-        this._teendoservice.zoom = false;
         this._teendoservice.Dto = new Array<TeendoDto>();
         break;
       case '/fizetesimod':
-        this._fizetesimodservice.zoom = false;
         this._fizetesimodservice.Dto = new Array<FizetesimodDto>();
         break;
       case '/penznem':
-        this._penznemservice.zoom = false;
         this._penznemservice.Dto = new Array<PenznemDto>();
         break;
       case '/me':
-        this._meservice.zoom = false;
         this._meservice.Dto = new Array<MeDto>();
         break;
       case '/afakulcs':
         this._afakulcsservice.Dto = new Array<AfakulcsDto>();
         break;
       case '/termekdij':
-        this._termekdijservice.zoom = false;
         this._termekdijservice.Dto = new Array<TermekdijDto>();
         break;
       case '/cikk':
@@ -141,7 +135,6 @@ export class MenuService {
         this._cikkservice.Dto = new Array<CikkDto>();
         break;
       case '/helyseg':
-        this._helysegservice.zoom = false;
         this._helysegservice.Dto = new Array<HelysegDto>();
         break;
       case '/ugyfel':

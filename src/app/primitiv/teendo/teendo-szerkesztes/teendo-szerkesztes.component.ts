@@ -5,15 +5,15 @@ import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {deepCopy} from '../../../tools/deepCopy';
 import {propCopy} from '../../../tools/propCopy';
+import {TeendoDto} from '../teendodto';
 
 @Component({
   selector: 'app-teendo-szerkesztes',
   templateUrl: './teendo-szerkesztes.component.html'
 })
 export class TeendoSzerkesztesComponent implements OnInit, OnDestroy {
-  teendoservice: TeendoService;
-
   @Input() uj = false;
+  DtoEdited = new TeendoDto();
   @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
@@ -25,9 +25,11 @@ export class TeendoSzerkesztesComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(teendoservice: TeendoService,
-              private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService) {
+  teendoservice: TeendoService;
+
+  constructor(private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
+              teendoservice: TeendoService) {
     this.teendoservice = teendoservice;
   }
 
@@ -40,7 +42,7 @@ export class TeendoSzerkesztesComponent implements OnInit, OnDestroy {
             throw res.Error;
           }
 
-          this.teendoservice.DtoEdited = res.Result[0];
+          this.DtoEdited = res.Result[0];
           this.eppFrissit = false;
         })
         .catch(err => {
@@ -48,7 +50,7 @@ export class TeendoSzerkesztesComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.teendoservice.DtoEdited = deepCopy(this.teendoservice.Dto[this.teendoservice.DtoSelectedIndex]);
+      this.DtoEdited = deepCopy(this.teendoservice.Dto[this.teendoservice.DtoSelectedIndex]);
     }
   }
 
@@ -57,9 +59,9 @@ export class TeendoSzerkesztesComponent implements OnInit, OnDestroy {
     let p: Promise<NumberResult>;
 
     if (this.uj) {
-      p = this.teendoservice.Add(this.teendoservice.DtoEdited);
+      p = this.teendoservice.Add(this.DtoEdited);
     } else {
-      p = this.teendoservice.Update(this.teendoservice.DtoEdited);
+      p = this.teendoservice.Update(this.DtoEdited);
     }
 
     p

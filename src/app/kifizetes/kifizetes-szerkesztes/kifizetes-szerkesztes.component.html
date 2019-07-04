@@ -65,10 +65,15 @@
     }-->
 
   <ng-container *ngIf="bizonylatkifizetesservice.SzerkesztesMode === 1">
-    <app-penznem-list></app-penznem-list>
+    <app-penznem-list [maszk]="this.bizonylatkifizetesservice.DtoEdited.Penznem || ''"
+                      (eventSelectzoom)="onPenznemSelectzoom($event)"
+                      (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
   </ng-container>
+
   <ng-container *ngIf="bizonylatkifizetesservice.SzerkesztesMode === 2">
-    <app-fizetesimod-list></app-fizetesimod-list>
+    <app-fizetesimod-list [maszk]="this.bizonylatkifizetesservice.DtoEdited.Fizetesimod || ''"
+                          (eventSelectzoom)="onFizetesimodSelectzoom($event)"
+                          (eventStopzoom)="onFizetesimodStopzoom()"></app-fizetesimod-list>
   </ng-container>
 </div>
 

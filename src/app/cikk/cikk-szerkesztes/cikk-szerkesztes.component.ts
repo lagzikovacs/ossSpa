@@ -14,6 +14,8 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {propCopy} from '../../tools/propCopy';
 import {AfakulcsDto} from '../../primitiv/afakulcs/afakulcsdto';
+import {MeDto} from '../../primitiv/me/medto';
+import {TermekdijDto} from '../../primitiv/termekdij/termekdijdto';
 
 @Component({
   selector: 'app-cikk-szerkesztes',
@@ -136,11 +138,14 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   MeZoom() {
-    this._meservice.ekDto.minta = this.cikkservice.DtoEdited.Me || '';
-    this._meservice.zoomsource = ZoomSources.Cikk;
-    this._meservice.zoom = true;
-
     this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.MeZoom;
+  }
+  onMeSelectzoom(Dto: MeDto) {
+    this.cikkservice.DtoEdited.Mekod = Dto.Mekod;
+    this.cikkservice.DtoEdited.Me = Dto.Me;
+  }
+  onMeStopzoom() {
+    this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.Blank;
   }
 
   AfakulcsZoom() {
@@ -156,12 +161,18 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   TermekdijZoom() {
-    this._termekdijservice.ekDto.minta = this.cikkservice.DtoEdited.Termekdijkt || '';
-    this._termekdijservice.zoomsource = ZoomSources.Cikk;
-    this._termekdijservice.zoom = true;
-
     this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.TermekdijZoom;
   }
+  onTermekdijSelectzoom(Dto: TermekdijDto) {
+    this.cikkservice.DtoEdited.Termekdijkod = Dto.Termekdijkod;
+    this.cikkservice.DtoEdited.Termekdijkt = Dto.Termekdijkt;
+    this.cikkservice.DtoEdited.Termekdijmegnevezes = Dto.Termekdijmegnevezes;
+    this.cikkservice.DtoEdited.Termekdijegysegar = Dto.Termekdijegysegar;
+  }
+  onTermekdijStopzoom() {
+    this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.Blank;
+  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

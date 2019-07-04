@@ -5,15 +5,15 @@ import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {deepCopy} from '../../../tools/deepCopy';
 import {propCopy} from '../../../tools/propCopy';
+import {PenznemDto} from '../penznemdto';
 
 @Component({
   selector: 'app-penznem-szerkesztes',
   templateUrl: './penznem-szerkesztes.component.html'
 })
 export class PenznemSzerkesztesComponent implements OnInit, OnDestroy {
-  penznemservice: PenznemService;
-
   @Input() uj = false;
+  DtoEdited = new PenznemDto();
   @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
@@ -25,9 +25,11 @@ export class PenznemSzerkesztesComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(penznemservice: PenznemService,
-              private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService) {
+  penznemservice: PenznemService;
+
+  constructor(private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
+              penznemservice: PenznemService) {
     this.penznemservice = penznemservice;
   }
 
@@ -40,7 +42,7 @@ export class PenznemSzerkesztesComponent implements OnInit, OnDestroy {
             throw res.Error;
           }
 
-          this.penznemservice.DtoEdited = res.Result[0];
+          this.DtoEdited = res.Result[0];
           this.eppFrissit = false;
         })
         .catch(err => {
@@ -48,7 +50,7 @@ export class PenznemSzerkesztesComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.penznemservice.DtoEdited = deepCopy(this.penznemservice.Dto[this.penznemservice.DtoSelectedIndex]);
+      this.DtoEdited = deepCopy(this.penznemservice.Dto[this.penznemservice.DtoSelectedIndex]);
     }
   }
 
@@ -57,9 +59,9 @@ export class PenznemSzerkesztesComponent implements OnInit, OnDestroy {
     let p: Promise<NumberResult>;
 
     if (this.uj) {
-      p = this.penznemservice.Add(this.penznemservice.DtoEdited);
+      p = this.penznemservice.Add(this.DtoEdited);
     } else {
-      p = this.penznemservice.Update(this.penznemservice.DtoEdited);
+      p = this.penznemservice.Update(this.DtoEdited);
     }
 
     p

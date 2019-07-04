@@ -9,6 +9,7 @@ import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 import {BizonylatesiratSzerkesztesMode} from '../bizonylatesiratszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {IrattipusDto} from '../../primitiv/irattipus/irattipusdto';
 
 @Component({
   selector: 'app-projektkapcsolat-ujirat',
@@ -55,11 +56,14 @@ export class ProjektkapcsolatUjiratComponent implements OnInit, OnDestroy {
   }
 
   IrattipusZoom() {
-    this._irattipusservice.ekDto.minta = this.projektkapcsolatservice.UjIratDto.Irattipus || '';
-    this._irattipusservice.zoomsource = ZoomSources.Projektirat;
-    this._irattipusservice.zoom = true;
-
     this.projektkapcsolatservice.SzerkesztesMode = BizonylatesiratSzerkesztesMode.IrattipusZoom;
+  }
+  onIrattipusSelectzoom(Dto: IrattipusDto) {
+    this.projektkapcsolatservice.UjIratDto.Irattipuskod = Dto.Irattipuskod;
+    this.projektkapcsolatservice.UjIratDto.Irattipus = Dto.Irattipus1;
+  }
+  onIrattipusStopzoom() {
+    this.projektkapcsolatservice.SzerkesztesMode = BizonylatesiratSzerkesztesMode.Blank;
   }
 
   onSubmit() {

@@ -54,7 +54,9 @@
                           (eventStopzoom)="onFelhasznaloStopzoom()"></app-felhasznalo-list>
   </ng-container>
   <ng-container *ngIf="projektteendoservice.SzerkesztesMode === 2">
-    <app-teendo-list></app-teendo-list>
+    <app-teendo-list [maszk]="this.projektteendoservice.DtoEdited.Teendo || ''"
+                     (eventSelectzoom)="onTeendoSelectzoom($event)"
+                     (eventStopzoom)="onTeendoStopzoom()"></app-teendo-list>
   </ng-container>
 </div>
 

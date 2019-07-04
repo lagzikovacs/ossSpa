@@ -5,15 +5,15 @@ import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {deepCopy} from '../../../tools/deepCopy';
 import {propCopy} from '../../../tools/propCopy';
+import {MeDto} from '../medto';
 
 @Component({
   selector: 'app-me-szerkesztes',
   templateUrl: './me-szerkesztes.component.html'
 })
 export class MeSzerkesztesComponent implements OnInit, OnDestroy {
-  meservice: MeService;
-
   @Input() uj = false;
+  DtoEdited = new MeDto();
   @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
@@ -25,9 +25,11 @@ export class MeSzerkesztesComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(meservice: MeService,
-              private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService) {
+  meservice: MeService;
+
+  constructor(private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
+              meservice: MeService) {
     this.meservice = meservice;
   }
 
@@ -40,7 +42,7 @@ export class MeSzerkesztesComponent implements OnInit, OnDestroy {
             throw res.Error;
           }
 
-          this.meservice.DtoEdited = res.Result[0];
+          this.DtoEdited = res.Result[0];
           this.eppFrissit = false;
         })
         .catch(err => {
@@ -48,7 +50,7 @@ export class MeSzerkesztesComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.meservice.DtoEdited = deepCopy(this.meservice.Dto[this.meservice.DtoSelectedIndex]);
+      this.DtoEdited = deepCopy(this.meservice.Dto[this.meservice.DtoSelectedIndex]);
     }
   }
 
@@ -57,9 +59,9 @@ export class MeSzerkesztesComponent implements OnInit, OnDestroy {
     let p: Promise<NumberResult>;
 
     if (this.uj) {
-      p = this.meservice.Add(this.meservice.DtoEdited);
+      p = this.meservice.Add(this.DtoEdited);
     } else {
-      p = this.meservice.Update(this.meservice.DtoEdited);
+      p = this.meservice.Update(this.DtoEdited);
     }
 
     p

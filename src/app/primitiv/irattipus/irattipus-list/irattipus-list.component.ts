@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {IrattipusService} from '../irattipus.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
@@ -12,6 +12,10 @@ import {BizonylatKapcsolatSzerkesztesMode} from '../../../bizonylatkapcsolat/biz
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
+import {environment} from '../../../../environments/environment';
+import {EgyszeruKeresesDto} from '../../../dtos/egyszerukeresesdto';
+import {IrattipusDto} from '../irattipusdto';
+import {deepCopy} from '../../../tools/deepCopy';
 
 @Component({
   selector: 'app-irattipus-list',
@@ -21,8 +25,10 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
   szurok = ['Irattipus'];
-  mod = false;
-  irattipusservice: IrattipusService;
+  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
+  elsokereses = true;
+  jog = false;
+  zoom = false;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -33,26 +39,34 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  @Input() set maszk(value: string) {
+    if (value !== undefined) {
+      this.ekDto.minta = value || '';
+      this.zoom = true;
+    }
+  }
+  @Output() eventSelectzoom = new EventEmitter<IrattipusDto>();
+  @Output() eventStopzoom = new EventEmitter<void>();
+
+  irattipusservice: IrattipusService;
+
   constructor(private _logonservice: LogonService,
-              private _iratservice: IratService,
-              private _projektkapcsolatservice: ProjektkapcsolatService,
-              private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               irattipusservice: IrattipusService) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.irattipusservice = irattipusservice;
   }
 
   ngOnInit() {
-    if (this.irattipusservice.zoom) {
+    if (this.zoom) {
       this.onKereses();
     }
   }
 
   onKereses() {
-    this.irattipusservice.elsokereses = true;
-    this.irattipusservice.ekDto.rekordtol = 0;
+    this.elsokereses = true;
+    this.ekDto.rekordtol = 0;
 
     this.tabla.clearselections();
 
@@ -61,15 +75,15 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
 
   onKeresesTovabb() {
     this.eppFrissit = true;
-    this.irattipusservice.Read(this.irattipusservice.ekDto.minta)
+    this.irattipusservice.Read(this.ekDto.minta)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        if (this.irattipusservice.elsokereses) {
+        if (this.elsokereses) {
           this.irattipusservice.Dto = res.Result;
-          this.irattipusservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.irattipusservice.Dto];
           res.Result.forEach(element => {
@@ -91,37 +105,14 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
   }
 
   onStartzoom(i: number) {
-    if (this.irattipusservice.zoomsource === ZoomSources.Irat) {
-      this._iratservice.DtoEdited.Irattipuskod = this.irattipusservice.Dto[i].Irattipuskod;
-      this._iratservice.DtoEdited.Irattipus = this.irattipusservice.Dto[i].Irattipus1;
+    this.eventSelectzoom.emit(deepCopy(this.irattipusservice.Dto[i]));
 
-      this.onStopzoom();
-    }
-    if (this.irattipusservice.zoomsource === ZoomSources.Projektirat) {
-      this._projektkapcsolatservice.UjIratDto.Irattipuskod = this.irattipusservice.Dto[i].Irattipuskod;
-      this._projektkapcsolatservice.UjIratDto.Irattipus = this.irattipusservice.Dto[i].Irattipus1;
-
-      this.onStopzoom();
-    }
-    if (this.irattipusservice.zoomsource === ZoomSources.Bizonylatirat) {
-      this._bizonylatkapcsolatservice.UjIratDto.Irattipuskod = this.irattipusservice.Dto[i].Irattipuskod;
-      this._bizonylatkapcsolatservice.UjIratDto.Irattipus = this.irattipusservice.Dto[i].Irattipus1;
-
-      this.onStopzoom();
-    }
+    this.onStopzoom();
   }
   onStopzoom() {
-    this.irattipusservice.zoom = false;
+    this.zoom = false;
 
-    if (this.irattipusservice.zoomsource === ZoomSources.Irat) {
-      this._iratservice.SzerkesztesMode = IratSzerkesztesMode.Blank;
-    }
-    if (this.irattipusservice.zoomsource === ZoomSources.Projektirat) {
-      this._projektkapcsolatservice.SzerkesztesMode = BizonylatesiratSzerkesztesMode.Blank;
-    }
-    if (this.irattipusservice.zoomsource === ZoomSources.Bizonylatirat) {
-      this._bizonylatkapcsolatservice.SzerkesztesMode = BizonylatKapcsolatSzerkesztesMode.Blank;
-    }
+    this.eventStopzoom.emit();
   }
 
   onId(i: number) {

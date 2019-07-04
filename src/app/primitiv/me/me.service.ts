@@ -19,15 +19,8 @@ export class MeService {
   private readonly _controller = 'api/mennyisegiegyseg/';
   cim = 'Mennyiségi egység';
 
-  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-  elsokereses = true;
-
   Dto: MeDto[] = new Array<MeDto>();
-  DtoEdited = new MeDto();
   DtoSelectedIndex = -1;
-
-  zoom = false;
-  zoomsource: ZoomSources;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

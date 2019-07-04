@@ -87,7 +87,9 @@
   </form>
 
   <ng-container *ngIf="cikkservice.SzerkesztesMode === 1">
-    <app-me-list></app-me-list>
+    <app-me-list [maszk]="this.cikkservice.DtoEdited.Me || ''"
+                 (eventSelectzoom)="onMeSelectzoom($event)"
+                 (eventStopzoom)="onMeStopzoom()"></app-me-list>
   </ng-container>
   <ng-container *ngIf="cikkservice.SzerkesztesMode === 2">
     <app-afakulcs-list [maszk]="this.cikkservice.DtoEdited.Afakulcs || ''"
@@ -95,7 +97,9 @@
                        (eventStopzoom)="onAfakulcsStopzoom()"></app-afakulcs-list>
   </ng-container>
   <ng-container *ngIf="cikkservice.SzerkesztesMode === 3">
-    <app-termekdij-list></app-termekdij-list>
+    <app-termekdij-list [maszk]="this.cikkservice.DtoEdited.Termekdijkt || ''"
+                        (eventSelectzoom)="onTermekdijSelectzoom($event)"
+                        (eventStopzoom)="onTermekdijStopzoom()"></app-termekdij-list>
   </ng-container>
 </div>
 

@@ -19,15 +19,8 @@ export class PenznemService {
   private readonly _controller = 'api/penznem/';
   cim = 'Pénznem';
 
-  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-  elsokereses = true;
-
   Dto: PenznemDto[] = new Array<PenznemDto>();
-  DtoEdited = new PenznemDto();
   DtoSelectedIndex = -1;
-
-  zoom = false;
-  zoomsource: ZoomSources;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

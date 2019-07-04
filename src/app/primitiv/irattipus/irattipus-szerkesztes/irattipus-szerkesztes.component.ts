@@ -5,15 +5,15 @@ import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {deepCopy} from '../../../tools/deepCopy';
 import {propCopy} from '../../../tools/propCopy';
+import {IrattipusDto} from '../irattipusdto';
 
 @Component({
   selector: 'app-irattipus-szerkesztes',
   templateUrl: './irattipus-szerkesztes.component.html'
 })
 export class IrattipusSzerkesztesComponent implements OnInit, OnDestroy {
-  irattipusservice: IrattipusService;
-
   @Input() uj = false;
+  DtoEdited = new IrattipusDto();
   @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
@@ -25,9 +25,11 @@ export class IrattipusSzerkesztesComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(irattipusservice: IrattipusService,
-              private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService) {
+  irattipusservice: IrattipusService;
+
+  constructor(private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
+              irattipusservice: IrattipusService) {
     this.irattipusservice = irattipusservice;
   }
 
@@ -40,7 +42,7 @@ export class IrattipusSzerkesztesComponent implements OnInit, OnDestroy {
             throw res.Error;
           }
 
-          this.irattipusservice.DtoEdited = res.Result[0];
+          this.DtoEdited = res.Result[0];
           this.eppFrissit = false;
         })
         .catch(err => {
@@ -48,7 +50,7 @@ export class IrattipusSzerkesztesComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.irattipusservice.DtoEdited = deepCopy(this.irattipusservice.Dto[this.irattipusservice.DtoSelectedIndex]);
+      this.DtoEdited = deepCopy(this.irattipusservice.Dto[this.irattipusservice.DtoSelectedIndex]);
     }
   }
 
@@ -57,9 +59,9 @@ export class IrattipusSzerkesztesComponent implements OnInit, OnDestroy {
     let p: Promise<NumberResult>;
 
     if (this.uj) {
-      p = this.irattipusservice.Add(this.irattipusservice.DtoEdited);
+      p = this.irattipusservice.Add(this.DtoEdited);
     } else {
-      p = this.irattipusservice.Update(this.irattipusservice.DtoEdited);
+      p = this.irattipusservice.Update(this.DtoEdited);
     }
 
     p

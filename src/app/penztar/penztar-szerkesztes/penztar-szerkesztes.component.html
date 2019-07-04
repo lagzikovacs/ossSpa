@@ -31,7 +31,9 @@
   </form>
 
   <ng-container *ngIf="penztarservice.SzerkesztesMode === 1">
-    <app-penznem-list></app-penznem-list>
+    <app-penznem-list [maszk]="this.penztarservice.DtoEdited.Penznem || ''"
+                      (eventSelectzoom)="onPenznemSelectzoom($event)"
+                      (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
   </ng-container>
 </div>
 

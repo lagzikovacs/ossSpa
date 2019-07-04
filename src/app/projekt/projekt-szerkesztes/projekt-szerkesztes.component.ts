@@ -11,6 +11,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {propCopy} from '../../tools/propCopy';
+import {PenznemDto} from '../../primitiv/penznem/penznemdto';
 
 @Component({
   selector: 'app-projekt-szerkesztes',
@@ -123,12 +124,16 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
 
     this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.UgyfelZoom;
   }
-  PenznemZoom() {
-    this._penznemservice.ekDto.minta = this.projektservice.DtoEdited.Penznem || '';
-    this._penznemservice.zoomsource = ZoomSources.Projekt;
-    this._penznemservice.zoom = true;
 
+  PenznemZoom() {
     this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.PenznemZoom;
+  }
+  onPenznemSelectzoom(Dto: PenznemDto) {
+    this.projektservice.DtoEdited.Penznemkod = Dto.Penznemkod;
+    this.projektservice.DtoEdited.Penznem = Dto.Penznem1;
+  }
+  onPenznemStopzoom() {
+    this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
   }
 
   ngOnDestroy() {

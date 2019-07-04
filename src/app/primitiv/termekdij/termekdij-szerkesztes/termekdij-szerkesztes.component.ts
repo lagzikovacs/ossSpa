@@ -5,15 +5,15 @@ import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {deepCopy} from '../../../tools/deepCopy';
 import {propCopy} from '../../../tools/propCopy';
+import {TermekdijDto} from '../termekdijdto';
 
 @Component({
   selector: 'app-termekdij-szerkesztes',
   templateUrl: './termekdij-szerkesztes.component.html'
 })
 export class TermekdijSzerkesztesComponent implements OnInit, OnDestroy {
-  termekdijservice: TermekdijService;
-
   @Input() uj = false;
+  DtoEdited = new TermekdijDto();
   @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
@@ -25,9 +25,11 @@ export class TermekdijSzerkesztesComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(termekdijservice: TermekdijService,
-              private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService) {
+  termekdijservice: TermekdijService;
+
+  constructor(private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
+              termekdijservice: TermekdijService) {
     this.termekdijservice = termekdijservice;
   }
 
@@ -40,7 +42,7 @@ export class TermekdijSzerkesztesComponent implements OnInit, OnDestroy {
             throw res.Error;
           }
 
-          this.termekdijservice.DtoEdited = res.Result[0];
+          this.DtoEdited = res.Result[0];
           this.eppFrissit = false;
         })
         .catch(err => {
@@ -48,7 +50,7 @@ export class TermekdijSzerkesztesComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.termekdijservice.DtoEdited = deepCopy(this.termekdijservice.Dto[this.termekdijservice.DtoSelectedIndex]);
+      this.DtoEdited = deepCopy(this.termekdijservice.Dto[this.termekdijservice.DtoSelectedIndex]);
     }
   }
 
@@ -57,9 +59,9 @@ export class TermekdijSzerkesztesComponent implements OnInit, OnDestroy {
     let p: Promise<NumberResult>;
 
     if (this.uj) {
-      p = this.termekdijservice.Add(this.termekdijservice.DtoEdited);
+      p = this.termekdijservice.Add(this.DtoEdited);
     } else {
-      p = this.termekdijservice.Update(this.termekdijservice.DtoEdited);
+      p = this.termekdijservice.Update(this.DtoEdited);
     }
 
     p

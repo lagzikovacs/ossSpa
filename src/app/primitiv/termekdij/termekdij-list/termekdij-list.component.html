@@ -1,17 +1,17 @@
 <div class="alapkeret">
-  <h5 *ngIf="!termekdijservice.zoom">{{termekdijservice.cim}}</h5>
-  <h5 *ngIf="termekdijservice.zoom">{{termekdijservice.cim}} - zoom</h5>
+  <h5 *ngIf="!zoom">{{termekdijservice.cim}}</h5>
+  <h5 *ngIf="zoom">{{termekdijservice.cim}} - zoom</h5>
   <app-toolbar [Szurok]="szurok"
-               [(szempont)]="termekdijservice.ekDto.szempont"
-               [(minta)]="termekdijservice.ekDto.minta"
+               [(szempont)]="ekDto.szempont"
+               [(minta)]="ekDto.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit && mod" (Uj)="onUj()"
-               [visZoom]="termekdijservice.zoom" (StopZoom)="onStopzoom()">
+               [enUj]="!eppFrissit && jog" (Uj)="onUj()"
+               [visZoom]="zoom" (StopZoom)="onStopzoom()">
   </app-toolbar>
   <app-tabla #tabla
              [items]="termekdijservice.Dto"
              [colsets]="termekdijservice.GridSettings"
-             [zoom]="termekdijservice.zoom"
+             [zoom]="zoom"
              (forzoom)="onStartzoom($event)"
              (forid)="onId($event)"
              [ujTemplate]="griduj"

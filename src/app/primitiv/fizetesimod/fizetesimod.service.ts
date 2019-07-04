@@ -19,15 +19,8 @@ export class FizetesimodService {
   private readonly _controller = 'api/fizetesimod/';
   cim = 'Fizetési mód';
 
-  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-  elsokereses = true;
-
   Dto: FizetesimodDto[] = new Array<FizetesimodDto>();
-  DtoEdited = new FizetesimodDto();
   DtoSelectedIndex = -1;
-
-  zoom = false;
-  zoomsource: ZoomSources;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

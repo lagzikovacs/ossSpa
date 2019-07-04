@@ -76,6 +76,8 @@
     <app-ugyfel-list></app-ugyfel-list>
   </ng-container>
   <ng-container *ngIf="projektservice.SzerkesztesMode === 2">
-    <app-penznem-list></app-penznem-list>
+    <app-penznem-list [maszk]="this.projektservice.DtoEdited.Penznem || ''"
+                      (eventSelectzoom)="onPenznemSelectzoom($event)"
+                      (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
   </ng-container>
 </div>

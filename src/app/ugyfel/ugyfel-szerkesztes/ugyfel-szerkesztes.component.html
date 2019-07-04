@@ -133,7 +133,9 @@
   </form>
 
   <ng-container *ngIf="ugyfelservice.SzerkesztesMode === 1">
-    <app-helyseg-list></app-helyseg-list>
+    <app-helyseg-list [maszk]="this.ugyfelservice.DtoEdited.Helysegnev || ''"
+                      (eventSelectzoom)="onHelysegSelectzoom($event)"
+                      (eventStopzoom)="onHelysegStopzoom()"></app-helyseg-list>
   </ng-container>
 </div>
 

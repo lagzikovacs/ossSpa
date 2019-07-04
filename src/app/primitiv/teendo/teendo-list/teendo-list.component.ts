@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {TeendoService} from '../teendo.service';
 import {JogKod} from '../../../enums/jogkod';
 import {LogonService} from '../../../logon/logon.service';
@@ -8,6 +8,10 @@ import {ProjektteendoSzerkesztesMode} from '../../../projektteendo/projektteendo
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
+import {environment} from '../../../../environments/environment';
+import {EgyszeruKeresesDto} from '../../../dtos/egyszerukeresesdto';
+import {TeendoDto} from '../teendodto';
+import {deepCopy} from '../../../tools/deepCopy';
 
 @Component({
   selector: 'app-teendo-list',
@@ -17,8 +21,10 @@ export class TeendoListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
   szurok = ['Teendő'];
-  mod = false;
-  teendoservice: TeendoService;
+  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
+  elsokereses = true;
+  jog = false;
+  zoom = false;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -29,24 +35,35 @@ export class TeendoListComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  @Input() set maszk(value: string) {
+    if (value !== undefined) {
+      this.ekDto.minta = value || '';
+      this.zoom = true;
+    }
+  }
+  @Output() eventSelectzoom = new EventEmitter<TeendoDto>();
+  @Output() eventStopzoom = new EventEmitter<void>();
+
+  teendoservice: TeendoService;
+
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
-              teendoservice: TeendoService,
-              private _projektteendoservice: ProjektteendoService) {
-    this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
+              private _projektteendoservice: ProjektteendoService,
+              teendoservice: TeendoService) {
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.teendoservice = teendoservice;
   }
 
   ngOnInit() {
-    if (this.teendoservice.zoom) {
+    if (this.zoom) {
       this.onKereses();
     }
   }
 
   onKereses() {
-    this.teendoservice.elsokereses = true;
-    this.teendoservice.ekDto.rekordtol = 0;
+    this.elsokereses = true;
+    this.ekDto.rekordtol = 0;
 
     this.tabla.clearselections();
 
@@ -55,15 +72,15 @@ export class TeendoListComponent implements OnInit, OnDestroy {
 
   onKeresesTovabb() {
     this.eppFrissit = true;
-    this.teendoservice.Read(this.teendoservice.ekDto.minta)
+    this.teendoservice.Read(this.ekDto.minta)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        if (this.teendoservice.elsokereses) {
+        if (this.elsokereses) {
           this.teendoservice.Dto = res.Result;
-          this.teendoservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.teendoservice.Dto];
           res.Result.forEach(element => {
@@ -85,19 +102,14 @@ export class TeendoListComponent implements OnInit, OnDestroy {
   }
 
   onStartzoom(i: number) {
-    if (this.teendoservice.zoomsource === ZoomSources.Projektteendo) {
-      this._projektteendoservice.DtoEdited.Teendokod = this.teendoservice.Dto[i].Teendokod;
-      this._projektteendoservice.DtoEdited.Teendo = this.teendoservice.Dto[i].Teendo1;
+    this.eventSelectzoom.emit(deepCopy(this.teendoservice.Dto[i]));
 
-      this.onStopzoom();
-    }
+    this.onStopzoom();
   }
   onStopzoom() {
-    this.teendoservice.zoom = false;
+    this.zoom = false;
 
-    if (this.teendoservice.zoomsource === ZoomSources.Projektteendo) {
-      this._projektteendoservice.SzerkesztesMode = ProjektteendoSzerkesztesMode.Blank;
-    }
+    this.eventStopzoom.emit();
   }
 
   onId(i: number) {

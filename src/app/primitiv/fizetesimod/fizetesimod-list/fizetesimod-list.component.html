@@ -1,16 +1,17 @@
 <div class="alapkeret">
-  <h5>{{fizetesimodservice.cim}}</h5>
+  <h5 *ngIf="!zoom">{{fizetesimodservice.cim}}</h5>
+  <h5 *ngIf="zoom">{{fizetesimodservice.cim}} - zoom</h5>
   <app-toolbar [Szurok]="szurok"
-               [(szempont)]="fizetesimodservice.ekDto.szempont"
-               [(minta)]="fizetesimodservice.ekDto.minta"
+               [(szempont)]="ekDto.szempont"
+               [(minta)]="ekDto.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
                [enUj]="!eppFrissit" (Uj)="onUj()"
-               [visZoom]="fizetesimodservice.zoom" (StopZoom)="onStopzoom()">
+               [visZoom]="zoom" (StopZoom)="onStopzoom()">
   </app-toolbar>
   <app-tabla #tabla
              [items]="fizetesimodservice.Dto"
              [colsets]="fizetesimodservice.GridSettings"
-             [zoom]="fizetesimodservice.zoom"
+             [zoom]="zoom"
              (forzoom)="onStartzoom($event)"
              (forid)="onId($event)"
              [ujTemplate]="griduj"

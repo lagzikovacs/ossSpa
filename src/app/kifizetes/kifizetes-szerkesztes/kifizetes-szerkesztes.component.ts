@@ -13,6 +13,8 @@ import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {propCopy} from '../../tools/propCopy';
+import {PenznemDto} from '../../primitiv/penznem/penznemdto';
+import {FizetesimodDto} from '../../primitiv/fizetesimod/fizetesimoddto';
 
 @Component({
   selector: 'app-kifizetes-szerkesztes',
@@ -45,18 +47,25 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   PenznemZoom() {
-    this._penznemservice.ekDto.minta = this.bizonylatkifizetesservice.DtoEdited.Penznem || '';
-    this._penznemservice.zoomsource = ZoomSources.Bizonylatkifizetes;
-    this._penznemservice.zoom = true;
-
     this.bizonylatkifizetesservice.SzerkesztesMode = KifizetesSzerkesztesMode.PenznemZoom;
   }
-  FizetesimodZoom() {
-    this._fizetesimodservice.ekDto.minta = this.bizonylatkifizetesservice.DtoEdited.Fizetesimod || '';
-    this._fizetesimodservice.zoomsource = ZoomSources.Bizonylatkifizetes;
-    this._fizetesimodservice.zoom = true;
+  onPenznemSelectzoom(Dto: PenznemDto) {
+    this.bizonylatkifizetesservice.DtoEdited.Penznemkod = Dto.Penznemkod;
+    this.bizonylatkifizetesservice.DtoEdited.Penznem = Dto.Penznem1;
+  }
+  onPenznemStopzoom() {
+    this.bizonylatkifizetesservice.SzerkesztesMode = KifizetesSzerkesztesMode.Blank;
+  }
 
+  FizetesimodZoom() {
     this.bizonylatkifizetesservice.SzerkesztesMode = KifizetesSzerkesztesMode.FizetesimodZoom;
+  }
+  onFizetesimodSelectzoom(Dto: FizetesimodDto) {
+    this.bizonylatkifizetesservice.DtoEdited.Fizetesimodkod = Dto.Fizetesimodkod;
+    this.bizonylatkifizetesservice.DtoEdited.Fizetesimod = Dto.Fizetesimod1;
+  }
+  onFizetesimodStopzoom() {
+    this.bizonylatkifizetesservice.SzerkesztesMode = KifizetesSzerkesztesMode.Blank;
   }
 
   onSubmit() {

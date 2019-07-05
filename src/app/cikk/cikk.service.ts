@@ -23,23 +23,8 @@ export class CikkService {
   private readonly _controller = 'api/cikk/';
   cim = 'Cikk';
 
-  szempont = 0;
-  minta = '';
-  up = new CikkParameter(0, environment.lapmeret);
-  elsokereses = true;
-  osszesrekord = 0;
-
   Dto: CikkDto[] = new Array<CikkDto>();
-  DtoEdited = new CikkDto();
   DtoSelectedIndex = -1;
-
-  zoom = false;
-  zoomsource: ZoomSources;
-
-  BizonylattipusKod: number;
-  MozgasDto: CikkMozgasTetelDto[] = new Array<CikkMozgasTetelDto>();
-
-  SzerkesztesMode = CikkSzerkesztesMode.Blank;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

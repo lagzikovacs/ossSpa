@@ -10,6 +10,7 @@ import {BizonylatKapcsolatContainerMode} from '../bizonylatkapcsolatcontainermod
 import {BizonylatKapcsolatSzerkesztesMode} from '../bizonylatkapcsolatszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {IrattipusDto} from '../../primitiv/irattipus/irattipusdto';
 
 @Component({
   selector: 'app-bizonylat-irat-uj',
@@ -57,11 +58,14 @@ export class BizonylatIratUjComponent implements OnInit, OnDestroy {
   }
 
   IrattipusZoom() {
-    this._irattipusservice.ekDto.minta = this.bizonylatkapcsolatservice.UjIratDto.Irattipus || '';
-    this._irattipusservice.zoomsource = ZoomSources.Bizonylatirat;
-    this._irattipusservice.zoom = true;
-
     this.bizonylatkapcsolatservice.SzerkesztesMode = BizonylatKapcsolatSzerkesztesMode.IrattipusZoom;
+  }
+  onMeSelectzoom(Dto: IrattipusDto) {
+    this.bizonylatkapcsolatservice.UjIratDto.Irattipuskod = Dto.Irattipuskod;
+    this.bizonylatkapcsolatservice.UjIratDto.Irattipus = Dto.Irattipus1;
+  }
+  onMeStopzoom() {
+    this.bizonylatkapcsolatservice.SzerkesztesMode = BizonylatKapcsolatSzerkesztesMode.Blank;
   }
 
   onSubmit() {

@@ -22,21 +22,8 @@ export class UgyfelService {
   private readonly _controller = 'api/ugyfel/';
   cim = 'Ügyfél';
 
-  csoportszempont = 0;
-  szempont = 0;
-  minta = '';
-  up = new UgyfelParameter(0, environment.lapmeret);
-  elsokereses = true;
-  osszesrekord = 0;
-
   Dto: UgyfelDto[] = new Array<UgyfelDto>();
-  DtoEdited = new UgyfelDto();
   DtoSelectedIndex = -1;
-
-  zoom = false;
-  zoomsource: ZoomSources;
-
-  SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
 
   pp = new ProjektParameter(0, environment.lapmeret);
   ProjektDto: ProjektDto[] = new Array<ProjektDto>();

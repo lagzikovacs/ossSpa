@@ -16,6 +16,8 @@ import * as moment from 'moment';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {PenznemDto} from '../../primitiv/penznem/penznemdto';
+import {FizetesimodDto} from '../../primitiv/fizetesimod/fizetesimoddto';
 
 @Component({
   selector: 'app-bizonylat-szerkesztes',
@@ -59,20 +61,31 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.UgyfelZoom;
     this._cdr.detectChanges();
   }
-  PenznemZoom() {
-    this._penznemservice.ekDto.minta = this.bizonylatservice.ComplexDtoEdited.Dto.Penznem || '';
-    this._penznemservice.zoomsource = ZoomSources.Bizonylat;
-    this._penznemservice.zoom = true;
 
+  PenznemZoom() {
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.PenznemZoom;
     this._cdr.detectChanges();
   }
-  FizetesimodZoom() {
-    this._fizetesimodservice.ekDto.minta = this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesimod || '';
-    this._fizetesimodservice.zoomsource = ZoomSources.Bizonylat;
-    this._fizetesimodservice.zoom = true;
+  onPenznemSelectzoom(Dto: PenznemDto) {
+    this.bizonylatservice.ComplexDtoEdited.Dto.Penznemkod = Dto.Penznemkod;
+    this.bizonylatservice.ComplexDtoEdited.Dto.Penznem = Dto.Penznem1;
+  }
+  onPenznemStopzoom() {
+    this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
+    this._cdr.detectChanges();
+  }
 
+  FizetesimodZoom() {
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.FizetesimodZoom;
+    this._cdr.detectChanges();
+  }
+  onFizetesimodSelectzoom(Dto: FizetesimodDto) {
+    this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesimodkod = Dto.Fizetesimodkod;
+    this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesimod = Dto.Fizetesimod1;
+    this._cdr.detectChanges();
+  }
+  onFizetesimodStopzoom() {
+    this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
     this._cdr.detectChanges();
   }
 

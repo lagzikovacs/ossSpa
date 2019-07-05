@@ -81,8 +81,11 @@
   </form>
 
   <ng-container *ngIf="iratservice.SzerkesztesMode === 1">
-    <app-irattipus-list></app-irattipus-list>
+    <app-irattipus-list [maszk]="this.iratservice.DtoEdited.Irattipus || ''"
+                        (eventSelectzoom)="onIrattipusSelectzoom($event)"
+                        (eventStopzoom)="onIrattipusStopzoom()"></app-irattipus-list>
   </ng-container>
+
   <ng-container *ngIf="iratservice.SzerkesztesMode === 2">
     <app-ugyfel-list></app-ugyfel-list>
   </ng-container>

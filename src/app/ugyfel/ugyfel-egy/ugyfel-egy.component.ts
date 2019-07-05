@@ -91,22 +91,24 @@ export class UgyfelEgyComponent implements OnDestroy {
   }
 
   VcardLetoles() {
+    const DtoEdited = deepCopy(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
+
     const encode = 'ENCODING=QUOTED-PRINTABLE;CHARSET=utf-8:';
 
-    const Ceg = this.ugyfelservice.DtoEdited.Ceg ? this.ugyfelservice.DtoEdited.Ceg : ';';
-    const Beosztas = this.ugyfelservice.DtoEdited.Beosztas ? this.ugyfelservice.DtoEdited.Beosztas : '';
+    const Ceg = DtoEdited.Ceg ? DtoEdited.Ceg : ';';
+    const Beosztas = DtoEdited.Beosztas ? DtoEdited.Beosztas : '';
 
     const raw = 'BEGIN:VCARD\r\n' +
       'VERSION:2.1\r\n' +
-      'FN;' + encode + this.ugyfelservice.DtoEdited.Nev + '\r\n' +
-      'N;' + encode + this.ugyfelservice.DtoEdited.Nev + ';;;\r\n' +
+      'FN;' + encode + DtoEdited.Nev + '\r\n' +
+      'N;' + encode + DtoEdited.Nev + ';;;\r\n' +
       'ORG;' + encode + Ceg + '\r\n' +
       'TITLE;' + encode + Beosztas + '\r\n' +
-      'ADR;WORK;PREF;' + encode + ';;' + this.ugyfelservice.DtoEdited.Kozterulet + ' ' +
-        this.ugyfelservice.DtoEdited.Kozterulettipus + ' ' + this.ugyfelservice.DtoEdited.Hazszam + ';' +
-        this.ugyfelservice.DtoEdited.Helysegnev + ';;' + this.ugyfelservice.DtoEdited.Iranyitoszam + '\r\n' +
-      'EMAIL:' + this.ugyfelservice.DtoEdited.Email + '\r\n' +
-      'TEL;TYPE=CELL:' + this.ugyfelservice.DtoEdited.Telefon + '\r\n' +
+      'ADR;WORK;PREF;' + encode + ';;' + DtoEdited.Kozterulet + ' ' +
+        DtoEdited.Kozterulettipus + ' ' + DtoEdited.Hazszam + ';' +
+        DtoEdited.Helysegnev + ';;' + DtoEdited.Iranyitoszam + '\r\n' +
+      'EMAIL:' + DtoEdited.Email + '\r\n' +
+      'TEL;TYPE=CELL:' + DtoEdited.Telefon + '\r\n' +
       'END:VCARD';
 
     const arrayUTF8 = this.toUTF8Array(raw);
@@ -116,7 +118,7 @@ export class UgyfelEgyComponent implements OnDestroy {
     }
 
     const blob = new Blob([byteNumbers], {type: 'text/html;charset=UTF-8;'});
-    FileSaver.saveAs(blob, this.ugyfelservice.DtoEdited.Nev + '.vcf');
+    FileSaver.saveAs(blob, DtoEdited.Nev + '.vcf');
   }
 
   toUTF8Array(str) {

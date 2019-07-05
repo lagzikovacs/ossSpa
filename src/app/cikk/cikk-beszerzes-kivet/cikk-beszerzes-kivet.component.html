@@ -1,10 +1,10 @@
 <div class="alapkeret">
-  <h5 *ngIf="cikkservice.BizonylattipusKod === 3">Beszerzés</h5>
-  <h5 *ngIf="cikkservice.BizonylattipusKod === 2">Kivét</h5>
+  <h5 *ngIf="BizonylattipusKod === 3">Beszerzés</h5>
+  <h5 *ngIf="BizonylattipusKod === 2">Kivét</h5>
 
   <app-tabla #tabla
-             [items]="cikkservice.MozgasDto"
-             [colsets]="cikkservice.BeszerzesKivetGridSettings">
+             [items]="MozgasDto"
+             [colsets]="BeszerzesKivetGridSettings">
   </app-tabla>
 </div>
 

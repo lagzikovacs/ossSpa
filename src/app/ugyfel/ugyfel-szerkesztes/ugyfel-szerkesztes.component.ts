@@ -9,16 +9,18 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {propCopy} from '../../tools/propCopy';
 import {HelysegDto} from '../../primitiv/helyseg/helysegdto';
+import {UgyfelDto} from '../ugyfeldto';
 
 @Component({
   selector: 'app-ugyfel-szerkesztes',
   templateUrl: './ugyfel-szerkesztes.component.html'
 })
 export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
-  ugyfelservice: UgyfelService;
-
   @Input() uj = false;
+  DtoEdited = new UgyfelDto();
   @Output() eventSzerkeszteskesz = new EventEmitter<void>();
+
+  SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -29,10 +31,12 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(ugyfelservice: UgyfelService,
-              private _helysegservice: HelysegService,
+  ugyfelservice: UgyfelService;
+
+  constructor(private _helysegservice: HelysegService,
               private _spinnerservice: SpinnerService,
-              private _errorservice: ErrorService) {
+              private _errorservice: ErrorService,
+              ugyfelservice: UgyfelService) {
     this.ugyfelservice = ugyfelservice;
   }
 
@@ -45,7 +49,7 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
             throw res.Error;
           }
 
-          this.ugyfelservice.DtoEdited = res.Result[0];
+          this.DtoEdited = res.Result[0];
           this.eppFrissit = false;
         })
         .catch(err => {
@@ -53,23 +57,23 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.ugyfelservice.DtoEdited = deepCopy(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
+      this.DtoEdited = deepCopy(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
     }
   }
 
   onSubmit() {
     this.eppFrissit = true;
-    this._helysegservice.ZoomCheck(new HelysegZoomParameter(this.ugyfelservice.DtoEdited.Helysegkod || 0,
-      this.ugyfelservice.DtoEdited.Helysegnev || ''))
+    this._helysegservice.ZoomCheck(new HelysegZoomParameter(this.DtoEdited.Helysegkod || 0,
+      this.DtoEdited.Helysegnev || ''))
       .then(res => {
         if (res.Error !== null) {
           throw res.Error;
         }
 
         if (this.uj) {
-          return this.ugyfelservice.Add(this.ugyfelservice.DtoEdited);
+          return this.ugyfelservice.Add(this.DtoEdited);
         } else {
-          return this.ugyfelservice.Update(this.ugyfelservice.DtoEdited);
+          return this.ugyfelservice.Update(this.DtoEdited);
         }
       })
       .then(res1 => {
@@ -103,14 +107,14 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   HelysegZoom() {
-    this.ugyfelservice.SzerkesztesMode = UgyfelSzerkesztesMode.HelysegZoom;
+    this.SzerkesztesMode = UgyfelSzerkesztesMode.HelysegZoom;
   }
   onHelysegSelectzoom(Dto: HelysegDto) {
-    this.ugyfelservice.DtoEdited.Helysegkod = Dto.Helysegkod;
-    this.ugyfelservice.DtoEdited.Helysegnev = Dto.Helysegnev;
+    this.DtoEdited.Helysegkod = Dto.Helysegkod;
+    this.DtoEdited.Helysegnev = Dto.Helysegnev;
   }
   onHelysegStopzoom() {
-    this.ugyfelservice.SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
+    this.SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
   }
 
   ngOnDestroy() {

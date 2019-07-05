@@ -13,6 +13,9 @@ import {AjanlatService} from '../../ajanlat/ajanlat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
+import {environment} from '../../../environments/environment';
+import {CikkParameter} from '../cikkparameter';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-cikk-list',
@@ -21,12 +24,17 @@ import {TablaComponent} from '../../tools/tabla/tabla.component';
 export class CikkListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
-  cikkservice: CikkService;
   szurok = ['Megnevezés', 'Id'];
+  szempont = 0;
+  minta = '';
+  up = new CikkParameter(0, environment.lapmeret);
   szempontok = [
     Szempont.Megnevezes, Szempont.Kod
   ];
+  elsokereses = true;
+  osszesrekord = 0;
   jog = false;
+  zoom = false;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -53,6 +61,18 @@ export class CikkListComponent implements OnInit, OnDestroy {
   //   this.osszesrekordChange.emit(this._osszesrekord);
   // }
 
+  @Input() set maszk(value: string) {
+    if (value !== undefined) {
+      this.minta = value || '';
+      this.szempont = 0;
+      this.zoom = true;
+    }
+  }
+  @Output() eventSelectzoom = new EventEmitter<CikkDto>();
+  @Output() eventStopzoom = new EventEmitter<void>();
+
+  cikkservice: CikkService;
+
   constructor(private _logonservice: LogonService,
               private _bizonylatservice: BizonylatService,
               private _ajanlatservice: AjanlatService,
@@ -64,7 +84,7 @@ export class CikkListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (this.cikkservice.zoom) {
+    if (this.zoom) {
       this.onKereses();
     }
   }
@@ -72,13 +92,13 @@ export class CikkListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.cikkservice.Dto = new Array<CikkDto>();
     this.cikkservice.DtoSelectedIndex = -1;
-    this.cikkservice.osszesrekord = 0;
+    this.osszesrekord = 0;
 
-    this.cikkservice.elsokereses = true;
-    this.cikkservice.up.rekordtol = 0;
-    this.cikkservice.up.fi = new Array<SzMT>();
+    this.elsokereses = true;
+    this.up.rekordtol = 0;
+    this.up.fi = new Array<SzMT>();
 
-    this.cikkservice.up.fi.push(new SzMT(this.szempontok[this.cikkservice.szempont], this.cikkservice.minta));
+    this.up.fi.push(new SzMT(this.szempontok[this.szempont], this.minta));
 
     this.tabla.clearselections();
 
@@ -86,15 +106,15 @@ export class CikkListComponent implements OnInit, OnDestroy {
   }
   onKeresesTovabb() {
     this.eppFrissit = true;
-    this.cikkservice.Select(this.cikkservice.up)
+    this.cikkservice.Select(this.up)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        if (this.cikkservice.elsokereses) {
+        if (this.elsokereses) {
           this.cikkservice.Dto = res.Result;
-          this.cikkservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.cikkservice.Dto];
           res.Result.forEach(element => {
@@ -102,9 +122,9 @@ export class CikkListComponent implements OnInit, OnDestroy {
           });
           this.cikkservice.Dto = buf;
         }
-        this.cikkservice.osszesrekord = res.OsszesRekord;
+        this.osszesrekord = res.OsszesRekord;
 
-        this.cikkservice.up.rekordtol += this.cikkservice.up.lapmeret;
+        this.up.rekordtol += this.up.lapmeret;
         this.eppFrissit = false;
 
         // if (this.cikkservice.zoom) {
@@ -118,44 +138,14 @@ export class CikkListComponent implements OnInit, OnDestroy {
   }
 
   onStartzoom(i: number) {
-    if (this.cikkservice.zoomsource === ZoomSources.Ajanlat) {
-      this._ajanlatservice.AjanlatParam.AjanlatBuf[this._ajanlatservice.AjanlattetelIndex].CikkKod =
-        this.cikkservice.Dto[i].Cikkkod;
-      this._ajanlatservice.AjanlatParam.AjanlatBuf[this._ajanlatservice.AjanlattetelIndex].CikkNev =
-        this.cikkservice.Dto[i].Megnevezes;
-      this._ajanlatservice.AjanlatParam.AjanlatBuf[this._ajanlatservice.AjanlattetelIndex].AfaMerteke =
-        this.cikkservice.Dto[i].Afamerteke;
-      this._ajanlatservice.AjanlatParam.AjanlatBuf[this._ajanlatservice.AjanlattetelIndex].EgysegAr =
-        this.cikkservice.Dto[i].Egysegar;
-    }
-    if (this.cikkservice.zoomsource === ZoomSources.Bizonylattetel) {
-      this._bizonylatservice.TetelDtoEdited.Cikkkod = this.cikkservice.Dto[i].Cikkkod;
-      this._bizonylatservice.TetelDtoEdited.Megnevezes = this.cikkservice.Dto[i].Megnevezes;
-      this._bizonylatservice.TetelDtoEdited.Mekod = this.cikkservice.Dto[i].Mekod;
-      this._bizonylatservice.TetelDtoEdited.Me = this.cikkservice.Dto[i].Me;
-      this._bizonylatservice.TetelDtoEdited.Afakulcskod = this.cikkservice.Dto[i].Afakulcskod;
-      this._bizonylatservice.TetelDtoEdited.Afakulcs = this.cikkservice.Dto[i].Afakulcs;
-      this._bizonylatservice.TetelDtoEdited.Afamerteke = this.cikkservice.Dto[i].Afamerteke;
-      this._bizonylatservice.TetelDtoEdited.Egysegar = this.cikkservice.Dto[i].Egysegar;
-      this._bizonylatservice.TetelDtoEdited.Tomegkg = this.cikkservice.Dto[i].Tomegkg;
-
-      this._bizonylatservice.TetelDtoEdited.Termekdijkod = this.cikkservice.Dto[i].Termekdijkod;
-      this._bizonylatservice.TetelDtoEdited.Termekdijkt = this.cikkservice.Dto[i].Termekdijkt;
-      this._bizonylatservice.TetelDtoEdited.Termekdijmegnevezes = this.cikkservice.Dto[i].Termekdijmegnevezes;
-      this._bizonylatservice.TetelDtoEdited.Termekdijegysegar = this.cikkservice.Dto[i].Termekdijegysegar;
-    }
+    this.eventSelectzoom.emit(deepCopy(this.cikkservice.Dto[i]));
 
     this.onStopzoom();
   }
   onStopzoom() {
-    this.cikkservice.zoom = false;
+    this.zoom = false;
 
-    if (this.cikkservice.zoomsource === ZoomSources.Ajanlat) {
-      this._ajanlatservice.AjanlatSzerkesztesMode = AjanlatSzerkesztesMode.Blank;
-    }
-    if (this.cikkservice.zoomsource === ZoomSources.Bizonylattetel) {
-      this._bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
-    }
+    this.eventStopzoom.emit();
   }
 
   onId(i: number) {

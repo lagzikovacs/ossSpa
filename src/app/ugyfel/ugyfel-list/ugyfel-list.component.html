@@ -1,19 +1,19 @@
 <div class="alapkeret">
-  <h5 *ngIf="!ugyfelservice.zoom">{{ugyfelservice.cim}}</h5>
-  <h5 *ngIf="ugyfelservice.zoom">{{ugyfelservice.cim}} - zoom</h5>
+  <h5 *ngIf="!zoom">{{ugyfelservice.cim}}</h5>
+  <h5 *ngIf="zoom">{{ugyfelservice.cim}} - zoom</h5>
   <app-ugyfeltoolbar [Csoportszurok]="csoportszurok"
                      [Szurok]="szurok"
-                     [(csoportszempont)]="ugyfelservice.csoportszempont"
-                     [(szempont)]="ugyfelservice.szempont"
-                     [(minta)]="ugyfelservice.minta"
+                     [(csoportszempont)]="csoportszempont"
+                     [(szempont)]="szempont"
+                     [(minta)]="minta"
                      [enKereses]="!eppFrissit" (Kereses)="onKereses()"
                      [enUj]="!eppFrissit && jog" (Uj)="onUj()"
-                     [visZoom]="ugyfelservice.zoom" (StopZoom)="onStopzoom()">
+                     [visZoom]="zoom" (StopZoom)="onStopzoom()">
   </app-ugyfeltoolbar>
 
   <app-ugyfel-tabla #tabla
                     [items]="ugyfelservice.Dto"
-                    [zoom]="ugyfelservice.zoom"
+                    [zoom]="zoom"
                     (forid)="onId($event)"
                     (forzoom)="onStartzoom($event)"
                     [ujTemplate]="griduj"
@@ -28,9 +28,9 @@
     <app-ugyfel-egy (eventTorlesutan)="onTorlesutan()"></app-ugyfel-egy>
   </ng-template>
 
-  <app-toolbarfooter [enKereses]="!ugyfelservice.elsokereses && !eppFrissit"
+  <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
                      [rekordszam]="ugyfelservice.Dto.length"
-                     [osszesrekord]="ugyfelservice.osszesrekord"
+                     [osszesrekord]="osszesrekord"
                      (KeresesTovabb)="onKeresesTovabb()">
   </app-toolbarfooter>
 </div>

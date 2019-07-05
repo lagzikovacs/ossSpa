@@ -9,6 +9,7 @@ import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {EgyMode} from '../../enums/egymode';
+import {CikkMozgasTetelDto} from '../cikkmozgasteteldto';
 
 @Component({
   selector: 'app-cikk-egy',
@@ -21,6 +22,9 @@ export class CikkEgyComponent implements OnDestroy {
   jog = false;
 
   @Output() eventTorlesutan = new EventEmitter<void>();
+
+  BizonylattipusKod: number;
+  MozgasDto = new Array<CikkMozgasTetelDto>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -49,23 +53,23 @@ export class CikkEgyComponent implements OnDestroy {
     this.egymode = EgyMode.Modositas;
   }
   doBeszerzes() {
-    this.cikkservice.BizonylattipusKod = 3;
+    this.BizonylattipusKod = 3;
     this.beszerzeskivet();
   }
   doKivet() {
-    this.cikkservice.BizonylattipusKod = 2;
+    this.BizonylattipusKod = 2;
     this.beszerzeskivet();
   }
   beszerzeskivet() {
     this.eppFrissit = true;
     this.cikkservice.Mozgas(new CikkMozgasParameter(this.cikkservice.Dto[this.cikkservice.DtoSelectedIndex].Cikkkod,
-      this.cikkservice.BizonylattipusKod))
+      this.BizonylattipusKod))
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        this.cikkservice.MozgasDto = res.Result;
+        this.MozgasDto = res.Result;
 
         this.eppFrissit = false;
         this.egymode = EgyMode.BeszerzesKivet;

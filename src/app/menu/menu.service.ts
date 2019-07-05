@@ -131,14 +131,12 @@ export class MenuService {
         this._termekdijservice.Dto = new Array<TermekdijDto>();
         break;
       case '/cikk':
-        this._cikkservice.zoom = false;
         this._cikkservice.Dto = new Array<CikkDto>();
         break;
       case '/helyseg':
         this._helysegservice.Dto = new Array<HelysegDto>();
         break;
       case '/ugyfel':
-        this._ugyfelservice.zoom = false;
         this._ugyfelservice.Dto = new Array<UgyfelDto>();
       break;
 

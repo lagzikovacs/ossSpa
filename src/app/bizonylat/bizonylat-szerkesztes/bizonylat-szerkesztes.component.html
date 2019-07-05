@@ -136,18 +136,27 @@
     <app-bizonylatteteltabla [enEdit]="true" (torles)="tetelTorles($event)" (modositas)="tetelModositas($event)"
                              [Dto]="bizonylatservice.ComplexDtoEdited.LstTetelDto"></app-bizonylatteteltabla>
   </ng-container>
+
   <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 2">
     <app-ugyfel-list></app-ugyfel-list>
   </ng-container>
+
   <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 3">
-    <app-penznem-list></app-penznem-list>
+    <app-penznem-list [maszk]="bizonylatservice.ComplexDtoEdited.Dto.Penznem || ''"
+                      (eventSelectzoom)="onPenznemSelectzoom($event)"
+                      (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
   </ng-container>
+
   <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 4">
-    <app-fizetesimod-list></app-fizetesimod-list>
+    <app-fizetesimod-list [maszk]="bizonylatservice.ComplexDtoEdited.Dto.Fizetesimod || ''"
+                          (eventSelectzoom)="onFizetesimodSelectzoom($event)"
+                          (eventStopzoom)="onFizetesimodStopzoom()"></app-fizetesimod-list>
   </ng-container>
+
   <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 5">
     <app-bizonylat-tetel-szerkesztes></app-bizonylat-tetel-szerkesztes>
   </ng-container>
+
   <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 6">
     <app-bizonylat-tetel-torles></app-bizonylat-tetel-torles>
   </ng-container>

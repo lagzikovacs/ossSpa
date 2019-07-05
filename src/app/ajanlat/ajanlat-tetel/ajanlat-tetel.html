@@ -57,7 +57,9 @@
   }-->
 
   <ng-container *ngIf="ajanlatservice.AjanlatSzerkesztesMode === 1">
-    <app-cikk-list></app-cikk-list>
+    <app-cikk-list [maszk]="ajanlatservice.AjanlatParam.AjanlatBuf[ajanlatservice.AjanlattetelIndex].CikkNev || ''"
+                   (eventSelectzoom)="onCikkSelectzoom($event)"
+                   (eventStopzoom)="onCikkStopzoom()"></app-cikk-list>
   </ng-container>
 </div>
 

@@ -1,17 +1,17 @@
 <div class="alapkeret">
-  <h5 *ngIf="!cikkservice.zoom">{{cikkservice.cim}}</h5>
-  <h5 *ngIf="cikkservice.zoom">{{cikkservice.cim}} - zoom</h5>
+  <h5 *ngIf="!zoom">{{cikkservice.cim}}</h5>
+  <h5 *ngIf="zoom">{{cikkservice.cim}} - zoom</h5>
   <app-toolbar [Szurok]="szurok"
-               [(szempont)]="cikkservice.szempont"
-               [(minta)]="cikkservice.minta"
+               [(szempont)]="szempont"
+               [(minta)]="minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
                [enUj]="!eppFrissit && jog" (Uj)="onUj()"
-               [visZoom]="cikkservice.zoom" (StopZoom)="onStopzoom()">
+               [visZoom]="zoom" (StopZoom)="onStopzoom()">
   </app-toolbar>
   <app-tabla #tabla
              [items]="cikkservice.Dto"
              [colsets]="cikkservice.GridSettings"
-             [zoom]="cikkservice.zoom"
+             [zoom]="zoom"
              (forzoom)="onStartzoom($event)"
              (forid)="onId($event)"
              [ujTemplate]="griduj"
@@ -25,9 +25,9 @@
   <ng-template #gridegy>
     <app-cikk-egy (eventTorlesutan)="onTorlesutan()"></app-cikk-egy>
   </ng-template>
-  <app-toolbarfooter [enKereses]="!cikkservice.elsokereses && !eppFrissit"
+  <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
                      [rekordszam]="cikkservice.Dto.length"
-                     [osszesrekord]="cikkservice.osszesrekord"
+                     [osszesrekord]="osszesrekord"
                      (KeresesTovabb)="onKeresesTovabb()">
   </app-toolbarfooter>
 </div>

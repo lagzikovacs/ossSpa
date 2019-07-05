@@ -16,16 +16,18 @@ import {propCopy} from '../../tools/propCopy';
 import {AfakulcsDto} from '../../primitiv/afakulcs/afakulcsdto';
 import {MeDto} from '../../primitiv/me/medto';
 import {TermekdijDto} from '../../primitiv/termekdij/termekdijdto';
+import {CikkDto} from '../cikkdto';
 
 @Component({
   selector: 'app-cikk-szerkesztes',
   templateUrl: './cikk-szerkesztes.component.html'
 })
 export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
-  cikkservice: CikkService;
-
   @Input() uj = false;
+  DtoEdited = new CikkDto();
   @Output() eventSzerkeszteskesz = new EventEmitter<void>();
+
+  SzerkesztesMode = CikkSzerkesztesMode.Blank;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -36,18 +38,18 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(cikkservice: CikkService,
-              private _meservice: MeService,
+  cikkservice: CikkService;
+
+  constructor(private _meservice: MeService,
               private _afakulcsservice: AfakulcsService,
               private _termekdijservice: TermekdijService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService) {
+              private _spinnerservice: SpinnerService,
+              cikkservice: CikkService) {
     this.cikkservice = cikkservice;
   }
 
   ngOnInit() {
-    this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.Blank;
-
     if (this.uj) {
       this.eppFrissit = true;
       this.cikkservice.CreateNew()
@@ -56,7 +58,7 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
             throw res.Error;
           }
 
-          this.cikkservice.DtoEdited = res.Result[0];
+          this.DtoEdited = res.Result[0];
           this.eppFrissit = false;
         })
         .catch(err => {
@@ -64,35 +66,35 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.cikkservice.DtoEdited = deepCopy(this.cikkservice.Dto[this.cikkservice.DtoSelectedIndex]);
+      this.DtoEdited = deepCopy(this.cikkservice.Dto[this.cikkservice.DtoSelectedIndex]);
     }
   }
 
   onSubmit() {
     this.eppFrissit = true;
 
-    this._meservice.ZoomCheck(new MeZoomParameter(this.cikkservice.DtoEdited.Mekod || 0,
-      this.cikkservice.DtoEdited.Me || ''))
+    this._meservice.ZoomCheck(new MeZoomParameter(this.DtoEdited.Mekod || 0,
+      this.DtoEdited.Me || ''))
       .then(res => {
         if (res.Error !== null) {
           throw res.Error;
         }
-        return this._afakulcsservice.ZoomCheck(new AfakulcsZoomParameter(this.cikkservice.DtoEdited.Afakulcskod || 0,
-          this.cikkservice.DtoEdited.Afakulcs || ''));
+        return this._afakulcsservice.ZoomCheck(new AfakulcsZoomParameter(this.DtoEdited.Afakulcskod || 0,
+          this.DtoEdited.Afakulcs || ''));
       })
       .then(res1 => {
         if (res1.Error !== null) {
           throw res1.Error;
         }
 
-        if ((this.cikkservice.DtoEdited.Termekdijkt || '') !== '') {
-          return this._termekdijservice.ZoomCheck(new TermekdijZoomParameter(this.cikkservice.DtoEdited.Termekdijkod || 0,
-            this.cikkservice.DtoEdited.Termekdijkt || ''));
+        if ((this.DtoEdited.Termekdijkt || '') !== '') {
+          return this._termekdijservice.ZoomCheck(new TermekdijZoomParameter(this.DtoEdited.Termekdijkod || 0,
+            this.DtoEdited.Termekdijkt || ''));
         } else {
-          this.cikkservice.DtoEdited.Termekdijkod = undefined;
-          this.cikkservice.DtoEdited.Termekdijkt = undefined;
-          this.cikkservice.DtoEdited.Termekdijmegnevezes = undefined;
-          this.cikkservice.DtoEdited.Termekdijegysegar = undefined;
+          this.DtoEdited.Termekdijkod = undefined;
+          this.DtoEdited.Termekdijkt = undefined;
+          this.DtoEdited.Termekdijmegnevezes = undefined;
+          this.DtoEdited.Termekdijegysegar = undefined;
           return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
         }
       })
@@ -103,9 +105,9 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
 
         // itt a zoom már le van ellenőrizve
         if (this.uj) {
-          return this.cikkservice.Add(this.cikkservice.DtoEdited);
+          return this.cikkservice.Add(this.DtoEdited);
         } else {
-          return this.cikkservice.Update(this.cikkservice.DtoEdited);
+          return this.cikkservice.Update(this.DtoEdited);
         }
       })
       .then(res3 => {
@@ -138,39 +140,39 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   MeZoom() {
-    this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.MeZoom;
+    this.SzerkesztesMode = CikkSzerkesztesMode.MeZoom;
   }
   onMeSelectzoom(Dto: MeDto) {
-    this.cikkservice.DtoEdited.Mekod = Dto.Mekod;
-    this.cikkservice.DtoEdited.Me = Dto.Me;
+    this.DtoEdited.Mekod = Dto.Mekod;
+    this.DtoEdited.Me = Dto.Me;
   }
   onMeStopzoom() {
-    this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.Blank;
+    this.SzerkesztesMode = CikkSzerkesztesMode.Blank;
   }
 
   AfakulcsZoom() {
-    this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.AfakulcsZoom;
+    this.SzerkesztesMode = CikkSzerkesztesMode.AfakulcsZoom;
   }
   onAfakulcsSelectzoom(Dto: AfakulcsDto) {
-    this.cikkservice.DtoEdited.Afakulcskod = Dto.Afakulcskod;
-    this.cikkservice.DtoEdited.Afakulcs = Dto.Afakulcs1;
-    this.cikkservice.DtoEdited.Afamerteke = Dto.Afamerteke;
+    this.DtoEdited.Afakulcskod = Dto.Afakulcskod;
+    this.DtoEdited.Afakulcs = Dto.Afakulcs1;
+    this.DtoEdited.Afamerteke = Dto.Afamerteke;
   }
   onAfakulcsStopzoom() {
-    this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.Blank;
+    this.SzerkesztesMode = CikkSzerkesztesMode.Blank;
   }
 
   TermekdijZoom() {
-    this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.TermekdijZoom;
+    this.SzerkesztesMode = CikkSzerkesztesMode.TermekdijZoom;
   }
   onTermekdijSelectzoom(Dto: TermekdijDto) {
-    this.cikkservice.DtoEdited.Termekdijkod = Dto.Termekdijkod;
-    this.cikkservice.DtoEdited.Termekdijkt = Dto.Termekdijkt;
-    this.cikkservice.DtoEdited.Termekdijmegnevezes = Dto.Termekdijmegnevezes;
-    this.cikkservice.DtoEdited.Termekdijegysegar = Dto.Termekdijegysegar;
+    this.DtoEdited.Termekdijkod = Dto.Termekdijkod;
+    this.DtoEdited.Termekdijkt = Dto.Termekdijkt;
+    this.DtoEdited.Termekdijmegnevezes = Dto.Termekdijmegnevezes;
+    this.DtoEdited.Termekdijegysegar = Dto.Termekdijegysegar;
   }
   onTermekdijStopzoom() {
-    this.cikkservice.SzerkesztesMode = CikkSzerkesztesMode.Blank;
+    this.SzerkesztesMode = CikkSzerkesztesMode.Blank;
   }
 
   ngOnDestroy() {

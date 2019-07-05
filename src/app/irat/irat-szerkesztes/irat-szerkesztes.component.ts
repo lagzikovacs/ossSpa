@@ -12,6 +12,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {propCopy} from '../../tools/propCopy';
+import {IrattipusDto} from '../../primitiv/irattipus/irattipusdto';
 
 @Component({
   selector: 'app-irat-szerkesztes',
@@ -127,11 +128,14 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   IrattipusZoom() {
-    this._irattipusservice.ekDto.minta = this.iratservice.DtoEdited.Irattipus || '';
-    this._irattipusservice.zoomsource = ZoomSources.Irat;
-    this._irattipusservice.zoom = true;
-
     this.iratservice.SzerkesztesMode = IratSzerkesztesMode.IrattipusZoom;
+  }
+  onMeSelectzoom(Dto: IrattipusDto) {
+    this.iratservice.DtoEdited.Irattipuskod = Dto.Irattipuskod;
+    this.iratservice.DtoEdited.Irattipus = Dto.Irattipus1;
+  }
+  onMeStopzoom() {
+    this.iratservice.SzerkesztesMode = IratSzerkesztesMode.Blank;
   }
 
   UgyfelZoom() {

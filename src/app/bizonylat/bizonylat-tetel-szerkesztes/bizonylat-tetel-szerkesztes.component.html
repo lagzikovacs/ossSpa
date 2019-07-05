@@ -226,17 +226,26 @@
   }-->
 
   <ng-container *ngIf="bizonylatservice.TetelSzerkesztesMode === 1">
-    <app-cikk-list></app-cikk-list>
+    <app-cikk-list [maszk]="bizonylatservice.TetelDtoEdited.Megnevezes || ''"
+                   (eventSelectzoom)="onCikkSelectzoom($event)"
+                   (eventStopzoom)="onCikkStopzoom()"></app-cikk-list>
   </ng-container>
+
   <ng-container *ngIf="bizonylatservice.TetelSzerkesztesMode === 2">
-    <app-me-list></app-me-list>
+    <app-me-list [maszk]="bizonylatservice.TetelDtoEdited.Me || ''"
+                 (eventSelectzoom)="onMeSelectzoom($event)"
+                 (eventStopzoom)="onMeStopzoom()"></app-me-list>
   </ng-container>
+
   <ng-container *ngIf="bizonylatservice.TetelSzerkesztesMode === 3">
-    <app-afakulcs-list [maszk]="this.bizonylatservice.TetelDtoEdited.Afakulcs || ''"
+    <app-afakulcs-list [maszk]="bizonylatservice.TetelDtoEdited.Afakulcs || ''"
                        (eventSelectzoom)="onAfakulcsSelectzoom($event)"
                        (eventStopzoom)="onAfakulcsStopzoom()"></app-afakulcs-list>
   </ng-container>
+
   <ng-container *ngIf="bizonylatservice.TetelSzerkesztesMode === 4">
-    <app-termekdij-list></app-termekdij-list>
+    <app-termekdij-list [maszk]="bizonylatservice.TetelDtoEdited.Termekdijkt || ''"
+                        (eventSelectzoom)="onTermekdijSelectzoom($event)"
+                        (eventStopzoom)="onTermekdijStopzoom()"></app-termekdij-list>
   </ng-container>
 </div>

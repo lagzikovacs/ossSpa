@@ -62,7 +62,9 @@
     }-->
 
   <ng-container *ngIf="bizonylatkapcsolatservice.SzerkesztesMode === 1">
-    <app-irattipus-list></app-irattipus-list>
+    <app-irattipus-list [maszk]="this.bizonylatkapcsolatservice.UjIratDto.Irattipus || ''"
+                        (eventSelectzoom)="onIrattipusSelectzoom($event)"
+                        (eventStopzoom)="onIrattipusStopzoom()"></app-irattipus-list>
   </ng-container>
 </div>
 

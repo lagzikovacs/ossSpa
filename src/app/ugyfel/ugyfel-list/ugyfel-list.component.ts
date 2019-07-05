@@ -15,6 +15,8 @@ import {BizonylatSzerkesztesMode} from '../../bizonylat/bizonylatszerkesztesmode
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {UgyfelTablaComponent} from '../ugyfel-tabla/ugyfel-tabla.component';
+import {environment} from '../../../environments/environment';
+import {UgyfelParameter} from '../ugyfelparameter';
 
 @Component({
   selector: 'app-ugyfel-list',
@@ -23,15 +25,20 @@ import {UgyfelTablaComponent} from '../ugyfel-tabla/ugyfel-tabla.component';
 export class UgyfelListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: UgyfelTablaComponent;
 
+  csoportszempont = 0;
   csoportszurok = ['Mind', 'Kiemelt'];
   szurok = ['Név', 'Cég', 'Beosztás', 'Helységnév', 'Telefon', 'Email', 'Egyéb link', 'Ajánlotta', 'Id'];
+  szempont = 0;
+  minta = '';
+  up = new UgyfelParameter(0, environment.lapmeret);
   szempontok = [
     Szempont.Nev, Szempont.Ceg, Szempont.Beosztas, Szempont.Telepules, Szempont.UgyfelTelefonszam, Szempont.UgyfelEmail,
     Szempont.Egyeblink, Szempont.Ajanlo, Szempont.Kod
   ];
+  elsokereses = true;
+  osszesrekord = 0;
   jog = false;
-  ugyfelservice: UgyfelService;
-
+  zoom = false;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -58,6 +65,19 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
   //   this.osszesrekordChange.emit(this._osszesrekord);
   // }
 
+  @Input() set maszk(value: string) {
+    if (value !== undefined) {
+      this.csoportszempont = 0;
+      this.minta = value || '';
+      this.szempont = 0;
+      this.zoom = true;
+    }
+  }
+  @Output() eventSelectzoom = new EventEmitter<UgyfelDto>();
+  @Output() eventStopzoom = new EventEmitter<void>();
+
+  ugyfelservice: UgyfelService;
+
   constructor(private _logonservice: LogonService,
               private _iratservice: IratService,
               private _projektservice: ProjektService,
@@ -70,7 +90,7 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (this.ugyfelservice.zoom) {
+    if (this.zoom) {
       this.onKereses();
     }
   }
@@ -78,13 +98,13 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.ugyfelservice.Dto = new Array<UgyfelDto>();
     this.ugyfelservice.DtoSelectedIndex = -1;
-    this.ugyfelservice.osszesrekord = 0;
+    this.osszesrekord = 0;
 
-    this.ugyfelservice.elsokereses = true;
-    this.ugyfelservice.up.rekordtol = 0;
-    this.ugyfelservice.up.csoport = this.ugyfelservice.csoportszempont;
-    this.ugyfelservice.up.fi = new Array<SzMT>();
-    this.ugyfelservice.up.fi.push(new SzMT(this.szempontok[this.ugyfelservice.szempont], this.ugyfelservice.minta));
+    this.elsokereses = true;
+    this.up.rekordtol = 0;
+    this.up.csoport = this.csoportszempont;
+    this.up.fi = new Array<SzMT>();
+    this.up.fi.push(new SzMT(this.szempontok[this.szempont], this.minta));
 
     this.tabla.clearselections();
 
@@ -92,15 +112,15 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
   }
   onKeresesTovabb() {
     this.eppFrissit = true;
-    this.ugyfelservice.Select(this.ugyfelservice.up)
+    this.ugyfelservice.Select(this.up)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        if (this.ugyfelservice.elsokereses) {
+        if (this.elsokereses) {
           this.ugyfelservice.Dto = res.Result;
-          this.ugyfelservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.ugyfelservice.Dto];
           res.Result.forEach(element => {
@@ -108,9 +128,9 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
           });
           this.ugyfelservice.Dto = buf;
         }
-        this.ugyfelservice.osszesrekord = res.OsszesRekord;
+        this.osszesrekord = res.OsszesRekord;
 
-        this.ugyfelservice.up.rekordtol += this.ugyfelservice.up.lapmeret;
+        this.up.rekordtol += this.up.lapmeret;
         this.eppFrissit = false;
 
         // if (this.ugyfelservice.zoom) {

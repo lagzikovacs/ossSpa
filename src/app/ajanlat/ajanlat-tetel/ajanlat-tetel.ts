@@ -7,6 +7,7 @@ import {ZoomSources} from '../../enums/zoomsources';
 import {AjanlatService} from '../ajanlat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {CikkDto} from '../../cikk/cikkdto';
 
 @Component({
   selector: 'app-ajanlat-tetel',
@@ -25,8 +26,7 @@ export class AjanlatTetelComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(private _cikkservice: CikkService,
-              private _errorservice: ErrorService,
+  constructor(private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               ajanlatservice: AjanlatService,
               projektkapcsolatservice: ProjektkapcsolatService) {
@@ -35,13 +35,16 @@ export class AjanlatTetelComponent implements OnDestroy {
   }
 
   CikkZoom() {
-    this._cikkservice.szempont = 0;
-    this._cikkservice.minta =
-      this.ajanlatservice.AjanlatParam.AjanlatBuf[this.ajanlatservice.AjanlattetelIndex].CikkNev || '';
-    this._cikkservice.zoomsource = ZoomSources.Ajanlat;
-    this._cikkservice.zoom = true;
-
     this.ajanlatservice.AjanlatSzerkesztesMode = AjanlatSzerkesztesMode.CikkZoom;
+  }
+  onAfakulcsSelectzoom(Dto: CikkDto) {
+    this.ajanlatservice.AjanlatParam.AjanlatBuf[this.ajanlatservice.AjanlattetelIndex].CikkKod = Dto.Cikkkod;
+    this.ajanlatservice.AjanlatParam.AjanlatBuf[this.ajanlatservice.AjanlattetelIndex].CikkNev = Dto.Megnevezes;
+    this.ajanlatservice.AjanlatParam.AjanlatBuf[this.ajanlatservice.AjanlattetelIndex].AfaMerteke = Dto.Afamerteke;
+    this.ajanlatservice.AjanlatParam.AjanlatBuf[this.ajanlatservice.AjanlattetelIndex].EgysegAr = Dto.Egysegar;
+  }
+  onAfakulcsStopzoom() {
+    this.ajanlatservice.AjanlatSzerkesztesMode = AjanlatSzerkesztesMode.Blank;
   }
 
   onSubmit() {

@@ -4,12 +4,14 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {UgyfelService} from '../ugyfel.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {propCopy} from '../../tools/propCopy';
+import {UgyfelDto} from '../ugyfeldto';
 
 @Component({
   selector: 'app-ugyfel-csoport',
   templateUrl: './ugyfel-csoport.component.html'
 })
 export class UgyfelCsoportComponent implements OnInit, OnDestroy {
+  DtoEdited = new UgyfelDto();
   ugyfelservice: UgyfelService;
   selected = 0;
 
@@ -33,18 +35,18 @@ export class UgyfelCsoportComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.ugyfelservice.DtoEdited = deepCopy(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
-    this.selected = this.ugyfelservice.DtoEdited.Csoport;
+    this.DtoEdited = deepCopy(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
+    this.selected = this.DtoEdited.Csoport;
   }
 
   change(i) {
     this.selected = i;
-    this.ugyfelservice.DtoEdited.Csoport = this.selected;
+    this.DtoEdited.Csoport = this.selected;
   }
 
   okClick() {
     this.eppFrissit = true;
-    this.ugyfelservice.Update(this.ugyfelservice.DtoEdited)
+    this.ugyfelservice.Update(this.DtoEdited)
       .then(res1 => {
         if (res1.Error !== null) {
           throw res1.Error;

@@ -10,6 +10,7 @@ import {deepCopy} from '../../tools/deepCopy';
 })
 export class UgyfelVcardComponent implements OnInit, OnDestroy {
   ugyfelservice: UgyfelService;
+  DtoEdited = new UgyfelDto();
   @Output() LetoltesClick = new EventEmitter<void>();
 
   private _eppFrissit = false;
@@ -27,7 +28,7 @@ export class UgyfelVcardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.ugyfelservice.DtoEdited = deepCopy(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
+    this.DtoEdited = deepCopy(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
   }
 
   letoltesClick() {

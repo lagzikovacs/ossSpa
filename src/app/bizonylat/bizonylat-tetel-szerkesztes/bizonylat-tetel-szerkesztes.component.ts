@@ -16,6 +16,9 @@ import {MeZoomParameter} from '../../primitiv/me/mezoomparameter';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {AfakulcsDto} from '../../primitiv/afakulcs/afakulcsdto';
+import {MeDto} from '../../primitiv/me/medto';
+import {TermekdijDto} from '../../primitiv/termekdij/termekdijdto';
+import {CikkDto} from '../../cikk/cikkdto';
 
 @Component({
   selector: 'app-bizonylat-tetel-szerkesztes',
@@ -47,20 +50,41 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
   }
 
   CikkZoom() {
-    this._cikkservice.szempont = 0;
-    this._cikkservice.minta = this.bizonylatservice.TetelDtoEdited.Megnevezes || '';
-    this._cikkservice.zoomsource = ZoomSources.Bizonylattetel;
-    this._cikkservice.zoom = true;
-
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.CikkZoom;
     this._cdr.detectChanges();
   }
-  MeZoom() {
-    this._meservice.ekDto.minta = this.bizonylatservice.TetelDtoEdited.Me || '';
-    this._meservice.zoomsource = ZoomSources.Bizonylattetel;
-    this._meservice.zoom = true;
+  onCikkSelectzoom(Dto: CikkDto) {
+    this.bizonylatservice.TetelDtoEdited.Cikkkod = Dto.Cikkkod;
+    this.bizonylatservice.TetelDtoEdited.Megnevezes = Dto.Megnevezes;
+    this.bizonylatservice.TetelDtoEdited.Mekod = Dto.Mekod;
+    this.bizonylatservice.TetelDtoEdited.Me = Dto.Me;
+    this.bizonylatservice.TetelDtoEdited.Afakulcskod = Dto.Afakulcskod;
+    this.bizonylatservice.TetelDtoEdited.Afakulcs = Dto.Afakulcs;
+    this.bizonylatservice.TetelDtoEdited.Afamerteke = Dto.Afamerteke;
+    this.bizonylatservice.TetelDtoEdited.Egysegar = Dto.Egysegar;
+    this.bizonylatservice.TetelDtoEdited.Tomegkg = Dto.Tomegkg;
 
+    this.bizonylatservice.TetelDtoEdited.Termekdijkod = Dto.Termekdijkod;
+    this.bizonylatservice.TetelDtoEdited.Termekdijkt = Dto.Termekdijkt;
+    this.bizonylatservice.TetelDtoEdited.Termekdijmegnevezes = Dto.Termekdijmegnevezes;
+    this.bizonylatservice.TetelDtoEdited.Termekdijegysegar = Dto.Termekdijegysegar;
+  }
+  onCikkStopzoom() {
+    this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
+    this._cdr.detectChanges();
+  }
+
+  MeZoom() {
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.MeZoom;
+    this._cdr.detectChanges();
+  }
+  onMeSelectzoom(Dto: MeDto) {
+    this.bizonylatservice.TetelDtoEdited.Mekod = Dto.Mekod;
+    this.bizonylatservice.TetelDtoEdited.Me = Dto.Me;
+    this._cdr.detectChanges();
+  }
+  onMeStopzoom() {
+    this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
     this._cdr.detectChanges();
   }
 
@@ -72,6 +96,7 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
     this.bizonylatservice.TetelDtoEdited.Afakulcskod = Dto.Afakulcskod;
     this.bizonylatservice.TetelDtoEdited.Afakulcs = Dto.Afakulcs1;
     this.bizonylatservice.TetelDtoEdited.Afamerteke = Dto.Afamerteke;
+    this._cdr.detectChanges();
   }
   onAfakulcsStopzoom() {
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
@@ -79,11 +104,18 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
   }
 
   TermekdijZoom() {
-    this._termekdijservice.ekDto.minta = this.bizonylatservice.TetelDtoEdited.Termekdijkt || '';
-    this._termekdijservice.zoomsource = ZoomSources.Bizonylattetel;
-    this._termekdijservice.zoom = true;
-
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.TermekdijZoom;
+    this._cdr.detectChanges();
+  }
+  onTermekdijSelectzoom(Dto: TermekdijDto) {
+    this.bizonylatservice.TetelDtoEdited.Termekdijkod = Dto.Termekdijkod
+    this.bizonylatservice.TetelDtoEdited.Termekdijkt = Dto.Termekdijkt;
+    this.bizonylatservice.TetelDtoEdited.Termekdijmegnevezes = Dto.Termekdijmegnevezes;
+    this.bizonylatservice.TetelDtoEdited.Termekdijegysegar = Dto.Termekdijegysegar;
+    this._cdr.detectChanges();
+  }
+  onTermekdijStopzoom() {
+    this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
     this._cdr.detectChanges();
   }
   TermekdijTorles() {
@@ -91,6 +123,7 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
     this.bizonylatservice.TetelDtoEdited.Termekdijkt = null;
     this.bizonylatservice.TetelDtoEdited.Termekdijmegnevezes = null;
     this.bizonylatservice.TetelDtoEdited.Termekdijegysegar = null;
+    this._cdr.detectChanges();
   }
 
   bruttobol() {

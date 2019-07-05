@@ -109,7 +109,7 @@ export class HelysegListComponent implements OnInit, OnDestroy {
   onStopzoom() {
     this.zoom = false;
 
-    this.ugyfelservice.SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
+    this.eventStopzoom.emit();
   }
 
   onId(i: number) {

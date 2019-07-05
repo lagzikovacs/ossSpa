@@ -50,7 +50,10 @@
 
   <ng-container *ngIf="egymode === 6">
     <div [@rowanimation]>
-      <app-cikk-beszerzes-kivet></app-cikk-beszerzes-kivet>
+      <app-cikk-beszerzes-kivet [BizonylattipusKod]="BizonylattipusKod"
+                                [MozgasDto]="MozgasDto"
+                                [BeszerzesKivetGridSettings]="cikkservice.BeszerzesKivetGridSettings">
+      </app-cikk-beszerzes-kivet>
     </div>
   </ng-container>
 </div>

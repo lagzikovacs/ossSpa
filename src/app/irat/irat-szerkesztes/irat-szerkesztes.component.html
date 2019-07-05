@@ -8,7 +8,7 @@
       <div>
         <div class="egylabel">Irány</div>
         <select type="text" class="form-control form-control-sm"
-                [(ngModel)]="iratservice.DtoEdited.Irany" name="irany">
+                [(ngModel)]="DtoEdited.Irany" name="irany">
           <option>Be</option>
           <option>Ki</option>
           <option>Belső</option>
@@ -29,7 +29,7 @@
         <div class="egylabel">Irattipus</div>
         <input type="text" class="form-control form-control-sm oszlop3" id="irattipus"
                maxlength="30" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
-               [(ngModel)]="iratservice.DtoEdited.Irattipus" name="irattipus">
+               [(ngModel)]="DtoEdited.Irattipus" name="irattipus">
         <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="IrattipusZoom()">...</button>
       </div>
     </div>
@@ -39,7 +39,7 @@
         <div class="egylabel">Ügyfél</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="ugyfelnev"
                maxlength="200" autocomplete="off" style="background-color: aquamarine; display: inline-block"
-               [(ngModel)]="iratservice.DtoEdited.Ugyfelnev" name="ugyfelnev">
+               [(ngModel)]="DtoEdited.Ugyfelnev" name="ugyfelnev">
         <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="UgyfelZoom()">...</button>
         <button class="btn btn-sm btn-outline-primary" (click)="UgyfelTorles()"
                 style="margin-left: 4px; display: inline-block" type="button">
@@ -52,7 +52,7 @@
       <div>
         <input type="text" class="form-control form-control-sm oszlop4" id="ugyfelcim"
                autocomplete="off" readonly="true"
-               [(ngModel)]="iratservice.DtoEdited.Ugyfelcim" name="ugyfelcim">
+               [(ngModel)]="DtoEdited.Ugyfelcim" name="ugyfelcim">
       </div>
     </div>
 
@@ -61,7 +61,7 @@
         <div class="egylabel">Küldő</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="kuldo"
                maxlength="100" autocomplete="off"
-               [(ngModel)]="iratservice.DtoEdited.Kuldo" name="kuldo">
+               [(ngModel)]="DtoEdited.Kuldo" name="kuldo">
       </div>
     </div>
 
@@ -70,7 +70,7 @@
         <div class="egylabel">Tárgy</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="targy"
                maxlength="200" autocomplete="off"
-               [(ngModel)]="iratservice.DtoEdited.Targy" name="targy">
+               [(ngModel)]="DtoEdited.Targy" name="targy">
       </div>
     </div>
 
@@ -80,13 +80,15 @@
     </div>
   </form>
 
-  <ng-container *ngIf="iratservice.SzerkesztesMode === 1">
-    <app-irattipus-list [maszk]="this.iratservice.DtoEdited.Irattipus || ''"
+  <ng-container *ngIf="SzerkesztesMode === 1">
+    <app-irattipus-list [maszk]="DtoEdited.Irattipus || ''"
                         (eventSelectzoom)="onIrattipusSelectzoom($event)"
                         (eventStopzoom)="onIrattipusStopzoom()"></app-irattipus-list>
   </ng-container>
 
-  <ng-container *ngIf="iratservice.SzerkesztesMode === 2">
-    <app-ugyfel-list></app-ugyfel-list>
+  <ng-container *ngIf="SzerkesztesMode === 2">
+    <app-ugyfel-list [maszk]="DtoEdited.Ugyfelnev || ''"
+                     (eventSelectzoom)="onUgyfelSelectzoom($event)"
+                     (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>
   </ng-container>
 </div>

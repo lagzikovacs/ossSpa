@@ -152,16 +152,10 @@ export class MenuService {
         this._projektteendoservice.Dto = new Array<ProjektteendoDto>();
       break;
       case '/irat':
-        this._iratservice.szempont = 0;
-        this._iratservice.szempont2 = 0;
-        this._iratservice.minta = '';
-        this._iratservice.minta2 = '';
-
         this._iratservice.Dto = new Array<IratDto>();
         this._dokumentumservice.Dto = new Array<DokumentumDto>();
       break;
       case '/penztar':
-        this._penztarservice.ekDto.minta = '';
         this._penztarservice.Dto = new Array<PenztarDto>();
         break;
       case '/ajanlatkeres':

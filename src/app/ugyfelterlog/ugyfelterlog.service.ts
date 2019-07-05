@@ -12,15 +12,10 @@ import {ColumnSettings} from '../tools/reszletek/columnsettings';
 })
 export class UgyfelterlogService {
   private readonly _controller = 'api/ugyfelterlog/';
-
   cim = 'Ügyféltér log';
-  szempont = 0;
-  minta = '';
 
   Dto = new Array<UgyfelterlogDto>();
   DtoSelectedIndex = -1;
-  OsszesRekord = 0;
-  ulp = new UgyfelterlogParameter(0, environment.lapmeret);
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

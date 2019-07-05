@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
 import {IratService} from '../irat.service';
 import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
@@ -9,6 +9,8 @@ import {JogKod} from '../../enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
+import {environment} from '../../../environments/environment';
+import {IratParameter} from '../iratparameter';
 
 @Component({
   selector: 'app-irat-list',
@@ -26,10 +28,15 @@ export class IratListComponent implements OnDestroy {
     Szempont.Kuldo
   ];
 
-  iratservice: IratService;
-  dokumentumservice: DokumentumService;
-  jog = false;
+  szempont = 0;
+  szempont2 = 0;
+  minta = '';
+  minta2 = '';
+  ip = new IratParameter(0, environment.lapmeret);
+  elsokereses = true;
+  OsszesRekord = 0;
 
+  jog = false;
   @Input() enProjekt = true;
 
   private _eppFrissit = false;
@@ -40,6 +47,9 @@ export class IratListComponent implements OnDestroy {
     this._eppFrissit = value;
     this._spinnerservice.Run = value;
   }
+
+  iratservice: IratService;
+  dokumentumservice: DokumentumService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
@@ -54,20 +64,20 @@ export class IratListComponent implements OnDestroy {
   onKereses() {
     this.iratservice.Dto = new Array<IratDto>();
     this.iratservice.DtoSelectedIndex = -1;
-    this.iratservice.OsszesRekord = 0;
+    this.OsszesRekord = 0;
 
-    this.iratservice.elsokereses = true;
-    this.iratservice.ip.rekordtol = 0;
-    this.iratservice.ip.fi = new Array<SzMT>();
+    this.elsokereses = true;
+    this.ip.rekordtol = 0;
+    this.ip.fi = new Array<SzMT>();
 
-    if (this.iratservice.szempont === this.iratservice.szempont2 && this.iratservice.szempont !== 0) {
+    if (this.szempont === this.szempont2 && this.szempont !== 0) {
       this._errorservice.Error = 'Ne válasszon azonos szempontokat!';
       return;
     }
 
-    this.iratservice.ip.fi.push(new SzMT(this.szempontok[this.iratservice.szempont], this.iratservice.minta));
-    if (this.iratservice.szempont2 > 0) {
-      this.iratservice.ip.fi.push(new SzMT(this.szempontok[this.iratservice.szempont2], this.iratservice.minta2));
+    this.ip.fi.push(new SzMT(this.szempontok[this.szempont], this.minta));
+    if (this.szempont2 > 0) {
+      this.ip.fi.push(new SzMT(this.szempontok[this.szempont2], this.minta2));
     }
 
     this.tabla.clearselections();
@@ -76,15 +86,15 @@ export class IratListComponent implements OnDestroy {
   }
   onKeresesTovabb() {
     this.eppFrissit = true;
-    this.iratservice.Select(this.iratservice.ip)
+    this.iratservice.Select(this.ip)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        if (this.iratservice.elsokereses) {
+        if (this.elsokereses) {
           this.iratservice.Dto = res.Result;
-          this.iratservice.elsokereses = false;
+          this.elsokereses = false;
         } else {
           const buf = [...this.iratservice.Dto];
           res.Result.forEach(element => {
@@ -92,9 +102,9 @@ export class IratListComponent implements OnDestroy {
           });
           this.iratservice.Dto = buf;
         }
-        this.iratservice.OsszesRekord = res.OsszesRekord;
+        this.OsszesRekord = res.OsszesRekord;
 
-        this.iratservice.ip.rekordtol += this.iratservice.ip.lapmeret;
+        this.ip.rekordtol += this.ip.lapmeret;
         this.eppFrissit = false;
       })
       .catch(err => {

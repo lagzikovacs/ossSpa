@@ -7,7 +7,6 @@ import {IratDto} from './iratdto';
 import {IratResult} from './iratresult';
 import {NumberResult} from '../dtos/numberresult';
 import {EmptyResult} from '../dtos/emptyresult';
-import {IratSzerkesztesMode} from './iratszerkesztesmode';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
 
@@ -16,21 +15,10 @@ import {ColumnSettings} from '../tools/reszletek/columnsettings';
 })
 export class IratService {
   private readonly _controller = 'api/irat/';
-
   cim = 'Irat';
-  szempont = 0;
-  szempont2 = 0;
-  minta = '';
-  minta2 = '';
-  ip = new IratParameter(0, environment.lapmeret);
-  elsokereses = true;
-  OsszesRekord = 0;
 
   Dto: IratDto[] = new Array<IratDto>();
-  DtoEdited = new IratDto();
   DtoSelectedIndex = -1;
-
-  SzerkesztesMode = IratSzerkesztesMode.Blank;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

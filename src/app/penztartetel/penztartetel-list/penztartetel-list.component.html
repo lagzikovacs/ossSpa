@@ -1,8 +1,8 @@
 <div class="alapkeret">
   <h5>{{penztartetelservice.cim}}</h5>
   <app-toolbar [Szurok]="szurok"
-               [(szempont)]="penztartetelservice.szempont"
-               [(minta)]="penztartetelservice.minta"
+               [(szempont)]="szempont"
+               [(minta)]="minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
                [enUj]="!eppFrissit && jog && nyitva" (Uj)="onUj()">
   </app-toolbar>
@@ -16,9 +16,9 @@
     </app-penztartetel-szerkesztes>
   </ng-template>
 
-  <app-toolbarfooter [enKereses]="!penztartetelservice.elsokereses && !eppFrissit"
+  <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
                      [rekordszam]="penztartetelservice.Dto.length"
-                     [osszesrekord]="penztartetelservice.OsszesRekord"
+                     [osszesrekord]="OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">
   </app-toolbarfooter>
 </div>

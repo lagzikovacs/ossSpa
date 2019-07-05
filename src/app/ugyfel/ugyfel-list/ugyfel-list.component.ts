@@ -17,6 +17,7 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {UgyfelTablaComponent} from '../ugyfel-tabla/ugyfel-tabla.component';
 import {environment} from '../../../environments/environment';
 import {UgyfelParameter} from '../ugyfelparameter';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-ugyfel-list',
@@ -144,45 +145,14 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
   }
 
   onStartzoom(i: number) {
-    if (this.ugyfelservice.zoomsource === ZoomSources.Irat) {
-      this._iratservice.DtoEdited.Ugyfelkod = this.ugyfelservice.Dto[i].Ugyfelkod;
-      this._iratservice.DtoEdited.Ugyfelnev = this.ugyfelservice.Dto[i].Nev;
-      this._iratservice.DtoEdited.Ugyfelcim = this.ugyfelservice.Dto[i].Cim;
-    }
-    if (this.ugyfelservice.zoomsource === ZoomSources.Projekt) {
-      this._projektservice.DtoEdited.Ugyfelkod = this.ugyfelservice.Dto[i].Ugyfelkod;
-      this._projektservice.DtoEdited.Ugyfelnev = this.ugyfelservice.Dto[i].Nev;
-      this._projektservice.DtoEdited.Ugyfelcim = this.ugyfelservice.Dto[i].Cim;
-    }
-    if (this.ugyfelservice.zoomsource === ZoomSources.Bizonylat) {
-      this._bizonylatservice.ComplexDtoEdited.Dto.Ugyfelkod = this.ugyfelservice.Dto[i].Ugyfelkod;
-      this._bizonylatservice.ComplexDtoEdited.Dto.Ugyfelnev = this.ugyfelservice.Dto[i].Nev;
-      this._bizonylatservice.ComplexDtoEdited.Dto.Ugyfelcim = this.ugyfelservice.Dto[i].Cim;
-
-      this._bizonylatservice.ComplexDtoEdited.Dto.Ugyfeladoszam = this.ugyfelservice.Dto[i].Adoszam;
-
-      this._bizonylatservice.ComplexDtoEdited.Dto.Ugyfeliranyitoszam = this.ugyfelservice.Dto[i].Iranyitoszam;
-      this._bizonylatservice.ComplexDtoEdited.Dto.Ugyfelhelysegkod = this.ugyfelservice.Dto[i].Helysegkod;
-      this._bizonylatservice.ComplexDtoEdited.Dto.Ugyfelhelysegnev = this.ugyfelservice.Dto[i].Helysegnev;
-      this._bizonylatservice.ComplexDtoEdited.Dto.Ugyfelkozterulet = this.ugyfelservice.Dto[i].Kozterulet;
-      this._bizonylatservice.ComplexDtoEdited.Dto.Ugyfelkozterulettipus = this.ugyfelservice.Dto[i].Kozterulettipus;
-      this._bizonylatservice.ComplexDtoEdited.Dto.Ugyfelhazszam = this.ugyfelservice.Dto[i].Hazszam;
-    }
+    this.eventSelectzoom.emit(deepCopy(this.ugyfelservice.Dto[i]));
 
     this.onStopzoom();
   }
   onStopzoom() {
-    this.ugyfelservice.zoom = false;
+    this.zoom = false;
 
-    if (this.ugyfelservice.zoomsource === ZoomSources.Irat) {
-      this._iratservice.SzerkesztesMode = IratSzerkesztesMode.Blank;
-    }
-    if (this.ugyfelservice.zoomsource === ZoomSources.Projekt) {
-      this._projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
-    }
-    if (this.ugyfelservice.zoomsource === ZoomSources.Bizonylat) {
-      this._bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
-    }
+    this.eventStopzoom.emit();
   }
 
   onId(i: number) {

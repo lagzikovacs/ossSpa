@@ -12,6 +12,7 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {propCopy} from '../../tools/propCopy';
 import {PenznemDto} from '../../primitiv/penznem/penznemdto';
+import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 
 @Component({
   selector: 'app-projekt-szerkesztes',
@@ -117,12 +118,15 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   UgyfelZoom() {
-    this._ugyfelservice.szempont = 0;
-    this._ugyfelservice.minta = this.projektservice.DtoEdited.Ugyfelnev || '';
-    this._ugyfelservice.zoomsource = ZoomSources.Projekt;
-    this._ugyfelservice.zoom = true;
-
     this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.UgyfelZoom;
+  }
+  onUgyfelSelectzoom(Dto: UgyfelDto) {
+    this.projektservice.DtoEdited.Ugyfelkod = Dto.Ugyfelkod;
+    this.projektservice.DtoEdited.Ugyfelnev = Dto.Nev;
+    this.projektservice.DtoEdited.Ugyfelcim = Dto.Cim;
+  }
+  onUgyfelStopzoom() {
+    this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
   }
 
   PenznemZoom() {

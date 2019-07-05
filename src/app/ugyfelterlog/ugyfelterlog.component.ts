@@ -5,20 +5,23 @@ import {SzMT} from '../dtos/szmt';
 import {UgyfelterlogDto} from './ugyfelterlogdto';
 import {ErrorService} from '../tools/errorbox/error.service';
 import {SpinnerService} from '../tools/spinner/spinner.service';
+import {environment} from '../../environments/environment';
+import {UgyfelterlogParameter} from './ugyfelterlogparameter';
 
 @Component({
   selector: 'app-ugyfelterlog',
   templateUrl: './ugyfelterlog.component.html'
 })
 export class UgyfelterlogComponent implements OnDestroy {
-  ugyfelterlogservice: UgyfelterlogService;
-  elsokereses = false;
-
   szurok = ['Id', 'Név'];
-
   szempontok = [
     Szempont.Kod, Szempont.Nev
   ];
+  szempont = 0;
+  minta = '';
+  ulp = new UgyfelterlogParameter(0, environment.lapmeret);
+  elsokereses = false;
+  OsszesRekord = 0;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -29,28 +32,30 @@ export class UgyfelterlogComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(ugyfelterlogservice: UgyfelterlogService,
-              private _spinnerservice: SpinnerService,
-              private _errorservice: ErrorService) {
+  ugyfelterlogservice: UgyfelterlogService;
+
+  constructor(private _spinnerservice: SpinnerService,
+              private _errorservice: ErrorService,
+              ugyfelterlogservice: UgyfelterlogService) {
     this.ugyfelterlogservice = ugyfelterlogservice;
   }
 
   onKereses() {
     this.ugyfelterlogservice.Dto = new Array<UgyfelterlogDto>();
     this.ugyfelterlogservice.DtoSelectedIndex = -1;
-    this.ugyfelterlogservice.OsszesRekord = 0;
+    this.OsszesRekord = 0;
 
     this.elsokereses = true;
-    this.ugyfelterlogservice.ulp.rekordtol = 0;
-    this.ugyfelterlogservice.ulp.fi = new Array<SzMT>();
+    this.ulp.rekordtol = 0;
+    this.ulp.fi = new Array<SzMT>();
 
-    this.ugyfelterlogservice.ulp.fi.push(new SzMT(this.szempontok[this.ugyfelterlogservice.szempont], this.ugyfelterlogservice.minta));
+    this.ulp.fi.push(new SzMT(this.szempontok[this.szempont], this.minta));
 
     this.onKeresesTovabb();
   }
   onKeresesTovabb() {
     this.eppFrissit = true;
-    this.ugyfelterlogservice.Select(this.ugyfelterlogservice.ulp)
+    this.ugyfelterlogservice.Select(this.ulp)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -66,9 +71,9 @@ export class UgyfelterlogComponent implements OnDestroy {
           });
           this.ugyfelterlogservice.Dto = buf;
         }
-        this.ugyfelterlogservice.OsszesRekord = res.OsszesRekord;
+        this.OsszesRekord = res.OsszesRekord;
 
-        this.ugyfelterlogservice.ulp.rekordtol += this.ugyfelterlogservice.ulp.lapmeret;
+        this.ulp.rekordtol += this.ulp.lapmeret;
         this.eppFrissit = false;
       })
       .catch(err => {

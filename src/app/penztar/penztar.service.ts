@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
-import {EgyszeruKeresesDto} from '../dtos/egyszerukeresesdto';
 import {environment} from '../../environments/environment';
 import {PenztarDto} from './penztardto';
-import {ZoomSources} from '../enums/zoomsources';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {LogonService} from '../logon/logon.service';
 import {NumberResult} from '../dtos/numberresult';
 import {PenztarResult} from './penztarresult';
 import {EmptyResult} from '../dtos/emptyresult';
-import {PenztarSzerkesztesMode} from './penztarszerkesztesmode';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 
@@ -19,13 +16,8 @@ export class PenztarService {
   private readonly _controller = 'api/penztar/';
   cim = 'Pénztár';
 
-  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-
   Dto: PenztarDto[] = new Array<PenztarDto>();
-  DtoEdited = new PenztarDto();
   DtoSelectedIndex = -1;
-
-  SzerkesztesMode = PenztarSzerkesztesMode.Blank;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

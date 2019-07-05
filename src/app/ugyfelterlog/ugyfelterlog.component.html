@@ -1,8 +1,8 @@
 <div class="alapkeret">
   <h5>{{ugyfelterlogservice.cim}}</h5>
   <app-toolbar [Szurok]="szurok"
-               [(szempont)]="ugyfelterlogservice.szempont"
-               [(minta)]="ugyfelterlogservice.minta"
+               [(szempont)]="szempont"
+               [(minta)]="minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
                [visUj]="false">
   </app-toolbar>
@@ -15,7 +15,7 @@
 
   <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
                      [rekordszam]="ugyfelterlogservice.Dto.length"
-                     [osszesrekord]="ugyfelterlogservice.OsszesRekord"
+                     [osszesrekord]="OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">
   </app-toolbarfooter>
 </div>

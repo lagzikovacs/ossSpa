@@ -16,14 +16,7 @@ export class PenztartetelService {
   private readonly _controller = 'api/penztartetel/';
   cim = 'Pénztártételek';
 
-  szempont = 0;
-  minta = '';
-  elsokereses = true;
-  ptp = new PenztartetelParameter(0, environment.lapmeret);
-  OsszesRekord = 0;
-
   Dto: PenztartetelDto[] = new Array<PenztartetelDto>();
-  DtoEdited = new PenztartetelDto();
   DtoSelectedIndex = -1;
 
   GridSettings: ColumnSettings[] = undefined;

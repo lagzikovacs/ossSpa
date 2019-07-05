@@ -5,6 +5,7 @@ import {PenztarService} from '../../penztar/penztar.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {propCopy} from '../../tools/propCopy';
+import {PenztartetelDto} from '../penztarteteldto';
 
 @Component({
   selector: 'app-penztartetel-szerkesztes',
@@ -17,7 +18,7 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnInit, 
   @ViewChild('bevetel') bevetelInput: ElementRef;
   @ViewChild('kiadas') kiadasInput: ElementRef;
 
-  penztartetelservice: PenztartetelService;
+  DtoEdited = new PenztartetelDto();
   datum = moment().format('YYYY-MM-DD');
 
   @Output() eventSzerkeszteskesz = new EventEmitter<void>();
@@ -31,10 +32,12 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnInit, 
     this._spinnerservice.Run = value;
   }
 
-  constructor(penztartetelservice: PenztartetelService,
-              private _penztarservice: PenztarService,
+  penztartetelservice: PenztartetelService;
+
+  constructor(private _penztarservice: PenztarService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService) {
+              private _spinnerservice: SpinnerService,
+              penztartetelservice: PenztartetelService) {
     this.penztartetelservice = penztartetelservice;
   }
 
@@ -46,7 +49,7 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnInit, 
           throw res.Error;
         }
 
-        this.penztartetelservice.DtoEdited = res.Result[0];
+        this.DtoEdited = res.Result[0];
         this.eppFrissit = false;
       })
       .catch(err => {
@@ -101,11 +104,11 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnInit, 
   }
 
   onSubmit() {
-    this.penztartetelservice.DtoEdited.Penztarkod = this._penztarservice.Dto[this._penztarservice.DtoSelectedIndex].Penztarkod;
-    this.penztartetelservice.DtoEdited.Datum = moment(this.datum).toISOString(true);
+    this.DtoEdited.Penztarkod = this._penztarservice.Dto[this._penztarservice.DtoSelectedIndex].Penztarkod;
+    this.DtoEdited.Datum = moment(this.datum).toISOString(true);
 
     this.eppFrissit = true;
-    this.penztartetelservice.Add(this.penztartetelservice.DtoEdited)
+    this.penztartetelservice.Add(this.DtoEdited)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

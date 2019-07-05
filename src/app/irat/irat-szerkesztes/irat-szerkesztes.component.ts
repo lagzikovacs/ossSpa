@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {IratService} from '../irat.service';
 import {IrattipusService} from '../../primitiv/irattipus/irattipus.service';
-import {ZoomSources} from '../../enums/zoomsources';
 import * as moment from 'moment';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {IratSzerkesztesMode} from '../iratszerkesztesmode';
@@ -13,17 +12,20 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {propCopy} from '../../tools/propCopy';
 import {IrattipusDto} from '../../primitiv/irattipus/irattipusdto';
+import {UgyfelDto} from '../../ugyfel/ugyfeldto';
+import {IratDto} from '../iratdto';
 
 @Component({
   selector: 'app-irat-szerkesztes',
   templateUrl: './irat-szerkesztes.component.html'
 })
 export class IratSzerkesztesComponent implements OnInit, OnDestroy {
-  iratservice: IratService;
-  Keletkezett: any;
-
   @Input() uj = false;
+  DtoEdited = new IratDto();
+  Keletkezett: any;
   @Output() eventSzerkeszteskesz = new EventEmitter<void>();
+
+  SzerkesztesMode = IratSzerkesztesMode.Blank;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -33,6 +35,8 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
     this._eppFrissit = value;
     this._spinnerservice.Run = value;
   }
+
+  iratservice: IratService;
 
   constructor(private _irattipusservice: IrattipusService,
               private _ugyfelservice: UgyfelService,
@@ -51,7 +55,7 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
             throw res.Error;
           }
 
-          this.iratservice.DtoEdited = res.Result[0];
+          this.DtoEdited = res.Result[0];
           this.eppFrissit = false;
         })
         .catch(err => {
@@ -61,25 +65,25 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
 
       this.Keletkezett = moment().format('YYYY-MM-DD');
     } else {
-      this.iratservice.DtoEdited = deepCopy(this.iratservice.Dto[this.iratservice.DtoSelectedIndex]);
+      this.DtoEdited = deepCopy(this.iratservice.Dto[this.iratservice.DtoSelectedIndex]);
 
-      this.Keletkezett = moment(this.iratservice.DtoEdited.Keletkezett).format('YYYY-MM-DD');
+      this.Keletkezett = moment(this.DtoEdited.Keletkezett).format('YYYY-MM-DD');
     }
   }
 
   onSubmit() {
     this.eppFrissit = true;
 
-    this._irattipusservice.ZoomCheck(new IrattipusZoomParameter(this.iratservice.DtoEdited.Irattipuskod,
-      this.iratservice.DtoEdited.Irattipus))
+    this._irattipusservice.ZoomCheck(new IrattipusZoomParameter(this.DtoEdited.Irattipuskod,
+      this.DtoEdited.Irattipus))
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        if (this.iratservice.DtoEdited.Ugyfelnev || '' !== '') {
-          return this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.iratservice.DtoEdited.Ugyfelkod,
-            this.iratservice.DtoEdited.Ugyfelnev));
+        if (this.DtoEdited.Ugyfelnev || '' !== '') {
+          return this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.DtoEdited.Ugyfelkod,
+            this.DtoEdited.Ugyfelnev));
         } else {
           return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
         }
@@ -89,12 +93,12 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
           throw res1.Error;
         }
 
-        this.iratservice.DtoEdited.Keletkezett = moment(this.Keletkezett).toISOString(true);
+        this.DtoEdited.Keletkezett = moment(this.Keletkezett).toISOString(true);
 
         if (this.uj) {
-          return this.iratservice.Add(this.iratservice.DtoEdited);
+          return this.iratservice.Add(this.DtoEdited);
         } else {
-          return this.iratservice.Update(this.iratservice.DtoEdited);
+          return this.iratservice.Update(this.DtoEdited);
         }
       })
       .then(res2 => {
@@ -128,29 +132,33 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   IrattipusZoom() {
-    this.iratservice.SzerkesztesMode = IratSzerkesztesMode.IrattipusZoom;
+    this.SzerkesztesMode = IratSzerkesztesMode.IrattipusZoom;
   }
-  onMeSelectzoom(Dto: IrattipusDto) {
-    this.iratservice.DtoEdited.Irattipuskod = Dto.Irattipuskod;
-    this.iratservice.DtoEdited.Irattipus = Dto.Irattipus1;
+  onIrattipusSelectzoom(Dto: IrattipusDto) {
+    this.DtoEdited.Irattipuskod = Dto.Irattipuskod;
+    this.DtoEdited.Irattipus = Dto.Irattipus1;
   }
-  onMeStopzoom() {
-    this.iratservice.SzerkesztesMode = IratSzerkesztesMode.Blank;
+  onIrattipusStopzoom() {
+    this.SzerkesztesMode = IratSzerkesztesMode.Blank;
   }
 
   UgyfelZoom() {
-    this._ugyfelservice.szempont = 0;
-    this._ugyfelservice.minta = this.iratservice.DtoEdited.Ugyfelnev || '';
-    this._ugyfelservice.zoomsource = ZoomSources.Irat;
-    this._ugyfelservice.zoom = true;
-
-    this.iratservice.SzerkesztesMode = IratSzerkesztesMode.UgyfelZoom;
+    this.SzerkesztesMode = IratSzerkesztesMode.UgyfelZoom;
+  }
+  onUgyfelSelectzoom(Dto: UgyfelDto) {
+    this.DtoEdited.Ugyfelkod = Dto.Ugyfelkod;
+    this.DtoEdited.Ugyfelnev = Dto.Nev;
+    this.DtoEdited.Ugyfelcim = Dto.Cim;
+  }
+  onUgyfelStopzoom() {
+    this.SzerkesztesMode = IratSzerkesztesMode.Blank;
   }
   UgyfelTorles() {
-    this.iratservice.DtoEdited.Ugyfelkod = null;
-    this.iratservice.DtoEdited.Ugyfelnev = null;
-    this.iratservice.DtoEdited.Ugyfelcim = null;
+    this.DtoEdited.Ugyfelkod = null;
+    this.DtoEdited.Ugyfelnev = null;
+    this.DtoEdited.Ugyfelcim = null;
   }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

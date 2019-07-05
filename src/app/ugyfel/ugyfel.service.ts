@@ -25,8 +25,7 @@ export class UgyfelService {
   Dto: UgyfelDto[] = new Array<UgyfelDto>();
   DtoSelectedIndex = -1;
 
-  pp = new ProjektParameter(0, environment.lapmeret);
-  ProjektDto: ProjektDto[] = new Array<ProjektDto>();
+
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

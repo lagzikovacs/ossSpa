@@ -3,12 +3,12 @@
   <app-irattoolbar
     [szurok]="szurok"
     [szurok2]="szurok2"
-    [(szempont)]="iratservice.szempont"
-    [(minta)]="iratservice.minta"
-    [(szempont2)]="iratservice.szempont2"
-    [(minta2)]="iratservice.minta2"
-    [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-    [enUj]="!eppFrissit && jog" (Uj)="onUj()">
+    [(szempont)]="szempont"
+    [(minta)]="minta"
+    [(szempont2)]="szempont2"
+    [(minta2)]="minta2"
+  [enKereses]="!eppFrissit" (Kereses)="onKereses()"
+  [enUj]="!eppFrissit && jog" (Uj)="onUj()">
   </app-irattoolbar>
   <app-tabla #tabla
              [items]="iratservice.Dto"
@@ -26,9 +26,9 @@
     <app-irat-egy [enProjekt]="enProjekt"
                   (eventTorlesutan)="torlesutan()"></app-irat-egy>
   </ng-template>
-  <app-toolbarfooter [enKereses]="!iratservice.elsokereses && !eppFrissit"
+  <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
                      [rekordszam]="iratservice.Dto.length"
-                     [osszesrekord]="iratservice.OsszesRekord"
+                     [osszesrekord]="OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">
   </app-toolbarfooter>
 </div>

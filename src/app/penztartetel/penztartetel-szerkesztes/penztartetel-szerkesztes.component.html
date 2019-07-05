@@ -15,7 +15,7 @@
       <div>
         <div class="egylabel">Jogcím</div>
         <select #jogcim type="text" class="form-control form-control-sm"
-                [(ngModel)]="penztartetelservice.DtoEdited.Jogcim" name="jogcim"
+                [(ngModel)]="DtoEdited.Jogcim" name="jogcim"
                 (change)="jogcimchange()">
           <option>Bevét korrekció</option>
           <option>Kiadás korrekció</option>
@@ -33,7 +33,7 @@
         <div class="egylabel">Ügyfél</div>
         <input #ugyfel type="text" class="form-control form-control-sm oszlop4" id="ugyfel"
                autocomplete="off"
-               [(ngModel)]="penztartetelservice.DtoEdited.Ugyfelnev" name="ugyfel">
+               [(ngModel)]="DtoEdited.Ugyfelnev" name="ugyfel">
       </div>
     </div>
 
@@ -42,7 +42,7 @@
         <div class="egylabel">Bizonylatszám</div>
         <input #bizonylatszam type="text" class="form-control form-control-sm oszlop2" id="bizonylatszam"
                autocomplete="off"
-               [(ngModel)]="penztartetelservice.DtoEdited.Bizonylatszam" name="bizonylatszam">
+               [(ngModel)]="DtoEdited.Bizonylatszam" name="bizonylatszam">
       </div>
     </div>
 
@@ -51,7 +51,7 @@
         <div class="egylabel">Bevétel</div>
         <input #bevetel type="text" class="form-control form-control-sm oszlop2" id="bevetel"
                autocomplete="off"
-               [(ngModel)]="penztartetelservice.DtoEdited.Bevetel" name="bevetel">
+               [(ngModel)]="DtoEdited.Bevetel" name="bevetel">
       </div>
     </div>
 
@@ -60,7 +60,7 @@
         <div class="egylabel">Kiadás</div>
         <input #kiadas type="text" class="form-control form-control-sm oszlop2" id="kiadas"
                autocomplete="off"
-               [(ngModel)]="penztartetelservice.DtoEdited.Kiadas" name="kiadas">
+               [(ngModel)]="DtoEdited.Kiadas" name="kiadas">
       </div>
     </div>
 
@@ -69,7 +69,7 @@
         <div class="egylabel">Megjegyzés</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="megjegyzes"
                autocomplete="off"
-               [(ngModel)]="penztartetelservice.DtoEdited.Megjegyzes" name="megjegyzes">
+               [(ngModel)]="DtoEdited.Megjegyzes" name="megjegyzes">
       </div>
     </div>
 

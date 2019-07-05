@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {PenztarService} from '../penztar.service';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
@@ -7,6 +7,8 @@ import {PenztartetelDto} from '../../penztartetel/penztarteteldto';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
+import {environment} from '../../../environments/environment';
+import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
 
 @Component({
   selector: 'app-penztar-list',
@@ -16,9 +18,10 @@ export class PenztarListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
   szurok = ['Pénztár'];
+  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
   jog = false;
   elsokereses = true;
-  penztarservice: PenztarService;
+
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -29,11 +32,13 @@ export class PenztarListComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  penztarservice: PenztarService;
+
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
-              penztarservice: PenztarService,
-              private _penztartetelservice: PenztartetelService) {
+              private _penztartetelservice: PenztartetelService,
+              penztarservice: PenztarService) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);
     this.penztarservice = penztarservice;
   }
@@ -44,7 +49,7 @@ export class PenztarListComponent implements OnInit, OnDestroy {
 
   onKereses() {
     this.elsokereses = true;
-    this.penztarservice.ekDto.rekordtol = 0;
+    this.ekDto.rekordtol = 0;
 
     this.tabla.clearselections();
 
@@ -53,7 +58,7 @@ export class PenztarListComponent implements OnInit, OnDestroy {
 
   onKeresesTovabb() {
     this.eppFrissit = true;
-    this.penztarservice.Read(this.penztarservice.ekDto.minta)
+    this.penztarservice.Read(this.ekDto.minta)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -82,7 +87,6 @@ export class PenztarListComponent implements OnInit, OnDestroy {
     this.penztarservice.DtoSelectedIndex = i;
 
     this._penztartetelservice.Dto = new Array<PenztartetelDto>();
-    this._penztartetelservice.OsszesRekord = 0;
   }
 
   onUj() {

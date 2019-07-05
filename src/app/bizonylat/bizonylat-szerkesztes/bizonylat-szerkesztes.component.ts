@@ -18,6 +18,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {PenznemDto} from '../../primitiv/penznem/penznemdto';
 import {FizetesimodDto} from '../../primitiv/fizetesimod/fizetesimoddto';
+import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 
 @Component({
   selector: 'app-bizonylat-szerkesztes',
@@ -53,12 +54,27 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   UgyfelZoom() {
-    this._ugyfelservice.szempont = 0;
-    this._ugyfelservice.minta = this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelnev || '';
-    this._ugyfelservice.zoomsource = ZoomSources.Bizonylat;
-    this._ugyfelservice.zoom = true;
-
     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.UgyfelZoom;
+    this._cdr.detectChanges();
+  }
+  onUgyfelSelectzoom(Dto: UgyfelDto) {
+    this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelkod = Dto.Ugyfelkod;
+    this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelnev = Dto.Nev;
+    this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelcim = Dto.Cim;
+
+    this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfeladoszam = Dto.Adoszam;
+
+    this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfeliranyitoszam = Dto.Iranyitoszam;
+    this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelhelysegkod = Dto.Helysegkod;
+    this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelhelysegnev = Dto.Helysegnev;
+    this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelkozterulet = Dto.Kozterulet;
+    this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelkozterulettipus = Dto.Kozterulettipus;
+    this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelhazszam = Dto.Hazszam;
+
+    this._cdr.detectChanges();
+  }
+  onUgyfelStopzoom() {
+    this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
     this._cdr.detectChanges();
   }
 

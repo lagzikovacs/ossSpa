@@ -20,11 +20,9 @@ import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 })
 export class DokumentumService {
   private readonly _controller = 'api/dokumentum/';
-
   cim = 'Dokumentum';
 
   Dto: DokumentumDto[] = new Array<DokumentumDto>();
-  DtoEdited = new DokumentumDto();
   DtoSelectedIndex = -1;
 
   GridSettings: ColumnSettings[] = undefined;

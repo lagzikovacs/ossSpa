@@ -9,7 +9,7 @@
         <div class="egylabel">Pénztár</div>
         <input type="text" class="form-control form-control-sm oszlop3" id="penztar"
                maxlength="200" required autocomplete="off"
-               [(ngModel)]="penztarservice.DtoEdited.Penztar1" name="penztar">
+               [(ngModel)]="DtoEdited.Penztar1" name="penztar">
       </div>
     </div>
 
@@ -18,7 +18,7 @@
         <div class="egylabel">Pénznem</div>
         <input type="text" class="form-control form-control-sm oszlop2" id="penznem"
                maxlength="100" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
-               [(ngModel)]="penztarservice.DtoEdited.Penznem" name="penznem">
+               [(ngModel)]="DtoEdited.Penznem" name="penznem">
         <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button"
                 (click)="PenznemZoom()">...</button>
       </div>
@@ -30,8 +30,8 @@
     </div>
   </form>
 
-  <ng-container *ngIf="penztarservice.SzerkesztesMode === 1">
-    <app-penznem-list [maszk]="this.penztarservice.DtoEdited.Penznem || ''"
+  <ng-container *ngIf="SzerkesztesMode === 1">
+    <app-penznem-list [maszk]="DtoEdited.Penznem || ''"
                       (eventSelectzoom)="onPenznemSelectzoom($event)"
                       (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
   </ng-container>

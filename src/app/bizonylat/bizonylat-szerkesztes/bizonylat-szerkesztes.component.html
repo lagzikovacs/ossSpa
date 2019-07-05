@@ -138,7 +138,9 @@
   </ng-container>
 
   <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 2">
-    <app-ugyfel-list></app-ugyfel-list>
+    <app-ugyfel-list [maszk]="bizonylatservice.ComplexDtoEdited.Dto.Ugyfelnev || ''"
+                     (eventSelectzoom)="onUgyfelSelectzoom($event)"
+                     (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>
   </ng-container>
 
   <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 3">

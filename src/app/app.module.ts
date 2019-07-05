@@ -55,7 +55,6 @@ import { HelysegSzerkesztesComponent } from './primitiv/helyseg/helyseg-szerkesz
 import { UgyfelListComponent } from './ugyfel/ugyfel-list/ugyfel-list.component';
 import { UgyfelSzerkesztesComponent } from './ugyfel/ugyfel-szerkesztes/ugyfel-szerkesztes.component';
 import { CsoportListComponent } from './csoport/csoport-list/csoport-list.component';
-import { CsoportEgyComponent } from './csoport/csoport-egy/csoport-egy.component';
 import { CsoportSzerkesztesComponent } from './csoport/csoport-szerkesztes/csoport-szerkesztes.component';
 import { CsoportFelhasznaloComponent } from './csoport/csoport-felhasznalo/csoport-felhasznalo.component';
 import { CsoportJogComponent } from './csoport/csoport-jog/csoport-jog.component';
@@ -320,7 +319,6 @@ if (environment.production) {
     HelysegSzerkesztesComponent,
     UgyfelSzerkesztesComponent,
     CsoportListComponent,
-    CsoportEgyComponent,
     CsoportSzerkesztesComponent,
     CsoportFelhasznaloComponent,
     CsoportJogComponent,

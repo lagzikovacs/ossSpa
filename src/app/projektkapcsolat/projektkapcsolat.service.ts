@@ -16,11 +16,11 @@ import {BizonylatesiratSzerkesztesMode} from './bizonylatesiratszerkesztesmode';
 })
 export class ProjektkapcsolatService {
   private readonly _controller = 'api/projektkapcsolat/';
+  cim = 'Bizonylat és irat';
 
   ProjektKod = -1;
   UgyfelKod = -1;
 
-  cim = 'Bizonylat és irat';
   Dto: ProjektKapcsolatDto[] = new Array<ProjektKapcsolatDto>();
   DtoSelectedIndex = -1;
 

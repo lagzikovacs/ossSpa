@@ -15,10 +15,10 @@ import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 })
 export class ProjektteendoService {
   private readonly _controller = 'api/projektteendo/';
+  cim = 'Projekt teendő';
 
   ProjektKod = -1;
 
-  cim = 'Projekt teendő';
   Dto: ProjektteendoDto[] = new Array<ProjektteendoDto>();
   DtoEdited = new ProjektteendoDto();
   DtoSelectedIndex = -1;

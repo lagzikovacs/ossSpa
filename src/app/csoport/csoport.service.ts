@@ -2,15 +2,12 @@ import { Injectable } from '@angular/core';
 import {NumberResult} from '../dtos/numberresult';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {EgyszeruKeresesDto} from '../dtos/egyszerukeresesdto';
 import {CsoportDto} from './csoportdto';
 import {LogonService} from '../logon/logon.service';
 import {CsoportResult} from './csoportresult';
 import {EmptyResult} from '../dtos/emptyresult';
 import {FelhasznaloResult} from '../primitiv/felhasznalo/felhasznaloresult';
 import {LehetsegesJogResult} from './lehetsegesjogresult';
-import {FelhasznaloDto} from '../primitiv/felhasznalo/felhasznalodto';
-import {LehetsegesJogDto} from './lehetsegesjogdto';
 import {CsoportFelhasznaloParameter} from './csoportfelhasznaloparameter';
 import {CsoportJogParameter} from './csoportjogparameter';
 import {JogaimResult} from './jogaimresult';
@@ -23,16 +20,6 @@ import {ColumnSettings} from '../tools/reszletek/columnsettings';
 export class CsoportService {
   private readonly _controller = 'api/csoport/';
   cim = 'Csoport';
-
-  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-  elsokereses = true;
-
-  Dto: CsoportDto[] = new Array<CsoportDto>();
-  DtoEdited = new CsoportDto();
-  DtoSelectedIndex = -1;
-
-  DtoCsoportFelhasznalo: FelhasznaloDto[] = new Array<FelhasznaloDto>();
-  DtoCsoportLehetsegesJog: LehetsegesJogDto[] = new Array<LehetsegesJogDto>();
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

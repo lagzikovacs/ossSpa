@@ -205,7 +205,6 @@ export class MenuService {
         this._felhasznaloservice.Dto = new Array<FelhasznaloDto>();
         break;
       case '/csoport':
-        this._csoportservice.Dto = new Array<CsoportDto>();
         break;
       case '/vagolap':
         this._vagolapservice.Mode = VagolapMode.List;

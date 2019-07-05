@@ -1,20 +1,31 @@
-import {Component, EventEmitter, OnDestroy, Output, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {CsoportService} from '../csoport.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
+import {environment} from '../../../environments/environment';
+import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
+import {CsoportDto} from '../csoportdto';
+import {EgyMode} from '../../enums/egymode';
+import {rowanimation} from '../../animation/rowAnimation';
+import {propCopy} from '../../tools/propCopy';
 
 @Component({
   selector: 'app-csoport-list',
-  templateUrl: './csoport-list.component.html'
+  templateUrl: './csoport-list.component.html',
+  animations: [rowanimation]
 })
 export class CsoportListComponent implements OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
-  csoportservice: CsoportService;
   szurok = ['Csoport'];
+  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
+  elsokereses = true;
 
-  @Output() KontenerKeres = new EventEmitter<void>();
+  Dto = new Array<CsoportDto>();
+  DtoSelectedIndex = -1;
+
+  egymode = EgyMode.Reszletek;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -25,6 +36,8 @@ export class CsoportListComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  csoportservice: CsoportService;
+
   constructor(private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               csoportservice: CsoportService) {
@@ -32,8 +45,8 @@ export class CsoportListComponent implements OnDestroy {
   }
 
   onKereses() {
-    this.csoportservice.elsokereses = true;
-    this.csoportservice.ekDto.rekordtol = 0;
+    this.elsokereses = true;
+    this.ekDto.rekordtol = 0;
 
     this.tabla.clearselections();
 
@@ -42,21 +55,21 @@ export class CsoportListComponent implements OnDestroy {
 
   onKeresesTovabb() {
     this.eppFrissit = true;
-    this.csoportservice.Read(this.csoportservice.ekDto.minta)
+    this.csoportservice.Read(this.ekDto.minta)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        if (this.csoportservice.elsokereses) {
-          this.csoportservice.Dto = res.Result;
-          this.csoportservice.elsokereses = false;
+        if (this.elsokereses) {
+          this.Dto = res.Result;
+          this.elsokereses = false;
         } else {
-          const buf = [...this.csoportservice.Dto];
+          const buf = [...this.Dto];
           res.Result.forEach(element => {
             buf.push(element);
           });
-          this.csoportservice.Dto = buf;
+          this.Dto = buf;
         }
 
         this.eppFrissit = false;
@@ -68,47 +81,52 @@ export class CsoportListComponent implements OnDestroy {
   }
 
   onId(i: number) {
-    this.csoportservice.DtoSelectedIndex = i;
-    if (this.csoportservice.DtoSelectedIndex === -1) {
-      return;
-    }
-
-    this.eppFrissit = true;
-    this.csoportservice.SelectCsoportFelhasznalo(this.csoportservice.Dto[i].Csoportkod)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        this.csoportservice.DtoCsoportFelhasznalo = res.Result;
-
-        return this.csoportservice.SelectCsoportJog(this.csoportservice.Dto[i].Csoportkod);
-      })
-      .then(res1 => {
-        if (res1.Error != null) {
-          throw res1.Error;
-        }
-
-        this.csoportservice.DtoCsoportLehetsegesJog = res1.Result;
-
-        this.eppFrissit = false;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+    this.DtoSelectedIndex = i; // lehet -1
+    this.egymode = EgyMode.Reszletek;
   }
 
-  onUj() {
+  doNav(i: number) {
+    this.egymode = i;
+  }
+
+  doUjtetel() {
     this.tabla.ujtetelstart();
   }
-
-  onUjkesz() {
+  onUjtetelkesz(dto: CsoportDto) {
+    if (dto !== null) {
+      this.Dto.unshift(dto);
+    }
     this.tabla.ujtetelstop();
   }
+  onModositaskesz(dto: CsoportDto) {
+    if (dto !== null) {
+      propCopy(dto, this.Dto[this.DtoSelectedIndex]);
+    }
+    this.egymode = EgyMode.Reszletek;
+  }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
 
-  onTorlesutan() {
-    this.tabla.clearselections();
+      this.csoportservice.Delete(this.Dto[this.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
+
+          this.Dto.splice(this.DtoSelectedIndex, 1);
+          this.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.tabla.clearselections();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
   }
 
   ngOnDestroy() {

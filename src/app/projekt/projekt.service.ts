@@ -16,8 +16,8 @@ import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 })
 export class ProjektService {
   private readonly _controller = 'api/projekt/';
-
   cim = 'Projekt';
+
   statuszszempont = 0;
   teendoszempont = 0;
   szempont = 0;

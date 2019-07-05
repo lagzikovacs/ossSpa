@@ -3,18 +3,20 @@ import {CsoportService} from '../csoport.service';
 import {NumberResult} from '../../dtos/numberresult';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {CsoportDto} from '../csoportdto';
 import {deepCopy} from '../../tools/deepCopy';
-import {propCopy} from '../../tools/propCopy';
 
 @Component({
   selector: 'app-csoport-szerkesztes',
   templateUrl: './csoport-szerkesztes.component.html'
 })
 export class CsoportSzerkesztesComponent implements OnInit, OnDestroy {
-  csoportservice: CsoportService;
-
   @Input() uj = false;
-  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
+  DtoEdited = new CsoportDto();
+  @Input() set DtoOriginal(value: CsoportDto) {
+    this.DtoEdited = deepCopy(value);
+  }
+  @Output() eventSzerkeszteskesz = new EventEmitter<CsoportDto>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -24,6 +26,8 @@ export class CsoportSzerkesztesComponent implements OnInit, OnDestroy {
     this._eppFrissit = value;
     this._spinnerservice.Run = value;
   }
+
+  csoportservice: CsoportService;
 
   constructor(private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
@@ -40,15 +44,13 @@ export class CsoportSzerkesztesComponent implements OnInit, OnDestroy {
             throw res.Error;
           }
 
-          this.csoportservice.DtoEdited = res.Result[0];
+          this.DtoEdited = res.Result[0];
           this.eppFrissit = false;
         })
         .catch(err => {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
-    } else {
-      this.csoportservice.DtoEdited = deepCopy(this.csoportservice.Dto[this.csoportservice.DtoSelectedIndex]);
     }
   }
 
@@ -57,9 +59,9 @@ export class CsoportSzerkesztesComponent implements OnInit, OnDestroy {
     let p: Promise<NumberResult>;
 
     if (this.uj) {
-      p = this.csoportservice.Add(this.csoportservice.DtoEdited);
+      p = this.csoportservice.Add(this.DtoEdited);
     } else {
-      p = this.csoportservice.Update(this.csoportservice.DtoEdited);
+      p = this.csoportservice.Update(this.DtoEdited);
     }
 
     p
@@ -75,22 +77,17 @@ export class CsoportSzerkesztesComponent implements OnInit, OnDestroy {
           throw res1.Error;
         }
 
-        if (this.uj) {
-          this.csoportservice.Dto.unshift(res1.Result[0]);
-        } else {
-          propCopy(res1.Result[0], this.csoportservice.Dto[this.csoportservice.DtoSelectedIndex]);
-        }
-
         this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit();
+        this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
-  OnCancel() {
-    this.eventSzerkeszteskesz.emit();
+
+  onCancel() {
+    this.eventSzerkeszteskesz.emit(null);
   }
 
   ngOnDestroy() {

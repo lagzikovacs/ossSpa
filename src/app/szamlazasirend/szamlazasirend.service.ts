@@ -15,10 +15,10 @@ import {ColumnSettings} from '../tools/reszletek/columnsettings';
 })
 export class SzamlazasirendService {
   private readonly _controller = 'api/szamlazasirend/';
+  cim = 'Számlázási rend';
 
   ProjektKod = -1;
 
-  cim = 'Számlázási rend';
   Dto: SzamlazasirendDto[] = new Array<SzamlazasirendDto>();
   DtoEdited = new SzamlazasirendDto();
   DtoSelectedIndex = -1;

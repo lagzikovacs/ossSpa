@@ -2,9 +2,9 @@
   <h5>A csoport jogai</h5>
   <table class="table table-bordered table-sm table-responsive" style="border: none">
     <tbody>
-    <tr *ngFor="let item of csoportservice.DtoCsoportLehetsegesJog; let i = index">
+    <tr *ngFor="let item of DtoCsoportLehetsegesJog; let i = index">
       <td>
-        <input type="checkbox" [checked]="item.Csoporttag" (click)="jog(i)">
+        <input type="checkbox" [checked]="item.Csoporttag" (click)="checkJog(i)">
       </td>
       <td>{{item.Jog}}</td>
     </tr>

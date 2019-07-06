@@ -11,10 +11,12 @@ import {IrattipusDto} from '../irattipusdto';
 import {deepCopy} from '../../../tools/deepCopy';
 import {EgyMode} from '../../../enums/egymode';
 import {propCopy} from '../../../tools/propCopy';
+import {rowanimation} from '../../../animation/rowAnimation';
 
 @Component({
   selector: 'app-irattipus-list',
-  templateUrl: './irattipus-list.component.html'
+  templateUrl: './irattipus-list.component.html',
+  animations: [rowanimation]
 })
 export class IrattipusListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;

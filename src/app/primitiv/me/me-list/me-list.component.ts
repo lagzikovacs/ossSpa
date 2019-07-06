@@ -11,10 +11,12 @@ import {MeDto} from '../medto';
 import {deepCopy} from '../../../tools/deepCopy';
 import {EgyMode} from '../../../enums/egymode';
 import {propCopy} from '../../../tools/propCopy';
+import {rowanimation} from '../../../animation/rowAnimation';
 
 @Component({
   selector: 'app-me-list',
-  templateUrl: './me-list.component.html'
+  templateUrl: './me-list.component.html',
+  animations: [rowanimation]
 })
 export class MeListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;

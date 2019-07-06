@@ -11,10 +11,12 @@ import {FizetesimodDto} from '../fizetesimoddto';
 import {deepCopy} from '../../../tools/deepCopy';
 import {EgyMode} from '../../../enums/egymode';
 import {propCopy} from '../../../tools/propCopy';
+import {rowanimation} from '../../../animation/rowAnimation';
 
 @Component({
   selector: 'app-fizetesimod-list',
-  templateUrl: './fizetesimod-list.component.html'
+  templateUrl: './fizetesimod-list.component.html',
+  animations: [rowanimation]
 })
 export class FizetesimodListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;

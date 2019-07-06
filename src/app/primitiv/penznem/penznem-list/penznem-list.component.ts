@@ -11,10 +11,12 @@ import {PenznemDto} from '../penznemdto';
 import {deepCopy} from '../../../tools/deepCopy';
 import {EgyMode} from '../../../enums/egymode';
 import {propCopy} from '../../../tools/propCopy';
+import {rowanimation} from '../../../animation/rowAnimation';
 
 @Component({
   selector: 'app-penznem-list',
-  templateUrl: './penznem-list.component.html'
+  templateUrl: './penznem-list.component.html',
+  animations: [rowanimation]
 })
 export class PenznemListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;

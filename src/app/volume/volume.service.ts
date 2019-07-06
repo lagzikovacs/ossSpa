@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
-import {EgyszeruKeresesDto} from '../dtos/egyszerukeresesdto';
-import {VolumeDto} from './volumedto';
-import {ZoomSources} from '../enums/zoomsources';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {LogonService} from '../logon/logon.service';
 import {VolumeResult} from './volumeresult';
@@ -15,16 +12,7 @@ import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 })
 export class VolumeService {
   private readonly _controller = 'api/volume/';
-
   cim = 'Volume';
-  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
-
-  Dto: VolumeDto[] = new Array<VolumeDto>();
-  DtoSelectedIndex = -1;
-  DtoEdited = new VolumeDto();
-
-  dbv: number[] = new Array<number>();
-  eppTesztel = false;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

@@ -11,10 +11,12 @@ import {TeendoDto} from '../teendodto';
 import {deepCopy} from '../../../tools/deepCopy';
 import {EgyMode} from '../../../enums/egymode';
 import {propCopy} from '../../../tools/propCopy';
+import {rowanimation} from '../../../animation/rowAnimation';
 
 @Component({
   selector: 'app-teendo-list',
-  templateUrl: './teendo-list.component.html'
+  templateUrl: './teendo-list.component.html',
+  animations: [rowanimation]
 })
 export class TeendoListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;

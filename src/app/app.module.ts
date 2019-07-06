@@ -119,7 +119,6 @@ import { ProjektTeendoElvegezveComponent } from './projektteendo/projekt-teendo-
 import { ProjektkapcsolatUjbizonylatComponent } from './projektkapcsolat/projektkapcsolat-ujbizonylat/projektkapcsolat-ujbizonylat.component';
 import { ProjektkapcsolatUjiratComponent } from './projektkapcsolat/projektkapcsolat-ujirat/projektkapcsolat-ujirat.component';
 import { AjanlatComponent } from './ajanlat/ajanlat/ajanlat';
-import { VolumeEgyComponent } from './volume/volume-egy/volume-egy.component';
 import { VolumeListComponent } from './volume/volume-list/volume-list.component';
 import { ParticioEgyComponent } from './particio/particio-egy/particio-egy.component';
 import { HelysegListComponent } from './primitiv/helyseg/helyseg-list/helyseg-list.component';
@@ -362,7 +361,6 @@ if (environment.production) {
     ProjektkapcsolatUjbizonylatComponent,
     ProjektkapcsolatUjiratComponent,
     AjanlatComponent,
-    VolumeEgyComponent,
     VolumeListComponent,
     ParticioEgyComponent,
     HelysegListComponent,

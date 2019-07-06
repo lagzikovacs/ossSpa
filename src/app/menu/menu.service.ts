@@ -66,14 +66,7 @@ export class MenuService {
               private _location: PlatformLocation,
               private _httpClient: HttpClient,
               private _logonservice: LogonService,
-              private _irattipusservice: IrattipusService,
-              private _teendoservice: TeendoService,
-              private _fizetesimodservice: FizetesimodService,
-              private _penznemservice: PenznemService,
-              private _meservice: MeService,
-              private _termekdijservice: TermekdijService,
               private _cikkservice: CikkService,
-              private _helysegservice: HelysegService,
               private _ugyfelservice: UgyfelService,
               private _projektservice: ProjektService,
               private _projektkapcsolatservice: ProjektkapcsolatService,
@@ -85,7 +78,6 @@ export class MenuService {
               private _ugynokservice: AjanlatkeresService,
               private _bizonylatservice: BizonylatService,
               private _particioservice: ParticioService,
-              private _volumeservice: VolumeService,
               private _vagolapservice: VagolapService) {
     _location.onPopState(() => {
       _router.navigate(['bejelentkezes']);
@@ -188,7 +180,6 @@ export class MenuService {
         this._particioservice.EgyMode = ParticioEgyMode.Szallito;
         break;
       case '/volume':
-        this._volumeservice.Dto = new Array<VolumeDto>();
         break;
       case '/felhasznalo':
         break;

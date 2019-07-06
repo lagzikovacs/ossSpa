@@ -11,10 +11,12 @@ import {HelysegDto} from '../helysegdto';
 import {deepCopy} from '../../../tools/deepCopy';
 import {EgyMode} from '../../../enums/egymode';
 import {propCopy} from '../../../tools/propCopy';
+import {rowanimation} from '../../../animation/rowAnimation';
 
 @Component({
   selector: 'app-helyseg-list',
-  templateUrl: './helyseg-list.component.html'
+  templateUrl: './helyseg-list.component.html',
+  animations: [rowanimation]
 })
 export class HelysegListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;

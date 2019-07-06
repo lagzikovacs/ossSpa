@@ -11,10 +11,12 @@ import {TermekdijDto} from '../termekdijdto';
 import {deepCopy} from '../../../tools/deepCopy';
 import {EgyMode} from '../../../enums/egymode';
 import {propCopy} from '../../../tools/propCopy';
+import {rowanimation} from '../../../animation/rowAnimation';
 
 @Component({
   selector: 'app-termekdij-list',
-  templateUrl: './termekdij-list.component.html'
+  templateUrl: './termekdij-list.component.html',
+  animations: [rowanimation]
 })
 export class TermekdijListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;

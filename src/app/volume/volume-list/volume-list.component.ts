@@ -3,16 +3,27 @@ import {VolumeService} from '../volume.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
+import {environment} from '../../../environments/environment';
+import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
+import {VolumeDto} from '../volumedto';
+import {rowanimation} from '../../animation/rowAnimation';
+import {EgyMode} from '../../enums/egymode';
 
 @Component({
   selector: 'app-volume-list',
-  templateUrl: './volume-list.component.html'
+  templateUrl: './volume-list.component.html',
+  animations: [rowanimation]
 })
 export class VolumeListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
+  ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
   elsokereses = true;
-  volumeservice: VolumeService;
+
+  Dto = new Array<VolumeDto>();
+  DtoSelectedIndex = -1;
+
+  egymode = EgyMode.Reszletek;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -23,9 +34,11 @@ export class VolumeListComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(volumeservice: VolumeService,
-              private _spinnerservice: SpinnerService,
-              private _errorservice: ErrorService) {
+  volumeservice: VolumeService;
+
+  constructor(private _spinnerservice: SpinnerService,
+              private _errorservice: ErrorService,
+              volumeservice: VolumeService) {
     this.volumeservice = volumeservice;
   }
 
@@ -35,7 +48,7 @@ export class VolumeListComponent implements OnInit, OnDestroy {
 
   onKereses() {
     this.elsokereses = true;
-    this.volumeservice.ekDto.rekordtol = 0;
+    this.ekDto.rekordtol = 0;
 
     this.tabla.clearselections();
 
@@ -51,14 +64,14 @@ export class VolumeListComponent implements OnInit, OnDestroy {
         }
 
         if (this.elsokereses) {
-          this.volumeservice.Dto = res.Result;
+          this.Dto = res.Result;
           this.elsokereses = false;
         } else {
-          const buf = [...this.volumeservice.Dto];
+          const buf = [...this.Dto];
           res.Result.forEach(element => {
             buf.push(element);
           });
-          this.volumeservice.Dto = buf;
+          this.Dto = buf;
         }
 
         this.eppFrissit = false;
@@ -69,12 +82,13 @@ export class VolumeListComponent implements OnInit, OnDestroy {
       });
   }
 
-  setClickedRow(i: number) {
-    this.volumeservice.DtoSelectedIndex = i;
+  onId(i: number) {
+    this.DtoSelectedIndex = i;
+    this.egymode = EgyMode.Reszletek;
   }
 
-  torlesutan() {
-    this.tabla.clearselections();
+  doNav(i: number) {
+    this.egymode = i;
   }
 
   ngOnDestroy() {

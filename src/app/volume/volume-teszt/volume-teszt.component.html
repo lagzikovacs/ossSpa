@@ -2,14 +2,14 @@
   <h5>Volume ellenőrzés</h5>
   <div>
     <nav>
-      <button [disabled]="volumeservice.eppTesztel" (click)="inditas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="eppTesztel" (click)="onInditas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Indítás
       </button>
-      <button [disabled]="!volumeservice.eppTesztel" (click)="leallitas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="!eppTesztel" (click)="onLeallitas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Leállítás
       </button>
     </nav>
-    <h6>{{index}}/{{volumeservice.dbv.length}}</h6>
+    <h6>{{index}}/{{dbv.length}}</h6>
     <div *ngFor="let h of hibalista">{{h}}</div>
   </div>
 </div>

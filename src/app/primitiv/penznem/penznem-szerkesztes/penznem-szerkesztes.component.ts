@@ -14,7 +14,10 @@ import {PenznemDto} from '../penznemdto';
 export class PenznemSzerkesztesComponent implements OnInit, OnDestroy {
   @Input() uj = false;
   DtoEdited = new PenznemDto();
-  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
+  @Input() set DtoOriginal(value: PenznemDto) {
+    this.DtoEdited = deepCopy(value);
+  }
+  @Output() eventSzerkeszteskesz = new EventEmitter<PenznemDto>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -49,8 +52,6 @@ export class PenznemSzerkesztesComponent implements OnInit, OnDestroy {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
-    } else {
-      this.DtoEdited = deepCopy(this.penznemservice.Dto[this.penznemservice.DtoSelectedIndex]);
     }
   }
 
@@ -77,23 +78,19 @@ export class PenznemSzerkesztesComponent implements OnInit, OnDestroy {
           throw res1.Error;
         }
 
-        if (this.uj) {
-          this.penznemservice.Dto.unshift(res1.Result[0]);
-        } else {
-          propCopy(res1.Result[0], this.penznemservice.Dto[this.penznemservice.DtoSelectedIndex]);
-        }
-
         this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit();
+        this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
-  cancel() {
-    this.eventSzerkeszteskesz.emit();
+
+  onCancel() {
+    this.eventSzerkeszteskesz.emit(null);
   }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

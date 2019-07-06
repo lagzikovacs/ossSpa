@@ -1,18 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {PenznemService} from '../penznem.service';
 import {LogonService} from '../../../logon/logon.service';
-import {PenztarService} from '../../../penztar/penztar.service';
-import {ProjektService} from '../../../projekt/projekt.service';
-import {SzamlazasirendService} from '../../../szamlazasirend/szamlazasirend.service';
-import {KifizetesService} from '../../../kifizetes/kifizetes.service';
-import {BizonylatService} from '../../../bizonylat/bizonylat.service';
 import {JogKod} from '../../../enums/jogkod';
-import {ZoomSources} from '../../../enums/zoomsources';
-import {PenztarSzerkesztesMode} from '../../../penztar/penztarszerkesztesmode';
-import {ProjektSzerkesztesMode} from '../../../projekt/projektszerkesztesmode';
-import {SzamlazasirendSzerkesztesMode} from '../../../szamlazasirend/szamlazasirendszerkesztesmode';
-import {KifizetesSzerkesztesMode} from '../../../kifizetes/kifizetesszerkesztesmode';
-import {BizonylatSzerkesztesMode} from '../../../bizonylat/bizonylatszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
@@ -20,7 +9,8 @@ import {environment} from '../../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../../dtos/egyszerukeresesdto';
 import {PenznemDto} from '../penznemdto';
 import {deepCopy} from '../../../tools/deepCopy';
-
+import {EgyMode} from '../../../enums/egymode';
+import {propCopy} from '../../../tools/propCopy';
 
 @Component({
   selector: 'app-penznem-list',
@@ -34,6 +24,11 @@ export class PenznemListComponent implements OnInit, OnDestroy {
   elsokereses = true;
   jog = false;
   zoom = false;
+
+  Dto = new Array<PenznemDto>();
+  DtoSelectedIndex = -1;
+
+  egymode = EgyMode.Reszletek;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -87,14 +82,14 @@ export class PenznemListComponent implements OnInit, OnDestroy {
         }
 
         if (this.elsokereses) {
-          this.penznemservice.Dto = res.Result;
+          this.Dto = res.Result;
           this.elsokereses = false;
         } else {
-          const buf = [...this.penznemservice.Dto];
+          const buf = [...this.Dto];
           res.Result.forEach(element => {
             buf.push(element);
           });
-          this.penznemservice.Dto = buf;
+          this.Dto = buf;
         }
 
         this.eppFrissit = false;
@@ -109,31 +104,65 @@ export class PenznemListComponent implements OnInit, OnDestroy {
       });
   }
 
+  onId(i: number) {
+    this.DtoSelectedIndex = i;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  doNav(i: number) {
+    this.egymode = i;
+  }
+
+  doUjtetel() {
+    this.tabla.ujtetelstart();
+  }
+  onUjtetelkesz(dto: PenznemDto) {
+    if (dto !== null) {
+      this.Dto.unshift(dto);
+    }
+    this.tabla.ujtetelstop();
+  }
+  onModositaskesz(dto: PenznemDto) {
+    if (dto !== null) {
+      propCopy(dto, this.Dto[this.DtoSelectedIndex]);
+    }
+    this.egymode = EgyMode.Reszletek;
+  }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
+
+      this.penznemservice.Delete(this.Dto[this.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
+
+          this.Dto.splice(this.DtoSelectedIndex, 1);
+          this.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.tabla.clearselections();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
+  }
+
   onStartzoom(i: number) {
-    this.eventSelectzoom.emit(deepCopy(this.penznemservice.Dto[i]));
+    this.eventSelectzoom.emit(deepCopy(this.Dto[i]));
 
     this.onStopzoom();
   }
+
   onStopzoom() {
     this.zoom = false;
 
     this.eventStopzoom.emit();
-  }
-
-  onId(i: number) {
-    this.penznemservice.DtoSelectedIndex = i;
-  }
-
-  onUj() {
-    this.tabla.ujtetelstart();
-  }
-
-  onUjkesz() {
-    this.tabla.ujtetelstop();
-  }
-
-  onTorlesutan() {
-    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

@@ -2,11 +2,6 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} fr
 import {FizetesimodService} from '../fizetesimod.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
-import {ZoomSources} from '../../../enums/zoomsources';
-import {KifizetesService} from '../../../kifizetes/kifizetes.service';
-import {KifizetesSzerkesztesMode} from '../../../kifizetes/kifizetesszerkesztesmode';
-import {BizonylatService} from '../../../bizonylat/bizonylat.service';
-import {BizonylatSzerkesztesMode} from '../../../bizonylat/bizonylatszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
@@ -14,6 +9,8 @@ import {environment} from '../../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../../dtos/egyszerukeresesdto';
 import {FizetesimodDto} from '../fizetesimoddto';
 import {deepCopy} from '../../../tools/deepCopy';
+import {EgyMode} from '../../../enums/egymode';
+import {propCopy} from '../../../tools/propCopy';
 
 @Component({
   selector: 'app-fizetesimod-list',
@@ -27,6 +24,11 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
   elsokereses = true;
   jog = false;
   zoom = false;
+
+  Dto = new Array<FizetesimodDto>();
+  DtoSelectedIndex = -1;
+
+  egymode = EgyMode.Reszletek;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -49,8 +51,6 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
   fizetesimodservice: FizetesimodService;
 
   constructor(private _logonservice: LogonService,
-              private _bizonylatkifizetesservice: KifizetesService,
-              private _bizonylatservice: BizonylatService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               fizetesimodservice: FizetesimodService) {
@@ -82,14 +82,14 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
         }
 
         if (this.elsokereses) {
-          this.fizetesimodservice.Dto = res.Result;
+          this.Dto = res.Result;
           this.elsokereses = false;
         } else {
-          const buf = [...this.fizetesimodservice.Dto];
+          const buf = [...this.Dto];
           res.Result.forEach(element => {
             buf.push(element);
           });
-          this.fizetesimodservice.Dto = buf;
+          this.Dto = buf;
         }
 
         this.eppFrissit = false;
@@ -104,31 +104,65 @@ export class FizetesimodListComponent implements OnInit, OnDestroy {
       });
   }
 
+  onId(i: number) {
+    this.DtoSelectedIndex = i;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  doNav(i: number) {
+    this.egymode = i;
+  }
+
+  doUjtetel() {
+    this.tabla.ujtetelstart();
+  }
+  onUjtetelkesz(dto: FizetesimodDto) {
+    if (dto !== null) {
+      this.Dto.unshift(dto);
+    }
+    this.tabla.ujtetelstop();
+  }
+  onModositaskesz(dto: FizetesimodDto) {
+    if (dto !== null) {
+      propCopy(dto, this.Dto[this.DtoSelectedIndex]);
+    }
+    this.egymode = EgyMode.Reszletek;
+  }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
+
+      this.fizetesimodservice.Delete(this.Dto[this.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
+
+          this.Dto.splice(this.DtoSelectedIndex, 1);
+          this.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.tabla.clearselections();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
+  }
+
   onStartzoom(i: number) {
-    this.eventSelectzoom.emit(deepCopy(this.fizetesimodservice.Dto[i]));
+    this.eventSelectzoom.emit(deepCopy(this.Dto[i]));
 
     this.onStopzoom();
   }
+
   onStopzoom() {
     this.zoom = false;
 
     this.eventStopzoom.emit();
-  }
-
-  onId(i: number) {
-    this.fizetesimodservice.DtoSelectedIndex = i;
-  }
-
-  onUj() {
-    this.tabla.ujtetelstart();
-  }
-
-  onUjkesz() {
-    this.tabla.ujtetelstop();
-  }
-
-  onTorlesutan() {
-    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

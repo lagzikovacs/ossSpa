@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {LogonService} from '../../logon/logon.service';
 import {FizetesimodDto} from './fizetesimoddto';
-import {ZoomSources} from '../../enums/zoomsources';
 import {FizetesimodResult} from './fizetesimodresult';
 import {NumberResult} from '../../dtos/numberresult';
 import {EmptyResult} from '../../dtos/emptyresult';
@@ -18,9 +16,6 @@ import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 export class FizetesimodService {
   private readonly _controller = 'api/fizetesimod/';
   cim = 'Fizetési mód';
-
-  Dto: FizetesimodDto[] = new Array<FizetesimodDto>();
-  DtoSelectedIndex = -1;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

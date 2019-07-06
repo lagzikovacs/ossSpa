@@ -14,7 +14,10 @@ import {FizetesimodDto} from '../fizetesimoddto';
 export class FizetesimodSzerkesztesComponent implements OnInit, OnDestroy {
   @Input() uj = false;
   DtoEdited = new FizetesimodDto();
-  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
+  @Input() set DtoOriginal(value: FizetesimodDto) {
+    this.DtoEdited = deepCopy(value);
+  }
+  @Output() eventSzerkeszteskesz = new EventEmitter<FizetesimodDto>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -49,8 +52,6 @@ export class FizetesimodSzerkesztesComponent implements OnInit, OnDestroy {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
-    } else {
-      this.DtoEdited = deepCopy(this.fizetesimodservice.Dto[this.fizetesimodservice.DtoSelectedIndex]);
     }
   }
 
@@ -77,23 +78,19 @@ export class FizetesimodSzerkesztesComponent implements OnInit, OnDestroy {
           throw res1.Error;
         }
 
-        if (this.uj) {
-          this.fizetesimodservice.Dto.unshift(res1.Result[0]);
-        } else {
-          propCopy(res1.Result[0], this.fizetesimodservice.Dto[this.fizetesimodservice.DtoSelectedIndex]);
-        }
-
         this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit();
+        this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
-  cancel() {
-    this.eventSzerkeszteskesz.emit();
+
+  onCancel() {
+    this.eventSzerkeszteskesz.emit(null);
   }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

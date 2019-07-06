@@ -4,8 +4,6 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {TeendoResult} from './teendoresult';
 import {TeendoZoomParameter} from './teendozoomparameter';
 import {environment} from '../../../environments/environment';
-import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
-import {ZoomSources} from '../../enums/zoomsources';
 import {LogonService} from '../../logon/logon.service';
 import {NumberResult} from '../../dtos/numberresult';
 import {EmptyResult} from '../../dtos/emptyresult';
@@ -18,9 +16,6 @@ import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 export class TeendoService {
   private readonly _controller = 'api/teendo/';
   cim = 'Teendő';
-
-  Dto: TeendoDto[] = new Array<TeendoDto>();
-  DtoSelectedIndex = -1;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

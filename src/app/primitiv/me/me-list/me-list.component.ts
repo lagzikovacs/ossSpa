@@ -1,12 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {MeService} from '../me.service';
-import {ZoomSources} from '../../../enums/zoomsources';
-import {CikkService} from '../../../cikk/cikk.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
-import {CikkSzerkesztesMode} from '../../../cikk/cikkszerkesztesmode';
-import {BizonylatService} from '../../../bizonylat/bizonylat.service';
-import {BizonylattetelSzerkesztesMode} from '../../../bizonylat/bizonylattetelszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
@@ -14,6 +9,8 @@ import {environment} from '../../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../../dtos/egyszerukeresesdto';
 import {MeDto} from '../medto';
 import {deepCopy} from '../../../tools/deepCopy';
+import {EgyMode} from '../../../enums/egymode';
+import {propCopy} from '../../../tools/propCopy';
 
 @Component({
   selector: 'app-me-list',
@@ -27,6 +24,11 @@ export class MeListComponent implements OnInit, OnDestroy {
   elsokereses = true;
   jog = false;
   zoom = false;
+
+  Dto = new Array<MeDto>();
+  DtoSelectedIndex = -1;
+
+  egymode = EgyMode.Reszletek;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -80,14 +82,14 @@ export class MeListComponent implements OnInit, OnDestroy {
         }
 
         if (this.elsokereses) {
-          this.meservice.Dto = res.Result;
+          this.Dto = res.Result;
           this.elsokereses = false;
         } else {
-          const buf = [...this.meservice.Dto];
+          const buf = [...this.Dto];
           res.Result.forEach(element => {
             buf.push(element);
           });
-          this.meservice.Dto = buf;
+          this.Dto = buf;
         }
 
         this.eppFrissit = false;
@@ -102,8 +104,58 @@ export class MeListComponent implements OnInit, OnDestroy {
       });
   }
 
+
+  onId(i: number) {
+    this.DtoSelectedIndex = i;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  doNav(i: number) {
+    this.egymode = i;
+  }
+
+  doUjtetel() {
+    this.tabla.ujtetelstart();
+  }
+  onUjtetelkesz(dto: MeDto) {
+    if (dto !== null) {
+      this.Dto.unshift(dto);
+    }
+    this.tabla.ujtetelstop();
+  }
+  onModositaskesz(dto: MeDto) {
+    if (dto !== null) {
+      propCopy(dto, this.Dto[this.DtoSelectedIndex]);
+    }
+    this.egymode = EgyMode.Reszletek;
+  }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
+
+      this.meservice.Delete(this.Dto[this.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
+
+          this.Dto.splice(this.DtoSelectedIndex, 1);
+          this.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.tabla.clearselections();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
+  }
+
   onStartzoom(i: number) {
-    this.eventSelectzoom.emit(deepCopy(this.meservice.Dto[i]));
+    this.eventSelectzoom.emit(deepCopy(this.Dto[i]));
 
     this.onStopzoom();
   }
@@ -111,22 +163,6 @@ export class MeListComponent implements OnInit, OnDestroy {
     this.zoom = false;
 
     this.eventStopzoom.emit();
-  }
-
-  onId(i: number) {
-    this.meservice.DtoSelectedIndex = i;
-  }
-
-  onUj() {
-    this.tabla.ujtetelstart();
-  }
-
-  onUjkesz() {
-    this.tabla.ujtetelstop();
-  }
-
-  onTorlesutan() {
-    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

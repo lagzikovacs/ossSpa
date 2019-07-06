@@ -107,30 +107,23 @@ export class MenuService {
   menuclick(utvonal: string) {
     switch (utvonal) {
       case '/irattipus':
-        this._irattipusservice.Dto = new Array<IrattipusDto>();
         break;
       case '/projektteendo':
-        this._teendoservice.Dto = new Array<TeendoDto>();
         break;
       case '/fizetesimod':
-        this._fizetesimodservice.Dto = new Array<FizetesimodDto>();
         break;
       case '/penznem':
-        this._penznemservice.Dto = new Array<PenznemDto>();
         break;
       case '/me':
-        this._meservice.Dto = new Array<MeDto>();
         break;
       case '/afakulcs':
         break;
       case '/termekdij':
-        this._termekdijservice.Dto = new Array<TermekdijDto>();
         break;
       case '/cikk':
         this._cikkservice.Dto = new Array<CikkDto>();
         break;
       case '/helyseg':
-        this._helysegservice.Dto = new Array<HelysegDto>();
         break;
       case '/ugyfel':
         this._ugyfelservice.Dto = new Array<UgyfelDto>();

@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
 import {environment} from '../../../environments/environment';
 import {PenznemDto} from './penznemdto';
-import {ZoomSources} from '../../enums/zoomsources';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {LogonService} from '../../logon/logon.service';
 import {PenznemResult} from './penznemresult';
@@ -18,9 +16,6 @@ import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 export class PenznemService {
   private readonly _controller = 'api/penznem/';
   cim = 'Pénznem';
-
-  Dto: PenznemDto[] = new Array<PenznemDto>();
-  DtoSelectedIndex = -1;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

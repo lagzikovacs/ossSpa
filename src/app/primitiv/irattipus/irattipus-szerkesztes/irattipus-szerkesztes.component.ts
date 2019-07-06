@@ -14,7 +14,10 @@ import {IrattipusDto} from '../irattipusdto';
 export class IrattipusSzerkesztesComponent implements OnInit, OnDestroy {
   @Input() uj = false;
   DtoEdited = new IrattipusDto();
-  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
+  @Input() set DtoOriginal(value: IrattipusDto) {
+    this.DtoEdited = deepCopy(value);
+  }
+  @Output() eventSzerkeszteskesz = new EventEmitter<IrattipusDto>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -49,8 +52,6 @@ export class IrattipusSzerkesztesComponent implements OnInit, OnDestroy {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
-    } else {
-      this.DtoEdited = deepCopy(this.irattipusservice.Dto[this.irattipusservice.DtoSelectedIndex]);
     }
   }
 
@@ -77,22 +78,17 @@ export class IrattipusSzerkesztesComponent implements OnInit, OnDestroy {
           throw res1.Error;
         }
 
-        if (this.uj) {
-          this.irattipusservice.Dto.unshift(res1.Result[0]);
-        } else {
-          propCopy(res1.Result[0], this.irattipusservice.Dto[this.irattipusservice.DtoSelectedIndex]);
-        }
-
         this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit();
+        this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
-  cancel() {
-    this.eventSzerkeszteskesz.emit();
+
+  onCancel() {
+    this.eventSzerkeszteskesz.emit(null);
   }
 
   ngOnDestroy() {

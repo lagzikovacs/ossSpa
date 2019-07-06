@@ -48,7 +48,6 @@ import { DokumentumEgyComponent } from './dokumentum/dokumentum-egy/dokumentum-e
 import { IratSzerkesztesComponent } from './irat/irat-szerkesztes/irat-szerkesztes.component';
 import { DokumentumFeltoltesComponent } from './dokumentum/dokumentum-feltoltes/dokumentum-feltoltes.component';
 import { IrattipusListComponent } from './primitiv/irattipus/irattipus-list/irattipus-list.component';
-import { IrattipusEgyComponent } from './primitiv/irattipus/irattipus-egy/irattipus-egy.component';
 import { IrattipusSzerkesztesComponent } from './primitiv/irattipus/irattipus-szerkesztes/irattipus-szerkesztes.component';
 import { HelysegSzerkesztesComponent } from './primitiv/helyseg/helyseg-szerkesztes/helyseg-szerkesztes.component';
 import { UgyfelListComponent } from './ugyfel/ugyfel-list/ugyfel-list.component';
@@ -83,12 +82,7 @@ import { CikkListComponent } from './cikk/cikk-list/cikk-list.component';
 import { MeListComponent } from './primitiv/me/me-list/me-list.component';
 import { AfakulcsListComponent } from './primitiv/afakulcs/afakulcs-list/afakulcs-list.component';
 import { TermekdijListComponent } from './primitiv/termekdij/termekdij-list/termekdij-list.component';
-import { TermekdijEgyComponent } from './primitiv/termekdij/termekdij-egy/termekdij-egy.component';
-import { MeEgyComponent } from './primitiv/me/me-egy/me-egy.component';
 import { CikkEgyComponent } from './cikk/cikk-egy/cikk-egy.component';
-import { PenznemEgyComponent } from './primitiv/penznem/penznem-egy/penznem-egy.component';
-import { FizetesimodEgyComponent } from './primitiv/fizetesimod/fizetesimod-egy/fizetesimod-egy.component';
-import { TeendoEgyComponent } from './primitiv/teendo/teendo-egy/teendo-egy.component';
 import { TermekdijSzerkesztesComponent } from './primitiv/termekdij/termekdij-szerkesztes/termekdij-szerkesztes.component';
 import { AfakulcsSzerkesztesComponent } from './primitiv/afakulcs/afakulcs-szerkesztes/afakulcs-szerkesztes.component';
 import { MeSzerkesztesComponent } from './primitiv/me/me-szerkesztes/me-szerkesztes.component';
@@ -128,7 +122,6 @@ import { AjanlatComponent } from './ajanlat/ajanlat/ajanlat';
 import { VolumeEgyComponent } from './volume/volume-egy/volume-egy.component';
 import { VolumeListComponent } from './volume/volume-list/volume-list.component';
 import { ParticioEgyComponent } from './particio/particio-egy/particio-egy.component';
-import { HelysegEgyComponent } from './primitiv/helyseg/helyseg-egy/helyseg-egy.component';
 import { HelysegListComponent } from './primitiv/helyseg/helyseg-list/helyseg-list.component';
 import {UgyfelEgyComponent} from './ugyfel/ugyfel-egy/ugyfel-egy.component';
 import {PenztartetelListComponent} from './penztartetel/penztartetel-list/penztartetel-list.component';
@@ -311,7 +304,6 @@ if (environment.production) {
     IratSzerkesztesComponent,
     DokumentumFeltoltesComponent,
     IrattipusListComponent,
-    IrattipusEgyComponent,
     IrattipusSzerkesztesComponent,
     HelysegSzerkesztesComponent,
     UgyfelSzerkesztesComponent,
@@ -345,12 +337,7 @@ if (environment.production) {
     MeListComponent,
     AfakulcsListComponent,
     TermekdijListComponent,
-    TermekdijEgyComponent,
-    MeEgyComponent,
     CikkEgyComponent,
-    PenznemEgyComponent,
-    FizetesimodEgyComponent,
-    TeendoEgyComponent,
     TermekdijSzerkesztesComponent,
     AfakulcsSzerkesztesComponent,
     MeSzerkesztesComponent,
@@ -378,7 +365,6 @@ if (environment.production) {
     VolumeEgyComponent,
     VolumeListComponent,
     ParticioEgyComponent,
-    HelysegEgyComponent,
     HelysegListComponent,
     UgyfelListComponent,
     UgyfelEgyComponent,

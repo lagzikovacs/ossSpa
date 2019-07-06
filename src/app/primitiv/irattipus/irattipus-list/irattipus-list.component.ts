@@ -2,13 +2,6 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} fr
 import {IrattipusService} from '../irattipus.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
-import {ZoomSources} from '../../../enums/zoomsources';
-import {ProjektkapcsolatService} from '../../../projektkapcsolat/projektkapcsolat.service';
-import {IratService} from '../../../irat/irat.service';
-import {IratSzerkesztesMode} from '../../../irat/iratszerkesztesmode';
-import {BizonylatesiratSzerkesztesMode} from '../../../projektkapcsolat/bizonylatesiratszerkesztesmode';
-import {BizonylatkapcsolatService} from '../../../bizonylatkapcsolat/bizonylatkapcsolat.service';
-import {BizonylatKapcsolatSzerkesztesMode} from '../../../bizonylatkapcsolat/bizonylatkapcsolatszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
@@ -16,6 +9,8 @@ import {environment} from '../../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../../dtos/egyszerukeresesdto';
 import {IrattipusDto} from '../irattipusdto';
 import {deepCopy} from '../../../tools/deepCopy';
+import {EgyMode} from '../../../enums/egymode';
+import {propCopy} from '../../../tools/propCopy';
 
 @Component({
   selector: 'app-irattipus-list',
@@ -29,6 +24,11 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
   elsokereses = true;
   jog = false;
   zoom = false;
+
+  Dto = new Array<IrattipusDto>();
+  DtoSelectedIndex = -1;
+
+  egymode = EgyMode.Reszletek;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -82,14 +82,14 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
         }
 
         if (this.elsokereses) {
-          this.irattipusservice.Dto = res.Result;
+          this.Dto = res.Result;
           this.elsokereses = false;
         } else {
-          const buf = [...this.irattipusservice.Dto];
+          const buf = [...this.Dto];
           res.Result.forEach(element => {
             buf.push(element);
           });
-          this.irattipusservice.Dto = buf;
+          this.Dto = buf;
         }
 
         this.eppFrissit = false;
@@ -104,31 +104,65 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
       });
   }
 
+  onId(i: number) {
+    this.DtoSelectedIndex = i;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  doNav(i: number) {
+    this.egymode = i;
+  }
+
+  doUjtetel() {
+    this.tabla.ujtetelstart();
+  }
+  onUjtetelkesz(dto: IrattipusDto) {
+    if (dto !== null) {
+      this.Dto.unshift(dto);
+    }
+    this.tabla.ujtetelstop();
+  }
+  onModositaskesz(dto: IrattipusDto) {
+    if (dto !== null) {
+      propCopy(dto, this.Dto[this.DtoSelectedIndex]);
+    }
+    this.egymode = EgyMode.Reszletek;
+  }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
+
+      this.irattipusservice.Delete(this.Dto[this.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
+
+          this.Dto.splice(this.DtoSelectedIndex, 1);
+          this.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.tabla.clearselections();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
+  }
+
   onStartzoom(i: number) {
-    this.eventSelectzoom.emit(deepCopy(this.irattipusservice.Dto[i]));
+    this.eventSelectzoom.emit(deepCopy(this.Dto[i]));
 
     this.onStopzoom();
   }
+
   onStopzoom() {
     this.zoom = false;
 
     this.eventStopzoom.emit();
-  }
-
-  onId(i: number) {
-    this.irattipusservice.DtoSelectedIndex = i;
-  }
-
-  onUj() {
-    this.tabla.ujtetelstart();
-  }
-
-  onUjkesz() {
-    this.tabla.ujtetelstop();
-  }
-
-  onTorlesutan() {
-    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
 import {environment} from '../../../environments/environment';
 import {TermekdijDto} from './termekdijdto';
-import {ZoomSources} from '../../enums/zoomsources';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {LogonService} from '../../logon/logon.service';
 import {TermekdijResult} from './termekdijresult';
@@ -18,9 +16,6 @@ import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 export class TermekdijService {
   private readonly _controller = 'api/termekdij/';
   cim = 'Termékdíj';
-
-  Dto: TermekdijDto[] = new Array<TermekdijDto>();
-  DtoSelectedIndex = -1;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

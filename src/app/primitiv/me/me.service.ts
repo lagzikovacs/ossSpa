@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import {MeDto} from './medto';
-import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
 import {environment} from '../../../environments/environment';
-import {ZoomSources} from '../../enums/zoomsources';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {LogonService} from '../../logon/logon.service';
 import {NumberResult} from '../../dtos/numberresult';
@@ -18,9 +16,6 @@ import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 export class MeService {
   private readonly _controller = 'api/mennyisegiegyseg/';
   cim = 'Mennyiségi egység';
-
-  Dto: MeDto[] = new Array<MeDto>();
-  DtoSelectedIndex = -1;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

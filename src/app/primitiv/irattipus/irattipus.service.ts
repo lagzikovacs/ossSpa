@@ -2,12 +2,10 @@ import { Injectable } from '@angular/core';
 import {NumberResult} from '../../dtos/numberresult';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
 import {LogonService} from '../../logon/logon.service';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {IrattipusDto} from './irattipusdto';
 import {IrattipusResult} from './irattipusresult';
-import {ZoomSources} from '../../enums/zoomsources';
 import {IrattipusZoomParameter} from './irattipuszoomparameter';
 import {ColumnSettings} from '../../tools/reszletek/columnsettings';
 import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
@@ -18,9 +16,6 @@ import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 export class IrattipusService {
   private readonly _controller = 'api/irattipus/';
   cim = 'Irattipus';
-
-  Dto: IrattipusDto[] = new Array<IrattipusDto>();
-  DtoSelectedIndex = -1;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

@@ -4,8 +4,6 @@ import {HelysegDto} from './helysegdto';
 import {HelysegResult} from './helysegresult';
 import {HelysegZoomParameter} from './helysegzoomparameter';
 import {environment} from '../../../environments/environment';
-import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
-import {ZoomSources} from '../../enums/zoomsources';
 import {LogonService} from '../../logon/logon.service';
 import {NumberResult} from '../../dtos/numberresult';
 import {EmptyResult} from '../../dtos/emptyresult';
@@ -18,9 +16,6 @@ import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 export class HelysegService {
   private readonly _controller = 'api/helyseg/';
   cim = 'Helység';
-
-  Dto: HelysegDto[] = new Array<HelysegDto>();
-  DtoSelectedIndex = -1;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

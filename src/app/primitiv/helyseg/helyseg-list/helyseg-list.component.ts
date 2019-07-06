@@ -1,10 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {HelysegService} from '../helyseg.service';
 import {LogonService} from '../../../logon/logon.service';
-import {UgyfelService} from '../../../ugyfel/ugyfel.service';
 import {JogKod} from '../../../enums/jogkod';
-import {ZoomSources} from '../../../enums/zoomsources';
-import {UgyfelSzerkesztesMode} from '../../../ugyfel/ugyfelszerkesztesmode';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
@@ -12,6 +9,8 @@ import {environment} from '../../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../../dtos/egyszerukeresesdto';
 import {HelysegDto} from '../helysegdto';
 import {deepCopy} from '../../../tools/deepCopy';
+import {EgyMode} from '../../../enums/egymode';
+import {propCopy} from '../../../tools/propCopy';
 
 @Component({
   selector: 'app-helyseg-list',
@@ -25,6 +24,11 @@ export class HelysegListComponent implements OnInit, OnDestroy {
   elsokereses = true;
   jog = false;
   zoom = false;
+
+  Dto = new Array<HelysegDto>();
+  DtoSelectedIndex = -1;
+
+  egymode = EgyMode.Reszletek;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -49,8 +53,7 @@ export class HelysegListComponent implements OnInit, OnDestroy {
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
-              helysegservice: HelysegService,
-              private ugyfelservice: UgyfelService) {
+              helysegservice: HelysegService) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.helysegservice = helysegservice;
   }
@@ -79,14 +82,14 @@ export class HelysegListComponent implements OnInit, OnDestroy {
         }
 
         if (this.elsokereses) {
-          this.helysegservice.Dto = res.Result;
+          this.Dto = res.Result;
           this.elsokereses = false;
         } else {
-          const buf = [...this.helysegservice.Dto];
+          const buf = [...this.Dto];
           res.Result.forEach(element => {
             buf.push(element);
           });
-          this.helysegservice.Dto = buf;
+          this.Dto = buf;
         }
 
         this.eppFrissit = false;
@@ -101,8 +104,57 @@ export class HelysegListComponent implements OnInit, OnDestroy {
       });
   }
 
+  onId(i: number) {
+    this.DtoSelectedIndex = i;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  doNav(i: number) {
+    this.egymode = i;
+  }
+
+  doUjtetel() {
+    this.tabla.ujtetelstart();
+  }
+  onUjtetelkesz(dto: HelysegDto) {
+    if (dto !== null) {
+      this.Dto.unshift(dto);
+    }
+    this.tabla.ujtetelstop();
+  }
+  onModositaskesz(dto: HelysegDto) {
+    if (dto !== null) {
+      propCopy(dto, this.Dto[this.DtoSelectedIndex]);
+    }
+    this.egymode = EgyMode.Reszletek;
+  }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
+
+      this.helysegservice.Delete(this.Dto[this.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
+
+          this.Dto.splice(this.DtoSelectedIndex, 1);
+          this.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.tabla.clearselections();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
+  }
+
   onStartzoom(i: number) {
-    this.eventSelectzoom.emit(deepCopy(this.helysegservice.Dto[i]));
+    this.eventSelectzoom.emit(deepCopy(this.Dto[i]));
 
     this.onStopzoom();
   }
@@ -110,22 +162,6 @@ export class HelysegListComponent implements OnInit, OnDestroy {
     this.zoom = false;
 
     this.eventStopzoom.emit();
-  }
-
-  onId(i: number) {
-    this.helysegservice.DtoSelectedIndex = i;
-  }
-
-  onUj() {
-    this.tabla.ujtetelstart();
-  }
-
-  onUjkesz() {
-    this.tabla.ujtetelstop();
-  }
-
-  onTorlesutan() {
-    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

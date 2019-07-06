@@ -71,7 +71,6 @@ export class MenuService {
               private _fizetesimodservice: FizetesimodService,
               private _penznemservice: PenznemService,
               private _meservice: MeService,
-              private _afakulcsservice: AfakulcsService,
               private _termekdijservice: TermekdijService,
               private _cikkservice: CikkService,
               private _helysegservice: HelysegService,
@@ -87,8 +86,6 @@ export class MenuService {
               private _bizonylatservice: BizonylatService,
               private _particioservice: ParticioService,
               private _volumeservice: VolumeService,
-              private _felhasznaloservice: FelhasznaloService,
-              private _csoportservice: CsoportService,
               private _vagolapservice: VagolapService) {
     _location.onPopState(() => {
       _router.navigate(['bejelentkezes']);
@@ -125,7 +122,6 @@ export class MenuService {
         this._meservice.Dto = new Array<MeDto>();
         break;
       case '/afakulcs':
-        this._afakulcsservice.Dto = new Array<AfakulcsDto>();
         break;
       case '/termekdij':
         this._termekdijservice.Dto = new Array<TermekdijDto>();

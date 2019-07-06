@@ -9,10 +9,14 @@ import {AfakulcsDto} from '../afakulcsdto';
 import {deepCopy} from '../../../tools/deepCopy';
 import {environment} from '../../../../environments/environment.prod';
 import {EgyszeruKeresesDto} from '../../../dtos/egyszerukeresesdto';
+import {EgyMode} from '../../../enums/egymode';
+import {propCopy} from '../../../tools/propCopy';
+import {rowanimation} from '../../../animation/rowAnimation';
 
 @Component({
   selector: 'app-afakulcs-list',
-  templateUrl: './afakulcs-list.component.html'
+  templateUrl: './afakulcs-list.component.html',
+  animations: [rowanimation]
 })
 export class AfakulcsListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
@@ -22,6 +26,11 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
   elsokereses = true;
   jog = false;
   zoom = false;
+
+  Dto = new Array<AfakulcsDto>();
+  DtoSelectedIndex = -1;
+
+  egymode = EgyMode.Reszletek;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -60,7 +69,7 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.elsokereses = true;
     this.ekDto.rekordtol = 0;
-    this.afakulcsservice.DtoSelectedIndex = -1;
+    this.DtoSelectedIndex = -1;
 
     this.tabla.clearselections();
 
@@ -76,14 +85,14 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
         }
 
         if (this.elsokereses) {
-          this.afakulcsservice.Dto = res.Result;
+          this.Dto = res.Result;
           this.elsokereses = false;
         } else {
-          const buf = [...this.afakulcsservice.Dto];
+          const buf = [...this.Dto];
           res.Result.forEach(element => {
             buf.push(element);
           });
-          this.afakulcsservice.Dto = buf;
+          this.Dto = buf;
         }
 
         this.eppFrissit = false;
@@ -94,8 +103,57 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
       });
   }
 
+  onId(i: number) {
+    this.DtoSelectedIndex = i;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  doNav(i: number) {
+    this.egymode = i;
+  }
+
+  doUjtetel() {
+    this.tabla.ujtetelstart();
+  }
+  onUjtetelkesz(dto: AfakulcsDto) {
+    if (dto !== null) {
+      this.Dto.unshift(dto);
+    }
+    this.tabla.ujtetelstop();
+  }
+  onModositaskesz(dto: AfakulcsDto) {
+    if (dto !== null) {
+      propCopy(dto, this.Dto[this.DtoSelectedIndex]);
+    }
+    this.egymode = EgyMode.Reszletek;
+  }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
+
+      this.afakulcsservice.Delete(this.Dto[this.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
+
+          this.Dto.splice(this.DtoSelectedIndex, 1);
+          this.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.tabla.clearselections();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
+  }
+
   onStartzoom(i: number) {
-    this.eventSelectzoom.emit(deepCopy(this.afakulcsservice.Dto[i]));
+    this.eventSelectzoom.emit(deepCopy(this.Dto[i]));
 
     this.onStopzoom();
   }
@@ -104,22 +162,6 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
     this.zoom = false;
 
     this.eventStopzoom.emit();
-  }
-
-  onId(i: number) {
-    this.afakulcsservice.DtoSelectedIndex = i;
-  }
-
-  onUj() {
-    this.tabla.ujtetelstart();
-  }
-
-  onUjkesz() {
-    this.tabla.ujtetelstop();
-  }
-
-  onTorlesutan() {
-    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

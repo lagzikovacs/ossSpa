@@ -14,7 +14,10 @@ import {AfakulcsDto} from '../afakulcsdto';
 export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
   @Input() uj = false;
   DtoEdited = new AfakulcsDto();
-  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
+  @Input() set DtoOriginal(value: AfakulcsDto) {
+    this.DtoEdited = deepCopy(value);
+  }
+  @Output() eventSzerkeszteskesz = new EventEmitter<AfakulcsDto>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -49,8 +52,6 @@ export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
-    } else {
-      this.DtoEdited = deepCopy(this.afakulcsservice.Dto[this.afakulcsservice.DtoSelectedIndex]);
     }
   }
 
@@ -78,22 +79,17 @@ export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
           throw res1.Error;
         }
 
-        if (this.uj) {
-          this.afakulcsservice.Dto.unshift(res1.Result[0]);
-        } else {
-          propCopy(res1.Result[0], this.afakulcsservice.Dto[this.afakulcsservice.DtoSelectedIndex]);
-        }
-
         this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit();
+        this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
+
   onCancel() {
-    this.eventSzerkeszteskesz.emit();
+    this.eventSzerkeszteskesz.emit(null);
   }
 
   ngOnDestroy() {

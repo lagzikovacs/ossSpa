@@ -17,9 +17,6 @@ export class AfakulcsService {
   private readonly _controller = 'api/afakulcs/';
   cim = 'ÁFA kulcs';
 
-  Dto: AfakulcsDto[] = new Array<AfakulcsDto>();
-  DtoSelectedIndex = -1;
-
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;
 

@@ -83,7 +83,6 @@ import { CikkListComponent } from './cikk/cikk-list/cikk-list.component';
 import { MeListComponent } from './primitiv/me/me-list/me-list.component';
 import { AfakulcsListComponent } from './primitiv/afakulcs/afakulcs-list/afakulcs-list.component';
 import { TermekdijListComponent } from './primitiv/termekdij/termekdij-list/termekdij-list.component';
-import { AfakulcsEgyComponent } from './primitiv/afakulcs/afakulcs-egy/afakulcs-egy.component';
 import { TermekdijEgyComponent } from './primitiv/termekdij/termekdij-egy/termekdij-egy.component';
 import { MeEgyComponent } from './primitiv/me/me-egy/me-egy.component';
 import { CikkEgyComponent } from './cikk/cikk-egy/cikk-egy.component';
@@ -346,7 +345,6 @@ if (environment.production) {
     MeListComponent,
     AfakulcsListComponent,
     TermekdijListComponent,
-    AfakulcsEgyComponent,
     TermekdijEgyComponent,
     MeEgyComponent,
     CikkEgyComponent,

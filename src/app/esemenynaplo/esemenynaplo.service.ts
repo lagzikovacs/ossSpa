@@ -11,24 +11,7 @@ import {EsemenynaploDto} from './esemenynaplodto';
 })
 export class EsemenynaploService {
   private readonly _controller = 'api/esemenynaplo/';
-
   cim = 'Korábbi tevékenység';
-
-  ep = new EsemenynaploParameter(0, environment.lapmeret);
-  OsszesRekord = 0;
-
-  Dto: EsemenynaploDto[] = new Array<EsemenynaploDto>();
-
-  private _felhasznalokod = -1;
-  get Felhasznalokod(): number {
-    return this._felhasznalokod;
-  }
-  set Felhasznalokod(value: number) {
-    this._felhasznalokod = value;
-
-    this.Dto  = new Array<EsemenynaploDto>();
-    this.OsszesRekord = 0;
-  }
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

@@ -18,9 +18,6 @@ export class FelhasznaloService {
   private readonly _controller = 'api/felhasznalo/';
   cim = 'Felhasználó';
 
-  Dto: FelhasznaloDto[] = new Array<FelhasznaloDto>();
-  DtoSelectedIndex = -1;
-
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;
 

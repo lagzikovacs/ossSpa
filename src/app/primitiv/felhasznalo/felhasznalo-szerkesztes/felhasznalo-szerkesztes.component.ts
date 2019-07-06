@@ -4,7 +4,6 @@ import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {deepCopy} from '../../../tools/deepCopy';
-import {propCopy} from '../../../tools/propCopy';
 import {FelhasznaloDto} from '../felhasznalodto';
 
 @Component({
@@ -12,11 +11,12 @@ import {FelhasznaloDto} from '../felhasznalodto';
   templateUrl: './felhasznalo-szerkesztes.component.html'
 })
 export class FelhasznaloSzerkesztesComponent implements OnInit, OnDestroy {
-  felhasznaloservice: FelhasznaloService;
-
   @Input() uj = false;
   DtoEdited = new FelhasznaloDto();
-  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
+  @Input() set DtoOriginal(value: FelhasznaloDto) {
+    this.DtoEdited = deepCopy(value);
+  }
+  @Output() eventSzerkeszteskesz = new EventEmitter<FelhasznaloDto>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -27,9 +27,11 @@ export class FelhasznaloSzerkesztesComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(felhasznaloservice: FelhasznaloService,
-              private _spinnerservice: SpinnerService,
-              private _errorservice: ErrorService) {
+  felhasznaloservice: FelhasznaloService;
+
+  constructor(private _spinnerservice: SpinnerService,
+              private _errorservice: ErrorService,
+              felhasznaloservice: FelhasznaloService) {
     this.felhasznaloservice = felhasznaloservice;
   }
 
@@ -49,8 +51,6 @@ export class FelhasznaloSzerkesztesComponent implements OnInit, OnDestroy {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
-    } else {
-      this.DtoEdited = deepCopy(this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex]);
     }
   }
 
@@ -77,23 +77,19 @@ export class FelhasznaloSzerkesztesComponent implements OnInit, OnDestroy {
           throw res1.Error;
         }
 
-        if (this.uj) {
-          this.felhasznaloservice.Dto.unshift(res1.Result[0]);
-        } else {
-          propCopy(res1.Result[0], this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex]);
-        }
-
         this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit();
+        this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
-  cancel() {
+
+  onCancel() {
     this.eventSzerkeszteskesz.emit();
   }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

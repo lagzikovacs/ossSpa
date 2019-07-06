@@ -1,8 +1,10 @@
-import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {FelhasznaloService} from '../felhasznalo.service';
 import {rowanimation} from '../../../animation/rowAnimation';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
+import {FelhasznaloDto} from '../felhasznalodto';
+import {deepCopy} from '../../../tools/deepCopy';
 
 @Component({
   selector: 'app-felhasznalo-jelszo',
@@ -10,11 +12,14 @@ import {SpinnerService} from '../../../tools/spinner/spinner.service';
   animations: [rowanimation]
 })
 export class FelhasznaloJelszoComponent implements OnDestroy {
-  felhasznaloservice: FelhasznaloService;
+  DtoEdited = new FelhasznaloDto();
+  @Input() set DtoOriginal(value: FelhasznaloDto) {
+    this.DtoEdited = deepCopy(value);
+  }
+  @Output() eventSzerkeszteskesz = new EventEmitter<FelhasznaloDto>();
+
   jelszo = '';
   jelszoujra = '';
-
-  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -25,9 +30,11 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(felhasznaloservice: FelhasznaloService,
-              private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService) {
+  felhasznaloservice: FelhasznaloService;
+
+  constructor(private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
+              felhasznaloservice: FelhasznaloService) {
     this.felhasznaloservice = felhasznaloservice;
   }
 
@@ -38,24 +45,21 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
     }
 
     this.eppFrissit = true;
-    this.felhasznaloservice.JelszoBeallitas(this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex].Felhasznalokod,
-      this.jelszo, this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex].Modositva)
+    this.felhasznaloservice.JelszoBeallitas(this.DtoEdited.Felhasznalokod, this.jelszo, this.DtoEdited.Modositva)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        return this.felhasznaloservice.Get(this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex].Felhasznalokod);
+        return this.felhasznaloservice.Get(this.DtoEdited.Felhasznalokod);
       })
       .then(res1 => {
         if (res1.Error != null) {
           throw res1.Error;
         }
 
-        this.felhasznaloservice.Dto[this.felhasznaloservice.DtoSelectedIndex] = res1.Result[0];
-
         this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit();
+        this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
         this._errorservice.Error = err;

@@ -9,11 +9,11 @@ import {EsemenynaploService} from '../esemenynaplo/esemenynaplo.service';
   templateUrl: './fooldal.component.html'
 })
 export class FooldalComponent implements OnInit, OnDestroy {
-  szerepkorkivalasztva: boolean;
+  szerepkorkivalasztva = false;
+  felhasznalokod = -1;
   private _subscription: Subscription;
 
   constructor(private _logonservice: LogonService,
-              private _esemenynaploservice: EsemenynaploService,
               private _sessionservice: SessionService) { }
 
   ngOnInit() {
@@ -30,7 +30,9 @@ export class FooldalComponent implements OnInit, OnDestroy {
 
   felhasznalo() {
     if (this.szerepkorkivalasztva) {
-      this._esemenynaploservice.Felhasznalokod = this._sessionservice.sessiondto.Felhasznalokod;
+      this.felhasznalokod = this._sessionservice.sessiondto.Felhasznalokod;
+    } else {
+      this.felhasznalokod = -1;
     }
   }
 

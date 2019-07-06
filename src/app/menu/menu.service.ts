@@ -202,7 +202,6 @@ export class MenuService {
         this._volumeservice.Dto = new Array<VolumeDto>();
         break;
       case '/felhasznalo':
-        this._felhasznaloservice.Dto = new Array<FelhasznaloDto>();
         break;
       case '/csoport':
         break;

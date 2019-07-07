@@ -7,25 +7,25 @@ import * as FileSaver from 'file-saver';
   templateUrl: './ugyfel-vcard.component.html'
 })
 export class UgyfelVcardComponent implements OnDestroy {
-  @Input() DtoEdited = new UgyfelDto();
+  @Input() Dto = new UgyfelDto();
 
   letoltesClick() {
     const encode = 'ENCODING=QUOTED-PRINTABLE;CHARSET=utf-8:';
 
-    const Ceg = this.DtoEdited.Ceg ? this.DtoEdited.Ceg : ';';
-    const Beosztas = this.DtoEdited.Beosztas ? this.DtoEdited.Beosztas : '';
+    const Ceg = this.Dto.Ceg ? this.Dto.Ceg : ';';
+    const Beosztas = this.Dto.Beosztas ? this.Dto.Beosztas : '';
 
     const raw = 'BEGIN:VCARD\r\n' +
       'VERSION:2.1\r\n' +
-      'FN;' + encode + this.DtoEdited.Nev + '\r\n' +
-      'N;' + encode + this.DtoEdited.Nev + ';;;\r\n' +
+      'FN;' + encode + this.Dto.Nev + '\r\n' +
+      'N;' + encode + this.Dto.Nev + ';;;\r\n' +
       'ORG;' + encode + Ceg + '\r\n' +
       'TITLE;' + encode + Beosztas + '\r\n' +
-      'ADR;WORK;PREF;' + encode + ';;' + this.DtoEdited.Kozterulet + ' ' +
-      this.DtoEdited.Kozterulettipus + ' ' + this.DtoEdited.Hazszam + ';' +
-      this.DtoEdited.Helysegnev + ';;' + this.DtoEdited.Iranyitoszam + '\r\n' +
-      'EMAIL:' + this.DtoEdited.Email + '\r\n' +
-      'TEL;TYPE=CELL:' + this.DtoEdited.Telefon + '\r\n' +
+      'ADR;WORK;PREF;' + encode + ';;' + this.Dto.Kozterulet + ' ' +
+      this.Dto.Kozterulettipus + ' ' + this.Dto.Hazszam + ';' +
+      this.Dto.Helysegnev + ';;' + this.Dto.Iranyitoszam + '\r\n' +
+      'EMAIL:' + this.Dto.Email + '\r\n' +
+      'TEL;TYPE=CELL:' + this.Dto.Telefon + '\r\n' +
       'END:VCARD';
 
     const arrayUTF8 = this.toUTF8Array(raw);
@@ -35,7 +35,7 @@ export class UgyfelVcardComponent implements OnDestroy {
     }
 
     const blob = new Blob([byteNumbers], {type: 'text/html;charset=UTF-8;'});
-    FileSaver.saveAs(blob, this.DtoEdited.Nev + '.vcf');
+    FileSaver.saveAs(blob, this.Dto.Nev + '.vcf');
   }
 
   toUTF8Array(str) {

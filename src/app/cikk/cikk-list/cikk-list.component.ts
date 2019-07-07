@@ -105,6 +105,7 @@ export class CikkListComponent implements OnInit, OnDestroy {
 
     this.onKeresesTovabb();
   }
+  
   onKeresesTovabb() {
     this.eppFrissit = true;
     this.cikkservice.Select(this.up)

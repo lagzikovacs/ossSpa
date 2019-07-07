@@ -6,13 +6,17 @@ import {environment} from '../../../environments/environment';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-ugyfel-ter-link',
   templateUrl: './ugyfel-ter-link.component.html'
 })
 export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
-  @Input() Dto = new UgyfelDto();
+  DtoEdited = new UgyfelDto();
+  @Input() set DtoOriginal(value: UgyfelDto) {
+    this.DtoEdited = deepCopy(value);
+  }
   @Output() eventSzerkeszteskesz = new EventEmitter<UgyfelDto>();
 
   link = '';
@@ -33,9 +37,9 @@ export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
               private _errorservice: ErrorService) { }
 
   ngOnInit() {
-    if (this.Dto.Kikuldesikodidopontja !== null) {
+    if (this.DtoEdited.Kikuldesikodidopontja !== null) {
       this.kikuldesidopontja();
-      this._ugyfelterservice.GetLink(this.Dto)
+      this._ugyfelterservice.GetLink(this.DtoEdited)
         .then(res => {
           if (res.Error !== null) {
             throw res.Error;
@@ -54,19 +58,19 @@ export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
   }
 
   kikuldesidopontja() {
-    this.kikuldesikodidopontja = moment(this.Dto.Kikuldesikodidopontja).format('YYYY-MM-DD HH:mm:ss');
+    this.kikuldesikodidopontja = moment(this.DtoEdited.Kikuldesikodidopontja).format('YYYY-MM-DD HH:mm:ss');
   }
 
   ugyfelterlink() {
     this.eppFrissit = true;
-    this._ugyfelterservice.CreateNewLink(this.Dto)
+    this._ugyfelterservice.CreateNewLink(this.DtoEdited)
       .then(res => {
         if (res.Error !== null) {
           throw res.Error;
         }
 
         this.link = environment.OSSRef + res.Result;
-        return this._ugyfelservice.Get(this.Dto.Ugyfelkod);
+        return this._ugyfelservice.Get(this.DtoEdited.Ugyfelkod);
       })
       .then(res1 => {
         if (res1.Error !== null) {

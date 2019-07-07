@@ -13,6 +13,7 @@ import {UgyfelParameter} from '../ugyfelparameter';
 import {deepCopy} from '../../tools/deepCopy';
 import {EgyMode} from '../../enums/egymode';
 import {rowanimation} from '../../animation/rowAnimation';
+import {propCopy} from '../../tools/propCopy';
 
 @Component({
   selector: 'app-ugyfel-list',
@@ -109,6 +110,7 @@ import {rowanimation} from '../../animation/rowAnimation';
 
     this.onKeresesTovabb();
   }
+
   onKeresesTovabb() {
     this.eppFrissit = true;
     this.ugyfelservice.Select(this.up)
@@ -153,16 +155,44 @@ import {rowanimation} from '../../animation/rowAnimation';
 
 
 
-  onUj() {
+  doUjtetel() {
     this.tabla.ujtetelstart();
   }
-
-  onUjkesz() {
+  onUjtetelkesz(dto: UgyfelDto) {
+    if (dto !== null) {
+      this.Dto.unshift(dto);
+    }
     this.tabla.ujtetelstop();
   }
+  onModositaskesz(dto: UgyfelDto) {
+    if (dto !== null) {
+      propCopy(dto, this.Dto[this.DtoSelectedIndex]);
+    }
+    this.egymode = EgyMode.Reszletek;
+  }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
 
-  onTorlesutan() {
-    this.tabla.clearselections();
+      this.ugyfelservice.Delete(this.Dto[this.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
+
+          this.Dto.splice(this.DtoSelectedIndex, 1);
+          this.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.tabla.clearselections();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
   }
 
 

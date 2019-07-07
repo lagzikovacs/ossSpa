@@ -7,7 +7,7 @@
                      [(szempont)]="szempont"
                      [(minta)]="minta"
                      [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-                     [enUj]="!eppFrissit && jog" (Uj)="onUj()"
+                     [enUj]="!eppFrissit && jog" (Uj)="doUjtetel()"
                      [visZoom]="zoom" (StopZoom)="onStopzoom()">
   </app-ugyfeltoolbar>
 
@@ -22,7 +22,7 @@
 
   <ng-template #griduj>
     <app-ugyfel-szerkesztes [uj] = "true"
-                            (eventSzerkeszteskesz)="onUjkesz()">
+                            (eventSzerkeszteskesz)="onUjtetelkesz($event)">
     </app-ugyfel-szerkesztes>
   </ng-template>
 
@@ -74,7 +74,8 @@
       <ng-container *ngIf="egymode === 3">
         <div [@rowanimation]>
           <app-ugyfel-szerkesztes [uj]="false"
-                                  (eventSzerkeszteskesz)="onModositaskesz()">
+                                  [DtoOriginal]="Dto[DtoSelectedIndex]"
+                                  (eventSzerkeszteskesz)="onModositaskesz($event)">
           </app-ugyfel-szerkesztes>
         </div>
       </ng-container>
@@ -82,23 +83,28 @@
 
       <ng-container *ngIf="egymode === 7">
         <div [@rowanimation]>
-          <app-ugyfel-csoport (eventSzerkeszteskesz)="onModositaskesz()">
+          <app-ugyfel-csoport [DtoOriginal]="Dto[DtoSelectedIndex]"
+                              (eventSzerkeszteskesz)="onModositaskesz($event)">
           </app-ugyfel-csoport>
         </div>
       </ng-container>
       <ng-container *ngIf="egymode === 8">
         <div [@rowanimation]>
-          <app-ugyfel-projekt></app-ugyfel-projekt>
+          <app-ugyfel-projekt [Ugyfelkod]="Dto[DtoSelectedIndex].Ugyfelkod">
+          </app-ugyfel-projekt>
         </div>
       </ng-container>
       <ng-container *ngIf="egymode === 9">
         <div [@rowanimation]>
-          <app-ugyfel-ter-link></app-ugyfel-ter-link>
+          <app-ugyfel-ter-link [DtoOriginal]="Dto[DtoSelectedIndex]"
+                               (eventSzerkeszteskesz)="onModositaskesz($event)">
+          </app-ugyfel-ter-link>
         </div>
       </ng-container>
       <ng-container *ngIf="egymode === 10">
         <div [@rowanimation]>
-          <app-ugyfel-vcard (LetoltesClick)="VcardLetoles()">
+          <app-ugyfel-vcard [Dto]="Dto[DtoSelectedIndex]"
+                            (LetoltesClick)="VcardLetoles()">
           </app-ugyfel-vcard>
         </div>
       </ng-container>

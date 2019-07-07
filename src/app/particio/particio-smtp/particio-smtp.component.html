@@ -4,81 +4,72 @@
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Klienstipus</div>
-      </div>
-      <div class="col-md-2">
+      <div>
+        <div class="egylabel">Klienstipus</div>
         <select type="text" class="form-control form-control-sm"
                 [(ngModel)]="Dto.SmtpKlienstipus" name="m1">
           <option>Gmail</option>
         </select>
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Azonosító</div>
-      </div>
-      <div class="col-md-3">
-        <input type="text" class="form-control form-control-sm" id="m2"
+      <div>
+        <div class="egylabel">Azonosító</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="m2"
                autocomplete="off"
                [(ngModel)]="Dto.SmtpFelhasznaloazonosito" name="m2">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Jelszó</div>
-      </div>
-      <div class="col-md-3">
-        <input type="text" class="form-control form-control-sm" id="m3"
+      <div>
+        <div class="egylabel">Jelszó</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="m3"
                autocomplete="off"
                [(ngModel)]="Dto.SmtpFelhasznalojelszo" name="m3">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">A küldő neve</div>
-      </div>
-      <div class="col-md-3">
-        <input type="text" class="form-control form-control-sm" id="m4"
+      <div>
+        <div class="egylabel">A küldő neve</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="m4"
                autocomplete="off" maxlength="50"
                [(ngModel)]="Dto.SmtpKuldoneve" name="m4">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">A küldő email címe</div>
-      </div>
-      <div class="col-md-3">
-        <input type="text" class="form-control form-control-sm" id="m5"
+      <div>
+        <div class="egylabel">A küldő email címe</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="m5"
                autocomplete="off" maxlength="50"
                [(ngModel)]="Dto.SmtpKuldoemailcime" name="m5">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Custom host</div>
-      </div>
-      <div class="col-md-2">
-        <input type="text" class="form-control form-control-sm" id="m6"
+      <div>
+        <div class="egylabel">Custom host</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="m6"
                autocomplete="off" maxlength="50"
                [(ngModel)]="Dto.SmtpCustomhost" name="m6">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Custom port</div>
-      </div>
-      <div class="col-md-1">
-        <input type="number" class="form-control form-control-sm" id="m7"
+      <div>
+        <div class="egylabel">Custom port</div>
+        <input type="number" class="form-control form-control-sm oszlop2" id="m7"
                autocomplete="off"
                [(ngModel)]="Dto.SmtpCustomport" name="m7">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">TLS</div>
-      </div>
-      <div class="col-md-1">
+      <div>
+        <div class="egylabel">TLS</div>
         <select type="text" class="form-control form-control-sm"
                 [(ngModel)]="Dto.SmtpTls" name="m8">
           <option value="false">Nem</option>
@@ -86,19 +77,17 @@
         </select>
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Hibaértesítési email címek</div>
-      </div>
-      <div class="col-md-4">
-        <input type="text" class="form-control form-control-sm" id="m9"
+      <div>
+        <div class="egylabel">Hibaértesítési email címek</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="m9"
                autocomplete="off"
                [(ngModel)]="Dto.Hibaertesitesemailcimek" name="m9">
       </div>
     </div>
 
-    <div class="row no-gutters" style="margin-bottom: 10px">
-      <div class="col-md-2"></div>
+    <div class="row no-gutters editform-row">
       <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
     </div>

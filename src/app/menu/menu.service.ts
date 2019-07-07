@@ -6,10 +6,8 @@ import {AngularmenuResult} from './angularmenuresult';
 import {Router} from '@angular/router';
 import {ProjektService} from '../projekt/projekt.service';
 import {IratService} from '../irat/irat.service';
-import {AjanlatkeresService} from '../ajanlatkeres/ajanlatkeres.service';
 import {IratDto} from '../irat/iratdto';
 import {ProjektDto} from '../projekt/projektdto';
-import {AjanlatkeresDto} from '../ajanlatkeres/ajanlatkeresdto';
 import {PenztarDto} from '../penztar/penztardto';
 import {PenztarService} from '../penztar/penztar.service';
 import {ProjektkapcsolatService} from '../projektkapcsolat/projektkapcsolat.service';
@@ -18,8 +16,6 @@ import {SzamlazasirendService} from '../szamlazasirend/szamlazasirend.service';
 import {ProjektteendoService} from '../projektteendo/projektteendo.service';
 import {SzamlazasirendDto} from '../szamlazasirend/szamlazasirenddto';
 import {ProjektteendoDto} from '../projektteendo/projektteendodto';
-import {ParticioService} from '../particio/particio.service';
-import {ParticioEgyMode} from '../particio/particioegymode';
 import {PlatformLocation} from '@angular/common';
 import {DokumentumService} from '../dokumentum/dokumentum.service';
 import {DokumentumDto} from '../dokumentum/dokumentumdto';
@@ -47,9 +43,7 @@ export class MenuService {
               private _iratservice: IratService,
               private _dokumentumservice: DokumentumService,
               private _penztarservice: PenztarService,
-              private _ugynokservice: AjanlatkeresService,
               private _bizonylatservice: BizonylatService,
-              private _particioservice: ParticioService,
               private _vagolapservice: VagolapService) {
     _location.onPopState(() => {
       _router.navigate(['bejelentkezes']);
@@ -146,7 +140,6 @@ export class MenuService {
 
 
       case '/particio':
-        this._particioservice.EgyMode = ParticioEgyMode.Szallito;
         break;
       case '/volume':
         break;

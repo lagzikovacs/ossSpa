@@ -5,16 +5,13 @@ import {environment} from '../../environments/environment';
 import {ParticioDto} from './particiodto';
 import {LogonService} from '../logon/logon.service';
 import {ParticioResult} from './particioresult';
-import {ParticioEgyMode} from './particioegymode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ParticioService {
   private readonly _controller = 'api/particio/';
-
   cim = 'Partíció';
-  EgyMode = ParticioEgyMode.Szallito;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

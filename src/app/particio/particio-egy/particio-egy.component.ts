@@ -11,9 +11,10 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   templateUrl: './particio-egy.component.html'
 })
 export class ParticioEgyComponent implements OnInit, OnDestroy {
-  particioservice: ParticioService;
   Ori = new ParticioDto();
   Dto = new ParticioDto();
+
+  EgyMode = ParticioEgyMode.Szallito;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -24,9 +25,11 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(particioservice: ParticioService,
-              private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService) {
+  particioservice: ParticioService;
+
+  constructor(private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
+              particioservice: ParticioService) {
     this.particioservice = particioservice;
   }
 
@@ -50,22 +53,22 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
   }
 
   szallito() {
-    this.particioservice.EgyMode = ParticioEgyMode.Szallito;
+    this.EgyMode = ParticioEgyMode.Szallito;
   }
   nav() {
-    this.particioservice.EgyMode = ParticioEgyMode.Nav;
+    this.EgyMode = ParticioEgyMode.Nav;
   }
   smtp() {
-    this.particioservice.EgyMode = ParticioEgyMode.Smtp;
+    this.EgyMode = ParticioEgyMode.Smtp;
   }
   bizonylat() {
-    this.particioservice.EgyMode = ParticioEgyMode.Bizonylat;
+    this.EgyMode = ParticioEgyMode.Bizonylat;
   }
   projekt() {
-    this.particioservice.EgyMode = ParticioEgyMode.Projekt;
+    this.EgyMode = ParticioEgyMode.Projekt;
   }
   volume() {
-    this.particioservice.EgyMode = ParticioEgyMode.Volume;
+    this.EgyMode = ParticioEgyMode.Volume;
   }
 
   SzerkesztesOk(Mod: ParticioDto) {
@@ -87,7 +90,7 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
         this.Dto = deepCopy(this.Ori);
 
         this.eppFrissit = false;
-        this.particioservice.EgyMode = ParticioEgyMode.Blank;
+        this.EgyMode = ParticioEgyMode.Blank;
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -97,7 +100,7 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
   SzerkesztesCancel() {
     this.Dto = deepCopy(this.Ori);
 
-    this.particioservice.EgyMode = ParticioEgyMode.Blank;
+    this.EgyMode = ParticioEgyMode.Blank;
   }
 
   ngOnDestroy() {

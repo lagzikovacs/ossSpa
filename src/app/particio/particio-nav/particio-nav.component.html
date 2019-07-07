@@ -3,58 +3,51 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Url</div>
-      </div>
-      <div class="col-md-3">
-        <input type="text" class="form-control form-control-sm" id="m1"
+      <div>
+        <div class="egylabel">Url</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="m1"
                autocomplete="off"
                [(ngModel)]="Dto.NavUrl" name="m1">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Azonosító</div>
-      </div>
-      <div class="col-md-3">
-        <input type="text" class="form-control form-control-sm" id="m2"
+      <div>
+        <div class="egylabel">Azonosító</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="m2"
                autocomplete="off"
                [(ngModel)]="Dto.NavFelhasznaloazonosito" name="m2">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Jelszó</div>
-      </div>
-      <div class="col-md-3">
-        <input type="text" class="form-control form-control-sm" id="m3"
+      <div>
+        <div class="egylabel">Jelszó</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="m3"
                autocomplete="off"
                [(ngModel)]="Dto.NavFelhasznalojelszo" name="m3">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Aláírókulcs</div>
-      </div>
-      <div class="col-md-3">
-        <input type="text" class="form-control form-control-sm" id="m4"
+      <div>
+        <div class="egylabel">Aláírókulcs</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="m4"
                autocomplete="off"
                [(ngModel)]="Dto.NavAlairokulcs" name="m4">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Cserekulcs</div>
-      </div>
-      <div class="col-md-3">
-        <input type="text" class="form-control form-control-sm" id="m5"
+      <div>
+        <div class="egylabel">Cserekulcs</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="m5"
                autocomplete="off"
                [(ngModel)]="Dto.NavCserekulcs" name="m5">
       </div>
     </div>
 
-    <div class="row no-gutters" style="margin-bottom: 10px">
-      <div class="col-md-2"></div>
+    <div class="row no-gutters editform-row">
       <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
     </div>

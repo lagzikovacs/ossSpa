@@ -16,9 +16,6 @@ export class PenztarService {
   private readonly _controller = 'api/penztar/';
   cim = 'Pénztár';
 
-  Dto: PenztarDto[] = new Array<PenztarDto>();
-  DtoSelectedIndex = -1;
-
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;
 

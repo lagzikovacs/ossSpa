@@ -1,10 +1,9 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {PenztartetelService} from '../penztartetel.service';
 import * as moment from 'moment';
 import {PenztarService} from '../../penztar/penztar.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
-import {propCopy} from '../../tools/propCopy';
 import {PenztartetelDto} from '../penztarteteldto';
 
 @Component({
@@ -18,10 +17,12 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnInit, 
   @ViewChild('bevetel') bevetelInput: ElementRef;
   @ViewChild('kiadas') kiadasInput: ElementRef;
 
+  @Input() Penztarkod = -1;
+
   DtoEdited = new PenztartetelDto();
   datum = moment().format('YYYY-MM-DD');
 
-  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
+  @Output() eventSzerkeszteskesz = new EventEmitter<PenztartetelDto>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -104,7 +105,7 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnInit, 
   }
 
   onSubmit() {
-    this.DtoEdited.Penztarkod = this._penztarservice.Dto[this._penztarservice.DtoSelectedIndex].Penztarkod;
+    this.DtoEdited.Penztarkod = this.Penztarkod;
     this.DtoEdited.Datum = moment(this.datum).toISOString(true);
 
     this.eppFrissit = true;
@@ -121,27 +122,17 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnInit, 
           throw res1.Error;
         }
 
-        this.penztartetelservice.Dto.unshift(res1.Result[0]);
-
-        return this._penztarservice.ReadById(this._penztarservice.Dto[this._penztarservice.DtoSelectedIndex].Penztarkod);
-      })
-      .then(res2 => {
-        if (res2.Error != null) {
-          throw res2.Error;
-        }
-
-        propCopy(res2.Result[0], this._penztarservice.Dto[this._penztarservice.DtoSelectedIndex]);
-
         this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit();
+        this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
-  cancel() {
-    this.eventSzerkeszteskesz.emit();
+
+  onCancel() {
+    this.eventSzerkeszteskesz.emit(null);
   }
 
   ngOnDestroy() {

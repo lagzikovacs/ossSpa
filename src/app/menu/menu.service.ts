@@ -8,8 +8,6 @@ import {ProjektService} from '../projekt/projekt.service';
 import {IratService} from '../irat/irat.service';
 import {IratDto} from '../irat/iratdto';
 import {ProjektDto} from '../projekt/projektdto';
-import {PenztarDto} from '../penztar/penztardto';
-import {PenztarService} from '../penztar/penztar.service';
 import {ProjektkapcsolatService} from '../projektkapcsolat/projektkapcsolat.service';
 import {ProjektKapcsolatDto} from '../projektkapcsolat/projektkapcsolatdto';
 import {SzamlazasirendService} from '../szamlazasirend/szamlazasirend.service';
@@ -42,7 +40,6 @@ export class MenuService {
               private _projektteendoservice: ProjektteendoService,
               private _iratservice: IratService,
               private _dokumentumservice: DokumentumService,
-              private _penztarservice: PenztarService,
               private _bizonylatservice: BizonylatService,
               private _vagolapservice: VagolapService) {
     _location.onPopState(() => {
@@ -101,7 +98,6 @@ export class MenuService {
         this._dokumentumservice.Dto = new Array<DokumentumDto>();
       break;
       case '/penztar':
-        this._penztarservice.Dto = new Array<PenztarDto>();
         break;
       case '/ajanlatkeres':
       break;

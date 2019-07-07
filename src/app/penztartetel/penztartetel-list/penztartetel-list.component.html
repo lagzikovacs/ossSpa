@@ -7,17 +7,18 @@
                [enUj]="!eppFrissit && jog && nyitva" (Uj)="onUj()">
   </app-toolbar>
   <app-tabla #tabla
-             [items]="penztartetelservice.Dto"
+             [items]="Dto"
              [colsets]="penztartetelservice.GridSettings"
              [ujTemplate]="griduj">
   </app-tabla>
+
   <ng-template #griduj>
     <app-penztartetel-szerkesztes (eventSzerkeszteskesz)="onUjkesz()">
     </app-penztartetel-szerkesztes>
   </ng-template>
 
   <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
-                     [rekordszam]="penztartetelservice.Dto.length"
+                     [rekordszam]="Dto.length"
                      [osszesrekord]="OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">
   </app-toolbarfooter>

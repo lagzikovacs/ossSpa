@@ -16,9 +16,6 @@ export class PenztartetelService {
   private readonly _controller = 'api/penztartetel/';
   cim = 'Pénztártételek';
 
-  Dto: PenztartetelDto[] = new Array<PenztartetelDto>();
-  DtoSelectedIndex = -1;
-
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;
 

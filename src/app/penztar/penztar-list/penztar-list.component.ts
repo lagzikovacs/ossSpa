@@ -2,13 +2,14 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {PenztarService} from '../penztar.service';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
-import {PenztartetelService} from '../../penztartetel/penztartetel.service';
-import {PenztartetelDto} from '../../penztartetel/penztarteteldto';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
+import {PenztarDto} from '../penztardto';
+import {EgyMode} from '../../enums/egymode';
+import {propCopy} from '../../tools/propCopy';
 
 @Component({
   selector: 'app-penztar-list',
@@ -20,8 +21,13 @@ export class PenztarListComponent implements OnInit, OnDestroy {
   szurok = ['Pénztár'];
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
   jog = false;
+  nyitva = false;
   elsokereses = true;
 
+  Dto = new Array<PenztarDto>();
+  DtoSelectedIndex = -1;
+
+  egymode = EgyMode.Reszletek;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -37,7 +43,6 @@ export class PenztarListComponent implements OnInit, OnDestroy {
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
-              private _penztartetelservice: PenztartetelService,
               penztarservice: PenztarService) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);
     this.penztarservice = penztarservice;
@@ -65,14 +70,14 @@ export class PenztarListComponent implements OnInit, OnDestroy {
         }
 
         if (this.elsokereses) {
-          this.penztarservice.Dto = res.Result;
+          this.Dto = res.Result;
           this.elsokereses = false;
         } else {
-          const buf = [...this.penztarservice.Dto];
+          const buf = [...this.Dto];
           res.Result.forEach(element => {
             buf.push(element);
           });
-          this.penztarservice.Dto = buf;
+          this.Dto = buf;
         }
 
         this.eppFrissit = false;
@@ -84,21 +89,54 @@ export class PenztarListComponent implements OnInit, OnDestroy {
   }
 
   onId(i: number) {
-    this.penztarservice.DtoSelectedIndex = i;
+    this.DtoSelectedIndex = i;
+    this.egymode = EgyMode.Reszletek;
 
-    this._penztartetelservice.Dto = new Array<PenztartetelDto>();
+    this.nyitva = this.DtoSelectedIndex === -1 ? false : this.Dto[this.DtoSelectedIndex].Nyitva;
   }
 
-  onUj() {
+  doNav(i: number) {
+    this.egymode = i;
+  }
+
+  doUjtetel() {
     this.tabla.ujtetelstart();
   }
-
-  onUjkesz() {
+  onUjtetelkesz(dto: PenztarDto) {
+    if (dto !== null) {
+      this.Dto.unshift(dto);
+    }
     this.tabla.ujtetelstop();
   }
+  onModositaskesz(dto: PenztarDto) {
+    if (dto !== null) {
+      propCopy(dto, this.Dto[this.DtoSelectedIndex]);
+    }
+    this.egymode = EgyMode.Reszletek;
+  }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
 
-  onTorlesutan() {
-    this.tabla.clearselections();
+      this.penztarservice.Delete(this.Dto[this.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
+
+          this.Dto.splice(this.DtoSelectedIndex, 1);
+          this.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.tabla.clearselections();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
   }
 
   ngOnDestroy() {

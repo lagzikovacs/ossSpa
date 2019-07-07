@@ -1,13 +1,11 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
-import {ZoomSources} from '../../enums/zoomsources';
 import {PenztarService} from '../penztar.service';
 import {PenztarSzerkesztesMode} from '../penztarszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
-import {propCopy} from '../../tools/propCopy';
 import {PenznemDto} from '../../primitiv/penznem/penznemdto';
 import {PenztarDto} from '../penztardto';
 
@@ -16,11 +14,12 @@ import {PenztarDto} from '../penztardto';
   templateUrl: './penztar-szerkesztes.component.html'
 })
 export class PenztarSzerkesztesComponent implements OnInit, OnDestroy {
-  penztarservice: PenztarService;
-
   @Input() uj = false;
   DtoEdited = new PenztarDto();
-  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
+  @Input() set DtoOriginal(value: PenztarDto) {
+    this.DtoEdited = deepCopy(value);
+  }
+  @Output() eventSzerkeszteskesz = new EventEmitter<PenztarDto>();
 
   SzerkesztesMode = PenztarSzerkesztesMode.Blank;
 
@@ -32,6 +31,8 @@ export class PenztarSzerkesztesComponent implements OnInit, OnDestroy {
     this._eppFrissit = value;
     this._spinnerservice.Run = value;
   }
+
+  penztarservice: PenztarService;
 
   constructor(private _penznemservice: PenznemService,
               private _errorservice: ErrorService,
@@ -56,8 +57,6 @@ export class PenztarSzerkesztesComponent implements OnInit, OnDestroy {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
-    } else {
-      this.DtoEdited = deepCopy(this.penztarservice.Dto[this.penztarservice.DtoSelectedIndex]);
     }
   }
 
@@ -88,22 +87,17 @@ export class PenztarSzerkesztesComponent implements OnInit, OnDestroy {
           throw res2.Error;
         }
 
-        if (this.uj) {
-          this.penztarservice.Dto.unshift(res2.Result[0]);
-        } else {
-          propCopy(res2.Result[0], this.penztarservice.Dto[this.penztarservice.DtoSelectedIndex]);
-        }
-
         this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit();
+        this.eventSzerkeszteskesz.emit(res2.Result[0]);
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
-  cancel() {
-    this.eventSzerkeszteskesz.emit();
+
+  onCancel() {
+    this.eventSzerkeszteskesz.emit(null);
   }
 
   PenznemZoom() {

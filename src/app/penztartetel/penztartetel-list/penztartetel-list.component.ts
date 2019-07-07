@@ -1,4 +1,4 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
 import {PenztarService} from '../../penztar/penztar.service';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
@@ -10,6 +10,7 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
 import {PenztartetelParameter} from '../penztartetelparameter';
+import {PenztartetelDto} from '../penztarteteldto';
 
 @Component({
   selector: 'app-penztartetel-list',
@@ -18,18 +19,22 @@ import {PenztartetelParameter} from '../penztartetelparameter';
 export class PenztartetelListComponent implements OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
+  @Input() Penztarkod = -1;
+  @Input() nyitva = false;
+
   szurok = ['Id', 'Pénztárbizonylatszám', 'Ügyfél', 'Bizonylatszám'];
   szempontok = [
     Szempont.Kod, Szempont.PenztarBizonylatszam, Szempont.Ugyfel, Szempont.Bizonylatszam
   ];
 
   jog = false;
-  nyitva = false;
   szempont = 0;
   minta = '';
   elsokereses = true;
   ptp = new PenztartetelParameter(0, environment.lapmeret);
   OsszesRekord = 0;
+
+  Dto = new Array<PenztartetelDto>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -40,25 +45,21 @@ export class PenztartetelListComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  penztarservice: PenztarService;
   penztartetelservice: PenztartetelService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
-              penztarservice: PenztarService,
               penztartetelservice: PenztartetelService) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);
-    this.penztarservice = penztarservice;
     this.penztartetelservice = penztartetelservice;
-    this.nyitva = this.penztarservice.Dto[this.penztarservice.DtoSelectedIndex].Nyitva;
   }
 
   onKereses() {
     this.elsokereses = true;
     this.ptp.rekordtol = 0;
     this.ptp.fi = new Array();
-    this.ptp.fi.push(new SzMT(Szempont.SzuloKod, this.penztarservice.Dto[this.penztarservice.DtoSelectedIndex].Penztarkod.toString()));
+    this.ptp.fi.push(new SzMT(Szempont.SzuloKod, this.Penztarkod.toString()));
     this.ptp.fi.push(new SzMT(this.szempontok[this.szempont], this.minta));
 
     this.tabla.clearselections();
@@ -75,14 +76,14 @@ export class PenztartetelListComponent implements OnDestroy {
         }
 
         if (this.elsokereses) {
-          this.penztartetelservice.Dto = res.Result;
+          this.Dto = res.Result;
           this.elsokereses = false;
         } else {
-          const buf = [...this.penztartetelservice.Dto];
+          const buf = [...this.Dto];
           res.Result.forEach(element => {
             buf.push(element);
           });
-          this.penztartetelservice.Dto = buf;
+          this.Dto = buf;
         }
         this.OsszesRekord = res.OsszesRekord;
 
@@ -95,6 +96,8 @@ export class PenztartetelListComponent implements OnDestroy {
       });
   }
 
+  // TODO a pénztárt is frissíteni az egyenleg miatt
+  // ReadById
   onUj() {
     this.tabla.ujtetelstart();
   }

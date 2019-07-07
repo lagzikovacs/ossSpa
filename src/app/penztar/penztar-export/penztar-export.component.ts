@@ -1,7 +1,6 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, Input, OnDestroy} from '@angular/core';
 import * as moment from 'moment';
 import * as FileSaver from 'file-saver';
-import {PenztarService} from '../penztar.service';
 import {b64toBlob} from '../../tools/b64toBlob';
 import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
@@ -14,7 +13,8 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   templateUrl: './penztar-export.component.html'
 })
 export class PenztarExportComponent implements OnDestroy {
-  riportservice: RiportService;
+  @Input() Penztarkod = -1;
+
   megszakitani = false;
 
   tol = '2018-01-01';
@@ -32,19 +32,20 @@ export class PenztarExportComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(riportservice: RiportService,
-              private _penztarservice: PenztarService,
-              private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService) {
+  riportservice: RiportService;
+
+  constructor(private _errorservice: ErrorService,
+              private _spinnerservice: SpinnerService,
+              riportservice: RiportService) {
     this.riportservice = riportservice;
   }
 
-  submit() {
+  onSubmit() {
     this.eppFrissit = true;
     this.megszakitani = false;
 
     const fi = [
-      new SzMT(Szempont.Null, this._penztarservice.Dto[this._penztarservice.DtoSelectedIndex].Penztarkod.toString()),
+      new SzMT(Szempont.Null, this.Penztarkod.toString()),
       new SzMT(Szempont.Null, moment(this.tol).toISOString(true)),
       new SzMT(Szempont.Null, moment(this.ig).toISOString(true))
     ];
@@ -63,6 +64,7 @@ export class PenztarExportComponent implements OnDestroy {
         this._errorservice.Error = err;
       });
   }
+
   ciklus() {
     this.riportservice.TaskCheck(this.tasktoken)
       .then(res => {
@@ -111,9 +113,10 @@ export class PenztarExportComponent implements OnDestroy {
     }
   }
 
-  megsem() {
+  onCancel() {
     this.megszakitani = true;
   }
+
   ngOnDestroy() {
     clearInterval(this.szamlalo);
 

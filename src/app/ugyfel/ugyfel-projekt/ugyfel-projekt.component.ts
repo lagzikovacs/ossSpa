@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {UgyfelService} from '../ugyfel.service';
 import {ProjektService} from '../../projekt/projekt.service';
 import {ProjektDto} from '../../projekt/projektdto';
@@ -14,6 +14,8 @@ import {ProjektParameter} from '../../projekt/projektparameter';
   templateUrl: './ugyfel-projekt.component.html'
 })
 export class UgyfelProjektComponent implements OnInit, OnDestroy {
+  @Input() Ugyfelkod = -1;
+
   pp = new ProjektParameter(0, environment.lapmeret);
   ProjektDto: ProjektDto[] = new Array<ProjektDto>();
 
@@ -37,8 +39,7 @@ export class UgyfelProjektComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.pp.fi = new Array<SzMT>();
-    this.pp.fi.push(
-      new SzMT(Szempont.UgyfelKod, this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex].Ugyfelkod.toString()));
+    this.pp.fi.push(new SzMT(Szempont.UgyfelKod, this.Ugyfelkod.toString()));
 
     this._projektservice.Select(this.pp)
       .then(res => {

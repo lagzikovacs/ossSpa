@@ -23,6 +23,9 @@ export class UgyfelterlogComponent implements OnDestroy {
   elsokereses = false;
   OsszesRekord = 0;
 
+  Dto = new Array<UgyfelterlogDto>();
+  DtoSelectedIndex = -1;
+
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -41,8 +44,8 @@ export class UgyfelterlogComponent implements OnDestroy {
   }
 
   onKereses() {
-    this.ugyfelterlogservice.Dto = new Array<UgyfelterlogDto>();
-    this.ugyfelterlogservice.DtoSelectedIndex = -1;
+    this.Dto = new Array<UgyfelterlogDto>();
+    this.DtoSelectedIndex = -1;
     this.OsszesRekord = 0;
 
     this.elsokereses = true;
@@ -53,6 +56,7 @@ export class UgyfelterlogComponent implements OnDestroy {
 
     this.onKeresesTovabb();
   }
+
   onKeresesTovabb() {
     this.eppFrissit = true;
     this.ugyfelterlogservice.Select(this.ulp)
@@ -62,14 +66,14 @@ export class UgyfelterlogComponent implements OnDestroy {
         }
 
         if (this.elsokereses) {
-          this.ugyfelterlogservice.Dto = res.Result;
+          this.Dto = res.Result;
           this.elsokereses = false;
         } else {
-          const buf = [...this.ugyfelterlogservice.Dto];
+          const buf = [...this.Dto];
           res.Result.forEach(element => {
             buf.push(element);
           });
-          this.ugyfelterlogservice.Dto = buf;
+          this.Dto = buf;
         }
         this.OsszesRekord = res.OsszesRekord;
 
@@ -81,6 +85,7 @@ export class UgyfelterlogComponent implements OnDestroy {
         this._errorservice.Error = err;
       });
   }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

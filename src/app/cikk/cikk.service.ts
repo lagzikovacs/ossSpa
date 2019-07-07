@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {LogonService} from '../logon/logon.service';
 import {CikkDto} from './cikkdto';
-import {ZoomSources} from '../enums/zoomsources';
 import {environment} from '../../environments/environment';
 import {CikkParameter} from './cikkparameter';
 import {CikkResult} from './cikkresult';
@@ -10,8 +9,6 @@ import {NumberResult} from '../dtos/numberresult';
 import {EmptyResult} from '../dtos/emptyresult';
 import {CikkMozgasResult} from './cikkmozgasresult';
 import {CikkMozgasParameter} from './cikkmozgasparameter';
-import {CikkMozgasTetelDto} from './cikkmozgasteteldto';
-import {CikkSzerkesztesMode} from './cikkszerkesztesmode';
 import {CikkZoomParameter} from './cikkzoomparameter';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
@@ -22,9 +19,6 @@ import {ColumnSettings} from '../tools/reszletek/columnsettings';
 export class CikkService {
   private readonly _controller = 'api/cikk/';
   cim = 'Cikk';
-
-  Dto: CikkDto[] = new Array<CikkDto>();
-  DtoSelectedIndex = -1;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

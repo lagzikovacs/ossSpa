@@ -1,16 +1,20 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {UgyfelterService} from '../ugyfelter.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import * as moment from 'moment';
 import {environment} from '../../../environments/environment';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 
 @Component({
   selector: 'app-ugyfel-ter-link',
   templateUrl: './ugyfel-ter-link.component.html'
 })
 export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
+  @Input() Dto = new UgyfelDto();
+  @Output() eventSzerkeszteskesz = new EventEmitter<UgyfelDto>();
+
   link = '';
   kikuldesikodidopontja: any;
 
@@ -29,9 +33,9 @@ export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
               private _errorservice: ErrorService) { }
 
   ngOnInit() {
-    if (this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex].Kikuldesikodidopontja !== null) {
+    if (this.Dto.Kikuldesikodidopontja !== null) {
       this.kikuldesidopontja();
-      this._ugyfelterservice.GetLink(this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex])
+      this._ugyfelterservice.GetLink(this.Dto)
         .then(res => {
           if (res.Error !== null) {
             throw res.Error;
@@ -50,29 +54,28 @@ export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
   }
 
   kikuldesidopontja() {
-    this.kikuldesikodidopontja =
-      moment(this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex].Kikuldesikodidopontja).format('YYYY-MM-DD HH:mm:ss');
+    this.kikuldesikodidopontja = moment(this.Dto.Kikuldesikodidopontja).format('YYYY-MM-DD HH:mm:ss');
   }
 
   ugyfelterlink() {
     this.eppFrissit = true;
-    this._ugyfelterservice.CreateNewLink(this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex])
+    this._ugyfelterservice.CreateNewLink(this.Dto)
       .then(res => {
         if (res.Error !== null) {
           throw res.Error;
         }
 
         this.link = environment.OSSRef + res.Result;
-        return this._ugyfelservice.Get(this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex].Ugyfelkod);
+        return this._ugyfelservice.Get(this.Dto.Ugyfelkod);
       })
       .then(res1 => {
         if (res1.Error !== null) {
           throw res1.Error;
         }
 
-        this._ugyfelservice.Dto[this._ugyfelservice.DtoSelectedIndex] = res1.Result[0];
         this.kikuldesidopontja();
         this.eppFrissit = false;
+        this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
         this.eppFrissit = false;

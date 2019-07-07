@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {UgyfelterlogDto} from './ugyfelterlogdto';
 import {environment} from '../../environments/environment';
 import {UgyfelterlogParameter} from './ugyfelterlogparameter';
 import {LogonService} from '../logon/logon.service';
@@ -13,9 +12,6 @@ import {ColumnSettings} from '../tools/reszletek/columnsettings';
 export class UgyfelterlogService {
   private readonly _controller = 'api/ugyfelterlog/';
   cim = 'Ügyféltér log';
-
-  Dto = new Array<UgyfelterlogDto>();
-  DtoSelectedIndex = -1;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

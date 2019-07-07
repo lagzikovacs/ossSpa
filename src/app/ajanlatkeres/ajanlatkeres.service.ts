@@ -5,8 +5,6 @@ import {AjanlatkeresResult} from './ajanlatkeresresult';
 import {environment} from '../../environments/environment';
 import {AjanlatkeresDto} from './ajanlatkeresdto';
 import {AjanlatkeresParameter} from './ajanlatkeresparameter';
-import {ProjektDto} from '../projekt/projektdto';
-import {ProjektParameter} from '../projekt/projektparameter';
 import {NumberResult} from '../dtos/numberresult';
 import {EmptyResult} from '../dtos/emptyresult';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
@@ -17,20 +15,7 @@ import {ColumnSettings} from '../tools/reszletek/columnsettings';
 })
 export class AjanlatkeresService {
   private readonly _controller = 'api/ajanlatkeres/';
-
   cim = 'Ajánlatkérés';
-  szempont = 0;
-  minta = '';
-  fp = new AjanlatkeresParameter(0, environment.lapmeret);
-  OsszesRekord = 0;
-  elsokereses = true;
-  Dto: AjanlatkeresDto[] = new Array<AjanlatkeresDto>();
-  DtoSelectedIndex = -1;
-  uj = false;
-  DtoEdited = new AjanlatkeresDto();
-
-  pp = new ProjektParameter(0, environment.lapmeret);
-  ProjektDto: ProjektDto[] = new Array<ProjektDto>();
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

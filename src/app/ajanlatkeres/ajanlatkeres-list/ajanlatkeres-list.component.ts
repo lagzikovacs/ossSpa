@@ -3,14 +3,18 @@ import {AjanlatkeresService} from '../ajanlatkeres.service';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import {AjanlatkeresDto} from '../ajanlatkeresdto';
-import {ProjektDto} from '../../projekt/projektdto';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
+import {environment} from '../../../environments/environment';
+import {AjanlatkeresParameter} from '../ajanlatkeresparameter';
+import {EgyMode} from '../../enums/egymode';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-ajanlatkeres-list',
-  templateUrl: './ajanlatkeres-list.component.html'
+  templateUrl: './ajanlatkeres-list.component.html',
+  animations: [rowanimation]
 })
 export class AjanlatkeresListComponent implements OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
@@ -20,8 +24,16 @@ export class AjanlatkeresListComponent implements OnDestroy {
     Szempont.Kod, Szempont.Ugynoknev, Szempont.Nev, Szempont.Cim, Szempont.Email,
     Szempont.Telefonszam
   ];
+  szempont = 0;
+  minta = '';
+  fp = new AjanlatkeresParameter(0, environment.lapmeret);
+  OsszesRekord = 0;
+  elsokereses = true;
 
-  ajanlatkeresservice: AjanlatkeresService;
+  Dto = new Array<AjanlatkeresDto>();
+  DtoSelectedIndex = -1;
+
+  egymode = EgyMode.Reszletek;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -32,6 +44,8 @@ export class AjanlatkeresListComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  ajanlatkeresservice: AjanlatkeresService;
+
   constructor(private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               ajanlatkeresservice: AjanlatkeresService) {
@@ -39,41 +53,41 @@ export class AjanlatkeresListComponent implements OnDestroy {
   }
 
   onKereses() {
-    this.ajanlatkeresservice.Dto = new Array<AjanlatkeresDto>();
-    this.ajanlatkeresservice.DtoSelectedIndex = -1;
-    this.ajanlatkeresservice.OsszesRekord = 0;
+    this.Dto = new Array<AjanlatkeresDto>();
+    this.DtoSelectedIndex = -1;
+    this.OsszesRekord = 0;
 
-    this.ajanlatkeresservice.elsokereses = true;
-    this.ajanlatkeresservice.fp.rekordtol = 0;
-    this.ajanlatkeresservice.fp.fi = new Array<SzMT>();
-
-    this.ajanlatkeresservice.fp.fi.push(new SzMT(this.szempontok[this.ajanlatkeresservice.szempont], this.ajanlatkeresservice.minta));
+    this.elsokereses = true;
+    this.fp.rekordtol = 0;
+    this.fp.fi = new Array<SzMT>();
+    this.fp.fi.push(new SzMT(this.szempontok[this.szempont], this.minta));
 
     this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
+
   onKeresesTovabb() {
     this.eppFrissit = true;
-    this.ajanlatkeresservice.Select(this.ajanlatkeresservice.fp)
+    this.ajanlatkeresservice.Select(this.fp)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        if (this.ajanlatkeresservice.elsokereses) {
-          this.ajanlatkeresservice.Dto = res.Result;
-          this.ajanlatkeresservice.elsokereses = false;
+        if (this.elsokereses) {
+          this.Dto = res.Result;
+          this.elsokereses = false;
         } else {
-          const buf = [...this.ajanlatkeresservice.Dto];
+          const buf = [...this.Dto];
           res.Result.forEach(element => {
             buf.push(element);
           });
-          this.ajanlatkeresservice.Dto = buf;
+          this.Dto = buf;
         }
-        this.ajanlatkeresservice.OsszesRekord = res.OsszesRekord;
+        this.OsszesRekord = res.OsszesRekord;
 
-        this.ajanlatkeresservice.fp.rekordtol += this.ajanlatkeresservice.fp.lapmeret;
+        this.fp.rekordtol += this.fp.lapmeret;
         this.eppFrissit = false;
       })
       .catch(err => {
@@ -81,10 +95,16 @@ export class AjanlatkeresListComponent implements OnDestroy {
         this._errorservice.Error = err;
       });
   }
-  setClickedRow(i: number) {
-    this.ajanlatkeresservice.ProjektDto = new Array<ProjektDto>();
-    this.ajanlatkeresservice.DtoSelectedIndex = i;
+
+  onId(i: number) {
+    this.DtoSelectedIndex = i;
+    this.egymode = EgyMode.Reszletek;
   }
+
+  doNav(i: number) {
+    this.egymode = i;
+  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

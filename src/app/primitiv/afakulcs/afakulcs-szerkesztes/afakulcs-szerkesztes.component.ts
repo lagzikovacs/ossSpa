@@ -4,7 +4,6 @@ import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {deepCopy} from '../../../tools/deepCopy';
-import {propCopy} from '../../../tools/propCopy';
 import {AfakulcsDto} from '../afakulcsdto';
 
 @Component({

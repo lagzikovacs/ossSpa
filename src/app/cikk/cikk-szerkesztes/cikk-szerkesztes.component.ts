@@ -25,7 +25,10 @@ import {CikkDto} from '../cikkdto';
 export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
   @Input() uj = false;
   DtoEdited = new CikkDto();
-  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
+  @Input() set DtoOriginal(value: CikkDto) {
+    this.DtoEdited = deepCopy(value);
+  }
+  @Output() eventSzerkeszteskesz = new EventEmitter<CikkDto>();
 
   SzerkesztesMode = CikkSzerkesztesMode.Blank;
 
@@ -65,8 +68,6 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
-    } else {
-      this.DtoEdited = deepCopy(this.cikkservice.Dto[this.cikkservice.DtoSelectedIndex]);
     }
   }
 
@@ -120,14 +121,9 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
         if (res4.Error !== null) {
           throw res4.Error;
         }
-        if (this.uj) {
-          this.cikkservice.Dto.unshift(res4.Result[0]);
-        } else {
-          propCopy(res4.Result[0], this.cikkservice.Dto[this.cikkservice.DtoSelectedIndex]);
-        }
 
         this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit();
+        this.eventSzerkeszteskesz.emit(res4.Result[0]);
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -136,7 +132,7 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit();
+    this.eventSzerkeszteskesz.emit(null);
   }
 
   MeZoom() {

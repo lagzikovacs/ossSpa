@@ -3,7 +3,6 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {UgyfelService} from '../ugyfel.service';
 import {deepCopy} from '../../tools/deepCopy';
-import {propCopy} from '../../tools/propCopy';
 import {UgyfelDto} from '../ugyfeldto';
 
 @Component({
@@ -12,12 +11,13 @@ import {UgyfelDto} from '../ugyfeldto';
 })
 export class UgyfelCsoportComponent implements OnInit, OnDestroy {
   DtoEdited = new UgyfelDto();
-  ugyfelservice: UgyfelService;
-  selected = 0;
+  @Input() set DtoOriginal(value: UgyfelDto) {
+    this.DtoEdited = deepCopy(value);
+  }
+  @Output() eventSzerkeszteskesz = new EventEmitter<UgyfelDto>();
 
   entries = ['(0) Mind', '(1) Kiemelt'];
-
-  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
+  selected = 0;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -28,14 +28,15 @@ export class UgyfelCsoportComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(ugyfelservice: UgyfelService,
-              private _spinnerservice: SpinnerService,
-              private _errorservice: ErrorService) {
+  ugyfelservice: UgyfelService;
+
+  constructor(private _spinnerservice: SpinnerService,
+              private _errorservice: ErrorService,
+              ugyfelservice: UgyfelService) {
     this.ugyfelservice = ugyfelservice;
   }
 
   ngOnInit() {
-    this.DtoEdited = deepCopy(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
     this.selected = this.DtoEdited.Csoport;
   }
 
@@ -59,10 +60,8 @@ export class UgyfelCsoportComponent implements OnInit, OnDestroy {
           throw res2.Error;
         }
 
-        propCopy(res2.Result[0], this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
-
         this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit();
+        this.eventSzerkeszteskesz.emit(res2.Result[0]);
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -71,7 +70,7 @@ export class UgyfelCsoportComponent implements OnInit, OnDestroy {
   }
 
   cancelClick() {
-    this.eventSzerkeszteskesz.emit();
+    this.eventSzerkeszteskesz.emit(null);
   }
 
   ngOnDestroy() {

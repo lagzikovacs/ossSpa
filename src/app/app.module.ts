@@ -58,7 +58,6 @@ import { CsoportFelhasznaloComponent } from './csoport/csoport-felhasznalo/csopo
 import { CsoportJogComponent } from './csoport/csoport-jog/csoport-jog.component';
 import { VolumeTesztComponent } from './volume/volume-teszt/volume-teszt.component';
 import { AjanlatkeresListComponent } from './ajanlatkeres/ajanlatkeres-list/ajanlatkeres-list.component';
-import { FeliratkozasEgyComponent } from './ajanlatkeres/ajanlatkeres-egy/ajanlatkeres-egy.component';
 import { AjanlatkeresProjektComponent } from './ajanlatkeres/ajanlatkeres-projekt/ajanlatkeres-projekt.component';
 import { ProjektTablaComponent } from './projekt/projekttabla/projekt-tabla.component';
 import { RiportComponent } from './riport/riport.component';
@@ -82,7 +81,6 @@ import { CikkListComponent } from './cikk/cikk-list/cikk-list.component';
 import { MeListComponent } from './primitiv/me/me-list/me-list.component';
 import { AfakulcsListComponent } from './primitiv/afakulcs/afakulcs-list/afakulcs-list.component';
 import { TermekdijListComponent } from './primitiv/termekdij/termekdij-list/termekdij-list.component';
-import { CikkEgyComponent } from './cikk/cikk-egy/cikk-egy.component';
 import { TermekdijSzerkesztesComponent } from './primitiv/termekdij/termekdij-szerkesztes/termekdij-szerkesztes.component';
 import { AfakulcsSzerkesztesComponent } from './primitiv/afakulcs/afakulcs-szerkesztes/afakulcs-szerkesztes.component';
 import { MeSzerkesztesComponent } from './primitiv/me/me-szerkesztes/me-szerkesztes.component';
@@ -122,7 +120,6 @@ import { AjanlatComponent } from './ajanlat/ajanlat/ajanlat';
 import { VolumeListComponent } from './volume/volume-list/volume-list.component';
 import { ParticioEgyComponent } from './particio/particio-egy/particio-egy.component';
 import { HelysegListComponent } from './primitiv/helyseg/helyseg-list/helyseg-list.component';
-import {UgyfelEgyComponent} from './ugyfel/ugyfel-egy/ugyfel-egy.component';
 import {PenztartetelListComponent} from './penztartetel/penztartetel-list/penztartetel-list.component';
 import {PenztarExportComponent} from './penztar/penztar-export/penztar-export.component';
 import {PenztarSzerkesztesComponent} from './penztar/penztar-szerkesztes/penztar-szerkesztes.component';
@@ -312,7 +309,6 @@ if (environment.production) {
     CsoportJogComponent,
     VolumeTesztComponent,
     AjanlatkeresListComponent,
-    FeliratkozasEgyComponent,
     AjanlatkeresProjektComponent,
     ProjektTablaComponent,
     RiportComponent,
@@ -336,7 +332,6 @@ if (environment.production) {
     MeListComponent,
     AfakulcsListComponent,
     TermekdijListComponent,
-    CikkEgyComponent,
     TermekdijSzerkesztesComponent,
     AfakulcsSzerkesztesComponent,
     MeSzerkesztesComponent,
@@ -365,7 +360,6 @@ if (environment.production) {
     ParticioEgyComponent,
     HelysegListComponent,
     UgyfelListComponent,
-    UgyfelEgyComponent,
     ProjektkapcsolatContainerComponent,
     ProjektkapcsolatLevalasztasComponent,
     ProjektExportComponent,

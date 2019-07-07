@@ -1,19 +1,22 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AjanlatkeresService} from '../ajanlatkeres.service';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import {ProjektService} from '../../projekt/projekt.service';
 import {ProjektDto} from '../../projekt/projektdto';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {environment} from '../../../environments/environment';
+import {ProjektParameter} from '../../projekt/projektparameter';
 
 @Component({
   selector: 'app-ajanlatkeres-projekt',
   templateUrl: './ajanlatkeres-projekt.component.html'
 })
 export class AjanlatkeresProjektComponent implements OnInit, OnDestroy {
-  ajanlatkeresservice: AjanlatkeresService;
-  projektservice: ProjektService;
+  @Input() Email = '';
+
+  pp = new ProjektParameter(0, environment.lapmeret);
+  ProjektDto = new Array<ProjektDto>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -24,30 +27,29 @@ export class AjanlatkeresProjektComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  projektservice: ProjektService;
+
   constructor(private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
-              ajanlatkeresservice: AjanlatkeresService,
               projektservice: ProjektService) {
-    this.ajanlatkeresservice = ajanlatkeresservice;
     this.projektservice = projektservice;
   }
 
   ngOnInit() {
-    this.ajanlatkeresservice.ProjektDto = new Array<ProjektDto>();
+    this.ProjektDto = new Array<ProjektDto>();
 
-    this.ajanlatkeresservice.pp.fi = new Array<SzMT>();
-    this.ajanlatkeresservice.pp.fi.push(
-      new SzMT(Szempont.UgyfelEmail, this.ajanlatkeresservice.Dto[this.ajanlatkeresservice.DtoSelectedIndex].Email));
+    this.pp.fi = new Array<SzMT>();
+    this.pp.fi.push(
+      new SzMT(Szempont.UgyfelEmail, this.Email));
 
     this.eppFrissit = true;
-    this.projektservice.Select(this.ajanlatkeresservice.pp)
+    this.projektservice.Select(this.pp)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        this.ajanlatkeresservice.ProjektDto = res.Result;
-
+        this.ProjektDto = res.Result;
         this.eppFrissit = false;
       })
       .catch(err => {

@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {UgyfelService} from '../ugyfel.service';
 import {HelysegService} from '../../primitiv/helyseg/helyseg.service';
-import {ZoomSources} from '../../enums/zoomsources';
 import {HelysegZoomParameter} from '../../primitiv/helyseg/helysegzoomparameter';
 import {UgyfelSzerkesztesMode} from '../ugyfelszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
@@ -18,7 +17,10 @@ import {UgyfelDto} from '../ugyfeldto';
 export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
   @Input() uj = false;
   DtoEdited = new UgyfelDto();
-  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
+  @Input() set DtoOriginal(value: UgyfelDto) {
+    this.DtoEdited = deepCopy(value);
+  }
+  @Output() eventSzerkeszteskesz = new EventEmitter<UgyfelDto>();
 
   SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
 
@@ -56,8 +58,6 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
-    } else {
-      this.DtoEdited = deepCopy(this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
     }
   }
 
@@ -88,22 +88,17 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
           throw res2.Error;
         }
 
-        if (this.uj) {
-          this.ugyfelservice.Dto.unshift(res2.Result[0]);
-        } else {
-          propCopy(res2.Result[0], this.ugyfelservice.Dto[this.ugyfelservice.DtoSelectedIndex]);
-        }
-
         this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit();
+        this.eventSzerkeszteskesz.emit(res2.Result[0]);
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
+
   onCancel() {
-    this.eventSzerkeszteskesz.emit();
+    this.eventSzerkeszteskesz.emit(null);
   }
 
   HelysegZoom() {

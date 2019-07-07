@@ -5,21 +5,20 @@ import {CikkDto} from '../cikkdto';
 import {SzMT} from '../../dtos/szmt';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
-import {ZoomSources} from '../../enums/zoomsources';
-import {AjanlatSzerkesztesMode} from '../../ajanlat/ajanlatszerkesztesmode';
-import {BizonylatService} from '../../bizonylat/bizonylat.service';
-import {BizonylattetelSzerkesztesMode} from '../../bizonylat/bizonylattetelszerkesztesmode';
-import {AjanlatService} from '../../ajanlat/ajanlat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
 import {CikkParameter} from '../cikkparameter';
 import {deepCopy} from '../../tools/deepCopy';
+import {EgyMode} from '../../enums/egymode';
+import {propCopy} from '../../tools/propCopy';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-cikk-list',
-  templateUrl: './cikk-list.component.html'
+  templateUrl: './cikk-list.component.html',
+  animations: [rowanimation]
 })
 export class CikkListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
@@ -35,6 +34,11 @@ export class CikkListComponent implements OnInit, OnDestroy {
   osszesrekord = 0;
   jog = false;
   zoom = false;
+
+  Dto = new Array<CikkDto>();
+  DtoSelectedIndex = -1;
+
+  egymode = EgyMode.Reszletek;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -74,8 +78,6 @@ export class CikkListComponent implements OnInit, OnDestroy {
   cikkservice: CikkService;
 
   constructor(private _logonservice: LogonService,
-              private _bizonylatservice: BizonylatService,
-              private _ajanlatservice: AjanlatService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               cikkservice: CikkService  ) {
@@ -90,14 +92,13 @@ export class CikkListComponent implements OnInit, OnDestroy {
   }
 
   onKereses() {
-    this.cikkservice.Dto = new Array<CikkDto>();
-    this.cikkservice.DtoSelectedIndex = -1;
+    this.Dto = new Array<CikkDto>();
+    this.DtoSelectedIndex = -1;
     this.osszesrekord = 0;
 
     this.elsokereses = true;
     this.up.rekordtol = 0;
     this.up.fi = new Array<SzMT>();
-
     this.up.fi.push(new SzMT(this.szempontok[this.szempont], this.minta));
 
     this.tabla.clearselections();
@@ -113,14 +114,14 @@ export class CikkListComponent implements OnInit, OnDestroy {
         }
 
         if (this.elsokereses) {
-          this.cikkservice.Dto = res.Result;
+          this.Dto = res.Result;
           this.elsokereses = false;
         } else {
-          const buf = [...this.cikkservice.Dto];
+          const buf = [...this.Dto];
           res.Result.forEach(element => {
             buf.push(element);
           });
-          this.cikkservice.Dto = buf;
+          this.Dto = buf;
         }
         this.osszesrekord = res.OsszesRekord;
 
@@ -137,8 +138,57 @@ export class CikkListComponent implements OnInit, OnDestroy {
       });
   }
 
+  onId(i: number) {
+    this.DtoSelectedIndex = i;
+    this.egymode = EgyMode.Reszletek;
+  }
+
+  doNav(i: number) {
+    this.egymode = i;
+  }
+
+  doUjtetel() {
+    this.tabla.ujtetelstart();
+  }
+  onUjtetelkesz(dto: CikkDto) {
+    if (dto !== null) {
+      this.Dto.unshift(dto);
+    }
+    this.tabla.ujtetelstop();
+  }
+  onModositaskesz(dto: CikkDto) {
+    if (dto !== null) {
+      propCopy(dto, this.Dto[this.DtoSelectedIndex]);
+    }
+    this.egymode = EgyMode.Reszletek;
+  }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
+
+      this.cikkservice.Delete(this.Dto[this.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
+
+          this.Dto.splice(this.DtoSelectedIndex, 1);
+          this.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.tabla.clearselections();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
+  }
+
   onStartzoom(i: number) {
-    this.eventSelectzoom.emit(deepCopy(this.cikkservice.Dto[i]));
+    this.eventSelectzoom.emit(deepCopy(this.Dto[i]));
 
     this.onStopzoom();
   }
@@ -146,22 +196,6 @@ export class CikkListComponent implements OnInit, OnDestroy {
     this.zoom = false;
 
     this.eventStopzoom.emit();
-  }
-
-  onId(i: number) {
-    this.cikkservice.DtoSelectedIndex = i;
-  }
-
-  onUj() {
-    this.tabla.ujtetelstart();
-  }
-
-  onUjkesz() {
-    this.tabla.ujtetelstop();
-  }
-
-  onTorlesutan() {
-    this.tabla.clearselections();
   }
 
   ngOnDestroy() {

@@ -4,38 +4,12 @@ import {environment} from '../../environments/environment';
 import {LogonService} from '../logon/logon.service';
 import {AngularmenuResult} from './angularmenuresult';
 import {Router} from '@angular/router';
-import {IrattipusService} from '../primitiv/irattipus/irattipus.service';
-import {IrattipusDto} from '../primitiv/irattipus/irattipusdto';
-import {HelysegService} from '../primitiv/helyseg/helyseg.service';
-import {HelysegDto} from '../primitiv/helyseg/helysegdto';
-import {UgyfelService} from '../ugyfel/ugyfel.service';
-import {UgyfelDto} from '../ugyfel/ugyfeldto';
-import {FelhasznaloDto} from '../primitiv/felhasznalo/felhasznalodto';
-import {FelhasznaloService} from '../primitiv/felhasznalo/felhasznalo.service';
-import {CsoportService} from '../csoport/csoport.service';
-import {VolumeService} from '../volume/volume.service';
-import {VolumeDto} from '../volume/volumedto';
-import {CsoportDto} from '../csoport/csoportdto';
 import {ProjektService} from '../projekt/projekt.service';
 import {IratService} from '../irat/irat.service';
 import {AjanlatkeresService} from '../ajanlatkeres/ajanlatkeres.service';
 import {IratDto} from '../irat/iratdto';
 import {ProjektDto} from '../projekt/projektdto';
 import {AjanlatkeresDto} from '../ajanlatkeres/ajanlatkeresdto';
-import {TeendoService} from '../primitiv/teendo/teendo.service';
-import {TeendoDto} from '../primitiv/teendo/teendodto';
-import {FizetesimodService} from '../primitiv/fizetesimod/fizetesimod.service';
-import {PenznemService} from '../primitiv/penznem/penznem.service';
-import {FizetesimodDto} from '../primitiv/fizetesimod/fizetesimoddto';
-import {PenznemDto} from '../primitiv/penznem/penznemdto';
-import {MeService} from '../primitiv/me/me.service';
-import {AfakulcsService} from '../primitiv/afakulcs/afakulcs.service';
-import {TermekdijService} from '../primitiv/termekdij/termekdij.service';
-import {CikkService} from '../cikk/cikk.service';
-import {MeDto} from '../primitiv/me/medto';
-import {AfakulcsDto} from '../primitiv/afakulcs/afakulcsdto';
-import {TermekdijDto} from '../primitiv/termekdij/termekdijdto';
-import {CikkDto} from '../cikk/cikkdto';
 import {PenztarDto} from '../penztar/penztardto';
 import {PenztarService} from '../penztar/penztar.service';
 import {ProjektkapcsolatService} from '../projektkapcsolat/projektkapcsolat.service';
@@ -66,8 +40,6 @@ export class MenuService {
               private _location: PlatformLocation,
               private _httpClient: HttpClient,
               private _logonservice: LogonService,
-              private _cikkservice: CikkService,
-              private _ugyfelservice: UgyfelService,
               private _projektservice: ProjektService,
               private _projektkapcsolatservice: ProjektkapcsolatService,
               private _szamlazasirendservice: SzamlazasirendService,
@@ -113,12 +85,10 @@ export class MenuService {
       case '/termekdij':
         break;
       case '/cikk':
-        this._cikkservice.Dto = new Array<CikkDto>();
         break;
       case '/helyseg':
         break;
       case '/ugyfel':
-        this._ugyfelservice.Dto = new Array<UgyfelDto>();
       break;
 
       case '/projekt':
@@ -140,7 +110,6 @@ export class MenuService {
         this._penztarservice.Dto = new Array<PenztarDto>();
         break;
       case '/ajanlatkeres':
-        this._ugynokservice.Dto = new Array<AjanlatkeresDto>();
       break;
 
 

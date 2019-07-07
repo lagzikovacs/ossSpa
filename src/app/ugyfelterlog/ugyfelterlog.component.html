@@ -8,13 +8,13 @@
   </app-toolbar>
 
   <app-tabla #tabla
-             [items]="ugyfelterlogservice.Dto"
+             [items]="Dto"
              [colsets]="ugyfelterlogservice.GridSettings"
              [enIdclick]="false">
   </app-tabla>
 
   <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
-                     [rekordszam]="ugyfelterlogservice.Dto.length"
+                     [rekordszam]="Dto.length"
                      [osszesrekord]="OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">
   </app-toolbarfooter>

@@ -35,4 +35,7 @@ export enum EgyMode {
   Szamlazasirend = 25,
   Teendo = 26,
   Datumok = 27,
+
+  BeszerzesMozgas = 28,
+  KivetMozgas = 29,
 }

@@ -5,13 +5,9 @@ import {UgyfelDto} from './ugyfeldto';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {LogonService} from '../logon/logon.service';
 import {UgyfelResult} from './ugyfelresult';
-import {ZoomSources} from '../enums/zoomsources';
 import {NumberResult} from '../dtos/numberresult';
 import {EmptyResult} from '../dtos/emptyresult';
-import {UgyfelSzerkesztesMode} from './ugyfelszerkesztesmode';
 import {UgyfelZoomParameter} from './ugyfelzoomparameter';
-import {ProjektDto} from '../projekt/projektdto';
-import {ProjektParameter} from '../projekt/projektparameter';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 
@@ -21,11 +17,6 @@ import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 export class UgyfelService {
   private readonly _controller = 'api/ugyfel/';
   cim = 'Ügyfél';
-
-  Dto: UgyfelDto[] = new Array<UgyfelDto>();
-  DtoSelectedIndex = -1;
-
-
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

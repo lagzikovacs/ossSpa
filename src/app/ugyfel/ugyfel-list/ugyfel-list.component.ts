@@ -5,25 +5,21 @@ import {UgyfelDto} from '../ugyfeldto';
 import {SzMT} from '../../dtos/szmt';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
-import {ZoomSources} from '../../enums/zoomsources';
-import {IratService} from '../../irat/irat.service';
-import {ProjektService} from '../../projekt/projekt.service';
-import {ProjektSzerkesztesMode} from '../../projekt/projektszerkesztesmode';
-import {IratSzerkesztesMode} from '../../irat/iratszerkesztesmode';
-import {BizonylatService} from '../../bizonylat/bizonylat.service';
-import {BizonylatSzerkesztesMode} from '../../bizonylat/bizonylatszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {UgyfelTablaComponent} from '../ugyfel-tabla/ugyfel-tabla.component';
 import {environment} from '../../../environments/environment';
 import {UgyfelParameter} from '../ugyfelparameter';
 import {deepCopy} from '../../tools/deepCopy';
+import {EgyMode} from '../../enums/egymode';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-ugyfel-list',
-  templateUrl: './ugyfel-list.component.html'
-})
-export class UgyfelListComponent implements OnInit, OnDestroy {
+  templateUrl: './ugyfel-list.component.html',
+  animations: [rowanimation]
+  })
+  export class UgyfelListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: UgyfelTablaComponent;
 
   csoportszempont = 0;
@@ -40,6 +36,11 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
   osszesrekord = 0;
   jog = false;
   zoom = false;
+
+  Dto = new Array<UgyfelDto>();
+  DtoSelectedIndex = -1;
+
+  egymode = EgyMode.Reszletek;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -80,9 +81,6 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
   ugyfelservice: UgyfelService;
 
   constructor(private _logonservice: LogonService,
-              private _iratservice: IratService,
-              private _projektservice: ProjektService,
-              private _bizonylatservice: BizonylatService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               ugyfelservice: UgyfelService  ) {
@@ -97,8 +95,8 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
   }
 
   onKereses() {
-    this.ugyfelservice.Dto = new Array<UgyfelDto>();
-    this.ugyfelservice.DtoSelectedIndex = -1;
+    this.Dto = new Array<UgyfelDto>();
+    this.DtoSelectedIndex = -1;
     this.osszesrekord = 0;
 
     this.elsokereses = true;
@@ -120,14 +118,14 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
         }
 
         if (this.elsokereses) {
-          this.ugyfelservice.Dto = res.Result;
+          this.Dto = res.Result;
           this.elsokereses = false;
         } else {
-          const buf = [...this.ugyfelservice.Dto];
+          const buf = [...this.Dto];
           res.Result.forEach(element => {
             buf.push(element);
           });
-          this.ugyfelservice.Dto = buf;
+          this.Dto = buf;
         }
         this.osszesrekord = res.OsszesRekord;
 
@@ -144,20 +142,16 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
       });
   }
 
-  onStartzoom(i: number) {
-    this.eventSelectzoom.emit(deepCopy(this.ugyfelservice.Dto[i]));
-
-    this.onStopzoom();
-  }
-  onStopzoom() {
-    this.zoom = false;
-
-    this.eventStopzoom.emit();
-  }
-
   onId(i: number) {
-    this.ugyfelservice.DtoSelectedIndex = i;
+    this.DtoSelectedIndex = i;
+    this.egymode = EgyMode.Reszletek;
   }
+
+  doNav(i: number) {
+    this.egymode = i;
+  }
+
+
 
   onUj() {
     this.tabla.ujtetelstart();
@@ -171,9 +165,27 @@ export class UgyfelListComponent implements OnInit, OnDestroy {
     this.tabla.clearselections();
   }
 
+
+
+
+  onStartzoom(i: number) {
+    this.eventSelectzoom.emit(deepCopy(this.Dto[i]));
+
+    this.onStopzoom();
+  }
+  onStopzoom() {
+    this.zoom = false;
+
+    this.eventStopzoom.emit();
+  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;
     });
   }
+
+
+
+
 }

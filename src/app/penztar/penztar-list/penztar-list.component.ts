@@ -10,10 +10,12 @@ import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
 import {PenztarDto} from '../penztardto';
 import {EgyMode} from '../../enums/egymode';
 import {propCopy} from '../../tools/propCopy';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-penztar-list',
-  templateUrl: './penztar-list.component.html'
+  templateUrl: './penztar-list.component.html',
+  animations: [rowanimation]
 })
 export class PenztarListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
@@ -137,6 +139,23 @@ export class PenztarListComponent implements OnInit, OnDestroy {
     } else {
       this.egymode = EgyMode.Reszletek;
     }
+  }
+
+  onReread() {
+    this.eppFrissit = true;
+    this.penztarservice.ReadById(this.Dto[this.DtoSelectedIndex].Penztarkod)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        propCopy(res.Result[0], this.Dto[this.DtoSelectedIndex]);
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this._errorservice.Error = err;
+      });
   }
 
   ngOnDestroy() {

@@ -4,7 +4,7 @@
                [(szempont)]="ekDto.szempont"
                [(minta)]="ekDto.minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit && jog" (Uj)="onUj()">
+               [enUj]="!eppFrissit && jog" (Uj)="doUjtetel()">
   </app-toolbar>
   <app-tabla #tabla
              [items]="Dto"
@@ -73,7 +73,9 @@
 
       <ng-container *ngIf="egymode === 13">
         <div [@rowanimation]>
-          <app-penztartetel-list [Penztarkod]="Dto[DtoSelectedIndex].Penztarkod">
+          <app-penztartetel-list [Penztarkod]="Dto[DtoSelectedIndex].Penztarkod"
+                                 [nyitva]="Dto[DtoSelectedIndex].Nyitva"
+                                 (eventFrissits)="onReread()">
           </app-penztartetel-list>
         </div>
       </ng-container>

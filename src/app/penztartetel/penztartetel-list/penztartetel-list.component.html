@@ -4,7 +4,7 @@
                [(szempont)]="szempont"
                [(minta)]="minta"
                [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!eppFrissit && jog && nyitva" (Uj)="onUj()">
+               [enUj]="!eppFrissit && jog && nyitva" (Uj)="doUjtetel()">
   </app-toolbar>
   <app-tabla #tabla
              [items]="Dto"
@@ -13,7 +13,8 @@
   </app-tabla>
 
   <ng-template #griduj>
-    <app-penztartetel-szerkesztes (eventSzerkeszteskesz)="onUjkesz()">
+    <app-penztartetel-szerkesztes [Penztarkod]="Penztarkod"
+                                  (eventSzerkeszteskesz)="onUjtetelkesz($event)">
     </app-penztartetel-szerkesztes>
   </ng-template>
 

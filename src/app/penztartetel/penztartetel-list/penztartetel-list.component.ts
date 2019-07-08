@@ -1,5 +1,4 @@
-import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
-import {PenztarService} from '../../penztar/penztar.service';
+import {Component, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {PenztartetelService} from '../penztartetel.service';
@@ -21,6 +20,7 @@ export class PenztartetelListComponent implements OnDestroy {
 
   @Input() Penztarkod = -1;
   @Input() nyitva = false;
+  @Output() eventFrissits = new EventEmitter();
 
   szurok = ['Id', 'Pénztárbizonylatszám', 'Ügyfél', 'Bizonylatszám'];
   szempontok = [
@@ -96,13 +96,15 @@ export class PenztartetelListComponent implements OnDestroy {
       });
   }
 
-  // TODO a pénztárt is frissíteni az egyenleg miatt
-  // ReadById
-  onUj() {
+
+  doUjtetel() {
     this.tabla.ujtetelstart();
   }
-
-  onUjkesz() {
+  onUjtetelkesz(dto: PenztartetelDto) {
+    if (dto !== null) {
+      this.Dto.unshift(dto);
+      this.eventFrissits.emit();
+    }
     this.tabla.ujtetelstop();
   }
 

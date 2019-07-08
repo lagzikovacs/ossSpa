@@ -22,9 +22,6 @@ export class DokumentumService {
   private readonly _controller = 'api/dokumentum/';
   cim = 'Dokumentum';
 
-  Dto: DokumentumDto[] = new Array<DokumentumDto>();
-  DtoSelectedIndex = -1;
-
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;
 
@@ -96,30 +93,28 @@ export class DokumentumService {
     return this._httpClient.post<LetoltesPDFResult>(url, body, options).toPromise();
   }
 
-  public Kimentes(): Promise<EmptyResult> {
-    return this.Letoltes(new LetoltesParam(
-      this.Dto[this.DtoSelectedIndex].Dokumentumkod,
-      this.Dto[this.DtoSelectedIndex].Meret))
+  public Kimentes(Dto: DokumentumDto): Promise<EmptyResult> {
+    return this.Letoltes(new LetoltesParam(Dto.Dokumentumkod, Dto.Meret))
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
         const blob = b64toBlob(res.Result.b);
-        FileSaver.saveAs(blob, this.Dto[this.DtoSelectedIndex].Megjegyzes + this.Dto[this.DtoSelectedIndex].Ext);
+        FileSaver.saveAs(blob, Dto.Megjegyzes + Dto.Ext);
 
         return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
       });
   }
-  public KimentesPDF(): Promise<EmptyResult> {
-    return this.LetoltesPDF(this.Dto[this.DtoSelectedIndex].Dokumentumkod)
+  public KimentesPDF(Dto: DokumentumDto): Promise<EmptyResult> {
+    return this.LetoltesPDF(Dto.Dokumentumkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
         const blob = b64toBlob(res.Result);
-        FileSaver.saveAs(blob, this.Dto[this.DtoSelectedIndex].Megjegyzes + '.pdf');
+        FileSaver.saveAs(blob, Dto.Megjegyzes + '.pdf');
 
         return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
       });

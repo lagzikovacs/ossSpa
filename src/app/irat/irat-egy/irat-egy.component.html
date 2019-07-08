@@ -58,7 +58,8 @@
 
   <ng-container *ngIf="egymode === 15">
     <div [@rowanimation]>
-      <app-dokumentum-list></app-dokumentum-list>
+      <app-dokumentum-list [Iratkod]="iratservice.Dto[iratservice.DtoSelectedIndex].Iratkod">
+      </app-dokumentum-list>
     </div>
   </ng-container>
 

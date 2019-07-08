@@ -44,7 +44,6 @@ import {IratToolbarComponent} from './irat/irattolbar/irattoolbar.component';
 import { DokumentumListComponent } from './dokumentum/dokumentum-list/dokumentum-list.component';
 import {IratService} from './irat/irat.service';
 import {DokumentumService} from './dokumentum/dokumentum.service';
-import { DokumentumEgyComponent } from './dokumentum/dokumentum-egy/dokumentum-egy.component';
 import { IratSzerkesztesComponent } from './irat/irat-szerkesztes/irat-szerkesztes.component';
 import { DokumentumFeltoltesComponent } from './dokumentum/dokumentum-feltoltes/dokumentum-feltoltes.component';
 import { IrattipusListComponent } from './primitiv/irattipus/irattipus-list/irattipus-list.component';
@@ -295,7 +294,6 @@ if (environment.production) {
     IratEgyComponent,
     IratToolbarComponent,
     DokumentumListComponent,
-    DokumentumEgyComponent,
     IratSzerkesztesComponent,
     DokumentumFeltoltesComponent,
     IrattipusListComponent,

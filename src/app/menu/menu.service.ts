@@ -15,8 +15,6 @@ import {ProjektteendoService} from '../projektteendo/projektteendo.service';
 import {SzamlazasirendDto} from '../szamlazasirend/szamlazasirenddto';
 import {ProjektteendoDto} from '../projektteendo/projektteendodto';
 import {PlatformLocation} from '@angular/common';
-import {DokumentumService} from '../dokumentum/dokumentum.service';
-import {DokumentumDto} from '../dokumentum/dokumentumdto';
 import {BizonylatService} from '../bizonylat/bizonylat.service';
 import {BizonylatTipus} from '../bizonylat/bizonylattipus';
 import {BizonylatDto} from '../bizonylat/bizonylatdto';
@@ -39,7 +37,6 @@ export class MenuService {
               private _szamlazasirendservice: SzamlazasirendService,
               private _projektteendoservice: ProjektteendoService,
               private _iratservice: IratService,
-              private _dokumentumservice: DokumentumService,
               private _bizonylatservice: BizonylatService,
               private _vagolapservice: VagolapService) {
     _location.onPopState(() => {
@@ -95,7 +92,6 @@ export class MenuService {
       break;
       case '/irat':
         this._iratservice.Dto = new Array<IratDto>();
-        this._dokumentumservice.Dto = new Array<DokumentumDto>();
       break;
       case '/penztar':
         break;

@@ -1,9 +1,9 @@
-import {Component, ElementRef, EventEmitter, OnDestroy, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
 import {DokumentumService} from '../dokumentum.service';
 import {FajlBuf} from '../fajlbuf';
-import {IratService} from '../../irat/irat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {DokumentumDto} from '../dokumentumdto';
 
 @Component({
   selector: 'app-dokumentum-feltoltes',
@@ -12,15 +12,14 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 export class DokumentumFeltoltesComponent implements OnDestroy {
   @ViewChild('fileInput') fileInput: ElementRef;
 
-  dokumentumservice: DokumentumService;
-
   file: any;
   file64: any;
   fajlnev = '';
   megjegyzes = '';
   imageSrc: string;
 
-  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
+  @Input() Iratkod = -1;
+  @Output() eventSzerkeszteskesz = new EventEmitter<DokumentumDto>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -31,8 +30,9 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(private _iratservice: IratService,
-              private _errorservice: ErrorService,
+  dokumentumservice: DokumentumService;
+
+  constructor(private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               dokumentumservice: DokumentumService) {
     this.dokumentumservice = dokumentumservice;
@@ -57,7 +57,7 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
     fb.Fajlnev = this.fajlnev;
     fb.Meret = this.file.size;
     fb.Megjegyzes = this.megjegyzes;
-    fb.IratKod = this._iratservice.Dto[this._iratservice.DtoSelectedIndex].Iratkod;
+    fb.IratKod = this.Iratkod;
 
     this.eppFrissit = true;
     this.dokumentumservice.FeltoltesAngular(fb)
@@ -73,18 +73,17 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
           throw res1.Error;
         }
 
-        this.dokumentumservice.Dto.unshift(res1.Result[0]);
-
         this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit();
+        this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
-  cancel() {
-    this.eventSzerkeszteskesz.emit();
+
+  onCancel() {
+    this.eventSzerkeszteskesz.emit(null);
   }
 
   ngOnDestroy() {

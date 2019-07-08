@@ -5,8 +5,6 @@ import {LogonService} from '../logon/logon.service';
 import {AngularmenuResult} from './angularmenuresult';
 import {Router} from '@angular/router';
 import {ProjektService} from '../projekt/projekt.service';
-import {IratService} from '../irat/irat.service';
-import {IratDto} from '../irat/iratdto';
 import {ProjektDto} from '../projekt/projektdto';
 import {ProjektkapcsolatService} from '../projektkapcsolat/projektkapcsolat.service';
 import {ProjektKapcsolatDto} from '../projektkapcsolat/projektkapcsolatdto';
@@ -36,7 +34,6 @@ export class MenuService {
               private _projektkapcsolatservice: ProjektkapcsolatService,
               private _szamlazasirendservice: SzamlazasirendService,
               private _projektteendoservice: ProjektteendoService,
-              private _iratservice: IratService,
               private _bizonylatservice: BizonylatService,
               private _vagolapservice: VagolapService) {
     _location.onPopState(() => {
@@ -91,7 +88,6 @@ export class MenuService {
         this._projektteendoservice.Dto = new Array<ProjektteendoDto>();
       break;
       case '/irat':
-        this._iratservice.Dto = new Array<IratDto>();
       break;
       case '/penztar':
         break;

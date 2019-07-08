@@ -3,7 +3,6 @@ import {IratService} from '../irat.service';
 import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
 import {IratDto} from '../iratdto';
-import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
@@ -18,6 +17,8 @@ import {IratParameter} from '../iratparameter';
 })
 export class IratListComponent implements OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
+
+  @Input() enProjekt = true;
 
   szurok = ['Id', 'Keletkezett', 'Ügyfél', 'Tárgy', 'Irattipus', 'Küldő'];
   szurok2 = ['-', 'Keletkezett', 'Ügyfél', 'Tárgy', 'Irattipus', 'Küldő'];
@@ -35,9 +36,10 @@ export class IratListComponent implements OnDestroy {
   ip = new IratParameter(0, environment.lapmeret);
   elsokereses = true;
   OsszesRekord = 0;
-
   jog = false;
-  @Input() enProjekt = true;
+
+  Dto = new Array<IratDto>();
+  DtoSelectedIndex = -1;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -49,21 +51,18 @@ export class IratListComponent implements OnDestroy {
   }
 
   iratservice: IratService;
-  dokumentumservice: DokumentumService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
-              iratservice: IratService,
-              dokumentumservice: DokumentumService) {
+              iratservice: IratService) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.IRATMOD]);
     this.iratservice = iratservice;
-    this.dokumentumservice = dokumentumservice;
   }
 
   onKereses() {
-    this.iratservice.Dto = new Array<IratDto>();
-    this.iratservice.DtoSelectedIndex = -1;
+    this.Dto = new Array<IratDto>();
+    this.DtoSelectedIndex = -1;
     this.OsszesRekord = 0;
 
     this.elsokereses = true;
@@ -84,6 +83,7 @@ export class IratListComponent implements OnDestroy {
 
     this.onKeresesTovabb();
   }
+
   onKeresesTovabb() {
     this.eppFrissit = true;
     this.iratservice.Select(this.ip)
@@ -93,14 +93,14 @@ export class IratListComponent implements OnDestroy {
         }
 
         if (this.elsokereses) {
-          this.iratservice.Dto = res.Result;
+          this.Dto = res.Result;
           this.elsokereses = false;
         } else {
-          const buf = [...this.iratservice.Dto];
+          const buf = [...this.Dto];
           res.Result.forEach(element => {
             buf.push(element);
           });
-          this.iratservice.Dto = buf;
+          this.Dto = buf;
         }
         this.OsszesRekord = res.OsszesRekord;
 
@@ -114,14 +114,16 @@ export class IratListComponent implements OnDestroy {
   }
 
   onId(i: number) {
-    this.iratservice.DtoSelectedIndex = i;
+    this.DtoSelectedIndex = i;
   }
 
-  onUj() {
+  doUjtetel() {
     this.tabla.ujtetelstart();
   }
-
-  onUjkesz() {
+  onUjtetelkesz(dto: IratDto) {
+    if (dto !== null) {
+      this.Dto.unshift(dto);
+    }
     this.tabla.ujtetelstop();
   }
 

@@ -20,10 +20,15 @@ import {IratDto} from '../iratdto';
   templateUrl: './irat-szerkesztes.component.html'
 })
 export class IratSzerkesztesComponent implements OnInit, OnDestroy {
+  Keletkezett: any;
+
   @Input() uj = false;
   DtoEdited = new IratDto();
-  Keletkezett: any;
-  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
+  @Input() set DtoOriginal(value: IratDto) {
+    this.DtoEdited = deepCopy(value);
+    this.Keletkezett = moment(this.DtoEdited.Keletkezett).format('YYYY-MM-DD');
+  }
+  @Output() eventSzerkeszteskesz = new EventEmitter<IratDto>();
 
   SzerkesztesMode = IratSzerkesztesMode.Blank;
 
@@ -64,10 +69,6 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
         });
 
       this.Keletkezett = moment().format('YYYY-MM-DD');
-    } else {
-      this.DtoEdited = deepCopy(this.iratservice.Dto[this.iratservice.DtoSelectedIndex]);
-
-      this.Keletkezett = moment(this.DtoEdited.Keletkezett).format('YYYY-MM-DD');
     }
   }
 
@@ -113,22 +114,17 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
           throw res3.Error;
         }
 
-        if (this.uj) {
-          this.iratservice.Dto.unshift(res3.Result[0]);
-        } else {
-          propCopy(res3.Result[0], this.iratservice.Dto[this.iratservice.DtoSelectedIndex]);
-        }
-
         this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit();
+        this.eventSzerkeszteskesz.emit(res3.Result[0]);
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
-  cancel() {
-    this.eventSzerkeszteskesz.emit();
+
+  onCancel() {
+    this.eventSzerkeszteskesz.emit(null);
   }
 
   IrattipusZoom() {

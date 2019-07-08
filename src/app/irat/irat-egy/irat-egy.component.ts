@@ -1,10 +1,8 @@
 import {Component, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
 import {IratService} from '../irat.service';
-import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
 import {ProjektService} from '../../projekt/projekt.service';
 import {ProjektResult} from '../../projekt/projektresult';
-import {BizonylatkapcsolatService} from '../../bizonylatkapcsolat/bizonylatkapcsolat.service';
 import {VagolapService} from '../../vagolap/vagolap.service';
 import {AbuComponent} from '../../tools/abu/abu.component';
 import {LogonService} from '../../logon/logon.service';
@@ -13,6 +11,8 @@ import {rowanimation} from '../../animation/rowAnimation';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {EgyMode} from '../../enums/egymode';
+import {IratDto} from '../iratdto';
+import {propCopy} from '../../tools/propCopy';
 
 @Component({
   selector: 'app-irat-egy',
@@ -21,10 +21,10 @@ import {EgyMode} from '../../enums/egymode';
 })
 export class IratEgyComponent implements OnDestroy {
   @ViewChild(AbuComponent) abu: AbuComponent;
+
   egymode = EgyMode.Dokumentum;
-  projektservice: ProjektService;
-  iratservice: IratService;
-  dokumentumservice: DokumentumService;
+
+
   nincsProjekt = false;
   jog = false;
 
@@ -40,17 +40,18 @@ export class IratEgyComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  iratservice: IratService;
+  projektservice: ProjektService;
+
   constructor(private _logonservice: LogonService,
               private _projektkapcsolatservice: ProjektkapcsolatService,
               private _vagolapservice: VagolapService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               iratservice: IratService,
-              dokumentumservice: DokumentumService,
               projektservice: ProjektService) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.IRATMOD]);
     this.iratservice = iratservice;
-    this.dokumentumservice = dokumentumservice;
     this.projektservice = projektservice;
   }
 
@@ -103,8 +104,9 @@ export class IratEgyComponent implements OnDestroy {
         this._errorservice.Error = err;
       });
   }
+
   doVagolap() {
-    this._vagolapservice.iratotvagolapra();
+    this._vagolapservice.iratotvagolapra(this.iratservice.Dto[this.iratservice.DtoSelectedIndex]);
     this.abu.Uzenet('Az irat a vágólapra került!');
   }
 
@@ -135,6 +137,12 @@ export class IratEgyComponent implements OnDestroy {
 
   onModositaskesz() {
     this.egymode = EgyMode.Reszletek;
+  }
+
+  onFotozaslinkKesz(dto: IratDto) {
+    if (dto !== null) {
+      propCopy(dto, this.iratservice.Dto[this.iratservice.DtoSelectedIndex]);
+    }
   }
 
   ngOnDestroy() {

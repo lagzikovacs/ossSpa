@@ -178,7 +178,8 @@ export class BizonylatEgyComponent implements OnDestroy {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.OSNxml;
   }
   vagolap() {
-    this._vagolapservice.bizonylatotvagolapra();
+    this._vagolapservice.bizonylatotvagolapra(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex],
+      this.bizonylatservice.bizonylatLeiro.BizonylatNev);
     this.abu.Uzenet('A(z) ' + this.bizonylatservice.bizonylatLeiro.BizonylatNev + ' a vágólapra került!');
   }
 

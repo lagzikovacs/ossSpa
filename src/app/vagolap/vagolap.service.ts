@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {VagolapDto} from './vagolapdto';
 import {VagolapMode} from './vagolapmode';
-import {IratService} from '../irat/irat.service';
-import {BizonylatService} from '../bizonylat/bizonylat.service';
+import {IratDto} from '../irat/iratdto';
+import {BizonylatDto} from '../bizonylat/bizonylatdto';
 
 @Injectable({
   providedIn: 'root'
@@ -12,30 +12,31 @@ export class VagolapService {
   Dto = new Array<VagolapDto>();
   Mode = VagolapMode.List;
 
-  constructor(private _iratservice: IratService,
-              private _bizonylatservice: BizonylatService) { }
-
-  iratotvagolapra() {
+  iratotvagolapra(_IratDto: IratDto) {
     const d = new VagolapDto();
+
     d.tipus = 0;
-    d.iratkod = this._iratservice.Dto[this._iratservice.DtoSelectedIndex].Iratkod;
-    d.irattipus = this._iratservice.Dto[this._iratservice.DtoSelectedIndex].Irattipus;
-    d.ugyfelnev = this._iratservice.Dto[this._iratservice.DtoSelectedIndex].Ugyfelnev;
-    d.ugyfelcim = this._iratservice.Dto[this._iratservice.DtoSelectedIndex].Ugyfelcim;
+    d.iratkod = _IratDto.Iratkod;
+    d.irattipus = _IratDto.Irattipus;
+    d.ugyfelnev = _IratDto.Ugyfelnev;
+    d.ugyfelcim = _IratDto.Ugyfelcim;
 
     this.Dto.push(d);
   }
-  bizonylatotvagolapra() {
+
+  bizonylatotvagolapra(_BizonylatDto: BizonylatDto, Bizonylattipus: string) {
     const d = new VagolapDto();
+
     d.tipus = 1;
-    d.bizonylatkod = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Bizonylatkod;
-    d.bizonylatszam = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Bizonylatszam;
-    d.bizonylattipus = this._bizonylatservice.bizonylatLeiro.BizonylatNev;
-    d.ugyfelnev = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Ugyfelnev;
-    d.ugyfelcim = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Ugyfelcim;
+    d.bizonylatkod = _BizonylatDto.Bizonylatkod;
+    d.bizonylatszam = _BizonylatDto.Bizonylatszam;
+    d.bizonylattipus = Bizonylattipus;
+    d.ugyfelnev = _BizonylatDto.Ugyfelnev;
+    d.ugyfelcim = _BizonylatDto.Ugyfelcim;
 
     this.Dto.push(d);
   }
+
   kijeloltiratokszama(): number {
     let kijeloltdb = 0;
     for (let i = 0; i < this.Dto.length; i++) {
@@ -45,6 +46,7 @@ export class VagolapService {
     }
     return kijeloltdb;
   }
+
   kijeloltekszama(): number {
     let kijeloltdb = 0;
     for (let i = 0; i < this.Dto.length; i++) {

@@ -1,5 +1,6 @@
 <div class="alapkeret">
   <h5>{{projektkapcsolatservice.cim}}</h5>
+
   <div>
     <nav>
       <button [disabled]="eppFrissit" (click)="kereses()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins" style="margin-right: 3px">
@@ -19,6 +20,7 @@
       </button>
     </nav>
   </div>
+
   <app-projektkapcsolat-tabla #tabla
                               [items]="projektkapcsolatservice.Dto"
                               (forid)="setClickedRow($event)"
@@ -26,9 +28,11 @@
                               [egyBizonylat]="bizonylategy"
                               [egyIrat]="irategy">
   </app-projektkapcsolat-tabla>
+
   <ng-template #bizonylategy>
     <app-bizonylat-egy (torlesutan)="torlesutan()"></app-bizonylat-egy>
   </ng-template>
+
   <ng-template #irategy>
     <app-irat-egy [enProjekt]="false" (torlesutan)="torlesutan()"></app-irat-egy>
   </ng-template>

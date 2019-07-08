@@ -17,9 +17,6 @@ export class IratService {
   private readonly _controller = 'api/irat/';
   cim = 'Irat';
 
-  Dto: IratDto[] = new Array<IratDto>();
-  DtoSelectedIndex = -1;
-
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;
 

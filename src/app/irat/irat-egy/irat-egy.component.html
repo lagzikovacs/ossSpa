@@ -76,7 +76,9 @@
 
   <ng-container *ngIf="egymode === 16">
     <div [@rowanimation]>
-      <app-fotozas-link></app-fotozas-link>
+      <app-fotozas-link [DtoOriginal]="iratservice.Dto[iratservice.DtoSelectedIndex]"
+                        (eventSzerkeszteskesz)="onFotozaslinkKesz($event)">
+      </app-fotozas-link>
     </div>
   </ng-container>
 </div>

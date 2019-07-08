@@ -1,5 +1,6 @@
 <div class="alapkeret">
   <h5>{{iratservice.cim}}</h5>
+
   <app-irattoolbar
     [szurok]="szurok"
     [szurok2]="szurok2"
@@ -8,26 +9,31 @@
     [(szempont2)]="szempont2"
     [(minta2)]="minta2"
   [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-  [enUj]="!eppFrissit && jog" (Uj)="onUj()">
+  [enUj]="!eppFrissit && jog" (Uj)="doUjtetel()">
   </app-irattoolbar>
+
   <app-tabla #tabla
-             [items]="iratservice.Dto"
+             [items]="Dto"
              [colsets]="iratservice.GridSettings"
              (forid)="onId($event)"
              [ujTemplate]="griduj"
              [egyTemplate]="gridegy">
   </app-tabla>
+
   <ng-template #griduj>
     <app-irat-szerkesztes [uj] = "true"
-                          (eventSzerkeszteskesz)="onUjkesz()">
+                          (eventSzerkeszteskesz)="onUjtetelkesz($event)">
     </app-irat-szerkesztes>
   </ng-template>
+
   <ng-template #gridegy>
     <app-irat-egy [enProjekt]="enProjekt"
-                  (eventTorlesutan)="torlesutan()"></app-irat-egy>
+                  (eventTorlesutan)="torlesutan()">
+    </app-irat-egy>
   </ng-template>
+
   <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
-                     [rekordszam]="iratservice.Dto.length"
+                     [rekordszam]="Dto.length"
                      [osszesrekord]="OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">
   </app-toolbarfooter>

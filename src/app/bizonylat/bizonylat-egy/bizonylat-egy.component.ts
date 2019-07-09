@@ -2,7 +2,6 @@ import {Component, EventEmitter, OnDestroy, Output, ViewChild} from '@angular/co
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
-import {BizonylatesIratContainerMode} from '../../projektkapcsolat/bizonylatesiratcontainermode';
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {KifizetesService} from '../../kifizetes/kifizetes.service';
 import {KifizetesContainerMode} from '../../kifizetes/kifizetescontainermode';
@@ -96,7 +95,6 @@ export class BizonylatEgyComponent implements OnDestroy {
 
   vissza() {
     this.bizonylatservice.ContainerMode = BizonylatContainerMode.List;
-    this._projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
   }
   reszletek() {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;

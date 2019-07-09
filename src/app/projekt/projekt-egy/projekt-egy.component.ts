@@ -1,7 +1,6 @@
 import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
-import {BizonylatesIratContainerMode} from '../../projektkapcsolat/bizonylatesiratcontainermode';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
@@ -79,7 +78,6 @@ export class ProjektEgyComponent implements OnDestroy {
   }
   bizonylatesirat() {
     this.egymode = EgyMode.Bizonylatesirat;
-    this._projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
   }
   szamlazasirend() {
     this.egymode = EgyMode.Szamlazasirend;

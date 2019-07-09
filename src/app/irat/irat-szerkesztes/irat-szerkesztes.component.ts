@@ -28,6 +28,8 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited = deepCopy(value);
     this.Keletkezett = moment(this.DtoEdited.Keletkezett).format('YYYY-MM-DD');
   }
+  @Input() enUgyfel = true;
+  @Input() Ugyfelkod = null;
   @Output() eventSzerkeszteskesz = new EventEmitter<IratDto>();
 
   SzerkesztesMode = IratSzerkesztesMode.Blank;
@@ -61,6 +63,7 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
+          this.DtoEdited.Ugyfelkod = this.Ugyfelkod;
           this.eppFrissit = false;
         })
         .catch(err => {

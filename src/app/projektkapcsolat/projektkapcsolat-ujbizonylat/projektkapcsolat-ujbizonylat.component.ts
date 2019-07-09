@@ -1,6 +1,5 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
-import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 import {BizonylatTipus} from '../../bizonylat/bizonylattipus';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
@@ -8,13 +7,15 @@ import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
 
 @Component({
   selector: 'app-projektkapcsolat-ujbizonylat',
   templateUrl: './projektkapcsolat-ujbizonylat.component.html'
 })
 export class ProjektkapcsolatUjbizonylatComponent implements OnDestroy {
-  projektkapcsolatservice: ProjektkapcsolatService;
+  @Output() eventUjbizonylatutan = new EventEmitter<ProjektKapcsolatDto>();
+
   entries = [
     ['Díjbekérő', BizonylatTipus.DijBekero],
     ['Előlegszámla', BizonylatTipus.ElolegSzamla],
@@ -33,6 +34,8 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnDestroy {
     this._eppFrissit = value;
     this._spinnerservice.Run = value;
   }
+
+  projektkapcsolatservice: ProjektkapcsolatService;
 
   constructor(private _bizonylatservice: BizonylatService,
               private _ugyfelservice: UgyfelService,
@@ -97,21 +100,20 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnDestroy {
           throw res3.Error;
         }
 
-        this.projektkapcsolatservice.Dto.unshift(res3.Result[0]);
         this.eppFrissit = false;
-        this.navigal();
+        this.eventUjbizonylatutan.emit(res3.Result[0]);
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
+
   cancel() {
-    this.navigal();
+    this.eventUjbizonylatutan.emit(null);
   }
-  navigal() {
-    this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
-  }
+
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

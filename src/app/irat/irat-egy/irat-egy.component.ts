@@ -13,6 +13,7 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {EgyMode} from '../../enums/egymode';
 import {IratDto} from '../iratdto';
 import {propCopy} from '../../tools/propCopy';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-irat-egy',
@@ -22,14 +23,21 @@ import {propCopy} from '../../tools/propCopy';
 export class IratEgyComponent implements OnDestroy {
   @ViewChild(AbuComponent) abu: AbuComponent;
 
-  egymode = EgyMode.Dokumentum;
+  Dto = new IratDto();
+  @Input() set DtoOriginal(value: IratDto) {
+    this.Dto = deepCopy(value);
+  }
+  @Output() eventSzerkesztesutan = new EventEmitter<IratDto>();
+  @Output() eventTorlesutan = new EventEmitter<void>();
 
+  @Input() enTorles = true;
+  @Input() enProjekt = true;
+  @Input() enUgyfel = true;
+
+  egymode = EgyMode.Dokumentum;
 
   nincsProjekt = false;
   jog = false;
-
-  @Input() enProjekt = true;
-  @Output() eventTorlesutan = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -72,7 +80,7 @@ export class IratEgyComponent implements OnDestroy {
   }
   doProjekt() {
     this.eppFrissit = true;
-    this._projektkapcsolatservice.SelectByIrat(this.iratservice.Dto[this.iratservice.DtoSelectedIndex].Iratkod)
+    this._projektkapcsolatservice.SelectByIrat(this.Dto.Iratkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -106,7 +114,7 @@ export class IratEgyComponent implements OnDestroy {
   }
 
   doVagolap() {
-    this._vagolapservice.iratotvagolapra(this.iratservice.Dto[this.iratservice.DtoSelectedIndex]);
+    this._vagolapservice.iratotvagolapra(this.Dto);
     this.abu.Uzenet('Az irat a vágólapra került!');
   }
 
@@ -114,14 +122,11 @@ export class IratEgyComponent implements OnDestroy {
     if (ok) {
       this.eppFrissit = true;
 
-      this.iratservice.Delete(this.iratservice.Dto[this.iratservice.DtoSelectedIndex])
+      this.iratservice.Delete(this.Dto)
         .then(res => {
           if (res.Error != null) {
             throw res.Error;
           }
-
-          this.iratservice.Dto.splice(this.iratservice.DtoSelectedIndex, 1);
-          this.iratservice.DtoSelectedIndex = -1;
 
           this.eppFrissit = false;
           this.eventTorlesutan.emit();
@@ -135,13 +140,19 @@ export class IratEgyComponent implements OnDestroy {
     }
   }
 
-  onModositaskesz() {
+  onModositaskesz(dto: IratDto) {
+    if (dto !== null) {
+      propCopy(dto, this.Dto);
+      this.eventSzerkesztesutan.emit(this.Dto);
+    }
+
     this.egymode = EgyMode.Reszletek;
   }
 
   onFotozaslinkKesz(dto: IratDto) {
     if (dto !== null) {
-      propCopy(dto, this.iratservice.Dto[this.iratservice.DtoSelectedIndex]);
+      propCopy(dto, this.Dto);
+      this.eventSzerkesztesutan.emit(this.Dto);
     }
   }
 

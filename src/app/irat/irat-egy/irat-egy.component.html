@@ -5,7 +5,7 @@
         <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>
       </button>
 
-      <button [disabled]="eppFrissit || !jog"
+      <button [disabled]="eppFrissit || !jog || !enTorles"
               (click)="doTorles()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-minus" aria-hidden="true"></i>
       </button>
@@ -34,7 +34,7 @@
   <ng-container *ngIf="egymode === 1">
     <div [@rowanimation]>
       <app-reszletek [cim]="iratservice.cim"
-                     [item]="iratservice.Dto[iratservice.DtoSelectedIndex]"
+                     [item]="Dto"
                      [colsets]="iratservice.ReszletekSettings">
       </app-reszletek>
     </div>
@@ -50,7 +50,9 @@
   <ng-container *ngIf="egymode === 3">
     <div [@rowanimation]>
       <app-irat-szerkesztes [uj]="false"
-                            (eventSzerkeszteskesz)="onModositaskesz()">
+                            [DtoOriginal]="Dto"
+                            [enUgyfel]="enUgyfel"
+                            (eventSzerkeszteskesz)="onModositaskesz($event)">
       </app-irat-szerkesztes>
     </div>
   </ng-container>
@@ -58,7 +60,7 @@
 
   <ng-container *ngIf="egymode === 15">
     <div [@rowanimation]>
-      <app-dokumentum-list [Iratkod]="iratservice.Dto[iratservice.DtoSelectedIndex].Iratkod">
+      <app-dokumentum-list [Iratkod]="Dto.Iratkod">
       </app-dokumentum-list>
     </div>
   </ng-container>
@@ -76,7 +78,7 @@
 
   <ng-container *ngIf="egymode === 16">
     <div [@rowanimation]>
-      <app-fotozas-link [DtoOriginal]="iratservice.Dto[iratservice.DtoSelectedIndex]"
+      <app-fotozas-link [DtoOriginal]="Dto"
                         (eventSzerkeszteskesz)="onFotozaslinkKesz($event)">
       </app-fotozas-link>
     </div>

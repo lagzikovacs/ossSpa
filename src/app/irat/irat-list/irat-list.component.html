@@ -27,8 +27,11 @@
   </ng-template>
 
   <ng-template #gridegy>
-    <app-irat-egy [enProjekt]="enProjekt"
-                  (eventTorlesutan)="torlesutan()">
+    <app-irat-egy [DtoOriginal]="Dto[DtoSelectedIndex]"
+                  [enTorles]="true"
+                  [enProjekt]="enProjekt"
+                  (eventSzerkesztesutan)="onSzerkesztesutan($event)"
+                  (eventTorlesutan)="onTorlesutan()">
     </app-irat-egy>
   </ng-template>
 

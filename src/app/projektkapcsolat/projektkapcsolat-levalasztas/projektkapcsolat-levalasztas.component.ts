@@ -1,6 +1,5 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
-import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 
@@ -9,7 +8,7 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   templateUrl: './projektkapcsolat-levalasztas.component.html'
 })
 export class ProjektkapcsolatLevalasztasComponent implements OnDestroy {
-  projektkapcsolatservice: ProjektkapcsolatService;
+  @Output() eventLevalasztasutan = new EventEmitter<boolean>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -19,6 +18,8 @@ export class ProjektkapcsolatLevalasztasComponent implements OnDestroy {
     this._eppFrissit = value;
     this._spinnerservice.Run = value;
   }
+
+  projektkapcsolatservice: ProjektkapcsolatService;
 
   constructor(projektkapcsolatservice: ProjektkapcsolatService,
               private _errorservice: ErrorService,
@@ -34,23 +35,19 @@ export class ProjektkapcsolatLevalasztasComponent implements OnDestroy {
           throw res.Error;
         }
 
-        this.projektkapcsolatservice.Dto.splice(this.projektkapcsolatservice.DtoSelectedIndex, 1);
-        this.projektkapcsolatservice.DtoSelectedIndex = -1;
-
         this.eppFrissit = false;
-        this.navigal();
+        this.eventLevalasztasutan.emit(true);
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
+
   cancel() {
-    this.navigal();
+    this.eventLevalasztasutan.emit(false);
   }
-  navigal() {
-    this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
-  }
+
 
   ngOnDestroy() {
     Object.keys(this).map(k => {

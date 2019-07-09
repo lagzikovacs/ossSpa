@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
-import {BizonylatesIratContainerMode} from '../../projektkapcsolat/bizonylatesiratcontainermode';
 import {AjanlatSzerkesztesMode} from '../ajanlatszerkesztesmode';
 import {AjanlatContainerMode} from '../ajanlatcontainermode';
 import * as moment from 'moment';
@@ -75,7 +74,6 @@ export class AjanlatComponent implements OnInit, OnDestroy {
     this.navigal();
   }
   navigal() {
-    this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
   }
   ngOnDestroy() {
     Object.keys(this).map(k => {

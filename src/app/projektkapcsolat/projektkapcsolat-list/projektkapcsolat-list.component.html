@@ -6,16 +6,16 @@
       <button [disabled]="eppFrissit" (click)="kereses()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins" style="margin-right: 3px">
         <i class="fa fa-search" aria-hidden="true"></i>
       </button>
-      <button [disabled]="eppFrissit || !BizonylatMod" (click)="ujbizonylat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="eppFrissit || !BizonylatMod" (click)="onUjbizonylat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Bizonylat
       </button>
-      <button [disabled]="eppFrissit || !IratMod" (click)="ujirat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="eppFrissit || !IratMod" (click)="onUjirat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Irat
       </button>
       <button [disabled]="eppFrissit || !AjanlatMod" (click)="ujajanlat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Ajánlat
       </button>
-      <button [disabled]="eppFrissit" (click)="vagolaprol()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="eppFrissit" (click)="onVagolaprol()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Vágólapról
       </button>
     </nav>
@@ -24,9 +24,13 @@
   <app-projektkapcsolat-tabla #tabla
                               [items]="projektkapcsolatservice.Dto"
                               (forid)="setClickedRow($event)"
-                              (forlevalasztas)="levalasztas($event)"
+                              (forlevalasztas)="onLevalasztas($event)"
                               [egyBizonylat]="bizonylategy"
-                              [egyIrat]="irategy">
+                              [egyIrat]="irategy"
+                              [egyLevalasztas]="levalasztasegy"
+                              [egyVagolaprol]="vagolaprolegy"
+                              [egyUjbizonylat]="ujbizonylategy"
+                              [egyUjirat]="ujirategy">
   </app-projektkapcsolat-tabla>
 
   <ng-template #bizonylategy>
@@ -34,6 +38,34 @@
   </ng-template>
 
   <ng-template #irategy>
-    <app-irat-egy [enProjekt]="false" (torlesutan)="torlesutan()"></app-irat-egy>
+    <app-irat-egy [DtoOriginal]="OriginalIrat"
+                  [enTorles]="false"
+                  [enProjekt]="false"
+                  [enUgyfel]="false"
+                  (eventSzerkesztesutan)="onIratSzerkesztesutan($event)">
+    </app-irat-egy>
+  </ng-template>
+
+  <ng-template #levalasztasegy>
+    <app-projektkapcsolat-levalasztas (eventLevalasztasutan)="onLevalasztasutan($event)">
+    </app-projektkapcsolat-levalasztas>
+  </ng-template>
+
+  <ng-template #vagolaprolegy>
+    <app-projektkapcsolat-vagolaprol (eventVagolaprolutan)="onVagolaprolutan($event)">
+    </app-projektkapcsolat-vagolaprol>
+  </ng-template>
+
+  <ng-template #ujbizonylategy>
+    <app-projektkapcsolat-ujbizonylat (eventUjbizonylatutan)="onUjbizonylatutan($event)">
+    </app-projektkapcsolat-ujbizonylat>
+  </ng-template>
+
+  <ng-template #ujirategy>
+    <app-irat-szerkesztes [uj]="true"
+                          [enUgyfel]="false"
+                          [Ugyfelkod]="projektkapcsolatservice.UgyfelKod"
+                          (eventSzerkeszteskesz)="onUjiratutan($event)">
+    </app-irat-szerkesztes>
   </ng-template>
 </div>

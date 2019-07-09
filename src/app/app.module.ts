@@ -121,7 +121,6 @@ import { HelysegListComponent } from './primitiv/helyseg/helyseg-list/helyseg-li
 import {PenztartetelListComponent} from './penztartetel/penztartetel-list/penztartetel-list.component';
 import {PenztarExportComponent} from './penztar/penztar-export/penztar-export.component';
 import {PenztarSzerkesztesComponent} from './penztar/penztar-szerkesztes/penztar-szerkesztes.component';
-import { ProjektkapcsolatContainerComponent } from './projektkapcsolat/projektkapcsolat-container/projektkapcsolat-container.component';
 import {PenztartetelService} from './penztartetel/penztartetel.service';
 import {BizonylatService} from './bizonylat/bizonylat.service';
 import {RiportService} from './riport/riport.service';
@@ -356,7 +355,6 @@ if (environment.production) {
     ParticioEgyComponent,
     HelysegListComponent,
     UgyfelListComponent,
-    ProjektkapcsolatContainerComponent,
     ProjektkapcsolatLevalasztasComponent,
     ProjektExportComponent,
     IratNincsprojektComponent,

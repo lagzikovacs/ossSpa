@@ -5,7 +5,6 @@ import {IrattipusService} from '../../primitiv/irattipus/irattipus.service';
 import {ZoomSources} from '../../enums/zoomsources';
 import {IratService} from '../../irat/irat.service';
 import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
-import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 import {BizonylatesiratSzerkesztesMode} from '../bizonylatesiratszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
@@ -111,7 +110,6 @@ export class ProjektkapcsolatUjiratComponent implements OnInit, OnDestroy {
     this.navigal();
   }
   navigal() {
-    this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
   }
   ngOnDestroy() {
     Object.keys(this).map(k => {

@@ -10,6 +10,7 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
 import {IratParameter} from '../iratparameter';
+import {propCopy} from '../../tools/propCopy';
 
 @Component({
   selector: 'app-irat-list',
@@ -126,8 +127,13 @@ export class IratListComponent implements OnDestroy {
     }
     this.tabla.ujtetelstop();
   }
+  onSzerkesztesutan(dto: IratDto) {
+    propCopy(dto, this.Dto[this.DtoSelectedIndex]);
+  }
+  onTorlesutan() {
+    this.Dto.splice(this.DtoSelectedIndex, 1);
+    this.DtoSelectedIndex = -1;
 
-  torlesutan() {
     this.tabla.clearselections();
   }
 

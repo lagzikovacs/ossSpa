@@ -1,9 +1,7 @@
 import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {LogonService} from '../../logon/logon.service';
-import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
 import {IratService} from '../../irat/irat.service';
-import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {AjanlatContainerMode} from '../../ajanlat/ajanlatcontainermode';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {BizonylatkapcsolatService} from '../../bizonylatkapcsolat/bizonylatkapcsolat.service';
@@ -16,6 +14,9 @@ import {JogKod} from '../../enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {ProjektkapcsolatTablaComponent} from '../projektkapcsolat-tabla/projektkapcsolat-tabla.component';
+import {IratDto} from '../../irat/iratdto';
+import {BizonylatDto} from '../../bizonylat/bizonylatdto';
+import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
 
 @Component({
   selector: 'app-projektkapcsolat-list',
@@ -30,6 +31,9 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
   IratMod = false;
   AjanlatMod = false;
 
+  OriginalIrat = new IratDto();
+  OriginalBizonylat = new BizonylatDto();
+
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -41,7 +45,6 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
 
   constructor(private _logonservice: LogonService,
               private _iratservice: IratService,
-              private _dokumentumservice: DokumentumService,
               private _bizonylatservice: BizonylatService,
               private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
               private _bizonylatkifizetesservice: KifizetesService,
@@ -68,13 +71,9 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
         this._errorservice.Error = err;
       });
   }
-  levalasztas(i: number) {
-    this.projektkapcsolatservice.DtoSelectedIndex = i;
-    this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.Levalasztas;
-  }
+
   setClickedRow(i: number) {
-    this.tabla.bizonylatOk = false;
-    this.tabla.iratOk = false;
+    this.tabla.nemOk();
     this.projektkapcsolatservice.DtoSelectedIndex = i;
 
     if (this.projektkapcsolatservice.DtoSelectedIndex === -1) {
@@ -123,7 +122,6 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
 
           this._bizonylatkifizetesservice.Dto = res3.Result;
 
-          // this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.EgyBizonylat;
           this._bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
           this.eppFrissit = false;
 
@@ -143,15 +141,8 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
             throw res.Error;
           }
 
-          this._iratservice.Dto = res.Result;
-          this._iratservice.DtoSelectedIndex = 0;
-
-          // this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.EgyIrat;
-          // this._iratservice.ContainerMode = IratContainerMode.Egy;
-          // this._iratservice.EgyMode = IratEgyMode.Dokumentum;
-          // this._dokumentumservice.ContainerMode = DokumentumContainerMode.List;
+          this.OriginalIrat = res.Result[0];
           this.eppFrissit = false;
-
           this.tabla.iratOk = true;
         })
         .catch(err => {
@@ -161,12 +152,39 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
     }
   }
 
-  ujbizonylat() {
-    this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.UjBizonylat;
+  onUjbizonylat() {
+    this.tabla.clearselections();
+    this.tabla.ujbizonylatOk = true;
   }
-  ujirat() {
-    this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.UjIrat;
+  onUjbizonylatutan(dto: ProjektKapcsolatDto) {
+    if (dto !== null) {
+      this.projektkapcsolatservice.Dto.unshift(dto);
+      this.tabla.nemOk();
+    } else {
+      this.tabla.nemOk();
+    }
   }
+
+  onUjirat() {
+    this.tabla.clearselections();
+    this.tabla.ujiratOk = true;
+  }
+  onUjiratutan(dto: IratDto) {
+    if (dto !== null) {
+      // TODO kapcsolatot létrehozni
+    } else {
+      this.tabla.nemOk();
+    }
+  }
+  onIratSzerkesztesutan(dto: IratDto) {
+    if (dto !== null) {
+      this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Keletkezett = dto.Keletkezett;
+      this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Irany = dto.Irany;
+      this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Targy = dto.Targy;
+      this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Tipus = dto.Irattipus;
+    }
+  }
+
   ujajanlat() {
     this.eppFrissit = true;
     this._ajanlatservice.CreateNew()
@@ -178,7 +196,6 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
         this._ajanlatservice.AjanlatParam = res.Result;
 
         this.eppFrissit = false;
-        this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.UjAjanlat;
         this._ajanlatservice.AjanlatContainerMode = AjanlatContainerMode.List;
       })
       .catch(err => {
@@ -186,14 +203,44 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
         this._errorservice.Error = err;
       });
   }
-  vagolaprol() {
-    this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.Vagolap;
-    this._vagolapservice.Mode = VagolapMode.Projekt;
-  }
+
 
   torlesutan() {
     this.tabla.clearselections();
   }
+
+
+  onLevalasztas(i: number) {
+    this.tabla.nemOk();
+    this.projektkapcsolatservice.DtoSelectedIndex = i;
+    this.tabla.levalasztasOk = true;
+  }
+  onLevalasztasutan(ok: boolean) {
+    if (ok) {
+      this.tabla.clearselections();
+
+      this.projektkapcsolatservice.Dto.splice(this.projektkapcsolatservice.DtoSelectedIndex, 1);
+      this.projektkapcsolatservice.DtoSelectedIndex = -1;
+    } else {
+      this.tabla.nemOk();
+    }
+  }
+
+  onVagolaprol() {
+    this._vagolapservice.Mode = VagolapMode.Projekt;
+    this.tabla.clearselections();
+    this.tabla.vagolaprolOk = true;
+  }
+  onVagolaprolutan(ok: boolean) {
+    if (ok) {
+      // TODO frissítés: lehet majd dto lesz a paraméter és többször is meghívódik
+      this.tabla.nemOk();
+    } else {
+      this.tabla.nemOk();
+    }
+  }
+
+
 
   ngOnDestroy() {
     Object.keys(this).map(k => {

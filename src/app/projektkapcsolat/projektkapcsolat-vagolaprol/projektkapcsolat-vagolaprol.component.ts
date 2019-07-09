@@ -1,5 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
-import {BizonylatesIratContainerMode} from '../bizonylatesiratcontainermode';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {ProjektService} from '../../projekt/projekt.service';
 import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
@@ -14,7 +13,8 @@ import {ProjektKapcsolatResult} from '../projektkapcsolatresult';
   templateUrl: './projektkapcsolat-vagolaprol.component.html'
 })
 export class ProjektkapcsolatVagolaprolComponent implements OnDestroy {
-  projektkapcsolatservice: ProjektkapcsolatService;
+  @Output() eventVagolaprolutan = new EventEmitter<boolean>();
+
   ci = 0;
 
   private _eppFrissit = false;
@@ -25,6 +25,8 @@ export class ProjektkapcsolatVagolaprolComponent implements OnDestroy {
     this._eppFrissit = value;
     this._spinnerservice.Run = value;
   }
+
+  projektkapcsolatservice: ProjektkapcsolatService;
 
   constructor(private _projektservice: ProjektService,
               private _vagolapservice: VagolapService,
@@ -97,16 +99,12 @@ export class ProjektkapcsolatVagolaprolComponent implements OnDestroy {
       }
     } else {
       this.eppFrissit = false;
-      this.navigal();
+      this.eventVagolaprolutan.emit(true);
     }
   }
 
   cancel() {
-    this.navigal();
-  }
-
-  navigal() {
-    this.projektkapcsolatservice.ContainerMode = BizonylatesIratContainerMode.List;
+    this.eventVagolaprolutan.emit(false);
   }
 
   ngOnDestroy() {

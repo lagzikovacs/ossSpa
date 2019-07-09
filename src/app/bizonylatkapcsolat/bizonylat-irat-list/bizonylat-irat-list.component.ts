@@ -8,6 +8,7 @@ import {VagolapService} from '../../vagolap/vagolap.service';
 import {VagolapMode} from '../../vagolap/vagolapmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {IratDto} from '../../irat/iratdto';
 
 @Component({
   selector: 'app-bizonylat-irat-list',
@@ -15,6 +16,8 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 })
 export class BizonylatIratListComponent implements OnDestroy {
   bizonylatkapcsolatservice: BizonylatkapcsolatService;
+
+  OriginalIrat = new IratDto();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -62,10 +65,11 @@ export class BizonylatIratListComponent implements OnDestroy {
           throw res.Error;
         }
 
-        this._iratservice.Dto = res.Result;
-        this._iratservice.DtoSelectedIndex = 0;
+        this.OriginalIrat = res.Result[0];
 
-        this.bizonylatkapcsolatservice.ContainerMode = BizonylatKapcsolatContainerMode.Egy;
+        // this.bizonylatkapcsolatservice.ContainerMode = BizonylatKapcsolatContainerMode.Egy;
+
+
         // this._iratservice.ContainerMode = IratContainerMode.List;
         // this._iratservice.EgyMode = IratEgyMode.Dokumentum;
         // this._dokumentumservice.ContainerMode = DokumentumContainerMode.List;

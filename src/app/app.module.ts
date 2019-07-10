@@ -108,7 +108,6 @@ import { PenztartetelSzerkesztesComponent } from './penztartetel/penztartetel-sz
 import { OnlineszamlaellenorzeseComponent } from './onlineszamla/onlineszamlaellenorzese/onlineszamlaellenorzese.component';
 import { ProjektStatuszComponent } from './projekt/projekt-statusz/projekt-statusz.component';
 import { SzamlazasirendSzerkesztesComponent } from './szamlazasirend/szamlazasirend-szerkesztes/szamlazasirend-szerkesztes.component';
-import { ProjektTeendoEgyComponent } from './projektteendo/projekt-teendo-egy/projekt-teendo-egy.component';
 import { ProjektTeendoSzerkesztesComponent } from './projektteendo/projekt-teendo-szerkesztes/projekt-teendo-szerkesztes.component';
 import { ProjektTeendoElvegezveComponent } from './projektteendo/projekt-teendo-elvegezve/projekt-teendo-elvegezve.component';
 import { ProjektkapcsolatUjbizonylatComponent } from './projektkapcsolat/projektkapcsolat-ujbizonylat/projektkapcsolat-ujbizonylat.component';
@@ -342,7 +341,6 @@ if (environment.production) {
     OnlineszamlaellenorzeseComponent,
     ProjektStatuszComponent,
     SzamlazasirendSzerkesztesComponent,
-    ProjektTeendoEgyComponent,
     ProjektTeendoSzerkesztesComponent,
     ProjektTeendoElvegezveComponent,
     ProjektkapcsolatUjbizonylatComponent,

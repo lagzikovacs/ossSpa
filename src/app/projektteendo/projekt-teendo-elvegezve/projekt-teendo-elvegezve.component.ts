@@ -1,20 +1,24 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import * as moment from 'moment';
 import {ProjektteendoService} from '../projektteendo.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {propCopy} from '../../tools/propCopy';
 import {deepCopy} from '../../tools/deepCopy';
+import {ProjektteendoDto} from '../projektteendodto';
 
 @Component({
   selector: 'app-projekt-teendo-elvegezve',
   templateUrl: './projekt-teendo-elvegezve.component.html'
 })
 export class ProjektTeendoElvegezveComponent implements OnInit, OnDestroy {
-  projektteendoservice: ProjektteendoService;
-  Elvegezve: any;
+  DtoEdited = new ProjektteendoDto();
+  @Input() set DtoOriginal(value: ProjektteendoDto) {
+    this.DtoEdited = deepCopy(value);
+  }
+  @Output() eventSzerkeszteskesz = new EventEmitter<ProjektteendoDto>();
 
-  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
+  Elvegezve: any;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -25,23 +29,23 @@ export class ProjektTeendoElvegezveComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(projektteendoservice: ProjektteendoService,
-              private _spinnerservice: SpinnerService,
-              private _errorservice: ErrorService) {
+  projektteendoservice: ProjektteendoService;
+
+  constructor(private _spinnerservice: SpinnerService,
+              private _errorservice: ErrorService,
+              projektteendoservice: ProjektteendoService) {
     this.projektteendoservice = projektteendoservice;
   }
 
   ngOnInit() {
     this.Elvegezve = moment().format('YYYY-MM-DD');
-
-    this.projektteendoservice.DtoEdited = deepCopy(this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex]);
   }
 
   onSubmit() {
     this.eppFrissit = true;
 
-    this.projektteendoservice.DtoEdited.Elvegezve = moment(this.Elvegezve).toISOString(true);
-    this.projektteendoservice.Update(this.projektteendoservice.DtoEdited)
+    this.DtoEdited.Elvegezve = moment(this.Elvegezve).toISOString(true);
+    this.projektteendoservice.Update(this.DtoEdited)
     .then(res1 => {
       if (res1.Error !== null) {
         throw res1.Error;
@@ -54,10 +58,8 @@ export class ProjektTeendoElvegezveComponent implements OnInit, OnDestroy {
         throw res2.Error;
       }
 
-      propCopy(res2.Result[0], this.projektteendoservice.Dto[this.projektteendoservice.DtoSelectedIndex]);
-
       this.eppFrissit = false;
-      this.eventSzerkeszteskesz.emit();
+      this.eventSzerkeszteskesz.emit(res2.Result[0]);
     })
     .catch(err => {
       this.eppFrissit = false;
@@ -65,7 +67,7 @@ export class ProjektTeendoElvegezveComponent implements OnInit, OnDestroy {
     });
   }
 
-  cancel() {
+  onCancel() {
     this.eventSzerkeszteskesz.emit();
   }
 

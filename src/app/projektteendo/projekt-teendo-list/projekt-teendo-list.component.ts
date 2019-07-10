@@ -1,17 +1,27 @@
-import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ProjektteendoService} from '../projektteendo.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
+import {ProjektteendoDto} from '../projektteendodto';
+import {EgyMode} from '../../enums/egymode';
+import {propCopy} from '../../tools/propCopy';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-projekt-teendo-list',
-  templateUrl: './projekt-teendo-list.component.html'
+  templateUrl: './projekt-teendo-list.component.html',
+  animations: [rowanimation]
 })
-export class ProjektTeendoListComponent implements OnDestroy {
+export class ProjektTeendoListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
   @Input() Projektkod = -1;
+
+  Dto = new Array<ProjektteendoDto>();
+  DtoSelectedIndex = -1;
+
+  egymode = EgyMode.Reszletek;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -24,18 +34,27 @@ export class ProjektTeendoListComponent implements OnDestroy {
 
   projektteendoservice: ProjektteendoService;
 
-  constructor(projektteendoservice: ProjektteendoService,
-              private _spinnerservice: SpinnerService,
-              private _errorservice: ErrorService) {
+  constructor(private _spinnerservice: SpinnerService,
+              private _errorservice: ErrorService,
+              projektteendoservice: ProjektteendoService) {
     this.projektteendoservice = projektteendoservice;
+  }
+
+  ngOnInit() {
+    this.onKereses();
   }
 
   onKereses() {
     this.tabla.clearselections();
 
     this.eppFrissit = true;
-    this.projektteendoservice.Kereses()
+    this.projektteendoservice.Select(this.Projektkod)
       .then(res => {
+        if (res.Error !== null) {
+          throw res.Error;
+        }
+
+        this.Dto = res.Result;
         this.eppFrissit = false;
       })
       .catch(err => {
@@ -45,19 +64,52 @@ export class ProjektTeendoListComponent implements OnDestroy {
   }
 
   onId(i: number) {
-    this.projektteendoservice.DtoSelectedIndex = i;
+    this.DtoSelectedIndex = i;
+    this.egymode = EgyMode.Reszletek;
   }
 
-  onUj() {
+  doNav(i: number) {
+    this.egymode = i;
+  }
+
+  onUjtetel() {
     this.tabla.ujtetelstart();
   }
-
-  onUjkesz() {
+  onUjtetelkesz(dto: ProjektteendoDto) {
+    if (dto !== null) {
+      this.Dto.unshift(dto);
+    }
     this.tabla.ujtetelstop();
   }
+  onModositaskesz(dto: ProjektteendoDto) {
+    if (dto !== null) {
+      propCopy(dto, this.Dto[this.DtoSelectedIndex]);
+    }
+    this.egymode = EgyMode.Reszletek;
+  }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
 
-  onTorlesutan() {
-    this.tabla.clearselections();
+      this.projektteendoservice.Delete(this.Dto[this.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
+
+          this.Dto.splice(this.DtoSelectedIndex, 1);
+          this.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.tabla.clearselections();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
   }
 
   ngOnDestroy() {

@@ -6,7 +6,6 @@ import {ProjektteendoDto} from './projektteendodto';
 import {LogonService} from '../logon/logon.service';
 import {ProjektteendoResult} from './projektteendoresult';
 import {EmptyResult} from '../dtos/emptyresult';
-import {ProjektteendoSzerkesztesMode} from './projektteendoszerkesztesmode';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 
@@ -16,14 +15,6 @@ import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 export class ProjektteendoService {
   private readonly _controller = 'api/projektteendo/';
   cim = 'Projekt teendő';
-
-  ProjektKod = -1;
-
-  Dto: ProjektteendoDto[] = new Array<ProjektteendoDto>();
-  DtoEdited = new ProjektteendoDto();
-  DtoSelectedIndex = -1;
-
-  SzerkesztesMode = ProjektteendoSzerkesztesMode.Blank;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;
@@ -95,22 +86,6 @@ export class ProjektteendoService {
     };
 
     return this._httpClient.post<NumberResult>(url, body, options).toPromise();
-  }
-
-  public Kereses(): Promise<EmptyResult> {
-    this.Dto = new Array<ProjektteendoDto>();
-    this.DtoSelectedIndex = -1;
-
-    return this.Select(this.ProjektKod)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        this.Dto = res.Result;
-
-        return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
-      });
   }
 
   public GetGridSettings(): Promise<ColumnSettingsResult> {

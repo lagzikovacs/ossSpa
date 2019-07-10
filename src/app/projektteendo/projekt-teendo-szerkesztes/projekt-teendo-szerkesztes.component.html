@@ -9,7 +9,7 @@
         <div class="egylabel">Dedikálva</div>
         <input type="text" class="form-control form-control-sm oszlop3" id="dedikalva"
                autocomplete="off" style="background-color: aquamarine; display: inline-block"
-               [(ngModel)]="projektteendoservice.DtoEdited.Dedikalva" name="dedikalva">
+               [(ngModel)]="DtoEdited.Dedikalva" name="dedikalva">
         <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="FelhasznaloZoom()">...</button>
       </div>
     </div>
@@ -28,7 +28,7 @@
         <div class="egylabel">Teendő</div>
         <input type="text" class="form-control form-control-sm oszlop6" id="teendo"
                maxlength="100" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
-               [(ngModel)]="projektteendoservice.DtoEdited.Teendo" name="teendo">
+               [(ngModel)]="DtoEdited.Teendo" name="teendo">
         <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="TeendoZoom()">...</button>
       </div>
     </div>
@@ -38,7 +38,7 @@
         <div class="egylabel">Leírás</div>
         <input type="text" class="form-control form-control-sm oszlop6" id="leiras"
                autocomplete="off"
-               [(ngModel)]="projektteendoservice.DtoEdited.Leiras" name="leiras">
+               [(ngModel)]="DtoEdited.Leiras" name="leiras">
       </div>
     </div>
 
@@ -48,13 +48,13 @@
     </div>
   </form>
 
-  <ng-container *ngIf="projektteendoservice.SzerkesztesMode === 1">
-    <app-felhasznalo-list [maszk]="this.projektteendoservice.DtoEdited.Dedikalva || ''"
+  <ng-container *ngIf="SzerkesztesMode === 1">
+    <app-felhasznalo-list [maszk]="DtoEdited.Dedikalva || ''"
                           (eventSelectzoom)="onFelhasznaloSelectzoom($event)"
                           (eventStopzoom)="onFelhasznaloStopzoom()"></app-felhasznalo-list>
   </ng-container>
-  <ng-container *ngIf="projektteendoservice.SzerkesztesMode === 2">
-    <app-teendo-list [maszk]="this.projektteendoservice.DtoEdited.Teendo || ''"
+  <ng-container *ngIf="SzerkesztesMode === 2">
+    <app-teendo-list [maszk]="DtoEdited.Teendo || ''"
                      (eventSelectzoom)="onTeendoSelectzoom($event)"
                      (eventStopzoom)="onTeendoStopzoom()"></app-teendo-list>
   </ng-container>

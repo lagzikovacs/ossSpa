@@ -14,6 +14,7 @@ import {EgyMode} from '../../enums/egymode';
 import {IratDto} from '../iratdto';
 import {propCopy} from '../../tools/propCopy';
 import {deepCopy} from '../../tools/deepCopy';
+import {ProjektDto} from '../../projekt/projektdto';
 
 @Component({
   selector: 'app-irat-egy',
@@ -36,6 +37,7 @@ export class IratEgyComponent implements OnDestroy {
 
   egymode = EgyMode.Dokumentum;
 
+  IratProjektje: ProjektDto;
   nincsProjekt = false;
   jog = false;
 
@@ -100,8 +102,7 @@ export class IratEgyComponent implements OnDestroy {
         }
 
         if (!this.nincsProjekt) {
-          this.projektservice.Dto = res1.Result;
-          this.projektservice.DtoSelectedIndex = 0;
+          this.IratProjektje = res1.Result[0];
         }
 
         this.egymode = EgyMode.Projekt;

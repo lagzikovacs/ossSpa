@@ -70,7 +70,7 @@
       <app-irat-nincsprojekt *ngIf="nincsProjekt"></app-irat-nincsprojekt>
       <app-reszletek *ngIf="!nincsProjekt"
                      [cim]="projektservice.cim"
-                     [item]="projektservice.Dto[projektservice.DtoSelectedIndex]"
+                     [item]="IratProjektje"
                      [colsets]="projektservice.ReszletekSettings">
       </app-reszletek>
     </div>

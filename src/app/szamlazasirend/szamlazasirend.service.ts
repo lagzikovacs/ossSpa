@@ -17,14 +17,6 @@ export class SzamlazasirendService {
   private readonly _controller = 'api/szamlazasirend/';
   cim = 'Számlázási rend';
 
-  ProjektKod = -1;
-
-  Dto: SzamlazasirendDto[] = new Array<SzamlazasirendDto>();
-  DtoEdited = new SzamlazasirendDto();
-  DtoSelectedIndex = -1;
-
-  SzerkesztesMode = SzamlazasirendSzerkesztesMode.Blank;
-
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;
 
@@ -95,22 +87,6 @@ export class SzamlazasirendService {
     };
 
     return this._httpClient.post<NumberResult>(url, body, options).toPromise();
-  }
-
-  public Kereses(): Promise<EmptyResult> {
-    this.Dto = new Array<SzamlazasirendDto>();
-    this.DtoSelectedIndex = -1;
-
-    return this.Select(this.ProjektKod)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        this.Dto = res.Result;
-
-        return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
-      });
   }
 
   public GetGridSettings(): Promise<ColumnSettingsResult> {

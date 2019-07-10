@@ -117,11 +117,19 @@
   </ng-container>
 
   <ng-container *ngIf="egymode === 25">
-    <div [@rowanimation]><app-szamlazasirend-list></app-szamlazasirend-list></div>
+    <div [@rowanimation]>
+      <app-szamlazasirend-list [Projektkod]="projektservice.Dto[projektservice.DtoSelectedIndex].Projektkod">
+
+      </app-szamlazasirend-list>
+    </div>
   </ng-container>
 
   <ng-container *ngIf="egymode === 26">
-    <div [@rowanimation]><app-projekt-teendo-list></app-projekt-teendo-list></div>
+    <div [@rowanimation]>
+      <app-projekt-teendo-list [Projektkod]="projektservice.Dto[projektservice.DtoSelectedIndex].Projektkod">
+
+      </app-projekt-teendo-list>
+    </div>
   </ng-container>
 
   <ng-container *ngIf="egymode === 27">

@@ -121,24 +121,9 @@ export class ProjektListComponent implements OnDestroy {
     const ProjektKod = this.projektservice.Dto[this.projektservice.DtoSelectedIndex].Projektkod;
     const UgyfelKod = this.projektservice.Dto[this.projektservice.DtoSelectedIndex].Ugyfelkod;
 
-    this._szamlazasirendservice.ProjektKod = ProjektKod;
-    this._projektteendoservice.ProjektKod = ProjektKod;
     this._ajanlatservice.ProjektKod = ProjektKod;
 
-    this.eppFrissit = true;
-    this._szamlazasirendservice.Kereses()
-      .then(res1 => {
-        return this._projektteendoservice.Kereses();
-      })
-      .then(res2 => {
-        this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
-
-        this.eppFrissit = false;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+    this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
   }
 
   onUj() {

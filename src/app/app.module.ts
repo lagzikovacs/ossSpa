@@ -107,7 +107,6 @@ import {PenztarService} from './penztar/penztar.service';
 import { PenztartetelSzerkesztesComponent } from './penztartetel/penztartetel-szerkesztes/penztartetel-szerkesztes.component';
 import { OnlineszamlaellenorzeseComponent } from './onlineszamla/onlineszamlaellenorzese/onlineszamlaellenorzese.component';
 import { ProjektStatuszComponent } from './projekt/projekt-statusz/projekt-statusz.component';
-import { SzamlazasirendEgyComponent } from './szamlazasirend/szamlazasirend-egy/szamlazasirend-egy.component';
 import { SzamlazasirendSzerkesztesComponent } from './szamlazasirend/szamlazasirend-szerkesztes/szamlazasirend-szerkesztes.component';
 import { ProjektTeendoEgyComponent } from './projektteendo/projekt-teendo-egy/projekt-teendo-egy.component';
 import { ProjektTeendoSzerkesztesComponent } from './projektteendo/projekt-teendo-szerkesztes/projekt-teendo-szerkesztes.component';
@@ -342,7 +341,6 @@ if (environment.production) {
     PenztartetelSzerkesztesComponent,
     OnlineszamlaellenorzeseComponent,
     ProjektStatuszComponent,
-    SzamlazasirendEgyComponent,
     SzamlazasirendSzerkesztesComponent,
     ProjektTeendoEgyComponent,
     ProjektTeendoSzerkesztesComponent,

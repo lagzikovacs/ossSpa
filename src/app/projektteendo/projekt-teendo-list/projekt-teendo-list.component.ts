@@ -1,4 +1,4 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
 import {ProjektteendoService} from '../projektteendo.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
@@ -11,7 +11,7 @@ import {TablaComponent} from '../../tools/tabla/tabla.component';
 export class ProjektTeendoListComponent implements OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
-  projektteendoservice: ProjektteendoService;
+  @Input() Projektkod = -1;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -21,6 +21,8 @@ export class ProjektTeendoListComponent implements OnDestroy {
     this._eppFrissit = value;
     this._spinnerservice.Run = value;
   }
+
+  projektteendoservice: ProjektteendoService;
 
   constructor(projektteendoservice: ProjektteendoService,
               private _spinnerservice: SpinnerService,

@@ -1,17 +1,27 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {SzamlazasirendService} from '../szamlazasirend.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
+import {SzamlazasirendDto} from '../szamlazasirenddto';
+import {EgyMode} from '../../enums/egymode';
+import {propCopy} from '../../tools/propCopy';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-szamlazasirend-list',
-  templateUrl: './szamlazasirend-list.component.html'
+  templateUrl: './szamlazasirend-list.component.html',
+  animations: [rowanimation]
 })
-export class SzamlazasirendListComponent implements OnDestroy {
+export class SzamlazasirendListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: TablaComponent;
 
-  szamlazasirendservice: SzamlazasirendService;
+  @Input() Projektkod = -1;
+
+  Dto = new Array<SzamlazasirendDto>();
+  DtoSelectedIndex = -1;
+
+  egymode = EgyMode.Reszletek;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -22,18 +32,29 @@ export class SzamlazasirendListComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  szamlazasirendservice: SzamlazasirendService;
+
   constructor(szamlazasirendservice: SzamlazasirendService,
               private _spinnerservice: SpinnerService,
               private _errorservice: ErrorService) {
     this.szamlazasirendservice = szamlazasirendservice;
   }
 
+  ngOnInit() {
+    this.onKereses();
+  }
+
   onKereses() {
     this.tabla.clearselections();
 
     this.eppFrissit = true;
-    this.szamlazasirendservice.Kereses()
+    this.szamlazasirendservice.Select(this.Projektkod)
       .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.Dto = res.Result;
         this.eppFrissit = false;
       })
       .catch(err => {
@@ -43,19 +64,52 @@ export class SzamlazasirendListComponent implements OnDestroy {
   }
 
   onId(i: number) {
-    this.szamlazasirendservice.DtoSelectedIndex = i;
+    this.DtoSelectedIndex = i;
+    this.egymode = EgyMode.Reszletek;
   }
 
-  onUj() {
+  doNav(i: number) {
+    this.egymode = i;
+  }
+
+  doUjtetel() {
     this.tabla.ujtetelstart();
   }
-
-  onUjkesz() {
+  onUjtetelkesz(dto: SzamlazasirendDto) {
+    if (dto !== null) {
+      this.Dto.unshift(dto);
+    }
     this.tabla.ujtetelstop();
   }
+  onModositaskesz(dto: SzamlazasirendDto) {
+    if (dto !== null) {
+      propCopy(dto, this.Dto[this.DtoSelectedIndex]);
+    }
+    this.egymode = EgyMode.Reszletek;
+  }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
 
-  onTorlesutan() {
-    this.tabla.clearselections();
+      this.szamlazasirendservice.Delete(this.Dto[this.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
+
+          this.Dto.splice(this.DtoSelectedIndex, 1);
+          this.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.tabla.clearselections();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
   }
 
   ngOnDestroy() {

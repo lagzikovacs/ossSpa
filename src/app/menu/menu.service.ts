@@ -6,9 +6,7 @@ import {AngularmenuResult} from './angularmenuresult';
 import {Router} from '@angular/router';
 import {ProjektService} from '../projekt/projekt.service';
 import {ProjektDto} from '../projekt/projektdto';
-import {SzamlazasirendService} from '../szamlazasirend/szamlazasirend.service';
 import {ProjektteendoService} from '../projektteendo/projektteendo.service';
-import {SzamlazasirendDto} from '../szamlazasirend/szamlazasirenddto';
 import {ProjektteendoDto} from '../projektteendo/projektteendodto';
 import {PlatformLocation} from '@angular/common';
 import {BizonylatService} from '../bizonylat/bizonylat.service';
@@ -29,7 +27,6 @@ export class MenuService {
               private _httpClient: HttpClient,
               private _logonservice: LogonService,
               private _projektservice: ProjektService,
-              private _szamlazasirendservice: SzamlazasirendService,
               private _projektteendoservice: ProjektteendoService,
               private _bizonylatservice: BizonylatService,
               private _vagolapservice: VagolapService) {
@@ -80,7 +77,6 @@ export class MenuService {
         this._projektservice.minta = '';
 
         this._projektservice.Dto = new Array<ProjektDto>();
-        this._szamlazasirendservice.Dto = new Array<SzamlazasirendDto>();
         this._projektteendoservice.Dto = new Array<ProjektteendoDto>();
       break;
       case '/irat':

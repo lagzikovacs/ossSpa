@@ -1,25 +1,29 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {SzamlazasirendService} from '../szamlazasirend.service';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
-import {ZoomSources} from '../../enums/zoomsources';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
-import {ProjektService} from '../../projekt/projekt.service';
 import {SzamlazasirendSzerkesztesMode} from '../szamlazasirendszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {propCopy} from '../../tools/propCopy';
 import {PenznemDto} from '../../primitiv/penznem/penznemdto';
+import {SzamlazasirendDto} from '../szamlazasirenddto';
 
 @Component({
   selector: 'app-szamlazasirend-szerkesztes',
   templateUrl: './szamlazasirend-szerkesztes.component.html'
 })
 export class SzamlazasirendSzerkesztesComponent implements OnInit, OnDestroy {
-  szamlazasirendservice: SzamlazasirendService;
-
   @Input() uj = false;
-  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
+  DtoEdited = new SzamlazasirendDto();
+  @Input() set DtoOriginal(value: SzamlazasirendDto) {
+    this.DtoEdited = deepCopy(value);
+  }
+  @Input() Projektkod = -1;
+  @Output() eventSzerkeszteskesz = new EventEmitter<SzamlazasirendDto>();
+
+  SzerkesztesMode = SzamlazasirendSzerkesztesMode.Blank;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -30,9 +34,10 @@ export class SzamlazasirendSzerkesztesComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  szamlazasirendservice: SzamlazasirendService;
+
   constructor(szamlazasirendservice: SzamlazasirendService,
               private _penznemservice: PenznemService,
-              private _projektservice: ProjektService,
               private _spinnerservice: SpinnerService,
               private _errorservice: ErrorService) {
     this.szamlazasirendservice = szamlazasirendservice;
@@ -47,33 +52,31 @@ export class SzamlazasirendSzerkesztesComponent implements OnInit, OnDestroy {
             throw res.Error;
           }
 
-          this.szamlazasirendservice.DtoEdited = res.Result[0];
+          this.DtoEdited = res.Result[0];
           this.eppFrissit = false;
         })
         .catch(err => {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
-    } else {
-      this.szamlazasirendservice.DtoEdited = deepCopy(this.szamlazasirendservice.Dto[this.szamlazasirendservice.DtoSelectedIndex]);
     }
   }
 
   onSubmit() {
     this.eppFrissit = true;
 
-    this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.szamlazasirendservice.DtoEdited.Penznemkod || 0,
-      this.szamlazasirendservice.DtoEdited.Penznem || ''))
+    this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.DtoEdited.Penznemkod || 0,
+      this.DtoEdited.Penznem || ''))
       .then(res => {
         if (res.Error !== null) {
           throw res.Error;
         }
 
         if (this.uj) {
-          this.szamlazasirendservice.DtoEdited.Projektkod = this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod;
-          return this.szamlazasirendservice.Add(this.szamlazasirendservice.DtoEdited);
+          this.DtoEdited.Projektkod = this.Projektkod;
+          return this.szamlazasirendservice.Add(this.DtoEdited);
         } else {
-          return this.szamlazasirendservice.Update(this.szamlazasirendservice.DtoEdited);
+          return this.szamlazasirendservice.Update(this.DtoEdited);
         }
       })
       .then(res1 => {
@@ -88,14 +91,8 @@ export class SzamlazasirendSzerkesztesComponent implements OnInit, OnDestroy {
           throw res2.Error;
         }
 
-        if (this.uj) {
-          this.szamlazasirendservice.Dto.unshift(res2.Result[0]);
-        } else {
-          propCopy(res2.Result[0], this.szamlazasirendservice.Dto[this.szamlazasirendservice.DtoSelectedIndex]);
-        }
-
         this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit();
+        this.eventSzerkeszteskesz.emit(res2.Result[0]);
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -104,18 +101,18 @@ export class SzamlazasirendSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit();
+    this.eventSzerkeszteskesz.emit(null);
   }
 
   PenznemZoom() {
-    this.szamlazasirendservice.SzerkesztesMode = SzamlazasirendSzerkesztesMode.PenznemZoom;
+    this.SzerkesztesMode = SzamlazasirendSzerkesztesMode.PenznemZoom;
   }
   onPenznemSelectzoom(Dto: PenznemDto) {
-    this.szamlazasirendservice.DtoEdited.Penznemkod = Dto.Penznemkod;
-    this.szamlazasirendservice.DtoEdited.Penznem = Dto.Penznem1;
+    this.DtoEdited.Penznemkod = Dto.Penznemkod;
+    this.DtoEdited.Penznem = Dto.Penznem1;
   }
   onPenznemStopzoom() {
-    this.szamlazasirendservice.SzerkesztesMode = SzamlazasirendSzerkesztesMode.Blank;
+    this.SzerkesztesMode = SzamlazasirendSzerkesztesMode.Blank;
   }
 
   ngOnDestroy() {

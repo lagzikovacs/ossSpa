@@ -9,14 +9,14 @@
         <div class="egylabel">Összeg</div>
         <input type="number" class="form-control form-control-sm oszlop3" id="osszeg"
                required autocomplete="off"
-               [(ngModel)]="szamlazasirendservice.DtoEdited.Osszeg" name="osszeg">
+               [(ngModel)]="DtoEdited.Osszeg" name="osszeg">
       </div>
 
       <div>
         <div class="egylabel">Pénznem</div>
         <input type="text" class="form-control form-control-sm oszlop2" id="penznem"
                maxlength="3" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
-               [(ngModel)]="szamlazasirendservice.DtoEdited.Penznem" name="penznem">
+               [(ngModel)]="DtoEdited.Penznem" name="penznem">
         <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="PenznemZoom()">...</button>
       </div>
     </div>
@@ -26,7 +26,7 @@
         <div class="egylabel">Megjegyzés</div>
         <input type="text" class="form-control form-control-sm oszlop6" id="megjegyzes"
                autocomplete="off"
-               [(ngModel)]="szamlazasirendservice.DtoEdited.Megjegyzes" name="megjegyzes">
+               [(ngModel)]="DtoEdited.Megjegyzes" name="megjegyzes">
       </div>
     </div>
 
@@ -36,8 +36,8 @@
     </div>
   </form>
 
-  <ng-container *ngIf="szamlazasirendservice.SzerkesztesMode === 1">
-    <app-penznem-list [maszk]="this.szamlazasirendservice.DtoEdited.Penznem || ''"
+  <ng-container *ngIf="SzerkesztesMode === 1">
+    <app-penznem-list [maszk]="DtoEdited.Penznem || ''"
                       (eventSelectzoom)="onPenznemSelectzoom($event)"
                       (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
   </ng-container>

@@ -17,11 +17,13 @@
              [ujTemplate]="griduj"
              [egyTemplate]="gridegy">
   </app-tabla>
+
   <ng-template #griduj>
     <app-projekt-teendo-szerkesztes [uj] = "true"
                                     (eventSzerkeszteskesz)="onUjkesz()">
     </app-projekt-teendo-szerkesztes>
   </ng-template>
+
   <ng-template #gridegy>
     <app-projekt-teendo-egy (eventTorlesutan)="onTorlesutan()"></app-projekt-teendo-egy>
   </ng-template>

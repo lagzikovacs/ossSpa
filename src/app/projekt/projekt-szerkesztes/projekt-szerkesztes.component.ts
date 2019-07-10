@@ -12,6 +12,7 @@ import {deepCopy} from '../../tools/deepCopy';
 import {propCopy} from '../../tools/propCopy';
 import {PenznemDto} from '../../primitiv/penznem/penznemdto';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
+import {ProjektDto} from '../projektdto';
 
 @Component({
   selector: 'app-projekt-szerkesztes',
@@ -19,11 +20,14 @@ import {UgyfelDto} from '../../ugyfel/ugyfeldto';
   animations: [rowanimation]
 })
 export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
+  @Input() uj = false;
+  DtoEdited = new ProjektDto();
+  @Input() set DtoOriginal(value: ProjektDto) {
+    this.DtoEdited = deepCopy(value);
+  }
+  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   Keletkezett: any;
-
-  @Input() uj = false;
-  @Output() eventSzerkeszteskesz = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -53,29 +57,27 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
             throw res.Error;
           }
 
-          this.projektservice.DtoEdited = res.Result[0];
+          this.DtoEdited = res.Result[0];
           this.eppFrissit = false;
         })
         .catch(err => {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
-    } else {
-      this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     }
   }
 
   onSubmit() {
     this.eppFrissit = true;
-    this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.projektservice.DtoEdited.Ugyfelkod || 0,
-      this.projektservice.DtoEdited.Ugyfelnev || ''))
+    this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.DtoEdited.Ugyfelkod || 0,
+      this.DtoEdited.Ugyfelnev || ''))
       .then(res => {
         if (res.Error !== null) {
           throw res.Error;
         }
 
-        return this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.projektservice.DtoEdited.Penznemkod || 0,
-          this.projektservice.DtoEdited.Penznem || ''));
+        return this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.DtoEdited.Penznemkod || 0,
+          this.DtoEdited.Penznem || ''));
       })
       .then(res1 => {
         if (res1.Error !== null) {
@@ -83,9 +85,9 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
         }
 
         if (this.uj) {
-          return this.projektservice.Add(this.projektservice.DtoEdited);
+          return this.projektservice.Add(this.DtoEdited);
         } else {
-          return this.projektservice.Update(this.projektservice.DtoEdited);
+          return this.projektservice.Update(this.DtoEdited);
         }
       })
       .then(res2 => {
@@ -122,9 +124,9 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
     this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.UgyfelZoom;
   }
   onUgyfelSelectzoom(Dto: UgyfelDto) {
-    this.projektservice.DtoEdited.Ugyfelkod = Dto.Ugyfelkod;
-    this.projektservice.DtoEdited.Ugyfelnev = Dto.Nev;
-    this.projektservice.DtoEdited.Ugyfelcim = Dto.Cim;
+    this.DtoEdited.Ugyfelkod = Dto.Ugyfelkod;
+    this.DtoEdited.Ugyfelnev = Dto.Nev;
+    this.DtoEdited.Ugyfelcim = Dto.Cim;
   }
   onUgyfelStopzoom() {
     this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
@@ -134,8 +136,8 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
     this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.PenznemZoom;
   }
   onPenznemSelectzoom(Dto: PenznemDto) {
-    this.projektservice.DtoEdited.Penznemkod = Dto.Penznemkod;
-    this.projektservice.DtoEdited.Penznem = Dto.Penznem1;
+    this.DtoEdited.Penznemkod = Dto.Penznemkod;
+    this.DtoEdited.Penznem = Dto.Penznem1;
   }
   onPenznemStopzoom() {
     this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;

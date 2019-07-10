@@ -27,7 +27,6 @@ export class ProjektService {
   OsszesRekord = 0;
 
   Dto: ProjektDto[] = new Array<ProjektDto>();
-  DtoEdited = new ProjektDto();
   DtoSelectedIndex = -1;
 
   SzerkesztesMode = ProjektSzerkesztesMode.Blank;

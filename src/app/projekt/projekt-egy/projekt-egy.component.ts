@@ -9,6 +9,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {EgyMode} from '../../enums/egymode';
 import {propCopy} from '../../tools/propCopy';
+import {ProjektDto} from '../projektdto';
 
 @Component({
   selector: 'app-projekt-egy',
@@ -32,7 +33,6 @@ export class ProjektEgyComponent implements OnDestroy {
   }
 
   constructor(private _logonservice: LogonService,
-              private _projektkapcsolatservice: ProjektkapcsolatService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               projektservice: ProjektService) {
@@ -54,19 +54,15 @@ export class ProjektEgyComponent implements OnDestroy {
   }
 
   stsz() {
-    this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     this.egymode = EgyMode.Statusz;
   }
   muszakiallapot() {
-    this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     this.egymode = EgyMode.Muszakiallapot;
   }
   inverter() {
-    this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     this.egymode = EgyMode.Inverter;
   }
   napelem() {
-    this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     this.egymode = EgyMode.Napelem;
   }
   iratminta() {
@@ -76,7 +72,6 @@ export class ProjektEgyComponent implements OnDestroy {
     // TODO a munkalap írja a projektet, újra kell olvasni
   }
   datumok() {
-    this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     this.egymode = EgyMode.Datumok;
   }
   bizonylatesirat() {
@@ -89,9 +84,9 @@ export class ProjektEgyComponent implements OnDestroy {
     this.egymode = EgyMode.Teendo;
   }
 
-  SegedOk() {
+  SegedOk(dto: ProjektDto) {
     this.eppFrissit = true;
-    this.projektservice.Update(this.projektservice.DtoEdited)
+    this.projektservice.Update(dto)
       .then(res => {
         if (res.Error !== null) {
           throw res.Error;

@@ -9,7 +9,7 @@
         <div class="egylabel">Ügyfél</div>
         <input type="text" class="form-control form-control-sm oszlop6" id="ugyfelnev"
                maxlength="200" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
-               [(ngModel)]="projektservice.DtoEdited.Ugyfelnev" name="ugyfelnev">
+               [(ngModel)]="DtoEdited.Ugyfelnev" name="ugyfelnev">
         <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="UgyfelZoom()">...</button>
       </div>
     </div>
@@ -18,7 +18,7 @@
       <div style="margin-right: 5px">
         <input type="text" class="form-control form-control-sm oszlop6" id="ugyfelcim"
                autocomplete="off" readonly="true"
-               [(ngModel)]="projektservice.DtoEdited.Ugyfelcim" name="ugyfelcim">
+               [(ngModel)]="DtoEdited.Ugyfelcim" name="ugyfelcim">
       </div>
     </div>
 
@@ -27,7 +27,7 @@
         <div class="egylabel">Telepítési cím</div>
         <input type="text" class="form-control form-control-sm oszlop6" id="telepitesicim"
                autocomplete="off"
-               [(ngModel)]="projektservice.DtoEdited.Telepitesicim" name="telepitesicim">
+               [(ngModel)]="DtoEdited.Telepitesicim" name="telepitesicim">
       </div>
     </div>
 
@@ -36,7 +36,7 @@
         <div class="egylabel">A projekt jellege</div>
         <input type="text" class="form-control form-control-sm oszlop6" id="projektjellege"
                autocomplete="off"
-               [(ngModel)]="projektservice.DtoEdited.Projektjellege" name="projektjellege">
+               [(ngModel)]="DtoEdited.Projektjellege" name="projektjellege">
       </div>
     </div>
 
@@ -45,14 +45,14 @@
         <div class="egylabel">Vállalási ár</div>
         <input type="number" class="form-control form-control-sm oszlop3" id="kuldo"
                required
-               [(ngModel)]="projektservice.DtoEdited.Vallalasiarnetto" name="kuldo">
+               [(ngModel)]="DtoEdited.Vallalasiarnetto" name="kuldo">
       </div>
 
       <div style="display: inline-block; margin-right: 5px">
         <div class="egylabel">Pénznem</div>
         <input type="text" class="form-control form-control-sm oszlop2" id="penznem"
                maxlength="30" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
-               [(ngModel)]="projektservice.DtoEdited.Penznem" name="penznem">
+               [(ngModel)]="DtoEdited.Penznem" name="penznem">
         <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="PenznemZoom()">...</button>
       </div>
     </div>
@@ -62,7 +62,7 @@
         <div class="egylabel">Megjegyzés</div>
         <input type="text" class="form-control form-control-sm oszlop6" id="megjegyzes"
                autocomplete="off"
-               [(ngModel)]="projektservice.DtoEdited.Megjegyzes" name="megjegyzes">
+               [(ngModel)]="DtoEdited.Megjegyzes" name="megjegyzes">
       </div>
     </div>
 
@@ -73,13 +73,13 @@
   </form>
 
   <ng-container *ngIf="projektservice.SzerkesztesMode === 1">
-    <app-ugyfel-list [maszk]="projektservice.DtoEdited.Ugyfelnev || ''"
+    <app-ugyfel-list [maszk]="DtoEdited.Ugyfelnev || ''"
                      (eventSelectzoom)="onUgyfelSelectzoom($event)"
                      (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>
   </ng-container>
 
   <ng-container *ngIf="projektservice.SzerkesztesMode === 2">
-    <app-penznem-list [maszk]="projektservice.DtoEdited.Penznem || ''"
+    <app-penznem-list [maszk]="DtoEdited.Penznem || ''"
                       (eventSelectzoom)="onPenznemSelectzoom($event)"
                       (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
   </ng-container>

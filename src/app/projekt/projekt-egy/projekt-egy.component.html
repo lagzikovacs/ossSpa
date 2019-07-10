@@ -63,6 +63,7 @@
   <ng-container *ngIf="egymode === 3">
     <div [@rowanimation]>
       <app-projekt-szerkesztes [uj]="false"
+                               [DtoOriginal]="projektservice.Dto[projektservice.DtoSelectedIndex]"
                                (eventSzerkeszteskesz)="onModositaskesz()">
       </app-projekt-szerkesztes>
     </div>
@@ -72,7 +73,8 @@
 
   <ng-container *ngIf="egymode === 19">
     <div [@rowanimation]><app-projekt-statusz [eppFrissit]="eppFrissit"
-                                              (OkClick)="SegedOk()"
+                                              [DtoOriginal]="projektservice.Dto[projektservice.DtoSelectedIndex]"
+                                              (OkClick)="SegedOk($event)"
                                               (CancelClick)="SegedCancel()">
     </app-projekt-statusz></div>
   </ng-container>
@@ -80,7 +82,8 @@
   <ng-container *ngIf="egymode === 20">
     <div [@rowanimation]>
       <app-projekt-muszakiallapot [eppFrissit]="eppFrissit"
-                                  (OkClick)="SegedOk()"
+                                  [DtoOriginal]="projektservice.Dto[projektservice.DtoSelectedIndex]"
+                                  (OkClick)="SegedOk($event)"
                                   (CancelClick)="SegedCancel()">
       </app-projekt-muszakiallapot>
     </div>
@@ -89,7 +92,8 @@
   <ng-container *ngIf="egymode === 21">
     <div [@rowanimation]>
       <app-projekt-inverter [eppFrissit]="eppFrissit"
-                            (OkClick)="SegedOk()"
+                            [DtoOriginal]="projektservice.Dto[projektservice.DtoSelectedIndex]"
+                            (OkClick)="SegedOk($event)"
                             (CancelClick)="SegedCancel()">
       </app-projekt-inverter>
     </div>
@@ -98,7 +102,8 @@
   <ng-container *ngIf="egymode === 22">
     <div [@rowanimation]>
       <app-projekt-napelem [eppFrissit]="eppFrissit"
-                           (OkClick)="SegedOk()"
+                           [DtoOriginal]="projektservice.Dto[projektservice.DtoSelectedIndex]"
+                           (OkClick)="SegedOk($event)"
                            (CancelClick)="SegedCancel()">
       </app-projekt-napelem>
     </div>
@@ -138,7 +143,8 @@
   <ng-container *ngIf="egymode === 27">
     <div [@rowanimation]>
       <app-projekt-datumok [eppFrissit]="eppFrissit"
-                           (OkClick)="SegedOk()"
+                           [DtoOriginal]="projektservice.Dto[projektservice.DtoSelectedIndex]"
+                           (OkClick)="SegedOk($event)"
                            (CancelClick)="SegedCancel()">
       </app-projekt-datumok>
     </div>

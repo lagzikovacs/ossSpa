@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {rowanimation} from '../../animation/rowAnimation';
+import {deepCopy} from '../../tools/deepCopy';
+import {ProjektDto} from '../projektdto';
 
 @Component({
   selector: 'app-projekt-muszakiallapot',
@@ -8,21 +10,25 @@ import {rowanimation} from '../../animation/rowAnimation';
   animations: [rowanimation]
 })
 export class ProjektMuszakiallapotComponent implements OnInit, OnDestroy {
-  projektservice: ProjektService;
+  @Input() eppFrissit: boolean;
+  DtoEdited = new ProjektDto();
+  @Input() set DtoOriginal(value: ProjektDto) {
+    this.DtoEdited = deepCopy(value);
+  }
+  @Output() OkClick = new EventEmitter<ProjektDto>();
+  @Output() CancelClick = new EventEmitter<void>();
 
   entries = ['', 'Nincs elkezdve a kivitelezése', 'Elkezdve a kivitelezése', 'Beüzemelve, hiányos', 'Beüzemelve, átadva'];
   selected = '';
-  @Input() eppFrissit: boolean;
 
-  @Output() OkClick = new EventEmitter<void>();
-  @Output() CancelClick = new EventEmitter<void>();
+  projektservice: ProjektService;
 
   constructor(projektservice: ProjektService) {
     this.projektservice = projektservice;
   }
 
   ngOnInit() {
-    this.selected = this.projektservice.DtoEdited.Muszakiallapot || '';
+    this.selected = this.DtoEdited.Muszakiallapot || '';
   }
 
   change(entry) {
@@ -30,9 +36,9 @@ export class ProjektMuszakiallapotComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.projektservice.DtoEdited.Muszakiallapot = this.selected;
+    this.DtoEdited.Muszakiallapot = this.selected;
 
-    this.OkClick.emit();
+    this.OkClick.emit(this.DtoEdited);
 
   }
   cancel() {

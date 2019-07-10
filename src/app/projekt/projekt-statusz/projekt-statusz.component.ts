@@ -40,7 +40,7 @@ export class ProjektStatuszComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.DtoEdited.Statusz = this.selected;
 
-    this.OkClick.emit();
+    this.OkClick.emit(this.DtoEdited);
   }
   cancel() {
     this.CancelClick.emit();

@@ -3,36 +3,181 @@
   <app-projekttoolbar [Statuszszurok]="statuszszurok"
                       [Teendoszurok]="teendoszurok"
                       [Szurok]="szurok"
-                      [(statuszszempont)]="projektservice.statuszszempont"
-                      [(teendoszempont)]="projektservice.teendoszempont"
-                      [(szempont)]="projektservice.szempont"
-                      [(minta)]="projektservice.minta"
+                      [(statuszszempont)]="statuszszempont"
+                      [(teendoszempont)]="teendoszempont"
+                      [(szempont)]="szempont"
+                      [(minta)]="minta"
                       [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-                      [enUj]="!eppFrissit && mod" (Uj)="onUj()"
+                      [enUj]="!eppFrissit && mod" (Uj)="doUjtetel()"
                       [enExport]="!eppFrissit" (Export)="onExport($event)">
   </app-projekttoolbar>
 
   <ng-container *ngIf="export">
     <app-projekt-export [projektcsoport]="projektcsoport"
+                        [statuszszempont]="statuszszempont"
                         (eventBezar)="doExportbezar()"></app-projekt-export>
   </ng-container>
 
   <app-projekt-tabla #tabla
-                     [Dto]="projektservice.Dto"
-                     (forid)="setClickedRow($event)"
+                     [Dto]="Dto"
+                     (forid)="onId($event)"
                      [ujTemplate]="griduj"
                      [egyTemplate]="gridegy">
   </app-projekt-tabla>
+
   <ng-template #griduj>
     <app-projekt-szerkesztes [uj]="true"
-                             (eventSzerkeszteskesz)="onUjkesz()"></app-projekt-szerkesztes>
+                             (eventSzerkeszteskesz)="onUjtetelkesz($event)">
+    </app-projekt-szerkesztes>
   </ng-template>
+
   <ng-template #gridegy>
-    <app-projekt-egy (eventTorlesutan)="torlesutan()"></app-projekt-egy>
+    <div class="alapkeret">
+      <div>
+        <nav>
+          <button [disabled]="eppFrissit" (click)="doNav(1)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+            <i class="fa fa-file" aria-hidden="true"></i>
+          </button>
+
+          <button [disabled]="eppFrissit || !mod" (click)="doNav(2)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+            <i class="fa fa-minus" aria-hidden="true"></i>
+          </button>
+
+          <button [disabled]="eppFrissit || !mod" (click)="doNav(3)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+            <i class="fa fa-edit" aria-hidden="true"></i>
+          </button>
+
+          <button [disabled]="eppFrissit || !mod" (click)="doNav(19)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+            Stsz
+          </button>
+          <button [disabled]="eppFrissit || !mod" (click)="doNav(20)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+            Műszaki állapot
+          </button>
+          <button [disabled]="eppFrissit || !mod" (click)="doNav(21)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+            Inverter
+          </button>
+          <button [disabled]="eppFrissit || !mod" (click)="doNav(22)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+            Napelem
+          </button>
+          <button [disabled]="eppFrissit" (click)="doNav(23)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+            Iratminta
+          </button>
+          <button [disabled]="eppFrissit" (click)="doNav(24)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+            Bizonylat és irat
+          </button>
+          <button [disabled]="eppFrissit" (click)="doNav(25)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+            Számlázási rend
+          </button>
+          <button [disabled]="eppFrissit" (click)="doNav(26)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+            Teendő
+          </button>
+          <button [disabled]="eppFrissit || !mod" (click)="doNav(27)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+            Dátumok
+          </button>
+        </nav>
+      </div>
+
+
+      <ng-container *ngIf="egymode === 1">
+        <div [@rowanimation]>
+          <app-reszletek [cim]="projektservice.cim"
+                         [item]="Dto[DtoSelectedIndex]"
+                         [colsets]="projektservice.ReszletekSettings">
+          </app-reszletek>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 2">
+        <div [@rowanimation]>
+          <app-tetel-torles [cim]="projektservice.cim"
+                            [eppFrissit]="eppFrissit"
+                            (eventTorles)="onTorles($event)">
+          </app-tetel-torles>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 3">
+        <div [@rowanimation]>
+          <app-projekt-szerkesztes [uj]="false"
+                                   [DtoOriginal]="Dto[DtoSelectedIndex]"
+                                   (eventSzerkeszteskesz)="onModositaskesz($event)">
+          </app-projekt-szerkesztes>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="egymode === 19">
+        <div [@rowanimation]><app-projekt-statusz [eppFrissit]="eppFrissit"
+                                                  [DtoOriginal]="Dto[DtoSelectedIndex]"
+                                                  (OkClick)="SegedOk($event)"
+                                                  (CancelClick)="SegedCancel()">
+        </app-projekt-statusz></div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 20">
+        <div [@rowanimation]>
+          <app-projekt-muszakiallapot [eppFrissit]="eppFrissit"
+                                      [DtoOriginal]="Dto[DtoSelectedIndex]"
+                                      (OkClick)="SegedOk($event)"
+                                      (CancelClick)="SegedCancel()">
+          </app-projekt-muszakiallapot>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 21">
+        <div [@rowanimation]>
+          <app-projekt-inverter [eppFrissit]="eppFrissit"
+                                [DtoOriginal]="Dto[DtoSelectedIndex]"
+                                (OkClick)="SegedOk($event)"
+                                (CancelClick)="SegedCancel()">
+          </app-projekt-inverter>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 22">
+        <div [@rowanimation]>
+          <app-projekt-napelem [eppFrissit]="eppFrissit"
+                               [DtoOriginal]="Dto[DtoSelectedIndex]"
+                               (OkClick)="SegedOk($event)"
+                               (CancelClick)="SegedCancel()">
+          </app-projekt-napelem>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 27">
+        <div [@rowanimation]>
+          <app-projekt-datumok [eppFrissit]="eppFrissit"
+                               [DtoOriginal]="Dto[DtoSelectedIndex]"
+                               (OkClick)="SegedOk($event)"
+                               (CancelClick)="SegedCancel()">
+          </app-projekt-datumok>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 23">
+        <div [@rowanimation]>
+          <app-projekt-iratminta [Projektkod]="Dto[DtoSelectedIndex].Projektkod"
+                                 (eventMunkalaputan)="onMunkalaputan()">
+          </app-projekt-iratminta>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 24">
+        <div [@rowanimation]>
+          <app-projektkapcsolat-list [Projektkod]="Dto[DtoSelectedIndex].Projektkod"
+                                     [Ugyfelkod]="Dto[DtoSelectedIndex].Ugyfelkod">
+          </app-projektkapcsolat-list>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 25">
+        <div [@rowanimation]>
+          <app-szamlazasirend-list [Projektkod]="Dto[DtoSelectedIndex].Projektkod">
+          </app-szamlazasirend-list>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 26">
+        <div [@rowanimation]>
+          <app-projekt-teendo-list [Projektkod]="Dto[DtoSelectedIndex].Projektkod">
+          </app-projekt-teendo-list>
+        </div>
+      </ng-container>
+    </div>
   </ng-template>
-  <app-toolbarfooter [enKereses]="!projektservice.elsokereses && !eppFrissit"
-                     [rekordszam]="projektservice.Dto.length"
-                     [osszesrekord]="projektservice.OsszesRekord"
+
+  <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
+                     [rekordszam]="Dto.length"
+                     [osszesrekord]="OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">
   </app-toolbarfooter>
 </div>

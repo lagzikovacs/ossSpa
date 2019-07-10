@@ -31,13 +31,13 @@ export class AjanlatTetelComponent implements OnDestroy {
   CikkZoom() {
     this.ajanlatservice.AjanlatSzerkesztesMode = AjanlatSzerkesztesMode.CikkZoom;
   }
-  onAfakulcsSelectzoom(Dto: CikkDto) {
+  onCikkSelectzoom(Dto: CikkDto) {
     this.ajanlatservice.AjanlatParam.AjanlatBuf[this.ajanlatservice.AjanlattetelIndex].CikkKod = Dto.Cikkkod;
     this.ajanlatservice.AjanlatParam.AjanlatBuf[this.ajanlatservice.AjanlattetelIndex].CikkNev = Dto.Megnevezes;
     this.ajanlatservice.AjanlatParam.AjanlatBuf[this.ajanlatservice.AjanlattetelIndex].AfaMerteke = Dto.Afamerteke;
     this.ajanlatservice.AjanlatParam.AjanlatBuf[this.ajanlatservice.AjanlattetelIndex].EgysegAr = Dto.Egysegar;
   }
-  onAfakulcsStopzoom() {
+  onCikkStopzoom() {
     this.ajanlatservice.AjanlatSzerkesztesMode = AjanlatSzerkesztesMode.Blank;
   }
 

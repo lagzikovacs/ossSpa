@@ -13,15 +13,14 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   templateUrl: './projekt-export.component.html'
 })
 export class ProjektExportComponent implements OnDestroy {
-  projektservice: ProjektService;
-  riportservice: RiportService;
+  @Input() statuszszempont = -1;
+  @Input() projektcsoport = '';
+  @Output() eventBezar = new EventEmitter<void>();
+
   megszakitani = false;
 
   tasktoken = '';
   szamlalo: any;
-
-  @Input() projektcsoport = '';
-  @Output() eventBezar = new EventEmitter<void>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -32,9 +31,12 @@ export class ProjektExportComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(projektservice: ProjektService,
-              private _errorservice: ErrorService,
+  projektservice: ProjektService;
+  riportservice: RiportService;
+
+  constructor(private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
+              projektservice: ProjektService,
               riportservice: RiportService) {
     this.projektservice = projektservice,
     this.riportservice = riportservice;
@@ -45,7 +47,7 @@ export class ProjektExportComponent implements OnDestroy {
     this.megszakitani = false;
 
     const fi = [
-      new SzMT(Szempont.Null, this.projektservice.statuszszempont.toString()),
+      new SzMT(Szempont.Null, this.statuszszempont.toString()),
       new SzMT(Szempont.Null, this.projektcsoport)
     ];
 

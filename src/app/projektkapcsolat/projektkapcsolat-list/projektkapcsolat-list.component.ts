@@ -190,7 +190,7 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
     if (dto !== null) {
       this.eppFrissit = true;
       this.projektkapcsolatservice.AddIratToProjekt(new ProjektKapcsolatParameter(
-            this.Dto[this.DtoSelectedIndex].Projektkod, 0, dto.Iratkod, undefined))
+            this.Projektkod, 0, dto.Iratkod, undefined))
         .then(res1 => {
           if (res1.Error != null) {
             throw res1.Error;
@@ -228,6 +228,14 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
     this.tabla.clearselections();
     this.tabla.ujajanlatOk = true;
   }
+  onAjanlatutan(dto: ProjektKapcsolatDto) {
+    if (dto !== null) {
+      this.Dto.unshift(dto);
+      this.tabla.nemOk();
+    } else {
+      this.tabla.nemOk();
+    }
+  }
 
 
   // TODO app-bizonylat-egy eseménye, vszeg később nem kell
@@ -262,10 +270,6 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
   }
   onVagolaprolutanvege() {
     this.tabla.nemOk();
-  }
-
-  onAjanlatutan(dto: ProjektKapcsolatDto) {
-    this.Dto.unshift(dto);
   }
 
   ngOnDestroy() {

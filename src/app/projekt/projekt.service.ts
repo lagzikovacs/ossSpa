@@ -6,7 +6,6 @@ import {ProjektParameter} from './projektparameter';
 import {environment} from '../../environments/environment';
 import {ProjektResult} from './projektresult';
 import {NumberResult} from '../dtos/numberresult';
-import {ProjektSzerkesztesMode} from './projektszerkesztesmode';
 import {EmptyResult} from '../dtos/emptyresult';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
@@ -17,19 +16,6 @@ import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 export class ProjektService {
   private readonly _controller = 'api/projekt/';
   cim = 'Projekt';
-
-  statuszszempont = 0;
-  teendoszempont = 0;
-  szempont = 0;
-  minta = '';
-  pp = new ProjektParameter(0, environment.lapmeret);
-  elsokereses = true;
-  OsszesRekord = 0;
-
-  Dto: ProjektDto[] = new Array<ProjektDto>();
-  DtoSelectedIndex = -1;
-
-  SzerkesztesMode = ProjektSzerkesztesMode.Blank;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

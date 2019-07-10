@@ -4,8 +4,6 @@ import {environment} from '../../environments/environment';
 import {LogonService} from '../logon/logon.service';
 import {AngularmenuResult} from './angularmenuresult';
 import {Router} from '@angular/router';
-import {ProjektService} from '../projekt/projekt.service';
-import {ProjektDto} from '../projekt/projektdto';
 import {PlatformLocation} from '@angular/common';
 import {BizonylatService} from '../bizonylat/bizonylat.service';
 import {BizonylatTipus} from '../bizonylat/bizonylattipus';
@@ -24,7 +22,6 @@ export class MenuService {
               private _location: PlatformLocation,
               private _httpClient: HttpClient,
               private _logonservice: LogonService,
-              private _projektservice: ProjektService,
               private _bizonylatservice: BizonylatService,
               private _vagolapservice: VagolapService) {
     _location.onPopState(() => {
@@ -68,12 +65,6 @@ export class MenuService {
       break;
 
       case '/projekt':
-        this._projektservice.statuszszempont = 0;
-        this._projektservice.teendoszempont = 0;
-        this._projektservice.szempont = 0;
-        this._projektservice.minta = '';
-
-        this._projektservice.Dto = new Array<ProjektDto>();
       break;
       case '/irat':
       break;

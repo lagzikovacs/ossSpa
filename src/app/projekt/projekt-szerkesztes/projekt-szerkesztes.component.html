@@ -72,13 +72,13 @@
     </div>
   </form>
 
-  <ng-container *ngIf="projektservice.SzerkesztesMode === 1">
+  <ng-container *ngIf="SzerkesztesMode === 1">
     <app-ugyfel-list [maszk]="DtoEdited.Ugyfelnev || ''"
                      (eventSelectzoom)="onUgyfelSelectzoom($event)"
                      (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>
   </ng-container>
 
-  <ng-container *ngIf="projektservice.SzerkesztesMode === 2">
+  <ng-container *ngIf="SzerkesztesMode === 2">
     <app-penznem-list [maszk]="DtoEdited.Penznem || ''"
                       (eventSelectzoom)="onPenznemSelectzoom($event)"
                       (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>

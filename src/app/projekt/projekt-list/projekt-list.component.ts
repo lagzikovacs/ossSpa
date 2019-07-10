@@ -2,20 +2,22 @@ import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
-import {ProjektSzerkesztesMode} from '../projektszerkesztesmode';
-import {ProjektteendoService} from '../../projektteendo/projektteendo.service';
-import {SzamlazasirendService} from '../../szamlazasirend/szamlazasirend.service';
-import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
-import {AjanlatService} from '../../ajanlat/ajanlat.service';
 import {JogKod} from '../../enums/jogkod';
 import {LogonService} from '../../logon/logon.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {ProjektTablaComponent} from '../projekttabla/projekt-tabla.component';
+import {environment} from '../../../environments/environment';
+import {ProjektParameter} from '../projektparameter';
+import {EgyMode} from '../../enums/egymode';
+import {ProjektDto} from '../projektdto';
+import {propCopy} from '../../tools/propCopy';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-projekt-list',
-  templateUrl: './projekt-list.component.html'
+  templateUrl: './projekt-list.component.html',
+  animations: [rowanimation]
 })
 export class ProjektListComponent implements OnDestroy {
   @ViewChild('tabla') tabla: ProjektTablaComponent;
@@ -43,7 +45,18 @@ export class ProjektListComponent implements OnDestroy {
   export = false;
   projektcsoport = '';
 
-  projektservice: ProjektService;
+  statuszszempont = 0;
+  teendoszempont = 0;
+  szempont = 0;
+  minta = '';
+  pp = new ProjektParameter(0, environment.lapmeret);
+  elsokereses = true;
+  OsszesRekord = 0;
+
+  Dto = new Array<ProjektDto>();
+  DtoSelectedIndex = -1;
+
+  egymode = EgyMode.Bizonylatesirat;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -54,11 +67,9 @@ export class ProjektListComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  projektservice: ProjektService;
+
   constructor(private _logonservice: LogonService,
-              private _projektkapcsolatservice: ProjektkapcsolatService,
-              private _szamlazasirendservice: SzamlazasirendService,
-              private _projektteendoservice: ProjektteendoService,
-              private _ajanlatservice: AjanlatService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               projektservice: ProjektService) {
@@ -69,14 +80,14 @@ export class ProjektListComponent implements OnDestroy {
   onKereses() {
     this.export = false;
 
-    this.projektservice.elsokereses = true;
-    this.projektservice.pp.rekordtol = 0;
-    this.projektservice.pp.statusz = this.projektservice.statuszszempont;
-    this.projektservice.pp.fi = new Array();
-    if (this.projektservice.teendoszempont !== 0) {
-      this.projektservice.pp.fi.push(new SzMT(this.teendoSzempontok[this.projektservice.teendoszempont], ''));
+    this.elsokereses = true;
+    this.pp.rekordtol = 0;
+    this.pp.statusz = this.statuszszempont;
+    this.pp.fi = new Array();
+    if (this.teendoszempont !== 0) {
+      this.pp.fi.push(new SzMT(this.teendoSzempontok[this.teendoszempont], ''));
     }
-    this.projektservice.pp.fi.push(new SzMT(this.szempontok[this.projektservice.szempont], this.projektservice.minta));
+    this.pp.fi.push(new SzMT(this.szempontok[this.szempont], this.minta));
 
     this.tabla.clearselections();
 
@@ -84,25 +95,25 @@ export class ProjektListComponent implements OnDestroy {
   }
   onKeresesTovabb() {
     this.eppFrissit = true;
-    this.projektservice.Select(this.projektservice.pp)
+    this.projektservice.Select(this.pp)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        if (this.projektservice.elsokereses) {
-          this.projektservice.Dto = res.Result;
-          this.projektservice.elsokereses = false;
+        if (this.elsokereses) {
+          this.Dto = res.Result;
+          this.elsokereses = false;
         } else {
-          const buf = [...this.projektservice.Dto];
+          const buf = [...this.Dto];
           res.Result.forEach(element => {
             buf.push(element);
           });
-          this.projektservice.Dto = buf;
+          this.Dto = buf;
         }
-        this.projektservice.OsszesRekord = res.OsszesRekord;
+        this.OsszesRekord = res.OsszesRekord;
 
-        this.projektservice.pp.rekordtol += this.projektservice.pp.lapmeret;
+        this.pp.rekordtol += this.pp.lapmeret;
         this.eppFrissit = false;
       })
       .catch(err => {
@@ -111,23 +122,93 @@ export class ProjektListComponent implements OnDestroy {
       });
   }
 
-  setClickedRow(i: number) {
-    this.projektservice.DtoSelectedIndex = i;
-
-    if (this.projektservice.DtoSelectedIndex === -1) {
-      return;
-    }
-
-    this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
+  onId(i: number) {
+    this.DtoSelectedIndex = i;
+    this.egymode = EgyMode.Bizonylatesirat;
   }
 
-  onUj() {
+  doNav(i: number) {
+    this.egymode = i;
+  }
+
+  doUjtetel() {
     this.tabla.ujtetelstart();
   }
-
-  onUjkesz() {
+  onUjtetelkesz(dto: ProjektDto) {
+    if (dto !== null) {
+      this.Dto.unshift(dto);
+    }
     this.tabla.ujtetelstop();
   }
+  onModositaskesz(dto: ProjektDto) {
+    if (dto !== null) {
+      propCopy(dto, this.Dto[this.DtoSelectedIndex]);
+    }
+    this.egymode = EgyMode.Reszletek;
+  }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
+
+      this.projektservice.Delete(this.Dto[this.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
+
+          this.Dto.splice(this.DtoSelectedIndex, 1);
+          this.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.tabla.clearselections();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
+  }
+
+  onMunkalaputan() {
+    // TODO a munkalap írja a projektet, újra kell olvasni
+  }
+
+  SegedOk(dto: ProjektDto) {
+    this.eppFrissit = true;
+    this.projektservice.Update(dto)
+      .then(res => {
+        if (res.Error !== null) {
+          throw res.Error;
+        }
+
+        return this.projektservice.Get(res.Result);
+      })
+      .then(res1 => {
+        if (res1.Error !== null) {
+          throw res1.Error;
+        }
+
+        propCopy(res1.Result[0], this.Dto[this.DtoSelectedIndex]);
+
+        this.eppFrissit = false;
+        this.egymode = EgyMode.Reszletek;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this._errorservice.Error = err;
+      });
+  }
+  SegedCancel() {
+    this.egymode = EgyMode.Reszletek;
+  }
+
+
+
+
+
+
 
   onExport(sszi: number) {
     this.projektcsoport = this.statuszszurok[sszi];

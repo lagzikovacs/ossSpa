@@ -6,8 +6,6 @@ import {AngularmenuResult} from './angularmenuresult';
 import {Router} from '@angular/router';
 import {ProjektService} from '../projekt/projekt.service';
 import {ProjektDto} from '../projekt/projektdto';
-import {ProjektkapcsolatService} from '../projektkapcsolat/projektkapcsolat.service';
-import {ProjektKapcsolatDto} from '../projektkapcsolat/projektkapcsolatdto';
 import {SzamlazasirendService} from '../szamlazasirend/szamlazasirend.service';
 import {ProjektteendoService} from '../projektteendo/projektteendo.service';
 import {SzamlazasirendDto} from '../szamlazasirend/szamlazasirenddto';
@@ -31,7 +29,6 @@ export class MenuService {
               private _httpClient: HttpClient,
               private _logonservice: LogonService,
               private _projektservice: ProjektService,
-              private _projektkapcsolatservice: ProjektkapcsolatService,
               private _szamlazasirendservice: SzamlazasirendService,
               private _projektteendoservice: ProjektteendoService,
               private _bizonylatservice: BizonylatService,
@@ -83,7 +80,6 @@ export class MenuService {
         this._projektservice.minta = '';
 
         this._projektservice.Dto = new Array<ProjektDto>();
-        this._projektkapcsolatservice.Dto = new Array<ProjektKapcsolatDto>();
         this._szamlazasirendservice.Dto = new Array<SzamlazasirendDto>();
         this._projektteendoservice.Dto = new Array<ProjektteendoDto>();
       break;

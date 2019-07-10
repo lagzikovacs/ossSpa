@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {BizonylatTipus} from '../../bizonylat/bizonylattipus';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
@@ -14,6 +14,8 @@ import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
   templateUrl: './projektkapcsolat-ujbizonylat.component.html'
 })
 export class ProjektkapcsolatUjbizonylatComponent implements OnDestroy {
+  @Input() Projektkod = -1;
+  @Input() Ugyfelkod = -1;
   @Output() eventUjbizonylatutan = new EventEmitter<ProjektKapcsolatDto>();
 
   entries = [
@@ -60,7 +62,7 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnDestroy {
         }
 
         bizonylatDto = res.Result[0].Dto;
-        return this._ugyfelservice.Get(this.projektkapcsolatservice.UgyfelKod);
+        return this._ugyfelservice.Get(this.Ugyfelkod);
       })
       .then(res1 => {
         if (res1.Error != null) {
@@ -82,7 +84,7 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnDestroy {
         bizonylatDto.Ugyfelhazszam = ugyfelDto.Hazszam;
 
         return this.projektkapcsolatservice.UjBizonylatToProjekt(new ProjektKapcsolatParameter(
-          this.projektkapcsolatservice.ProjektKod,
+          this.Projektkod,
           0,
           0,
           bizonylatDto

@@ -3,12 +3,9 @@ import {LogonService} from '../logon/logon.service';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {ProjektKapcsolatResult} from './projektkapcsolatresult';
 import {environment} from '../../environments/environment';
-import {ProjektKapcsolatDto} from './projektkapcsolatdto';
-import {IratDto} from '../irat/iratdto';
 import {NumberResult} from '../dtos/numberresult';
 import {ProjektKapcsolatParameter} from './projektkapcsolatparameter';
 import {EmptyResult} from '../dtos/emptyresult';
-import {BizonylatesiratSzerkesztesMode} from './bizonylatesiratszerkesztesmode';
 
 @Injectable({
   providedIn: 'root'
@@ -16,16 +13,6 @@ import {BizonylatesiratSzerkesztesMode} from './bizonylatesiratszerkesztesmode';
 export class ProjektkapcsolatService {
   private readonly _controller = 'api/projektkapcsolat/';
   cim = 'Bizonylat és irat';
-
-  ProjektKod = -1;
-  UgyfelKod = -1;
-
-  Dto: ProjektKapcsolatDto[] = new Array<ProjektKapcsolatDto>();
-  DtoSelectedIndex = -1;
-
-  UjIratDto = new IratDto();
-
-  SzerkesztesMode = BizonylatesiratSzerkesztesMode.Blank;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
@@ -91,37 +78,6 @@ export class ProjektkapcsolatService {
     };
 
     return this._httpClient.post<ProjektKapcsolatResult>(url, body, options).toPromise();
-  }
-
-  public Kereses(): Promise<EmptyResult> {
-    this.Dto = new Array<ProjektKapcsolatDto>();
-    this.DtoSelectedIndex = -1;
-
-    return this.Select(this.ProjektKod)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        this.Dto = res.Result;
-
-        return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
-      });
-  }
-  public KeresesForUgyfelter(): Promise<EmptyResult> {
-    this.Dto = new Array<ProjektKapcsolatDto>();
-    this.DtoSelectedIndex = -1;
-
-    return this.SelectForUgyfelter(this.ProjektKod)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        this.Dto = res.Result;
-
-        return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
-      });
   }
 
   public AddBizonylatToProjekt(pkp: ProjektKapcsolatParameter): Promise<NumberResult> {

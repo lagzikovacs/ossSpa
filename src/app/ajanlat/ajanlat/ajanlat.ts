@@ -60,7 +60,7 @@ export class AjanlatComponent implements OnInit, OnDestroy {
           throw res1.Error;
         }
 
-        this.projektkapcsolatservice.Dto.unshift(res1.Result[0]);
+        // this.projektkapcsolatservice.Dto.unshift(res1.Result[0]);
 
         this.eppFrissit = false;
         this.navigal();

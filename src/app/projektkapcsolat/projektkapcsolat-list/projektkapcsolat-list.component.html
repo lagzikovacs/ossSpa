@@ -3,7 +3,7 @@
 
   <div>
     <nav>
-      <button [disabled]="eppFrissit" (click)="kereses()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins" style="margin-right: 3px">
+      <button [disabled]="eppFrissit" (click)="onKereses()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins" style="margin-right: 3px">
         <i class="fa fa-search" aria-hidden="true"></i>
       </button>
       <button [disabled]="eppFrissit || !BizonylatMod" (click)="onUjbizonylat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
@@ -22,7 +22,7 @@
   </div>
 
   <app-projektkapcsolat-tabla #tabla
-                              [items]="projektkapcsolatservice.Dto"
+                              [items]="Dto"
                               (forid)="setClickedRow($event)"
                               (forlevalasztas)="onLevalasztas($event)"
                               [egyBizonylat]="bizonylategy"
@@ -47,24 +47,28 @@
   </ng-template>
 
   <ng-template #levalasztasegy>
-    <app-projektkapcsolat-levalasztas (eventLevalasztasutan)="onLevalasztasutan($event)">
+    <app-projektkapcsolat-levalasztas [Dto]="Dto[DtoSelectedIndex]"
+                                      (eventLevalasztasutan)="onLevalasztasutan($event)">
     </app-projektkapcsolat-levalasztas>
   </ng-template>
 
   <ng-template #vagolaprolegy>
-    <app-projektkapcsolat-vagolaprol (eventVagolaprolutan)="onVagolaprolutan($event)">
+    <app-projektkapcsolat-vagolaprol (eventVagolaprolutan)="onVagolaprolutan($event)"
+                                     (eventVagolaprolutanvege)="onVagolaprolutanvege()">
     </app-projektkapcsolat-vagolaprol>
   </ng-template>
 
   <ng-template #ujbizonylategy>
-    <app-projektkapcsolat-ujbizonylat (eventUjbizonylatutan)="onUjbizonylatutan($event)">
+    <app-projektkapcsolat-ujbizonylat [Projektkod]="Projektkod"
+                                      [Ugyfelkod]="Ugyfelkod"
+                                      (eventUjbizonylatutan)="onUjbizonylatutan($event)">
     </app-projektkapcsolat-ujbizonylat>
   </ng-template>
 
   <ng-template #ujirategy>
     <app-irat-szerkesztes [uj]="true"
                           [enUgyfel]="false"
-                          [Ugyfelkod]="projektkapcsolatservice.UgyfelKod"
+                          [Ugyfelkod]="UgyfelKod"
                           (eventSzerkeszteskesz)="onUjiratutan($event)">
     </app-irat-szerkesztes>
   </ng-template>

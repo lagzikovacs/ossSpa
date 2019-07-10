@@ -7,13 +7,15 @@ import {NumberResult} from '../../dtos/numberresult';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {ProjektKapcsolatResult} from '../projektkapcsolatresult';
+import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
 
 @Component({
   selector: 'app-projektkapcsolat-vagolaprol',
   templateUrl: './projektkapcsolat-vagolaprol.component.html'
 })
 export class ProjektkapcsolatVagolaprolComponent implements OnDestroy {
-  @Output() eventVagolaprolutan = new EventEmitter<boolean>();
+  @Output() eventVagolaprolutan = new EventEmitter<ProjektKapcsolatDto>();
+  @Output() eventVagolaprolutanvege = new EventEmitter<void>();
 
   ci = 0;
 
@@ -84,7 +86,7 @@ export class ProjektkapcsolatVagolaprolComponent implements OnDestroy {
               throw res.Error;
             }
 
-            this.projektkapcsolatservice.Dto.unshift(res.Result[0]);
+            this.eventVagolaprolutan.emit(res.Result[0]);
 
             ++this.ci;
             this.ciklus();
@@ -99,12 +101,12 @@ export class ProjektkapcsolatVagolaprolComponent implements OnDestroy {
       }
     } else {
       this.eppFrissit = false;
-      this.eventVagolaprolutan.emit(true);
+      this.eventVagolaprolutanvege.emit();
     }
   }
 
   cancel() {
-    this.eventVagolaprolutan.emit(false);
+    this.eventVagolaprolutanvege.emit();
   }
 
   ngOnDestroy() {

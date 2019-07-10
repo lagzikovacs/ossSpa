@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {LogonService} from '../../logon/logon.service';
 import {IratService} from '../../irat/irat.service';
@@ -17,19 +17,24 @@ import {ProjektkapcsolatTablaComponent} from '../projektkapcsolat-tabla/projektk
 import {IratDto} from '../../irat/iratdto';
 import {BizonylatDto} from '../../bizonylat/bizonylatdto';
 import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
+import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
 
 @Component({
   selector: 'app-projektkapcsolat-list',
   templateUrl: './projektkapcsolat-list.component.html'
 })
-export class ProjektkapcsolatListComponent implements OnDestroy {
+export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla') tabla: ProjektkapcsolatTablaComponent;
 
-  projektkapcsolatservice: ProjektkapcsolatService;
+  @Input() Projektkod = -1;
+  @Input() Ugyfelkod = -1;
 
   BizonylatMod = false;
   IratMod = false;
   AjanlatMod = false;
+
+  Dto = new Array<ProjektKapcsolatDto>();
+  DtoSelectedIndex = -1;
 
   OriginalIrat = new IratDto();
   OriginalBizonylat = new BizonylatDto();
@@ -42,6 +47,8 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
     this._eppFrissit = value;
     this._spinnerservice.Run = value;
   }
+
+  projektkapcsolatservice: ProjektkapcsolatService;
 
   constructor(private _logonservice: LogonService,
               private _iratservice: IratService,
@@ -59,11 +66,20 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
     this.projektkapcsolatservice = projektkapcsolatservice;
   }
 
-  kereses() {
+  ngOnInit() {
+    this.onKereses();
+  }
+
+  onKereses() {
     this.eppFrissit = true;
     this.tabla.clearselections();
-    this.projektkapcsolatservice.Kereses()
+    this.projektkapcsolatservice.Select(this.Projektkod)
       .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.Dto = res.Result;
         this.eppFrissit = false;
       })
       .catch(err => {
@@ -74,15 +90,15 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
 
   setClickedRow(i: number) {
     this.tabla.nemOk();
-    this.projektkapcsolatservice.DtoSelectedIndex = i;
+    this.DtoSelectedIndex = i;
 
-    if (this.projektkapcsolatservice.DtoSelectedIndex === -1) {
+    if (this.DtoSelectedIndex === -1) {
       return;
     }
 
-    if (this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Bizonylatkod !== null) {
+    if (this.Dto[this.DtoSelectedIndex].Bizonylatkod !== null) {
       this.eppFrissit = true;
-      this._bizonylatservice.GetComplex(this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Bizonylatkod)
+      this._bizonylatservice.GetComplex(this.Dto[this.DtoSelectedIndex].Bizonylatkod)
         .then(res => {
           if (res.Error != null) {
             throw res.Error;
@@ -104,7 +120,7 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
           }
 
           return this._bizonylatkapcsolatservice.Select(
-            this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Bizonylatkod);
+            this.Dto[this.DtoSelectedIndex].Bizonylatkod);
         })
         .then(res2 => {
           if (res2.Error != null) {
@@ -113,7 +129,7 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
 
           this._bizonylatkapcsolatservice.Dto = res2.Result;
           return this._bizonylatkifizetesservice.Select(
-            this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Bizonylatkod);
+            this.Dto[this.DtoSelectedIndex].Bizonylatkod);
         })
         .then(res3 => {
           if (res3.Error != null) {
@@ -133,9 +149,9 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
         });
     }
 
-    if (this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Iratkod !== null) {
+    if (this.Dto[this.DtoSelectedIndex].Iratkod !== null) {
       this.eppFrissit = true;
-      this._iratservice.Get(this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Iratkod)
+      this._iratservice.Get(this.Dto[this.DtoSelectedIndex].Iratkod)
         .then(res => {
           if (res.Error != null) {
             throw res.Error;
@@ -158,30 +174,53 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
   }
   onUjbizonylatutan(dto: ProjektKapcsolatDto) {
     if (dto !== null) {
-      this.projektkapcsolatservice.Dto.unshift(dto);
+      this.Dto.unshift(dto);
       this.tabla.nemOk();
     } else {
       this.tabla.nemOk();
     }
   }
 
+  // az app-irat-szerkesztes komponenssel dolgoznak
   onUjirat() {
     this.tabla.clearselections();
     this.tabla.ujiratOk = true;
   }
   onUjiratutan(dto: IratDto) {
     if (dto !== null) {
-      // TODO kapcsolatot létrehozni
+      this.eppFrissit = true;
+      this.projektkapcsolatservice.AddIratToProjekt(new ProjektKapcsolatParameter(
+            this.Dto[this.DtoSelectedIndex].Projektkod, 0, dto.Iratkod, undefined))
+        .then(res1 => {
+          if (res1.Error != null) {
+            throw res1.Error;
+          }
+
+          return this.projektkapcsolatservice.Get(res1.Result);
+        })
+        .then(res2 => {
+          if (res2.Error != null) {
+            throw res2.Error;
+          }
+
+          this.Dto.unshift(res2.Result[0]);
+          this.eppFrissit = false;
+          this.tabla.nemOk();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
     } else {
       this.tabla.nemOk();
     }
   }
   onIratSzerkesztesutan(dto: IratDto) {
     if (dto !== null) {
-      this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Keletkezett = dto.Keletkezett;
-      this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Irany = dto.Irany;
-      this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Targy = dto.Targy;
-      this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Tipus = dto.Irattipus;
+      this.Dto[this.DtoSelectedIndex].Keletkezett = dto.Keletkezett;
+      this.Dto[this.DtoSelectedIndex].Irany = dto.Irany;
+      this.Dto[this.DtoSelectedIndex].Targy = dto.Targy;
+      this.Dto[this.DtoSelectedIndex].Tipus = dto.Irattipus;
     }
   }
 
@@ -205,6 +244,7 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
   }
 
 
+  // TODO app-bizonylat-egy eseménye, vszeg később nem kell
   torlesutan() {
     this.tabla.clearselections();
   }
@@ -212,15 +252,15 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
 
   onLevalasztas(i: number) {
     this.tabla.nemOk();
-    this.projektkapcsolatservice.DtoSelectedIndex = i;
+    this.DtoSelectedIndex = i;
     this.tabla.levalasztasOk = true;
   }
   onLevalasztasutan(ok: boolean) {
     if (ok) {
       this.tabla.clearselections();
 
-      this.projektkapcsolatservice.Dto.splice(this.projektkapcsolatservice.DtoSelectedIndex, 1);
-      this.projektkapcsolatservice.DtoSelectedIndex = -1;
+      this.Dto.splice(this.DtoSelectedIndex, 1);
+      this.DtoSelectedIndex = -1;
     } else {
       this.tabla.nemOk();
     }
@@ -231,13 +271,11 @@ export class ProjektkapcsolatListComponent implements OnDestroy {
     this.tabla.clearselections();
     this.tabla.vagolaprolOk = true;
   }
-  onVagolaprolutan(ok: boolean) {
-    if (ok) {
-      // TODO frissítés: lehet majd dto lesz a paraméter és többször is meghívódik
-      this.tabla.nemOk();
-    } else {
-      this.tabla.nemOk();
-    }
+  onVagolaprolutan(dto: ProjektKapcsolatDto) {
+    this.Dto.unshift(dto);
+  }
+  onVagolaprolutanvege() {
+    this.tabla.nemOk();
   }
 
 

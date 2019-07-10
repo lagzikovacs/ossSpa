@@ -1,13 +1,15 @@
-import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
 
 @Component({
   selector: 'app-projektkapcsolat-levalasztas',
   templateUrl: './projektkapcsolat-levalasztas.component.html'
 })
 export class ProjektkapcsolatLevalasztasComponent implements OnDestroy {
+  @Input() Dto = new ProjektKapcsolatDto();
   @Output() eventLevalasztasutan = new EventEmitter<boolean>();
 
   private _eppFrissit = false;
@@ -29,7 +31,7 @@ export class ProjektkapcsolatLevalasztasComponent implements OnDestroy {
 
   ok() {
     this.eppFrissit = true;
-    this.projektkapcsolatservice.Delete(this.projektkapcsolatservice.Dto[this.projektkapcsolatservice.DtoSelectedIndex].Projektkapcsolatkod)
+    this.projektkapcsolatservice.Delete(this.Dto.Projektkapcsolatkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

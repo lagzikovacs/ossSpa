@@ -121,18 +121,12 @@ export class ProjektListComponent implements OnDestroy {
     const ProjektKod = this.projektservice.Dto[this.projektservice.DtoSelectedIndex].Projektkod;
     const UgyfelKod = this.projektservice.Dto[this.projektservice.DtoSelectedIndex].Ugyfelkod;
 
-    this._projektkapcsolatservice.ProjektKod = ProjektKod;
-    this._projektkapcsolatservice.UgyfelKod = UgyfelKod;
-
     this._szamlazasirendservice.ProjektKod = ProjektKod;
     this._projektteendoservice.ProjektKod = ProjektKod;
     this._ajanlatservice.ProjektKod = ProjektKod;
 
     this.eppFrissit = true;
-    this._projektkapcsolatservice.Kereses()
-      .then(res => {
-        return this._szamlazasirendservice.Kereses();
-      })
+    this._szamlazasirendservice.Kereses()
       .then(res1 => {
         return this._projektteendoservice.Kereses();
       })

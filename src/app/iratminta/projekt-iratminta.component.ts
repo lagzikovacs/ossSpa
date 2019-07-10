@@ -1,5 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
-import {ProjektService} from '../projekt/projekt.service';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {b64toBlob} from '../tools/b64toBlob';
 import * as FileSaver from 'file-saver';
 import {IratmintaService} from './iratminta.service';
@@ -13,6 +12,9 @@ import {SpinnerService} from '../tools/spinner/spinner.service';
   animations: [rowanimation]
 })
 export class ProjektIratmintaComponent implements OnDestroy {
+  @Input() Projektkod = -1;
+  @Output() eventMunkalaputan = new EventEmitter<void>();
+
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -22,15 +24,14 @@ export class ProjektIratmintaComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(private _projektservice: ProjektService,
-              private _iratmintaservice: IratmintaService,
+  constructor(private _iratmintaservice: IratmintaService,
               private _spinnerservice: SpinnerService,
               private _errorservice: ErrorService) {
   }
 
   szerzodes() {
     this.eppFrissit = true;
-      this._iratmintaservice.Szerzodes(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod)
+      this._iratmintaservice.Szerzodes(this.Projektkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -46,7 +47,7 @@ export class ProjektIratmintaComponent implements OnDestroy {
   }
   szallitasiszerzodes() {
     this.eppFrissit = true;
-    this._iratmintaservice.Szallitasiszerzodes(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod)
+    this._iratmintaservice.Szallitasiszerzodes(this.Projektkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -62,7 +63,7 @@ export class ProjektIratmintaComponent implements OnDestroy {
   }
   feltetelesszerzodes() {
     this.eppFrissit = true;
-    this._iratmintaservice.Feltetelesszerzodes(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod)
+    this._iratmintaservice.Feltetelesszerzodes(this.Projektkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -78,23 +79,16 @@ export class ProjektIratmintaComponent implements OnDestroy {
   }
   munkalap() {
     this.eppFrissit = true;
-    this._iratmintaservice.Munkalap(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod)
+    this._iratmintaservice.Munkalap(this.Projektkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
         const blob = b64toBlob(res.Result);
         FileSaver.saveAs(blob, 'Munkalap.docx');
-
-        return this._projektservice.Get(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod);
-      })
-      .then(res1 => {
-        if (res1.Error != null) {
-          throw res1.Error;
-        }
-
-        this._projektservice.Dto[this._projektservice.DtoSelectedIndex] = res1.Result[0];
         this.eppFrissit = false;
+
+        this.eventMunkalaputan.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -103,7 +97,7 @@ export class ProjektIratmintaComponent implements OnDestroy {
   }
   elegedettseg() {
     this.eppFrissit = true;
-    this._iratmintaservice.Elegedettseg(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod)
+    this._iratmintaservice.Elegedettseg(this.Projektkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -119,7 +113,7 @@ export class ProjektIratmintaComponent implements OnDestroy {
   }
   elmuemasz() {
     this.eppFrissit = true;
-    this._iratmintaservice.KeszrejelentesElmuEmasz(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod)
+    this._iratmintaservice.KeszrejelentesElmuEmasz(this.Projektkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -135,7 +129,7 @@ export class ProjektIratmintaComponent implements OnDestroy {
   }
   eon() {
     this.eppFrissit = true;
-    this._iratmintaservice.KeszrejelentesEon(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod)
+    this._iratmintaservice.KeszrejelentesEon(this.Projektkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -151,7 +145,7 @@ export class ProjektIratmintaComponent implements OnDestroy {
   }
   demasz() {
     this.eppFrissit = true;
-    this._iratmintaservice.KeszrejelentesNkm(this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod)
+    this._iratmintaservice.KeszrejelentesNkm(this.Projektkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

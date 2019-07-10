@@ -105,7 +105,11 @@
   </ng-container>
 
   <ng-container *ngIf="egymode === 23">
-    <div [@rowanimation]><app-projekt-iratminta></app-projekt-iratminta></div>
+    <div [@rowanimation]>
+      <app-projekt-iratminta [Projektkod]="projektservice.Dto[projektservice.DtoSelectedIndex].Projektkod"
+                             (eventMunkalaputan)="onMunkalaputan()">
+      </app-projekt-iratminta>
+    </div>
   </ng-container>
 
   <ng-container *ngIf="egymode === 24">
@@ -119,7 +123,6 @@
   <ng-container *ngIf="egymode === 25">
     <div [@rowanimation]>
       <app-szamlazasirend-list [Projektkod]="projektservice.Dto[projektservice.DtoSelectedIndex].Projektkod">
-
       </app-szamlazasirend-list>
     </div>
   </ng-container>

@@ -72,6 +72,9 @@ export class ProjektEgyComponent implements OnDestroy {
   iratminta() {
     this.egymode = EgyMode.Iratminta;
   }
+  onMunkalaputan() {
+    // TODO a munkalap írja a projektet, újra kell olvasni
+  }
   datumok() {
     this.projektservice.DtoEdited = deepCopy(this.projektservice.Dto[this.projektservice.DtoSelectedIndex]);
     this.egymode = EgyMode.Datumok;

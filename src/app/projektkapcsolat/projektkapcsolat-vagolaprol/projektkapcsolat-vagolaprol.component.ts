@@ -1,6 +1,5 @@
-import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
-import {ProjektService} from '../../projekt/projekt.service';
 import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
 import {VagolapService} from '../../vagolap/vagolap.service';
 import {NumberResult} from '../../dtos/numberresult';
@@ -14,6 +13,7 @@ import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
   templateUrl: './projektkapcsolat-vagolaprol.component.html'
 })
 export class ProjektkapcsolatVagolaprolComponent implements OnDestroy {
+  @Input() Projektkod = -1;
   @Output() eventVagolaprolutan = new EventEmitter<ProjektKapcsolatDto>();
   @Output() eventVagolaprolutanvege = new EventEmitter<void>();
 
@@ -30,8 +30,7 @@ export class ProjektkapcsolatVagolaprolComponent implements OnDestroy {
 
   projektkapcsolatservice: ProjektkapcsolatService;
 
-  constructor(private _projektservice: ProjektService,
-              private _vagolapservice: VagolapService,
+  constructor(private _vagolapservice: VagolapService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               projektkapcsolatservice: ProjektkapcsolatService) {
@@ -53,14 +52,14 @@ export class ProjektkapcsolatVagolaprolComponent implements OnDestroy {
 
     if (this._vagolapservice.Dto[this.ci].tipus === 0) {
       p = this.projektkapcsolatservice.AddIratToProjekt(new ProjektKapcsolatParameter(
-        this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod,
+        this.Projektkod,
         0,
         this._vagolapservice.Dto[this.ci].iratkod,
         null
       ));
     } else {
       p = this.projektkapcsolatservice.AddBizonylatToProjekt(new ProjektKapcsolatParameter(
-        this._projektservice.Dto[this._projektservice.DtoSelectedIndex].Projektkod,
+        this.Projektkod,
         this._vagolapservice.Dto[this.ci].bizonylatkod,
         0,
         null

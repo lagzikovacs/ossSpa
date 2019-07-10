@@ -53,7 +53,8 @@
   </ng-template>
 
   <ng-template #vagolaprolegy>
-    <app-projektkapcsolat-vagolaprol (eventVagolaprolutan)="onVagolaprolutan($event)"
+    <app-projektkapcsolat-vagolaprol [Projektkod]="Projektkod"
+                                     (eventVagolaprolutan)="onVagolaprolutan($event)"
                                      (eventVagolaprolutanvege)="onVagolaprolutanvege()">
     </app-projektkapcsolat-vagolaprol>
   </ng-template>

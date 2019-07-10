@@ -12,7 +12,7 @@
       <button [disabled]="eppFrissit || !IratMod" (click)="onUjirat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Irat
       </button>
-      <button [disabled]="eppFrissit || !AjanlatMod" (click)="ujajanlat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="eppFrissit || !AjanlatMod" (click)="onUjajanlat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Ajánlat
       </button>
       <button [disabled]="eppFrissit" (click)="onVagolaprol()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
@@ -30,7 +30,8 @@
                               [egyLevalasztas]="levalasztasegy"
                               [egyVagolaprol]="vagolaprolegy"
                               [egyUjbizonylat]="ujbizonylategy"
-                              [egyUjirat]="ujirategy">
+                              [egyUjirat]="ujirategy"
+                              [egyUjajanlat]="ujajanlategy">
   </app-projektkapcsolat-tabla>
 
   <ng-template #bizonylategy>
@@ -72,5 +73,11 @@
                           [Ugyfelkod]="UgyfelKod"
                           (eventSzerkeszteskesz)="onUjiratutan($event)">
     </app-irat-szerkesztes>
+  </ng-template>
+
+  <ng-template #ujajanlategy>
+    <app-ajanlat [Projektkod]="Projektkod"
+                 (eventAjanlatkesz)="onAjanlatutan($event)">
+    </app-ajanlat>
   </ng-template>
 </div>

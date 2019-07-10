@@ -1,9 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
-import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
 import {AjanlatSzerkesztesMode} from '../ajanlatszerkesztesmode';
 import {AjanlatContainerMode} from '../ajanlatcontainermode';
-import {CikkService} from '../../cikk/cikk.service';
-import {ZoomSources} from '../../enums/zoomsources';
 import {AjanlatService} from '../ajanlat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
@@ -15,7 +12,6 @@ import {CikkDto} from '../../cikk/cikkdto';
 })
 export class AjanlatTetelComponent implements OnDestroy {
   ajanlatservice: AjanlatService;
-  projektkapcsolatservice: ProjektkapcsolatService;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -28,10 +24,8 @@ export class AjanlatTetelComponent implements OnDestroy {
 
   constructor(private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
-              ajanlatservice: AjanlatService,
-              projektkapcsolatservice: ProjektkapcsolatService) {
+              ajanlatservice: AjanlatService) {
     this.ajanlatservice = ajanlatservice;
-    this.projektkapcsolatservice = projektkapcsolatservice;
   }
 
   CikkZoom() {

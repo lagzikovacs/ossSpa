@@ -15,6 +15,7 @@ export class ProjektkapcsolatTablaComponent implements OnDestroy {
   @Input() egyVagolaprol: TemplateRef<any>;
   @Input() egyUjbizonylat: TemplateRef<any>;
   @Input() egyUjirat: TemplateRef<any>;
+  @Input() egyUjajanlat: TemplateRef<any>;
 
   @Output() forid = new EventEmitter<number>();
   @Output() forlevalasztas = new EventEmitter<number>();
@@ -25,6 +26,7 @@ export class ProjektkapcsolatTablaComponent implements OnDestroy {
   @Input() vagolaprolOk = false;
   @Input() ujbizonylatOk = false;
   @Input() ujiratOk = false;
+  @Input() ujajanlatOk = false;
 
   clickedrowindex = -1;
   clickedidindex = -1;
@@ -43,6 +45,7 @@ export class ProjektkapcsolatTablaComponent implements OnDestroy {
     this.vagolaprolOk = false;
     this.ujbizonylatOk = false;
     this.ujiratOk = false;
+    this.ujajanlatOk = false;
   }
 
   clickforid(i: number) {

@@ -224,23 +224,9 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
     }
   }
 
-  ujajanlat() {
-    this.eppFrissit = true;
-    this._ajanlatservice.CreateNew()
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        this._ajanlatservice.AjanlatParam = res.Result;
-
-        this.eppFrissit = false;
-        this._ajanlatservice.AjanlatContainerMode = AjanlatContainerMode.List;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+  onUjajanlat() {
+    this.tabla.clearselections();
+    this.tabla.ujajanlatOk = true;
   }
 
 
@@ -278,7 +264,9 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
     this.tabla.nemOk();
   }
 
-
+  onAjanlatutan(dto: ProjektKapcsolatDto) {
+    this.Dto.unshift(dto);
+  }
 
   ngOnDestroy() {
     Object.keys(this).map(k => {

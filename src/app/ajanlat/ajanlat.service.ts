@@ -14,11 +14,10 @@ import {AjanlatContainerMode} from './ajanlatcontainermode';
 export class AjanlatService {
   private readonly _controller = 'api/ajanlat/';
 
-  ProjektKod = -1;
-
-  AjanlatParam: AjanlatParam;
+  AjanlatParam = new AjanlatParam();
   AjanlatErvenyes: any;
   AjanlattetelIndex = 0;
+
   AjanlatContainerMode = AjanlatContainerMode.List;
   AjanlatSzerkesztesMode = AjanlatSzerkesztesMode.Blank;
 

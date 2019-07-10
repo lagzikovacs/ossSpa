@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {ProjektService} from '../projekt.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
-import {ZoomSources} from '../../enums/zoomsources';
 import {ProjektSzerkesztesMode} from '../projektszerkesztesmode';
 import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
@@ -20,7 +19,7 @@ import {UgyfelDto} from '../../ugyfel/ugyfeldto';
   animations: [rowanimation]
 })
 export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
-  projektservice: ProjektService;
+
   Keletkezett: any;
 
   @Input() uj = false;
@@ -34,6 +33,8 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
     this._eppFrissit = value;
     this._spinnerservice.Run = value;
   }
+
+  projektservice: ProjektService;
 
   constructor(private _ugyfelservice: UgyfelService,
               private _penznemservice: PenznemService,

@@ -118,11 +118,6 @@ export class ProjektListComponent implements OnDestroy {
       return;
     }
 
-    const ProjektKod = this.projektservice.Dto[this.projektservice.DtoSelectedIndex].Projektkod;
-    const UgyfelKod = this.projektservice.Dto[this.projektservice.DtoSelectedIndex].Ugyfelkod;
-
-    this._ajanlatservice.ProjektKod = ProjektKod;
-
     this.projektservice.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
   }
 

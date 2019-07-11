@@ -4,7 +4,6 @@ import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {KifizetesService} from '../../kifizetes/kifizetes.service';
-import {BizonylatKapcsolatContainerMode} from '../../bizonylatkapcsolat/bizonylatkapcsolatcontainermode';
 import {BizonylatkapcsolatService} from '../../bizonylatkapcsolat/bizonylatkapcsolat.service';
 import {BizonylatTipus} from '../bizonylattipus';
 import {PenztarService} from '../../penztar/penztar.service';
@@ -40,8 +39,6 @@ export class BizonylatEgyComponent implements OnDestroy {
   }
 
   constructor(private _logonservice: LogonService,
-              private _projektkapcsolatservice: ProjektkapcsolatService,
-              private _bizonylatkifizetesservice: KifizetesService,
               private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
               private _penztarsevice: PenztarService,
               private _vagolapservice: VagolapService,
@@ -165,7 +162,6 @@ export class BizonylatEgyComponent implements OnDestroy {
   }
   irat() {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Irat;
-    this._bizonylatkapcsolatservice.ContainerMode = BizonylatKapcsolatContainerMode.List;
   }
   formaiellenorzes() {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Formaiellenorzes;

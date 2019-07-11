@@ -23,7 +23,7 @@
 
   <app-projektkapcsolat-tabla #tabla
                               [items]="Dto"
-                              (forid)="setClickedRow($event)"
+                              (forid)="onId($event)"
                               (forlevalasztas)="onLevalasztas($event)"
                               [egyBizonylat]="bizonylategy"
                               [egyIrat]="irategy"

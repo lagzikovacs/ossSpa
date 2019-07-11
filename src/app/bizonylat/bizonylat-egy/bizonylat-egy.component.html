@@ -100,7 +100,9 @@
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 4">
     <div [@rowanimation]>
-      <app-bizonylat-irat-container></app-bizonylat-irat-container>
+      <app-bizonylatkapcsolat-list [Bizonylatkod]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].Bizonylatkod"
+                                   [Ugyfelkod]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].Ugyfelkod">
+      </app-bizonylatkapcsolat-list>
     </div>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 5">

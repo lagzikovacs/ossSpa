@@ -1,15 +1,16 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
-import {BizonylatKapcsolatContainerMode} from '../bizonylatkapcsolatcontainermode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {BizonylatKapcsolatDto} from '../bizonylatkapcsolatdto';
 
 @Component({
-  selector: 'app-bizonylat-irat-levalasztas',
-  templateUrl: './bizonylat-irat-levalasztas.component.html'
+  selector: 'app-bizonylatkapcsolat-levalasztas',
+  templateUrl: './bizonylatkapcsolat-levalasztas.component.html'
 })
-export class BizonylatIratLevalasztasComponent implements OnDestroy {
-  bizonylatkapcsolatservice: BizonylatkapcsolatService;
+export class BizonylatkapcsolatLevalasztasComponent implements OnDestroy {
+  @Input() Dto = new BizonylatKapcsolatDto();
+  @Output() eventLevalasztasutan = new EventEmitter<boolean>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -20,6 +21,8 @@ export class BizonylatIratLevalasztasComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  bizonylatkapcsolatservice: BizonylatkapcsolatService;
+
   constructor(private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               bizonylatkapcsolatservice: BizonylatkapcsolatService) {
@@ -28,17 +31,14 @@ export class BizonylatIratLevalasztasComponent implements OnDestroy {
 
   ok() {
     this.eppFrissit = true;
-    this.bizonylatkapcsolatservice.Delete(this.bizonylatkapcsolatservice.Dto[this.bizonylatkapcsolatservice.DtoSelectedIndex])
+    this.bizonylatkapcsolatservice.Delete(this.Dto)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        this.bizonylatkapcsolatservice.Dto.splice(this.bizonylatkapcsolatservice.DtoSelectedIndex, 1);
-        this.bizonylatkapcsolatservice.DtoSelectedIndex = -1;
-
         this.eppFrissit = false;
-        this.navigal();
+        this.eventLevalasztasutan.emit(true);
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -46,11 +46,9 @@ export class BizonylatIratLevalasztasComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.navigal();
+    this.eventLevalasztasutan.emit(false);
   }
-  navigal() {
-    this.bizonylatkapcsolatservice.ContainerMode = BizonylatKapcsolatContainerMode.List;
-  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

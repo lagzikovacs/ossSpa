@@ -7,26 +7,13 @@ import {BizonylatKapcsolatDto} from './bizonylatkapcsolatdto';
 import {NumberResult} from '../dtos/numberresult';
 import {EmptyResult} from '../dtos/emptyresult';
 import {BizonylatKapcsolatParam} from './bizonylatkapcsolatparam';
-import {BizonylatKapcsolatContainerMode} from './bizonylatkapcsolatcontainermode';
-import {IratDto} from '../irat/iratdto';
-import {BizonylatKapcsolatSzerkesztesMode} from './bizonylatkapcsolatszerkesztesmode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BizonylatkapcsolatService {
   private readonly _controller = 'api/bizonylatkapcsolat/';
-
-  cim = 'Irat';
-  Dto = new Array<BizonylatKapcsolatDto>();
-  DtoSelectedIndex = -1;
-  uj = false;
-  DtoEdited = new BizonylatKapcsolatDto();
-
-  UjIratDto = new IratDto();
-
-  ContainerMode = BizonylatKapcsolatContainerMode.List;
-  SzerkesztesMode = BizonylatKapcsolatSzerkesztesMode.Blank;
+  cim = 'Bizonylatkapcsolat';
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

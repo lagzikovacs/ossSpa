@@ -137,10 +137,8 @@ import { KifizetesSzerkesztesComponent } from './kifizetes/kifizetes-szerkesztes
 import { BizonylatNyomtatasComponent } from './bizonylatnyomtatas/bizonylat-nyomtatas/bizonylat-nyomtatas.component';
 import { ProjektDatumokComponent } from './projekt/projekt-datumok/projekt-datumok.component';
 import { BizonylatReszletekComponent } from './bizonylat/bizonylat-reszletek/bizonylat-reszletek.component';
-import { BizonylatIratContainerComponent } from './bizonylatkapcsolat/bizonylat-irat-container/bizonylat-irat-container.component';
-import { BizonylatIratListComponent } from './bizonylatkapcsolat/bizonylat-irat-list/bizonylat-irat-list.component';
-import { BizonylatIratLevalasztasComponent } from './bizonylatkapcsolat/bizonylat-irat-levalasztas/bizonylat-irat-levalasztas.component';
-import { BizonylatIratUjComponent } from './bizonylatkapcsolat/bizonylat-irat-uj/bizonylat-irat-uj.component';
+import { BizonylatkapcsolatListComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-list/bizonylatkapcsolat-list.component';
+import { BizonylatkapcsolatLevalasztasComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-levalasztas/bizonylatkapcsolat-levalasztas.component';
 import { BizonylatteteltablaComponent } from './bizonylat/bizonylatteteltabla/bizonylatteteltabla.component';
 import { BizonylatafatablaComponent } from './bizonylat/bizonylatafatabla/bizonylatafatabla.component';
 import { BizonylattermekdijtablaComponent } from './bizonylat/bizonylattermekdijtabla/bizonylattermekdijtabla.component';
@@ -158,7 +156,7 @@ import { BizonylatTetelTorlesComponent } from './bizonylat/bizonylat-tetel-torle
 import { VagolapComponent } from './vagolap/vagolap.component';
 import {VagolapService} from './vagolap/vagolap.service';
 import { AbuComponent } from './tools/abu/abu.component';
-import { BizonylatIratVagolaprolComponent } from './bizonylatkapcsolat/bizonylat-irat-vagolaprol/bizonylat-irat-vagolaprol.component';
+import { BizonylatkapcsolatVagolaprolComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-vagolaprol/bizonylatkapcsolat-vagolaprol.component';
 import { ProjektkapcsolatVagolaprolComponent } from './projektkapcsolat/projektkapcsolat-vagolaprol/projektkapcsolat-vagolaprol.component';
 import {AjanlatService} from './ajanlat/ajanlat.service';
 import {IratmintaService} from './iratminta/iratminta.service';
@@ -190,6 +188,7 @@ import { GspinnerComponent } from './tools/spinner/spinner.component';
 import {SpinnerService} from './tools/spinner/spinner.service';
 import { UgyfelterProjektTablaComponent } from './ugyfelter/ugyfelter-projekt-tabla/ugyfelter-projekt-tabla.component';
 import { ProjektkapcsolatTablaComponent } from './projektkapcsolat/projektkapcsolat-tabla/projektkapcsolat-tabla.component';
+import { BizonylatkapcsolatTablaComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-tabla/bizonylatkapcsolat-tabla.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -362,10 +361,8 @@ if (environment.production) {
     BizonylatNyomtatasComponent,
     ProjektDatumokComponent,
     BizonylatReszletekComponent,
-    BizonylatIratContainerComponent,
-    BizonylatIratListComponent,
-    BizonylatIratLevalasztasComponent,
-    BizonylatIratUjComponent,
+    BizonylatkapcsolatListComponent,
+    BizonylatkapcsolatLevalasztasComponent,
     BizonylatteteltablaComponent,
     BizonylatafatablaComponent,
     BizonylattermekdijtablaComponent,
@@ -382,7 +379,7 @@ if (environment.production) {
     BizonylatTetelTorlesComponent,
     VagolapComponent,
     AbuComponent,
-    BizonylatIratVagolaprolComponent,
+    BizonylatkapcsolatVagolaprolComponent,
     ProjektkapcsolatVagolaprolComponent,
     EsemenynaploComponent,
     UgyfelterComponent,
@@ -405,6 +402,7 @@ if (environment.production) {
     GspinnerComponent,
     UgyfelterProjektTablaComponent,
     ProjektkapcsolatTablaComponent,
+    BizonylatkapcsolatTablaComponent,
   ],
   imports: [
     BrowserModule,

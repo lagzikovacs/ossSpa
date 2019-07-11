@@ -2,14 +2,11 @@ import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {LogonService} from '../../logon/logon.service';
 import {IratService} from '../../irat/irat.service';
-import {AjanlatContainerMode} from '../../ajanlat/ajanlatcontainermode';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {BizonylatkapcsolatService} from '../../bizonylatkapcsolat/bizonylatkapcsolat.service';
-import {KifizetesService} from '../../kifizetes/kifizetes.service';
 import {BizonylatEgyMode} from '../../bizonylat/bizonylategymode';
 import {VagolapService} from '../../vagolap/vagolap.service';
 import {VagolapMode} from '../../vagolap/vagolapmode';
-import {AjanlatService} from '../../ajanlat/ajanlat.service';
 import {JogKod} from '../../enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
@@ -54,9 +51,7 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
               private _iratservice: IratService,
               private _bizonylatservice: BizonylatService,
               private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
-              private _bizonylatkifizetesservice: KifizetesService,
               private _vagolapservice: VagolapService,
-              private _ajanlatservice: AjanlatService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               projektkapcsolatservice: ProjektkapcsolatService) {
@@ -88,7 +83,7 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
       });
   }
 
-  setClickedRow(i: number) {
+  onId(i: number) {
     this.tabla.nemOk();
     this.DtoSelectedIndex = i;
 
@@ -119,19 +114,8 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
             throw res1.Error;
           }
 
-          return this._bizonylatkapcsolatservice.Select(
-            this.Dto[this.DtoSelectedIndex].Bizonylatkod);
-        })
-        .then(res2 => {
-          if (res2.Error != null) {
-            throw res2.Error;
-          }
-
-          this._bizonylatkapcsolatservice.Dto = res2.Result;
-
           this._bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
           this.eppFrissit = false;
-
           this.tabla.bizonylatOk = true;
         })
         .catch(err => {

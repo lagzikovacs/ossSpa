@@ -6,7 +6,6 @@ import {SzamlazasirendSzerkesztesMode} from '../szamlazasirendszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
-import {propCopy} from '../../tools/propCopy';
 import {PenznemDto} from '../../primitiv/penznem/penznemdto';
 import {SzamlazasirendDto} from '../szamlazasirenddto';
 

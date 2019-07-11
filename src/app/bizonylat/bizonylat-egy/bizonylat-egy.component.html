@@ -10,10 +10,10 @@
       <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-arrow-left" style="margin-right: 3px" aria-hidden="true"></i>Vissza
       </button>
+
       <button [disabled]="eppFrissit" (click)="reszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>
       </button>
-
       <button [disabled]="eppFrissit || !torlesenabled()" (click)="torles()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-minus" aria-hidden="true"></i>
       </button>
@@ -21,24 +21,18 @@
         <i class="fa fa-edit" aria-hidden="true"></i>
       </button>
 
-      <button [disabled]="eppFrissit" (click)="nyomtatas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-print" style="margin-right: 3px" aria-hidden="true"></i>Nyomtatás
-      </button>
 
-      <button [disabled]="eppFrissit" (click)="errol()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        Erről
-      </button>
       <button [disabled]="eppFrissit || !kibocsatasenabled()" (click)="kibocsatas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Kibocsátás
       </button>
-      <button [disabled]="eppFrissit || !penztarenabled()" (click)="penztar()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        Pénztár
+      <button [disabled]="eppFrissit" (click)="nyomtatas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+        <i class="fa fa-print" style="margin-right: 3px" aria-hidden="true"></i>Nyomtatás
       </button>
       <button [disabled]="eppFrissit || !stornoenabled()" (click)="storno()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Storno
       </button>
-      <button [disabled]="eppFrissit || !kifizetesrendbenenabled()" (click)="kifizetesrendben()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        Kifizetés rendben
+      <button [disabled]="eppFrissit || !penztarenabled()" (click)="penztar()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+        Pénztár
       </button>
       <button [disabled]="eppFrissit || !kiszallitvaenabled()" (click)="kiszallitva()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Kiszállítva
@@ -46,8 +40,18 @@
       <button [disabled]="eppFrissit" (click)="kifizetes()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Kifizetés
       </button>
+      <button [disabled]="eppFrissit || !kifizetesrendbenenabled()" (click)="kifizetesrendben()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+        Kifizetés rendben
+      </button>
       <button [disabled]="eppFrissit" (click)="irat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Irat
+      </button>
+      <button [disabled]="eppFrissit" (click)="errol()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+        Erről
+      </button>
+      <button [disabled]="eppFrissit" (click)="vagolap()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+        <i class="fa fa-angle-right" style="margin-right: 3px" aria-hidden="true"></i>
+        Vágólapra
       </button>
 
       <button [disabled]="eppFrissit || !formaiellenorzesenabled()" (click)="formaiellenorzes()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
@@ -55,10 +59,6 @@
       </button>
       <button [disabled]="eppFrissit || !osnxmlenabled()" (click)="osnxml()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         OSN xml
-      </button>
-      <button [disabled]="eppFrissit" (click)="vagolap()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-angle-right" style="margin-right: 3px" aria-hidden="true"></i>
-        Vágólapra
       </button>
     </nav>
     <app-abu></app-abu>
@@ -94,7 +94,8 @@
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 3">
     <div [@rowanimation]>
-      <app-kifizetes-container></app-kifizetes-container>
+      <app-kifizetes-list [Bizonylat]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex]">
+      </app-kifizetes-list>
     </div>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 4">

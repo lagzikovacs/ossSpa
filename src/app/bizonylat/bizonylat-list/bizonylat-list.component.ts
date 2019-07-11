@@ -112,14 +112,6 @@ export class BizonylatListComponent implements OnDestroy {
         }
 
         this._bizonylatkapcsolatservice.Dto = res1.Result;
-        return this._bizonylatkifizetesservice.Select(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatkod);
-      })
-      .then(res2 => {
-        if (res2.Error != null) {
-          throw res2.Error;
-        }
-
-        this._bizonylatkifizetesservice.Dto = res2.Result;
 
         this.bizonylatservice.ContainerMode = BizonylatContainerMode.Egy;
         this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;

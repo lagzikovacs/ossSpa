@@ -1,27 +1,34 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {KifizetesService} from '../kifizetes.service';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
 import {FizetesimodService} from '../../primitiv/fizetesimod/fizetesimod.service';
-import {ZoomSources} from '../../enums/zoomsources';
 import {KifizetesSzerkesztesMode} from '../kifizetesszerkesztesmode';
 import * as moment from 'moment';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
 import {FizetesimodZoomParameter} from '../../primitiv/fizetesimod/fiztesimodzoomparameter';
-import {KifizetesContainerMode} from '../kifizetescontainermode';
-import {KifizetesEgyMode} from '../kifizetesegymode';
-import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
-import {propCopy} from '../../tools/propCopy';
 import {PenznemDto} from '../../primitiv/penznem/penznemdto';
 import {FizetesimodDto} from '../../primitiv/fizetesimod/fizetesimoddto';
+import {deepCopy} from '../../tools/deepCopy';
+import {KifizetesDto} from '../kifizetesdto';
+import {BizonylatDto} from '../../bizonylat/bizonylatdto';
 
 @Component({
   selector: 'app-kifizetes-szerkesztes',
   templateUrl: './kifizetes-szerkesztes.component.html'
 })
 export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
-  bizonylatkifizetesservice: KifizetesService;
+  @Input() uj = false;
+  DtoEdited = new KifizetesDto();
+  @Input() set DtoOriginal(value: KifizetesDto) {
+    this.DtoEdited = deepCopy(value);
+  }
+  @Input() Bizonylat = new BizonylatDto();
+  @Output() eventSzerkeszteskesz = new EventEmitter<KifizetesDto>();
+
+  SzerkesztesMode = KifizetesSzerkesztesMode.Blank;
+
   Datum: any;
 
   private _eppFrissit = false;
@@ -33,9 +40,10 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  bizonylatkifizetesservice: KifizetesService;
+
   constructor(private _penznemservice: PenznemService,
               private _fizetesimodservice: FizetesimodService,
-              private _bizonylatservice: BizonylatService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               bizonylatkifizetesservice: KifizetesService) {
@@ -43,56 +51,52 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.Datum = moment(this.bizonylatkifizetesservice.DtoEdited.Datum).format('YYYY-MM-DD');
-  }
+    if (this.uj) {
+      this.eppFrissit = true;
+      this.bizonylatkifizetesservice.CreateNew()
+        .then(res => {
+          if (res.Error !== null) {
+            throw res.Error;
+          }
 
-  PenznemZoom() {
-    this.bizonylatkifizetesservice.SzerkesztesMode = KifizetesSzerkesztesMode.PenznemZoom;
-  }
-  onPenznemSelectzoom(Dto: PenznemDto) {
-    this.bizonylatkifizetesservice.DtoEdited.Penznemkod = Dto.Penznemkod;
-    this.bizonylatkifizetesservice.DtoEdited.Penznem = Dto.Penznem1;
-  }
-  onPenznemStopzoom() {
-    this.bizonylatkifizetesservice.SzerkesztesMode = KifizetesSzerkesztesMode.Blank;
-  }
+          this.DtoEdited = res.Result[0];
+          this.DtoEdited.Osszeg = this.Bizonylat.Brutto;
+          this.DtoEdited.Penznemkod = this.Bizonylat.Penznemkod;
+          this.DtoEdited.Penznem = this.Bizonylat.Penznem;
+          this.DtoEdited.Fizetesimodkod = this.Bizonylat.Fizetesimodkod;
+          this.DtoEdited.Fizetesimod = this.Bizonylat.Fizetesimod;
+          this.eppFrissit = false;
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    }
 
-  FizetesimodZoom() {
-    this.bizonylatkifizetesservice.SzerkesztesMode = KifizetesSzerkesztesMode.FizetesimodZoom;
-  }
-  onFizetesimodSelectzoom(Dto: FizetesimodDto) {
-    this.bizonylatkifizetesservice.DtoEdited.Fizetesimodkod = Dto.Fizetesimodkod;
-    this.bizonylatkifizetesservice.DtoEdited.Fizetesimod = Dto.Fizetesimod1;
-  }
-  onFizetesimodStopzoom() {
-    this.bizonylatkifizetesservice.SzerkesztesMode = KifizetesSzerkesztesMode.Blank;
+    this.Datum = moment(this.DtoEdited.Datum).format('YYYY-MM-DD');
   }
 
   onSubmit() {
-    this.bizonylatkifizetesservice.DtoEdited.Bizonylatkod =
-      this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Bizonylatkod;
-    this.bizonylatkifizetesservice.DtoEdited.Datum = moment(this.Datum).toISOString(true);
-
     this.eppFrissit = true;
-    this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.bizonylatkifizetesservice.DtoEdited.Penznemkod,
-      this.bizonylatkifizetesservice.DtoEdited.Penznem))
+    this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.DtoEdited.Penznemkod, this.DtoEdited.Penznem))
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        return this._fizetesimodservice.ZoomCheck(new FizetesimodZoomParameter(this.bizonylatkifizetesservice.DtoEdited.Fizetesimodkod,
-          this.bizonylatkifizetesservice.DtoEdited.Fizetesimod));
+        return this._fizetesimodservice.ZoomCheck(new FizetesimodZoomParameter(this.DtoEdited.Fizetesimodkod, this.DtoEdited.Fizetesimod));
       })
       .then(res1 => {
         if (res1.Error != null) {
           throw res1.Error;
         }
 
-        if (this.bizonylatkifizetesservice.uj) {
-          return this.bizonylatkifizetesservice.Add(this.bizonylatkifizetesservice.DtoEdited);
+        this.DtoEdited.Datum = moment(this.Datum).toISOString(true);
+        if (this.uj) {
+          this.DtoEdited.Bizonylatkod = this.Bizonylat.Bizonylatkod;
+          return this.bizonylatkifizetesservice.Add(this.DtoEdited);
         } else {
-          return this.bizonylatkifizetesservice.Update(this.bizonylatkifizetesservice.DtoEdited);
+          return this.bizonylatkifizetesservice.Update(this.DtoEdited);
         }
       })
       .then(res2 => {
@@ -107,29 +111,39 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
           throw res3.Error;
         }
 
-        if (this.bizonylatkifizetesservice.uj) {
-          this.bizonylatkifizetesservice.Dto.unshift(res3.Result[0]);
-        } else {
-          propCopy(res3.Result[0], this.bizonylatkifizetesservice.Dto[this.bizonylatkifizetesservice.DtoSelectedIndex]);
-        }
-
         this.eppFrissit = false;
-        this.navigal();
+        this.eventSzerkeszteskesz.emit(res3.Result[0]);
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
-  cancel() {
-    this.navigal();
+
+  onCancel() {
+    this.eventSzerkeszteskesz.emit(null);
   }
-  navigal() {
-    if (this.bizonylatkifizetesservice.uj) {
-      this.bizonylatkifizetesservice.ContainerMode = KifizetesContainerMode.List;
-    } else {
-      this.bizonylatkifizetesservice.EgyMode = KifizetesEgyMode.Reszletek;
-    }
+
+  PenznemZoom() {
+    this.SzerkesztesMode = KifizetesSzerkesztesMode.PenznemZoom;
+  }
+  onPenznemSelectzoom(Dto: PenznemDto) {
+    this.DtoEdited.Penznemkod = Dto.Penznemkod;
+    this.DtoEdited.Penznem = Dto.Penznem1;
+  }
+  onPenznemStopzoom() {
+    this.SzerkesztesMode = KifizetesSzerkesztesMode.Blank;
+  }
+
+  FizetesimodZoom() {
+    this.SzerkesztesMode = KifizetesSzerkesztesMode.FizetesimodZoom;
+  }
+  onFizetesimodSelectzoom(Dto: FizetesimodDto) {
+    this.DtoEdited.Fizetesimodkod = Dto.Fizetesimodkod;
+    this.DtoEdited.Fizetesimod = Dto.Fizetesimod1;
+  }
+  onFizetesimodStopzoom() {
+    this.SzerkesztesMode = KifizetesSzerkesztesMode.Blank;
   }
 
   ngOnDestroy() {

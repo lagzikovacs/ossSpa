@@ -128,15 +128,6 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
           }
 
           this._bizonylatkapcsolatservice.Dto = res2.Result;
-          return this._bizonylatkifizetesservice.Select(
-            this.Dto[this.DtoSelectedIndex].Bizonylatkod);
-        })
-        .then(res3 => {
-          if (res3.Error != null) {
-            throw res3.Error;
-          }
-
-          this._bizonylatkifizetesservice.Dto = res3.Result;
 
           this._bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
           this.eppFrissit = false;

@@ -132,9 +132,7 @@ import { BizonylattablaComponent } from './bizonylat/bizonylattabla/bizonylattab
 import { BizonylatSzerkesztesComponent } from './bizonylat/bizonylat-szerkesztes/bizonylat-szerkesztes.component';
 import { AdoszamellenorzesComponent } from './onlineszamla/adoszamellenorzes/adoszamellenorzes.component';
 import { SzamlalekerdezesComponent } from './onlineszamla/szamlalekerdezes/szamlalekerdezes.component';
-import { KifizetesContainerComponent } from './kifizetes/kifizetes-container/kifizetes-container.component';
 import { KifizetesListComponent } from './kifizetes/kifizetes-list/kifizetes-list.component';
-import { KifizetesEgyComponent } from './kifizetes/kifizetes-egy/kifizetes-egy.component';
 import { KifizetesSzerkesztesComponent } from './kifizetes/kifizetes-szerkesztes/kifizetes-szerkesztes.component';
 import { BizonylatNyomtatasComponent } from './bizonylatnyomtatas/bizonylat-nyomtatas/bizonylat-nyomtatas.component';
 import { ProjektDatumokComponent } from './projekt/projekt-datumok/projekt-datumok.component';
@@ -359,9 +357,7 @@ if (environment.production) {
     BizonylatSzerkesztesComponent,
     AdoszamellenorzesComponent,
     SzamlalekerdezesComponent,
-    KifizetesContainerComponent,
     KifizetesListComponent,
-    KifizetesEgyComponent,
     KifizetesSzerkesztesComponent,
     BizonylatNyomtatasComponent,
     ProjektDatumokComponent,

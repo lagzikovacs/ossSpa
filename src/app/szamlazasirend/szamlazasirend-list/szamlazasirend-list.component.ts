@@ -34,9 +34,9 @@ export class SzamlazasirendListComponent implements OnInit, OnDestroy {
 
   szamlazasirendservice: SzamlazasirendService;
 
-  constructor(szamlazasirendservice: SzamlazasirendService,
-              private _spinnerservice: SpinnerService,
-              private _errorservice: ErrorService) {
+  constructor(private _spinnerservice: SpinnerService,
+              private _errorservice: ErrorService,
+              szamlazasirendservice: SzamlazasirendService) {
     this.szamlazasirendservice = szamlazasirendservice;
   }
 

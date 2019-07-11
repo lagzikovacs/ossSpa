@@ -6,9 +6,6 @@ import {KifizetesResult} from './kifizetesresult';
 import {environment} from '../../environments/environment';
 import {NumberResult} from '../dtos/numberresult';
 import {EmptyResult} from '../dtos/emptyresult';
-import {KifizetesContainerMode} from './kifizetescontainermode';
-import {KifizetesSzerkesztesMode} from './kifizetesszerkesztesmode';
-import {KifizetesEgyMode} from './kifizetesegymode';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
 
@@ -17,17 +14,7 @@ import {ColumnSettings} from '../tools/reszletek/columnsettings';
 })
 export class KifizetesService {
   private readonly _controller = 'api/kifizetes/';
-
   cim = 'Kifizetés';
-
-  Dto = new Array<KifizetesDto>();
-  DtoSelectedIndex = -1;
-  uj = false;
-  DtoEdited = new KifizetesDto();
-
-  ContainerMode = KifizetesContainerMode.Blank;
-  EgyMode = KifizetesEgyMode.Reszletek;
-  SzerkesztesMode = KifizetesSzerkesztesMode.Blank;
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

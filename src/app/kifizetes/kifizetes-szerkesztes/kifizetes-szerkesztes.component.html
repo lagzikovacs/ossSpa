@@ -1,60 +1,50 @@
 <div class="alapkeret">
-  <h5 *ngIf="bizonylatkifizetesservice.uj">Új {{bizonylatkifizetesservice.cim | lowercase}}</h5>
-  <h5 *ngIf="!bizonylatkifizetesservice.uj">{{bizonylatkifizetesservice.cim}} módosítása</h5>
+  <h5 *ngIf="uj">Új {{bizonylatkifizetesservice.cim | lowercase}}</h5>
+  <h5 *ngIf="!uj">{{bizonylatkifizetesservice.cim}} módosítása</h5>
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Dátum</div>
-      </div>
-      <div class="col-md-2">
-        <input type="date" class="form-control form-control-sm" id="datum"
+      <div>
+        <div class="egylabel">Dátum</div>
+        <input type="date" class="form-control form-control-sm oszlop3" id="datum"
                [(ngModel)]="Datum" name="datum">
       </div>
     </div>
+
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Összeg</div>
-      </div>
-      <div class="col-md-2">
-        <input type="number" class="form-control form-control-sm" id="osszeg"
-               [(ngModel)]="bizonylatkifizetesservice.DtoEdited.Osszeg" name="osszeg">
+      <div>
+        <div class="egylabel">Összeg</div>
+        <input type="number" class="form-control form-control-sm oszlop3" id="osszeg"
+               [(ngModel)]="DtoEdited.Osszeg" name="osszeg">
       </div>
     </div>
 
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Pénznem</div>
-      </div>
-      <div class="col-md-2">
-        <input type="text" class="form-control form-control-sm" id="penznem"
-               maxlength="3" required autocomplete="off" style="background-color: aquamarine"
-               [(ngModel)]="bizonylatkifizetesservice.DtoEdited.Penznem" name="penznem">
-      </div>
-      <div class="col-md-1">
-        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="PenznemZoom()">...</button>
+      <div>
+        <div class="egylabel">Pénznem</div>
+        <input type="text" class="form-control form-control-sm oszlop2" id="penznem"
+               maxlength="3" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
+               [(ngModel)]="DtoEdited.Penznem" name="penznem">
+        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button"
+                (click)="PenznemZoom()">...</button>
       </div>
     </div>
 
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">Fizetési mód</div>
-      </div>
-      <div class="col-md-2">
-        <input type="text" class="form-control form-control-sm" id="fizetesimod"
-               maxlength="20" required autocomplete="off" style="background-color: aquamarine"
-               [(ngModel)]="bizonylatkifizetesservice.DtoEdited.Fizetesimod" name="fizetesimod">
-      </div>
-      <div class="col-md-1">
-        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px" type="button" (click)="FizetesimodZoom()">...</button>
+      <div>
+        <div class="egylabel">Fizetési mód</div>
+        <input type="text" class="form-control form-control-sm oszlop2" id="fizetesimod"
+               maxlength="20" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
+               [(ngModel)]="DtoEdited.Fizetesimod" name="fizetesimod">
+        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button"
+                (click)="FizetesimodZoom()">...</button>
       </div>
     </div>
 
-    <div class="row no-gutters" style="margin-bottom: 10px">
-      <div class="col-md-2"></div>
+    <div class="row no-gutters editform-row">
       <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
-      <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
+      <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>
 
@@ -64,14 +54,14 @@
     FizetesimodZoom = 2,
     }-->
 
-  <ng-container *ngIf="bizonylatkifizetesservice.SzerkesztesMode === 1">
-    <app-penznem-list [maszk]="this.bizonylatkifizetesservice.DtoEdited.Penznem || ''"
+  <ng-container *ngIf="SzerkesztesMode === 1">
+    <app-penznem-list [maszk]="DtoEdited.Penznem || ''"
                       (eventSelectzoom)="onPenznemSelectzoom($event)"
                       (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
   </ng-container>
 
-  <ng-container *ngIf="bizonylatkifizetesservice.SzerkesztesMode === 2">
-    <app-fizetesimod-list [maszk]="this.bizonylatkifizetesservice.DtoEdited.Fizetesimod || ''"
+  <ng-container *ngIf="SzerkesztesMode === 2">
+    <app-fizetesimod-list [maszk]="DtoEdited.Fizetesimod || ''"
                           (eventSelectzoom)="onFizetesimodSelectzoom($event)"
                           (eventStopzoom)="onFizetesimodStopzoom()"></app-fizetesimod-list>
   </ng-container>

@@ -12,7 +12,7 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   templateUrl: './bizonylat-kibocsatas.component.html'
 })
 export class BizonylatKibocsatasComponent implements OnDestroy {
-  bizonylatservice: BizonylatService;
+
   bizonylatszam = '';
   private _keszpenzes = false;
 
@@ -24,6 +24,8 @@ export class BizonylatKibocsatasComponent implements OnDestroy {
     this._eppFrissit = value;
     this._spinnerservice.Run = value;
   }
+
+  bizonylatservice: BizonylatService;
 
   constructor(private _penztarsevice: PenztarService,
               private _errorservice: ErrorService,

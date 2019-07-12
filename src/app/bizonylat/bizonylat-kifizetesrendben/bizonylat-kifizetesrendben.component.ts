@@ -1,14 +1,20 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {BizonylatDto} from '../bizonylatdto';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-bizonylat-kifizetesrendben',
   templateUrl: './bizonylat-kifizetesrendben.component.html'
 })
 export class BizonylatKifizetesrendbenComponent implements OnDestroy {
-  bizonylatservice: BizonylatService;
+  Dto = new BizonylatDto();
+  @Input() set DtoOriginal(value: BizonylatDto) {
+    this.Dto = deepCopy(value);
+  }
+  @Output() eventKifizetesrendbenUtan = new EventEmitter<BizonylatDto>();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -19,6 +25,8 @@ export class BizonylatKifizetesrendbenComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  bizonylatservice: BizonylatService;
+
   constructor(private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               bizonylatservice: BizonylatService) {
@@ -27,7 +35,7 @@ export class BizonylatKifizetesrendbenComponent implements OnDestroy {
 
   modositas() {
     this.eppFrissit = true;
-    this.bizonylatservice.KifizetesRendben(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex])
+    this.bizonylatservice.KifizetesRendben(this.Dto)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -40,8 +48,8 @@ export class BizonylatKifizetesrendbenComponent implements OnDestroy {
           throw res1.Error;
         }
 
-        this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex] = res1.Result[0];
         this.eppFrissit = false;
+        this.eventKifizetesrendbenUtan.emit(res1.Result[0]);
       })
       .catch(err => {
         this.eppFrissit = false;

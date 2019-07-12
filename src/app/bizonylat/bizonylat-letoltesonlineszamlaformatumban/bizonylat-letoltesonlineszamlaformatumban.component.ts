@@ -1,15 +1,15 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
-  selector: 'app-bizonylat-osnxml',
-  templateUrl: './bizonylat-osnxml.component.html'
+  selector: 'app-bizonylat-letoltesonlineszamlaformatumban',
+  templateUrl: './bizonylat-letoltesonlineszamlaformatumban.html'
 })
-export class BizonylatOSNxmlComponent implements OnInit, OnDestroy {
+export class BizonylatLetoltesonlineszamlaformatumbanComponent implements OnInit, OnDestroy {
+  @Input() Bizonylatkod = -1;
 
-  bizonylatservice: BizonylatService;
   result = '';
 
   private _eppFrissit = false;
@@ -21,6 +21,8 @@ export class BizonylatOSNxmlComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  bizonylatservice: BizonylatService;
+
   constructor(private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               bizonylatservice: BizonylatService) {
@@ -29,7 +31,7 @@ export class BizonylatOSNxmlComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.eppFrissit = true;
-    this.bizonylatservice.LetoltesOsnxmlFormatumban(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatkod)
+    this.bizonylatservice.LetoltesOnlineszamlaFormatumban(this.Bizonylatkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

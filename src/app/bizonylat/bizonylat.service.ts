@@ -181,8 +181,8 @@ export class BizonylatService {
     return this._httpClient.post<NumberResult>(url, body, options).toPromise();
   }
 
-  public SzamlaTartalmiEllenorzese(bizonylatKod: number): Promise<StringResult> {
-    const url = environment.CoreRef + this._controller + 'szamlatartalmiellenorzese';
+  public SzamlaFormaiEllenorzese(bizonylatKod: number): Promise<StringResult> {
+    const url = environment.CoreRef + this._controller + 'szamlaformaiellenorzese';
     const body = bizonylatKod;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -192,8 +192,8 @@ export class BizonylatService {
     return this._httpClient.post<StringResult>(url, body, options).toPromise();
   }
 
-  public LetoltesOsnxmlFormatumban(bizonylatKod: number): Promise<StringResult> {
-    const url = environment.CoreRef + this._controller + 'letoltesosnxmlformatumban';
+  public LetoltesOnlineszamlaFormatumban(bizonylatKod: number): Promise<StringResult> {
+    const url = environment.CoreRef + this._controller + 'letoltesonlineszamlaformatumban';
     const body = bizonylatKod;
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),

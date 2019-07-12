@@ -2,7 +2,6 @@ import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
-import {ZoomSources} from '../../enums/zoomsources';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
 import {FizetesimodService} from '../../primitiv/fizetesimod/fizetesimod.service';
 import {BizonylatContainerMode} from '../bizonylatcontainermode';

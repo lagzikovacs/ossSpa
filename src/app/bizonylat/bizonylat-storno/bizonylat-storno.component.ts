@@ -1,16 +1,22 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
-import {BizonylatEgyMode} from '../bizonylategymode';
-import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {deepCopy} from '../../tools/deepCopy';
+import {BizonylatDto} from '../bizonylatdto';
 
 @Component({
   selector: 'app-bizonylat-storno',
   templateUrl: './bizonylat-storno.component.html'
 })
 export class BizonylatStornoComponent implements OnDestroy {
-  bizonylatservice: BizonylatService;
+  Dto = new BizonylatDto();
+  @Input() set DtoOriginal(value: BizonylatDto) {
+    this.Dto = deepCopy(value);
+  }
+  @Output() eventStornozando = new EventEmitter<BizonylatDto>();
+  @Output() eventStornozo = new EventEmitter<BizonylatDto>();
+  @Output() eventStornoMegsem = new EventEmitter();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -21,6 +27,8 @@ export class BizonylatStornoComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  bizonylatservice: BizonylatService;
+
   constructor(private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               bizonylatservice: BizonylatService) {
@@ -28,18 +36,17 @@ export class BizonylatStornoComponent implements OnDestroy {
   }
 
   ok() {
-    const stornozandoKod = this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatkod;
+    const stornozandoKod = this.Dto.Bizonylatkod;
     let stornozoKod = 0;
 
     this.eppFrissit = true;
-    this.bizonylatservice.Storno(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex])
+    this.bizonylatservice.Storno(this.Dto)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
         stornozoKod = res.Result;
-
         return this.bizonylatservice.Get(stornozandoKod);
       })
       .then(res1 => {
@@ -47,8 +54,7 @@ export class BizonylatStornoComponent implements OnDestroy {
           throw res1.Error;
         }
 
-        this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex] = res1.Result[0];
-
+        this.eventStornozando.emit(res1.Result[0]);
         return this.bizonylatservice.Get(stornozoKod);
       })
       .then(res2 => {
@@ -56,18 +62,17 @@ export class BizonylatStornoComponent implements OnDestroy {
           throw res2.Error;
         }
 
-        this.bizonylatservice.Dto.unshift(res2.Result[0]);
-
         this.eppFrissit = false;
-        this.bizonylatservice.ContainerMode = BizonylatContainerMode.List;
+        this.eventStornozo.emit(res2.Result[0]);
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
+
   cancel() {
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
+    this.eventStornoMegsem.emit();
   }
 
   ngOnDestroy() {

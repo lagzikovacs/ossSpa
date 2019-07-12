@@ -9,7 +9,11 @@
                         [enKereses]="!eppFrissit" (Kereses)="onKereses()"
                         [enUj]="!eppFrissit" (Uj)="onUj()">
   </app-bizonylattoolbar>
-  <app-bizonylattabla [Dto]="bizonylatservice.Dto" (idclick)="setClickedRow($event)"></app-bizonylattabla>
+
+  <app-bizonylattabla [Dto]="bizonylatservice.Dto"
+                      (idclick)="setClickedRow($event)">
+  </app-bizonylattabla>
+
   <app-toolbarfooter [enKereses]="!bizonylatservice.elsokereses && !eppFrissit"
                      [rekordszam]="bizonylatservice.Dto.length"
                      [osszesrekord]="bizonylatservice.OsszesRekord"

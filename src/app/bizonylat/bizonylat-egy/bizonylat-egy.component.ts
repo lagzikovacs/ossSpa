@@ -1,10 +1,7 @@
 import {Component, EventEmitter, OnDestroy, Output, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatContainerMode} from '../bizonylatcontainermode';
-import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
 import {BizonylatEgyMode} from '../bizonylategymode';
-import {KifizetesService} from '../../kifizetes/kifizetes.service';
-import {BizonylatkapcsolatService} from '../../bizonylatkapcsolat/bizonylatkapcsolat.service';
 import {BizonylatTipus} from '../bizonylattipus';
 import {PenztarService} from '../../penztar/penztar.service';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
@@ -15,6 +12,8 @@ import {JogKod} from '../../enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {BizonylatDto} from '../bizonylatdto';
+import {propCopy} from '../../tools/propCopy';
 
 @Component({
   selector: 'app-bizonylat-egy',
@@ -39,7 +38,6 @@ export class BizonylatEgyComponent implements OnDestroy {
   }
 
   constructor(private _logonservice: LogonService,
-              private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
               private _penztarsevice: PenztarService,
               private _vagolapservice: VagolapService,
               private _errorservice: ErrorService,
@@ -197,6 +195,32 @@ export class BizonylatEgyComponent implements OnDestroy {
   }
 
   TorlesCancel() {
+    this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
+  }
+
+
+  onBizonylaterrolUtan(ok: boolean) {
+    this.bizonylatservice.EgyMode = BizonylatEgyMode.Blank;
+  }
+
+  onKifizetesrendbenUtan(dto: BizonylatDto) {
+    propCopy(dto, this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex]);
+  }
+
+  onKiszallitvaUtan(dto: BizonylatDto) {
+    propCopy(dto, this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex]);
+  }
+
+  onStornozando(dto: BizonylatDto) {
+    propCopy(dto, this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex]);
+  }
+
+  onStornozo(dto: BizonylatDto) {
+    this.bizonylatservice.Dto.unshift(dto);
+    this.bizonylatservice.ContainerMode = BizonylatContainerMode.List;
+  }
+
+  onStornoMegsem() {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
   }
 

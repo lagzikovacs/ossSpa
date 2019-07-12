@@ -149,10 +149,8 @@ import { BizonylatPenztarComponent } from './bizonylat/bizonylat-penztar/bizonyl
 import { BizonylatKifizetesrendbenComponent } from './bizonylat/bizonylat-kifizetesrendben/bizonylat-kifizetesrendben.component';
 import { BizonylatKiszallitvaComponent } from './bizonylat/bizonylat-kiszallitva/bizonylat-kiszallitva.component';
 import { BizonylatFormaiellenorzesComponent } from './bizonylat/bizonylat-formaiellenorzes/bizonylat-formaiellenorzes.component';
-import { BizonylatOSNxmlComponent } from './bizonylat/bizonylat-osnxml/bizonylat-osnxml.component';
+import { BizonylatLetoltesonlineszamlaformatumbanComponent } from './bizonylat/bizonylat-letoltesonlineszamlaformatumban/bizonylat-letoltesonlineszamlaformatumban.component';
 import { BoolHunPipe } from './pipes/boolhun.pipe';
-import { BizonylatTetelSzerkesztesComponent } from './bizonylat/bizonylat-tetel-szerkesztes/bizonylat-tetel-szerkesztes.component';
-import { BizonylatTetelTorlesComponent } from './bizonylat/bizonylat-tetel-torles/bizonylat-tetel-torles.component';
 import { VagolapComponent } from './vagolap/vagolap.component';
 import {VagolapService} from './vagolap/vagolap.service';
 import { AbuComponent } from './tools/abu/abu.component';
@@ -189,6 +187,8 @@ import {SpinnerService} from './tools/spinner/spinner.service';
 import { UgyfelterProjektTablaComponent } from './ugyfelter/ugyfelter-projekt-tabla/ugyfelter-projekt-tabla.component';
 import { ProjektkapcsolatTablaComponent } from './projektkapcsolat/projektkapcsolat-tabla/projektkapcsolat-tabla.component';
 import { BizonylatkapcsolatTablaComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-tabla/bizonylatkapcsolat-tabla.component';
+import {BizonylatTetelSzerkesztesComponent} from './bizonylat/bizonylattetel-szerkesztes/bizonylat-tetel-szerkesztes.component';
+import {BizonylatTetelTorlesComponent} from './bizonylat/bizonylattetel-torles/bizonylat-tetel-torles.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -373,7 +373,7 @@ if (environment.production) {
     BizonylatKifizetesrendbenComponent,
     BizonylatKiszallitvaComponent,
     BizonylatFormaiellenorzesComponent,
-    BizonylatOSNxmlComponent,
+    BizonylatLetoltesonlineszamlaformatumbanComponent,
     BoolHunPipe,
     BizonylatTetelSzerkesztesComponent,
     BizonylatTetelTorlesComponent,

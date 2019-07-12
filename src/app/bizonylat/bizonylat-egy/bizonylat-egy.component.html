@@ -54,12 +54,12 @@
         Vágólapra
       </button>
 
-      <button [disabled]="eppFrissit || !formaiellenorzesenabled()" (click)="formaiellenorzes()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+<!--      <button [disabled]="eppFrissit || !formaiellenorzesenabled()" (click)="formaiellenorzes()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Formai ellenőrzés
       </button>
       <button [disabled]="eppFrissit || !osnxmlenabled()" (click)="osnxml()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        OSN xml
-      </button>
+        Letöltés online számla formátumban
+      </button>-->
     </nav>
     <app-abu></app-abu>
   </div>
@@ -119,9 +119,12 @@
       <app-bizonylat-szerkesztes></app-bizonylat-szerkesztes>
     </div>
   </ng-container>
+
   <ng-container *ngIf="bizonylatservice.EgyMode === 7">
     <div [@rowanimation]>
-      <app-bizonylat-errol></app-bizonylat-errol>
+      <app-bizonylat-errol [Bizonylatkod]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].Bizonylatkod"
+                           (eventBizonylaterrolUtan)="onBizonylaterrolUtan($event)">
+      </app-bizonylat-errol>
     </div>
   </ng-container>
 
@@ -132,7 +135,11 @@
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 9">
     <div [@rowanimation]>
-      <app-bizonylat-storno></app-bizonylat-storno>
+      <app-bizonylat-storno [DtoOriginal]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex]"
+                            (eventStornozando)="onStornozando($event)"
+                            (eventStornozo)="onStornozo($event)"
+                            (eventStornoMegsem)="onStornoMegsem()">
+      </app-bizonylat-storno>
     </div>
   </ng-container>
 
@@ -143,23 +150,29 @@
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 11">
     <div [@rowanimation]>
-      <app-bizonylat-kifizetesrendben></app-bizonylat-kifizetesrendben>
+      <app-bizonylat-kifizetesrendben [DtoOriginal]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex]"
+                                      (eventKifizetesrendbenUtan)="onKifizetesrendbenUtan($event)">
+      </app-bizonylat-kifizetesrendben>
     </div>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 12">
     <div [@rowanimation]>
-      <app-bizonylat-kiszallitva></app-bizonylat-kiszallitva>
+      <app-bizonylat-kiszallitva [DtoOriginal]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex]"
+                                 (eventKiszallitvaUtan)="onKiszallitvaUtan($event)">
+      </app-bizonylat-kiszallitva>
     </div>
   </ng-container>
 
   <ng-container *ngIf="bizonylatservice.EgyMode === 13">
     <div [@rowanimation]>
-      <app-bizonylat-formaiellenorzes></app-bizonylat-formaiellenorzes>
+      <app-bizonylat-formaiellenorzes [Bizonylatkod]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].Bizonylatkod">
+      </app-bizonylat-formaiellenorzes>
     </div>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 14">
     <div [@rowanimation]>
-      <app-bizonylat-osnxml></app-bizonylat-osnxml>
+      <app-bizonylat-letoltesonlineszamlaformatumban [Bizonylatkod]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].Bizonylatkod">
+      </app-bizonylat-letoltesonlineszamlaformatumban>
     </div>
   </ng-container>
 </div>

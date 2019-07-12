@@ -1,7 +1,6 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {BizonylatTipus} from '../bizonylattipus';
 import {BizonylatService} from '../bizonylat.service';
-import {BizonylatEgyMode} from '../bizonylategymode';
 import {BizonylatMintaAlapjanParam} from '../bizonylatmintaalapjan';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
@@ -11,6 +10,9 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   templateUrl: './bizonylat-errol.component.html'
 })
 export class BizonylatErrolComponent implements OnDestroy {
+  @Input() Bizonylatkod = -1;
+  @Output() eventBizonylaterrolUtan = new EventEmitter<boolean>();
+
   entries = [
     ['Díjbekérő', BizonylatTipus.DijBekero],
     ['Előlegszámla', BizonylatTipus.ElolegSzamla],
@@ -44,15 +46,13 @@ export class BizonylatErrolComponent implements OnDestroy {
     if (!this.kesz) {
       this.eppFrissit = true;
       this._bizonylatservice.UjBizonylatMintaAlapjan(new BizonylatMintaAlapjanParam(
-        this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Bizonylatkod,
-        this.entries[this.entryindex][1]))
+        this.Bizonylatkod, this.entries[this.entryindex][1]))
         .then(res => {
           if (res.Error != null) {
             throw res.Error;
           }
 
           this.ujbizonylatkod = res.Result;
-
           this.kesz = true;
           this.eppFrissit = false;
         })
@@ -61,14 +61,12 @@ export class BizonylatErrolComponent implements OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.navigal();
+      this.eventBizonylaterrolUtan.emit(true);
     }
   }
+
   cancel() {
-    this.navigal();
-  }
-  navigal() {
-    this._bizonylatservice.EgyMode = BizonylatEgyMode.Blank;
+    this.eventBizonylaterrolUtan.emit(false);
   }
 
   ngOnDestroy() {

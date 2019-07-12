@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
@@ -8,7 +8,8 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   templateUrl: './bizonylat-formaiellenorzes.component.html'
 })
 export class BizonylatFormaiellenorzesComponent implements OnInit, OnDestroy {
-  bizonylatservice: BizonylatService;
+  @Input() Bizonylatkod = -1;
+
   result = '';
 
   private _eppFrissit = false;
@@ -20,6 +21,8 @@ export class BizonylatFormaiellenorzesComponent implements OnInit, OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  bizonylatservice: BizonylatService;
+
   constructor(private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               bizonylatservice: BizonylatService) {
@@ -28,7 +31,7 @@ export class BizonylatFormaiellenorzesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.eppFrissit = true;
-    this.bizonylatservice.SzamlaTartalmiEllenorzese(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatkod)
+    this.bizonylatservice.SzamlaFormaiEllenorzese(this.Bizonylatkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

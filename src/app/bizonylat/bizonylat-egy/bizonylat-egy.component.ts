@@ -1,9 +1,7 @@
-import {Component, EventEmitter, OnDestroy, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
-import {BizonylatContainerMode} from '../bizonylatcontainermode';
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {BizonylatTipus} from '../bizonylattipus';
-import {PenztarService} from '../../penztar/penztar.service';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
 import {VagolapService} from '../../vagolap/vagolap.service';
 import {AbuComponent} from '../../tools/abu/abu.component';
@@ -14,6 +12,8 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {BizonylatDto} from '../bizonylatdto';
 import {propCopy} from '../../tools/propCopy';
+import {deepCopy} from '../../tools/deepCopy';
+import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 
 @Component({
   selector: 'app-bizonylat-egy',
@@ -23,10 +23,18 @@ import {propCopy} from '../../tools/propCopy';
 export class BizonylatEgyComponent implements OnDestroy {
   @ViewChild(AbuComponent) abu: AbuComponent;
 
-  bizonylatservice: BizonylatService;
-  mod = false;
+  Dto = new BizonylatDto();
+  @Input() set DtoOriginal(value: BizonylatDto) {
+    this.Dto = deepCopy(value);
+  }
+  @Input() bizonylatLeiro = new BizonylatTipusLeiro();
+  @Input() enTorles = true;
+  @Output() eventSzerkesztesutan = new EventEmitter<BizonylatDto>();
+  @Output() eventTorlesutan = new EventEmitter<void>();
 
-  @Output() torlesutan = new EventEmitter<void>();
+  EgyMode = BizonylatEgyMode.Reszletek;
+
+  mod = false;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -36,6 +44,8 @@ export class BizonylatEgyComponent implements OnDestroy {
     this._eppFrissit = value;
     this._spinnerservice.Run = value;
   }
+
+  bizonylatservice: BizonylatService;
 
   constructor(private _logonservice: LogonService,
               private _vagolapservice: VagolapService,
@@ -47,61 +57,61 @@ export class BizonylatEgyComponent implements OnDestroy {
   }
 
   modositasenabled(): boolean {
-    return this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatszam === null;
+    return this.Dto.Bizonylatszam === null;
   }
   torlesenabled(): boolean {
-    return this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatszam === null;
+    return this.Dto.Bizonylatszam === null;
   }
   kibocsatasenabled(): boolean {
-    return this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatszam === null;
+    return this.Dto.Bizonylatszam === null;
   }
   kiszallitvaenabled(): boolean {
-    return this.bizonylatservice.bizonylatTipus === BizonylatTipus.Megrendeles;
+    return this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.Megrendeles;
   }
   kifizetesrendbenenabled(): boolean {
-    return (this.bizonylatservice.bizonylatTipus === BizonylatTipus.Szamla ||
-      this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
-      this.bizonylatservice.bizonylatTipus === BizonylatTipus.DijBekero ||
-      this.bizonylatservice.bizonylatTipus === BizonylatTipus.ElolegSzamla) &&
-      this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatszam !== null;
+    return (this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.Szamla ||
+      this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
+      this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.DijBekero ||
+      this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.ElolegSzamla) &&
+      this.Dto.Bizonylatszam !== null;
   }
   penztarenabled(): boolean {
-    return (this.bizonylatservice.bizonylatTipus === BizonylatTipus.Szamla ||
-      this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
-      this.bizonylatservice.bizonylatTipus === BizonylatTipus.ElolegSzamla) &&
-      this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatszam !== null &&
-      this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Fizetesimod === 'Készpénz';
+    console.log((this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.Szamla));
+    console.log(this.bizonylatLeiro);
+
+    return (this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.Szamla ||
+      this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
+      this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.ElolegSzamla) &&
+      this.Dto.Bizonylatszam !== null &&
+      this.Dto.Fizetesimod === 'Készpénz';
   }
   stornoenabled(): boolean {
-    return this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatszam !== null &&
-      this.bizonylatservice.bizonylatLeiro.Stornozhato &&
-      !this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Ezstornozott &&
-      !this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Ezstornozo;
+    return this.Dto.Bizonylatszam !== null &&
+      this.bizonylatLeiro.Stornozhato &&
+      !this.Dto.Ezstornozott &&
+      !this.Dto.Ezstornozo;
   }
   formaiellenorzesenabled(): boolean {
-    return (this.bizonylatservice.bizonylatTipus === BizonylatTipus.Szamla ||
-    this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla);
+    return (this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.Szamla ||
+    this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.BejovoSzamla);
   }
   osnxmlenabled(): boolean {
-    return (this.bizonylatservice.bizonylatTipus === BizonylatTipus.Szamla ||
-      this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla);
+    return (this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.Szamla ||
+      this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.BejovoSzamla);
   }
 
-  vissza() {
-    this.bizonylatservice.ContainerMode = BizonylatContainerMode.List;
-  }
   reszletek() {
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
+    this.EgyMode = BizonylatEgyMode.Reszletek;
   }
   torles() {
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Torles;
+    this.EgyMode = BizonylatEgyMode.Torles;
   }
   modositas() {
     // itt másolat szokott készülni az aktuális rekordról
     // most a complex miatt egyszerűbb újra lekérni
 
     this.eppFrissit = true;
-    this.bizonylatservice.GetComplex(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatkod)
+    this.bizonylatservice.GetComplex(this.Dto.Bizonylatkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -111,7 +121,7 @@ export class BizonylatEgyComponent implements OnDestroy {
 
         this.bizonylatservice.uj = false;
         this.eppFrissit = false;
-        this.bizonylatservice.EgyMode = BizonylatEgyMode.Modositas;
+        this.EgyMode = BizonylatEgyMode.Modositas;
         this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
       })
       .catch(err => {
@@ -120,58 +130,53 @@ export class BizonylatEgyComponent implements OnDestroy {
       });
   }
   nyomtatas() {
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Nyomtatas;
+    this.EgyMode = BizonylatEgyMode.Nyomtatas;
   }
   errol() {
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Errol;
+    this.EgyMode = BizonylatEgyMode.Errol;
   }
   kibocsatas() {
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Kibocsatas;
+    this.EgyMode = BizonylatEgyMode.Kibocsatas;
   }
   penztar() {
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Penztar;
+    this.EgyMode = BizonylatEgyMode.Penztar;
   }
   storno() {
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Storno;
+    this.EgyMode = BizonylatEgyMode.Storno;
   }
   kifizetesrendben() {
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Kifizetesrendben;
+    this.EgyMode = BizonylatEgyMode.Kifizetesrendben;
   }
   kiszallitva() {
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Kiszallitva;
+    this.EgyMode = BizonylatEgyMode.Kiszallitva;
   }
   kifizetes() {
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Kifizetes;
+    this.EgyMode = BizonylatEgyMode.Kifizetes;
   }
   irat() {
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Irat;
+    this.EgyMode = BizonylatEgyMode.Irat;
   }
   formaiellenorzes() {
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Formaiellenorzes;
+    this.EgyMode = BizonylatEgyMode.Formaiellenorzes;
   }
   osnxml() {
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.OSNxml;
+    this.EgyMode = BizonylatEgyMode.OSNxml;
   }
   vagolap() {
-    this._vagolapservice.bizonylatotvagolapra(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex],
-      this.bizonylatservice.bizonylatLeiro.BizonylatNev);
-    this.abu.Uzenet('A(z) ' + this.bizonylatservice.bizonylatLeiro.BizonylatNev + ' a vágólapra került!');
+    this._vagolapservice.bizonylatotvagolapra(this.Dto, this.bizonylatLeiro.BizonylatNev);
+    this.abu.Uzenet('A(z) ' + this.bizonylatLeiro.BizonylatNev + ' a vágólapra került!');
   }
 
   TorlesOk() {
     this.eppFrissit = true;
-    this.bizonylatservice.Delete(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex])
+    this.bizonylatservice.Delete(this.Dto)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        this.bizonylatservice.Dto.splice(this.bizonylatservice.DtoSelectedIndex, 1);
-        this.bizonylatservice.DtoSelectedIndex = -1;
-
         this.eppFrissit = false;
-        this.torlesutan.emit();
-        this.bizonylatservice.ContainerMode = BizonylatContainerMode.List;
+        this.eventTorlesutan.emit();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -180,53 +185,52 @@ export class BizonylatEgyComponent implements OnDestroy {
   }
 
   TorlesCancel() {
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
+    this.EgyMode = BizonylatEgyMode.Reszletek;
   }
 
 
   onBizonylaterrolUtan(ok: boolean) {
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Blank;
+    this.EgyMode = BizonylatEgyMode.Blank;
   }
 
   onKifizetesrendbenUtan(dto: BizonylatDto) {
-    propCopy(dto, this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex]);
+    propCopy(dto, this.Dto);
   }
 
   onKiszallitvaUtan(dto: BizonylatDto) {
-    propCopy(dto, this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex]);
+    propCopy(dto, this.Dto);
   }
 
   onStornozando(dto: BizonylatDto) {
-    propCopy(dto, this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex]);
+    propCopy(dto, this.Dto);
   }
 
   onStornozo(dto: BizonylatDto) {
-    this.bizonylatservice.Dto.unshift(dto);
-    this.bizonylatservice.ContainerMode = BizonylatContainerMode.List;
+    // this.bizonylatservice.Dto.unshift(dto);
   }
 
   onStornoMegsem() {
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
+    this.EgyMode = BizonylatEgyMode.Reszletek;
   }
 
   onKibocsatasUtan(dto: BizonylatDto) {
     if (dto !== null) {
-      propCopy(dto, this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex]);
+      propCopy(dto, this.Dto);
     } else {
-      this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
+      this.EgyMode = BizonylatEgyMode.Reszletek;
     }
   }
 
   onKibocsatasUtanKeszpenzes(keszpenzes: boolean) {
     if (keszpenzes) {
-      this.bizonylatservice.EgyMode = BizonylatEgyMode.Penztar;
+      this.EgyMode = BizonylatEgyMode.Penztar;
     } else {
-      this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
+      this.EgyMode = BizonylatEgyMode.Reszletek;
     }
   }
 
   onPenztarUtan() {
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
+    this.EgyMode = BizonylatEgyMode.Reszletek;
   }
 
   ngOnDestroy() {
@@ -235,3 +239,5 @@ export class BizonylatEgyComponent implements OnDestroy {
     });
   }
 }
+
+

@@ -1,22 +1,40 @@
 <div class="alapkeret">
-  <h5>{{bizonylatservice.bizonylatLeiro.BizonylatNev}}</h5>
-  <app-bizonylattoolbar [Megrendeles]="bizonylatservice.bizonylatTipus === 4"
+  <h5>{{bizonylatLeiro.BizonylatNev}}</h5>
+  <app-bizonylattoolbar [Megrendeles]="bizonylatTipus === 4"
                         [MegrendelesSzurok]="megrendelesszurok"
                         [Szurok]="szurok"
-                        [(megrendelesszempont)]="bizonylatservice.megrendelesszempont"
-                        [(szempont)]="bizonylatservice.szempont"
-                        [(minta)]="bizonylatservice.minta"
+                        [(megrendelesszempont)]="megrendelesszempont"
+                        [(szempont)]="szempont"
+                        [(minta)]="minta"
                         [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-                        [enUj]="!eppFrissit" (Uj)="onUj()">
+                        [enUj]="!eppFrissit" (Uj)="doUjtetel()">
   </app-bizonylattoolbar>
 
-  <app-bizonylattabla [Dto]="bizonylatservice.Dto"
-                      (idclick)="setClickedRow($event)">
+  <app-bizonylattabla #tabla
+                      [items]="Dto"
+                      (forid)="onId($event)"
+                      [ujTemplate]="griduj"
+                      [egyTemplate]="gridegy">
   </app-bizonylattabla>
 
-  <app-toolbarfooter [enKereses]="!bizonylatservice.elsokereses && !eppFrissit"
-                     [rekordszam]="bizonylatservice.Dto.length"
-                     [osszesrekord]="bizonylatservice.OsszesRekord"
+  <ng-template #griduj>
+    <!--<app-irat-szerkesztes [uj] = "true"-->
+                          <!--(eventSzerkeszteskesz)="onUjtetelkesz($event)">-->
+    <!--</app-irat-szerkesztes>-->
+  </ng-template>
+
+  <ng-template #gridegy>
+    <app-bizonylat-egy [DtoOriginal]="Dto[DtoSelectedIndex]"
+                       [bizonylatLeiro]="bizonylatLeiro"
+                       [enTorles]="true"
+                       (eventSzerkesztesutan)="onSzerkesztesutan($event)"
+                       (eventTorlesutan)="onTorlesutan()">
+    </app-bizonylat-egy>
+  </ng-template>
+
+  <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
+                     [rekordszam]="Dto.length"
+                     [osszesrekord]="OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">
   </app-toolbarfooter>
 </div>

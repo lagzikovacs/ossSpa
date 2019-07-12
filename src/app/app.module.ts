@@ -124,7 +124,6 @@ import { ProjektkapcsolatLevalasztasComponent } from './projektkapcsolat/projekt
 import { ProjektExportComponent } from './projekt/projekt-export/projekt-export.component';
 import { IratNincsprojektComponent } from './irat/irat-nincsprojekt/irat-nincsprojekt.component';
 import { AjanlatTetelComponent } from './ajanlat/ajanlat-tetel/ajanlat-tetel';
-import { BizonylatContainerComponent } from './bizonylat/bizonylat-container/bizonylat-container.component';
 import { BizonylatListComponent } from './bizonylat/bizonylat-list/bizonylat-list.component';
 import { BizonylatEgyComponent } from './bizonylat/bizonylat-egy/bizonylat-egy.component';
 import { BizonylattoolbarComponent } from './bizonylat/bizonylattoolbar/bizonylattoolbar.component';
@@ -209,13 +208,13 @@ const routes: Routes = [
   {path: 'ugyfelterlog', component: UgyfelterlogComponent, canActivate: [RoleGuard]},
 
   {path: 'bizonylat', children: [
-    {path: 'dijbekero', component: BizonylatContainerComponent, canActivate: [RoleGuard]},
-    {path: 'elolegszamla', component: BizonylatContainerComponent, canActivate: [RoleGuard]},
+    {path: 'dijbekero', component: BizonylatListComponent, canActivate: [RoleGuard]},
+    {path: 'elolegszamla', component: BizonylatListComponent, canActivate: [RoleGuard]},
 
-    {path: 'szallito', component: BizonylatContainerComponent, canActivate: [RoleGuard]},
-    {path: 'szamla', component: BizonylatContainerComponent, canActivate: [RoleGuard]},
-    {path: 'megrendeles', component: BizonylatContainerComponent, canActivate: [RoleGuard]},
-    {path: 'bejovoszamla', component: BizonylatContainerComponent, canActivate: [RoleGuard]},
+    {path: 'szallito', component: BizonylatListComponent, canActivate: [RoleGuard]},
+    {path: 'szamla', component: BizonylatListComponent, canActivate: [RoleGuard]},
+    {path: 'megrendeles', component: BizonylatListComponent, canActivate: [RoleGuard]},
+    {path: 'bejovoszamla', component: BizonylatListComponent, canActivate: [RoleGuard]},
   ]},
   {path: 'adoszamellenorzes', component: AdoszamellenorzesComponent, canActivate: [RoleGuard]},
   {path: 'navfeltoltesellenorzese', component: OnlineszamlaellenorzeseComponent, canActivate: [RoleGuard]},
@@ -348,7 +347,6 @@ if (environment.production) {
     ProjektExportComponent,
     IratNincsprojektComponent,
     AjanlatTetelComponent,
-    BizonylatContainerComponent,
     BizonylatListComponent,
     BizonylatEgyComponent,
     BizonylattoolbarComponent,

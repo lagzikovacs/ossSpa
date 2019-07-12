@@ -20,37 +20,49 @@
   </tr>
   </thead>
   <tbody>
-  <ng-container *ngFor="let item of Dto; let i = index">
-    <tr>
-      <td *ngIf="enIdclick" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.Bizonylatkod}}</td>
-      <td *ngIf="!enIdclick">{{item.BIZONYLATKOD}}</td>
-
-      <td>{{item.Bizonylatszam}}</td>
-      <td>
-        <div style="width: 250px">{{item.Ugyfelnev}}</div>
-        <div style="width: 250px">{{item.Ugyfelcim}}</div>
+    <tr *ngIf="ujtetel && ujTemplate !== undefined" class="active">
+      <td colspan="100">
+        <ng-template *ngTemplateOutlet="ujTemplate"></ng-template>
       </td>
+    </tr>
 
-      <td>{{item.Bizonylatkelte | datehun}}</td>
-      <td>{{item.Teljesiteskelte | datehun}}</td>
-      <td>{{item.Fizetesimod}}</td>
-      <td>{{item.Fizetesihatarido | datehun}}</td>
-      <td>{{item.Kifizetesrendben | boolhun}}</td>
-      <td>{{item.Kiszallitva | boolhun}}</td>
-      <td>{{item.Penznem}}</td>
-      <td style="text-align: right">{{item.Arfolyam | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.Netto | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.Afa | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.Brutto | number: '1.2-2'}}</td>
-      <td *ngIf="item.Ezstornozo">igen</td>
-      <td *ngIf="!item.Ezstornozo"></td>
-      <td *ngIf="item.Ezstornozott">igen</td>
-      <td *ngIf="!item.Ezstornozott"></td>
-    </tr>
-    <tr *ngIf="item.Megjegyzesfej || '' !== ''">
-      <td colspan="16">{{item.Megjegyzesfej}}</td>
-    </tr>
-  </ng-container>
+    <ng-container *ngFor="let item of items; let i = index">
+      <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
+        <td *ngIf="enIdclick" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="clickforid(i)">{{item.Bizonylatkod}}</td>
+        <td *ngIf="!enIdclick">{{item.Bizonylatkod}}</td>
+
+        <td>{{item.Bizonylatszam}}</td>
+        <td>
+          <div style="width: 250px">{{item.Ugyfelnev}}</div>
+          <div style="width: 250px">{{item.Ugyfelcim}}</div>
+        </td>
+
+        <td>{{item.Bizonylatkelte | datehun}}</td>
+        <td>{{item.Teljesiteskelte | datehun}}</td>
+        <td>{{item.Fizetesimod}}</td>
+        <td>{{item.Fizetesihatarido | datehun}}</td>
+        <td>{{item.Kifizetesrendben | boolhun}}</td>
+        <td>{{item.Kiszallitva | boolhun}}</td>
+        <td>{{item.Penznem}}</td>
+        <td style="text-align: right">{{item.Arfolyam | number: '1.2-2'}}</td>
+        <td style="text-align: right">{{item.Netto | number: '1.2-2'}}</td>
+        <td style="text-align: right">{{item.Afa | number: '1.2-2'}}</td>
+        <td style="text-align: right">{{item.Brutto | number: '1.2-2'}}</td>
+        <td *ngIf="item.Ezstornozo">igen</td>
+        <td *ngIf="!item.Ezstornozo"></td>
+        <td *ngIf="item.Ezstornozott">igen</td>
+        <td *ngIf="!item.Ezstornozott"></td>
+      </tr>
+      <tr *ngIf="item.Megjegyzesfej || '' !== ''" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
+        <td colspan="100">{{item.Megjegyzesfej}}</td>
+      </tr>
+
+      <tr *ngIf="i === clickedidindex && egyTemplate !== undefined" [class.active]="i === clickedidindex">
+        <td colspan="100">
+          <ng-template *ngTemplateOutlet="egyTemplate"></ng-template>
+        </td>
+      </tr>
+    </ng-container>
   </tbody>
 </table>
 

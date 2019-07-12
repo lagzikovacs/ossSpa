@@ -7,6 +7,7 @@ import {BizonylatDto} from '../bizonylatdto';
 import {BizonylatTetelDto} from '../bizonylatteteldto';
 import {BizonylatAfaDto} from '../bizonylatafadto';
 import {BizonylatTermekdijDto} from '../bizonylattermekdijdto';
+import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 
 @Component({
   selector: 'app-bizonylat-reszletek',
@@ -14,6 +15,7 @@ import {BizonylatTermekdijDto} from '../bizonylattermekdijdto';
 })
 export class BizonylatReszletekComponent implements OnInit, OnDestroy {
   @Input() Bizonylatkod = -1;
+  @Input() bizonylatLeiro = new BizonylatTipusLeiro();
 
   cdto = new BizonylatComplexDto();
   cdtoDto = new Array<BizonylatDto>();

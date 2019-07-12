@@ -6,6 +6,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {BizonylatDto} from '../bizonylatdto';
+import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 
 @Component({
   selector: 'app-bizonylat-kibocsatas',
@@ -16,6 +17,7 @@ export class BizonylatKibocsatasComponent implements OnDestroy {
   @Input() set DtoOriginal(value: BizonylatDto) {
     this.Dto = deepCopy(value);
   }
+  @Input() bizonylatLeiro = new BizonylatTipusLeiro();
   @Output() eventKibocsatasUtan = new EventEmitter<BizonylatDto>();
   @Output() eventKibocsatasUtanKeszpenzes = new EventEmitter<boolean>();
 
@@ -57,9 +59,9 @@ export class BizonylatKibocsatasComponent implements OnDestroy {
         this.eppFrissit = false;
         this.eventKibocsatasUtan.emit(res1.Result[0]);
 
-        this._keszpenzes = (this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
-            this.bizonylatservice.bizonylatTipus === BizonylatTipus.ElolegSzamla ||
-            this.bizonylatservice.bizonylatTipus === BizonylatTipus.Szamla) &&
+        this._keszpenzes = (this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
+            this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.ElolegSzamla ||
+            this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.Szamla) &&
             this.Dto.Fizetesimod === 'Készpénz';
 
         this.eventKibocsatasUtanKeszpenzes.emit(this._keszpenzes);

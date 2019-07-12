@@ -1,16 +1,6 @@
 <div class="alapkeret">
-  <h5>{{bizonylatservice.bizonylatLeiro.BizonylatNev}}</h5>
-  <div style="margin-bottom: 10px">
-    <div style="font-size: smaller">{{bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].Bizonylatkod}}
-      {{bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].Ugyfelnev}}</div>
-    <div style="font-size: smaller">{{bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].Bizonylatszam}}</div>
-  </div>
   <div>
     <nav>
-      <button [disabled]="eppFrissit" (click)="vissza()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-arrow-left" style="margin-right: 3px" aria-hidden="true"></i>Vissza
-      </button>
-
       <button [disabled]="eppFrissit" (click)="reszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>
       </button>
@@ -82,32 +72,33 @@
   OSNxml = 14,
   }-->
 
-  <ng-container *ngIf="bizonylatservice.EgyMode === 1">
+  <ng-container *ngIf="EgyMode === 1">
     <div [@rowanimation]>
-      <app-bizonylat-nyomtatas [Bizonylatkod]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].Bizonylatkod">
+      <app-bizonylat-nyomtatas [Bizonylatkod]="Dto.Bizonylatkod">
       </app-bizonylat-nyomtatas>
     </div>
   </ng-container>
-  <ng-container *ngIf="bizonylatservice.EgyMode === 2">
+  <ng-container *ngIf="EgyMode === 2">
     <div [@rowanimation]>
-      <app-bizonylat-reszletek [Bizonylatkod]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].Bizonylatkod">
+      <app-bizonylat-reszletek [Bizonylatkod]="Dto.Bizonylatkod"
+                               [bizonylatLeiro]="bizonylatLeiro">
       </app-bizonylat-reszletek>
     </div>
   </ng-container>
-  <ng-container *ngIf="bizonylatservice.EgyMode === 3">
+  <ng-container *ngIf="EgyMode === 3">
     <div [@rowanimation]>
-      <app-kifizetes-list [Bizonylat]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex]">
+      <app-kifizetes-list [Bizonylat]="Dto">
       </app-kifizetes-list>
     </div>
   </ng-container>
-  <ng-container *ngIf="bizonylatservice.EgyMode === 4">
+  <ng-container *ngIf="EgyMode === 4">
     <div [@rowanimation]>
-      <app-bizonylatkapcsolat-list [Bizonylatkod]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].Bizonylatkod"
-                                   [Ugyfelkod]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].Ugyfelkod">
+      <app-bizonylatkapcsolat-list [Bizonylatkod]="Dto.Bizonylatkod"
+                                   [Ugyfelkod]="Dto.Ugyfelkod">
       </app-bizonylatkapcsolat-list>
     </div>
   </ng-container>
-  <ng-container *ngIf="bizonylatservice.EgyMode === 5">
+  <ng-container *ngIf="EgyMode === 5">
     <div [@rowanimation]>
       <app-tetel-torles [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"
                         [eppFrissit]="eppFrissit"
@@ -116,31 +107,35 @@
       </app-tetel-torles>
     </div>
   </ng-container>
-  <ng-container *ngIf="bizonylatservice.EgyMode === 6">
+  <ng-container *ngIf="EgyMode === 6">
     <div [@rowanimation]>
-      <app-bizonylat-szerkesztes></app-bizonylat-szerkesztes>
+      <app-bizonylat-szerkesztes [bizonylatLeiro]="bizonylatLeiro">
+
+      </app-bizonylat-szerkesztes>
     </div>
   </ng-container>
 
-  <ng-container *ngIf="bizonylatservice.EgyMode === 7">
+  <ng-container *ngIf="EgyMode === 7">
     <div [@rowanimation]>
-      <app-bizonylat-errol [Bizonylatkod]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].Bizonylatkod"
+      <app-bizonylat-errol [Bizonylatkod]="Dto.Bizonylatkod"
                            (eventBizonylaterrolUtan)="onBizonylaterrolUtan($event)">
       </app-bizonylat-errol>
     </div>
   </ng-container>
 
-  <ng-container *ngIf="bizonylatservice.EgyMode === 8">
+  <ng-container *ngIf="EgyMode === 8">
     <div [@rowanimation]>
-      <app-bizonylat-kibocsatas [DtoOriginal]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex]"
+      <app-bizonylat-kibocsatas [DtoOriginal]="Dto"
+                                [bizonylatLeiro]="bizonylatLeiro"
                                 (eventKibocsatasUtan)="onKibocsatasUtan($event)"
                                 (eventKibocsatasUtanKeszpenzes)="onKibocsatasUtanKeszpenzes($event)">
       </app-bizonylat-kibocsatas>
     </div>
   </ng-container>
-  <ng-container *ngIf="bizonylatservice.EgyMode === 9">
+  <ng-container *ngIf="EgyMode === 9">
     <div [@rowanimation]>
-      <app-bizonylat-storno [DtoOriginal]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex]"
+      <app-bizonylat-storno [DtoOriginal]="Dto"
+                            [bizonylatLeiro]="bizonylatLeiro"
                             (eventStornozando)="onStornozando($event)"
                             (eventStornozo)="onStornozo($event)"
                             (eventStornoMegsem)="onStornoMegsem()">
@@ -148,37 +143,38 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="bizonylatservice.EgyMode === 10">
+  <ng-container *ngIf="EgyMode === 10">
     <div [@rowanimation]>
-      <app-bizonylat-penztar [DtoOriginal]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex]"
+      <app-bizonylat-penztar [DtoOriginal]="Dto"
+                             [bizonylatLeiro]="bizonylatLeiro"
                              (eventPenztarUtan)="onPenztarUtan()">
       </app-bizonylat-penztar>
     </div>
   </ng-container>
-  <ng-container *ngIf="bizonylatservice.EgyMode === 11">
+  <ng-container *ngIf="EgyMode === 11">
     <div [@rowanimation]>
-      <app-bizonylat-kifizetesrendben [DtoOriginal]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex]"
+      <app-bizonylat-kifizetesrendben [DtoOriginal]="Dto"
                                       (eventKifizetesrendbenUtan)="onKifizetesrendbenUtan($event)">
       </app-bizonylat-kifizetesrendben>
     </div>
   </ng-container>
-  <ng-container *ngIf="bizonylatservice.EgyMode === 12">
+  <ng-container *ngIf="EgyMode === 12">
     <div [@rowanimation]>
-      <app-bizonylat-kiszallitva [DtoOriginal]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex]"
+      <app-bizonylat-kiszallitva [DtoOriginal]="Dto"
                                  (eventKiszallitvaUtan)="onKiszallitvaUtan($event)">
       </app-bizonylat-kiszallitva>
     </div>
   </ng-container>
 
-  <ng-container *ngIf="bizonylatservice.EgyMode === 13">
+  <ng-container *ngIf="EgyMode === 13">
     <div [@rowanimation]>
-      <app-bizonylat-formaiellenorzes [Bizonylatkod]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].Bizonylatkod">
+      <app-bizonylat-formaiellenorzes [Bizonylatkod]="Dto.Bizonylatkod">
       </app-bizonylat-formaiellenorzes>
     </div>
   </ng-container>
-  <ng-container *ngIf="bizonylatservice.EgyMode === 14">
+  <ng-container *ngIf="EgyMode === 14">
     <div [@rowanimation]>
-      <app-bizonylat-letoltesonlineszamlaformatumban [Bizonylatkod]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].Bizonylatkod">
+      <app-bizonylat-letoltesonlineszamlaformatumban [Bizonylatkod]="Dto.Bizonylatkod">
       </app-bizonylat-letoltesonlineszamlaformatumban>
     </div>
   </ng-container>

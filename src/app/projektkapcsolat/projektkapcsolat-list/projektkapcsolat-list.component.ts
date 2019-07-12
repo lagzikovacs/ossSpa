@@ -15,6 +15,7 @@ import {IratDto} from '../../irat/iratdto';
 import {BizonylatDto} from '../../bizonylat/bizonylatdto';
 import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
 import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
+import {BizonylatTipusLeiro} from '../../bizonylat/bizonylattipusleiro';
 
 @Component({
   selector: 'app-projektkapcsolat-list',
@@ -35,6 +36,7 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
 
   OriginalIrat = new IratDto();
   OriginalBizonylat = new BizonylatDto();
+  bizonylatLeiro = new BizonylatTipusLeiro();
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -93,28 +95,21 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
 
     if (this.Dto[this.DtoSelectedIndex].Bizonylatkod !== null) {
       this.eppFrissit = true;
-      this._bizonylatservice.GetComplex(this.Dto[this.DtoSelectedIndex].Bizonylatkod)
+      this._bizonylatservice.Get(this.Dto[this.DtoSelectedIndex].Bizonylatkod)
         .then(res => {
           if (res.Error != null) {
             throw res.Error;
           }
 
-          this._bizonylatservice.Dto = [res.Result[0].Dto];
-          this._bizonylatservice.DtoSelectedIndex = 0;
-          this._bizonylatservice.bizonylatTipus = this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Bizonylattipuskod;
-
-          this._bizonylatservice.TetelDto = res.Result[0].LstTetelDto;
-          this._bizonylatservice.AfaDto = res.Result[0].LstAfaDto;
-          this._bizonylatservice.TermekdijDto = res.Result[0].LstTermekdijDto;
-
-          return this._bizonylatservice.GetBizonylatLeiro(); // ez megcsinálja az értékadásokat is
+          this.OriginalBizonylat = res.Result[0];
+          return this._bizonylatservice.BizonylatLeiro(this.OriginalBizonylat.Bizonylattipuskod);
         })
         .then(res1 => {
           if (res1.Error != null) {
             throw res1.Error;
           }
 
-          this._bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
+          this.bizonylatLeiro = res1.Result;
           this.eppFrissit = false;
           this.tabla.bizonylatOk = true;
         })

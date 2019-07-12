@@ -1,7 +1,7 @@
 <div class="alapkeret">
-  <h5>{{bizonylatservice.bizonylatLeiro.BizonylatNev}} részletesen</h5>
+  <h5>{{bizonylatLeiro.BizonylatNev}} részletesen</h5>
   <div class="egylabel">Bizonylat</div>
-  <app-bizonylattabla [enIdclick]="false" [Dto]="cdtoDto"></app-bizonylattabla>
+  <app-bizonylattabla [enIdclick]="false" [items]="cdtoDto"></app-bizonylattabla>
   <div class="egylabel">Tételek</div>
   <app-bizonylatteteltabla [enEdit]="false" [Dto]="cdtoTetel"></app-bizonylatteteltabla>
   <div class="egylabel">ÁFA összesítés</div>

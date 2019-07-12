@@ -9,6 +9,7 @@ import {deepCopy} from '../../tools/deepCopy';
 import {BizonylatDto} from '../bizonylatdto';
 import {PenztarDto} from '../../penztar/penztardto';
 import {PenztarService} from '../../penztar/penztar.service';
+import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 
 @Component({
   selector: 'app-bizonylat-penztar',
@@ -19,6 +20,7 @@ export class BizonylatPenztarComponent implements OnInit, OnDestroy {
   @Input() set DtoOriginal(value: BizonylatDto) {
     this.Dto = deepCopy(value);
   }
+  @Input() bizonylatLeiro = new BizonylatTipusLeiro();
   @Output() eventPenztarUtan = new EventEmitter<void>();
 
   penztarDto = new Array<PenztarDto>();
@@ -82,10 +84,10 @@ export class BizonylatPenztarComponent implements OnInit, OnDestroy {
 
         penztartetelDto.Penztarkod = this.penztarDto[this.penztarindex].Penztarkod;
         penztartetelDto.Datum = this.Dto.Bizonylatkelte;
-        penztartetelDto.Jogcim = this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla ? 'Bejövő számla' : 'Számla';
+        penztartetelDto.Jogcim = this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.BejovoSzamla ? 'Bejövő számla' : 'Számla';
         penztartetelDto.Ugyfelnev = this.Dto.Ugyfelnev;
         penztartetelDto.Bizonylatszam = this.Dto.Bizonylatszam;
-        if (this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla) {
+        if (this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.BejovoSzamla) {
           penztartetelDto.Kiadas = this.Dto.Brutto;
         } else {
           penztartetelDto.Bevetel = this.Dto.Brutto;

@@ -5,21 +5,15 @@ import {environment} from '../../environments/environment';
 import {BizonylatComplexResult} from './bizonylatcomplexresult';
 import {BizonylatTipus} from './bizonylattipus';
 import {BizonylatDto} from './bizonylatdto';
-import {BizonylatContainerMode} from './bizonylatcontainermode';
 import {BizonylatTipusLeiroResult} from './bizonylattipusleiroresult';
 import {EmptyResult} from '../dtos/emptyresult';
-import {BizonylatTipusLeiro} from './bizonylattipusleiro';
 import {BizonylatParameter} from './bizonylatparameter';
 import {BizonylatResult} from './bizonylatresult';
-import {BizonylatTermekdijDto} from './bizonylattermekdijdto';
-import {BizonylatAfaDto} from './bizonylatafadto';
 import {BizonylatTetelDto} from './bizonylatteteldto';
-import {BizonylatEgyMode} from './bizonylategymode';
 import {NumberResult} from '../dtos/numberresult';
 import {BizonylatMintaAlapjanParam} from './bizonylatmintaalapjan';
 import {StringResult} from '../dtos/stringresult';
 import {BizonylatKibocsatasParam} from './bizonylatkibocsatasparam';
-import {PenztarDto} from '../penztar/penztardto';
 import {BizonylatComplexDto} from './bizonylatcomplexdto';
 import {BizonylatSzerkesztesMode} from './bizonylatszerkesztesmode';
 import {BizonylattetelSzerkesztesMode} from './bizonylattetelszerkesztesmode';
@@ -32,18 +26,7 @@ import {BruttobolParam} from './bruttobolparam';
 export class BizonylatService {
   private readonly _controller = 'api/bizonylat/';
 
-  bizonylatTipus = BizonylatTipus.Szamla;
-  bizonylatLeiro = new BizonylatTipusLeiro();
   szvesz = false;
-
-  // a listából kiválasztott tételeken végzett egyszerűbb műveletekhez
-  Dto = new Array<BizonylatDto>();
-  DtoSelectedIndex = -1;
-
-  // ezek csak a részletek megjelenítéséhez kellenek
-  TetelDto = new Array<BizonylatTetelDto>();
-  AfaDto = new Array<BizonylatAfaDto>();
-  TermekdijDto = new Array<BizonylatTermekdijDto>();
 
   uj = false;
   ComplexDtoEdited = new BizonylatComplexDto();
@@ -51,15 +34,6 @@ export class BizonylatService {
   TetelDtoEdited = new BizonylatTetelDto();
   TetelDtoSelectedIndex = -1;
 
-  megrendelesszempont = 1;
-  szempont = 0;
-  minta = '';
-  bp = new BizonylatParameter(0, environment.lapmeret);
-  OsszesRekord = 0;
-  elsokereses = true;
-
-  ContainerMode = BizonylatContainerMode.List;
-  EgyMode = BizonylatEgyMode.Reszletek;
   SzerkesztesMode = BizonylatSzerkesztesMode.List;
   TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
 
@@ -67,9 +41,9 @@ export class BizonylatService {
               private _logonservice: LogonService) { }
 
   public Setszvesz() {
-    this.szvesz = this.bizonylatTipus === BizonylatTipus.Szamla ||
-      this.bizonylatTipus === BizonylatTipus.ElolegSzamla ||
-      this.bizonylatTipus === BizonylatTipus.Szallito;
+    // this.szvesz = this.bizonylatTipus === BizonylatTipus.Szamla ||
+    //   this.bizonylatTipus === BizonylatTipus.ElolegSzamla ||
+    //   this.bizonylatTipus === BizonylatTipus.Szallito;
   }
 
   public BizonylatLeiro(bt: BizonylatTipus): Promise<BizonylatTipusLeiroResult> {
@@ -81,21 +55,6 @@ export class BizonylatService {
     };
 
     return this._httpClient.post<BizonylatTipusLeiroResult>(url, body, options).toPromise();
-  }
-
-  public GetBizonylatLeiro(): Promise<EmptyResult> {
-    this.bizonylatLeiro = new BizonylatTipusLeiro();
-
-    return this.BizonylatLeiro(this.bizonylatTipus)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        this.bizonylatLeiro = res.Result;
-
-        return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
-      });
   }
 
   public CreateNewComplex(): Promise<BizonylatComplexResult> {

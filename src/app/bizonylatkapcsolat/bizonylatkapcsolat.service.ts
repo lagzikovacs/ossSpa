@@ -13,7 +13,7 @@ import {BizonylatKapcsolatParam} from './bizonylatkapcsolatparam';
 })
 export class BizonylatkapcsolatService {
   private readonly _controller = 'api/bizonylatkapcsolat/';
-  cim = 'Bizonylatkapcsolat';
+  cim = 'Irat';
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

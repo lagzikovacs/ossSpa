@@ -5,10 +5,6 @@ import {LogonService} from '../logon/logon.service';
 import {AngularmenuResult} from './angularmenuresult';
 import {Router} from '@angular/router';
 import {PlatformLocation} from '@angular/common';
-import {BizonylatService} from '../bizonylat/bizonylat.service';
-import {BizonylatTipus} from '../bizonylat/bizonylattipus';
-import {BizonylatDto} from '../bizonylat/bizonylatdto';
-import {BizonylatContainerMode} from '../bizonylat/bizonylatcontainermode';
 import {VagolapService} from '../vagolap/vagolap.service';
 import {VagolapMode} from '../vagolap/vagolapmode';
 
@@ -22,7 +18,6 @@ export class MenuService {
               private _location: PlatformLocation,
               private _httpClient: HttpClient,
               private _logonservice: LogonService,
-              private _bizonylatservice: BizonylatService,
               private _vagolapservice: VagolapService) {
     _location.onPopState(() => {
       _router.navigate(['bejelentkezes']);
@@ -75,34 +70,16 @@ export class MenuService {
 
 
       case '/bizonylat/dijbekero':
-        this._bizonylatservice.bizonylatTipus = BizonylatTipus.DijBekero;
-        this._bizonylatservice.ContainerMode = BizonylatContainerMode.List;
-        this._bizonylatservice.Dto = new Array<BizonylatDto>();
         break;
       case '/bizonylat/elolegszamla':
-        this._bizonylatservice.bizonylatTipus = BizonylatTipus.ElolegSzamla;
-        this._bizonylatservice.ContainerMode = BizonylatContainerMode.List;
-        this._bizonylatservice.Dto = new Array<BizonylatDto>();
         break;
       case '/bizonylat/szallito':
-        this._bizonylatservice.bizonylatTipus = BizonylatTipus.Szallito;
-        this._bizonylatservice.ContainerMode = BizonylatContainerMode.List;
-        this._bizonylatservice.Dto = new Array<BizonylatDto>();
         break;
       case '/bizonylat/szamla':
-        this._bizonylatservice.bizonylatTipus = BizonylatTipus.Szamla;
-        this._bizonylatservice.ContainerMode = BizonylatContainerMode.List;
-        this._bizonylatservice.Dto = new Array<BizonylatDto>();
         break;
       case '/bizonylat/megrendeles':
-        this._bizonylatservice.bizonylatTipus = BizonylatTipus.Megrendeles;
-        this._bizonylatservice.ContainerMode = BizonylatContainerMode.List;
-        this._bizonylatservice.Dto = new Array<BizonylatDto>();
         break;
       case '/bizonylat/bejovoszamla':
-        this._bizonylatservice.bizonylatTipus = BizonylatTipus.BejovoSzamla;
-        this._bizonylatservice.ContainerMode = BizonylatContainerMode.List;
-        this._bizonylatservice.Dto = new Array<BizonylatDto>();
         break;
 
 

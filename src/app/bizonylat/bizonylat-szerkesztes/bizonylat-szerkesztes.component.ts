@@ -1,11 +1,9 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
 import {FizetesimodService} from '../../primitiv/fizetesimod/fizetesimod.service';
-import {BizonylatContainerMode} from '../bizonylatcontainermode';
-import {BizonylatEgyMode} from '../bizonylategymode';
 import {BizonylattetelSzerkesztesMode} from '../bizonylattetelszerkesztesmode';
 import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
@@ -18,12 +16,14 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {PenznemDto} from '../../primitiv/penznem/penznemdto';
 import {FizetesimodDto} from '../../primitiv/fizetesimod/fizetesimoddto';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
+import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 
 @Component({
   selector: 'app-bizonylat-szerkesztes',
   templateUrl: './bizonylat-szerkesztes.component.html'
 })
 export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
+  @Input() bizonylatLeiro = new BizonylatTipusLeiro();
 
   fizerr = 'Ismeretlen fizetési mód: ';
 
@@ -141,7 +141,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
   tetelUj() {
     this.eppFrissit = true;
-    this.bizonylatservice.CreateNewTetel(this.bizonylatservice.bizonylatTipus)
+    this.bizonylatservice.CreateNewTetel(this.bizonylatLeiro.bizonylatTipus)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -197,7 +197,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
           throw res1.Error;
         }
 
-        if (this.bizonylatservice.bizonylatLeiro.FizetesiModIs) {
+        if (this.bizonylatLeiro.FizetesiModIs) {
           return this._fizetesimodservice.ZoomCheck(new FizetesimodZoomParameter(this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesimodkod,
             this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesimod));
         } else {
@@ -227,14 +227,14 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
           throw res4.Error;
         }
 
-        if (this.bizonylatservice.uj) {
-          this.bizonylatservice.Dto.unshift(res4.Result[0].Dto);
-        } else {
-          this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex] = res4.Result[0].Dto;
-          this.bizonylatservice.TetelDto = res4.Result[0].LstTetelDto;
-          this.bizonylatservice.AfaDto = res4.Result[0].LstAfaDto;
-          this.bizonylatservice.TermekdijDto = res4.Result[0].LstTermekdijDto;
-        }
+        // if (this.bizonylatservice.uj) {
+        //   this.bizonylatservice.Dto.unshift(res4.Result[0].Dto);
+        // } else {
+        //   this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex] = res4.Result[0].Dto;
+        //   this.bizonylatservice.TetelDto = res4.Result[0].LstTetelDto;
+        //   this.bizonylatservice.AfaDto = res4.Result[0].LstAfaDto;
+        //   this.bizonylatservice.TermekdijDto = res4.Result[0].LstTermekdijDto;
+        // }
 
         this.eppFrissit = false;
         this.navigal();
@@ -249,9 +249,9 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   }
   navigal() {
     if (this.bizonylatservice.uj) {
-      this.bizonylatservice.ContainerMode = BizonylatContainerMode.List;
+      // this.bizonylatservice.ContainerMode = BizonylatContainerMode.List;
     } else {
-      this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
+      // this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
     }
   }
   ngOnDestroy() {

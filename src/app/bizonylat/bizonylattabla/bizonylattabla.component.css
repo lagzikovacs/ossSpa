@@ -1,0 +1,14 @@
+.table tr.active td {
+  background-color: #abdde5;
+}
+.table tr.inactive td {
+  background-color: white;
+}
+
+.datum {
+  width: 75px;
+}
+
+.idobelyeg {
+  width: 130px;
+}

@@ -4,6 +4,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {BizonylatDto} from '../bizonylatdto';
+import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 
 @Component({
   selector: 'app-bizonylat-storno',
@@ -14,6 +15,7 @@ export class BizonylatStornoComponent implements OnDestroy {
   @Input() set DtoOriginal(value: BizonylatDto) {
     this.Dto = deepCopy(value);
   }
+  @Input() bizonylatLeiro = new BizonylatTipusLeiro();
   @Output() eventStornozando = new EventEmitter<BizonylatDto>();
   @Output() eventStornozo = new EventEmitter<BizonylatDto>();
   @Output() eventStornoMegsem = new EventEmitter();

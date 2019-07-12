@@ -1,18 +1,28 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
-import {BizonylatEgyMode} from '../bizonylategymode';
 import {PenztartetelService} from '../../penztartetel/penztartetel.service';
 import {PenztartetelDto} from '../../penztartetel/penztarteteldto';
 import {BizonylatTipus} from '../bizonylattipus';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {deepCopy} from '../../tools/deepCopy';
+import {BizonylatDto} from '../bizonylatdto';
+import {PenztarDto} from '../../penztar/penztardto';
+import {PenztarService} from '../../penztar/penztar.service';
 
 @Component({
   selector: 'app-bizonylat-penztar',
   templateUrl: './bizonylat-penztar.component.html'
 })
-export class BizonylatPenztarComponent implements OnDestroy {
-  bizonylatservice: BizonylatService;
+export class BizonylatPenztarComponent implements OnInit, OnDestroy {
+  Dto = new BizonylatDto();
+  @Input() set DtoOriginal(value: BizonylatDto) {
+    this.Dto = deepCopy(value);
+  }
+  @Output() eventPenztarUtan = new EventEmitter<void>();
+
+  penztarDto = new Array<PenztarDto>();
+
   penztarindex = -1;
   penztarkivalasztva = false;
   megjegyzes = '';
@@ -26,11 +36,31 @@ export class BizonylatPenztarComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(private _penztartetelservice: PenztartetelService,
+  bizonylatservice: BizonylatService;
+
+  constructor(private _penztarservice: PenztarService,
+              private _penztartetelservice: PenztartetelService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
+  }
+
+  ngOnInit() {
+    this.eppFrissit = true;
+    this._penztarservice.ReadByCurrencyOpened(this.Dto.Penznemkod)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.penztarDto = res.Result;
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this._errorservice.Error = err;
+      });
   }
 
   penztarvalasztas(i: number) {
@@ -39,7 +69,7 @@ export class BizonylatPenztarComponent implements OnDestroy {
   }
 
   onSubmit() {
-    let Dto: PenztartetelDto;
+    let penztartetelDto: PenztartetelDto;
 
     this.eppFrissit = true;
     this._penztartetelservice.CreateNew()
@@ -48,21 +78,21 @@ export class BizonylatPenztarComponent implements OnDestroy {
           throw res.Error;
         }
 
-        Dto = res.Result[0];
+        penztartetelDto = res.Result[0];
 
-        Dto.Penztarkod = this.bizonylatservice.BizonylatPenztarDto[this.penztarindex].Penztarkod;
-        Dto.Datum = this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatkelte;
-        Dto.Jogcim = this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla ? 'Bejövő számla' : 'Számla';
-        Dto.Ugyfelnev = this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Ugyfelnev;
-        Dto.Bizonylatszam = this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatszam;
+        penztartetelDto.Penztarkod = this.penztarDto[this.penztarindex].Penztarkod;
+        penztartetelDto.Datum = this.Dto.Bizonylatkelte;
+        penztartetelDto.Jogcim = this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla ? 'Bejövő számla' : 'Számla';
+        penztartetelDto.Ugyfelnev = this.Dto.Ugyfelnev;
+        penztartetelDto.Bizonylatszam = this.Dto.Bizonylatszam;
         if (this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla) {
-          Dto.Kiadas = this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Brutto;
+          penztartetelDto.Kiadas = this.Dto.Brutto;
         } else {
-          Dto.Bevetel = this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Brutto;
+          penztartetelDto.Bevetel = this.Dto.Brutto;
         }
-        Dto.Megjegyzes = this.megjegyzes;
+        penztartetelDto.Megjegyzes = this.megjegyzes;
 
-        return this._penztartetelservice.Add(Dto);
+        return this._penztartetelservice.Add(penztartetelDto);
       })
       .then(res1 => {
         if (res1.Error != null) {
@@ -70,7 +100,8 @@ export class BizonylatPenztarComponent implements OnDestroy {
         }
 
         this.eppFrissit = false;
-        this.bizonylatservice.EgyMode = BizonylatEgyMode.Blank;
+        this.eventPenztarUtan.emit();
+
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -78,7 +109,7 @@ export class BizonylatPenztarComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Blank;
+    this.eventPenztarUtan.emit();
   }
 
   ngOnDestroy() {

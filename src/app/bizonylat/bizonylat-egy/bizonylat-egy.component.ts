@@ -38,7 +38,6 @@ export class BizonylatEgyComponent implements OnDestroy {
   }
 
   constructor(private _logonservice: LogonService,
-              private _penztarsevice: PenztarService,
               private _vagolapservice: VagolapService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
@@ -68,7 +67,8 @@ export class BizonylatEgyComponent implements OnDestroy {
   }
   penztarenabled(): boolean {
     return (this.bizonylatservice.bizonylatTipus === BizonylatTipus.Szamla ||
-      this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla) &&
+      this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
+      this.bizonylatservice.bizonylatTipus === BizonylatTipus.ElolegSzamla) &&
       this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Bizonylatszam !== null &&
       this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Fizetesimod === 'Készpénz';
   }
@@ -129,22 +129,7 @@ export class BizonylatEgyComponent implements OnDestroy {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Kibocsatas;
   }
   penztar() {
-    this.eppFrissit = true;
-    this._penztarsevice.ReadByCurrencyOpened(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Penznemkod)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        this.bizonylatservice.BizonylatPenztarDto = res.Result;
-
-        this.bizonylatservice.EgyMode = BizonylatEgyMode.Penztar;
-        this.eppFrissit = false;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+    this.bizonylatservice.EgyMode = BizonylatEgyMode.Penztar;
   }
   storno() {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Storno;
@@ -221,6 +206,26 @@ export class BizonylatEgyComponent implements OnDestroy {
   }
 
   onStornoMegsem() {
+    this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
+  }
+
+  onKibocsatasUtan(dto: BizonylatDto) {
+    if (dto !== null) {
+      propCopy(dto, this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex]);
+    } else {
+      this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
+    }
+  }
+
+  onKibocsatasUtanKeszpenzes(keszpenzes: boolean) {
+    if (keszpenzes) {
+      this.bizonylatservice.EgyMode = BizonylatEgyMode.Penztar;
+    } else {
+      this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
+    }
+  }
+
+  onPenztarUtan() {
     this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
   }
 

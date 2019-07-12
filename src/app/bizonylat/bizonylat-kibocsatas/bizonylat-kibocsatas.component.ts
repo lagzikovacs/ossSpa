@@ -1,17 +1,23 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
-import {BizonylatEgyMode} from '../bizonylategymode';
 import {BizonylatKibocsatasParam} from '../bizonylatkibocsatasparam';
 import {BizonylatTipus} from '../bizonylattipus';
-import {PenztarService} from '../../penztar/penztar.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {deepCopy} from '../../tools/deepCopy';
+import {BizonylatDto} from '../bizonylatdto';
 
 @Component({
   selector: 'app-bizonylat-kibocsatas',
   templateUrl: './bizonylat-kibocsatas.component.html'
 })
 export class BizonylatKibocsatasComponent implements OnDestroy {
+  Dto = new BizonylatDto();
+  @Input() set DtoOriginal(value: BizonylatDto) {
+    this.Dto = deepCopy(value);
+  }
+  @Output() eventKibocsatasUtan = new EventEmitter<BizonylatDto>();
+  @Output() eventKibocsatasUtanKeszpenzes = new EventEmitter<boolean>();
 
   bizonylatszam = '';
   private _keszpenzes = false;
@@ -27,8 +33,7 @@ export class BizonylatKibocsatasComponent implements OnDestroy {
 
   bizonylatservice: BizonylatService;
 
-  constructor(private _penztarsevice: PenztarService,
-              private _errorservice: ErrorService,
+  constructor(private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
@@ -36,8 +41,7 @@ export class BizonylatKibocsatasComponent implements OnDestroy {
 
   onSubmit() {
     this.eppFrissit = true;
-    this.bizonylatservice.Kibocsatas(new BizonylatKibocsatasParam(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex],
-      this.bizonylatszam))
+    this.bizonylatservice.Kibocsatas(new BizonylatKibocsatasParam(this.Dto, this.bizonylatszam))
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -50,39 +54,24 @@ export class BizonylatKibocsatasComponent implements OnDestroy {
           throw res1.Error;
         }
 
-        this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex] = res1.Result[0];
+        this.eppFrissit = false;
+        this.eventKibocsatasUtan.emit(res1.Result[0]);
 
-        if ((this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
+        this._keszpenzes = (this.bizonylatservice.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
             this.bizonylatservice.bizonylatTipus === BizonylatTipus.ElolegSzamla ||
             this.bizonylatservice.bizonylatTipus === BizonylatTipus.Szamla) &&
-            this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Fizetesimod === 'Készpénz') {
+            this.Dto.Fizetesimod === 'Készpénz';
 
-            this._keszpenzes = true;
-            return this._penztarsevice.ReadByCurrencyOpened(this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex].Penznemkod);
-        } else {
-          this.eppFrissit = false;
-          this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
-        }
-      })
-      .then(res2 => {
-        if (this._keszpenzes) {
-          if (res2.Error != null) {
-            throw res2.Error;
-          }
-
-          this.bizonylatservice.BizonylatPenztarDto = res2.Result;
-
-          this.eppFrissit = false;
-          this.bizonylatservice.EgyMode = BizonylatEgyMode.Penztar;
-        }
+        this.eventKibocsatasUtanKeszpenzes.emit(this._keszpenzes);
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
+
   cancel() {
-    this.bizonylatservice.EgyMode = BizonylatEgyMode.Blank;
+    this.eventKibocsatasUtan.emit(null);
   }
 
   ngOnDestroy() {

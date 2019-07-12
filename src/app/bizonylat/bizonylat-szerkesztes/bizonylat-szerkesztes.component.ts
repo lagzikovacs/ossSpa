@@ -24,8 +24,12 @@ import {UgyfelDto} from '../../ugyfel/ugyfeldto';
   templateUrl: './bizonylat-szerkesztes.component.html'
 })
 export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
-  bizonylatservice: BizonylatService;
+
   fizerr = 'Ismeretlen fizetési mód: ';
+
+  BizonylatKelte: any;
+  TeljesitesKelte: any;
+  FizetesiHatarido: any;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -35,6 +39,8 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this._eppFrissit = value;
     this._spinnerservice.Run = value;
   }
+
+  bizonylatservice: BizonylatService;
 
   constructor(private _ugyfelservice: UgyfelService,
               private _penznemservice: PenznemService,
@@ -47,9 +53,9 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.bizonylatservice.BizonylatKelte = moment(this.bizonylatservice.ComplexDtoEdited.Dto.Bizonylatkelte).format('YYYY-MM-DD');
-    this.bizonylatservice.TeljesitesKelte = moment(this.bizonylatservice.ComplexDtoEdited.Dto.Teljesiteskelte).format('YYYY-MM-DD');
-    this.bizonylatservice.FizetesiHatarido = moment(this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesihatarido).format('YYYY-MM-DD');
+    this.BizonylatKelte = moment(this.bizonylatservice.ComplexDtoEdited.Dto.Bizonylatkelte).format('YYYY-MM-DD');
+    this.TeljesitesKelte = moment(this.bizonylatservice.ComplexDtoEdited.Dto.Teljesiteskelte).format('YYYY-MM-DD');
+    this.FizetesiHatarido = moment(this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesihatarido).format('YYYY-MM-DD');
   }
 
   UgyfelZoom() {
@@ -115,10 +121,10 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
           throw this.fizerr + fm;
         }
 
-        this.bizonylatservice.TeljesitesKelte = this.bizonylatservice.BizonylatKelte;
+        this.TeljesitesKelte = this.BizonylatKelte;
         this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesimodkod = res.Result[0].Fizetesimodkod;
         this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesimod = res.Result[0].Fizetesimod1;
-        this.bizonylatservice.FizetesiHatarido = this.bizonylatservice.BizonylatKelte;
+        this.FizetesiHatarido = this.BizonylatKelte;
         this.eppFrissit = false;
       })
       .catch(err => {
@@ -203,9 +209,9 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
           throw res2.Error;
         }
 
-        this.bizonylatservice.ComplexDtoEdited.Dto.Bizonylatkelte = moment(this.bizonylatservice.BizonylatKelte).toISOString(true);
-        this.bizonylatservice.ComplexDtoEdited.Dto.Teljesiteskelte = moment(this.bizonylatservice.TeljesitesKelte).toISOString(true);
-        this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesihatarido = moment(this.bizonylatservice.FizetesiHatarido).toISOString(true);
+        this.bizonylatservice.ComplexDtoEdited.Dto.Bizonylatkelte = moment(this.BizonylatKelte).toISOString(true);
+        this.bizonylatservice.ComplexDtoEdited.Dto.Teljesiteskelte = moment(this.TeljesitesKelte).toISOString(true);
+        this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesihatarido = moment(this.FizetesiHatarido).toISOString(true);
 
         return this.bizonylatservice.Save(this.bizonylatservice.ComplexDtoEdited);
       })

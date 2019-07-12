@@ -1,6 +1,7 @@
 <div class="alapkeret">
   <h5>{{bizonylatservice.bizonylatLeiro.BizonylatNev}} pénztári kezelése</h5>
-  <ng-container *ngIf="bizonylatservice.BizonylatPenztarDto.length > 0 && !penztarkivalasztva">
+
+  <ng-container *ngIf="penztarDto.length > 0 && !penztarkivalasztva">
     <div>A bizonylat pénznemének megfelelő nyitott pénztárak a következők, válassza ki a megfelelőt:</div>
     <table class="table table-bordered table-sm table-responsive" style="border: none">
       <thead>
@@ -12,7 +13,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let item of bizonylatservice.BizonylatPenztarDto; let i = index">
+      <tr *ngFor="let item of penztarDto; let i = index">
         <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
             (click)="penztarvalasztas(i)">{{item.Penztarkod}}</td>
         <td>{{item.Penztar1}}</td>
@@ -22,67 +23,63 @@
       </tbody>
     </table>
   </ng-container>
+
   <ng-container *ngIf="penztarkivalasztva">
     <form #f="ngForm" (ngSubmit)="onSubmit()">
+
       <div class="row no-gutters editform-row">
-        <div class="col-md-2">
-          <div class="editform-title">Pénztár</div>
-        </div>
-        <div class="col-md-2">
-          <input type="text" class="form-control form-control-sm" id="penztar"
+        <div>
+          <div class="egylabel">Pénztár</div>
+          <input type="text" class="form-control form-control-sm oszlop3" id="penztar"
                  readonly="true"
-                 [(ngModel)]="bizonylatservice.BizonylatPenztarDto[penztarindex].Penztar1" name="penztar">
+                 [(ngModel)]="penztarDto[penztarindex].Penztar1" name="penztar">
         </div>
       </div>
+
       <div class="row no-gutters editform-row">
-        <div class="col-md-2">
-          <div class="editform-title">Pénznem</div>
-        </div>
-        <div class="col-md-1">
-          <input type="text" class="form-control form-control-sm" id="penznem"
+        <div>
+          <div class="egylabel">Pénznem</div>
+          <input type="text" class="form-control form-control-sm oszlop2" id="penznem"
                  readonly="true"
-                 [(ngModel)]="bizonylatservice.BizonylatPenztarDto[penztarindex].Penznem" name="penznem">
+                 [(ngModel)]="penztarDto[penztarindex].Penznem" name="penznem">
         </div>
       </div>
+
       <div class="row no-gutters editform-row">
-        <div class="col-md-2">
-          <div class="editform-title">Egyenleg</div>
-        </div>
-        <div class="col-md-2">
-          <input type="text" class="form-control form-control-sm" id="egyenleg"
+        <div>
+          <div class="egylabel">Egyenleg</div>
+          <input type="text" class="form-control form-control-sm oszlop2" id="egyenleg"
                  readonly="true"
-                 [(ngModel)]="bizonylatservice.BizonylatPenztarDto[penztarindex].Egyenleg" name="egyenleg">
+                 [(ngModel)]="penztarDto[penztarindex].Egyenleg" name="egyenleg">
         </div>
       </div>
+
       <div class="row no-gutters editform-row">
-        <div class="col-md-2">
-          <div class="editform-title">Összeg</div>
-        </div>
-        <div class="col-md-2">
-          <input type="text" class="form-control form-control-sm" id="osszeg"
+        <div>
+          <div class="egylabel">Összeg</div>
+          <input type="text" class="form-control form-control-sm oszlop2" id="osszeg"
                  readonly="true"
-                 [(ngModel)]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].Brutto" name="osszeg">
+                 [(ngModel)]="Dto.Brutto" name="osszeg">
         </div>
       </div>
+
       <div class="row no-gutters editform-row">
-        <div class="col-md-2">
-          <div class="editform-title">Megjegyzés</div>
-        </div>
-        <div class="col-md-4">
-          <input type="text" class="form-control form-control-sm" id="megjegyzes"
+        <div>
+          <div class="egylabel">Megjegyzés</div>
+          <input type="text" class="form-control form-control-sm oszlop6" id="megjegyzes"
                  autocomplete="off"
                  [(ngModel)]="megjegyzes" name="megjegyzes">
         </div>
       </div>
 
-      <div class="row no-gutters" style="margin-bottom: 10px">
-        <div class="col-md-2"></div>
+      <div class="row no-gutters editform-row">
         <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
         <button class="btn btn-sm btn-default" [disabled]="eppFrissit" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
       </div>
     </form>
   </ng-container>
-  <ng-container *ngIf="bizonylatservice.BizonylatPenztarDto.length === 0">
+
+  <ng-container *ngIf="penztarDto.length === 0">
     <div>Nincs a bizonylat pénznemének megfelelő nyitott pénztár!</div>
   </ng-container>
 </div>

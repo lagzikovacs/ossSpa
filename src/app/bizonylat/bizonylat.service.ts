@@ -63,12 +63,6 @@ export class BizonylatService {
   SzerkesztesMode = BizonylatSzerkesztesMode.List;
   TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
 
-  BizonylatPenztarDto = new Array<PenztarDto>();
-
-  BizonylatKelte: any;
-  TeljesitesKelte: any;
-  FizetesiHatarido: any;
-
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
 

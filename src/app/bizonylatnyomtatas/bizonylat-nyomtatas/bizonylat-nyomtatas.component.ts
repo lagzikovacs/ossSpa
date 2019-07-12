@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, Input, OnDestroy} from '@angular/core';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {BizonylatnyomtatasService} from '../bizonylatnyomtatas.service';
 import {SzMT} from '../../dtos/szmt';
@@ -14,6 +14,7 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   templateUrl: './bizonylat-nyomtatas.component.html'
 })
 export class BizonylatNyomtatasComponent implements OnDestroy {
+  @Input() Bizonylatkod = -1;
 
   entries = ['Minta', 'Eredeti', 'Másolat'];
   entriest = [BizonylatNyomtatasTipus.Minta, BizonylatNyomtatasTipus.Eredeti, BizonylatNyomtatasTipus.Masolat];
@@ -46,7 +47,7 @@ export class BizonylatNyomtatasComponent implements OnDestroy {
     this.megszakitani = false;
 
     const fi = [
-      new SzMT(Szempont.BizonylatKod, this._bizonylatservice.Dto[this._bizonylatservice.DtoSelectedIndex].Bizonylatkod),
+      new SzMT(Szempont.BizonylatKod, this.Bizonylatkod),
       new SzMT(Szempont.NyomtatasTipus, this.entriest[this.selectedi])
     ];
 

@@ -84,12 +84,14 @@
 
   <ng-container *ngIf="bizonylatservice.EgyMode === 1">
     <div [@rowanimation]>
-      <app-bizonylat-nyomtatas></app-bizonylat-nyomtatas>
+      <app-bizonylat-nyomtatas [Bizonylatkod]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].Bizonylatkod">
+      </app-bizonylat-nyomtatas>
     </div>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 2">
     <div [@rowanimation]>
-      <app-bizonylat-reszletek></app-bizonylat-reszletek>
+      <app-bizonylat-reszletek [Bizonylatkod]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex].Bizonylatkod">
+      </app-bizonylat-reszletek>
     </div>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 3">
@@ -130,7 +132,10 @@
 
   <ng-container *ngIf="bizonylatservice.EgyMode === 8">
     <div [@rowanimation]>
-      <app-bizonylat-kibocsatas></app-bizonylat-kibocsatas>
+      <app-bizonylat-kibocsatas [DtoOriginal]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex]"
+                                (eventKibocsatasUtan)="onKibocsatasUtan($event)"
+                                (eventKibocsatasUtanKeszpenzes)="onKibocsatasUtanKeszpenzes($event)">
+      </app-bizonylat-kibocsatas>
     </div>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 9">
@@ -145,7 +150,9 @@
 
   <ng-container *ngIf="bizonylatservice.EgyMode === 10">
     <div [@rowanimation]>
-      <app-bizonylat-penztar></app-bizonylat-penztar>
+      <app-bizonylat-penztar [DtoOriginal]="bizonylatservice.Dto[bizonylatservice.DtoSelectedIndex]"
+                             (eventPenztarUtan)="onPenztarUtan()">
+      </app-bizonylat-penztar>
     </div>
   </ng-container>
   <ng-container *ngIf="bizonylatservice.EgyMode === 11">

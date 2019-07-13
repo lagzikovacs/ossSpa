@@ -210,25 +210,25 @@ export class BizonylattetelSzerkesztesComponent implements OnDestroy {
           throw res5.Error;
         }
 
-        if (this.bizonylatservice.teteluj) {
-          // a lista végére teszi, h a sorrend a user szándékának feleljen meg
-          this.bizonylatservice.ComplexDtoEdited.LstTetelDto.push(res5.Result[0]);
-        } else {
-          this.bizonylatservice.ComplexDtoEdited.LstTetelDto[this.bizonylatservice.TetelDtoSelectedIndex] = res5.Result[0];
-        }
-
-        return this.bizonylatservice.SumEsAfaEsTermekdij(this.bizonylatservice.ComplexDtoEdited);
+        // if (this.bizonylatservice.teteluj) {
+        //   // a lista végére teszi, h a sorrend a user szándékának feleljen meg
+        //   this.bizonylatservice.ComplexDtoEdited.LstTetelDto.push(res5.Result[0]);
+        // } else {
+        //   this.bizonylatservice.ComplexDtoEdited.LstTetelDto[this.bizonylatservice.TetelDtoSelectedIndex] = res5.Result[0];
+        // }
+        //
+        // return this.bizonylatservice.SumEsAfaEsTermekdij(this.bizonylatservice.ComplexDtoEdited);
       })
       .then(res6 => {
-        if (res6.Error != null) {
-          throw res6.Error;
-        }
+        // if (res6.Error != null) {
+        //   throw res6.Error;
+        // }
 
-        this.bizonylatservice.ComplexDtoEdited = res6.Result[0];
-
-        this.eppFrissit = false;
-        this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
-        this._cdr.detectChanges();
+        // this.bizonylatservice.ComplexDtoEdited = res6.Result[0];
+        //
+        // this.eppFrissit = false;
+        // this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
+        // this._cdr.detectChanges();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -236,8 +236,8 @@ export class BizonylattetelSzerkesztesComponent implements OnDestroy {
       });
   }
   cancel() {
-    this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
-    this._cdr.detectChanges();
+    // this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
+    // this._cdr.detectChanges();
   }
   ngOnDestroy() {
     Object.keys(this).map(k => {

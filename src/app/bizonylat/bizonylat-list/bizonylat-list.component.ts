@@ -114,6 +114,8 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
       this.bp.fi.push(new SzMT(Szempont.NincsKiszallitva, ''));
     }
 
+    this.tabla.clearselections();
+
     this.onKeresesTovabb();
   }
 

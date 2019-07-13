@@ -19,6 +19,10 @@ import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 import {BizonylatTipus} from '../bizonylattipus';
 import {BizonylatComplexDto} from '../bizonylatcomplexdto';
+import {BizonylatDto} from '../bizonylatdto';
+import {BizonylatTetelDto} from '../bizonylatteteldto';
+import {BizonylatAfaDto} from '../bizonylatafadto';
+import {BizonylatTermekdijDto} from '../bizonylattermekdijdto';
 
 @Component({
   selector: 'app-bizonylat-szerkesztes',
@@ -32,7 +36,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
   fizerr = 'Ismeretlen fizetési mód: ';
 
-  ComplexDtoEdited = new BizonylatComplexDto();
+  ComplexDtoEdited: BizonylatComplexDto;
 
   BizonylatKelte: any;
   TeljesitesKelte: any;
@@ -59,6 +63,12 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
               private _cdr: ChangeDetectorRef,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
+
+    this.ComplexDtoEdited = new BizonylatComplexDto();
+    this.ComplexDtoEdited.Dto = new BizonylatDto();
+    this.ComplexDtoEdited.LstTetelDto = new Array<BizonylatTetelDto>()
+    this.ComplexDtoEdited.LstAfaDto = new Array<BizonylatAfaDto>();
+    this.ComplexDtoEdited.LstTermekdijDto = new Array<BizonylatTermekdijDto>();
   }
 
   ngOnInit() {
@@ -72,7 +82,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
           this.ComplexDtoEdited = res.Result[0];
           this.ComplexDtoEdited.Dto.Bizonylattipuskod = this.bizonylatTipus;
-
+          this.datumok();
           this.eppFrissit = false;
           this.SzerkesztesMode = BizonylatSzerkesztesMode.List;
         })
@@ -89,7 +99,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.ComplexDtoEdited = res.Result[0];
-
+          this.datumok();
           this.eppFrissit = false;
           this.SzerkesztesMode = BizonylatSzerkesztesMode.List;
         })
@@ -98,12 +108,13 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     }
+  }
 
+  datumok() {
     this.BizonylatKelte = moment(this.ComplexDtoEdited.Dto.Bizonylatkelte).format('YYYY-MM-DD');
     this.TeljesitesKelte = moment(this.ComplexDtoEdited.Dto.Teljesiteskelte).format('YYYY-MM-DD');
     this.FizetesiHatarido = moment(this.ComplexDtoEdited.Dto.Fizetesihatarido).format('YYYY-MM-DD');
   }
-
 
   UgyfelZoom() {
     this.SzerkesztesMode = BizonylatSzerkesztesMode.UgyfelZoom;

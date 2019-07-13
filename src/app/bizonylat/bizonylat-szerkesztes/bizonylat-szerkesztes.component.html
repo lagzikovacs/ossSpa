@@ -1,6 +1,6 @@
 <div class="alapkeret">
-  <h5 *ngIf="bizonylatservice.uj">Új {{bizonylatservice.bizonylatLeiro.BizonylatNev | lowercase}}</h5>
-  <h5 *ngIf="!bizonylatservice.uj">{{bizonylatservice.bizonylatLeiro.BizonylatNev}} módosítása</h5>
+  <h5 *ngIf="uj">Új {{bizonylatLeiro.BizonylatNev | lowercase}}</h5>
+  <h5 *ngIf="!uj">{{bizonylatLeiro.BizonylatNev}} módosítása</h5>
 
   <div class="row no-gutters editform-row">
     <div class="col-md-1">
@@ -9,11 +9,11 @@
     <div class="col-md-4">
       <input type="text" class="form-control form-control-sm" id="ugyfelnev"
              maxlength="200" required autocomplete="off" style="background-color: aquamarine"
-             [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.Ugyfelnev">
+             [(ngModel)]="ComplexDtoEdited.Dto.Ugyfelnev">
     </div>
     <div class="col-md-1">
       <button class="btn btn-sm btn-outline-primary" (click)="UgyfelZoom()"
-              [disabled] = "bizonylatservice.SzerkesztesMode !== 1"
+              [disabled] = "SzerkesztesMode !== 1"
               style="margin-left: 4px" type="button">...</button>
     </div>
     <div class="col-md-2">
@@ -22,11 +22,11 @@
     <div class="col-md-1">
       <input type="text" class="form-control form-control-sm" id="penznem"
              maxlength="3" required autocomplete="off" style="background-color: aquamarine"
-             [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.Penznem">
+             [(ngModel)]="ComplexDtoEdited.Dto.Penznem">
     </div>
     <div class="col-md-1">
       <button class="btn btn-sm btn-outline-primary" (click)="PenznemZoom()"
-              [disabled] = "bizonylatservice.SzerkesztesMode !== 1"
+              [disabled] = "SzerkesztesMode !== 1"
               style="margin-left: 4px" type="button">...</button>
     </div>
   </div>
@@ -37,14 +37,14 @@
     <div class="col-md-4">
       <input type="text" class="form-control form-control-sm" id="ugyfelcim"
              readonly
-             [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.Ugyfelcim">
+             [(ngModel)]="ComplexDtoEdited.Dto.Ugyfelcim">
     </div>
     <div class="col-md-3">
       <div class="editform-title">Árfolyam</div>
     </div>
     <div class="col-md-2">
       <input type="number" class="form-control form-control-sm" id="arfolyam"
-             [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.Arfolyam">
+             [(ngModel)]="ComplexDtoEdited.Dto.Arfolyam">
     </div>
   </div>
   <div class="row no-gutters editform-row">
@@ -54,7 +54,7 @@
     <div class="col-md-4">
       <input type="text" class="form-control form-control-sm" id="megjegyzes"
              maxlength="200" autocomplete="off"
-             [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.Megjegyzesfej" name="megjegyzes">
+             [(ngModel)]="ComplexDtoEdited.Dto.Megjegyzesfej" name="megjegyzes">
     </div>
     <div class="col-md-3">
       <div class="editform-title">Fizetési mód</div>
@@ -62,11 +62,11 @@
     <div class="col-md-2">
       <input type="text" class="form-control form-control-sm" id="fizetesimod"
              maxlength="20" required autocomplete="off" style="background-color: aquamarine"
-             [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.Fizetesimod" name="megjegyzes">
+             [(ngModel)]="ComplexDtoEdited.Dto.Fizetesimod" name="megjegyzes">
     </div>
     <div class="col-md-1">
       <button class="btn btn-sm btn-outline-primary" (click)="FizetesimodZoom()"
-              [disabled] = "bizonylatservice.SzerkesztesMode !== 1"
+              [disabled] = "SzerkesztesMode !== 1"
               style="margin-left: 4px" type="button">...</button>
       <button class="btn btn-sm btn-outline-primary" (click)="Bk()" style="margin-left: 4px" type="button">Bk</button>
       <button class="btn btn-sm btn-outline-primary" (click)="Kp()" style="margin-left: 4px" type="button">Kp</button>
@@ -77,11 +77,11 @@
     </div>
     <div class="col-md-4 input-group">
       <input type="text" class="form-control form-control-sm" id="netto" style="text-align:right"
-             readonly="true" [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.Netto">
+             readonly="true" [(ngModel)]="ComplexDtoEdited.Dto.Netto">
       <input type="text" class="form-control form-control-sm" id="afa" style="text-align:right"
-             readonly="true" [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.Afa">
+             readonly="true" [(ngModel)]="ComplexDtoEdited.Dto.Afa">
       <input type="text" class="form-control form-control-sm" id="brutto" style="text-align:right"
-             readonly="true" [(ngModel)]="bizonylatservice.ComplexDtoEdited.Dto.Brutto">
+             readonly="true" [(ngModel)]="ComplexDtoEdited.Dto.Brutto">
     </div>
     <div class="col-md-3">
       <div class="editform-title">A bizonylat kelte</div>
@@ -127,46 +127,49 @@
   TetelTorles = 6,
   }-->
 
-  <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 1">
+  <ng-container *ngIf="SzerkesztesMode === 2">
+    <app-ugyfel-list [maszk]="ComplexDtoEdited.Dto.Ugyfelnev || ''"
+                     (eventSelectzoom)="onUgyfelSelectzoom($event)"
+                     (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>
+  </ng-container>
+
+  <ng-container *ngIf="SzerkesztesMode === 3">
+    <app-penznem-list [maszk]="ComplexDtoEdited.Dto.Penznem || ''"
+                      (eventSelectzoom)="onPenznemSelectzoom($event)"
+                      (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
+  </ng-container>
+
+  <ng-container *ngIf="SzerkesztesMode === 4">
+    <app-fizetesimod-list [maszk]="ComplexDtoEdited.Dto.Fizetesimod || ''"
+                          (eventSelectzoom)="onFizetesimodSelectzoom($event)"
+                          (eventStopzoom)="onFizetesimodStopzoom()"></app-fizetesimod-list>
+  </ng-container>
+
+  <div class="alapkeret">
     <nav>
       <button [disabled]="eppFrissit" (click)="tetelUj()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>
       </button>
     </nav>
-    <app-bizonylatteteltabla [enEdit]="true" (torles)="tetelTorles($event)" (modositas)="tetelModositas($event)"
-                             [Dto]="bizonylatservice.ComplexDtoEdited.LstTetelDto"></app-bizonylatteteltabla>
-  </ng-container>
+    <app-bizonylatteteltabla [enEdit]="true"
+                             [Dto]="ComplexDtoEdited.LstTetelDto"
+                             (torles)="tetelTorles($event)"
+                             (modositas)="tetelModositas($event)">
+    </app-bizonylatteteltabla>
 
-  <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 2">
-    <app-ugyfel-list [maszk]="bizonylatservice.ComplexDtoEdited.Dto.Ugyfelnev || ''"
-                     (eventSelectzoom)="onUgyfelSelectzoom($event)"
-                     (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>
-  </ng-container>
+    <ng-container *ngIf="SzerkesztesMode === 5">
+      <app-bizonylattetel-szerkesztes></app-bizonylattetel-szerkesztes>
+    </ng-container>
 
-  <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 3">
-    <app-penznem-list [maszk]="bizonylatservice.ComplexDtoEdited.Dto.Penznem || ''"
-                      (eventSelectzoom)="onPenznemSelectzoom($event)"
-                      (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
-  </ng-container>
-
-  <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 4">
-    <app-fizetesimod-list [maszk]="bizonylatservice.ComplexDtoEdited.Dto.Fizetesimod || ''"
-                          (eventSelectzoom)="onFizetesimodSelectzoom($event)"
-                          (eventStopzoom)="onFizetesimodStopzoom()"></app-fizetesimod-list>
-  </ng-container>
-
-  <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 5">
-    <app-bizonylattetel-szerkesztes></app-bizonylattetel-szerkesztes>
-  </ng-container>
-
-  <ng-container *ngIf="bizonylatservice.SzerkesztesMode === 6">
-    <app-bizonylattetel-torles></app-bizonylattetel-torles>
-  </ng-container>
+    <ng-container *ngIf="SzerkesztesMode === 6">
+      <app-bizonylattetel-torles></app-bizonylattetel-torles>
+    </ng-container>
+  </div>
 
   <div class="row no-gutters" style="margin-bottom: 10px">
-    <button class="btn btn-sm btn-primary" [disabled]="eppFrissit || bizonylatservice.SzerkesztesMode !== 1"
+    <button class="btn btn-sm btn-primary" [disabled]="eppFrissit || SzerkesztesMode !== 1"
             type="button" (click)="onSubmit()">Ok</button>
-    <button class="btn btn-sm btn-default" [disabled]="eppFrissit || bizonylatservice.SzerkesztesMode !== 1"
+    <button class="btn btn-sm btn-default" [disabled]="eppFrissit || SzerkesztesMode !== 1"
             style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
   </div>
 </div>

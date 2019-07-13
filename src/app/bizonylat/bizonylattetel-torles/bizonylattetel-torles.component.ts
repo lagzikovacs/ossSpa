@@ -29,34 +29,34 @@ export class BizonylattetelTorlesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.megnevezes = this.bizonylatservice.ComplexDtoEdited.LstTetelDto[this.bizonylatservice.TetelDtoSelectedIndex].Megnevezes;
+    // this.megnevezes = this.bizonylatservice.ComplexDtoEdited.LstTetelDto[this.bizonylatservice.TetelDtoSelectedIndex].Megnevezes;
   }
 
   ok() {
-    this.eppFrissit = true;
-    this.bizonylatservice.ComplexDtoEdited.LstTetelDto.splice(this.bizonylatservice.TetelDtoSelectedIndex, 1);
-    this.bizonylatservice.SumEsAfaEsTermekdij(this.bizonylatservice.ComplexDtoEdited)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        this.bizonylatservice.ComplexDtoEdited = res.Result[0];
-
-        this.eppFrissit = false;
-        this.navigal();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+    // this.eppFrissit = true;
+    // this.bizonylatservice.ComplexDtoEdited.LstTetelDto.splice(this.bizonylatservice.TetelDtoSelectedIndex, 1);
+    // this.bizonylatservice.SumEsAfaEsTermekdij(this.bizonylatservice.ComplexDtoEdited)
+    //   .then(res => {
+    //     if (res.Error != null) {
+    //       throw res.Error;
+    //     }
+    //
+    //     this.bizonylatservice.ComplexDtoEdited = res.Result[0];
+    //
+    //     this.eppFrissit = false;
+    //     this.navigal();
+    //   })
+    //   .catch(err => {
+    //     this.eppFrissit = false;
+    //     this._errorservice.Error = err;
+    //   });
   }
   cancel() {
     this.navigal();
   }
   navigal() {
-    this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
-    this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
+    // this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
+    // this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
   }
   ngOnDestroy() {
     Object.keys(this).map(k => {

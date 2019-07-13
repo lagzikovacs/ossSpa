@@ -3,7 +3,6 @@ import {CikkService} from '../cikk.service';
 import {MeService} from '../../primitiv/me/me.service';
 import {AfakulcsService} from '../../primitiv/afakulcs/afakulcs.service';
 import {TermekdijService} from '../../primitiv/termekdij/termekdij.service';
-import {ZoomSources} from '../../enums/zoomsources';
 import {MeZoomParameter} from '../../primitiv/me/mezoomparameter';
 import {AfakulcsZoomParameter} from '../../primitiv/afakulcs/afakulcszoomparameter';
 import {EmptyResult} from '../../dtos/emptyresult';

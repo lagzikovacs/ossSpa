@@ -21,35 +21,52 @@
   </tr>
   </thead>
   <tbody>
-  <ng-container *ngFor="let item of Dto; let i = index">
-    <tr>
-      <td *ngIf="enEdit" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer;padding-left: 8px;padding-right: 8px"
-          (click)="dotorles(i)">
-        <i class="fa fa-minus" aria-hidden="true"></i></td>
-      <td *ngIf="enEdit" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer;padding-left: 8px;padding-right: 8px"
-          (click)="domodositas(i)">
-        <i class="fa fa-edit" aria-hidden="true"></i></td>
+    <tr *ngIf="ujOk && ujTemplate !== undefined" class="active">
+      <td colspan="100">
+        <ng-template *ngTemplateOutlet="ujTemplate"></ng-template>
+      </td>
+    </tr>
 
-      <td>{{item.Bizonylattetelkod}}</td>
-      <td>{{item.Megnevezes}}</td>
-      <td style="text-align: right">{{item.Mennyiseg | number: '1.2-2'}}</td>
-      <td>{{item.Me}}</td>
-      <td style="text-align: right">{{item.Egysegar | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.Afamerteke | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.Netto | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.Afa | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.Brutto | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.Tomegkg | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.Ossztomegkg | number: '1.2-2'}}</td>
-      <td>{{item.Termekdijkt}}</td>
-      <td>{{item.Termekdijmegnevezes}}</td>
-      <td style="text-align: right">{{item.Termekdijegysegar | number: '1.2-2'}}</td>
-      <td style="text-align: right">{{item.Termekdij | number: '1.2-2'}}</td>
-    </tr>
-    <tr *ngIf="item.Megjegyzes || '' !== ''">
-      <td colspan="15">{{item.Megjegyzes}}</td>
-    </tr>
-  </ng-container>
+    <ng-container *ngFor="let item of Dto; let i = index">
+      <tr (click)="clickforrow(i)" [className]="i === clickedrowindex ? 'active' : 'inactive'">
+        <td *ngIf="enEdit" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer;padding-left: 8px;padding-right: 8px"
+            (click)="dotorles(i)">
+          <i class="fa fa-minus" aria-hidden="true"></i></td>
+        <td *ngIf="enEdit" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer;padding-left: 8px;padding-right: 8px"
+            (click)="domodositas(i)">
+          <i class="fa fa-edit" aria-hidden="true"></i></td>
+
+        <td>{{item.Bizonylattetelkod}}</td>
+        <td>{{item.Megnevezes}}</td>
+        <td style="text-align: right">{{item.Mennyiseg | number: '1.2-2'}}</td>
+        <td>{{item.Me}}</td>
+        <td style="text-align: right">{{item.Egysegar | number: '1.2-2'}}</td>
+        <td style="text-align: right">{{item.Afamerteke | number: '1.2-2'}}</td>
+        <td style="text-align: right">{{item.Netto | number: '1.2-2'}}</td>
+        <td style="text-align: right">{{item.Afa | number: '1.2-2'}}</td>
+        <td style="text-align: right">{{item.Brutto | number: '1.2-2'}}</td>
+        <td style="text-align: right">{{item.Tomegkg | number: '1.2-2'}}</td>
+        <td style="text-align: right">{{item.Ossztomegkg | number: '1.2-2'}}</td>
+        <td>{{item.Termekdijkt}}</td>
+        <td>{{item.Termekdijmegnevezes}}</td>
+        <td style="text-align: right">{{item.Termekdijegysegar | number: '1.2-2'}}</td>
+        <td style="text-align: right">{{item.Termekdij | number: '1.2-2'}}</td>
+      </tr>
+      <tr *ngIf="item.Megjegyzes || '' !== ''">
+        <td colspan="100">{{item.Megjegyzes}}</td>
+      </tr>
+
+      <tr *ngIf="i === clickedidindex && torlesOk && torlesTemplate !== undefined" class="active">
+        <td colspan="100">
+          <ng-template *ngTemplateOutlet="torlesTemplate"></ng-template>
+        </td>
+      </tr>
+      <tr *ngIf="i === clickedidindex && modOk && modTemplate !== undefined" class="active">
+        <td colspan="100">
+          <ng-template *ngTemplateOutlet="modTemplate"></ng-template>
+        </td>
+      </tr>
+    </ng-container>
   </tbody>
 </table>
 

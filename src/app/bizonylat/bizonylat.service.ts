@@ -26,25 +26,8 @@ import {BruttobolParam} from './bruttobolparam';
 export class BizonylatService {
   private readonly _controller = 'api/bizonylat/';
 
-  szvesz = false;
-
-
-
-  teteluj = false;
-  TetelDtoEdited = new BizonylatTetelDto();
-  TetelDtoSelectedIndex = -1;
-
-
-  TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
-
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
-
-  public Setszvesz() {
-    // this.szvesz = this.bizonylatTipus === BizonylatTipus.Szamla ||
-    //   this.bizonylatTipus === BizonylatTipus.ElolegSzamla ||
-    //   this.bizonylatTipus === BizonylatTipus.Szallito;
-  }
 
   public BizonylatLeiro(bt: BizonylatTipus): Promise<BizonylatTipusLeiroResult> {
     const url = environment.CoreRef + this._controller + 'bizonylatleiro';

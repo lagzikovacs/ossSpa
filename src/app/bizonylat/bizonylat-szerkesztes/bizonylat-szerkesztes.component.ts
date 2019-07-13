@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
@@ -23,12 +23,15 @@ import {BizonylatDto} from '../bizonylatdto';
 import {BizonylatTetelDto} from '../bizonylatteteldto';
 import {BizonylatAfaDto} from '../bizonylatafadto';
 import {BizonylatTermekdijDto} from '../bizonylattermekdijdto';
+import {BizonylatteteltablaComponent} from '../bizonylatteteltabla/bizonylatteteltabla.component';
 
 @Component({
   selector: 'app-bizonylat-szerkesztes',
   templateUrl: './bizonylat-szerkesztes.component.html'
 })
 export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
+  @ViewChild('teteltabla') tabla: BizonylatteteltablaComponent;
+
   @Input() bizonylatTipus = BizonylatTipus.Szamla;
   @Input() bizonylatLeiro = new BizonylatTipusLeiro();
   @Input() uj = false;
@@ -37,6 +40,12 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   fizerr = 'Ismeretlen fizetési mód: ';
 
   ComplexDtoEdited: BizonylatComplexDto;
+
+  teteluj = false;
+  TetelDtoEdited = new BizonylatTetelDto();
+  TetelDtoSelectedIndex = -1;
+
+  szvesz = false;
 
   BizonylatKelte: any;
   TeljesitesKelte: any;
@@ -66,7 +75,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
     this.ComplexDtoEdited = new BizonylatComplexDto();
     this.ComplexDtoEdited.Dto = new BizonylatDto();
-    this.ComplexDtoEdited.LstTetelDto = new Array<BizonylatTetelDto>()
+    this.ComplexDtoEdited.LstTetelDto = new Array<BizonylatTetelDto>();
     this.ComplexDtoEdited.LstAfaDto = new Array<BizonylatAfaDto>();
     this.ComplexDtoEdited.LstTermekdijDto = new Array<BizonylatTermekdijDto>();
   }
@@ -200,7 +209,14 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
 
-  tetelUj() {
+
+  public Setszvesz() {
+    this.szvesz = this.bizonylatTipus === BizonylatTipus.Szamla ||
+      this.bizonylatTipus === BizonylatTipus.ElolegSzamla ||
+      this.bizonylatTipus === BizonylatTipus.Szallito;
+  }
+
+  onTetelUjElott() {
     this.eppFrissit = true;
     this.bizonylatservice.CreateNewTetel(this.bizonylatLeiro.bizonylatTipus)
       .then(res => {
@@ -208,37 +224,39 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        this.bizonylatservice.TetelDtoEdited = res.Result[0];
-        this.eppFrissit = false;
+        this.TetelDtoSelectedIndex = -1;
+        this.teteluj = true;
+        this.Setszvesz();
 
-        this.bizonylatservice.teteluj = true;
-        this.bizonylatservice.Setszvesz();
-
-        this.SzerkesztesMode = BizonylatSzerkesztesMode.TetelSzerkesztes;
-        this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
+        this.TetelDtoEdited = res.Result[0];
         this._cdr.detectChanges();
+
+        this.eppFrissit = false;
+        this.tabla.doUj();
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
-  tetelTorles(i: number) {
-    this.bizonylatservice.TetelDtoSelectedIndex = i;
-    this.SzerkesztesMode = BizonylatSzerkesztesMode.TetelTorles;
-    this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
-    this._cdr.detectChanges();
-  }
-  tetelModositas(i: number) {
-    this.bizonylatservice.TetelDtoSelectedIndex = i;
-    this.bizonylatservice.teteluj = false;
-    this.bizonylatservice.Setszvesz();
 
-    this.bizonylatservice.TetelDtoEdited = deepCopy(this.ComplexDtoEdited.LstTetelDto[i]);
-    this.SzerkesztesMode = BizonylatSzerkesztesMode.TetelSzerkesztes;
-    this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
+  onTetelTorlesElott(i: number) {
+    this.TetelDtoSelectedIndex = i;
     this._cdr.detectChanges();
   }
+  onTeteltorles(ok: boolean) {
+
+  }
+
+  onTetelModositasElott(i: number) {
+    this.TetelDtoSelectedIndex = i;
+    this.teteluj = false;
+    this.Setszvesz();
+
+    this.TetelDtoEdited = deepCopy(this.ComplexDtoEdited.LstTetelDto[i]);
+    this._cdr.detectChanges();
+  }
+
 
 
   onSubmit() {

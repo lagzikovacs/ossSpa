@@ -1,6 +1,6 @@
 <div class="alapkeret">
-  <h5 *ngIf="bizonylatservice.teteluj">Új {{bizonylatservice.bizonylatLeiro.BizonylatNev | lowercase}}tétel</h5>
-  <h5 *ngIf="!bizonylatservice.teteluj">{{bizonylatservice.bizonylatLeiro.BizonylatNev}}tétel módosítása</h5>
+  <h5 *ngIf="teteluj">Új {{bizonylatLeiro.BizonylatNev | lowercase}}tétel</h5>
+  <h5 *ngIf="!teteluj">{{bizonylatLeiro.BizonylatNev}}tétel módosítása</h5>
 
   <div class="row no-gutters editform-row">
     <div class="col-md-2">
@@ -8,7 +8,7 @@
     </div>
     <div class="col-md-1">
       <select type="text" class="form-control form-control-sm" name="termekdijas"
-              [disabled]="!bizonylatservice.szvesz"
+              [disabled]="!szvesz"
               [(ngModel)]="bizonylatservice.TetelDtoEdited.Termekdijas"
               (change)="tetelcalc($event)">
         <option value="false">Nem</option>
@@ -22,7 +22,7 @@
     </div>
     <div class="col-md-1">
       <select type="text" class="form-control form-control-sm" name="kozvetitett"
-              [disabled]="!bizonylatservice.szvesz"
+              [disabled]="!szvesz"
               [(ngModel)]="bizonylatservice.TetelDtoEdited.Kozvetitettszolgaltatas">
         <option value="false">Nem</option>
         <option value="true">Igen</option>
@@ -35,7 +35,7 @@
     </div>
     <div class="col-md-1">
       <select type="text" class="form-control form-control-sm" name="eloleg"
-              [disabled]="!bizonylatservice.szvesz"
+              [disabled]="!szvesz"
               [(ngModel)]="bizonylatservice.TetelDtoEdited.Ezeloleg">
         <option value="false">Nem</option>
         <option value="true">Igen</option>

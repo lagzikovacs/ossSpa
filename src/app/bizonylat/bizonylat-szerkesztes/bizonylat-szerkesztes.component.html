@@ -147,23 +147,34 @@
 
   <div class="alapkeret">
     <nav>
-      <button [disabled]="eppFrissit" (click)="tetelUj()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="eppFrissit" (click)="onTetelUjElott()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>
       </button>
     </nav>
-    <app-bizonylatteteltabla [enEdit]="true"
+    <app-bizonylatteteltabla #teteltabla
+                             [enEdit]="true"
                              [Dto]="ComplexDtoEdited.LstTetelDto"
-                             (torles)="tetelTorles($event)"
-                             (modositas)="tetelModositas($event)">
+                             [ujTemplate]="gridmod"
+                             [torlesTemplate]="gridtorles"
+                             [modTemplate]="gridmod"
+                             (eventTorlesElott)="onTetelTorlesElott($event)"
+                             (eventModositasElott)="onTetelModositasElott($event)">
     </app-bizonylatteteltabla>
 
-    <ng-container *ngIf="SzerkesztesMode === 5">
-      <app-bizonylattetel-szerkesztes></app-bizonylattetel-szerkesztes>
-    </ng-container>
+    <ng-template #gridtorles>
+      <app-tetel-torles [cim]="'Bizonylattétel'"
+                        [eppFrissit]="eppFrissit"
+                        (eventTorles)="onTeteltorles($event)">
+      </app-tetel-torles>
+    </ng-template>
 
-    <ng-container *ngIf="SzerkesztesMode === 6">
-      <app-bizonylattetel-torles></app-bizonylattetel-torles>
-    </ng-container>
+    <ng-template #gridmod>
+      <app-bizonylattetel-szerkesztes [teteluj]="teteluj"
+                                      [bizonylatLeiro]="bizonylatLeiro"
+                                      [szvesz]="szvesz"
+                                      [TetelDtoEdited]="TetelDtoEdited">
+      </app-bizonylattetel-szerkesztes>
+    </ng-template>
   </div>
 
   <div class="row no-gutters" style="margin-bottom: 10px">

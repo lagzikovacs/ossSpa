@@ -187,7 +187,6 @@ import { UgyfelterProjektTablaComponent } from './ugyfelter/ugyfelter-projekt-ta
 import { ProjektkapcsolatTablaComponent } from './projektkapcsolat/projektkapcsolat-tabla/projektkapcsolat-tabla.component';
 import { BizonylatkapcsolatTablaComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-tabla/bizonylatkapcsolat-tabla.component';
 import {BizonylattetelSzerkesztesComponent} from './bizonylat/bizonylattetel-szerkesztes/bizonylattetel-szerkesztes.component';
-import {BizonylattetelTorlesComponent} from './bizonylat/bizonylattetel-torles/bizonylattetel-torles.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -374,7 +373,6 @@ if (environment.production) {
     BizonylatLetoltesonlineszamlaformatumbanComponent,
     BoolHunPipe,
     BizonylattetelSzerkesztesComponent,
-    BizonylattetelTorlesComponent,
     VagolapComponent,
     AbuComponent,
     BizonylatkapcsolatVagolaprolComponent,

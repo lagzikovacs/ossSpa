@@ -9,7 +9,7 @@
     <div class="col-md-1">
       <select type="text" class="form-control form-control-sm" name="termekdijas"
               [disabled]="!szvesz"
-              [(ngModel)]="bizonylatservice.TetelDtoEdited.Termekdijas"
+              [(ngModel)]="TetelDtoEdited.Termekdijas"
               (change)="tetelcalc($event)">
         <option value="false">Nem</option>
         <option value="true">Igen</option>
@@ -23,7 +23,7 @@
     <div class="col-md-1">
       <select type="text" class="form-control form-control-sm" name="kozvetitett"
               [disabled]="!szvesz"
-              [(ngModel)]="bizonylatservice.TetelDtoEdited.Kozvetitettszolgaltatas">
+              [(ngModel)]="TetelDtoEdited.Kozvetitettszolgaltatas">
         <option value="false">Nem</option>
         <option value="true">Igen</option>
       </select>
@@ -36,7 +36,7 @@
     <div class="col-md-1">
       <select type="text" class="form-control form-control-sm" name="eloleg"
               [disabled]="!szvesz"
-              [(ngModel)]="bizonylatservice.TetelDtoEdited.Ezeloleg">
+              [(ngModel)]="TetelDtoEdited.Ezeloleg">
         <option value="false">Nem</option>
         <option value="true">Igen</option>
       </select>
@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-4">
       <input type="text" class="form-control form-control-sm" id="megnevezes" name="megnevezes"
-             [(ngModel)]="bizonylatservice.TetelDtoEdited.Megnevezes"
+             [(ngModel)]="TetelDtoEdited.Megnevezes"
              maxlength="100" required autocomplete="off" style="background-color: aquamarine">
     </div>
     <div class="col-md-1">
@@ -62,7 +62,7 @@
     </div>
     <div class="col-md-4">
       <input type="text" class="form-control form-control-sm" id="megjegyzes" name="megjegyzes"
-             [(ngModel)]="bizonylatservice.TetelDtoEdited.Megjegyzes"
+             [(ngModel)]="TetelDtoEdited.Megjegyzes"
              autocomplete="off">
     </div>
   </div>
@@ -72,7 +72,7 @@
     </div>
     <div class="col-md-2">
       <input type="number" class="form-control form-control-sm" id="mennyiseg" name="mennyiseg"
-             [(ngModel)]="bizonylatservice.TetelDtoEdited.Mennyiseg"
+             [(ngModel)]="TetelDtoEdited.Mennyiseg"
              (focusout)="tetelcalc($event)"
              required min="0">
     </div>
@@ -83,7 +83,7 @@
     </div>
     <div class="col-md-1">
       <input type="text" class="form-control form-control-sm" id="me" name="me"
-             [(ngModel)]="bizonylatservice.TetelDtoEdited.Me"
+             [(ngModel)]="TetelDtoEdited.Me"
              maxlength="10" required autocomplete="off" style="background-color: aquamarine">
     </div>
     <div class="col-md-1">
@@ -97,7 +97,7 @@
     </div>
     <div class="col-md-4 input-group">
       <input type="number" class="form-control form-control-sm" id="egysegar" name="egysegar"
-             [(ngModel)]="bizonylatservice.TetelDtoEdited.Egysegar"
+             [(ngModel)]="TetelDtoEdited.Egysegar"
              (focusout)="tetelcalc($event)"
              required>
       <button class="btn btn-sm btn-outline-primary" (click)="bruttobol()"
@@ -112,7 +112,7 @@
     </div>
     <div class="col-md-1">
       <input type="text" class="form-control form-control-sm" id="afakulcs" name="afakulcs"
-             [(ngModel)]="bizonylatservice.TetelDtoEdited.Afakulcs"
+             [(ngModel)]="TetelDtoEdited.Afakulcs"
              maxlength="10" required autocomplete="off" style="background-color: aquamarine">
     </div>
     <div class="col-md-1">
@@ -126,7 +126,7 @@
     </div>
     <div class="col-md-2">
       <input type="number" class="form-control form-control-sm" id="tomegkg" name="tomegkg"
-             [(ngModel)]="bizonylatservice.TetelDtoEdited.Tomegkg"
+             [(ngModel)]="TetelDtoEdited.Tomegkg"
              (focusout)="tetelcalc($event)"
              min="0">
     </div>
@@ -137,7 +137,7 @@
     </div>
     <div class="col-md-2">
       <input type="number" class="form-control form-control-sm" id="netto" name="netto" readonly="true"
-             [(ngModel)]="bizonylatservice.TetelDtoEdited.Netto">
+             [(ngModel)]="TetelDtoEdited.Netto">
     </div>
   </div>
   <div class="row no-gutters editform-row">
@@ -146,7 +146,7 @@
     </div>
     <div class="col-md-2">
       <input type="text" class="form-control form-control-sm" id="termekdijkt" name="termekdijkt"
-             [(ngModel)]="bizonylatservice.TetelDtoEdited.Termekdijkt"
+             [(ngModel)]="TetelDtoEdited.Termekdijkt"
              maxlength="10" autocomplete="off" style="background-color: aquamarine">
     </div>
     <div class="col-md-1">
@@ -164,7 +164,7 @@
     </div>
     <div class="col-md-2">
       <input type="number" class="form-control form-control-sm" id="afa" name="afa" readonly="true"
-             [(ngModel)]="bizonylatservice.TetelDtoEdited.Afa">
+             [(ngModel)]="TetelDtoEdited.Afa">
     </div>
   </div>
   <div class="row no-gutters editform-row">
@@ -173,7 +173,7 @@
     </div>
     <div class="col-md-3">
       <input type="text" class="form-control form-control-sm" id="termekdijmegnevezes" name="termekdijmegnevezes"
-             [(ngModel)]="bizonylatservice.TetelDtoEdited.Termekdijmegnevezes"
+             [(ngModel)]="TetelDtoEdited.Termekdijmegnevezes"
              readonly="true" autocomplete="off">
     </div>
     <div class="col-md-2">
@@ -183,7 +183,7 @@
     </div>
     <div class="col-md-2">
       <input type="number" class="form-control form-control-sm" id="brutto" name="brutto" readonly="true"
-             [(ngModel)]="bizonylatservice.TetelDtoEdited.Brutto">
+             [(ngModel)]="TetelDtoEdited.Brutto">
     </div>
   </div>
   <div class="row no-gutters editform-row">
@@ -192,7 +192,7 @@
     </div>
     <div class="col-md-2">
       <input type="number" class="form-control form-control-sm" id="termekdijegysegar" name="termekdijegysegar"
-             [(ngModel)]="bizonylatservice.TetelDtoEdited.Termekdijegysegar"
+             [(ngModel)]="TetelDtoEdited.Termekdijegysegar"
              (focusout)="tetelcalc($event)"
              readonly="true">
     </div>
@@ -203,7 +203,7 @@
     </div>
     <div class="col-md-2">
       <input type="number" class="form-control form-control-sm" id="terekdijabruttoarbol" name="terekdijabruttoarbol"
-             [(ngModel)]="bizonylatservice.TetelDtoEdited.Termekdij"
+             [(ngModel)]="TetelDtoEdited.Termekdij"
              readonly="true">
     </div>
   </div>
@@ -225,26 +225,26 @@
   TermekdijZoom = 4
   }-->
 
-  <ng-container *ngIf="bizonylatservice.TetelSzerkesztesMode === 1">
-    <app-cikk-list [maszk]="bizonylatservice.TetelDtoEdited.Megnevezes || ''"
+  <ng-container *ngIf="TetelSzerkesztesMode === 1">
+    <app-cikk-list [maszk]="TetelDtoEdited.Megnevezes || ''"
                    (eventSelectzoom)="onCikkSelectzoom($event)"
                    (eventStopzoom)="onCikkStopzoom()"></app-cikk-list>
   </ng-container>
 
-  <ng-container *ngIf="bizonylatservice.TetelSzerkesztesMode === 2">
-    <app-me-list [maszk]="bizonylatservice.TetelDtoEdited.Me || ''"
+  <ng-container *ngIf="TetelSzerkesztesMode === 2">
+    <app-me-list [maszk]="TetelDtoEdited.Me || ''"
                  (eventSelectzoom)="onMeSelectzoom($event)"
                  (eventStopzoom)="onMeStopzoom()"></app-me-list>
   </ng-container>
 
-  <ng-container *ngIf="bizonylatservice.TetelSzerkesztesMode === 3">
-    <app-afakulcs-list [maszk]="bizonylatservice.TetelDtoEdited.Afakulcs || ''"
+  <ng-container *ngIf="TetelSzerkesztesMode === 3">
+    <app-afakulcs-list [maszk]="TetelDtoEdited.Afakulcs || ''"
                        (eventSelectzoom)="onAfakulcsSelectzoom($event)"
                        (eventStopzoom)="onAfakulcsStopzoom()"></app-afakulcs-list>
   </ng-container>
 
-  <ng-container *ngIf="bizonylatservice.TetelSzerkesztesMode === 4">
-    <app-termekdij-list [maszk]="bizonylatservice.TetelDtoEdited.Termekdijkt || ''"
+  <ng-container *ngIf="TetelSzerkesztesMode === 4">
+    <app-termekdij-list [maszk]="TetelDtoEdited.Termekdijkt || ''"
                         (eventSelectzoom)="onTermekdijSelectzoom($event)"
                         (eventStopzoom)="onTermekdijStopzoom()"></app-termekdij-list>
   </ng-container>

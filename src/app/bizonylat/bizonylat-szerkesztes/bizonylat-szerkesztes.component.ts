@@ -245,7 +245,29 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this._cdr.detectChanges();
   }
   onTeteltorles(ok: boolean) {
+    if (ok) {
+      // this.eppFrissit = true;
+      // this.bizonylatservice.ComplexDtoEdited.LstTetelDto.splice(this.bizonylatservice.TetelDtoSelectedIndex, 1);
+      // this.bizonylatservice.SumEsAfaEsTermekdij(this.bizonylatservice.ComplexDtoEdited)
+      //   .then(res => {
+      //     if (res.Error != null) {
+      //       throw res.Error;
+      //     }
+      //
+      //     this.bizonylatservice.ComplexDtoEdited = res.Result[0];
+      //
+      //     this.eppFrissit = false;
+      //     this.navigal();
+      //   })
+      //   .catch(err => {
+      //     this.eppFrissit = false;
+      //     this._errorservice.Error = err;
+      //   });
 
+      this.tabla.clearselections();
+    } else {
+      this.tabla.egysem();
+    }
   }
 
   onTetelModositasElott(i: number) {

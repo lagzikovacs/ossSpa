@@ -3,7 +3,7 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
-    <ng-container *ngIf="!bizonylatservice.bizonylatLeiro.GenBizonylatszam">
+    <ng-container *ngIf="!bizonylatLeiro.GenBizonylatszam">
       <div class="row no-gutters editform-row">
         <div class="col-md-2">
           <div class="editform-title">Bizonylatszám</div>
@@ -15,7 +15,7 @@
         </div>
       </div>
     </ng-container>
-    <ng-container *ngIf="bizonylatservice.bizonylatLeiro.GenBizonylatszam">
+    <ng-container *ngIf="bizonylatLeiro.GenBizonylatszam">
       <div>Biztosan kibocsátja ezt a bizonylatot?</div>
     </ng-container>
 

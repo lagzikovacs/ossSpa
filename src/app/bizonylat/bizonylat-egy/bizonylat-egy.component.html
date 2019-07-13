@@ -100,7 +100,7 @@
   </ng-container>
   <ng-container *ngIf="EgyMode === 5">
     <div [@rowanimation]>
-      <app-tetel-torles [cim]="bizonylatservice.bizonylatLeiro.BizonylatNev"
+      <app-tetel-torles [cim]="bizonylatLeiro.BizonylatNev"
                         [eppFrissit]="eppFrissit"
                         (OkClick)="TorlesOk()"
                         (CancelClick)="TorlesCancel()">
@@ -109,8 +109,10 @@
   </ng-container>
   <ng-container *ngIf="EgyMode === 6">
     <div [@rowanimation]>
-      <app-bizonylat-szerkesztes [bizonylatLeiro]="bizonylatLeiro">
-
+      <app-bizonylat-szerkesztes [uj]="false"
+                                 [bizonylatTipus]="bizonylatTipus"
+                                 [bizonylatLeiro]="bizonylatLeiro"
+                                 [Bizonylatkod]="Dto.Bizonylatkod">
       </app-bizonylat-szerkesztes>
     </div>
   </ng-container>
@@ -146,6 +148,7 @@
   <ng-container *ngIf="EgyMode === 10">
     <div [@rowanimation]>
       <app-bizonylat-penztar [DtoOriginal]="Dto"
+                             [bizonylatTipus]="bizonylatTipus"
                              [bizonylatLeiro]="bizonylatLeiro"
                              (eventPenztarUtan)="onPenztarUtan()">
       </app-bizonylat-penztar>
@@ -154,6 +157,7 @@
   <ng-container *ngIf="EgyMode === 11">
     <div [@rowanimation]>
       <app-bizonylat-kifizetesrendben [DtoOriginal]="Dto"
+                                      [bizonylatLeiro]="bizonylatLeiro"
                                       (eventKifizetesrendbenUtan)="onKifizetesrendbenUtan($event)">
       </app-bizonylat-kifizetesrendben>
     </div>
@@ -161,6 +165,7 @@
   <ng-container *ngIf="EgyMode === 12">
     <div [@rowanimation]>
       <app-bizonylat-kiszallitva [DtoOriginal]="Dto"
+                                 [bizonylatLeiro]="bizonylatLeiro"
                                  (eventKiszallitvaUtan)="onKiszallitvaUtan($event)">
       </app-bizonylat-kiszallitva>
     </div>
@@ -168,13 +173,15 @@
 
   <ng-container *ngIf="EgyMode === 13">
     <div [@rowanimation]>
-      <app-bizonylat-formaiellenorzes [Bizonylatkod]="Dto.Bizonylatkod">
+      <app-bizonylat-formaiellenorzes [Bizonylatkod]="Dto.Bizonylatkod"
+                                      [bizonylatLeiro]="bizonylatLeiro">
       </app-bizonylat-formaiellenorzes>
     </div>
   </ng-container>
   <ng-container *ngIf="EgyMode === 14">
     <div [@rowanimation]>
-      <app-bizonylat-letoltesonlineszamlaformatumban [Bizonylatkod]="Dto.Bizonylatkod">
+      <app-bizonylat-letoltesonlineszamlaformatumban [Bizonylatkod]="Dto.Bizonylatkod"
+                                                     [bizonylatLeiro]="bizonylatLeiro">
       </app-bizonylat-letoltesonlineszamlaformatumban>
     </div>
   </ng-container>

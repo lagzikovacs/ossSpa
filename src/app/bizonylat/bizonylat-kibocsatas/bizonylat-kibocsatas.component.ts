@@ -17,6 +17,7 @@ export class BizonylatKibocsatasComponent implements OnDestroy {
   @Input() set DtoOriginal(value: BizonylatDto) {
     this.Dto = deepCopy(value);
   }
+  @Input() bizonylatTipus = BizonylatTipus.Szamla;
   @Input() bizonylatLeiro = new BizonylatTipusLeiro();
   @Output() eventKibocsatasUtan = new EventEmitter<BizonylatDto>();
   @Output() eventKibocsatasUtanKeszpenzes = new EventEmitter<boolean>();
@@ -59,9 +60,9 @@ export class BizonylatKibocsatasComponent implements OnDestroy {
         this.eppFrissit = false;
         this.eventKibocsatasUtan.emit(res1.Result[0]);
 
-        this._keszpenzes = (this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
-            this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.ElolegSzamla ||
-            this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.Szamla) &&
+        this._keszpenzes = (this.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
+            this.bizonylatTipus === BizonylatTipus.ElolegSzamla ||
+            this.bizonylatTipus === BizonylatTipus.Szamla) &&
             this.Dto.Fizetesimod === 'Készpénz';
 
         this.eventKibocsatasUtanKeszpenzes.emit(this._keszpenzes);

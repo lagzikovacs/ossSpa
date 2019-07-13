@@ -6,10 +6,10 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
-  selector: 'app-bizonylat-tetel-torles',
-  templateUrl: './bizonylat-tetel-torles.component.html'
+  selector: 'app-bizonylattetel-torles',
+  templateUrl: './bizonylattetel-torles.component.html'
 })
-export class BizonylatTetelTorlesComponent implements OnInit, OnDestroy {
+export class BizonylattetelTorlesComponent implements OnInit, OnDestroy {
   bizonylatservice: BizonylatService;
   megnevezes = '';
 

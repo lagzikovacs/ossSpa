@@ -21,12 +21,12 @@ import {TermekdijDto} from '../../primitiv/termekdij/termekdijdto';
 import {CikkDto} from '../../cikk/cikkdto';
 
 @Component({
-  selector: 'app-bizonylat-tetel-szerkesztes',
-  templateUrl: './bizonylat-tetel-szerkesztes.component.html'
+  selector: 'app-bizonylattetel-szerkesztes',
+  templateUrl: './bizonylattetel-szerkesztes.component.html'
 })
-export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
+export class BizonylattetelSzerkesztesComponent implements OnDestroy {
 
-  bizonylatservice: BizonylatService;
+
   bruttoosszeg = 0;
 
   private _eppFrissit = false;
@@ -37,6 +37,8 @@ export class BizonylatTetelSzerkesztesComponent implements OnDestroy {
     this._eppFrissit = value;
     this._spinnerservice.Run = value;
   }
+
+  bizonylatservice: BizonylatService;
 
   constructor(private _cikkservice: CikkService,
               private _meservice: MeService,

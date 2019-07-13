@@ -148,50 +148,10 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
 
   onId(i: number) {
     this.DtoSelectedIndex = i;
-
-    // this.eppFrissit = true;
-    // this.bizonylatservice.GetComplex(this.Dto[this.DtoSelectedIndex].Bizonylatkod)
-    //   .then(res => {
-    //     if (res.Error != null) {
-    //       throw res.Error;
-    //     }
-    //
-    //     this.Dto[this.DtoSelectedIndex] = res.Result[0].Dto;
-    //
-    //     this.bizonylatservice.TetelDto = res.Result[0].LstTetelDto;
-    //     this.bizonylatservice.AfaDto = res.Result[0].LstAfaDto;
-    //     this.bizonylatservice.TermekdijDto = res.Result[0].LstTermekdijDto;
-    //
-    //     this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
-    //     this.eppFrissit = false;
-    //   })
-    //   .catch(err => {
-    //     this.eppFrissit = false;
-    //     this._errorservice.Error = err;
-    //   });
   }
 
   doUjtetel() {
     this.tabla.ujtetelstart();
-
-    // this.eppFrissit = true;
-    // this.bizonylatservice.CreateNewComplex()
-    //   .then(res => {
-    //     if (res.Error !== null) {
-    //       throw res.Error;
-    //     }
-    //
-    //     this.bizonylatservice.ComplexDtoEdited = res.Result[0];
-    //     this.bizonylatservice.ComplexDtoEdited.Dto.Bizonylattipuskod = this.bizonylatservice.bizonylatTipus;
-    //
-    //     this.bizonylatservice.uj = true;
-    //     this.eppFrissit = false;
-    //     this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
-    //   })
-    //   .catch(err => {
-    //     this.eppFrissit = false;
-    //     this._errorservice.Error = err;
-    //   });
   }
   onUjtetelkesz(dto: BizonylatDto) {
     if (dto !== null) {

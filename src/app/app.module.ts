@@ -186,8 +186,8 @@ import {SpinnerService} from './tools/spinner/spinner.service';
 import { UgyfelterProjektTablaComponent } from './ugyfelter/ugyfelter-projekt-tabla/ugyfelter-projekt-tabla.component';
 import { ProjektkapcsolatTablaComponent } from './projektkapcsolat/projektkapcsolat-tabla/projektkapcsolat-tabla.component';
 import { BizonylatkapcsolatTablaComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-tabla/bizonylatkapcsolat-tabla.component';
-import {BizonylatTetelSzerkesztesComponent} from './bizonylat/bizonylattetel-szerkesztes/bizonylat-tetel-szerkesztes.component';
-import {BizonylatTetelTorlesComponent} from './bizonylat/bizonylattetel-torles/bizonylat-tetel-torles.component';
+import {BizonylattetelSzerkesztesComponent} from './bizonylat/bizonylattetel-szerkesztes/bizonylattetel-szerkesztes.component';
+import {BizonylattetelTorlesComponent} from './bizonylat/bizonylattetel-torles/bizonylattetel-torles.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -373,8 +373,8 @@ if (environment.production) {
     BizonylatFormaiellenorzesComponent,
     BizonylatLetoltesonlineszamlaformatumbanComponent,
     BoolHunPipe,
-    BizonylatTetelSzerkesztesComponent,
-    BizonylatTetelTorlesComponent,
+    BizonylattetelSzerkesztesComponent,
+    BizonylattetelTorlesComponent,
     VagolapComponent,
     AbuComponent,
     BizonylatkapcsolatVagolaprolComponent,

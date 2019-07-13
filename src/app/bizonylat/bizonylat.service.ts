@@ -28,13 +28,13 @@ export class BizonylatService {
 
   szvesz = false;
 
-  uj = false;
-  ComplexDtoEdited = new BizonylatComplexDto();
+
+
   teteluj = false;
   TetelDtoEdited = new BizonylatTetelDto();
   TetelDtoSelectedIndex = -1;
 
-  SzerkesztesMode = BizonylatSzerkesztesMode.List;
+
   TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
 
   constructor(private _httpClient: HttpClient,

@@ -2,6 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 
 @Component({
   selector: 'app-bizonylat-letoltesonlineszamlaformatumban',
@@ -9,6 +10,7 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 })
 export class BizonylatLetoltesonlineszamlaformatumbanComponent implements OnInit, OnDestroy {
   @Input() Bizonylatkod = -1;
+  @Input() bizonylatLeiro = new BizonylatTipusLeiro();
 
   result = '';
 

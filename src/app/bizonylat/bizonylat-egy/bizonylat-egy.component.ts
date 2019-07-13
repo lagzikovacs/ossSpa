@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@ang
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {BizonylatTipus} from '../bizonylattipus';
-import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
 import {VagolapService} from '../../vagolap/vagolap.service';
 import {AbuComponent} from '../../tools/abu/abu.component';
 import {LogonService} from '../../logon/logon.service';
@@ -27,6 +26,7 @@ export class BizonylatEgyComponent implements OnDestroy {
   @Input() set DtoOriginal(value: BizonylatDto) {
     this.Dto = deepCopy(value);
   }
+  @Input() bizonylatTipus = BizonylatTipus.Szamla;
   @Input() bizonylatLeiro = new BizonylatTipusLeiro();
   @Input() enTorles = true;
   @Output() eventSzerkesztesutan = new EventEmitter<BizonylatDto>();
@@ -66,22 +66,19 @@ export class BizonylatEgyComponent implements OnDestroy {
     return this.Dto.Bizonylatszam === null;
   }
   kiszallitvaenabled(): boolean {
-    return this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.Megrendeles;
+    return this.bizonylatTipus === BizonylatTipus.Megrendeles;
   }
   kifizetesrendbenenabled(): boolean {
-    return (this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.Szamla ||
-      this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
-      this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.DijBekero ||
-      this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.ElolegSzamla) &&
+    return (this.bizonylatTipus === BizonylatTipus.Szamla ||
+      this.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
+      this.bizonylatTipus === BizonylatTipus.DijBekero ||
+      this.bizonylatTipus === BizonylatTipus.ElolegSzamla) &&
       this.Dto.Bizonylatszam !== null;
   }
   penztarenabled(): boolean {
-    console.log((this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.Szamla));
-    console.log(this.bizonylatLeiro);
-
-    return (this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.Szamla ||
-      this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
-      this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.ElolegSzamla) &&
+    return (this.bizonylatTipus === BizonylatTipus.Szamla ||
+      this.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
+      this.bizonylatTipus === BizonylatTipus.ElolegSzamla) &&
       this.Dto.Bizonylatszam !== null &&
       this.Dto.Fizetesimod === 'Készpénz';
   }
@@ -92,12 +89,12 @@ export class BizonylatEgyComponent implements OnDestroy {
       !this.Dto.Ezstornozo;
   }
   formaiellenorzesenabled(): boolean {
-    return (this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.Szamla ||
-    this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.BejovoSzamla);
+    return (this.bizonylatTipus === BizonylatTipus.Szamla ||
+    this.bizonylatTipus === BizonylatTipus.BejovoSzamla);
   }
   osnxmlenabled(): boolean {
-    return (this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.Szamla ||
-      this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.BejovoSzamla);
+    return (this.bizonylatTipus === BizonylatTipus.Szamla ||
+      this.bizonylatTipus === BizonylatTipus.BejovoSzamla);
   }
 
   reszletek() {
@@ -107,27 +104,7 @@ export class BizonylatEgyComponent implements OnDestroy {
     this.EgyMode = BizonylatEgyMode.Torles;
   }
   modositas() {
-    // itt másolat szokott készülni az aktuális rekordról
-    // most a complex miatt egyszerűbb újra lekérni
-
-    this.eppFrissit = true;
-    this.bizonylatservice.GetComplex(this.Dto.Bizonylatkod)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        this.bizonylatservice.ComplexDtoEdited = res.Result[0];
-
-        this.bizonylatservice.uj = false;
-        this.eppFrissit = false;
-        this.EgyMode = BizonylatEgyMode.Modositas;
-        this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+    this.EgyMode = BizonylatEgyMode.Modositas;
   }
   nyomtatas() {
     this.EgyMode = BizonylatEgyMode.Nyomtatas;

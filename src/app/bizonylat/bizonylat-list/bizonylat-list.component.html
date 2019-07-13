@@ -18,13 +18,16 @@
   </app-bizonylattabla>
 
   <ng-template #griduj>
-    <!--<app-irat-szerkesztes [uj] = "true"-->
-                          <!--(eventSzerkeszteskesz)="onUjtetelkesz($event)">-->
-    <!--</app-irat-szerkesztes>-->
+    <app-bizonylat-szerkesztes [uj]="true"
+                               [bizonylatTipus]="bizonylatTipus"
+                               [bizonylatLeiro]="bizonylatLeiro">
+
+    </app-bizonylat-szerkesztes>
   </ng-template>
 
   <ng-template #gridegy>
     <app-bizonylat-egy [DtoOriginal]="Dto[DtoSelectedIndex]"
+                       [bizonylatTipus]="bizonylatTipus"
                        [bizonylatLeiro]="bizonylatLeiro"
                        [enTorles]="true"
                        (eventSzerkesztesutan)="onSzerkesztesutan($event)"

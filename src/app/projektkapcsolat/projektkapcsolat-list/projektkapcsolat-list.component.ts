@@ -3,8 +3,6 @@ import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {LogonService} from '../../logon/logon.service';
 import {IratService} from '../../irat/irat.service';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
-import {BizonylatkapcsolatService} from '../../bizonylatkapcsolat/bizonylatkapcsolat.service';
-import {BizonylatEgyMode} from '../../bizonylat/bizonylategymode';
 import {VagolapService} from '../../vagolap/vagolap.service';
 import {VagolapMode} from '../../vagolap/vagolapmode';
 import {JogKod} from '../../enums/jogkod';
@@ -16,6 +14,7 @@ import {BizonylatDto} from '../../bizonylat/bizonylatdto';
 import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
 import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
 import {BizonylatTipusLeiro} from '../../bizonylat/bizonylattipusleiro';
+import {BizonylatTipus} from '../../bizonylat/bizonylattipus';
 
 @Component({
   selector: 'app-projektkapcsolat-list',
@@ -37,6 +36,7 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
   OriginalIrat = new IratDto();
   OriginalBizonylat = new BizonylatDto();
   bizonylatLeiro = new BizonylatTipusLeiro();
+  bizonylatTipus = BizonylatTipus.Szamla;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -52,7 +52,6 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
   constructor(private _logonservice: LogonService,
               private _iratservice: IratService,
               private _bizonylatservice: BizonylatService,
-              private _bizonylatkapcsolatservice: BizonylatkapcsolatService,
               private _vagolapservice: VagolapService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
@@ -102,7 +101,8 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
           }
 
           this.OriginalBizonylat = res.Result[0];
-          return this._bizonylatservice.BizonylatLeiro(this.OriginalBizonylat.Bizonylattipuskod);
+          this.bizonylatTipus = this.OriginalBizonylat.Bizonylattipuskod;
+          return this._bizonylatservice.BizonylatLeiro(this.bizonylatTipus);
         })
         .then(res1 => {
           if (res1.Error != null) {

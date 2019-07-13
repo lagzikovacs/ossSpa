@@ -4,6 +4,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {BizonylatDto} from '../bizonylatdto';
 import {deepCopy} from '../../tools/deepCopy';
+import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 
 @Component({
   selector: 'app-bizonylat-kifizetesrendben',
@@ -14,6 +15,7 @@ export class BizonylatKifizetesrendbenComponent implements OnDestroy {
   @Input() set DtoOriginal(value: BizonylatDto) {
     this.Dto = deepCopy(value);
   }
+  @Input() bizonylatLeiro = new BizonylatTipusLeiro();
   @Output() eventKifizetesrendbenUtan = new EventEmitter<BizonylatDto>();
 
   private _eppFrissit = false;

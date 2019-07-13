@@ -17,19 +17,28 @@ import {PenznemDto} from '../../primitiv/penznem/penznemdto';
 import {FizetesimodDto} from '../../primitiv/fizetesimod/fizetesimoddto';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
+import {BizonylatTipus} from '../bizonylattipus';
+import {BizonylatComplexDto} from '../bizonylatcomplexdto';
 
 @Component({
   selector: 'app-bizonylat-szerkesztes',
   templateUrl: './bizonylat-szerkesztes.component.html'
 })
 export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
+  @Input() bizonylatTipus = BizonylatTipus.Szamla;
   @Input() bizonylatLeiro = new BizonylatTipusLeiro();
+  @Input() uj = false;
+  @Input() Bizonylatkod = -1;
 
   fizerr = 'Ismeretlen fizetési mód: ';
+
+  ComplexDtoEdited = new BizonylatComplexDto();
 
   BizonylatKelte: any;
   TeljesitesKelte: any;
   FizetesiHatarido: any;
+
+  SzerkesztesMode = BizonylatSzerkesztesMode.List;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -53,60 +62,100 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.BizonylatKelte = moment(this.bizonylatservice.ComplexDtoEdited.Dto.Bizonylatkelte).format('YYYY-MM-DD');
-    this.TeljesitesKelte = moment(this.bizonylatservice.ComplexDtoEdited.Dto.Teljesiteskelte).format('YYYY-MM-DD');
-    this.FizetesiHatarido = moment(this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesihatarido).format('YYYY-MM-DD');
+    if (this.uj) {
+      this.eppFrissit = true;
+      this.bizonylatservice.CreateNewComplex()
+        .then(res => {
+          if (res.Error !== null) {
+            throw res.Error;
+          }
+
+          this.ComplexDtoEdited = res.Result[0];
+          this.ComplexDtoEdited.Dto.Bizonylattipuskod = this.bizonylatTipus;
+
+          this.eppFrissit = false;
+          this.SzerkesztesMode = BizonylatSzerkesztesMode.List;
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.eppFrissit = true;
+      this.bizonylatservice.GetComplex(this.Bizonylatkod)
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
+
+          this.ComplexDtoEdited = res.Result[0];
+
+          this.eppFrissit = false;
+          this.SzerkesztesMode = BizonylatSzerkesztesMode.List;
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    }
+
+    this.BizonylatKelte = moment(this.ComplexDtoEdited.Dto.Bizonylatkelte).format('YYYY-MM-DD');
+    this.TeljesitesKelte = moment(this.ComplexDtoEdited.Dto.Teljesiteskelte).format('YYYY-MM-DD');
+    this.FizetesiHatarido = moment(this.ComplexDtoEdited.Dto.Fizetesihatarido).format('YYYY-MM-DD');
   }
 
+
   UgyfelZoom() {
-    this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.UgyfelZoom;
+    this.SzerkesztesMode = BizonylatSzerkesztesMode.UgyfelZoom;
     this._cdr.detectChanges();
   }
   onUgyfelSelectzoom(Dto: UgyfelDto) {
-    this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelkod = Dto.Ugyfelkod;
-    this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelnev = Dto.Nev;
-    this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelcim = Dto.Cim;
+    this.ComplexDtoEdited.Dto.Ugyfelkod = Dto.Ugyfelkod;
+    this.ComplexDtoEdited.Dto.Ugyfelnev = Dto.Nev;
+    this.ComplexDtoEdited.Dto.Ugyfelcim = Dto.Cim;
 
-    this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfeladoszam = Dto.Adoszam;
+    this.ComplexDtoEdited.Dto.Ugyfeladoszam = Dto.Adoszam;
 
-    this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfeliranyitoszam = Dto.Iranyitoszam;
-    this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelhelysegkod = Dto.Helysegkod;
-    this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelhelysegnev = Dto.Helysegnev;
-    this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelkozterulet = Dto.Kozterulet;
-    this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelkozterulettipus = Dto.Kozterulettipus;
-    this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelhazszam = Dto.Hazszam;
+    this.ComplexDtoEdited.Dto.Ugyfeliranyitoszam = Dto.Iranyitoszam;
+    this.ComplexDtoEdited.Dto.Ugyfelhelysegkod = Dto.Helysegkod;
+    this.ComplexDtoEdited.Dto.Ugyfelhelysegnev = Dto.Helysegnev;
+    this.ComplexDtoEdited.Dto.Ugyfelkozterulet = Dto.Kozterulet;
+    this.ComplexDtoEdited.Dto.Ugyfelkozterulettipus = Dto.Kozterulettipus;
+    this.ComplexDtoEdited.Dto.Ugyfelhazszam = Dto.Hazszam;
 
     this._cdr.detectChanges();
   }
   onUgyfelStopzoom() {
-    this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
+    this.SzerkesztesMode = BizonylatSzerkesztesMode.List;
     this._cdr.detectChanges();
   }
 
+
   PenznemZoom() {
-    this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.PenznemZoom;
+    this.SzerkesztesMode = BizonylatSzerkesztesMode.PenznemZoom;
     this._cdr.detectChanges();
   }
   onPenznemSelectzoom(Dto: PenznemDto) {
-    this.bizonylatservice.ComplexDtoEdited.Dto.Penznemkod = Dto.Penznemkod;
-    this.bizonylatservice.ComplexDtoEdited.Dto.Penznem = Dto.Penznem1;
+    this.ComplexDtoEdited.Dto.Penznemkod = Dto.Penznemkod;
+    this.ComplexDtoEdited.Dto.Penznem = Dto.Penznem1;
   }
   onPenznemStopzoom() {
-    this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
+    this.SzerkesztesMode = BizonylatSzerkesztesMode.List;
     this._cdr.detectChanges();
   }
 
+
   FizetesimodZoom() {
-    this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.FizetesimodZoom;
+    this.SzerkesztesMode = BizonylatSzerkesztesMode.FizetesimodZoom;
     this._cdr.detectChanges();
   }
   onFizetesimodSelectzoom(Dto: FizetesimodDto) {
-    this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesimodkod = Dto.Fizetesimodkod;
-    this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesimod = Dto.Fizetesimod1;
+    this.ComplexDtoEdited.Dto.Fizetesimodkod = Dto.Fizetesimodkod;
+    this.ComplexDtoEdited.Dto.Fizetesimod = Dto.Fizetesimod1;
     this._cdr.detectChanges();
   }
   onFizetesimodStopzoom() {
-    this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.List;
+    this.SzerkesztesMode = BizonylatSzerkesztesMode.List;
     this._cdr.detectChanges();
   }
 
@@ -122,8 +171,8 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
         }
 
         this.TeljesitesKelte = this.BizonylatKelte;
-        this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesimodkod = res.Result[0].Fizetesimodkod;
-        this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesimod = res.Result[0].Fizetesimod1;
+        this.ComplexDtoEdited.Dto.Fizetesimodkod = res.Result[0].Fizetesimodkod;
+        this.ComplexDtoEdited.Dto.Fizetesimod = res.Result[0].Fizetesimod1;
         this.FizetesiHatarido = this.BizonylatKelte;
         this.eppFrissit = false;
       })
@@ -139,6 +188,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this.Fiztool('Készpénz');
   }
 
+
   tetelUj() {
     this.eppFrissit = true;
     this.bizonylatservice.CreateNewTetel(this.bizonylatLeiro.bizonylatTipus)
@@ -153,7 +203,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
         this.bizonylatservice.teteluj = true;
         this.bizonylatservice.Setszvesz();
 
-        this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.TetelSzerkesztes;
+        this.SzerkesztesMode = BizonylatSzerkesztesMode.TetelSzerkesztes;
         this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
         this._cdr.detectChanges();
       })
@@ -164,7 +214,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   }
   tetelTorles(i: number) {
     this.bizonylatservice.TetelDtoSelectedIndex = i;
-    this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.TetelTorles;
+    this.SzerkesztesMode = BizonylatSzerkesztesMode.TetelTorles;
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
     this._cdr.detectChanges();
   }
@@ -173,24 +223,25 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this.bizonylatservice.teteluj = false;
     this.bizonylatservice.Setszvesz();
 
-    this.bizonylatservice.TetelDtoEdited = deepCopy(this.bizonylatservice.ComplexDtoEdited.LstTetelDto[i]);
-    this.bizonylatservice.SzerkesztesMode = BizonylatSzerkesztesMode.TetelSzerkesztes;
+    this.bizonylatservice.TetelDtoEdited = deepCopy(this.ComplexDtoEdited.LstTetelDto[i]);
+    this.SzerkesztesMode = BizonylatSzerkesztesMode.TetelSzerkesztes;
     this.bizonylatservice.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
     this._cdr.detectChanges();
   }
 
+
   onSubmit() {
     this.eppFrissit = true;
 
-    this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelkod,
-      this.bizonylatservice.ComplexDtoEdited.Dto.Ugyfelnev))
+    this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.ComplexDtoEdited.Dto.Ugyfelkod,
+      this.ComplexDtoEdited.Dto.Ugyfelnev))
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        return this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.bizonylatservice.ComplexDtoEdited.Dto.Penznemkod,
-          this.bizonylatservice.ComplexDtoEdited.Dto.Penznem));
+        return this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.ComplexDtoEdited.Dto.Penznemkod,
+          this.ComplexDtoEdited.Dto.Penznem));
       })
       .then(res1 => {
         if (res1.Error != null) {
@@ -198,8 +249,8 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
         }
 
         if (this.bizonylatLeiro.FizetesiModIs) {
-          return this._fizetesimodservice.ZoomCheck(new FizetesimodZoomParameter(this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesimodkod,
-            this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesimod));
+          return this._fizetesimodservice.ZoomCheck(new FizetesimodZoomParameter(this.ComplexDtoEdited.Dto.Fizetesimodkod,
+            this.ComplexDtoEdited.Dto.Fizetesimod));
         } else {
           return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
         }
@@ -209,11 +260,11 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
           throw res2.Error;
         }
 
-        this.bizonylatservice.ComplexDtoEdited.Dto.Bizonylatkelte = moment(this.BizonylatKelte).toISOString(true);
-        this.bizonylatservice.ComplexDtoEdited.Dto.Teljesiteskelte = moment(this.TeljesitesKelte).toISOString(true);
-        this.bizonylatservice.ComplexDtoEdited.Dto.Fizetesihatarido = moment(this.FizetesiHatarido).toISOString(true);
+        this.ComplexDtoEdited.Dto.Bizonylatkelte = moment(this.BizonylatKelte).toISOString(true);
+        this.ComplexDtoEdited.Dto.Teljesiteskelte = moment(this.TeljesitesKelte).toISOString(true);
+        this.ComplexDtoEdited.Dto.Fizetesihatarido = moment(this.FizetesiHatarido).toISOString(true);
 
-        return this.bizonylatservice.Save(this.bizonylatservice.ComplexDtoEdited);
+        return this.bizonylatservice.Save(this.ComplexDtoEdited);
       })
       .then(res3 => {
         if (res3.Error != null) {
@@ -248,7 +299,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this.navigal();
   }
   navigal() {
-    if (this.bizonylatservice.uj) {
+    if (this.uj) {
       // this.bizonylatservice.ContainerMode = BizonylatContainerMode.List;
     } else {
       // this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;

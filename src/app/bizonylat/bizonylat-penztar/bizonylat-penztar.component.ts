@@ -20,6 +20,7 @@ export class BizonylatPenztarComponent implements OnInit, OnDestroy {
   @Input() set DtoOriginal(value: BizonylatDto) {
     this.Dto = deepCopy(value);
   }
+  @Input() bizonylatTipus = BizonylatTipus.Szamla;
   @Input() bizonylatLeiro = new BizonylatTipusLeiro();
   @Output() eventPenztarUtan = new EventEmitter<void>();
 
@@ -84,10 +85,10 @@ export class BizonylatPenztarComponent implements OnInit, OnDestroy {
 
         penztartetelDto.Penztarkod = this.penztarDto[this.penztarindex].Penztarkod;
         penztartetelDto.Datum = this.Dto.Bizonylatkelte;
-        penztartetelDto.Jogcim = this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.BejovoSzamla ? 'Bejövő számla' : 'Számla';
+        penztartetelDto.Jogcim = this.bizonylatTipus === BizonylatTipus.BejovoSzamla ? 'Bejövő számla' : 'Számla';
         penztartetelDto.Ugyfelnev = this.Dto.Ugyfelnev;
         penztartetelDto.Bizonylatszam = this.Dto.Bizonylatszam;
-        if (this.bizonylatLeiro.bizonylatTipus === BizonylatTipus.BejovoSzamla) {
+        if (this.bizonylatTipus === BizonylatTipus.BejovoSzamla) {
           penztartetelDto.Kiadas = this.Dto.Brutto;
         } else {
           penztartetelDto.Bevetel = this.Dto.Brutto;

@@ -172,7 +172,8 @@
       <app-bizonylattetel-szerkesztes [teteluj]="teteluj"
                                       [bizonylatLeiro]="bizonylatLeiro"
                                       [szvesz]="szvesz"
-                                      [TetelDtoEdited]="TetelDtoEdited">
+                                      [TetelDtoEdited]="TetelDtoEdited"
+                                      (eventUjModositasUtan)="onUjModositasUtan($event)">
       </app-bizonylattetel-szerkesztes>
     </ng-template>
   </div>

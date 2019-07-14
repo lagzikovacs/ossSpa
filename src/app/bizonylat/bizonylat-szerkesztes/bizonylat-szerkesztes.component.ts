@@ -1,10 +1,9 @@
-import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
 import {FizetesimodService} from '../../primitiv/fizetesimod/fizetesimod.service';
-import {BizonylattetelSzerkesztesMode} from '../bizonylattetelszerkesztesmode';
 import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
 import {FizetesimodZoomParameter} from '../../primitiv/fizetesimod/fiztesimodzoomparameter';
@@ -24,6 +23,7 @@ import {BizonylatTetelDto} from '../bizonylatteteldto';
 import {BizonylatAfaDto} from '../bizonylatafadto';
 import {BizonylatTermekdijDto} from '../bizonylattermekdijdto';
 import {BizonylatteteltablaComponent} from '../bizonylatteteltabla/bizonylatteteltabla.component';
+import {propCopy} from '../../tools/propCopy';
 
 @Component({
   selector: 'app-bizonylat-szerkesztes',
@@ -36,6 +36,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   @Input() bizonylatLeiro = new BizonylatTipusLeiro();
   @Input() uj = false;
   @Input() Bizonylatkod = -1;
+  @Output() eventSzerkesztesUtan = new EventEmitter<BizonylatDto>();
 
   fizerr = 'Ismeretlen fizetési mód: ';
 
@@ -218,7 +219,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
   onTetelUjElott() {
     this.eppFrissit = true;
-    this.bizonylatservice.CreateNewTetel(this.bizonylatLeiro.bizonylatTipus)
+    this.bizonylatservice.CreateNewTetel(this.bizonylatTipus)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -246,27 +247,23 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   }
   onTeteltorles(ok: boolean) {
     if (ok) {
-      // this.eppFrissit = true;
-      // this.bizonylatservice.ComplexDtoEdited.LstTetelDto.splice(this.bizonylatservice.TetelDtoSelectedIndex, 1);
-      // this.bizonylatservice.SumEsAfaEsTermekdij(this.bizonylatservice.ComplexDtoEdited)
-      //   .then(res => {
-      //     if (res.Error != null) {
-      //       throw res.Error;
-      //     }
-      //
-      //     this.bizonylatservice.ComplexDtoEdited = res.Result[0];
-      //
-      //     this.eppFrissit = false;
-      //     this.navigal();
-      //   })
-      //   .catch(err => {
-      //     this.eppFrissit = false;
-      //     this._errorservice.Error = err;
-      //   });
+      this.eppFrissit = true;
+      this.ComplexDtoEdited.LstTetelDto.splice(this.TetelDtoSelectedIndex, 1);
+      this.bizonylatservice.SumEsAfaEsTermekdij(this.ComplexDtoEdited)
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
 
-      this.tabla.clearselections();
-    } else {
-      this.tabla.egysem();
+          this.ComplexDtoEdited = res.Result[0];
+
+          this.eppFrissit = false;
+          this.tabla.clearselections();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
     }
   }
 
@@ -279,7 +276,36 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this._cdr.detectChanges();
   }
 
+  onUjModositasUtan(dto: BizonylatTetelDto) {
+    if (dto !== null) {
+      if (this.teteluj) {
+        // a lista végére teszi, h a sorrend a user szándékának feleljen meg
+        this.ComplexDtoEdited.LstTetelDto.push(dto);
+      } else {
+        propCopy(dto, this.ComplexDtoEdited.LstTetelDto[this.TetelDtoSelectedIndex]);
+      }
 
+      this.bizonylatservice.SumEsAfaEsTermekdij(this.ComplexDtoEdited)
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
+
+          this.ComplexDtoEdited = res.Result[0];
+
+          this.eppFrissit = false;
+          this.tabla.egysem();
+          this.SzerkesztesMode = BizonylatSzerkesztesMode.List;
+          this._cdr.detectChanges();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.tabla.egysem();
+    }
+  }
 
   onSubmit() {
     this.eppFrissit = true;
@@ -329,33 +355,19 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
           throw res4.Error;
         }
 
-        // if (this.bizonylatservice.uj) {
-        //   this.bizonylatservice.Dto.unshift(res4.Result[0].Dto);
-        // } else {
-        //   this.bizonylatservice.Dto[this.bizonylatservice.DtoSelectedIndex] = res4.Result[0].Dto;
-        //   this.bizonylatservice.TetelDto = res4.Result[0].LstTetelDto;
-        //   this.bizonylatservice.AfaDto = res4.Result[0].LstAfaDto;
-        //   this.bizonylatservice.TermekdijDto = res4.Result[0].LstTermekdijDto;
-        // }
-
         this.eppFrissit = false;
-        this.navigal();
+        this.eventSzerkesztesUtan.emit(res4.Result[0].Dto);
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
+
   cancel() {
-    this.navigal();
+    this.eventSzerkesztesUtan.emit(null);
   }
-  navigal() {
-    if (this.uj) {
-      // this.bizonylatservice.ContainerMode = BizonylatContainerMode.List;
-    } else {
-      // this.bizonylatservice.EgyMode = BizonylatEgyMode.Reszletek;
-    }
-  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

@@ -112,7 +112,8 @@
       <app-bizonylat-szerkesztes [uj]="false"
                                  [bizonylatTipus]="bizonylatTipus"
                                  [bizonylatLeiro]="bizonylatLeiro"
-                                 [Bizonylatkod]="Dto.Bizonylatkod">
+                                 [Bizonylatkod]="Dto.Bizonylatkod"
+                                 (eventSzerkesztesUtan)="onSzerkesztesUtan($event)">
       </app-bizonylat-szerkesztes>
     </div>
   </ng-container>

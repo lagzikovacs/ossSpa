@@ -210,6 +210,15 @@ export class BizonylatEgyComponent implements OnDestroy {
     this.EgyMode = BizonylatEgyMode.Reszletek;
   }
 
+  onSzerkesztesUtan(dto: BizonylatDto) {
+    if (dto !== null) {
+      propCopy(dto, this.Dto);
+      this.eventSzerkesztesutan.emit(dto);
+    }
+
+    this.EgyMode = BizonylatEgyMode.Reszletek;
+  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

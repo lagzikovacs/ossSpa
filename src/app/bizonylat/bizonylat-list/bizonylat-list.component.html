@@ -20,8 +20,8 @@
   <ng-template #griduj>
     <app-bizonylat-szerkesztes [uj]="true"
                                [bizonylatTipus]="bizonylatTipus"
-                               [bizonylatLeiro]="bizonylatLeiro">
-
+                               [bizonylatLeiro]="bizonylatLeiro"
+                               (eventSzerkesztesUtan)="onUjtetelkesz($event)">
     </app-bizonylat-szerkesztes>
   </ng-template>
 

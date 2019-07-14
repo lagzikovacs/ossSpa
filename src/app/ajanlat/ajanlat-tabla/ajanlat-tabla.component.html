@@ -1,0 +1,39 @@
+<table class="table table-bordered table-sm table-responsive" style="border: none">
+  <thead>
+    <tr>
+      <th>Tételtipus</th>
+      <th>Cikk</th>
+      <th>Mennyiség</th>
+      <th>Egységár</th>
+      <th>Egységnyi teljesítmény</th>
+      <th>Netto</th>
+      <th>ÁFA</th>
+      <th>Brutto</th>
+      <th>Össz. teljesítmény</th>
+      <th>Garancia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let item of items; let i = index">
+      <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
+        <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
+            (click)="clickforid(i)">{{item.TetelTipus}}</td>
+        <td>{{item.CikkNev}}</td>
+        <td>{{item.Mennyiseg}}</td>
+        <td>{{item.EgysegAr}}</td>
+        <td>{{item.EgysegnyiTeljesitmeny}}</td>
+        <td>{{item.Netto}}</td>
+        <td>{{item.Afa}}</td>
+        <td>{{item.Brutto}}</td>
+        <td>{{item.OsszTeljesitmeny}}</td>
+        <td>{{item.Garancia}}</td>
+      </tr>
+
+      <tr *ngIf="szerkesztes && i === clickedidindex && tetelTemplate !== undefined" [class.active]="i === clickedidindex">
+        <td colspan="100">
+          <ng-template *ngTemplateOutlet="tetelTemplate"></ng-template>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>

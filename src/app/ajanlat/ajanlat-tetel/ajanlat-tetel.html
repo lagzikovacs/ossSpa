@@ -1,14 +1,12 @@
 <div class="alapkeret">
-  <h5>{{ajanlatservice.AjanlatParam.AjanlatBuf[ajanlatservice.AjanlattetelIndex].TetelTipus}}</h5>
-
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">{{ajanlatservice.AjanlatParam.AjanlatBuf[ajanlatservice.AjanlattetelIndex].TetelTipus}}</div>
+        <div class="egylabel">{{item.TetelTipus}}</div>
         <input type="text" class="form-control form-control-sm oszlop6" id="cikk"
                maxlength="100" autocomplete="off" style="background-color: aquamarine;display: inline-block"
-               [(ngModel)]="ajanlatservice.AjanlatParam.AjanlatBuf[ajanlatservice.AjanlattetelIndex].CikkNev" name="cikk">
+               [(ngModel)]="item.CikkNev" name="cikk">
         <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px;display: inline-block" type="button" (click)="CikkZoom()">...</button>
       </div>
     </div>
@@ -17,31 +15,31 @@
       <div>
         <div class="egylabel">Mennyiség</div>
         <input type="number" class="form-control form-control-sm oszlop2" id="mennyiseg"
-               [(ngModel)]="ajanlatservice.AjanlatParam.AjanlatBuf[ajanlatservice.AjanlattetelIndex].Mennyiseg" name="mennyiseg">
+               style="display: inline-block;margin-right: 3px"
+               [(ngModel)]="item.Mennyiseg" name="mennyiseg">
       </div>
-    </div>
 
-    <div class="row no-gutters editform-row">
       <div>
         <div class="egylabel">Egységár</div>
         <input type="number" class="form-control form-control-sm oszlop2" id="egysegar"
-               [(ngModel)]="ajanlatservice.AjanlatParam.AjanlatBuf[ajanlatservice.AjanlattetelIndex].EgysegAr" name="egysegar">
+               style="display: inline-block;margin-right: 3px"
+               [(ngModel)]="item.EgysegAr" name="egysegar">
       </div>
     </div>
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Egységnyi teljesítmény</div>
+        <div class="egylabel">Egys. teljesítmény</div>
         <input type="number" class="form-control form-control-sm oszlop2" id="egysegnyi"
-               [(ngModel)]="ajanlatservice.AjanlatParam.AjanlatBuf[ajanlatservice.AjanlattetelIndex].EgysegnyiTeljesitmeny" name="egysegnyi">
+               style="display: inline-block;margin-right: 3px"
+               [(ngModel)]="item.EgysegnyiTeljesitmeny" name="egysegnyi">
       </div>
-    </div>
 
-    <div class="row no-gutters editform-row">
       <div>
         <div class="egylabel">Garancia</div>
         <input type="number" class="form-control form-control-sm oszlop2" id="garancia"
-               [(ngModel)]="ajanlatservice.AjanlatParam.AjanlatBuf[ajanlatservice.AjanlattetelIndex].Garancia" name="garancia">
+               style="display: inline-block;margin-right: 3px"
+               [(ngModel)]="item.Garancia" name="garancia">
       </div>
     </div>
 
@@ -56,8 +54,8 @@
   CikkZoom = 1
   }-->
 
-  <ng-container *ngIf="ajanlatservice.AjanlatSzerkesztesMode === 1">
-    <app-cikk-list [maszk]="ajanlatservice.AjanlatParam.AjanlatBuf[ajanlatservice.AjanlattetelIndex].CikkNev || ''"
+  <ng-container *ngIf="AjanlatSzerkesztesMode === 1">
+    <app-cikk-list [maszk]="item.CikkNev || ''"
                    (eventSelectzoom)="onCikkSelectzoom($event)"
                    (eventStopzoom)="onCikkStopzoom()"></app-cikk-list>
   </ng-container>

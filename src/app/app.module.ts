@@ -187,6 +187,7 @@ import { UgyfelterProjektTablaComponent } from './ugyfelter/ugyfelter-projekt-ta
 import { ProjektkapcsolatTablaComponent } from './projektkapcsolat/projektkapcsolat-tabla/projektkapcsolat-tabla.component';
 import { BizonylatkapcsolatTablaComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-tabla/bizonylatkapcsolat-tabla.component';
 import {BizonylattetelSzerkesztesComponent} from './bizonylat/bizonylattetel-szerkesztes/bizonylattetel-szerkesztes.component';
+import { AjanlatTablaComponent } from './ajanlat/ajanlat-tabla/ajanlat-tabla.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -399,6 +400,7 @@ if (environment.production) {
     UgyfelterProjektTablaComponent,
     ProjektkapcsolatTablaComponent,
     BizonylatkapcsolatTablaComponent,
+    AjanlatTablaComponent,
   ],
   imports: [
     BrowserModule,

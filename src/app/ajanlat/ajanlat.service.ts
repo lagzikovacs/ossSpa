@@ -5,21 +5,12 @@ import {AjanlatParamResult} from './ajanlatparamresult';
 import {AjanlatParam} from './ajanlatparam';
 import {NumberResult} from '../dtos/numberresult';
 import {environment} from '../../environments/environment';
-import {AjanlatSzerkesztesMode} from './ajanlatszerkesztesmode';
-import {AjanlatContainerMode} from './ajanlatcontainermode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AjanlatService {
   private readonly _controller = 'api/ajanlat/';
-
-  AjanlatParam = new AjanlatParam();
-  AjanlatErvenyes: any;
-  AjanlattetelIndex = 0;
-
-  AjanlatContainerMode = AjanlatContainerMode.List;
-  AjanlatSzerkesztesMode = AjanlatSzerkesztesMode.Blank;
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }

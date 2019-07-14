@@ -10,7 +10,6 @@ import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
-import {propCopy} from '../../tools/propCopy';
 import {IrattipusDto} from '../../primitiv/irattipus/irattipusdto';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 import {IratDto} from '../iratdto';

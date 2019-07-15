@@ -1,5 +1,8 @@
 <div class="alapkeret">
   <h5>Fotózás</h5>
+
+  <img src="assets/gsg.jpg" style="margin-top: 8px;margin-bottom: 8px" alt="GSG">
+
   <ng-container *ngIf="!bejelentkezve">
     <p>Üdvözöljük, ön a GridSolar Group Kft. informatikai rendszerét (OSS) használja. Kérjük a fotózáshoz kapott linket kezelje bizalmasan!</p>
     <button [disabled]="eppFrissit" (click)="folytatas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
@@ -8,9 +11,15 @@
   </ng-container>
   <ng-container *ngIf="bejelentkezve">
     <div style="font-size: smaller;margin-bottom: 10px">(tető, inverter, óraszekrény/mérőóra, rákötés)</div>
+    <div class="egylabel">Ügyfél</div>
     <div>{{Dto.iratDto[0].Ugyfelnev}}</div>
     <div>{{Dto.iratDto[0].Ugyfelcim}}</div>
     <div><b>{{Dto.iratDto[0].Targy}}</b></div>
+    <ng-container *ngIf="Dto.projektDto !== undefined">
+      <br>
+      <div class="egylabel">Telepítési cím</div>
+      <div><b>{{Dto.projektDto[0].Telepitesicim}}</b></div>
+    </ng-container>
     <table class="table table-bordered table-sm table-responsive" style="border: none;margin-top: 10px;margin-bottom: 10px">
       <thead>
       <tr>
@@ -32,26 +41,22 @@
     <form #f="ngForm" (ngSubmit)="onSubmit()">
 
       <div class="row no-gutters editform-row">
-        <div class="col-md-2">
-        </div>
-        <div class="col-md-6">
+        <div>
           <input type="file" (change)="onFileChange($event)" #fileInput>
         </div>
       </div>
+
       <div class="row no-gutters editform-row">
-        <div class="col-md-2">
-          <div class="editform-title">Megjegyzés</div>
-        </div>
-        <div class="col-md-4">
-          <input type="text" class="form-control form-control-sm" id="megjegyzes"
+        <div>
+          <div class="egylabel">Megjegyzés</div>
+          <input type="text" class="form-control form-control-sm oszlop6" id="megjegyzes"
                  autocomplete="off" required
                  [(ngModel)]="megjegyzes" name="megjegyzes">
         </div>
       </div>
 
-      <div class="row no-gutters" style="margin-bottom: 10px">
-        <div class="col-md-2"></div>
-        <button class="btn btn-sm btn-primary" [disabled]="file === undefined || eppFrissit" type="submit">Ok</button>
+      <div class="row no-gutters editform-row">
+        <button class="btn btn-sm btn-primary" [disabled]="!f.valid || file === undefined || eppFrissit" type="submit">Ok</button>
       </div>
     </form>
   </ng-container>

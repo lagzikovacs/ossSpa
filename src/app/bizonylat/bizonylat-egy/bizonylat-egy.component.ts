@@ -172,14 +172,17 @@ export class BizonylatEgyComponent implements OnDestroy {
 
   onKifizetesrendbenUtan(dto: BizonylatDto) {
     propCopy(dto, this.Dto);
+    this.eventSzerkesztesutan.emit(dto);
   }
 
   onKiszallitvaUtan(dto: BizonylatDto) {
     propCopy(dto, this.Dto);
+    this.eventSzerkesztesutan.emit(dto);
   }
 
   onStornozando(dto: BizonylatDto) {
     propCopy(dto, this.Dto);
+    this.eventSzerkesztesutan.emit(dto);
   }
 
   onStornozo(dto: BizonylatDto) {
@@ -193,6 +196,7 @@ export class BizonylatEgyComponent implements OnDestroy {
   onKibocsatasUtan(dto: BizonylatDto) {
     if (dto !== null) {
       propCopy(dto, this.Dto);
+      this.eventSzerkesztesutan.emit(dto);
     } else {
       this.EgyMode = BizonylatEgyMode.Reszletek;
     }

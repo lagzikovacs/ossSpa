@@ -30,7 +30,7 @@ import {propCopy} from '../../tools/propCopy';
   templateUrl: './bizonylat-szerkesztes.component.html'
 })
 export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
-  @ViewChild('teteltabla') tabla: BizonylatteteltablaComponent;
+  @ViewChild('teteltabla', {static: true}) tabla: BizonylatteteltablaComponent;
 
   @Input() bizonylatTipus = BizonylatTipus.Szamla;
   @Input() bizonylatLeiro = new BizonylatTipusLeiro();

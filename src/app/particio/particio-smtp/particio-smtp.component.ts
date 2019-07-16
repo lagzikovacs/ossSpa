@@ -8,14 +8,14 @@ import {ParticioDto} from '../particiodto';
 export class ParticioSmtpComponent implements OnDestroy {
   @Input() Dto: ParticioDto;
   @Input() eppFrissit: boolean;
-  @Output() OkClick = new EventEmitter<ParticioDto>();
-  @Output() CancelClick = new EventEmitter<void>();
+  @Output() eventOk = new EventEmitter<ParticioDto>();
+  @Output() eventCancel = new EventEmitter<void>();
 
   onSubmit() {
-    this.OkClick.emit(this.Dto);
+    this.eventOk.emit(this.Dto);
   }
   cancel() {
-    this.CancelClick.emit();
+    this.eventCancel.emit();
   }
 
   ngOnDestroy() {

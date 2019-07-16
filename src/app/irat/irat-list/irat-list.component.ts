@@ -17,7 +17,7 @@ import {propCopy} from '../../tools/propCopy';
   templateUrl: './irat-list.component.html'
 })
 export class IratListComponent implements OnDestroy {
-  @ViewChild('tabla') tabla: TablaComponent;
+  @ViewChild('tabla', {static: true}) tabla: TablaComponent;
 
   @Input() enProjekt = true;
 

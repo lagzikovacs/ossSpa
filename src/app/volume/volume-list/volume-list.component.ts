@@ -15,7 +15,7 @@ import {EgyMode} from '../../enums/egymode';
   animations: [rowanimation]
 })
 export class VolumeListComponent implements OnInit, OnDestroy {
-  @ViewChild('tabla') tabla: TablaComponent;
+  @ViewChild('tabla', {static: true}) tabla: TablaComponent;
 
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
   elsokereses = true;

@@ -6,7 +6,6 @@ import {NumberResult} from '../dtos/numberresult';
 import {environment} from '../../environments/environment';
 import {SzamlazasirendResult} from './szamlazasirendresult';
 import {EmptyResult} from '../dtos/emptyresult';
-import {SzamlazasirendSzerkesztesMode} from './szamlazasirendszerkesztesmode';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
 

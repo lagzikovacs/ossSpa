@@ -7,19 +7,14 @@ import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 export class TetelTorlesComponent implements OnDestroy {
   @Input() cim: string;
   @Input() eppFrissit: boolean;
-  @Output() OkClick = new EventEmitter<void>();
-  @Output() CancelClick = new EventEmitter<void>();
-
   @Output() eventTorles = new EventEmitter<boolean>();
 
-  okClick() {
+  doOk() {
     this.eventTorles.emit(true);
-    this.OkClick.emit();
   }
 
-  cancelClick() {
+  doCancel() {
     this.eventTorles.emit(false);
-    this.CancelClick.emit();
   }
 
   ngOnDestroy() {

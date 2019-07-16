@@ -4,10 +4,8 @@
   <form #f="ngForm" (ngSubmit)="onSubmit()">
     <ng-container *ngIf="!kesz">
       <div class="row no-gutters editform-row">
-        <div class="col-md-2">
-          <div class="editform-title">Új bizonylattipus</div>
-        </div>
-        <div class="col-md-4">
+        <div>
+          <div class="egylabel">Új bizonylattipus</div>
           <div *ngFor="let entry of entries; let i = index" class="form-check">
             <input class="form-check-input" type="radio" name="radiogroup" id="entry"
                    [checked]="i === entryindex"
@@ -19,15 +17,15 @@
         </div>
       </div>
 
-      <div class="row no-gutters" style="margin-bottom: 10px">
-        <div class="col-md-2"></div>
+      <div class="row no-gutters editform-row">
         <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
         <button class="btn btn-sm btn-default" [disabled]="eppFrissit" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
       </div>
     </ng-container>
+
     <ng-container *ngIf="kesz">
       <div>Az új bizonylat elkészült, bizonylatkód: {{ujbizonylatkod}}</div>
-      <div class="row no-gutters" style="margin-bottom: 10px">
+      <div class="row no-gutters editform-row">
         <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
       </div>
     </ng-container>

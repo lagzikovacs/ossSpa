@@ -132,8 +132,8 @@
         <div [@rowanimation]>
           <app-projekt-napelem [eppFrissit]="eppFrissit"
                                [DtoOriginal]="Dto[DtoSelectedIndex]"
-                               (OkClick)="SegedOk($event)"
-                               (CancelClick)="SegedCancel()">
+                               (eventOk)="SegedOk($event)"
+                               (eventCancel)="SegedCancel()">
           </app-projekt-napelem>
         </div>
       </ng-container>

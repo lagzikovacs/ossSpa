@@ -20,7 +20,7 @@ export class IratToolbarComponent implements AfterViewInit, OnDestroy {
   // pl. egy tétel szerkesztése után
 
   _szempont = 0;
-  @ViewChild('Szempont') SzempontCombobox: ElementRef;
+  @ViewChild('Szempont', {static: true}) SzempontCombobox: ElementRef;
   @Input()
   set szempont(value: number) {
     this._szempont = value;
@@ -28,7 +28,7 @@ export class IratToolbarComponent implements AfterViewInit, OnDestroy {
   @Output() szempontChange: EventEmitter<number> = new EventEmitter();
 
 
-  @ViewChild('Minta') MintaTextBox: ElementRef;
+  @ViewChild('Minta', {static: true}) MintaTextBox: ElementRef;
   @Input()
   set minta(value: string) {
     this.MintaTextBox.nativeElement.value = value;
@@ -37,7 +37,7 @@ export class IratToolbarComponent implements AfterViewInit, OnDestroy {
 
 
   _szempont2 = 0;
-  @ViewChild('Szempont2') Szempont2Combobox: ElementRef;
+  @ViewChild('Szempont2', {static: true}) Szempont2Combobox: ElementRef;
   @Input()
   set szempont2(value: number) {
     this._szempont2 = value;
@@ -45,7 +45,7 @@ export class IratToolbarComponent implements AfterViewInit, OnDestroy {
   @Output() szempont2Change: EventEmitter<number> = new EventEmitter();
 
 
-  @ViewChild('Minta2') Minta2TextBox: ElementRef;
+  @ViewChild('Minta2', {static: true}) Minta2TextBox: ElementRef;
   @Input()
   set minta2(value: string) {
     this.Minta2TextBox.nativeElement.value = value;

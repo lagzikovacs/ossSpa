@@ -13,7 +13,7 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   templateUrl: './fotozas.component.html'
 })
 export class FotozasComponent implements OnInit, OnDestroy {
-  @ViewChild('fileInput') fileInput: ElementRef;
+  @ViewChild('fileInput', {static: true}) fileInput: ElementRef;
 
   fp: string;
   private _sub: any;

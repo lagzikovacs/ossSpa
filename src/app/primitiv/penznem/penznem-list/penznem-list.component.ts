@@ -19,7 +19,7 @@ import {rowanimation} from '../../../animation/rowAnimation';
   animations: [rowanimation]
 })
 export class PenznemListComponent implements OnInit, OnDestroy {
-  @ViewChild('tabla') tabla: TablaComponent;
+  @ViewChild('tabla', {static: true}) tabla: TablaComponent;
 
   szurok = ['Pénznem'];
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);

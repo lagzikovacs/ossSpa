@@ -6,9 +6,9 @@
                      [(csoportszempont)]="csoportszempont"
                      [(szempont)]="szempont"
                      [(minta)]="minta"
-                     [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-                     [enUj]="!eppFrissit && jog" (Uj)="doUjtetel()"
-                     [visZoom]="zoom" (StopZoom)="onStopzoom()">
+                     [enKereses]="!eppFrissit" (eventKereses)="onKereses()"
+                     [enUj]="!eppFrissit && jog" (eventUj)="doUjtetel()"
+                     [visZoom]="zoom" (eventStopZoom)="onStopzoom()">
   </app-ugyfeltoolbar>
 
   <app-ugyfel-tabla #tabla

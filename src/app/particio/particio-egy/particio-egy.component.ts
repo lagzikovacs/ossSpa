@@ -71,7 +71,7 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
     this.EgyMode = ParticioEgyMode.Volume;
   }
 
-  SzerkesztesOk(Mod: ParticioDto) {
+  onSzerkesztesOk(Mod: ParticioDto) {
     this.eppFrissit = true;
     this.particioservice.Update(Mod)
       .then(res => {
@@ -97,7 +97,7 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
         this._errorservice.Error = err;
       });
   }
-  SzerkesztesCancel() {
+  onSzerkesztesCancel() {
     this.Dto = deepCopy(this.Ori);
 
     this.EgyMode = ParticioEgyMode.Blank;

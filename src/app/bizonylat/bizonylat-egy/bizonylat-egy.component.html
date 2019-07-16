@@ -102,8 +102,7 @@
     <div [@rowanimation]>
       <app-tetel-torles [cim]="bizonylatLeiro.BizonylatNev"
                         [eppFrissit]="eppFrissit"
-                        (OkClick)="TorlesOk()"
-                        (CancelClick)="TorlesCancel()">
+                        (eventTorles)="onTorles($event)">
       </app-tetel-torles>
     </div>
   </ng-container>

@@ -21,7 +21,7 @@ import {BizonylatTipus} from '../../bizonylat/bizonylattipus';
   templateUrl: './projektkapcsolat-list.component.html'
 })
 export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
-  @ViewChild('tabla') tabla: ProjektkapcsolatTablaComponent;
+  @ViewChild('tabla', {static: true}) tabla: ProjektkapcsolatTablaComponent;
 
   @Input() Projektkod = -1;
   @Input() Ugyfelkod = -1;

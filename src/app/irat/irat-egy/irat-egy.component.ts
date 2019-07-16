@@ -22,7 +22,7 @@ import {ProjektDto} from '../../projekt/projektdto';
   animations: [rowanimation]
 })
 export class IratEgyComponent implements OnDestroy {
-  @ViewChild(AbuComponent) abu: AbuComponent;
+  @ViewChild(AbuComponent, {static: true}) abu: AbuComponent;
 
   Dto = new IratDto();
   @Input() set DtoOriginal(value: IratDto) {

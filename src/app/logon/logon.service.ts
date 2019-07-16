@@ -14,10 +14,11 @@ import {EmptyResult} from '../dtos/emptyresult';
   providedIn: 'root'
 })
 export class LogonService {
+  private readonly _controller = environment.CoreRef + 'api/logon/';
+
   lehetsegesszerepkorokDto: CsoportDto[];
   Sid = '';
   Jogaim: any[] = new Array<any>();
-  private readonly _controller = 'api/logon/';
   private _subjectSzerepkorKivalasztva = new Subject<any>();
 
   constructor(private _httpClient: HttpClient) {}
@@ -33,8 +34,22 @@ export class LogonService {
     this._subjectSzerepkorKivalasztva.next({szerepkorkivalasztva: this._SzerepkorKivalasztva});
   }
 
+  SzerepkorKivalasztvaObservable(): Observable<any> {
+    return this._subjectSzerepkorKivalasztva.asObservable();
+  }
+
+  private options() {
+    return {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      params: new HttpParams().set('sid', this.Sid)
+    };
+  }
+  public httpoptions() {
+    return this.options();
+  }
+
   public Bejelentkezes(Azonosito: string, Jelszo: string): Promise<LogonResult> {
-    const url = environment.CoreRef + this._controller + 'bejelentkezes';
+    const url = this._controller + 'bejelentkezes';
     const body = new LogonParameter(Azonosito, Md5.hashStr(Jelszo).toString());
     const options = {headers: new HttpHeaders().set('Content-Type', 'application/json')};
 
@@ -45,43 +60,23 @@ export class LogonService {
   }
 
   public Szerepkorok(): Promise<SzerepkorokResult> {
-    const url = environment.CoreRef + this._controller + 'szerepkorok';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this.Sid)
-    };
-
-    return this._httpClient.post<SzerepkorokResult>(url, body, options).toPromise();
+    return this._httpClient.post<SzerepkorokResult>(
+      this._controller + 'szerepkorok', '', this.options())
+      .toPromise();
   }
 
   public SzerepkorValasztas(particiokod: number, csoportkod: number): Promise<EmptyResult> {
-    const url = environment.CoreRef + this._controller + 'szerepkorvalasztas';
-    const body = new SzerepkorvalasztasParameter(particiokod, csoportkod);
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this.Sid)
-    };
-
-    return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
+    return this._httpClient.post<EmptyResult>(
+      this._controller + 'szerepkorvalasztas', new SzerepkorvalasztasParameter(particiokod, csoportkod), this.options())
+      .toPromise();
   }
 
   public Kijelentkezes(): Promise<EmptyResult> {
-    const url = environment.CoreRef + this._controller + 'kijelentkezes';
-    const body = null;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this.Sid)
-    };
-
-    this.Sid = '';
     this.SzerepkorKivalasztva = false;
 
-    return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
-  }
-
-  SzerepkorKivalasztvaObservable(): Observable<any> {
-    return this._subjectSzerepkorKivalasztva.asObservable();
+    return this._httpClient.post<EmptyResult>(
+      this._controller + 'kijelentkezes', null, this.options())
+      .toPromise();
   }
 
   public isBejelentkezve(): boolean {

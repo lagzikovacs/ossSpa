@@ -17,7 +17,7 @@ import {rowanimation} from '../../animation/rowAnimation';
   animations: [rowanimation]
 })
 export class AjanlatkeresListComponent implements OnDestroy {
-  @ViewChild('tabla') tabla: TablaComponent;
+  @ViewChild('tabla', {static: true}) tabla: TablaComponent;
 
   szurok = ['Id', 'Ügynök', 'Név', 'Cím', 'Email', 'Telefonszám'];
   szempontok = [

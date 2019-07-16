@@ -20,7 +20,7 @@ import {rowanimation} from '../../animation/rowAnimation';
   animations: [rowanimation]
 })
 export class ProjektListComponent implements OnDestroy {
-  @ViewChild('tabla') tabla: ProjektTablaComponent;
+  @ViewChild('tabla', {static: true}) tabla: ProjektTablaComponent;
 
   statuszszurok = [
     '(0) Mind', '(1) Ajánlat', '(2) Fut', '(3) Kész', '(4) Pályázatra vár', '(5) Mástól megrendelte',

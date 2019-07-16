@@ -15,8 +15,8 @@ export class ProjektNapelemComponent implements OnInit, OnDestroy {
   @Input() set DtoOriginal(value: ProjektDto) {
     this.DtoEdited = deepCopy(value);
   }
-  @Output() OkClick = new EventEmitter<ProjektDto>();
-  @Output() CancelClick = new EventEmitter<void>();
+  @Output() eventOk = new EventEmitter<ProjektDto>();
+  @Output() eventCancel = new EventEmitter<void>();
 
   entries = ['', 'Nincs megrendelve', 'Megrendelve', 'Raktárban', 'Kiszállítva/telepítve', 'Harmadik fél biztosítja'];
   selected = '';
@@ -38,10 +38,10 @@ export class ProjektNapelemComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.DtoEdited.Napelemallapot = this.selected;
 
-    this.OkClick.emit(this.DtoEdited);
+    this.eventOk.emit(this.DtoEdited);
   }
   cancel() {
-    this.CancelClick.emit();
+    this.eventCancel.emit();
   }
 
   ngOnDestroy() {

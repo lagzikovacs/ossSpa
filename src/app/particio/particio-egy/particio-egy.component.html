@@ -40,43 +40,43 @@
   <ng-container *ngIf="EgyMode === 1">
     <app-particio-szallito [eppFrissit]="eppFrissit"
                            [Dto]="Dto"
-                           (OkClick)="SzerkesztesOk($event)"
-                           (CancelClick)="SzerkesztesCancel()">
+                           (eventOk)="onSzerkesztesOk($event)"
+                           (eventCancel)="onSzerkesztesCancel()">
     </app-particio-szallito>
   </ng-container>
   <ng-container *ngIf="EgyMode === 2">
     <app-particio-nav [eppFrissit]="eppFrissit"
                       [Dto]="Dto"
-                      (OkClick)="SzerkesztesOk($event)"
-                      (CancelClick)="SzerkesztesCancel()">
+                      (eventOk)="onSzerkesztesOk($event)"
+                      (eventCancel)="onSzerkesztesCancel()">
     </app-particio-nav>
   </ng-container>
   <ng-container *ngIf="EgyMode === 3">
     <app-particio-smtp [eppFrissit]="eppFrissit"
                        [Dto]="Dto"
-                       (OkClick)="SzerkesztesOk($event)"
-                       (CancelClick)="SzerkesztesCancel()">
+                       (eventOk)="onSzerkesztesOk($event)"
+                       (eventCancel)="onSzerkesztesCancel()">
     </app-particio-smtp>
   </ng-container>
   <ng-container *ngIf="EgyMode === 4">
     <app-particio-bizonylat [eppFrissit]="eppFrissit"
                             [Dto]="Dto"
-                            (OkClick)="SzerkesztesOk($event)"
-                            (CancelClick)="SzerkesztesCancel()">
+                            (eventOk)="onSzerkesztesOk($event)"
+                            (eventCancel)="onSzerkesztesCancel()">
     </app-particio-bizonylat>
   </ng-container>
   <ng-container *ngIf="EgyMode === 5">
     <app-particio-projekt [eppFrissit]="eppFrissit"
                           [Dto]="Dto"
-                          (OkClick)="SzerkesztesOk($event)"
-                          (CancelClick)="SzerkesztesCancel()">
+                          (eventOk)="onSzerkesztesOk($event)"
+                          (eventCancel)="onSzerkesztesCancel()">
     </app-particio-projekt>
   </ng-container>
   <ng-container *ngIf="EgyMode === 6">
     <app-particio-volume [eppFrissit]="eppFrissit"
                          [Dto]="Dto"
-                         (OkClick)="SzerkesztesOk($event)"
-                         (CancelClick)="SzerkesztesCancel()">
+                         (eventOk)="onSzerkesztesOk($event)"
+                         (eventCancel)="onSzerkesztesCancel()">
     </app-particio-volume>
   </ng-container>
 </div>

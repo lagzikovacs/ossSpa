@@ -19,7 +19,7 @@ import {rowanimation} from '../../../animation/rowAnimation';
   animations: [rowanimation]
 })
 export class TeendoListComponent implements OnInit, OnDestroy {
-  @ViewChild('tabla') tabla: TablaComponent;
+  @ViewChild('tabla', {static: true}) tabla: TablaComponent;
 
   szurok = ['Teendő'];
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);

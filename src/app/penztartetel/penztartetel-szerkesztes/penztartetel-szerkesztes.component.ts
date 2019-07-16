@@ -11,11 +11,11 @@ import {PenztartetelDto} from '../penztarteteldto';
   templateUrl: './penztartetel-szerkesztes.component.html'
 })
 export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnInit, OnDestroy {
-  @ViewChild('jogcim') jogcimInput: ElementRef;
-  @ViewChild('ugyfel') ugyfelInput: ElementRef;
-  @ViewChild('bizonylatszam') bizonylatszamInput: ElementRef;
-  @ViewChild('bevetel') bevetelInput: ElementRef;
-  @ViewChild('kiadas') kiadasInput: ElementRef;
+  @ViewChild('jogcim', {static: true}) jogcimInput: ElementRef;
+  @ViewChild('ugyfel', {static: true}) ugyfelInput: ElementRef;
+  @ViewChild('bizonylatszam', {static: true}) bizonylatszamInput: ElementRef;
+  @ViewChild('bevetel', {static: true}) bevetelInput: ElementRef;
+  @ViewChild('kiadas', {static: true}) kiadasInput: ElementRef;
 
   @Input() Penztarkod = -1;
 

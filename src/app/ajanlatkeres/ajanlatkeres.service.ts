@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {LogonService} from '../logon/logon.service';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {AjanlatkeresResult} from './ajanlatkeresresult';
 import {environment} from '../../environments/environment';
 import {AjanlatkeresDto} from './ajanlatkeresdto';
@@ -14,7 +14,7 @@ import {ColumnSettings} from '../tools/reszletek/columnsettings';
   providedIn: 'root'
 })
 export class AjanlatkeresService {
-  private readonly _controller = 'api/ajanlatkeres/';
+  private readonly _controller = environment.CoreRef + 'api/ajanlatkeres/';
   cim = 'Ajánlatkérés';
 
   GridSettings: ColumnSettings[] = undefined;
@@ -24,90 +24,50 @@ export class AjanlatkeresService {
               private _logonservice: LogonService) { }
 
   public Add(dto: AjanlatkeresDto): Promise<NumberResult> {
-    const url = environment.CoreRef + this._controller + 'add';
-    const body = dto;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+    return this._httpClient.post<NumberResult>(
+      this._controller + 'add', dto, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public CreateNew(): Promise<AjanlatkeresResult> {
-    const url = environment.CoreRef + this._controller + 'createnew';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<AjanlatkeresResult>(url, body, options).toPromise();
+    return this._httpClient.post<AjanlatkeresResult>(
+      this._controller + 'createnew', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Delete(dto: AjanlatkeresDto): Promise<EmptyResult> {
-    const url = environment.CoreRef + this._controller + 'delete';
-    const body = dto;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
+    return this._httpClient.post<EmptyResult>(
+      this._controller + 'delete', dto, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Get(key: number): Promise<AjanlatkeresResult> {
-    const url = environment.CoreRef + this._controller + 'get';
-    const body = key;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<AjanlatkeresResult>(url, body, options).toPromise();
+    return this._httpClient.post<AjanlatkeresResult>(
+      this._controller + 'get', key, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Select(fp: AjanlatkeresParameter): Promise<AjanlatkeresResult> {
-    const url = environment.CoreRef + this._controller + 'select';
-    const body = fp;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<AjanlatkeresResult>(url, body, options).toPromise();
+    return this._httpClient.post<AjanlatkeresResult>(
+      this._controller + 'select', fp, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Update(dto: AjanlatkeresDto): Promise<NumberResult> {
-    const url = environment.CoreRef + this._controller + 'update';
-    const body = dto;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+    return this._httpClient.post<NumberResult>(
+      this._controller + 'update', dto, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public GetGridSettings(): Promise<ColumnSettingsResult> {
-    const url = environment.CoreRef + this._controller + 'getgridsettings';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
+    return this._httpClient.post<ColumnSettingsResult>(
+      this._controller + 'getgridsettings', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public GetReszletekSettings(): Promise<ColumnSettingsResult> {
-    const url = environment.CoreRef + this._controller + 'getreszleteksettings';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
+    return this._httpClient.post<ColumnSettingsResult>(
+      this._controller + 'getreszleteksettings', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 }

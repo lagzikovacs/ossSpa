@@ -20,7 +20,7 @@ export class ToolbarComponent implements AfterViewInit, OnDestroy  {
   // pl. egy tétel szerkesztése után
 
   _szempont = 1;
-  @ViewChild('Szempont') SzempontCombobox: ElementRef;
+  @ViewChild('Szempont', {static: true}) SzempontCombobox: ElementRef;
   @Input()
   set szempont(value: number) {
     this._szempont = value;
@@ -28,7 +28,7 @@ export class ToolbarComponent implements AfterViewInit, OnDestroy  {
   @Output() szempontChange: EventEmitter<number> = new EventEmitter();
 
 
-  @ViewChild('Minta') MintaTextBox: ElementRef;
+  @ViewChild('Minta', {static: true}) MintaTextBox: ElementRef;
   @Input()
   set minta(value: string) {
     this.MintaTextBox.nativeElement.value = value;

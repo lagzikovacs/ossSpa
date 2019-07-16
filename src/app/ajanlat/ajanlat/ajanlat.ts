@@ -16,7 +16,7 @@ import {AjanlatTablaComponent} from '../ajanlat-tabla/ajanlat-tabla.component';
   templateUrl: './ajanlat.html'
 })
 export class AjanlatComponent implements OnInit, OnDestroy {
-  @ViewChild('tabla') tabla: AjanlatTablaComponent;
+  @ViewChild('tabla', {static: true}) tabla: AjanlatTablaComponent;
 
   @Input() Projektkod = -1;
   @Output() eventAjanlatkesz = new EventEmitter<ProjektKapcsolatDto>();

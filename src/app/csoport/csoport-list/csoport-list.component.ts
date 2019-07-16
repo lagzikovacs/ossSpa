@@ -16,7 +16,7 @@ import {propCopy} from '../../tools/propCopy';
   animations: [rowanimation]
 })
 export class CsoportListComponent implements OnDestroy {
-  @ViewChild('tabla') tabla: TablaComponent;
+  @ViewChild('tabla', {static: true}) tabla: TablaComponent;
 
   szurok = ['Csoport'];
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);

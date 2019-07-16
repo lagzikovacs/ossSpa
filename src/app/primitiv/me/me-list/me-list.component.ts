@@ -19,7 +19,7 @@ import {rowanimation} from '../../../animation/rowAnimation';
   animations: [rowanimation]
 })
 export class MeListComponent implements OnInit, OnDestroy {
-  @ViewChild('tabla') tabla: TablaComponent;
+  @ViewChild('tabla', {static: true}) tabla: TablaComponent;
 
   szurok = ['Mennyiségi egység'];
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);

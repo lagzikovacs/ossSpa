@@ -43,8 +43,8 @@
 
 /** Evergreen browsers require these. **/
 // Used for reflect-metadata in JIT. If you use AOT (and only Angular decorators), you can remove.
-import 'core-js/es7/reflect';
-
+// import 'core-js/es7/reflect';
+import 'core-js/proposals/reflect-metadata';
 
 /**
  * Web Animations `@angular/platform-browser/animations`
@@ -78,3 +78,4 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+

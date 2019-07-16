@@ -19,7 +19,7 @@ import {rowanimation} from '../../../animation/rowAnimation';
   animations: [rowanimation]
 })
 export class HelysegListComponent implements OnInit, OnDestroy {
-  @ViewChild('tabla') tabla: TablaComponent;
+  @ViewChild('tabla', {static: true}) tabla: TablaComponent;
 
   szurok = ['Helységnév'];
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);

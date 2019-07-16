@@ -22,21 +22,21 @@ export class BizonylattoolbarComponent implements AfterViewInit, OnDestroy {
   _megrendelesszempont = 0;
   _szempont = 0;
 
-  @ViewChild('MegrendelesSzempont') MegrendelesSzempontCombobox: ElementRef;
+  @ViewChild('MegrendelesSzempont', {static: true}) MegrendelesSzempontCombobox: ElementRef;
   @Input()
   set megrendelesszempont(value: number) {
     this._megrendelesszempont = value;
   }
   @Output() megrendelesszempontChange: EventEmitter<number> = new EventEmitter();
 
-  @ViewChild('Szempont') SzempontCombobox: ElementRef;
+  @ViewChild('Szempont', {static: true}) SzempontCombobox: ElementRef;
   @Input()
   set szempont(value: number) {
     this._szempont = value;
   }
   @Output() szempontChange: EventEmitter<number> = new EventEmitter();
 
-  @ViewChild('Minta') MintaTextBox: ElementRef;
+  @ViewChild('Minta', {static: true}) MintaTextBox: ElementRef;
   @Input()
   set minta(value: string) {
     this.MintaTextBox.nativeElement.value = value;

@@ -20,7 +20,7 @@ import {propCopy} from '../../tools/propCopy';
   templateUrl: './bizonylat-list.component.html'
 })
 export class BizonylatListComponent implements OnInit, OnDestroy {
-  @ViewChild('tabla') tabla: BizonylattablaComponent;
+  @ViewChild('tabla', {static: true}) tabla: BizonylattablaComponent;
 
   megrendelesszurok = ['Mind', 'Nincs kiszállítva'];
   szurok = ['Id', 'Bizonylatszám', 'Ügyfél'];

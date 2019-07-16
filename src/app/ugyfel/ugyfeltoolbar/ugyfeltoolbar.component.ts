@@ -13,9 +13,9 @@ export class UgyfeltoolbarComponent implements AfterViewInit, OnDestroy {
   @Input() visUj = true;
   @Input() visZoom = false;
 
-  @Output() Kereses = new EventEmitter<void>();
-  @Output() Uj = new EventEmitter<void>();
-  @Output() StopZoom = new EventEmitter<void>();
+  @Output() eventKereses = new EventEmitter<void>();
+  @Output() eventUj = new EventEmitter<void>();
+  @Output() eventStopZoom = new EventEmitter<void>();
 
   // azért kell a kétirányú adatkötés, h a szülő komponens újrainicializálja a toolbart
   // pl. egy tétel szerkesztése után
@@ -23,21 +23,21 @@ export class UgyfeltoolbarComponent implements AfterViewInit, OnDestroy {
   _csoportszempont = 0;
   _szempont = 0;
 
-  @ViewChild('Csoportszempont') CsoportszempontCombobox: ElementRef;
+  @ViewChild('Csoportszempont', {static: true}) CsoportszempontCombobox: ElementRef;
   @Input()
   set csoportszempont(value: number) {
     this._csoportszempont = value;
   }
   @Output() csoportszempontChange: EventEmitter<number> = new EventEmitter();
 
-  @ViewChild('Szempont') SzempontCombobox: ElementRef;
+  @ViewChild('Szempont', {static: true}) SzempontCombobox: ElementRef;
   @Input()
   set szempont(value: number) {
     this._szempont = value;
   }
   @Output() szempontChange: EventEmitter<number> = new EventEmitter();
 
-  @ViewChild('Minta') MintaTextBox: ElementRef;
+  @ViewChild('Minta', {static: true}) MintaTextBox: ElementRef;
   @Input()
   set minta(value: string) {
     this.MintaTextBox.nativeElement.value = value;
@@ -60,15 +60,15 @@ export class UgyfeltoolbarComponent implements AfterViewInit, OnDestroy {
   }
 
   doKereses() {
-    this.Kereses.emit();
+    this.eventKereses.emit();
   }
 
   doUj() {
-    this.Uj.emit();
+    this.eventUj.emit();
   }
 
   doStopZoom() {
-    this.StopZoom.emit();
+    this.eventStopZoom.emit();
   }
 
   ngOnDestroy() {

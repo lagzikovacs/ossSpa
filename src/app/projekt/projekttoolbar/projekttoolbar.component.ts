@@ -26,28 +26,28 @@ export class ProjektToolbarComponent implements AfterViewInit, OnDestroy {
   _teendoszempont = 0;
   _szempont = 0;
 
-  @ViewChild('Statuszszempont') StatuszszempontCombobox: ElementRef;
+  @ViewChild('Statuszszempont', {static: true}) StatuszszempontCombobox: ElementRef;
   @Input()
   set statuszszempont(value: number) {
     this._statuszszempont = value;
   }
   @Output() statuszszempontChange: EventEmitter<number> = new EventEmitter();
 
-  @ViewChild('Teendoszempont') TeendoszempontCombobox: ElementRef;
+  @ViewChild('Teendoszempont', {static: true}) TeendoszempontCombobox: ElementRef;
   @Input()
   set teendoszempont(value: number) {
     this._teendoszempont = value;
   }
   @Output() teendoszempontChange: EventEmitter<number> = new EventEmitter();
 
-  @ViewChild('Szempont') SzempontCombobox: ElementRef;
+  @ViewChild('Szempont', {static: true}) SzempontCombobox: ElementRef;
   @Input()
   set szempont(value: number) {
     this._szempont = value;
   }
   @Output() szempontChange: EventEmitter<number> = new EventEmitter();
 
-  @ViewChild('Minta') MintaTextBox: ElementRef;
+  @ViewChild('Minta', {static: true}) MintaTextBox: ElementRef;
   @Input()
   set minta(value: string) {
     this.MintaTextBox.nativeElement.value = value;

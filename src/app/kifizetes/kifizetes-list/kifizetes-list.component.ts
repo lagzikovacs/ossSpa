@@ -15,7 +15,7 @@ import {BizonylatDto} from '../../bizonylat/bizonylatdto';
   animations: [rowanimation]
 })
 export class KifizetesListComponent implements OnInit, OnDestroy {
-  @ViewChild('tabla') tabla: TablaComponent;
+  @ViewChild('tabla', {static: true}) tabla: TablaComponent;
 
   @Input() Bizonylat = new BizonylatDto();
 

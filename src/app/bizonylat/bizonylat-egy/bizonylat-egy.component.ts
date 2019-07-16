@@ -20,7 +20,7 @@ import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
   animations: [rowanimation]
 })
 export class BizonylatEgyComponent implements OnDestroy {
-  @ViewChild(AbuComponent) abu: AbuComponent;
+  @ViewChild(AbuComponent, {static: true}) abu: AbuComponent;
 
   Dto = new BizonylatDto();
   @Input() set DtoOriginal(value: BizonylatDto) {
@@ -144,27 +144,26 @@ export class BizonylatEgyComponent implements OnDestroy {
     this.abu.Uzenet('A(z) ' + this.bizonylatLeiro.BizonylatNev + ' a vágólapra került!');
   }
 
-  TorlesOk() {
-    this.eppFrissit = true;
-    this.bizonylatservice.Delete(this.Dto)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
+      this.bizonylatservice.Delete(this.Dto)
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
 
-        this.eppFrissit = false;
-        this.eventTorlesutan.emit();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+          this.eppFrissit = false;
+          this.eventTorlesutan.emit();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.EgyMode = BizonylatEgyMode.Reszletek;
+    }
   }
-
-  TorlesCancel() {
-    this.EgyMode = BizonylatEgyMode.Reszletek;
-  }
-
 
   onBizonylaterrolUtan(ok: boolean) {
     this.EgyMode = BizonylatEgyMode.Blank;

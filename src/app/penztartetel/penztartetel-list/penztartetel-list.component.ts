@@ -16,7 +16,7 @@ import {PenztartetelDto} from '../penztarteteldto';
   templateUrl: './penztartetel-list.component.html'
 })
 export class PenztartetelListComponent implements OnDestroy {
-  @ViewChild('tabla') tabla: TablaComponent;
+  @ViewChild('tabla', {static: true}) tabla: TablaComponent;
 
   @Input() Penztarkod = -1;
   @Input() nyitva = false;

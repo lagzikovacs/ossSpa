@@ -21,7 +21,7 @@ import {propCopy} from '../../tools/propCopy';
   animations: [rowanimation]
   })
   export class UgyfelListComponent implements OnInit, OnDestroy {
-  @ViewChild('tabla') tabla: UgyfelTablaComponent;
+  @ViewChild('tabla', {static: true}) tabla: UgyfelTablaComponent;
 
   csoportszempont = 0;
   csoportszurok = ['Mind', 'Kiemelt'];

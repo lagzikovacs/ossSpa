@@ -10,7 +10,7 @@ import {DokumentumDto} from '../dokumentumdto';
   templateUrl: './dokumentum-feltoltes.component.html'
 })
 export class DokumentumFeltoltesComponent implements OnDestroy {
-  @ViewChild('fileInput') fileInput: ElementRef;
+  @ViewChild('fileInput', {static: true}) fileInput: ElementRef;
 
   file: any;
   file64: any;

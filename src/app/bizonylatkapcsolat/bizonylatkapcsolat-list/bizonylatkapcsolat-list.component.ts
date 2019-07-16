@@ -15,7 +15,7 @@ import {BizonylatKapcsolatDto} from '../bizonylatkapcsolatdto';
   templateUrl: './bizonylatkapcsolat-list.component.html'
 })
 export class BizonylatkapcsolatListComponent implements OnInit, OnDestroy {
-  @ViewChild('tabla') tabla: BizonylatkapcsolatTablaComponent;
+  @ViewChild('tabla', {static: true}) tabla: BizonylatkapcsolatTablaComponent;
 
   @Input() Bizonylatkod = -1;
   @Input() Ugyfelkod = -1;

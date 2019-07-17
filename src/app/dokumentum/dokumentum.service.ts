@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {LogonService} from '../logon/logon.service';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {DokumentumResult} from './dokumentumresult';
 import {DokumentumDto} from './dokumentumdto';
@@ -19,7 +19,7 @@ import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
   providedIn: 'root'
 })
 export class DokumentumService {
-  private readonly _controller = 'api/dokumentum/';
+  private readonly _controller = environment.CoreRef + 'api/dokumentum/';
   cim = 'Dokumentum';
 
   GridSettings: ColumnSettings[] = undefined;
@@ -29,68 +29,38 @@ export class DokumentumService {
               private _logonservice: LogonService) { }
 
   public Select(iratkod: number): Promise<DokumentumResult> {
-    const url = environment.CoreRef + this._controller + 'select';
-    const body = JSON.stringify(iratkod);
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<DokumentumResult>(url, body, options).toPromise();
+    return this._httpClient.post<DokumentumResult>(
+      this._controller + 'select', JSON.stringify(iratkod), this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Get(dokumentumkod: number): Promise<DokumentumResult> {
-    const url = environment.CoreRef + this._controller + 'get';
-    const body = JSON.stringify(dokumentumkod);
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<DokumentumResult>(url, body, options).toPromise();
+    return this._httpClient.post<DokumentumResult>(
+      this._controller + 'get', JSON.stringify(dokumentumkod), this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Delete(dto: DokumentumDto): Promise<EmptyResult> {
-    const url = environment.CoreRef + this._controller + 'delete';
-    const body = dto;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
+    return this._httpClient.post<EmptyResult>(
+      this._controller + 'delete', dto, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Ellenorzes(dokumentumkod: number): Promise<EmptyResult> {
-    const url = environment.CoreRef + this._controller + 'ellenorzes';
-    const body = JSON.stringify(dokumentumkod);
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
+    return this._httpClient.post<EmptyResult>(
+      this._controller + 'ellenorzes', JSON.stringify(dokumentumkod), this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Letoltes(lp: LetoltesParam): Promise<LetoltesResult> {
-    const url = environment.CoreRef + this._controller + 'letoltes';
-    const body = lp;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<LetoltesResult>(url, body, options).toPromise();
+    return this._httpClient.post<LetoltesResult>(
+      this._controller + 'letoltes', lp, this._logonservice.httpoptions())
+      .toPromise();
   }
   public LetoltesPDF(dokumentumkod: number): Promise<LetoltesPDFResult> {
-    const url = environment.CoreRef + this._controller + 'letoltespdf';
-    const body = dokumentumkod;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<LetoltesPDFResult>(url, body, options).toPromise();
+    return this._httpClient.post<LetoltesPDFResult>(
+      this._controller + 'letoltespdf', dokumentumkod, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Kimentes(Dto: DokumentumDto): Promise<EmptyResult> {
@@ -121,35 +91,20 @@ export class DokumentumService {
   }
 
   public FeltoltesAngular(fb: FajlBuf): Promise<NumberResult> {
-    const url = environment.CoreRef + this._controller + 'feltoltesangular';
-    const body = fb;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+    return this._httpClient.post<NumberResult>(
+      this._controller + 'feltoltesangular', fb, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public GetGridSettings(): Promise<ColumnSettingsResult> {
-    const url = environment.CoreRef + this._controller + 'getgridsettings';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
+    return this._httpClient.post<ColumnSettingsResult>(
+      this._controller + 'getgridsettings', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public GetReszletekSettings(): Promise<ColumnSettingsResult> {
-    const url = environment.CoreRef + this._controller + 'getreszleteksettings';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
+    return this._httpClient.post<ColumnSettingsResult>(
+      this._controller + 'getreszleteksettings', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 }

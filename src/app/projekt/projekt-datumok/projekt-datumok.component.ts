@@ -14,8 +14,8 @@ export class ProjektDatumokComponent implements OnInit, OnDestroy {
   @Input() set DtoOriginal(value: ProjektDto) {
     this.DtoEdited = deepCopy(value);
   }
-  @Output() OkClick = new EventEmitter<ProjektDto>();
-  @Output() CancelClick = new EventEmitter<void>();
+  @Output() eventOk = new EventEmitter<ProjektDto>();
+  @Output() eventCancel = new EventEmitter<void>();
 
   Keletkezett: any;
   Megrendelve: any;
@@ -38,10 +38,11 @@ export class ProjektDatumokComponent implements OnInit, OnDestroy {
     this.DtoEdited.Megrendelve = moment(this.Megrendelve).toISOString(true);
     this.DtoEdited.Kivitelezesihatarido = moment(this.KivHat).toISOString(true);
 
-    this.OkClick.emit(this.DtoEdited);
+    this.eventOk.emit(this.DtoEdited);
   }
-  cancel() {
-    this.CancelClick.emit();
+  
+  onCancel() {
+    this.eventCancel.emit();
   }
 
   ngOnDestroy() {

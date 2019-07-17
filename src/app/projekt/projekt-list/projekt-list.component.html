@@ -106,16 +106,16 @@
       <ng-container *ngIf="egymode === 19">
         <div [@rowanimation]><app-projekt-statusz [eppFrissit]="eppFrissit"
                                                   [DtoOriginal]="Dto[DtoSelectedIndex]"
-                                                  (OkClick)="SegedOk($event)"
-                                                  (CancelClick)="SegedCancel()">
+                                                  (eventOk)="onSegedOk($event)"
+                                                  (eventCancel)="onSegedCancel()">
         </app-projekt-statusz></div>
       </ng-container>
       <ng-container *ngIf="egymode === 20">
         <div [@rowanimation]>
           <app-projekt-muszakiallapot [eppFrissit]="eppFrissit"
                                       [DtoOriginal]="Dto[DtoSelectedIndex]"
-                                      (OkClick)="SegedOk($event)"
-                                      (CancelClick)="SegedCancel()">
+                                      (eventOk)="onSegedOk($event)"
+                                      (eventCancel)="onSegedCancel()">
           </app-projekt-muszakiallapot>
         </div>
       </ng-container>
@@ -123,8 +123,8 @@
         <div [@rowanimation]>
           <app-projekt-inverter [eppFrissit]="eppFrissit"
                                 [DtoOriginal]="Dto[DtoSelectedIndex]"
-                                (OkClick)="SegedOk($event)"
-                                (CancelClick)="SegedCancel()">
+                                (eventOk)="onSegedOk($event)"
+                                (eventCancel)="onSegedCancel()">
           </app-projekt-inverter>
         </div>
       </ng-container>
@@ -132,8 +132,8 @@
         <div [@rowanimation]>
           <app-projekt-napelem [eppFrissit]="eppFrissit"
                                [DtoOriginal]="Dto[DtoSelectedIndex]"
-                               (eventOk)="SegedOk($event)"
-                               (eventCancel)="SegedCancel()">
+                               (eventOk)="onSegedOk($event)"
+                               (eventCancel)="onSegedCancel()">
           </app-projekt-napelem>
         </div>
       </ng-container>
@@ -141,8 +141,8 @@
         <div [@rowanimation]>
           <app-projekt-datumok [eppFrissit]="eppFrissit"
                                [DtoOriginal]="Dto[DtoSelectedIndex]"
-                               (OkClick)="SegedOk($event)"
-                               (CancelClick)="SegedCancel()">
+                               (eventOk)="onSegedOk($event)"
+                               (eventCancel)="onSegedCancel()">
           </app-projekt-datumok>
         </div>
       </ng-container>

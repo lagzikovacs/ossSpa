@@ -15,8 +15,8 @@ export class ProjektInverterComponent implements OnInit, OnDestroy {
   @Input() set DtoOriginal(value: ProjektDto) {
     this.DtoEdited = deepCopy(value);
   }
-  @Output() OkClick = new EventEmitter<ProjektDto>();
-  @Output() CancelClick = new EventEmitter<void>();
+  @Output() eventOk = new EventEmitter<ProjektDto>();
+  @Output() eventCancel = new EventEmitter<void>();
 
   entries = ['', 'Nincs megrendelve', 'Megrendelve', 'Raktárban', 'Kiszállítva/telepítve', 'Harmadik fél biztosítja'];
   selected = '';
@@ -38,10 +38,11 @@ export class ProjektInverterComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.DtoEdited.Inverterallapot = this.selected;
 
-    this.OkClick.emit(this.DtoEdited);
+    this.eventOk.emit(this.DtoEdited);
   }
-  cancel() {
-    this.CancelClick.emit();
+
+  onCancel() {
+    this.eventCancel.emit();
   }
 
   ngOnDestroy() {

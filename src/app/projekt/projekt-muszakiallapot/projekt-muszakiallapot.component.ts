@@ -15,8 +15,8 @@ export class ProjektMuszakiallapotComponent implements OnInit, OnDestroy {
   @Input() set DtoOriginal(value: ProjektDto) {
     this.DtoEdited = deepCopy(value);
   }
-  @Output() OkClick = new EventEmitter<ProjektDto>();
-  @Output() CancelClick = new EventEmitter<void>();
+  @Output() eventOk = new EventEmitter<ProjektDto>();
+  @Output() eventCancel = new EventEmitter<void>();
 
   entries = ['', 'Nincs elkezdve a kivitelezése', 'Elkezdve a kivitelezése', 'Beüzemelve, hiányos', 'Beüzemelve, átadva'];
   selected = '';
@@ -38,11 +38,11 @@ export class ProjektMuszakiallapotComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.DtoEdited.Muszakiallapot = this.selected;
 
-    this.OkClick.emit(this.DtoEdited);
+    this.eventOk.emit(this.DtoEdited);
 
   }
   cancel() {
-    this.CancelClick.emit();
+    this.eventCancel.emit();
   }
 
   ngOnDestroy() {

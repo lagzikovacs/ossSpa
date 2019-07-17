@@ -15,8 +15,8 @@ export class ProjektStatuszComponent implements OnInit, OnDestroy {
   @Input() set DtoOriginal(value: ProjektDto) {
     this.DtoEdited = deepCopy(value);
   }
-  @Output() OkClick = new EventEmitter<ProjektDto>();
-  @Output() CancelClick = new EventEmitter<void>();
+  @Output() eventOk = new EventEmitter<ProjektDto>();
+  @Output() eventCancel = new EventEmitter<void>();
 
   entries = ['(0) Mind', '(1) Ajánlat', '(2) Fut', '(3) Kész', '(4) Pályázatra vár', '(5) Mástól megrendelte', '(6) Döglött',
     '(7) Csak érdeklődött', '(8) Helyszíni felmérést kér', '(9) Kommunikál, van remény', '(10) Még papírozni kell',
@@ -40,10 +40,10 @@ export class ProjektStatuszComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.DtoEdited.Statusz = this.selected;
 
-    this.OkClick.emit(this.DtoEdited);
+    this.eventOk.emit(this.DtoEdited);
   }
   cancel() {
-    this.CancelClick.emit();
+    this.eventCancel.emit();
   }
 
   ngOnDestroy() {

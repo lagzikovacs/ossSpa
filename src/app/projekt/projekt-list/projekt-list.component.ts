@@ -175,7 +175,7 @@ export class ProjektListComponent implements OnDestroy {
     // TODO a munkalap írja a projektet, újra kell olvasni
   }
 
-  SegedOk(dto: ProjektDto) {
+  onSegedOk(dto: ProjektDto) {
     this.eppFrissit = true;
     this.projektservice.Update(dto)
       .then(res => {
@@ -200,7 +200,7 @@ export class ProjektListComponent implements OnDestroy {
         this._errorservice.Error = err;
       });
   }
-  SegedCancel() {
+  onSegedCancel() {
     this.egymode = EgyMode.Reszletek;
   }
 

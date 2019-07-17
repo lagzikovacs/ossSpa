@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
 import {PenztartetelDto} from './penztarteteldto';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {LogonService} from '../logon/logon.service';
 import {NumberResult} from '../dtos/numberresult';
 import {PenztartetelResult} from './penztartetelresult';
@@ -13,7 +13,7 @@ import {ColumnSettings} from '../tools/reszletek/columnsettings';
   providedIn: 'root'
 })
 export class PenztartetelService {
-  private readonly _controller = 'api/penztartetel/';
+  private readonly _controller = environment.CoreRef + 'api/penztartetel/';
   cim = 'Pénztártételek';
 
   GridSettings: ColumnSettings[] = undefined;
@@ -23,68 +23,38 @@ export class PenztartetelService {
               private _logonservice: LogonService) { }
 
   public Add(dto: PenztartetelDto): Promise<NumberResult> {
-    const url = environment.CoreRef + this._controller + 'add';
-    const body = dto;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+    return this._httpClient.post<NumberResult>(
+      this._controller + 'add', dto, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public CreateNew(): Promise<PenztartetelResult> {
-    const url = environment.CoreRef + this._controller + 'createnew';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<PenztartetelResult>(url, body, options).toPromise();
+    return this._httpClient.post<PenztartetelResult>(
+      this._controller + 'createnew', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Get(key: number): Promise<PenztartetelResult> {
-    const url = environment.CoreRef + this._controller + 'get';
-    const body = key;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<PenztartetelResult>(url, body, options).toPromise();
+    return this._httpClient.post<PenztartetelResult>(
+      this._controller + 'get', key, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Select(par: PenztartetelParameter): Promise<PenztartetelResult> {
-    const url = environment.CoreRef + this._controller + 'select';
-    const body = par;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<PenztartetelResult>(url, body, options).toPromise();
+    return this._httpClient.post<PenztartetelResult>(
+      this._controller + 'select', par, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public GetGridSettings(): Promise<ColumnSettingsResult> {
-    const url = environment.CoreRef + this._controller + 'getgridsettings';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
+    return this._httpClient.post<ColumnSettingsResult>(
+      this._controller + 'getgridsettings', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public GetReszletekSettings(): Promise<ColumnSettingsResult> {
-    const url = environment.CoreRef + this._controller + 'getreszleteksettings';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
+    return this._httpClient.post<ColumnSettingsResult>(
+      this._controller + 'getreszleteksettings', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 }

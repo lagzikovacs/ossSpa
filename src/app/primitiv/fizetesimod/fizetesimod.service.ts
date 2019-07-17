@@ -14,7 +14,7 @@ import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
   providedIn: 'root'
 })
 export class FizetesimodService {
-  private readonly _controller = 'api/fizetesimod/';
+  private readonly _controller = environment.CoreRef + 'api/fizetesimod/';
   cim = 'Fizetési mód';
 
   GridSettings: ColumnSettings[] = undefined;
@@ -24,101 +24,56 @@ export class FizetesimodService {
               private _logonservice: LogonService) { }
 
   public Add(dto: FizetesimodDto): Promise<NumberResult> {
-    const url = environment.CoreRef + this._controller + 'add';
-    const body = dto;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+    return this._httpClient.post<NumberResult>(
+      this._controller + 'add', dto, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public CreateNew(): Promise<FizetesimodResult> {
-    const url = environment.CoreRef + this._controller + 'createnew';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<FizetesimodResult>(url, body, options).toPromise();
+    return this._httpClient.post<FizetesimodResult>(
+      this._controller + 'createnew', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Delete(dto: FizetesimodDto): Promise<EmptyResult> {
-    const url = environment.CoreRef + this._controller + 'delete';
-    const body = dto;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
+    return this._httpClient.post<EmptyResult>(
+      this._controller + 'delete', dto, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Get(key: number): Promise<FizetesimodResult> {
-    const url = environment.CoreRef + this._controller + 'get';
-    const body = key;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<FizetesimodResult>(url, body, options).toPromise();
+    return this._httpClient.post<FizetesimodResult>(
+      this._controller + 'get', key, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Read(maszk: string): Promise<FizetesimodResult> {
-    const url = environment.CoreRef + this._controller + 'read';
-    const body = maszk;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<FizetesimodResult>(url, JSON.stringify(body), options).toPromise();
+    return this._httpClient.post<FizetesimodResult>(
+      this._controller + 'read', JSON.stringify(maszk), this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Update(dto: FizetesimodDto): Promise<NumberResult> {
-    const url = environment.CoreRef + this._controller + 'update';
-    const body = dto;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+    return this._httpClient.post<NumberResult>(
+      this._controller + 'update', dto, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public ZoomCheck(par: FizetesimodZoomParameter): Promise<EmptyResult> {
-    const url = environment.CoreRef + this._controller + 'zoomcheck';
-    const body = par;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
+    return this._httpClient.post<EmptyResult>(
+      this._controller + 'zoomcheck', par, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public GetGridSettings(): Promise<ColumnSettingsResult> {
-    const url = environment.CoreRef + this._controller + 'getgridsettings';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
+    return this._httpClient.post<ColumnSettingsResult>(
+      this._controller + 'getgridsettings', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public GetReszletekSettings(): Promise<ColumnSettingsResult> {
-    const url = environment.CoreRef + this._controller + 'getreszleteksettings';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
+    return this._httpClient.post<ColumnSettingsResult>(
+      this._controller + 'getreszleteksettings', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 }

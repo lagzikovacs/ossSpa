@@ -7,6 +7,8 @@ import {SzMT} from '../../dtos/szmt';
 import {OnlineszamlaDto} from '../onlineszamladto';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {environment} from '../../../environments/environment';
+import {OnlineszamlaParameter} from '../onlineszamlaparameter';
 
 @Component({
   selector: 'app-navonlineszamla',
@@ -20,7 +22,13 @@ export class OnlineszamlaellenorzeseComponent implements OnDestroy {
 
   mod = false;
   elsokereses = true;
-  onlineszamlaservice: OnlineszamlaService;
+  szempont = 0;
+  minta = '';
+  up = new OnlineszamlaParameter(0, environment.lapmeret);
+  OsszesRekord = 0;
+
+  Dto: OnlineszamlaDto[] = new Array<OnlineszamlaDto>();
+  DtoSelectedIndex = -1;
 
   private _eppFrissit = false;
   get eppFrissit(): boolean {
@@ -31,6 +39,8 @@ export class OnlineszamlaellenorzeseComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  onlineszamlaservice: OnlineszamlaService;
+
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
@@ -40,40 +50,40 @@ export class OnlineszamlaellenorzeseComponent implements OnDestroy {
   }
 
   onKereses() {
-    this.onlineszamlaservice.Dto = new Array<OnlineszamlaDto>();
-    this.onlineszamlaservice.DtoSelectedIndex = -1;
-    this.onlineszamlaservice.OsszesRekord = 0;
+    this.Dto = new Array<OnlineszamlaDto>();
+    this.DtoSelectedIndex = -1;
+    this.OsszesRekord = 0;
 
     this.elsokereses = true;
-    this.onlineszamlaservice.up.rekordtol = 0;
-    this.onlineszamlaservice.up.fi = new Array<SzMT>();
+    this.up.rekordtol = 0;
+    this.up.fi = new Array<SzMT>();
 
-    this.onlineszamlaservice.up.fi.push(new SzMT(this.szempontok[this.onlineszamlaservice.szempont],
-      this.onlineszamlaservice.minta));
+    this.up.fi.push(new SzMT(this.szempontok[this.szempont],
+      this.minta));
 
     this.onKeresesTovabb();
   }
   onKeresesTovabb() {
     this.eppFrissit = true;
-    this.onlineszamlaservice.Select(this.onlineszamlaservice.up)
+    this.onlineszamlaservice.Select(this.up)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
         if (this.elsokereses) {
-          this.onlineszamlaservice.Dto = res.Result;
+          this.Dto = res.Result;
           this.elsokereses = false;
         } else {
-          const buf = [...this.onlineszamlaservice.Dto];
+          const buf = [...this.Dto];
           res.Result.forEach(element => {
             buf.push(element);
           });
-          this.onlineszamlaservice.Dto = buf;
+          this.Dto = buf;
         }
-        this.onlineszamlaservice.OsszesRekord = res.OsszesRekord;
+        this.OsszesRekord = res.OsszesRekord;
 
-        this.onlineszamlaservice.up.rekordtol += this.onlineszamlaservice.up.lapmeret;
+        this.up.rekordtol += this.up.lapmeret;
         this.eppFrissit = false;
       })
       .catch(err => {

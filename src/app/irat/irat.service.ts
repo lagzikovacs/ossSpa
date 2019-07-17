@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {LogonService} from '../logon/logon.service';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {IratParameter} from './iratparameter';
 import {environment} from '../../environments/environment';
 import {IratDto} from './iratdto';
@@ -14,7 +14,7 @@ import {ColumnSettings} from '../tools/reszletek/columnsettings';
   providedIn: 'root'
 })
 export class IratService {
-  private readonly _controller = 'api/irat/';
+  private readonly _controller = environment.CoreRef + 'api/irat/';
   cim = 'Irat';
 
   GridSettings: ColumnSettings[] = undefined;
@@ -24,90 +24,50 @@ export class IratService {
               private _logonservice: LogonService) { }
 
   public Add(dto: IratDto): Promise<NumberResult> {
-    const url = environment.CoreRef + this._controller + 'add';
-    const body = dto;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+    return this._httpClient.post<NumberResult>(
+      this._controller + 'add', dto, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public CreateNew(): Promise<IratResult> {
-    const url = environment.CoreRef + this._controller + 'createnew';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<IratResult>(url, body, options).toPromise();
+    return this._httpClient.post<IratResult>(
+      this._controller + 'createnew', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Delete(dto: IratDto): Promise<EmptyResult> {
-    const url = environment.CoreRef + this._controller + 'delete';
-    const body = dto;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
+    return this._httpClient.post<EmptyResult>(
+      this._controller + 'delete', dto, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Get(iratkod: number): Promise<IratResult> {
-    const url = environment.CoreRef + this._controller + 'get';
-    const body = iratkod;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<IratResult>(url, body, options).toPromise();
+    return this._httpClient.post<IratResult>(
+      this._controller + 'get', iratkod, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Select(ip: IratParameter): Promise<IratResult> {
-    const url = environment.CoreRef + this._controller + 'select';
-    const body = ip;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<IratResult>(url, body, options).toPromise();
+    return this._httpClient.post<IratResult>(
+      this._controller + 'select', ip, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Update(dto: IratDto): Promise<NumberResult> {
-    const url = environment.CoreRef + this._controller + 'update';
-    const body = dto;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+    return this._httpClient.post<NumberResult>(
+      this._controller + 'update', dto, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public GetGridSettings(): Promise<ColumnSettingsResult> {
-    const url = environment.CoreRef + this._controller + 'getgridsettings';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
+    return this._httpClient.post<ColumnSettingsResult>(
+      this._controller + 'getgridsettings', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public GetReszletekSettings(): Promise<ColumnSettingsResult> {
-    const url = environment.CoreRef + this._controller + 'getreszleteksettings';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
+    return this._httpClient.post<ColumnSettingsResult>(
+      this._controller + 'getreszleteksettings', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 }

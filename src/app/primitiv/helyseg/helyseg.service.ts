@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {HelysegDto} from './helysegdto';
 import {HelysegResult} from './helysegresult';
 import {HelysegZoomParameter} from './helysegzoomparameter';
@@ -14,7 +14,7 @@ import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
   providedIn: 'root'
 })
 export class HelysegService {
-  private readonly _controller = 'api/helyseg/';
+  private readonly _controller = environment.CoreRef + 'api/helyseg/';
   cim = 'Helység';
 
   GridSettings: ColumnSettings[] = undefined;
@@ -24,101 +24,56 @@ export class HelysegService {
               private _logonservice: LogonService) { }
 
   public Add(dto: HelysegDto): Promise<NumberResult> {
-    const url = environment.CoreRef + this._controller + 'add';
-    const body = dto;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+    return this._httpClient.post<NumberResult>(
+      this._controller + 'add', dto, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public CreateNew(): Promise<HelysegResult> {
-    const url = environment.CoreRef + this._controller + 'createnew';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<HelysegResult>(url, body, options).toPromise();
+    return this._httpClient.post<HelysegResult>(
+      this._controller + 'createnew', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Delete(dto: HelysegDto): Promise<EmptyResult> {
-    const url = environment.CoreRef + this._controller + 'delete';
-    const body = dto;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
+    return this._httpClient.post<EmptyResult>(
+      this._controller + 'delete', dto, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Get(key: number): Promise<HelysegResult> {
-    const url = environment.CoreRef + this._controller + 'get';
-    const body = key;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<HelysegResult>(url, body, options).toPromise();
+    return this._httpClient.post<HelysegResult>(
+      this._controller + 'get', key, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Read(maszk: string): Promise<HelysegResult> {
-    const url = environment.CoreRef + this._controller + 'read';
-    const body = maszk;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<HelysegResult>(url, JSON.stringify(body), options).toPromise();
+    return this._httpClient.post<HelysegResult>(
+      this._controller + 'read', JSON.stringify(maszk), this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Update(dto: HelysegDto): Promise<NumberResult> {
-    const url = environment.CoreRef + this._controller + 'update';
-    const body = dto;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+    return this._httpClient.post<NumberResult>(
+      this._controller + 'update', dto, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public ZoomCheck(par: HelysegZoomParameter): Promise<EmptyResult> {
-    const url = environment.CoreRef + this._controller + 'zoomcheck';
-    const body = par;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
+    return this._httpClient.post<EmptyResult>(
+      this._controller + 'zoomcheck', par, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public GetGridSettings(): Promise<ColumnSettingsResult> {
-    const url = environment.CoreRef + this._controller + 'getgridsettings';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
+    return this._httpClient.post<ColumnSettingsResult>(
+      this._controller + 'getgridsettings', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public GetReszletekSettings(): Promise<ColumnSettingsResult> {
-    const url = environment.CoreRef + this._controller + 'getreszleteksettings';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
+    return this._httpClient.post<ColumnSettingsResult>(
+      this._controller + 'getreszleteksettings', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 }

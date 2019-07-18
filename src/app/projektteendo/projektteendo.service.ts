@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {NumberResult} from '../dtos/numberresult';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {ProjektteendoDto} from './projektteendodto';
 import {LogonService} from '../logon/logon.service';
@@ -13,7 +13,7 @@ import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
   providedIn: 'root'
 })
 export class ProjektteendoService {
-  private readonly _controller = 'api/projektteendo/';
+  private readonly _controller = environment.CoreRef + 'api/projektteendo/';
   cim = 'Projekt teendő';
 
   GridSettings: ColumnSettings[] = undefined;
@@ -23,90 +23,50 @@ export class ProjektteendoService {
               private _logonservice: LogonService) { }
 
   public Add(dto: ProjektteendoDto): Promise<NumberResult> {
-    const url = environment.CoreRef + this._controller + 'add';
-    const body = dto;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+    return this._httpClient.post<NumberResult>(
+      this._controller + 'add', dto, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public CreateNew(): Promise<ProjektteendoResult> {
-    const url = environment.CoreRef + this._controller + 'createnew';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<ProjektteendoResult>(url, body, options).toPromise();
+    return this._httpClient.post<ProjektteendoResult>(
+      this._controller + 'createnew', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Delete(dto: ProjektteendoDto): Promise<EmptyResult> {
-    const url = environment.CoreRef + this._controller + 'delete';
-    const body = dto;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<EmptyResult>(url, body, options).toPromise();
+    return this._httpClient.post<EmptyResult>(
+      this._controller + 'delete', dto, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Get(key: number): Promise<ProjektteendoResult> {
-    const url = environment.CoreRef + this._controller + 'get';
-    const body = key;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<ProjektteendoResult>(url, body, options).toPromise();
+    return this._httpClient.post<ProjektteendoResult>(
+      this._controller + 'get', key, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Select(projektkod: number): Promise<ProjektteendoResult> {
-    const url = environment.CoreRef + this._controller + 'select';
-    const body = projektkod;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<ProjektteendoResult>(url, body, options).toPromise();
+    return this._httpClient.post<ProjektteendoResult>(
+      this._controller + 'select', projektkod, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public Update(dto: ProjektteendoDto): Promise<NumberResult> {
-    const url = environment.CoreRef + this._controller + 'update';
-    const body = dto;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<NumberResult>(url, body, options).toPromise();
+    return this._httpClient.post<NumberResult>(
+      this._controller + 'update', dto, this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public GetGridSettings(): Promise<ColumnSettingsResult> {
-    const url = environment.CoreRef + this._controller + 'getgridsettings';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
+    return this._httpClient.post<ColumnSettingsResult>(
+      this._controller + 'getgridsettings', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public GetReszletekSettings(): Promise<ColumnSettingsResult> {
-    const url = environment.CoreRef + this._controller + 'getreszleteksettings';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<ColumnSettingsResult>(url, body, options).toPromise();
+    return this._httpClient.post<ColumnSettingsResult>(
+      this._controller + 'getreszleteksettings', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 }

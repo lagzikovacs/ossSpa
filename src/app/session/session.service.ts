@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {LogonService} from '../logon/logon.service';
 import {SessionResult} from './sessionresult';
 import {environment} from '../../environments/environment';
@@ -9,7 +9,7 @@ import {SessionDto} from './sessiondto';
   providedIn: 'root'
 })
 export class SessionService {
-  private _controller = 'api/session/';
+  private _controller = environment.CoreRef + 'api/session/';
 
   sessiondto = new SessionDto();
 
@@ -18,13 +18,8 @@ export class SessionService {
   }
 
   public Get(): Promise<SessionResult> {
-    const url = environment.CoreRef + this._controller + 'get';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<SessionResult>(url, body, options).toPromise();
+    return this._httpClient.post<SessionResult>(
+      this._controller + 'get', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 }

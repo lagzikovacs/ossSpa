@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
 import {UgyfelterlogParameter} from './ugyfelterlogparameter';
 import {LogonService} from '../logon/logon.service';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {UgyfelterlogResult} from './ugyfelterlogresult';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
 
@@ -10,7 +10,7 @@ import {ColumnSettings} from '../tools/reszletek/columnsettings';
   providedIn: 'root'
 })
 export class UgyfelterlogService {
-  private readonly _controller = 'api/ugyfelterlog/';
+  private readonly _controller = environment.CoreRef + 'api/ugyfelterlog/';
   cim = 'Ügyféltér log';
 
   GridSettings: ColumnSettings[] = undefined;
@@ -20,13 +20,8 @@ export class UgyfelterlogService {
               private _logonservice: LogonService) { }
 
   public Select(ulp: UgyfelterlogParameter): Promise<UgyfelterlogResult> {
-    const url = environment.CoreRef + this._controller + 'select';
-    const body = ulp;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<UgyfelterlogResult>(url, body, options).toPromise();
+    return this._httpClient.post<UgyfelterlogResult>(
+      this._controller + 'select', ulp, this._logonservice.httpoptions())
+      .toPromise();
   }
 }

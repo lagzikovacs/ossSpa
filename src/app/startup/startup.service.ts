@@ -33,7 +33,7 @@ import {UgyfelterlogService} from '../ugyfelterlog/ugyfelterlog.service';
   providedIn: 'root'
 })
 export class StartupService {
-  private readonly _controller = 'api/startup/';
+  private readonly _controller = environment.CoreRef + 'api/startup/';
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService,
@@ -63,14 +63,9 @@ export class StartupService {
               private _ugyfelterlogservice: UgyfelterlogService) { }
 
   public Get(): Promise<StartupResult> {
-    const url = environment.CoreRef + this._controller + 'get';
-    const body = '';
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<StartupResult>(url, body, options).toPromise();
+    return this._httpClient.post<StartupResult>(
+      this._controller + 'get', '', this._logonservice.httpoptions())
+      .toPromise();
   }
 
   public SzerepkorValasztas(particiokod: number, csoportkod: number): Promise<EmptyResult> {

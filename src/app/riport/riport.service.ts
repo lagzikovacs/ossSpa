@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {LogonService} from '../logon/logon.service';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {RiportResult} from './riportresult';
 import {environment} from '../../environments/environment';
 import {EmptyResult} from '../dtos/emptyresult';
@@ -11,119 +11,68 @@ import {SzMT} from '../dtos/szmt';
   providedIn: 'root'
 })
 export class RiportService {
-  private readonly _controller = 'api/riport/';
-
+  private readonly _controller = environment.CoreRef + 'api/riport/';
   cim = 'Riport';
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
 
   public TaskCheck(taskToken: string): Promise<RiportResult> {
-    const url = environment.CoreRef + this._controller + 'taskcheck';
-    const body = taskToken;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<RiportResult>(url, JSON.stringify(body), options).toPromise();
+    return this._httpClient.post<RiportResult>(
+      this._controller + 'taskcheck', JSON.stringify(taskToken), this._logonservice.httpoptions())
+      .toPromise();
   }
   public TaskCancel(taskToken: string): Promise<EmptyResult> {
-    const url = environment.CoreRef + this._controller + 'taskcancel';
-    const body = taskToken;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<EmptyResult>(url, JSON.stringify(body), options).toPromise();
+    return this._httpClient.post<EmptyResult>(
+      this._controller + 'taskcancel', JSON.stringify(taskToken), this._logonservice.httpoptions())
+      .toPromise();
   }
 
 
   public KimenoSzamlaTaskStart(fi: SzMT[]): Promise<StringResult> {
-    const url = environment.CoreRef + this._controller + 'kimenoszamlataskstart';
-    const body = fi;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<StringResult>(url, body, options).toPromise();
+    return this._httpClient.post<StringResult>(
+      this._controller + 'kimenoszamlataskstart', fi, this._logonservice.httpoptions())
+      .toPromise();
   }
   public BejovoSzamlaTaskStart(fi: SzMT[]): Promise<StringResult> {
-    const url = environment.CoreRef + this._controller + 'bejovoszamlataskstart';
-    const body = fi;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<StringResult>(url, body, options).toPromise();
+    return this._httpClient.post<StringResult>(
+      this._controller + 'bejovoszamlataskstart', fi, this._logonservice.httpoptions())
+      .toPromise();
   }
 
 
   public KovetelesekTaskStart(fi: SzMT[]): Promise<StringResult> {
-    const url = environment.CoreRef + this._controller + 'kovetelesektaskstart';
-    const body = fi;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<StringResult>(url, body, options).toPromise();
+    return this._httpClient.post<StringResult>(
+      this._controller + 'kovetelesektaskstart', fi, this._logonservice.httpoptions())
+      .toPromise();
   }
   public TartozasokTaskStart(fi: SzMT[]): Promise<StringResult> {
-    const url = environment.CoreRef + this._controller + 'tartozasoktaskstart';
-    const body = fi;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<StringResult>(url, body, options).toPromise();
+    return this._httpClient.post<StringResult>(
+      this._controller + 'tartozasoktaskstart', fi, this._logonservice.httpoptions())
+      .toPromise();
   }
 
 
   public BeszerzesTaskStart(fi: SzMT[]): Promise<StringResult> {
-    const url = environment.CoreRef + this._controller + 'beszerzestaskstart';
-    const body = fi;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<StringResult>(url, body, options).toPromise();
+    return this._httpClient.post<StringResult>(
+      this._controller + 'beszerzestaskstart', fi, this._logonservice.httpoptions())
+      .toPromise();
   }
   public KeszletTaskStart(fi: SzMT[]): Promise<StringResult> {
-    const url = environment.CoreRef + this._controller + 'keszlettaskstart';
-    const body = fi;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<StringResult>(url, body, options).toPromise();
+    return this._httpClient.post<StringResult>(
+      this._controller + 'keszlettaskstart', fi, this._logonservice.httpoptions())
+      .toPromise();
   }
 
 
   public PenztarTetelTaskStart(fi: SzMT[]): Promise<StringResult> {
-    const url = environment.CoreRef + this._controller + 'penztarteteltaskstart';
-    const body = fi;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<StringResult>(url, body, options).toPromise();
+    return this._httpClient.post<StringResult>(
+      this._controller + 'penztarteteltaskstart', fi, this._logonservice.httpoptions())
+      .toPromise();
   }
   public ProjektTaskStart(fi: SzMT[]): Promise<StringResult> {
-    const url = environment.CoreRef + this._controller + 'projekttaskstart';
-    const body = fi;
-    const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json'),
-      params: new HttpParams().set('sid', this._logonservice.Sid)
-    };
-
-    return this._httpClient.post<StringResult>(url, body, options).toPromise();
+    return this._httpClient.post<StringResult>(
+      this._controller + 'projekttaskstart', fi, this._logonservice.httpoptions())
+      .toPromise();
   }
 }

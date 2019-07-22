@@ -122,7 +122,6 @@ import {BizonylatService} from './bizonylat/bizonylat.service';
 import {RiportService} from './riport/riport.service';
 import { ProjektkapcsolatLevalasztasComponent } from './projektkapcsolat/projektkapcsolat-levalasztas/projektkapcsolat-levalasztas.component';
 import { ProjektExportComponent } from './projekt/projekt-export/projekt-export.component';
-import { IratNincsprojektComponent } from './irat/irat-nincsprojekt/irat-nincsprojekt.component';
 import { AjanlatTetelComponent } from './ajanlat/ajanlat-tetel/ajanlat-tetel';
 import { BizonylatListComponent } from './bizonylat/bizonylat-list/bizonylat-list.component';
 import { BizonylatEgyComponent } from './bizonylat/bizonylat-egy/bizonylat-egy.component';
@@ -256,6 +255,7 @@ if (environment.production) {
   declarations: [
     DatetimeHunPipe,
     DateHunPipe,
+    BoolHunPipe,
 
     AppComponent,
     MenuComponent,
@@ -345,7 +345,6 @@ if (environment.production) {
     UgyfelListComponent,
     ProjektkapcsolatLevalasztasComponent,
     ProjektExportComponent,
-    IratNincsprojektComponent,
     AjanlatTetelComponent,
     BizonylatListComponent,
     BizonylatEgyComponent,
@@ -372,7 +371,6 @@ if (environment.production) {
     BizonylatKiszallitvaComponent,
     BizonylatFormaiellenorzesComponent,
     BizonylatLetoltesonlineszamlaformatumbanComponent,
-    BoolHunPipe,
     BizonylattetelSzerkesztesComponent,
     VagolapComponent,
     AbuComponent,

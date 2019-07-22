@@ -2,7 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {LogonService} from '../logon/logon.service';
 import {Subscription} from 'rxjs/index';
 import {SessionService} from '../session/session.service';
-import {EsemenynaploService} from '../esemenynaplo/esemenynaplo.service';
 
 @Component({
   selector: 'app-fooldal',

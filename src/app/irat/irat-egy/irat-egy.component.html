@@ -67,7 +67,7 @@
 
   <ng-container *ngIf="egymode === 8">
     <div [@rowanimation]>
-      <app-irat-nincsprojekt *ngIf="nincsProjekt"></app-irat-nincsprojekt>
+      <h5 *ngIf="nincsProjekt">Az irat nem tartozik projekthez</h5>
       <app-reszletek *ngIf="!nincsProjekt"
                      [cim]="projektservice.cim"
                      [item]="IratProjektje"

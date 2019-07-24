@@ -13,6 +13,10 @@ import {BizonylatDto} from '../bizonylatdto';
 import {propCopy} from '../../tools/propCopy';
 import {deepCopy} from '../../tools/deepCopy';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
+import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
+import {ProjektService} from '../../projekt/projekt.service';
+import {ProjektResult} from '../../projekt/projektresult';
+import {ProjektDto} from '../../projekt/projektdto';
 
 @Component({
   selector: 'app-bizonylat-egy',
@@ -29,11 +33,14 @@ export class BizonylatEgyComponent implements OnDestroy {
   @Input() bizonylatTipus = BizonylatTipus.Szamla;
   @Input() bizonylatLeiro = new BizonylatTipusLeiro();
   @Input() enTorles = true;
+  @Input() enProjekt = true;
   @Output() eventSzerkesztesutan = new EventEmitter<BizonylatDto>();
   @Output() eventTorlesutan = new EventEmitter<void>();
 
   EgyMode = BizonylatEgyMode.Reszletek;
 
+  BizonylatProjektje: ProjektDto;
+  nincsProjekt = false;
   mod = false;
 
   private _eppFrissit = false;
@@ -46,14 +53,18 @@ export class BizonylatEgyComponent implements OnDestroy {
   }
 
   bizonylatservice: BizonylatService;
+  projektservice: ProjektService;
 
   constructor(private _logonservice: LogonService,
               private _vagolapservice: VagolapService,
               private _errorservice: ErrorService,
               private _spinnerservice: SpinnerService,
-              bizonylatservice: BizonylatService) {
+              private _projektkapcsolatservice: ProjektkapcsolatService,
+              bizonylatservice: BizonylatService,
+              projektservice: ProjektService) {
     this.mod = this._logonservice.Jogaim.includes(JogKod[JogKod.BIZONYLATMOD]);
     this.bizonylatservice = bizonylatservice;
+    this.projektservice = projektservice;
   }
 
   modositasenabled(): boolean {
@@ -138,6 +149,39 @@ export class BizonylatEgyComponent implements OnDestroy {
   }
   osnxml() {
     this.EgyMode = BizonylatEgyMode.OSNxml;
+  }
+  doProjekt() {
+    this.eppFrissit = true;
+    this._projektkapcsolatservice.SelectByBizonylat(this.Dto.Bizonylatkod)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        if (res.Result.length === 0) {
+          this.nincsProjekt = true;
+          return new Promise<ProjektResult>((resolve, reject) => { resolve(new ProjektResult()); });
+        } else {
+          this.nincsProjekt = false;
+          return this.projektservice.Get(res.Result[0].Projektkod);
+        }
+      })
+      .then(res1 => {
+        if (res1.Error != null) {
+          throw res1.Error;
+        }
+
+        if (!this.nincsProjekt) {
+          this.BizonylatProjektje = res1.Result[0];
+        }
+
+        this.EgyMode = BizonylatEgyMode.Projekt;
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this._errorservice.Error = err;
+      });
   }
   vagolap() {
     this._vagolapservice.bizonylatotvagolapra(this.Dto, this.bizonylatLeiro.BizonylatNev);

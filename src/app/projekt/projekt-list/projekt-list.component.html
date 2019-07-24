@@ -18,12 +18,14 @@
                         (eventBezar)="doExportbezar()"></app-projekt-export>
   </ng-container>
 
-  <app-projekt-tabla #tabla
-                     [Dto]="Dto"
-                     (forid)="onId($event)"
-                     [ujTemplate]="griduj"
-                     [egyTemplate]="gridegy">
-  </app-projekt-tabla>
+  <div id="tabladiv" style="overflow: hidden">
+    <app-projekt-tabla id="tabla" #tabla
+                       [Dto]="Dto"
+                       (forid)="onId($event)"
+                       [ujTemplate]="griduj"
+                       [egyTemplate]="gridegy">
+    </app-projekt-tabla>
+  </div>
 
   <ng-template #griduj>
     <app-projekt-szerkesztes [uj]="true"

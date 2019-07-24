@@ -224,7 +224,7 @@ const routes: Routes = [
     {path: 'bejovoszamla', component: BejovoszamlaComponent},
     {path: 'koveteles', component: KovetelesComponent},
     {path: 'tartozas', component: TartozasComponent},
-    {path: 'doBeszerzes', component: BeszerzesComponent},
+    {path: 'beszerzes', component: BeszerzesComponent},
     {path: 'keszlet', component: KeszletComponent},
     {path: 'ngm', component: NgmComponent}
   ]},

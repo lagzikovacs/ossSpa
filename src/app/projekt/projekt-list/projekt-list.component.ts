@@ -1,4 +1,4 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
@@ -13,13 +13,14 @@ import {EgyMode} from '../../enums/egymode';
 import {ProjektDto} from '../projektdto';
 import {propCopy} from '../../tools/propCopy';
 import {rowanimation} from '../../animation/rowAnimation';
+import * as Hammer from 'hammerjs';
 
 @Component({
   selector: 'app-projekt-list',
   templateUrl: './projekt-list.component.html',
   animations: [rowanimation]
 })
-export class ProjektListComponent implements OnDestroy {
+export class ProjektListComponent implements AfterViewInit, OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: ProjektTablaComponent;
 
   statuszszurok = [
@@ -75,6 +76,21 @@ export class ProjektListComponent implements OnDestroy {
               projektservice: ProjektService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PROJEKTMOD]);
     this.projektservice = projektservice;
+  }
+
+  ngAfterViewInit() {
+    const tabladiv = document.getElementById('tabladiv');
+    const mc = new Hammer(tabladiv);
+
+    mc.get('pan').set({ direction: 6 });
+
+    mc.on('panleft panright', ev => {
+      console.log(ev);
+      // console.log(tabladiv.scrollLeft);
+      if (ev.srcEvent.ctrlKey) {
+        tabladiv.scrollLeft += 10;
+      }
+    });
   }
 
   onKereses() {

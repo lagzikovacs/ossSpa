@@ -13,7 +13,6 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   templateUrl: './bejovoszamla.component.html'
 })
 export class BejovoszamlaComponent implements OnDestroy {
-  riportservice: RiportService;
   megszakitani = false;
 
   tol = '2019-01-01';
@@ -31,13 +30,15 @@ export class BejovoszamlaComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
+  riportservice: RiportService;
+
   constructor(riportservice: RiportService,
               private _spinnerservice: SpinnerService,
               private _errorservice: ErrorService) {
     this.riportservice = riportservice;
   }
 
-  submit() {
+  onSubmit() {
     this.eppFrissit = true;
     this.megszakitani = false;
 
@@ -60,6 +61,7 @@ export class BejovoszamlaComponent implements OnDestroy {
         this._errorservice.Error = err;
       });
   }
+
   ciklus() {
     this.riportservice.TaskCheck(this.tasktoken)
       .then(res => {
@@ -108,9 +110,10 @@ export class BejovoszamlaComponent implements OnDestroy {
     }
   }
 
-  megsem() {
+  onCancel() {
     this.megszakitani = true;
   }
+
   ngOnDestroy() {
     clearInterval(this.szamlalo);
 

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, ViewChild} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
@@ -13,7 +13,8 @@ import {EgyMode} from '../../enums/egymode';
 import {ProjektDto} from '../projektdto';
 import {propCopy} from '../../tools/propCopy';
 import {rowanimation} from '../../animation/rowAnimation';
-import * as Hammer from 'hammerjs';
+
+declare var $;
 
 @Component({
   selector: 'app-projekt-list',
@@ -59,6 +60,8 @@ export class ProjektListComponent implements AfterViewInit, OnDestroy {
 
   egymode = EgyMode.Bizonylatesirat;
 
+  oldX = 0;
+
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -80,17 +83,18 @@ export class ProjektListComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     const tabladiv = document.getElementById('tabladiv');
-    const mc = new Hammer(tabladiv);
 
-    mc.get('pan').set({ direction: 6 });
-
-    mc.on('panleft panright', ev => {
-      console.log(ev);
-      // console.log(tabladiv.scrollLeft);
-      if (ev.srcEvent.ctrlKey) {
-        tabladiv.scrollLeft += 10;
+    tabladiv.onmousemove = mm => {
+      if (mm.ctrlKey) {
+        if (mm.clientX > this.oldX) {
+          tabladiv.scrollLeft += 25;
+        } else {
+          tabladiv.scrollLeft -= 25;
+        }
       }
-    });
+
+      this.oldX = mm.clientX;
+    };
   }
 
   onKereses() {
@@ -220,12 +224,6 @@ export class ProjektListComponent implements AfterViewInit, OnDestroy {
     this.egymode = EgyMode.Reszletek;
   }
 
-
-
-
-
-
-
   onExport(sszi: number) {
     this.projektcsoport = this.statuszszurok[sszi];
     this.export = true;
@@ -239,6 +237,8 @@ export class ProjektListComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    $('#tablediv').off();
+
     Object.keys(this).map(k => {
       (this[k]) = null;
     });

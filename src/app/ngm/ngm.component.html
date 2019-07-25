@@ -4,38 +4,38 @@
   <form #f="ngForm" (ngSubmit)="submit()">
 
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">A számlák kelte</div>
+      <div>
+        <div class="egylabel">A számlák kelte</div>
+        <input type="date" class="form-control form-control-sm oszlop3" id="szktol"
+               [(ngModel)]="szktol" name="szktol" style="display: inline-block;margin-right: 4px">
       </div>
-      <div class="col-md-3 input-group">
-        <input type="date" class="form-control form-control-sm" id="szktol"
-               [(ngModel)]="szktol" name="szktol">
-        &nbsp;-&nbsp;
-        <input type="date" class="form-control form-control-sm" id="szkig"
-               [(ngModel)]="szkig" name="szkig">
-      </div>
-      <div class="col-md-1">
+    </div>
+
+    <div class="row no-gutters editform-row">
+      <div>
+        <input type="date" class="form-control form-control-sm oszlop3" id="szkig"
+               [(ngModel)]="szkig" name="szkig" style="display: inline-block;margin-right: 4px">
         <button class="btn btn-sm btn-primary" (click)="szamlakelte()"
-                [disabled] = "eppFrissit" style="margin-left: 4px" type="button">
+                [disabled] = "eppFrissit" style="display: inline-block;margin-right: 4px" type="button">
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </button>
       </div>
     </div>
 
     <div class="row no-gutters editform-row">
-      <div class="col-md-2">
-        <div class="editform-title">A számlák száma</div>
+      <div>
+        <div class="egylabel">A számlák száma</div>
+        <input type="text" class="form-control form-control-sm oszlop3" id="szsztol"
+               [(ngModel)]="szsztol" name="szsztol" style="display: inline-block;margin-right: 4px">
       </div>
-      <div class="col-md-3 input-group">
-        <input type="text" class="form-control form-control-sm" id="szsztol"
-               [(ngModel)]="szsztol" name="szsztol">
-        &nbsp;-&nbsp;
-        <input type="text" class="form-control form-control-sm" id="szszig"
-               [(ngModel)]="szszig" name="szszig">
-      </div>
-      <div class="col-md-1">
+    </div>
+
+    <div class="row no-gutters editform-row">
+      <div>
+        <input type="text" class="form-control form-control-sm oszlop3" id="szszig"
+               [(ngModel)]="szszig" name="szszig" style="display: inline-block;margin-right: 4px">
         <button class="btn btn-sm btn-primary" (click)="szamlaszam()"
-                [disabled] = "eppFrissit" style="margin-left: 4px" type="button">
+                [disabled] = "eppFrissit" style="display: inline-block;margin-right: 4px" type="button">
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </button>
       </div>

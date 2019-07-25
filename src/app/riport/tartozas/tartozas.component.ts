@@ -13,7 +13,6 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   templateUrl: './tartozas.component.html'
 })
 export class TartozasComponent implements OnDestroy {
-  riportservice: RiportService;
   megszakitani = false;
 
   datum = moment().format('YYYY-MM-DD');
@@ -30,13 +29,15 @@ export class TartozasComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(riportservice: RiportService,
-              private _spinnerservice: SpinnerService,
-              private _errorservice: ErrorService) {
+  riportservice: RiportService;
+
+  constructor(private _spinnerservice: SpinnerService,
+              private _errorservice: ErrorService,
+              riportservice: RiportService) {
     this.riportservice = riportservice;
   }
 
-  submit() {
+  onSubmit() {
     this.eppFrissit = true;
     this.megszakitani = false;
 
@@ -57,6 +58,7 @@ export class TartozasComponent implements OnDestroy {
         this._errorservice.Error = err;
       });
   }
+
   ciklus() {
     this.riportservice.TaskCheck(this.tasktoken)
       .then(res => {
@@ -105,9 +107,10 @@ export class TartozasComponent implements OnDestroy {
     }
   }
 
-  megsem() {
+  onCancel() {
     this.megszakitani = true;
   }
+
   ngOnDestroy() {
     clearInterval(this.szamlalo);
 

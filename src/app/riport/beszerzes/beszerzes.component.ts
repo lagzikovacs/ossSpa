@@ -13,7 +13,6 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   templateUrl: './beszerzes.component.html'
 })
 export class BeszerzesComponent implements OnDestroy {
-  riportservice: RiportService;
   megszakitani = false;
 
   tol = '2019-01-01';
@@ -32,13 +31,15 @@ export class BeszerzesComponent implements OnDestroy {
     this._spinnerservice.Run = value;
   }
 
-  constructor(riportservice: RiportService,
-              private _spinnerservice: SpinnerService,
-              private _errorservice: ErrorService) {
+  riportservice: RiportService;
+
+  constructor(private _spinnerservice: SpinnerService,
+              private _errorservice: ErrorService,
+              riportservice: RiportService) {
     this.riportservice = riportservice;
   }
 
-  submit() {
+  onSubmit() {
     this.eppFrissit = true;
     this.megszakitani = false;
 
@@ -62,6 +63,7 @@ export class BeszerzesComponent implements OnDestroy {
         this._errorservice.Error = err;
       });
   }
+
   ciklus() {
     this.riportservice.TaskCheck(this.tasktoken)
       .then(res => {
@@ -110,9 +112,10 @@ export class BeszerzesComponent implements OnDestroy {
     }
   }
 
-  megsem() {
+  onCancel() {
     this.megszakitani = true;
   }
+
   ngOnDestroy() {
     clearInterval(this.szamlalo);
 

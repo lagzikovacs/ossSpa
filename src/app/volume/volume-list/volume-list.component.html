@@ -1,5 +1,12 @@
 <div class="alapkeret">
   <h5>{{volumeservice.cim}}</h5>
+  <div>
+    <nav>
+      <button [disabled]="eppFrissit" (click)="onKereses()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins" style="margin-right: 3px">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
+    </nav>
+  </div>
   <app-tabla #tabla
              [items]="Dto"
              [colsets]="volumeservice.GridSettings"

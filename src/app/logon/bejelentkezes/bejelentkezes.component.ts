@@ -15,14 +15,7 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 export class BejelentkezesComponent implements OnInit, OnDestroy {
   form: FormGroup;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
+  spinnerservice: SpinnerService;
 
   constructor(private _router: Router,
               private fb: FormBuilder,
@@ -30,7 +23,8 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
               private _sessionservice: SessionService,
               private _startupservice: StartupService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService) {
+              spinnerservice: SpinnerService) {
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -46,7 +40,7 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     const nincsBesorolva = 'Önt a rendszergazda még nem sorolta be egyetlen felhasználói csoportba sem!';
 
     this._logonservice.Bejelentkezes(this.form.value['azonosito'], this.form.value['jelszo'])
@@ -75,7 +69,7 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
                   throw res4.Error;
                 }
 
-                this.eppFrissit = false;
+                this.spinnerservice.eppFrissit = false;
                 this._router.navigate(['/fooldal']);
               })
               .catch(err => {
@@ -83,12 +77,12 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
               });
             break;
           default:
-            this.eppFrissit = false;
+            this.spinnerservice.eppFrissit = false;
             this._router.navigate(['/szerepkorvalasztas']);
         }
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

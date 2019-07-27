@@ -14,8 +14,6 @@ import {ProjektDto} from '../projektdto';
 import {propCopy} from '../../tools/propCopy';
 import {rowanimation} from '../../animation/rowAnimation';
 
-declare var $;
-
 @Component({
   selector: 'app-projekt-list',
   templateUrl: './projekt-list.component.html',
@@ -219,8 +217,6 @@ export class ProjektListComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    $('#tablediv').off();
-
     Object.keys(this).map(k => {
       (this[k]) = null;
     });

@@ -14,15 +14,6 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 export class SzerepkorvalasztasComponent implements OnInit, OnDestroy {
   logonservice: LogonService;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   constructor(private _router: Router,
               private _sessionservice: SessionService,
               private _startupservice: StartupService,
@@ -38,7 +29,7 @@ export class SzerepkorvalasztasComponent implements OnInit, OnDestroy {
   }
 
   setClickedRow(i: number) {
-    this.eppFrissit = true;
+    this._spinnerservice.eppFrissit = true;
 
     this._startupservice.SzerepkorValasztas(this.logonservice.lehetsegesszerepkorokDto[i].Particiokod,
       this.logonservice.lehetsegesszerepkorokDto[i].Csoportkod)
@@ -47,11 +38,11 @@ export class SzerepkorvalasztasComponent implements OnInit, OnDestroy {
           throw res2.Error;
         }
 
-        this.eppFrissit = false;
+        this._spinnerservice.eppFrissit = false;
         this._router.navigate(['/fooldal']);
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this._spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

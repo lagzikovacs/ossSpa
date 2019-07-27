@@ -9,26 +9,20 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   templateUrl: './jelszocsere.component.html'
 })
 export class JelszocsereComponent implements OnDestroy {
-  felhasznaloservice: FelhasznaloService;
   regijelszo = '';
   jelszo = '';
   jelszoujra = '';
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
+  felhasznaloservice: FelhasznaloService;
+  spinnerservice: SpinnerService;
 
   constructor(private _router: Router,
               private _route: ActivatedRoute,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               felhasznaloservice: FelhasznaloService) {
     this.felhasznaloservice = felhasznaloservice;
+    this.spinnerservice = spinnerservice;
   }
 
   onSubmit() {
@@ -37,23 +31,23 @@ export class JelszocsereComponent implements OnDestroy {
       return;
     }
 
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.felhasznaloservice.JelszoCsere(this.regijelszo, this.jelszo)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._router.navigate(['../fooldal'], {relativeTo: this._route});
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
 
-  cancel() {
+  onCancel() {
     this._router.navigate(['../fooldal'], {relativeTo: this._route});
   }
 

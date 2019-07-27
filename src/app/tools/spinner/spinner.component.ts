@@ -20,6 +20,8 @@ export class GspinnerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.subscription.unsubscribe();
+
     Object.keys(this).map(k => {
       (this[k]) = null;
     });

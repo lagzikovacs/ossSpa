@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {PenztartetelService} from '../penztartetel.service';
 import * as moment from 'moment';
-import {PenztarService} from '../../penztar/penztar.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {PenztartetelDto} from '../penztarteteldto';
@@ -24,26 +23,18 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnInit, 
 
   @Output() eventSzerkeszteskesz = new EventEmitter<PenztartetelDto>();
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   penztartetelservice: PenztartetelService;
+  spinnerservice: SpinnerService;
 
-  constructor(private _penztarservice: PenztarService,
-              private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+  constructor(private _errorservice: ErrorService,
+              spinnerservice: SpinnerService,
               penztartetelservice: PenztartetelService) {
     this.penztartetelservice = penztartetelservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.penztartetelservice.CreateNew()
       .then(res => {
         if (res.Error !== null) {
@@ -51,10 +42,10 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnInit, 
         }
 
         this.DtoEdited = res.Result[0];
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
         });
   }
@@ -108,7 +99,7 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnInit, 
     this.DtoEdited.Penztarkod = this.Penztarkod;
     this.DtoEdited.Datum = moment(this.datum).toISOString(true);
 
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.penztartetelservice.Add(this.DtoEdited)
       .then(res => {
         if (res.Error != null) {
@@ -122,11 +113,11 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnInit, 
           throw res1.Error;
         }
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

@@ -69,7 +69,7 @@ export class FelhasznaloService {
   }
 
   public JelszoCsere(RegiJelszo: string, UjJelszo: string): Promise<EmptyResult> {
-    const body = new JelszocsereParameter(0, Md5.hashStr(RegiJelszo).toString(), Md5.hashStr(UjJelszo).toString(), null);
+    const body = new JelszocsereParameter(0, Md5.hashStr(RegiJelszo).toString(), Md5.hashStr(UjJelszo).toString(), undefined);
 
     return this._httpClient.post<EmptyResult>(
       this._controller + 'jelszocsere', body, this._logonservice.httpoptions())

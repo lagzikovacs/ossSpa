@@ -21,7 +21,7 @@ declare var $;
   templateUrl: './projekt-list.component.html',
   animations: [rowanimation]
 })
-export class ProjektListComponent implements AfterViewInit, OnDestroy {
+export class ProjektListComponent implements OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: ProjektTablaComponent;
 
   statuszszurok = [
@@ -60,8 +60,6 @@ export class ProjektListComponent implements AfterViewInit, OnDestroy {
 
   egymode = EgyMode.Bizonylatesirat;
 
-  oldX = 0;
-
   private _eppFrissit = false;
   get eppFrissit(): boolean {
     return this._eppFrissit;
@@ -79,22 +77,6 @@ export class ProjektListComponent implements AfterViewInit, OnDestroy {
               projektservice: ProjektService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PROJEKTMOD]);
     this.projektservice = projektservice;
-  }
-
-  ngAfterViewInit() {
-    const tabladiv = document.getElementById('tabladiv');
-
-    tabladiv.onmousemove = mm => {
-      if (mm.ctrlKey) {
-        if (mm.clientX > this.oldX) {
-          tabladiv.scrollLeft += 25;
-        } else {
-          tabladiv.scrollLeft -= 25;
-        }
-      }
-
-      this.oldX = mm.clientX;
-    };
   }
 
   onKereses() {

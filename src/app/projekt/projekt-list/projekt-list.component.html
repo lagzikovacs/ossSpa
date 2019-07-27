@@ -18,7 +18,7 @@
                         (eventBezar)="doExportbezar()"></app-projekt-export>
   </ng-container>
 
-  <div id="tabladiv" style="overflow-x: auto;overflow-y: hidden;margin-bottom: 10px">
+  <div appHscroll style="overflow-x: auto;overflow-y: hidden;margin-bottom: 10px">
     <app-projekt-tabla id="tabla" #tabla
                        [Dto]="Dto"
                        (forid)="onId($event)"

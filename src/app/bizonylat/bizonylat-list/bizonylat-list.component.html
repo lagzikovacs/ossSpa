@@ -10,12 +10,14 @@
                         [enUj]="!eppFrissit" (Uj)="doUjtetel()">
   </app-bizonylattoolbar>
 
-  <app-bizonylattabla #tabla
-                      [items]="Dto"
-                      (forid)="onId($event)"
-                      [ujTemplate]="griduj"
-                      [egyTemplate]="gridegy">
-  </app-bizonylattabla>
+  <div appHscroll style="overflow-x: auto;overflow-y: hidden;margin-bottom: 10px">
+    <app-bizonylattabla #tabla
+                        [items]="Dto"
+                        (forid)="onId($event)"
+                        [ujTemplate]="griduj"
+                        [egyTemplate]="gridegy">
+    </app-bizonylattabla>
+  </div>
 
   <ng-template #griduj>
     <app-bizonylat-szerkesztes [uj]="true"

@@ -187,6 +187,7 @@ import { ProjektkapcsolatTablaComponent } from './projektkapcsolat/projektkapcso
 import { BizonylatkapcsolatTablaComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-tabla/bizonylatkapcsolat-tabla.component';
 import {BizonylattetelSzerkesztesComponent} from './bizonylat/bizonylattetel-szerkesztes/bizonylattetel-szerkesztes.component';
 import { AjanlatTablaComponent } from './ajanlat/ajanlat-tabla/ajanlat-tabla.component';
+import { HscrollDirective } from './directives/divhscroll.directive';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -399,6 +400,7 @@ if (environment.production) {
     ProjektkapcsolatTablaComponent,
     BizonylatkapcsolatTablaComponent,
     AjanlatTablaComponent,
+    HscrollDirective,
   ],
   imports: [
     BrowserModule,

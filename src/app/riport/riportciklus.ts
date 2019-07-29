@@ -4,8 +4,11 @@ import {ErrorService} from '../tools/errorbox/error.service';
 import {b64toBlob} from '../tools/b64toBlob';
 import * as FileSaver from 'file-saver';
 import {OnDestroy} from '@angular/core';
+import {LiteEvent} from '../tools/event/LiteEvent';
 
 export class Riportciklus implements OnDestroy {
+  eventCiklusutan = new LiteEvent<void>();
+
   private _szamlalo: any;
   megszakitani = false;
   tasktoken = '';
@@ -36,11 +39,15 @@ export class Riportciklus implements OnDestroy {
           const blob = b64toBlob(res.Riport);
           FileSaver.saveAs(blob, this._fajlnev);
           this._spinnerservice.eppFrissit = false;
+
+          this.eventCiklusutan.trigger();
         }
       })
       .catch(err => {
         this._spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
+
+        this.eventCiklusutan.trigger();
       });
   }
 

@@ -19,8 +19,8 @@
     </div>
 
     <div class="row no-gutters editform-row">
-      <button class="btn btn-sm btn-primary" [disabled]="!f.valid || eppFrissit" type="submit">Ok</button>
-      <button class="btn btn-sm btn-secondary" style="margin-left:3px;" [disabled]="!eppFrissit" type="button" (click)="onCancel()">Stop</button>
+      <button class="btn btn-sm btn-primary" [disabled]="!f.valid || spinnerservice.eppFrissit" type="submit">Ok</button>
+      <button class="btn btn-sm btn-secondary" style="margin-left:3px;" [disabled]="!spinnerservice.eppFrissit" type="button" (click)="onCancel()">Stop</button>
     </div>
   </form>
 </div>

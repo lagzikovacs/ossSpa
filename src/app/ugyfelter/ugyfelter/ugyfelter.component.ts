@@ -18,12 +18,15 @@ import {b64toBlob} from '../../tools/b64toBlob';
 import {LetoltesParam} from '../../dokumentum/letoltesparam';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
+import {Bizonylatnyomtatasciklus} from '../../bizonylatnyomtatas/bizonylatnyomtatasciklus';
 
 @Component({
   selector: 'app-ugyfelter',
   templateUrl: './ugyfelter.component.html'
 })
 export class UgyfelterComponent implements OnInit, OnDestroy {
+  bc: Bizonylatnyomtatasciklus;
+
   up: string;
   private _sub: any;
   bejelentkezve = false;
@@ -37,20 +40,8 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
 
   projektkod = 0;
   bizonylatkod = 0;
-  bizonylatnev = '';
   iratkod = 0;
   dokumentumkod = 0;
-  tasktoken = '';
-  szamlalo: any;
-
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
 
   constructor(private _route: ActivatedRoute,
               private _logonservice: LogonService,
@@ -59,7 +50,9 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
               private _bizonylatnyomtatasservice: BizonylatnyomtatasService,
               private _dokumentumservice: DokumentumService,
               private _spinnerservice: SpinnerService,
-              private _errorservice: ErrorService) { }
+              private _errorservice: ErrorService) {
+    this.bc = new Bizonylatnyomtatasciklus(_errorservice, _spinnerservice, _bizonylatnyomtatasservice);
+  }
 
   ngOnInit() {
     this._sub = this._route
@@ -70,7 +63,7 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
   }
 
   folytatas() {
-    this.eppFrissit = true;
+    this._spinnerservice.eppFrissit = true;
     this._ugyfelterservice.UgyfelterCheck(this.up)
       .then(res => {
         if (res.Error !== null) {
@@ -83,10 +76,10 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
         this.lstProjektDto = res.Result.lstProjektDto;
 
         this.bejelentkezve = true;
-        this.eppFrissit = false;
+        this._spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this._spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -96,7 +89,7 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
     this.iratkod = 0;
     this.dokumentumkod = 0;
 
-    this.eppFrissit = true;
+    this._spinnerservice.eppFrissit = true;
     this._projektkapcsolatservice.SelectForUgyfelter(this.projektkod)
       .then(res => {
         if (res.Error !== null) {
@@ -105,68 +98,40 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
 
         this.lstProjektkapcsolatDto = res.Result;
 
-        this.eppFrissit = false;
+        this._spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this._spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
 
   bizonylatvalasztas(i: number) {
     this.bizonylatkod = this.lstProjektkapcsolatDto[i].Bizonylatkod;
-    this.bizonylatnev = this.lstProjektkapcsolatDto[i].Azonosito + ' ' + this.lstProjektkapcsolatDto[i].Tipus + '.pdf';
     this.iratkod = 0;
     this.dokumentumkod = 0;
+
+    this.bc.fajlnev = this.lstProjektkapcsolatDto[i].Azonosito + ' ' + this.lstProjektkapcsolatDto[i].Tipus + '.pdf';
 
     const fi = [
       new SzMT(Szempont.BizonylatKod, this.bizonylatkod),
       new SzMT(Szempont.NyomtatasTipus, BizonylatNyomtatasTipus.Masolat)
     ];
 
-    this.eppFrissit = true;
+    this._spinnerservice.eppFrissit = true;
     this._bizonylatnyomtatasservice.TaskStart(fi)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        this.tasktoken = res.Result;
-        this.bizonylatnyomtatasciklus();
+        this.bc.tasktoken = res.Result;
+        this.bc.ciklus();
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this._spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
-  }
-  bizonylatnyomtatasciklus() {
-    this._bizonylatnyomtatasservice.TaskCheck(this.tasktoken)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-        if (res.Status === 'Error') {
-          throw new Error('Hm... ' + res.Error);
-        }
-        if (res.Status === 'Queued' || res.Status === 'Running') {
-          this.szamlalo = setInterval(() => { this.bizonylatnyomtatasciklusnext(); }, 1000);
-        }
-
-        if (res.Status === 'Completed') {
-          const blob = b64toBlob(res.Riport);
-          FileSaver.saveAs(blob, this.bizonylatnev);
-          this.eppFrissit = false;
-        }
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
-  }
-  bizonylatnyomtatasciklusnext() {
-    clearInterval(this.szamlalo);
-
-    this.bizonylatnyomtatasciklus();
   }
 
   iratvalasztas(i: number) {
@@ -174,7 +139,7 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
     this.iratkod = this.lstProjektkapcsolatDto[i].Iratkod;
     this.dokumentumkod = 0;
 
-    this.eppFrissit = true;
+    this._spinnerservice.eppFrissit = true;
     this._dokumentumservice.Select(this.iratkod)
       .then(res => {
         if (res.Error !== null) {
@@ -183,10 +148,10 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
 
         this.lstDokumentumDto = res.Result;
 
-        this.eppFrissit = false;
+        this._spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this._spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -198,7 +163,7 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
     const megjegyzes = this.lstDokumentumDto[i].Megjegyzes;
     const ext = this.lstDokumentumDto[i].Ext.toLowerCase();
 
-    this.eppFrissit = true;
+    this._spinnerservice.eppFrissit = true;
     if (ext !== '.doc' && ext !== '.docx' && ext !== '.xls' && ext !== '.xlsx') {
       this._dokumentumservice.Letoltes(new LetoltesParam(
         this.dokumentumkod, meret))
@@ -210,10 +175,10 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
           const blob = b64toBlob(res.Result.b);
           FileSaver.saveAs(blob, megjegyzes + ext);
 
-          this.eppFrissit = false;
+          this._spinnerservice.eppFrissit = false;
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this._spinnerservice.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {
@@ -226,10 +191,10 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
           const blob = b64toBlob(res.Result);
           FileSaver.saveAs(blob, megjegyzes + '.pdf');
 
-          this.eppFrissit = false;
+          this._spinnerservice.eppFrissit = false;
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this._spinnerservice.eppFrissit = false;
           this._errorservice.Error = err;
         });
     }

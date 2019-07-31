@@ -16,25 +16,18 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
 
   EgyMode = ParticioEgyMode.Szallito;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   particioservice: ParticioService;
+  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               particioservice: ParticioService) {
     this.particioservice = particioservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.particioservice.Get()
       .then(res => {
         if (res.Error != null) {
@@ -44,10 +37,10 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
         this.Ori = res.Result[0];
         this.Dto = deepCopy(this.Ori);
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -72,7 +65,7 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
   }
 
   onSzerkesztesOk(Mod: ParticioDto) {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.particioservice.Update(Mod)
       .then(res => {
         if (res.Error != null) {
@@ -89,11 +82,11 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
         this.Ori = res1.Result[0];
         this.Dto = deepCopy(this.Ori);
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this.EgyMode = ParticioEgyMode.Blank;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

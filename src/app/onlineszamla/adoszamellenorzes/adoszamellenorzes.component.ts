@@ -12,24 +12,18 @@ export class AdoszamellenorzesComponent implements OnDestroy {
   adoszam = '';
   valasz = '';
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
+  spinnerservice: SpinnerService;
 
-  constructor(navfeltoltesservice: OnlineszamlaService,
-              private _spinnerservice: SpinnerService,
-              private _errorservice: ErrorService) {
+  constructor(private _errorservice: ErrorService,
+              navfeltoltesservice: OnlineszamlaService,
+              spinnerservice: SpinnerService) {
     this.navfeltoltesservice = navfeltoltesservice;
+    this.spinnerservice = spinnerservice;
   }
 
   onSubmit() {
     this.valasz = '';
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.navfeltoltesservice.Adoszamellenorzes(this.adoszam)
       .then(res => {
         if (res.Error != null) {
@@ -37,10 +31,10 @@ export class AdoszamellenorzesComponent implements OnDestroy {
         }
 
         this.valasz = res.Result;
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

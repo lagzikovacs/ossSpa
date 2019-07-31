@@ -36,23 +36,17 @@ export class PenztartetelListComponent implements OnDestroy {
 
   Dto = new Array<PenztartetelDto>();
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   penztartetelservice: PenztartetelService;
+  spinnerservice: SpinnerService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               penztartetelservice: PenztartetelService) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);
+
     this.penztartetelservice = penztartetelservice;
+    this.spinnerservice = spinnerservice;
   }
 
   onKereses() {
@@ -68,7 +62,7 @@ export class PenztartetelListComponent implements OnDestroy {
   }
 
   onKeresesTovabb() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.penztartetelservice.Select(this.ptp)
       .then(res => {
         if (res.Error != null) {
@@ -88,10 +82,10 @@ export class PenztartetelListComponent implements OnDestroy {
         this.OsszesRekord = res.OsszesRekord;
 
         this.ptp.rekordtol += this.ptp.lapmeret;
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

@@ -28,21 +28,14 @@ export class EsemenynaploComponent implements OnDestroy {
     this.OsszesRekord = 0;
   }
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   esemenynaploservice: EsemenynaploService;
+  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               esemenynaploservice: EsemenynaploService) {
     this.esemenynaploservice = esemenynaploservice;
+    this.spinnerservice = spinnerservice;
   }
 
   onKereses() {
@@ -53,7 +46,7 @@ export class EsemenynaploComponent implements OnDestroy {
     this.onKeresesTovabb();
   }
   onKeresesTovabb() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.esemenynaploservice.Select(this.ep)
       .then(res => {
         if (res.Error != null) {
@@ -73,10 +66,10 @@ export class EsemenynaploComponent implements OnDestroy {
         this.OsszesRekord = res.OsszesRekord;
 
         this.ep.rekordtol += this.ep.lapmeret;
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

@@ -18,25 +18,18 @@ export class BizonylatKiszallitvaComponent implements OnDestroy {
   @Input() bizonylatLeiro = new BizonylatTipusLeiro();
   @Output() eventKiszallitvaUtan = new EventEmitter<BizonylatDto>();
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   bizonylatservice: BizonylatService;
+  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
+    this.spinnerservice = spinnerservice;
   }
 
   modositas() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.bizonylatservice.Kiszallitva(this.Dto)
       .then(res => {
         if (res.Error != null) {
@@ -50,11 +43,11 @@ export class BizonylatKiszallitvaComponent implements OnDestroy {
           throw res1.Error;
         }
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this.eventKiszallitvaUtan.emit(res1.Result[0]);
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

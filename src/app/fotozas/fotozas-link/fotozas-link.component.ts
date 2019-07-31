@@ -22,19 +22,14 @@ export class FotozasLinkComponent implements OnInit, OnDestroy {
   link = '';
   kikuldesikodidopontja: any;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
+  spinnerservice: SpinnerService;
 
   constructor(private _iratservice: IratService,
               private _fotozasservice: FotozasService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService) { }
+              spinnerservice: SpinnerService) {
+    this.spinnerservice = spinnerservice;
+  }
 
   ngOnInit() {
     if (this.DtoEdited.Kikuldesikodidopontja !== null) {
@@ -49,7 +44,7 @@ export class FotozasLinkComponent implements OnInit, OnDestroy {
           this.link = environment.OSSRef + res.Result;
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {
@@ -64,7 +59,7 @@ export class FotozasLinkComponent implements OnInit, OnDestroy {
   }
 
   fotozaslink() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this._fotozasservice.CreateNewLink(this.DtoEdited)
       .then(res => {
         if (res.Error !== null) {
@@ -82,11 +77,11 @@ export class FotozasLinkComponent implements OnInit, OnDestroy {
         this.DtoEdited = res1.Result[0];
         this.kikuldesidopontja();
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

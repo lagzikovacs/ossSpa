@@ -23,27 +23,20 @@ export class PenztarSzerkesztesComponent implements OnInit, OnDestroy {
 
   SzerkesztesMode = PenztarSzerkesztesMode.Blank;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   penztarservice: PenztarService;
+  spinnerservice: SpinnerService;
 
   constructor(private _penznemservice: PenznemService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               penztarservice: PenztarService) {
     this.penztarservice = penztarservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
     if (this.uj) {
-      this.eppFrissit = true;
+      this.spinnerservice.eppFrissit = true;
       this.penztarservice.CreateNew()
         .then(res => {
           if (res.Error !== null) {
@@ -51,17 +44,17 @@ export class PenztarSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this._errorservice.Error = err;
         });
     }
   }
 
   onSubmit() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.DtoEdited.Penznemkod || 0,
       this.DtoEdited.Penznem || ''))
       .then(res => {
@@ -87,11 +80,11 @@ export class PenztarSzerkesztesComponent implements OnInit, OnDestroy {
           throw res2.Error;
         }
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res2.Result[0]);
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

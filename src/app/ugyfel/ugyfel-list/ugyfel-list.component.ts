@@ -43,31 +43,6 @@ import {propCopy} from '../../tools/propCopy';
 
   egymode = EgyMode.Reszletek;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
-  // private _elsokereses = true;
-  // @Output() elsokeresesChange = new EventEmitter<boolean>();
-  // @Input() get elsokereses() { return this._elsokereses; }
-  // set elsokereses(value: boolean) {
-  //   this._elsokereses = value;
-  //   this.elsokeresesChange.emit(this._elsokereses);
-  // }
-  //
-  // private _osszesrekord = 0;
-  // @Output() osszesrekordChange = new EventEmitter<number>();
-  // @Input() get osszesrekord() { return this._osszesrekord; }
-  // set osszesrekord(value: number) {
-  //   this._osszesrekord = value;
-  //   this.osszesrekordChange.emit(this._osszesrekord);
-  // }
-
   @Input() set maszk(value: string) {
     if (value !== undefined) {
       this.csoportszempont = 0;
@@ -80,13 +55,16 @@ import {propCopy} from '../../tools/propCopy';
   @Output() eventStopzoom = new EventEmitter<void>();
 
   ugyfelservice: UgyfelService;
+  spinnerservice: SpinnerService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               ugyfelservice: UgyfelService  ) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.UGYFELEKMOD]);
+
     this.ugyfelservice = ugyfelservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -112,7 +90,7 @@ import {propCopy} from '../../tools/propCopy';
   }
 
   onKeresesTovabb() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.ugyfelservice.Select(this.up)
       .then(res => {
         if (res.Error != null) {
@@ -132,14 +110,14 @@ import {propCopy} from '../../tools/propCopy';
         this.osszesrekord = res.OsszesRekord;
 
         this.up.rekordtol += this.up.lapmeret;
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
 
         // if (this.ugyfelservice.zoom) {
         //   window.scrollTo(0, document.body.scrollHeight);
         // }
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -172,7 +150,7 @@ import {propCopy} from '../../tools/propCopy';
   }
   onTorles(ok: boolean) {
     if (ok) {
-      this.eppFrissit = true;
+      this.spinnerservice.eppFrissit = true;
 
       this.ugyfelservice.Delete(this.Dto[this.DtoSelectedIndex])
         .then(res => {
@@ -183,11 +161,11 @@ import {propCopy} from '../../tools/propCopy';
           this.Dto.splice(this.DtoSelectedIndex, 1);
           this.DtoSelectedIndex = -1;
 
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this.tabla.clearselections();
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {

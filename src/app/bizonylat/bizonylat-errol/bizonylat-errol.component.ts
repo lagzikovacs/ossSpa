@@ -25,18 +25,12 @@ export class BizonylatErrolComponent implements OnDestroy {
   kesz = false;
   ujbizonylatkod = 0;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
+  spinnerservice: SpinnerService;
 
   constructor(private _bizonylatservice: BizonylatService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService) {
+              spinnerservice: SpinnerService) {
+    this.spinnerservice = spinnerservice;
   }
 
   change(i) {
@@ -44,7 +38,7 @@ export class BizonylatErrolComponent implements OnDestroy {
   }
   onSubmit() {
     if (!this.kesz) {
-      this.eppFrissit = true;
+      this.spinnerservice.eppFrissit = true;
       this._bizonylatservice.UjBizonylatMintaAlapjan(new BizonylatMintaAlapjanParam(
         this.Bizonylatkod, this.entries[this.entryindex][1]))
         .then(res => {
@@ -54,10 +48,10 @@ export class BizonylatErrolComponent implements OnDestroy {
 
           this.ujbizonylatkod = res.Result;
           this.kesz = true;
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {

@@ -26,21 +26,14 @@ export class UgyfelterlogComponent implements OnDestroy {
   Dto = new Array<UgyfelterlogDto>();
   DtoSelectedIndex = -1;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   ugyfelterlogservice: UgyfelterlogService;
+  spinnerservice: SpinnerService;
 
-  constructor(private _spinnerservice: SpinnerService,
-              private _errorservice: ErrorService,
+  constructor(private _errorservice: ErrorService,
+              spinnerservice: SpinnerService,
               ugyfelterlogservice: UgyfelterlogService) {
     this.ugyfelterlogservice = ugyfelterlogservice;
+    this.spinnerservice = spinnerservice;
   }
 
   onKereses() {
@@ -58,7 +51,7 @@ export class UgyfelterlogComponent implements OnDestroy {
   }
 
   onKeresesTovabb() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.ugyfelterlogservice.Select(this.ulp)
       .then(res => {
         if (res.Error != null) {
@@ -78,10 +71,10 @@ export class UgyfelterlogComponent implements OnDestroy {
         this.OsszesRekord = res.OsszesRekord;
 
         this.ulp.rekordtol += this.ulp.lapmeret;
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

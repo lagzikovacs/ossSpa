@@ -31,28 +31,21 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
 
   Datum: any;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   bizonylatkifizetesservice: KifizetesService;
+  spinnerservice: SpinnerService;
 
   constructor(private _penznemservice: PenznemService,
               private _fizetesimodservice: FizetesimodService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               bizonylatkifizetesservice: KifizetesService) {
     this.bizonylatkifizetesservice = bizonylatkifizetesservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
     if (this.uj) {
-      this.eppFrissit = true;
+      this.spinnerservice.eppFrissit = true;
       this.bizonylatkifizetesservice.CreateNew()
         .then(res => {
           if (res.Error !== null) {
@@ -65,10 +58,10 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
           this.DtoEdited.Penznem = this.Bizonylat.Penznem;
           this.DtoEdited.Fizetesimodkod = this.Bizonylat.Fizetesimodkod;
           this.DtoEdited.Fizetesimod = this.Bizonylat.Fizetesimod;
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this._errorservice.Error = err;
         });
     }
@@ -77,7 +70,7 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.DtoEdited.Penznemkod, this.DtoEdited.Penznem))
       .then(res => {
         if (res.Error != null) {
@@ -111,11 +104,11 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
           throw res3.Error;
         }
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res3.Result[0]);
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

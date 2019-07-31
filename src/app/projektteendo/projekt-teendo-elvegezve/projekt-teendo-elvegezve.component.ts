@@ -3,7 +3,6 @@ import * as moment from 'moment';
 import {ProjektteendoService} from '../projektteendo.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
-import {propCopy} from '../../tools/propCopy';
 import {deepCopy} from '../../tools/deepCopy';
 import {ProjektteendoDto} from '../projektteendodto';
 
@@ -20,21 +19,14 @@ export class ProjektTeendoElvegezveComponent implements OnInit, OnDestroy {
 
   Elvegezve: any;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   projektteendoservice: ProjektteendoService;
+  spinnerservice: SpinnerService;
 
-  constructor(private _spinnerservice: SpinnerService,
-              private _errorservice: ErrorService,
+  constructor(private _errorservice: ErrorService,
+              spinnerservice: SpinnerService,
               projektteendoservice: ProjektteendoService) {
     this.projektteendoservice = projektteendoservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -42,7 +34,7 @@ export class ProjektTeendoElvegezveComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
 
     this.DtoEdited.Elvegezve = moment(this.Elvegezve).toISOString(true);
     this.projektteendoservice.Update(this.DtoEdited)
@@ -58,11 +50,11 @@ export class ProjektTeendoElvegezveComponent implements OnInit, OnDestroy {
         throw res2.Error;
       }
 
-      this.eppFrissit = false;
+      this.spinnerservice.eppFrissit = false;
       this.eventSzerkeszteskesz.emit(res2.Result[0]);
     })
     .catch(err => {
-      this.eppFrissit = false;
+      this.spinnerservice.eppFrissit = false;
       this._errorservice.Error = err;
     });
   }

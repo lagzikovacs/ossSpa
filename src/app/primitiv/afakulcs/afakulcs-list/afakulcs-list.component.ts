@@ -32,15 +32,6 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
 
   egymode = EgyMode.Reszletek;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   @Input() set maszk(value: string) {
     if (value !== undefined) {
       this.ekDto.minta = value || '';
@@ -51,13 +42,16 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
   @Output() eventStopzoom = new EventEmitter<void>();
 
   afakulcsservice: AfakulcsService;
+  spinnerservice: SpinnerService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               afakulcsservice: AfakulcsService) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
+
     this.afakulcsservice = afakulcsservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -77,7 +71,7 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
   }
 
   onKeresesTovabb() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.afakulcsservice.Read(this.ekDto.minta)
       .then(res => {
         if (res.Error != null) {
@@ -95,10 +89,10 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
           this.Dto = buf;
         }
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -129,7 +123,7 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
   }
   onTorles(ok: boolean) {
     if (ok) {
-      this.eppFrissit = true;
+      this.spinnerservice.eppFrissit = true;
 
       this.afakulcsservice.Delete(this.Dto[this.DtoSelectedIndex])
         .then(res => {
@@ -140,11 +134,11 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
           this.Dto.splice(this.DtoSelectedIndex, 1);
           this.DtoSelectedIndex = -1;
 
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this.tabla.clearselections();
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {

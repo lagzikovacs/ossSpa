@@ -16,39 +16,32 @@ export class VolumeTesztComponent implements OnInit, OnDestroy {
   hibalista: string[];
   eppTesztel = false;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   volumeservice: VolumeService;
   dokumentumservice: DokumentumService;
+  spinnerservice: SpinnerService;
 
-  constructor(private _spinnerservice: SpinnerService,
-              private _errorservice: ErrorService,
+  constructor(private _errorservice: ErrorService,
+              spinnerservice: SpinnerService,
               volumeservice: VolumeService,
               dokumentumservice: DokumentumService) {
     this.volumeservice = volumeservice;
     this.dokumentumservice = dokumentumservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.volumeservice.DokumentumkodByVolume(this.Volumekod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this.dbv = res.Result;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

@@ -23,21 +23,14 @@ export class ProjektTeendoListComponent implements OnInit, OnDestroy {
 
   egymode = EgyMode.Reszletek;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   projektteendoservice: ProjektteendoService;
+  spinnerservice: SpinnerService;
 
-  constructor(private _spinnerservice: SpinnerService,
-              private _errorservice: ErrorService,
+  constructor(private _errorservice: ErrorService,
+              spinnerservice: SpinnerService,
               projektteendoservice: ProjektteendoService) {
     this.projektteendoservice = projektteendoservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -47,7 +40,7 @@ export class ProjektTeendoListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.tabla.clearselections();
 
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.projektteendoservice.Select(this.Projektkod)
       .then(res => {
         if (res.Error !== null) {
@@ -55,10 +48,10 @@ export class ProjektTeendoListComponent implements OnInit, OnDestroy {
         }
 
         this.Dto = res.Result;
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -89,7 +82,7 @@ export class ProjektTeendoListComponent implements OnInit, OnDestroy {
   }
   onTorles(ok: boolean) {
     if (ok) {
-      this.eppFrissit = true;
+      this.spinnerservice.eppFrissit = true;
 
       this.projektteendoservice.Delete(this.Dto[this.DtoSelectedIndex])
         .then(res => {
@@ -100,11 +93,11 @@ export class ProjektTeendoListComponent implements OnInit, OnDestroy {
           this.Dto.splice(this.DtoSelectedIndex, 1);
           this.DtoSelectedIndex = -1;
 
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this.tabla.clearselections();
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {

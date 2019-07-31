@@ -6,7 +6,6 @@ import {UgyfelSzerkesztesMode} from '../ugyfelszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
-import {propCopy} from '../../tools/propCopy';
 import {HelysegDto} from '../../primitiv/helyseg/helysegdto';
 import {UgyfelDto} from '../ugyfeldto';
 
@@ -24,27 +23,20 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
 
   SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   ugyfelservice: UgyfelService;
+  spinnerservice: SpinnerService;
 
   constructor(private _helysegservice: HelysegService,
-              private _spinnerservice: SpinnerService,
               private _errorservice: ErrorService,
+              spinnerservice: SpinnerService,
               ugyfelservice: UgyfelService) {
     this.ugyfelservice = ugyfelservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
     if (this.uj) {
-      this.eppFrissit = true;
+      this.spinnerservice.eppFrissit = true;
       this.ugyfelservice.CreateNew()
         .then(res => {
           if (res.Error !== null) {
@@ -52,17 +44,17 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this._errorservice.Error = err;
         });
     }
   }
 
   onSubmit() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this._helysegservice.ZoomCheck(new HelysegZoomParameter(this.DtoEdited.Helysegkod || 0,
       this.DtoEdited.Helysegnev || ''))
       .then(res => {
@@ -88,11 +80,11 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
           throw res2.Error;
         }
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res2.Result[0]);
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

@@ -3,7 +3,7 @@
   <app-toolbar [Szurok]="szurok"
                [(szempont)]="szempont"
                [(minta)]="minta"
-               [enKereses]="!eppFrissit" (Kereses)="onKereses()"
+               [enKereses]="!spinnerservice.eppFrissit" (Kereses)="onKereses()"
                [visUj]="false">
   </app-toolbar>
 
@@ -45,7 +45,7 @@
     </div>
   </ng-template>
 
-  <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
+  <app-toolbarfooter [enKereses]="!elsokereses && !spinnerservice.eppFrissit"
                      [rekordszam]="Dto.length"
                      [osszesrekord]="OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">

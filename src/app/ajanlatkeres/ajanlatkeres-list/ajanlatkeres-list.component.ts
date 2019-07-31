@@ -35,21 +35,14 @@ export class AjanlatkeresListComponent implements OnDestroy {
 
   egymode = EgyMode.Reszletek;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   ajanlatkeresservice: AjanlatkeresService;
+  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               ajanlatkeresservice: AjanlatkeresService) {
     this.ajanlatkeresservice = ajanlatkeresservice;
+    this.spinnerservice = spinnerservice;
   }
 
   onKereses() {
@@ -68,7 +61,7 @@ export class AjanlatkeresListComponent implements OnDestroy {
   }
 
   onKeresesTovabb() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.ajanlatkeresservice.Select(this.fp)
       .then(res => {
         if (res.Error != null) {
@@ -88,10 +81,10 @@ export class AjanlatkeresListComponent implements OnDestroy {
         this.OsszesRekord = res.OsszesRekord;
 
         this.fp.rekordtol += this.fp.lapmeret;
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

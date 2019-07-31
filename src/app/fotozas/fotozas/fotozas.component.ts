@@ -25,21 +25,16 @@ export class FotozasComponent implements OnInit, OnDestroy {
   fajlnev = '';
   megjegyzes = '';
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
+  spinnerservice: SpinnerService;
 
   constructor(private _route: ActivatedRoute,
               private _logonservice: LogonService,
               private _dokumentumservice: DokumentumService,
               private _fotozasservice: FotozasService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService) { }
+              spinnerservice: SpinnerService) {
+    this.spinnerservice = spinnerservice;
+  }
 
   ngOnInit() {
     this._sub = this._route
@@ -50,7 +45,7 @@ export class FotozasComponent implements OnInit, OnDestroy {
   }
 
   folytatas() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this._fotozasservice.Check(this.fp)
       .then(res => {
         if (res.Error !== null) {
@@ -61,10 +56,10 @@ export class FotozasComponent implements OnInit, OnDestroy {
         this._logonservice.Sid = this.Dto.sid;
 
         this.bejelentkezve = true;
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -89,7 +84,7 @@ export class FotozasComponent implements OnInit, OnDestroy {
     fb.Megjegyzes = this.megjegyzes;
     fb.IratKod = this.Dto.iratDto[0].Iratkod;
 
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this._dokumentumservice.FeltoltesAngular(fb)
       .then(res => {
         if (res.Error != null) {
@@ -108,10 +103,10 @@ export class FotozasComponent implements OnInit, OnDestroy {
         this.megjegyzes = '';
         this.fileInput.nativeElement.value = '';
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

@@ -8,39 +8,33 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
   templateUrl: './szamlalekerdezes.component.html'
 })
 export class SzamlalekerdezesComponent implements OnDestroy {
-  navexportellenorzesservice: OnlineszamlaService;
   szamlaszam = '';
   valasz = '';
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
+  onlineszamlaservice: OnlineszamlaService;
+  spinnerservice: SpinnerService;
 
-  constructor(navexportellenorzesservice: OnlineszamlaService,
-              private _spinnerservice: SpinnerService,
-              private _errorservice: ErrorService) {
-    this.navexportellenorzesservice = navexportellenorzesservice;
+  constructor(private _errorservice: ErrorService,
+              onlineszamlaservice: OnlineszamlaService,
+              spinnerservice: SpinnerService) {
+    this.onlineszamlaservice = onlineszamlaservice;
+    this.spinnerservice = spinnerservice;
   }
 
   onSubmit() {
     this.valasz = '';
-    this.eppFrissit = true;
-    this.navexportellenorzesservice.Szamlalekerdezes(this.szamlaszam)
+    this.spinnerservice.eppFrissit = true;
+    this.onlineszamlaservice.Szamlalekerdezes(this.szamlaszam)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
         this.valasz = res.Result;
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

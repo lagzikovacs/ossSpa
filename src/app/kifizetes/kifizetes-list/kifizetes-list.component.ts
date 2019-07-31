@@ -24,21 +24,14 @@ export class KifizetesListComponent implements OnInit, OnDestroy {
 
   egymode = EgyMode.Reszletek;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   bizonylatkifizetesservice: KifizetesService;
+  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               bizonylatkifizetesservice: KifizetesService) {
     this.bizonylatkifizetesservice = bizonylatkifizetesservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -48,16 +41,16 @@ export class KifizetesListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.tabla.clearselections();
 
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.bizonylatkifizetesservice.Select(this.Bizonylat.Bizonylatkod)
       .then(res => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
 
         this.Dto = res.Result;
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -88,7 +81,7 @@ export class KifizetesListComponent implements OnInit, OnDestroy {
   }
   onTorles(ok: boolean) {
     if (ok) {
-      this.eppFrissit = true;
+      this.spinnerservice.eppFrissit = true;
 
       this.bizonylatkifizetesservice.Delete(this.Dto[this.DtoSelectedIndex])
         .then(res => {
@@ -99,11 +92,11 @@ export class KifizetesListComponent implements OnInit, OnDestroy {
           this.Dto.splice(this.DtoSelectedIndex, 1);
           this.DtoSelectedIndex = -1;
 
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this.tabla.clearselections();
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {

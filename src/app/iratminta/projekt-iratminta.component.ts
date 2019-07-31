@@ -15,22 +15,16 @@ export class ProjektIratmintaComponent implements OnDestroy {
   @Input() Projektkod = -1;
   @Output() eventMunkalaputan = new EventEmitter<void>();
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
+  spinnerservice: SpinnerService;
 
   constructor(private _iratmintaservice: IratmintaService,
-              private _spinnerservice: SpinnerService,
-              private _errorservice: ErrorService) {
+              private _errorservice: ErrorService,
+              spinnerservice: SpinnerService) {
+    this.spinnerservice = spinnerservice;
   }
 
   szerzodes() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
       this._iratmintaservice.Szerzodes(this.Projektkod)
       .then(res => {
         if (res.Error != null) {
@@ -38,15 +32,15 @@ export class ProjektIratmintaComponent implements OnDestroy {
         }
         const blob = b64toBlob(res.Result);
         FileSaver.saveAs(blob, 'Szerződés.docx');
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
   szallitasiszerzodes() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this._iratmintaservice.Szallitasiszerzodes(this.Projektkod)
       .then(res => {
         if (res.Error != null) {
@@ -54,15 +48,15 @@ export class ProjektIratmintaComponent implements OnDestroy {
         }
         const blob = b64toBlob(res.Result);
         FileSaver.saveAs(blob, 'Szállítási szerződés.docx');
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
   feltetelesszerzodes() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this._iratmintaservice.Feltetelesszerzodes(this.Projektkod)
       .then(res => {
         if (res.Error != null) {
@@ -70,15 +64,15 @@ export class ProjektIratmintaComponent implements OnDestroy {
         }
         const blob = b64toBlob(res.Result);
         FileSaver.saveAs(blob, 'Feltételes szerződés.docx');
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
   munkalap() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this._iratmintaservice.Munkalap(this.Projektkod)
       .then(res => {
         if (res.Error != null) {
@@ -86,17 +80,17 @@ export class ProjektIratmintaComponent implements OnDestroy {
         }
         const blob = b64toBlob(res.Result);
         FileSaver.saveAs(blob, 'Munkalap.docx');
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
 
         this.eventMunkalaputan.emit();
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
   elegedettseg() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this._iratmintaservice.Elegedettseg(this.Projektkod)
       .then(res => {
         if (res.Error != null) {
@@ -104,15 +98,15 @@ export class ProjektIratmintaComponent implements OnDestroy {
         }
         const blob = b64toBlob(res.Result);
         FileSaver.saveAs(blob, 'Elégedettségi felmérés.docx');
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
   elmuemasz() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this._iratmintaservice.KeszrejelentesElmuEmasz(this.Projektkod)
       .then(res => {
         if (res.Error != null) {
@@ -120,15 +114,15 @@ export class ProjektIratmintaComponent implements OnDestroy {
         }
         const blob = b64toBlob(res.Result);
         FileSaver.saveAs(blob, 'Készrejelentés Elmű/Émász.docx');
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
   eon() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this._iratmintaservice.KeszrejelentesEon(this.Projektkod)
       .then(res => {
         if (res.Error != null) {
@@ -136,15 +130,15 @@ export class ProjektIratmintaComponent implements OnDestroy {
         }
         const blob = b64toBlob(res.Result);
         FileSaver.saveAs(blob, 'Készrejelentés Eon.docx');
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
   demasz() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this._iratmintaservice.KeszrejelentesNkm(this.Projektkod)
       .then(res => {
         if (res.Error != null) {
@@ -152,10 +146,10 @@ export class ProjektIratmintaComponent implements OnDestroy {
         }
         const blob = b64toBlob(res.Result);
         FileSaver.saveAs(blob, 'Készrejelentés Démász.docx');
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

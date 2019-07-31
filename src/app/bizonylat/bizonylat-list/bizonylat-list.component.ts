@@ -41,25 +41,20 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
   Dto = new Array<BizonylatDto>();
   DtoSelectedIndex = -1;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   private _sub: any;
+
   bizonylatservice: BizonylatService;
+  spinnerservice: SpinnerService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
               private _route: ActivatedRoute,
+              spinnerservice: SpinnerService,
               bizonylatservice: BizonylatService) {
     this.mod = this._logonservice.Jogaim.includes(JogKod[JogKod.BIZONYLATMOD]);
+
     this.bizonylatservice = bizonylatservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -85,7 +80,7 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
           break;
       }
 
-      this.eppFrissit = true;
+      this.spinnerservice.eppFrissit = true;
       this.bizonylatservice.BizonylatLeiro(this.bizonylatTipus)
         .then(res => {
           if (res.Error != null) {
@@ -93,10 +88,10 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
           }
 
           this.bizonylatLeiro = res.Result;
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this._errorservice.Error = err;
         });
     });
@@ -120,7 +115,7 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
   }
 
   onKeresesTovabb() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.bizonylatservice.Select(this.bp)
       .then(res => {
         if (res.Error != null) {
@@ -140,10 +135,10 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
         this.OsszesRekord = res.OsszesRekord;
 
         this.bp.rekordtol += this.bp.lapmeret;
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

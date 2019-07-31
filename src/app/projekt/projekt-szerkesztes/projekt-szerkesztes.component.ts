@@ -30,28 +30,21 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
 
   SzerkesztesMode = ProjektSzerkesztesMode.Blank;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   projektservice: ProjektService;
+  spinnerservice: SpinnerService;
 
   constructor(private _ugyfelservice: UgyfelService,
               private _penznemservice: PenznemService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               projektservice: ProjektService) {
     this.projektservice = projektservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
     if (this.uj) {
-      this.eppFrissit = true;
+      this.spinnerservice.eppFrissit = true;
       this.projektservice.CreateNew()
         .then(res => {
           if (res.Error !== null) {
@@ -59,17 +52,17 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this._errorservice.Error = err;
         });
     }
   }
 
   onSubmit() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.DtoEdited.Ugyfelkod || 0,
       this.DtoEdited.Ugyfelnev || ''))
       .then(res => {
@@ -103,11 +96,11 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
           throw res3.Error;
         }
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res3.Result[0]);
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

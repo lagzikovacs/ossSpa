@@ -21,21 +21,14 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
   @Input() Iratkod = -1;
   @Output() eventSzerkeszteskesz = new EventEmitter<DokumentumDto>();
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   dokumentumservice: DokumentumService;
+  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               dokumentumservice: DokumentumService) {
     this.dokumentumservice = dokumentumservice;
+    this.spinnerservice = spinnerservice;
   }
 
   onFileChange(event) {
@@ -59,7 +52,7 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
     fb.Megjegyzes = this.megjegyzes;
     fb.IratKod = this.Iratkod;
 
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.dokumentumservice.FeltoltesAngular(fb)
       .then(res => {
         if (res.Error != null) {
@@ -73,11 +66,11 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
           throw res1.Error;
         }
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

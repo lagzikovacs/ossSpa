@@ -21,21 +21,14 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
   jelszo = '';
   jelszoujra = '';
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   felhasznaloservice: FelhasznaloService;
+  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               felhasznaloservice: FelhasznaloService) {
     this.felhasznaloservice = felhasznaloservice;
+    this.spinnerservice = spinnerservice;
   }
 
   onSubmit() {
@@ -44,7 +37,7 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
       return;
     }
 
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.felhasznaloservice.JelszoBeallitas(this.DtoEdited.Felhasznalokod, this.jelszo, this.DtoEdited.Modositva)
       .then(res => {
         if (res.Error != null) {
@@ -58,12 +51,12 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
           throw res1.Error;
         }
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
         this._errorservice.Error = err;
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       });
   }
 

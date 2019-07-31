@@ -35,26 +35,19 @@ export class BizonylattetelSzerkesztesComponent implements OnDestroy {
 
   bruttoosszeg = 0;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   bizonylatservice: BizonylatService;
+  spinnerservice: SpinnerService;
 
   constructor(private _cikkservice: CikkService,
               private _meservice: MeService,
               private _afakulcsservice: AfakulcsService,
               private _termekdijservice: TermekdijService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
               private _cdr: ChangeDetectorRef,
+              spinnerservice: SpinnerService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
+    this.spinnerservice = spinnerservice;
   }
 
   CikkZoom() {
@@ -135,7 +128,7 @@ export class BizonylattetelSzerkesztesComponent implements OnDestroy {
   }
 
   bruttobol() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.bizonylatservice.Bruttobol(new BruttobolParam(this.TetelDtoEdited, this.bruttoosszeg))
       .then(res => {
         if (res.Error != null) {
@@ -143,16 +136,16 @@ export class BizonylattetelSzerkesztesComponent implements OnDestroy {
         }
 
         this.TetelDtoEdited = res.Result[0];
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
 
   tetelcalc(e: any) {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.bizonylatservice.BizonylattetelCalc(this.TetelDtoEdited)
       .then(res => {
         if (res.Error != null) {
@@ -160,16 +153,16 @@ export class BizonylattetelSzerkesztesComponent implements OnDestroy {
         }
 
         this.TetelDtoEdited = res.Result[0];
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
 
   onSubmit() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this._cikkservice.ZoomCheck(new CikkZoomParameter(this.TetelDtoEdited.Cikkkod || 0,
             this.TetelDtoEdited.Megnevezes || ''))
       .then(res1 => {
@@ -217,11 +210,11 @@ export class BizonylattetelSzerkesztesComponent implements OnDestroy {
         }
 
         this._cdr.detectChanges();
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this.eventUjModositasUtan.emit(res5.Result[0]);
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

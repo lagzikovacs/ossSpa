@@ -27,21 +27,14 @@ export class CsoportListComponent implements OnDestroy {
 
   egymode = EgyMode.Reszletek;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   csoportservice: CsoportService;
+  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               csoportservice: CsoportService) {
     this.csoportservice = csoportservice;
+    this.spinnerservice = spinnerservice;
   }
 
   onKereses() {
@@ -54,7 +47,7 @@ export class CsoportListComponent implements OnDestroy {
   }
 
   onKeresesTovabb() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.csoportservice.Read(this.ekDto.minta)
       .then(res => {
         if (res.Error != null) {
@@ -72,10 +65,10 @@ export class CsoportListComponent implements OnDestroy {
           this.Dto = buf;
         }
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -106,7 +99,7 @@ export class CsoportListComponent implements OnDestroy {
   }
   onTorles(ok: boolean) {
     if (ok) {
-      this.eppFrissit = true;
+      this.spinnerservice.eppFrissit = true;
 
       this.csoportservice.Delete(this.Dto[this.DtoSelectedIndex])
         .then(res => {
@@ -117,11 +110,11 @@ export class CsoportListComponent implements OnDestroy {
           this.Dto.splice(this.DtoSelectedIndex, 1);
           this.DtoSelectedIndex = -1;
 
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this.tabla.clearselections();
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {

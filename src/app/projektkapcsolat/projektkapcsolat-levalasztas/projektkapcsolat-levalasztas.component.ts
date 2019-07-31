@@ -12,36 +12,29 @@ export class ProjektkapcsolatLevalasztasComponent implements OnDestroy {
   @Input() Dto = new ProjektKapcsolatDto();
   @Output() eventLevalasztasutan = new EventEmitter<boolean>();
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   projektkapcsolatservice: ProjektkapcsolatService;
+  spinnerservice: SpinnerService;
 
-  constructor(projektkapcsolatservice: ProjektkapcsolatService,
-              private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService) {
+  constructor(private _errorservice: ErrorService,
+              projektkapcsolatservice: ProjektkapcsolatService,
+              spinnerservice: SpinnerService) {
     this.projektkapcsolatservice = projektkapcsolatservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ok() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.projektkapcsolatservice.Delete(this.Dto.Projektkapcsolatkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this.eventLevalasztasutan.emit(true);
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

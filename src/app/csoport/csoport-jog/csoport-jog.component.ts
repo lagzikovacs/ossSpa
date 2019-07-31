@@ -14,25 +14,18 @@ export class CsoportJogComponent implements OnInit, OnDestroy {
 
   DtoCsoportLehetsegesJog = new Array<LehetsegesJogDto>();
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   csoportservice: CsoportService;
+  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               csoportservice: CsoportService) {
     this.csoportservice = csoportservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.csoportservice.SelectCsoportJog(this.Csoportkod)
       .then(res => {
         if (res.Error != null) {
@@ -40,16 +33,16 @@ export class CsoportJogComponent implements OnInit, OnDestroy {
         }
 
         this.DtoCsoportLehetsegesJog = res.Result;
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
 
   checkJog(i: number) {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
 
     const par = new CsoportJogParameter(this.Csoportkod,
       this.DtoCsoportLehetsegesJog[i].Lehetsegesjogkod, !this.DtoCsoportLehetsegesJog[i].Csoporttag);
@@ -61,10 +54,10 @@ export class CsoportJogComponent implements OnInit, OnDestroy {
         }
 
         this.DtoCsoportLehetsegesJog[i].Csoporttag = !this.DtoCsoportLehetsegesJog[i].Csoporttag;
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

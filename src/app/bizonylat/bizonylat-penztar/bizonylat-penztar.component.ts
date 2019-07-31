@@ -30,27 +30,20 @@ export class BizonylatPenztarComponent implements OnInit, OnDestroy {
   penztarkivalasztva = false;
   megjegyzes = '';
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   bizonylatservice: BizonylatService;
+  spinnerservice: SpinnerService;
 
   constructor(private _penztarservice: PenztarService,
               private _penztartetelservice: PenztartetelService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this._penztarservice.ReadByCurrencyOpened(this.Dto.Penznemkod)
       .then(res => {
         if (res.Error != null) {
@@ -58,10 +51,10 @@ export class BizonylatPenztarComponent implements OnInit, OnDestroy {
         }
 
         this.penztarDto = res.Result;
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -74,7 +67,7 @@ export class BizonylatPenztarComponent implements OnInit, OnDestroy {
   onSubmit() {
     let penztartetelDto: PenztartetelDto;
 
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this._penztartetelservice.CreateNew()
       .then(res => {
         if (res.Error != null) {
@@ -102,12 +95,12 @@ export class BizonylatPenztarComponent implements OnInit, OnDestroy {
           throw res1.Error;
         }
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this.eventPenztarUtan.emit();
 
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

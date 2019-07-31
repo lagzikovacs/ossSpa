@@ -19,22 +19,15 @@ export class UgyfelProjektComponent implements OnInit, OnDestroy {
   pp = new ProjektParameter(0, environment.lapmeret);
   ProjektDto: ProjektDto[] = new Array<ProjektDto>();
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   ugyfelservice: UgyfelService;
+  spinnerservice: SpinnerService;
 
   constructor(private _projektservice: ProjektService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               ugyfelservice: UgyfelService) {
     this.ugyfelservice = ugyfelservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -49,10 +42,10 @@ export class UgyfelProjektComponent implements OnInit, OnDestroy {
 
         this.ProjektDto = res.Result;
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

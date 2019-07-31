@@ -28,23 +28,16 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnDestroy {
   ];
   entryindex = 4;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   projektkapcsolatservice: ProjektkapcsolatService;
+  spinnerservice: SpinnerService;
 
   constructor(private _bizonylatservice: BizonylatService,
               private _ugyfelservice: UgyfelService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.projektkapcsolatservice = projektkapcsolatservice;
+    this.spinnerservice = spinnerservice;
   }
 
   change(i) {
@@ -54,7 +47,7 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnDestroy {
     let bizonylatDto: any;
     let ugyfelDto: UgyfelDto;
 
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this._bizonylatservice.CreateNewComplex()
       .then(res => {
         if (res.Error != null) {
@@ -102,11 +95,11 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnDestroy {
           throw res3.Error;
         }
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this.eventUjbizonylatutan.emit(res3.Result[0]);
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

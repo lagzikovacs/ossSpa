@@ -33,28 +33,21 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
 
   SzerkesztesMode = IratSzerkesztesMode.Blank;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   iratservice: IratService;
+  spinnerservice: SpinnerService;
 
   constructor(private _irattipusservice: IrattipusService,
               private _ugyfelservice: UgyfelService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               iratservice: IratService) {
     this.iratservice = iratservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
     if (this.uj) {
-      this.eppFrissit = true;
+      this.spinnerservice.eppFrissit = true;
       this.iratservice.CreateNew()
         .then(res => {
           if (res.Error !== null) {
@@ -63,10 +56,10 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
 
           this.DtoEdited = res.Result[0];
           this.DtoEdited.Ugyfelkod = this.Ugyfelkod;
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this._errorservice.Error = err;
         });
 
@@ -75,7 +68,7 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
 
     this._irattipusservice.ZoomCheck(new IrattipusZoomParameter(this.DtoEdited.Irattipuskod,
       this.DtoEdited.Irattipus))
@@ -116,11 +109,11 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
           throw res3.Error;
         }
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res3.Result[0]);
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

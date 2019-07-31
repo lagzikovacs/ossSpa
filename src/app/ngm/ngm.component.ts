@@ -21,19 +21,13 @@ export class NgmComponent implements OnDestroy {
   np = new NGMParam();
   result = '';
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
+  spinnerservice: SpinnerService;
 
   constructor(ngmservice: NgmService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               private _errorservice: ErrorService) {
     this.ngmservice = ngmservice;
+    this.spinnerservice = spinnerservice;
   }
 
   submit() {
@@ -58,7 +52,7 @@ export class NgmComponent implements OnDestroy {
   }
 
   adatszolgaltatas() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.result = '';
     this.ngmservice.Adatszolgaltatas(this.np)
       .then(res => {
@@ -68,10 +62,10 @@ export class NgmComponent implements OnDestroy {
 
         this.result = res.Result;
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

@@ -12,15 +12,11 @@ export class SpinnerService {
     return this._subjectSpinner.asObservable();
   }
 
-  set Run(par: boolean) {
-    this._subjectSpinner.next(par);
-  }
-
   get eppFrissit(): boolean {
     return this._eppFrissit;
   }
   set eppFrissit(value: boolean) {
     this._eppFrissit = value;
-    this.Run = value;
+    this._subjectSpinner.next(value);
   }
 }

@@ -42,23 +42,17 @@ export class IratListComponent implements OnDestroy {
   Dto = new Array<IratDto>();
   DtoSelectedIndex = -1;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   iratservice: IratService;
+  spinnerservice: SpinnerService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               iratservice: IratService) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.IRATMOD]);
+
     this.iratservice = iratservice;
+    this.spinnerservice = spinnerservice;
   }
 
   onKereses() {
@@ -86,7 +80,7 @@ export class IratListComponent implements OnDestroy {
   }
 
   onKeresesTovabb() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.iratservice.Select(this.ip)
       .then(res => {
         if (res.Error != null) {
@@ -106,10 +100,10 @@ export class IratListComponent implements OnDestroy {
         this.OsszesRekord = res.OsszesRekord;
 
         this.ip.rekordtol += this.ip.lapmeret;
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

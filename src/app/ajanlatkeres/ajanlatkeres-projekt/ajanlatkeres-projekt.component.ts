@@ -18,21 +18,14 @@ export class AjanlatkeresProjektComponent implements OnInit, OnDestroy {
   pp = new ProjektParameter(0, environment.lapmeret);
   ProjektDto = new Array<ProjektDto>();
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   projektservice: ProjektService;
+  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               projektservice: ProjektService) {
     this.projektservice = projektservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -42,7 +35,7 @@ export class AjanlatkeresProjektComponent implements OnInit, OnDestroy {
     this.pp.fi.push(
       new SzMT(Szempont.UgyfelEmail, this.Email));
 
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.projektservice.Select(this.pp)
       .then(res => {
         if (res.Error != null) {
@@ -50,10 +43,10 @@ export class AjanlatkeresProjektComponent implements OnInit, OnDestroy {
         }
 
         this.ProjektDto = res.Result;
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

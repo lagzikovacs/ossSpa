@@ -12,36 +12,29 @@ export class BizonylatkapcsolatLevalasztasComponent implements OnDestroy {
   @Input() Dto = new BizonylatKapcsolatDto();
   @Output() eventLevalasztasutan = new EventEmitter<boolean>();
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   bizonylatkapcsolatservice: BizonylatkapcsolatService;
+  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               bizonylatkapcsolatservice: BizonylatkapcsolatService) {
     this.bizonylatkapcsolatservice = bizonylatkapcsolatservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ok() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.bizonylatkapcsolatservice.Delete(this.Dto)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this.eventLevalasztasutan.emit(true);
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

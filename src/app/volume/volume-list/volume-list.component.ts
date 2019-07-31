@@ -25,21 +25,14 @@ export class VolumeListComponent implements OnInit, OnDestroy {
 
   egymode = EgyMode.Reszletek;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   volumeservice: VolumeService;
+  spinnerservice: SpinnerService;
 
-  constructor(private _spinnerservice: SpinnerService,
-              private _errorservice: ErrorService,
+  constructor(private _errorservice: ErrorService,
+              spinnerservice: SpinnerService,
               volumeservice: VolumeService) {
     this.volumeservice = volumeservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -56,7 +49,7 @@ export class VolumeListComponent implements OnInit, OnDestroy {
   }
 
   onKeresesTovabb() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.volumeservice.Read()
       .then(res => {
         if (res.Error != null) {
@@ -74,10 +67,10 @@ export class VolumeListComponent implements OnInit, OnDestroy {
           this.Dto = buf;
         }
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

@@ -43,28 +43,22 @@ export class BizonylatEgyComponent implements OnDestroy {
   nincsProjekt = false;
   mod = false;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   bizonylatservice: BizonylatService;
   projektservice: ProjektService;
+  spinnerservice: SpinnerService;
 
   constructor(private _logonservice: LogonService,
               private _vagolapservice: VagolapService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
               private _projektkapcsolatservice: ProjektkapcsolatService,
+              spinnerservice: SpinnerService,
               bizonylatservice: BizonylatService,
               projektservice: ProjektService) {
     this.mod = this._logonservice.Jogaim.includes(JogKod[JogKod.BIZONYLATMOD]);
+
     this.bizonylatservice = bizonylatservice;
     this.projektservice = projektservice;
+    this.spinnerservice = spinnerservice;
   }
 
   modositasenabled(): boolean {
@@ -151,7 +145,7 @@ export class BizonylatEgyComponent implements OnDestroy {
     this.EgyMode = BizonylatEgyMode.OSNxml;
   }
   doProjekt() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this._projektkapcsolatservice.SelectByBizonylat(this.Dto.Bizonylatkod)
       .then(res => {
         if (res.Error != null) {
@@ -176,10 +170,10 @@ export class BizonylatEgyComponent implements OnDestroy {
         }
 
         this.EgyMode = BizonylatEgyMode.Projekt;
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -190,18 +184,18 @@ export class BizonylatEgyComponent implements OnDestroy {
 
   onTorles(ok: boolean) {
     if (ok) {
-      this.eppFrissit = true;
+      this.spinnerservice.eppFrissit = true;
       this.bizonylatservice.Delete(this.Dto)
         .then(res => {
           if (res.Error != null) {
             throw res.Error;
           }
 
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this.eventTorlesutan.emit();
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {

@@ -26,28 +26,21 @@ export class AjanlatComponent implements OnInit, OnDestroy {
   ajanlatitem = new AjanlatBuf();
   AjanlatErvenyes: any;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   ajanlatservice: AjanlatService;
   projektkapcsolatservice: ProjektkapcsolatService;
+  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               ajanlatservice: AjanlatService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.ajanlatservice = ajanlatservice;
     this.projektkapcsolatservice = projektkapcsolatservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.ajanlatservice.CreateNew()
       .then(res => {
         if (res.Error != null) {
@@ -57,10 +50,10 @@ export class AjanlatComponent implements OnInit, OnDestroy {
         this.AjanlatParam = res.Result;
         this.AjanlatErvenyes = moment(this.AjanlatParam.Ervenyes).format('YYYY-MM-DD');
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -73,7 +66,7 @@ export class AjanlatComponent implements OnInit, OnDestroy {
     this.tabla.nem();
 
     if (item !== null) {
-      this.eppFrissit = true;
+      this.spinnerservice.eppFrissit = true;
       propCopy(item, this.AjanlatParam.AjanlatBuf[this.ajanlatitemindex]);
       this.ajanlatservice.AjanlatCalc(this.AjanlatParam)
         .then(res => {
@@ -82,17 +75,17 @@ export class AjanlatComponent implements OnInit, OnDestroy {
           }
 
           this.AjanlatParam = res.Result;
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this._errorservice.Error = err;
         });
     }
   }
 
   onSubmit() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
 
     this.AjanlatParam.ProjektKod = this.Projektkod;
     this.AjanlatParam.Ervenyes = moment(this.AjanlatErvenyes).toISOString(true);
@@ -109,11 +102,11 @@ export class AjanlatComponent implements OnInit, OnDestroy {
           throw res1.Error;
         }
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this.eventAjanlatkesz.emit(res1.Result[0]);
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

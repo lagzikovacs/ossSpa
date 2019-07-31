@@ -20,23 +20,15 @@ export class BizonylatkapcsolatVagolaprolComponent implements OnDestroy {
 
   ci = 0;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   bizonylatkapcsolatservice: BizonylatkapcsolatService;
+  spinnerservice: SpinnerService;
 
-  constructor(private _bizonylatservice: BizonylatService,
-              private _vagolapservice: VagolapService,
+  constructor(private _vagolapservice: VagolapService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               bizonylatkapcsolatservice: BizonylatkapcsolatService) {
     this.bizonylatkapcsolatservice = bizonylatkapcsolatservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ok() {
@@ -67,7 +59,7 @@ export class BizonylatkapcsolatVagolaprolComponent implements OnDestroy {
   }
 
   ciklus() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     if (this.ci < this._vagolapservice.Dto.length) {
       if (this._vagolapservice.Dto[this.ci].selected) {
         this.add()
@@ -82,7 +74,7 @@ export class BizonylatkapcsolatVagolaprolComponent implements OnDestroy {
             this.ciklus();
           })
           .catch(err => {
-            this.eppFrissit = false;
+            this.spinnerservice.eppFrissit = false;
             this._errorservice.Error = err;
           });
       } else {
@@ -90,7 +82,7 @@ export class BizonylatkapcsolatVagolaprolComponent implements OnDestroy {
         this.ciklus();
       }
     } else {
-      this.eppFrissit = false;
+      this.spinnerservice.eppFrissit = false;
       this.eventVagolaprolutanvege.emit();
     }
   }

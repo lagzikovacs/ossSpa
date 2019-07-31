@@ -40,15 +40,6 @@ export class CikkListComponent implements OnInit, OnDestroy {
 
   egymode = EgyMode.Reszletek;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   @Input() set maszk(value: string) {
     if (value !== undefined) {
       this.minta = value || '';
@@ -60,13 +51,16 @@ export class CikkListComponent implements OnInit, OnDestroy {
   @Output() eventStopzoom = new EventEmitter<void>();
 
   cikkservice: CikkService;
+  spinnerservice: SpinnerService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               cikkservice: CikkService  ) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.CIKKMOD]);
+
     this.cikkservice = cikkservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -91,7 +85,7 @@ export class CikkListComponent implements OnInit, OnDestroy {
   }
 
   onKeresesTovabb() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.cikkservice.Select(this.up)
       .then(res => {
         if (res.Error != null) {
@@ -111,14 +105,14 @@ export class CikkListComponent implements OnInit, OnDestroy {
         this.osszesrekord = res.OsszesRekord;
 
         this.up.rekordtol += this.up.lapmeret;
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
 
         // if (this.cikkservice.zoom) {
         //   window.scrollTo(0, document.body.scrollHeight);
         // }
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -149,7 +143,7 @@ export class CikkListComponent implements OnInit, OnDestroy {
   }
   onTorles(ok: boolean) {
     if (ok) {
-      this.eppFrissit = true;
+      this.spinnerservice.eppFrissit = true;
 
       this.cikkservice.Delete(this.Dto[this.DtoSelectedIndex])
         .then(res => {
@@ -160,11 +154,11 @@ export class CikkListComponent implements OnInit, OnDestroy {
           this.Dto.splice(this.DtoSelectedIndex, 1);
           this.DtoSelectedIndex = -1;
 
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this.tabla.clearselections();
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {

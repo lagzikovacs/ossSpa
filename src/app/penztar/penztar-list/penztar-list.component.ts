@@ -31,23 +31,17 @@ export class PenztarListComponent implements OnInit, OnDestroy {
 
   egymode = EgyMode.Reszletek;
 
-  private _eppFrissit = false;
-  get eppFrissit(): boolean {
-    return this._eppFrissit;
-  }
-  set eppFrissit(value: boolean) {
-    this._eppFrissit = value;
-    this._spinnerservice.Run = value;
-  }
-
   penztarservice: PenztarService;
+  spinnerservice: SpinnerService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
+              spinnerservice: SpinnerService,
               penztarservice: PenztarService) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);
+
     this.penztarservice = penztarservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -64,7 +58,7 @@ export class PenztarListComponent implements OnInit, OnDestroy {
   }
 
   onKeresesTovabb() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.penztarservice.Read(this.ekDto.minta)
       .then(res => {
         if (res.Error != null) {
@@ -82,10 +76,10 @@ export class PenztarListComponent implements OnInit, OnDestroy {
           this.Dto = buf;
         }
 
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -118,7 +112,7 @@ export class PenztarListComponent implements OnInit, OnDestroy {
   }
   onTorles(ok: boolean) {
     if (ok) {
-      this.eppFrissit = true;
+      this.spinnerservice.eppFrissit = true;
 
       this.penztarservice.Delete(this.Dto[this.DtoSelectedIndex])
         .then(res => {
@@ -129,11 +123,11 @@ export class PenztarListComponent implements OnInit, OnDestroy {
           this.Dto.splice(this.DtoSelectedIndex, 1);
           this.DtoSelectedIndex = -1;
 
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this.tabla.clearselections();
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this.spinnerservice.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {
@@ -142,7 +136,7 @@ export class PenztarListComponent implements OnInit, OnDestroy {
   }
 
   onReread() {
-    this.eppFrissit = true;
+    this.spinnerservice.eppFrissit = true;
     this.penztarservice.ReadById(this.Dto[this.DtoSelectedIndex].Penztarkod)
       .then(res => {
         if (res.Error != null) {
@@ -150,10 +144,10 @@ export class PenztarListComponent implements OnInit, OnDestroy {
         }
 
         propCopy(res.Result[0], this.Dto[this.DtoSelectedIndex]);
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinnerservice.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

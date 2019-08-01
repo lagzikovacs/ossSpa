@@ -8,8 +8,8 @@
     [(minta)]="minta"
     [(szempont2)]="szempont2"
     [(minta2)]="minta2"
-  [enKereses]="!eppFrissit" (Kereses)="onKereses()"
-  [enUj]="!eppFrissit && jog" (Uj)="doUjtetel()">
+  [enKereses]="!spinnerservice.eppFrissit" (Kereses)="onKereses()"
+  [enUj]="!spinnerservice.eppFrissit && jog" (Uj)="doUjtetel()">
   </app-irattoolbar>
 
   <app-tabla #tabla
@@ -35,7 +35,7 @@
     </app-irat-egy>
   </ng-template>
 
-  <app-toolbarfooter [enKereses]="!elsokereses && !eppFrissit"
+  <app-toolbarfooter [enKereses]="!elsokereses && !spinnerservice.eppFrissit"
                      [rekordszam]="Dto.length"
                      [osszesrekord]="OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">

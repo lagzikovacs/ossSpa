@@ -2,7 +2,7 @@
   <h5>{{volumeservice.cim}}</h5>
   <div>
     <nav>
-      <button [disabled]="eppFrissit" (click)="onKereses()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins" style="margin-right: 3px">
+      <button [disabled]="spinnerservice.eppFrissit" (click)="onKereses()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins" style="margin-right: 3px">
         <i class="fa fa-search" aria-hidden="true"></i>
       </button>
     </nav>
@@ -17,11 +17,11 @@
     <div class="alapkeret">
       <div>
         <nav>
-          <button [disabled]="eppFrissit" (click)="doNav(1)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button [disabled]="spinnerservice.eppFrissit" (click)="doNav(1)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             <i class="fa fa-file" aria-hidden="true"></i>
           </button>
 
-          <button [disabled]="eppFrissit" (click)="doNav(17)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button [disabled]="spinnerservice.eppFrissit" (click)="doNav(17)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             Ellenőrzés
           </button>
         </nav>

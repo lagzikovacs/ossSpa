@@ -3,6 +3,7 @@ import {ProjektService} from '../projekt.service';
 import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
 import {ProjektDto} from '../projektdto';
+import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-projekt-statusz',
@@ -24,9 +25,12 @@ export class ProjektStatuszComponent implements OnInit, OnDestroy {
   selected = 0;
 
   projektservice: ProjektService;
+  spinnerservice: SpinnerService;
 
-  constructor(projektservice: ProjektService) {
+  constructor(projektservice: ProjektService,
+              spinnerservice: SpinnerService) {
     this.projektservice = projektservice;
+    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {

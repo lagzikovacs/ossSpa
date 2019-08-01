@@ -2,7 +2,7 @@
   <h5>{{bizonylatLeiro.BizonylatNev}} storno</h5>
   <div>Biztosan stornozni akarja ezt a tételt?</div>
   <div class="row no-gutters" style="margin-bottom: 10px">
-    <button class="btn btn-sm btn-primary" [disabled]="eppFrissit" type="button" (click)="ok()">Ok</button>
-    <button class="btn btn-sm btn-default" [disabled]="eppFrissit" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
+    <button class="btn btn-sm btn-primary" [disabled]="spinnerservice.eppFrissit" type="button" (click)="ok()">Ok</button>
+    <button class="btn btn-sm btn-default" [disabled]="spinnerservice.eppFrissit" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
   </div>
 </div>

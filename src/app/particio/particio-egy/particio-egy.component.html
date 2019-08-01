@@ -5,22 +5,22 @@
   </div>
   <div>
     <nav>
-      <button [disabled]="eppFrissit" (click)="szallito()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="spinnerservice.eppFrissit" (click)="szallito()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Szállító
       </button>
-      <button [disabled]="eppFrissit" (click)="nav()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="spinnerservice.eppFrissit" (click)="nav()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         NAV
       </button>
-      <button [disabled]="eppFrissit" (click)="smtp()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="spinnerservice.eppFrissit" (click)="smtp()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         SMTP
       </button>
-      <button [disabled]="eppFrissit" (click)="bizonylat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="spinnerservice.eppFrissit" (click)="bizonylat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Bizonylat
       </button>
-      <button [disabled]="eppFrissit" (click)="projekt()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="spinnerservice.eppFrissit" (click)="projekt()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Projekt
       </button>
-      <button [disabled]="eppFrissit" (click)="volume()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="spinnerservice.eppFrissit" (click)="volume()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Volume
       </button>
     </nav>
@@ -38,42 +38,42 @@
 
 
   <ng-container *ngIf="EgyMode === 1">
-    <app-particio-szallito [eppFrissit]="eppFrissit"
+    <app-particio-szallito [eppFrissit]="spinnerservice.eppFrissit"
                            [Dto]="Dto"
                            (eventOk)="onSzerkesztesOk($event)"
                            (eventCancel)="onSzerkesztesCancel()">
     </app-particio-szallito>
   </ng-container>
   <ng-container *ngIf="EgyMode === 2">
-    <app-particio-nav [eppFrissit]="eppFrissit"
+    <app-particio-nav [eppFrissit]="spinnerservice.eppFrissit"
                       [Dto]="Dto"
                       (eventOk)="onSzerkesztesOk($event)"
                       (eventCancel)="onSzerkesztesCancel()">
     </app-particio-nav>
   </ng-container>
   <ng-container *ngIf="EgyMode === 3">
-    <app-particio-smtp [eppFrissit]="eppFrissit"
+    <app-particio-smtp [eppFrissit]="spinnerservice.eppFrissit"
                        [Dto]="Dto"
                        (eventOk)="onSzerkesztesOk($event)"
                        (eventCancel)="onSzerkesztesCancel()">
     </app-particio-smtp>
   </ng-container>
   <ng-container *ngIf="EgyMode === 4">
-    <app-particio-bizonylat [eppFrissit]="eppFrissit"
+    <app-particio-bizonylat [eppFrissit]="spinnerservice.eppFrissit"
                             [Dto]="Dto"
                             (eventOk)="onSzerkesztesOk($event)"
                             (eventCancel)="onSzerkesztesCancel()">
     </app-particio-bizonylat>
   </ng-container>
   <ng-container *ngIf="EgyMode === 5">
-    <app-particio-projekt [eppFrissit]="eppFrissit"
+    <app-particio-projekt [eppFrissit]="spinnerservice.eppFrissit"
                           [Dto]="Dto"
                           (eventOk)="onSzerkesztesOk($event)"
                           (eventCancel)="onSzerkesztesCancel()">
     </app-particio-projekt>
   </ng-container>
   <ng-container *ngIf="EgyMode === 6">
-    <app-particio-volume [eppFrissit]="eppFrissit"
+    <app-particio-volume [eppFrissit]="spinnerservice.eppFrissit"
                          [Dto]="Dto"
                          (eventOk)="onSzerkesztesOk($event)"
                          (eventCancel)="onSzerkesztesCancel()">

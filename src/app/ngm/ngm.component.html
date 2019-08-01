@@ -16,7 +16,7 @@
         <input type="date" class="form-control form-control-sm oszlop3" id="szkig"
                [(ngModel)]="szkig" name="szkig" style="display: inline-block;margin-right: 4px">
         <button class="btn btn-sm btn-primary" (click)="szamlakelte()"
-                [disabled] = "eppFrissit" style="display: inline-block;margin-right: 4px" type="button">
+                [disabled] = "spinnerservice.eppFrissit" style="display: inline-block;margin-right: 4px" type="button">
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </button>
       </div>
@@ -35,7 +35,7 @@
         <input type="text" class="form-control form-control-sm oszlop3" id="szszig"
                [(ngModel)]="szszig" name="szszig" style="display: inline-block;margin-right: 4px">
         <button class="btn btn-sm btn-primary" (click)="szamlaszam()"
-                [disabled] = "eppFrissit" style="display: inline-block;margin-right: 4px" type="button">
+                [disabled] = "spinnerservice.eppFrissit" style="display: inline-block;margin-right: 4px" type="button">
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </button>
       </div>

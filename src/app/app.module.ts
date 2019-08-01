@@ -188,6 +188,7 @@ import { BizonylatkapcsolatTablaComponent } from './bizonylatkapcsolat/bizonylat
 import {BizonylattetelSzerkesztesComponent} from './bizonylat/bizonylattetel-szerkesztes/bizonylattetel-szerkesztes.component';
 import { AjanlatTablaComponent } from './ajanlat/ajanlat-tabla/ajanlat-tabla.component';
 import { HscrollDirective } from './directives/divhscroll.directive';
+import { OkmegsemComponent } from './tools/okmegsem/okmegsem.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -401,6 +402,7 @@ if (environment.production) {
     BizonylatkapcsolatTablaComponent,
     AjanlatTablaComponent,
     HscrollDirective,
+    OkmegsemComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,10 @@
 <div class="alapkeret">
   <h5>{{dokumentumservice.cim}}</h5>
   <nav>
-    <button [disabled]="eppFrissit" (click)="onKereses()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+    <button [disabled]="spinnerservice.eppFrissit" (click)="onKereses()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
       <i class="fa fa-search" aria-hidden="true"></i>
     </button>
-    <button [disabled]="eppFrissit" (click)="doUjtetel()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+    <button [disabled]="spinnerservice.eppFrissit" (click)="doUjtetel()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
       <i class="fa fa-plus" aria-hidden="true"></i>
     </button>
   </nav>
@@ -29,16 +29,16 @@
     <div class="alapkeret">
       <div>
         <nav>
-          <button [disabled]="eppFrissit" (click)="doNav(1)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button [disabled]="spinnerservice.eppFrissit" (click)="doNav(1)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             <i class="fa fa-file" aria-hidden="true"></i>
           </button>
-          <button [disabled]="eppFrissit" (click)="doNav(2)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button [disabled]="spinnerservice.eppFrissit" (click)="doNav(2)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             <i class="fa fa-minus" aria-hidden="true"></i>
           </button>
-          <button [disabled]="eppFrissit" (click)="onLetoltes()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button [disabled]="spinnerservice.eppFrissit" (click)="onLetoltes()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             Letöltés
           </button>
-          <button [disabled]="eppFrissit" (click)="onLetoltesPDF()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button [disabled]="spinnerservice.eppFrissit" (click)="onLetoltesPDF()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             PDF
           </button>
         </nav>
@@ -59,7 +59,7 @@
       <ng-container *ngIf="egymode === 2">
         <div [@rowanimation]>
           <app-tetel-torles [cim]="dokumentumservice.cim"
-                            [eppFrissit]="eppFrissit"
+                            [eppFrissit]="spinnerservice.eppFrissit"
                             (eventTorles)="onTorles($event)">
           </app-tetel-torles>
         </div>

@@ -1,56 +1,56 @@
 <div class="alapkeret">
   <div>
     <nav>
-      <button [disabled]="eppFrissit" (click)="reszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="spinnerservice.eppFrissit" (click)="reszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>
       </button>
-      <button [disabled]="eppFrissit || !torlesenabled()" (click)="torles()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="spinnerservice.eppFrissit || !torlesenabled()" (click)="torles()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-minus" aria-hidden="true"></i>
       </button>
-      <button [disabled]="eppFrissit || !modositasenabled()" (click)="modositas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="spinnerservice.eppFrissit || !modositasenabled()" (click)="modositas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-edit" aria-hidden="true"></i>
       </button>
 
 
-      <button [disabled]="eppFrissit || !kibocsatasenabled()" (click)="kibocsatas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="spinnerservice.eppFrissit || !kibocsatasenabled()" (click)="kibocsatas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Kibocsátás
       </button>
-      <button [disabled]="eppFrissit" (click)="nyomtatas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="spinnerservice.eppFrissit" (click)="nyomtatas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-print" style="margin-right: 3px" aria-hidden="true"></i>Nyomtatás
       </button>
-      <button [disabled]="eppFrissit || !stornoenabled()" (click)="storno()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="spinnerservice.eppFrissit || !stornoenabled()" (click)="storno()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Storno
       </button>
-      <button [disabled]="eppFrissit || !penztarenabled()" (click)="penztar()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="spinnerservice.eppFrissit || !penztarenabled()" (click)="penztar()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Pénztár
       </button>
-      <button [disabled]="eppFrissit || !kiszallitvaenabled()" (click)="kiszallitva()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="spinnerservice.eppFrissit || !kiszallitvaenabled()" (click)="kiszallitva()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Kiszállítva
       </button>
-      <button [disabled]="eppFrissit" (click)="kifizetes()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="spinnerservice.eppFrissit" (click)="kifizetes()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Kifizetés
       </button>
-      <button [disabled]="eppFrissit || !kifizetesrendbenenabled()" (click)="kifizetesrendben()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="spinnerservice.eppFrissit || !kifizetesrendbenenabled()" (click)="kifizetesrendben()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Kifizetés rendben
       </button>
-      <button [disabled]="eppFrissit" (click)="irat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="spinnerservice.eppFrissit" (click)="irat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Irat
       </button>
-      <button [disabled]="eppFrissit" (click)="errol()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="spinnerservice.eppFrissit" (click)="errol()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Erről
       </button>
-      <button [disabled]="eppFrissit || !enProjekt" (click)="doProjekt()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="spinnerservice.eppFrissit || !enProjekt" (click)="doProjekt()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Projekt
       </button>
-      <button [disabled]="eppFrissit" (click)="vagolap()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="spinnerservice.eppFrissit" (click)="vagolap()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-angle-right" style="margin-right: 3px" aria-hidden="true"></i>
         Vágólapra
       </button>
 
-<!--      <button [disabled]="eppFrissit || !formaiellenorzesenabled()" (click)="formaiellenorzes()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+<!--      <button [disabled]="spinnerservice.eppFrissit || !formaiellenorzesenabled()" (click)="formaiellenorzes()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Formai ellenőrzés
       </button>
-      <button [disabled]="eppFrissit || !osnxmlenabled()" (click)="osnxml()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="spinnerservice.eppFrissit || !osnxmlenabled()" (click)="osnxml()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Letöltés online számla formátumban
       </button>-->
     </nav>
@@ -105,7 +105,7 @@
   <ng-container *ngIf="EgyMode === 5">
     <div [@rowanimation]>
       <app-tetel-torles [cim]="bizonylatLeiro.BizonylatNev"
-                        [eppFrissit]="eppFrissit"
+                        [eppFrissit]="spinnerservice.eppFrissit"
                         (eventTorles)="onTorles($event)">
       </app-tetel-torles>
     </div>

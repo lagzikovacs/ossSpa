@@ -1,4 +1,4 @@
-<div class="alapkeret">
+<div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>Bejelentkezés</h5>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -20,7 +20,7 @@
     </div>
 
     <div class="row no-gutters editform-row">
-      <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.valid || spinnerservice.eppFrissit">Ok</button>
+      <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.valid">Ok</button>
     </div>
   </form>
 </div>

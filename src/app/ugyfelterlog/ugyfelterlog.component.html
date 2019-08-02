@@ -1,9 +1,9 @@
-<div class="alapkeret">
+<div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>{{ugyfelterlogservice.cim}}</h5>
   <app-toolbar [Szurok]="szurok"
                [(szempont)]="szempont"
                [(minta)]="minta"
-               [enKereses]="!spinnerservice.eppFrissit" (Kereses)="onKereses()"
+               (Kereses)="onKereses()"
                [visUj]="false">
   </app-toolbar>
 
@@ -13,7 +13,7 @@
              [enIdclick]="false">
   </app-tabla>
 
-  <app-toolbarfooter [enKereses]="!elsokereses && !spinnerservice.eppFrissit"
+  <app-toolbarfooter [enKereses]="!elsokereses"
                      [rekordszam]="Dto.length"
                      [osszesrekord]="OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">

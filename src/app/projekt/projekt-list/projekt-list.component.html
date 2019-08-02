@@ -7,9 +7,9 @@
                       [(teendoszempont)]="teendoszempont"
                       [(szempont)]="szempont"
                       [(minta)]="minta"
-                      [enKereses]="!spinnerservice.eppFrissit" (Kereses)="onKereses()"
-                      [enUj]="!spinnerservice.eppFrissit && mod" (Uj)="doUjtetel()"
-                      [enExport]="!spinnerservice.eppFrissit" (Export)="onExport($event)">
+                      (Kereses)="onKereses()"
+                      [enUj]="mod" (Uj)="doUjtetel()"
+                      (Export)="onExport($event)">
   </app-projekttoolbar>
 
   <ng-container *ngIf="export">
@@ -37,43 +37,43 @@
     <div class="alapkeret">
       <div>
         <nav>
-          <button [disabled]="spinnerservice.eppFrissit" (click)="doNav(1)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button (click)="doNav(1)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             <i class="fa fa-file" aria-hidden="true"></i>
           </button>
 
-          <button [disabled]="spinnerservice.eppFrissit || !mod" (click)="doNav(2)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button [disabled]="!mod" (click)="doNav(2)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             <i class="fa fa-minus" aria-hidden="true"></i>
           </button>
 
-          <button [disabled]="spinnerservice.eppFrissit || !mod" (click)="doNav(3)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button [disabled]="!mod" (click)="doNav(3)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             <i class="fa fa-edit" aria-hidden="true"></i>
           </button>
 
-          <button [disabled]="spinnerservice.eppFrissit || !mod" (click)="doNav(19)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button [disabled]="!mod" (click)="doNav(19)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             Stsz
           </button>
-          <button [disabled]="spinnerservice.eppFrissit || !mod" (click)="doNav(20)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button [disabled]="!mod" (click)="doNav(20)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             Műszaki állapot
           </button>
-          <button [disabled]="spinnerservice.eppFrissit || !mod" (click)="doNav(21)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button [disabled]="!mod" (click)="doNav(21)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             Inverter
           </button>
-          <button [disabled]="spinnerservice.eppFrissit || !mod" (click)="doNav(22)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button [disabled]="!mod" (click)="doNav(22)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             Napelem
           </button>
-          <button [disabled]="spinnerservice.eppFrissit" (click)="doNav(23)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button (click)="doNav(23)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             Iratminta
           </button>
-          <button [disabled]="spinnerservice.eppFrissit" (click)="doNav(24)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button (click)="doNav(24)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             Bizonylat és irat
           </button>
-          <button [disabled]="spinnerservice.eppFrissit" (click)="doNav(25)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button (click)="doNav(25)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             Számlázási rend
           </button>
-          <button [disabled]="spinnerservice.eppFrissit" (click)="doNav(26)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button (click)="doNav(26)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             Teendő
           </button>
-          <button [disabled]="spinnerservice.eppFrissit || !mod" (click)="doNav(27)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button [disabled]="!mod" (click)="doNav(27)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             Dátumok
           </button>
         </nav>
@@ -91,7 +91,6 @@
       <ng-container *ngIf="egymode === 2">
         <div [@rowanimation]>
           <app-tetel-torles [cim]="projektservice.cim"
-                            [eppFrissit]="spinnerservice.eppFrissit"
                             (eventTorles)="onTorles($event)">
           </app-tetel-torles>
         </div>
@@ -106,16 +105,14 @@
       </ng-container>
 
       <ng-container *ngIf="egymode === 19">
-        <div [@rowanimation]><app-projekt-statusz [eppFrissit]="spinnerservice.eppFrissit"
-                                                  [DtoOriginal]="Dto[DtoSelectedIndex]"
+        <div [@rowanimation]><app-projekt-statusz [DtoOriginal]="Dto[DtoSelectedIndex]"
                                                   (eventOk)="onSegedOk($event)"
                                                   (eventCancel)="onSegedCancel()">
         </app-projekt-statusz></div>
       </ng-container>
       <ng-container *ngIf="egymode === 20">
         <div [@rowanimation]>
-          <app-projekt-muszakiallapot [eppFrissit]="spinnerservice.eppFrissit"
-                                      [DtoOriginal]="Dto[DtoSelectedIndex]"
+          <app-projekt-muszakiallapot [DtoOriginal]="Dto[DtoSelectedIndex]"
                                       (eventOk)="onSegedOk($event)"
                                       (eventCancel)="onSegedCancel()">
           </app-projekt-muszakiallapot>
@@ -123,8 +120,7 @@
       </ng-container>
       <ng-container *ngIf="egymode === 21">
         <div [@rowanimation]>
-          <app-projekt-inverter [eppFrissit]="spinnerservice.eppFrissit"
-                                [DtoOriginal]="Dto[DtoSelectedIndex]"
+          <app-projekt-inverter [DtoOriginal]="Dto[DtoSelectedIndex]"
                                 (eventOk)="onSegedOk($event)"
                                 (eventCancel)="onSegedCancel()">
           </app-projekt-inverter>
@@ -132,8 +128,7 @@
       </ng-container>
       <ng-container *ngIf="egymode === 22">
         <div [@rowanimation]>
-          <app-projekt-napelem [eppFrissit]="spinnerservice.eppFrissit"
-                               [DtoOriginal]="Dto[DtoSelectedIndex]"
+          <app-projekt-napelem [DtoOriginal]="Dto[DtoSelectedIndex]"
                                (eventOk)="onSegedOk($event)"
                                (eventCancel)="onSegedCancel()">
           </app-projekt-napelem>
@@ -141,8 +136,7 @@
       </ng-container>
       <ng-container *ngIf="egymode === 27">
         <div [@rowanimation]>
-          <app-projekt-datumok [eppFrissit]="spinnerservice.eppFrissit"
-                               [DtoOriginal]="Dto[DtoSelectedIndex]"
+          <app-projekt-datumok [DtoOriginal]="Dto[DtoSelectedIndex]"
                                (eventOk)="onSegedOk($event)"
                                (eventCancel)="onSegedCancel()">
           </app-projekt-datumok>
@@ -177,7 +171,7 @@
     </div>
   </ng-template>
 
-  <app-toolbarfooter [enKereses]="!elsokereses && !spinnerservice.eppFrissit"
+  <app-toolbarfooter [enKereses]="!elsokereses"
                      [rekordszam]="Dto.length"
                      [osszesrekord]="OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">

@@ -2,7 +2,7 @@
   <h5>{{esemenynaploservice.cim}}</h5>
   <div>
     <nav>
-      <button [disabled]="spinnerservice.eppFrissit" (click)="onKereses()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button (click)="onKereses()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-search" aria-hidden="true"></i>
       </button>
     </nav>
@@ -27,7 +27,7 @@
     </tr>
     </tbody>
   </table>
-  <app-toolbarfooter [enKereses]="!elsokereses && !spinnerservice.eppFrissit"
+  <app-toolbarfooter [enKereses]="!elsokereses"
                      [rekordszam]="Dto.length"
                      [osszesrekord]="OsszesRekord"
                      (KeresesTovabb)="onKeresesTovabb()">

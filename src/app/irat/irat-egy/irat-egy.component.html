@@ -1,29 +1,29 @@
 <div class="alapkeret">
   <div>
     <nav>
-      <button [disabled]="spinnerservice.eppFrissit" (click)="doReszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button (click)="doReszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>
       </button>
 
-      <button [disabled]="spinnerservice.eppFrissit || !jog || !enTorles"
+      <button [disabled]="!jog || !enTorles"
               (click)="doTorles()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-minus" aria-hidden="true"></i>
       </button>
-      <button [disabled]="spinnerservice.eppFrissit || !jog"
+      <button [disabled]="!jog"
               (click)="doModositas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-edit" aria-hidden="true"></i>
       </button>
 
-      <button [disabled]="spinnerservice.eppFrissit" (click)="doDokumentum()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button (click)="doDokumentum()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Dokumentum
       </button>
-      <button [disabled]="spinnerservice.eppFrissit" (click)="doFotozaslink()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button (click)="doFotozaslink()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Fotózás link
       </button>
-      <button [disabled]="spinnerservice.eppFrissit || !enProjekt" (click)="doProjekt()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="!enProjekt" (click)="doProjekt()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Projekt
       </button>
-      <button [disabled]="spinnerservice.eppFrissit" (click)="doVagolap()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button (click)="doVagolap()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-angle-right" style="margin-right: 3px" aria-hidden="true"></i>
         Vágólapra
       </button>
@@ -42,7 +42,6 @@
   <ng-container *ngIf="egymode === 2">
     <div [@rowanimation]>
       <app-tetel-torles [cim]="iratservice.cim"
-                        [eppFrissit]="spinnerservice.eppFrissit"
                         (eventTorles)="onTorles($event)">
       </app-tetel-torles>
     </div>

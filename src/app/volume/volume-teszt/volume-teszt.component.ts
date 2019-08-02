@@ -2,7 +2,6 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {VolumeService} from '../volume.service';
 import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-volume-teszt',
@@ -15,33 +14,31 @@ export class VolumeTesztComponent implements OnInit, OnDestroy {
   index = 0;
   hibalista: string[];
   eppTesztel = false;
+  eppFrissit = false;
 
   volumeservice: VolumeService;
   dokumentumservice: DokumentumService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               volumeservice: VolumeService,
               dokumentumservice: DokumentumService) {
     this.volumeservice = volumeservice;
     this.dokumentumservice = dokumentumservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.volumeservice.DokumentumkodByVolume(this.Volumekod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.dbv = res.Result;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

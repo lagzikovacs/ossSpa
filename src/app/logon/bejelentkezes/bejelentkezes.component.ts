@@ -6,7 +6,6 @@ import {SessionService} from '../../session/session.service';
 import {SessionDto} from '../../session/sessiondto';
 import {StartupService} from '../../startup/startup.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-bejelentkezes',
@@ -15,16 +14,14 @@ import {SpinnerService} from '../../tools/spinner/spinner.service';
 export class BejelentkezesComponent implements OnInit, OnDestroy {
   form: FormGroup;
 
-  spinnerservice: SpinnerService;
+  eppFrissit = false;
 
   constructor(private _router: Router,
               private fb: FormBuilder,
               private _logonservice: LogonService,
               private _sessionservice: SessionService,
               private _startupservice: StartupService,
-              private _errorservice: ErrorService,
-              spinnerservice: SpinnerService) {
-    this.spinnerservice = spinnerservice;
+              private _errorservice: ErrorService) {
   }
 
   ngOnInit() {
@@ -40,7 +37,7 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     const nincsBesorolva = 'Önt a rendszergazda még nem sorolta be egyetlen felhasználói csoportba sem!';
 
     this._logonservice.Bejelentkezes(this.form.value['azonosito'], this.form.value['jelszo'])
@@ -69,7 +66,7 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
                   throw res4.Error;
                 }
 
-                this.spinnerservice.eppFrissit = false;
+                this.eppFrissit = false;
                 this._router.navigate(['/fooldal']);
               })
               .catch(err => {
@@ -77,12 +74,12 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
               });
             break;
           default:
-            this.spinnerservice.eppFrissit = false;
+            this.eppFrissit = false;
             this._router.navigate(['/szerepkorvalasztas']);
         }
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

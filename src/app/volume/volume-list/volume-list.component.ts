@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {VolumeService} from '../volume.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
@@ -19,6 +18,7 @@ export class VolumeListComponent implements OnInit, OnDestroy {
 
   ekDto = new EgyszeruKeresesDto(0, '', environment.lapmeret);
   elsokereses = true;
+  eppFrissit = false;
 
   Dto = new Array<VolumeDto>();
   DtoSelectedIndex = -1;
@@ -26,13 +26,10 @@ export class VolumeListComponent implements OnInit, OnDestroy {
   egymode = EgyMode.Reszletek;
 
   volumeservice: VolumeService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               volumeservice: VolumeService) {
     this.volumeservice = volumeservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -49,7 +46,7 @@ export class VolumeListComponent implements OnInit, OnDestroy {
   }
 
   onKeresesTovabb() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.volumeservice.Read()
       .then(res => {
         if (res.Error != null) {
@@ -67,10 +64,10 @@ export class VolumeListComponent implements OnInit, OnDestroy {
           this.Dto = buf;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

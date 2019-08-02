@@ -4,7 +4,6 @@ import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import {AjanlatkeresDto} from '../ajanlatkeresdto';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
 import {AjanlatkeresParameter} from '../ajanlatkeresparameter';
@@ -29,6 +28,7 @@ export class AjanlatkeresListComponent implements OnDestroy {
   fp = new AjanlatkeresParameter(0, environment.lapmeret);
   OsszesRekord = 0;
   elsokereses = true;
+  eppFrissit = false;
 
   Dto = new Array<AjanlatkeresDto>();
   DtoSelectedIndex = -1;
@@ -36,13 +36,10 @@ export class AjanlatkeresListComponent implements OnDestroy {
   egymode = EgyMode.Reszletek;
 
   ajanlatkeresservice: AjanlatkeresService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               ajanlatkeresservice: AjanlatkeresService) {
     this.ajanlatkeresservice = ajanlatkeresservice;
-    this.spinnerservice = spinnerservice;
   }
 
   onKereses() {
@@ -61,7 +58,7 @@ export class AjanlatkeresListComponent implements OnDestroy {
   }
 
   onKeresesTovabb() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.ajanlatkeresservice.Select(this.fp)
       .then(res => {
         if (res.Error != null) {
@@ -81,10 +78,10 @@ export class AjanlatkeresListComponent implements OnDestroy {
         this.OsszesRekord = res.OsszesRekord;
 
         this.fp.rekordtol += this.fp.lapmeret;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

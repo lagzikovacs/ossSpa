@@ -6,7 +6,6 @@ import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 })
 export class TetelTorlesComponent implements OnDestroy {
   @Input() cim: string;
-  @Input() eppFrissit: boolean;
   @Output() eventTorles = new EventEmitter<boolean>();
 
   doOk() {

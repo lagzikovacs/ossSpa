@@ -4,8 +4,8 @@
   <app-toolbar [Szurok]="szurok"
                [(szempont)]="ekDto.szempont"
                [(minta)]="ekDto.minta"
-               [enKereses]="!spinnerservice.eppFrissit" (Kereses)="onKereses()"
-               [enUj]="!spinnerservice.eppFrissit && jog" (Uj)="doUjtetel()"
+               (Kereses)="onKereses()"
+               [enUj]="jog" (Uj)="doUjtetel()"
                [visZoom]="zoom" (StopZoom)="onStopzoom()">
   </app-toolbar>
   <app-tabla #tabla
@@ -28,13 +28,13 @@
     <div class="alapkeret">
       <div>
         <nav>
-          <button [disabled]="spinnerservice.eppFrissit" (click)="doNav(1)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button (click)="doNav(1)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             <i class="fa fa-file" aria-hidden="true"></i>
           </button>
-          <button [disabled]="spinnerservice.eppFrissit || !jog" (click)="doNav(2)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button [disabled]="!jog" (click)="doNav(2)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             <i class="fa fa-minus" aria-hidden="true"></i>
           </button>
-          <button [disabled]="spinnerservice.eppFrissit || !jog" (click)="doNav(3)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button [disabled]="!jog" (click)="doNav(3)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             <i class="fa fa-edit" aria-hidden="true"></i>
           </button>
         </nav>
@@ -57,7 +57,6 @@
       <ng-container *ngIf="egymode === 2">
         <div [@rowanimation]>
           <app-tetel-torles [cim]="irattipusservice.cim"
-                            [eppFrissit]="spinnerservice.eppFrissit"
                             (eventTorles)="onTorles($event)">
           </app-tetel-torles>
         </div>

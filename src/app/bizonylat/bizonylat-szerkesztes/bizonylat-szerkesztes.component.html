@@ -147,7 +147,7 @@
 
   <div class="alapkeret">
     <nav>
-      <button [disabled]="spinnerservice.eppFrissit" (click)="onTetelUjElott()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button (click)="onTetelUjElott()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>
       </button>
     </nav>
@@ -163,7 +163,6 @@
 
     <ng-template #gridtorles>
       <app-tetel-torles [cim]="'Bizonylattétel'"
-                        [eppFrissit]="spinnerservice.eppFrissit"
                         (eventTorles)="onTeteltorles($event)">
       </app-tetel-torles>
     </ng-template>
@@ -179,9 +178,9 @@
   </div>
 
   <div class="row no-gutters" style="margin-bottom: 10px">
-    <button class="btn btn-sm btn-primary" [disabled]="spinnerservice.eppFrissit || SzerkesztesMode !== 1"
+    <button class="btn btn-sm btn-primary" [disabled]="SzerkesztesMode !== 1"
             type="button" (click)="onSubmit()">Ok</button>
-    <button class="btn btn-sm btn-default" [disabled]="spinnerservice.eppFrissit || SzerkesztesMode !== 1"
+    <button class="btn btn-sm btn-default" [disabled]="SzerkesztesMode !== 1"
             style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
   </div>
 </div>

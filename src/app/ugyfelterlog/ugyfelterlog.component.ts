@@ -4,7 +4,6 @@ import {Szempont} from '../enums/szempont';
 import {SzMT} from '../dtos/szmt';
 import {UgyfelterlogDto} from './ugyfelterlogdto';
 import {ErrorService} from '../tools/errorbox/error.service';
-import {SpinnerService} from '../tools/spinner/spinner.service';
 import {environment} from '../../environments/environment';
 import {UgyfelterlogParameter} from './ugyfelterlogparameter';
 
@@ -22,18 +21,16 @@ export class UgyfelterlogComponent implements OnDestroy {
   ulp = new UgyfelterlogParameter(0, environment.lapmeret);
   elsokereses = false;
   OsszesRekord = 0;
+  eppFrissit = false;
 
   Dto = new Array<UgyfelterlogDto>();
   DtoSelectedIndex = -1;
 
   ugyfelterlogservice: UgyfelterlogService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               ugyfelterlogservice: UgyfelterlogService) {
     this.ugyfelterlogservice = ugyfelterlogservice;
-    this.spinnerservice = spinnerservice;
   }
 
   onKereses() {
@@ -51,7 +48,7 @@ export class UgyfelterlogComponent implements OnDestroy {
   }
 
   onKeresesTovabb() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.ugyfelterlogservice.Select(this.ulp)
       .then(res => {
         if (res.Error != null) {
@@ -71,10 +68,10 @@ export class UgyfelterlogComponent implements OnDestroy {
         this.OsszesRekord = res.OsszesRekord;
 
         this.ulp.rekordtol += this.ulp.lapmeret;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

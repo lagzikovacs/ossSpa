@@ -3,19 +3,19 @@
 
   <div>
     <nav>
-      <button [disabled]="spinnerservice.eppFrissit" (click)="onKereses()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins" style="margin-right: 3px">
+      <button (click)="onKereses()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins" style="margin-right: 3px">
         <i class="fa fa-search" aria-hidden="true"></i>
       </button>
-      <button [disabled]="spinnerservice.eppFrissit || !BizonylatMod" (click)="onUjbizonylat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="!BizonylatMod" (click)="onUjbizonylat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Bizonylat
       </button>
-      <button [disabled]="spinnerservice.eppFrissit || !IratMod" (click)="onUjirat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="!IratMod" (click)="onUjirat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Irat
       </button>
-      <button [disabled]="spinnerservice.eppFrissit || !AjanlatMod" (click)="onUjajanlat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="!AjanlatMod" (click)="onUjajanlat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Ajánlat
       </button>
-      <button [disabled]="spinnerservice.eppFrissit" (click)="onVagolaprol()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button (click)="onVagolaprol()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Vágólapról
       </button>
     </nav>

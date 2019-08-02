@@ -1,4 +1,3 @@
-import {SpinnerService} from '../tools/spinner/spinner.service';
 import {ErrorService} from '../tools/errorbox/error.service';
 import {b64toBlob} from '../tools/b64toBlob';
 import * as FileSaver from 'file-saver';
@@ -15,7 +14,6 @@ export class Bizonylatnyomtatasciklus implements OnDestroy {
   fajlnev: string;
 
   constructor(private _errorservice: ErrorService,
-              private _spinnerservice: SpinnerService,
               private _bizonylatnyomtatasservice: BizonylatnyomtatasService) {
   }
 

@@ -5,7 +5,7 @@
 
   <ng-container *ngIf="!bejelentkezve">
     <p>Üdvözöljük, ön a GridSolar Group Kft. informatikai rendszerét (OSS) használja. Kérjük a fotózáshoz kapott linket kezelje bizalmasan!</p>
-    <button [disabled]="spinnerservice.eppFrissit" (click)="folytatas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+    <button (click)="folytatas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
       Folytatás
     </button>
   </ng-container>
@@ -56,7 +56,7 @@
       </div>
 
       <div class="row no-gutters editform-row">
-        <button class="btn btn-sm btn-primary" [disabled]="!f.valid || file === undefined || spinnerservice.eppFrissit" type="submit">Ok</button>
+        <button class="btn btn-sm btn-primary" [disabled]="!f.valid || file === undefined" type="submit">Ok</button>
       </div>
     </form>
   </ng-container>

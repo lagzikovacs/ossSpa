@@ -6,8 +6,8 @@
                      [(csoportszempont)]="csoportszempont"
                      [(szempont)]="szempont"
                      [(minta)]="minta"
-                     [enKereses]="!spinnerservice.eppFrissit" (eventKereses)="onKereses()"
-                     [enUj]="!spinnerservice.eppFrissit && jog" (eventUj)="doUjtetel()"
+                     (eventKereses)="onKereses()"
+                     [enUj]="jog" (eventUj)="doUjtetel()"
                      [visZoom]="zoom" (eventStopZoom)="onStopzoom()">
   </app-ugyfeltoolbar>
 
@@ -30,26 +30,26 @@
     <div class="alapkeret">
       <div>
         <nav>
-          <button [disabled]="spinnerservice.eppFrissit" (click)="doNav(1)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button (click)="doNav(1)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             <i class="fa fa-file" aria-hidden="true"></i>
           </button>
 
-          <button [disabled]="spinnerservice.eppFrissit || !jog" (click)="doNav(2)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button [disabled]="!jog" (click)="doNav(2)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             <i class="fa fa-minus" aria-hidden="true"></i>
           </button>
-          <button [disabled]="spinnerservice.eppFrissit || !jog" (click)="doNav(3)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button [disabled]="!jog" (click)="doNav(3)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             <i class="fa fa-edit" aria-hidden="true"></i>
           </button>
-          <button [disabled]="spinnerservice.eppFrissit" (click)="doNav(7)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button (click)="doNav(7)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             Csoport
           </button>
-          <button [disabled]="spinnerservice.eppFrissit" (click)="doNav(8)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button (click)="doNav(8)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             Projekt
           </button>
-          <button [disabled]="spinnerservice.eppFrissit" (click)="doNav(9)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button (click)="doNav(9)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             Ügyféltér link
           </button>
-          <button [disabled]="spinnerservice.eppFrissit" (click)="doNav(10)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+          <button (click)="doNav(10)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             vCard
           </button>
         </nav>
@@ -66,7 +66,6 @@
       <ng-container *ngIf="egymode === 2">
         <div [@rowanimation]>
           <app-tetel-torles [cim]="ugyfelservice.cim"
-                            [eppFrissit]="spinnerservice.eppFrissit"
                             (eventTorles)="onTorles($event)">
           </app-tetel-torles>
         </div>
@@ -111,7 +110,7 @@
     </div>
   </ng-template>
 
-  <app-toolbarfooter [enKereses]="!elsokereses && !spinnerservice.eppFrissit"
+  <app-toolbarfooter [enKereses]="!elsokereses"
                      [rekordszam]="Dto.length"
                      [osszesrekord]="osszesrekord"
                      (KeresesTovabb)="onKeresesTovabb()">

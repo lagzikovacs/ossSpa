@@ -3,7 +3,6 @@ import {HelysegService} from '../helyseg.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
 import {ErrorService} from '../../../tools/errorbox/error.service';
-import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
 import {environment} from '../../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../../dtos/egyszerukeresesdto';
@@ -26,6 +25,7 @@ export class HelysegListComponent implements OnInit, OnDestroy {
   elsokereses = true;
   jog = false;
   zoom = false;
+  eppFrissit = false;
 
   Dto = new Array<HelysegDto>();
   DtoSelectedIndex = -1;
@@ -42,16 +42,13 @@ export class HelysegListComponent implements OnInit, OnDestroy {
   @Output() eventStopzoom = new EventEmitter<void>();
 
   helysegservice: HelysegService;
-  spinnerservice: SpinnerService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               helysegservice: HelysegService) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
 
     this.helysegservice = helysegservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -65,12 +62,13 @@ export class HelysegListComponent implements OnInit, OnDestroy {
     this.ekDto.rekordtol = 0;
 
     this.tabla.clearselections();
+    this.Dto = [];
 
     this.onKeresesTovabb();
   }
 
   onKeresesTovabb() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.helysegservice.Read(this.ekDto.minta)
       .then(res => {
         if (res.Error != null) {
@@ -88,14 +86,14 @@ export class HelysegListComponent implements OnInit, OnDestroy {
           this.Dto = buf;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
 
         // if (this.helysegservice.zoom) {
         //   window.scrollTo(0, document.body.scrollHeight);
         // }
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -126,7 +124,7 @@ export class HelysegListComponent implements OnInit, OnDestroy {
   }
   onTorles(ok: boolean) {
     if (ok) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
 
       this.helysegservice.Delete(this.Dto[this.DtoSelectedIndex])
         .then(res => {
@@ -137,11 +135,11 @@ export class HelysegListComponent implements OnInit, OnDestroy {
           this.Dto.splice(this.DtoSelectedIndex, 1);
           this.DtoSelectedIndex = -1;
 
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this.tabla.clearselections();
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {

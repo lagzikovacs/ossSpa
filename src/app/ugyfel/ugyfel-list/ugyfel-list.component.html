@@ -1,4 +1,4 @@
-<div class="alapkeret" {appSpinner[="eppFrissit">
+<div class="alapkeret" [appSpinner]="eppFrissit">
   <h5 *ngIf="!zoom">{{ugyfelservice.cim}}</h5>
   <h5 *ngIf="zoom">{{ugyfelservice.cim}} - zoom</h5>
   <app-ugyfeltoolbar [Csoportszurok]="csoportszurok"

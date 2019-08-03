@@ -4,21 +4,20 @@ import {Directive, ElementRef, Input} from '@angular/core';
   selector: '[appSpinner]'
 })
 export class SpinnerDirective {
-  private _alapkeretdiv: any;
-  private _loadingdiv: any;
+  randomid = '';
 
   @Input() set appSpinner(value) {
     if (value) {
-      document.getElementById('loadingdiv').style.display = 'block';
+      document.getElementById(this.randomid).style.display = 'block';
     } else {
-      document.getElementById('loadingdiv').style.display = 'none';
+      document.getElementById(this.randomid).style.display = 'none';
     }
   }
 
   constructor(private elementRef: ElementRef) {
-    this._alapkeretdiv = elementRef.nativeElement;
+    this.randomid = Math.floor((Math.random() * 1000000) + 1).toString();
 
-    this._alapkeretdiv.innerHTML = '<div id="loadingdiv" class="loading" style="display: none"><div class="loader"></div></div>';
-    this._loadingdiv = document.getElementById('loadingdiv');
+    elementRef.nativeElement.innerHTML =
+      `<div id="${this.randomid}" class="loading" style="display: none"><div class="loader"></div></div>`;
   }
 }

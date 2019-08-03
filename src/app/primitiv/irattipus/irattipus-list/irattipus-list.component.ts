@@ -3,7 +3,6 @@ import {IrattipusService} from '../irattipus.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
 import {ErrorService} from '../../../tools/errorbox/error.service';
-import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
 import {environment} from '../../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../../dtos/egyszerukeresesdto';
@@ -26,6 +25,7 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
   elsokereses = true;
   jog = false;
   zoom = false;
+  eppFrissit = false;
 
   Dto = new Array<IrattipusDto>();
   DtoSelectedIndex = -1;
@@ -42,16 +42,13 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
   @Output() eventStopzoom = new EventEmitter<void>();
 
   irattipusservice: IrattipusService;
-  spinnerservice: SpinnerService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               irattipusservice: IrattipusService) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
 
     this.irattipusservice = irattipusservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -70,7 +67,7 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
   }
 
   onKeresesTovabb() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.irattipusservice.Read(this.ekDto.minta)
       .then(res => {
         if (res.Error != null) {
@@ -88,14 +85,14 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
           this.Dto = buf;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
 
         // if (this.irattipusservice.zoom) {
         //   window.scrollTo(0, document.body.scrollHeight);
         // }
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -126,7 +123,7 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
   }
   onTorles(ok: boolean) {
     if (ok) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
 
       this.irattipusservice.Delete(this.Dto[this.DtoSelectedIndex])
         .then(res => {
@@ -137,11 +134,11 @@ export class IrattipusListComponent implements OnInit, OnDestroy {
           this.Dto.splice(this.DtoSelectedIndex, 1);
           this.DtoSelectedIndex = -1;
 
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this.tabla.clearselections();
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {

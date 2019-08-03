@@ -2,7 +2,6 @@ import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, On
 import {PenztartetelService} from '../penztartetel.service';
 import * as moment from 'moment';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {PenztartetelDto} from '../penztarteteldto';
 
 @Component({
@@ -23,18 +22,17 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnInit, 
 
   @Output() eventSzerkeszteskesz = new EventEmitter<PenztartetelDto>();
 
+  eppFrissit = false;
+
   penztartetelservice: PenztartetelService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               penztartetelservice: PenztartetelService) {
     this.penztartetelservice = penztartetelservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.penztartetelservice.CreateNew()
       .then(res => {
         if (res.Error !== null) {
@@ -42,10 +40,10 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnInit, 
         }
 
         this.DtoEdited = res.Result[0];
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
         });
   }
@@ -99,7 +97,7 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnInit, 
     this.DtoEdited.Penztarkod = this.Penztarkod;
     this.DtoEdited.Datum = moment(this.datum).toISOString(true);
 
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.penztartetelservice.Add(this.DtoEdited)
       .then(res => {
         if (res.Error != null) {
@@ -113,11 +111,11 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnInit, 
           throw res1.Error;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

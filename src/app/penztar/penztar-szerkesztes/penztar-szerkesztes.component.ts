@@ -4,7 +4,6 @@ import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter'
 import {PenztarService} from '../penztar.service';
 import {PenztarSzerkesztesMode} from '../penztarszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {PenznemDto} from '../../primitiv/penznem/penznemdto';
 import {PenztarDto} from '../penztardto';
@@ -23,20 +22,19 @@ export class PenztarSzerkesztesComponent implements OnInit, OnDestroy {
 
   SzerkesztesMode = PenztarSzerkesztesMode.Blank;
 
+  eppFrissit = false;
+
   penztarservice: PenztarService;
-  spinnerservice: SpinnerService;
 
   constructor(private _penznemservice: PenznemService,
               private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               penztarservice: PenztarService) {
     this.penztarservice = penztarservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
     if (this.uj) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
       this.penztarservice.CreateNew()
         .then(res => {
           if (res.Error !== null) {
@@ -44,17 +42,17 @@ export class PenztarSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     }
   }
 
   onSubmit() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.DtoEdited.Penznemkod || 0,
       this.DtoEdited.Penznem || ''))
       .then(res => {
@@ -80,11 +78,11 @@ export class PenztarSzerkesztesComponent implements OnInit, OnDestroy {
           throw res2.Error;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res2.Result[0]);
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

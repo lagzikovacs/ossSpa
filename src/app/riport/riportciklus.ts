@@ -7,6 +7,7 @@ import {LiteEvent} from '../tools/event/LiteEvent';
 
 export class Riportciklus implements OnDestroy {
   eventCiklusutan = new LiteEvent<void>();
+  eventSpinnervege = new LiteEvent<void>();
 
   private _szamlalo: any;
   megszakitani = false;
@@ -36,13 +37,13 @@ export class Riportciklus implements OnDestroy {
         if (res.Status === 'Completed') {
           const blob = b64toBlob(res.Riport);
           FileSaver.saveAs(blob, this._fajlnev);
-          this._spinnerservice.eppFrissit = false;
+          this.eventSpinnervege.trigger();
 
           this.eventCiklusutan.trigger();
         }
       })
       .catch(err => {
-        this._spinnerservice.eppFrissit = false;
+        this.eventSpinnervege.trigger();
         this._errorservice.Error = err;
 
         this.eventCiklusutan.trigger();
@@ -59,10 +60,10 @@ export class Riportciklus implements OnDestroy {
             throw res.Error;
           }
 
-          this._spinnerservice.eppFrissit = false;
+          this.eventSpinnervege.trigger();
         })
         .catch(err => {
-          this._spinnerservice.eppFrissit = false;
+          this.eventSpinnervege.trigger();
           this._errorservice.Error = err;
         });
     } else {

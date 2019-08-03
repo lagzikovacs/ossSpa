@@ -4,7 +4,6 @@ import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import * as moment from 'moment';
 import {environment} from '../../../environments/environment';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 import {deepCopy} from '../../tools/deepCopy';
 
@@ -22,17 +21,16 @@ export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
   link = '';
   kikuldesikodidopontja: any;
 
-  spinnerservice: SpinnerService;
+  eppFrissit = false;
 
   constructor(private _ugyfelservice: UgyfelService,
               private _ugyfelterservice: UgyfelterService,
-              private _errorservice: ErrorService,
-              spinnerservice: SpinnerService) {
-    this.spinnerservice = spinnerservice;
+              private _errorservice: ErrorService) {
   }
 
   ngOnInit() {
     if (this.DtoEdited.Kikuldesikodidopontja !== null) {
+      this.eppFrissit = true;
       this.kikuldesidopontja();
       this._ugyfelterservice.GetLink(this.DtoEdited)
         .then(res => {
@@ -43,7 +41,7 @@ export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
           this.link = environment.OSSRef + res.Result;
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {
@@ -57,7 +55,7 @@ export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
   }
 
   ugyfelterlink() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this._ugyfelterservice.CreateNewLink(this.DtoEdited)
       .then(res => {
         if (res.Error !== null) {
@@ -73,11 +71,11 @@ export class UgyfelTerLinkComponent implements OnInit, OnDestroy {
         }
 
         this.kikuldesidopontja();
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

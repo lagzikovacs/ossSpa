@@ -6,7 +6,6 @@ import {SzMT} from '../../dtos/szmt';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
 import {CikkParameter} from '../cikkparameter';
@@ -34,6 +33,7 @@ export class CikkListComponent implements OnInit, OnDestroy {
   osszesrekord = 0;
   jog = false;
   zoom = false;
+  eppFrissit = false;
 
   Dto = new Array<CikkDto>();
   DtoSelectedIndex = -1;
@@ -51,16 +51,13 @@ export class CikkListComponent implements OnInit, OnDestroy {
   @Output() eventStopzoom = new EventEmitter<void>();
 
   cikkservice: CikkService;
-  spinnerservice: SpinnerService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               cikkservice: CikkService  ) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.CIKKMOD]);
 
     this.cikkservice = cikkservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -85,7 +82,7 @@ export class CikkListComponent implements OnInit, OnDestroy {
   }
 
   onKeresesTovabb() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.cikkservice.Select(this.up)
       .then(res => {
         if (res.Error != null) {
@@ -105,14 +102,14 @@ export class CikkListComponent implements OnInit, OnDestroy {
         this.osszesrekord = res.OsszesRekord;
 
         this.up.rekordtol += this.up.lapmeret;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
 
         // if (this.cikkservice.zoom) {
         //   window.scrollTo(0, document.body.scrollHeight);
         // }
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -143,7 +140,7 @@ export class CikkListComponent implements OnInit, OnDestroy {
   }
   onTorles(ok: boolean) {
     if (ok) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
 
       this.cikkservice.Delete(this.Dto[this.DtoSelectedIndex])
         .then(res => {
@@ -154,11 +151,11 @@ export class CikkListComponent implements OnInit, OnDestroy {
           this.Dto.splice(this.DtoSelectedIndex, 1);
           this.DtoSelectedIndex = -1;
 
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this.tabla.clearselections();
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {

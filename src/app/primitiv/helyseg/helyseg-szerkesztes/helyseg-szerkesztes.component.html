@@ -1,4 +1,4 @@
-<div class="alapkeret">
+<div class="alapkeret" [appSpinner]="eppFrissit">
   <h5 *ngIf="uj">Új {{helysegservice.cim | lowercase}}</h5>
   <h5 *ngIf="!uj">{{helysegservice.cim}} módosítása</h5>
 

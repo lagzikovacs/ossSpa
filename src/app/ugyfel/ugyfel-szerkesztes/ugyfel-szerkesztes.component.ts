@@ -4,7 +4,6 @@ import {HelysegService} from '../../primitiv/helyseg/helyseg.service';
 import {HelysegZoomParameter} from '../../primitiv/helyseg/helysegzoomparameter';
 import {UgyfelSzerkesztesMode} from '../ugyfelszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {HelysegDto} from '../../primitiv/helyseg/helysegdto';
 import {UgyfelDto} from '../ugyfeldto';
@@ -21,22 +20,21 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
   }
   @Output() eventSzerkeszteskesz = new EventEmitter<UgyfelDto>();
 
+  eppFrissit = false;
+
   SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
 
   ugyfelservice: UgyfelService;
-  spinnerservice: SpinnerService;
 
   constructor(private _helysegservice: HelysegService,
               private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               ugyfelservice: UgyfelService) {
     this.ugyfelservice = ugyfelservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
     if (this.uj) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
       this.ugyfelservice.CreateNew()
         .then(res => {
           if (res.Error !== null) {
@@ -44,17 +42,17 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     }
   }
 
   onSubmit() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this._helysegservice.ZoomCheck(new HelysegZoomParameter(this.DtoEdited.Helysegkod || 0,
       this.DtoEdited.Helysegnev || ''))
       .then(res => {
@@ -80,11 +78,11 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
           throw res2.Error;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res2.Result[0]);
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

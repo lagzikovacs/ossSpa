@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {FelhasznaloService} from '../felhasznalo.service';
 import {rowanimation} from '../../../animation/rowAnimation';
 import {ErrorService} from '../../../tools/errorbox/error.service';
-import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {FelhasznaloDto} from '../felhasznalodto';
 import {deepCopy} from '../../../tools/deepCopy';
 
@@ -18,17 +17,16 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
   }
   @Output() eventSzerkeszteskesz = new EventEmitter<FelhasznaloDto>();
 
+  eppFrissit = false;
+
   jelszo = '';
   jelszoujra = '';
 
   felhasznaloservice: FelhasznaloService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               felhasznaloservice: FelhasznaloService) {
     this.felhasznaloservice = felhasznaloservice;
-    this.spinnerservice = spinnerservice;
   }
 
   onSubmit() {
@@ -37,7 +35,7 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
       return;
     }
 
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.felhasznaloservice.JelszoBeallitas(this.DtoEdited.Felhasznalokod, this.jelszo, this.DtoEdited.Modositva)
       .then(res => {
         if (res.Error != null) {
@@ -51,12 +49,12 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
           throw res1.Error;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
         this._errorservice.Error = err;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       });
   }
 

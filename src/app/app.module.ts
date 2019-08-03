@@ -180,8 +180,6 @@ import { TablaComponent } from './tools/tabla/tabla.component';
 import {StartupService} from './startup/startup.service';
 import {ErrorService} from './tools/errorbox/error.service';
 import { ErrorboxComponent } from './tools/errorbox/errorbox.component';
-import { GspinnerComponent } from './tools/spinner/spinner.component';
-import {SpinnerService} from './tools/spinner/spinner.service';
 import { UgyfelterProjektTablaComponent } from './ugyfelter/ugyfelter-projekt-tabla/ugyfelter-projekt-tabla.component';
 import { ProjektkapcsolatTablaComponent } from './projektkapcsolat/projektkapcsolat-tabla/projektkapcsolat-tabla.component';
 import { BizonylatkapcsolatTablaComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-tabla/bizonylatkapcsolat-tabla.component';
@@ -396,7 +394,6 @@ if (environment.production) {
     UgyfelTablaComponent,
     TablaComponent,
     ErrorboxComponent,
-    GspinnerComponent,
     UgyfelterProjektTablaComponent,
     ProjektkapcsolatTablaComponent,
     BizonylatkapcsolatTablaComponent,
@@ -459,7 +456,6 @@ if (environment.production) {
     SessionService,
     VagolapService,
     ErrorService,
-    SpinnerService
   ],
   bootstrap: [AppComponent]
 })

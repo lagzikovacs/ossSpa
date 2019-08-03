@@ -6,7 +6,6 @@ import {SzMT} from '../../dtos/szmt';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {UgyfelTablaComponent} from '../ugyfel-tabla/ugyfel-tabla.component';
 import {environment} from '../../../environments/environment';
 import {UgyfelParameter} from '../ugyfelparameter';
@@ -37,6 +36,7 @@ import {propCopy} from '../../tools/propCopy';
   osszesrekord = 0;
   jog = false;
   zoom = false;
+  eppFrissit = false;
 
   Dto = new Array<UgyfelDto>();
   DtoSelectedIndex = -1;
@@ -55,16 +55,13 @@ import {propCopy} from '../../tools/propCopy';
   @Output() eventStopzoom = new EventEmitter<void>();
 
   ugyfelservice: UgyfelService;
-  spinnerservice: SpinnerService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               ugyfelservice: UgyfelService  ) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.UGYFELEKMOD]);
 
     this.ugyfelservice = ugyfelservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -90,7 +87,7 @@ import {propCopy} from '../../tools/propCopy';
   }
 
   onKeresesTovabb() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.ugyfelservice.Select(this.up)
       .then(res => {
         if (res.Error != null) {
@@ -110,14 +107,14 @@ import {propCopy} from '../../tools/propCopy';
         this.osszesrekord = res.OsszesRekord;
 
         this.up.rekordtol += this.up.lapmeret;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
 
         // if (this.ugyfelservice.zoom) {
         //   window.scrollTo(0, document.body.scrollHeight);
         // }
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -150,7 +147,7 @@ import {propCopy} from '../../tools/propCopy';
   }
   onTorles(ok: boolean) {
     if (ok) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
 
       this.ugyfelservice.Delete(this.Dto[this.DtoSelectedIndex])
         .then(res => {
@@ -161,11 +158,11 @@ import {propCopy} from '../../tools/propCopy';
           this.Dto.splice(this.DtoSelectedIndex, 1);
           this.DtoSelectedIndex = -1;
 
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this.tabla.clearselections();
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {

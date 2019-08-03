@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {UgyfelService} from '../ugyfel.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {UgyfelDto} from '../ugyfeldto';
@@ -18,15 +17,13 @@ export class UgyfelCsoportComponent implements OnInit, OnDestroy {
 
   entries = ['(0) Mind', '(1) Kiemelt'];
   selected = 0;
+  eppFrissit = false;
 
   ugyfelservice: UgyfelService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               ugyfelservice: UgyfelService) {
     this.ugyfelservice = ugyfelservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -39,7 +36,7 @@ export class UgyfelCsoportComponent implements OnInit, OnDestroy {
   }
 
   okClick() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.ugyfelservice.Update(this.DtoEdited)
       .then(res1 => {
         if (res1.Error !== null) {
@@ -53,11 +50,11 @@ export class UgyfelCsoportComponent implements OnInit, OnDestroy {
           throw res2.Error;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res2.Result[0]);
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

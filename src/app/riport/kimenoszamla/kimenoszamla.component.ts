@@ -4,7 +4,6 @@ import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
 import * as moment from 'moment';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {Riportciklus} from '../riportciklus';
 
 @Component({
@@ -17,20 +16,22 @@ export class KimenoszamlaComponent implements OnDestroy {
   tol = '2019-01-01';
   ig = '2019-12-31';
 
+  eppFrissit = false;
+
   riportservice: RiportService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               riportservice: RiportService) {
     this.riportservice = riportservice;
-    this.spinnerservice = spinnerservice;
 
-    this.rc = new Riportciklus(_errorservice, spinnerservice, riportservice, 'Kimenő számla.xls');
+    this.rc = new Riportciklus(_errorservice, riportservice, 'Kimenő számla.xls');
+    this.rc.eventSpinnervege.on(() => {
+      this.eppFrissit = false;
+    });
   }
 
   onSubmit() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.rc.megszakitani = false;
 
     const fi = [
@@ -48,7 +49,7 @@ export class KimenoszamlaComponent implements OnDestroy {
         this.rc.ciklus();
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

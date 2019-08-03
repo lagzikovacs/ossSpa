@@ -51,6 +51,9 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
               private _dokumentumservice: DokumentumService,
               private _errorservice: ErrorService) {
     this.bc = new Bizonylatnyomtatasciklus(_errorservice, _bizonylatnyomtatasservice);
+    this.bc.eventSpinnervege.on(() => {
+      this.eppFrissit = false;
+    });
   }
 
   ngOnInit() {

@@ -5,7 +5,6 @@ import {PenztartetelService} from '../penztartetel.service';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
 import {PenztartetelParameter} from '../penztartetelparameter';
@@ -33,20 +32,18 @@ export class PenztartetelListComponent implements OnDestroy {
   elsokereses = true;
   ptp = new PenztartetelParameter(0, environment.lapmeret);
   OsszesRekord = 0;
+  eppFrissit = false;
 
   Dto = new Array<PenztartetelDto>();
 
   penztartetelservice: PenztartetelService;
-  spinnerservice: SpinnerService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               penztartetelservice: PenztartetelService) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);
 
     this.penztartetelservice = penztartetelservice;
-    this.spinnerservice = spinnerservice;
   }
 
   onKereses() {
@@ -62,7 +59,7 @@ export class PenztartetelListComponent implements OnDestroy {
   }
 
   onKeresesTovabb() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.penztartetelservice.Select(this.ptp)
       .then(res => {
         if (res.Error != null) {
@@ -82,10 +79,10 @@ export class PenztartetelListComponent implements OnDestroy {
         this.OsszesRekord = res.OsszesRekord;
 
         this.ptp.rekordtol += this.ptp.lapmeret;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

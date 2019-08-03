@@ -25,6 +25,9 @@ export class BejovoszamlaComponent implements OnDestroy {
     this.riportservice = riportservice;
 
     this.rc = new Riportciklus(_errorservice, riportservice, 'Bejövő számla.xls');
+    this.rc.eventSpinnervege.on(() => {
+      this.eppFrissit = false;
+    });
   }
 
   onSubmit() {

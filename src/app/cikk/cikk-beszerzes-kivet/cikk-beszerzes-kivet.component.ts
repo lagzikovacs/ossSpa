@@ -1,7 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {CikkService} from '../cikk.service';
 import {CikkMozgasTetelDto} from '../cikkmozgasteteldto';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {CikkMozgasParameter} from '../cikkmozgasparameter';
 
@@ -15,18 +14,17 @@ export class CikkBeszerzesKivetComponent implements OnInit, OnDestroy {
 
   MozgasDto = new Array<CikkMozgasTetelDto>();
 
+  eppFrissit = false;
+
   cikkservice: CikkService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               cikkservice: CikkService) {
     this.cikkservice = cikkservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.cikkservice.Mozgas(new CikkMozgasParameter(this.Cikkkod, this.BizonylattipusKod))
       .then(res => {
         if (res.Error != null) {
@@ -34,10 +32,10 @@ export class CikkBeszerzesKivetComponent implements OnInit, OnDestroy {
         }
 
         this.MozgasDto = res.Result;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

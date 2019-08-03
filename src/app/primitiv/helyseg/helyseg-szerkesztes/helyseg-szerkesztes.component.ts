@@ -18,6 +18,8 @@ export class HelysegSzerkesztesComponent implements OnInit, OnDestroy {
   }
   @Output() eventSzerkeszteskesz = new EventEmitter<HelysegDto>();
 
+  eppFrissit = false;
+
   helysegservice: HelysegService;
   spinnerservice: SpinnerService;
 

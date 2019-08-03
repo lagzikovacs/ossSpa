@@ -1,4 +1,4 @@
-<div class="alapkeret">
+<div class="alapkeret" [appSpinner]="eppFrissit">
   <h5 *ngIf="!zoom">{{felhasznaloservice.cim}}</h5>
   <h5 *ngIf="zoom">{{felhasznaloservice.cim}} - zoom</h5>
   <app-toolbar [Szurok]="szurok"

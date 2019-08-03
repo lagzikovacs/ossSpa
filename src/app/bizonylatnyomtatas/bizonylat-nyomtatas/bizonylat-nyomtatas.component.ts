@@ -4,7 +4,6 @@ import {SzMT} from '../../dtos/szmt';
 import {Szempont} from '../../enums/szempont';
 import {BizonylatNyomtatasTipus} from '../bizonylatnyomtatastipus';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {Bizonylatnyomtatasciklus} from '../bizonylatnyomtatasciklus';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 
@@ -20,16 +19,16 @@ export class BizonylatNyomtatasComponent implements OnDestroy {
   entries = ['Minta', 'Eredeti', 'Másolat'];
   entriest = [BizonylatNyomtatasTipus.Minta, BizonylatNyomtatasTipus.Eredeti, BizonylatNyomtatasTipus.Masolat];
   selectedi = 0;
-
-  spinnerservice: SpinnerService;
+  eppFrissit = false;
 
   constructor(private _bizonylatservice: BizonylatService,
               private _bizonylatnyomtatasservice: BizonylatnyomtatasService,
-              private _errorservice: ErrorService,
-              spinnerservice: SpinnerService) {
-    this.spinnerservice = spinnerservice;
+              private _errorservice: ErrorService) {
 
-    this.bc = new Bizonylatnyomtatasciklus(_errorservice, spinnerservice, _bizonylatnyomtatasservice);
+    this.bc = new Bizonylatnyomtatasciklus(_errorservice, _bizonylatnyomtatasservice);
+    this.bc.eventSpinnervege.on(() => {
+      this.eppFrissit = false;
+    });
   }
 
   change(i) {
@@ -37,7 +36,7 @@ export class BizonylatNyomtatasComponent implements OnDestroy {
   }
 
   onSubmit() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.bc.megszakitani = false;
     this.bc.fajlnev = '';
 
@@ -72,7 +71,7 @@ export class BizonylatNyomtatasComponent implements OnDestroy {
         this.bc.ciklus();
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

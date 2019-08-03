@@ -1,12 +1,9 @@
 import {Component, OnDestroy} from '@angular/core';
 import {RiportService} from '../riport.service';
 import * as moment from 'moment';
-import * as FileSaver from 'file-saver';
-import {b64toBlob} from '../../tools/b64toBlob';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {Riportciklus} from '../riportciklus';
 
 @Component({
@@ -18,20 +15,22 @@ export class KeszletComponent implements OnDestroy {
 
   datum = moment().format('YYYY-MM-DD');
 
+  eppFrissit = false;
+
   riportservice: RiportService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               riportservice: RiportService) {
     this.riportservice = riportservice;
-    this.spinnerservice = spinnerservice;
 
-    this.rc = new Riportciklus(_errorservice, spinnerservice, riportservice, 'Készlet.xls');
+    this.rc = new Riportciklus(_errorservice, riportservice, 'Készlet.xls');
+    this.rc.eventSpinnervege.on(() => {
+      this.eppFrissit = false;
+    });
   }
 
   onSubmit() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.rc.megszakitani = false;
 
     const fi = [
@@ -47,7 +46,7 @@ export class KeszletComponent implements OnDestroy {
         this.rc.ciklus();
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

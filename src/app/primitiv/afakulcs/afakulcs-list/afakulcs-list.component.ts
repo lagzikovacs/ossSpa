@@ -3,7 +3,6 @@ import {AfakulcsService} from '../afakulcs.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
 import {ErrorService} from '../../../tools/errorbox/error.service';
-import {SpinnerService} from '../../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
 import {AfakulcsDto} from '../afakulcsdto';
 import {deepCopy} from '../../../tools/deepCopy';
@@ -26,6 +25,7 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
   elsokereses = true;
   jog = false;
   zoom = false;
+  eppFrissit = false;
 
   Dto = new Array<AfakulcsDto>();
   DtoSelectedIndex = -1;
@@ -42,16 +42,13 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
   @Output() eventStopzoom = new EventEmitter<void>();
 
   afakulcsservice: AfakulcsService;
-  spinnerservice: SpinnerService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               afakulcsservice: AfakulcsService) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
 
     this.afakulcsservice = afakulcsservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -71,7 +68,7 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
   }
 
   onKeresesTovabb() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.afakulcsservice.Read(this.ekDto.minta)
       .then(res => {
         if (res.Error != null) {
@@ -89,10 +86,10 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
           this.Dto = buf;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -123,7 +120,7 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
   }
   onTorles(ok: boolean) {
     if (ok) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
 
       this.afakulcsservice.Delete(this.Dto[this.DtoSelectedIndex])
         .then(res => {
@@ -134,11 +131,11 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
           this.Dto.splice(this.DtoSelectedIndex, 1);
           this.DtoSelectedIndex = -1;
 
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this.tabla.clearselections();
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {

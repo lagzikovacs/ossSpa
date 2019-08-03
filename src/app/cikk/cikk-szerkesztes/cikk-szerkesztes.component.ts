@@ -9,7 +9,6 @@ import {EmptyResult} from '../../dtos/emptyresult';
 import {TermekdijZoomParameter} from '../../primitiv/termekdij/termekdijzoomparameter';
 import {CikkSzerkesztesMode} from '../cikkszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {AfakulcsDto} from '../../primitiv/afakulcs/afakulcsdto';
 import {MeDto} from '../../primitiv/me/medto';
@@ -28,24 +27,23 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
   }
   @Output() eventSzerkeszteskesz = new EventEmitter<CikkDto>();
 
+  eppFrissit = false;
+
   SzerkesztesMode = CikkSzerkesztesMode.Blank;
 
   cikkservice: CikkService;
-  spinnerservice: SpinnerService;
 
   constructor(private _meservice: MeService,
               private _afakulcsservice: AfakulcsService,
               private _termekdijservice: TermekdijService,
               private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               cikkservice: CikkService) {
     this.cikkservice = cikkservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
     if (this.uj) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
       this.cikkservice.CreateNew()
         .then(res => {
           if (res.Error !== null) {
@@ -53,17 +51,17 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     }
   }
 
   onSubmit() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
 
     this._meservice.ZoomCheck(new MeZoomParameter(this.DtoEdited.Mekod || 0,
       this.DtoEdited.Me || ''))
@@ -113,11 +111,11 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
           throw res4.Error;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res4.Result[0]);
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

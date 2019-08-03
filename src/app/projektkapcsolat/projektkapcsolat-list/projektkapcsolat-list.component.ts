@@ -7,7 +7,6 @@ import {VagolapService} from '../../vagolap/vagolap.service';
 import {VagolapMode} from '../../vagolap/vagolapmode';
 import {JogKod} from '../../enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {ProjektkapcsolatTablaComponent} from '../projektkapcsolat-tabla/projektkapcsolat-tabla.component';
 import {IratDto} from '../../irat/iratdto';
 import {BizonylatDto} from '../../bizonylat/bizonylatdto';
@@ -38,22 +37,21 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
   bizonylatLeiro = new BizonylatTipusLeiro();
   bizonylatTipus = BizonylatTipus.Szamla;
 
+  eppFrissit = false;
+
   projektkapcsolatservice: ProjektkapcsolatService;
-  spinnerservice: SpinnerService;
 
   constructor(private _logonservice: LogonService,
               private _iratservice: IratService,
               private _bizonylatservice: BizonylatService,
               private _vagolapservice: VagolapService,
               private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.BizonylatMod = this._logonservice.Jogaim.includes(JogKod[JogKod.BIZONYLATMOD]);
     this.IratMod = this._logonservice.Jogaim.includes(JogKod[JogKod.IRATMOD]);
     this.AjanlatMod = this._logonservice.Jogaim.includes(JogKod[JogKod.AJANLATKESZITES]);
 
     this.projektkapcsolatservice = projektkapcsolatservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -61,7 +59,7 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
   }
 
   onKereses() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.tabla.clearselections();
     this.projektkapcsolatservice.Select(this.Projektkod)
       .then(res => {
@@ -70,10 +68,10 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
         }
 
         this.Dto = res.Result;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -87,7 +85,7 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
     }
 
     if (this.Dto[this.DtoSelectedIndex].Bizonylatkod !== null) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
       this._bizonylatservice.Get(this.Dto[this.DtoSelectedIndex].Bizonylatkod)
         .then(res => {
           if (res.Error != null) {
@@ -104,17 +102,17 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
           }
 
           this.bizonylatLeiro = res1.Result;
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this.tabla.bizonylatOk = true;
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     }
 
     if (this.Dto[this.DtoSelectedIndex].Iratkod !== null) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
       this._iratservice.Get(this.Dto[this.DtoSelectedIndex].Iratkod)
         .then(res => {
           if (res.Error != null) {
@@ -122,11 +120,11 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
           }
 
           this.OriginalIrat = res.Result[0];
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this.tabla.iratOk = true;
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     }
@@ -152,7 +150,7 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
   }
   onUjiratutan(dto: IratDto) {
     if (dto !== null) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
       this.projektkapcsolatservice.AddIratToProjekt(new ProjektKapcsolatParameter(
             this.Projektkod, 0, dto.Iratkod, undefined))
         .then(res1 => {
@@ -168,11 +166,11 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
           }
 
           this.Dto.unshift(res2.Result[0]);
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this.tabla.nemOk();
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {

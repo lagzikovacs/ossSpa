@@ -6,7 +6,6 @@ import {IratDto} from '../iratdto';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
 import {IratParameter} from '../iratparameter';
@@ -38,21 +37,19 @@ export class IratListComponent implements OnDestroy {
   elsokereses = true;
   OsszesRekord = 0;
   jog = false;
+  eppFrissit = false;
 
   Dto = new Array<IratDto>();
   DtoSelectedIndex = -1;
 
   iratservice: IratService;
-  spinnerservice: SpinnerService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               iratservice: IratService) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.IRATMOD]);
 
     this.iratservice = iratservice;
-    this.spinnerservice = spinnerservice;
   }
 
   onKereses() {
@@ -80,7 +77,7 @@ export class IratListComponent implements OnDestroy {
   }
 
   onKeresesTovabb() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.iratservice.Select(this.ip)
       .then(res => {
         if (res.Error != null) {
@@ -100,10 +97,10 @@ export class IratListComponent implements OnDestroy {
         this.OsszesRekord = res.OsszesRekord;
 
         this.ip.rekordtol += this.ip.lapmeret;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

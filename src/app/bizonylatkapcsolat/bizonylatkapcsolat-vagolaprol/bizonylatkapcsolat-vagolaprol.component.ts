@@ -1,10 +1,8 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
-import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {BizonylatKapcsolatParam} from '../bizonylatkapcsolatparam';
 import {VagolapService} from '../../vagolap/vagolap.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {BizonylatKapcsolatDto} from '../bizonylatkapcsolatdto';
 import {BizonylatKapcsolatResult} from '../bizonylatkapcsolatresult';
 import {NumberResult} from '../../dtos/numberresult';
@@ -19,16 +17,14 @@ export class BizonylatkapcsolatVagolaprolComponent implements OnDestroy {
   @Output() eventVagolaprolutanvege = new EventEmitter<void>();
 
   ci = 0;
+  eppFrissit = false;
 
   bizonylatkapcsolatservice: BizonylatkapcsolatService;
-  spinnerservice: SpinnerService;
 
   constructor(private _vagolapservice: VagolapService,
               private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               bizonylatkapcsolatservice: BizonylatkapcsolatService) {
     this.bizonylatkapcsolatservice = bizonylatkapcsolatservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ok() {
@@ -59,7 +55,7 @@ export class BizonylatkapcsolatVagolaprolComponent implements OnDestroy {
   }
 
   ciklus() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     if (this.ci < this._vagolapservice.Dto.length) {
       if (this._vagolapservice.Dto[this.ci].selected) {
         this.add()
@@ -74,7 +70,7 @@ export class BizonylatkapcsolatVagolaprolComponent implements OnDestroy {
             this.ciklus();
           })
           .catch(err => {
-            this.spinnerservice.eppFrissit = false;
+            this.eppFrissit = false;
             this._errorservice.Error = err;
           });
       } else {
@@ -82,7 +78,7 @@ export class BizonylatkapcsolatVagolaprolComponent implements OnDestroy {
         this.ciklus();
       }
     } else {
-      this.spinnerservice.eppFrissit = false;
+      this.eppFrissit = false;
       this.eventVagolaprolutanvege.emit();
     }
   }

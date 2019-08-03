@@ -5,7 +5,6 @@ import {Szempont} from '../../enums/szempont';
 import {JogKod} from '../../enums/jogkod';
 import {LogonService} from '../../logon/logon.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {ProjektTablaComponent} from '../projekttabla/projekt-tabla.component';
 import {environment} from '../../../environments/environment';
 import {ProjektParameter} from '../projektparameter';
@@ -52,6 +51,7 @@ export class ProjektListComponent implements OnDestroy {
   pp = new ProjektParameter(0, environment.lapmeret);
   elsokereses = true;
   OsszesRekord = 0;
+  eppFrissit = false;
 
   Dto = new Array<ProjektDto>();
   DtoSelectedIndex = -1;
@@ -59,16 +59,13 @@ export class ProjektListComponent implements OnDestroy {
   egymode = EgyMode.Bizonylatesirat;
 
   projektservice: ProjektService;
-  spinnerservice: SpinnerService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               projektservice: ProjektService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.PROJEKTMOD]);
 
     this.projektservice = projektservice;
-    this.spinnerservice = spinnerservice;
   }
 
   onKereses() {
@@ -88,7 +85,7 @@ export class ProjektListComponent implements OnDestroy {
     this.onKeresesTovabb();
   }
   onKeresesTovabb() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.projektservice.Select(this.pp)
       .then(res => {
         if (res.Error != null) {
@@ -108,10 +105,10 @@ export class ProjektListComponent implements OnDestroy {
         this.OsszesRekord = res.OsszesRekord;
 
         this.pp.rekordtol += this.pp.lapmeret;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -142,7 +139,7 @@ export class ProjektListComponent implements OnDestroy {
   }
   onTorles(ok: boolean) {
     if (ok) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
 
       this.projektservice.Delete(this.Dto[this.DtoSelectedIndex])
         .then(res => {
@@ -153,11 +150,11 @@ export class ProjektListComponent implements OnDestroy {
           this.Dto.splice(this.DtoSelectedIndex, 1);
           this.DtoSelectedIndex = -1;
 
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this.tabla.clearselections();
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {
@@ -170,7 +167,7 @@ export class ProjektListComponent implements OnDestroy {
   }
 
   onSegedOk(dto: ProjektDto) {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.projektservice.Update(dto)
       .then(res => {
         if (res.Error !== null) {
@@ -186,11 +183,11 @@ export class ProjektListComponent implements OnDestroy {
 
         propCopy(res1.Result[0], this.Dto[this.DtoSelectedIndex]);
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.egymode = EgyMode.Reszletek;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

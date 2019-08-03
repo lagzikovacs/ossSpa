@@ -3,7 +3,6 @@ import {ProjektService} from '../projekt.service';
 import * as moment from 'moment';
 import {deepCopy} from '../../tools/deepCopy';
 import {ProjektDto} from '../projektdto';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-projekt-datumok',
@@ -23,12 +22,9 @@ export class ProjektDatumokComponent implements OnInit, OnDestroy {
   KivHat: any;
 
   projektservice: ProjektService;
-  spinnerservice: SpinnerService;
 
-  constructor(projektservice: ProjektService,
-              spinnerservice: SpinnerService) {
+  constructor(projektservice: ProjektService) {
     this.projektservice = projektservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {

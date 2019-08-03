@@ -1,4 +1,4 @@
-<div class="alapkeret">
+<div class="alapkeret" [appSpinner]="eppFrissit">
   <h5 *ngIf="teteluj">Új {{bizonylatLeiro.BizonylatNev | lowercase}}tétel</h5>
   <h5 *ngIf="!teteluj">{{bizonylatLeiro.BizonylatNev}}tétel módosítása</h5>
 

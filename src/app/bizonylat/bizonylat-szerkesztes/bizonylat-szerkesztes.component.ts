@@ -11,7 +11,6 @@ import {EmptyResult} from '../../dtos/emptyresult';
 import * as moment from 'moment';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {PenznemDto} from '../../primitiv/penznem/penznemdto';
 import {FizetesimodDto} from '../../primitiv/fizetesimod/fizetesimoddto';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
@@ -54,18 +53,17 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
   SzerkesztesMode = BizonylatSzerkesztesMode.List;
 
+  eppFrissit = false;
+
   bizonylatservice: BizonylatService;
-  spinnerservice: SpinnerService;
 
   constructor(private _ugyfelservice: UgyfelService,
               private _penznemservice: PenznemService,
               private _fizetesimodservice: FizetesimodService,
               private _errorservice: ErrorService,
               private _cdr: ChangeDetectorRef,
-              spinnerservice: SpinnerService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
-    this.spinnerservice = spinnerservice;
 
     this.ComplexDtoEdited = new BizonylatComplexDto();
     this.ComplexDtoEdited.Dto = new BizonylatDto();
@@ -76,7 +74,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.uj) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
       this.bizonylatservice.CreateNewComplex()
         .then(res => {
           if (res.Error !== null) {
@@ -86,15 +84,15 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
           this.ComplexDtoEdited = res.Result[0];
           this.ComplexDtoEdited.Dto.Bizonylattipuskod = this.bizonylatTipus;
           this.datumok();
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this.SzerkesztesMode = BizonylatSzerkesztesMode.List;
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
       this.bizonylatservice.GetComplex(this.Bizonylatkod)
         .then(res => {
           if (res.Error != null) {
@@ -103,11 +101,11 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
           this.ComplexDtoEdited = res.Result[0];
           this.datumok();
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this.SzerkesztesMode = BizonylatSzerkesztesMode.List;
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     }
@@ -174,7 +172,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   Fiztool(fm: string) {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this._fizetesimodservice.Read(fm)
       .then(res => {
         if (res.Error != null) {
@@ -188,10 +186,10 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
         this.ComplexDtoEdited.Dto.Fizetesimodkod = res.Result[0].Fizetesimodkod;
         this.ComplexDtoEdited.Dto.Fizetesimod = res.Result[0].Fizetesimod1;
         this.FizetesiHatarido = this.BizonylatKelte;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -211,7 +209,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onTetelUjElott() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.bizonylatservice.CreateNewTetel(this.bizonylatTipus)
       .then(res => {
         if (res.Error != null) {
@@ -225,11 +223,11 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
         this.TetelDtoEdited = res.Result[0];
         this._cdr.detectChanges();
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.tabla.doUj();
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -240,7 +238,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   }
   onTeteltorles(ok: boolean) {
     if (ok) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
       this.ComplexDtoEdited.LstTetelDto.splice(this.TetelDtoSelectedIndex, 1);
       this.bizonylatservice.SumEsAfaEsTermekdij(this.ComplexDtoEdited)
         .then(res => {
@@ -250,11 +248,11 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
           this.ComplexDtoEdited = res.Result[0];
 
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this.tabla.clearselections();
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     }
@@ -278,6 +276,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
         propCopy(dto, this.ComplexDtoEdited.LstTetelDto[this.TetelDtoSelectedIndex]);
       }
 
+      this.eppFrissit = true;
       this.bizonylatservice.SumEsAfaEsTermekdij(this.ComplexDtoEdited)
         .then(res => {
           if (res.Error != null) {
@@ -286,13 +285,13 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
           this.ComplexDtoEdited = res.Result[0];
 
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this.tabla.egysem();
           this.SzerkesztesMode = BizonylatSzerkesztesMode.List;
           this._cdr.detectChanges();
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {
@@ -301,7 +300,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
 
     this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.ComplexDtoEdited.Dto.Ugyfelkod,
       this.ComplexDtoEdited.Dto.Ugyfelnev))
@@ -348,11 +347,11 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
           throw res4.Error;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.eventSzerkesztesUtan.emit(res4.Result[0].Dto);
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

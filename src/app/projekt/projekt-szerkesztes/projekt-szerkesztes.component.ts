@@ -7,7 +7,6 @@ import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
 import {rowanimation} from '../../animation/rowAnimation';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {PenznemDto} from '../../primitiv/penznem/penznemdto';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
@@ -30,21 +29,20 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
 
   SzerkesztesMode = ProjektSzerkesztesMode.Blank;
 
+  eppFrissit = false;
+
   projektservice: ProjektService;
-  spinnerservice: SpinnerService;
 
   constructor(private _ugyfelservice: UgyfelService,
               private _penznemservice: PenznemService,
               private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               projektservice: ProjektService) {
     this.projektservice = projektservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
     if (this.uj) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
       this.projektservice.CreateNew()
         .then(res => {
           if (res.Error !== null) {
@@ -52,17 +50,17 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     }
   }
 
   onSubmit() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.DtoEdited.Ugyfelkod || 0,
       this.DtoEdited.Ugyfelnev || ''))
       .then(res => {
@@ -96,11 +94,11 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
           throw res3.Error;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res3.Result[0]);
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

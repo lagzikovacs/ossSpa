@@ -4,7 +4,6 @@ import {PenznemService} from '../../primitiv/penznem/penznem.service';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
 import {SzamlazasirendSzerkesztesMode} from '../szamlazasirendszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {PenznemDto} from '../../primitiv/penznem/penznemdto';
 import {SzamlazasirendDto} from '../szamlazasirenddto';
@@ -24,20 +23,19 @@ export class SzamlazasirendSzerkesztesComponent implements OnInit, OnDestroy {
 
   SzerkesztesMode = SzamlazasirendSzerkesztesMode.Blank;
 
+  eppFrissit = false;
+
   szamlazasirendservice: SzamlazasirendService;
-  spinnerservice: SpinnerService;
 
   constructor(private _penznemservice: PenznemService,
               private _errorservice: ErrorService,
-              szamlazasirendservice: SzamlazasirendService,
-              spinnerservice: SpinnerService) {
+              szamlazasirendservice: SzamlazasirendService) {
     this.szamlazasirendservice = szamlazasirendservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
     if (this.uj) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
       this.szamlazasirendservice.CreateNew()
         .then(res => {
           if (res.Error !== null) {
@@ -45,17 +43,17 @@ export class SzamlazasirendSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     }
   }
 
   onSubmit() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
 
     this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.DtoEdited.Penznemkod || 0,
       this.DtoEdited.Penznem || ''))
@@ -83,11 +81,11 @@ export class SzamlazasirendSzerkesztesComponent implements OnInit, OnDestroy {
           throw res2.Error;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res2.Result[0]);
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

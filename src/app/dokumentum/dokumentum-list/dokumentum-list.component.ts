@@ -1,8 +1,7 @@
-import {AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {DokumentumService} from '../dokumentum.service';
 import {DokumentumDto} from '../dokumentumdto';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {EgyMode} from '../../enums/egymode';
 import {propCopy} from '../../tools/propCopy';
@@ -24,14 +23,13 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
   elsokereses = true;
   egymode = EgyMode.Reszletek;
 
+  eppFrissit = false;
+
   dokumentumservice: DokumentumService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               dokumentumservice: DokumentumService) {
     this.dokumentumservice = dokumentumservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -49,7 +47,7 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
   }
 
   onKeresesTovabb() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.dokumentumservice.Select(this.Iratkod)
       .then(res => {
         if (res.Error != null) {
@@ -59,10 +57,10 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
         this.elsokereses = false;
 
         this.Dto = res.Result;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -93,7 +91,7 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
   }
   onTorles(ok: boolean) {
     if (ok) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
 
       this.dokumentumservice.Delete(this.Dto[this.DtoSelectedIndex])
         .then(res => {
@@ -104,11 +102,11 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
           this.Dto.splice(this.DtoSelectedIndex, 1);
           this.DtoSelectedIndex = -1;
 
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this.tabla.clearselections();
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {
@@ -122,25 +120,25 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
     this.onLetoltes();
   }
   onLetoltes() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.dokumentumservice.Kimentes(this.Dto[this.DtoSelectedIndex])
       .then(res => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
 
   onLetoltesPDF() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.dokumentumservice.KimentesPDF(this.Dto[this.DtoSelectedIndex])
       .then(res => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

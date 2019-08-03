@@ -3,7 +3,6 @@ import {BizonylatService} from '../bizonylat.service';
 import {BizonylatKibocsatasParam} from '../bizonylatkibocsatasparam';
 import {BizonylatTipus} from '../bizonylattipus';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {BizonylatDto} from '../bizonylatdto';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
@@ -25,18 +24,17 @@ export class BizonylatKibocsatasComponent implements OnDestroy {
   bizonylatszam = '';
   private _keszpenzes = false;
 
+  eppFrissit = false;
+
   bizonylatservice: BizonylatService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
-    this.spinnerservice = spinnerservice;
   }
 
   onSubmit() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.bizonylatservice.Kibocsatas(new BizonylatKibocsatasParam(this.Dto, this.bizonylatszam))
       .then(res => {
         if (res.Error != null) {
@@ -50,7 +48,7 @@ export class BizonylatKibocsatasComponent implements OnDestroy {
           throw res1.Error;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.eventKibocsatasUtan.emit(res1.Result[0]);
 
         this._keszpenzes = (this.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
@@ -61,7 +59,7 @@ export class BizonylatKibocsatasComponent implements OnDestroy {
         this.eventKibocsatasUtanKeszpenzes.emit(this._keszpenzes);
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

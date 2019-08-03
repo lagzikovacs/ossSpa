@@ -4,7 +4,6 @@ import {PenztartetelService} from '../../penztartetel/penztartetel.service';
 import {PenztartetelDto} from '../../penztartetel/penztarteteldto';
 import {BizonylatTipus} from '../bizonylattipus';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {BizonylatDto} from '../bizonylatdto';
 import {PenztarDto} from '../../penztar/penztardto';
@@ -30,20 +29,19 @@ export class BizonylatPenztarComponent implements OnInit, OnDestroy {
   penztarkivalasztva = false;
   megjegyzes = '';
 
+  eppFrissit = false;
+
   bizonylatservice: BizonylatService;
-  spinnerservice: SpinnerService;
 
   constructor(private _penztarservice: PenztarService,
               private _penztartetelservice: PenztartetelService,
               private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this._penztarservice.ReadByCurrencyOpened(this.Dto.Penznemkod)
       .then(res => {
         if (res.Error != null) {
@@ -51,10 +49,10 @@ export class BizonylatPenztarComponent implements OnInit, OnDestroy {
         }
 
         this.penztarDto = res.Result;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -67,7 +65,7 @@ export class BizonylatPenztarComponent implements OnInit, OnDestroy {
   onSubmit() {
     let penztartetelDto: PenztartetelDto;
 
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this._penztartetelservice.CreateNew()
       .then(res => {
         if (res.Error != null) {
@@ -95,12 +93,12 @@ export class BizonylatPenztarComponent implements OnInit, OnDestroy {
           throw res1.Error;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.eventPenztarUtan.emit();
 
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

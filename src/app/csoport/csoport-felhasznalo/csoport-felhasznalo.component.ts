@@ -2,7 +2,6 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {CsoportService} from '../csoport.service';
 import {CsoportFelhasznaloParameter} from '../csoportfelhasznaloparameter';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {FelhasznaloDto} from '../../primitiv/felhasznalo/felhasznalodto';
 
 @Component({
@@ -14,18 +13,17 @@ export class CsoportFelhasznaloComponent implements OnInit, OnDestroy {
 
   DtoCsoportFelhasznalo = new Array<FelhasznaloDto>();
 
+  eppFrissit = false;
+
   csoportservice: CsoportService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               csoportservice: CsoportService) {
     this.csoportservice = csoportservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.csoportservice.SelectCsoportFelhasznalo(this.Csoportkod)
       .then(res => {
         if (res.Error != null) {
@@ -33,16 +31,16 @@ export class CsoportFelhasznaloComponent implements OnInit, OnDestroy {
         }
 
         this.DtoCsoportFelhasznalo = res.Result;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
 
   checkFelhasznalo(i: number) {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
 
     const par = new CsoportFelhasznaloParameter(this.Csoportkod,
       this.DtoCsoportFelhasznalo[i].Felhasznalokod, !this.DtoCsoportFelhasznalo[i].Csoporttag);
@@ -54,10 +52,10 @@ export class CsoportFelhasznaloComponent implements OnInit, OnDestroy {
         }
 
         this.DtoCsoportFelhasznalo[i].Csoporttag = !this.DtoCsoportFelhasznalo[i].Csoporttag;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

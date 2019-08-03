@@ -1,7 +1,6 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {CsoportService} from '../csoport.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
@@ -27,14 +26,13 @@ export class CsoportListComponent implements OnDestroy {
 
   egymode = EgyMode.Reszletek;
 
+  eppFrissit = false;
+
   csoportservice: CsoportService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               csoportservice: CsoportService) {
     this.csoportservice = csoportservice;
-    this.spinnerservice = spinnerservice;
   }
 
   onKereses() {
@@ -47,7 +45,7 @@ export class CsoportListComponent implements OnDestroy {
   }
 
   onKeresesTovabb() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.csoportservice.Read(this.ekDto.minta)
       .then(res => {
         if (res.Error != null) {
@@ -65,10 +63,10 @@ export class CsoportListComponent implements OnDestroy {
           this.Dto = buf;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -99,7 +97,7 @@ export class CsoportListComponent implements OnDestroy {
   }
   onTorles(ok: boolean) {
     if (ok) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
 
       this.csoportservice.Delete(this.Dto[this.DtoSelectedIndex])
         .then(res => {
@@ -110,11 +108,11 @@ export class CsoportListComponent implements OnDestroy {
           this.Dto.splice(this.DtoSelectedIndex, 1);
           this.DtoSelectedIndex = -1;
 
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this.tabla.clearselections();
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {

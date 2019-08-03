@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {BizonylatDto} from '../bizonylatdto';
 import {deepCopy} from '../../tools/deepCopy';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
@@ -18,18 +17,17 @@ export class BizonylatKiszallitvaComponent implements OnDestroy {
   @Input() bizonylatLeiro = new BizonylatTipusLeiro();
   @Output() eventKiszallitvaUtan = new EventEmitter<BizonylatDto>();
 
+  eppFrissit = false;
+
   bizonylatservice: BizonylatService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
-    this.spinnerservice = spinnerservice;
   }
 
   modositas() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.bizonylatservice.Kiszallitva(this.Dto)
       .then(res => {
         if (res.Error != null) {
@@ -43,11 +41,11 @@ export class BizonylatKiszallitvaComponent implements OnDestroy {
           throw res1.Error;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.eventKiszallitvaUtan.emit(res1.Result[0]);
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

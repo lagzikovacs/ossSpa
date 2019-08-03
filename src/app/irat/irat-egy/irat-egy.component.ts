@@ -9,7 +9,6 @@ import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {EgyMode} from '../../enums/egymode';
 import {IratDto} from '../iratdto';
 import {propCopy} from '../../tools/propCopy';
@@ -40,23 +39,21 @@ export class IratEgyComponent implements OnDestroy {
   IratProjektje: ProjektDto;
   nincsProjekt = false;
   jog = false;
+  eppFrissit = false;
 
   iratservice: IratService;
   projektservice: ProjektService;
-  spinnerservice: SpinnerService;
 
   constructor(private _logonservice: LogonService,
               private _projektkapcsolatservice: ProjektkapcsolatService,
               private _vagolapservice: VagolapService,
               private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               iratservice: IratService,
               projektservice: ProjektService) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.IRATMOD]);
 
     this.iratservice = iratservice;
     this.projektservice = projektservice;
-    this.spinnerservice = spinnerservice;
   }
 
   doReszletek() {
@@ -75,7 +72,7 @@ export class IratEgyComponent implements OnDestroy {
     this.egymode = EgyMode.FotozasLink;
   }
   doProjekt() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this._projektkapcsolatservice.SelectByIrat(this.Dto.Iratkod)
       .then(res => {
         if (res.Error != null) {
@@ -100,10 +97,10 @@ export class IratEgyComponent implements OnDestroy {
         }
 
         this.egymode = EgyMode.Projekt;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -115,7 +112,7 @@ export class IratEgyComponent implements OnDestroy {
 
   onTorles(ok: boolean) {
     if (ok) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
 
       this.iratservice.Delete(this.Dto)
         .then(res => {
@@ -123,11 +120,11 @@ export class IratEgyComponent implements OnDestroy {
             throw res.Error;
           }
 
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this.eventTorlesutan.emit();
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {

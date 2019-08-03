@@ -6,7 +6,6 @@ import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
 
 @Component({
@@ -28,16 +27,15 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnDestroy {
   ];
   entryindex = 4;
 
+  eppFrissit = false;
+
   projektkapcsolatservice: ProjektkapcsolatService;
-  spinnerservice: SpinnerService;
 
   constructor(private _bizonylatservice: BizonylatService,
               private _ugyfelservice: UgyfelService,
               private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.projektkapcsolatservice = projektkapcsolatservice;
-    this.spinnerservice = spinnerservice;
   }
 
   change(i) {
@@ -47,7 +45,7 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnDestroy {
     let bizonylatDto: any;
     let ugyfelDto: UgyfelDto;
 
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this._bizonylatservice.CreateNewComplex()
       .then(res => {
         if (res.Error != null) {
@@ -95,11 +93,11 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnDestroy {
           throw res3.Error;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.eventUjbizonylatutan.emit(res3.Result[0]);
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

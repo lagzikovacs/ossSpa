@@ -12,7 +12,6 @@ import {TermekdijZoomParameter} from '../../primitiv/termekdij/termekdijzoompara
 import {AfakulcsZoomParameter} from '../../primitiv/afakulcs/afakulcszoomparameter';
 import {MeZoomParameter} from '../../primitiv/me/mezoomparameter';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {AfakulcsDto} from '../../primitiv/afakulcs/afakulcsdto';
 import {MeDto} from '../../primitiv/me/medto';
 import {TermekdijDto} from '../../primitiv/termekdij/termekdijdto';
@@ -35,8 +34,9 @@ export class BizonylattetelSzerkesztesComponent implements OnDestroy {
 
   bruttoosszeg = 0;
 
+  eppFrissit = false;
+
   bizonylatservice: BizonylatService;
-  spinnerservice: SpinnerService;
 
   constructor(private _cikkservice: CikkService,
               private _meservice: MeService,
@@ -44,10 +44,8 @@ export class BizonylattetelSzerkesztesComponent implements OnDestroy {
               private _termekdijservice: TermekdijService,
               private _errorservice: ErrorService,
               private _cdr: ChangeDetectorRef,
-              spinnerservice: SpinnerService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
-    this.spinnerservice = spinnerservice;
   }
 
   CikkZoom() {
@@ -128,7 +126,7 @@ export class BizonylattetelSzerkesztesComponent implements OnDestroy {
   }
 
   bruttobol() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.bizonylatservice.Bruttobol(new BruttobolParam(this.TetelDtoEdited, this.bruttoosszeg))
       .then(res => {
         if (res.Error != null) {
@@ -136,16 +134,16 @@ export class BizonylattetelSzerkesztesComponent implements OnDestroy {
         }
 
         this.TetelDtoEdited = res.Result[0];
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
 
   tetelcalc(e: any) {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.bizonylatservice.BizonylattetelCalc(this.TetelDtoEdited)
       .then(res => {
         if (res.Error != null) {
@@ -153,16 +151,16 @@ export class BizonylattetelSzerkesztesComponent implements OnDestroy {
         }
 
         this.TetelDtoEdited = res.Result[0];
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
 
   onSubmit() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this._cikkservice.ZoomCheck(new CikkZoomParameter(this.TetelDtoEdited.Cikkkod || 0,
             this.TetelDtoEdited.Megnevezes || ''))
       .then(res1 => {
@@ -210,11 +208,11 @@ export class BizonylattetelSzerkesztesComponent implements OnDestroy {
         }
 
         this._cdr.detectChanges();
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.eventUjModositasUtan.emit(res5.Result[0]);
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

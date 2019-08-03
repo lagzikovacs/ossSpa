@@ -1,7 +1,6 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {KifizetesService} from '../kifizetes.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {KifizetesDto} from '../kifizetesdto';
 import {EgyMode} from '../../enums/egymode';
@@ -24,14 +23,13 @@ export class KifizetesListComponent implements OnInit, OnDestroy {
 
   egymode = EgyMode.Reszletek;
 
+  eppFrissit = false;
+
   bizonylatkifizetesservice: KifizetesService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               bizonylatkifizetesservice: KifizetesService) {
     this.bizonylatkifizetesservice = bizonylatkifizetesservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -41,16 +39,16 @@ export class KifizetesListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.tabla.clearselections();
 
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.bizonylatkifizetesservice.Select(this.Bizonylat.Bizonylatkod)
       .then(res => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
 
         this.Dto = res.Result;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -81,7 +79,7 @@ export class KifizetesListComponent implements OnInit, OnDestroy {
   }
   onTorles(ok: boolean) {
     if (ok) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
 
       this.bizonylatkifizetesservice.Delete(this.Dto[this.DtoSelectedIndex])
         .then(res => {
@@ -92,11 +90,11 @@ export class KifizetesListComponent implements OnInit, OnDestroy {
           this.Dto.splice(this.DtoSelectedIndex, 1);
           this.DtoSelectedIndex = -1;
 
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this.tabla.clearselections();
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {

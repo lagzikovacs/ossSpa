@@ -3,7 +3,6 @@ import {BizonylatTipus} from '../bizonylattipus';
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatMintaAlapjanParam} from '../bizonylatmintaalapjan';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-bizonylat-errol',
@@ -25,12 +24,10 @@ export class BizonylatErrolComponent implements OnDestroy {
   kesz = false;
   ujbizonylatkod = 0;
 
-  spinnerservice: SpinnerService;
+  eppFrissit = false;
 
   constructor(private _bizonylatservice: BizonylatService,
-              private _errorservice: ErrorService,
-              spinnerservice: SpinnerService) {
-    this.spinnerservice = spinnerservice;
+              private _errorservice: ErrorService) {
   }
 
   change(i) {
@@ -38,7 +35,7 @@ export class BizonylatErrolComponent implements OnDestroy {
   }
   onSubmit() {
     if (!this.kesz) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
       this._bizonylatservice.UjBizonylatMintaAlapjan(new BizonylatMintaAlapjanParam(
         this.Bizonylatkod, this.entries[this.entryindex][1]))
         .then(res => {
@@ -48,10 +45,10 @@ export class BizonylatErrolComponent implements OnDestroy {
 
           this.ujbizonylatkod = res.Result;
           this.kesz = true;
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {

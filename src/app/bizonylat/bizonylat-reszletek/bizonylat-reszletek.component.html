@@ -1,4 +1,4 @@
-<div class="alapkeret">
+<div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>{{bizonylatLeiro.BizonylatNev}} részletesen</h5>
   <div class="egylabel">Bizonylat</div>
   <app-bizonylattabla [enIdclick]="false" [items]="cdtoDto"></app-bizonylattabla>

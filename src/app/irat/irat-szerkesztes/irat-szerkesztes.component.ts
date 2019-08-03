@@ -8,7 +8,6 @@ import {IrattipusZoomParameter} from '../../primitiv/irattipus/irattipuszoompara
 import {EmptyResult} from '../../dtos/emptyresult';
 import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {IrattipusDto} from '../../primitiv/irattipus/irattipusdto';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
@@ -33,21 +32,20 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
 
   SzerkesztesMode = IratSzerkesztesMode.Blank;
 
+  eppFrissit = false;
+
   iratservice: IratService;
-  spinnerservice: SpinnerService;
 
   constructor(private _irattipusservice: IrattipusService,
               private _ugyfelservice: UgyfelService,
               private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               iratservice: IratService) {
     this.iratservice = iratservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
     if (this.uj) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
       this.iratservice.CreateNew()
         .then(res => {
           if (res.Error !== null) {
@@ -56,10 +54,10 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
 
           this.DtoEdited = res.Result[0];
           this.DtoEdited.Ugyfelkod = this.Ugyfelkod;
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
 
@@ -68,7 +66,7 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
 
     this._irattipusservice.ZoomCheck(new IrattipusZoomParameter(this.DtoEdited.Irattipuskod,
       this.DtoEdited.Irattipus))
@@ -109,11 +107,11 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
           throw res3.Error;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res3.Result[0]);
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

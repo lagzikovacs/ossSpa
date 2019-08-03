@@ -5,7 +5,6 @@ import * as moment from 'moment';
 import {TeendoZoomParameter} from '../../primitiv/teendo/teendozoomparameter';
 import {ProjektteendoSzerkesztesMode} from '../projektteendoszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {FelhasznaloDto} from '../../primitiv/felhasznalo/felhasznalodto';
 import {TeendoDto} from '../../primitiv/teendo/teendodto';
@@ -28,22 +27,21 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
 
   SzerkesztesMode = ProjektteendoSzerkesztesMode.Blank;
 
+  eppFrissit = false;
+
   projektteendoservice: ProjektteendoService;
-  spinnerservice: SpinnerService;
 
   constructor(private _teendoservice: TeendoService,
               private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               projektteendoservice: ProjektteendoService) {
     this.projektteendoservice = projektteendoservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
     this.Hatarido = moment().format('YYYY-MM-DD');
 
     if (this.uj) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
       this.projektteendoservice.CreateNew()
         .then(res => {
           if (res.Error !== null) {
@@ -51,10 +49,10 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     }
@@ -63,7 +61,7 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
   onSubmit() {
     // nem ellenőrzi, h a dedikált felhasználó létezik-e
 
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this._teendoservice.ZoomCheck(new TeendoZoomParameter(this.DtoEdited.Teendokod || 0,
       this.DtoEdited.Teendo || ''))
       .then(res => {
@@ -92,11 +90,11 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
           throw res2.Error;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res2.Result[0]);
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

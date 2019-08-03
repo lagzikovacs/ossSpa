@@ -4,7 +4,6 @@ import {FotozasService} from '../fotozas.service';
 import * as moment from 'moment';
 import {environment} from '../../../environments/environment';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {IratDto} from '../../irat/iratdto';
 
@@ -22,19 +21,18 @@ export class FotozasLinkComponent implements OnInit, OnDestroy {
   link = '';
   kikuldesikodidopontja: any;
 
-  spinnerservice: SpinnerService;
+  eppFrissit = false;
 
   constructor(private _iratservice: IratService,
               private _fotozasservice: FotozasService,
-              private _errorservice: ErrorService,
-              spinnerservice: SpinnerService) {
-    this.spinnerservice = spinnerservice;
+              private _errorservice: ErrorService) {
   }
 
   ngOnInit() {
     if (this.DtoEdited.Kikuldesikodidopontja !== null) {
       this.kikuldesidopontja();
 
+      this.eppFrissit = true;
       this._fotozasservice.GetLink(this.DtoEdited)
         .then(res => {
           if (res.Error !== null) {
@@ -44,7 +42,7 @@ export class FotozasLinkComponent implements OnInit, OnDestroy {
           this.link = environment.OSSRef + res.Result;
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {
@@ -59,7 +57,7 @@ export class FotozasLinkComponent implements OnInit, OnDestroy {
   }
 
   fotozaslink() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this._fotozasservice.CreateNewLink(this.DtoEdited)
       .then(res => {
         if (res.Error !== null) {
@@ -77,11 +75,11 @@ export class FotozasLinkComponent implements OnInit, OnDestroy {
         this.DtoEdited = res1.Result[0];
         this.kikuldesidopontja();
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

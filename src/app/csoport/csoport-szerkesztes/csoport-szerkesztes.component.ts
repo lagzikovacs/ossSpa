@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {CsoportService} from '../csoport.service';
 import {NumberResult} from '../../dtos/numberresult';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {CsoportDto} from '../csoportdto';
 import {deepCopy} from '../../tools/deepCopy';
 
@@ -18,19 +17,18 @@ export class CsoportSzerkesztesComponent implements OnInit, OnDestroy {
   }
   @Output() eventSzerkeszteskesz = new EventEmitter<CsoportDto>();
 
+  eppFrissit = false;
+
   csoportservice: CsoportService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               csoportservice: CsoportService) {
     this.csoportservice = csoportservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
     if (this.uj) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
       this.csoportservice.CreateNew()
         .then(res => {
           if (res.Error !== null) {
@@ -38,17 +36,17 @@ export class CsoportSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     }
   }
 
   onSubmit() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     let p: Promise<NumberResult>;
 
     if (this.uj) {
@@ -70,11 +68,11 @@ export class CsoportSzerkesztesComponent implements OnInit, OnDestroy {
           throw res1.Error;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

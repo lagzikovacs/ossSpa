@@ -6,7 +6,6 @@ import {JogKod} from '../../enums/jogkod';
 import {SzMT} from '../../dtos/szmt';
 import {OnlineszamlaDto} from '../onlineszamladto';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {environment} from '../../../environments/environment';
 import {OnlineszamlaParameter} from '../onlineszamlaparameter';
 
@@ -26,21 +25,19 @@ export class OnlineszamlaellenorzeseComponent implements OnDestroy {
   minta = '';
   up = new OnlineszamlaParameter(0, environment.lapmeret);
   OsszesRekord = 0;
+  eppFrissit = false;
 
   Dto: OnlineszamlaDto[] = new Array<OnlineszamlaDto>();
   DtoSelectedIndex = -1;
 
   onlineszamlaservice: OnlineszamlaService;
-  spinnerservice: SpinnerService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               onlineszamlaservice: OnlineszamlaService) {
     this.mod = _logonservice.Jogaim.includes(JogKod[JogKod.CIKKMOD]);
 
     this.onlineszamlaservice = onlineszamlaservice;
-    this.spinnerservice = spinnerservice;
   }
 
   onKereses() {
@@ -58,7 +55,7 @@ export class OnlineszamlaellenorzeseComponent implements OnDestroy {
     this.onKeresesTovabb();
   }
   onKeresesTovabb() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.onlineszamlaservice.Select(this.up)
       .then(res => {
         if (res.Error != null) {
@@ -78,10 +75,10 @@ export class OnlineszamlaellenorzeseComponent implements OnDestroy {
         this.OsszesRekord = res.OsszesRekord;
 
         this.up.rekordtol += this.up.lapmeret;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

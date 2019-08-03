@@ -4,7 +4,6 @@ import {NGMParam} from './ngmparam';
 import * as moment from 'moment';
 import {NGMMode} from './ngmmode';
 import {ErrorService} from '../tools/errorbox/error.service';
-import {SpinnerService} from '../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-ngm',
@@ -21,13 +20,11 @@ export class NgmComponent implements OnDestroy {
   np = new NGMParam();
   result = '';
 
-  spinnerservice: SpinnerService;
+  eppFrissit = false;
 
   constructor(ngmservice: NgmService,
-              spinnerservice: SpinnerService,
               private _errorservice: ErrorService) {
     this.ngmservice = ngmservice;
-    this.spinnerservice = spinnerservice;
   }
 
   submit() {
@@ -52,7 +49,7 @@ export class NgmComponent implements OnDestroy {
   }
 
   adatszolgaltatas() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.result = '';
     this.ngmservice.Adatszolgaltatas(this.np)
       .then(res => {
@@ -62,10 +59,10 @@ export class NgmComponent implements OnDestroy {
 
         this.result = res.Result;
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

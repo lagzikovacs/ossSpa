@@ -1,7 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 
 @Component({
@@ -13,19 +12,17 @@ export class BizonylatFormaiellenorzesComponent implements OnInit, OnDestroy {
   @Input() bizonylatLeiro = new BizonylatTipusLeiro();
 
   result = '';
+  eppFrissit = false;
 
   bizonylatservice: BizonylatService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.bizonylatservice.SzamlaFormaiEllenorzese(this.Bizonylatkod)
       .then(res => {
         if (res.Error != null) {
@@ -33,10 +30,10 @@ export class BizonylatFormaiellenorzesComponent implements OnInit, OnDestroy {
         }
 
         this.result = res.Result;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

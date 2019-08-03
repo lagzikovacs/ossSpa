@@ -3,7 +3,6 @@ import {ProjektService} from '../projekt.service';
 import {rowanimation} from '../../animation/rowAnimation';
 import {ProjektDto} from '../projektdto';
 import {deepCopy} from '../../tools/deepCopy';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-projekt-napelem',
@@ -23,12 +22,9 @@ export class ProjektNapelemComponent implements OnInit, OnDestroy {
   selected = '';
 
   projektservice: ProjektService;
-  spinnerservice: SpinnerService;
 
-  constructor(projektservice: ProjektService,
-              spinnerservice: SpinnerService) {
+  constructor(projektservice: ProjektService) {
     this.projektservice = projektservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {

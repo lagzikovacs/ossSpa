@@ -1,7 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
 import {OnlineszamlaService} from '../onlineszamla.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-szamlalekerdezes',
@@ -11,19 +10,18 @@ export class SzamlalekerdezesComponent implements OnDestroy {
   szamlaszam = '';
   valasz = '';
 
+  eppFrissit = false;
+
   onlineszamlaservice: OnlineszamlaService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              onlineszamlaservice: OnlineszamlaService,
-              spinnerservice: SpinnerService) {
+              onlineszamlaservice: OnlineszamlaService) {
     this.onlineszamlaservice = onlineszamlaservice;
-    this.spinnerservice = spinnerservice;
   }
 
   onSubmit() {
     this.valasz = '';
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.onlineszamlaservice.Szamlalekerdezes(this.szamlaszam)
       .then(res => {
         if (res.Error != null) {
@@ -31,10 +29,10 @@ export class SzamlalekerdezesComponent implements OnDestroy {
         }
 
         this.valasz = res.Result;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

@@ -4,7 +4,6 @@ import {IratService} from '../../irat/irat.service';
 import {VagolapService} from '../../vagolap/vagolap.service';
 import {VagolapMode} from '../../vagolap/vagolapmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {IratDto} from '../../irat/iratdto';
 import {BizonylatkapcsolatTablaComponent} from '../bizonylatkapcsolat-tabla/bizonylatkapcsolat-tabla.component';
 import {BizonylatKapcsolatParam} from '../bizonylatkapcsolatparam';
@@ -25,16 +24,15 @@ export class BizonylatkapcsolatListComponent implements OnInit, OnDestroy {
   Dto = new Array<BizonylatKapcsolatDto>();
   DtoSelectedIndex = -1;
 
+  eppFrissit = false;
+
   bizonylatkapcsolatservice: BizonylatkapcsolatService;
-  spinnerservice: SpinnerService;
 
   constructor(private _iratservice: IratService,
               private _vagolapservice: VagolapService,
               private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               bizonylatkapcsolatservice: BizonylatkapcsolatService) {
     this.bizonylatkapcsolatservice = bizonylatkapcsolatservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -42,7 +40,7 @@ export class BizonylatkapcsolatListComponent implements OnInit, OnDestroy {
   }
 
   onKereses() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.tabla.clearselections();
     this.bizonylatkapcsolatservice.Select(this.Bizonylatkod)
       .then(res => {
@@ -51,10 +49,10 @@ export class BizonylatkapcsolatListComponent implements OnInit, OnDestroy {
         }
 
         this.Dto = res.Result;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -67,7 +65,7 @@ export class BizonylatkapcsolatListComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this._iratservice.Get(this.Dto[this.DtoSelectedIndex].Iratkod)
       .then(res => {
         if (res.Error != null) {
@@ -75,11 +73,11 @@ export class BizonylatkapcsolatListComponent implements OnInit, OnDestroy {
         }
 
         this.OriginalIrat = res.Result[0];
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.tabla.iratOk = true;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -91,7 +89,7 @@ export class BizonylatkapcsolatListComponent implements OnInit, OnDestroy {
   }
   onUjiratutan(dto: IratDto) {
     if (dto !== null) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
       this.bizonylatkapcsolatservice.AddIratToBizonylat(new BizonylatKapcsolatParam(
         this.Bizonylatkod, dto.Iratkod))
         .then(res1 => {
@@ -107,11 +105,11 @@ export class BizonylatkapcsolatListComponent implements OnInit, OnDestroy {
           }
 
           this.Dto.unshift(res2.Result[0]);
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this.tabla.nemOk();
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {

@@ -1,7 +1,6 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ProjektteendoService} from '../projektteendo.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {ProjektteendoDto} from '../projektteendodto';
 import {EgyMode} from '../../enums/egymode';
@@ -23,14 +22,13 @@ export class ProjektTeendoListComponent implements OnInit, OnDestroy {
 
   egymode = EgyMode.Reszletek;
 
+  eppFrissit = false;
+
   projektteendoservice: ProjektteendoService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               projektteendoservice: ProjektteendoService) {
     this.projektteendoservice = projektteendoservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -40,7 +38,7 @@ export class ProjektTeendoListComponent implements OnInit, OnDestroy {
   onKereses() {
     this.tabla.clearselections();
 
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.projektteendoservice.Select(this.Projektkod)
       .then(res => {
         if (res.Error !== null) {
@@ -48,10 +46,10 @@ export class ProjektTeendoListComponent implements OnInit, OnDestroy {
         }
 
         this.Dto = res.Result;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -82,7 +80,7 @@ export class ProjektTeendoListComponent implements OnInit, OnDestroy {
   }
   onTorles(ok: boolean) {
     if (ok) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
 
       this.projektteendoservice.Delete(this.Dto[this.DtoSelectedIndex])
         .then(res => {
@@ -93,11 +91,11 @@ export class ProjektTeendoListComponent implements OnInit, OnDestroy {
           this.Dto.splice(this.DtoSelectedIndex, 1);
           this.DtoSelectedIndex = -1;
 
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this.tabla.clearselections();
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {

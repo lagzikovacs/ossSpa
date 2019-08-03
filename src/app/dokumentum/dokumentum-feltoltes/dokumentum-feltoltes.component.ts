@@ -2,7 +2,6 @@ import {Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild
 import {DokumentumService} from '../dokumentum.service';
 import {FajlBuf} from '../fajlbuf';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {DokumentumDto} from '../dokumentumdto';
 
 @Component({
@@ -21,14 +20,13 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
   @Input() Iratkod = -1;
   @Output() eventSzerkeszteskesz = new EventEmitter<DokumentumDto>();
 
+  eppFrissit = false;
+
   dokumentumservice: DokumentumService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               dokumentumservice: DokumentumService) {
     this.dokumentumservice = dokumentumservice;
-    this.spinnerservice = spinnerservice;
   }
 
   onFileChange(event) {
@@ -52,7 +50,7 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
     fb.Megjegyzes = this.megjegyzes;
     fb.IratKod = this.Iratkod;
 
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.dokumentumservice.FeltoltesAngular(fb)
       .then(res => {
         if (res.Error != null) {
@@ -66,11 +64,11 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
           throw res1.Error;
         }
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

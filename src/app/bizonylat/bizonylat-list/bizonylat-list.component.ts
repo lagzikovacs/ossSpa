@@ -6,7 +6,6 @@ import {BizonylatTipus} from '../bizonylattipus';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {BizonylatDto} from '../bizonylatdto';
 import {ActivatedRoute} from '@angular/router';
 import {environment} from '../../../environments/environment';
@@ -33,6 +32,7 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
   bp = new BizonylatParameter(0, environment.lapmeret);
   OsszesRekord = 0;
   elsokereses = true;
+  eppFrissit = false;
 
   bizonylatTipus = BizonylatTipus.Szamla;
   bizonylatLeiro = new BizonylatTipusLeiro();
@@ -44,17 +44,14 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
   private _sub: any;
 
   bizonylatservice: BizonylatService;
-  spinnerservice: SpinnerService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
               private _route: ActivatedRoute,
-              spinnerservice: SpinnerService,
               bizonylatservice: BizonylatService) {
     this.mod = this._logonservice.Jogaim.includes(JogKod[JogKod.BIZONYLATMOD]);
 
     this.bizonylatservice = bizonylatservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -80,7 +77,7 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
           break;
       }
 
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
       this.bizonylatservice.BizonylatLeiro(this.bizonylatTipus)
         .then(res => {
           if (res.Error != null) {
@@ -88,10 +85,10 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
           }
 
           this.bizonylatLeiro = res.Result;
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     });
@@ -115,7 +112,7 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
   }
 
   onKeresesTovabb() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.bizonylatservice.Select(this.bp)
       .then(res => {
         if (res.Error != null) {
@@ -135,10 +132,10 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
         this.OsszesRekord = res.OsszesRekord;
 
         this.bp.rekordtol += this.bp.lapmeret;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

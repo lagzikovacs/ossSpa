@@ -8,7 +8,6 @@ import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {BizonylatDto} from '../bizonylatdto';
 import {propCopy} from '../../tools/propCopy';
 import {deepCopy} from '../../tools/deepCopy';
@@ -42,23 +41,21 @@ export class BizonylatEgyComponent implements OnDestroy {
   BizonylatProjektje: ProjektDto;
   nincsProjekt = false;
   mod = false;
+  eppFrissit = false;
 
   bizonylatservice: BizonylatService;
   projektservice: ProjektService;
-  spinnerservice: SpinnerService;
 
   constructor(private _logonservice: LogonService,
               private _vagolapservice: VagolapService,
               private _errorservice: ErrorService,
               private _projektkapcsolatservice: ProjektkapcsolatService,
-              spinnerservice: SpinnerService,
               bizonylatservice: BizonylatService,
               projektservice: ProjektService) {
     this.mod = this._logonservice.Jogaim.includes(JogKod[JogKod.BIZONYLATMOD]);
 
     this.bizonylatservice = bizonylatservice;
     this.projektservice = projektservice;
-    this.spinnerservice = spinnerservice;
   }
 
   modositasenabled(): boolean {
@@ -145,7 +142,7 @@ export class BizonylatEgyComponent implements OnDestroy {
     this.EgyMode = BizonylatEgyMode.OSNxml;
   }
   doProjekt() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this._projektkapcsolatservice.SelectByBizonylat(this.Dto.Bizonylatkod)
       .then(res => {
         if (res.Error != null) {
@@ -170,10 +167,10 @@ export class BizonylatEgyComponent implements OnDestroy {
         }
 
         this.EgyMode = BizonylatEgyMode.Projekt;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -184,18 +181,18 @@ export class BizonylatEgyComponent implements OnDestroy {
 
   onTorles(ok: boolean) {
     if (ok) {
-      this.spinnerservice.eppFrissit = true;
+      this.eppFrissit = true;
       this.bizonylatservice.Delete(this.Dto)
         .then(res => {
           if (res.Error != null) {
             throw res.Error;
           }
 
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this.eventTorlesutan.emit();
         })
         .catch(err => {
-          this.spinnerservice.eppFrissit = false;
+          this.eppFrissit = false;
           this._errorservice.Error = err;
         });
     } else {

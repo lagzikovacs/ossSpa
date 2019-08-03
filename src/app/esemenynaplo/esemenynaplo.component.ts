@@ -1,7 +1,6 @@
 import {Component, Input, OnDestroy} from '@angular/core';
 import {EsemenynaploService} from './esemenynaplo.service';
 import {ErrorService} from '../tools/errorbox/error.service';
-import {SpinnerService} from '../tools/spinner/spinner.service';
 import {environment} from '../../environments/environment';
 import {EsemenynaploParameter} from './esemenynaploparameter';
 import {EsemenynaploDto} from './esemenynaplodto';
@@ -28,14 +27,13 @@ export class EsemenynaploComponent implements OnDestroy {
     this.OsszesRekord = 0;
   }
 
+  eppFrissit = false;
+
   esemenynaploservice: EsemenynaploService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               esemenynaploservice: EsemenynaploService) {
     this.esemenynaploservice = esemenynaploservice;
-    this.spinnerservice = spinnerservice;
   }
 
   onKereses() {
@@ -46,7 +44,7 @@ export class EsemenynaploComponent implements OnDestroy {
     this.onKeresesTovabb();
   }
   onKeresesTovabb() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this.esemenynaploservice.Select(this.ep)
       .then(res => {
         if (res.Error != null) {
@@ -66,10 +64,10 @@ export class EsemenynaploComponent implements OnDestroy {
         this.OsszesRekord = res.OsszesRekord;
 
         this.ep.rekordtol += this.ep.lapmeret;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

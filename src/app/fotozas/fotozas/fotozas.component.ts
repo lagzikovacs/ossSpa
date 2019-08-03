@@ -6,7 +6,6 @@ import {FajlBuf} from '../../dokumentum/fajlbuf';
 import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {LogonService} from '../../logon/logon.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 
 @Component({
   selector: 'app-fotozas',
@@ -25,15 +24,13 @@ export class FotozasComponent implements OnInit, OnDestroy {
   fajlnev = '';
   megjegyzes = '';
 
-  spinnerservice: SpinnerService;
+  eppFrissit = false;
 
   constructor(private _route: ActivatedRoute,
               private _logonservice: LogonService,
               private _dokumentumservice: DokumentumService,
               private _fotozasservice: FotozasService,
-              private _errorservice: ErrorService,
-              spinnerservice: SpinnerService) {
-    this.spinnerservice = spinnerservice;
+              private _errorservice: ErrorService) {
   }
 
   ngOnInit() {
@@ -45,7 +42,7 @@ export class FotozasComponent implements OnInit, OnDestroy {
   }
 
   folytatas() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this._fotozasservice.Check(this.fp)
       .then(res => {
         if (res.Error !== null) {
@@ -56,10 +53,10 @@ export class FotozasComponent implements OnInit, OnDestroy {
         this._logonservice.Sid = this.Dto.sid;
 
         this.bejelentkezve = true;
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
@@ -84,7 +81,7 @@ export class FotozasComponent implements OnInit, OnDestroy {
     fb.Megjegyzes = this.megjegyzes;
     fb.IratKod = this.Dto.iratDto[0].Iratkod;
 
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
     this._dokumentumservice.FeltoltesAngular(fb)
       .then(res => {
         if (res.Error != null) {
@@ -103,10 +100,10 @@ export class FotozasComponent implements OnInit, OnDestroy {
         this.megjegyzes = '';
         this.fileInput.nativeElement.value = '';
 
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
       })
       .catch(err => {
-        this.spinnerservice.eppFrissit = false;
+        this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }

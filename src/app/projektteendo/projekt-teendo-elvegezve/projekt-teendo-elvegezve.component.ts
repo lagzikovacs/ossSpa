@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import * as moment from 'moment';
 import {ProjektteendoService} from '../projektteendo.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {SpinnerService} from '../../tools/spinner/spinner.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {ProjektteendoDto} from '../projektteendodto';
 
@@ -19,14 +18,13 @@ export class ProjektTeendoElvegezveComponent implements OnInit, OnDestroy {
 
   Elvegezve: any;
 
+  eppFrissit = false;
+
   projektteendoservice: ProjektteendoService;
-  spinnerservice: SpinnerService;
 
   constructor(private _errorservice: ErrorService,
-              spinnerservice: SpinnerService,
               projektteendoservice: ProjektteendoService) {
     this.projektteendoservice = projektteendoservice;
-    this.spinnerservice = spinnerservice;
   }
 
   ngOnInit() {
@@ -34,7 +32,7 @@ export class ProjektTeendoElvegezveComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.spinnerservice.eppFrissit = true;
+    this.eppFrissit = true;
 
     this.DtoEdited.Elvegezve = moment(this.Elvegezve).toISOString(true);
     this.projektteendoservice.Update(this.DtoEdited)
@@ -50,11 +48,11 @@ export class ProjektTeendoElvegezveComponent implements OnInit, OnDestroy {
         throw res2.Error;
       }
 
-      this.spinnerservice.eppFrissit = false;
+      this.eppFrissit = false;
       this.eventSzerkeszteskesz.emit(res2.Result[0]);
     })
     .catch(err => {
-      this.spinnerservice.eppFrissit = false;
+      this.eppFrissit = false;
       this._errorservice.Error = err;
     });
   }

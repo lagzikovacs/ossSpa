@@ -1,4 +1,4 @@
-<div class="alapkeret">
+<div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>{{bizonylatLeiro.BizonylatNev}} pénztári kezelése</h5>
 
   <ng-container *ngIf="penztarDto.length > 0 && !penztarkivalasztva">

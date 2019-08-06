@@ -140,10 +140,13 @@ import {propCopy} from '../../tools/propCopy';
     this.tabla.ujtetelstop();
   }
   onModositaskesz(dto: UgyfelDto) {
+    this.onModositaskeszCsak(dto);
+    this.egymode = EgyMode.Reszletek;
+  }
+  onModositaskeszCsak(dto: UgyfelDto) {
     if (dto !== null) {
       propCopy(dto, this.Dto[this.DtoSelectedIndex]);
     }
-    this.egymode = EgyMode.Reszletek;
   }
   onTorles(ok: boolean) {
     if (ok) {

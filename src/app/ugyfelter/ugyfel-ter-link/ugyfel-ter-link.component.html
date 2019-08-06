@@ -1,13 +1,36 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>Ügyféltér link</h5>
-  <ng-container *ngIf="kikuldesikodidopontja !== ''">
-    <p>Korábban már készült ügyféltér link ({{kikuldesikodidopontja}})!</p>
-    <div class="form-group">
-      <textarea class="form-control" rows="3" id="regilink" readonly="true" [(ngModel)]="link"></textarea>
-    </div>
-  </ng-container>
-  <button (click)="ugyfelterlink()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+
+  <button (click)="doUj()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
     Új ügyféltér link
   </button>
-  <p *ngIf="kikuldesikodidopontja !== ''">Ha új linket készít, a régi érvényessége megszűnik!</p>
+  <button [disabled]="link === ''" (click)="doTorles()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+    Ügyféltér link törlése
+  </button>
+
+  <ng-container *ngIf="link !== ''">
+    <div class="form-group">
+      <textarea class="form-control" rows="3" id="regilink" readonly="true" [(ngModel)]="link"></textarea>
+      {{kikuldesikodidopontja}}
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="egymode === 3">
+    <div [@rowanimation]>
+      <h5>Új ügyféltér link</h5>
+      <p>Ha új ügyféltér linket készít, a régi érvényessége megszűnik. Biztos benne?</p>
+      <div class="row no-gutters" style="margin-bottom: 10px">
+        <button class="btn btn-sm btn-primary" (click)="onUj()">Ok</button>
+        <button class="btn btn-sm btn-default" style="margin-left:3px;" (click)="onMegsem()">Mégsem</button>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="egymode === 2">
+    <div [@rowanimation]>
+      <app-tetel-torles [cim]="'Ügyféltér link'"
+                        (eventTorles)="onTorles($event)">
+      </app-tetel-torles>
+    </div>
+  </ng-container>
 </div>

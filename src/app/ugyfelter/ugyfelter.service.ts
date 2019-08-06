@@ -5,6 +5,7 @@ import {StringResult} from '../dtos/stringresult';
 import {environment} from '../../environments/environment';
 import {UgyfelDto} from '../ugyfel/ugyfeldto';
 import {UgyfelterResult} from './ugyfelterresult';
+import {EmptyResult} from '../dtos/emptyresult';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +21,16 @@ export class UgyfelterService {
       this._controller + 'createnewlink', dto, this._logonservice.httpoptions())
       .toPromise();
   }
+
   public GetLink(dto: UgyfelDto): Promise<StringResult> {
     return this._httpClient.post<StringResult>(
       this._controller + 'getlink', dto, this._logonservice.httpoptions())
+      .toPromise();
+  }
+
+  public ClearLink(dto: UgyfelDto): Promise<EmptyResult> {
+    return this._httpClient.post<EmptyResult>(
+      this._controller + 'clearlink', dto, this._logonservice.httpoptions())
       .toPromise();
   }
 

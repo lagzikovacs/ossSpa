@@ -40,6 +40,7 @@ export class FotozasLinkComponent implements OnInit, OnDestroy {
           }
 
           this.link = environment.OSSRef + res.Result;
+          this.eppFrissit = false;
         })
         .catch(err => {
           this.eppFrissit = false;

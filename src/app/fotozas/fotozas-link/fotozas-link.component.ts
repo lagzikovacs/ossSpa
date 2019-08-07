@@ -6,10 +6,13 @@ import {environment} from '../../../environments/environment';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {IratDto} from '../../irat/iratdto';
+import {EgyMode} from '../../enums/egymode';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-fotozas-link',
-  templateUrl: './fotozas-link.component.html'
+  templateUrl: './fotozas-link.component.html',
+  animations: [rowanimation]
 })
 export class FotozasLinkComponent implements OnInit, OnDestroy {
   DtoEdited = new IratDto();
@@ -21,6 +24,7 @@ export class FotozasLinkComponent implements OnInit, OnDestroy {
   link = '';
   kikuldesikodidopontja: any;
 
+  egymode = EgyMode.Blank;
   eppFrissit = false;
 
   constructor(private _iratservice: IratService,
@@ -57,7 +61,15 @@ export class FotozasLinkComponent implements OnInit, OnDestroy {
       moment(this.DtoEdited.Kikuldesikodidopontja).format('YYYY-MM-DD HH:mm:ss');
   }
 
-  fotozaslink() {
+  doUj() {
+    if (this.link === '') {
+      this.onUj();
+    } else {
+      this.egymode = EgyMode.Modositas;
+    }
+  }
+
+  onUj() {
     this.eppFrissit = true;
     this._fotozasservice.CreateNewLink(this.DtoEdited)
       .then(res => {
@@ -75,14 +87,56 @@ export class FotozasLinkComponent implements OnInit, OnDestroy {
 
         this.DtoEdited = res1.Result[0];
         this.kikuldesidopontja();
-
         this.eppFrissit = false;
+
+        this.egymode = EgyMode.Blank;
+
         this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
+  }
+  onMegsem() {
+    this.egymode = EgyMode.Blank;
+  }
+
+  doTorles() {
+    this.egymode = EgyMode.Torles;
+  }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
+      this._fotozasservice.ClearLink(this.DtoEdited)
+        .then(res => {
+          if (res.Error !== null) {
+            throw res.Error;
+          }
+
+          this.link = '';
+          return this._iratservice.Get(this.DtoEdited.Iratkod);
+        })
+        .then(res1 => {
+          if (res1.Error !== null) {
+            throw res1.Error;
+          }
+
+          this.DtoEdited = res1.Result[0];
+          this.kikuldesikodidopontja = '';
+          this.eppFrissit = false;
+
+          this.egymode = EgyMode.Blank;
+
+          this.eventSzerkeszteskesz.emit(res1.Result[0]);
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Blank;
+    }
   }
 
   ngOnDestroy() {

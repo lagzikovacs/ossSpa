@@ -5,6 +5,7 @@ import {environment} from '../../environments/environment';
 import {IratDto} from '../irat/iratdto';
 import {LogonService} from '../logon/logon.service';
 import {FotozasResult} from './fotozasresult';
+import {EmptyResult} from '../dtos/emptyresult';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,12 @@ export class FotozasService {
   public CreateNewLink(dto: IratDto): Promise<StringResult> {
     return this._httpClient.post<StringResult>(
       this._controller + 'createnewlink', dto, this._logonservice.httpoptions())
+      .toPromise();
+  }
+
+  public ClearLink(dto: IratDto): Promise<EmptyResult> {
+    return this._httpClient.post<EmptyResult>(
+      this._controller + 'clearlink', dto, this._logonservice.httpoptions())
       .toPromise();
   }
 

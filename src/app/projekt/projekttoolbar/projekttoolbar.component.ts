@@ -1,7 +1,5 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
 
-declare let $: any;
-
 @Component({
   selector: 'app-projekttoolbar',
   templateUrl: './projekttoolbar.component.html'

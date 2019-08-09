@@ -3,8 +3,6 @@ import {Router} from '@angular/router';
 import {ErrorService} from './error.service';
 import {Subscription} from 'rxjs';
 
-declare let $: any;
-
 @Component({
   selector: 'app-errorbox',
   templateUrl: './errorbox.component.html',
@@ -25,7 +23,7 @@ export class ErrorboxComponent implements OnInit, OnDestroy {
 
       this.ahibastring = typeof(this.hiba) === 'string';
 
-      $('#errorbox').modal();
+      $('#errorbox').modal(); // a modal bootstrap extension a jqueryhez
     });
   }
 

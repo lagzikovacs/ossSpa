@@ -23,45 +23,74 @@
       <button (click)="volume()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Volume
       </button>
+      <button (click)="email()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+        eMail
+      </button>
     </nav>
   </div>
 
 
   <ng-container *ngIf="EgyMode === 30">
-    <app-particio-szallito [Dto]="Dto"
-                           (eventOk)="onSzerkesztesOk($event)"
-                           (eventCancel)="onSzerkesztesCancel()">
-    </app-particio-szallito>
+    <div [@rowanimation]>
+      <app-particio-szallito [Dto]="Dto"
+                             (eventOk)="onSzerkesztesOk($event)"
+                             (eventCancel)="onSzerkesztesCancel()">
+      </app-particio-szallito>
+    </div>
   </ng-container>
+
   <ng-container *ngIf="EgyMode === 31">
-    <app-particio-nav [Dto]="Dto"
-                      (eventOk)="onSzerkesztesOk($event)"
-                      (eventCancel)="onSzerkesztesCancel()">
-    </app-particio-nav>
+    <div [@rowanimation]>
+      <app-particio-nav [Dto]="Dto"
+                        (eventOk)="onSzerkesztesOk($event)"
+                        (eventCancel)="onSzerkesztesCancel()">
+      </app-particio-nav>
+    </div>
   </ng-container>
+
   <ng-container *ngIf="EgyMode === 32">
-    <app-particio-smtp [Dto]="Dto"
-                       (eventOk)="onSzerkesztesOk($event)"
-                       (eventCancel)="onSzerkesztesCancel()">
-    </app-particio-smtp>
-  </ng-container>
-  <ng-container *ngIf="EgyMode === 33">
-    <app-particio-bizonylat [Dto]="Dto"
-                            (eventOk)="onSzerkesztesOk($event)"
-                            (eventCancel)="onSzerkesztesCancel()">
-    </app-particio-bizonylat>
-  </ng-container>
-  <ng-container *ngIf="EgyMode === 8">
-    <app-particio-projekt [Dto]="Dto"
-                          (eventOk)="onSzerkesztesOk($event)"
-                          (eventCancel)="onSzerkesztesCancel()">
-    </app-particio-projekt>
-  </ng-container>
-  <ng-container *ngIf="EgyMode === 34">
-    <app-particio-volume [Dto]="Dto"
+    <div [@rowanimation]>
+      <app-particio-smtp [Dto]="Dto"
                          (eventOk)="onSzerkesztesOk($event)"
                          (eventCancel)="onSzerkesztesCancel()">
-    </app-particio-volume>
+      </app-particio-smtp>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="EgyMode === 33">
+    <div [@rowanimation]>
+      <app-particio-bizonylat [Dto]="Dto"
+                              (eventOk)="onSzerkesztesOk($event)"
+                              (eventCancel)="onSzerkesztesCancel()">
+      </app-particio-bizonylat>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="EgyMode === 8">
+    <div [@rowanimation]>
+      <app-particio-projekt [Dto]="Dto"
+                            (eventOk)="onSzerkesztesOk($event)"
+                            (eventCancel)="onSzerkesztesCancel()">
+      </app-particio-projekt>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="EgyMode === 34">
+    <div [@rowanimation]>
+      <app-particio-volume [Dto]="Dto"
+                           (eventOk)="onSzerkesztesOk($event)"
+                           (eventCancel)="onSzerkesztesCancel()">
+      </app-particio-volume>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="EgyMode === 35">
+    <div [@rowanimation]>
+      <app-particio-email [Dto]="Dto"
+                          (eventOk)="onSzerkesztesOk($event)"
+                          (eventCancel)="onSzerkesztesCancel()">
+      </app-particio-email>
+    </div>
   </ng-container>
 </div>
 

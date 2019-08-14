@@ -4,10 +4,12 @@ import {ParticioDto} from '../particiodto';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {EgyMode} from '../../enums/egymode';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-particio-egy',
-  templateUrl: './particio-egy.component.html'
+  templateUrl: './particio-egy.component.html',
+  animations: [rowanimation]
 })
 export class ParticioEgyComponent implements OnInit, OnDestroy {
   Ori = new ParticioDto();
@@ -60,6 +62,9 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
   }
   volume() {
     this.EgyMode = EgyMode.Volume;
+  }
+  email() {
+    this.EgyMode = EgyMode.Email;
   }
 
   onSzerkesztesOk(Mod: ParticioDto) {

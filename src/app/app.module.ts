@@ -187,6 +187,7 @@ import {BizonylattetelSzerkesztesComponent} from './bizonylat/bizonylattetel-sze
 import { AjanlatTablaComponent } from './ajanlat/ajanlat-tabla/ajanlat-tabla.component';
 import { HscrollDirective } from './directives/divhscroll.directive';
 import {SpinnerDirective} from './directives/spinner.directive';
+import { ParticioEmailComponent } from './particio/particio-email/particio-email.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -399,7 +400,8 @@ if (environment.production) {
     BizonylatkapcsolatTablaComponent,
     AjanlatTablaComponent,
     HscrollDirective,
-    SpinnerDirective
+    SpinnerDirective,
+    ParticioEmailComponent
   ],
   imports: [
     BrowserModule,

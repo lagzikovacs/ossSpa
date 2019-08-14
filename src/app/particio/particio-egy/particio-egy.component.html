@@ -26,48 +26,38 @@
     </nav>
   </div>
 
-<!--  export enum ParticioEgyMode {
-  Blank = 0,
-  Szallito = 1,
-  Nav = 2,
-  Smtp = 3,
-  Bizonylat = 4,
-  Projekt = 5,
-  Volume = 6
-  }-->
 
-
-  <ng-container *ngIf="EgyMode === 1">
+  <ng-container *ngIf="EgyMode === 30">
     <app-particio-szallito [Dto]="Dto"
                            (eventOk)="onSzerkesztesOk($event)"
                            (eventCancel)="onSzerkesztesCancel()">
     </app-particio-szallito>
   </ng-container>
-  <ng-container *ngIf="EgyMode === 2">
+  <ng-container *ngIf="EgyMode === 31">
     <app-particio-nav [Dto]="Dto"
                       (eventOk)="onSzerkesztesOk($event)"
                       (eventCancel)="onSzerkesztesCancel()">
     </app-particio-nav>
   </ng-container>
-  <ng-container *ngIf="EgyMode === 3">
+  <ng-container *ngIf="EgyMode === 32">
     <app-particio-smtp [Dto]="Dto"
                        (eventOk)="onSzerkesztesOk($event)"
                        (eventCancel)="onSzerkesztesCancel()">
     </app-particio-smtp>
   </ng-container>
-  <ng-container *ngIf="EgyMode === 4">
+  <ng-container *ngIf="EgyMode === 33">
     <app-particio-bizonylat [Dto]="Dto"
                             (eventOk)="onSzerkesztesOk($event)"
                             (eventCancel)="onSzerkesztesCancel()">
     </app-particio-bizonylat>
   </ng-container>
-  <ng-container *ngIf="EgyMode === 5">
+  <ng-container *ngIf="EgyMode === 8">
     <app-particio-projekt [Dto]="Dto"
                           (eventOk)="onSzerkesztesOk($event)"
                           (eventCancel)="onSzerkesztesCancel()">
     </app-particio-projekt>
   </ng-container>
-  <ng-container *ngIf="EgyMode === 6">
+  <ng-container *ngIf="EgyMode === 34">
     <app-particio-volume [Dto]="Dto"
                          (eventOk)="onSzerkesztesOk($event)"
                          (eventCancel)="onSzerkesztesCancel()">

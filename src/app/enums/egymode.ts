@@ -38,4 +38,10 @@ export enum EgyMode {
 
   BeszerzesMozgas = 28,
   KivetMozgas = 29,
+
+  Szallito = 30,
+  Nav = 31,
+  Smtp = 32,
+  Bizonylat = 33,
+  Volume = 34,
 }

@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ParticioService} from '../particio.service';
-import {ParticioEgyMode} from '../particioegymode';
 import {ParticioDto} from '../particiodto';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {EgyMode} from '../../enums/egymode';
 
 @Component({
   selector: 'app-particio-egy',
@@ -13,7 +13,7 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
   Ori = new ParticioDto();
   Dto = new ParticioDto();
 
-  EgyMode = ParticioEgyMode.Szallito;
+  EgyMode = EgyMode.Szallito;
 
   eppFrissit = false;
 
@@ -44,22 +44,22 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
   }
 
   szallito() {
-    this.EgyMode = ParticioEgyMode.Szallito;
+    this.EgyMode = EgyMode.Szallito;
   }
   nav() {
-    this.EgyMode = ParticioEgyMode.Nav;
+    this.EgyMode = EgyMode.Nav;
   }
   smtp() {
-    this.EgyMode = ParticioEgyMode.Smtp;
+    this.EgyMode = EgyMode.Smtp;
   }
   bizonylat() {
-    this.EgyMode = ParticioEgyMode.Bizonylat;
+    this.EgyMode = EgyMode.Bizonylat;
   }
   projekt() {
-    this.EgyMode = ParticioEgyMode.Projekt;
+    this.EgyMode = EgyMode.Projekt;
   }
   volume() {
-    this.EgyMode = ParticioEgyMode.Volume;
+    this.EgyMode = EgyMode.Volume;
   }
 
   onSzerkesztesOk(Mod: ParticioDto) {
@@ -81,7 +81,7 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
         this.Dto = deepCopy(this.Ori);
 
         this.eppFrissit = false;
-        this.EgyMode = ParticioEgyMode.Blank;
+        this.EgyMode = EgyMode.Blank;
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -91,7 +91,7 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
   onSzerkesztesCancel() {
     this.Dto = deepCopy(this.Ori);
 
-    this.EgyMode = ParticioEgyMode.Blank;
+    this.EgyMode = EgyMode.Blank;
   }
 
   ngOnDestroy() {

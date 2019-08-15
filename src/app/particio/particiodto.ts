@@ -45,6 +45,11 @@ export class ParticioDto {
   VolumeUjvolumeMaxmeret: number;
   VolumeUjvolumeEleresiut: string;
 
+  Szallito: string;
+  Navonlineszamla: string;
+  Bizonylat: string;
+  Projekt: string;
+  Volume: string;
   Emails: string;
 
   Letrehozva: Date;

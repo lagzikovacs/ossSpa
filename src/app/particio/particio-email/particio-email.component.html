@@ -23,7 +23,7 @@
         <div>
           <div class="egylabel">Klienstipus</div>
           <select type="text" class="form-control form-control-sm"
-                  [(ngModel)]="eMails[selected].Tipus" name="m1">
+                  [(ngModel)]="cEmails[selected].Tipus" name="m1">
             <option>Gmail</option>
           </select>
         </div>
@@ -34,14 +34,14 @@
           <div class="egylabel">Azonosító</div>
           <input type="text" class="form-control form-control-sm oszlop4" id="m2"
                  autocomplete="off"
-                 [(ngModel)]="eMails[selected].Azonosito" name="m2">
+                 [(ngModel)]="cEmails[selected].Azonosito" name="m2">
         </div>
 
         <div>
           <div class="egylabel">Jelszó</div>
           <input type="text" class="form-control form-control-sm oszlop4" id="m3"
                  autocomplete="off"
-                 [(ngModel)]="eMails[selected].Jelszo" name="m3">
+                 [(ngModel)]="cEmails[selected].Jelszo" name="m3">
         </div>
       </div>
 
@@ -50,14 +50,14 @@
           <div class="egylabel">A küldő neve</div>
           <input type="text" class="form-control form-control-sm oszlop4" id="m4"
                  autocomplete="off" maxlength="50"
-                 [(ngModel)]="eMails[selected].KuldoNeve" name="m4">
+                 [(ngModel)]="cEmails[selected].KuldoNeve" name="m4">
         </div>
 
         <div>
           <div class="egylabel">A küldő email címe</div>
           <input type="text" class="form-control form-control-sm oszlop4" id="m5"
                  autocomplete="off" maxlength="50"
-                 [(ngModel)]="eMails[selected].KuldoEmailcime" name="m5">
+                 [(ngModel)]="cEmails[selected].KuldoEmailcime" name="m5">
         </div>
       </div>
 
@@ -66,14 +66,14 @@
           <div class="egylabel">Custom host</div>
           <input type="text" class="form-control form-control-sm oszlop4" id="m6"
                  autocomplete="off" maxlength="50"
-                 [(ngModel)]="eMails[selected].CustomHost" name="m6">
+                 [(ngModel)]="cEmails[selected].CustomHost" name="m6">
         </div>
 
         <div>
           <div class="egylabel">Custom port</div>
           <input type="number" class="form-control form-control-sm oszlop1" id="m7"
                  autocomplete="off"
-                 [(ngModel)]="eMails[selected].CustomPort" name="m7">
+                 [(ngModel)]="cEmails[selected].CustomPort" name="m7">
         </div>
       </div>
 
@@ -81,7 +81,7 @@
         <div>
           <div class="egylabel">Ssl</div>
           <select type="text" class="form-control form-control-sm"
-                  [(ngModel)]="eMails[selected].Ssl" name="m8">
+                  [(ngModel)]="cEmails[selected].Ssl" name="m8">
             <option value="false">Nem</option>
             <option value="true">Igen</option>
           </select>

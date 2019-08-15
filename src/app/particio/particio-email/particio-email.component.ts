@@ -14,37 +14,33 @@ export class ParticioEmailComponent implements OnInit, OnDestroy {
   entries = ['Sales', 'NAV online számla'];
   selected = 0;
 
-  eMails: EmailConf[];
+  cEmails: EmailConf[];
 
   selectedchange(i) {
     this.selected = i;
   }
 
-  initemails() {
-    this.eMails = new Array<EmailConf>();
-    this.eMails.push(new EmailConf());
-    this.eMails.push(new EmailConf());
-    this.eMails[0].ConfName = 'Sales';
-    this.eMails[0].Tipus = 'Gmail';
-    this.eMails[0].Ssl = false;
-    this.eMails[1].ConfName = 'NAV online számla';
-    this.eMails[1].Tipus = 'Gmail';
-    this.eMails[1].Ssl = false;
-  }
-
   ngOnInit() {
     try {
-      this.eMails = JSON.parse(this.Dto.Emails); // kivétel, ha hibás
-      if (this.eMails === null) { // null, ha a mező is null
+      this.cEmails = JSON.parse(this.Dto.Emails); // kivétel, ha hibás
+      if (this.cEmails === null) { // null, ha a mező is null
         throw new Error();
       }
     } catch (ex) {
-      this.initemails();
+      this.cEmails = new Array<EmailConf>();
+      this.cEmails.push(new EmailConf());
+      this.cEmails.push(new EmailConf());
+      this.cEmails[0].ConfName = 'Sales';
+      this.cEmails[0].Tipus = 'Gmail';
+      this.cEmails[0].Ssl = false;
+      this.cEmails[1].ConfName = 'NAV online számla';
+      this.cEmails[1].Tipus = 'Gmail';
+      this.cEmails[1].Ssl = false;
     }
   }
 
   onSubmit() {
-    this.Dto.Emails = JSON.stringify(this.eMails);
+    this.Dto.Emails = JSON.stringify(this.cEmails);
 
     this.eventOk.emit(this.Dto);
   }

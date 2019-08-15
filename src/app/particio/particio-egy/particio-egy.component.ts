@@ -15,7 +15,7 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
   Ori = new ParticioDto();
   Dto = new ParticioDto();
 
-  EgyMode = EgyMode.Szallito;
+  EgyMode = EgyMode.Blank;
 
   eppFrissit = false;
 
@@ -38,6 +38,8 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
         this.Dto = deepCopy(this.Ori);
 
         this.eppFrissit = false;
+
+        this.EgyMode = EgyMode.Szallito;
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -50,9 +52,6 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
   }
   nav() {
     this.EgyMode = EgyMode.Nav;
-  }
-  smtp() {
-    this.EgyMode = EgyMode.Smtp;
   }
   bizonylat() {
     this.EgyMode = EgyMode.Bizonylat;

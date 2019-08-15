@@ -1,5 +1,5 @@
 <div class="alapkeret">
-  <h5>NAV</h5>
+  <h5>NAV online számla</h5>
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
     <div class="row no-gutters editform-row">
@@ -7,7 +7,7 @@
         <div class="egylabel">Url</div>
         <input type="text" class="form-control form-control-sm oszlop6" id="m1"
                autocomplete="off"
-               [(ngModel)]="Dto.NavUrl" name="m1">
+               [(ngModel)]="cNavOnlineszamla.Url" name="m1">
       </div>
     </div>
 
@@ -16,7 +16,7 @@
         <div class="egylabel">Azonosító</div>
         <input type="text" class="form-control form-control-sm oszlop6" id="m2"
                autocomplete="off"
-               [(ngModel)]="Dto.NavFelhasznaloazonosito" name="m2">
+               [(ngModel)]="cNavOnlineszamla.Azonosito" name="m2">
       </div>
     </div>
 
@@ -25,7 +25,7 @@
         <div class="egylabel">Jelszó</div>
         <input type="text" class="form-control form-control-sm oszlop6" id="m3"
                autocomplete="off"
-               [(ngModel)]="Dto.NavFelhasznalojelszo" name="m3">
+               [(ngModel)]="cNavOnlineszamla.Jelszo" name="m3">
       </div>
     </div>
 
@@ -34,7 +34,7 @@
         <div class="egylabel">Aláírókulcs</div>
         <input type="text" class="form-control form-control-sm oszlop6" id="m4"
                autocomplete="off"
-               [(ngModel)]="Dto.NavAlairokulcs" name="m4">
+               [(ngModel)]="cNavOnlineszamla.Alairokulcs" name="m4">
       </div>
     </div>
 
@@ -43,7 +43,16 @@
         <div class="egylabel">Cserekulcs</div>
         <input type="text" class="form-control form-control-sm oszlop6" id="m5"
                autocomplete="off"
-               [(ngModel)]="Dto.NavCserekulcs" name="m5">
+               [(ngModel)]="cNavOnlineszamla.Cserekulcs" name="m5">
+      </div>
+    </div>
+
+    <div class="row no-gutters editform-row">
+      <div>
+        <div class="egylabel">Hibaértesítési email címek</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="m9"
+               autocomplete="off"
+               [(ngModel)]="cNavOnlineszamla.Hibaertesitesemailcimek" name="m9">
       </div>
     </div>
 

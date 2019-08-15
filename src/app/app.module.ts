@@ -68,7 +68,6 @@ import { KeszletComponent } from './riport/keszlet/keszlet.component';
 import { NgmComponent } from './ngm/ngm.component';
 import { ParticioSzallitoComponent } from './particio/particio-szallito/particio-szallito.component';
 import { ParticioNavComponent } from './particio/particio-nav/particio-nav.component';
-import { ParticioSmtpComponent } from './particio/particio-smtp/particio-smtp.component';
 import { ParticioBizonylatComponent } from './particio/particio-bizonylat/particio-bizonylat.component';
 import { ParticioProjektComponent } from './particio/particio-projekt/particio-projekt.component';
 import { ParticioVolumeComponent } from './particio/particio-volume/particio-volume.component';
@@ -309,7 +308,6 @@ if (environment.production) {
     NgmComponent,
     ParticioSzallitoComponent,
     ParticioNavComponent,
-    ParticioSmtpComponent,
     ParticioBizonylatComponent,
     ParticioProjektComponent,
     ParticioVolumeComponent,

@@ -45,4 +45,6 @@ export enum EgyMode {
   Bizonylat = 33,
   Volume = 34,
   Email = 35,
+
+  Terkep = 36,
 }

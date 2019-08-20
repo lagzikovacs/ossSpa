@@ -188,6 +188,7 @@ import { HscrollDirective } from './directives/divhscroll.directive';
 import {SpinnerDirective} from './directives/spinner.directive';
 import { ParticioEmailComponent } from './particio/particio-email/particio-email.component';
 import {AgmCoreModule} from '@agm/core';
+import { TerkepComponent } from './tools/terkep/terkep.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -400,7 +401,8 @@ if (environment.production) {
     AjanlatTablaComponent,
     HscrollDirective,
     SpinnerDirective,
-    ParticioEmailComponent
+    ParticioEmailComponent,
+    TerkepComponent
   ],
   imports: [
     BrowserModule,

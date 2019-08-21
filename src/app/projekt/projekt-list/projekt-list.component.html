@@ -76,9 +76,6 @@
           <button (click)="doNav(25)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             Számlázási rend
           </button>
-          <button (click)="doNav(36)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-            Térkép
-          </button>
         </nav>
       </div>
 
@@ -169,12 +166,6 @@
         <div [@rowanimation]>
           <app-projekt-teendo-list [Projektkod]="Dto[DtoSelectedIndex].Projektkod">
           </app-projekt-teendo-list>
-        </div>
-      </ng-container>
-      <ng-container *ngIf="egymode === 36">
-        <div [@rowanimation]>
-          <app-terkep>
-          </app-terkep>
         </div>
       </ng-container>
     </div>

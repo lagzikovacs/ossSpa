@@ -187,6 +187,7 @@ import { AjanlatTablaComponent } from './ajanlat/ajanlat-tabla/ajanlat-tabla.com
 import { HscrollDirective } from './directives/divhscroll.directive';
 import {SpinnerDirective} from './directives/spinner.directive';
 import { ParticioEmailComponent } from './particio/particio-email/particio-email.component';
+import { KapcsolatiHaloComponent } from './kapcsolatihalo/kapcsolati-halo/kapcsolati-halo.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -205,6 +206,7 @@ const routes: Routes = [
   {path: 'penztar', component: PenztarListComponent, canActivate: [RoleGuard]},
   {path: 'ajanlatkeres', component: AjanlatkeresListComponent, canActivate: [RoleGuard]},
   {path: 'ugyfelterlog', component: UgyfelterlogComponent, canActivate: [RoleGuard]},
+  {path: 'kapcsolatihalo', component: KapcsolatiHaloComponent, canActivate: [RoleGuard]},
 
   {path: 'bizonylat', children: [
     {path: 'dijbekero', component: BizonylatListComponent, canActivate: [RoleGuard]},
@@ -400,6 +402,7 @@ if (environment.production) {
     HscrollDirective,
     SpinnerDirective,
     ParticioEmailComponent,
+    KapcsolatiHaloComponent,
   ],
   imports: [
     BrowserModule,

@@ -86,6 +86,16 @@
     </div>
 
     <div class="row no-gutters editform-row">
+      <div>
+        <div class="egylabel">Tevékenység</div>
+        <input type="text" class="form-control form-control-sm oszlop3" id="tevekenyseg"
+               maxlength="100" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
+               [(ngModel)]="DtoEdited.Tevekenyseg" name="tevekenyseg">
+        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="TevekenysegZoom()">...</button>
+      </div>
+    </div>
+
+    <div class="row no-gutters editform-row">
       <div style="margin-right: 5px">
         <div class="egylabel">Adószám</div>
         <input type="text" class="form-control form-control-sm oszlop2" style="display: inline-block" id="adoszam"
@@ -136,6 +146,11 @@
     <app-helyseg-list [maszk]="DtoEdited.Helysegnev || ''"
                       (eventSelectzoom)="onHelysegSelectzoom($event)"
                       (eventStopzoom)="onHelysegStopzoom()"></app-helyseg-list>
+  </ng-container>
+  <ng-container *ngIf="SzerkesztesMode === 2">
+    <app-tevekenyseg-list [maszk]="DtoEdited.Tevekenyseg || ''"
+                      (eventSelectzoom)="onTevekenysegSelectzoom($event)"
+                      (eventStopzoom)="onTevekenysegStopzoom()"></app-tevekenyseg-list>
   </ng-container>
 </div>
 

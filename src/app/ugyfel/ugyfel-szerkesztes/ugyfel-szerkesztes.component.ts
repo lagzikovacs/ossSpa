@@ -7,6 +7,9 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {HelysegDto} from '../../primitiv/helyseg/helysegdto';
 import {UgyfelDto} from '../ugyfeldto';
+import {TevekenysegDto} from '../../primitiv/tevekenyseg/tevekenysegdto';
+import {TevekenysegService} from '../../primitiv/tevekenyseg/tevekenyseg.service';
+import {TevekenysegZoomParameter} from '../../primitiv/tevekenyseg/tevekenysegzoomparameter';
 
 @Component({
   selector: 'app-ugyfel-szerkesztes',
@@ -27,6 +30,7 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
   ugyfelservice: UgyfelService;
 
   constructor(private _helysegservice: HelysegService,
+              private _tevekenysegservice: TevekenysegService,
               private _errorservice: ErrorService,
               ugyfelservice: UgyfelService) {
     this.ugyfelservice = ugyfelservice;
@@ -58,6 +62,14 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
       .then(res => {
         if (res.Error !== null) {
           throw res.Error;
+        }
+
+        return this._tevekenysegservice.ZoomCheck(new TevekenysegZoomParameter(this.DtoEdited.Tevekenysegkod || 0,
+          this.DtoEdited.Tevekenyseg || ''));
+      })
+      .then(res0 => {
+        if (res0.Error !== null) {
+          throw res0.Error;
         }
 
         if (this.uj) {
@@ -99,6 +111,17 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Helysegnev = Dto.Helysegnev;
   }
   onHelysegStopzoom() {
+    this.SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
+  }
+
+  TevekenysegZoom() {
+    this.SzerkesztesMode = UgyfelSzerkesztesMode.TevekenysegZoom;
+  }
+  onTevekenysegSelectzoom(Dto: TevekenysegDto) {
+    this.DtoEdited.Tevekenysegkod = Dto.Tevekenysegkod;
+    this.DtoEdited.Tevekenyseg = Dto.Tevekenyseg1;
+  }
+  onTevekenysegStopzoom() {
     this.SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
   }
 

@@ -15,6 +15,8 @@ export class UgyfelDto {
   Euadoszam: string;
   Telefon: string;
   Email: string;
+  Tevekenysegkod: number;
+  Tevekenyseg: string;
   Egyeblink: string;
   Ajanlotta: string;
   Megjegyzes: string;

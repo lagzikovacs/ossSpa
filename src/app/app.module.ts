@@ -188,6 +188,10 @@ import { HscrollDirective } from './directives/divhscroll.directive';
 import {SpinnerDirective} from './directives/spinner.directive';
 import { ParticioEmailComponent } from './particio/particio-email/particio-email.component';
 import { KapcsolatiHaloComponent } from './kapcsolatihalo/kapcsolati-halo/kapcsolati-halo.component';
+import { UgyfelKapcsolatComponent } from './ugyfel/ugyfel-kapcsolat/ugyfel-kapcsolat.component';
+import {TevekenysegService} from './primitiv/tevekenyseg/tevekenyseg.service';
+import {TevekenysegSzerkesztesComponent} from './primitiv/tevekenyseg/tevekenyseg-szerkesztes/tevekenyseg-szerkesztes.component';
+import {TevekenysegListComponent} from './primitiv/tevekenyseg/tevekenyseg-list/tevekenyseg-list.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -199,6 +203,7 @@ const routes: Routes = [
   {path: 'termekdij', component: TermekdijListComponent, canActivate: [RoleGuard]},
   {path: 'cikk', component: CikkListComponent, canActivate: [RoleGuard]},
   {path: 'helyseg', component: HelysegListComponent, canActivate: [RoleGuard]},
+  {path: 'tevekenyseg', component: TevekenysegListComponent, canActivate: [RoleGuard]},
   {path: 'ugyfel', component: UgyfelListComponent, canActivate: [RoleGuard]},
 
   {path: 'projekt', component: ProjektListComponent, canActivate: [RoleGuard]},
@@ -321,6 +326,8 @@ if (environment.production) {
     AfakulcsListComponent,
     TermekdijListComponent,
     TermekdijSzerkesztesComponent,
+    TevekenysegListComponent,
+    TevekenysegSzerkesztesComponent,
     AfakulcsSzerkesztesComponent,
     MeSzerkesztesComponent,
     CikkSzerkesztesComponent,
@@ -403,6 +410,7 @@ if (environment.production) {
     SpinnerDirective,
     ParticioEmailComponent,
     KapcsolatiHaloComponent,
+    UgyfelKapcsolatComponent,
   ],
   imports: [
     BrowserModule,
@@ -427,6 +435,7 @@ if (environment.production) {
     MeService,
     AfakulcsService,
     TermekdijService,
+    TevekenysegService,
     CikkService,
     HelysegService,
     UgyfelService,

@@ -19,7 +19,7 @@ import {UgyfelService} from '../ugyfel/ugyfel.service';
 import {ProjektteendoService} from '../projektteendo/projektteendo.service';
 import {StartupResult} from './startupresult';
 import {environment} from '../../environments/environment';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {SzamlazasirendService} from '../szamlazasirend/szamlazasirend.service';
 import {AjanlatkeresService} from '../ajanlatkeres/ajanlatkeres.service';
 import {PenztarService} from '../penztar/penztar.service';
@@ -28,6 +28,7 @@ import {VolumeService} from '../volume/volume.service';
 import {KifizetesService} from '../kifizetes/kifizetes.service';
 import {DokumentumService} from '../dokumentum/dokumentum.service';
 import {UgyfelterlogService} from '../ugyfelterlog/ugyfelterlog.service';
+import {TevekenysegService} from '../primitiv/tevekenyseg/tevekenyseg.service';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,7 @@ export class StartupService {
               private _penznemservice: PenznemService,
               private _teendoservice: TeendoService,
               private _termekdijservice: TermekdijService,
+              private _tevekenysegservice: TevekenysegService,
               private _cikkservice: CikkService,
               private _ugyfelservice: UgyfelService,
               private _projektservice: ProjektService,
@@ -118,6 +120,8 @@ export class StartupService {
         this._teendoservice.ReszletekSettings = res3.Teendo_Reszletek;
         this._termekdijservice.GridSettings = res3.Termekdij_Grid;
         this._termekdijservice.ReszletekSettings = res3.Termekdij_Reszletek;
+        this._tevekenysegservice.GridSettings = res3.Tevekenyseg_Grid;
+        this._tevekenysegservice.ReszletekSettings = res3.Tevekenyseg_Reszletek;
 
         this._cikkservice.GridSettings = res3.Cikk_Grid;
         this._cikkservice.BeszerzesKivetGridSettings = res3.BeszerzesKivet_Grid;

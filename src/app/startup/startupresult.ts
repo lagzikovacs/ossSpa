@@ -21,6 +21,8 @@ export class StartupResult {
   Teendo_Reszletek: ColumnSettings[];
   Termekdij_Grid: ColumnSettings[];
   Termekdij_Reszletek: ColumnSettings[];
+  Tevekenyseg_Grid: ColumnSettings[];
+  Tevekenyseg_Reszletek: ColumnSettings[];
 
   Cikk_Grid: ColumnSettings[];
   BeszerzesKivet_Grid: ColumnSettings[];

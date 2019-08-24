@@ -47,4 +47,5 @@ export enum EgyMode {
   Email = 35,
 
   Terkep = 36,
+  UgyfelKapcsolat = 37,
 }

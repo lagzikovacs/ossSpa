@@ -52,6 +52,9 @@
           <button (click)="doNav(10)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             vCard
           </button>
+          <button (click)="doNav(37)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+            Kapcsolatok
+          </button>
         </nav>
       </div>
 
@@ -105,6 +108,13 @@
           <app-ugyfel-vcard [Dto]="Dto[DtoSelectedIndex]"
                             (LetoltesClick)="VcardLetoles()">
           </app-ugyfel-vcard>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 37">
+        <div [@rowanimation]>
+          <app-ugyfel-kapcsolat>
+
+          </app-ugyfel-kapcsolat>
         </div>
       </ng-container>
     </div>

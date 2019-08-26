@@ -188,10 +188,11 @@ import { HscrollDirective } from './directives/divhscroll.directive';
 import {SpinnerDirective} from './directives/spinner.directive';
 import { ParticioEmailComponent } from './particio/particio-email/particio-email.component';
 import { KapcsolatiHaloComponent } from './kapcsolatihalo/kapcsolati-halo/kapcsolati-halo.component';
-import { UgyfelKapcsolatComponent } from './ugyfel/ugyfel-kapcsolat/ugyfel-kapcsolat.component';
+import { UgyfelKapcsolatComponent } from './ugyfelkapcsolat/ugyfel-kapcsolat/ugyfel-kapcsolat.component';
 import {TevekenysegService} from './primitiv/tevekenyseg/tevekenyseg.service';
 import {TevekenysegSzerkesztesComponent} from './primitiv/tevekenyseg/tevekenyseg-szerkesztes/tevekenyseg-szerkesztes.component';
 import {TevekenysegListComponent} from './primitiv/tevekenyseg/tevekenyseg-list/tevekenyseg-list.component';
+import {UgyfelkapcsolatService} from './ugyfelkapcsolat/ugyfelkapcsolat.service';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -441,6 +442,7 @@ if (environment.production) {
     UgyfelService,
     UgyfelterService,
     UgyfelterlogService,
+    UgyfelkapcsolatService,
 
     ProjektService,
     AjanlatService,

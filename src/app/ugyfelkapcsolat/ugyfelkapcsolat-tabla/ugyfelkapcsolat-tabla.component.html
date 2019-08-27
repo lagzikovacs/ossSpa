@@ -3,15 +3,10 @@
   <tr>
     <th *ngIf="zoom"></th>
     <th>Id</th>
-    <th></th>
     <th>
       <div style="white-space: nowrap">
         <div>Név</div>
         <div>Cím</div>
-      </div>
-    </th>
-    <th>
-      <div style="white-space: nowrap">
         <div>Email</div>
         <div>Telefon</div>
       </div>
@@ -20,24 +15,7 @@
       <div style="white-space: nowrap">
         <div>Cég</div>
         <div>Beosztás</div>
-      </div>
-    </th>
-    <th>
-      <div>
         <div>Tevékenység</div>
-        <div></div>
-      </div>
-    </th>
-    <th>
-      <div style="white-space: nowrap">
-        <div>Adószám</div>
-        <div>EU adószám</div>
-      </div>
-    </th>
-    <th>
-      <div style="white-space: nowrap">
-        <div>Egyéb link</div>
-        <div>Ajánlotta</div>
       </div>
     </th>
   </tr>
@@ -51,9 +29,6 @@
 
     <ng-container *ngFor="let item of items; let i = index">
       <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
-        <td *ngIf="zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="clickforzoom(i)">
-          <i class="fa fa-check" aria-hidden="true"></i>
-        </td>
         <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="clickforid(i)">
           {{item.Ugyfelkod}}
         </td>
@@ -61,26 +36,13 @@
         <td>
           <div style="width: 200px">{{item.Nev}}</div>
           <div style="width: 300px">{{item.Cim}}</div>
-        </td>
-        <td>
           <div>{{item.Email}}</div>
           <div>{{item.Telefon}}</div>
         </td>
         <td>
           <div style="width: 200px">{{item.Ceg}}</div>
           <div style="width: 200px">{{item.Beosztas}}</div>
-        </td>
-        <td>
           <div>{{item.Tevekenyseg}}</div>
-          <div></div>
-        </td>
-        <td>
-          <div>{{item.Adoszam}}</div>
-          <div>{{item.Euadoszam}}</div>
-        </td>
-        <td>
-          <div>{{item.Egyeblink}}</div>
-          <div>{{item.Ajanlotta}}</div>
         </td>
       </tr>
 

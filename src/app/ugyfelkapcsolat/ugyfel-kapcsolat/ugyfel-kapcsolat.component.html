@@ -1,3 +1,56 @@
 <div class="alapkeret">
   <h5>Kapcsolatok</h5>
+
+  <div class="row no-gutters toolbarmargins">
+    <div class="toolbarcontrolmargins">
+      <select #Fromtoszempont type="text" class="form-control form-control-sm">
+        <option *ngFor="let s of fromtoszurok; let i = index" [value]="i" [selected]="i == fromtoszempont">{{s}}</option>
+      </select>
+    </div>
+    <div class="toolbarcontrolmargins">
+      <select #Szempont type="text" class="form-control form-control-sm">
+        <option *ngFor="let sz of szurok; let i = index" [value]="i" [selected]="i == szempont">{{sz}}</option>
+      </select>
+    </div>
+    <div class="toolbarcontrolmargins" style="width: 120px">
+      <input #Minta type="text" class="form-control form-control-sm">
+    </div>
+
+    <div class="float-right" role="toolbar" aria-label="Gombok">
+      <div class="btn-group btn-group-sm" role="group" aria-label="Gombok">
+        <button (click)="onKereses()"
+                class="btn btn-outline-primary toolbarcontrolmargins"
+                type="button">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+        <button [disabled]="fromtoszempont != 0"
+                (click)="doUjtetel()"
+                class="btn btn-sm btn-outline-primary toolbarcontrolmarginskozel"
+                type="button">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <app-ugyfelkapcsolat-tabla #tabla
+                             [items]="Dto"
+                             (forid)="onId($event)"
+                             [ujTemplate]="griduj"
+                             [egyTemplate]="gridegy">
+  </app-ugyfelkapcsolat-tabla>
+
+  <ng-template #griduj>
+    <app-ugyfelkapcsolat-szerkesztes>
+    </app-ugyfelkapcsolat-szerkesztes>
+  </ng-template>
+
+  <ng-template #gridegy>
+  </ng-template>
+
+  <app-toolbarfooter [enKereses]="!elsokereses"
+                     [rekordszam]="Dto.length"
+                     [osszesrekord]="osszesrekord"
+                     (KeresesTovabb)="onKeresesTovabb()">
+  </app-toolbarfooter>
 </div>

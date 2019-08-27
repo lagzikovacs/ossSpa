@@ -193,6 +193,8 @@ import {TevekenysegService} from './primitiv/tevekenyseg/tevekenyseg.service';
 import {TevekenysegSzerkesztesComponent} from './primitiv/tevekenyseg/tevekenyseg-szerkesztes/tevekenyseg-szerkesztes.component';
 import {TevekenysegListComponent} from './primitiv/tevekenyseg/tevekenyseg-list/tevekenyseg-list.component';
 import {UgyfelkapcsolatService} from './ugyfelkapcsolat/ugyfelkapcsolat.service';
+import {UgyfelkapcsolatTablaComponent} from './ugyfelkapcsolat/ugyfelkapcsolat-tabla/ugyfelkapcsolat-tabla.component';
+import { UgyfelkapcsolatSzerkesztesComponent } from './ugyfelkapcsolat/ugyfelkapcsolat-szerkesztes/ugyfelkapcsolat-szerkesztes.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -401,6 +403,7 @@ if (environment.production) {
     UgyfelCsoportComponent,
     UgyfelVcardComponent,
     UgyfelTablaComponent,
+    UgyfelkapcsolatTablaComponent,
     TablaComponent,
     ErrorboxComponent,
     UgyfelterProjektTablaComponent,
@@ -412,6 +415,7 @@ if (environment.production) {
     ParticioEmailComponent,
     KapcsolatiHaloComponent,
     UgyfelKapcsolatComponent,
+    UgyfelkapcsolatSzerkesztesComponent,
   ],
   imports: [
     BrowserModule,

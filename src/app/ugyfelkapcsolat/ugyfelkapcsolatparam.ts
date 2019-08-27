@@ -6,4 +6,9 @@ export class UgyfelkapcsolatParam {
   lapmeret: number;
   fi: SzMT[];
   FromTo: FromTo;
+
+  constructor(rekordtol: number, lapmeret: number) {
+    this.rekordtol = rekordtol;
+    this.lapmeret = lapmeret;
+  }
 }

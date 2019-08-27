@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Szempont} from '../../enums/szempont';
 import {environment} from '../../../environments/environment';
 import {UgyfelkapcsolatParam} from '../ugyfelkapcsolatparam';
@@ -19,6 +19,8 @@ export class UgyfelKapcsolatComponent implements OnInit, AfterViewInit, OnDestro
   @ViewChild('Fromtoszempont', {static: true}) FromtoszempontCombobox: ElementRef;
   @ViewChild('Szempont', {static: true}) SzempontCombobox: ElementRef;
   @ViewChild('tabla', {static: true}) tabla: UgyfelkapcsolatTablaComponent;
+
+  @Input() Ugyfelkod = -1;
 
   fromtoszempont = 0;
   fromtoszurok = ['Ettől az ügyféltől', 'Eddig az ügyfélig'];
@@ -71,6 +73,7 @@ export class UgyfelKapcsolatComponent implements OnInit, AfterViewInit, OnDestro
 
     this.elsokereses = true;
     this.up.rekordtol = 0;
+    this.up.ugyfelkod = this.Ugyfelkod
     this.up.fi = new Array<SzMT>();
     this.up.fi.push(new SzMT(this.szempontok[this.szempont], this.minta));
     this.up.FromTo = this.fromtoszempont;
@@ -88,6 +91,7 @@ export class UgyfelKapcsolatComponent implements OnInit, AfterViewInit, OnDestro
           throw res.Error;
         }
 
+        console.log(res.Result);
         if (this.elsokereses) {
           this.Dto = res.Result;
           this.elsokereses = false;

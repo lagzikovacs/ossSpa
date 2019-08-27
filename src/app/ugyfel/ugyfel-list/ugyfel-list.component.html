@@ -112,7 +112,7 @@
       </ng-container>
       <ng-container *ngIf="egymode === 37">
         <div [@rowanimation]>
-          <app-ugyfel-kapcsolat>
+          <app-ugyfel-kapcsolat [Ugyfelkod]="Dto[DtoSelectedIndex].Ugyfelkod">
 
           </app-ugyfel-kapcsolat>
         </div>

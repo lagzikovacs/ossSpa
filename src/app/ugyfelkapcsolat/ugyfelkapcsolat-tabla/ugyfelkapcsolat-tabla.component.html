@@ -1,21 +1,20 @@
 <table class="table table-bordered table-sm table-responsive" style="border: none">
   <thead>
   <tr>
-    <th *ngIf="zoom"></th>
     <th>Id</th>
     <th>
       <div style="white-space: nowrap">
-        <div>Név</div>
-        <div>Cím</div>
-        <div>Email</div>
-        <div>Telefon</div>
+        <div>Név, Cím, Email, Telefon</div>
       </div>
     </th>
     <th>
       <div style="white-space: nowrap">
-        <div>Cég</div>
-        <div>Beosztás</div>
-        <div>Tevékenység</div>
+        <div>Cég, Beosztás, Tevékenység</div>
+      </div>
+    </th>
+    <th>
+      <div style="white-space: nowrap">
+        <div>Leírás</div>
       </div>
     </th>
   </tr>
@@ -30,9 +29,8 @@
     <ng-container *ngFor="let item of items; let i = index">
       <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
         <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="clickforid(i)">
-          {{item.Ugyfelkod}}
+          {{item.Ugyfelkapcsolatkod}}
         </td>
-        <td>{{item.Csoport}}</td>
         <td>
           <div style="width: 200px">{{item.Nev}}</div>
           <div style="width: 300px">{{item.Cim}}</div>
@@ -43,6 +41,9 @@
           <div style="width: 200px">{{item.Ceg}}</div>
           <div style="width: 200px">{{item.Beosztas}}</div>
           <div>{{item.Tevekenyseg}}</div>
+        </td>
+        <td>
+          <div style="width: 500px">{{item.Leiras}}</div>
         </td>
       </tr>
 

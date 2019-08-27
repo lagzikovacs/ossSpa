@@ -1,4 +1,4 @@
-<div class="alapkeret">
+<div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>Kapcsolatok</h5>
 
   <div class="row no-gutters toolbarmargins">
@@ -41,7 +41,7 @@
   </app-ugyfelkapcsolat-tabla>
 
   <ng-template #griduj>
-    <app-ugyfelkapcsolat-szerkesztes>
+    <app-ugyfelkapcsolat-szerkesztes [Ugyfelkod]="Ugyfelkod">
     </app-ugyfelkapcsolat-szerkesztes>
   </ng-template>
 

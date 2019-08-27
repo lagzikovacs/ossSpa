@@ -1,1 +1,45 @@
-<p>ugyfelkapcsolat-szerkesztes works!</p>
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>Új kapcsolat</h5>
+
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+
+    <div class="row no-gutters editform-row">
+      <div style="margin-right: 5px">
+        <div class="egylabel">Ügyfél</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="ugyfelnev"
+               maxlength="200" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
+               [(ngModel)]="DtoEdited.Nev" name="ugyfelnev">
+        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="UgyfelZoom()">...</button>
+      </div>
+    </div>
+
+    <div class="row no-gutters editform-row">
+      <div style="margin-right: 5px">
+        <input type="text" class="form-control form-control-sm oszlop6" id="ugyfelcim"
+               autocomplete="off" readonly="true"
+               [(ngModel)]="DtoEdited.Cim" name="ugyfelcim">
+      </div>
+    </div>
+
+    <div class="row no-gutters editform-row">
+      <div style="margin-right: 5px">
+        <div class="egylabel">Leírás</div>
+        <input type="text" class="form-control form-control-sm oszlop6" id="telepitesicim"
+               autocomplete="off"
+               [(ngModel)]="DtoEdited.Leiras" name="telepitesicim">
+      </div>
+    </div>
+
+    <div class="row no-gutters editform-row">
+      <button class="btn btn-sm btn-primary" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
+    </div>
+  </form>
+
+  <ng-container *ngIf="SzerkesztesMode === 1">
+    <app-ugyfel-list [maszk]="DtoEdited.Nev || ''"
+                     (eventSelectzoom)="onUgyfelSelectzoom($event)"
+                     (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>
+  </ng-container>
+</div>
+

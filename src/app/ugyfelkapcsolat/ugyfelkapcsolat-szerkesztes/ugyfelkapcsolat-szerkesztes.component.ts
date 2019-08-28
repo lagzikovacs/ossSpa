@@ -8,6 +8,7 @@ import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
 import {UgyfelkapcsolatGetParam} from '../ugyfelkapcsolatgetparam';
 import {FromTo} from '../../enums/fromto';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-ugyfelkapcsolat-szerkesztes',
@@ -15,7 +16,11 @@ import {FromTo} from '../../enums/fromto';
 })
 export class UgyfelkapcsolatSzerkesztesComponent implements OnInit, OnDestroy {
   @Input() Ugyfelkod = -1;
+  @Input() uj = false;
   DtoEdited = new UgyfelkapcsolatDto();
+  @Input() set DtoOriginal(value: UgyfelkapcsolatDto) {
+    this.DtoEdited = deepCopy(value);
+  }
   @Output() eventSzerkeszteskesz = new EventEmitter<UgyfelkapcsolatDto>();
 
   SzerkesztesMode = UgyfelkapcsolatSzerkesztesMode.Blank;
@@ -31,21 +36,23 @@ export class UgyfelkapcsolatSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.eppFrissit = true;
-    this.ugyfelkapcsolatservice.CreateNew()
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
+    if (this.uj) {
+      this.eppFrissit = true;
+      this.ugyfelkapcsolatservice.CreateNew()
+        .then(res => {
+          if (res.Error !== null) {
+            throw res.Error;
+          }
 
-        this.DtoEdited = res.Result[0];
-        this.DtoEdited.Fromugyfelkod = this.Ugyfelkod;
-        this.eppFrissit = false;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+          this.DtoEdited = res.Result[0];
+          this.DtoEdited.Fromugyfelkod = this.Ugyfelkod;
+          this.eppFrissit = false;
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    }
   }
 
   onSubmit() {
@@ -57,7 +64,11 @@ export class UgyfelkapcsolatSzerkesztesComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
+        if (this.uj) {
           return this.ugyfelkapcsolatservice.Add(this.DtoEdited);
+        } else {
+          return this.ugyfelkapcsolatservice.Update(this.DtoEdited);
+        }
       })
       .then(res2 => {
         if (res2.Error !== null) {

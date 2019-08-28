@@ -141,6 +141,12 @@ export class UgyfelKapcsolatComponent implements OnInit, AfterViewInit, OnDestro
     }
     this.tabla.ujtetelstop();
   }
+  onModositaskesz(dto: UgyfelkapcsolatDto) {
+    if (dto !== null) {
+      propCopy(dto, this.Dto[this.DtoSelectedIndex]);
+    }
+    this.egymode = EgyMode.Reszletek;
+  }
   onTorles(ok: boolean) {
     if (ok) {
       this.eppFrissit = true;

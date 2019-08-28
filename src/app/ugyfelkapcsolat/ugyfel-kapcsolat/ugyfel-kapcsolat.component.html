@@ -41,7 +41,8 @@
   </app-ugyfelkapcsolat-tabla>
 
   <ng-template #griduj>
-    <app-ugyfelkapcsolat-szerkesztes [Ugyfelkod]="Ugyfelkod"
+    <app-ugyfelkapcsolat-szerkesztes [uj] = "true"
+                                     [Ugyfelkod]="Ugyfelkod"
                                      (eventSzerkeszteskesz)="onUjtetelkesz($event)">
     </app-ugyfelkapcsolat-szerkesztes>
   </ng-template>
@@ -55,6 +56,9 @@
           </button>
           <button [disabled]="!jog" (click)="doNav(2)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             <i class="fa fa-minus" aria-hidden="true"></i>
+          </button>
+          <button [disabled]="!jog" (click)="doNav(3)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+            <i class="fa fa-edit" aria-hidden="true"></i>
           </button>
         </nav>
       </div>
@@ -72,6 +76,14 @@
           <app-tetel-torles [cim]="ugyfelkapcsolatservice.cim"
                             (eventTorles)="onTorles($event)">
           </app-tetel-torles>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 3">
+        <div [@rowanimation]>
+          <app-ugyfelkapcsolat-szerkesztes [uj]="false"
+                                           [DtoOriginal]="Dto[DtoSelectedIndex]"
+                                           (eventSzerkeszteskesz)="onModositaskesz($event)">
+          </app-ugyfelkapcsolat-szerkesztes>
         </div>
       </ng-container>
     </div>

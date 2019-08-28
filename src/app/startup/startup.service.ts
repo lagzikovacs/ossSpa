@@ -29,6 +29,7 @@ import {KifizetesService} from '../kifizetes/kifizetes.service';
 import {DokumentumService} from '../dokumentum/dokumentum.service';
 import {UgyfelterlogService} from '../ugyfelterlog/ugyfelterlog.service';
 import {TevekenysegService} from '../primitiv/tevekenyseg/tevekenyseg.service';
+import {UgyfelkapcsolatService} from '../ugyfelkapcsolat/ugyfelkapcsolat.service';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +53,7 @@ export class StartupService {
               private _tevekenysegservice: TevekenysegService,
               private _cikkservice: CikkService,
               private _ugyfelservice: UgyfelService,
+              private _ugyfelkapcsolatservice: UgyfelkapcsolatService,
               private _projektservice: ProjektService,
               private _projektteendoservice: ProjektteendoService,
               private _szamlazasirendservice: SzamlazasirendService,
@@ -128,6 +130,8 @@ export class StartupService {
         this._cikkservice.ReszletekSettings = res3.Cikk_Reszletek;
         this._ugyfelservice.GridSettings = res3.Ugyfel_Grid;
         this._ugyfelservice.ReszletekSettings = res3.Ugyfel_Reszletek;
+        this._ugyfelkapcsolatservice.GridSettings = res3.Ugyfelkapcsolat_Grid;
+        this._ugyfelkapcsolatservice.ReszletekSettings = res3.Ugyfelkapcsolat_Reszletek;
 
         this._projektservice.GridSettings = res3.Projekt_Grid;
         this._projektservice.ReszletekSettings = res3.Projekt_Reszletek;

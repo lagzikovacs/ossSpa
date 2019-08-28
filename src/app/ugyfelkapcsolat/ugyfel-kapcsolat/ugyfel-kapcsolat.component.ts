@@ -10,14 +10,18 @@ import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {UgyfelkapcsolatTablaComponent} from '../ugyfelkapcsolat-tabla/ugyfelkapcsolat-tabla.component';
 import {EgyMode} from '../../enums/egymode';
+import {propCopy} from '../../tools/propCopy';
+import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
   selector: 'app-ugyfel-kapcsolat',
-  templateUrl: './ugyfel-kapcsolat.component.html'
+  templateUrl: './ugyfel-kapcsolat.component.html',
+  animations: [rowanimation]
 })
 export class UgyfelKapcsolatComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('Fromtoszempont', {static: true}) FromtoszempontCombobox: ElementRef;
   @ViewChild('Szempont', {static: true}) SzempontCombobox: ElementRef;
+  @ViewChild('Minta', {static: true}) MintaTextBox: ElementRef;
   @ViewChild('tabla', {static: true}) tabla: UgyfelkapcsolatTablaComponent;
 
   @Input() Ugyfelkod = -1;
@@ -64,6 +68,9 @@ export class UgyfelKapcsolatComponent implements OnInit, AfterViewInit, OnDestro
     this.SzempontCombobox.nativeElement.addEventListener('change', (event) => {
       this.szempont = event.target.value;
     });
+    this.MintaTextBox.nativeElement.addEventListener('keyup', () => {
+      this.minta = this.MintaTextBox.nativeElement.value;
+    });
   }
 
   onKereses() {
@@ -91,7 +98,6 @@ export class UgyfelKapcsolatComponent implements OnInit, AfterViewInit, OnDestro
           throw res.Error;
         }
 
-        console.log(res.Result);
         if (this.elsokereses) {
           this.Dto = res.Result;
           this.elsokereses = false;
@@ -122,8 +128,42 @@ export class UgyfelKapcsolatComponent implements OnInit, AfterViewInit, OnDestro
     this.egymode = EgyMode.Reszletek;
   }
 
+  doNav(i: number) {
+    this.egymode = i;
+  }
+
   doUjtetel() {
     this.tabla.ujtetelstart();
+  }
+  onUjtetelkesz(dto: UgyfelkapcsolatDto) {
+    if (dto !== null) {
+      this.Dto.unshift(dto);
+    }
+    this.tabla.ujtetelstop();
+  }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
+
+      this.ugyfelkapcsolatservice.Delete(this.Dto[this.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
+
+          this.Dto.splice(this.DtoSelectedIndex, 1);
+          this.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.tabla.clearselections();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = EgyMode.Reszletek;
+    }
   }
 
   ngOnDestroy() {

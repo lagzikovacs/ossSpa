@@ -29,6 +29,8 @@ export class StartupResult {
   Cikk_Reszletek: ColumnSettings[];
   Ugyfel_Grid: ColumnSettings[];
   Ugyfel_Reszletek: ColumnSettings[];
+  Ugyfelkapcsolat_Grid: ColumnSettings[];
+  Ugyfelkapcsolat_Reszletek: ColumnSettings[];
 
   Projekt_Grid: ColumnSettings[];
   Projekt_Reszletek: ColumnSettings[];

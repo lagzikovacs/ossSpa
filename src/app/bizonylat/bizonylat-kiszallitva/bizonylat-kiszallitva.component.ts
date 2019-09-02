@@ -41,6 +41,8 @@ export class BizonylatKiszallitvaComponent implements OnDestroy {
           throw res1.Error;
         }
 
+
+        this.Dto = deepCopy(res1.Result[0]);
         this.eppFrissit = false;
         this.eventKiszallitvaUtan.emit(res1.Result[0]);
       })

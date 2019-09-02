@@ -6,15 +6,15 @@ export const environment = {
   production: false,
   lapmeret: 5,
 
-  // CoreRef: 'https://docport.hu/osscore/',
-  // OSSRef: 'https://docport.hu/oss2/',
-  CoreRef: 'https://localhost:44308/',
-  OSSRef: 'http://localhost:4200/',
+  CoreRef: 'https://docport.hu/osscore/',
+  OSSRef: 'https://docport.hu/oss2/',
+  // CoreRef: 'https://localhost:44308/',
+  // OSSRef: 'http://localhost:4200/',
 
   perAlldefault: '0 / 0'
 };
 
-/*
+/*s
  * In development mode, to ignore zone related error stack frames such as
  * `zone.run`, `zoneDelegate.invokeTask` for easier debugging, you can
  * import the following file, but please comment it out in production mode

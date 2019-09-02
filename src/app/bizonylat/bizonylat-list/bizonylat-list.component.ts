@@ -102,7 +102,8 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
     this.bp.BizonylatTipus = this.bizonylatTipus;
     this.bp.fi.push(new SzMT(this.szempontok[this.szempont], this.minta));
 
-    if (this.bizonylatTipus === BizonylatTipus.Megrendeles && this.megrendelesszempont === 1) {
+    // valamiért number-ként és '===' operátorral nem működik
+    if (this.bizonylatTipus === BizonylatTipus.Megrendeles && (this.megrendelesszempont.toString() === '1')) {
       this.bp.fi.push(new SzMT(Szempont.NincsKiszallitva, ''));
     }
 

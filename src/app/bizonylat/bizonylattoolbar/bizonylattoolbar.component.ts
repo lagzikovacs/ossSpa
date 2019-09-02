@@ -22,7 +22,7 @@ export class BizonylattoolbarComponent implements AfterViewInit, OnDestroy {
   _megrendelesszempont = 0;
   _szempont = 0;
 
-  @ViewChild('MegrendelesSzempont', {static: true}) MegrendelesSzempontCombobox: ElementRef;
+  @ViewChild('MegrendelesSzempont', {static: false}) MegrendelesSzempontCombobox: ElementRef;
   @Input()
   set megrendelesszempont(value: number) {
     this._megrendelesszempont = value;

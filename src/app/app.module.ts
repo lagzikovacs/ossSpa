@@ -195,6 +195,7 @@ import {TevekenysegListComponent} from './primitiv/tevekenyseg/tevekenyseg-list/
 import {UgyfelkapcsolatService} from './ugyfelkapcsolat/ugyfelkapcsolat.service';
 import {UgyfelkapcsolatTablaComponent} from './ugyfelkapcsolat/ugyfelkapcsolat-tabla/ugyfelkapcsolat-tabla.component';
 import { UgyfelkapcsolatSzerkesztesComponent } from './ugyfelkapcsolat/ugyfelkapcsolat-szerkesztes/ugyfelkapcsolat-szerkesztes.component';
+import {KapcsolatihaloService} from './kapcsolatihalo/kapcsolatihalo.service';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -447,6 +448,7 @@ if (environment.production) {
     UgyfelterService,
     UgyfelterlogService,
     UgyfelkapcsolatService,
+    KapcsolatihaloService,
 
     ProjektService,
     AjanlatService,

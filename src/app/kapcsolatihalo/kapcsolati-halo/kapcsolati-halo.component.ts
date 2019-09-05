@@ -1,10 +1,10 @@
-import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
-import cytoscape from 'cytoscape';
-import contextMenus from 'cytoscape-context-menus';
+import {Component, ElementRef, HostListener, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {KapcsolatihaloService} from '../kapcsolatihalo.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 import {UgyfelkapcsolatDto} from '../../ugyfelkapcsolat/ugyfelkapcsolatdto';
+import cytoscape from 'cytoscape';
+import contextMenus from 'cytoscape-context-menus';
 
 cytoscape.use(contextMenus, $);
 
@@ -13,7 +13,7 @@ cytoscape.use(contextMenus, $);
   templateUrl: './kapcsolati-halo.component.html',
   styleUrls: ['./kapcsolati-halo.component.css']
 })
-export class KapcsolatiHaloComponent implements OnInit {
+export class KapcsolatiHaloComponent implements OnInit, OnDestroy {
   @ViewChild('akDiv', {static: true}) akDiv: ElementRef;
   @ViewChild('cy', {static: true}) CytoDiv: ElementRef;
 
@@ -21,13 +21,16 @@ export class KapcsolatiHaloComponent implements OnInit {
   cytowidth = 0;
   cytoheight = 0;
 
-  nodes: UgyfelDto[];
-  edges: UgyfelkapcsolatDto[];
+  nodes = new Array<UgyfelDto>();
+  edges = new Array<UgyfelkapcsolatDto>();
+  moved = new Array<number>();
 
   tasktoken = '';
   private _szamlalo: any;
 
   eppFrissit = false;
+
+  cy: any;
 
   constructor(private _errorservice: ErrorService,
               private _kapcsolatihaloservice: KapcsolatihaloService) {
@@ -36,58 +39,25 @@ export class KapcsolatiHaloComponent implements OnInit {
 
   ngOnInit() {
     this.cytosize();
-
-    this.eppFrissit = true;
-    this._kapcsolatihaloservice.TaskStartNew()
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        this.tasktoken = res.Result;
-        this.ciklus();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+    this.cytoinit();
   }
 
-  ciklus() {
-    this._kapcsolatihaloservice.TaskCheck(this.tasktoken)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-        if (res.status === 'Error') {
-          throw new Error('Hm... ' + res.Error);
-        }
-        if (res.status === 'Queued' || res.status === 'Running') {
-          this._szamlalo = setInterval(() => { this.next(); }, 1000);
-        }
-
-        if (res.status === 'Completed') {
-          this.nodes = res.lstUgyfelDto;
-          this.edges = res.lstUgyfelkapcsolatDto;
-
-          this.eppFrissit = false;
-
-          this.go();
-        }
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+  cytosize() {
+    this.cytowidth = this.akDiv.nativeElement.offsetWidth - 16;
+    this.cytoheight = this.windowheight - 180;
   }
 
-  next() {
-    clearInterval(this._szamlalo);
-    this.ciklus();
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    event.stopPropagation();
+    event.preventDefault();
+
+    this.windowheight = event.target.innerHeight;
+    this.cytosize();
   }
 
-  go() {
-    const cy = cytoscape({
+  cytoinit() {
+    this.cy = cytoscape({
       container: document.getElementById('cy'),
       style: [
         {
@@ -108,37 +78,109 @@ export class KapcsolatiHaloComponent implements OnInit {
             'border-width': 1,
             'border-opacity': 1
           }
-        }
+        },
+        {
+          selector: 'edge',
+          style: {
+            'curve-style': 'bezier',
+            'target-arrow-shape': 'triangle',
+            'font-size': '15',
+            'width': 1,
+            'line-color': 'black',
+            'target-arrow-color': 'black'
+          }
+        },
       ]
     });
 
+    this.cy.on('drag', 'node', evt => {
+      // console.log(this.cy.nodes()[0].position());
+
+      const id = evt.target.data().id;
+      if (this.moved.indexOf(id) < 0) {
+        this.moved.push(id);
+        console.log(this.moved);
+      }
+    });
+  }
+
+  onFrissites() {
+    this.cy.elements().remove();
+    this.nodes = new Array<UgyfelDto>();
+    this.edges = new Array<UgyfelkapcsolatDto>();
+    this.moved = new Array<number>();
+
+    this.eppFrissit = true;
+    this._kapcsolatihaloservice.TaskStartNew()
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.tasktoken = res.Result;
+        this.frissitesciklus();
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this._errorservice.Error = err;
+      });
+  }
+
+  frissitesciklus() {
+    this._kapcsolatihaloservice.TaskCheck(this.tasktoken)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+        if (res.status === 'Error') {
+          throw new Error('Hm... ' + res.Error);
+        }
+        if (res.status === 'Queued' || res.status === 'Running') {
+          this._szamlalo = setInterval(() => { this.frissitesnext(); }, 1000);
+        }
+
+        if (res.status === 'Completed') {
+          this.nodes = res.lstUgyfelDto;
+          this.edges = res.lstUgyfelkapcsolatDto;
+
+          this.eppFrissit = false;
+
+          this.cytodraw();
+        }
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this._errorservice.Error = err;
+      });
+  }
+
+  frissitesnext() {
+    clearInterval(this._szamlalo);
+    this.frissitesciklus();
+  }
+
+  cytodraw() {
     this.nodes.forEach(x => {
-      cy.add({ group: 'nodes', data: { id: x.Ugyfelkod, name: x.Nev, width: 100 }, position: { x: 10, y: 10 } });
+      this.cy.add({ group: 'nodes', data: { id: x.Ugyfelkod, name: x.Nev + '\n' + x.Helysegnev + '\n' + x.Ceg + '\n' + x.Beosztas + '\n' + x.Tevekenyseg, width: 100, height: 30 }, position: { x: 10, y: 10 } });
     });
     this.edges.forEach(x => {
-      cy.add({ group: 'edges', data: { id: x.Ugyfelkapcsolatkod, source: x.Fromugyfelkod, target: x.Tougyfelkod } });
+      this.cy.add({ group: 'edges', data: { id: x.Ugyfelkapcsolatkod, source: x.Fromugyfelkod, target: x.Tougyfelkod } });
     });
 
-    const eles = cy.add([
-      { group: 'nodes', data: { id: 'n0', name: 'Lagzi-Kovács Sándor \r\n GridSolar Group Kft.', width: 100 }, position: { x: 100, y: 100 } },
-      { group: 'nodes', data: { id: 'n1' }, position: { x: -200, y: 200 } },
-      { group: 'edges', data: { id: 'e0', source: 'n0', target: 'n1' } }
-    ]);
-
-    cy.center();
+    this.cy.center();
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    event.stopPropagation();
-    event.preventDefault();
-
-    this.windowheight = event.target.innerHeight;
-    this.cytosize();
+  onMentes() {
+    this.moved.forEach(x => {
+      console.log(this.cy.getElementById(x).position().x);
+    });
   }
 
-  cytosize() {
-    this.cytowidth = this.akDiv.nativeElement.offsetWidth - 16;
-    this.cytoheight = this.windowheight - 160;
+  ngOnDestroy() {
+    this.cy.removeAllListeners();
+
+    Object.keys(this).map(k => {
+      (this[k]) = null;
+    });
   }
 }

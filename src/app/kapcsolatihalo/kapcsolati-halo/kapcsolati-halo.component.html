@@ -1,4 +1,14 @@
 <div #akDiv class="alapkeret" [appSpinner]="eppFrissit">
   <h5>Kapcsolati háló</h5>
+  <div>
+    <nav>
+      <button (click)="onFrissites()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins" style="margin-right: 3px">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
+      <button (click)="onMentes()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins" style="margin-right: 3px">
+        Mentés
+      </button>
+    </nav>
+  </div>
   <div  id="cy" [style.width.px]="cytowidth" [style.height.px]="cytoheight" style="border: 1px solid silver"></div>
 </div>

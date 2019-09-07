@@ -5,6 +5,8 @@ import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 import {UgyfelkapcsolatDto} from '../../ugyfelkapcsolat/ugyfelkapcsolatdto';
 import cytoscape from 'cytoscape';
 import contextMenus from 'cytoscape-context-menus';
+import {KapcsolatihaloPos} from '../kapcsolatihalopos';
+import {propCopy} from '../../tools/propCopy';
 
 cytoscape.use(contextMenus, $);
 
@@ -127,7 +129,7 @@ export class KapcsolatiHaloComponent implements OnInit, OnDestroy {
         }
 
         this.tasktoken = res.Result;
-        this.frissitesciklus();
+        this.readerciklus();
       })
       .catch(err => {
         this.eppFrissit = false;
@@ -135,7 +137,7 @@ export class KapcsolatiHaloComponent implements OnInit, OnDestroy {
       });
   }
 
-  frissitesciklus() {
+  readerciklus() {
     this._kapcsolatihaloservice.TaskCheck(this.tasktoken)
       .then(res => {
         if (res.Error != null) {
@@ -145,7 +147,7 @@ export class KapcsolatiHaloComponent implements OnInit, OnDestroy {
           throw new Error('Hm... ' + res.Error);
         }
         if (res.status === 'Queued' || res.status === 'Running') {
-          this._szamlalo = setInterval(() => { this.frissitesnext(); }, 1000);
+          this._szamlalo = setInterval(() => { this.readernext(); }, 1000);
         }
 
         if (res.status === 'Completed') {
@@ -163,9 +165,9 @@ export class KapcsolatiHaloComponent implements OnInit, OnDestroy {
       });
   }
 
-  frissitesnext() {
+  readernext() {
     clearInterval(this._szamlalo);
-    this.frissitesciklus();
+    this.readerciklus();
   }
 
   cytodraw() {
@@ -200,10 +202,64 @@ export class KapcsolatiHaloComponent implements OnInit, OnDestroy {
   }
 
   onMentes() {
-    this.moved.forEach(x => {
-      console.log(this.nodes.find(u => u.Ugyfelkod == x));
-      // console.log(this.cy.getElementById(x).position().x);
+    const pos = new Array<KapcsolatihaloPos>();
+
+    this.moved.forEach(muk => {
+      const elp = this.cy.getElementById(muk).position();
+      const ugyfelDto = this.nodes.find(udto => udto.Ugyfelkod == muk);
+      const p = new KapcsolatihaloPos(muk, elp.x, elp.y, ugyfelDto.Modositva);
+
+      pos.push(p);
     });
+
+    this.eppFrissit = true;
+    this._kapcsolatihaloservice.StartWriter(pos)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.tasktoken = res.Result;
+        this.writerciklus();
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this._errorservice.Error = err;
+      });
+  }
+
+  writerciklus() {
+    this._kapcsolatihaloservice.TaskCheck(this.tasktoken)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+        if (res.status === 'Error') {
+          throw new Error('Hm... ' + res.Error);
+        }
+        if (res.status === 'Queued' || res.status === 'Running') {
+          this._szamlalo = setInterval(() => { this.writernext(); }, 1000);
+        }
+
+        if (res.status === 'Completed') {
+          res.lstUgyfelDto.forEach(dto => {
+            const i = this.nodes.findIndex(udto => udto.Ugyfelkod == dto.Ugyfelkod);
+            propCopy(dto, this.nodes[i]);
+          });
+
+          this.moved = [];
+          this.eppFrissit = false;
+        }
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this._errorservice.Error = err;
+      });
+  }
+
+  writernext() {
+    clearInterval(this._szamlalo);
+    this.writerciklus();
   }
 
   ngOnDestroy() {

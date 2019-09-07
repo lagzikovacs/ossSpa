@@ -15,9 +15,9 @@ export class KapcsolatihaloService {
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
 
-  public TaskStartNew(): Promise<StringResult> {
+  public StartReader(): Promise<StringResult> {
     return this._httpClient.post<StringResult>(
-      this._controller + 'taskstartnew', '', this._logonservice.httpoptions())
+      this._controller + 'startreader', '', this._logonservice.httpoptions())
       .toPromise();
   }
 

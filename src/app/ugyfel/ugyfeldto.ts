@@ -21,6 +21,8 @@ export class UgyfelDto {
   Ajanlotta: string;
   Megjegyzes: string;
   Kikuldesikodidopontja: any;
+  Halox: number;
+  Haloy: number;
   Letrehozva: any;
   Letrehozta: string;
   Modositva: any;

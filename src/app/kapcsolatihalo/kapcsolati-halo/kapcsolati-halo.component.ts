@@ -73,7 +73,7 @@ export class KapcsolatiHaloComponent implements OnInit, OnDestroy {
             'text-halign': 'center',
             'background-color': 'white',
             'text-max-width': '90',
-            'font-size': '9',
+            'font-size': '10',
             'border-color': '#a79d93',
             'border-width': 1,
             'border-opacity': 1
@@ -90,7 +90,16 @@ export class KapcsolatiHaloComponent implements OnInit, OnDestroy {
             'target-arrow-color': 'black'
           }
         },
-      ]
+        {
+          selector: ':selected',
+          style: {
+            'background-color': '#FDDFB3',
+            'transition-property': 'background-color',
+            'transition-duration': '0.5s'
+          }
+        }
+      ],
+      wheelSensitivity: 0.2
     });
 
     this.cy.on('drag', 'node', evt => {
@@ -99,7 +108,7 @@ export class KapcsolatiHaloComponent implements OnInit, OnDestroy {
       const id = evt.target.data().id;
       if (this.moved.indexOf(id) < 0) {
         this.moved.push(id);
-        console.log(this.moved);
+        // console.log(this.moved);
       }
     });
   }
@@ -111,7 +120,7 @@ export class KapcsolatiHaloComponent implements OnInit, OnDestroy {
     this.moved = new Array<number>();
 
     this.eppFrissit = true;
-    this._kapcsolatihaloservice.TaskStartNew()
+    this._kapcsolatihaloservice.StartReader()
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -161,10 +170,30 @@ export class KapcsolatiHaloComponent implements OnInit, OnDestroy {
 
   cytodraw() {
     this.nodes.forEach(x => {
-      this.cy.add({ group: 'nodes', data: { id: x.Ugyfelkod, name: x.Nev + '\n' + x.Helysegnev + '\n' + x.Ceg + '\n' + x.Beosztas + '\n' + x.Tevekenyseg, width: 100, height: 30 }, position: { x: 10, y: 10 } });
+      this.cy.add({
+        group: 'nodes',
+        data: {
+          id: x.Ugyfelkod,
+          name: x.Nev + '\n' + x.Helysegnev + '\n' + x.Ceg + '\n' + x.Beosztas + '\n' + x.Tevekenyseg,
+          width: 120,
+          height: 10 + 5 * 12
+        },
+        position: {
+          x: x.Halox ? x.Halox : 0,
+          y: x.Haloy ? x.Haloy : 0
+        }
+      });
     });
+
     this.edges.forEach(x => {
-      this.cy.add({ group: 'edges', data: { id: x.Ugyfelkapcsolatkod, source: x.Fromugyfelkod, target: x.Tougyfelkod } });
+      this.cy.add({
+        group: 'edges',
+        data: {
+          id: x.Ugyfelkapcsolatkod,
+          source: x.Fromugyfelkod,
+          target: x.Tougyfelkod
+        }
+      });
     });
 
     this.cy.center();
@@ -172,7 +201,8 @@ export class KapcsolatiHaloComponent implements OnInit, OnDestroy {
 
   onMentes() {
     this.moved.forEach(x => {
-      console.log(this.cy.getElementById(x).position().x);
+      console.log(this.nodes.find(u => u.Ugyfelkod == x));
+      // console.log(this.cy.getElementById(x).position().x);
     });
   }
 

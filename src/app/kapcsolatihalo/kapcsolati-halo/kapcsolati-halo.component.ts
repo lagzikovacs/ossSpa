@@ -1,13 +1,16 @@
-import {Component, ElementRef, HostListener, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {KapcsolatihaloService} from '../kapcsolatihalo.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 import {UgyfelkapcsolatDto} from '../../ugyfelkapcsolat/ugyfelkapcsolatdto';
 import cytoscape from 'cytoscape';
+import popper from 'cytoscape-popper';
+import tippy from 'tippy.js';
 import contextMenus from 'cytoscape-context-menus';
 import {KapcsolatihaloPos} from '../kapcsolatihalopos';
 import {propCopy} from '../../tools/propCopy';
 
+cytoscape.use(popper);
 cytoscape.use(contextMenus, $);
 
 @Component({
@@ -176,14 +179,40 @@ export class KapcsolatiHaloComponent implements OnInit, OnDestroy {
         group: 'nodes',
         data: {
           id: x.Ugyfelkod,
-          name: x.Nev + '\n' + x.Helysegnev + '\n' + x.Ceg + '\n' + x.Beosztas + '\n' + x.Tevekenyseg,
+          name: x.Nev + '\n' + x.Ceg,
           width: 120,
-          height: 10 + 5 * 12
+          height: 10 + 2 * 12
         },
         position: {
           x: x.Halox ? x.Halox : 0,
           y: x.Haloy ? x.Haloy : 0
         }
+      });
+
+      const _node = this.cy.getElementById(x.Ugyfelkod);
+      const _popperref = _node.popperRef();
+      const hint = tippy(_popperref, {
+        content: () => {
+          const tdiv = document.createElement('div');
+
+          tdiv.id = 'div' + x.Ugyfelkod;
+          tdiv.innerHTML = '<div>' + x.Ugyfelkod.toString() + '</div>' +
+            '<div>' + x.Nev + '</div>' +
+            '<div>' + x.Helysegnev + '</div>' +
+            '<div>' + x.Ceg + '</div>' +
+            '<div>' + x.Beosztas + '</div>' +
+            '<div>' + x.Tevekenyseg + '</div>';
+
+          return tdiv;
+        },
+        theme: 'light-border'
+      });
+
+      _node.on('mouseover', event => {
+        _popperref._tippy.show();
+      });
+      _node.on('mouseout', event => {
+        _popperref._tippy.hide();
       });
     });
 
@@ -211,7 +240,7 @@ export class KapcsolatiHaloComponent implements OnInit, OnDestroy {
 
       pos.push(p);
     });
-
+    console.log(pos);
     this.eppFrissit = true;
     this._kapcsolatihaloservice.StartWriter(pos)
       .then(res => {
@@ -264,6 +293,8 @@ export class KapcsolatiHaloComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.cy.removeAllListeners();
+    this.cy.elements().remove();
+    this.cy.destroy();
 
     Object.keys(this).map(k => {
       (this[k]) = null;

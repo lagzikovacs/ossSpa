@@ -227,7 +227,8 @@ export class KapcsolatiHaloComponent implements OnInit, OnDestroy {
       });
     });
 
-    this.cy.center();
+    // this.cy.zoom = 1;
+    this.cy.fit();
   }
 
   onMentes() {
@@ -236,7 +237,7 @@ export class KapcsolatiHaloComponent implements OnInit, OnDestroy {
     this.moved.forEach(muk => {
       const elp = this.cy.getElementById(muk).position();
       const ugyfelDto = this.nodes.find(udto => udto.Ugyfelkod == muk);
-      const p = new KapcsolatihaloPos(muk, elp.x, elp.y, ugyfelDto.Modositva);
+      const p = new KapcsolatihaloPos(muk, Math.floor(elp.x), Math.floor(elp.y), ugyfelDto.Modositva);
 
       pos.push(p);
     });

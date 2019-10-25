@@ -1,43 +1,42 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {LogonService} from '../logon/logon.service';
-import {Subscription} from 'rxjs/index';
-import {SessionService} from '../session/session.service';
+import {Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-fooldal',
-  templateUrl: './fooldal.component.html'
+  templateUrl: './fooldal.component.html',
+  styleUrls: ['./fooldal.component.css']
 })
 export class FooldalComponent implements OnInit, OnDestroy {
-  szerepkorkivalasztva = false;
-  felhasznalokod = -1;
-  private _subscription: Subscription;
+  @ViewChild('hatterkep', {static: true}) hatterkep: ElementRef;
 
-  constructor(private _logonservice: LogonService,
-              private _sessionservice: SessionService) { }
+  dwith = 0;
+  dheight = 0;
 
   ngOnInit() {
-    // arra az esetre kell, amikor a főoldal van megjelenítve bejelentkezett állapotban és kattintunk a kijelentkezésre
-    // ilyenkor a router nem irányít 'még egyszer' a főoldalra, nem frissül
-    this._subscription = this._logonservice.SzerepkorKivalasztvaObservable().subscribe(uzenet => {
-      this.szerepkorkivalasztva = (uzenet.szerepkorkivalasztva as boolean);
-      this.felhasznalo();
-    });
-
-    this.szerepkorkivalasztva = this._logonservice.SzerepkorKivalasztva;
-    this.felhasznalo();
+    this.resize();
   }
 
-  felhasznalo() {
-    if (this.szerepkorkivalasztva) {
-      this.felhasznalokod = this._sessionservice.sessiondto.Felhasznalokod;
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    event.stopPropagation();
+    event.preventDefault();
+
+    this.resize();
+  }
+
+  resize() {
+    this.dwith = this.hatterkep.nativeElement.width;
+    this.dheight = this.hatterkep.nativeElement.height;
+
+    if (window.innerWidth > window.innerHeight) {
+      this.hatterkep.nativeElement.width = window.innerWidth;
+      this.hatterkep.nativeElement.height = window.innerHeight;
     } else {
-      this.felhasznalokod = -1;
+      this.hatterkep.nativeElement.width = 0;
+      this.hatterkep.nativeElement.height = 0;
     }
   }
 
   ngOnDestroy(): void {
-    this._subscription.unsubscribe();
-
     Object.keys(this).map(k => {
       (this[k]) = null;
     });

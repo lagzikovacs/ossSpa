@@ -103,16 +103,6 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
     this.eventSzerkeszteskesz.emit(null);
   }
 
-  FelhasznaloZoom() {
-    this.SzerkesztesMode = ProjektteendoSzerkesztesMode.FelhasznaloZoom;
-  }
-  onFelhasznaloSelectzoom(Dto: FelhasznaloDto) {
-    this.DtoEdited.Dedikalva = Dto.Nev;
-  }
-  onFelhasznaloStopzoom() {
-    this.SzerkesztesMode = ProjektteendoSzerkesztesMode.Blank;
-  }
-
   TeendoZoom() {
     this.SzerkesztesMode = ProjektteendoSzerkesztesMode.TeendoZoom;
   }

@@ -38,10 +38,6 @@
           <button (click)="doNav(3)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
             <i class="fa fa-edit" aria-hidden="true"></i>
           </button>
-
-          <button (click)="doNav(18)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-            Elvégezve
-          </button>
         </nav>
       </div>
 
@@ -66,13 +62,6 @@
                                           [DtoOriginal]="Dto[DtoSelectedIndex]"
                                           (eventSzerkeszteskesz)="onModositaskesz($event)">
           </app-projekt-teendo-szerkesztes>
-        </div>
-      </ng-container>
-      <ng-container *ngIf="egymode === 18">
-        <div [@rowanimation]>
-          <app-projekt-teendo-elvegezve [DtoOriginal]="Dto[DtoSelectedIndex]"
-                                        (eventSzerkeszteskesz)="onModositaskesz($event)">
-          </app-projekt-teendo-elvegezve>
         </div>
       </ng-container>
     </div>

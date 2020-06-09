@@ -107,7 +107,6 @@ import { OnlineszamlaellenorzeseComponent } from './onlineszamla/onlineszamlaell
 import { ProjektStatuszComponent } from './projekt/projekt-statusz/projekt-statusz.component';
 import { SzamlazasirendSzerkesztesComponent } from './szamlazasirend/szamlazasirend-szerkesztes/szamlazasirend-szerkesztes.component';
 import { ProjektTeendoSzerkesztesComponent } from './projektteendo/projekt-teendo-szerkesztes/projekt-teendo-szerkesztes.component';
-import { ProjektTeendoElvegezveComponent } from './projektteendo/projekt-teendo-elvegezve/projekt-teendo-elvegezve.component';
 import { ProjektkapcsolatUjbizonylatComponent } from './projektkapcsolat/projektkapcsolat-ujbizonylat/projektkapcsolat-ujbizonylat.component';
 import { AjanlatComponent } from './ajanlat/ajanlat/ajanlat';
 import { VolumeListComponent } from './volume/volume-list/volume-list.component';
@@ -348,7 +347,6 @@ if (environment.production) {
     ProjektStatuszComponent,
     SzamlazasirendSzerkesztesComponent,
     ProjektTeendoSzerkesztesComponent,
-    ProjektTeendoElvegezveComponent,
     ProjektkapcsolatUjbizonylatComponent,
     AjanlatComponent,
     VolumeListComponent,

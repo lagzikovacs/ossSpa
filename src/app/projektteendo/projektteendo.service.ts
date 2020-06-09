@@ -14,7 +14,7 @@ import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 })
 export class ProjektteendoService {
   private readonly _controller = environment.CoreRef + 'api/projektteendo/';
-  cim = 'Projekt teendő';
+  cim = 'Jegyzet';
 
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;

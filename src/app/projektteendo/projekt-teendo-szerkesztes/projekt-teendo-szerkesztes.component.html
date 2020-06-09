@@ -6,16 +6,6 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Dedikálva</div>
-        <input type="text" class="form-control form-control-sm oszlop3" id="dedikalva"
-               autocomplete="off" style="background-color: aquamarine; display: inline-block"
-               [(ngModel)]="DtoEdited.Dedikalva" name="dedikalva">
-        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="FelhasznaloZoom()">...</button>
-      </div>
-    </div>
-
-    <div class="row no-gutters editform-row">
-      <div>
         <div class="egylabel">Határidő</div>
         <input type="date" class="form-control form-control-sm oszlop3" id="hatarido"
                autocomplete="off"
@@ -48,11 +38,6 @@
     </div>
   </form>
 
-  <ng-container *ngIf="SzerkesztesMode === 1">
-    <app-felhasznalo-list [maszk]="DtoEdited.Dedikalva || ''"
-                          (eventSelectzoom)="onFelhasznaloSelectzoom($event)"
-                          (eventStopzoom)="onFelhasznaloStopzoom()"></app-felhasznalo-list>
-  </ng-container>
   <ng-container *ngIf="SzerkesztesMode === 2">
     <app-teendo-list [maszk]="DtoEdited.Teendo || ''"
                      (eventSelectzoom)="onTeendoSelectzoom($event)"

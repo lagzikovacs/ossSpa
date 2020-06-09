@@ -9,6 +9,7 @@ import {deepCopy} from '../../tools/deepCopy';
 import {FelhasznaloDto} from '../../primitiv/felhasznalo/felhasznalodto';
 import {TeendoDto} from '../../primitiv/teendo/teendodto';
 import {ProjektteendoDto} from '../projektteendodto';
+import {NumberResult} from '../../dtos/numberresult';
 
 @Component({
   selector: 'app-projekt-teendo-szerkesztes',
@@ -23,10 +24,6 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
   @Input() Projektkod = -1;
   @Output() eventSzerkeszteskesz = new EventEmitter<ProjektteendoDto>();
 
-  Hatarido: any;
-
-  SzerkesztesMode = ProjektteendoSzerkesztesMode.Blank;
-
   eppFrissit = false;
 
   projektteendoservice: ProjektteendoService;
@@ -38,8 +35,6 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.Hatarido = moment().format('YYYY-MM-DD');
-
     if (this.uj) {
       this.eppFrissit = true;
       this.projektteendoservice.CreateNew()
@@ -59,25 +54,17 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    // nem ellenőrzi, h a dedikált felhasználó létezik-e
-
     this.eppFrissit = true;
-    this._teendoservice.ZoomCheck(new TeendoZoomParameter(this.DtoEdited.Teendokod || 0,
-      this.DtoEdited.Teendo || ''))
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
+    let p: Promise<NumberResult>;
 
-        this.DtoEdited.Hatarido = moment(this.Hatarido).toISOString(true);
+    if (this.uj) {
+      this.DtoEdited.Projektkod = this.Projektkod;
+      p = this.projektteendoservice.Add(this.DtoEdited);
+    } else {
+      p = this.projektteendoservice.Update(this.DtoEdited);
+    }
 
-        if (this.uj) {
-          this.DtoEdited.Projektkod = this.Projektkod;
-          return this.projektteendoservice.Add(this.DtoEdited);
-        } else {
-          return this.projektteendoservice.Update(this.DtoEdited);
-        }
-      })
+    p
       .then(res1 => {
         if (res1.Error !== null) {
           throw res1.Error;
@@ -101,17 +88,6 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
 
   onCancel() {
     this.eventSzerkeszteskesz.emit(null);
-  }
-
-  TeendoZoom() {
-    this.SzerkesztesMode = ProjektteendoSzerkesztesMode.TeendoZoom;
-  }
-  onTeendoSelectzoom(Dto: TeendoDto) {
-    this.DtoEdited.Teendokod = Dto.Teendokod;
-    this.DtoEdited.Teendo = Dto.Teendo1;
-  }
-  onTeendoStopzoom() {
-    this.SzerkesztesMode = ProjektteendoSzerkesztesMode.Blank;
   }
 
   ngOnDestroy() {

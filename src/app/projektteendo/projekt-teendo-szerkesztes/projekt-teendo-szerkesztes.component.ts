@@ -1,13 +1,8 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {TeendoService} from '../../primitiv/teendo/teendo.service';
 import {ProjektteendoService} from '../projektteendo.service';
 import * as moment from 'moment';
-import {TeendoZoomParameter} from '../../primitiv/teendo/teendozoomparameter';
-import {ProjektteendoSzerkesztesMode} from '../projektteendoszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {deepCopy} from '../../tools/deepCopy';
-import {FelhasznaloDto} from '../../primitiv/felhasznalo/felhasznalodto';
-import {TeendoDto} from '../../primitiv/teendo/teendodto';
 import {ProjektteendoDto} from '../projektteendodto';
 import {NumberResult} from '../../dtos/numberresult';
 
@@ -28,8 +23,7 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
 
   projektteendoservice: ProjektteendoService;
 
-  constructor(private _teendoservice: TeendoService,
-              private _errorservice: ErrorService,
+  constructor(private _errorservice: ErrorService,
               projektteendoservice: ProjektteendoService) {
     this.projektteendoservice = projektteendoservice;
   }

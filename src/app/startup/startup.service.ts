@@ -12,7 +12,6 @@ import {HelysegService} from '../primitiv/helyseg/helyseg.service';
 import {IrattipusService} from '../primitiv/irattipus/irattipus.service';
 import {MeService} from '../primitiv/me/me.service';
 import {PenznemService} from '../primitiv/penznem/penznem.service';
-import {TeendoService} from '../primitiv/teendo/teendo.service';
 import {TermekdijService} from '../primitiv/termekdij/termekdij.service';
 import {CikkService} from '../cikk/cikk.service';
 import {UgyfelService} from '../ugyfel/ugyfel.service';
@@ -48,7 +47,6 @@ export class StartupService {
               private _irattipusservice: IrattipusService,
               private _meservice: MeService,
               private _penznemservice: PenznemService,
-              private _teendoservice: TeendoService,
               private _termekdijservice: TermekdijService,
               private _tevekenysegservice: TevekenysegService,
               private _cikkservice: CikkService,
@@ -118,8 +116,6 @@ export class StartupService {
         this._meservice.ReszletekSettings = res3.Me_Reszletek;
         this._penznemservice.GridSettings = res3.Penznem_Grid;
         this._penznemservice.ReszletekSettings = res3.Penznem_Reszletek;
-        this._teendoservice.GridSettings = res3.Teendo_Grid;
-        this._teendoservice.ReszletekSettings = res3.Teendo_Reszletek;
         this._termekdijservice.GridSettings = res3.Termekdij_Grid;
         this._termekdijservice.ReszletekSettings = res3.Termekdij_Reszletek;
         this._tevekenysegservice.GridSettings = res3.Tevekenyseg_Grid;

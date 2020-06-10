@@ -27,7 +27,7 @@ export class ProjektListComponent implements OnDestroy {
     '(10) Még papírozni kell', '(11) Elhalasztva', '(12) Passzív', '(13) Felmérés után', '(14) Roadshow-ra jelentkezett',
     '(15) Link'
   ];
-  teendoszurok = ['Mind', 'Teendő', 'Saját teendő', 'Lejárt teendő'];
+  teendoszurok = ['Mind', 'Jegyzet is'];
   szurok = ['Id', 'Ügyfél', 'Ügyfélcím', 'Email', 'Telefon', 'Telepítési cím', 'Keletkezett', 'Műszaki állapot'];
 
   teendoSzempontok = [

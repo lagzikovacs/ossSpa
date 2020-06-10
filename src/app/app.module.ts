@@ -71,7 +71,6 @@ import { ParticioNavComponent } from './particio/particio-nav/particio-nav.compo
 import { ParticioBizonylatComponent } from './particio/particio-bizonylat/particio-bizonylat.component';
 import { ParticioProjektComponent } from './particio/particio-projekt/particio-projekt.component';
 import { ParticioVolumeComponent } from './particio/particio-volume/particio-volume.component';
-import { TeendoListComponent } from './primitiv/teendo/teendo-list/teendo-list.component';
 import { FizetesimodListComponent } from './primitiv/fizetesimod/fizetesimod-list/fizetesimod-list.component';
 import { PenznemListComponent } from './primitiv/penznem/penznem-list/penznem-list.component';
 import { CikkListComponent } from './cikk/cikk-list/cikk-list.component';
@@ -82,13 +81,11 @@ import { TermekdijSzerkesztesComponent } from './primitiv/termekdij/termekdij-sz
 import { AfakulcsSzerkesztesComponent } from './primitiv/afakulcs/afakulcs-szerkesztes/afakulcs-szerkesztes.component';
 import { MeSzerkesztesComponent } from './primitiv/me/me-szerkesztes/me-szerkesztes.component';
 import { CikkSzerkesztesComponent } from './cikk/cikk-szerkesztes/cikk-szerkesztes.component';
-import { TeendoSzerkesztesComponent } from './primitiv/teendo/teendo-szerkesztes/teendo-szerkesztes.component';
 import { FizetesimodSzerkesztesComponent } from './primitiv/fizetesimod/fizetesimod-szerkesztes/fizetesimod-szerkesztes.component';
 import { PenznemSzerkesztesComponent } from './primitiv/penznem/penznem-szerkesztes/penznem-szerkesztes.component';
 import { CikkBeszerzesKivetComponent } from './cikk/cikk-beszerzes-kivet/cikk-beszerzes-kivet.component';
 import { PenztarListComponent } from './penztar/penztar-list/penztar-list.component';
 import {IrattipusService} from './primitiv/irattipus/irattipus.service';
-import {TeendoService} from './primitiv/teendo/teendo.service';
 import {FizetesimodService} from './primitiv/fizetesimod/fizetesimod.service';
 import {PenznemService} from './primitiv/penznem/penznem.service';
 import {MeService} from './primitiv/me/me.service';
@@ -198,7 +195,6 @@ import {KapcsolatihaloService} from './kapcsolatihalo/kapcsolatihalo.service';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
-  {path: 'teendo', component: TeendoListComponent, canActivate: [RoleGuard]},
   {path: 'fizetesimod', component: FizetesimodListComponent, canActivate: [RoleGuard]},
   {path: 'penznem', component: PenznemListComponent, canActivate: [RoleGuard]},
   {path: 'me', component: MeListComponent, canActivate: [RoleGuard]},
@@ -321,7 +317,6 @@ if (environment.production) {
     ParticioBizonylatComponent,
     ParticioProjektComponent,
     ParticioVolumeComponent,
-    TeendoListComponent,
     FizetesimodListComponent,
     PenznemListComponent,
     CikkListComponent,
@@ -334,7 +329,6 @@ if (environment.production) {
     AfakulcsSzerkesztesComponent,
     MeSzerkesztesComponent,
     CikkSzerkesztesComponent,
-    TeendoSzerkesztesComponent,
     FizetesimodSzerkesztesComponent,
     PenznemSzerkesztesComponent,
     CikkBeszerzesKivetComponent,
@@ -433,7 +427,6 @@ if (environment.production) {
     RoleGuard,
 
     IrattipusService,
-    TeendoService,
     FizetesimodService,
     PenznemService,
     MeService,

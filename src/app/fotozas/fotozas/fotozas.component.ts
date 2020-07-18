@@ -13,7 +13,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 })
 export class FotozasComponent implements OnInit, OnDestroy {
   // dinamikusan keresi a konténerben
-  @ViewChild('fileInput', {static: false}) fileInput: ElementRef;
+  @ViewChild('fileInput') fileInput: ElementRef;
 
   fp: string;
   private _sub: any;

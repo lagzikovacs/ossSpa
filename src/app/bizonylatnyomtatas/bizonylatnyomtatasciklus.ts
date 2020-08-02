@@ -1,11 +1,10 @@
 import {ErrorService} from '../tools/errorbox/error.service';
 import {b64toBlob} from '../tools/b64toBlob';
 import * as FileSaver from 'file-saver';
-import {OnDestroy} from '@angular/core';
 import {LiteEvent} from '../tools/event/LiteEvent';
 import {BizonylatnyomtatasService} from './bizonylatnyomtatas.service';
 
-export class Bizonylatnyomtatasciklus implements OnDestroy {
+export class Bizonylatnyomtatasciklus {
   eventCiklusutan = new LiteEvent<void>();
   eventSpinnervege = new LiteEvent<void>();
 
@@ -69,14 +68,6 @@ export class Bizonylatnyomtatasciklus implements OnDestroy {
     } else {
       this.ciklus();
     }
-  }
-
-  ngOnDestroy() {
-    clearInterval(this._szamlalo);
-
-    Object.keys(this).map(k => {
-      (this[k]) = null;
-    });
   }
 }
 

@@ -33,7 +33,7 @@ export enum EgyMode {
   Iratminta = 23,
   Bizonylatesirat = 24,
   Szamlazasirend = 25,
-  Teendo = 26,
+  Jegyzet = 26,
   Datumok = 27,
 
   BeszerzesMozgas = 28,

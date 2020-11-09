@@ -6,7 +6,7 @@ import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Ou
 })
 export class ProjektToolbarComponent implements AfterViewInit, OnDestroy {
   @Input() Statuszszurok: string[] = [];
-  @Input() Teendoszurok: string[] = [];
+  @Input() Jegyzetszurok: string[] = [];
   @Input() Szurok: string[] = [];
 
   @Input() enKereses = true;
@@ -21,7 +21,7 @@ export class ProjektToolbarComponent implements AfterViewInit, OnDestroy {
   // pl. egy tétel szerkesztése után
 
   _statuszszempont = 0;
-  _teendoszempont = 0;
+  _jegyzetszempont = 0;
   _szempont = 0;
 
   @ViewChild('Statuszszempont', {static: true}) StatuszszempontCombobox: ElementRef;
@@ -31,12 +31,12 @@ export class ProjektToolbarComponent implements AfterViewInit, OnDestroy {
   }
   @Output() statuszszempontChange: EventEmitter<number> = new EventEmitter();
 
-  @ViewChild('Teendoszempont', {static: true}) TeendoszempontCombobox: ElementRef;
+  @ViewChild('Jegyzetszempont', {static: true}) JegyzetszempontCombobox: ElementRef;
   @Input()
-  set teendoszempont(value: number) {
-    this._teendoszempont = value;
+  set jegyzetszempont(value: number) {
+    this._jegyzetszempont = value;
   }
-  @Output() teendoszempontChange: EventEmitter<number> = new EventEmitter();
+  @Output() jegyzetszempontChange: EventEmitter<number> = new EventEmitter();
 
   @ViewChild('Szempont', {static: true}) SzempontCombobox: ElementRef;
   @Input()
@@ -57,9 +57,9 @@ export class ProjektToolbarComponent implements AfterViewInit, OnDestroy {
       this._statuszszempont = event.target.value;
       this.statuszszempontChange.emit(this._statuszszempont);
     });
-    this.TeendoszempontCombobox.nativeElement.addEventListener('change', (event) => {
-      this._teendoszempont = event.target.value;
-      this.teendoszempontChange.emit(this._teendoszempont);
+    this.JegyzetszempontCombobox.nativeElement.addEventListener('change', (event) => {
+      this._jegyzetszempont = event.target.value;
+      this.jegyzetszempontChange.emit(this._jegyzetszempont);
     });
     this.SzempontCombobox.nativeElement.addEventListener('change', (event) => {
       this._szempont = event.target.value;

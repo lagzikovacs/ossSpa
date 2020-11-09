@@ -1,5 +1,5 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
-  <h5>{{projektteendoservice.cim}}</h5>
+  <h5>{{projektjegyzetservice.cim}}</h5>
   <div>
     <nav>
       <button (click)="onKereses()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins" style="margin-right: 3px">
@@ -12,17 +12,17 @@
   </div>
   <app-tabla #tabla
              [items]="Dto"
-             [colsets]="projektteendoservice.GridSettings"
+             [colsets]="projektjegyzetservice.GridSettings"
              (forid)="onId($event)"
              [ujTemplate]="griduj"
              [egyTemplate]="gridegy">
   </app-tabla>
 
   <ng-template #griduj>
-    <app-projekt-teendo-szerkesztes [uj] = "true"
+    <app-projekt-jegyzet-szerkesztes [uj] = "true"
                                     [Projektkod]="Projektkod"
                                     (eventSzerkeszteskesz)="onUjtetelkesz($event)">
-    </app-projekt-teendo-szerkesztes>
+    </app-projekt-jegyzet-szerkesztes>
   </ng-template>
 
   <ng-template #gridegy>
@@ -43,25 +43,25 @@
 
       <ng-container *ngIf="egymode === 1">
         <div [@rowanimation]>
-          <app-reszletek [cim]="projektteendoservice.cim"
+          <app-reszletek [cim]="projektjegyzetservice.cim"
                          [item]="Dto[DtoSelectedIndex]"
-                         [colsets]="projektteendoservice.ReszletekSettings">
+                         [colsets]="projektjegyzetservice.ReszletekSettings">
           </app-reszletek>
         </div>
       </ng-container>
       <ng-container *ngIf="egymode === 2">
         <div [@rowanimation]>
-          <app-tetel-torles [cim]="projektteendoservice.cim"
+          <app-tetel-torles [cim]="projektjegyzetservice.cim"
                             (eventTorles)="onTorles($event)">
           </app-tetel-torles>
         </div>
       </ng-container>
       <ng-container *ngIf="egymode === 3">
         <div [@rowanimation]>
-          <app-projekt-teendo-szerkesztes [uj]="false"
+          <app-projekt-jegyzet-szerkesztes [uj]="false"
                                           [DtoOriginal]="Dto[DtoSelectedIndex]"
                                           (eventSzerkeszteskesz)="onModositaskesz($event)">
-          </app-projekt-teendo-szerkesztes>
+          </app-projekt-jegyzet-szerkesztes>
         </div>
       </ng-container>
     </div>

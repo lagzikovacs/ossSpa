@@ -27,12 +27,11 @@ export class ProjektListComponent implements OnDestroy {
     '(10) Még papírozni kell', '(11) Elhalasztva', '(12) Passzív', '(13) Felmérés után', '(14) Roadshow-ra jelentkezett',
     '(15) Link'
   ];
-  teendoszurok = ['Mind', 'Jegyzet is'];
+  jegyzetszurok = ['Mind', 'Jegyzet is'];
   szurok = ['Id', 'Ügyfél', 'Ügyfélcím', 'Email', 'Telefon', 'Telepítési cím', 'Keletkezett', 'Műszaki állapot'];
 
-  teendoSzempontok = [
-    Szempont.Null, Szempont.CsakHaTeendo,
-    Szempont.SajatTeendo, Szempont.CsakHaLejartTeendo
+  jegyzetSzempontok = [
+    Szempont.Null, Szempont.CsakHaJegyzetIs
   ];
   szempontok = [
     Szempont.Kod, Szempont.Ugyfel,
@@ -45,7 +44,7 @@ export class ProjektListComponent implements OnDestroy {
   projektcsoport = '';
 
   statuszszempont = 0;
-  teendoszempont = 0;
+  jegyzetszempont = 0;
   szempont = 0;
   minta = '';
   pp = new ProjektParameter(0, environment.lapmeret);
@@ -75,8 +74,8 @@ export class ProjektListComponent implements OnDestroy {
     this.pp.rekordtol = 0;
     this.pp.statusz = this.statuszszempont;
     this.pp.fi = new Array();
-    if (this.teendoszempont !== 0) {
-      this.pp.fi.push(new SzMT(this.teendoSzempontok[this.teendoszempont], ''));
+    if (this.jegyzetszempont !== 0) {
+      this.pp.fi.push(new SzMT(this.jegyzetSzempontok[this.jegyzetszempont], ''));
     }
     this.pp.fi.push(new SzMT(this.szempontok[this.szempont], this.minta));
 

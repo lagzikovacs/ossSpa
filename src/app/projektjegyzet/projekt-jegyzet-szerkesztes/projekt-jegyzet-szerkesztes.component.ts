@@ -1,37 +1,37 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {ProjektteendoService} from '../projektteendo.service';
+import {ProjektjegyzetService} from '../projektjegyzet.service';
 import * as moment from 'moment';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {deepCopy} from '../../tools/deepCopy';
-import {ProjektteendoDto} from '../projektteendodto';
+import {ProjektjegyzetDto} from '../projektjegyzetdto';
 import {NumberResult} from '../../dtos/numberresult';
 
 @Component({
-  selector: 'app-projekt-teendo-szerkesztes',
-  templateUrl: './projekt-teendo-szerkesztes.component.html'
+  selector: 'app-projekt-jegyzet-szerkesztes',
+  templateUrl: './projekt-jegyzet-szerkesztes.component.html'
 })
-export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
+export class ProjektJegyzetSzerkesztesComponent implements OnInit, OnDestroy {
   @Input() uj = false;
-  DtoEdited = new ProjektteendoDto();
-  @Input() set DtoOriginal(value: ProjektteendoDto) {
+  DtoEdited = new ProjektjegyzetDto();
+  @Input() set DtoOriginal(value: ProjektjegyzetDto) {
     this.DtoEdited = deepCopy(value);
   }
   @Input() Projektkod = -1;
-  @Output() eventSzerkeszteskesz = new EventEmitter<ProjektteendoDto>();
+  @Output() eventSzerkeszteskesz = new EventEmitter<ProjektjegyzetDto>();
 
   eppFrissit = false;
 
-  projektteendoservice: ProjektteendoService;
+  projektjegyzetservice: ProjektjegyzetService;
 
   constructor(private _errorservice: ErrorService,
-              projektteendoservice: ProjektteendoService) {
-    this.projektteendoservice = projektteendoservice;
+              projektjegyzetservice: ProjektjegyzetService) {
+    this.projektjegyzetservice = projektjegyzetservice;
   }
 
   ngOnInit() {
     if (this.uj) {
       this.eppFrissit = true;
-      this.projektteendoservice.CreateNew()
+      this.projektjegyzetservice.CreateNew()
         .then(res => {
           if (res.Error !== null) {
             throw res.Error;
@@ -53,9 +53,9 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
 
     if (this.uj) {
       this.DtoEdited.Projektkod = this.Projektkod;
-      p = this.projektteendoservice.Add(this.DtoEdited);
+      p = this.projektjegyzetservice.Add(this.DtoEdited);
     } else {
-      p = this.projektteendoservice.Update(this.DtoEdited);
+      p = this.projektjegyzetservice.Update(this.DtoEdited);
     }
 
     p
@@ -64,7 +64,7 @@ export class ProjektTeendoSzerkesztesComponent implements OnInit, OnDestroy {
           throw res1.Error;
         }
 
-        return this.projektteendoservice.Get(res1.Result);
+        return this.projektjegyzetservice.Get(res1.Result);
       })
       .then(res2 => {
         if (res2.Error !== null) {

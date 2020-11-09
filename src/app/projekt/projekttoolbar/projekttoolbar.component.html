@@ -5,8 +5,8 @@
     </select>
   </div>
   <div class="toolbarcontrolmargins">
-    <select [disabled]="!enKereses" #Teendoszempont type="text" class="form-control form-control-sm">
-      <option *ngFor="let t of Teendoszurok; let i = index" [value]="i" [selected]="i == _teendoszempont">{{t}}</option>
+    <select [disabled]="!enKereses" #Jegyzetszempont type="text" class="form-control form-control-sm">
+      <option *ngFor="let t of Jegyzetszurok; let i = index" [value]="i" [selected]="i == _jegyzetszempont">{{t}}</option>
     </select>
   </div>
   <div class="toolbarcontrolmargins">

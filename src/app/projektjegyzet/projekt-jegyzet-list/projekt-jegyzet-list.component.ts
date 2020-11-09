@@ -1,34 +1,34 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ProjektteendoService} from '../projektteendo.service';
+import {ProjektjegyzetService} from '../projektjegyzet.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
-import {ProjektteendoDto} from '../projektteendodto';
+import {ProjektjegyzetDto} from '../projektjegyzetdto';
 import {EgyMode} from '../../enums/egymode';
 import {propCopy} from '../../tools/propCopy';
 import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({
-  selector: 'app-projekt-teendo-list',
-  templateUrl: './projekt-teendo-list.component.html',
+  selector: 'app-projekt-jegyzet-list',
+  templateUrl: './projekt-jegyzet-list.component.html',
   animations: [rowanimation]
 })
-export class ProjektTeendoListComponent implements OnInit, OnDestroy {
+export class ProjektJegyzetListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: TablaComponent;
 
   @Input() Projektkod = -1;
 
-  Dto = new Array<ProjektteendoDto>();
+  Dto = new Array<ProjektjegyzetDto>();
   DtoSelectedIndex = -1;
 
   egymode = EgyMode.Reszletek;
 
   eppFrissit = false;
 
-  projektteendoservice: ProjektteendoService;
+  projektjegyzetservice: ProjektjegyzetService;
 
   constructor(private _errorservice: ErrorService,
-              projektteendoservice: ProjektteendoService) {
-    this.projektteendoservice = projektteendoservice;
+              projektjegyzetservice: ProjektjegyzetService) {
+    this.projektjegyzetservice = projektjegyzetservice;
   }
 
   ngOnInit() {
@@ -39,7 +39,7 @@ export class ProjektTeendoListComponent implements OnInit, OnDestroy {
     this.tabla.clearselections();
 
     this.eppFrissit = true;
-    this.projektteendoservice.Select(this.Projektkod)
+    this.projektjegyzetservice.Select(this.Projektkod)
       .then(res => {
         if (res.Error !== null) {
           throw res.Error;
@@ -66,13 +66,13 @@ export class ProjektTeendoListComponent implements OnInit, OnDestroy {
   onUjtetel() {
     this.tabla.ujtetelstart();
   }
-  onUjtetelkesz(dto: ProjektteendoDto) {
+  onUjtetelkesz(dto: ProjektjegyzetDto) {
     if (dto !== null) {
       this.Dto.unshift(dto);
     }
     this.tabla.ujtetelstop();
   }
-  onModositaskesz(dto: ProjektteendoDto) {
+  onModositaskesz(dto: ProjektjegyzetDto) {
     if (dto !== null) {
       propCopy(dto, this.Dto[this.DtoSelectedIndex]);
     }
@@ -82,7 +82,7 @@ export class ProjektTeendoListComponent implements OnInit, OnDestroy {
     if (ok) {
       this.eppFrissit = true;
 
-      this.projektteendoservice.Delete(this.Dto[this.DtoSelectedIndex])
+      this.projektjegyzetservice.Delete(this.Dto[this.DtoSelectedIndex])
         .then(res => {
           if (res.Error != null) {
             throw res.Error;

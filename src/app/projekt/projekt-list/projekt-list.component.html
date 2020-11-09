@@ -1,10 +1,10 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>{{projektservice.cim}}</h5>
   <app-projekttoolbar [Statuszszurok]="statuszszurok"
-                      [Teendoszurok]="teendoszurok"
+                      [Jegyzetszurok]="jegyzetszurok"
                       [Szurok]="szurok"
                       [(statuszszempont)]="statuszszempont"
-                      [(teendoszempont)]="teendoszempont"
+                      [(jegyzetszempont)]="jegyzetszempont"
                       [(szempont)]="szempont"
                       [(minta)]="minta"
                       (Kereses)="onKereses()"
@@ -164,8 +164,8 @@
       </ng-container>
       <ng-container *ngIf="egymode === 26">
         <div [@rowanimation]>
-          <app-projekt-teendo-list [Projektkod]="Dto[DtoSelectedIndex].Projektkod">
-          </app-projekt-teendo-list>
+          <app-projekt-jegyzet-list [Projektkod]="Dto[DtoSelectedIndex].Projektkod">
+          </app-projekt-jegyzet-list>
         </div>
       </ng-container>
     </div>

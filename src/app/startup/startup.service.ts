@@ -15,7 +15,7 @@ import {PenznemService} from '../primitiv/penznem/penznem.service';
 import {TermekdijService} from '../primitiv/termekdij/termekdij.service';
 import {CikkService} from '../cikk/cikk.service';
 import {UgyfelService} from '../ugyfel/ugyfel.service';
-import {ProjektteendoService} from '../projektteendo/projektteendo.service';
+import {ProjektjegyzetService} from '../projektjegyzet/projektjegyzet.service';
 import {StartupResult} from './startupresult';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
@@ -53,7 +53,7 @@ export class StartupService {
               private _ugyfelservice: UgyfelService,
               private _ugyfelkapcsolatservice: UgyfelkapcsolatService,
               private _projektservice: ProjektService,
-              private _projektteendoservice: ProjektteendoService,
+              private _projektjegyzetservice: ProjektjegyzetService,
               private _szamlazasirendservice: SzamlazasirendService,
               private _iratservice: IratService,
               private _ajanlatkeresservice: AjanlatkeresService,
@@ -131,8 +131,8 @@ export class StartupService {
 
         this._projektservice.GridSettings = res3.Projekt_Grid;
         this._projektservice.ReszletekSettings = res3.Projekt_Reszletek;
-        this._projektteendoservice.GridSettings = res3.Projektteendo_Grid;
-        this._projektteendoservice.ReszletekSettings = res3.Projektteendo_Reszletek;
+        this._projektjegyzetservice.GridSettings = res3.Projektjegyzet_Grid;
+        this._projektjegyzetservice.ReszletekSettings = res3.Projektjegyzet_Reszletek;
         this._szamlazasirendservice.GridSettings = res3.Szamlazasirend_Grid;
         this._szamlazasirendservice.ReszletekSettings = res3.Szamlazasirend_Reszletek;
 

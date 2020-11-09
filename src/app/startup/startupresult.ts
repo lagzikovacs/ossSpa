@@ -17,8 +17,6 @@ export class StartupResult {
   Me_Reszletek: ColumnSettings[];
   Penznem_Grid: ColumnSettings[];
   Penznem_Reszletek: ColumnSettings[];
-  Teendo_Grid: ColumnSettings[];
-  Teendo_Reszletek: ColumnSettings[];
   Termekdij_Grid: ColumnSettings[];
   Termekdij_Reszletek: ColumnSettings[];
   Tevekenyseg_Grid: ColumnSettings[];
@@ -34,8 +32,8 @@ export class StartupResult {
 
   Projekt_Grid: ColumnSettings[];
   Projekt_Reszletek: ColumnSettings[];
-  Projektteendo_Grid: ColumnSettings[];
-  Projektteendo_Reszletek: ColumnSettings[];
+  Projektjegyzet_Grid: ColumnSettings[];
+  Projektjegyzet_Reszletek: ColumnSettings[];
   Szamlazasirend_Grid: ColumnSettings[];
   Szamlazasirend_Reszletek: ColumnSettings[];
 

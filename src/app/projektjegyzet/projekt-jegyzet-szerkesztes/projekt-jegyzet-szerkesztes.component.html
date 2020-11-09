@@ -1,6 +1,6 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
-  <h5 *ngIf="uj">Új {{projektteendoservice.cim | lowercase}}</h5>
-  <h5 *ngIf="!uj">{{projektteendoservice.cim}} módosítása</h5>
+  <h5 *ngIf="uj">Új {{projektjegyzetservice.cim | lowercase}}</h5>
+  <h5 *ngIf="!uj">{{projektjegyzetservice.cim}} módosítása</h5>
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 

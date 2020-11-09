@@ -10,9 +10,9 @@ export enum Szempont {
   Kivitelezve = 9,
   Keszrejelentve = 10,
   UgyfelKod = 11,
-  CsakHaTeendo = 12,
-  CsakHaTeendoSajat = 13,
-  CsakHaLejartTeendo = 14,
+  CsakHaJegyzetIs = 12,
+
+
   TeljesitesKeltetol = 15,
   TeljesitesKelteig = 16,
   BizonylatszamCsokkenoSorrend = 17, // Nem kell neki értéket adni, elég ha jelen van a listában.
@@ -32,7 +32,7 @@ export enum Szempont {
   Targy = 31,
   Kuldo = 32,
   Irattipus = 33,
-  SajatTeendo = 34,
+
   MuszakiAllapot = 35,
   UgyfelTelefonszam = 36,
   Lista = 37,

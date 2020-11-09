@@ -36,7 +36,7 @@ import { ProjektNapelemComponent } from './projekt/projekt-napelem/projekt-napel
 import { ProjektIratmintaComponent } from './iratminta/projekt-iratminta.component';
 import { ProjektkapcsolatListComponent } from './projektkapcsolat/projektkapcsolat-list/projektkapcsolat-list.component';
 import { SzamlazasirendListComponent } from './szamlazasirend/szamlazasirend-list/szamlazasirend-list.component';
-import { ProjektTeendoListComponent } from './projektteendo/projekt-teendo-list/projekt-teendo-list.component';
+import { ProjektJegyzetListComponent } from './projektjegyzet/projekt-jegyzet-list/projekt-jegyzet-list.component';
 import { IratListComponent } from './irat/irat-list/irat-list.component';
 import { IratEgyComponent } from './irat/irat-egy/irat-egy.component';
 import {IratToolbarComponent} from './irat/irattolbar/irattoolbar.component';
@@ -103,7 +103,7 @@ import { PenztartetelSzerkesztesComponent } from './penztartetel/penztartetel-sz
 import { OnlineszamlaellenorzeseComponent } from './onlineszamla/onlineszamlaellenorzese/onlineszamlaellenorzese.component';
 import { ProjektStatuszComponent } from './projekt/projekt-statusz/projekt-statusz.component';
 import { SzamlazasirendSzerkesztesComponent } from './szamlazasirend/szamlazasirend-szerkesztes/szamlazasirend-szerkesztes.component';
-import { ProjektTeendoSzerkesztesComponent } from './projektteendo/projekt-teendo-szerkesztes/projekt-teendo-szerkesztes.component';
+import { ProjektJegyzetSzerkesztesComponent } from './projektjegyzet/projekt-jegyzet-szerkesztes/projekt-jegyzet-szerkesztes.component';
 import { ProjektkapcsolatUjbizonylatComponent } from './projektkapcsolat/projektkapcsolat-ujbizonylat/projektkapcsolat-ujbizonylat.component';
 import { AjanlatComponent } from './ajanlat/ajanlat/ajanlat';
 import { VolumeListComponent } from './volume/volume-list/volume-list.component';
@@ -285,7 +285,7 @@ if (environment.production) {
     ProjektIratmintaComponent,
     ProjektkapcsolatListComponent,
     SzamlazasirendListComponent,
-    ProjektTeendoListComponent,
+    ProjektJegyzetListComponent,
     IratListComponent,
     IratEgyComponent,
     IratToolbarComponent,
@@ -340,7 +340,7 @@ if (environment.production) {
     OnlineszamlaellenorzeseComponent,
     ProjektStatuszComponent,
     SzamlazasirendSzerkesztesComponent,
-    ProjektTeendoSzerkesztesComponent,
+    ProjektJegyzetSzerkesztesComponent,
     ProjektkapcsolatUjbizonylatComponent,
     AjanlatComponent,
     VolumeListComponent,

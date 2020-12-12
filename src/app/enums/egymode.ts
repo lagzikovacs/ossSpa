@@ -48,4 +48,6 @@ export enum EgyMode {
 
   Terkep = 36,
   UgyfelKapcsolat = 37,
+
+  PDFNezet = 38,
 }

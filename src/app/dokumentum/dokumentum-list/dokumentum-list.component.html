@@ -39,7 +39,10 @@
             Letöltés
           </button>
           <button (click)="onLetoltesPDF()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-            PDF
+            Letöltés PDF-ben
+          </button>
+          <button (click)="doNav(38)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+            Nézet
           </button>
         </nav>
       </div>
@@ -61,6 +64,13 @@
           <app-tetel-torles [cim]="dokumentumservice.cim"
                             (eventTorles)="onTorles($event)">
           </app-tetel-torles>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 38">
+        <div [@rowanimation]>
+          <app-pdfnezet>
+
+          </app-pdfnezet>
         </div>
       </ng-container>
     </div>

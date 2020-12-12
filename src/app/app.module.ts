@@ -192,6 +192,7 @@ import {UgyfelkapcsolatService} from './ugyfelkapcsolat/ugyfelkapcsolat.service'
 import {UgyfelkapcsolatTablaComponent} from './ugyfelkapcsolat/ugyfelkapcsolat-tabla/ugyfelkapcsolat-tabla.component';
 import { UgyfelkapcsolatSzerkesztesComponent } from './ugyfelkapcsolat/ugyfelkapcsolat-szerkesztes/ugyfelkapcsolat-szerkesztes.component';
 import {KapcsolatihaloService} from './kapcsolatihalo/kapcsolatihalo.service';
+import { PdfnezetComponent } from './dokumentum/pdfnezet/pdfnezet.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -409,6 +410,7 @@ if (environment.production) {
     KapcsolatiHaloComponent,
     UgyfelKapcsolatComponent,
     UgyfelkapcsolatSzerkesztesComponent,
+    PdfnezetComponent,
   ],
   imports: [
     BrowserModule,

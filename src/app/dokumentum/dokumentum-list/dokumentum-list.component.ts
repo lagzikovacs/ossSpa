@@ -25,6 +25,8 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
 
+  pdf: any;
+
   dokumentumservice: DokumentumService;
 
   constructor(private _errorservice: ErrorService,
@@ -71,7 +73,23 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
   }
 
   doNav(i: number) {
-    this.egymode = i;
+    if (i === 38) {
+      this.eppFrissit = true;
+      this.dokumentumservice.LetoltesPDF(this.Dto[this.DtoSelectedIndex].Dokumentumkod)
+        .then(res => {
+          this.pdf = res.Result;
+
+          this.eppFrissit = false;
+          this.egymode = i;
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = i;
+    }
+
   }
 
   doUjtetel() {

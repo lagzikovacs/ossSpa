@@ -3,6 +3,7 @@ import {enableProdMode, NgModule} from '@angular/core';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu/menu.component';
 import {RouterModule, Routes} from '@angular/router';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import {environment} from '../environments/environment';
 import { FooldalComponent } from './fooldal/fooldal.component';
 import { MenunodeComponent } from './menu/menunode/menunode.component';
@@ -419,6 +420,7 @@ if (environment.production) {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxExtendedPdfViewerModule,
   ],
   exports: [
     DatetimeHunPipe,

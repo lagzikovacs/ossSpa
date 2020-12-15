@@ -52,6 +52,7 @@ export class FotozasComponent implements OnInit, OnDestroy {
 
         this.Dto = res.Result;
         this._logonservice.Sid = this.Dto.sid;
+        this.Dto.dokumentumDto.reverse();
 
         this.bejelentkezve = true;
         this.eppFrissit = false;
@@ -89,25 +90,20 @@ export class FotozasComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        return this._dokumentumservice.Get(res.Result);
-      })
-      .then(res1 => {
-        if (res1.Error != null) {
-          throw res1.Error;
-        }
-
-        this.Dto.dokumentumDto.unshift(res1.Result[0]);
-
         this.megjegyzes = '';
         this.fileInput.nativeElement.value = '';
 
         this.eppFrissit = false;
+
+        this.folytatas();
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
   }
+
+  // this.Dto.dokumentumDto.unshift(res1.Result[0]);
 
   ngOnDestroy() {
     this._sub.unsubscribe();

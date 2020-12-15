@@ -7,6 +7,7 @@ export class DokumentumDto {
   Hash: string;
   Iratkod: number;
   Megjegyzes: string;
+  Imgprev: any;
   Letrehozva: Date;
   Letrehozta: string;
   Modositva: Date;

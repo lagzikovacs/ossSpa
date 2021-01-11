@@ -8,4 +8,5 @@ export class ProjektConf {
   SzallitasiSzerzodesIratkod: number;
   SzerzodesIratkod: number;
   FeltetelesSzerzodesIratkod: number;
+  OFTSzerzodesIratkod: number;
 }

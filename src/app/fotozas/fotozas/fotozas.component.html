@@ -23,15 +23,11 @@
     <table class="table table-bordered table-sm table-responsive" style="border: none;margin-top: 10px;margin-bottom: 10px">
       <thead>
       <tr>
-        <th>Id</th>
         <th>Megjegyzés</th>
-        <th>Méret</th>
-        <th>Ext</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let item of Dto.dokumentumDto">
-        <td>{{item.Dokumentumkod}}</td>
         <td>
           <div>
             {{item.Megjegyzes}}
@@ -40,8 +36,6 @@
             <img [src] = "'data:image/jpg;base64,' + item.Imgprev"/>
           </div>
         </td>
-        <td>{{item.Meret}}</td>
-        <td>{{item.Ext}}</td>
       </tr>
       </tbody>
     </table>

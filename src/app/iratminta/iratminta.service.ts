@@ -31,6 +31,12 @@ export class IratmintaService {
       .toPromise();
   }
 
+  public OFTszerzodes(projektkod: number): Promise<IratmintaResult> {
+    return this._httpClient.post<IratmintaResult>(
+      this._controller + 'oftszerzodes', projektkod, this._logonservice.httpoptions())
+      .toPromise();
+  }
+
   public Munkalap(projektkod: number): Promise<IratmintaResult> {
     return this._httpClient.post<IratmintaResult>(
       this._controller + 'munkalap', projektkod, this._logonservice.httpoptions())

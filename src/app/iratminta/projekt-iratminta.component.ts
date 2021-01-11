@@ -68,6 +68,22 @@ export class ProjektIratmintaComponent implements OnDestroy {
         this._errorservice.Error = err;
       });
   }
+  oftszerzodes() {
+    this.eppFrissit = true;
+    this._iratmintaservice.OFTszerzodes(this.Projektkod)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+        const blob = b64toBlob(res.Result);
+        FileSaver.saveAs(blob, 'OFT szerződés.docx');
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this._errorservice.Error = err;
+      });
+  }
   munkalap() {
     this.eppFrissit = true;
     this._iratmintaservice.Munkalap(this.Projektkod)

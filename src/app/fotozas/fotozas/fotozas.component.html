@@ -22,16 +22,18 @@
     </ng-container>
     <table class="table table-bordered table-sm table-responsive" style="border: none;margin-top: 10px;margin-bottom: 10px">
       <thead>
-      <tr>
-        <th>Megjegyzés</th>
-      </tr>
+      <!--<tr>-->
+        <!--<th>Megjegyzés</th>-->
+      <!--</tr>-->
       </thead>
       <tbody>
       <tr *ngFor="let item of Dto.dokumentumDto">
         <td>
+          <div style="height: 15px"></div>
           <div>
             {{item.Megjegyzes}}
           </div>
+          <div style="height: 5px"></div>
           <div *ngIf="item.Imgprev !== null">
             <img [src] = "'data:image/jpg;base64,' + item.Imgprev"/>
           </div>
@@ -50,9 +52,18 @@
       <div class="row no-gutters editform-row">
         <div>
           <div class="egylabel">Megjegyzés</div>
-          <input type="text" class="form-control form-control-sm oszlop6" id="megjegyzes"
+          <input type="text" list="ssz" class="form-control form-control-sm oszlop5" id="megjegyzes"
                  autocomplete="off" required
                  [(ngModel)]="megjegyzes" name="megjegyzes">
+          <datalist id="ssz">
+            <option value="Kész tető">
+            <option value="Kész inverter és környéke">
+            <option value="AC doboz">
+            <option value="DC doboz">
+            <option value="Inverter adattábla">
+            <option value="Mérőóra">
+            <option value="Rákötési pont">
+          </datalist>
         </div>
       </div>
 

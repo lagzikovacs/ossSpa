@@ -70,6 +70,9 @@ export class BizonylatEgyComponent implements OnDestroy {
   kiszallitvaenabled(): boolean {
     return this.bizonylatTipus === BizonylatTipus.Megrendeles;
   }
+  fuvarszamlaenabled(): boolean {
+    return this.bizonylatTipus === BizonylatTipus.BejovoSzamla;
+  }
   kifizetesrendbenenabled(): boolean {
     return (this.bizonylatTipus === BizonylatTipus.Szamla ||
       this.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
@@ -119,6 +122,9 @@ export class BizonylatEgyComponent implements OnDestroy {
   }
   penztar() {
     this.EgyMode = BizonylatEgyMode.Penztar;
+  }
+  fuvarszamla() {
+    this.EgyMode = BizonylatEgyMode.Fuvarszamla;
   }
   storno() {
     this.EgyMode = BizonylatEgyMode.Storno;

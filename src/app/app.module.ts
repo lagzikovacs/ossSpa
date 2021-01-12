@@ -194,6 +194,9 @@ import {UgyfelkapcsolatTablaComponent} from './ugyfelkapcsolat/ugyfelkapcsolat-t
 import { UgyfelkapcsolatSzerkesztesComponent } from './ugyfelkapcsolat/ugyfelkapcsolat-szerkesztes/ugyfelkapcsolat-szerkesztes.component';
 import {KapcsolatihaloService} from './kapcsolatihalo/kapcsolatihalo.service';
 import { PdfnezetComponent } from './dokumentum/pdfnezet/pdfnezet.component';
+import { BizonylatFuvarszamlaComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla.component';
+import { BizonylatFuvarszamlaUjComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla-uj/bizonylat-fuvarszamla-uj.component';
+import { BizonylatFuvarszamlaTorlesComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla-torles/bizonylat-fuvarszamla-torles.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -412,6 +415,9 @@ if (environment.production) {
     UgyfelKapcsolatComponent,
     UgyfelkapcsolatSzerkesztesComponent,
     PdfnezetComponent,
+    BizonylatFuvarszamlaComponent,
+    BizonylatFuvarszamlaUjComponent,
+    BizonylatFuvarszamlaTorlesComponent,
   ],
   imports: [
     BrowserModule,

@@ -71,7 +71,8 @@ export class BizonylatEgyComponent implements OnDestroy {
     return this.bizonylatTipus === BizonylatTipus.Megrendeles;
   }
   fuvarszamlaenabled(): boolean {
-    return this.bizonylatTipus === BizonylatTipus.BejovoSzamla;
+    return this.bizonylatTipus === BizonylatTipus.BejovoSzamla &&
+      this.Dto.Bizonylatszam !== null;
   }
   kifizetesrendbenenabled(): boolean {
     return (this.bizonylatTipus === BizonylatTipus.Szamla ||

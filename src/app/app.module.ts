@@ -101,7 +101,6 @@ import {CsoportService} from './csoport/csoport.service';
 import {AjanlatkeresService} from './ajanlatkeres/ajanlatkeres.service';
 import {PenztarService} from './penztar/penztar.service';
 import { PenztartetelSzerkesztesComponent } from './penztartetel/penztartetel-szerkesztes/penztartetel-szerkesztes.component';
-import { OnlineszamlaellenorzeseComponent } from './onlineszamla/onlineszamlaellenorzese/onlineszamlaellenorzese.component';
 import { ProjektStatuszComponent } from './projekt/projekt-statusz/projekt-statusz.component';
 import { SzamlazasirendSzerkesztesComponent } from './szamlazasirend/szamlazasirend-szerkesztes/szamlazasirend-szerkesztes.component';
 import { ProjektJegyzetSzerkesztesComponent } from './projektjegyzet/projekt-jegyzet-szerkesztes/projekt-jegyzet-szerkesztes.component';
@@ -124,8 +123,6 @@ import { BizonylatEgyComponent } from './bizonylat/bizonylat-egy/bizonylat-egy.c
 import { BizonylattoolbarComponent } from './bizonylat/bizonylattoolbar/bizonylattoolbar.component';
 import { BizonylattablaComponent } from './bizonylat/bizonylattabla/bizonylattabla.component';
 import { BizonylatSzerkesztesComponent } from './bizonylat/bizonylat-szerkesztes/bizonylat-szerkesztes.component';
-import { AdoszamellenorzesComponent } from './onlineszamla/adoszamellenorzes/adoszamellenorzes.component';
-import { SzamlalekerdezesComponent } from './onlineszamla/szamlalekerdezes/szamlalekerdezes.component';
 import { KifizetesListComponent } from './kifizetes/kifizetes-list/kifizetes-list.component';
 import { KifizetesSzerkesztesComponent } from './kifizetes/kifizetes-szerkesztes/kifizetes-szerkesztes.component';
 import { BizonylatNyomtatasComponent } from './bizonylatnyomtatas/bizonylat-nyomtatas/bizonylat-nyomtatas.component';
@@ -162,7 +159,6 @@ import {UgyfelterlogService} from './ugyfelterlog/ugyfelterlog.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FotozasComponent } from './fotozas/fotozas/fotozas.component';
 import { FotozasLinkComponent } from './fotozas/fotozas-link/fotozas-link.component';
-import {OnlineszamlaService} from './onlineszamla/onlineszamla.service';
 import { UgyfelterBizonylatesiratComponent } from './ugyfelter/ugyfelter-bizonylatesirat/ugyfelter-bizonylatesirat.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { UgyfelterDokumentumComponent } from './ugyfelter/ugyfelter-dokumentum/ugyfelter-dokumentum.component';
@@ -226,9 +222,6 @@ const routes: Routes = [
     {path: 'megrendeles', component: BizonylatListComponent, canActivate: [RoleGuard]},
     {path: 'bejovoszamla', component: BizonylatListComponent, canActivate: [RoleGuard]},
   ]},
-  {path: 'adoszamellenorzes', component: AdoszamellenorzesComponent, canActivate: [RoleGuard]},
-  {path: 'navfeltoltesellenorzese', component: OnlineszamlaellenorzeseComponent, canActivate: [RoleGuard]},
-  {path: 'szamlalekerdezes', component: SzamlalekerdezesComponent, canActivate: [RoleGuard]},
 
   {path: 'riport', component: RiportComponent, canActivate: [RoleGuard], children: [
     {path: 'kimenoszamla', component: KimenoszamlaComponent},
@@ -342,7 +335,6 @@ if (environment.production) {
     PenztarExportComponent,
     PenztartetelListComponent,
     PenztartetelSzerkesztesComponent,
-    OnlineszamlaellenorzeseComponent,
     ProjektStatuszComponent,
     SzamlazasirendSzerkesztesComponent,
     ProjektJegyzetSzerkesztesComponent,
@@ -360,8 +352,6 @@ if (environment.production) {
     BizonylattoolbarComponent,
     BizonylattablaComponent,
     BizonylatSzerkesztesComponent,
-    AdoszamellenorzesComponent,
-    SzamlalekerdezesComponent,
     KifizetesListComponent,
     KifizetesSzerkesztesComponent,
     BizonylatNyomtatasComponent,
@@ -461,7 +451,6 @@ if (environment.production) {
     AjanlatkeresService,
 
     BizonylatService,
-    OnlineszamlaService,
     RiportService,
 
     ParticioService,

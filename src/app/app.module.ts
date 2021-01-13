@@ -139,8 +139,6 @@ import { BizonylatStornoComponent } from './bizonylat/bizonylat-storno/bizonylat
 import { BizonylatPenztarComponent } from './bizonylat/bizonylat-penztar/bizonylat-penztar.component';
 import { BizonylatKifizetesrendbenComponent } from './bizonylat/bizonylat-kifizetesrendben/bizonylat-kifizetesrendben.component';
 import { BizonylatKiszallitvaComponent } from './bizonylat/bizonylat-kiszallitva/bizonylat-kiszallitva.component';
-import { BizonylatFormaiellenorzesComponent } from './bizonylat/bizonylat-formaiellenorzes/bizonylat-formaiellenorzes.component';
-import { BizonylatLetoltesonlineszamlaformatumbanComponent } from './bizonylat/bizonylat-letoltesonlineszamlaformatumban/bizonylat-letoltesonlineszamlaformatumban.component';
 import { BoolHunPipe } from './pipes/boolhun.pipe';
 import { VagolapComponent } from './vagolap/vagolap.component';
 import {VagolapService} from './vagolap/vagolap.service';
@@ -368,8 +366,6 @@ if (environment.production) {
     BizonylatPenztarComponent,
     BizonylatKifizetesrendbenComponent,
     BizonylatKiszallitvaComponent,
-    BizonylatFormaiellenorzesComponent,
-    BizonylatLetoltesonlineszamlaformatumbanComponent,
     BizonylattetelSzerkesztesComponent,
     VagolapComponent,
     AbuComponent,

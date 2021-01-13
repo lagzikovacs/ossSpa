@@ -12,7 +12,6 @@ import {BizonylatResult} from './bizonylatresult';
 import {BizonylatTetelDto} from './bizonylatteteldto';
 import {NumberResult} from '../dtos/numberresult';
 import {BizonylatMintaAlapjanParam} from './bizonylatmintaalapjan';
-import {StringResult} from '../dtos/stringresult';
 import {BizonylatKibocsatasParam} from './bizonylatkibocsatasparam';
 import {BizonylatComplexDto} from './bizonylatcomplexdto';
 import {BizonylatTetelResult} from './bizonylattetelresult';
@@ -77,18 +76,6 @@ export class BizonylatService {
   public UjBizonylatMintaAlapjan(par: BizonylatMintaAlapjanParam): Promise<NumberResult> {
     return this._httpClient.post<NumberResult>(
       this._controller + 'ujbizonylatmintaalapjan', par, this._logonservice.httpoptions())
-      .toPromise();
-  }
-
-  public SzamlaFormaiEllenorzese(bizonylatKod: number): Promise<StringResult> {
-    return this._httpClient.post<StringResult>(
-      this._controller + 'szamlaformaiellenorzese', bizonylatKod, this._logonservice.httpoptions())
-      .toPromise();
-  }
-
-  public LetoltesOnlineszamlaFormatumban(bizonylatKod: number): Promise<StringResult> {
-    return this._httpClient.post<StringResult>(
-      this._controller + 'letoltesonlineszamlaformatumban', bizonylatKod, this._logonservice.httpoptions())
       .toPromise();
   }
 

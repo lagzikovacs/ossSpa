@@ -12,12 +12,23 @@ export class BizonylatFuvarszamlaUjComponent implements OnDestroy {
   eppFrissit = false;
   bizonylatservice: BizonylatService;
 
+  Fuvarszamla: string;
+  Fuvardij: number;
+  Fuvardijpenzneme: string;
+  Fuvardijarfolyama: number;
+
+  SzerkesztesMode = 0;
+
   constructor(private _errorservice: ErrorService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
   }
 
-  doOk() {
+  BizonylatZoom() {
+    this.SzerkesztesMode = 1;
+  }
+
+  onSubmit() {
 
   }
 

@@ -191,6 +191,7 @@ import { PdfnezetComponent } from './dokumentum/pdfnezet/pdfnezet.component';
 import { BizonylatFuvarszamlaComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla.component';
 import { BizonylatFuvarszamlaUjComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla-uj/bizonylat-fuvarszamla-uj.component';
 import { BizonylatFuvarszamlaTorlesComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla-torles/bizonylat-fuvarszamla-torles.component';
+import { BizonylatZoomComponent } from './bizonylat/bizonylat-zoom/bizonylat-zoom.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -404,6 +405,7 @@ if (environment.production) {
     BizonylatFuvarszamlaComponent,
     BizonylatFuvarszamlaUjComponent,
     BizonylatFuvarszamlaTorlesComponent,
+    BizonylatZoomComponent,
   ],
   imports: [
     BrowserModule,

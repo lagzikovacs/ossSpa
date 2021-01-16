@@ -9,4 +9,5 @@ export class ProjektConf {
   SzerzodesIratkod: number;
   FeltetelesSzerzodesIratkod: number;
   OFTSzerzodesIratkod: number;
+  HMKEtulajdonoshozzajarulasIratkod: number;
 }

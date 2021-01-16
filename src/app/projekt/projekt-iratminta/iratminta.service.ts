@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {LogonService} from '../logon/logon.service';
-import {IratmintaResult} from '../projekt/iratmintaresult';
-import {environment} from '../../environments/environment';
+import {LogonService} from '../../logon/logon.service';
+import {IratmintaResult} from '../iratmintaresult';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +34,12 @@ export class IratmintaService {
   public OFTszerzodes(projektkod: number): Promise<IratmintaResult> {
     return this._httpClient.post<IratmintaResult>(
       this._controller + 'oftszerzodes', projektkod, this._logonservice.httpoptions())
+      .toPromise();
+  }
+
+  public HMKEtulajdonoshozzajarulas(projektkod: number): Promise<IratmintaResult> {
+    return this._httpClient.post<IratmintaResult>(
+      this._controller + 'hmketulajdonoshozzajarulas', projektkod, this._logonservice.httpoptions())
       .toPromise();
   }
 

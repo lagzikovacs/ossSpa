@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {b64toBlob} from '../tools/b64toBlob';
+import {b64toBlob} from '../../tools/b64toBlob';
 import * as FileSaver from 'file-saver';
 import {IratmintaService} from './iratminta.service';
-import {rowanimation} from '../animation/rowAnimation';
-import {ErrorService} from '../tools/errorbox/error.service';
+import {rowanimation} from '../../animation/rowAnimation';
+import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-projekt-iratminta',
@@ -77,6 +77,22 @@ export class ProjektIratmintaComponent implements OnDestroy {
         }
         const blob = b64toBlob(res.Result);
         FileSaver.saveAs(blob, 'OFT szerződés.docx');
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this._errorservice.Error = err;
+      });
+  }
+  hmketulajdonoshozzajarulas() {
+    this.eppFrissit = true;
+    this._iratmintaservice.HMKEtulajdonoshozzajarulas(this.Projektkod)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+        const blob = b64toBlob(res.Result);
+        FileSaver.saveAs(blob, 'HMKE tulajdonos hozzájárulás.docx');
         this.eppFrissit = false;
       })
       .catch(err => {

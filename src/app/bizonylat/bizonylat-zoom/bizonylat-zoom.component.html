@@ -1,3 +1,23 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>Bejövő számlák - zoom</h5>
+  <div class="row no-gutters toolbarmargins">
+    <div class="toolbarcontrolmargins" style="width: 120px">
+      <input #Minta type="text" class="form-control form-control-sm">
+    </div>
+
+    <div class="float-right" role="toolbar" aria-label="Gombok">
+      <div class="btn-group btn-group-sm" role="group" aria-label="Gombok">
+        <button (click)="doKereses()"
+                class="btn btn-outline-primary toolbarcontrolmargins"
+                type="button">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+        <button (click)="doStopZoom()"
+                class="btn btn-sm btn-outline-primary toolbarcontrolmarginskozel"
+                type="button">
+          <i class="fa fa-close" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

@@ -28,6 +28,10 @@ export class BizonylatFuvarszamlaUjComponent implements OnDestroy {
     this.SzerkesztesMode = 1;
   }
 
+  eventStopZoom() {
+    this.SzerkesztesMode = 0;
+  }
+
   onSubmit() {
 
   }

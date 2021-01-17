@@ -1,8 +1,10 @@
 <table class="table table-bordered table-sm">
   <thead>
   <tr>
-    <th>Id</th>
-    <th>Sorszám</th>
+    <th>
+      <div>Id</div>
+      <div>Sorszám</div>
+    </th>
     <th>
       <div>Ügyfél</div>
       <div>Cím</div>
@@ -49,10 +51,12 @@
 
     <ng-container *ngFor="let item of items; let i = index">
       <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
-        <td *ngIf="enIdclick" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="clickforid(i)">{{item.Bizonylatkod}}</td>
-        <td *ngIf="!enIdclick">{{item.Bizonylatkod}}</td>
+        <td>
+          <div *ngIf="enIdclick" style="color: blue; text-decoration: underline; cursor: pointer"(click)="clickforid(i)">{{item.Bizonylatkod}}</div>
+          <div *ngIf="!enIdclick">{{item.Bizonylatkod}}</div>
+          <div>{{item.Bizonylatszam}}</div>
+        </td>
 
-        <td>{{item.Bizonylatszam}}</td>
         <td>
           <div style="width: 250px">{{item.Ugyfelnev}}</div>
           <div style="width: 250px">{{item.Ugyfelcim}}</div>

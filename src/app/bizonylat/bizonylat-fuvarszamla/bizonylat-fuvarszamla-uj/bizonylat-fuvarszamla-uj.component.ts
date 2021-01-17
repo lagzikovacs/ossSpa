@@ -1,6 +1,7 @@
 import {Component, OnDestroy, Output, EventEmitter, Input} from '@angular/core';
 import {BizonylatService} from '../../bizonylat.service';
 import {ErrorService} from '../../../tools/errorbox/error.service';
+import {BizonylatDto} from '../../bizonylatdto';
 
 @Component({
   selector: 'app-bizonylat-fuvarszamla-uj',
@@ -12,8 +13,9 @@ export class BizonylatFuvarszamlaUjComponent implements OnDestroy {
   eppFrissit = false;
   bizonylatservice: BizonylatService;
 
-  Fuvarszamla: string;
+  Fuvarszamla = '';
   Fuvardij: number;
+  Fuvardijpenznemkodja: number;
   Fuvardijpenzneme: string;
   Fuvardijarfolyama: number;
 
@@ -29,6 +31,16 @@ export class BizonylatFuvarszamlaUjComponent implements OnDestroy {
   }
 
   eventStopZoom() {
+    this.SzerkesztesMode = 0;
+  }
+
+  eventSelectzoom(Dto: BizonylatDto) {
+    this.Fuvarszamla = Dto.Bizonylatszam;
+    this.Fuvardij = Dto.Netto;
+    this.Fuvardijpenznemkodja = Dto.Penznemkod;
+    this.Fuvardijpenzneme = Dto.Penznem;
+    this.Fuvardijarfolyama = Dto.Arfolyam;
+
     this.SzerkesztesMode = 0;
   }
 

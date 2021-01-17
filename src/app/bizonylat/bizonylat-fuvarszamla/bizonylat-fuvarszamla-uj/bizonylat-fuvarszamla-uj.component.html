@@ -46,8 +46,8 @@
 
   <ng-container *ngIf="SzerkesztesMode === 1">
     <app-bizonylat-zoom [maszk]="Fuvarszamla"
-                        (eventStopzoom)="eventStopZoom()">
-
+                        (eventStopzoom)="eventStopZoom()"
+                        (eventSelectzoom)="eventSelectzoom($event)">
     </app-bizonylat-zoom>
   </ng-container>
 </div>

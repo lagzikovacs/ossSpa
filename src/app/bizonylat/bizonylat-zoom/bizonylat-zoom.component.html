@@ -20,4 +20,77 @@
       </div>
     </div>
   </div>
+
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th style="width: 20px"></th>
+      <th style="width: 130px">
+        <div>Id</div>
+        <div>Sorszám</div>
+      </th>
+      <th style="width: 250px">
+        <div>Ügyfél</div>
+        <div>Cím</div>
+      </th>
+      <th style="width: 130px">
+        <div>Bizonylat kelte</div>
+        <div>Teljesítés kelte</div>
+      </th>
+      <th style="width: 130px">
+        <div>Fizetési mód</div>
+        <div>Fizetési határidő</div>
+      </th>
+      <th style="width: 130px">
+        <div>Pénznem</div>
+        <div>Árfolyam</div>
+      </th>
+      <th style="width: 130px">Netto</th>
+      <th style="width: 130px">ÁFA</th>
+      <th style="width: 130px">Brutto</th>
+    </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let item of items; let i = index">
+        <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
+          <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
+              (click)="clickforzoom(i)">
+            <i class="fa fa-check" aria-hidden="true"></i>
+          </td>
+
+          <td>
+            <div>{{item.Bizonylatkod}}</div>
+            <div>{{item.Bizonylatszam}}</div>
+          </td>
+
+          <td>
+            <div style="width: 250px">{{item.Ugyfelnev}}</div>
+            <div style="width: 250px">{{item.Ugyfelcim}}</div>
+          </td>
+
+          <td>
+            <div>{{item.Bizonylatkelte | datehun}}</div>
+            <div>{{item.Teljesiteskelte | datehun}}</div>
+          </td>
+          <td>
+            <div>{{item.Fizetesimod}}</div>
+            <div>{{item.Fizetesihatarido | datehun}}</div>
+          </td>
+          <td>
+            <div>{{item.Penznem}}</div>
+            <div style="text-align: right">{{item.Arfolyam | number: '1.2-2'}}</div>
+          </td>
+          <td style="text-align: right">{{item.Netto | number: '1.2-2'}}</td>
+          <td style="text-align: right">{{item.Afa | number: '1.2-2'}}</td>
+          <td style="text-align: right">{{item.Brutto | number: '1.2-2'}}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+
+  <app-toolbarfooter [enKereses]="!elsokereses"
+                     [rekordszam]="items.length"
+                     [osszesrekord]="OsszesRekord"
+                     (KeresesTovabb)="doKeresesTovabb()">
+  </app-toolbarfooter>
 </div>

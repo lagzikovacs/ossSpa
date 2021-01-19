@@ -206,8 +206,8 @@
 
   <ng-container *ngIf="EgyMode === 16">
     <div [@rowanimation]>
-      <app-bizonylat-fuvarszamla [BizonylatKod]="Dto.Bizonylatkod">
-
+      <app-bizonylat-fuvarszamla  [dtoAnyagszamla]="Dto"
+                                  (eventOK)="onFuvarszamlaUtan($event)">
       </app-bizonylat-fuvarszamla>
     </div>
   </ng-container>

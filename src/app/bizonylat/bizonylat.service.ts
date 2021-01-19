@@ -16,6 +16,8 @@ import {BizonylatKibocsatasParam} from './bizonylatkibocsatasparam';
 import {BizonylatComplexDto} from './bizonylatcomplexdto';
 import {BizonylatTetelResult} from './bizonylattetelresult';
 import {BruttobolParam} from './bruttobolparam';
+import {FuvardijParam} from './fuvardijparam';
+import {BizonylatZoomParameter} from './bizonylatzoomparameter';
 
 @Injectable({
   providedIn: 'root'
@@ -130,6 +132,24 @@ export class BizonylatService {
   public Save(dto: BizonylatComplexDto): Promise<NumberResult> {
     return this._httpClient.post<NumberResult>(
       this._controller + 'save', dto, this._logonservice.httpoptions())
+      .toPromise();
+  }
+
+  public Fuvardij(par: FuvardijParam): Promise<NumberResult> {
+    return this._httpClient.post<NumberResult>(
+      this._controller + 'fuvardij', par, this._logonservice.httpoptions())
+      .toPromise();
+  }
+
+  public FuvardijTorles(dto: BizonylatDto): Promise<NumberResult> {
+    return this._httpClient.post<NumberResult>(
+      this._controller + 'fuvardijtorles', dto, this._logonservice.httpoptions())
+      .toPromise();
+  }
+
+  public ZoomCheck(par: BizonylatZoomParameter): Promise<EmptyResult> {
+    return this._httpClient.post<EmptyResult>(
+      this._controller + 'zoomcheck', par, this._logonservice.httpoptions())
       .toPromise();
   }
 }

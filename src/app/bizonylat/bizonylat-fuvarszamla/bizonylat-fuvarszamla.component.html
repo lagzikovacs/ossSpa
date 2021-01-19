@@ -15,15 +15,17 @@
 
   <ng-container *ngIf="EgyMode === 1">
     <div [@rowanimation]>
-      <app-bizonylat-fuvarszamla-uj [BizonylatKod]="BizonylatKod"
-                                    (eventMegsem)="onMegsem()">
+      <app-bizonylat-fuvarszamla-uj [dtoAnyagszamla]="dtoAnyagszamla"
+                                    (eventMegsem)="onMegsem()"
+                                    (eventOK)="onOK($event)">
       </app-bizonylat-fuvarszamla-uj>
     </div>
   </ng-container>
   <ng-container *ngIf="EgyMode === 2">
     <div [@rowanimation]>
-      <app-bizonylat-fuvarszamla-torles [BizonylatKod]="BizonylatKod"
-                                        (eventMegsem)="onMegsem()">
+      <app-bizonylat-fuvarszamla-torles [dtoAnyagszamla]="dtoAnyagszamla"
+                                        (eventMegsem)="onMegsem()"
+                                        (eventOK)="onOK($event)">
       </app-bizonylat-fuvarszamla-torles>
     </div>
   </ng-container>

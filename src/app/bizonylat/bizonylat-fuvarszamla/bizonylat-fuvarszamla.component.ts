@@ -1,5 +1,6 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, Output, EventEmitter} from '@angular/core';
 import {rowanimation} from '../../animation/rowAnimation';
+import {BizonylatDto} from '../bizonylatdto';
 
 @Component({
   selector: 'app-bizonylat-fuvarszamla',
@@ -7,7 +8,8 @@ import {rowanimation} from '../../animation/rowAnimation';
   animations: [rowanimation]
 })
 export class BizonylatFuvarszamlaComponent implements OnInit, OnDestroy {
-  @Input() BizonylatKod: number;
+  @Input() dtoAnyagszamla: BizonylatDto;
+  @Output() eventOK = new EventEmitter<BizonylatDto>();
   eppFrissit = false;
   EgyMode = 0;
 
@@ -21,6 +23,11 @@ export class BizonylatFuvarszamlaComponent implements OnInit, OnDestroy {
   }
 
   onMegsem() {
+    this.EgyMode = 0;
+  }
+
+  onOK(dtoMod: BizonylatDto) {
+    this.eventOK.emit(dtoMod);
     this.EgyMode = 0;
   }
 

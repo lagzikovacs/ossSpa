@@ -6,7 +6,7 @@
         <div class="egylabel">Fuvarszámla</div>
         <input type="text" class="form-control form-control-sm oszlop3" id="bizonylatszam"
                maxlength="100" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
-               [(ngModel)]="Fuvarszamla" name="bizonylatszam">
+               [(ngModel)]="dtoFuvarszamla.Bizonylatszam" name="bizonylatszam">
         <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="BizonylatZoom()">...</button>
       </div>
     </div>
@@ -25,7 +25,7 @@
         <div class="egylabel">Fuvardíj pénzneme</div>
         <input type="text" class="form-control form-control-sm oszlop3" id="fuvardijpenzneme"
                maxlength="20" required autocomplete="off" readonly
-               [(ngModel)]="Fuvardijpenzneme" name="fuvardijpenzneme">
+               [(ngModel)]="dtoFuvarszamla.Penznem" name="fuvardijpenzneme">
       </div>
     </div>
 
@@ -34,7 +34,7 @@
         <div class="egylabel">Fuvardíj árfolyama</div>
         <input type="text" class="form-control form-control-sm oszlop3" id="fuvardijarfolyama"
                maxlength="20" required autocomplete="off" readonly
-               [(ngModel)]="Fuvardijarfolyama" name="fuvardijarfolyama">
+               [(ngModel)]="dtoFuvarszamla.Arfolyam" name="fuvardijarfolyama">
       </div>
     </div>
 
@@ -45,7 +45,7 @@
   </form>
 
   <ng-container *ngIf="SzerkesztesMode === 1">
-    <app-bizonylat-zoom [maszk]="Fuvarszamla"
+    <app-bizonylat-zoom [maszk]="dtoFuvarszamla.Bizonylatszam"
                         (eventStopzoom)="eventStopZoom()"
                         (eventSelectzoom)="eventSelectzoom($event)">
     </app-bizonylat-zoom>

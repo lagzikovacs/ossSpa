@@ -46,4 +46,8 @@ export class BizonylatDto {
   Letrehozta: string;
   Modositva: any;
   Modositotta: string;
+
+  constructor() {
+    this.Bizonylatszam = '';
+  }
 }

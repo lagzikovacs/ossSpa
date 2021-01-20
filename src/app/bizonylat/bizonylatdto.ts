@@ -42,6 +42,12 @@ export class BizonylatDto {
   Ezstornozott: boolean;
   Stornozobizonylatkod: number;
   Stornozottbizonylatkod: number;
+  Fuvarszamlakod: number;
+  Fuvarszamla: string;
+  Fuvardij: number;
+  Fuvardijpenznemkod: number;
+  Fuvardijpenznem: string;
+  Fuvardijarfolyam: number;
   Letrehozva: any;
   Letrehozta: string;
   Modositva: any;

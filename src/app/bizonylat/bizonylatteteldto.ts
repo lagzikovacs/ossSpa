@@ -26,4 +26,6 @@ export class BizonylatTetelDto {
   Termekdijmegnevezes: string;
   Termekdijegysegar: number;
   Termekdij: number;
+  Fuvardijegysegar: number;
+  Fuvardij: number;
 }

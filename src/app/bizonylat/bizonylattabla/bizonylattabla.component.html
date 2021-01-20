@@ -90,12 +90,12 @@
           <div *ngIf="item.Ezstornozott"></div>
         </td>
         <td>
-          <div></div>
-          <div></div>
+          <div>{{item.Fuvarszamla}}</div>
+          <div style="text-align: right">{{item.Fuvardij | number: '1.2-2'}}</div>
         </td>
         <td>
-          <div></div>
-          <div></div>
+          <div>{{item.Fuvardijpenznem}}</div>
+          <div style="text-align: right">{{item.Fuvardijarfolyam | number: '1.2-2'}}</div>
         </td>
       </tr>
       <tr *ngIf="item.Megjegyzesfej || '' !== ''" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">

@@ -156,7 +156,6 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
   }
   onSzerkesztesutan(dto: BizonylatDto) {
     propCopy(dto, this.Dto[this.DtoSelectedIndex]);
-    console.log('updatelve');
   }
   onTorlesutan() {
     this.Dto.splice(this.DtoSelectedIndex, 1);

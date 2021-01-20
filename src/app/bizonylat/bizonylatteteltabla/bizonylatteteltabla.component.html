@@ -18,6 +18,8 @@
     <th>Termékdíj megnevezés</th>
     <th>Termékdíj egységár</th>
     <th>Termékdíj</th>
+    <th>Fuvardíj egységár</th>
+    <th>Fuvardíj</th>
   </tr>
   </thead>
   <tbody>
@@ -51,6 +53,8 @@
         <td>{{item.Termekdijmegnevezes}}</td>
         <td style="text-align: right">{{item.Termekdijegysegar | number: '1.2-2'}}</td>
         <td style="text-align: right">{{item.Termekdij | number: '1.2-2'}}</td>
+        <td style="text-align: right">{{item.Fuvardijegysegar | number: '1.2-2'}}</td>
+        <td style="text-align: right">{{item.Fuvardij | number: '1.2-2'}}</td>
       </tr>
       <tr *ngIf="item.Megjegyzes || '' !== ''">
         <td colspan="100">{{item.Megjegyzes}}</td>

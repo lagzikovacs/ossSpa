@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {BizonylatTipus} from '../../bizonylat/bizonylattipus';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
@@ -7,25 +7,27 @@ import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
+import {LogonService} from '../../logon/logon.service';
+import {JogKod} from '../../enums/jogkod';
 
 @Component({
   selector: 'app-projektkapcsolat-ujbizonylat',
   templateUrl: './projektkapcsolat-ujbizonylat.component.html'
 })
-export class ProjektkapcsolatUjbizonylatComponent implements OnDestroy {
+export class ProjektkapcsolatUjbizonylatComponent implements OnInit, OnDestroy {
   @Input() Projektkod = -1;
   @Input() Ugyfelkod = -1;
   @Output() eventUjbizonylatutan = new EventEmitter<ProjektKapcsolatDto>();
 
   entries = [
-    ['Díjbekérő', BizonylatTipus.DijBekero],
-    ['Előlegszámla', BizonylatTipus.ElolegSzamla],
-    ['Megrendelés', BizonylatTipus.Megrendeles],
-    ['Szállító', BizonylatTipus.Szallito],
-    ['Számla', BizonylatTipus.Szamla],
-    ['Bejövő számla', BizonylatTipus.BejovoSzamla]
+    ['Díjbekérő', BizonylatTipus.DijBekero, false, 'DIJBEKERO'],
+    ['Előlegszámla', BizonylatTipus.ElolegSzamla, false, 'ELOLEGSZAMLA'],
+    ['Megrendelés', BizonylatTipus.Megrendeles, false, 'MEGRENDELES'],
+    ['Szállító', BizonylatTipus.Szallito, false, 'SZALLITO'],
+    ['Számla', BizonylatTipus.Szamla, false, 'SZAMLA'],
+    ['Bejövő számla', BizonylatTipus.BejovoSzamla, false, 'BEJOVOSZAMLA']
   ];
-  entryindex = 4;
+  entryindex = 3;
 
   eppFrissit = false;
 
@@ -33,9 +35,16 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnDestroy {
 
   constructor(private _bizonylatservice: BizonylatService,
               private _ugyfelservice: UgyfelService,
+              private _logonservice: LogonService,
               private _errorservice: ErrorService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.projektkapcsolatservice = projektkapcsolatservice;
+  }
+
+  ngOnInit() {
+    for (let i = 0; i < this.entries.length; i++) {
+      this.entries[i][2] = !this._logonservice.Jogaim.includes(this.entries[i][3]);
+    }
   }
 
   change(i) {

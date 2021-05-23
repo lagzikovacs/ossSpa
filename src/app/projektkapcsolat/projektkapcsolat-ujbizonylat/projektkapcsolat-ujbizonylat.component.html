@@ -6,10 +6,11 @@
       <div>
         <div class="egylabel">Bizonylattipus</div>
         <div *ngFor="let entry of entries; let i = index" class="form-check">
-          <input class="form-check-input" type="radio" name="radiogroup" id="entry"
+          <input class="form-check-input" type="radio" name="radiogroup" [id]=entry[0]
                  [checked]="i === entryindex"
+                 [disabled]=entry[2]
                  (change)="change(i)">
-          <label class="form-check-label" for="entry">
+          <label class="form-check-label" [for]=entry[0]>
             {{entry[0]}}
           </label>
         </div>

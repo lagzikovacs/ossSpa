@@ -178,7 +178,6 @@ import { AjanlatTablaComponent } from './ajanlat/ajanlat-tabla/ajanlat-tabla.com
 import { HscrollDirective } from './directives/divhscroll.directive';
 import {SpinnerDirective} from './directives/spinner.directive';
 import { ParticioEmailComponent } from './particio/particio-email/particio-email.component';
-import { KapcsolatiHaloComponent } from './kapcsolatihalo/kapcsolati-halo/kapcsolati-halo.component';
 import { UgyfelKapcsolatComponent } from './ugyfelkapcsolat/ugyfel-kapcsolat/ugyfel-kapcsolat.component';
 import {TevekenysegService} from './primitiv/tevekenyseg/tevekenyseg.service';
 import {TevekenysegSzerkesztesComponent} from './primitiv/tevekenyseg/tevekenyseg-szerkesztes/tevekenyseg-szerkesztes.component';
@@ -186,7 +185,6 @@ import {TevekenysegListComponent} from './primitiv/tevekenyseg/tevekenyseg-list/
 import {UgyfelkapcsolatService} from './ugyfelkapcsolat/ugyfelkapcsolat.service';
 import {UgyfelkapcsolatTablaComponent} from './ugyfelkapcsolat/ugyfelkapcsolat-tabla/ugyfelkapcsolat-tabla.component';
 import { UgyfelkapcsolatSzerkesztesComponent } from './ugyfelkapcsolat/ugyfelkapcsolat-szerkesztes/ugyfelkapcsolat-szerkesztes.component';
-import {KapcsolatihaloService} from './kapcsolatihalo/kapcsolatihalo.service';
 import { PdfnezetComponent } from './dokumentum/pdfnezet/pdfnezet.component';
 import { BizonylatFuvarszamlaComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla.component';
 import { BizonylatFuvarszamlaUjComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla-uj/bizonylat-fuvarszamla-uj.component';
@@ -210,7 +208,6 @@ const routes: Routes = [
   {path: 'penztar', component: PenztarListComponent, canActivate: [RoleGuard]},
   {path: 'ajanlatkeres', component: AjanlatkeresListComponent, canActivate: [RoleGuard]},
   {path: 'ugyfelterlog', component: UgyfelterlogComponent, canActivate: [RoleGuard]},
-  {path: 'kapcsolatihalo', component: KapcsolatiHaloComponent, canActivate: [RoleGuard]},
 
   {path: 'bizonylat', children: [
     {path: 'dijbekero', component: BizonylatListComponent, canActivate: [RoleGuard]},
@@ -398,7 +395,6 @@ if (environment.production) {
     HscrollDirective,
     SpinnerDirective,
     ParticioEmailComponent,
-    KapcsolatiHaloComponent,
     UgyfelKapcsolatComponent,
     UgyfelkapcsolatSzerkesztesComponent,
     PdfnezetComponent,
@@ -437,7 +433,6 @@ if (environment.production) {
     UgyfelterService,
     UgyfelterlogService,
     UgyfelkapcsolatService,
-    KapcsolatihaloService,
 
     ProjektService,
     AjanlatService,

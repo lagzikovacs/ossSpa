@@ -60,7 +60,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   beep() {
     const audio = new Audio();
-    audio.src = 'assets/doorbell.mp3';
+    audio.src = 'assets/ossspa/doorbell.mp3';
     audio.load();
     audio.play();
   }

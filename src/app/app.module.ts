@@ -178,13 +178,9 @@ import { AjanlatTablaComponent } from './ajanlat/ajanlat-tabla/ajanlat-tabla.com
 import { HscrollDirective } from './directives/divhscroll.directive';
 import {SpinnerDirective} from './directives/spinner.directive';
 import { ParticioEmailComponent } from './particio/particio-email/particio-email.component';
-import { UgyfelKapcsolatComponent } from './ugyfelkapcsolat/ugyfel-kapcsolat/ugyfel-kapcsolat.component';
 import {TevekenysegService} from './primitiv/tevekenyseg/tevekenyseg.service';
 import {TevekenysegSzerkesztesComponent} from './primitiv/tevekenyseg/tevekenyseg-szerkesztes/tevekenyseg-szerkesztes.component';
 import {TevekenysegListComponent} from './primitiv/tevekenyseg/tevekenyseg-list/tevekenyseg-list.component';
-import {UgyfelkapcsolatService} from './ugyfelkapcsolat/ugyfelkapcsolat.service';
-import {UgyfelkapcsolatTablaComponent} from './ugyfelkapcsolat/ugyfelkapcsolat-tabla/ugyfelkapcsolat-tabla.component';
-import { UgyfelkapcsolatSzerkesztesComponent } from './ugyfelkapcsolat/ugyfelkapcsolat-szerkesztes/ugyfelkapcsolat-szerkesztes.component';
 import { PdfnezetComponent } from './dokumentum/pdfnezet/pdfnezet.component';
 import { BizonylatFuvarszamlaComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla.component';
 import { BizonylatFuvarszamlaUjComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla-uj/bizonylat-fuvarszamla-uj.component';
@@ -385,7 +381,6 @@ if (environment.production) {
     UgyfelCsoportComponent,
     UgyfelVcardComponent,
     UgyfelTablaComponent,
-    UgyfelkapcsolatTablaComponent,
     TablaComponent,
     ErrorboxComponent,
     UgyfelterProjektTablaComponent,
@@ -395,8 +390,6 @@ if (environment.production) {
     HscrollDirective,
     SpinnerDirective,
     ParticioEmailComponent,
-    UgyfelKapcsolatComponent,
-    UgyfelkapcsolatSzerkesztesComponent,
     PdfnezetComponent,
     BizonylatFuvarszamlaComponent,
     BizonylatFuvarszamlaUjComponent,
@@ -432,7 +425,6 @@ if (environment.production) {
     UgyfelService,
     UgyfelterService,
     UgyfelterlogService,
-    UgyfelkapcsolatService,
 
     ProjektService,
     AjanlatService,

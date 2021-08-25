@@ -1,75 +1,76 @@
-<div class="alapkeret" [appSpinner]="eppFrissit">
-  <h5>Fotózás</h5>
+<div style="margin-left: 5%;margin-right: 5%;width: auto;">
+  <div class="alapkeret" [appSpinner]="eppFrissit">
+    <h5>Fotózás</h5>
 
-  <img src="assets/ossspa/gsg.jpg" style="margin-top: 8px;margin-bottom: 8px" alt="GSG">
+    <img src="assets/ossspa/gsg.jpg" style="margin-top: 8px;margin-bottom: 8px" alt="GSG">
 
-  <ng-container *ngIf="!bejelentkezve">
-    <p>Üdvözöljük, ön a GridSolar Group Kft. informatikai rendszerét (OSS) használja. Kérjük a fotózáshoz kapott linket kezelje bizalmasan!</p>
-    <button (click)="folytatas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-      Folytatás
-    </button>
-  </ng-container>
-  <ng-container *ngIf="bejelentkezve">
-    <div style="font-size: smaller;margin-bottom: 10px">(tető, inverter, óraszekrény/mérőóra, rákötés)</div>
-    <div class="egylabel">Ügyfél</div>
-    <div>{{Dto.iratDto[0].Ugyfelnev}}</div>
-    <div>{{Dto.iratDto[0].Ugyfelcim}}</div>
-    <div><b>{{Dto.iratDto[0].Targy}}</b></div>
-    <ng-container *ngIf="Dto.projektDto !== undefined">
-      <br>
-      <div class="egylabel">Telepítési cím</div>
-      <div><b>{{Dto.projektDto[0].Telepitesicim}}</b></div>
+    <ng-container *ngIf="!bejelentkezve">
+      <p>Üdvözöljük, ön a GridSolar Group Kft. informatikai rendszerét (OSS) használja. Kérjük a fotózáshoz kapott linket kezelje bizalmasan!</p>
+      <button (click)="folytatas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+        Folytatás
+      </button>
     </ng-container>
-    <table class="table table-bordered table-sm table-responsive" style="border: none;margin-top: 10px;margin-bottom: 10px">
-      <thead>
-      <!--<tr>-->
-        <!--<th>Megjegyzés</th>-->
-      <!--</tr>-->
-      </thead>
-      <tbody>
-      <tr *ngFor="let item of Dto.dokumentumDto">
-        <td>
-          <div style="height: 15px"></div>
+    <ng-container *ngIf="bejelentkezve">
+      <div class="egylabel">Ügyfél</div>
+      <div>{{Dto.iratDto[0].Ugyfelnev}}</div>
+      <div>{{Dto.iratDto[0].Ugyfelcim}}</div>
+      <div><b>{{Dto.iratDto[0].Targy}}</b></div>
+      <ng-container *ngIf="Dto.projektDto !== undefined">
+        <br>
+        <div class="egylabel">Telepítési cím</div>
+        <div><b>{{Dto.projektDto[0].Telepitesicim}}</b></div>
+      </ng-container>
+      <table class="table table-bordered table-sm table-responsive" style="border: none;margin-top: 10px;margin-bottom: 10px">
+        <thead>
+        <!--<tr>-->
+          <!--<th>Megjegyzés</th>-->
+        <!--</tr>-->
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of Dto.dokumentumDto">
+          <td>
+            <div style="height: 15px"></div>
+            <div>
+              {{item.Megjegyzes}}
+            </div>
+            <div style="height: 5px"></div>
+            <div *ngIf="item.Imgprev !== null">
+              <img [src] = "'data:image/jpg;base64,' + item.Imgprev"/>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <form #f="ngForm" (ngSubmit)="onSubmit()">
+
+        <div class="row no-gutters editform-row">
           <div>
-            {{item.Megjegyzes}}
+            <input type="file" (change)="onFileChange($event)" #fileInput>
           </div>
-          <div style="height: 5px"></div>
-          <div *ngIf="item.Imgprev !== null">
-            <img [src] = "'data:image/jpg;base64,' + item.Imgprev"/>
+        </div>
+
+        <div class="row no-gutters editform-row">
+          <div>
+            <div class="egylabel">Megjegyzés</div>
+            <input type="text" list="ssz" class="form-control form-control-sm oszlop5" id="megjegyzes"
+                   autocomplete="off" required
+                   [(ngModel)]="megjegyzes" name="megjegyzes">
+            <datalist id="ssz">
+              <option value="Kész tető">
+              <option value="Kész inverter és környéke">
+              <option value="AC doboz">
+              <option value="DC doboz">
+              <option value="Inverter adattábla">
+              <option value="Mérőóra">
+              <option value="Rákötési pont">
+            </datalist>
           </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <form #f="ngForm" (ngSubmit)="onSubmit()">
-
-      <div class="row no-gutters editform-row">
-        <div>
-          <input type="file" (change)="onFileChange($event)" #fileInput>
         </div>
-      </div>
 
-      <div class="row no-gutters editform-row">
-        <div>
-          <div class="egylabel">Megjegyzés</div>
-          <input type="text" list="ssz" class="form-control form-control-sm oszlop5" id="megjegyzes"
-                 autocomplete="off" required
-                 [(ngModel)]="megjegyzes" name="megjegyzes">
-          <datalist id="ssz">
-            <option value="Kész tető">
-            <option value="Kész inverter és környéke">
-            <option value="AC doboz">
-            <option value="DC doboz">
-            <option value="Inverter adattábla">
-            <option value="Mérőóra">
-            <option value="Rákötési pont">
-          </datalist>
+        <div class="row no-gutters editform-row">
+          <button class="btn btn-sm btn-primary" [disabled]="!f.valid || file === undefined" type="submit">Ok</button>
         </div>
-      </div>
-
-      <div class="row no-gutters editform-row">
-        <button class="btn btn-sm btn-primary" [disabled]="!f.valid || file === undefined" type="submit">Ok</button>
-      </div>
-    </form>
-  </ng-container>
+      </form>
+    </ng-container>
+  </div>
 </div>

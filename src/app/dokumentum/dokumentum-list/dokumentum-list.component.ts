@@ -161,6 +161,12 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
       });
   }
 
+  onNezet(i: number) {
+    this.DtoSelectedIndex = i;
+    this.egymode = EgyMode.Reszletek;
+    this.doNav(38);
+  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

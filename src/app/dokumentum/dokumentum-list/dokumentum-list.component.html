@@ -13,6 +13,8 @@
              [items]="Dto"
              [colsets]="dokumentumservice.GridSettings"
              [letoltes]="true"
+             [nezet]="true"
+             (forview)="onNezet($event)"
              (forid)="onId($event)"
              (fordownload)="onLetoltesDirekt($event)"
              [ujTemplate]="griduj"

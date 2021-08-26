@@ -11,12 +11,14 @@ export class TablaComponent implements OnDestroy {
   @Input() colsets: ColumnSettings[];
   @Input() zoom = false;
   @Input() letoltes = false;
+  @Input() nezet = false;
   @Input() enIdclick = true;
 
   @Input() ujTemplate: TemplateRef<any>;
   @Input() egyTemplate: TemplateRef<any>;
 
   @Output() fordownload = new EventEmitter<number>();
+  @Output() forview = new EventEmitter<number>();
   @Output() forzoom = new EventEmitter<number>();
   @Output() forid = new EventEmitter<number>();
 
@@ -48,7 +50,13 @@ export class TablaComponent implements OnDestroy {
 
     this.fordownload.emit(this.clickeddownloadindex);
   }
+  clickforview(i: number) {
+    this.clickeddownloadindex = i;
+    this.clickedidindex = this.clickeddownloadindex;
+    this.clickedrowindex = this.clickeddownloadindex;
 
+    this.forview.emit(this.clickeddownloadindex);
+  }
   clickforid(i: number) {
     this.ujtetel = false;
 

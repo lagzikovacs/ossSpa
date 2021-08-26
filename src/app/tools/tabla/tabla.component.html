@@ -2,6 +2,7 @@
   <thead>
   <tr>
     <th *ngIf="letoltes"></th>
+    <th *ngIf="nezet"></th>
     <th *ngIf="zoom"></th>
     <th *ngFor="let cs of colsets">{{cs.Title}}</th>
   </tr>
@@ -19,7 +20,10 @@
           (click)="clickfordownload(i)">
           <i class="fa fa-arrow-down" aria-hidden="true"></i>
         </td>
-
+        <td *ngIf="nezet" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
+            (click)="clickforview(i)">
+          <i class="fa fa-book" aria-hidden="true"></i>
+        </td>
         <td *ngIf="zoom" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
           (click)="clickforzoom(i)">
           <i class="fa fa-check" aria-hidden="true"></i>

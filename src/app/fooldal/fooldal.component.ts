@@ -2,14 +2,10 @@ import {Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from 
 
 @Component({
   selector: 'app-fooldal',
-  templateUrl: './fooldal.component.html',
-  styleUrls: ['./fooldal.component.css']
+  templateUrl: './fooldal.component.html'
 })
 export class FooldalComponent implements OnInit, OnDestroy {
   @ViewChild('hatterkep', {static: true}) hatterkep: ElementRef;
-
-  dwith = 0;
-  dheight = 0;
 
   ngOnInit() {
     this.resize();
@@ -24,9 +20,6 @@ export class FooldalComponent implements OnInit, OnDestroy {
   }
 
   resize() {
-    this.dwith = this.hatterkep.nativeElement.width;
-    this.dheight = this.hatterkep.nativeElement.height;
-
     if (window.innerWidth > window.innerHeight) {
       this.hatterkep.nativeElement.width = window.innerWidth;
       this.hatterkep.nativeElement.height = window.innerHeight;

@@ -30,6 +30,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this._subscription = this._logonservice.SzerepkorKivalasztvaObservable().subscribe(uzenet => {
       this.szerepkorkivalasztva = (uzenet.szerepkorkivalasztva as boolean);
 
+      this.mode = 0;
+      // TODO az esetleges listát törölni
+      
       if (this.szerepkorkivalasztva) {
         this.startconnection();
       } else {

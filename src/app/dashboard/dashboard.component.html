@@ -1,4 +1,13 @@
-<div class="row no-gutters rounded mb-3" style="background-color: silver; z-index: 0">
-  <div *ngIf="szerepkorkivalasztva" class="col-auto mr-auto" style="margin-left: 14px">{{sessionservice.sessiondto.Particio}} / {{sessionservice.sessiondto.Csoport}} / {{sessionservice.sessiondto.Felhasznalo}}</div>
-  <div *ngIf="szerepkorkivalasztva" class="col-auto" style="margin-left: 14px;margin-right: 18px">{{utolsouzenet}}</div>
-</div>
+<ng-container *ngIf="szerepkorkivalasztva">
+  <div style="background-color: silver">
+    <div style="margin-left: 14px;padding-top: 5px;padding-bottom: 5px">
+      {{sessionservice.sessiondto.Particio}} / {{sessionservice.sessiondto.Csoport}} / {{sessionservice.sessiondto.Felhasznalo}}
+      <i *ngIf="mode === 0" class="fa fa-arrow-down" aria-hidden="true" (click)="reszletes()"></i>
+      <i *ngIf="mode === 1" class="fa fa-arrow-up" aria-hidden="true" (click)="alap()"></i>
+    </div>
+    <ng-container *ngIf="mode === 1">
+      <div style="height: 50px">
+      </div>
+    </ng-container>
+  </div>
+</ng-container>

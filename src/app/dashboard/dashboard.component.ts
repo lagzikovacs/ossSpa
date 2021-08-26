@@ -19,6 +19,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   connected = false;
   utolsouzenet = '';
 
+  mode = 0;
+
   constructor(private _logonservice: LogonService,
               sessionservice: SessionService) {
     this.sessionservice = sessionservice;
@@ -63,6 +65,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     audio.src = 'assets/ossspa/doorbell.mp3';
     audio.load();
     audio.play();
+  }
+
+  alap() {
+    this.mode = 0;
+  }
+  reszletes() {
+    this.mode = 1;
   }
 
   ngOnDestroy() {

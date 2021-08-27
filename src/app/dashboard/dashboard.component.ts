@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
       this.mode = 0;
       // TODO az esetleges listát törölni
-      
+
       if (this.szerepkorkivalasztva) {
         this.startconnection();
       } else {

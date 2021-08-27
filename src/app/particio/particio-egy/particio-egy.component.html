@@ -8,9 +8,6 @@
       <button (click)="szallito()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Szállító
       </button>
-      <button (click)="nav()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        NAV online számla
-      </button>
       <button (click)="bizonylat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Bizonylat
       </button>
@@ -33,15 +30,6 @@
                              (eventOk)="onSzerkesztesOk($event)"
                              (eventCancel)="onSzerkesztesCancel()">
       </app-particio-szallito>
-    </div>
-  </ng-container>
-
-  <ng-container *ngIf="EgyMode === 31">
-    <div [@rowanimation]>
-      <app-particio-nav [Dto]="Dto"
-                        (eventOk)="onSzerkesztesOk($event)"
-                        (eventCancel)="onSzerkesztesCancel()">
-      </app-particio-nav>
     </div>
   </ng-container>
 

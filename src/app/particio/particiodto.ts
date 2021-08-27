@@ -3,7 +3,6 @@ export class ParticioDto {
   Megnevezes: string;
 
   Szallito: string;
-  Navonlineszamla: string;
   Bizonylat: string;
   Projekt: string;
   Volume: string;

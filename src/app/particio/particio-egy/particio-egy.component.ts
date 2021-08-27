@@ -50,9 +50,6 @@ export class ParticioEgyComponent implements OnInit, OnDestroy {
   szallito() {
     this.EgyMode = EgyMode.Szallito;
   }
-  nav() {
-    this.EgyMode = EgyMode.Nav;
-  }
   bizonylat() {
     this.EgyMode = EgyMode.Bizonylat;
   }

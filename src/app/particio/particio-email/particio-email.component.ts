@@ -11,7 +11,7 @@ export class ParticioEmailComponent implements OnInit, OnDestroy {
   @Output() eventOk = new EventEmitter<ParticioDto>();
   @Output() eventCancel = new EventEmitter<void>();
 
-  entries = ['Sales', 'NAV online számla'];
+  entries = ['Sales', 'Egyéb'];
   selected = 0;
 
   cEmails: EmailConf[];
@@ -30,10 +30,10 @@ export class ParticioEmailComponent implements OnInit, OnDestroy {
       this.cEmails = new Array<EmailConf>();
       this.cEmails.push(new EmailConf());
       this.cEmails.push(new EmailConf());
-      this.cEmails[0].ConfName = 'Sales';
+      this.cEmails[0].ConfName = this.entries[0];
       this.cEmails[0].Tipus = 'Gmail';
       this.cEmails[0].Ssl = false;
-      this.cEmails[1].ConfName = 'NAV online számla';
+      this.cEmails[1].ConfName = this.entries[1];
       this.cEmails[1].Tipus = 'Gmail';
       this.cEmails[1].Ssl = false;
     }

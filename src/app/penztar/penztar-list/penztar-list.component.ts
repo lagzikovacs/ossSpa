@@ -83,7 +83,7 @@ export class PenztarListComponent implements OnInit, OnDestroy {
 
   onId(i: number) {
     this.DtoSelectedIndex = i;
-    this.egymode = EgyMode.Reszletek;
+    this.egymode = EgyMode.Tetelek;
 
     this.nyitva = this.DtoSelectedIndex === -1 ? false : this.Dto[this.DtoSelectedIndex].Nyitva;
   }

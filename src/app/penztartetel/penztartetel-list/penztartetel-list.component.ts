@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {PenztartetelService} from '../penztartetel.service';
@@ -14,7 +14,7 @@ import {PenztartetelDto} from '../penztarteteldto';
   selector: 'app-penztartetel-list',
   templateUrl: './penztartetel-list.component.html'
 })
-export class PenztartetelListComponent implements OnDestroy {
+export class PenztartetelListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: TablaComponent;
 
   @Input() Penztarkod = -1;
@@ -44,6 +44,10 @@ export class PenztartetelListComponent implements OnDestroy {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PENZTARMOD]);
 
     this.penztartetelservice = penztartetelservice;
+  }
+
+  ngOnInit() {
+    this.onKereses();
   }
 
   onKereses() {

@@ -23,10 +23,18 @@ html, body {
 }
 
 
+.editform-box {
+  float: left;
+  margin-right: 5px;
+}
 .editform-row {
   margin-bottom: 8px;
   margin-left: 20px;
 }
+.editform-okcancel {
+  clear: both;
+}
+
 .oszlop1 {
   width: 60px;
 }

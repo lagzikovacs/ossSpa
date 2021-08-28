@@ -3,35 +3,26 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
-    <div class="row no-gutters editform-row">
-      <div>
+    <div class="editform-box">
+      <div class="editform-row">
         <div class="egylabel">Név</div>
         <input type="text" class="form-control form-control-sm oszlop6" id="m1"
                autocomplete="off" maxlength="50"
                [(ngModel)]="cSzallito.Nev" name="m1">
       </div>
-    </div>
-
-    <div class="row no-gutters editform-row">
-      <div>
+      <div class="editform-row">
         <div class="egylabel">Irányítószám</div>
         <input type="text" class="form-control form-control-sm oszlop2" id="m2"
                autocomplete="off" maxlength="10"
                [(ngModel)]="cSzallito.Iranyitoszam" name="m2">
       </div>
-    </div>
-
-    <div class="row no-gutters editform-row">
-      <div>
+      <div class="editform-row">
         <div class="egylabel">Helységnév</div>
         <input type="text" class="form-control form-control-sm oszlop6" id="m3"
                autocomplete="off" maxlength="50"
                [(ngModel)]="cSzallito.Helysegnev" name="m3">
       </div>
-    </div>
-
-    <div class="row no-gutters editform-row">
-      <div>
+      <div class="editform-row">
         <div class="egylabel">Utca, házszám</div>
         <input type="text" class="form-control form-control-sm oszlop6" id="m4"
                autocomplete="off" maxlength="50"
@@ -39,44 +30,35 @@
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
-      <div>
+    <div class="editform-box">
+      <div class="editform-row">
         <div class="egylabel">Bankszámla 1</div>
         <input type="text" class="form-control form-control-sm oszlop6" id="m5"
                autocomplete="off" maxlength="50"
                [(ngModel)]="cSzallito.Bankszamla1" name="m5">
       </div>
-    </div>
-
-    <div class="row no-gutters editform-row">
-      <div>
+      <div class="editform-row">
         <div class="egylabel">Bankszámla 2</div>
         <input type="text" class="form-control form-control-sm oszlop6" id="m6"
                autocomplete="off" maxlength="50"
                [(ngModel)]="cSzallito.Bankszamla2" name="m6">
       </div>
     </div>
-
-    <div class="row no-gutters editform-row">
-      <div>
+    
+    <div class="editform-box">
+      <div class="editform-row">
         <div class="egylabel">Adó törzsszám</div>
         <input type="text" class="form-control form-control-sm oszlop3" id="m7"
                autocomplete="off" maxlength="8"
                [(ngModel)]="cSzallito.Adotorzsszam" name="m7">
       </div>
-    </div>
-
-    <div class="row no-gutters editform-row">
-      <div>
+      <div class="editform-row">
         <div class="egylabel">Adó áfakód</div>
         <input type="text" class="form-control form-control-sm oszlop2" id="m8"
                autocomplete="off" maxlength="1"
                [(ngModel)]="cSzallito.Adoafakod" name="m8">
       </div>
-    </div>
-
-    <div class="row no-gutters editform-row">
-      <div>
+      <div class="editform-row">
         <div class="egylabel">Adó megyekód</div>
         <input type="text" class="form-control form-control-sm oszlop2" id="m9"
                autocomplete="off" maxlength="2"
@@ -84,7 +66,13 @@
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
+
+
+
+
+
+
+    <div class="editform-row editform-okcancel">
       <button class="btn btn-sm btn-primary" [disabled]="!f.valid" type="submit">Ok</button>
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
     </div>

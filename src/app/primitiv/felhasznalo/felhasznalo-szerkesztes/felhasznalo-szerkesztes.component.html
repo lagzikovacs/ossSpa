@@ -4,31 +4,26 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
-    <div class="row no-gutters editform-row">
-      <div style="margin-right: 5px">
+    <div class="editform-box">
+      <div class="editform-row">
         <div class="egylabel">Azonosító</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="azonosito"
                maxlength="30" required autocomplete="off"
                [(ngModel)]="DtoEdited.Azonosito" name="azonosito">
       </div>
-
-      <div style="display: inline-block; margin-right: 5px">
+      <div class="editform-row">
         <div class="egylabel">Név</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="nev"
                maxlength="100" required autocomplete="off"
                [(ngModel)]="DtoEdited.Nev" name="nev">
       </div>
-    </div>
-
-    <div class="row no-gutters editform-row">
-      <div style="margin-right: 5px">
+      <div class="editform-row">
         <div class="egylabel">Telefon</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="telefon"
                maxlength="50" required autocomplete="off"
                [(ngModel)]="DtoEdited.Telefon" name="telefon">
       </div>
-
-      <div style="display: inline-block; margin-right: 5px">
+      <div class="editform-row">
         <div class="egylabel">Email</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="email"
                maxlength="50" required autocomplete="off"
@@ -36,8 +31,8 @@
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
-      <div style="margin-right: 5px">
+    <div class="editform-box">
+      <div class="editform-row">
         <div class="egylabel">Státusz</div>
         <select type="text" class="form-control form-control-sm"
                 [(ngModel)]="DtoEdited.Statusz" name="statusz">
@@ -45,8 +40,7 @@
           <option>Tiltott</option>
         </select>
       </div>
-
-      <div style="display: inline-block; margin-right: 5px">
+      <div class="editform-row">
         <div class="egylabel">Log</div>
         <select type="text" class="form-control form-control-sm"
                 [(ngModel)]="DtoEdited.Logonlog" name="log">
@@ -56,7 +50,7 @@
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
+    <div class="editform-okcancel">
       <button class="btn btn-sm btn-primary" [disabled]="!f.valid" type="submit">Ok</button>
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="onCancel()">Mégsem</button>
     </div>

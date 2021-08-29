@@ -28,10 +28,13 @@ html, body {
   margin-right: 5px;
 }
 .editform-row {
-  margin-bottom: 8px;
   margin-left: 20px;
+  margin-bottom: 8px;
 }
 .editform-okcancel {
+  margin-left: 20px;
+  margin-bottom: 10px;
+
   clear: both;
 }
 

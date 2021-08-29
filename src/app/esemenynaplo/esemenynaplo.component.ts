@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {EsemenynaploService} from './esemenynaplo.service';
 import {ErrorService} from '../tools/errorbox/error.service';
 import {environment} from '../../environments/environment';
@@ -9,7 +9,7 @@ import {EsemenynaploDto} from './esemenynaplodto';
   selector: 'app-esemenynaplo',
   templateUrl: './esemenynaplo.component.html'
 })
-export class EsemenynaploComponent implements OnDestroy {
+export class EsemenynaploComponent implements OnInit, OnDestroy {
   ep = new EsemenynaploParameter(0, environment.lapmeret);
   elsokereses = true;
   OsszesRekord = 0;
@@ -34,6 +34,10 @@ export class EsemenynaploComponent implements OnDestroy {
   constructor(private _errorservice: ErrorService,
               esemenynaploservice: EsemenynaploService) {
     this.esemenynaploservice = esemenynaploservice;
+  }
+
+  ngOnInit() {
+    this.onKereses();
   }
 
   onKereses() {

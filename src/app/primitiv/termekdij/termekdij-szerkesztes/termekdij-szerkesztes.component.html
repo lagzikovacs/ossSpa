@@ -4,32 +4,28 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
-    <div class="row no-gutters editform-row">
-      <div>
-        <div class="egylabel">KT</div>
-        <input type="text" class="form-control form-control-sm oszlop2" id="kt"
-               maxlength="30" required autocomplete="off"
-               [(ngModel)]="DtoEdited.Termekdijkt" name="kt">
+    <div class="editform-box">
+      <div class="editform-row">
+          <div class="egylabel">KT</div>
+          <input type="text" class="form-control form-control-sm oszlop2" id="kt"
+                 maxlength="30" required autocomplete="off"
+                 [(ngModel)]="DtoEdited.Termekdijkt" name="kt">
       </div>
-    </div>
-    <div class="row no-gutters editform-row">
-      <div>
-        <div class="egylabel">Megnevezés</div>
-        <input type="text" class="form-control form-control-sm oszlop4" id="megnevezes"
-               maxlength="50" required autocomplete="off"
-               [(ngModel)]="DtoEdited.Termekdijmegnevezes" name="megnevezes">
+      <div class="editform-row">
+          <div class="egylabel">Megnevezés</div>
+          <input type="text" class="form-control form-control-sm oszlop4" id="megnevezes"
+                 maxlength="50" required autocomplete="off"
+                 [(ngModel)]="DtoEdited.Termekdijmegnevezes" name="megnevezes">
       </div>
-    </div>
-    <div class="row no-gutters editform-row">
-      <div>
-        <div class="egylabel">Egységár</div>
-        <input type="number" class="form-control form-control-sm oszlop2" id="egysegar"
-               required autocomplete="off"
-               [(ngModel)]="DtoEdited.Termekdijegysegar" name="egysegar">
+      <div class="editform-row">
+          <div class="egylabel">Egységár</div>
+          <input type="number" class="form-control form-control-sm oszlop2" id="egysegar"
+                 required autocomplete="off"
+                 [(ngModel)]="DtoEdited.Termekdijegysegar" name="egysegar">
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
+    <div class="editform-okcancel">
       <button class="btn btn-sm btn-primary" [disabled]="!f.valid" type="submit">Ok</button>
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="onCancel()">Mégsem</button>
     </div>

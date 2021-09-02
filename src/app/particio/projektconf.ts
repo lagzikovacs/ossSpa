@@ -1,7 +1,7 @@
 export class ProjektConf {
   AjanlatIratkod: number;
   ElegedettsegiFelmeresIratkod: number;
-  KeszrejelentesNkmIratkod: number;
+  KeszrejelentesMvmIratkod: number;
   KeszrejelentesElmuemaszIratkod: number;
   KeszrejelentesEonIratkod: number;
   MunkalapIratkod: number;

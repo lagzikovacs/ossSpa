@@ -166,15 +166,15 @@ export class ProjektIratmintaComponent implements OnDestroy {
         this._errorservice.Error = err;
       });
   }
-  demasz() {
+  mvm() {
     this.eppFrissit = true;
-    this._iratmintaservice.KeszrejelentesNkm(this.Projektkod)
+    this._iratmintaservice.KeszrejelentesMvm(this.Projektkod)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
         const blob = b64toBlob(res.Result);
-        FileSaver.saveAs(blob, 'Készrejelentés Démász.docx');
+        FileSaver.saveAs(blob, 'Készrejelentés MVM.docx');
         this.eppFrissit = false;
       })
       .catch(err => {
@@ -182,6 +182,13 @@ export class ProjektIratmintaComponent implements OnDestroy {
         this._errorservice.Error = err;
       });
   }
+  eonelmu() {
+
+  }
+  mvmemasz() {
+
+  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

@@ -55,9 +55,9 @@ export class IratmintaService {
       .toPromise();
   }
 
-  public KeszrejelentesNkm(projektkod: number): Promise<IratmintaResult> {
+  public KeszrejelentesMvm(projektkod: number): Promise<IratmintaResult> {
     return this._httpClient.post<IratmintaResult>(
-      this._controller + 'keszrejelentesnkm', projektkod, this._logonservice.httpoptions())
+      this._controller + 'keszrejelentesmvm', projektkod, this._logonservice.httpoptions())
       .toPromise();
   }
 

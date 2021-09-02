@@ -61,12 +61,6 @@
 
     <div class="editform-box">
       <div class="editform-row">
-          <div class="egylabel">Készrejelentés NKM iratkód</div>
-          <input type="number" class="form-control form-control-sm oszlop2" id="m3"
-                 autocomplete="off"
-                 [(ngModel)]="cProjekt.KeszrejelentesNkmIratkod" name="m3">
-      </div>
-      <div class="editform-row">
           <div class="egylabel">Készrejelentés ELMŰ-ÉMÁSZ iratkód</div>
           <input type="number" class="form-control form-control-sm oszlop2" id="m4"
                  autocomplete="off"
@@ -77,6 +71,12 @@
           <input type="number" class="form-control form-control-sm oszlop2" id="m5"
                  autocomplete="off"
                  [(ngModel)]="cProjekt.KeszrejelentesEonIratkod" name="m5">
+      </div>
+      <div class="editform-row">
+        <div class="egylabel">Készrejelentés MVM iratkód</div>
+        <input type="number" class="form-control form-control-sm oszlop2" id="m3"
+               autocomplete="off"
+               [(ngModel)]="cProjekt.KeszrejelentesMvmIratkod" name="m3">
       </div>
     </div>
 

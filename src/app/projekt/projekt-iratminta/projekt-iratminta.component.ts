@@ -183,10 +183,36 @@ export class ProjektIratmintaComponent implements OnDestroy {
       });
   }
   eonelmu() {
-
+    this.eppFrissit = true;
+    this._iratmintaservice.KeszrejelentesEonelmu(this.Projektkod)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+        const blob = b64toBlob(res.Result);
+        FileSaver.saveAs(blob, 'Készrejelentés EON/ELMÜ.docx');
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this._errorservice.Error = err;
+      });
   }
   mvmemasz() {
-
+    this.eppFrissit = true;
+    this._iratmintaservice.KeszrejelentesMvmemasz(this.Projektkod)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+        const blob = b64toBlob(res.Result);
+        FileSaver.saveAs(blob, 'Készrejelentés MVM/ÉMÁSZ.docx');
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this._errorservice.Error = err;
+      });
   }
 
   ngOnDestroy() {

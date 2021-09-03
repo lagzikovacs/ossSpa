@@ -72,4 +72,16 @@ export class IratmintaService {
       this._controller + 'keszrejelenteseon', projektkod, this._logonservice.httpoptions())
       .toPromise();
   }
+
+
+  public KeszrejelentesEonelmu(projektkod: number): Promise<IratmintaResult> {
+    return this._httpClient.post<IratmintaResult>(
+      this._controller + 'keszrejelenteseonelmu', projektkod, this._logonservice.httpoptions())
+      .toPromise();
+  }
+  public KeszrejelentesMvmemasz(projektkod: number): Promise<IratmintaResult> {
+    return this._httpClient.post<IratmintaResult>(
+      this._controller + 'keszrejelentesmvmemasz', projektkod, this._logonservice.httpoptions())
+      .toPromise();
+  }
 }

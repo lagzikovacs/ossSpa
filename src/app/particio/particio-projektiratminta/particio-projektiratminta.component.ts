@@ -1,35 +1,35 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ParticioDto} from '../particiodto';
-import {SzallitoConf} from '../szallitoconf';
+import {ProjektConf} from '../projektconf';
 
 @Component({
-  selector: 'app-particio-szallito',
-  templateUrl: './particio-szallito.component.html'
+  selector: 'app-particio-projektiratminta',
+  templateUrl: './particio-projektiratminta.component.html'
 })
-export class ParticioSzallitoComponent implements OnInit, OnDestroy {
+export class ParticioProjektiratmintaComponent implements OnInit, OnDestroy {
   @Input() Dto: ParticioDto;
   @Output() eventOk = new EventEmitter<ParticioDto>();
   @Output() eventCancel = new EventEmitter<void>();
 
-  cSzallito: SzallitoConf;
+  cProjekt: ProjektConf;
 
   ngOnInit() {
     try {
-      this.cSzallito = JSON.parse(this.Dto.Szallito); // kivétel, ha hibás
-      if (this.cSzallito === null) { // null, ha a mező is null
+      this.cProjekt = JSON.parse(this.Dto.Projekt); // kivétel, ha hibás
+      if (this.cProjekt === null) { // null, ha a mező is null
         throw new Error();
       }
     } catch (ex) {
-      this.cSzallito = new SzallitoConf();
+      this.cProjekt = new ProjektConf();
     }
   }
 
   onSubmit() {
-    this.Dto.Szallito = JSON.stringify(this.cSzallito);
+    this.Dto.Projekt = JSON.stringify(this.cProjekt);
 
     this.eventOk.emit(this.Dto);
   }
-  cancel() {
+  onCancel() {
     this.eventCancel.emit();
   }
 

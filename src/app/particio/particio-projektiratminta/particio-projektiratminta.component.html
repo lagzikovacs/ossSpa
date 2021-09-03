@@ -1,5 +1,5 @@
 <div class="alapkeret">
-  <h5>Projekt</h5>
+  <h5>Projekt iratminta</h5>
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
     <div class="editform-box">
@@ -77,6 +77,18 @@
         <input type="number" class="form-control form-control-sm oszlop2" id="m3"
                autocomplete="off"
                [(ngModel)]="cProjekt.KeszrejelentesMvmIratkod" name="m3">
+      </div>
+      <div class="editform-row">
+        <div class="egylabel">Készrejelentés EON/ELMÜ iratkód</div>
+        <input type="number" class="form-control form-control-sm oszlop2" id="m31"
+               autocomplete="off"
+               [(ngModel)]="cProjekt.KeszrejelentesEonelmuIratkod" name="m31">
+      </div>
+      <div class="editform-row">
+        <div class="egylabel">Készrejelentés MVM/ÉMÁSZ iratkód</div>
+        <input type="number" class="form-control form-control-sm oszlop2" id="m32"
+               autocomplete="off"
+               [(ngModel)]="cProjekt.KeszrejelentesMvmemaszIratkod" name="m32">
       </div>
     </div>
 

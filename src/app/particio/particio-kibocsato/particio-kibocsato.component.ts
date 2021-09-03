@@ -1,35 +1,35 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ParticioDto} from '../particiodto';
-import {BizonylatConf} from '../bizonylatconf';
+import {SzallitoConf} from '../szallitoconf';
 
 @Component({
-  selector: 'app-particio-bizonylat',
-  templateUrl: './particio-bizonylat.component.html'
+  selector: 'app-particio-kibocsato',
+  templateUrl: './particio-kibocsato.component.html'
 })
-export class ParticioBizonylatComponent implements OnInit, OnDestroy {
+export class ParticioSzallitoComponent implements OnInit, OnDestroy {
   @Input() Dto: ParticioDto;
   @Output() eventOk = new EventEmitter<ParticioDto>();
   @Output() eventCancel = new EventEmitter<void>();
 
-  cBizonylat: BizonylatConf;
+  cSzallito: SzallitoConf;
 
   ngOnInit() {
     try {
-      this.cBizonylat = JSON.parse(this.Dto.Bizonylat); // kivétel, ha hibás
-      if (this.cBizonylat === null) { // null, ha a mező is null
+      this.cSzallito = JSON.parse(this.Dto.Szallito); // kivétel, ha hibás
+      if (this.cSzallito === null) { // null, ha a mező is null
         throw new Error();
       }
     } catch (ex) {
-      this.cBizonylat = new BizonylatConf();
+      this.cSzallito = new SzallitoConf();
     }
   }
 
   onSubmit() {
-    this.Dto.Bizonylat = JSON.stringify(this.cBizonylat);
+    this.Dto.Szallito = JSON.stringify(this.cSzallito);
 
     this.eventOk.emit(this.Dto);
   }
-  onCancel() {
+  cancel() {
     this.eventCancel.emit();
   }
 

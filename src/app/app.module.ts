@@ -67,9 +67,9 @@ import { TartozasComponent } from './riport/tartozas/tartozas.component';
 import { BeszerzesComponent } from './riport/beszerzes/beszerzes.component';
 import { KeszletComponent } from './riport/keszlet/keszlet.component';
 import { NgmComponent } from './ngm/ngm.component';
-import { ParticioSzallitoComponent } from './particio/particio-szallito/particio-szallito.component';
-import { ParticioBizonylatComponent } from './particio/particio-bizonylat/particio-bizonylat.component';
-import { ParticioProjektComponent } from './particio/particio-projekt/particio-projekt.component';
+import { ParticioSzallitoComponent } from './particio/particio-kibocsato/particio-kibocsato.component';
+import { ParticioBizonylatComponent } from './particio/particio-bizonylatnyomtatas/particio-bizonylatnyomtatas.component';
+import { ParticioProjektiratmintaComponent } from './particio/particio-projektiratminta/particio-projektiratminta.component';
 import { ParticioVolumeComponent } from './particio/particio-volume/particio-volume.component';
 import { FizetesimodListComponent } from './primitiv/fizetesimod/fizetesimod-list/fizetesimod-list.component';
 import { PenznemListComponent } from './primitiv/penznem/penznem-list/penznem-list.component';
@@ -303,7 +303,7 @@ if (environment.production) {
     NgmComponent,
     ParticioSzallitoComponent,
     ParticioBizonylatComponent,
-    ParticioProjektComponent,
+    ParticioProjektiratmintaComponent,
     ParticioVolumeComponent,
     FizetesimodListComponent,
     PenznemListComponent,

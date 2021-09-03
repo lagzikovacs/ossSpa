@@ -6,13 +6,13 @@
   <div>
     <nav>
       <button (click)="szallito()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        Szállító
+        Kibocsátó
       </button>
       <button (click)="bizonylat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        Bizonylat
+        Bizonylatnyomtatás
       </button>
       <button (click)="projekt()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        Projekt
+        Projekt iratminta
       </button>
       <button (click)="volume()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
         Volume
@@ -26,28 +26,28 @@
 
   <ng-container *ngIf="EgyMode === 30">
     <div [@rowanimation]>
-      <app-particio-szallito [Dto]="Dto"
+      <app-particio-kibocsato [Dto]="Dto"
                              (eventOk)="onSzerkesztesOk($event)"
                              (eventCancel)="onSzerkesztesCancel()">
-      </app-particio-szallito>
+      </app-particio-kibocsato>
     </div>
   </ng-container>
 
   <ng-container *ngIf="EgyMode === 33">
     <div [@rowanimation]>
-      <app-particio-bizonylat [Dto]="Dto"
+      <app-particio-bizonylatnyomtatas [Dto]="Dto"
                               (eventOk)="onSzerkesztesOk($event)"
                               (eventCancel)="onSzerkesztesCancel()">
-      </app-particio-bizonylat>
+      </app-particio-bizonylatnyomtatas>
     </div>
   </ng-container>
 
   <ng-container *ngIf="EgyMode === 8">
     <div [@rowanimation]>
-      <app-particio-projekt [Dto]="Dto"
+      <app-particio-projektiratminta [Dto]="Dto"
                             (eventOk)="onSzerkesztesOk($event)"
                             (eventCancel)="onSzerkesztesCancel()">
-      </app-particio-projekt>
+      </app-particio-projektiratminta>
     </div>
   </ng-container>
 

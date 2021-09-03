@@ -1,31 +1,31 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ParticioDto} from '../particiodto';
-import {ProjektConf} from '../projektconf';
+import {BizonylatConf} from '../bizonylatconf';
 
 @Component({
-  selector: 'app-particio-projekt',
-  templateUrl: './particio-projekt.component.html'
+  selector: 'app-particio-bizonylatnyomtatas',
+  templateUrl: './particio-bizonylatnyomtatas.component.html'
 })
-export class ParticioProjektComponent implements OnInit, OnDestroy {
+export class ParticioBizonylatComponent implements OnInit, OnDestroy {
   @Input() Dto: ParticioDto;
   @Output() eventOk = new EventEmitter<ParticioDto>();
   @Output() eventCancel = new EventEmitter<void>();
 
-  cProjekt: ProjektConf;
+  cBizonylat: BizonylatConf;
 
   ngOnInit() {
     try {
-      this.cProjekt = JSON.parse(this.Dto.Projekt); // kivétel, ha hibás
-      if (this.cProjekt === null) { // null, ha a mező is null
+      this.cBizonylat = JSON.parse(this.Dto.Bizonylat); // kivétel, ha hibás
+      if (this.cBizonylat === null) { // null, ha a mező is null
         throw new Error();
       }
     } catch (ex) {
-      this.cProjekt = new ProjektConf();
+      this.cBizonylat = new BizonylatConf();
     }
   }
 
   onSubmit() {
-    this.Dto.Projekt = JSON.stringify(this.cProjekt);
+    this.Dto.Bizonylat = JSON.stringify(this.cBizonylat);
 
     this.eventOk.emit(this.Dto);
   }

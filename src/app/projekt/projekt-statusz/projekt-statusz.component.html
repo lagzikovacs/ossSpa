@@ -6,7 +6,7 @@
     <div class="row no-gutters editform-row">
       <div>
         <div class="egylabel">Státusz</div>
-        <div *ngFor="let entry of entries;let i = index" class="form-check">
+        <div *ngFor="let entry of projektservice.statuszszurok;let i = index" class="form-check">
           <input class="form-check-input" type="radio" name="radiogroup" id="entry"
                  [checked]="i === selected" (change)="change(i)">
           <label class="form-check-label" for="entry">

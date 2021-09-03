@@ -21,12 +21,6 @@ import {rowanimation} from '../../animation/rowAnimation';
 export class ProjektListComponent implements OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: ProjektTablaComponent;
 
-  statuszszurok = [
-    '(0) Mind', '(1) Ajánlat', '(2) Fut', '(3) Kész', '(4) Pályázatra vár', '(5) Mástól megrendelte',
-    '(6) Döglött', '(7) Csak érdeklődött', '(8) Helyszíni felmérést kér', '(9) Kommunikál, van remény',
-    '(10) Még papírozni kell', '(11) Elhalasztva', '(12) Passzív', '(13) Felmérés után', '(14) Roadshow-ra jelentkezett',
-    '(15) Link'
-  ];
   jegyzetszurok = ['Mind', 'Jegyzet is'];
   szurok = ['Id', 'Ügyfél', 'Ügyfélcím', 'Email', 'Telefon', 'Telepítési cím', 'Keletkezett', 'Műszaki állapot'];
 
@@ -195,7 +189,7 @@ export class ProjektListComponent implements OnDestroy {
   }
 
   onExport(sszi: number) {
-    this.projektcsoport = this.statuszszurok[sszi];
+    this.projektcsoport = this.projektservice.statuszszurok[sszi];
     this.export = true;
   }
   doExportbezar() {

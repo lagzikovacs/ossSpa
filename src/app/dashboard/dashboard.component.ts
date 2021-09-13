@@ -4,6 +4,7 @@ import {LogonService} from '../logon/logon.service';
 import {SessionService} from '../session/session.service';
 import {environment} from '../../environments/environment';
 import * as signalR from '@aspnet/signalr';
+import {DashboardDto} from './dashboarddto';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,9 +18,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   sessionservice: SessionService;
 
   connected = false;
-  utolsouzenet = '';
-
   mode = 0;
+  Dto = new Array<DashboardDto>();
 
   constructor(private _logonservice: LogonService,
               sessionservice: SessionService) {
@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.szerepkorkivalasztva = (uzenet.szerepkorkivalasztva as boolean);
 
       this.mode = 0;
-      // TODO az esetleges listát törölni
+      this.Dto = [];
 
       if (this.szerepkorkivalasztva) {
         this.startconnection();
@@ -43,23 +43,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   startconnection() {
     this._hubConnection.on('Uzenet', (message) => {
-        // TODO lehet listába tenni, stb.
-        this.utolsouzenet = message;
-        this.beep();
+        this.Dto.unshift({Idopont: Date.now(), Uzenet: message});
     });
     this._hubConnection.start()
       .then(() => {
-        this.utolsouzenet = 'OssHub OK';
+        this.Dto.unshift({Idopont: Date.now(), Uzenet: 'OssHub start'});
         this.connected = true;
       })
       .catch((error: any) => {
-        this.utolsouzenet = error;
+        this.Dto.unshift({Idopont: Date.now(), Uzenet: error});
       });
   }
   stopconnection() {
     this._hubConnection.stop();
-
-    this.utolsouzenet = '';
+    this.Dto.unshift({Idopont: Date.now(), Uzenet: 'OssHub stop'});
     this.connected = false;
   }
 

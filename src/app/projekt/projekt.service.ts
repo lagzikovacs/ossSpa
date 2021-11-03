@@ -21,7 +21,8 @@ export class ProjektService {
     '(0) Mind', '(1) Ajánlat', '(2) Fut', '(3) Kész', '(4) Pályázatra vár', '(5) Mástól megrendelte',
     '(6) Döglött', '(7) Csak érdeklődött', '(8) Helyszíni felmérést kér', '(9) Kommunikál, van remény',
     '(10) Még papírozni kell', '(11) Elhalasztva', '(12) Passzív', '(13) Felmérés után', '(14) Roadshow-ra jelentkezett',
-    '(15) Link', '(16) Csodapályázat', '(17) Ampert bővít', '(18) 1. ütem/I.', '(19) 1. ütem/II.', '(20) 1. ütem/III.', '(21) 1. ütem/IV.'
+    '(15) Link', '(16) Csodapályázat', '(17) Ampert bővít', '(18) 1. ütem/I.', '(19) 1. ütem/II.', '(20) 1. ütem/III.', '(21) 1. ütem/IV' +
+    '.'
   ];
 
   GridSettings: ColumnSettings[] = undefined;

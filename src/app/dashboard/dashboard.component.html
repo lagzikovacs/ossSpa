@@ -1,7 +1,7 @@
 <ng-container *ngIf="szerepkorkivalasztva">
   <div style="background-color: silver">
     <div style="margin-left: 14px;padding-top: 5px;padding-bottom: 5px">
-      {{sessionservice.sessiondto.Particio}} / {{sessionservice.sessiondto.Csoport}} / {{sessionservice.sessiondto.Felhasznalo}}
+      {{sessionservice.sessiondto.Particio}} / {{sessionservice.sessiondto.Csoport}} / {{sessionservice.sessiondto.Felhasznalo}} - {{serverurl}}
       <i *ngIf="mode === 0" class="fa fa-arrow-down" aria-hidden="true" (click)="reszletes()"></i>
       <i *ngIf="mode === 1" class="fa fa-arrow-up" aria-hidden="true" (click)="alap()"></i>
     </div>

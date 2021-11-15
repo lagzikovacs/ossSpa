@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   szerepkorkivalasztva: boolean;
   sessionservice: SessionService;
+  serverurl: any;
 
   connected = false;
   mode = 0;
@@ -24,6 +25,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(private _logonservice: LogonService,
               sessionservice: SessionService) {
     this.sessionservice = sessionservice;
+    this.serverurl = environment.CoreRef;
   }
 
   ngOnInit() {

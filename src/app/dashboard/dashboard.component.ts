@@ -5,12 +5,15 @@ import {SessionService} from '../session/session.service';
 import {environment} from '../../environments/environment';
 import * as signalR from '@aspnet/signalr';
 import {DashboardDto} from './dashboarddto';
+import {ScreenService} from '../screen/screen.service';
+import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html'
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent extends OnDestroyMixin implements OnInit, OnDestroy {
   private _subscription: Subscription;
   private _hubConnection: signalR.HubConnection = new signalR.HubConnectionBuilder().withUrl(environment.CoreRef + 'osshub').build();
 
@@ -18,17 +21,31 @@ export class DashboardComponent implements OnInit, OnDestroy {
   sessionservice: SessionService;
   serverurl: any;
 
+  screenWidth: number;
+  screenHeight: number;
+
   connected = false;
   mode = 0;
   Dto = new Array<DashboardDto>();
 
   constructor(private _logonservice: LogonService,
+              private _screenService: ScreenService,
               sessionservice: SessionService) {
+    super();
+
     this.sessionservice = sessionservice;
     this.serverurl = environment.CoreRef;
   }
 
   ngOnInit() {
+    this._screenService.currentScreenSize.pipe(untilComponentDestroyed(this))
+      .subscribe(x => {
+          setTimeout(() => {
+            this.screenWidth = x.ScreenWidth;
+            this.screenHeight = x.ScreenHeight;
+          }, 100);
+      });
+
     this._subscription = this._logonservice.SzerepkorKivalasztvaObservable().subscribe(uzenet => {
       this.szerepkorkivalasztva = (uzenet.szerepkorkivalasztva as boolean);
 
@@ -77,6 +94,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    super.ngOnDestroy();
+
     this._subscription.unsubscribe();
 
     if (this.connected) {

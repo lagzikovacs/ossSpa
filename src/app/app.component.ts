@@ -1,5 +1,6 @@
 import {Component, HostListener} from '@angular/core';
 import {LogonService} from './logon/logon.service';
+import {ScreenService} from './screen/screen.service';
 
 @Component({
   selector: 'app-root',
@@ -7,15 +8,23 @@ import {LogonService} from './logon/logon.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private _logonservice: LogonService) {
+  constructor(private _logonservice: LogonService,
+              private _screenService: ScreenService) {
     window.localStorage.clear();
+    this._screenService.changeScreenSize({
+      ScreenWidth: window.innerWidth,
+      ScreenHeight: window.innerHeight
+    });
   }
 
-  @HostListener('window:beforeunload')
-  BezarasElott() {
-    if (this._logonservice.isBejelentkezve()) {
-      this._logonservice.Kijelentkezes().then();
-    }
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    this._screenService.changeScreenSize({
+      ScreenWidth: event.target.innerWidth,
+      ScreenHeight: event.target.innerHeight
+    });
   }
 
   @HostListener('window:scroll')
@@ -24,6 +33,13 @@ export class AppComponent {
       document.getElementById('GoTopBtn').style.display = 'block';
     } else {
       document.getElementById('GoTopBtn').style.display = 'none';
+    }
+  }
+
+  @HostListener('window:beforeunload')
+  BezarasElott() {
+    if (this._logonservice.isBejelentkezve()) {
+      this._logonservice.Kijelentkezes().then();
     }
   }
 

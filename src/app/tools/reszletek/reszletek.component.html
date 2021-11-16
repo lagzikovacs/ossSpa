@@ -3,7 +3,7 @@
   <table class="table ng table-bordered table-sm table-responsive" style="border: none">
     <tbody>
     <tr *ngFor="let colset of colsets; let i = index" (click)="RowClick(i)" [class.active]="i == selectedindex">
-      <td class="egylabel">{{colset.Title}}:</td>
+      <td class="editform-label">{{colset.Title}}:</td>
       <td>
         <div *ngIf="colset.Type === 'INT'">{{item[colset.Name]}}</div>
         <div *ngIf="colset.Type === 'NUMBER'">{{item[colset.Name] | number: '1.2-2'}}</div>

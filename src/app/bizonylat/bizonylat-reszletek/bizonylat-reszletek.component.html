@@ -1,11 +1,11 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>{{bizonylatLeiro.BizonylatNev}} részletesen</h5>
-  <div class="egylabel">Bizonylat</div>
+  <div class="editform-label">Bizonylat</div>
   <app-bizonylattabla [enIdclick]="false" [items]="cdtoDto"></app-bizonylattabla>
-  <div class="egylabel">Tételek</div>
+  <div class="editform-label">Tételek</div>
   <app-bizonylatteteltabla [enEdit]="false" [Dto]="cdtoTetel"></app-bizonylatteteltabla>
-  <div class="egylabel">ÁFA összesítés</div>
+  <div class="editform-label">ÁFA összesítés</div>
   <app-bizonylatafatabla [enIdclick]="false" [Dto]="cdtoAfa"></app-bizonylatafatabla>
-  <div class="egylabel">Termékdíj összesítés</div>
+  <div class="editform-label">Termékdíj összesítés</div>
   <app-bizonylattermekdijtabla [enIdclick]="false" [Dto]="cdtoTermekdij"></app-bizonylattermekdijtabla>
 </div>

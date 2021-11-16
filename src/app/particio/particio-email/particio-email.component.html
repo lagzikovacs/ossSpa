@@ -5,7 +5,7 @@
 
     <div class="editform-box">
       <div class="editform-row">
-          <div class="egylabel">Konfiguráció</div>
+          <div class="editform-label">Konfiguráció</div>
           <div *ngFor="let entry of entries;let i = index" class="form-check">
             <input class="form-check-input" type="radio" name="radiogroup" id="entry"
                    [checked]="i === selected" (change)="selectedchange(i)">
@@ -18,25 +18,25 @@
 
     <div class="editform-box">
       <div class="editform-row">
-        <div class="egylabel">Azonosító</div>
+        <div class="editform-label">Azonosító</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="m2"
                autocomplete="off"
                [(ngModel)]="cEmails[selected].Azonosito" name="m2">
       </div>
       <div class="editform-row">
-        <div class="egylabel">Jelszó</div>
+        <div class="editform-label">Jelszó</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="m3"
                autocomplete="off"
                [(ngModel)]="cEmails[selected].Jelszo" name="m3">
       </div>
       <div class="editform-row">
-        <div class="egylabel">A küldő neve</div>
+        <div class="editform-label">A küldő neve</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="m4"
                autocomplete="off" maxlength="50"
                [(ngModel)]="cEmails[selected].KuldoNeve" name="m4">
       </div>
       <div class="editform-row">
-        <div class="egylabel">A küldő email címe</div>
+        <div class="editform-label">A küldő email címe</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="m5"
                autocomplete="off" maxlength="50"
                [(ngModel)]="cEmails[selected].KuldoEmailcime" name="m5">
@@ -45,26 +45,26 @@
 
     <div class="editform-box">
       <div class="editform-row">
-        <div class="egylabel">Klienstipus</div>
+        <div class="editform-label">Klienstipus</div>
         <select type="text" class="form-control form-control-sm"
                 [(ngModel)]="cEmails[selected].Tipus" name="m1">
           <option>Gmail</option>
         </select>
       </div>
       <div class="editform-row">
-        <div class="egylabel">Custom host</div>
+        <div class="editform-label">Custom host</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="m6"
                autocomplete="off" maxlength="50"
                [(ngModel)]="cEmails[selected].CustomHost" name="m6">
       </div>
       <div class="editform-row">
-        <div class="egylabel">Custom port</div>
+        <div class="editform-label">Custom port</div>
         <input type="number" class="form-control form-control-sm oszlop1" id="m7"
                autocomplete="off"
                [(ngModel)]="cEmails[selected].CustomPort" name="m7">
       </div>
       <div class="editform-row">
-        <div class="egylabel">Ssl</div>
+        <div class="editform-label">Ssl</div>
         <select type="text" class="form-control form-control-sm oszlop2"
                 [(ngModel)]="cEmails[selected].Ssl" name="m8">
           <option value="false">Nem</option>

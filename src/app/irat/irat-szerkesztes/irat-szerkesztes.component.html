@@ -6,7 +6,7 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Irány</div>
+        <div class="editform-label">Irány</div>
         <select type="text" class="form-control form-control-sm"
                 [(ngModel)]="DtoEdited.Irany" name="irany">
           <option>Be</option>
@@ -18,7 +18,7 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Keletkezett</div>
+        <div class="editform-label">Keletkezett</div>
         <input type="date" class="form-control form-control-sm oszlop3" id="keletkezett"
                [(ngModel)]="Keletkezett" name="keletkezett">
       </div>
@@ -26,7 +26,7 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Irattipus</div>
+        <div class="editform-label">Irattipus</div>
         <input type="text" class="form-control form-control-sm oszlop3" id="irattipus"
                maxlength="30" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="DtoEdited.Irattipus" name="irattipus">
@@ -37,7 +37,7 @@
     <ng-container *ngIf="enUgyfel">
       <div class="row no-gutters editform-row">
         <div>
-          <div class="egylabel">Ügyfél</div>
+          <div class="editform-label">Ügyfél</div>
           <input type="text" class="form-control form-control-sm oszlop4" id="ugyfelnev"
                  maxlength="200" autocomplete="off" style="background-color: aquamarine; display: inline-block"
                  [(ngModel)]="DtoEdited.Ugyfelnev" name="ugyfelnev">
@@ -59,7 +59,7 @@
 
       <div class="row no-gutters editform-row">
         <div>
-          <div class="egylabel">Küldő</div>
+          <div class="editform-label">Küldő</div>
           <input type="text" class="form-control form-control-sm oszlop4" id="kuldo"
                  maxlength="100" autocomplete="off"
                  [(ngModel)]="DtoEdited.Kuldo" name="kuldo">
@@ -69,7 +69,7 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Tárgy</div>
+        <div class="editform-label">Tárgy</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="targy"
                maxlength="200" autocomplete="off"
                [(ngModel)]="DtoEdited.Targy" name="targy">

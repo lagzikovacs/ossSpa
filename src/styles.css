@@ -1,42 +1,58 @@
 html, body {
-  font-size: 14px;
-}
-
-.table thead tr th {
-  font-weight: normal;
-  font-style: normal;
-}
-
-.ng-valid:not(form) {
-  border-left: 5px solid greenyellow;
-}
-.ng-invalid:not(form) {
-  border-left: 5px solid lightpink;
+  font-size: 1em;
 }
 
 .alapkeret {
   overflow: auto;
   background-color: white;
   border: 1px solid lightgrey;
-  padding: 8px;
-  margin-bottom: 5px;
+  padding: 0.5em;
 }
-
-
 .editform-box {
   float: left;
-  margin-right: 5px;
+  margin-right: 1em;
 }
 .editform-row {
-  margin-left: 20px;
-  margin-bottom: 8px;
+  margin-left: 1em;
+  margin-bottom: 0.7em;
+}
+.editform-label {
+  text-align: left;
+  font-style: italic;
+}
+.editform-edit {
+  border: 1px solid lightgrey;
+}
+.ng-valid:not(form) {
+  border-left: 0.3em solid greenyellow;
+}
+.ng-invalid:not(form) {
+  border-left: 0.3em solid lightpink;
+}
+.editform-cw10 {
+  width: 10em;
 }
 .editform-okcancel {
-  margin-left: 20px;
-  margin-bottom: 10px;
+  margin-top: 1em;
+  margin-left: 1em;
+  margin-bottom: 0.5em;
 
   clear: both;
 }
+
+
+
+
+
+.table thead tr th {
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+
+
 
 .oszlop1 {
   width: 60px;
@@ -73,12 +89,7 @@ html, body {
 }
 
 
-.egylabel {
-  text-align: left;
-  font-style: italic;
-  /*font-size: smaller;*/
-  padding-right: 10px;
-}
+
 
 
 

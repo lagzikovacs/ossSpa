@@ -5,7 +5,7 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Dátum</div>
+        <div class="editform-label">Dátum</div>
         <input type="date" class="form-control form-control-sm oszlop3" id="datum"
                [(ngModel)]="datum" name="datum">
       </div>
@@ -13,7 +13,7 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Jogcím</div>
+        <div class="editform-label">Jogcím</div>
         <select #jogcim type="text" class="form-control form-control-sm"
                 [(ngModel)]="DtoEdited.Jogcim" name="jogcim"
                 (change)="jogcimchange()">
@@ -30,7 +30,7 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Ügyfél</div>
+        <div class="editform-label">Ügyfél</div>
         <input #ugyfel type="text" class="form-control form-control-sm oszlop4" id="ugyfel"
                autocomplete="off"
                [(ngModel)]="DtoEdited.Ugyfelnev" name="ugyfel">
@@ -39,7 +39,7 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Bizonylatszám</div>
+        <div class="editform-label">Bizonylatszám</div>
         <input #bizonylatszam type="text" class="form-control form-control-sm oszlop2" id="bizonylatszam"
                autocomplete="off"
                [(ngModel)]="DtoEdited.Bizonylatszam" name="bizonylatszam">
@@ -48,7 +48,7 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Bevétel</div>
+        <div class="editform-label">Bevétel</div>
         <input #bevetel type="text" class="form-control form-control-sm oszlop2" id="bevetel"
                autocomplete="off"
                [(ngModel)]="DtoEdited.Bevetel" name="bevetel">
@@ -57,7 +57,7 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Kiadás</div>
+        <div class="editform-label">Kiadás</div>
         <input #kiadas type="text" class="form-control form-control-sm oszlop2" id="kiadas"
                autocomplete="off"
                [(ngModel)]="DtoEdited.Kiadas" name="kiadas">
@@ -66,7 +66,7 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Megjegyzés</div>
+        <div class="editform-label">Megjegyzés</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="megjegyzes"
                autocomplete="off"
                [(ngModel)]="DtoEdited.Megjegyzes" name="megjegyzes">

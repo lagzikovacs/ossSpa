@@ -11,13 +11,13 @@
       </button>
     </ng-container>
     <ng-container *ngIf="bejelentkezve">
-      <div class="egylabel">Ügyfél</div>
+      <div class="editform-label">Ügyfél</div>
       <div>{{Dto.iratDto[0].Ugyfelnev}}</div>
       <div>{{Dto.iratDto[0].Ugyfelcim}}</div>
       <div><b>{{Dto.iratDto[0].Targy}}</b></div>
       <ng-container *ngIf="Dto.projektDto !== undefined">
         <br>
-        <div class="egylabel">Telepítési cím</div>
+        <div class="editform-label">Telepítési cím</div>
         <div><b>{{Dto.projektDto[0].Telepitesicim}}</b></div>
       </ng-container>
       <table class="table table-bordered table-sm table-responsive" style="border: none;margin-top: 10px;margin-bottom: 10px">
@@ -51,7 +51,7 @@
 
         <div class="row no-gutters editform-row">
           <div>
-            <div class="egylabel">Megjegyzés</div>
+            <div class="editform-label">Megjegyzés</div>
             <input type="text" list="ssz" class="form-control form-control-sm oszlop5" id="megjegyzes"
                    autocomplete="off" required
                    [(ngModel)]="megjegyzes" name="megjegyzes">

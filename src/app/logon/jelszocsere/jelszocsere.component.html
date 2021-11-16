@@ -3,34 +3,34 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
-    <div class="row no-gutters editform-row">
+    <div class="editform-row">
       <div>
-        <div class="egylabel">Régi jelszó</div>
-        <input type="password" class="form-control form-control-sm oszlop3" id="regijelszo"
+        <div class="editform-label">Régi jelszó</div>
+        <input type="password" class="editform-edit editform-cw10" id="regijelszo"
                maxlength="100" required autocomplete="off"
                [(ngModel)]="regijelszo" name="regijelszo">
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
+    <div class="editform-row">
       <div>
-        <div class="egylabel">Új jelszó</div>
-        <input type="password" class="form-control form-control-sm oszlop3" id="jelszo"
+        <div class="editform-label">Új jelszó</div>
+        <input type="password" class="editform-edit editform-cw10" id="jelszo"
                maxlength="100" required autocomplete="off"
                [(ngModel)]="jelszo" name="jelszo">
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
+    <div class="editform-row">
       <div>
-        <div class="egylabel">Új jelszó újra</div>
-        <input type="password" class="form-control form-control-sm oszlop3" id="jelszoujra"
+        <div class="editform-label">Új jelszó újra</div>
+        <input type="password" class="editform-edit editform-cw10" id="jelszoujra"
                maxlength="100" required autocomplete="off"
                [(ngModel)]="jelszoujra" name="jelszoujra">
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
+    <div class="editform-okcancel">
       <button class="btn btn-sm btn-primary" [disabled]="!f.valid" type="submit">Ok</button>
       <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="onCancel()">Mégsem</button>
     </div>

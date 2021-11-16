@@ -3,7 +3,7 @@
   <form #f="ngForm" (ngSubmit)="onSubmit()">
     <div class="row no-gutters editform-row">
       <div style="display: inline-block; margin-right: 5px">
-        <div class="egylabel">Fuvarszámla</div>
+        <div class="editform-label">Fuvarszámla</div>
         <input type="text" class="form-control form-control-sm oszlop3" id="bizonylatszam"
                maxlength="100" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="dtoFuvarszamla.Bizonylatszam" name="bizonylatszam">
@@ -13,7 +13,7 @@
 
     <div class="row no-gutters editform-row">
       <div style="margin-right: 5px">
-        <div class="egylabel">Fuvardíj</div>
+        <div class="editform-label">Fuvardíj</div>
         <input type="text" class="form-control form-control-sm oszlop3" id="fuvardij"
                maxlength="20" required autocomplete="off"
                [(ngModel)]="Fuvardij" name="fuvardij">
@@ -22,7 +22,7 @@
 
     <div class="row no-gutters editform-row">
       <div style="margin-right: 5px">
-        <div class="egylabel">Fuvardíj pénzneme</div>
+        <div class="editform-label">Fuvardíj pénzneme</div>
         <input type="text" class="form-control form-control-sm oszlop3" id="fuvardijpenzneme"
                maxlength="20" required autocomplete="off" readonly
                [(ngModel)]="dtoFuvarszamla.Penznem" name="fuvardijpenzneme">
@@ -31,7 +31,7 @@
 
     <div class="row no-gutters editform-row">
       <div style="margin-right: 5px">
-        <div class="egylabel">Fuvardíj árfolyama</div>
+        <div class="editform-label">Fuvardíj árfolyama</div>
         <input type="text" class="form-control form-control-sm oszlop3" id="fuvardijarfolyama"
                maxlength="20" required autocomplete="off" readonly
                [(ngModel)]="dtoFuvarszamla.Arfolyam" name="fuvardijarfolyama">

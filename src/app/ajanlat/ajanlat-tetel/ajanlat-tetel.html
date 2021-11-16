@@ -3,7 +3,7 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">{{item.TetelTipus}}</div>
+        <div class="editform-label">{{item.TetelTipus}}</div>
         <input type="text" class="form-control form-control-sm oszlop6" id="cikk"
                maxlength="100" autocomplete="off" style="background-color: aquamarine;display: inline-block"
                [(ngModel)]="item.CikkNev" name="cikk">
@@ -13,14 +13,14 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Mennyiség</div>
+        <div class="editform-label">Mennyiség</div>
         <input type="number" class="form-control form-control-sm oszlop2" id="mennyiseg"
                style="display: inline-block;margin-right: 3px"
                [(ngModel)]="item.Mennyiseg" name="mennyiseg">
       </div>
 
       <div>
-        <div class="egylabel">Egységár</div>
+        <div class="editform-label">Egységár</div>
         <input type="number" class="form-control form-control-sm oszlop2" id="egysegar"
                style="display: inline-block;margin-right: 3px"
                [(ngModel)]="item.EgysegAr" name="egysegar">
@@ -29,14 +29,14 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Egys. teljesítmény</div>
+        <div class="editform-label">Egys. teljesítmény</div>
         <input type="number" class="form-control form-control-sm oszlop2" id="egysegnyi"
                style="display: inline-block;margin-right: 3px"
                [(ngModel)]="item.EgysegnyiTeljesitmeny" name="egysegnyi">
       </div>
 
       <div>
-        <div class="egylabel">Garancia</div>
+        <div class="editform-label">Garancia</div>
         <input type="number" class="form-control form-control-sm oszlop2" id="garancia"
                style="display: inline-block;margin-right: 3px"
                [(ngModel)]="item.Garancia" name="garancia">

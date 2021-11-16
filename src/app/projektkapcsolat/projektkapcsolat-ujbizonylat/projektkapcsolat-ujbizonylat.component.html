@@ -4,7 +4,7 @@
   <form #f="ngForm" (ngSubmit)="onSubmit()">
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Bizonylattipus</div>
+        <div class="editform-label">Bizonylattipus</div>
         <div *ngFor="let entry of entries; let i = index" class="form-check">
           <input class="form-check-input" type="radio" name="radiogroup" [id]=entry[0]
                  [checked]="i === entryindex"

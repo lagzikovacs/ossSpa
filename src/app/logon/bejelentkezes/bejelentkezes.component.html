@@ -3,23 +3,23 @@
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-    <div class="row no-gutters editform-row">
+    <div class="editform-row">
       <div>
-        <div class="egylabel">Azonosító</div>
-        <input type="text" class="form-control form-control-sm" id="azonosito"
+        <div class="editform-label">Azonosító</div>
+        <input type="text" class="editform-edit editform-cw10" id="azonosito"
                formControlName="azonosito" autocomplete="off" #azonosito>
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
+    <div class="editform-row">
       <div>
-        <div class="egylabel">Jelszó</div>
-        <input type="password" class="form-control form-control-sm" id="jelszo"
+        <div class="editform-label">Jelszó</div>
+        <input type="password" class="editform-edit editform-cw10" id="jelszo"
                formControlName="jelszo" autocomplete="off" #jelszo>
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
+    <div class="editform-okcancel">
       <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.valid">Ok</button>
     </div>
   </form>

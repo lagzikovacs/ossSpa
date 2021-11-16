@@ -6,7 +6,7 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Dátum</div>
+        <div class="editform-label">Dátum</div>
         <input type="date" class="form-control form-control-sm oszlop3" id="datum"
                [(ngModel)]="Datum" name="datum">
       </div>
@@ -14,7 +14,7 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Összeg</div>
+        <div class="editform-label">Összeg</div>
         <input type="number" class="form-control form-control-sm oszlop3" id="osszeg"
                [(ngModel)]="DtoEdited.Osszeg" name="osszeg">
       </div>
@@ -22,7 +22,7 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Pénznem</div>
+        <div class="editform-label">Pénznem</div>
         <input type="text" class="form-control form-control-sm oszlop2" id="penznem"
                maxlength="3" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="DtoEdited.Penznem" name="penznem">
@@ -33,7 +33,7 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Fizetési mód</div>
+        <div class="editform-label">Fizetési mód</div>
         <input type="text" class="form-control form-control-sm oszlop2" id="fizetesimod"
                maxlength="20" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="DtoEdited.Fizetesimod" name="fizetesimod">

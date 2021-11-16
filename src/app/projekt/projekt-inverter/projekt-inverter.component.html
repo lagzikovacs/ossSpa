@@ -5,7 +5,7 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Inverter</div>
+        <div class="editform-label">Inverter</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="inverter"
                maxlength="50" autocomplete="off"
                [(ngModel)]="DtoEdited.Inverter"
@@ -15,7 +15,7 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">AC, kVA</div>
+        <div class="editform-label">AC, kVA</div>
         <input type="number" class="form-control form-control-sm oszlop2" id="ackva"
                [(ngModel)]="DtoEdited.Ackva"
                name="ackva">
@@ -24,7 +24,7 @@
 
     <div class="row no-gutters editform-row">
       <div>
-        <div class="egylabel">Inverter státusz</div>
+        <div class="editform-label">Inverter státusz</div>
         <div *ngFor="let entry of entries" class="form-check">
           <input class="form-check-input" type="radio" name="radiogroup" id="entry"
                  [checked]="entry === selected" (change)="change(entry)">

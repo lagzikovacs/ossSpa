@@ -26,8 +26,8 @@
 
   <ng-template #gridegy>
     <div class="alapkeret">
-      <div style="margin-bottom: 0.5em">
-        <nav>
+      <ng-container *ngIf="bbmode === 1">
+        <div>
           <button (click)="doNav(1)" class="toolbutton">
             <i class="fa fa-file" aria-hidden="true"></i>
           </button>
@@ -37,14 +37,8 @@
           <button [disabled]="!jog" (click)="doNav(3)" class="toolbutton">
             <i class="fa fa-edit" aria-hidden="true"></i>
           </button>
-        </nav>
-      </div>
-
-      <!--  export enum IrattipusEgyMode {
-    Reszletek = 1,
-    Torles = 2,
-    Modositas = 3
-    }-->
+        </div>
+      </ng-container>
 
       <ng-container *ngIf="egymode === 1">
         <div [@rowanimation]>

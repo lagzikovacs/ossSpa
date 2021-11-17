@@ -1,7 +1,11 @@
 html, body {
   font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
   font-size: 1em;
-  font-weight: 400;
+  font-weight: normal;
+}
+th {
+  font-weight: normal;
+  font-style: normal;
 }
 
 .alapkeret {
@@ -86,6 +90,7 @@ html, body {
   background-color: #fff;
   color: #0095ff;
   margin-right: 0.2em;
+  margin-bottom: 0.2em;
 }
 .toolbutton:disabled {
   border: 1px solid black;
@@ -168,10 +173,6 @@ html, body {
 /*}*/
 
 
-.table thead tr th {
-  font-weight: normal;
-  font-style: normal;
-}
 
 
 

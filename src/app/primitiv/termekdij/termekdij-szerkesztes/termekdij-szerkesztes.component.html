@@ -7,27 +7,27 @@
     <div class="editform-box">
       <div class="editform-row">
           <div class="editform-label">KT</div>
-          <input type="text" class="form-control form-control-sm oszlop2" id="kt"
+          <input type="text" class="editform-combo editform-cw6" id="kt"
                  maxlength="30" required autocomplete="off"
                  [(ngModel)]="DtoEdited.Termekdijkt" name="kt">
       </div>
       <div class="editform-row">
           <div class="editform-label">Megnevezés</div>
-          <input type="text" class="form-control form-control-sm oszlop4" id="megnevezes"
+          <input type="text" class="editform-combo editform-cw15" id="megnevezes"
                  maxlength="50" required autocomplete="off"
                  [(ngModel)]="DtoEdited.Termekdijmegnevezes" name="megnevezes">
       </div>
       <div class="editform-row">
           <div class="editform-label">Egységár</div>
-          <input type="number" class="form-control form-control-sm oszlop2" id="egysegar"
+          <input type="number" class="editform-combo editform-cw6" id="egysegar"
                  required autocomplete="off"
                  [(ngModel)]="DtoEdited.Termekdijegysegar" name="egysegar">
       </div>
     </div>
 
     <div class="editform-okcancel">
-      <button class="btn btn-sm btn-primary" [disabled]="!f.valid" type="submit">Ok</button>
-      <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="onCancel()">Mégsem</button>
+      <button class="editform-okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="editform-cancelbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>
 </div>

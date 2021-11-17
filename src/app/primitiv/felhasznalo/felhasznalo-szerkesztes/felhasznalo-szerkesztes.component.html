@@ -7,25 +7,25 @@
     <div class="editform-box">
       <div class="editform-row">
         <div class="editform-label">Azonosító</div>
-        <input type="text" class="form-control form-control-sm oszlop4" id="azonosito"
+        <input type="text" class="editform-edit editform-cw10" id="azonosito"
                maxlength="30" required autocomplete="off"
                [(ngModel)]="DtoEdited.Azonosito" name="azonosito">
       </div>
       <div class="editform-row">
         <div class="editform-label">Név</div>
-        <input type="text" class="form-control form-control-sm oszlop4" id="nev"
+        <input type="text" class="editform-edit editform-cw15" id="nev"
                maxlength="100" required autocomplete="off"
                [(ngModel)]="DtoEdited.Nev" name="nev">
       </div>
       <div class="editform-row">
         <div class="editform-label">Telefon</div>
-        <input type="text" class="form-control form-control-sm oszlop4" id="telefon"
+        <input type="text" class="editform-edit editform-cw15" id="telefon"
                maxlength="50" required autocomplete="off"
                [(ngModel)]="DtoEdited.Telefon" name="telefon">
       </div>
       <div class="editform-row">
         <div class="editform-label">Email</div>
-        <input type="text" class="form-control form-control-sm oszlop4" id="email"
+        <input type="text" class="editform-edit editform-cw15" id="email"
                maxlength="50" required autocomplete="off"
                [(ngModel)]="DtoEdited.Email" name="email">
       </div>
@@ -34,7 +34,7 @@
     <div class="editform-box">
       <div class="editform-row">
         <div class="editform-label">Státusz</div>
-        <select type="text" class="form-control form-control-sm"
+        <select type="text" class="editform-combo editform-cw6"
                 [(ngModel)]="DtoEdited.Statusz" name="statusz">
           <option>OK</option>
           <option>Tiltott</option>
@@ -42,7 +42,7 @@
       </div>
       <div class="editform-row">
         <div class="editform-label">Log</div>
-        <select type="text" class="form-control form-control-sm"
+        <select type="text" class="editform-combo editform-cw4"
                 [(ngModel)]="DtoEdited.Logonlog" name="log">
           <option value="false">Nem</option>
           <option value="true">Igen</option>
@@ -51,8 +51,8 @@
     </div>
 
     <div class="editform-okcancel">
-      <button class="btn btn-sm btn-primary" [disabled]="!f.valid" type="submit">Ok</button>
-      <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="onCancel()">Mégsem</button>
+      <button class="editform-okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="editform-cancelbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>
 </div>

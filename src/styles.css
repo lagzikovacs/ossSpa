@@ -22,6 +22,11 @@ html, body {
 }
 .editform-edit {
   border: 1px solid lightgrey;
+  border-radius: 0.2em;
+}
+.editform-combo {
+  border: 1px solid lightgrey;
+  border-radius: 0.2em;
 }
 .ng-valid:not(form) {
   border-left: 0.3em solid greenyellow;
@@ -29,8 +34,17 @@ html, body {
 .ng-invalid:not(form) {
   border-left: 0.3em solid lightpink;
 }
+.editform-cw4 {
+   width: 4em;
+}
+.editform-cw6 {
+  width: 6em;
+}
 .editform-cw10 {
   width: 10em;
+}
+.editform-cw15 {
+  width: 15em;
 }
 .editform-okcancel {
   margin-top: 1em;
@@ -39,9 +53,90 @@ html, body {
 
   clear: both;
 }
+.editform-okbutton {
+  cursor: pointer;
+  border: 1px solid #0095ff;
+  border-radius: 0.2em;
+  margin-right: 0.5em;
+  background-color: #0095ff;
+  color: #fff;
+}
+.editform-okbutton:disabled {
+  border: 1px solid black;
+  background-color: #ffffff;
+  color: #000000;
+}
+.editform-cancelbutton {
+  cursor: pointer;
+  border: 1px solid #0095ff;
+  border-radius: 0.2em;
+  background-color: #fff;
+  color: #0095ff;
+}
+
+/*.editform-okbutton:disabled,*/
+/*.editform-okbutton:hover {*/
+  /*background-color: black;*/
+/*}*/
+
+/*.editform-okbutton:hover,*/
+/*.editform-okbutton:focus {*/
+  /*background-color: #07c;*/
+/*}*/
+/*.editform-okbutton:focus {*/
+  /*box-shadow: 0 0 0 0.3em rgba(0, 149, 255, .15);*/
+/*}*/
+/*.editform-okbutton:active {*/
+  /*background-color: #0064bd;*/
+  /*box-shadow: none;*/
+/*}*/
 
 
 
+
+<!-- HTML !-->
+/*<button class="button-7" role="button">Button 7</button>*/
+
+                                                   /* CSS */
+/*.button-7 {*/
+ /*background-color: #0095ff;*/
+ /*border: 1px solid transparent;*/
+ /*border-radius: 3px;*/
+ /*box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;*/
+ /*box-sizing: border-box;*/
+ /*color: #fff;*/
+ /*cursor: pointer;*/
+ /*display: inline-block;*/
+ /*font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;*/
+ /*font-size: 13px;*/
+ /*font-weight: 400;*/
+ /*line-height: 1.15385;*/
+ /*margin: 0;*/
+ /*outline: none;*/
+ /*padding: 8px .8em;*/
+ /*position: relative;*/
+ /*text-align: center;*/
+ /*text-decoration: none;*/
+ /*user-select: none;*/
+ /*-webkit-user-select: none;*/
+ /*touch-action: manipulation;*/
+ /*vertical-align: baseline;*/
+ /*white-space: nowrap;*/
+/*}*/
+
+/*.button-7:hover,*/
+/*.button-7:focus {*/
+  /*background-color: #07c;*/
+/*}*/
+
+/*.button-7:focus {*/
+  /*box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);*/
+/*}*/
+
+/*.button-7:active {*/
+  /*background-color: #0064bd;*/
+  /*box-shadow: none;*/
+/*}*/
 
 
 .table thead tr th {

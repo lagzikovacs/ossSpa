@@ -7,15 +7,15 @@
     <div class="editform-box">
       <div class="editform-row">
         <div class="editform-label">Irattipus</div>
-        <input type="text" class="form-control form-control-sm oszlop5" id="irattipus1"
+        <input type="text" class="editform-edit editform-cw15" id="irattipus1"
                maxlength="30" required autocomplete="off"
                [(ngModel)]="DtoEdited.Irattipus1" name="irattipus1">
       </div>
     </div>
 
     <div class="editform-okcancel">
-      <button class="btn btn-sm btn-primary" [disabled]="!f.valid" type="submit">Ok</button>
-      <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="onCancel()">Mégsem</button>
+      <button class="editform-okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="editform-cancelbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>
 </div>

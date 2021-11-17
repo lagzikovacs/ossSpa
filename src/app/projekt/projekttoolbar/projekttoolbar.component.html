@@ -1,43 +1,24 @@
-<div class="row no-gutters toolbarmargins">
-  <div class="toolbarcontrolmargins">
-    <select [disabled]="!enKereses" #Statuszszempont type="text" class="form-control form-control-sm">
-      <option *ngFor="let s of Statuszszurok; let i = index" [value]="i" [selected]="i == _statuszszempont">{{s}}</option>
-    </select>
-  </div>
-  <div class="toolbarcontrolmargins">
-    <select [disabled]="!enKereses" #Jegyzetszempont type="text" class="form-control form-control-sm">
-      <option *ngFor="let t of Jegyzetszurok; let i = index" [value]="i" [selected]="i == _jegyzetszempont">{{t}}</option>
-    </select>
-  </div>
-  <div class="toolbarcontrolmargins">
-    <select [disabled]="!enKereses" #Szempont type="text" class="form-control form-control-sm">
-      <option *ngFor="let sz of Szurok; let i = index" [value]="i" [selected]="i == _szempont">{{sz}}</option>
-    </select>
-  </div>
-  <div class="toolbarcontrolmargins" style="width: 120px">
-    <input [disabled]="!enKereses" #Minta type="text" class="form-control form-control-sm">
-  </div>
+<div class="toolbar">
+  <select [disabled]="!enKereses" #Statuszszempont type="text" class="toolcombo">
+    <option *ngFor="let s of Statuszszurok; let i = index" [value]="i" [selected]="i == _statuszszempont">{{s}}</option>
+  </select>
+  <select [disabled]="!enKereses" #Jegyzetszempont type="text" class="toolcombo">
+    <option *ngFor="let t of Jegyzetszurok; let i = index" [value]="i" [selected]="i == _jegyzetszempont">{{t}}</option>
+  </select>
+  <select [disabled]="!enKereses" #Szempont type="text" class="toolcombo">
+    <option *ngFor="let sz of Szurok; let i = index" [value]="i" [selected]="i == _szempont">{{sz}}</option>
+  </select>
+  <input [disabled]="!enKereses" #Minta type="text" class="tooledit em10width">
 
-  <div class="float-right" role="toolbar" aria-label="Gombok">
-    <div class="btn-group btn-group-sm" role="group" aria-label="Gombok">
-      <button [disabled]="!enKereses"
-              (click)="doKereses()"
-              class="btn btn-outline-primary toolbarcontrolmargins"
-              type="button">
-        <i class="fa fa-search" aria-hidden="true"></i>
-      </button>
-      <button [disabled]="!enUj"
-              (click)="doUj()"
-              class="btn btn-sm btn-outline-primary toolbarcontrolmarginskozel"
-              type="button">
-        <i class="fa fa-plus" aria-hidden="true"></i>
-      </button>
-      <button (click)="doExport()"
-              class="btn btn-sm btn-outline-primary toolbarcontrolmarginskozel"
-              type="button">
-        Export
-      </button>
-    </div>
-  </div>
+
+  <button [disabled]="!enKereses" (click)="doKereses()" class="toolbutton" type="button">
+    <i class="fa fa-search" aria-hidden="true"></i>
+  </button>
+  <button [disabled]="!enUj" (click)="doUj()" class="toolbutton" type="button">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+  </button>
+  <button (click)="doExport()" class="toolbutton" type="button">
+    Export
+  </button>
 </div>
 

@@ -1,52 +1,52 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
-  <div>
+  <div style="margin-bottom: 1em">
     <nav>
-      <button (click)="reszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>
+      <button (click)="reszletek()" class="toolbutton">
+        <i class="fa fa-file" aria-hidden="true"></i>
       </button>
-      <button [disabled]="!torlesenabled()" (click)="torles()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="!torlesenabled()" (click)="torles()" class="toolbutton">
         <i class="fa fa-minus" aria-hidden="true"></i>
       </button>
-      <button [disabled]="!modositasenabled()" (click)="modositas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="!modositasenabled()" (click)="modositas()" class="toolbutton">
         <i class="fa fa-edit" aria-hidden="true"></i>
       </button>
 
 
-      <button [disabled]="!kibocsatasenabled()" (click)="kibocsatas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="!kibocsatasenabled()" (click)="kibocsatas()" class="toolbutton">
         Kibocsátás
       </button>
-      <button (click)="nyomtatas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-print" style="margin-right: 3px" aria-hidden="true"></i>Nyomtatás
+      <button (click)="nyomtatas()" class="toolbutton">
+        <i class="fa fa-print" aria-hidden="true"></i>Nyomtatás
       </button>
-      <button [disabled]="!stornoenabled()" (click)="storno()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="!stornoenabled()" (click)="storno()" class="toolbutton">
         Storno
       </button>
-      <button [disabled]="!penztarenabled()" (click)="penztar()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="!penztarenabled()" (click)="penztar()" class="toolbutton">
         Pénztár
       </button>
-      <button [disabled]="!fuvarszamlaenabled()" (click)="fuvarszamla()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="!fuvarszamlaenabled()" (click)="fuvarszamla()" class="toolbutton">
         Fuvarszámla
       </button>
-      <button [disabled]="!kiszallitvaenabled()" (click)="kiszallitva()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="!kiszallitvaenabled()" (click)="kiszallitva()" class="toolbutton">
         Kiszállítva
       </button>
-      <button (click)="kifizetes()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button (click)="kifizetes()" class="toolbutton">
         Kifizetés
       </button>
-      <button [disabled]="!kifizetesrendbenenabled()" (click)="kifizetesrendben()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="!kifizetesrendbenenabled()" (click)="kifizetesrendben()" class="toolbutton">
         Kifizetés rendben
       </button>
-      <button (click)="irat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button (click)="irat()" class="toolbutton">
         Irat
       </button>
-      <button (click)="errol()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button (click)="errol()" class="toolbutton">
         Erről
       </button>
-      <button [disabled]="!enProjekt" (click)="doProjekt()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button [disabled]="!enProjekt" (click)="doProjekt()" class="toolbutton">
         Projekt
       </button>
-      <button (click)="vagolap()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-angle-right" style="margin-right: 3px" aria-hidden="true"></i>
+      <button (click)="vagolap()" class="toolbutton">
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
         Vágólapra
       </button>
 

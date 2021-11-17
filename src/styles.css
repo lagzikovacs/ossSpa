@@ -1,5 +1,7 @@
 html, body {
+  font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
   font-size: 1em;
+  font-weight: 400;
 }
 
 .alapkeret {
@@ -40,7 +42,7 @@ html, body {
 .editform-cw6 {
   width: 6em;
 }
-.editform-cw10 {
+.em10width {
   width: 10em;
 }
 .editform-cw15 {
@@ -73,18 +75,32 @@ html, body {
   background-color: #fff;
   color: #0095ff;
 }
+.toolbar {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
 .toolbutton {
   cursor: pointer;
   border: 1px solid #0095ff;
   border-radius: 0.2em;
   background-color: #fff;
   color: #0095ff;
-  margin-right: 0.5em;
+  margin-right: 0.2em;
 }
 .toolbutton:disabled {
   border: 1px solid black;
   background-color: #ffffff;
   color: #000000;
+}
+.tooledit {
+  border: 1px solid lightgrey;
+  border-radius: 0.2em;
+  margin-right: 0.2em;
+}
+.toolcombo {
+  border: 1px solid lightgrey;
+  border-radius: 0.2em;
+  margin-right: 0.2em;
 }
 
 /*.editform-okbutton:disabled,*/

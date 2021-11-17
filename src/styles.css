@@ -57,9 +57,9 @@ html, body {
   cursor: pointer;
   border: 1px solid #0095ff;
   border-radius: 0.2em;
+  background-color: #fff;
+  color: #0095ff;
   margin-right: 0.5em;
-  background-color: #0095ff;
-  color: #fff;
 }
 .editform-okbutton:disabled {
   border: 1px solid black;
@@ -72,6 +72,14 @@ html, body {
   border-radius: 0.2em;
   background-color: #fff;
   color: #0095ff;
+}
+.toolbutton {
+  cursor: pointer;
+  border: 1px solid #0095ff;
+  border-radius: 0.2em;
+  background-color: #fff;
+  color: #0095ff;
+  margin-right: 0.5em;
 }
 
 /*.editform-okbutton:disabled,*/

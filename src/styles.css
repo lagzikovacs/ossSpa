@@ -81,6 +81,11 @@ html, body {
   color: #0095ff;
   margin-right: 0.5em;
 }
+.toolbutton:disabled {
+  border: 1px solid black;
+  background-color: #ffffff;
+  color: #000000;
+}
 
 /*.editform-okbutton:disabled,*/
 /*.editform-okbutton:hover {*/

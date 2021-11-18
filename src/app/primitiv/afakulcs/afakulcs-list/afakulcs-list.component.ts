@@ -30,6 +30,7 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
   Dto = new Array<AfakulcsDto>();
   DtoSelectedIndex = -1;
 
+  bbmode = 0;
   egymode = EgyMode.Reszletek;
 
   @Input() set maszk(value: string) {
@@ -96,10 +97,12 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
 
   onId(i: number) {
     this.DtoSelectedIndex = i;
-    this.egymode = EgyMode.Reszletek;
+    this.bbmode = 1;
+    this.egymode = 0;
   }
 
   doNav(i: number) {
+    this.bbmode = 0;
     this.egymode = i;
   }
 
@@ -116,7 +119,8 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
     if (dto !== null) {
       propCopy(dto, this.Dto[this.DtoSelectedIndex]);
     }
-    this.egymode = EgyMode.Reszletek;
+    this.bbmode = 1;
+    this.egymode = 0;
   }
   onTorles(ok: boolean) {
     if (ok) {
@@ -139,7 +143,8 @@ export class AfakulcsListComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.egymode = EgyMode.Reszletek;
+      this.bbmode = 1;
+      this.egymode = 0;
     }
   }
 

@@ -41,6 +41,7 @@ import {propCopy} from '../../tools/propCopy';
   Dto = new Array<UgyfelDto>();
   DtoSelectedIndex = -1;
 
+  bbmode = 0;
   egymode = EgyMode.Reszletek;
 
   @Input() set maszk(value: string) {
@@ -121,10 +122,12 @@ import {propCopy} from '../../tools/propCopy';
 
   onId(i: number) {
     this.DtoSelectedIndex = i;
-    this.egymode = EgyMode.Reszletek;
+    this.bbmode = 1;
+    this.egymode = 0;
   }
 
   doNav(i: number) {
+    this.bbmode = 0;
     this.egymode = i;
   }
 
@@ -141,7 +144,8 @@ import {propCopy} from '../../tools/propCopy';
   }
   onModositaskesz(dto: UgyfelDto) {
     this.onModositaskeszCsak(dto);
-    this.egymode = EgyMode.Reszletek;
+    this.bbmode = 1;
+    this.egymode = 0;
   }
   onModositaskeszCsak(dto: UgyfelDto) {
     if (dto !== null) {
@@ -169,7 +173,8 @@ import {propCopy} from '../../tools/propCopy';
           this._errorservice.Error = err;
         });
     } else {
-      this.egymode = EgyMode.Reszletek;
+      this.bbmode = 1;
+      this.egymode = 0;
     }
   }
 

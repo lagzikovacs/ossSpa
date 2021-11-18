@@ -1,33 +1,31 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <div>
-    <nav>
-      <button (click)="doReszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>
-      </button>
+    <button (click)="doReszletek()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <i class="fa fa-file" style="margin-right: 3px" aria-hidden="true"></i>
+    </button>
 
-      <button [disabled]="!jog || !enTorles"
-              (click)="doTorles()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-minus" aria-hidden="true"></i>
-      </button>
-      <button [disabled]="!jog"
-              (click)="doModositas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-edit" aria-hidden="true"></i>
-      </button>
+    <button [disabled]="!jog || !enTorles"
+            (click)="doTorles()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <i class="fa fa-minus" aria-hidden="true"></i>
+    </button>
+    <button [disabled]="!jog"
+            (click)="doModositas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <i class="fa fa-edit" aria-hidden="true"></i>
+    </button>
 
-      <button (click)="doDokumentum()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        Dokumentum
-      </button>
-      <button (click)="doFotozaslink()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        Fotózás link
-      </button>
-      <button [disabled]="!enProjekt" (click)="doProjekt()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        Projekt
-      </button>
-      <button (click)="doVagolap()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-angle-right" style="margin-right: 3px" aria-hidden="true"></i>
-        Vágólapra
-      </button>
-    </nav>
+    <button (click)="doDokumentum()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      Dokumentum
+    </button>
+    <button (click)="doFotozaslink()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      Fotózás link
+    </button>
+    <button [disabled]="!enProjekt" (click)="doProjekt()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      Projekt
+    </button>
+    <button (click)="doVagolap()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <i class="fa fa-angle-right" style="margin-right: 3px" aria-hidden="true"></i>
+      Vágólapra
+    </button>
     <app-abu></app-abu>
   </div>
 

@@ -21,7 +21,9 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
   DtoSelectedIndex = -1;
 
   elsokereses = true;
-  egymode = EgyMode.Reszletek;
+
+  bbmode = 1;
+  egymode = 0;
 
   eppFrissit = false;
 
@@ -69,27 +71,13 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
 
   onId(i: number) {
     this.DtoSelectedIndex = i;
-    this.egymode = EgyMode.Reszletek;
+    this.bbmode = 1;
+    this.egymode = 0;
   }
 
   doNav(i: number) {
-    if (i === 38) {
-      this.eppFrissit = true;
-      this.dokumentumservice.LetoltesPDF(this.Dto[this.DtoSelectedIndex].Dokumentumkod)
-        .then(res => {
-          this.pdf = res.Result;
-
-          this.eppFrissit = false;
-          this.egymode = i;
-        })
-        .catch(err => {
-          this.eppFrissit = false;
-          this._errorservice.Error = err;
-        });
-    } else {
-      this.egymode = i;
-    }
-
+    this.bbmode = 0;
+    this.egymode = i;
   }
 
   doUjtetel() {
@@ -105,7 +93,8 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
     if (dto !== null) {
       propCopy(dto, this.Dto[this.DtoSelectedIndex]);
     }
-    this.egymode = EgyMode.Reszletek;
+    this.bbmode = 1;
+    this.egymode = 0;
   }
   onTorles(ok: boolean) {
     if (ok) {
@@ -128,16 +117,20 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.egymode = EgyMode.Reszletek;
+      this.bbmode = 1;
+      this.egymode = 0;
     }
   }
 
-  onLetoltesDirekt(i: number) {
+  onKimentesDirekt(i: number) {
     this.DtoSelectedIndex = i;
-    this.egymode = EgyMode.Reszletek;
-    this.onLetoltes();
+
+    this.bbmode = 1;
+    this.egymode = 0;
+
+    this.onKimentes();
   }
-  onLetoltes() {
+  onKimentes() {
     this.eppFrissit = true;
     this.dokumentumservice.Kimentes(this.Dto[this.DtoSelectedIndex])
       .then(res => {
@@ -149,7 +142,31 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
       });
   }
 
-  onLetoltesPDF() {
+  onNezetDirekt(i: number) {
+    this.DtoSelectedIndex = i;
+
+    this.bbmode = 1;
+    this.egymode = 0;
+
+    this.onNezet();
+  }
+  onNezet() {
+    this.eppFrissit = true;
+    this.dokumentumservice.LetoltesPDF(this.Dto[this.DtoSelectedIndex].Dokumentumkod)
+      .then(res => {
+        this.pdf = res.Result;
+
+        this.eppFrissit = false;
+        this.bbmode = 0;
+        this.egymode = 38;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this._errorservice.Error = err;
+      });
+  }
+
+  onKimentesPDF() {
     this.eppFrissit = true;
     this.dokumentumservice.KimentesPDF(this.Dto[this.DtoSelectedIndex])
       .then(res => {
@@ -161,16 +178,9 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
       });
   }
 
-  onNezet(i: number) {
-    this.DtoSelectedIndex = i;
-    this.egymode = EgyMode.Reszletek;
-    this.doNav(38);
-  }
-
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;
     });
   }
-
 }

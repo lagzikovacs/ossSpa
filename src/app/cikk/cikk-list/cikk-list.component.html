@@ -26,8 +26,8 @@
 
   <ng-template #gridegy>
     <div class="alapkeret">
-      <div class="buttonbar">
-        <nav>
+      <ng-container *ngIf="bbmode === 1">
+        <div>
           <button (click)="doNav(1)" class="toolbutton">
             <i class="fa fa-file" aria-hidden="true"></i>
           </button>
@@ -44,8 +44,8 @@
           <button (click)="doNav(29)" class="toolbutton">
             Kivét
           </button>
-        </nav>
-      </div>
+        </div>
+      </ng-container>
 
       <ng-container *ngIf="egymode === 1">
         <div [@rowanimation]>

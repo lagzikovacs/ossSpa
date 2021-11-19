@@ -87,7 +87,7 @@ export class IratEgyComponent implements OnDestroy {
         });
     } else {
       this.bbmode = 1;
-      this.egymode = 15;
+      this.egymode = 0;
     }
   }
 
@@ -98,7 +98,7 @@ export class IratEgyComponent implements OnDestroy {
     }
 
     this.bbmode = 1;
-    this.egymode = 15;
+    this.egymode = 0;
   }
 
   onFotozaslinkKesz(dto: IratDto) {

@@ -29,7 +29,8 @@ export class PenztarListComponent implements OnInit, OnDestroy {
   Dto = new Array<PenztarDto>();
   DtoSelectedIndex = -1;
 
-  egymode = EgyMode.Reszletek;
+  bbmode = 1;
+  egymode = 13;
 
   penztarservice: PenztarService;
 
@@ -82,13 +83,21 @@ export class PenztarListComponent implements OnInit, OnDestroy {
   }
 
   onId(i: number) {
+    if (i !== this.DtoSelectedIndex) {
+      this.bbmode = 0;
+      this.egymode = 13;
+    } else {
+      this.bbmode = 1;
+      this.egymode = 0;
+    }
+
     this.DtoSelectedIndex = i;
-    this.egymode = EgyMode.Tetelek;
 
     this.nyitva = this.DtoSelectedIndex === -1 ? false : this.Dto[this.DtoSelectedIndex].Nyitva;
   }
 
   doNav(i: number) {
+    this.bbmode = 0;
     this.egymode = i;
   }
 
@@ -101,11 +110,13 @@ export class PenztarListComponent implements OnInit, OnDestroy {
     }
     this.tabla.ujtetelstop();
   }
+
   onModositaskesz(dto: PenztarDto) {
     if (dto !== null) {
       propCopy(dto, this.Dto[this.DtoSelectedIndex]);
     }
-    this.egymode = EgyMode.Reszletek;
+    this.bbmode = 1;
+    this.egymode = 0;
   }
   onTorles(ok: boolean) {
     if (ok) {
@@ -128,7 +139,8 @@ export class PenztarListComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.egymode = EgyMode.Reszletek;
+      this.bbmode = 1;
+      this.egymode = 0;
     }
   }
 

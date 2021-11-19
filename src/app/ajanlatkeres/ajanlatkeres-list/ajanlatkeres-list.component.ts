@@ -33,7 +33,8 @@ export class AjanlatkeresListComponent implements OnDestroy {
   Dto = new Array<AjanlatkeresDto>();
   DtoSelectedIndex = -1;
 
-  egymode = EgyMode.Reszletek;
+  bbmode = 1;
+  egymode = 1;
 
   ajanlatkeresservice: AjanlatkeresService;
 
@@ -87,11 +88,19 @@ export class AjanlatkeresListComponent implements OnDestroy {
   }
 
   onId(i: number) {
+    if (i !== this.DtoSelectedIndex) {
+      this.bbmode = 0;
+      this.egymode = 1;
+    } else {
+      this.bbmode = 1;
+      this.egymode = 0;
+    }
+
     this.DtoSelectedIndex = i;
-    this.egymode = EgyMode.Reszletek;
   }
 
   doNav(i: number) {
+    this.bbmode = 0;
     this.egymode = i;
   }
 

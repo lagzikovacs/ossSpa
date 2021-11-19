@@ -34,80 +34,38 @@ export class IratEgyComponent implements OnDestroy {
   @Input() enProjekt = true;
   @Input() enUgyfel = true;
 
-  egymode = EgyMode.Dokumentum;
+  private _bbmode = 1;
+  @Output() bbmodeChange = new EventEmitter<number>();
+  @Input() get bbmode() { return this._bbmode; }
+  set bbmode(value: number) {
+    this._bbmode = value;
+    this.bbmodeChange.emit(this._bbmode);
+  }
 
-  IratProjektje: ProjektDto;
-  nincsProjekt = false;
+  private _egymode = 0;
+  @Output() egymodeChange = new EventEmitter<number>();
+  @Input() get egymode() { return this._egymode; }
+  set egymode(value: number) {
+    this._egymode = value;
+    this.egymodeChange.emit(this._egymode);
+  }
+
   jog = false;
   eppFrissit = false;
 
   iratservice: IratService;
-  projektservice: ProjektService;
 
   constructor(private _logonservice: LogonService,
-              private _projektkapcsolatservice: ProjektkapcsolatService,
-              private _vagolapservice: VagolapService,
               private _errorservice: ErrorService,
-              iratservice: IratService,
-              projektservice: ProjektService) {
+              iratservice: IratService) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.IRATMOD]);
 
     this.iratservice = iratservice;
-    this.projektservice = projektservice;
   }
 
-  doReszletek() {
-    this.egymode = EgyMode.Reszletek;
-  }
-  doTorles() {
-    this.egymode = EgyMode.Torles;
-  }
-  doModositas() {
-    this.egymode = EgyMode.Modositas;
-  }
-  doDokumentum() {
-    this.egymode = EgyMode.Dokumentum;
-  }
-  doFotozaslink() {
-    this.egymode = EgyMode.FotozasLink;
-  }
-  doProjekt() {
-    this.eppFrissit = true;
-    this._projektkapcsolatservice.SelectByIrat(this.Dto.Iratkod)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        if (res.Result.length === 0) {
-          this.nincsProjekt = true;
-          return new Promise<ProjektResult>((resolve, reject) => { resolve(new ProjektResult()); });
-        } else {
-          this.nincsProjekt = false;
-          return this.projektservice.Get(res.Result[0].Projektkod);
-        }
-      })
-      .then(res1 => {
-        if (res1.Error != null) {
-          throw res1.Error;
-        }
-
-        if (!this.nincsProjekt) {
-          this.IratProjektje = res1.Result[0];
-        }
-
-        this.egymode = EgyMode.Projekt;
-        this.eppFrissit = false;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
-  }
-
-  doVagolap() {
-    this._vagolapservice.iratotvagolapra(this.Dto);
-    this.abu.Uzenet('Az irat a vágólapra került!');
+  doNav(i: number) {
+    this.bbmode = 0;
+    this.egymode = i;
   }
 
   onTorles(ok: boolean) {
@@ -128,7 +86,8 @@ export class IratEgyComponent implements OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.egymode = EgyMode.Reszletek;
+      this.bbmode = 1;
+      this.egymode = 15;
     }
   }
 
@@ -138,7 +97,8 @@ export class IratEgyComponent implements OnDestroy {
       this.eventSzerkesztesutan.emit(this.Dto);
     }
 
-    this.egymode = EgyMode.Reszletek;
+    this.bbmode = 1;
+    this.egymode = 15;
   }
 
   onFotozaslinkKesz(dto: IratDto) {

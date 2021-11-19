@@ -52,4 +52,7 @@ export enum EgyMode {
   PDFNezet = 38,
   DokumentumLetoltes = 39,
   DokumentumLetoltesPDF = 40,
+
+  VagolapIrathoz = 41,
+  VagolapBizonylathoz = 42,
 }

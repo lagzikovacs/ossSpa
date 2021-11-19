@@ -187,6 +187,9 @@ import { BizonylatZoomComponent } from './bizonylat/bizonylat-zoom/bizonylat-zoo
 import { DokumentumLetoltesComponent } from './dokumentum/dokumentum-letoltes/dokumentum-letoltes.component';
 import { DokumentumLetoltesPdfComponent } from './dokumentum/dokumentum-letoltes-pdf/dokumentum-letoltes-pdf.component';
 import { DokumentumNezetComponent } from './dokumentum/dokumentum-nezet/dokumentum-nezet.component';
+import { VagolapIrathozComponent } from './vagolap/vagolap-irathoz/vagolap-irathoz.component';
+import { VagolapBizonylathozComponent } from './vagolap/vagolap-bizonylathoz/vagolap-bizonylathoz.component';
+import { IratProjektjeComponent } from './irat/irat-projektje/irat-projektje.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -397,6 +400,9 @@ if (environment.production) {
     DokumentumLetoltesComponent,
     DokumentumLetoltesPdfComponent,
     DokumentumNezetComponent,
+    VagolapIrathozComponent,
+    VagolapBizonylathozComponent,
+    IratProjektjeComponent,
   ],
   imports: [
     BrowserModule,

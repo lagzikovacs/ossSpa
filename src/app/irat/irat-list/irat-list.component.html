@@ -30,6 +30,8 @@
     <app-irat-egy [DtoOriginal]="Dto[DtoSelectedIndex]"
                   [enTorles]="true"
                   [enProjekt]="enProjekt"
+                  [(bbmode)]="egyirat_bbmode"
+                  [(egymode)]="egyirat_egymode"
                   (eventSzerkesztesutan)="onSzerkesztesutan($event)"
                   (eventTorlesutan)="onTorlesutan()">
     </app-irat-egy>

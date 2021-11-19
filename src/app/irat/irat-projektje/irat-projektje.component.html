@@ -1,0 +1,12 @@
+<div *ngIf="nincsProjekt" class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>Irat projektje</h5>
+  <div *ngIf="eppFrissit">Kis türelmet...</div>
+  <div *ngIf="!eppFrissit">Az irat nem tartozik projekthez!</div>
+</div>
+
+<app-reszletek *ngIf="!eppFrissit && !nincsProjekt"
+               [cim]="projektservice.cim"
+               [item]="IratProjektje"
+               [colsets]="projektservice.ReszletekSettings">
+</app-reszletek>
+

@@ -39,6 +39,9 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
 
+  egyirat_bbmode = 0;
+  egyirat_egymode = 15; // dokumentum
+
   projektkapcsolatservice: ProjektkapcsolatService;
 
   constructor(private _logonservice: LogonService,
@@ -77,6 +80,8 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
   }
 
   onId(i: number) {
+    const OldIndex = this.DtoSelectedIndex;
+
     this.tabla.nemOk();
     this.DtoSelectedIndex = i;
 
@@ -121,6 +126,15 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
 
           this.OriginalIrat = res.Result[0];
           this.eppFrissit = false;
+
+          if (i !== OldIndex) {
+            this.egyirat_bbmode = 0;
+            this.egyirat_egymode = 15;
+          } else {
+            this.egyirat_bbmode = 1;
+            this.egyirat_egymode = 0;
+          }
+
           this.tabla.iratOk = true;
         })
         .catch(err => {

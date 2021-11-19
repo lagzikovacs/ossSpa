@@ -38,13 +38,13 @@
               <i class="fa fa-minus" aria-hidden="true"></i>
             </button>
 
-            <button (click)="onKimentes()" class="toolbutton">
+            <button (click)="doNav(39)" class="toolbutton">
               Letöltés
             </button>
-            <button (click)="onNezet()" class="toolbutton">
+            <button (click)="doNav(38)" class="toolbutton">
               Nézet
             </button>
-            <button (click)="onKimentesPDF()" class="toolbutton">
+            <button (click)="doNav(40)" class="toolbutton">
               Letöltés PDF-ben
             </button>
         </div>
@@ -71,8 +71,17 @@
       </ng-container>
       <ng-container *ngIf="egymode === 38">
         <div [@rowanimation]>
-          <app-pdfnezet [pdf]="pdf">
-          </app-pdfnezet>
+          <app-dokumentum-nezet [item]="Dto[DtoSelectedIndex]"></app-dokumentum-nezet>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 39">
+        <div [@rowanimation]>
+          <app-dokumentum-letoltes [item]="Dto[DtoSelectedIndex]"></app-dokumentum-letoltes>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 40">
+        <div [@rowanimation]>
+          <app-dokumentum-letoltes-pdf [item]="Dto[DtoSelectedIndex]"></app-dokumentum-letoltes-pdf>
         </div>
       </ng-container>
     </div>

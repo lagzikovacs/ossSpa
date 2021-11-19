@@ -180,11 +180,13 @@ import { ParticioEmailComponent } from './particio/particio-email/particio-email
 import {TevekenysegService} from './primitiv/tevekenyseg/tevekenyseg.service';
 import {TevekenysegSzerkesztesComponent} from './primitiv/tevekenyseg/tevekenyseg-szerkesztes/tevekenyseg-szerkesztes.component';
 import {TevekenysegListComponent} from './primitiv/tevekenyseg/tevekenyseg-list/tevekenyseg-list.component';
-import { PdfnezetComponent } from './dokumentum/pdfnezet/pdfnezet.component';
 import { BizonylatFuvarszamlaComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla.component';
 import { BizonylatFuvarszamlaUjComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla-uj/bizonylat-fuvarszamla-uj.component';
 import { BizonylatFuvarszamlaTorlesComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla-torles/bizonylat-fuvarszamla-torles.component';
 import { BizonylatZoomComponent } from './bizonylat/bizonylat-zoom/bizonylat-zoom.component';
+import { DokumentumLetoltesComponent } from './dokumentum/dokumentum-letoltes/dokumentum-letoltes.component';
+import { DokumentumLetoltesPdfComponent } from './dokumentum/dokumentum-letoltes-pdf/dokumentum-letoltes-pdf.component';
+import { DokumentumNezetComponent } from './dokumentum/dokumentum-nezet/dokumentum-nezet.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -388,11 +390,13 @@ if (environment.production) {
     HscrollDirective,
     SpinnerDirective,
     ParticioEmailComponent,
-    PdfnezetComponent,
     BizonylatFuvarszamlaComponent,
     BizonylatFuvarszamlaUjComponent,
     BizonylatFuvarszamlaTorlesComponent,
     BizonylatZoomComponent,
+    DokumentumLetoltesComponent,
+    DokumentumLetoltesPdfComponent,
+    DokumentumNezetComponent,
   ],
   imports: [
     BrowserModule,

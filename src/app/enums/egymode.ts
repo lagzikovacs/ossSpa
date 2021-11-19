@@ -50,4 +50,6 @@ export enum EgyMode {
   UgyfelKapcsolat = 37,
 
   PDFNezet = 38,
+  DokumentumLetoltes = 39,
+  DokumentumLetoltesPDF = 40,
 }

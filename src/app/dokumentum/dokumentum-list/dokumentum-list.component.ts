@@ -124,58 +124,12 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
 
   onKimentesDirekt(i: number) {
     this.DtoSelectedIndex = i;
-
-    this.bbmode = 1;
-    this.egymode = 0;
-
-    this.onKimentes();
-  }
-  onKimentes() {
-    this.eppFrissit = true;
-    this.dokumentumservice.Kimentes(this.Dto[this.DtoSelectedIndex])
-      .then(res => {
-        this.eppFrissit = false;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+    this.doNav(39);
   }
 
   onNezetDirekt(i: number) {
     this.DtoSelectedIndex = i;
-
-    this.bbmode = 1;
-    this.egymode = 0;
-
-    this.onNezet();
-  }
-  onNezet() {
-    this.eppFrissit = true;
-    this.dokumentumservice.LetoltesPDF(this.Dto[this.DtoSelectedIndex].Dokumentumkod)
-      .then(res => {
-        this.pdf = res.Result;
-
-        this.eppFrissit = false;
-        this.bbmode = 0;
-        this.egymode = 38;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
-  }
-
-  onKimentesPDF() {
-    this.eppFrissit = true;
-    this.dokumentumservice.KimentesPDF(this.Dto[this.DtoSelectedIndex])
-      .then(res => {
-        this.eppFrissit = false;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+    this.doNav(38);
   }
 
   ngOnDestroy() {

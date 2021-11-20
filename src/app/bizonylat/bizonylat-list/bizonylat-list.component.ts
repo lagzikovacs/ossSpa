@@ -43,6 +43,9 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
 
   private _sub: any;
 
+  egyirat_bbmode = 0;
+  egyirat_egymode = 1; // részletek
+
   bizonylatservice: BizonylatService;
 
   constructor(private _logonservice: LogonService,
@@ -142,6 +145,14 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
   }
 
   onId(i: number) {
+    if (i !== this.DtoSelectedIndex) {
+      this.egyirat_bbmode = 0;
+      this.egyirat_egymode = 1;
+    } else {
+      this.egyirat_bbmode = 1;
+      this.egyirat_egymode = 0;
+    }
+
     this.DtoSelectedIndex = i;
   }
 

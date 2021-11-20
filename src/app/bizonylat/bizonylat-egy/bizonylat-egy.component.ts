@@ -36,7 +36,21 @@ export class BizonylatEgyComponent implements OnDestroy {
   @Output() eventSzerkesztesutan = new EventEmitter<BizonylatDto>();
   @Output() eventTorlesutan = new EventEmitter<void>();
 
-  EgyMode = BizonylatEgyMode.Reszletek;
+  private _bbmode = 1;
+  @Output() bbmodeChange = new EventEmitter<number>();
+  @Input() get bbmode() { return this._bbmode; }
+  set bbmode(value: number) {
+    this._bbmode = value;
+    this.bbmodeChange.emit(this._bbmode);
+  }
+
+  private _egymode = 0;
+  @Output() egymodeChange = new EventEmitter<number>();
+  @Input() get egymode() { return this._egymode; }
+  set egymode(value: number) {
+    this._egymode = value;
+    this.egymodeChange.emit(this._egymode);
+  }
 
   BizonylatProjektje: ProjektDto;
   nincsProjekt = false;
@@ -103,51 +117,15 @@ export class BizonylatEgyComponent implements OnDestroy {
       this.bizonylatTipus === BizonylatTipus.BejovoSzamla);
   }
 
-  reszletek() {
-    this.EgyMode = BizonylatEgyMode.Reszletek;
+  doNav(i: number) {
+    this.bbmode = 0;
+    this.egymode = i;
   }
-  torles() {
-    this.EgyMode = BizonylatEgyMode.Torles;
-  }
-  modositas() {
-    this.EgyMode = BizonylatEgyMode.Modositas;
-  }
-  nyomtatas() {
-    this.EgyMode = BizonylatEgyMode.Nyomtatas;
-  }
-  errol() {
-    this.EgyMode = BizonylatEgyMode.Errol;
-  }
-  kibocsatas() {
-    this.EgyMode = BizonylatEgyMode.Kibocsatas;
-  }
-  penztar() {
-    this.EgyMode = BizonylatEgyMode.Penztar;
-  }
-  fuvarszamla() {
-    this.EgyMode = BizonylatEgyMode.Fuvarszamla;
-  }
-  storno() {
-    this.EgyMode = BizonylatEgyMode.Storno;
-  }
-  kifizetesrendben() {
-    this.EgyMode = BizonylatEgyMode.Kifizetesrendben;
-  }
-  kiszallitva() {
-    this.EgyMode = BizonylatEgyMode.Kiszallitva;
-  }
-  kifizetes() {
-    this.EgyMode = BizonylatEgyMode.Kifizetes;
-  }
-  irat() {
-    this.EgyMode = BizonylatEgyMode.Irat;
-  }
-  formaiellenorzes() {
-    this.EgyMode = BizonylatEgyMode.Formaiellenorzes;
-  }
-  osnxml() {
-    this.EgyMode = BizonylatEgyMode.OSNxml;
-  }
+
+
+
+
+
   doProjekt() {
     this.eppFrissit = true;
     this._projektkapcsolatservice.SelectByBizonylat(this.Dto.Bizonylatkod)

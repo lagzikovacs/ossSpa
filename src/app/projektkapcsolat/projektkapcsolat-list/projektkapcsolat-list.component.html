@@ -2,23 +2,21 @@
   <h5>{{projektkapcsolatservice.cim}}</h5>
 
   <div>
-    <nav>
-      <button (click)="onKereses()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins" style="margin-right: 3px">
-        <i class="fa fa-search" aria-hidden="true"></i>
-      </button>
-      <button [disabled]="!BizonylatMod" (click)="onUjbizonylat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Bizonylat
-      </button>
-      <button [disabled]="!IratMod" (click)="onUjirat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Irat
-      </button>
-      <button [disabled]="!AjanlatMod" (click)="onUjajanlat()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Ajánlat
-      </button>
-      <button (click)="onVagolaprol()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Vágólapról
-      </button>
-    </nav>
+    <button (click)="onKereses()" class="toolbutton">
+      <i class="fa fa-search" aria-hidden="true"></i>
+    </button>
+    <button [disabled]="!BizonylatMod" (click)="onUjbizonylat()" class="toolbutton">
+      <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Bizonylat
+    </button>
+    <button [disabled]="!IratMod" (click)="onUjirat()" class="toolbutton">
+      <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Irat
+    </button>
+    <button [disabled]="!AjanlatMod" (click)="onUjajanlat()" class="toolbutton">
+      <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Ajánlat
+    </button>
+    <button (click)="onVagolaprol()" class="toolbutton">
+      <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Vágólapról
+    </button>
   </div>
 
   <app-projektkapcsolat-tabla #tabla
@@ -39,7 +37,9 @@
                        [bizonylatTipus]=""
                        [bizonylatLeiro]="bizonylatLeiro"
                        [enTorles]="false"
-                       [enProjekt]="false">
+                       [enProjekt]="false"
+                       [(bbmode)]="egybizonylat_bbmode"
+                       [(egymode)]="egybizonylat_egymode">
     </app-bizonylat-egy>
   </ng-template>
 

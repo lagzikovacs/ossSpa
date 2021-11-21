@@ -1,16 +1,14 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>Fuvarszámla</h5>
   <div>
-    <nav>
-      <button (click)="doPage(1)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>
-        Új vagy felülírás
-      </button>
-      <button (click)="doPage(2)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-minus" style="margin-right: 3px" aria-hidden="true"></i>
-        Fuvardíjak törlése
-      </button>
-    </nav>
+    <button (click)="doPage(1)" class="toolbutton">
+      <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>
+      Új vagy felülírás
+    </button>
+    <button (click)="doPage(2)" class="toolbutton">
+      <i class="fa fa-minus" style="margin-right: 3px" aria-hidden="true"></i>
+      Fuvardíjak törlése
+    </button>
   </div>
 
   <ng-container *ngIf="EgyMode === 1">

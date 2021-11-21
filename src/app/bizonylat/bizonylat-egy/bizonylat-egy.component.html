@@ -42,15 +42,13 @@
       <button (click)="doNav(7)" class="toolbutton">
         Erről
       </button>
-      <button [disabled]="!enProjekt" (click)="doProjekt()" class="toolbutton">
+      <button [disabled]="!enProjekt" (click)="doNav(15)" class="toolbutton">
         Projekt
       </button>
-      <button (click)="vagolap()" class="toolbutton">
+      <button (click)="doNav(17)" class="toolbutton">
         <i class="fa fa-angle-right" aria-hidden="true"></i>
         Vágólapra
       </button>
-
-      <app-abu></app-abu>
     </div>
   </ng-container>
 
@@ -173,12 +171,7 @@
 
   <ng-container *ngIf="egymode === 15">
     <div [@rowanimation]>
-      <h5 *ngIf="nincsProjekt">A bizonylat nem tartozik projekthez</h5>
-      <app-reszletek *ngIf="!nincsProjekt"
-                     [cim]="projektservice.cim"
-                     [item]="BizonylatProjektje"
-                     [colsets]="projektservice.ReszletekSettings">
-      </app-reszletek>
+      <app-bizonylat-projektje [item]="Dto"></app-bizonylat-projektje>
     </div>
   </ng-container>
 
@@ -187,6 +180,13 @@
       <app-bizonylat-fuvarszamla  [dtoAnyagszamla]="Dto"
                                   (eventOK)="onFuvarszamlaUtan($event)">
       </app-bizonylat-fuvarszamla>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="egymode === 17">
+    <div [@rowanimation]>
+      <app-vagolap-bizonylathoz [item]="Dto" [tipus]="bizonylatLeiro.BizonylatNev">
+      </app-vagolap-bizonylathoz>
     </div>
   </ng-container>
 </div>

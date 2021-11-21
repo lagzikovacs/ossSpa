@@ -1,11 +1,9 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>{{esemenynaploservice.cim}}</h5>
   <div>
-    <nav>
-      <button (click)="onKereses()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        <i class="fa fa-search" aria-hidden="true"></i>
-      </button>
-    </nav>
+    <button (click)="onKereses()" class="toolbutton">
+      <i class="fa fa-search" aria-hidden="true"></i>
+    </button>
   </div>
   <table class="table table-bordered table-sm table-responsive" style="border: none">
     <thead>

@@ -1,13 +1,11 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>{{dokumentumservice.cim}}</h5>
-  <nav>
-    <button (click)="onKereses()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-      <i class="fa fa-search" aria-hidden="true"></i>
-    </button>
-    <button (click)="doUjtetel()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-      <i class="fa fa-plus" aria-hidden="true"></i>
-    </button>
-  </nav>
+  <button (click)="onKereses()" class="toolbutton">
+    <i class="fa fa-search" aria-hidden="true"></i>
+  </button>
+  <button (click)="doUjtetel()" class="toolbutton">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+  </button>
 
   <app-tabla #tabla
              [items]="Dto"

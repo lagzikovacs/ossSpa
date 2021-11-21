@@ -1,11 +1,9 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>{{volumeservice.cim}}</h5>
   <div>
-    <nav>
-      <button (click)="onKereses()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins" style="margin-right: 3px">
-        <i class="fa fa-search" aria-hidden="true"></i>
-      </button>
-    </nav>
+    <button (click)="onKereses()" class="toolbutton" style="margin-right: 3px">
+      <i class="fa fa-search" aria-hidden="true"></i>
+    </button>
   </div>
   <app-tabla #tabla
              [items]="Dto"
@@ -16,15 +14,13 @@
   <ng-template #gridegy>
     <div class="alapkeret">
       <div>
-        <nav>
-          <button (click)="doNav(1)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-            <i class="fa fa-file" aria-hidden="true"></i>
-          </button>
+        <button (click)="doNav(1)" class="toolbutton">
+          <i class="fa fa-file" aria-hidden="true"></i>
+        </button>
 
-          <button (click)="doNav(17)" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-            Ellenőrzés
-          </button>
-        </nav>
+        <button (click)="doNav(17)" class="toolbutton">
+          Ellenőrzés
+        </button>
       </div>
 
       <ng-container *ngIf="egymode === 1">

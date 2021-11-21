@@ -16,4 +16,5 @@ export enum BizonylatEgyMode {
   OSNxml = 14,
   Projekt = 15,
   Fuvarszamla = 16,
+  Vagolap = 17,
 }

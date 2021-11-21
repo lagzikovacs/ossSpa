@@ -76,9 +76,9 @@
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
-      <button class="btn btn-sm btn-primary" [disabled]="!f.valid" type="submit">Ok</button>
-      <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="onCancel()">Mégsem</button>
+    <div class="editform-okcancel">
+      <button class="editform-okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="editform-cancelbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>
 

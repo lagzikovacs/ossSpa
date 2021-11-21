@@ -1,14 +1,12 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>Volume ellenőrzés</h5>
   <div>
-    <nav>
-      <button [disabled]="eppTesztel" (click)="onInditas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        Indítás
-      </button>
-      <button [disabled]="!eppTesztel" (click)="onLeallitas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
-        Leállítás
-      </button>
-    </nav>
+    <button [disabled]="eppTesztel" (click)="onInditas()" class="toolbutton">
+      Indítás
+    </button>
+    <button [disabled]="!eppTesztel" (click)="onLeallitas()" class="toolbutton">
+      Leállítás
+    </button>
     <h6>{{index}}/{{dbv.length}}</h6>
     <div *ngFor="let h of hibalista">{{h}}</div>
   </div>

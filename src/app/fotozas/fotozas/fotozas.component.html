@@ -6,7 +6,7 @@
 
     <ng-container *ngIf="!bejelentkezve">
       <p>Üdvözöljük, ön a GridSolar Group Kft. informatikai rendszerét (OSS) használja. Kérjük a fotózáshoz kapott linket kezelje bizalmasan!</p>
-      <button (click)="folytatas()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+      <button (click)="folytatas()" class="toolbutton">
         Folytatás
       </button>
     </ng-container>
@@ -43,13 +43,13 @@
       </table>
       <form #f="ngForm" (ngSubmit)="onSubmit()">
 
-        <div class="row no-gutters editform-row">
+        <div class="editform-row">
           <div>
             <input type="file" (change)="onFileChange($event)" #fileInput>
           </div>
         </div>
 
-        <div class="row no-gutters editform-row">
+        <div class="editform-row">
           <div>
             <div class="editform-label">Megjegyzés</div>
             <input type="text" list="ssz" class="form-control form-control-sm oszlop5" id="megjegyzes"
@@ -67,8 +67,8 @@
           </div>
         </div>
 
-        <div class="row no-gutters editform-row">
-          <button class="btn btn-sm btn-primary" [disabled]="!f.valid || file === undefined" type="submit">Ok</button>
+        <div class="editform-okcancel">
+          <button class="editform-okbutton" [disabled]="!f.valid || file === undefined" type="submit">Ok</button>
         </div>
       </form>
     </ng-container>

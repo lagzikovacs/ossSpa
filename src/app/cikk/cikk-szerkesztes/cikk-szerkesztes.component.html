@@ -3,52 +3,42 @@
   <h5 *ngIf="!uj">{{cikkservice.cim}} módosítása</h5>
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
-
-    <div class="row no-gutters editform-row">
-      <div style="margin-right: 5px">
+    <div class="editform-box">
+      <div class="editform-row">
         <div class="editform-label">Megnevezés</div>
-        <input type="text" class="form-control form-control-sm oszlop6" id="megnevezes"
+        <input type="text" class="editform-edit editform-cw15" id="megnevezes"
                maxlength="100" required autocomplete="off"
                [(ngModel)]="DtoEdited.Megnevezes" name="megnevezes">
       </div>
-    </div>
 
-    <div class="row no-gutters editform-row">
-      <div style="margin-right: 5px">
+      <div class="editform-row">
         <div class="editform-label">Me</div>
-        <input type="text" class="form-control form-control-sm oszlop2" id="me"
+        <input type="text" class="editform-edit editform-cw6" id="me"
                maxlength="10" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="DtoEdited.Me" name="me">
-        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="MeZoom()">...</button>
+        <button class="toolbutton" style="margin-left: 4px; display: inline-block" type="button" (click)="MeZoom()">...</button>
       </div>
 
-      <div style="display: inline-block; margin-right: 5px">
+      <div class="editform-row">
         <div class="editform-label">ÁFA kulcs</div>
-        <input type="text" class="form-control form-control-sm oszlop2" id="afakulcs"
+        <input type="text" class="editform-edit editform-cw6" id="afakulcs"
                maxlength="10" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="DtoEdited.Afakulcs" name="afakulcs">
-        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="AfakulcsZoom()">...</button>
+        <button class="toolbutton" style="margin-left: 4px; display: inline-block" type="button" (click)="AfakulcsZoom()">...</button>
       </div>
-    </div>
 
-    <div class="row no-gutters editform-row">
-      <div style="margin-right: 5px">
+      <div class="editform-row">
         <div class="editform-label">Egységár</div>
-        <input type="number" class="form-control form-control-sm oszlop2" id="egysegar"
+        <input type="number" class="editform-edit editform-cw6" id="egysegar"
                maxlength="10" required autocomplete="off"
                [(ngModel)]="DtoEdited.Egysegar" name="egysegar">
       </div>
+    </div>
 
-      <div style="display: inline-block; margin-right: 5px">
-        <div class="editform-label">Tömeg, kg</div>
-        <input type="number" class="form-control form-control-sm oszlop2" id="tomeg"
-               maxlength="10" required autocomplete="off"
-               [(ngModel)]="DtoEdited.Tomegkg" name="tomeg">
-      </div>
-
-      <div style="display: inline-block; margin-right: 5px">
+    <div class="editform-box">
+      <div class="editform-row">
         <div class="editform-label">Készletet képez</div>
-        <select type="text" class="form-control form-control-sm"
+        <select type="text" class="editform-combo editform-cw6"
                 [(ngModel)]="DtoEdited.Keszletetkepez" name="kk">
           <option value="false">Nem</option>
           <option value="true">Igen</option>
@@ -56,33 +46,40 @@
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
-      <div style="margin-right: 5px">
-        <div class="editform-label">Termékdíj KT</div>
-        <input type="text" class="form-control form-control-sm oszlop2" id="termekdijkt"
-               maxlength="10" autocomplete="off" style="background-color: aquamarine; display: inline-block"
-               [(ngModel)]="DtoEdited.Termekdijkt" name="termekdijkt">
-        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="TermekdijZoom()">...</button>
+    <div class="editform-box">
+      <div class="editform-row">
+        <div class="editform-label">Tömeg, kg</div>
+        <input type="number" class="editform-combo editform-cw6" id="tomeg"
+               maxlength="10" required autocomplete="off"
+               [(ngModel)]="DtoEdited.Tomegkg" name="tomeg">
       </div>
 
-      <div style="display: inline-block; margin-right: 5px">
+      <div class="editform-row">
+        <div class="editform-label">Termékdíj KT</div>
+        <input type="text" class="editform-edit editform-cw6" id="termekdijkt"
+               maxlength="10" autocomplete="off" style="background-color: aquamarine; display: inline-block"
+               [(ngModel)]="DtoEdited.Termekdijkt" name="termekdijkt">
+        <button class="toolbutton" style="margin-left: 4px; display: inline-block" type="button" (click)="TermekdijZoom()">...</button>
+      </div>
+
+      <div class="editform-row">
         <div class="editform-label">Termékdíj megnevezés</div>
-        <input type="text" class="form-control form-control-sm oszlop4" id="termekdijmegnevezes"
+        <input type="text" class="editform-edit editform-cw15" id="termekdijmegnevezes"
                autocomplete="off" readonly
                [(ngModel)]="DtoEdited.Termekdijmegnevezes" name="termekdijmegnevezes">
       </div>
 
-      <div style="display: inline-block; margin-right: 5px">
+      <div class="editform-row">
         <div class="editform-label">Termékdíj egységár</div>
-        <input type="number" class="form-control form-control-sm oszlop1" id="termekdijegysegar"
+        <input type="number" class="editform-edit editform-cw6" id="termekdijegysegar"
                autocomplete="off" readonly
                [(ngModel)]="DtoEdited.Termekdijegysegar" name="termekdijegysegar">
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
-      <button class="btn btn-sm btn-primary" [disabled]="!f.valid" type="submit">Ok</button>
-      <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="onCancel()">Mégsem</button>
+    <div class="editform-okcancel">
+      <button class="editform-okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="editform-cancelbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>
 

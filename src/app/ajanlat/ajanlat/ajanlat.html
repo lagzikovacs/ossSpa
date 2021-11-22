@@ -1,7 +1,7 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>Új ajánlat</h5>
 
-    <div class="row no-gutters editform-row">
+    <div class="editform-row">
       <div>
         <div class="editform-label">Érvényes</div>
         <input type="date" class="form-control form-control-sm oszlop3" id="ervenyes"
@@ -9,49 +9,47 @@
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
-      <div>
+    <div class="editform-row">
+      <div style="display: inline-block">
         <div class="editform-label">Szüks. áramerősség</div>
-        <input type="text" class="form-control form-control-sm oszlop2" id="szuksaram"
+        <input type="text" class="editform-edit em4width" id="szuksaram"
                maxlength="20" required autocomplete="off" style="display: inline-block;margin-right: 3px"
                [(ngModel)]="AjanlatParam.SzuksegesAramerosseg" name="szuksaram">
       </div>
 
-      <div>
+      <div style="display: inline-block">
         <div class="editform-label">Tájolás</div>
-        <input type="text" class="form-control form-control-sm oszlop2" id="tajolas"
+        <input type="text" class="editform-edit em4width" id="tajolas"
                maxlength="20" required autocomplete="off" style="display: inline-block;margin-right: 3px"
                [(ngModel)]="AjanlatParam.Tajolas" name="tajolas">
       </div>
 
-      <div>
+      <div style="display: inline-block">
         <div class="editform-label">Termelés</div>
-        <input type="number" class="form-control form-control-sm oszlop2" id="termeles"
+        <input type="number" class="editform-edit em4width" id="termeles"
                required style="display: inline-block;margin-right: 3px"
                [(ngModel)]="AjanlatParam.Termeles" name="termeles">
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
+    <div class="editform-row">
       <div>
         <div class="editform-label">Megjegyzés (tárgy)</div>
-        <input type="text" class="form-control form-control-sm oszlop6" id="megjegyzes"
+        <input type="text" class="editform-edit em15width" id="megjegyzes"
                maxlength="200" autocomplete="off"
                [(ngModel)]="AjanlatParam.Megjegyzes" name="megjegyzes">
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
-      <div>
-        <input type="text" class="form-control form-control-sm oszlop3" id="netto" style="text-align:right;display: inline-block"
-               readonly="true" [(ngModel)]="AjanlatParam.Netto">
+    <div class="editform-row">
+        <input type="text" class="editform-edit em10width" id="netto" style="text-align:right;display: inline-block"
+               disabled="true" [(ngModel)]="AjanlatParam.Netto">
 
-        <input type="text" class="form-control form-control-sm oszlop3" id="afa" style="text-align:right;display: inline-block"
-               readonly="true" [(ngModel)]="AjanlatParam.Afa">
+        <input type="text" class="editform-edit em10width" id="afa" style="text-align:right;display: inline-block"
+               disabled="true" [(ngModel)]="AjanlatParam.Afa">
 
-        <input type="text" class="form-control form-control-sm oszlop3" id="brutto" style="text-align:right;display: inline-block"
-               readonly="true" [(ngModel)]="AjanlatParam.Brutto">
-      </div>
+        <input type="text" class="editform-edit em10width" id="brutto" style="text-align:right;display: inline-block"
+               disabled="true" [(ngModel)]="AjanlatParam.Brutto">
     </div>
 
     <app-ajanlat-tabla #tabla

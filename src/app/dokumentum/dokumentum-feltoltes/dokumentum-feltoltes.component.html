@@ -3,20 +3,16 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
-    <div class="row no-gutters editform-row">
-      <div>
-        <input class="oszlop6" type="file" (change)="onFileChange($event)" #fileInput>
-      </div>
+    <div class="editform-row">
+        <input type="file" (change)="onFileChange($event)" #fileInput>
     </div>
 
-    <div class="row no-gutters editform-row">
-      <div>
+    <div class="editform-row">
         <div class="editform-label">Megjegyzés</div>
-        <input type="text" class="form-control form-control-sm oszlop4" id="megjegyzes"
+        <input type="text" class="tooledit em15width" id="megjegyzes"
                autocomplete="off"
                [(ngModel)]="megjegyzes" name="megjegyzes">
         <div style="color: red">Ha ez a mező üresen marad, automatikusan<br> az eredeti fájlnév kerül a megjegyzésbe.</div>
-      </div>
     </div>
 
     <div class="editform-okcancel">

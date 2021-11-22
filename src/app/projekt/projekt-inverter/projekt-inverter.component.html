@@ -3,7 +3,7 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
-    <div class="row no-gutters editform-row">
+    <div class="editform-row">
       <div>
         <div class="editform-label">Inverter</div>
         <input type="text" class="form-control form-control-sm oszlop4" id="inverter"
@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
+    <div class="editform-row">
       <div>
         <div class="editform-label">AC, kVA</div>
         <input type="number" class="form-control form-control-sm oszlop2" id="ackva"
@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
+    <div class="editform-row">
       <div>
         <div class="editform-label">Inverter státusz</div>
         <div *ngFor="let entry of entries" class="form-check">

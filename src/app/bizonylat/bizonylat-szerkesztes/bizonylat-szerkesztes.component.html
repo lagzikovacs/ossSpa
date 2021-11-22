@@ -12,7 +12,7 @@
              [(ngModel)]="ComplexDtoEdited.Dto.Ugyfelnev">
     </div>
     <div class="col-md-1">
-      <button class="btn btn-sm btn-outline-primary" (click)="UgyfelZoom()"
+      <button class="toolbutton" (click)="UgyfelZoom()"
               [disabled] = "SzerkesztesMode !== 1"
               style="margin-left: 4px" type="button">...</button>
     </div>
@@ -25,7 +25,7 @@
              [(ngModel)]="ComplexDtoEdited.Dto.Penznem">
     </div>
     <div class="col-md-1">
-      <button class="btn btn-sm btn-outline-primary" (click)="PenznemZoom()"
+      <button class="toolbutton" (click)="PenznemZoom()"
               [disabled] = "SzerkesztesMode !== 1"
               style="margin-left: 4px" type="button">...</button>
     </div>
@@ -65,11 +65,11 @@
              [(ngModel)]="ComplexDtoEdited.Dto.Fizetesimod" name="megjegyzes">
     </div>
     <div class="col-md-1">
-      <button class="btn btn-sm btn-outline-primary" (click)="FizetesimodZoom()"
+      <button class="btoolbutton" (click)="FizetesimodZoom()"
               [disabled] = "SzerkesztesMode !== 1"
               style="margin-left: 4px" type="button">...</button>
-      <button class="btn btn-sm btn-outline-primary" (click)="Bk()" style="margin-left: 4px" type="button">Bk</button>
-      <button class="btn btn-sm btn-outline-primary" (click)="Kp()" style="margin-left: 4px" type="button">Kp</button>
+      <button class="toolbutton" (click)="Bk()" style="margin-left: 4px" type="button">Bk</button>
+      <button class="toolbutton" (click)="Kp()" style="margin-left: 4px" type="button">Kp</button>
     </div>
   </div>
   <div class="row no-gutters editform-row">
@@ -175,10 +175,10 @@
     </ng-template>
   </div>
 
-  <div class="row no-gutters" style="margin-bottom: 10px">
-    <button class="btn btn-sm btn-primary" [disabled]="SzerkesztesMode !== 1"
+  <div class="editform-okcancel" style="margin-bottom: 10px">
+    <button class="editform-okbutton" [disabled]="SzerkesztesMode !== 1"
             type="button" (click)="onSubmit()">Ok</button>
-    <button class="btn btn-sm btn-default" [disabled]="SzerkesztesMode !== 1"
+    <button class="editform-cancelbutton" [disabled]="SzerkesztesMode !== 1"
             style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
   </div>
 </div>

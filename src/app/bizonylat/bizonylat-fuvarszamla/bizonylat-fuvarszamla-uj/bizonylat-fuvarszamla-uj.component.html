@@ -7,7 +7,7 @@
         <input type="text" class="form-control form-control-sm oszlop3" id="bizonylatszam"
                maxlength="100" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="dtoFuvarszamla.Bizonylatszam" name="bizonylatszam">
-        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="BizonylatZoom()">...</button>
+        <button class="toolbutton" style="margin-left: 4px; display: inline-block" type="button" (click)="BizonylatZoom()">...</button>
       </div>
     </div>
 
@@ -38,9 +38,9 @@
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
-      <button class="btn btn-sm btn-primary" [disabled]="!f.valid" type="submit">Ok</button>
-      <button class="btn btn-sm btn-default" style="margin-left:3px;" type="button" (click)="doCancel()">Mégsem</button>
+    <div class="editform-okcancel">
+      <button class="editform-okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="editform-cancelbutton" type="button" (click)="doCancel()">Mégsem</button>
     </div>
   </form>
 

@@ -1,10 +1,10 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>Fotózás link</h5>
 
-  <button (click)="doUj()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+  <button (click)="doUj()" class="toolbutton">
     Új fotózás link
   </button>
-  <button [disabled]="link === ''" (click)="doTorles()" class="btn btn-sm btn-outline-primary toolbarcontrolmargins">
+  <button [disabled]="link === ''" (click)="doTorles()" class="toolbutton">
     Fotózás link törlése
   </button>
 
@@ -19,9 +19,9 @@
     <div [@rowanimation]>
       <h5>Új fotózás link</h5>
       <p>Ha új fotózás linket készít, a régi érvényessége megszűnik. Biztos benne?</p>
-      <div class="row no-gutters" style="margin-bottom: 10px">
-        <button class="btn btn-sm btn-primary" (click)="onUj()">Ok</button>
-        <button class="btn btn-sm btn-default" style="margin-left:3px;" (click)="onMegsem()">Mégsem</button>
+      <div class="editform-okcancel" style="margin-bottom: 10px">
+        <button class="editform-okbutton" (click)="onUj()">Ok</button>
+        <button class="editform-cancelbutton" (click)="onMegsem()">Mégsem</button>
       </div>
     </div>
   </ng-container>

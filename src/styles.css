@@ -31,6 +31,10 @@ th {
   border-radius: 0.2em;
 }
 .editform-combo {
+   border: 1px solid lightgrey;
+   border-radius: 0.2em;
+}
+.editform-date {
   border: 1px solid lightgrey;
   border-radius: 0.2em;
 }

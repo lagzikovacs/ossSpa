@@ -4,75 +4,66 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
-    <div class="row no-gutters editform-row">
-      <div>
+    <div class="editform-box">
+      <div class="editform-row">
         <div class="editform-label">Irány</div>
-        <select type="text" class="form-control form-control-sm"
+        <select type="text" class="editform-combo em4width"
                 [(ngModel)]="DtoEdited.Irany" name="irany">
           <option>Be</option>
           <option>Ki</option>
           <option>Belső</option>
         </select>
       </div>
-    </div>
 
-    <div class="row no-gutters editform-row">
-      <div>
+      <div class="editform-row">
         <div class="editform-label">Keletkezett</div>
-        <input type="date" class="form-control form-control-sm oszlop3" id="keletkezett"
+        <input type="date" class="editform-date em10width" id="keletkezett"
                [(ngModel)]="Keletkezett" name="keletkezett">
       </div>
-    </div>
 
-    <div class="row no-gutters editform-row">
-      <div>
+      <div class="editform-row">
         <div class="editform-label">Irattipus</div>
-        <input type="text" class="form-control form-control-sm oszlop3" id="irattipus"
+        <input type="text" class="editform-edit em10width" id="irattipus"
                maxlength="30" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="DtoEdited.Irattipus" name="irattipus">
-        <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="IrattipusZoom()">...</button>
+        <button class="toolbutton" style="margin-left: 4px; display: inline-block" type="button" (click)="IrattipusZoom()">...</button>
       </div>
     </div>
 
-    <ng-container *ngIf="enUgyfel">
-      <div class="row no-gutters editform-row">
-        <div>
-          <div class="editform-label">Ügyfél</div>
-          <input type="text" class="form-control form-control-sm oszlop4" id="ugyfelnev"
-                 maxlength="200" autocomplete="off" style="background-color: aquamarine; display: inline-block"
-                 [(ngModel)]="DtoEdited.Ugyfelnev" name="ugyfelnev">
-          <button class="btn btn-sm btn-outline-primary" style="margin-left: 4px; display: inline-block" type="button" (click)="UgyfelZoom()">...</button>
-          <button class="btn btn-sm btn-outline-primary" (click)="UgyfelTorles()"
-                  style="margin-left: 4px; display: inline-block" type="button">
-            <i class="fa fa-close" aria-hidden="true"></i>
-          </button>
+    <div class="editform-box">
+      <ng-container *ngIf="enUgyfel">
+        <div class="editform-row">
+            <div class="editform-label">Ügyfél</div>
+            <input type="text" class="editform-edit em15width" id="ugyfelnev"
+                   maxlength="200" autocomplete="off" style="background-color: aquamarine; display: inline-block"
+                   [(ngModel)]="DtoEdited.Ugyfelnev" name="ugyfelnev">
+            <button class="toolbutton" style="margin-left: 4px; display: inline-block" type="button" (click)="UgyfelZoom()">...</button>
+            <button class="toolbutton" (click)="UgyfelTorles()"
+                    style="margin-left: 4px; display: inline-block" type="button">
+              <i class="fa fa-close" aria-hidden="true"></i>
+            </button>
         </div>
-      </div>
 
-      <div class="row no-gutters editform-row">
-        <div>
-          <input type="text" class="form-control form-control-sm oszlop4" id="ugyfelcim"
-                 autocomplete="off" readonly="true"
-                 [(ngModel)]="DtoEdited.Ugyfelcim" name="ugyfelcim">
+        <div class="editform-row">
+          <div class="editform-label">Cím</div>
+            <input type="text" class="editform-edit em15width" id="ugyfelcim"
+                   autocomplete="off" readonly="true" disabled="true"
+                   [(ngModel)]="DtoEdited.Ugyfelcim" name="ugyfelcim">
         </div>
-      </div>
 
-      <div class="row no-gutters editform-row">
-        <div>
-          <div class="editform-label">Küldő</div>
-          <input type="text" class="form-control form-control-sm oszlop4" id="kuldo"
-                 maxlength="100" autocomplete="off"
-                 [(ngModel)]="DtoEdited.Kuldo" name="kuldo">
+        <div class="editform-row">
+            <div class="editform-label">Küldő</div>
+            <input type="text" class="editform-edit em15width" id="kuldo"
+                   maxlength="100" autocomplete="off"
+                   [(ngModel)]="DtoEdited.Kuldo" name="kuldo">
         </div>
-      </div>
-    </ng-container>
+      </ng-container>
 
-    <div class="row no-gutters editform-row">
-      <div>
-        <div class="editform-label">Tárgy</div>
-        <input type="text" class="form-control form-control-sm oszlop4" id="targy"
-               maxlength="200" autocomplete="off"
-               [(ngModel)]="DtoEdited.Targy" name="targy">
+      <div class="editform-row">
+          <div class="editform-label">Tárgy</div>
+          <input type="text" class="editform-edit em15width" id="targy"
+                 maxlength="200" autocomplete="off"
+                 [(ngModel)]="DtoEdited.Targy" name="targy">
       </div>
     </div>
 

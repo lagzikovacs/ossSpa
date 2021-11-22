@@ -13,7 +13,7 @@
 
       <div class="editform-row">
         <div class="editform-label">Me</div>
-        <input type="text" class="editform-edit editform-cw6" id="me"
+        <input type="text" class="editform-edit em6width" id="me"
                maxlength="10" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="DtoEdited.Me" name="me">
         <button class="toolbutton" style="margin-left: 4px; display: inline-block" type="button" (click)="MeZoom()">...</button>
@@ -21,7 +21,7 @@
 
       <div class="editform-row">
         <div class="editform-label">ÁFA kulcs</div>
-        <input type="text" class="editform-edit editform-cw6" id="afakulcs"
+        <input type="text" class="editform-edit em6width" id="afakulcs"
                maxlength="10" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="DtoEdited.Afakulcs" name="afakulcs">
         <button class="toolbutton" style="margin-left: 4px; display: inline-block" type="button" (click)="AfakulcsZoom()">...</button>
@@ -29,14 +29,14 @@
 
       <div class="editform-row">
         <div class="editform-label">Egységár</div>
-        <input type="number" class="editform-edit editform-cw6" id="egysegar"
+        <input type="number" class="editform-edit em6width" id="egysegar"
                maxlength="10" required autocomplete="off"
                [(ngModel)]="DtoEdited.Egysegar" name="egysegar">
       </div>
 
       <div class="editform-row">
         <div class="editform-label">Készletet képez</div>
-        <select type="text" class="editform-combo editform-cw6"
+        <select type="text" class="editform-combo em6width"
                 [(ngModel)]="DtoEdited.Keszletetkepez" name="kk">
           <option value="false">Nem</option>
           <option value="true">Igen</option>
@@ -47,14 +47,14 @@
     <div class="editform-box">
       <div class="editform-row">
         <div class="editform-label">Tömeg, kg</div>
-        <input type="number" class="editform-combo editform-cw6" id="tomeg"
+        <input type="number" class="editform-combo em6width" id="tomeg"
                maxlength="10" required autocomplete="off"
                [(ngModel)]="DtoEdited.Tomegkg" name="tomeg">
       </div>
 
       <div class="editform-row">
         <div class="editform-label">Termékdíj KT</div>
-        <input type="text" class="editform-edit editform-cw6" id="termekdijkt"
+        <input type="text" class="editform-edit em6width" id="termekdijkt"
                maxlength="10" autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="DtoEdited.Termekdijkt" name="termekdijkt">
         <button class="toolbutton" style="margin-left: 4px; display: inline-block" type="button" (click)="TermekdijZoom()">...</button>
@@ -69,7 +69,7 @@
 
       <div class="editform-row">
         <div class="editform-label">Termékdíj egységár</div>
-        <input type="number" class="editform-edit editform-cw6" id="termekdijegysegar"
+        <input type="number" class="editform-edit em6width" id="termekdijegysegar"
                autocomplete="off" readonly
                [(ngModel)]="DtoEdited.Termekdijegysegar" name="termekdijegysegar">
       </div>

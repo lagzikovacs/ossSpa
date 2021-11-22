@@ -6,7 +6,7 @@
     <div class="editform-box">
       <div class="editform-row">
         <div class="editform-label">Megnevezés</div>
-        <input type="text" class="editform-edit editform-cw15" id="megnevezes"
+        <input type="text" class="editform-edit em15width" id="megnevezes"
                maxlength="100" required autocomplete="off"
                [(ngModel)]="DtoEdited.Megnevezes" name="megnevezes">
       </div>
@@ -33,9 +33,7 @@
                maxlength="10" required autocomplete="off"
                [(ngModel)]="DtoEdited.Egysegar" name="egysegar">
       </div>
-    </div>
 
-    <div class="editform-box">
       <div class="editform-row">
         <div class="editform-label">Készletet képez</div>
         <select type="text" class="editform-combo editform-cw6"
@@ -64,7 +62,7 @@
 
       <div class="editform-row">
         <div class="editform-label">Termékdíj megnevezés</div>
-        <input type="text" class="editform-edit editform-cw15" id="termekdijmegnevezes"
+        <input type="text" class="editform-edit em15width" id="termekdijmegnevezes"
                autocomplete="off" readonly
                [(ngModel)]="DtoEdited.Termekdijmegnevezes" name="termekdijmegnevezes">
       </div>

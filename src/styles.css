@@ -40,7 +40,7 @@ th {
 .ng-invalid:not(form) {
   border-left: 0.3em solid lightpink;
 }
-.editform-cw4 {
+.em4width {
    width: 4em;
 }
 .editform-cw6 {
@@ -49,7 +49,7 @@ th {
 .em10width {
   width: 10em;
 }
-.editform-cw15 {
+.em15width {
   width: 15em;
 }
 .editform-okcancel {

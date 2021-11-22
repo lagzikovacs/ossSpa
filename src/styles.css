@@ -22,6 +22,10 @@ th {
   margin-left: 1em;
   margin-bottom: 0.7em;
 }
+.editform-row-block {
+  display: inline-block;
+  margin-right: 0.5em
+}
 .editform-label {
   text-align: left;
   font-style: italic;
@@ -29,10 +33,12 @@ th {
 .editform-edit {
   border: 1px solid lightgrey;
   border-radius: 0.2em;
+  margin-right: 0.5em;
 }
 .editform-combo {
-   border: 1px solid lightgrey;
-   border-radius: 0.2em;
+  border: 1px solid lightgrey;
+  border-radius: 0.2em;
+  margin-right: 0.5em;
 }
 .editform-date {
   border: 1px solid lightgrey;
@@ -55,6 +61,12 @@ th {
 }
 .em15width {
   width: 15em;
+}
+.em20width {
+  width: 20em;
+}
+.em30width {
+  width: 30em;
 }
 .editform-okcancel {
   margin-top: 1em;
@@ -110,6 +122,12 @@ th {
   border: 1px solid lightgrey;
   border-radius: 0.2em;
   margin-right: 0.2em;
+}
+.itemID {
+  text-align: right;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 /*.editform-okbutton:disabled,*/

@@ -1,6 +1,6 @@
-.table tr.active td {
+table tr.active td {
   background-color: #abdde5;
 }
-.table tr.inactive td {
+table tr.inactive td {
   background-color: white;
 }

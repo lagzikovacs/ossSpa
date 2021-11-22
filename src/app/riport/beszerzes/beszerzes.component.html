@@ -3,7 +3,7 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
-    <div class="row no-gutters editform-row">
+    <div class="editform-row">
       <div>
         <div class="editform-label">A teljesítés kelte</div>
         <input type="date" class="form-control form-control-sm oszlop3" id="tol"
@@ -11,14 +11,14 @@
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
+    <div class="editform-row">
       <div>
         <input type="date" class="form-control form-control-sm oszlop3" id="ig"
                [(ngModel)]="ig" name="ig">
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
+    <div class="editform-row">
       <div>
         <div class="editform-label">Részletek is</div>
         <select type="text" class="form-control form-control-sm"

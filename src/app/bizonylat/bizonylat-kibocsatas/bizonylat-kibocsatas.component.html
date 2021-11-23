@@ -7,7 +7,7 @@
       <div class="editform-row">
         <div>
           <div class="editform-label">Bizonylatszám</div>
-          <input type="text" class="form-control form-control-sm oszlop3" id="bizonylatszam"
+          <input type="text" class="editform-edit em10width" id="bizonylatszam"
                  maxlength="20" required autocomplete="off"
                  [(ngModel)]="bizonylatszam" name="bizonylatszam">
         </div>
@@ -16,7 +16,7 @@
 
     <ng-container *ngIf="bizonylatLeiro.GenBizonylatszam">
       <div class="editform-row">
-        <div>Biztosan kibocsátja ezt a bizonylatot?</div>
+        Biztosan kibocsátja ezt a bizonylatot?
       </div>
     </ng-container>
 

@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, Input, OnDestroy, Output, EventEmitter} from '@angular/core';
 import {rowanimation} from '../../animation/rowAnimation';
 import {BizonylatDto} from '../bizonylatdto';
 
@@ -7,16 +7,13 @@ import {BizonylatDto} from '../bizonylatdto';
   templateUrl: './bizonylat-fuvarszamla.component.html',
   animations: [rowanimation]
 })
-export class BizonylatFuvarszamlaComponent implements OnInit, OnDestroy {
+export class BizonylatFuvarszamlaComponent implements OnDestroy {
   @Input() dtoAnyagszamla: BizonylatDto;
   @Output() eventOK = new EventEmitter<BizonylatDto>();
   eppFrissit = false;
   EgyMode = 0;
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   doPage(i: number) {
     this.EgyMode = i;

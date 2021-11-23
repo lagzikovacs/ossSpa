@@ -3,7 +3,7 @@
 
   <ng-container *ngIf="penztarDto.length > 0 && !penztarkivalasztva">
     <div>A bizonylat pénznemének megfelelő nyitott pénztárak a következők, válassza ki a megfelelőt:</div>
-    <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <table>
       <thead>
       <tr>
         <th>Id</th>
@@ -14,8 +14,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let item of penztarDto; let i = index">
-        <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
-            (click)="penztarvalasztas(i)">{{item.Penztarkod}}</td>
+        <td class="itemID" (click)="penztarvalasztas(i)">{{item.Penztarkod}}</td>
         <td>{{item.Penztar1}}</td>
         <td>{{item.Penznem}}</td>
         <td>{{item.Egyenleg}}</td>
@@ -28,48 +27,38 @@
     <form #f="ngForm" (ngSubmit)="onSubmit()">
 
       <div class="editform-row">
-        <div>
           <div class="editform-label">Pénztár</div>
-          <input type="text" class="form-control form-control-sm oszlop3" id="penztar"
-                 readonly="true"
+          <input type="text" class="editform-edit em15width" id="penztar"
+                 disabled="true"
                  [(ngModel)]="penztarDto[penztarindex].Penztar1" name="penztar">
-        </div>
       </div>
 
       <div class="editform-row">
-        <div>
           <div class="editform-label">Pénznem</div>
-          <input type="text" class="form-control form-control-sm oszlop2" id="penznem"
-                 readonly="true"
+          <input type="text" class="editform-edit em4width" id="penznem"
+                 disabled="true"
                  [(ngModel)]="penztarDto[penztarindex].Penznem" name="penznem">
-        </div>
       </div>
 
       <div class="editform-row">
-        <div>
           <div class="editform-label">Egyenleg</div>
-          <input type="text" class="form-control form-control-sm oszlop2" id="egyenleg"
-                 readonly="true"
+          <input type="text" class="editform-edit em6width" id="egyenleg"
+                 disabled="true"
                  [(ngModel)]="penztarDto[penztarindex].Egyenleg" name="egyenleg">
-        </div>
       </div>
 
       <div class="editform-row">
-        <div>
           <div class="editform-label">Összeg</div>
-          <input type="text" class="form-control form-control-sm oszlop2" id="osszeg"
-                 readonly="true"
+          <input type="text" class="editform-edit em6width" id="osszeg"
+                 disabled="true"
                  [(ngModel)]="Dto.Brutto" name="osszeg">
-        </div>
       </div>
 
       <div class="editform-row">
-        <div>
           <div class="editform-label">Megjegyzés</div>
-          <input type="text" class="form-control form-control-sm oszlop6" id="megjegyzes"
+          <input type="text" class="editform-edit em30width" id="megjegyzes"
                  autocomplete="off"
                  [(ngModel)]="megjegyzes" name="megjegyzes">
-        </div>
       </div>
 
       <div class="editform-okcancel">

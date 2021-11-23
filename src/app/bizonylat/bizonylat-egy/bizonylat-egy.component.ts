@@ -111,8 +111,6 @@ export class BizonylatEgyComponent implements OnDestroy {
     this.egymode = i;
   }
 
-
-
   onTorles(ok: boolean) {
     if (ok) {
       this.eppFrissit = true;

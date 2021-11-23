@@ -1,8 +1,10 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>Fuvardíjak törlése</h5>
-  <p>Biztosan törölni akarja erről a számláról a fuvardíjakat?</p>
+  <div class="editform-row">
+    Biztosan törölni akarja erről a számláról a fuvardíjakat?
+  </div>
   <div class="editform-okcancel" style="margin-bottom: 10px">
     <button class="editform-okbutton" (click)="doOk()">Ok</button>
-    <button class="editform-cancelbutton" style="margin-left:3px;" (click)="doCancel()">Mégsem</button>
+    <button class="editform-cancelbutton" (click)="doCancel()">Mégsem</button>
   </div>
 </div>

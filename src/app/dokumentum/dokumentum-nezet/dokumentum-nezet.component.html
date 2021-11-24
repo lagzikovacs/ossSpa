@@ -1,8 +1,10 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>Nézet</h5>
-  <div *ngIf="!kesz">Letöltés, kis türelmet...</div>
-  <div *ngIf="kesz" style="width: 75vw">
-    <ngx-extended-pdf-viewer [base64Src]="pdf" height="60vh" [showOpenFileButton]="false" [zoom]="'page-width'" [textLayer]="true">
-    </ngx-extended-pdf-viewer>
+  <div class="editform-row">
+    <div *ngIf="!kesz">Letöltés, kis türelmet...</div>
+    <div *ngIf="kesz" style="width: 75vw">
+      <ngx-extended-pdf-viewer [base64Src]="pdf" height="60vh" [showOpenFileButton]="false" [zoom]="'page-width'" [textLayer]="true">
+      </ngx-extended-pdf-viewer>
+    </div>
   </div>
 </div>

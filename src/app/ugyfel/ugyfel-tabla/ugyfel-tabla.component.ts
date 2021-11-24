@@ -3,8 +3,7 @@ import {UgyfelDto} from '../ugyfeldto';
 
 @Component({
   selector: 'app-ugyfel-tabla',
-  templateUrl: './ugyfel-tabla.component.html',
-  styleUrls: ['./ugyfel-tabla.component.css']
+  templateUrl: './ugyfel-tabla.component.html'
 })
 export class UgyfelTablaComponent implements OnDestroy {
   @Input() items: UgyfelDto[];

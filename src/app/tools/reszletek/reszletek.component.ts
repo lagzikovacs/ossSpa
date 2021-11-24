@@ -3,8 +3,7 @@ import {ColumnSettings} from './columnsettings';
 
 @Component({
   selector: 'app-reszletek',
-  templateUrl: './reszletek.component.html',
-  styleUrls: ['./reszletek.component.css']
+  templateUrl: './reszletek.component.html'
 })
 export class ReszletekComponent implements OnDestroy {
   @Input() cim: string;

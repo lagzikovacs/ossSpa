@@ -1,4 +1,4 @@
-<table class="table table-bordered table-sm table-responsive" style="border: none">
+<table>
   <thead>
   <tr>
     <th>Id</th>
@@ -11,7 +11,7 @@
   <tbody>
   <ng-container *ngFor="let item of Dto; let i = index">
     <tr>
-      <td *ngIf="enIdclick" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="setClickedRow(i)">{{item.Bizonylatafakod}}</td>
+      <td *ngIf="enIdclick" class="itemID" (click)="setClickedRow(i)">{{item.Bizonylatafakod}}</td>
       <td *ngIf="!enIdclick">{{item.Bizonylatafakod}}</td>
       <td style="text-align: right">{{item.Afamerteke | number: '1.2-2'}}</td>
       <td style="text-align: right">{{item.Netto | number: '1.2-2'}}</td>

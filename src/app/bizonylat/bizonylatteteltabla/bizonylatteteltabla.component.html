@@ -1,4 +1,4 @@
-<table class="table table-bordered table-sm table-responsive" style="border: none">
+<table>
   <thead>
   <tr>
     <th *ngIf="enEdit"></th>
@@ -31,10 +31,10 @@
 
     <ng-container *ngFor="let item of Dto; let i = index">
       <tr (click)="clickforrow(i)" [className]="i === clickedrowindex ? 'active' : 'inactive'">
-        <td *ngIf="enEdit" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer;padding-left: 8px;padding-right: 8px"
+        <td *ngIf="enEdit" class="itemID itemIcon"
             (click)="dotorles(i)">
           <i class="fa fa-minus" aria-hidden="true"></i></td>
-        <td *ngIf="enEdit" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer;padding-left: 8px;padding-right: 8px"
+        <td *ngIf="enEdit" class="itemID itemIcon"
             (click)="domodositas(i)">
           <i class="fa fa-edit" aria-hidden="true"></i></td>
 

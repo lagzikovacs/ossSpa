@@ -3,8 +3,7 @@ import {ColumnSettings} from '../reszletek/columnsettings';
 
 @Component({
   selector: 'app-tabla',
-  templateUrl: './tabla.component.html',
-  styleUrls: ['./tabla.component.css']
+  templateUrl: './tabla.component.html'
 })
 export class TablaComponent implements OnDestroy {
   @Input() items: any[];

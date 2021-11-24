@@ -7,7 +7,7 @@
     <div class="editform-row">
       <div>
         <div class="editform-label">Dátum</div>
-        <input type="date" class="form-control form-control-sm oszlop3" id="datum"
+        <input type="date" class="editform-date em10width" id="datum"
                [(ngModel)]="Datum" name="datum">
       </div>
     </div>
@@ -15,7 +15,7 @@
     <div class="editform-row">
       <div>
         <div class="editform-label">Összeg</div>
-        <input type="number" class="form-control form-control-sm oszlop3" id="osszeg"
+        <input type="number" class="editform-edit em10width" id="osszeg"
                [(ngModel)]="DtoEdited.Osszeg" name="osszeg">
       </div>
     </div>
@@ -23,7 +23,7 @@
     <div class="editform-row">
       <div>
         <div class="editform-label">Pénznem</div>
-        <input type="text" class="form-control form-control-sm oszlop2" id="penznem"
+        <input type="text" class="editform-edit em4width" id="penznem"
                maxlength="3" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="DtoEdited.Penznem" name="penznem">
         <button class="toolbutton" style="margin-left: 4px; display: inline-block" type="button"
@@ -34,7 +34,7 @@
     <div class="editform-row">
       <div>
         <div class="editform-label">Fizetési mód</div>
-        <input type="text" class="form-control form-control-sm oszlop2" id="fizetesimod"
+        <input type="text" class="editform-edit em10width" id="fizetesimod"
                maxlength="20" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="DtoEdited.Fizetesimod" name="fizetesimod">
         <button class="toolbutton" style="margin-left: 4px; display: inline-block" type="button"

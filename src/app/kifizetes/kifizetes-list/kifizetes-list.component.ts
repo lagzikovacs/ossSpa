@@ -21,7 +21,8 @@ export class KifizetesListComponent implements OnInit, OnDestroy {
   Dto = new Array<KifizetesDto>();
   DtoSelectedIndex = -1;
 
-  egymode = EgyMode.Reszletek;
+  bbmode = 1;
+  egymode = 0;
 
   eppFrissit = false;
 
@@ -55,10 +56,12 @@ export class KifizetesListComponent implements OnInit, OnDestroy {
 
   onId(i: number) {
     this.DtoSelectedIndex = i;
-    this.egymode = EgyMode.Reszletek;
+    this.bbmode = 1;
+    this.egymode = 0;
   }
 
   doNav(i: number) {
+    this.bbmode = 0;
     this.egymode = i;
   }
 
@@ -75,7 +78,8 @@ export class KifizetesListComponent implements OnInit, OnDestroy {
     if (dto !== null) {
       propCopy(dto, this.Dto[this.DtoSelectedIndex]);
     }
-    this.egymode = EgyMode.Reszletek;
+    this.bbmode = 1;
+    this.egymode = 0;
   }
   onTorles(ok: boolean) {
     if (ok) {
@@ -98,7 +102,8 @@ export class KifizetesListComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.egymode = EgyMode.Reszletek;
+      this.bbmode = 1;
+      this.egymode = 0;
     }
   }
 

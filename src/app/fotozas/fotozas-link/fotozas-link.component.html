@@ -1,36 +1,47 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>Fotózás link</h5>
 
-  <button (click)="doUj()" class="toolbutton">
-    Új fotózás link
-  </button>
-  <button [disabled]="link === ''" (click)="doTorles()" class="toolbutton">
-    Fotózás link törlése
-  </button>
+  <div class="editform-row">
+    <button (click)="doUj()" class="toolbutton">
+      Új fotózás link
+    </button>
+    <button [disabled]="link === ''" (click)="doTorles()" class="toolbutton">
+      Fotózás link törlése
+    </button>
+  </div>
 
   <ng-container *ngIf="link !== ''">
-    <div class="form-group">
-      <textarea class="form-control" rows="3" id="regilink" readonly="true" [(ngModel)]="link"></textarea>
+    <div class="editform-row">
+      <textarea class="em60width" rows="3" id="regilink" readonly="true" [(ngModel)]="link"></textarea>
+    </div>
+    <div class="editform-row">
       {{kikuldesikodidopontja}}
     </div>
   </ng-container>
 
+
   <ng-container *ngIf="egymode === 3">
     <div [@rowanimation]>
-      <h5>Új fotózás link</h5>
-      <p>Ha új fotózás linket készít, a régi érvényessége megszűnik. Biztos benne?</p>
-      <div class="editform-okcancel" style="margin-bottom: 10px">
-        <button class="editform-okbutton" (click)="onUj()">Ok</button>
-        <button class="editform-cancelbutton" (click)="onMegsem()">Mégsem</button>
+      <div class="alapkeret editform-row">
+        <h5>Új fotózás link</h5>
+        <div class="editform-row">
+          Ha új fotózás linket készít, a régi érvényessége megszűnik. Biztos benne?
+        </div>
+        <div class="editform-okcancel" style="margin-bottom: 10px">
+          <button class="editform-okbutton" (click)="onUj()">Ok</button>
+          <button class="editform-cancelbutton" (click)="onMegsem()">Mégsem</button>
+        </div>
       </div>
     </div>
   </ng-container>
 
   <ng-container *ngIf="egymode === 2">
     <div [@rowanimation]>
-      <app-tetel-torles [cim]="'Fotózás link'"
-                        (eventTorles)="onTorles($event)">
-      </app-tetel-torles>
+      <div class="editform-row">
+        <app-tetel-torles [cim]="'Fotózás link'"
+                          (eventTorles)="onTorles($event)">
+        </app-tetel-torles>
+      </div>
     </div>
   </ng-container>
 </div>

@@ -11,7 +11,7 @@
     </button>
   </div>
 
-  <table class="table table-bordered table-sm table-responsive" style="border: none">
+  <table>
     <thead>
     <tr>
       <th style="width: 20px"></th>
@@ -43,8 +43,7 @@
     <tbody>
       <ng-container *ngFor="let item of items; let i = index">
         <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
-          <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
-              (click)="clickforzoom(i)">
+          <td class="itemID" (click)="clickforzoom(i)">
             <i class="fa fa-check" aria-hidden="true"></i>
           </td>
 

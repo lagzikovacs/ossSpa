@@ -52,7 +52,7 @@
     <ng-container *ngFor="let item of items; let i = index">
       <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
         <td>
-          <div *ngIf="enIdclick" style="color: blue; text-decoration: underline; cursor: pointer"(click)="clickforid(i)">{{item.Bizonylatkod}}</div>
+          <div *ngIf="enIdclick" class="itemID" (click)="clickforid(i)">{{item.Bizonylatkod}}</div>
           <div *ngIf="!enIdclick">{{item.Bizonylatkod}}</div>
           <div>{{item.Bizonylatszam}}</div>
         </td>

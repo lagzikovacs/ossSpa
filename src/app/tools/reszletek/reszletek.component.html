@@ -1,8 +1,8 @@
 <div class="alapkeret">
   <h5>{{cim}} részletesen</h5>
-  <table class="table ng table-bordered table-sm table-responsive" style="border: none">
+  <table>
     <tbody>
-    <tr *ngFor="let colset of colsets; let i = index" (click)="RowClick(i)" [class.active]="i == selectedindex">
+    <tr *ngFor="let colset of colsets; let i = index" (click)="RowClick(i)" [className]="i === selectedindex ? 'active' : 'inactive'">
       <td class="editform-label">{{colset.Title}}:</td>
       <td>
         <div *ngIf="colset.Type === 'INT'">{{item[colset.Name]}}</div>

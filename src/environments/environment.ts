@@ -7,7 +7,7 @@ export const environment = {
   lapmeret: 5,
 
   CoreRef: 'https://docport.hu/ossserver/',
-  OSSRef: 'https://docport.hu/oss2/',
+  OSSRef: 'http://localhost:4200/',
   // CoreRef: 'https://localhost:44373/',
   // OSSRef: 'http://localhost:4200/',
 

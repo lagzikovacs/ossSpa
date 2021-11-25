@@ -5,23 +5,18 @@
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
     <div class="editform-row">
-      <div>
         <div class="editform-label">Pénztár</div>
-        <input type="text" class="form-control form-control-sm oszlop3" id="penztar"
+        <input type="text" class="editform-edit em15width" id="penztar"
                maxlength="200" required autocomplete="off"
                [(ngModel)]="DtoEdited.Penztar1" name="penztar">
-      </div>
     </div>
 
     <div class="editform-row">
-      <div>
         <div class="editform-label">Pénznem</div>
-        <input type="text" class="form-control form-control-sm oszlop2" id="penznem"
-               maxlength="100" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
+        <input type="text" class="editform-edit em4width" id="penznem"
+               maxlength="100" required autocomplete="off"
                [(ngModel)]="DtoEdited.Penznem" name="penznem">
-        <button class="toolbutton" style="margin-left: 4px; display: inline-block" type="button"
-                (click)="PenznemZoom()">...</button>
-      </div>
+        <button class="toolbutton" type="button" (click)="PenznemZoom()">...</button>
     </div>
 
     <div class="editform-okcancel">

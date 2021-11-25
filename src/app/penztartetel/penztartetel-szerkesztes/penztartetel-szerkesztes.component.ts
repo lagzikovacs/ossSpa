@@ -54,41 +54,41 @@ export class PenztartetelSzerkesztesComponent implements AfterViewInit, OnInit, 
   }
 
   jogcimchange() {
-    this.ugyfelInput.nativeElement.readOnly = false;
-    this.bizonylatszamInput.nativeElement.readOnly = false;
-    this.bevetelInput.nativeElement.readOnly = false;
-    this.kiadasInput.nativeElement.readOnly = false;
+    this.ugyfelInput.nativeElement.disabled = false;
+    this.bizonylatszamInput.nativeElement.disabled = false;
+    this.bevetelInput.nativeElement.disabled = false;
+    this.kiadasInput.nativeElement.disabled = false;
 
     switch (this.jogcimInput.nativeElement.selectedIndex) {
       case 0: // Bevét korrekció
-        this.ugyfelInput.nativeElement.readOnly = true;
-        this.bizonylatszamInput.nativeElement.readOnly = true;
-        this.bevetelInput.nativeElement.readOnly = true;
+        this.ugyfelInput.nativeElement.disabled = true;
+        this.bizonylatszamInput.nativeElement.disabled = true;
+        this.bevetelInput.nativeElement.disabled = true;
         break;
       case 1: // Kiadás korrekció
-        this.ugyfelInput.nativeElement.readOnly = true;
-        this.bizonylatszamInput.nativeElement.readOnly = true;
-        this.kiadasInput.nativeElement.readOnly = true;
+        this.ugyfelInput.nativeElement.disabled = true;
+        this.bizonylatszamInput.nativeElement.disabled = true;
+        this.kiadasInput.nativeElement.disabled = true;
         break;
       case 2: // pénzfelvét bankból
-        this.ugyfelInput.nativeElement.readOnly = true;
-        this.bizonylatszamInput.nativeElement.readOnly = true;
-        this.kiadasInput.nativeElement.readOnly = true;
+        this.ugyfelInput.nativeElement.disabled = true;
+        this.bizonylatszamInput.nativeElement.disabled = true;
+        this.kiadasInput.nativeElement.disabled = true;
         break;
       case 3: // befizetés bankba
-        this.ugyfelInput.nativeElement.readOnly = true;
-        this.bizonylatszamInput.nativeElement.readOnly = true;
-        this.bevetelInput.nativeElement.readOnly = true;
+        this.ugyfelInput.nativeElement.disabled = true;
+        this.bizonylatszamInput.nativeElement.disabled = true;
+        this.bevetelInput.nativeElement.disabled = true;
         break;
       case 4: // Bejövő számla
-        this.bevetelInput.nativeElement.readOnly = true;
+        this.bevetelInput.nativeElement.disabled = true;
         break;
       case 5: // Kimenő számla
-        this.kiadasInput.nativeElement.readOnly = true;
+        this.kiadasInput.nativeElement.disabled = true;
         break;
       case 6: // Bérkifizetés
-        this.bizonylatszamInput.nativeElement.readOnly = true;
-        this.bevetelInput.nativeElement.readOnly = true;
+        this.bizonylatszamInput.nativeElement.disabled = true;
+        this.bevetelInput.nativeElement.disabled = true;
         break;
     }
   }

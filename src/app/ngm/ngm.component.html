@@ -3,44 +3,42 @@
 
   <form #f="ngForm" (ngSubmit)="submit()">
 
-    <div class="row no-gutters editform-row">
-      <div>
+    <div class="editform-box">
+      <div class="editform-row">
         <div class="editform-label">A számlák kelte</div>
-        <input type="date" class="form-control form-control-sm oszlop3" id="szktol"
-               [(ngModel)]="szktol" name="szktol" style="display: inline-block;margin-right: 4px">
+        <input type="date" class="editform-date em10width" id="szktol"
+               [(ngModel)]="szktol" name="szktol">
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-row-block">
+          <input type="date" class="editform-date em10width" id="szkig"
+                 [(ngModel)]="szkig" name="szkig">
+          <button class="toolbutton" (click)="szamlakelte()" type="button" style="margin-left: 1em">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+          </button>
+        </div>
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
-      <div>
-        <input type="date" class="form-control form-control-sm oszlop3" id="szkig"
-               [(ngModel)]="szkig" name="szkig" style="display: inline-block;margin-right: 4px">
-        <button class="toolbutton" (click)="szamlakelte()"
-                style="display: inline-block;margin-right: 4px" type="button">
-          <i class="fa fa-angle-right" aria-hidden="true"></i>
-        </button>
-      </div>
-    </div>
-
-    <div class="row no-gutters editform-row">
-      <div>
+    <div class="editform-box">
+      <div class="editform-row">
         <div class="editform-label">A számlák száma</div>
-        <input type="text" class="form-control form-control-sm oszlop3" id="szsztol"
-               [(ngModel)]="szsztol" name="szsztol" style="display: inline-block;margin-right: 4px">
+        <input type="text" class="editform-edit em10width" id="szsztol"
+               [(ngModel)]="szsztol" name="szsztol">
       </div>
-    </div>
 
-    <div class="row no-gutters editform-row">
-      <div>
-        <input type="text" class="form-control form-control-sm oszlop3" id="szszig"
-               [(ngModel)]="szszig" name="szszig" style="display: inline-block;margin-right: 4px">
-        <button class="toolbutton" (click)="szamlaszam()"
-                style="display: inline-block;margin-right: 4px" type="button">
-          <i class="fa fa-angle-right" aria-hidden="true"></i>
-        </button>
+      <div class="editform-row">
+        <div class="editform-row-block">
+          <input type="text" class="editform-edit em10width" id="szszig"
+                 [(ngModel)]="szszig" name="szszig">
+          <button class="toolbutton" (click)="szamlaszam()" type="button" style="margin-left: 1px">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+          </button>
+        </div>
       </div>
     </div>
 
   </form>
-  <div>{{result}}</div>
+  <div class="editform-okcancel">{{result}}</div>
 </div>

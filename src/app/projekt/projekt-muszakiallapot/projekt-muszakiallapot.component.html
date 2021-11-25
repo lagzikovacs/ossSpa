@@ -4,16 +4,14 @@
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
     <div class="editform-row">
-      <div>
         <div class="editform-label">Műszaki állapot</div>
-        <div *ngFor="let entry of entries" class="form-check">
-          <input class="form-check-input" type="radio" name="radiogroup" id="entry"
+        <div *ngFor="let entry of entries">
+          <input type="radio" name="radiogroup" id="entry"
                  [checked]="entry === selected" (change)="change(entry)">
-          <label class="form-check-label" for="entry">
+          <label for="entry">
             {{entry}}
           </label>
         </div>
-      </div>
     </div>
 
     <div class="editform-okcancel">

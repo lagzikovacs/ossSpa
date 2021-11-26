@@ -5,7 +5,6 @@ import { MenuComponent } from './menu/menu/menu.component';
 import {RouterModule, Routes} from '@angular/router';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import {environment} from '../environments/environment';
-import { FooldalComponent } from './fooldal/fooldal.component';
 import { MenunodeComponent } from './menu/menunode/menunode.component';
 import { MenuitemComponent } from './menu/menuitem/menuitem.component';
 import {LogonService} from './logon/logon.service';
@@ -191,6 +190,7 @@ import { VagolapIrathozComponent } from './vagolap/vagolap-irathoz/vagolap-irath
 import { VagolapBizonylathozComponent } from './vagolap/vagolap-bizonylathoz/vagolap-bizonylathoz.component';
 import { IratProjektjeComponent } from './irat/irat-projektje/irat-projektje.component';
 import { BizonylatProjektjeComponent } from './bizonylat/bizonylat-projektje/bizonylat-projektje.component';
+import { FooldalComponent } from './fooldal/fooldal.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -260,7 +260,6 @@ if (environment.production) {
 
     AppComponent,
     MenuComponent,
-    FooldalComponent,
     MenunodeComponent,
     MenuitemComponent,
     BejelentkezesComponent,
@@ -405,6 +404,7 @@ if (environment.production) {
     VagolapBizonylathozComponent,
     IratProjektjeComponent,
     BizonylatProjektjeComponent,
+    FooldalComponent,
   ],
   imports: [
     BrowserModule,

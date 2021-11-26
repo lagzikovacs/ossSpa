@@ -9,7 +9,8 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-menu',
-  templateUrl: './menu.component.html'
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit, OnDestroy {
   public bejelentkezve = false;
@@ -56,25 +57,20 @@ export class MenuComponent implements OnInit, OnDestroy {
     });
   }
 
+  csere() {
+    const x = document.getElementById('myTopnav');
+    if (x.className === 'topnav') {
+      x.className += ' responsive';
+    } else {
+      x.className = 'topnav';
+    }
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
 
     Object.keys(this).map(k => {
       (this[k]) = null;
     });
-  }
-
-  public onBejelentkezes() {
-    this._router.navigate(['/bejelentkezes']);
-  }
-
-  public onKijelentkezes() {
-    this._logonservice.Kijelentkezes()
-      .then(() => {
-        this._router.navigate(['/fooldal']);
-      })
-      .catch(err => {
-        this._errorservice.Error = err;
-      });
   }
 }

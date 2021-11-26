@@ -9,8 +9,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
   selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+  templateUrl: './menu.component.html'
 })
 export class MenuComponent implements OnInit, OnDestroy {
   public bejelentkezve = false;
@@ -55,15 +54,6 @@ export class MenuComponent implements OnInit, OnDestroy {
       // itt frissül a template
       this.szerepkorkivalasztva = szerepkorkivalasztva;
     });
-  }
-
-  csere() {
-    const x = document.getElementById('myTopnav');
-    if (x.className === 'topnav') {
-      x.className += ' responsive';
-    } else {
-      x.className = 'topnav';
-    }
   }
 
   ngOnDestroy() {

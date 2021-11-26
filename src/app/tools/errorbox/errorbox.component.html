@@ -1,21 +1,19 @@
-<div id="errorbox" class="modal fade" role="dialog"  data-backdrop="false" style="background-color: rgba(0, 0, 0, 0.5);" data-keyboard="false">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Hiba</h5>
-      </div>
-      <div id="projektmodal" class="modal-body" style="color: red">
-        <ng-container *ngIf="ahibastring">
-          {{hiba}}
-        </ng-container>
-        <ng-container *ngIf="!ahibastring">
-          <p>{{hiba.status}} {{hiba.statusText}}</p>
-          <p>{{hiba.url}}</p>
-        </ng-container>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="toolbutton" data-dismiss="modal" (click)="onClose()">Ok</button>
-      </div>
+<div id="errorbox" class="modal" role="dialog"  data-backdrop="false" data-keyboard="false">
+  <div class="modal-content">
+    <h5>Hiba</h5>
+
+    <div class="editform-row">
+      <ng-container *ngIf="ahibastring">
+        {{hiba}}
+      </ng-container>
+      <ng-container *ngIf="!ahibastring">
+        <p>{{hiba.status}} {{hiba.statusText}}</p>
+        <p>{{hiba.url}}</p>
+      </ng-container>
+    </div>
+
+    <div class="editform-okcancel">
+      <button type="button" class="toolbutton" data-dismiss="modal" (click)="onClose()">Ok</button>
     </div>
   </div>
 </div>

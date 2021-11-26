@@ -5,12 +5,10 @@
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
     <div class="editform-row">
-      <div>
-        <div class="editform-label">Leírás</div>
-        <input type="text" class="form-control form-control-sm oszlop10" id="leiras"
-               autocomplete="off"
-               [(ngModel)]="DtoEdited.Leiras" name="leiras">
-      </div>
+      <div class="editform-label">Leírás</div>
+      <input type="text" class="editform-edit em60width" id="leiras"
+             autocomplete="off"
+             [(ngModel)]="DtoEdited.Leiras" name="leiras">
     </div>
 
     <div class="editform-okcancel">

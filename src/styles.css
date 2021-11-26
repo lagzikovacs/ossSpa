@@ -158,10 +158,17 @@ table tr.inactive td {
   color: blue;
   text-decoration: underline;
   cursor: pointer;
+  width: 4em;
+  max-width: 4em;
 }
 .itemIcon {
-  padding-left: 8px;
-  padding-right: 8px
+  text-align: right;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+  width: 1em;
+  padding-left: 0.5em;
+  padding-right: 0.5em
 }
 
 /*.editform-okbutton:disabled,*/

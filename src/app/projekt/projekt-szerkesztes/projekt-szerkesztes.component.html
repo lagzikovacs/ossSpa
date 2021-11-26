@@ -4,66 +4,59 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
-    <div class="row no-gutters editform-row">
-      <div style="margin-right: 5px">
+    <div class="editform-box">
+      <div class="editform-row">
         <div class="editform-label">Ügyfél</div>
-        <input type="text" class="form-control form-control-sm oszlop6" id="ugyfelnev"
-               maxlength="200" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
+        <input type="text" class="editform-edit em20width" id="ugyfelnev"
+               maxlength="200" required autocomplete="off" style="background-color: aquamarine;"
                [(ngModel)]="DtoEdited.Ugyfelnev" name="ugyfelnev">
-        <button class="toolbutton" style="margin-left: 4px; display: inline-block" type="button" (click)="UgyfelZoom()">...</button>
+        <button type="button" class="toolbutton" (click)="UgyfelZoom()">...</button>
       </div>
-    </div>
 
-    <div class="row no-gutters editform-row">
-      <div style="margin-right: 5px">
-        <input type="text" class="form-control form-control-sm oszlop6" id="ugyfelcim"
-               autocomplete="off" readonly="true"
+      <div class="editform-row">
+        <div class="editform-label">Cím</div>
+        <input type="text" class="editform-edit em20width" id="ugyfelcim"
+               autocomplete="off" disabled="true"
                [(ngModel)]="DtoEdited.Ugyfelcim" name="ugyfelcim">
       </div>
-    </div>
 
-    <div class="row no-gutters editform-row">
-      <div style="margin-right: 5px">
+      <div class="editform-row">
         <div class="editform-label">Telepítési cím</div>
-        <input type="text" class="form-control form-control-sm oszlop6" id="telepitesicim"
+        <input type="text" class="editform-edit em20width" id="telepitesicim"
                autocomplete="off"
                [(ngModel)]="DtoEdited.Telepitesicim" name="telepitesicim">
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
-      <div style="margin-right: 5px">
+    <div class="editform-box">
+      <div class="editform-row">
         <div class="editform-label">A projekt jellege</div>
-        <input type="text" class="form-control form-control-sm oszlop6" id="projektjellege"
+        <input type="text" class="editform-edit em20width" id="projektjellege"
                autocomplete="off"
                [(ngModel)]="DtoEdited.Projektjellege" name="projektjellege">
       </div>
-    </div>
 
-    <div class="row no-gutters editform-row">
-      <div style="margin-right: 5px">
+      <div class="editform-row">
         <div class="editform-label">Vállalási ár</div>
-        <input type="number" class="form-control form-control-sm oszlop3" id="kuldo"
+        <input type="number" class="editform-edit em10width" id="var"
                required
-               [(ngModel)]="DtoEdited.Vallalasiarnetto" name="kuldo">
+               [(ngModel)]="DtoEdited.Vallalasiarnetto" name="var">
       </div>
 
-      <div style="display: inline-block; margin-right: 5px">
+      <div class="editform-row">
         <div class="editform-label">Pénznem</div>
-        <input type="text" class="form-control form-control-sm oszlop2" id="penznem"
-               maxlength="30" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
+        <input type="text" class="editform-edit em4width" id="penznem"
+               maxlength="30" required autocomplete="off" style="background-color: aquamarine;"
                [(ngModel)]="DtoEdited.Penznem" name="penznem">
-        <button class="toolbutton" style="margin-left: 4px; display: inline-block" type="button" (click)="PenznemZoom()">...</button>
+        <button class="toolbutton" type="button" (click)="PenznemZoom()">...</button>
       </div>
     </div>
 
-    <div class="row no-gutters editform-row">
-      <div style="margin-right: 5px">
+    <div class="editform-okcancel">
         <div class="editform-label">Megjegyzés</div>
-        <input type="text" class="form-control form-control-sm oszlop6" id="megjegyzes"
+        <input type="text" class="editform-edit em60width" id="megjegyzes"
                autocomplete="off"
                [(ngModel)]="DtoEdited.Megjegyzes" name="megjegyzes">
-      </div>
     </div>
 
     <div class="editform-okcancel">

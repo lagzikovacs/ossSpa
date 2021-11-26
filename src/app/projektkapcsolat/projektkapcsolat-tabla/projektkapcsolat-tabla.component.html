@@ -1,4 +1,4 @@
-<table class="table table-bordered table-sm table-responsive" style="border: none">
+<table>
   <thead>
   <tr>
     <th></th>
@@ -35,12 +35,12 @@
 
     <ng-container *ngFor="let item of items; let i = index">
       <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
-        <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer;padding-left: 8px;padding-right: 8px"
+        <td class="itemIcon"
             (click)="clickforlevalasztas(i)">
           <i class="fa fa-minus" aria-hidden="true"></i>
         </td>
 
-        <td style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
+        <td class="itemID"
             (click)="clickforid(i)">{{item.Projektkapcsolatkod}}
         </td>
 

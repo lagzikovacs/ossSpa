@@ -41,7 +41,6 @@ export class ProjektkapcsolatLevalasztasComponent implements OnDestroy {
     this.eventLevalasztasutan.emit(false);
   }
 
-
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

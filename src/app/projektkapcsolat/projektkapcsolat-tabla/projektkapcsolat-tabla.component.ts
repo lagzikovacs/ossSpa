@@ -3,8 +3,7 @@ import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
 
 @Component({
   selector: 'app-projektkapcsolat-tabla',
-  templateUrl: './projektkapcsolat-tabla.component.html',
-  styleUrls: ['./projektkapcsolat-tabla.component.css']
+  templateUrl: './projektkapcsolat-tabla.component.html'
 })
 export class ProjektkapcsolatTablaComponent implements OnDestroy {
   @Input() items: ProjektKapcsolatDto[];

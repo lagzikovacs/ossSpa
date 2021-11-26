@@ -4,23 +4,19 @@
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
     <div class="editform-row">
-      <div>
         <div class="editform-label">A teljesítés kelte</div>
-        <input type="date" class="form-control form-control-sm" id="tol"
+        <input type="date" class="editform-date em10width" id="tol"
                [(ngModel)]="tol" name="tol">
-      </div>
     </div>
 
     <div class="editform-row">
-      <div>
-        <input type="date" class="form-control form-control-sm" id="ig"
+        <input type="date" class="editform-date em10width" id="ig"
                [(ngModel)]="ig" name="ig">
-      </div>
     </div>
 
     <div class="editform-okcancel">
       <button class="editform-okbutton" [disabled]="!f.valid" type="submit">Ok</button>
-      <button class="editform-cancelbutton" type="button" (click)="onCancel()">Stop</button>
+      <!--<button class="editform-cancelbutton" type="button" (click)="onCancel()">Stop</button>-->
     </div>
   </form>
 </div>

@@ -4,16 +4,14 @@
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
     <div class="editform-row">
-      <div>
         <div class="editform-label">Időpontig</div>
-        <input type="date" class="form-control form-control-sm oszlop3" id="datum"
+        <input type="date" class="editform-date em10width" id="datum"
                [(ngModel)]="datum" name="datum">
-      </div>
     </div>
 
     <div class="editform-okcancel">
       <button class="editform-okbutton" [disabled]="!f.valid" type="submit">Ok</button>
-      <button class="editform-cancelbutton" type="button" (click)="onCancel()">Stop</button>
+      <!--<button class="editform-cancelbutton" type="button" (click)="onCancel()">Stop</button>-->
     </div>
   </form>
 </div>

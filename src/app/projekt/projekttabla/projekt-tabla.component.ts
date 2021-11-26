@@ -3,8 +3,7 @@ import {ProjektDto} from '../projektdto';
 
 @Component({
   selector: 'app-projekt-tabla',
-  templateUrl: './projekt-tabla.component.html',
-  styleUrls: ['./projekt-tabla.component.css']
+  templateUrl: './projekt-tabla.component.html'
 })
 export class ProjektTablaComponent implements OnDestroy {
   @Input() Dto: ProjektDto[] = new Array<ProjektDto>();

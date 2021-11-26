@@ -1,5 +1,4 @@
-<!--<table class="table table-bordered table-sm table-responsive" style="border: none;" xmlns="http://www.w3.org/1999/html">-->
-<table class="table table-bordered table-sm">
+<table>
   <thead>
   <tr>
     <th>Id</th>
@@ -33,7 +32,7 @@
 
     <ng-container *ngFor="let item of Dto; let i = index">
       <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
-        <td *ngIf="enIdclick" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="clickforid(i)">{{item.Projektkod}}</td>
+        <td *ngIf="enIdclick" class="itemID" (click)="clickforid(i)">{{item.Projektkod}}</td>
         <td *ngIf="!enIdclick">{{item.Projektkod}}</td>
         <td>{{item.Statusz}}</td>
         <td>

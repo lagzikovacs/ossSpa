@@ -6,7 +6,6 @@ import {environment} from '../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
 import {VolumeDto} from '../volumedto';
 import {rowanimation} from '../../animation/rowAnimation';
-import {EgyMode} from '../../enums/egymode';
 
 @Component({
   selector: 'app-volume-list',
@@ -23,7 +22,8 @@ export class VolumeListComponent implements OnInit, OnDestroy {
   Dto = new Array<VolumeDto>();
   DtoSelectedIndex = -1;
 
-  egymode = EgyMode.Reszletek;
+  bbmode = 0;
+  egymode = 1;
 
   volumeservice: VolumeService;
 
@@ -74,10 +74,12 @@ export class VolumeListComponent implements OnInit, OnDestroy {
 
   onId(i: number) {
     this.DtoSelectedIndex = i;
-    this.egymode = EgyMode.Reszletek;
+    this.bbmode = 1;
+    this.egymode = 0;
   }
 
   doNav(i: number) {
+    this.bbmode = 0;
     this.egymode = i;
   }
 

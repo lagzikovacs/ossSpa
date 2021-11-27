@@ -1,16 +1,20 @@
+:root {
+  --keretszin: #dddddd;
+}
+
 html, body {
   font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
   font-size: 1em;
   font-weight: normal;
 }
 th {
-  border: 1px solid #dddddd;
+  border: 1px solid var(--keretszin);
   font-weight: normal;
   font-style: normal;
   padding: 8px;
 }
 td {
-  border: 1px solid #dddddd;
+  border: 1px solid var(--keretszin);
   font-weight: normal;
   font-style: normal;
   padding: 8px;
@@ -21,11 +25,30 @@ table tr.active td {
 table tr.inactive td {
   background-color: white;
 }
+
 .datum {
-  width: 75px;
+  width: 5em;
 }
 .idobelyeg {
-  width: 130px;
+  width: 9em;
+}
+.itemID {
+  text-align: right;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+  width: 4em;
+  padding-left: 0.5em;
+  padding-right: 0.5em
+}
+.itemIcon {
+  text-align: right;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+  width: 1em;
+  padding-left: 0.5em;
+  padding-right: 0.5em
 }
 
 
@@ -153,40 +176,8 @@ table tr.inactive td {
   border-radius: 0.2em;
   margin-right: 0.2em;
 }
-.itemID {
-  text-align: right;
-  color: blue;
-  text-decoration: underline;
-  cursor: pointer;
-  width: 4em;
-  max-width: 4em;
-}
-.itemIcon {
-  text-align: right;
-  color: blue;
-  text-decoration: underline;
-  cursor: pointer;
-  width: 1em;
-  padding-left: 0.5em;
-  padding-right: 0.5em
-}
 
-/*.editform-okbutton:disabled,*/
-/*.editform-okbutton:hover {*/
-  /*background-color: black;*/
-/*}*/
 
-/*.editform-okbutton:hover,*/
-/*.editform-okbutton:focus {*/
-  /*background-color: #07c;*/
-/*}*/
-/*.editform-okbutton:focus {*/
-  /*box-shadow: 0 0 0 0.3em rgba(0, 149, 255, .15);*/
-/*}*/
-/*.editform-okbutton:active {*/
-  /*background-color: #0064bd;*/
-  /*box-shadow: none;*/
-/*}*/
 
 
 
@@ -275,21 +266,6 @@ table tr.inactive td {
 
 
 
-
-
-
-
-.toolbarmargins {
-  margin-top: 6px;
-}
-.toolbarcontrolmargins {
-  margin-right: 6px;
-  margin-bottom: 6px;
-}
-.toolbarcontrolmarginskozel {
-  margin-right: 3px;
-  margin-bottom: 6px;
-}
 
 
 /*Waiter*/

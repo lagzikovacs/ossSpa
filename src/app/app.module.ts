@@ -152,7 +152,6 @@ import {UgyfelterService} from './ugyfelter/ugyfelter.service';
 import { UgyfelProjektComponent } from './ugyfel/ugyfel-projekt/ugyfel-projekt.component';
 import { UgyfelterlogComponent } from './ugyfelterlog/ugyfelterlog.component';
 import {UgyfelterlogService} from './ugyfelterlog/ugyfelterlog.service';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { FotozasComponent } from './fotozas/fotozas/fotozas.component';
 import { FotozasLinkComponent } from './fotozas/fotozas-link/fotozas-link.component';
 import { UgyfelterBizonylatesiratComponent } from './ugyfelter/ugyfelter-bizonylatesirat/ugyfelter-bizonylatesirat.component';
@@ -239,7 +238,8 @@ const routes: Routes = [
   {path: 'jelszocsere', component: JelszocsereComponent, canActivate: [LoginGuard]},
   {path: 'vagolap', component: VagolapComponent, canActivate: [RoleGuard]},
 
-  {path: 'fooldal', component: FooldalComponent},
+  {path: 'fooldal', component: FooldalComponent, canActivate: [LoginGuard]},
+
   {path: 'ugyfelter', component: UgyfelterComponent},
   {path: 'fotozas', component: FotozasComponent},
 
@@ -373,7 +373,6 @@ if (environment.production) {
     UgyfelTerLinkComponent,
     UgyfelProjektComponent,
     UgyfelterlogComponent,
-    DashboardComponent,
     FotozasComponent,
     FotozasLinkComponent,
     UgyfelterBizonylatesiratComponent,

@@ -20,7 +20,7 @@ td {
   padding: 8px;
 }
 table tr.active td {
-  background-color: #abdde5;
+  background-color: #abdde0;
 }
 table tr.inactive td {
   background-color: white;
@@ -55,7 +55,7 @@ table tr.inactive td {
 .alapkeret {
   overflow: auto;
   background-color: white;
-  border: 1px solid lightgrey;
+  border: 1px solid var(--keretszin);
   padding: 0.5em;
 }
 .editform-box {
@@ -249,18 +249,6 @@ table tr.inactive td {
 }
 .oszlop10 {
   width: 600px;
-}
-
-@media(max-width:963px) {
-  .editform-title {
-    text-align: left;
-  }
-}
-@media(min-width:964px) {
-  .editform-title {
-    text-align: right;
-    padding-right: 10px;
-  }
 }
 
 

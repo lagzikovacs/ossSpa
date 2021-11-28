@@ -2,7 +2,7 @@
   <h5>A csoport jogai</h5>
   <table>
     <tbody>
-    <tr *ngFor="let item of DtoCsoportLehetsegesJog; let i = index">
+    <tr *ngFor="let item of DtoCsoportLehetsegesJog; let i = index" [className]="'inactive'">
       <td>
         <input type="checkbox" [checked]="item.Csoporttag" (click)="checkJog(i)">
       </td>

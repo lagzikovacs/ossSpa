@@ -4,6 +4,7 @@
 
   <div class="editform-box">
     <div class="editform-row">
+    <div class="editform-row-block">
         <div class="editform-label">Termékdíjas</div>
         <select type="text" class="editform-combo" name="termekdijas"
                 [disabled]="!szvesz"
@@ -14,8 +15,8 @@
         </select>
     </div>
 
-    <div class="editform-row">
-        <div class="editform-label">Közvetített szolgáltatás</div>
+    <div class="editform-row-block">
+        <div class="editform-label">Közvetített</div>
         <select type="text" class="editform-combo" name="kozvetitett"
                 [disabled]="!szvesz"
                 [(ngModel)]="TetelDtoEdited.Kozvetitettszolgaltatas">
@@ -24,7 +25,7 @@
         </select>
     </div>
 
-    <div class="editform-row">
+    <div class="editform-row-block">
         <div class="editform-label">Előleg</div>
         <select type="text" class="editform-combo" name="eloleg"
                 [disabled]="!szvesz"
@@ -32,6 +33,7 @@
           <option value="false">Nem</option>
           <option value="true">Igen</option>
         </select>
+    </div>
     </div>
 
     <div class="editform-row">
@@ -41,9 +43,78 @@
                maxlength="100" required autocomplete="off" style="background-color: aquamarine">
         <button class="toolbutton" (click)="CikkZoom()" type="button">...</button>
     </div>
+
+    <div class="editform-row">
+        <div class="editform-label">Megjegyzés</div>
+        <input type="text" class="editform-edit em20width" id="megjegyzes" name="megjegyzes"
+               [(ngModel)]="TetelDtoEdited.Megjegyzes"
+               autocomplete="off">
+    </div>
+
+    <div class="editform-row">
+        <div class="editform-label">Mennyiség</div>
+        <input type="number" class="editform-edit em10width" id="mennyiseg" name="mennyiseg"
+               [(ngModel)]="TetelDtoEdited.Mennyiseg"
+               (focusout)="tetelcalc($event)"
+               required min="0">
+    </div>
+    <div class="editform-row">
+        <div class="editform-label">Me</div>
+        <input type="text" class="editform-edit em10width" id="me" name="me"
+               [(ngModel)]="TetelDtoEdited.Me"
+               maxlength="10" required autocomplete="off" style="background-color: aquamarine">
+        <button class="toolbutton" (click)="MeZoom()"
+                type="button">...</button>
+    </div>
+    <div class="editform-row">
+        <div class="editform-label">Egységár</div>
+        <input type="number" class="editform-edit em10width" id="egysegar" name="egysegar"
+               [(ngModel)]="TetelDtoEdited.Egysegar"
+               (focusout)="tetelcalc($event)"
+               required>
+        <button class="toolbutton" (click)="bruttobol()"
+                type="button"><- Br</button>
+        <input type="number" class="editform-edit em10width" id="bruttoosszeg" name="bruttoosszeg"
+               [(ngModel)]="bruttoosszeg">
+    </div>
+    <div class="editform-row">
+        <div class="editform-label">ÁFA kulcs</div>
+        <input type="text" class="editform-edit em10width" id="afakulcs" name="afakulcs"
+               [(ngModel)]="TetelDtoEdited.Afakulcs"
+               maxlength="10" required autocomplete="off" style="background-color: aquamarine">
+        <button class="toolbutton" (click)="AfakulcsZoom()"
+                type="button">...</button>
+    </div>
+
   </div>
 
   <div class="editform-box">
+    <div class="editform-row">
+      <div class="editform-label">Tömeg, kg</div>
+      <input type="number" class="editform-edit em10width" id="tomegkg" name="tomegkg"
+             [(ngModel)]="TetelDtoEdited.Tomegkg"
+             (focusout)="tetelcalc($event)"
+             min="0">
+    </div>
+
+    <div class="editform-row">
+        <div class="editform-label">Termékdíj KT</div>
+        <input type="text" class="editform-edit em10width" id="termekdijkt" name="termekdijkt"
+               [(ngModel)]="TetelDtoEdited.Termekdijkt"
+               maxlength="10" autocomplete="off" style="background-color: aquamarine">
+        <button class="toolbutton" (click)="TermekdijZoom()" type="button">...</button>
+        <button class="toolbutton" (click)="TermekdijTorles()" type="button">
+          <i class="fa fa-close" aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <div class="editform-row">
+        <div class="editform-label">Termékdíj megnevezés</div>
+        <input type="text" class="editform-edit em20width" id="termekdijmegnevezes" name="termekdijmegnevezes"
+               [(ngModel)]="TetelDtoEdited.Termekdijmegnevezes"
+               disabled="true" autocomplete="off">
+    </div>
+
     <div class="editform-row">
         <div class="editform-laű">Termékdíj egységár</div>
         <input type="number" class="editform-edit em10width" id="termekdijegysegar" name="termekdijegysegar"
@@ -80,113 +151,6 @@
              disabled="true">
     </div>
   </div>
-
-
-
-  <div class="row no-gutters editform-row">
-    <div class="col-md-2">
-      <div class="editform-title">Megjegyzés</div>
-    </div>
-    <div class="col-md-4">
-      <input type="text" class="form-control form-control-sm" id="megjegyzes" name="megjegyzes"
-             [(ngModel)]="TetelDtoEdited.Megjegyzes"
-             autocomplete="off">
-    </div>
-  </div>
-  <div class="row no-gutters editform-row">
-    <div class="col-md-2">
-      <div class="editform-title">Mennyiség</div>
-    </div>
-    <div class="col-md-2">
-      <input type="number" class="form-control form-control-sm" id="mennyiseg" name="mennyiseg"
-             [(ngModel)]="TetelDtoEdited.Mennyiseg"
-             (focusout)="tetelcalc($event)"
-             required min="0">
-    </div>
-  </div>
-  <div class="row no-gutters editform-row">
-    <div class="col-md-2">
-      <div class="editform-title">Me</div>
-    </div>
-    <div class="col-md-1">
-      <input type="text" class="form-control form-control-sm" id="me" name="me"
-             [(ngModel)]="TetelDtoEdited.Me"
-             maxlength="10" required autocomplete="off" style="background-color: aquamarine">
-    </div>
-    <div class="col-md-1">
-      <button class="toolbutton" (click)="MeZoom()"
-              style="margin-left: 4px" type="button">...</button>
-    </div>
-  </div>
-  <div class="row no-gutters editform-row">
-    <div class="col-md-2">
-      <div class="editform-title">Egységár</div>
-    </div>
-    <div class="col-md-4 input-group">
-      <input type="number" class="form-control form-control-sm" id="egysegar" name="egysegar"
-             [(ngModel)]="TetelDtoEdited.Egysegar"
-             (focusout)="tetelcalc($event)"
-             required>
-      <button class="toolbutton" (click)="bruttobol()"
-              style="margin-left: 4px;margin-right: 4px" type="button"><- Br</button>
-      <input type="number" class="form-control form-control-sm" id="bruttoosszeg" name="bruttoosszeg"
-             [(ngModel)]="bruttoosszeg">
-    </div>
-  </div>
-  <div class="row no-gutters editform-row">
-    <div class="col-md-2">
-      <div class="editform-title">ÁFA kulcs</div>
-    </div>
-    <div class="col-md-1">
-      <input type="text" class="form-control form-control-sm" id="afakulcs" name="afakulcs"
-             [(ngModel)]="TetelDtoEdited.Afakulcs"
-             maxlength="10" required autocomplete="off" style="background-color: aquamarine">
-    </div>
-    <div class="col-md-1">
-      <button class="toolbutton" (click)="AfakulcsZoom()"
-              style="margin-left: 4px" type="button">...</button>
-    </div>
-  </div>
-  <div class="row no-gutters editform-row">
-    <div class="col-md-2">
-      <div class="editform-title">Tömeg, kg</div>
-    </div>
-    <div class="col-md-2">
-      <input type="number" class="form-control form-control-sm" id="tomegkg" name="tomegkg"
-             [(ngModel)]="TetelDtoEdited.Tomegkg"
-             (focusout)="tetelcalc($event)"
-             min="0">
-    </div>
-  </div>
-  <div class="row no-gutters editform-row">
-    <div class="col-md-2">
-      <div class="editform-title">Termékdíj KT</div>
-    </div>
-    <div class="col-md-2">
-      <input type="text" class="form-control form-control-sm" id="termekdijkt" name="termekdijkt"
-             [(ngModel)]="TetelDtoEdited.Termekdijkt"
-             maxlength="10" autocomplete="off" style="background-color: aquamarine">
-    </div>
-    <div class="col-md-1">
-      <button class="toolbutton" (click)="TermekdijZoom()"
-              style="margin-left: 4px" type="button">...</button>
-      <button class="toolbutton" (click)="TermekdijTorles()"
-              style="margin-left: 4px" type="button">
-        <i class="fa fa-close" aria-hidden="true"></i>
-      </button>
-    </div>
-  </div>
-  <div class="row no-gutters editform-row">
-    <div class="col-md-2">
-      <div class="editform-title">Termékdíj megnevezés</div>
-    </div>
-    <div class="col-md-3">
-      <input type="text" class="form-control form-control-sm" id="termekdijmegnevezes" name="termekdijmegnevezes"
-             [(ngModel)]="TetelDtoEdited.Termekdijmegnevezes"
-             readonly="true" autocomplete="off">
-    </div>
-  </div>
-
 
   <div class="editform-okcancel" style="margin-bottom: 10px">
     <button class="editform-okbutton" type="button" (click)="onSubmit()">Ok</button>

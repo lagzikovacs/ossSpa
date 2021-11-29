@@ -44,7 +44,7 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.zoombox = document.getElementById('zoombox');
+    this.zoombox = document.getElementById('iratzoombox');
 
     if (this.uj) {
       this.eppFrissit = true;

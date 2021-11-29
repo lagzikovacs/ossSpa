@@ -32,6 +32,8 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
 
   SzerkesztesMode = IratSzerkesztesMode.Blank;
 
+  iratzoombox: any;
+
   eppFrissit = false;
 
   iratservice: IratService;
@@ -44,6 +46,8 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.iratzoombox = document.getElementById('iratzoombox');
+
     if (this.uj) {
       this.eppFrissit = true;
       this.iratservice.CreateNew()
@@ -122,25 +126,31 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
 
   IrattipusZoom() {
     this.SzerkesztesMode = IratSzerkesztesMode.IrattipusZoom;
+    this.iratzoombox.style.display = 'block';
   }
   onIrattipusSelectzoom(Dto: IrattipusDto) {
     this.DtoEdited.Irattipuskod = Dto.Irattipuskod;
     this.DtoEdited.Irattipus = Dto.Irattipus1;
+    this.iratzoombox.style.display = 'none';
   }
   onIrattipusStopzoom() {
     this.SzerkesztesMode = IratSzerkesztesMode.Blank;
+    this.iratzoombox.style.display = 'none';
   }
 
   UgyfelZoom() {
     this.SzerkesztesMode = IratSzerkesztesMode.UgyfelZoom;
+    this.iratzoombox.style.display = 'block';
   }
   onUgyfelSelectzoom(Dto: UgyfelDto) {
     this.DtoEdited.Ugyfelkod = Dto.Ugyfelkod;
     this.DtoEdited.Ugyfelnev = Dto.Nev;
     this.DtoEdited.Ugyfelcim = Dto.Cim;
+    this.iratzoombox.style.display = 'none';
   }
   onUgyfelStopzoom() {
     this.SzerkesztesMode = IratSzerkesztesMode.Blank;
+    this.iratzoombox.style.display = 'none';
   }
   UgyfelTorles() {
     this.DtoEdited.Ugyfelkod = null;

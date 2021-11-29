@@ -25,6 +25,8 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
 
+  zoombox: any;
+
   SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
 
   ugyfelservice: UgyfelService;
@@ -37,6 +39,8 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.zoombox = document.getElementById('zoombox');
+
     if (this.uj) {
       this.eppFrissit = true;
       this.ugyfelservice.CreateNew()
@@ -105,24 +109,30 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
 
   HelysegZoom() {
     this.SzerkesztesMode = UgyfelSzerkesztesMode.HelysegZoom;
+    this.zoombox.style.display = 'block';
   }
   onHelysegSelectzoom(Dto: HelysegDto) {
     this.DtoEdited.Helysegkod = Dto.Helysegkod;
     this.DtoEdited.Helysegnev = Dto.Helysegnev;
+    this.zoombox.style.display = 'none';
   }
   onHelysegStopzoom() {
     this.SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
+    this.zoombox.style.display = 'none';
   }
 
   TevekenysegZoom() {
     this.SzerkesztesMode = UgyfelSzerkesztesMode.TevekenysegZoom;
+    this.zoombox.style.display = 'block';
   }
   onTevekenysegSelectzoom(Dto: TevekenysegDto) {
     this.DtoEdited.Tevekenysegkod = Dto.Tevekenysegkod;
     this.DtoEdited.Tevekenyseg = Dto.Tevekenyseg1;
+    this.zoombox.style.display = 'none';
   }
   onTevekenysegStopzoom() {
     this.SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
+    this.zoombox.style.display = 'none';
   }
 
   ngOnDestroy() {

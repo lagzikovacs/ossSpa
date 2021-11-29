@@ -81,20 +81,24 @@
     </div>
   </form>
 
-  <ng-container *ngIf="SzerkesztesMode === 1">
-    <app-me-list [maszk]="DtoEdited.Me || ''"
-                 (eventSelectzoom)="onMeSelectzoom($event)"
-                 (eventStopzoom)="onMeStopzoom()"></app-me-list>
-  </ng-container>
-  <ng-container *ngIf="SzerkesztesMode === 2">
-    <app-afakulcs-list [maszk]="DtoEdited.Afakulcs || ''"
-                       (eventSelectzoom)="onAfakulcsSelectzoom($event)"
-                       (eventStopzoom)="onAfakulcsStopzoom()"></app-afakulcs-list>
-  </ng-container>
-  <ng-container *ngIf="SzerkesztesMode === 3">
-    <app-termekdij-list [maszk]="DtoEdited.Termekdijkt || ''"
-                        (eventSelectzoom)="onTermekdijSelectzoom($event)"
-                        (eventStopzoom)="onTermekdijStopzoom()"></app-termekdij-list>
-  </ng-container>
+  <div id="zoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
+    <div class="zoom-modal-content">
+      <ng-container *ngIf="SzerkesztesMode === 1">
+        <app-me-list [maszk]="DtoEdited.Me || ''"
+                     (eventSelectzoom)="onMeSelectzoom($event)"
+                     (eventStopzoom)="onMeStopzoom()"></app-me-list>
+      </ng-container>
+      <ng-container *ngIf="SzerkesztesMode === 2">
+        <app-afakulcs-list [maszk]="DtoEdited.Afakulcs || ''"
+                           (eventSelectzoom)="onAfakulcsSelectzoom($event)"
+                           (eventStopzoom)="onAfakulcsStopzoom()"></app-afakulcs-list>
+      </ng-container>
+      <ng-container *ngIf="SzerkesztesMode === 3">
+        <app-termekdij-list [maszk]="DtoEdited.Termekdijkt || ''"
+                            (eventSelectzoom)="onTermekdijSelectzoom($event)"
+                            (eventStopzoom)="onTermekdijStopzoom()"></app-termekdij-list>
+      </ng-container>
+    </div>
+  </div>
 </div>
 

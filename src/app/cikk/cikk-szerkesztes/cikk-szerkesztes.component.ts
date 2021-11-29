@@ -29,6 +29,8 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
 
+  zoombox: any;
+
   SzerkesztesMode = CikkSzerkesztesMode.Blank;
 
   cikkservice: CikkService;
@@ -42,6 +44,8 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.zoombox = document.getElementById('zoombox');
+
     if (this.uj) {
       this.eppFrissit = true;
       this.cikkservice.CreateNew()
@@ -126,38 +130,47 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
 
   MeZoom() {
     this.SzerkesztesMode = CikkSzerkesztesMode.MeZoom;
+    this.zoombox.style.display = 'block';
   }
   onMeSelectzoom(Dto: MeDto) {
     this.DtoEdited.Mekod = Dto.Mekod;
     this.DtoEdited.Me = Dto.Me;
+    this.zoombox.style.display = 'none';
   }
   onMeStopzoom() {
     this.SzerkesztesMode = CikkSzerkesztesMode.Blank;
+    this.zoombox.style.display = 'none';
   }
 
   AfakulcsZoom() {
     this.SzerkesztesMode = CikkSzerkesztesMode.AfakulcsZoom;
+    this.zoombox.style.display = 'block';
   }
   onAfakulcsSelectzoom(Dto: AfakulcsDto) {
     this.DtoEdited.Afakulcskod = Dto.Afakulcskod;
     this.DtoEdited.Afakulcs = Dto.Afakulcs1;
     this.DtoEdited.Afamerteke = Dto.Afamerteke;
+    this.zoombox.style.display = 'none';
   }
   onAfakulcsStopzoom() {
     this.SzerkesztesMode = CikkSzerkesztesMode.Blank;
+    this.zoombox.style.display = 'none';
   }
 
   TermekdijZoom() {
     this.SzerkesztesMode = CikkSzerkesztesMode.TermekdijZoom;
+    this.zoombox.style.display = 'block';
   }
   onTermekdijSelectzoom(Dto: TermekdijDto) {
     this.DtoEdited.Termekdijkod = Dto.Termekdijkod;
     this.DtoEdited.Termekdijkt = Dto.Termekdijkt;
     this.DtoEdited.Termekdijmegnevezes = Dto.Termekdijmegnevezes;
     this.DtoEdited.Termekdijegysegar = Dto.Termekdijegysegar;
+    this.zoombox.style.display = 'none';
   }
   onTermekdijStopzoom() {
     this.SzerkesztesMode = CikkSzerkesztesMode.Blank;
+    this.zoombox.style.display = 'none';
   }
 
   ngOnDestroy() {

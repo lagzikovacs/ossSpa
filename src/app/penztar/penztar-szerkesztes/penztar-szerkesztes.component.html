@@ -5,18 +5,18 @@
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
     <div class="editform-row">
-        <div class="editform-label">Pénztár</div>
-        <input type="text" class="editform-edit em15width" id="penztar"
-               maxlength="200" required autocomplete="off"
-               [(ngModel)]="DtoEdited.Penztar1" name="penztar">
+      <div class="editform-label">Pénztár</div>
+      <input type="text" class="editform-edit em15width" id="penztar"
+             maxlength="200" required autocomplete="off"
+             [(ngModel)]="DtoEdited.Penztar1" name="penztar">
     </div>
 
     <div class="editform-row">
-        <div class="editform-label">Pénznem</div>
-        <input type="text" class="editform-edit em4width" id="penznem"
-               maxlength="100" required autocomplete="off"
-               [(ngModel)]="DtoEdited.Penznem" name="penznem">
-        <button class="toolbutton" type="button" (click)="PenznemZoom()">...</button>
+      <div class="editform-label">Pénznem</div>
+      <input type="text" class="editform-edit em4width" id="penznem"
+             maxlength="100" required autocomplete="off"
+             [(ngModel)]="DtoEdited.Penznem" name="penznem">
+      <button class="toolbutton" type="button" (click)="PenznemZoom()">...</button>
     </div>
 
     <div class="editform-okcancel">
@@ -25,10 +25,14 @@
     </div>
   </form>
 
-  <ng-container *ngIf="SzerkesztesMode === 1">
-    <app-penznem-list [maszk]="DtoEdited.Penznem || ''"
-                      (eventSelectzoom)="onPenznemSelectzoom($event)"
-                      (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
-  </ng-container>
+  <div id="penztarzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
+    <div class="zoom-modal-content-primitiv">
+      <ng-container *ngIf="SzerkesztesMode === 1">
+        <app-penznem-list [maszk]="DtoEdited.Penznem || ''"
+                          (eventSelectzoom)="onPenznemSelectzoom($event)"
+                          (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
+      </ng-container>
+    </div>
+  </div>
 </div>
 

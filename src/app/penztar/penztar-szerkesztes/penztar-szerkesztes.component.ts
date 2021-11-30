@@ -24,6 +24,8 @@ export class PenztarSzerkesztesComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
 
+  penztarzoombox: any;
+
   penztarservice: PenztarService;
 
   constructor(private _penznemservice: PenznemService,
@@ -33,6 +35,8 @@ export class PenztarSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.penztarzoombox = document.getElementById('penztarzoombox');
+
     if (this.uj) {
       this.eppFrissit = true;
       this.penztarservice.CreateNew()
@@ -93,13 +97,16 @@ export class PenztarSzerkesztesComponent implements OnInit, OnDestroy {
 
   PenznemZoom() {
     this.SzerkesztesMode = PenztarSzerkesztesMode.PenznemZoom;
+    this.penztarzoombox.style.display = 'block';
   }
   onPenznemSelectzoom(Dto: PenznemDto) {
     this.DtoEdited.Penznemkod = Dto.Penznemkod;
     this.DtoEdited.Penznem = Dto.Penznem1;
+    this.penztarzoombox.style.display = 'none';
   }
   onPenznemStopzoom() {
     this.SzerkesztesMode = PenztarSzerkesztesMode.Blank;
+    this.penztarzoombox.style.display = 'none';
   }
 
   ngOnDestroy() {

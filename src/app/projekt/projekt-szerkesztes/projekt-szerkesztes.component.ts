@@ -31,6 +31,8 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
 
+  projektzoombox: any;
+
   projektservice: ProjektService;
 
   constructor(private _ugyfelservice: UgyfelService,
@@ -41,6 +43,8 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.projektzoombox = document.getElementById('projektzoombox');
+
     if (this.uj) {
       this.eppFrissit = true;
       this.projektservice.CreateNew()
@@ -108,25 +112,31 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
 
   UgyfelZoom() {
     this.SzerkesztesMode = ProjektSzerkesztesMode.UgyfelZoom;
+    this.projektzoombox.style.display = 'block';
   }
   onUgyfelSelectzoom(Dto: UgyfelDto) {
     this.DtoEdited.Ugyfelkod = Dto.Ugyfelkod;
     this.DtoEdited.Ugyfelnev = Dto.Nev;
     this.DtoEdited.Ugyfelcim = Dto.Cim;
+    this.projektzoombox.style.display = 'none';
   }
   onUgyfelStopzoom() {
     this.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
+    this.projektzoombox.style.display = 'none';
   }
 
   PenznemZoom() {
     this.SzerkesztesMode = ProjektSzerkesztesMode.PenznemZoom;
+    this.projektzoombox.style.display = 'block';
   }
   onPenznemSelectzoom(Dto: PenznemDto) {
     this.DtoEdited.Penznemkod = Dto.Penznemkod;
     this.DtoEdited.Penznem = Dto.Penznem1;
+    this.projektzoombox.style.display = 'none';
   }
   onPenznemStopzoom() {
     this.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
+    this.projektzoombox.style.display = 'none';
   }
 
   ngOnDestroy() {

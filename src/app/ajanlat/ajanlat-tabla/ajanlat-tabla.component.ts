@@ -3,8 +3,7 @@ import {AjanlatBuf} from '../ajanlatbuf';
 
 @Component({
   selector: 'app-ajanlat-tabla',
-  templateUrl: './ajanlat-tabla.component.html',
-  styleUrls: ['./ajanlat-tabla.component.css']
+  templateUrl: './ajanlat-tabla.component.html'
 })
 export class AjanlatTablaComponent implements OnDestroy {
   @Input() items: AjanlatBuf[];
@@ -26,6 +25,8 @@ export class AjanlatTablaComponent implements OnDestroy {
   }
 
   clickforid(i: number) {
+    this.szerkesztes = false;
+
     this.clickedidindex = i;
     this.clickedrowindex = this.clickedidindex;
 
@@ -37,6 +38,7 @@ export class AjanlatTablaComponent implements OnDestroy {
     this.clickedrowindex = i;
     // először clickforid vagy clickfordownload, aztán clickforrow is, clickforrow felülírná az eseményeket
     if (this.clickedrowindex !== this.clickedidindex) {
+      this.szerkesztes = false;
       this.clickedidindex = -1;
     }
   }

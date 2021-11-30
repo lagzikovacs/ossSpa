@@ -65,15 +65,21 @@
     </div>
   </form>
 
-  <ng-container *ngIf="SzerkesztesMode === 1">
-    <app-ugyfel-list [maszk]="DtoEdited.Ugyfelnev || ''"
-                     (eventSelectzoom)="onUgyfelSelectzoom($event)"
-                     (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>
-  </ng-container>
+  <div id="projektzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
+    <ng-container *ngIf="SzerkesztesMode === 1">
+      <div class="zoom-modal-content">
+      <app-ugyfel-list [maszk]="DtoEdited.Ugyfelnev || ''"
+                       (eventSelectzoom)="onUgyfelSelectzoom($event)"
+                       (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>
+      </div>
+    </ng-container>
 
-  <ng-container *ngIf="SzerkesztesMode === 2">
-    <app-penznem-list [maszk]="DtoEdited.Penznem || ''"
-                      (eventSelectzoom)="onPenznemSelectzoom($event)"
-                      (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
-  </ng-container>
+    <ng-container *ngIf="SzerkesztesMode === 2">
+      <div class="zoom-modal-content-primitiv">
+      <app-penznem-list [maszk]="DtoEdited.Penznem || ''"
+                        (eventSelectzoom)="onPenznemSelectzoom($event)"
+                        (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
+      </div>
+    </ng-container>
+  </div>
 </div>

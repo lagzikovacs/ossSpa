@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {AjanlatSzerkesztesMode} from '../ajanlatszerkesztesmode';
 import {CikkDto} from '../../cikk/cikkdto';
 import {AjanlatBuf} from '../ajanlatbuf';
@@ -15,6 +15,9 @@ export class AjanlatTetelComponent implements OnInit, OnDestroy {
 
   AjanlatSzerkesztesMode = AjanlatSzerkesztesMode.Blank;
 
+  constructor(private _cdr: ChangeDetectorRef) {
+  }
+
   ngOnInit() {
     this.ajanlatzoombox = document.getElementById('ajanlatzoombox');
   }
@@ -22,6 +25,7 @@ export class AjanlatTetelComponent implements OnInit, OnDestroy {
   CikkZoom() {
     this.AjanlatSzerkesztesMode = AjanlatSzerkesztesMode.CikkZoom;
     this.ajanlatzoombox.style.display = 'block';
+    this._cdr.detectChanges();
   }
   onCikkSelectzoom(Dto: CikkDto) {
     this.item.CikkKod = Dto.Cikkkod;
@@ -29,10 +33,12 @@ export class AjanlatTetelComponent implements OnInit, OnDestroy {
     this.item.AfaMerteke = Dto.Afamerteke;
     this.item.EgysegAr = Dto.Egysegar;
     this.ajanlatzoombox.style.display = 'none';
+    this._cdr.detectChanges();
   }
   onCikkStopzoom() {
     this.AjanlatSzerkesztesMode = AjanlatSzerkesztesMode.Blank;
     this.ajanlatzoombox.style.display = 'none';
+    this._cdr.detectChanges();
   }
 
   onSubmit() {

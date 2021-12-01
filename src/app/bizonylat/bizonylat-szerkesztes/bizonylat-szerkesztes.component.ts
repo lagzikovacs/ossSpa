@@ -55,6 +55,8 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
 
+  bizonylatzoombox: any;
+
   bizonylatservice: BizonylatService;
 
   constructor(private _ugyfelservice: UgyfelService,
@@ -73,6 +75,8 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.bizonylatzoombox = document.getElementById('bizonylatzoombox');
+
     if (this.uj) {
       this.eppFrissit = true;
       this.bizonylatservice.CreateNewComplex()
@@ -119,6 +123,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
   UgyfelZoom() {
     this.SzerkesztesMode = BizonylatSzerkesztesMode.UgyfelZoom;
+    this.bizonylatzoombox.style.display = 'block';
     this._cdr.detectChanges();
   }
   onUgyfelSelectzoom(Dto: UgyfelDto) {
@@ -135,39 +140,48 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this.ComplexDtoEdited.Dto.Ugyfelkozterulettipus = Dto.Kozterulettipus;
     this.ComplexDtoEdited.Dto.Ugyfelhazszam = Dto.Hazszam;
 
+    this.bizonylatzoombox.style.display = 'none';
     this._cdr.detectChanges();
   }
   onUgyfelStopzoom() {
     this.SzerkesztesMode = BizonylatSzerkesztesMode.List;
+    this.bizonylatzoombox.style.display = 'none';
     this._cdr.detectChanges();
   }
 
 
   PenznemZoom() {
     this.SzerkesztesMode = BizonylatSzerkesztesMode.PenznemZoom;
+    this.bizonylatzoombox.style.display = 'block';
     this._cdr.detectChanges();
   }
   onPenznemSelectzoom(Dto: PenznemDto) {
     this.ComplexDtoEdited.Dto.Penznemkod = Dto.Penznemkod;
     this.ComplexDtoEdited.Dto.Penznem = Dto.Penznem1;
+    this.bizonylatzoombox.style.display = 'none';
+    this._cdr.detectChanges();
   }
   onPenznemStopzoom() {
     this.SzerkesztesMode = BizonylatSzerkesztesMode.List;
+    this.bizonylatzoombox.style.display = 'none';
     this._cdr.detectChanges();
   }
 
 
   FizetesimodZoom() {
     this.SzerkesztesMode = BizonylatSzerkesztesMode.FizetesimodZoom;
+    this.bizonylatzoombox.style.display = 'block';
     this._cdr.detectChanges();
   }
   onFizetesimodSelectzoom(Dto: FizetesimodDto) {
     this.ComplexDtoEdited.Dto.Fizetesimodkod = Dto.Fizetesimodkod;
     this.ComplexDtoEdited.Dto.Fizetesimod = Dto.Fizetesimod1;
+    this.bizonylatzoombox.style.display = 'none';
     this._cdr.detectChanges();
   }
   onFizetesimodStopzoom() {
     this.SzerkesztesMode = BizonylatSzerkesztesMode.List;
+    this.bizonylatzoombox.style.display = 'none';
     this._cdr.detectChanges();
   }
 

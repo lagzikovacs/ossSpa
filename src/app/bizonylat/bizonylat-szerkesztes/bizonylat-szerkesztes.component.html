@@ -106,23 +106,29 @@
   TetelTorles = 6,
   }-->
 
-  <div class="editform-okcancel">
+  <div id="bizonylatzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
     <ng-container *ngIf="SzerkesztesMode === 2">
-      <app-ugyfel-list [maszk]="ComplexDtoEdited.Dto.Ugyfelnev || ''"
-                       (eventSelectzoom)="onUgyfelSelectzoom($event)"
-                       (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>
+      <div class="zoom-modal-content">
+        <app-ugyfel-list [maszk]="ComplexDtoEdited.Dto.Ugyfelnev || ''"
+                         (eventSelectzoom)="onUgyfelSelectzoom($event)"
+                         (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>
+      </div>
     </ng-container>
 
     <ng-container *ngIf="SzerkesztesMode === 3">
-      <app-penznem-list [maszk]="ComplexDtoEdited.Dto.Penznem || ''"
-                        (eventSelectzoom)="onPenznemSelectzoom($event)"
-                        (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
+      <div class="zoom-modal-content-primitiv">
+        <app-penznem-list [maszk]="ComplexDtoEdited.Dto.Penznem || ''"
+                          (eventSelectzoom)="onPenznemSelectzoom($event)"
+                          (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
+      </div>
     </ng-container>
 
     <ng-container *ngIf="SzerkesztesMode === 4">
-      <app-fizetesimod-list [maszk]="ComplexDtoEdited.Dto.Fizetesimod || ''"
-                            (eventSelectzoom)="onFizetesimodSelectzoom($event)"
-                            (eventStopzoom)="onFizetesimodStopzoom()"></app-fizetesimod-list>
+      <div class="zoom-modal-content-primitiv">
+        <app-fizetesimod-list [maszk]="ComplexDtoEdited.Dto.Fizetesimod || ''"
+                              (eventSelectzoom)="onFizetesimodSelectzoom($event)"
+                              (eventStopzoom)="onFizetesimodStopzoom()"></app-fizetesimod-list>
+      </div>
     </ng-container>
   </div>
 

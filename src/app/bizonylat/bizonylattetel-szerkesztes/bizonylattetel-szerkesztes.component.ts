@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {CikkService} from '../../cikk/cikk.service';
 import {MeService} from '../../primitiv/me/me.service';
@@ -23,7 +23,7 @@ import {BizonylatTetelDto} from '../bizonylatteteldto';
   selector: 'app-bizonylattetel-szerkesztes',
   templateUrl: './bizonylattetel-szerkesztes.component.html'
 })
-export class BizonylattetelSzerkesztesComponent implements OnDestroy {
+export class BizonylattetelSzerkesztesComponent implements OnInit, OnDestroy {
   @Input() bizonylatLeiro = new BizonylatTipusLeiro();
   @Input() teteluj = false;
   @Input() szvesz = false;
@@ -35,6 +35,8 @@ export class BizonylattetelSzerkesztesComponent implements OnDestroy {
   bruttoosszeg = 0;
 
   eppFrissit = false;
+
+  bizonylattetelzoombox: any;
 
   bizonylatservice: BizonylatService;
 
@@ -48,8 +50,13 @@ export class BizonylattetelSzerkesztesComponent implements OnDestroy {
     this.bizonylatservice = bizonylatservice;
   }
 
+  ngOnInit() {
+    this.bizonylattetelzoombox = document.getElementById('bizonylattetelzoombox');
+  }
+
   CikkZoom() {
     this.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.CikkZoom;
+    this.bizonylattetelzoombox.style.display = 'block';
     this._cdr.detectChanges();
   }
   onCikkSelectzoom(Dto: CikkDto) {
@@ -67,43 +74,53 @@ export class BizonylattetelSzerkesztesComponent implements OnDestroy {
     this.TetelDtoEdited.Termekdijkt = Dto.Termekdijkt;
     this.TetelDtoEdited.Termekdijmegnevezes = Dto.Termekdijmegnevezes;
     this.TetelDtoEdited.Termekdijegysegar = Dto.Termekdijegysegar;
+    this.bizonylattetelzoombox.style.display = 'none';
+    this._cdr.detectChanges();
   }
   onCikkStopzoom() {
     this.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
+    this.bizonylattetelzoombox.style.display = 'none';
     this._cdr.detectChanges();
   }
 
   MeZoom() {
     this.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.MeZoom;
+    this.bizonylattetelzoombox.style.display = 'block';
     this._cdr.detectChanges();
   }
   onMeSelectzoom(Dto: MeDto) {
     this.TetelDtoEdited.Mekod = Dto.Mekod;
     this.TetelDtoEdited.Me = Dto.Me;
+    this.bizonylattetelzoombox.style.display = 'none';
     this._cdr.detectChanges();
   }
   onMeStopzoom() {
     this.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
+    this.bizonylattetelzoombox.style.display = 'none';
     this._cdr.detectChanges();
   }
 
   AfakulcsZoom() {
     this.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.AfakulcsZoom;
+    this.bizonylattetelzoombox.style.display = 'block';
     this._cdr.detectChanges();
   }
   onAfakulcsSelectzoom(Dto: AfakulcsDto) {
     this.TetelDtoEdited.Afakulcskod = Dto.Afakulcskod;
     this.TetelDtoEdited.Afakulcs = Dto.Afakulcs1;
     this.TetelDtoEdited.Afamerteke = Dto.Afamerteke;
+    this.bizonylattetelzoombox.style.display = 'none';
     this._cdr.detectChanges();
   }
   onAfakulcsStopzoom() {
     this.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
+    this.bizonylattetelzoombox.style.display = 'none';
     this._cdr.detectChanges();
   }
 
   TermekdijZoom() {
     this.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.TermekdijZoom;
+    this.bizonylattetelzoombox.style.display = 'block';
     this._cdr.detectChanges();
   }
   onTermekdijSelectzoom(Dto: TermekdijDto) {
@@ -111,10 +128,12 @@ export class BizonylattetelSzerkesztesComponent implements OnDestroy {
     this.TetelDtoEdited.Termekdijkt = Dto.Termekdijkt;
     this.TetelDtoEdited.Termekdijmegnevezes = Dto.Termekdijmegnevezes;
     this.TetelDtoEdited.Termekdijegysegar = Dto.Termekdijegysegar;
+    this.bizonylattetelzoombox.style.display = 'none';
     this._cdr.detectChanges();
   }
   onTermekdijStopzoom() {
     this.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
+    this.bizonylattetelzoombox.style.display = 'none';
     this._cdr.detectChanges();
   }
   TermekdijTorles() {

@@ -2,12 +2,12 @@
   <h5 *ngIf="vagolapservice.Mode === 1">{{vagolapservice.cim}}</h5>
   <div>
     <ng-container *ngIf="vagolapservice.Mode === 1">
-      <button [disabled]="eppFrissit" (click)="torles()" class="toolbutton" style="margin-right: 3px">
+      <button [disabled]="eppFrissit" (click)="torles()" class="toolbutton">
         A vágólap törlése
       </button>
     </ng-container>
   </div>
-  <table class="table table-bordered table-sm table-responsive" style="border: none">
+  <table>
     <thead>
     <tr>
       <th></th>

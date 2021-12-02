@@ -6,7 +6,7 @@
         <input type="text" class="editform-edit em10width" id="bizonylatszam"
                maxlength="100" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="dtoFuvarszamla.Bizonylatszam" name="bizonylatszam">
-        <button class="toolbutton" style="margin-left: 4px; display: inline-block" type="button" (click)="BizonylatZoom()">...</button>
+        <button class="toolbutton" type="button" (click)="BizonylatZoom()">...</button>
     </div>
 
     <div class="editform-row">
@@ -36,10 +36,14 @@
     </div>
   </form>
 
-  <ng-container *ngIf="SzerkesztesMode === 1">
-    <app-bizonylat-zoom [maszk]="dtoFuvarszamla.Bizonylatszam"
-                        (eventStopzoom)="eventStopZoom()"
-                        (eventSelectzoom)="eventSelectzoom($event)">
-    </app-bizonylat-zoom>
-  </ng-container>
+  <div id="fuvarszamlazoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
+    <ng-container *ngIf="SzerkesztesMode === 1">
+      <div class="zoom-modal-content">
+        <app-bizonylat-zoom [maszk]="dtoFuvarszamla.Bizonylatszam"
+                            (eventStopzoom)="eventStopZoom()"
+                            (eventSelectzoom)="eventSelectzoom($event)">
+        </app-bizonylat-zoom>
+      </div>
+    </ng-container>
+  </div>
 </div>

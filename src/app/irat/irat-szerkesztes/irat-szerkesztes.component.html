@@ -26,7 +26,7 @@
         <input type="text" class="editform-edit em10width" id="irattipus"
                maxlength="30" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="DtoEdited.Irattipus" name="irattipus">
-        <button class="toolbutton" style="margin-left: 4px; display: inline-block" type="button" (click)="IrattipusZoom()">...</button>
+        <button class="toolbutton" type="button" (click)="IrattipusZoom()">...</button>
       </div>
     </div>
 
@@ -37,9 +37,8 @@
             <input type="text" class="editform-edit em15width" id="ugyfelnev"
                    maxlength="200" autocomplete="off" style="background-color: aquamarine; display: inline-block"
                    [(ngModel)]="DtoEdited.Ugyfelnev" name="ugyfelnev">
-            <button class="toolbutton" style="margin-left: 4px; display: inline-block" type="button" (click)="UgyfelZoom()">...</button>
-            <button class="toolbutton" (click)="UgyfelTorles()"
-                    style="margin-left: 4px; display: inline-block" type="button">
+            <button class="toolbutton" type="button" (click)="UgyfelZoom()">...</button>
+            <button class="toolbutton" (click)="UgyfelTorles()" type="button">
               <i class="fa fa-close" aria-hidden="true"></i>
             </button>
         </div>

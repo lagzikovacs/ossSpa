@@ -164,10 +164,8 @@
     </div>
   </div>
 
-  <div class="editform-okcancel" style="margin-bottom: 10px">
-    <button class="editform-okbutton" [disabled]="SzerkesztesMode !== 1"
-            type="button" (click)="onSubmit()">Ok</button>
-    <button class="editform-cancelbutton" [disabled]="SzerkesztesMode !== 1"
-            style="margin-left:3px;" type="button" (click)="cancel()">Mégsem</button>
+  <div class="editform-okcancel">
+    <button class="editform-okbutton" [disabled]="SzerkesztesMode !== 1" type="button" (click)="onSubmit()">Ok</button>
+    <button class="editform-cancelbutton" [disabled]="SzerkesztesMode !== 1" type="button" (click)="cancel()">Mégsem</button>
   </div>
 </div>

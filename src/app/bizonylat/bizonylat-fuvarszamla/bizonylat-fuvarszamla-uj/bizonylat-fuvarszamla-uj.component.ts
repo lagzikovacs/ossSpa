@@ -1,4 +1,4 @@
-import {Component, OnDestroy, Output, EventEmitter, Input} from '@angular/core';
+import {Component, OnDestroy, Output, EventEmitter, Input, OnInit} from '@angular/core';
 import {BizonylatService} from '../../bizonylat.service';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {BizonylatDto} from '../../bizonylatdto';
@@ -9,7 +9,7 @@ import {FuvardijParam} from '../../fuvardijparam';
   selector: 'app-bizonylat-fuvarszamla-uj',
   templateUrl: './bizonylat-fuvarszamla-uj.component.html'
 })
-export class BizonylatFuvarszamlaUjComponent implements OnDestroy {
+export class BizonylatFuvarszamlaUjComponent implements OnInit, OnDestroy {
   @Input() dtoAnyagszamla: BizonylatDto;
   dtoFuvarszamla = new BizonylatDto();
   @Output() eventMegsem = new EventEmitter();
@@ -21,17 +21,25 @@ export class BizonylatFuvarszamlaUjComponent implements OnDestroy {
 
   SzerkesztesMode = 0;
 
+  fuvarszamlazoombox: any;
+
   constructor(private _errorservice: ErrorService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
   }
 
+  ngOnInit() {
+    this.fuvarszamlazoombox = document.getElementById('fuvarszamlazoombox');
+  }
+
   BizonylatZoom() {
     this.SzerkesztesMode = 1;
+    this.fuvarszamlazoombox.style.display = 'block';
   }
 
   eventStopZoom() {
     this.SzerkesztesMode = 0;
+    this.fuvarszamlazoombox.style.display = 'none';
   }
 
   eventSelectzoom(Dto: BizonylatDto) {
@@ -39,6 +47,7 @@ export class BizonylatFuvarszamlaUjComponent implements OnDestroy {
     this.Fuvardij = Dto.Netto;
 
     this.SzerkesztesMode = 0;
+    this.fuvarszamlazoombox.style.display = 'none';
   }
 
   onSubmit() {

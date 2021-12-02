@@ -10,7 +10,7 @@
   </thead>
   <tbody>
   <ng-container *ngFor="let item of Dto; let i = index">
-    <tr>
+    <tr [className]="false ? 'active' : 'inactive'">
       <td *ngIf="enIdclick" class="itemID" (click)="setClickedRow(i)">{{item.Bizonylatafakod}}</td>
       <td *ngIf="!enIdclick">{{item.Bizonylatafakod}}</td>
       <td style="text-align: right">{{item.Afamerteke | number: '1.2-2'}}</td>

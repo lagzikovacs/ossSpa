@@ -26,7 +26,7 @@
         <input type="text" class="editform-edit em4width" id="penznem"
                maxlength="3" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="DtoEdited.Penznem" name="penznem">
-        <button class="toolbutton" style="margin-left: 4px; display: inline-block" type="button"
+        <button class="toolbutton" type="button"
                 (click)="PenznemZoom()">...</button>
       </div>
     </div>
@@ -37,7 +37,7 @@
         <input type="text" class="editform-edit em10width" id="fizetesimod"
                maxlength="20" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
                [(ngModel)]="DtoEdited.Fizetesimod" name="fizetesimod">
-        <button class="toolbutton" style="margin-left: 4px; display: inline-block" type="button"
+        <button class="toolbutton" type="button"
                 (click)="FizetesimodZoom()">...</button>
       </div>
     </div>
@@ -54,16 +54,20 @@
     FizetesimodZoom = 2,
     }-->
 
-  <ng-container *ngIf="SzerkesztesMode === 1">
-    <app-penznem-list [maszk]="DtoEdited.Penznem || ''"
-                      (eventSelectzoom)="onPenznemSelectzoom($event)"
-                      (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
-  </ng-container>
+  <div id="kifizeteszoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
+    <div class="zoom-modal-content-primitiv">
+      <ng-container *ngIf="SzerkesztesMode === 1">
+        <app-penznem-list [maszk]="DtoEdited.Penznem || ''"
+                          (eventSelectzoom)="onPenznemSelectzoom($event)"
+                          (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
+      </ng-container>
 
-  <ng-container *ngIf="SzerkesztesMode === 2">
-    <app-fizetesimod-list [maszk]="DtoEdited.Fizetesimod || ''"
-                          (eventSelectzoom)="onFizetesimodSelectzoom($event)"
-                          (eventStopzoom)="onFizetesimodStopzoom()"></app-fizetesimod-list>
-  </ng-container>
+      <ng-container *ngIf="SzerkesztesMode === 2">
+        <app-fizetesimod-list [maszk]="DtoEdited.Fizetesimod || ''"
+                              (eventSelectzoom)="onFizetesimodSelectzoom($event)"
+                              (eventStopzoom)="onFizetesimodStopzoom()"></app-fizetesimod-list>
+      </ng-container>
+    </div>
+  </div>
 </div>
 

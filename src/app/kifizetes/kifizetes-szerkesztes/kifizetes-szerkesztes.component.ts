@@ -32,6 +32,8 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
 
+  kifizeteszoombox: any;
+
   bizonylatkifizetesservice: KifizetesService;
 
   constructor(private _penznemservice: PenznemService,
@@ -42,6 +44,8 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.kifizeteszoombox = document.getElementById('kifizeteszoombox');
+
     if (this.uj) {
       this.eppFrissit = true;
       this.bizonylatkifizetesservice.CreateNew()
@@ -117,24 +121,30 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
 
   PenznemZoom() {
     this.SzerkesztesMode = KifizetesSzerkesztesMode.PenznemZoom;
+    this.kifizeteszoombox.style.display = 'block';
   }
   onPenznemSelectzoom(Dto: PenznemDto) {
     this.DtoEdited.Penznemkod = Dto.Penznemkod;
     this.DtoEdited.Penznem = Dto.Penznem1;
+    this.kifizeteszoombox.style.display = 'none';
   }
   onPenznemStopzoom() {
     this.SzerkesztesMode = KifizetesSzerkesztesMode.Blank;
+    this.kifizeteszoombox.style.display = 'none';
   }
 
   FizetesimodZoom() {
     this.SzerkesztesMode = KifizetesSzerkesztesMode.FizetesimodZoom;
+    this.kifizeteszoombox.style.display = 'block';
   }
   onFizetesimodSelectzoom(Dto: FizetesimodDto) {
     this.DtoEdited.Fizetesimodkod = Dto.Fizetesimodkod;
     this.DtoEdited.Fizetesimod = Dto.Fizetesimod1;
+    this.kifizeteszoombox.style.display = 'none';
   }
   onFizetesimodStopzoom() {
     this.SzerkesztesMode = KifizetesSzerkesztesMode.Blank;
+    this.kifizeteszoombox.style.display = 'none';
   }
 
   ngOnDestroy() {

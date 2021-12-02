@@ -10,10 +10,9 @@ import {BizonylatDto} from '../bizonylatdto';
 export class BizonylatFuvarszamlaComponent implements OnDestroy {
   @Input() dtoAnyagszamla: BizonylatDto;
   @Output() eventOK = new EventEmitter<BizonylatDto>();
+
   eppFrissit = false;
   EgyMode = 0;
-
-  constructor() { }
 
   doPage(i: number) {
     this.EgyMode = i;

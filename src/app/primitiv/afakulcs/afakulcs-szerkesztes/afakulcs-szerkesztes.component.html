@@ -4,24 +4,22 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
-    <div class="editform-box">
-      <div class="editform-row">
-        <div class="editform-label">ÁFA kulcs</div>
-        <input type="text" class="editform-edit em10width" id="afakulcs"
-               maxlength="10" required autocomplete="off"
-               [(ngModel)]="DtoEdited.Afakulcs1" name="afakulcs">
-      </div>
-      <div class="editform-row">
-        <div class="editform-label">Az ÁFA mértéke, %</div>
-        <input type="number" class="editform-edit em10width" id="egysegar"
-               required autocomplete="off"
-               [(ngModel)]="DtoEdited.Afamerteke" name="egysegar">
-      </div>
+    <div class="editform-row">
+      <div class="editform-label">ÁFA kulcs</div>
+      <input type="text" class="editform-edit em10width" id="afakulcs"
+             maxlength="10" required autocomplete="off"
+             [(ngModel)]="DtoEdited.Afakulcs1" name="afakulcs">
+    </div>
+    <div class="editform-row">
+      <div class="editform-label">Az ÁFA mértéke, %</div>
+      <input type="number" class="editform-edit em10width" id="egysegar"
+             required autocomplete="off"
+             [(ngModel)]="DtoEdited.Afamerteke" name="egysegar">
     </div>
 
     <div class="editform-okcancel">
       <button class="editform-okbutton" [disabled]="!f.valid" type="submit">Ok</button>
-      <button class="editform-cancelbutton" type="button" (click)="onCancel()">Mégsem</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>
 </div>

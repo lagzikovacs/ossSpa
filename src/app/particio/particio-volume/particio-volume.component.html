@@ -3,25 +3,23 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
-    <div class="editform-box">
-      <div class="editform-row">
-          <div class="editform-label">Új volume max. méret</div>
-          <input type="number" class="editform-edit em10width" id="m1"
-                 autocomplete="off"
-                 [(ngModel)]="cVolume.UjvolumeMaxmeret" name="m1">
-      </div>
+    <div class="editform-row">
+        <div class="editform-label">Új volume max. méret</div>
+        <input type="number" class="editform-edit em10width" id="m1"
+               autocomplete="off"
+               [(ngModel)]="cVolume.UjvolumeMaxmeret" name="m1">
+    </div>
 
-      <div class="editform-row">
-          <div class="editform-label">Új volume elérési út</div>
-          <input type="text" class="editform-edit em15width" id="m2"
-                 autocomplete="off"
-                 [(ngModel)]="cVolume.UjvolumeEleresiut" name="m2">
-      </div>
+    <div class="editform-row">
+        <div class="editform-label">Új volume elérési út</div>
+        <input type="text" class="editform-edit em15width" id="m2"
+               autocomplete="off"
+               [(ngModel)]="cVolume.UjvolumeEleresiut" name="m2">
     </div>
 
     <div class="editform-okcancel">
       <button class="editform-okbutton" [disabled]="!f.valid" type="submit">Ok</button>
-      <button class="editform-cancelbutton" type="button" (click)="cancel()">Mégsem</button>
+      <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
     </div>
   </form>
 </div>

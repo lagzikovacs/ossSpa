@@ -4,30 +4,28 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
-    <div class="editform-box">
-      <div class="editform-row">
-          <div class="editform-label">KT</div>
-          <input type="text" class="editform-combo em6width" id="kt"
-                 maxlength="30" required autocomplete="off"
-                 [(ngModel)]="DtoEdited.Termekdijkt" name="kt">
-      </div>
-      <div class="editform-row">
-          <div class="editform-label">Megnevezés</div>
-          <input type="text" class="editform-combo em15width" id="megnevezes"
-                 maxlength="50" required autocomplete="off"
-                 [(ngModel)]="DtoEdited.Termekdijmegnevezes" name="megnevezes">
-      </div>
-      <div class="editform-row">
-          <div class="editform-label">Egységár</div>
-          <input type="number" class="editform-combo em6width" id="egysegar"
-                 required autocomplete="off"
-                 [(ngModel)]="DtoEdited.Termekdijegysegar" name="egysegar">
-      </div>
+    <div class="editform-row">
+        <div class="editform-label">KT</div>
+        <input type="text" class="editform-combo em6width" id="kt"
+               maxlength="30" required autocomplete="off"
+               [(ngModel)]="DtoEdited.Termekdijkt" name="kt">
+    </div>
+    <div class="editform-row">
+        <div class="editform-label">Megnevezés</div>
+        <input type="text" class="editform-combo em15width" id="megnevezes"
+               maxlength="50" required autocomplete="off"
+               [(ngModel)]="DtoEdited.Termekdijmegnevezes" name="megnevezes">
+    </div>
+    <div class="editform-row">
+        <div class="editform-label">Egységár</div>
+        <input type="number" class="editform-combo em6width" id="egysegar"
+               required autocomplete="off"
+               [(ngModel)]="DtoEdited.Termekdijegysegar" name="egysegar">
     </div>
 
     <div class="editform-okcancel">
       <button class="editform-okbutton" [disabled]="!f.valid" type="submit">Ok</button>
-      <button class="editform-cancelbutton" type="button" (click)="onCancel()">Mégsem</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>
 </div>

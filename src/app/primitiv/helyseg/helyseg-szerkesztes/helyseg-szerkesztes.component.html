@@ -4,18 +4,16 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
-    <div class="editform-box">
-      <div class="editform-row">
-        <div class="editform-label">Helységnév</div>
-        <input type="text" class="editform-edit em10width" id="helysegnev"
-               maxlength="100" required autocomplete="off"
-               [(ngModel)]="DtoEdited.Helysegnev" name="helysegnev">
-      </div>
+    <div class="editform-row">
+      <div class="editform-label">Helységnév</div>
+      <input type="text" class="editform-edit em10width" id="helysegnev"
+             maxlength="100" required autocomplete="off"
+             [(ngModel)]="DtoEdited.Helysegnev" name="helysegnev">
     </div>
 
     <div class="editform-okcancel">
       <button class="editform-okbutton" [disabled]="!f.valid" type="submit">Ok</button>
-      <button class="editform-cancelbutton" type="button" (click)="onCancel()">Mégsem</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>
 </div>

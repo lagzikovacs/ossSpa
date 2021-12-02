@@ -3,7 +3,7 @@
   <h5 *ngIf="!uj">{{cikkservice.cim}} módosítása</h5>
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
-    <div class="editform-box">
+    <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Megnevezés</div>
         <input type="text" class="editform-edit em15width" id="megnevezes"
@@ -44,7 +44,7 @@
       </div>
     </div>
 
-    <div class="editform-box">
+    <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Tömeg, kg</div>
         <input type="number" class="editform-combo em6width" id="tomeg"
@@ -77,7 +77,7 @@
 
     <div class="editform-okcancel">
       <button class="editform-okbutton" [disabled]="!f.valid" type="submit">Ok</button>
-      <button class="editform-cancelbutton" type="button" (click)="onCancel()">Mégsem</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>
 

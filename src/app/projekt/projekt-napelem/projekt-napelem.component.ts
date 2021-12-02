@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {rowanimation} from '../../animation/rowAnimation';
 import {ProjektDto} from '../projektdto';
@@ -9,7 +9,7 @@ import {deepCopy} from '../../tools/deepCopy';
   templateUrl: './projekt-napelem.component.html',
   animations: [rowanimation]
 })
-export class ProjektNapelemComponent implements OnInit, OnDestroy {
+export class ProjektNapelemComponent implements OnDestroy {
   @Input() eppFrissit: boolean;
   DtoEdited = new ProjektDto();
   @Input() set DtoOriginal(value: ProjektDto) {
@@ -18,28 +18,16 @@ export class ProjektNapelemComponent implements OnInit, OnDestroy {
   @Output() eventOk = new EventEmitter<ProjektDto>();
   @Output() eventCancel = new EventEmitter<void>();
 
-  entries = ['', 'Nincs megrendelve', 'Megrendelve', 'Raktárban', 'Kiszállítva/telepítve', 'Harmadik fél biztosítja'];
-  selected = '';
-
   projektservice: ProjektService;
 
   constructor(projektservice: ProjektService) {
     this.projektservice = projektservice;
   }
 
-  ngOnInit() {
-    this.selected = this.DtoEdited.Napelemallapot || '';
-  }
-
-  change(entry) {
-    this.selected = entry;
-  }
-
   onSubmit() {
-    this.DtoEdited.Napelemallapot = this.selected;
-
     this.eventOk.emit(this.DtoEdited);
   }
+
   cancel() {
     this.eventCancel.emit();
   }

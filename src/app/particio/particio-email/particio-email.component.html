@@ -3,7 +3,7 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
-    <div class="editform-box">
+    <div class="editform-card">
       <div class="editform-row">
           <div class="editform-label">Konfiguráció</div>
           <div *ngFor="let entry of entries;let i = index">
@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <div class="editform-box">
+    <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Azonosító</div>
         <input type="text" class="editform-edit em15width" id="m2"
@@ -43,7 +43,7 @@
       </div>
     </div>
 
-    <div class="editform-box">
+    <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Klienstipus</div>
         <select type="text" class="editform-edit em10width"
@@ -75,7 +75,7 @@
 
     <div class="editform-okcancel">
       <button class="editform-okbutton" [disabled]="!f.valid" type="submit">Ok</button>
-      <button class="editform-cancelbutton" type="button" (click)="cancel()">Mégsem</button>
+      <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
     </div>
   </form>
 </div>

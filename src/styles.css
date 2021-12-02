@@ -1,7 +1,9 @@
 :root {
   --hatterszin: white;
+  --szovegszin: black;
   --keretszin: #dddddd;
-  --kivalasztottszin: #abdde0;
+  --kivalasztottszin: #d0e0df;
+  --kontrolszin: #5d8dea;
 }
 
 html, body {
@@ -40,7 +42,7 @@ table tr.inactive td {
 }
 .itemID {
   text-align: right;
-  color: blue;
+  color: var(--kontrolszin);
   text-decoration: underline;
   cursor: pointer;
   width: 4em;
@@ -49,8 +51,7 @@ table tr.inactive td {
 }
 .itemIcon {
   text-align: right;
-  color: blue;
-  text-decoration: underline;
+  color: var(--kontrolszin);
   cursor: pointer;
   width: 1em;
   padding-left: 0.5em;
@@ -64,7 +65,7 @@ table tr.inactive td {
   border: 1px solid var(--keretszin);
   padding: 0.5em;
 }
-.editform-box {
+.editform-card {
   float: left;
   margin-right: 1em;
 }
@@ -149,31 +150,41 @@ table tr.inactive td {
   background-color: #ffffff;
   color: #000000;
 }
-.editform-cancelbutton {
-  cursor: pointer;
-  border: 1px solid #0095ff;
-  border-radius: 0.2em;
-  background-color: #fff;
-  color: #0095ff;
-}
+
 .toolbar {
   /*margin-top: 0.5em;*/
   /*margin-bottom: 0.5em;*/
 }
+
 .toolbutton {
   cursor: pointer;
-  border: 1px solid #0095ff;
+  border: 1px solid var(--kontrolszin);
   border-radius: 0.2em;
-  background-color: #fff;
-  color: #0095ff;
+  background-color: var(--hatterszin);
+  color: var(--kontrolszin);
   margin-right: 0.2em;
   margin-bottom: 0.2em;
+  font-family: inherit;
+  font-size: 90%;
 }
 .toolbutton:disabled {
-  border: 1px solid black;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--keretszin);
+  cursor: not-allowed;
 }
+.toolbutton:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--kontrolszin);
+}
+.toolbutton:hover {
+  background-color: var(--kontrolszin);
+  color: var(--hatterszin);
+}
+
+.okbutton {
+  background-color: var(--kontrolszin);
+  color: var(--hatterszin);
+}
+
 .tooledit {
   border: 1px solid lightgrey;
   border-radius: 0.2em;

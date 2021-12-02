@@ -2,7 +2,7 @@
   <h5 *ngIf="teteluj">Új {{bizonylatLeiro.BizonylatNev | lowercase}}tétel</h5>
   <h5 *ngIf="!teteluj">{{bizonylatLeiro.BizonylatNev}}tétel módosítása</h5>
 
-  <div class="editform-box">
+  <div class="editform-card">
     <div class="editform-row">
     <div class="editform-row-block">
         <div class="editform-label">Termékdíjas</div>
@@ -88,7 +88,7 @@
 
   </div>
 
-  <div class="editform-box">
+  <div class="editform-card">
     <div class="editform-row">
       <div class="editform-label">Tömeg, kg</div>
       <input type="number" class="editform-edit em10width" id="tomegkg" name="tomegkg"
@@ -154,7 +154,7 @@
 
   <div class="editform-okcancel">
     <button class="editform-okbutton" type="button" (click)="onSubmit()">Ok</button>
-    <button class="editform-cancelbutton" type="button" (click)="cancel()">Mégsem</button>
+    <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
   </div>
 
 <!--  export enum BizonylattetelSzerkesztesMode {

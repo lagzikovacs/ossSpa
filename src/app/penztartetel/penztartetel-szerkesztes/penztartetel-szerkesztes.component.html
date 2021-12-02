@@ -3,7 +3,7 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
-    <div class="editform-box">
+    <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Dátum</div>
         <input type="date" class="editform-edit em10width" id="datum"
@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <div class="editform-box">
+    <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Bevétel</div>
         <input #bevetel type="number" class="editform-edit em15width" id="bevetel"
@@ -65,7 +65,7 @@
 
     <div class="editform-okcancel">
       <button class="editform-okbutton" [disabled]="!f.valid" type="submit">Ok</button>
-      <button class="editform-cancelbutton" type="button" (click)="onCancel()">Mégsem</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>
 </div>

@@ -3,25 +3,23 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
-    <div class="editform-box">
-      <div class="editform-row">
-        <div class="editform-label">Jelszó</div>
-        <input type="password" class="form-control form-control-sm" id="jelszo"
-               maxlength="100" required autocomplete="off"
-               [(ngModel)]="jelszo" name="jelszo">
-      </div>
+    <div class="editform-row">
+      <div class="editform-label">Jelszó</div>
+      <input type="password" class="form-control form-control-sm" id="jelszo"
+             maxlength="100" required autocomplete="off"
+             [(ngModel)]="jelszo" name="jelszo">
+    </div>
 
-      <div class="editform-row">
-        <div class="editform-label">Jelszó újra</div>
-        <input type="password" class="form-control form-control-sm" id="jelszoujra"
-               maxlength="100" required autocomplete="off"
-               [(ngModel)]="jelszoujra" name="jelszoujra">
-      </div>
+    <div class="editform-row">
+      <div class="editform-label">Jelszó újra</div>
+      <input type="password" class="form-control form-control-sm" id="jelszoujra"
+             maxlength="100" required autocomplete="off"
+             [(ngModel)]="jelszoujra" name="jelszoujra">
     </div>
 
     <div class="editform-okcancel">
       <button class="editform-okbutton" [disabled]="!f.valid" type="submit">Ok</button>
-      <button class="editform-cancelbutton" type="button" (click)="onCancel()">Mégsem</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>
 </div>

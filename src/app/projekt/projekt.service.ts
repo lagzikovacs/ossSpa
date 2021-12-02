@@ -25,6 +25,8 @@ export class ProjektService {
     '.'
   ];
 
+  napeleminverterstatuszok = ['', 'Nincs megrendelve', 'Megrendelve', 'Raktárban', 'Kiszállítva/telepítve', 'Harmadik fél biztosítja'];
+
   GridSettings: ColumnSettings[] = undefined;
   ReszletekSettings: ColumnSettings[] = undefined;
 

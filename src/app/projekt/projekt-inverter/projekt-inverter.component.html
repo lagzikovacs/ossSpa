@@ -19,19 +19,15 @@
     </div>
 
     <div class="editform-row">
-        <div class="editform-label">Inverter státusz</div>
-        <div *ngFor="let entry of entries">
-          <input type="radio" name="radiogroup" id="entry"
-                 [checked]="entry === selected" (change)="change(entry)">
-          <label for="entry">
-            {{entry}}
-          </label>
-        </div>
+      <div class="editform-label">Inverter státusz</div>
+      <select type="text" class="editform-combo" name="statusz" [(ngModel)]="DtoEdited.Inverterallapot">
+        <option *ngFor="let s of projektservice.napeleminverterstatuszok" [value]="s">{{s}}</option>
+      </select>
     </div>
 
     <div class="editform-okcancel">
       <button class="editform-okbutton" [disabled]="!f.valid" type="submit">Ok</button>
-      <button class="editform-cancelbutton" type="button" (click)="onCancel()">Mégsem</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>
 </div>

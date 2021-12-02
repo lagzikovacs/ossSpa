@@ -4,21 +4,14 @@
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
     <div class="editform-row">
-      <div>
-        <div class="editform-label">Státusz</div>
-        <div *ngFor="let entry of projektservice.statuszszurok;let i = index">
-          <input type="radio" name="radiogroup" id="entry"
-                 [checked]="i === selected" (change)="change(i)">
-          <label for="entry">
-            {{entry}}
-          </label>
-        </div>
-      </div>
+      <select type="text" class="editform-combo" name="statusz" [(ngModel)]="DtoEdited.Statusz">
+        <option *ngFor="let s of projektservice.statuszszurok; let i = index" [value]="i">{{s}}</option>
+      </select>
     </div>
 
     <div class="editform-okcancel">
       <button class="editform-okbutton" [disabled]="!f.valid" type="submit">Ok</button>
-      <button class="editform-cancelbutton" type="button" (click)="cancel()">Mégsem</button>
+      <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
     </div>
   </form>
 

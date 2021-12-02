@@ -1,11 +1,13 @@
 :root {
+  --hatterszin: white;
   --keretszin: #dddddd;
+  --kivalasztottszin: #abdde0;
 }
 
 html, body {
   font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
-  font-size: 1em;
-  font-weight: normal;
+  font-size: 16px;
+  font-weight: 300;
 }
 button, input, select, textarea {
   font-family: inherit;
@@ -15,19 +17,19 @@ th {
   border: 1px solid var(--keretszin);
   font-weight: normal;
   font-style: normal;
-  padding: 8px;
+  padding: 6px;
 }
 td {
   border: 1px solid var(--keretszin);
   font-weight: normal;
   font-style: normal;
-  padding: 8px;
+  padding: 6px;
 }
 table tr.active td {
-  background-color: #abdde0;
+  background-color: var(--kivalasztottszin);
 }
 table tr.inactive td {
-  background-color: white;
+  background-color: var(--hatterszin);
 }
 
 .datum {
@@ -58,7 +60,7 @@ table tr.inactive td {
 
 .alapkeret {
   overflow: auto;
-  background-color: white;
+  background-color: var(--hatterszin);
   border: 1px solid var(--keretszin);
   padding: 0.5em;
 }
@@ -77,6 +79,8 @@ table tr.inactive td {
 .editform-label {
   text-align: left;
   font-style: italic;
+  font-family: inherit;
+  font-size: 90%;
 }
 .editform-edit {
   border: 1px solid lightgrey;

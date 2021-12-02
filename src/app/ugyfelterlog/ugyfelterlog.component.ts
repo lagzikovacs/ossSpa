@@ -19,7 +19,7 @@ export class UgyfelterlogComponent implements OnDestroy {
   szempont = 0;
   minta = '';
   ulp = new UgyfelterlogParameter(0, environment.lapmeret);
-  elsokereses = false;
+  elsokereses = true;
   OsszesRekord = 0;
   eppFrissit = false;
 

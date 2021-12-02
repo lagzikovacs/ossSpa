@@ -7,6 +7,10 @@ html, body {
   font-size: 1em;
   font-weight: normal;
 }
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+}
 th {
   border: 1px solid var(--keretszin);
   font-weight: normal;
@@ -149,8 +153,8 @@ table tr.inactive td {
   color: #0095ff;
 }
 .toolbar {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  /*margin-top: 0.5em;*/
+  /*margin-bottom: 0.5em;*/
 }
 .toolbutton {
   cursor: pointer;

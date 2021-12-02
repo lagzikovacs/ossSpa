@@ -56,7 +56,7 @@
         <td style="text-align: right">{{item.Fuvardijegysegar | number: '1.2-2'}}</td>
         <td style="text-align: right">{{item.Fuvardij | number: '1.2-2'}}</td>
       </tr>
-      <tr *ngIf="item.Megjegyzes || '' !== ''">
+      <tr *ngIf="item.Megjegyzes || '' !== ''" class="inactive">
         <td colspan="100">{{item.Megjegyzes}}</td>
       </tr>
 

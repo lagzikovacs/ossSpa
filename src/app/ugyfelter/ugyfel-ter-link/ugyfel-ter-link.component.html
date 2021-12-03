@@ -1,16 +1,20 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>Ügyféltér link</h5>
 
-  <button (click)="doUj()" class="toolbutton">
-    Új ügyféltér link
-  </button>
-  <button [disabled]="link === ''" (click)="doTorles()" class="toolbutton">
-    Ügyféltér link törlése
-  </button>
+  <div class="toolbar">
+    <button (click)="doUj()" class="toolbutton">
+      Új ügyféltér link
+    </button>
+    <button [disabled]="link === ''" (click)="doTorles()" class="toolbutton">
+      Ügyféltér link törlése
+    </button>
+  </div>
 
   <ng-container *ngIf="link !== ''">
-    <div class="form-group">
-      <textarea class="form-control" rows="3" id="regilink" readonly="true" [(ngModel)]="link"></textarea>
+    <div>
+      <textarea rows="3" cols="100" id="regilink" disabled="true" [(ngModel)]="link"></textarea>
+    </div>
+    <div>
       {{kikuldesikodidopontja}}
     </div>
   </ng-container>
@@ -18,8 +22,8 @@
   <ng-container *ngIf="egymode === 3">
     <div [@rowanimation]>
       <h5>Új ügyféltér link</h5>
-      <p>Ha új ügyféltér linket készít, a régi érvényessége megszűnik. Biztos benne?</p>
-      <div class="editform-okcancel" style="margin-bottom: 10px">
+      <div class="editform-row">Ha új ügyféltér linket készít, a régi érvényessége megszűnik. Biztos benne?</div>
+      <div class="editform-okcancel">
         <button class="toolbutton okbutton" (click)="onUj()">Ok</button>
         <button class="toolbutton" (click)="onMegsem()">Mégsem</button>
       </div>

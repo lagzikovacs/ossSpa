@@ -13,16 +13,16 @@
 
       <div class="editform-row">
         <div class="editform-label">Me</div>
-        <input type="text" class="editform-edit em6width" id="me"
-               maxlength="10" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
+        <input type="text" class="editform-edit zoomedit em6width" id="me"
+               maxlength="10" required autocomplete="off"
                [(ngModel)]="DtoEdited.Me" name="me">
         <button class="toolbutton" type="button" (click)="MeZoom()">...</button>
       </div>
 
       <div class="editform-row">
         <div class="editform-label">ÁFA kulcs</div>
-        <input type="text" class="editform-edit em6width" id="afakulcs"
-               maxlength="10" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
+        <input type="text" class="editform-edit zoomedit em6width" id="afakulcs"
+               maxlength="10" required autocomplete="off"
                [(ngModel)]="DtoEdited.Afakulcs" name="afakulcs">
         <button class="toolbutton" type="button" (click)="AfakulcsZoom()">...</button>
       </div>
@@ -54,8 +54,8 @@
 
       <div class="editform-row">
         <div class="editform-label">Termékdíj KT</div>
-        <input type="text" class="editform-edit em6width" id="termekdijkt"
-               maxlength="10" autocomplete="off" style="background-color: aquamarine; display: inline-block"
+        <input type="text" class="editform-edit zoomedit em6width" id="termekdijkt"
+               maxlength="10" autocomplete="off"
                [(ngModel)]="DtoEdited.Termekdijkt" name="termekdijkt">
         <button class="toolbutton" type="button" (click)="TermekdijZoom()">...</button>
       </div>

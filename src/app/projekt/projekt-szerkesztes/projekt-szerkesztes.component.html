@@ -7,8 +7,8 @@
     <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Ügyfél</div>
-        <input type="text" class="editform-edit em20width" id="ugyfelnev"
-               maxlength="200" required autocomplete="off" style="background-color: aquamarine;"
+        <input type="text" class="editform-edit zoomedit em20width" id="ugyfelnev"
+               maxlength="200" required autocomplete="off"
                [(ngModel)]="DtoEdited.Ugyfelnev" name="ugyfelnev">
         <button type="button" class="toolbutton" (click)="UgyfelZoom()">...</button>
       </div>
@@ -45,8 +45,8 @@
 
       <div class="editform-row">
         <div class="editform-label">Pénznem</div>
-        <input type="text" class="editform-edit em4width" id="penznem"
-               maxlength="30" required autocomplete="off" style="background-color: aquamarine;"
+        <input type="text" class="editform-edit zoomedit penznemwidth" id="penznem"
+               maxlength="30" required autocomplete="off"
                [(ngModel)]="DtoEdited.Penznem" name="penznem">
         <button class="toolbutton" type="button" (click)="PenznemZoom()">...</button>
       </div>

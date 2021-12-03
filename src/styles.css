@@ -4,11 +4,12 @@
   --keretszin: #dddddd;
   --kivalasztottszin: #d0e0df;
   --kontrolszin: #5d8dea;
+  --zoomszin: rgba(149, 253, 189, 0.67);
 }
 
 html, body {
   font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 300;
 }
 button, input, select, textarea {
@@ -82,6 +83,7 @@ table tr.inactive td {
   font-style: italic;
   font-family: inherit;
   font-size: 90%;
+  margin-bottom: 0.1em;
 }
 .editform-edit {
   outline: 0;
@@ -93,6 +95,16 @@ table tr.inactive td {
   padding: 0.25rem 0.25rem;
   font-size: 0.875rem;
 }
+.zoomedit {
+  background-color: var(--zoomszin);
+}
+.penznemwidth {
+  width: 3em;
+}
+.ugyfelwidth {
+  width: 20em;
+}
+
 .editform-combo {
   outline: 0;
   border: 1px solid var(--kontrolszin);
@@ -111,6 +123,7 @@ table tr.inactive td {
   height: calc(1.5em + 0.5rem + 2px);
   padding: 0.25rem 0.25rem;
   font-size: 0.875rem;
+  width: 10em;
 }
 /*.ng-valid:not(form) {*/
   /*border-left: 0.3em solid #56ac96;*/
@@ -154,8 +167,8 @@ table tr.inactive td {
 }
 
 .toolbar {
-  /*margin-top: 0.5em;*/
-  /*margin-bottom: 0.5em;*/
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
 }
 
 .toolbutton {

@@ -1,12 +1,14 @@
 <div class="alapkeret">
   <h5 *ngIf="vagolapservice.Mode === 1">{{vagolapservice.cim}}</h5>
-  <div>
-    <ng-container *ngIf="vagolapservice.Mode === 1">
+
+  <ng-container *ngIf="vagolapservice.Mode === 1">
+    <div class="toolbar">
       <button [disabled]="eppFrissit" (click)="torles()" class="toolbutton">
         A vágólap törlése
       </button>
-    </ng-container>
-  </div>
+    </div>
+  </ng-container>
+
   <table>
     <thead>
     <tr>
@@ -27,7 +29,7 @@
       <td *ngIf="item.tipus === 1">{{item.bizonylatszam}}</td>
       <td *ngIf="item.tipus === 0">{{item.irattipus}}</td>
       <td *ngIf="item.tipus === 1">{{item.bizonylattipus}}</td>
-      <td>{{item.ugyfelnev}}</td>
+      <td class="ugyfelwidth">{{item.ugyfelnev}}</td>
       <td>{{item.ugyfelcim}}</td>
     </tr>
     </tbody>

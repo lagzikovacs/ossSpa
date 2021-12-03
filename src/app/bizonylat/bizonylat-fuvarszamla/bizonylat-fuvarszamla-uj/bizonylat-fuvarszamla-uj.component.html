@@ -3,8 +3,8 @@
   <form #f="ngForm" (ngSubmit)="onSubmit()">
     <div class="editform-row">
         <div class="editform-label">Fuvarszámla</div>
-        <input type="text" class="editform-edit em10width" id="bizonylatszam"
-               maxlength="100" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
+        <input type="text" class="editform-edit zoomedit em10width" id="bizonylatszam"
+               maxlength="100" required autocomplete="off"
                [(ngModel)]="dtoFuvarszamla.Bizonylatszam" name="bizonylatszam">
         <button class="toolbutton" type="button" (click)="BizonylatZoom()">...</button>
     </div>

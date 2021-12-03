@@ -7,7 +7,7 @@
     <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Név</div>
-        <input type="text" class="editform-edit em15width" id="nev"
+        <input type="text" class="editform-edit ugyfelwidth" id="nev"
                maxlength="200" required autocomplete="off"
                [(ngModel)]="DtoEdited.Nev" name="nev">
       </div>
@@ -22,8 +22,8 @@
 
         <div style="display: inline-block; margin-right: 5px">
           <div class="editform-label">Helységnév</div>
-          <input type="text" class="editform-edit em15width" id="helysegnev"
-                 maxlength="100" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
+          <input type="text" class="editform-edit zoomedit em15width" id="helysegnev"
+                 maxlength="100" required autocomplete="off"
                  [(ngModel)]="DtoEdited.Helysegnev" name="helysegnev">
           <button class="toolbutton" type="button" (click)="HelysegZoom()">...</button>
         </div>
@@ -100,8 +100,8 @@
 
       <div class="editform-row">
           <div class="editform-label">Tevékenység</div>
-          <input type="text" class="editform-edit em15width" id="tevekenyseg"
-                 maxlength="100" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
+          <input type="text" class="editform-edit zoomedit em15width" id="tevekenyseg"
+                 maxlength="100" required autocomplete="off"
                  [(ngModel)]="DtoEdited.Tevekenyseg" name="tevekenyseg">
           <button class="toolbutton" style="margin-left: 4px; display: inline-block" type="button" (click)="TevekenysegZoom()">...</button>
       </div>

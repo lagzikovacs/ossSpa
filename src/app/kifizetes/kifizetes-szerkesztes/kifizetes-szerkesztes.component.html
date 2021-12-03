@@ -7,7 +7,7 @@
     <div class="editform-row">
       <div>
         <div class="editform-label">Dátum</div>
-        <input type="date" class="editform-date em10width" id="datum"
+        <input type="date" class="editform-date" id="datum"
                [(ngModel)]="Datum" name="datum">
       </div>
     </div>
@@ -23,8 +23,8 @@
     <div class="editform-row">
       <div>
         <div class="editform-label">Pénznem</div>
-        <input type="text" class="editform-edit em4width" id="penznem"
-               maxlength="3" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
+        <input type="text" class="editform-edit zoomedit penznemwidth" id="penznem"
+               maxlength="3" required autocomplete="off"
                [(ngModel)]="DtoEdited.Penznem" name="penznem">
         <button class="toolbutton" type="button"
                 (click)="PenznemZoom()">...</button>
@@ -34,8 +34,8 @@
     <div class="editform-row">
       <div>
         <div class="editform-label">Fizetési mód</div>
-        <input type="text" class="editform-edit em10width" id="fizetesimod"
-               maxlength="20" required autocomplete="off" style="background-color: aquamarine; display: inline-block"
+        <input type="text" class="editform-edit zoomedit em10width" id="fizetesimod"
+               maxlength="20" required autocomplete="off"
                [(ngModel)]="DtoEdited.Fizetesimod" name="fizetesimod">
         <button class="toolbutton" type="button"
                 (click)="FizetesimodZoom()">...</button>

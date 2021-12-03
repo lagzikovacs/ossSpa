@@ -25,6 +25,15 @@ import {BizonylatZoomParameter} from './bizonylatzoomparameter';
 export class BizonylatService {
   private readonly _controller = environment.CoreRef + 'api/bizonylat/';
 
+  tipusok = [
+    ['Díjbekérő', BizonylatTipus.DijBekero, false, 'DIJBEKERO'],
+    ['Előlegszámla', BizonylatTipus.ElolegSzamla, false, 'ELOLEGSZAMLA'],
+    ['Megrendelés', BizonylatTipus.Megrendeles, false, 'MEGRENDELES'],
+    ['Szállító', BizonylatTipus.Szallito, false, 'SZALLITO'],
+    ['Számla', BizonylatTipus.Szamla, false, 'SZAMLA'],
+    ['Bejövő számla', BizonylatTipus.BejovoSzamla, false, 'BEJOVOSZAMLA']
+  ];
+
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
 

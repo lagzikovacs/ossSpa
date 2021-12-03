@@ -1,43 +1,42 @@
-import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {BizonylatTipus} from '../bizonylattipus';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatMintaAlapjanParam} from '../bizonylatmintaalapjan';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {LogonService} from '../../logon/logon.service';
 
 @Component({
   selector: 'app-bizonylat-errol',
   templateUrl: './bizonylat-errol.component.html'
 })
-export class BizonylatErrolComponent implements OnDestroy {
+export class BizonylatErrolComponent implements OnInit, OnDestroy {
   @Input() Bizonylatkod = -1;
   @Output() eventBizonylaterrolUtan = new EventEmitter<boolean>();
 
-  entries = [
-    ['Díjbekérő', BizonylatTipus.DijBekero],
-    ['Előlegszámla', BizonylatTipus.ElolegSzamla],
-    ['Megrendelés', BizonylatTipus.Megrendeles],
-    ['Szállító', BizonylatTipus.Szallito],
-    ['Számla', BizonylatTipus.Szamla],
-    ['Bejövő számla', BizonylatTipus.BejovoSzamla]
-  ];
   entryindex = 4;
   kesz = false;
   ujbizonylatkod = 0;
 
   eppFrissit = false;
 
-  constructor(private _bizonylatservice: BizonylatService,
-              private _errorservice: ErrorService) {
+  bizonylatservice: BizonylatService;
+
+  constructor(private _errorservice: ErrorService,
+              private _logonservice: LogonService,
+              bizonylatservice: BizonylatService) {
+    this.bizonylatservice = bizonylatservice;
   }
 
-  change(i) {
-    this.entryindex = i;
+  ngOnInit() {
+    for (let i = 0; i < this.bizonylatservice.tipusok.length; i++) {
+      this.bizonylatservice.tipusok[i][2] = !this._logonservice.Jogaim.includes(this.bizonylatservice.tipusok[i][3]);
+    }
   }
+
   onSubmit() {
     if (!this.kesz) {
       this.eppFrissit = true;
-      this._bizonylatservice.UjBizonylatMintaAlapjan(new BizonylatMintaAlapjanParam(
-        this.Bizonylatkod, this.entries[this.entryindex][1]))
+      this.bizonylatservice.UjBizonylatMintaAlapjan(new BizonylatMintaAlapjanParam(
+        this.Bizonylatkod, this.bizonylatservice.tipusok[this.entryindex][1]))
         .then(res => {
           if (res.Error != null) {
             throw res.Error;

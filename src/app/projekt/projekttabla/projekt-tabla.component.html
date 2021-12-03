@@ -48,16 +48,24 @@
           <div style="width: 30em">{{item.Projektjellege}}</div>
         </td>
         <td>
-          <div style="width:120px" [style.background-color]="MuszakiallapotColor(item.Muszakiallapot)">{{item.Muszakiallapot}}</div>
+          <div style="width: 8em;padding-left: 0.5em;padding-right: 0.5em"
+               [style.background-color]="MuszakiallapotColor(item.Muszakiallapot)[0]"
+               [style.color]="MuszakiallapotColor(item.Muszakiallapot)[1]">
+            {{item.Muszakiallapot}}
+          </div>
         </td>
         <td>
-          <div style="width: 250px" [style.background-color]="InverterNapelemColor(item.Inverterallapot)">
+          <div style="width: 15em;padding-left: 0.5em;padding-right: 0.5em"
+               [style.background-color]="InverterNapelemColor(item.Inverterallapot)[0]"
+               [style.color]="InverterNapelemColor(item.Inverterallapot)[1]">
             <div>{{item.Inverter}}</div>
             <div>{{item.Inverterallapot}}</div>
           </div>
         </td>
         <td>
-          <div style="width: 250px" [style.background-color]="InverterNapelemColor(item.Napelemallapot)">
+          <div style="width: 15em;padding-left: 0.5em;padding-right: 0.5em"
+               [style.background-color]="InverterNapelemColor(item.Napelemallapot)[0]"
+               [style.color]="InverterNapelemColor(item.Napelemallapot)[1]">
             <div>{{item.Napelem}}</div>
             <div>{{item.Napelemallapot}}</div>
           </div>

@@ -59,15 +59,15 @@ export class ProjektTablaComponent implements OnDestroy {
   MuszakiallapotColor(muszakiallapot: string) {
     switch (muszakiallapot) {
       case 'Nincs elkezdve a kivitelezése':
-        return 'yellow';
+        return ['yellow', 'black'];
       case 'Elkezdve a kivitelezése':
-        return 'blue';
+        return ['blue', 'white'];
       case 'Beüzemelve, hiányos':
-        return 'aquamarine';
+        return ['aquamarine', 'black'];
       case 'Beüzemelve, átadva':
-        return 'green';
+        return ['green', 'white'];
       default:
-        return 'silver';
+        return ['silver', 'black'];
     }
   }
   InverterNapelemColor(inverterallapot: string) {
@@ -75,25 +75,25 @@ export class ProjektTablaComponent implements OnDestroy {
       case 'Inverter: Nincs megrendelve':
       case 'Napelem: Nincs megrendelve':
       case 'Nincs megrendelve':
-        return 'red';
+        return ['red', 'white'];
       case 'Inverter: Megrendelve':
       case 'Napelem: Megrendelve':
       case 'Megrendelve':
-        return 'yellow';
+        return ['yellow', 'black'];
       case 'Inverter: Raktárban':
       case 'Napelem: Raktárban':
       case 'Raktárban':
-        return 'blue';
+        return ['blue', 'white'];
       case 'Inverter: Kiszállítva/beépítve':
       case 'Napelem: Kiszállítva/telepítve':
       case 'Kiszállítva/telepítve':
-        return 'aquamarine';
+        return ['aquamarine', 'black'];
       case 'Inverter: Harmadik fél biztosítja':
       case 'Napelem: Harmadik fél biztosítja':
       case 'Harmadik fél biztosítja':
-        return 'fuchsia';
+        return ['fuchsia', 'white'];
       default:
-        return 'silver';
+        return ['silver', 'black'];
     }
   }
 

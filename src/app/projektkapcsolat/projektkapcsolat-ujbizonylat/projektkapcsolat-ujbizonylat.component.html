@@ -2,25 +2,19 @@
   <h5>Új bizonylat</h5>
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
+
     <div class="editform-row">
-      <div>
-        <div class="editform-label">Bizonylattipus</div>
-        <div *ngFor="let entry of entries; let i = index">
-          <input type="radio" name="radiogroup" [id]=entry[0]
-                 [checked]="i === entryindex"
-                 [disabled]=entry[2]
-                 (change)="change(i)">
-          <label [for]=entry[0]>
-            {{entry[0]}}
-          </label>
-        </div>
-      </div>
+      <div class="editform-label">Bizonylattipus</div>
+      <select type="text" class="editform-combo" name="statusz" [(ngModel)]="entryindex">
+        <option *ngFor="let s of bizonylatservice.tipusok; let i = index" [value]="i" [disabled]=s[2]>{{s[0]}}</option>
+      </select>
     </div>
 
     <div class="editform-okcancel">
       <button class="editform-okbutton" [disabled]="!f.valid" type="submit">Ok</button>
       <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
     </div>
+
   </form>
 </div>
 

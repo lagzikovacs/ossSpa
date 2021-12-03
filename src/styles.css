@@ -84,22 +84,37 @@ table tr.inactive td {
   font-size: 90%;
 }
 .editform-edit {
-  border: 1px solid lightgrey;
+  outline: 0;
+  border: 1px solid var(--kontrolszin);
   border-radius: 0.2em;
   margin-right: 0.5em;
+  font-family: inherit;
+  height: calc(1.5em + 0.5rem + 2px);
+  padding: 0.25rem 0.25rem;
+  font-size: 0.875rem;
 }
 .editform-combo {
-  border: 1px solid lightgrey;
+  outline: 0;
+  border: 1px solid var(--kontrolszin);
   border-radius: 0.2em;
   margin-right: 0.5em;
+  font-family: inherit;
+  height: calc(1.5em + 0.5rem + 2px);
+  padding: 0.25rem 0.25rem;
+  font-size: 0.875rem;
 }
 .editform-date {
-  border: 1px solid lightgrey;
+  outline: 0;
+  border: 1px solid var(--kontrolszin);
   border-radius: 0.2em;
+  font-family: inherit;
+  height: calc(1.5em + 0.5rem + 2px);
+  padding: 0.25rem 0.25rem;
+  font-size: 0.875rem;
 }
-.ng-valid:not(form) {
-  border-left: 0.3em solid greenyellow;
-}
+/*.ng-valid:not(form) {*/
+  /*border-left: 0.3em solid #56ac96;*/
+/*}*/
 .ng-invalid:not(form) {
   border-left: 0.3em solid lightpink;
 }
@@ -152,7 +167,9 @@ table tr.inactive td {
   margin-right: 0.2em;
   margin-bottom: 0.2em;
   font-family: inherit;
-  font-size: 90%;
+  height: calc(1.5em + 0.5rem + 2px);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
 }
 .toolbutton:disabled {
   background-color: var(--keretszin);
@@ -173,16 +190,26 @@ table tr.inactive td {
 }
 
 .tooledit {
+  outline: 0;
   background-color: var(--hatterszin);
   border: 1px solid var(--kontrolszin);
   border-radius: 0.2em;
   margin-right: 0.2em;
+  font-family: inherit;
+  height: calc(1.5em + 0.5rem + 2px);
+  padding: 0.25rem 0.25rem;
+  font-size: 0.875rem;
 }
 .toolcombo {
+  outline: 0;
   background-color: var(--hatterszin);
   border: 1px solid var(--kontrolszin);
   border-radius: 0.2em;
   margin-right: 0.2em;
+  font-family: inherit;
+  height: calc(1.5em + 0.5rem + 2px);
+  padding: 0.25rem 0.25rem;
+  font-size: 0.875rem;
 }
 
 

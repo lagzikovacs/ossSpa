@@ -137,19 +137,6 @@ table tr.inactive td {
 
   clear: both;
 }
-.editform-okbutton {
-  cursor: pointer;
-  border: 1px solid #0095ff;
-  border-radius: 0.2em;
-  background-color: #fff;
-  color: #0095ff;
-  margin-right: 0.5em;
-}
-.editform-okbutton:disabled {
-  border: 1px solid black;
-  background-color: #ffffff;
-  color: #000000;
-}
 
 .toolbar {
   /*margin-top: 0.5em;*/
@@ -186,12 +173,14 @@ table tr.inactive td {
 }
 
 .tooledit {
-  border: 1px solid lightgrey;
+  background-color: var(--hatterszin);
+  border: 1px solid var(--kontrolszin);
   border-radius: 0.2em;
   margin-right: 0.2em;
 }
 .toolcombo {
-  border: 1px solid lightgrey;
+  background-color: var(--hatterszin);
+  border: 1px solid var(--kontrolszin);
   border-radius: 0.2em;
   margin-right: 0.2em;
 }

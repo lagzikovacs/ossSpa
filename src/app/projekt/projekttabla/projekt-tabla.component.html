@@ -83,7 +83,7 @@
         <td>{{item.Megrendelve | datehun}}</td>
         <td>{{item.Kivitelezesihatarido | datehun}}</td>
       </tr>
-      <tr *ngIf="item.Megjegyzes !== null && item.Megjegyzes !== '' && megjegyzesIs" (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
+      <tr *ngIf="item.Megjegyzes !== null && item.Megjegyzes !== '' && megjegyzesIs" (click)="clickforrow(i)" style="font-size: 90%" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
         <td colspan="100">{{item.Megjegyzes}}</td>
       </tr>
 

@@ -55,15 +55,6 @@
           <button [disabled]="!mod" (click)="doNav(20)" class="toolbutton">
             Műszaki állapot
           </button>
-          <button [disabled]="!mod" (click)="doNav(21)" class="toolbutton">
-            Inverter
-          </button>
-          <button [disabled]="!mod" (click)="doNav(22)" class="toolbutton">
-            Napelem
-          </button>
-          <button [disabled]="!mod" (click)="doNav(27)" class="toolbutton">
-            Dátumok
-          </button>
           <button (click)="doNav(24)" class="toolbutton">
             Bizonylat és irat
           </button>
@@ -117,30 +108,7 @@
           </app-projekt-muszakiallapot>
         </div>
       </ng-container>
-      <ng-container *ngIf="egymode === 21">
-        <div [@rowanimation]>
-          <app-projekt-inverter [DtoOriginal]="Dto[DtoSelectedIndex]"
-                                (eventOk)="onSegedOk($event)"
-                                (eventCancel)="onSegedCancel()">
-          </app-projekt-inverter>
-        </div>
-      </ng-container>
-      <ng-container *ngIf="egymode === 22">
-        <div [@rowanimation]>
-          <app-projekt-napelem [DtoOriginal]="Dto[DtoSelectedIndex]"
-                               (eventOk)="onSegedOk($event)"
-                               (eventCancel)="onSegedCancel()">
-          </app-projekt-napelem>
-        </div>
-      </ng-container>
-      <ng-container *ngIf="egymode === 27">
-        <div [@rowanimation]>
-          <app-projekt-datumok [DtoOriginal]="Dto[DtoSelectedIndex]"
-                               (eventOk)="onSegedOk($event)"
-                               (eventCancel)="onSegedCancel()">
-          </app-projekt-datumok>
-        </div>
-      </ng-container>
+
       <ng-container *ngIf="egymode === 23">
         <div [@rowanimation]>
           <app-projekt-iratminta [Projektkod]="Dto[DtoSelectedIndex].Projektkod"

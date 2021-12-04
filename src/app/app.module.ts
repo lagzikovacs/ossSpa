@@ -31,8 +31,6 @@ import { ProjektSzerkesztesComponent } from './projekt/projekt-szerkesztes/proje
 import {ProjektToolbarComponent} from './projekt/projekttoolbar/projekttoolbar.component';
 import {ProjektService} from './projekt/projekt.service';
 import { ProjektMuszakiallapotComponent } from './projekt/projekt-muszakiallapot/projekt-muszakiallapot.component';
-import { ProjektInverterComponent } from './projekt/projekt-inverter/projekt-inverter.component';
-import { ProjektNapelemComponent } from './projekt/projekt-napelem/projekt-napelem.component';
 import { ProjektIratmintaComponent } from './projekt/projekt-iratminta/projekt-iratminta.component';
 import { ProjektkapcsolatListComponent } from './projektkapcsolat/projektkapcsolat-list/projektkapcsolat-list.component';
 import { SzamlazasirendListComponent } from './szamlazasirend/szamlazasirend-list/szamlazasirend-list.component';
@@ -124,7 +122,6 @@ import { BizonylatSzerkesztesComponent } from './bizonylat/bizonylat-szerkesztes
 import { KifizetesListComponent } from './kifizetes/kifizetes-list/kifizetes-list.component';
 import { KifizetesSzerkesztesComponent } from './kifizetes/kifizetes-szerkesztes/kifizetes-szerkesztes.component';
 import { BizonylatNyomtatasComponent } from './bizonylatnyomtatas/bizonylat-nyomtatas/bizonylat-nyomtatas.component';
-import { ProjektDatumokComponent } from './projekt/projekt-datumok/projekt-datumok.component';
 import { BizonylatReszletekComponent } from './bizonylat/bizonylat-reszletek/bizonylat-reszletek.component';
 import { BizonylatkapcsolatListComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-list/bizonylatkapcsolat-list.component';
 import { BizonylatkapcsolatLevalasztasComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-levalasztas/bizonylatkapcsolat-levalasztas.component';
@@ -274,8 +271,6 @@ if (environment.production) {
     ProjektToolbarComponent,
     ProjektSzerkesztesComponent,
     ProjektMuszakiallapotComponent,
-    ProjektInverterComponent,
-    ProjektNapelemComponent,
     ProjektIratmintaComponent,
     ProjektkapcsolatListComponent,
     SzamlazasirendListComponent,
@@ -350,7 +345,6 @@ if (environment.production) {
     KifizetesListComponent,
     KifizetesSzerkesztesComponent,
     BizonylatNyomtatasComponent,
-    ProjektDatumokComponent,
     BizonylatReszletekComponent,
     BizonylatkapcsolatListComponent,
     BizonylatkapcsolatLevalasztasComponent,

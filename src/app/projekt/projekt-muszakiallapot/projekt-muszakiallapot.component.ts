@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../tools/deepCopy';
 import {ProjektDto} from '../projektdto';
+import {ProjektService} from '../projekt.service';
 
 @Component({
   selector: 'app-projekt-muszakiallapot',
@@ -17,7 +18,13 @@ export class ProjektMuszakiallapotComponent implements OnDestroy {
   @Output() eventOk = new EventEmitter<ProjektDto>();
   @Output() eventCancel = new EventEmitter<void>();
 
-  entries = ['', 'Nincs elkezdve a kivitelezése', 'Elkezdve a kivitelezése', 'Beüzemelve, hiányos', 'Beüzemelve, átadva'];
+
+
+  projektservice: ProjektService;
+
+  constructor(projektservice: ProjektService) {
+    this.projektservice = projektservice;
+  }
 
   onSubmit() {
     this.eventOk.emit(this.DtoEdited);

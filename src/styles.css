@@ -66,6 +66,7 @@ table tr.inactive td {
   border: 1px solid var(--keretszin);
   padding: 0.5em;
 }
+
 .editform-card {
   float: left;
   margin-right: 1em;
@@ -78,6 +79,14 @@ table tr.inactive td {
   display: inline-block;
   margin-right: 0.5em
 }
+.editform-row-bottom {
+  margin-top: 1em;
+  margin-left: 1em;
+  margin-bottom: 0.5em;
+
+  clear: both;
+}
+
 .editform-label {
   text-align: left;
   font-style: italic;
@@ -95,14 +104,19 @@ table tr.inactive td {
   padding: 0.25rem 0.25rem;
   font-size: 0.875rem;
 }
+
 .zoomedit {
   background-color: var(--zoomszin);
 }
+
 .penznemwidth {
   width: 3em;
 }
 .ugyfelwidth {
   width: 20em;
+}
+.megjegyzeswidth {
+  width: 60em;
 }
 
 .editform-combo {
@@ -155,16 +169,8 @@ table tr.inactive td {
 .em30width {
   width: 30em;
 }
-.em60width {
-  width: 60em;
-}
-.editform-okcancel {
-  margin-top: 1em;
-  margin-left: 1em;
-  margin-bottom: 0.5em;
 
-  clear: both;
-}
+
 
 .toolbar {
   margin-top: 0.25em;

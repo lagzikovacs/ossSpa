@@ -4,7 +4,7 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit()">
 
-    <div class="editform-card">
+    <div class="editform-card" style="margin-right: 3em">
       <div class="editform-row">
         <div class="editform-label">Ügyfél</div>
         <input type="text" class="editform-edit zoomedit em20width" id="ugyfelnev"
@@ -28,7 +28,7 @@
       </div>
     </div>
 
-    <div class="editform-card">
+    <div class="editform-card" style="margin-right: 3em">
       <div class="editform-row">
         <div class="editform-label">A projekt jellege</div>
         <input type="text" class="editform-edit em20width" id="projektjellege"
@@ -52,14 +52,34 @@
       </div>
     </div>
 
-    <div class="editform-okcancel">
+    <div class="editform-card">
+      <div class="editform-row">
+        <div class="editform-label">Keletkezett</div>
+        <input type="date" class="editform-date" id="keletkezett"
+               [(ngModel)]="Keletkezett" name="keletkezett">
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Megrendelve</div>
+        <input type="date" class="editform-date" id="megrendelve"
+               [(ngModel)]="Megrendelve" name="megrendelve">
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Kivitelezési határidő</div>
+        <input type="date" class="editform-date" id="kivhat"
+               [(ngModel)]="KivHat" name="kivhat">
+      </div>
+    </div>
+
+    <div class="editform-row-bottom">
         <div class="editform-label">Megjegyzés</div>
-        <input type="text" class="editform-edit em60width" id="megjegyzes"
+        <input type="text" class="editform-edit megjegyzeswidth" id="megjegyzes"
                autocomplete="off"
                [(ngModel)]="DtoEdited.Megjegyzes" name="megjegyzes">
     </div>
 
-    <div class="editform-okcancel">
+    <div class="editform-row-bottom">
       <button class="toolbutton okbutton" [disabled]="!f.valid" type="submit">Ok</button>
       <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
     </div>

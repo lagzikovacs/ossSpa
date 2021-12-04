@@ -11,6 +11,7 @@ import {deepCopy} from '../../tools/deepCopy';
 import {PenznemDto} from '../../primitiv/penznem/penznemdto';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 import {ProjektDto} from '../projektdto';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-projekt-szerkesztes',
@@ -25,13 +26,15 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
   }
   @Output() eventSzerkeszteskesz = new EventEmitter<ProjektDto>();
 
-  Keletkezett: any;
-
   SzerkesztesMode = ProjektSzerkesztesMode.Blank;
 
   eppFrissit = false;
 
   projektzoombox: any;
+
+  Keletkezett: any;
+  Megrendelve: any;
+  KivHat: any;
 
   projektservice: ProjektService;
 
@@ -61,9 +64,17 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     }
+
+    this.Keletkezett = moment(this.DtoEdited.Keletkezett).format('YYYY-MM-DD');
+    this.Megrendelve = moment(this.DtoEdited.Megrendelve).format('YYYY-MM-DD');
+    this.KivHat = moment(this.DtoEdited.Kivitelezesihatarido).format('YYYY-MM-DD');
   }
 
   onSubmit() {
+    this.DtoEdited.Keletkezett = moment(this.Keletkezett).toISOString(true);
+    this.DtoEdited.Megrendelve = moment(this.Megrendelve).toISOString(true);
+    this.DtoEdited.Kivitelezesihatarido = moment(this.KivHat).toISOString(true);
+
     this.eppFrissit = true;
     this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.DtoEdited.Ugyfelkod || 0,
       this.DtoEdited.Ugyfelnev || ''))

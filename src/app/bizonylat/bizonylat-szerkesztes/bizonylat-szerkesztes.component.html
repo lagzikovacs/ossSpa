@@ -20,7 +20,7 @@
 
     <div class="editform-row">
       <div class="editform-label">Megjegyzés</div>
-      <input type="text" class="editform-edit em30width" id="megjegyzes"
+      <input type="text" class="editform-edit megjegyzeswidth" id="megjegyzes"
              maxlength="200" autocomplete="off"
              [(ngModel)]="ComplexDtoEdited.Dto.Megjegyzesfej">
     </div>
@@ -132,7 +132,7 @@
     </ng-container>
   </div>
 
-  <div class="editform-okcancel">
+  <div class="editform-row-bottom">
     <div class="alapkeret">
       <div class="toolbar">
         <button (click)="onTetelUjElott()" class="toolbutton">
@@ -166,7 +166,7 @@
     </div>
   </div>
 
-  <div class="editform-okcancel">
+  <div class="editform-row-bottom">
     <button class="toolbutton okbutton" [disabled]="SzerkesztesMode !== 1" type="button" (click)="onSubmit()">Ok</button>
     <button class="toolbutton" [disabled]="SzerkesztesMode !== 1" type="button" (click)="cancel()">Mégsem</button>
   </div>

@@ -139,6 +139,18 @@ table tr.inactive td {
   font-size: 0.875rem;
   width: 10em;
 }
+.editform-number {
+  outline: 0;
+  border: 1px solid var(--kontrolszin);
+  border-radius: 0.2em;
+  font-family: inherit;
+  height: calc(1.5em + 0.5rem + 2px);
+  padding: 0.25rem 0.25rem;
+  font-size: 0.875rem;
+  width: 8em;
+  margin-right: 0.5em;
+  text-align: right;
+}
 /*.ng-valid:not(form) {*/
   /*border-left: 0.3em solid #56ac96;*/
 /*}*/
@@ -183,8 +195,8 @@ table tr.inactive td {
   border-radius: 0.2em;
   background-color: var(--hatterszin);
   color: var(--kontrolszin);
-  margin-right: 0.2em;
-  margin-bottom: 0.2em;
+  margin-right: 0.3em;
+  margin-bottom: 0.3em;
   font-family: inherit;
   height: calc(1.5em + 0.5rem + 2px);
   padding: 0.25rem 0.5rem;

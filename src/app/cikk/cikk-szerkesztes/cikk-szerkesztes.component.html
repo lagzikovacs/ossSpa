@@ -29,7 +29,7 @@
 
       <div class="editform-row">
         <div class="editform-label">Egységár</div>
-        <input type="number" class="editform-edit em6width" id="egysegar"
+        <input type="number" class="editform-number" id="egysegar"
                maxlength="10" required autocomplete="off"
                [(ngModel)]="DtoEdited.Egysegar" name="egysegar">
       </div>
@@ -47,7 +47,7 @@
     <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Tömeg, kg</div>
-        <input type="number" class="editform-combo em6width" id="tomeg"
+        <input type="number" class="editform-number" id="tomeg"
                maxlength="10" required autocomplete="off"
                [(ngModel)]="DtoEdited.Tomegkg" name="tomeg">
       </div>
@@ -69,7 +69,7 @@
 
       <div class="editform-row">
         <div class="editform-label">Termékdíj egységár</div>
-        <input type="number" class="editform-edit em6width" id="termekdijegysegar"
+        <input type="number" class="editform-number" id="termekdijegysegar"
                autocomplete="off" readonly
                [(ngModel)]="DtoEdited.Termekdijegysegar" name="termekdijegysegar">
       </div>

@@ -53,7 +53,7 @@
 
     <div class="editform-row">
         <div class="editform-label">Mennyiség</div>
-        <input type="number" class="editform-edit em10width" id="mennyiseg" name="mennyiseg"
+        <input type="number" class="editform-number" id="mennyiseg" name="mennyiseg"
                [(ngModel)]="TetelDtoEdited.Mennyiseg"
                (focusout)="tetelcalc($event)"
                required min="0">
@@ -68,13 +68,13 @@
     </div>
     <div class="editform-row">
         <div class="editform-label">Egységár</div>
-        <input type="number" class="editform-edit em10width" id="egysegar" name="egysegar"
+        <input type="number" class="editform-number" id="egysegar" name="egysegar"
                [(ngModel)]="TetelDtoEdited.Egysegar"
                (focusout)="tetelcalc($event)"
                required>
         <button class="toolbutton" (click)="bruttobol()"
                 type="button"><- Br</button>
-        <input type="number" class="editform-edit em10width" id="bruttoosszeg" name="bruttoosszeg"
+        <input type="number" class="editform-number" id="bruttoosszeg" name="bruttoosszeg"
                [(ngModel)]="bruttoosszeg">
     </div>
     <div class="editform-row">
@@ -91,7 +91,7 @@
   <div class="editform-card">
     <div class="editform-row">
       <div class="editform-label">Tömeg, kg</div>
-      <input type="number" class="editform-edit em10width" id="tomegkg" name="tomegkg"
+      <input type="number" class="editform-number" id="tomegkg" name="tomegkg"
              [(ngModel)]="TetelDtoEdited.Tomegkg"
              (focusout)="tetelcalc($event)"
              min="0">
@@ -117,7 +117,7 @@
 
     <div class="editform-row">
         <div class="editform-label">Termékdíj egységár</div>
-        <input type="number" class="editform-edit em10width" id="termekdijegysegar" name="termekdijegysegar"
+        <input type="number" class="editform-number" id="termekdijegysegar" name="termekdijegysegar"
                [(ngModel)]="TetelDtoEdited.Termekdijegysegar"
                (focusout)="tetelcalc($event)"
                readonly="true">
@@ -125,28 +125,28 @@
 
     <div class="editform-row">
       <div class="editform-label">Netto</div>
-      <input type="number" class="editform-edit em10width" id="netto" name="netto"
+      <input type="number" class="editform-number" id="netto" name="netto"
              [(ngModel)]="TetelDtoEdited.Netto"
              disabled="true">
     </div>
 
     <div class="editform-row">
       <div class="editform-label">ÁFA</div>
-      <input type="number" class="editform-edit em10width" id="afa" name="afa"
+      <input type="number" class="editform-number" id="afa" name="afa"
              [(ngModel)]="TetelDtoEdited.Afa"
              disabled="true">
     </div>
 
     <div class="editform-row">
       <div class="editform-label">Brutto</div>
-      <input type="number" class="editform-edit em10width" id="brutto" name="brutto"
+      <input type="number" class="editform-number" id="brutto" name="brutto"
              [(ngModel)]="TetelDtoEdited.Brutto"
              disabled="true">
     </div>
 
     <div class="editform-row">
       <div class="editform-label">Termékdíj a brutto árból</div>
-      <input type="number" class="editform-edit em10width" id="terekdijabruttoarbol" name="terekdijabruttoarbol"
+      <input type="number" class="editform-number" id="terekdijabruttoarbol" name="terekdijabruttoarbol"
              [(ngModel)]="TetelDtoEdited.Termekdij"
              disabled="true">
     </div>

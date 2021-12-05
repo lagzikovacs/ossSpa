@@ -38,7 +38,7 @@
 
     <div class="editform-row">
         <div class="editform-label">Megnevezés</div>
-        <input type="text" class="editform-edit zoomedit em20width" id="megnevezes" name="megnevezes"
+        <input type="text" class="editform-edit zoomedit cikkwidth" id="megnevezes" name="megnevezes"
                [(ngModel)]="TetelDtoEdited.Megnevezes"
                maxlength="100" required autocomplete="off">
         <button class="toolbutton" (click)="CikkZoom()" type="button">...</button>
@@ -54,7 +54,7 @@
       </div>
       <div class="editform-row-block">
           <div class="editform-label">Me</div>
-          <input type="text" class="editform-edit zoomedit em10width" id="me" name="me"
+          <input type="text" class="editform-edit zoomedit kisprimitivwidth" id="me" name="me"
                  [(ngModel)]="TetelDtoEdited.Me"
                  maxlength="10" required autocomplete="off">
           <button class="toolbutton" (click)="MeZoom()"
@@ -75,7 +75,7 @@
     </div>
     <div class="editform-row">
         <div class="editform-label">ÁFA kulcs</div>
-        <input type="text" class="editform-edit zoomedit em10width" id="afakulcs" name="afakulcs"
+        <input type="text" class="editform-edit zoomedit kisprimitivwidth" id="afakulcs" name="afakulcs"
                [(ngModel)]="TetelDtoEdited.Afakulcs"
                maxlength="10" required autocomplete="off">
         <button class="toolbutton" (click)="AfakulcsZoom()"
@@ -95,7 +95,7 @@
 
     <div class="editform-row">
         <div class="editform-label">Termékdíj KT</div>
-        <input type="text" class="editform-edit zoomedit em10width" id="termekdijkt" name="termekdijkt"
+        <input type="text" class="editform-edit zoomedit primitivwidth" id="termekdijkt" name="termekdijkt"
                [(ngModel)]="TetelDtoEdited.Termekdijkt"
                maxlength="10" autocomplete="off">
         <button class="toolbutton" (click)="TermekdijZoom()" type="button">...</button>

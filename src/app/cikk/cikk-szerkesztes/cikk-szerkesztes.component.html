@@ -6,14 +6,14 @@
     <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Megnevezés</div>
-        <input type="text" class="editform-edit em15width" id="megnevezes"
+        <input type="text" class="editform-edit cikkwidth" id="megnevezes"
                maxlength="100" required autocomplete="off"
                [(ngModel)]="DtoEdited.Megnevezes" name="megnevezes">
       </div>
 
       <div class="editform-row">
         <div class="editform-label">Me</div>
-        <input type="text" class="editform-edit zoomedit em6width" id="me"
+        <input type="text" class="editform-edit zoomedit kisprimitivwidth" id="me"
                maxlength="10" required autocomplete="off"
                [(ngModel)]="DtoEdited.Me" name="me">
         <button class="toolbutton" type="button" (click)="MeZoom()">...</button>
@@ -21,7 +21,7 @@
 
       <div class="editform-row">
         <div class="editform-label">ÁFA kulcs</div>
-        <input type="text" class="editform-edit zoomedit em6width" id="afakulcs"
+        <input type="text" class="editform-edit zoomedit kisprimitivwidth" id="afakulcs"
                maxlength="10" required autocomplete="off"
                [(ngModel)]="DtoEdited.Afakulcs" name="afakulcs">
         <button class="toolbutton" type="button" (click)="AfakulcsZoom()">...</button>
@@ -36,7 +36,7 @@
 
       <div class="editform-row">
         <div class="editform-label">Készletet képez</div>
-        <select type="text" class="editform-combo em6width"
+        <select type="text" class="editform-combo"
                 [(ngModel)]="DtoEdited.Keszletetkepez" name="kk">
           <option value="false">Nem</option>
           <option value="true">Igen</option>
@@ -54,7 +54,7 @@
 
       <div class="editform-row">
         <div class="editform-label">Termékdíj KT</div>
-        <input type="text" class="editform-edit zoomedit em6width" id="termekdijkt"
+        <input type="text" class="editform-edit zoomedit primitivwidth" id="termekdijkt"
                maxlength="10" autocomplete="off"
                [(ngModel)]="DtoEdited.Termekdijkt" name="termekdijkt">
         <button class="toolbutton" type="button" (click)="TermekdijZoom()">...</button>

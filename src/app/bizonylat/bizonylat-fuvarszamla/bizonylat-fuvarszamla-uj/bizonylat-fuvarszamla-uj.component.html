@@ -11,21 +11,21 @@
 
     <div class="editform-row">
         <div class="editform-label">Fuvardíj</div>
-        <input type="text" class="editform-edit em10width" id="fuvardij"
+        <input type="number" class="editform-number" id="fuvardij"
                maxlength="20" required autocomplete="off"
                [(ngModel)]="Fuvardij" name="fuvardij">
     </div>
 
     <div class="editform-row">
         <div class="editform-label">Fuvardíj pénzneme</div>
-        <input type="text" class="editform-edit em10width" id="fuvardijpenzneme"
+        <input type="text" class="editform-edit penznemwidth" id="fuvardijpenzneme"
                maxlength="20" required autocomplete="off" disabled="true"
                [(ngModel)]="dtoFuvarszamla.Penznem" name="fuvardijpenzneme">
     </div>
 
     <div class="editform-row">
         <div class="editform-label">Fuvardíj árfolyama</div>
-        <input type="text" class="editform-edit em10width" id="fuvardijarfolyama"
+        <input type="number" class="editform-number" id="fuvardijarfolyama"
                maxlength="20" required autocomplete="off" disabled="true"
                [(ngModel)]="dtoFuvarszamla.Arfolyam" name="fuvardijarfolyama">
     </div>

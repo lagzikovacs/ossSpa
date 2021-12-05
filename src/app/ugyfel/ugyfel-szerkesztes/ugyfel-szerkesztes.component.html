@@ -22,7 +22,7 @@
 
         <div style="display: inline-block; margin-right: 5px">
           <div class="editform-label">Helységnév</div>
-          <input type="text" class="editform-edit zoomedit em15width" id="helysegnev"
+          <input type="text" class="editform-edit zoomedit primitivwidth" id="helysegnev"
                  maxlength="100" required autocomplete="off"
                  [(ngModel)]="DtoEdited.Helysegnev" name="helysegnev">
           <button class="toolbutton" type="button" (click)="HelysegZoom()">...</button>
@@ -100,7 +100,7 @@
 
       <div class="editform-row">
           <div class="editform-label">Tevékenység</div>
-          <input type="text" class="editform-edit zoomedit em15width" id="tevekenyseg"
+          <input type="text" class="editform-edit zoomedit primitivwidth" id="tevekenyseg"
                  maxlength="100" required autocomplete="off"
                  [(ngModel)]="DtoEdited.Tevekenyseg" name="tevekenyseg">
           <button class="toolbutton" style="margin-left: 4px; display: inline-block" type="button" (click)="TevekenysegZoom()">...</button>
@@ -108,21 +108,21 @@
 
       <div class="editform-row">
         <div class="editform-label">Egyéb link</div>
-        <input type="text" class="editform-edit em15width" id="egyeblink"
+        <input type="text" class="editform-edit megjegyzeswidth" id="egyeblink"
                maxlength="200" autocomplete="off"
                [(ngModel)]="DtoEdited.Egyeblink" name="egyeblink">
       </div>
 
       <div class="editform-row">
         <div class="editform-label">Ajánlotta</div>
-        <input type="text" class="editform-edit em15width" id="ajanlotta"
+        <input type="text" class="editform-edit megjegyzeswidth" id="ajanlotta"
                maxlength="200" autocomplete="off"
                [(ngModel)]="DtoEdited.Ajanlotta" name="ajanlotta">
       </div>
 
       <div class="editform-row">
         <div class="editform-label">Megjegyzés</div>
-        <input type="text" class="editform-edit em15width" id="megjegyzes"
+        <input type="text" class="editform-edit megjegyzeswidth" id="megjegyzes"
                maxlength="200" autocomplete="off"
                [(ngModel)]="DtoEdited.Megjegyzes" name="megjegyzes">
       </div>

@@ -19,14 +19,14 @@
       <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
         <td class="itemID" (click)="clickforid(i)">{{item.TetelTipus}}</td>
         <td>{{item.CikkNev}}</td>
-        <td>{{item.Mennyiseg}}</td>
-        <td>{{item.EgysegAr}}</td>
-        <td>{{item.EgysegnyiTeljesitmeny}}</td>
-        <td>{{item.Netto}}</td>
-        <td>{{item.Afa}}</td>
-        <td>{{item.Brutto}}</td>
-        <td>{{item.OsszTeljesitmeny}}</td>
-        <td>{{item.Garancia}}</td>
+        <td style="text-align: right">{{item.Mennyiseg}}</td>
+        <td style="text-align: right">{{item.EgysegAr}}</td>
+        <td style="text-align: right">{{item.EgysegnyiTeljesitmeny}}</td>
+        <td style="text-align: right">{{item.Netto}}</td>
+        <td style="text-align: right">{{item.Afa}}</td>
+        <td style="text-align: right">{{item.Brutto}}</td>
+        <td style="text-align: right">{{item.OsszTeljesitmeny}}</td>
+        <td style="text-align: right">{{item.Garancia}}</td>
       </tr>
 
       <tr *ngIf="szerkesztes && i === clickedidindex && tetelTemplate !== undefined" [class.active]="i === clickedidindex">

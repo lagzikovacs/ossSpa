@@ -6,7 +6,7 @@
     <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Dátum</div>
-        <input type="date" class="editform-edit em10width" id="datum"
+        <input type="date" class="editform-date" id="datum"
                [(ngModel)]="datum" name="datum">
       </div>
 
@@ -27,7 +27,7 @@
 
       <div class="editform-row">
         <div class="editform-label">Ügyfél</div>
-        <input #ugyfel type="text" class="editform-edit em20width" id="ugyfel"
+        <input #ugyfel type="text" class="editform-edit ugyfelwidth" id="ugyfel"
                autocomplete="off"
                [(ngModel)]="DtoEdited.Ugyfelnev" name="ugyfel">
       </div>
@@ -43,21 +43,21 @@
     <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Bevétel</div>
-        <input #bevetel type="number" class="editform-edit em15width" id="bevetel"
+        <input #bevetel type="number" class="editform-number" id="bevetel"
                autocomplete="off"
                [(ngModel)]="DtoEdited.Bevetel" name="bevetel">
       </div>
 
       <div class="editform-row">
         <div class="editform-label">Kiadás</div>
-        <input #kiadas type="number" class="editform-edit em15width" id="kiadas"
+        <input #kiadas type="number" class="editform-number" id="kiadas"
                autocomplete="off"
                [(ngModel)]="DtoEdited.Kiadas" name="kiadas">
       </div>
 
       <div class="editform-row">
         <div class="editform-label">Megjegyzés</div>
-        <input type="text" class="editform-edit em20width" id="megjegyzes"
+        <input type="text" class="editform-edit megjegyzeswidth" id="megjegyzes"
                autocomplete="off"
                [(ngModel)]="DtoEdited.Megjegyzes" name="megjegyzes">
       </div>

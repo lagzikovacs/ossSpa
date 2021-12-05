@@ -13,7 +13,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let item of penztarDto; let i = index">
+      <tr *ngFor="let item of penztarDto; let i = index" class="inactive">
         <td class="itemID" (click)="penztarvalasztas(i)">{{item.Penztarkod}}</td>
         <td>{{item.Penztar1}}</td>
         <td>{{item.Penznem}}</td>
@@ -42,21 +42,21 @@
 
       <div class="editform-row">
           <div class="editform-label">Egyenleg</div>
-          <input type="text" class="editform-edit em6width" id="egyenleg"
+          <input type="number" class="editform-number" id="egyenleg"
                  disabled="true"
                  [(ngModel)]="penztarDto[penztarindex].Egyenleg" name="egyenleg">
       </div>
 
       <div class="editform-row">
           <div class="editform-label">Összeg</div>
-          <input type="text" class="editform-edit em6width" id="osszeg"
+          <input type="number" class="editform-number" id="osszeg"
                  disabled="true"
                  [(ngModel)]="Dto.Brutto" name="osszeg">
       </div>
 
       <div class="editform-row">
           <div class="editform-label">Megjegyzés</div>
-          <input type="text" class="editform-edit em30width" id="megjegyzes"
+          <input type="text" class="editform-edit megjegyzeswidth" id="megjegyzes"
                  autocomplete="off"
                  [(ngModel)]="megjegyzes" name="megjegyzes">
       </div>

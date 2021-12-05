@@ -7,7 +7,7 @@
     <div class="editform-card" style="margin-right: 3em">
       <div class="editform-row">
         <div class="editform-label">Ügyfél</div>
-        <input type="text" class="editform-edit zoomedit em20width" id="ugyfelnev"
+        <input type="text" class="editform-edit zoomedit ugyfelwidth" id="ugyfelnev"
                maxlength="200" required autocomplete="off"
                [(ngModel)]="DtoEdited.Ugyfelnev" name="ugyfelnev">
         <button type="button" class="toolbutton" (click)="UgyfelZoom()">...</button>
@@ -15,14 +15,14 @@
 
       <div class="editform-row">
         <div class="editform-label">Cím</div>
-        <input type="text" class="editform-edit em20width" id="ugyfelcim"
+        <input type="text" class="editform-edit cimwidth" id="ugyfelcim"
                autocomplete="off" disabled="true"
                [(ngModel)]="DtoEdited.Ugyfelcim" name="ugyfelcim">
       </div>
 
       <div class="editform-row">
         <div class="editform-label">Telepítési cím</div>
-        <input type="text" class="editform-edit em20width" id="telepitesicim"
+        <input type="text" class="editform-edit cimwidth" id="telepitesicim"
                autocomplete="off"
                [(ngModel)]="DtoEdited.Telepitesicim" name="telepitesicim">
       </div>

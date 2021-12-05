@@ -35,12 +35,7 @@ table tr.inactive td {
   background-color: var(--hatterszin);
 }
 
-.datum {
-  width: 5em;
-}
-.idobelyeg {
-  width: 9em;
-}
+
 .itemID {
   text-align: right;
   color: var(--kontrolszin);
@@ -99,24 +94,37 @@ table tr.inactive td {
   border: 1px solid var(--kontrolszin);
   border-radius: 0.2em;
   margin-right: 0.5em;
+  margin-bottom: 0.3em;
   font-family: inherit;
   height: calc(1.5em + 0.5rem + 2px);
   padding: 0.25rem 0.25rem;
   font-size: 0.875rem;
 }
-
+.editform-edit:disabled {
+  background-color: var(--keretszin);
+}
 .zoomedit {
   background-color: var(--zoomszin);
 }
 
+
+.datum {
+  width: 5em;
+}
+.idobelyeg {
+  width: 9em;
+}
 .penznemwidth {
   width: 3em;
 }
 .ugyfelwidth {
   width: 20em;
 }
+.cimwidth {
+  width: 30em;
+}
 .megjegyzeswidth {
-  width: 60em;
+  width: 50em;
 }
 
 .editform-combo {
@@ -124,10 +132,14 @@ table tr.inactive td {
   border: 1px solid var(--kontrolszin);
   border-radius: 0.2em;
   margin-right: 0.5em;
+  margin-bottom: 0.3em;
   font-family: inherit;
   height: calc(1.5em + 0.5rem + 2px);
   padding: 0.25rem 0.25rem;
   font-size: 0.875rem;
+}
+.editform-combo:disabled {
+  background-color: var(--keretszin);
 }
 .editform-date {
   outline: 0;
@@ -138,6 +150,11 @@ table tr.inactive td {
   padding: 0.25rem 0.25rem;
   font-size: 0.875rem;
   width: 10em;
+  margin-right: 0.5em;
+  margin-bottom: 0.3em;
+}
+.editform-date:disabled {
+  background-color: var(--keretszin);
 }
 .editform-number {
   outline: 0;
@@ -149,7 +166,11 @@ table tr.inactive td {
   font-size: 0.875rem;
   width: 8em;
   margin-right: 0.5em;
+  margin-bottom: 0.3em;
   text-align: right;
+}
+.editform-number:disabled {
+  background-color: var(--keretszin);
 }
 /*.ng-valid:not(form) {*/
   /*border-left: 0.3em solid #56ac96;*/
@@ -157,6 +178,7 @@ table tr.inactive td {
 .ng-invalid:not(form) {
   border-left: 0.3em solid lightpink;
 }
+
 .em4width {
    width: 4em;
 }
@@ -178,9 +200,7 @@ table tr.inactive td {
 .em20width {
   width: 20em;
 }
-.em30width {
-  width: 30em;
-}
+
 
 
 
@@ -272,80 +292,6 @@ table tr.inactive td {
   border: 1px solid #888;
   width: 30%; /* Could be more or less, depending on screen size */
 }
-
-
-
-/*.button-7 {*/
- /*background-color: #0095ff;*/
- /*border: 1px solid transparent;*/
- /*border-radius: 3px;*/
- /*box-shadow: rgba(255, 255, 255, .4) 0 1px 0 0 inset;*/
- /*box-sizing: border-box;*/
- /*color: #fff;*/
- /*cursor: pointer;*/
- /*display: inline-block;*/
- /*font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;*/
- /*font-size: 13px;*/
- /*font-weight: 400;*/
- /*line-height: 1.15385;*/
- /*margin: 0;*/
- /*outline: none;*/
- /*padding: 8px .8em;*/
- /*position: relative;*/
- /*text-align: center;*/
- /*text-decoration: none;*/
- /*user-select: none;*/
- /*-webkit-user-select: none;*/
- /*touch-action: manipulation;*/
- /*vertical-align: baseline;*/
- /*white-space: nowrap;*/
-/*}*/
-
-/*.button-7:hover,*/
-/*.button-7:focus {*/
-  /*background-color: #07c;*/
-/*}*/
-
-/*.button-7:focus {*/
-  /*box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);*/
-/*}*/
-
-/*.button-7:active {*/
-  /*background-color: #0064bd;*/
-  /*box-shadow: none;*/
-/*}*/
-
-
-
-
-
-
-
-
-.oszlop1 {
-  width: 60px;
-}
-.oszlop2 {
-  width: 120px;
-}
-.oszlop3 {
-  width: 180px;
-}
-.oszlop4 {
-  width: 240px;
-}
-.oszlop5 {
-  width: 300px;
-}
-.oszlop6 {
-  width: 360px;
-}
-.oszlop10 {
-  width: 600px;
-}
-
-
-
 
 
 

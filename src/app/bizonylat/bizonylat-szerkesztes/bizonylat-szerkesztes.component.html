@@ -13,8 +13,8 @@
 
     <div class="editform-row">
       <div class="editform-label">Cím</div>
-      <input type="text" class="editform-edit em30width" id="cim"
-             maxlength="200" required autocomplete="off" disabled="true"
+      <input type="text" class="editform-edit cimwidth" id="cim"
+             maxlength="200" required autocomplete="off" disabled
              [(ngModel)]="ComplexDtoEdited.Dto.Ugyfelcim">
     </div>
 
@@ -23,29 +23,6 @@
       <input type="text" class="editform-edit megjegyzeswidth" id="megjegyzes"
              maxlength="200" autocomplete="off"
              [(ngModel)]="ComplexDtoEdited.Dto.Megjegyzesfej">
-    </div>
-
-    <div class="editform-row">
-      <div class="editform-row-block">
-        <div class="editform-label">Netto</div>
-        <input type="number" class="editform-number" id="netto1"
-               disabled="true"
-               [(ngModel)]="ComplexDtoEdited.Dto.Netto">
-      </div>
-
-      <div class="editform-row-block">
-        <div class="editform-label">Áfa</div>
-        <input type="number" class="editform-number" id="afa1"
-               disabled="true"
-               [(ngModel)]="ComplexDtoEdited.Dto.Afa">
-      </div>
-
-      <div class="editform-row-block">
-        <div class="editform-label">Brutto</div>
-        <input type="number" class="editform-number" id="brutto1"
-               disabled="true"
-               [(ngModel)]="ComplexDtoEdited.Dto.Brutto">
-      </div>
     </div>
   </div>
 
@@ -97,46 +74,35 @@
     </div>
   </div>
 
-<!--  export enum BizonylatSzerkesztesMode {
-  List = 1,
-  UgyfelZoom = 2,
-  PenznemZoom = 3,
-  FizetesimodZoom = 4,
-  TetelSzerkesztes = 5,
-  TetelTorles = 6,
-  }-->
+  <div class="editform-row-bottom">
+    <div class="editform-row-block">
+      <div class="editform-label">Netto</div>
+      <input type="number" class="editform-number" id="netto1"
+             disabled="true"
+             [(ngModel)]="ComplexDtoEdited.Dto.Netto">
+    </div>
 
-  <div id="bizonylatzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
-    <ng-container *ngIf="SzerkesztesMode === 2">
-      <div class="zoom-modal-content">
-        <app-ugyfel-list [maszk]="ComplexDtoEdited.Dto.Ugyfelnev || ''"
-                         (eventSelectzoom)="onUgyfelSelectzoom($event)"
-                         (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>
-      </div>
-    </ng-container>
+    <div class="editform-row-block">
+      <div class="editform-label">Áfa</div>
+      <input type="number" class="editform-number" id="afa1"
+             disabled="true"
+             [(ngModel)]="ComplexDtoEdited.Dto.Afa">
+    </div>
 
-    <ng-container *ngIf="SzerkesztesMode === 3">
-      <div class="zoom-modal-content-primitiv">
-        <app-penznem-list [maszk]="ComplexDtoEdited.Dto.Penznem || ''"
-                          (eventSelectzoom)="onPenznemSelectzoom($event)"
-                          (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
-      </div>
-    </ng-container>
-
-    <ng-container *ngIf="SzerkesztesMode === 4">
-      <div class="zoom-modal-content-primitiv">
-        <app-fizetesimod-list [maszk]="ComplexDtoEdited.Dto.Fizetesimod || ''"
-                              (eventSelectzoom)="onFizetesimodSelectzoom($event)"
-                              (eventStopzoom)="onFizetesimodStopzoom()"></app-fizetesimod-list>
-      </div>
-    </ng-container>
+    <div class="editform-row-block">
+      <div class="editform-label">Brutto</div>
+      <input type="number" class="editform-number" id="brutto1"
+             disabled="true"
+             [(ngModel)]="ComplexDtoEdited.Dto.Brutto">
+    </div>
   </div>
+
 
   <div class="editform-row-bottom">
     <div class="alapkeret">
       <div class="toolbar">
         <button (click)="onTetelUjElott()" class="toolbutton">
-          <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>
+          <i class="fa fa-plus" aria-hidden="true"></i>
         </button>
       </div>
       <app-bizonylatteteltabla #teteltabla
@@ -169,5 +135,31 @@
   <div class="editform-row-bottom">
     <button class="toolbutton okbutton" [disabled]="SzerkesztesMode !== 1" type="button" (click)="onSubmit()">Ok</button>
     <button class="toolbutton" [disabled]="SzerkesztesMode !== 1" type="button" (click)="cancel()">Mégsem</button>
+  </div>
+
+  <div id="bizonylatzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
+    <ng-container *ngIf="SzerkesztesMode === 2">
+      <div class="zoom-modal-content">
+        <app-ugyfel-list [maszk]="ComplexDtoEdited.Dto.Ugyfelnev || ''"
+                         (eventSelectzoom)="onUgyfelSelectzoom($event)"
+                         (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="SzerkesztesMode === 3">
+      <div class="zoom-modal-content-primitiv">
+        <app-penznem-list [maszk]="ComplexDtoEdited.Dto.Penznem || ''"
+                          (eventSelectzoom)="onPenznemSelectzoom($event)"
+                          (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="SzerkesztesMode === 4">
+      <div class="zoom-modal-content-primitiv">
+        <app-fizetesimod-list [maszk]="ComplexDtoEdited.Dto.Fizetesimod || ''"
+                              (eventSelectzoom)="onFizetesimodSelectzoom($event)"
+                              (eventStopzoom)="onFizetesimodStopzoom()"></app-fizetesimod-list>
+      </div>
+    </ng-container>
   </div>
 </div>

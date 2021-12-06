@@ -1,24 +1,20 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>{{felhasznaloservice.cim}} jelszavának beállítása</h5>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
     <div class="editform-row">
       <div class="editform-label">Jelszó</div>
-      <input type="password" class="form-control form-control-sm" id="jelszo"
-             maxlength="100" required autocomplete="off"
-             [(ngModel)]="jelszo" name="jelszo">
+      <input type="password" class="editform-edit passwordwidth" formControlName="jelszo">
     </div>
 
     <div class="editform-row">
       <div class="editform-label">Jelszó újra</div>
-      <input type="password" class="form-control form-control-sm" id="jelszoujra"
-             maxlength="100" required autocomplete="off"
-             [(ngModel)]="jelszoujra" name="jelszoujra">
+      <input type="password" class="editform-edit passwordwidth" formControlName="jelszoujra">
     </div>
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
       <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>

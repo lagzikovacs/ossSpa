@@ -4,6 +4,7 @@ import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {deepCopy} from '../../../tools/deepCopy';
 import {AfakulcsDto} from '../afakulcsdto';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-afakulcs-szerkesztes',
@@ -17,13 +18,20 @@ export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
   }
   @Output() eventSzerkeszteskesz = new EventEmitter<AfakulcsDto>();
 
+  form: FormGroup;
   eppFrissit = false;
 
   afakulcsservice: AfakulcsService;
 
   constructor(private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               afakulcsservice: AfakulcsService) {
     this.afakulcsservice = afakulcsservice;
+
+    this.form = this._fb.group({
+      'afakulcs': ['', [Validators.required, Validators.maxLength(10)]],
+      'afamerteke': ['', [Validators.required, Validators.min(0), Validators.max(100)]]
+    });
   }
 
   ngOnInit() {
@@ -36,19 +44,31 @@ export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
+          this.updateform();
           this.eppFrissit = false;
         })
         .catch(err => {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
+    } else {
+      this.updateform();
     }
+  }
+
+  updateform() {
+    this.form.controls['afakulcs'].setValue(this.DtoEdited.Afakulcs1);
+    this.form.controls['afamerteke'].setValue(this.DtoEdited.Afamerteke);
+  }
+  updatedto() {
+    this.DtoEdited.Afakulcs1 = this.form.value['afakulcs'];
+    this.DtoEdited.Afamerteke = this.form.value['afamerteke'];
   }
 
   onSubmit() {
     this.eppFrissit = true;
-
     let p: Promise<NumberResult>;
+    this.updatedto();
 
     if (this.uj) {
       p = this.afakulcsservice.Add(this.DtoEdited);

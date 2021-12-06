@@ -4,6 +4,7 @@ import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {deepCopy} from '../../../tools/deepCopy';
 import {MeDto} from '../medto';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-me-szerkesztes',
@@ -17,13 +18,19 @@ export class MeSzerkesztesComponent implements OnInit, OnDestroy {
   }
   @Output() eventSzerkeszteskesz = new EventEmitter<MeDto>();
 
+  form: FormGroup;
   eppFrissit = false;
 
   meservice: MeService;
 
   constructor(private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               meservice: MeService) {
     this.meservice = meservice;
+
+    this.form = this._fb.group({
+      'me': ['', [Validators.required, Validators.maxLength(10)]]
+    });
   }
 
   ngOnInit() {
@@ -36,18 +43,29 @@ export class MeSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
+          this.updateform();
           this.eppFrissit = false;
         })
         .catch(err => {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
+    } else {
+      this.updateform();
     }
+  }
+
+  updateform() {
+    this.form.controls['me'].setValue(this.DtoEdited.Me);
+  }
+  updatedto() {
+    this.DtoEdited.Me = this.form.value['me'];
   }
 
   onSubmit() {
     this.eppFrissit = true;
     let p: Promise<NumberResult>;
+    this.updatedto();
 
     if (this.uj) {
       p = this.meservice.Add(this.DtoEdited);

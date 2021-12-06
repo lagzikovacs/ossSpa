@@ -4,6 +4,7 @@ import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {deepCopy} from '../../../tools/deepCopy';
 import {HelysegDto} from '../helysegdto';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-helyseg-szerkesztes',
@@ -17,13 +18,19 @@ export class HelysegSzerkesztesComponent implements OnInit, OnDestroy {
   }
   @Output() eventSzerkeszteskesz = new EventEmitter<HelysegDto>();
 
+  form: FormGroup;
   eppFrissit = false;
 
   helysegservice: HelysegService;
 
   constructor(private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               helysegservice: HelysegService) {
     this.helysegservice = helysegservice;
+
+    this.form = this._fb.group({
+      'helysegnev': ['', [Validators.required, Validators.maxLength(100)]]
+    });
   }
 
   ngOnInit() {
@@ -36,18 +43,29 @@ export class HelysegSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
+          this.updateform();
           this.eppFrissit = false;
         })
         .catch(err => {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
+    } else {
+      this.updateform();
     }
+  }
+
+  updateform() {
+    this.form.controls['helysegnev'].setValue(this.DtoEdited.Helysegnev);
+  }
+  updatedto() {
+    this.DtoEdited.Helysegnev = this.form.value['helysegnev'];
   }
 
   onSubmit() {
     this.eppFrissit = true;
     let p: Promise<NumberResult>;
+    this.updatedto();
 
     if (this.uj) {
       p = this.helysegservice.Add(this.DtoEdited);

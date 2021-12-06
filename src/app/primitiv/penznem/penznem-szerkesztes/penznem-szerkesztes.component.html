@@ -2,17 +2,15 @@
   <h5 *ngIf="uj">Új {{penznemservice.cim | lowercase}}</h5>
   <h5 *ngIf="!uj">{{penznemservice.cim}} módosítása</h5>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
     <div class="editform-row">
       <div class="editform-label">Pénznem</div>
-      <input type="text" class="editform-edit penznemwidth" id="penznem1"
-             maxlength="3" required autocomplete="off"
-             [(ngModel)]="DtoEdited.Penznem1" name="penznem1">
+      <input type="text" class="editform-edit penznemwidth" formControlName="penznem">
     </div>
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
       <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>

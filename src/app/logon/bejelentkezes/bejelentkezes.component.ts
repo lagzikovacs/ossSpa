@@ -17,11 +17,16 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
   eppFrissit = false;
 
   constructor(private _router: Router,
-              private fb: FormBuilder,
+              private _fb: FormBuilder,
               private _logonservice: LogonService,
               private _sessionservice: SessionService,
               private _startupservice: StartupService,
               private _errorservice: ErrorService) {
+
+    this.form = this._fb.group({
+      'azonosito': ['', [Validators.required, Validators.maxLength(30)]],
+      'jelszo': ['', [Validators.required, Validators.maxLength(30)]]
+    });
   }
 
   ngOnInit() {
@@ -29,11 +34,6 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
     this._logonservice.Jogaim = new Array<any>();
     this._sessionservice.sessiondto = new SessionDto();
     this._logonservice.SzerepkorKivalasztva = false;
-
-    this.form = this.fb.group({
-      'azonosito': ['', Validators.required],
-      'jelszo': ['', Validators.required]
-    });
   }
 
   onSubmit() {

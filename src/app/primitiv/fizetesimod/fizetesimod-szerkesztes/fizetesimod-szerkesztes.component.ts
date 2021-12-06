@@ -4,6 +4,7 @@ import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {deepCopy} from '../../../tools/deepCopy';
 import {FizetesimodDto} from '../fizetesimoddto';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-fizetesimod-szerkesztes',
@@ -17,13 +18,19 @@ export class FizetesimodSzerkesztesComponent implements OnInit, OnDestroy {
   }
   @Output() eventSzerkeszteskesz = new EventEmitter<FizetesimodDto>();
 
+  form: FormGroup;
   eppFrissit = false;
 
   fizetesimodservice: FizetesimodService;
 
   constructor(private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               fizetesimodservice: FizetesimodService) {
     this.fizetesimodservice = fizetesimodservice;
+
+    this.form = this._fb.group({
+      'fizetesimod': ['', [Validators.required, Validators.maxLength(30)]]
+    });
   }
 
   ngOnInit() {
@@ -36,18 +43,29 @@ export class FizetesimodSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
+          this.updateform();
           this.eppFrissit = false;
         })
         .catch(err => {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
+    } else {
+      this.updateform();
     }
+  }
+
+  updateform() {
+    this.form.controls['fizetesimod'].setValue(this.DtoEdited.Fizetesimod1);
+  }
+  updatedto() {
+    this.DtoEdited.Fizetesimod1 = this.form.value['fizetesimod'];
   }
 
   onSubmit() {
     this.eppFrissit = true;
     let p: Promise<NumberResult>;
+    this.updatedto();
 
     if (this.uj) {
       p = this.fizetesimodservice.Add(this.DtoEdited);

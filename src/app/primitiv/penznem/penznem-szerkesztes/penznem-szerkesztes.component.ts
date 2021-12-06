@@ -4,6 +4,7 @@ import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {deepCopy} from '../../../tools/deepCopy';
 import {PenznemDto} from '../penznemdto';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-penznem-szerkesztes',
@@ -17,13 +18,19 @@ export class PenznemSzerkesztesComponent implements OnInit, OnDestroy {
   }
   @Output() eventSzerkeszteskesz = new EventEmitter<PenznemDto>();
 
+  form: FormGroup;
   eppFrissit = false;
 
   penznemservice: PenznemService;
 
   constructor(private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               penznemservice: PenznemService) {
     this.penznemservice = penznemservice;
+
+    this.form = this._fb.group({
+      'penznem': ['', [Validators.required, Validators.maxLength(3)]]
+    });
   }
 
   ngOnInit() {
@@ -36,18 +43,29 @@ export class PenznemSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
+          this.updateform();
           this.eppFrissit = false;
         })
         .catch(err => {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
+    } else {
+      this.updateform();
     }
+  }
+
+  updateform() {
+    this.form.controls['penznem'].setValue(this.DtoEdited.Penznem1);
+  }
+  updatedto() {
+    this.DtoEdited.Penznem1 = this.form.value['penznem'];
   }
 
   onSubmit() {
     this.eppFrissit = true;
     let p: Promise<NumberResult>;
+    this.updatedto();
 
     if (this.uj) {
       p = this.penznemservice.Add(this.DtoEdited);

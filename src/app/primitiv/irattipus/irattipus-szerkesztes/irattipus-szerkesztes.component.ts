@@ -4,6 +4,7 @@ import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {deepCopy} from '../../../tools/deepCopy';
 import {IrattipusDto} from '../irattipusdto';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-irattipus-szerkesztes',
@@ -17,13 +18,19 @@ export class IrattipusSzerkesztesComponent implements OnInit, OnDestroy {
   }
   @Output() eventSzerkeszteskesz = new EventEmitter<IrattipusDto>();
 
+  form: FormGroup;
   eppFrissit = false;
 
   irattipusservice: IrattipusService;
 
   constructor(private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               irattipusservice: IrattipusService) {
     this.irattipusservice = irattipusservice;
+
+    this.form = this._fb.group({
+      'irattipus': ['', [Validators.required, Validators.maxLength(30)]]
+    });
   }
 
   ngOnInit() {
@@ -36,18 +43,29 @@ export class IrattipusSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
+          this.updateform();
           this.eppFrissit = false;
         })
         .catch(err => {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
+    } else {
+      this.updateform();
     }
+  }
+
+  updateform() {
+    this.form.controls['irattipus'].setValue(this.DtoEdited.Irattipus1);
+  }
+  updatedto() {
+    this.DtoEdited.Irattipus1 = this.form.value['irattipus'];
   }
 
   onSubmit() {
     this.eppFrissit = true;
     let p: Promise<NumberResult>;
+    this.updatedto();
 
     if (this.uj) {
       p = this.irattipusservice.Add(this.DtoEdited);

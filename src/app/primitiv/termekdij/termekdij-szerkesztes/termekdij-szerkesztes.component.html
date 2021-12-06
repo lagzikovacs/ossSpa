@@ -2,29 +2,23 @@
   <h5 *ngIf="uj">Új {{termekdijservice.cim | lowercase}}</h5>
   <h5 *ngIf="!uj">{{termekdijservice.cim}} módosítása</h5>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
     <div class="editform-row">
         <div class="editform-label">KT</div>
-        <input type="text" class="editform-edit em6width" id="kt"
-               maxlength="30" required autocomplete="off"
-               [(ngModel)]="DtoEdited.Termekdijkt" name="kt">
+        <input type="text" class="editform-edit primitivwidth" formControlName="kt">
     </div>
     <div class="editform-row">
         <div class="editform-label">Megnevezés</div>
-        <input type="text" class="editform-edit primitivwidth" id="megnevezes"
-               maxlength="50" required autocomplete="off"
-               [(ngModel)]="DtoEdited.Termekdijmegnevezes" name="megnevezes">
+        <input type="text" class="editform-edit primitivwidth" formControlName="megnevezes">
     </div>
     <div class="editform-row">
         <div class="editform-label">Egységár</div>
-        <input type="number" class="editform-number" id="egysegar"
-               required autocomplete="off"
-               [(ngModel)]="DtoEdited.Termekdijegysegar" name="egysegar">
+        <input type="number" class="editform-number" formControlName="egysegar">
     </div>
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
       <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>

@@ -4,6 +4,7 @@ import {ErrorService} from '../../../tools/errorbox/error.service';
 import {deepCopy} from '../../../tools/deepCopy';
 import {TevekenysegDto} from '../tevekenysegdto';
 import {TevekenysegService} from '../tevekenyseg.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-tevekenyseg-szerkesztes',
@@ -17,13 +18,19 @@ export class TevekenysegSzerkesztesComponent implements OnInit, OnDestroy {
   }
   @Output() eventSzerkeszteskesz = new EventEmitter<TevekenysegDto>();
 
+  form: FormGroup;
   eppFrissit = false;
 
   tevekenysegservice: TevekenysegService;
 
   constructor(private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               tevekenysegservice: TevekenysegService) {
     this.tevekenysegservice = tevekenysegservice;
+
+    this.form = this._fb.group({
+      'tevekenyseg': ['', [Validators.required, Validators.maxLength(100)]]
+    });
   }
 
   ngOnInit() {
@@ -36,18 +43,29 @@ export class TevekenysegSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
+          this.updateform();
           this.eppFrissit = false;
         })
         .catch(err => {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
+    } else {
+      this.updateform();
     }
+  }
+
+  updateform() {
+    this.form.controls['tevekenyseg'].setValue(this.DtoEdited.Tevekenyseg1);
+  }
+  updatedto() {
+    this.DtoEdited.Tevekenyseg1 = this.form.value['tevekenyseg'];
   }
 
   onSubmit() {
     this.eppFrissit = true;
     let p: Promise<NumberResult>;
+    this.updatedto();
 
     if (this.uj) {
       p = this.tevekenysegservice.Add(this.DtoEdited);

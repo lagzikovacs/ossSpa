@@ -2,23 +2,19 @@
   <h5 *ngIf="uj">Új {{afakulcsservice.cim | lowercase}}</h5>
   <h5 *ngIf="!uj">{{afakulcsservice.cim}} módosítása</h5>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
     <div class="editform-row">
       <div class="editform-label">ÁFA kulcs</div>
-      <input type="text" class="editform-edit primitivwidth" id="afakulcs"
-             maxlength="10" required autocomplete="off"
-             [(ngModel)]="DtoEdited.Afakulcs1" name="afakulcs">
+      <input type="text" class="editform-edit primitivwidth" formControlName="afakulcs">
     </div>
     <div class="editform-row">
       <div class="editform-label">Az ÁFA mértéke, %</div>
-      <input type="number" class="editform-number" id="egysegar"
-             required autocomplete="off"
-             [(ngModel)]="DtoEdited.Afamerteke" name="egysegar">
+      <input type="number" class="editform-number" formControlName="afamerteke">
     </div>
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
       <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>

@@ -2,6 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {FelhasznaloService} from '../../primitiv/felhasznalo/felhasznalo.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-jelszocsere',
@@ -12,6 +13,7 @@ export class JelszocsereComponent implements OnDestroy {
   jelszo = '';
   jelszoujra = '';
 
+  form: FormGroup;
   eppFrissit = false;
 
   felhasznaloservice: FelhasznaloService;
@@ -19,11 +21,22 @@ export class JelszocsereComponent implements OnDestroy {
   constructor(private _router: Router,
               private _route: ActivatedRoute,
               private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               felhasznaloservice: FelhasznaloService) {
     this.felhasznaloservice = felhasznaloservice;
+
+    this.form = this._fb.group({
+      'regijelszo': ['', [Validators.required, Validators.maxLength(30)]],
+      'jelszo': ['', [Validators.required, Validators.maxLength(30)]],
+      'jelszoujra': ['', [Validators.required, Validators.maxLength(30)]]
+    });
   }
 
   onSubmit() {
+    this.regijelszo = this.form.value['regijelszo'];
+    this.jelszo = this.form.value['jelszo'];
+    this.jelszoujra = this.form.value['jelszoujra'];
+
     if (this.jelszo !== this.jelszoujra) {
       this._errorservice.Error = 'A jelszó két példánya nem azonos!';
       return;

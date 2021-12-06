@@ -4,6 +4,7 @@ import {rowanimation} from '../../../animation/rowAnimation';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {FelhasznaloDto} from '../felhasznalodto';
 import {deepCopy} from '../../../tools/deepCopy';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-felhasznalo-jelszo',
@@ -17,6 +18,7 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
   }
   @Output() eventSzerkeszteskesz = new EventEmitter<FelhasznaloDto>();
 
+  form: FormGroup;
   eppFrissit = false;
 
   jelszo = '';
@@ -25,11 +27,20 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
   felhasznaloservice: FelhasznaloService;
 
   constructor(private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               felhasznaloservice: FelhasznaloService) {
     this.felhasznaloservice = felhasznaloservice;
+
+    this.form = this._fb.group({
+      'jelszo': ['', [Validators.required, Validators.maxLength(30)]],
+      'jelszoujra': ['', [Validators.required, Validators.maxLength(30)]],
+    });
   }
 
   onSubmit() {
+    this.jelszo = this.form.value['jelszo'];
+    this.jelszoujra = this.form.value['jelszoujra'];
+
     if (this.jelszo !== this.jelszoujra) {
       this._errorservice.Error = 'A jelszó két példánya nem azonos!';
       return;

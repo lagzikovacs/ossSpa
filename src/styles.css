@@ -135,6 +135,9 @@ table tr.inactive td {
 .cikkwidth {
   width: 30em;
 }
+.passwordwidth {
+  width: 10em;
+}
 
 .editform-combo {
   outline: 0;

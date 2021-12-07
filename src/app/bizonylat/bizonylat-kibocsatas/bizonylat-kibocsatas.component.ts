@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatKibocsatasParam} from '../bizonylatkibocsatasparam';
 import {BizonylatTipus} from '../bizonylattipus';
@@ -6,12 +6,13 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {BizonylatDto} from '../bizonylatdto';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-bizonylat-kibocsatas',
   templateUrl: './bizonylat-kibocsatas.component.html'
 })
-export class BizonylatKibocsatasComponent implements OnDestroy {
+export class BizonylatKibocsatasComponent implements OnInit, OnDestroy {
   Dto = new BizonylatDto();
   @Input() set DtoOriginal(value: BizonylatDto) {
     this.Dto = deepCopy(value);
@@ -21,21 +22,39 @@ export class BizonylatKibocsatasComponent implements OnDestroy {
   @Output() eventKibocsatasUtan = new EventEmitter<BizonylatDto>();
   @Output() eventKibocsatasUtanKeszpenzes = new EventEmitter<boolean>();
 
-  bizonylatszam = '';
+  vbizonylatszam = '';
   private _keszpenzes = false;
 
+  form: FormGroup;
   eppFrissit = false;
 
   bizonylatservice: BizonylatService;
 
   constructor(private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
+
+    this.form = this._fb.group({
+      'bizonylatszam': ['', [Validators.required]]
+    });
+  }
+
+  ngOnInit() {
+    this.updateform();
+  }
+
+  updateform() {
+    this.form.controls['bizonylatszam'].setValue(this.vbizonylatszam);
+  }
+  updatedto() {
+    this.vbizonylatszam = this.form.value['bizonylatszam'];
   }
 
   onSubmit() {
     this.eppFrissit = true;
-    this.bizonylatservice.Kibocsatas(new BizonylatKibocsatasParam(this.Dto, this.bizonylatszam))
+    this.updatedto();
+    this.bizonylatservice.Kibocsatas(new BizonylatKibocsatasParam(this.Dto, this.vbizonylatszam))
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

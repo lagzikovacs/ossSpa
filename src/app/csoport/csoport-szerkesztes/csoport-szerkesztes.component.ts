@@ -4,6 +4,7 @@ import {NumberResult} from '../../dtos/numberresult';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {CsoportDto} from '../csoportdto';
 import {deepCopy} from '../../tools/deepCopy';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-csoport-szerkesztes',
@@ -17,13 +18,19 @@ export class CsoportSzerkesztesComponent implements OnInit, OnDestroy {
   }
   @Output() eventSzerkeszteskesz = new EventEmitter<CsoportDto>();
 
+  form: FormGroup;
   eppFrissit = false;
 
   csoportservice: CsoportService;
 
   constructor(private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               csoportservice: CsoportService) {
     this.csoportservice = csoportservice;
+
+    this.form = this._fb.group({
+      'csoport': ['', [Validators.required, Validators.maxLength(100)]]
+    });
   }
 
   ngOnInit() {
@@ -36,18 +43,29 @@ export class CsoportSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
+          this.updateform();
           this.eppFrissit = false;
         })
         .catch(err => {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
+    } else {
+      this.updateform();
     }
+  }
+
+  updateform() {
+    this.form.controls['csoport'].setValue(this.DtoEdited.Csoport1);
+  }
+  updatedto() {
+    this.DtoEdited.Csoport1 = this.form.value['csoport'];
   }
 
   onSubmit() {
     this.eppFrissit = true;
     let p: Promise<NumberResult>;
+    this.updatedto();
 
     if (this.uj) {
       p = this.csoportservice.Add(this.DtoEdited);

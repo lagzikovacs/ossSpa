@@ -1,15 +1,13 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>{{bizonylatLeiro.BizonylatNev}} kibocsátás</h5>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
     <ng-container *ngIf="!bizonylatLeiro.GenBizonylatszam">
       <div class="editform-row">
         <div>
           <div class="editform-label">Bizonylatszám</div>
-          <input type="text" class="editform-edit em10width" id="bizonylatszam"
-                 maxlength="20" required autocomplete="off"
-                 [(ngModel)]="bizonylatszam" name="bizonylatszam">
+          <input type="text" class="editform-edit em10width" formControlName="bizonylatszam">
         </div>
       </div>
     </ng-container>
@@ -21,7 +19,7 @@
     </ng-container>
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
       <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
     </div>
 

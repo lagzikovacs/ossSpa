@@ -1,28 +1,36 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {RiportService} from '../riport.service';
 import * as moment from 'moment';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {Riportciklus} from '../riportciklus';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-bejovoszamla',
   templateUrl: './bejovoszamla.component.html'
 })
-export class BejovoszamlaComponent implements OnDestroy {
+export class BejovoszamlaComponent implements OnInit, OnDestroy {
   rc: Riportciklus;
 
-  tol = '2019-01-01';
-  ig = '2019-12-31';
+  vtol = '2021-01-01';
+  vig = '2021-12-31';
 
+  form: FormGroup;
   eppFrissit = false;
 
   riportservice: RiportService;
 
   constructor(private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               riportservice: RiportService) {
     this.riportservice = riportservice;
+
+    this.form = this._fb.group({
+      'tol': ['', [Validators.required]],
+      'ig': ['', [Validators.required]]
+    });
 
     this.rc = new Riportciklus(_errorservice, riportservice, 'Bejövő számla.xls');
     this.rc.eventSpinnervege.on(() => {
@@ -30,13 +38,27 @@ export class BejovoszamlaComponent implements OnDestroy {
     });
   }
 
+  ngOnInit() {
+    this.updateform();
+  }
+
+  updateform() {
+    this.form.controls['tol'].setValue(this.vtol);
+    this.form.controls['ig'].setValue(this.vig);
+  }
+  updatedto() {
+    this.vtol = this.form.value['tol'];
+    this.vig = this.form.value['ig'];
+  }
+
   onSubmit() {
     this.eppFrissit = true;
     this.rc.megszakitani = false;
+    this.updatedto();
 
     const fi = [
-      new SzMT(Szempont.Null, moment(this.tol).toISOString(true)),
-      new SzMT(Szempont.Null, moment(this.ig).toISOString(true))
+      new SzMT(Szempont.Null, moment(this.vtol).toISOString(true)),
+      new SzMT(Szempont.Null, moment(this.vig).toISOString(true))
     ];
 
     this.riportservice.BejovoSzamlaTaskStart(fi)

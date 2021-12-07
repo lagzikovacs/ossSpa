@@ -3,6 +3,7 @@ import {BizonylatService} from '../bizonylat.service';
 import {BizonylatMintaAlapjanParam} from '../bizonylatmintaalapjan';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {LogonService} from '../../logon/logon.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-bizonylat-errol',
@@ -16,25 +17,41 @@ export class BizonylatErrolComponent implements OnInit, OnDestroy {
   kesz = false;
   ujbizonylatkod = 0;
 
+  form: FormGroup;
   eppFrissit = false;
 
   bizonylatservice: BizonylatService;
 
   constructor(private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               private _logonservice: LogonService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
+
+    this.form = this._fb.group({
+      'bizonylattipusok': [0, [Validators.required]]
+    });
   }
 
   ngOnInit() {
     for (let i = 0; i < this.bizonylatservice.tipusok.length; i++) {
       this.bizonylatservice.tipusok[i][2] = !this._logonservice.Jogaim.includes(this.bizonylatservice.tipusok[i][3]);
     }
+
+    this.updateform();
+  }
+
+  updateform() {
+    this.form.controls['bizonylattipusok'].setValue(this.entryindex);
+  }
+  updatedto() {
+    this.entryindex = this.form.value['bizonylattipusok'];
   }
 
   onSubmit() {
     if (!this.kesz) {
       this.eppFrissit = true;
+      this.updatedto();
       this.bizonylatservice.UjBizonylatMintaAlapjan(new BizonylatMintaAlapjanParam(
         this.Bizonylatkod, this.bizonylatservice.tipusok[this.entryindex][1]))
         .then(res => {
@@ -55,7 +72,7 @@ export class BizonylatErrolComponent implements OnInit, OnDestroy {
     }
   }
 
-  cancel() {
+  onCancel() {
     this.eventBizonylaterrolUtan.emit(false);
   }
 

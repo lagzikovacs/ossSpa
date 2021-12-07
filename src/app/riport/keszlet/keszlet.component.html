@@ -1,17 +1,17 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>Készlet</h5>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
     <div class="editform-row">
         <div class="editform-label">Időpontig</div>
-        <input type="date" class="editform-date" id="datum"
-               [(ngModel)]="datum" name="datum">
+        <input type="date" class="editform-date" formControlName="datum">
     </div>
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" [disabled]="!f.valid" type="submit">Ok</button>
-      <!--<button class="editform-cancelbutton" type="button" (click)="onCancel()">Stop</button>-->
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="onCancel()" [disabled]="!eppFrissit">Stop</button>
     </div>
+
   </form>
 </div>

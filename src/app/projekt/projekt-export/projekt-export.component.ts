@@ -42,7 +42,7 @@ export class ProjektExportComponent implements OnDestroy {
     this.rc.megszakitani = false;
 
     const fi = [
-      new SzMT(Szempont.Null, this.statuszszempont.toString()),
+      new SzMT(Szempont.Null, this.statuszszempont),
       new SzMT(Szempont.Null, this.projektcsoport)
     ];
 

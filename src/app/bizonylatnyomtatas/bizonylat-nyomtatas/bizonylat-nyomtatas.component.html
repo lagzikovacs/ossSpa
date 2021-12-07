@@ -1,24 +1,17 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>Nyomtatás</h5>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
     <div class="editform-row">
-      <div>
-        <div class="editform-label">Nyomtatás</div>
-        <div *ngFor="let entry of entries;let i = index">
-          <input type="radio" name="radiogroup" id="entry"
-                 [checked]="i === selectedi" (change)="change(i)">
-          <label for="entry">
-            {{entry}}
-          </label>
-        </div>
-      </div>
+      <select type="text" class="editform-combo" formControlName="nyomtatastipus">
+        <option *ngFor="let s of entries; let i = index" [value]="i">{{s}}</option>
+      </select>
     </div>
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" [disabled]="!f.valid" type="submit">Ok</button>
-      <button class="toolbutton" type="button" (click)="onCancel()">Stop</button>
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="onCancel()" [disabled]="!eppFrissit">Stop</button>
     </div>
   </form>
 </div>

@@ -57,7 +57,7 @@ export class ParticioEmailComponent implements OnInit, OnDestroy {
 
   updateform() {
     this.form.controls['konfiguracio'].setValue(this.selected);
-    
+
     this.form.controls['azonosito'].setValue(this.cEmails[this.selected].Azonosito);
     this.form.controls['jelszo'].setValue(this.cEmails[this.selected].Jelszo);
     this.form.controls['kuldoneve'].setValue(this.cEmails[this.selected].KuldoNeve);

@@ -1,12 +1,12 @@
 <div class="alapkeret">
   <h5>Műszaki állapot</h5>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
     <div class="editform-card" style="margin-right: 3em">
       <div class="editform-row">
         <div class="editform-label">Műszaki állapot</div>
-        <select type="text" class="editform-combo" name="muszakiallapot" [(ngModel)]="DtoEdited.Muszakiallapot">
+        <select type="text" class="editform-combo" formControlName="muszakiallapot">
           <option *ngFor="let s of projektservice.muszakiallapotok" [value]="s">{{s}}</option>
         </select>
       </div>
@@ -15,22 +15,17 @@
     <div class="editform-card" style="margin-right: 3em">
       <div class="editform-row">
         <div class="editform-label">Inverter</div>
-        <input type="text" class="editform-edit em15width" id="inverter"
-               maxlength="50" autocomplete="off"
-               [(ngModel)]="DtoEdited.Inverter"
-               name="inverter">
+        <input type="text" class="editform-edit em15width" formControlName="inverter">
       </div>
 
       <div class="editform-row">
         <div class="editform-label">AC, kVA</div>
-        <input type="number" class="editform-number" id="ackva"
-               [(ngModel)]="DtoEdited.Ackva"
-               name="ackva">
+        <input type="number" class="editform-number" formControlName="ackva">
       </div>
 
       <div class="editform-row">
         <div class="editform-label">Inverter státusz</div>
-        <select type="text" class="editform-combo" name="inverterstatusz" [(ngModel)]="DtoEdited.Inverterallapot">
+        <select type="text" class="editform-combo" formControlName="inverterstatusz">
           <option *ngFor="let s of projektservice.napeleminverterstatuszok" [value]="s">{{s}}</option>
         </select>
       </div>
@@ -39,29 +34,24 @@
     <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Napelem</div>
-        <input type="text" class="editform-edit em15width" id="napelem"
-               maxlength="50" autocomplete="off"
-               [(ngModel)]="DtoEdited.Napelem"
-               name="napelem">
+        <input type="text" class="editform-edit em15width" formControlName="napelem">
       </div>
 
       <div class="editform-row">
         <div class="editform-label">DC, kW</div>
-        <input type="number" class="editform-number" id="dckw"
-               [(ngModel)]="DtoEdited.Dckw"
-               name="dckw">
+        <input type="number" class="editform-number" formControlName="dckw">
       </div>
 
       <div class="editform-row">
         <div class="editform-label">Napelem státusz</div>
-        <select type="text" class="editform-combo" name="napelemstatusz" [(ngModel)]="DtoEdited.Napelemallapot">
+        <select type="text" class="editform-combo" formControlName="napelemstatusz">
           <option *ngFor="let s of projektservice.napeleminverterstatuszok" [value]="s">{{s}}</option>
         </select>
       </div>
     </div>
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
       <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
     </div>
   </form>

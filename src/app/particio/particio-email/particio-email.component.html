@@ -1,72 +1,54 @@
 <div class="alapkeret">
   <h5>eMail</h5>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
     <div class="editform-card">
       <div class="editform-row">
           <div class="editform-label">Konfiguráció</div>
-          <div *ngFor="let entry of entries;let i = index">
-            <input type="radio" id="entry"
-                   [checked]="i === selected" (change)="selectedchange(i)" name="radiogroup">
-            <label for="entry">
-              {{entry}}
-            </label>
-          </div>
+          <select type="text" class="editform-combo" (change)="selectedchange($event.target.value)" formControlName="konfiguracio">
+            <option *ngFor="let s of entries; let i = index" [value]="i">{{s}}</option>
+          </select>
       </div>
     </div>
 
     <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Azonosító</div>
-        <input type="text" class="editform-edit em15width" id="m2"
-               autocomplete="off"
-               [(ngModel)]="cEmails[selected].Azonosito" name="m2">
+        <input type="text" class="editform-edit em15width" formControlName="azonosito">
       </div>
       <div class="editform-row">
         <div class="editform-label">Jelszó</div>
-        <input type="text" class="editform-edit em15width" id="m3"
-               autocomplete="off"
-               [(ngModel)]="cEmails[selected].Jelszo" name="m3">
+        <input type="text" class="editform-edit em15width" formControlName="jelszo">
       </div>
       <div class="editform-row">
         <div class="editform-label">A küldő neve</div>
-        <input type="text" class="editform-edit em15width" id="m4"
-               autocomplete="off" maxlength="50"
-               [(ngModel)]="cEmails[selected].KuldoNeve" name="m4">
+        <input type="text" class="editform-edit em15width" formControlName="kuldoneve">
       </div>
       <div class="editform-row">
         <div class="editform-label">A küldő email címe</div>
-        <input type="text" class="editform-edit em15width" id="m5"
-               autocomplete="off" maxlength="50"
-               [(ngModel)]="cEmails[selected].KuldoEmailcime" name="m5">
+        <input type="text" class="editform-edit em15width" formControlName="kuldoemailcime">
       </div>
     </div>
 
     <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Klienstipus</div>
-        <select type="text" class="editform-edit em10width"
-                [(ngModel)]="cEmails[selected].Tipus" name="m1">
+        <select type="text" class="editform-edit em10width" formControlName="klienstipus">
           <option>Gmail</option>
         </select>
       </div>
       <div class="editform-row">
         <div class="editform-label">Custom host</div>
-        <input type="text" class="editform-edit em15width" id="m6"
-               autocomplete="off" maxlength="50"
-               [(ngModel)]="cEmails[selected].CustomHost" name="m6">
+        <input type="text" class="editform-edit em15width" formControlName="customhost">
       </div>
       <div class="editform-row">
         <div class="editform-label">Custom port</div>
-        <input type="number" class="editform-number" id="m7"
-               autocomplete="off"
-               [(ngModel)]="cEmails[selected].CustomPort" name="m7">
+        <input type="number" class="editform-number" formControlName="customport">
       </div>
       <div class="editform-row">
         <div class="editform-label">Ssl</div>
-        <select type="text" class="editform-combo em6width"
-                [(ngModel)]="cEmails[selected].Ssl" name="m8">
+        <select type="text" class="editform-combo em6width" formControlName="ssl">
           <option value="false">Nem</option>
           <option value="true">Igen</option>
         </select>
@@ -74,7 +56,7 @@
     </div>
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
       <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
     </div>
   </form>

@@ -1,73 +1,55 @@
 <div class="alapkeret">
   <h5>Kibocsátó</h5>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
     <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Név</div>
-        <input type="text" class="editform-edit em15width" id="m1"
-               autocomplete="off" maxlength="50"
-               [(ngModel)]="cSzallito.Nev" name="m1">
+        <input type="text" class="editform-edit em15width" formControlName="nev">
       </div>
       <div class="editform-row">
         <div class="editform-label">Irányítószám</div>
-        <input type="text" class="editform-edit em6width" id="m2"
-               autocomplete="off" maxlength="10"
-               [(ngModel)]="cSzallito.Iranyitoszam" name="m2">
+        <input type="text" class="editform-edit em6width" formControlName="iranyitoszam">
       </div>
       <div class="editform-row">
         <div class="editform-label">Helységnév</div>
-        <input type="text" class="editform-edit em15width" id="m3"
-               autocomplete="off" maxlength="50"
-               [(ngModel)]="cSzallito.Helysegnev" name="m3">
+        <input type="text" class="editform-edit em15width" formControlName="helysegnev">
       </div>
       <div class="editform-row">
         <div class="editform-label">Utca, házszám</div>
-        <input type="text" class="editform-edit em15width" id="m4"
-               autocomplete="off" maxlength="50"
-               [(ngModel)]="cSzallito.Utcahazszam" name="m4">
+        <input type="text" class="editform-edit em15width" formControlName="utcahazszam">
       </div>
     </div>
 
     <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Bankszámla 1</div>
-        <input type="text" class="editform-edit em15width" id="m5"
-               autocomplete="off" maxlength="50"
-               [(ngModel)]="cSzallito.Bankszamla1" name="m5">
+        <input type="text" class="editform-edit em15width" formControlName="bankszamla1">
       </div>
       <div class="editform-row">
         <div class="editform-label">Bankszámla 2</div>
-        <input type="text" class="editform-edit em15width" id="m6"
-               autocomplete="off" maxlength="50"
-               [(ngModel)]="cSzallito.Bankszamla2" name="m6">
+        <input type="text" class="editform-edit em15width" formControlName="bankszamla2">
       </div>
     </div>
 
     <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Adó törzsszám</div>
-        <input type="text" class="editform-edit em10width" id="m7"
-               autocomplete="off" maxlength="8"
-               [(ngModel)]="cSzallito.Adotorzsszam" name="m7">
+        <input type="text" class="editform-edit em10width" formControlName="adotorzsszam">
       </div>
       <div class="editform-row">
         <div class="editform-label">Adó áfakód</div>
-        <input type="text" class="editform-edit em6width" id="m8"
-               autocomplete="off" maxlength="1"
-               [(ngModel)]="cSzallito.Adoafakod" name="m8">
+        <input type="text" class="editform-edit em6width" formControlName="adoafakod">
       </div>
       <div class="editform-row">
         <div class="editform-label">Adó megyekód</div>
-        <input type="text" class="editform-edit em6width" id="m9"
-               autocomplete="off" maxlength="2"
-               [(ngModel)]="cSzallito.Adomegyekod" name="m9">
+        <input type="text" class="editform-edit em6width" formControlName="adomegyekod">
       </div>
     </div>
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
       <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
     </div>
   </form>

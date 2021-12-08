@@ -1,99 +1,73 @@
 <div class="alapkeret">
   <h5>Projekt iratminta</h5>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
     <div class="editform-card">
       <div class="editform-row">
           <div class="editform-label">Ajánlat iratkód</div>
-          <input type="number" class="editform-number" id="m1"
-                 autocomplete="off"
-                 [(ngModel)]="cProjekt.AjanlatIratkod" name="m1">
+          <input type="number" class="editform-number" formControlName="ajanlatiratkod">
       </div>
     </div>
 
     <div class="editform-card">
       <div class="editform-row">
           <div class="editform-label">Szerződés iratkód</div>
-          <input type="number" class="editform-number" id="m8"
-                 autocomplete="off"
-                 [(ngModel)]="cProjekt.SzerzodesIratkod" name="m8">
+          <input type="number" class="editform-number" formControlName="szerzodesiratkod">
       </div>
       <div class="editform-row">
           <div class="editform-label">Szállítási szerződés iratkód</div>
-          <input type="number" class="editform-number" id="m7"
-                 autocomplete="off"
-                 [(ngModel)]="cProjekt.SzallitasiSzerzodesIratkod" name="m7">
+          <input type="number" class="editform-number" formControlName="szallitasiszerzodesiratkod">
       </div>
       <div class="editform-row">
           <div class="editform-label">Feltételes szerződés iratkód</div>
-          <input type="number" class="editform-number" id="m9"
-                 autocomplete="off"
-                 [(ngModel)]="cProjekt.FeltetelesSzerzodesIratkod" name="m9">
+          <input type="number" class="editform-number" formControlName="feltetelesszerzodesiratkod">
       </div>
       <div class="editform-row">
           <div class="editform-label">OFT szerződés iratkód</div>
-          <input type="number" class="editform-number" id="m10"
-                 autocomplete="off"
-                 [(ngModel)]="cProjekt.OFTSzerzodesIratkod" name="m10">
+          <input type="number" class="editform-number" formControlName="oftszerzodesiratkod">
       </div>
       <div class="editform-row">
           <div class="editform-label">HMKE tulajdonos hozzájárulás iratkód</div>
-          <input type="number" class="editform-number" id="m11"
-                 autocomplete="off"
-                 [(ngModel)]="cProjekt.HMKEtulajdonoshozzajarulasIratkod" name="m11">
+          <input type="number" class="editform-number" formControlName="hmketulajdonoshozzajarulasiratkod">
       </div>
     </div>
 
     <div class="editform-card">
       <div class="editform-row">
           <div class="editform-label">Munkalap iratkód</div>
-          <input type="number" class="editform-number" id="m6"
-                 autocomplete="off"
-                 [(ngModel)]="cProjekt.MunkalapIratkod" name="m6">
+          <input type="number" class="editform-number" formControlName="munkalapiratkod">
       </div>
       <div class="editform-row">
           <div class="editform-label">Elégedettségi felmérés iratkód</div>
-          <input type="number" class="editform-number" id="m2"
-                 autocomplete="off"
-                 [(ngModel)]="cProjekt.ElegedettsegiFelmeresIratkod" name="m2">
+          <input type="number" class="editform-number" formControlName="elegedettsegifelmeresiratkod">
       </div>
     </div>
 
     <div class="editform-card">
       <div class="editform-row">
           <div class="editform-label">Készrejelentés ELMŰ-ÉMÁSZ iratkód</div>
-          <input type="number" class="editform-number" id="m4"
-                 autocomplete="off"
-                 [(ngModel)]="cProjekt.KeszrejelentesElmuemaszIratkod" name="m4">
+          <input type="number" class="editform-number" formControlName="keszrejelenteselmuemasziratkod">
       </div>
       <div class="editform-row">
           <div class="editform-label">Készrejelentés E.ON iratkód</div>
-          <input type="number" class="editform-number" id="m5"
-                 autocomplete="off"
-                 [(ngModel)]="cProjekt.KeszrejelentesEonIratkod" name="m5">
+          <input type="number" class="editform-number" formControlName="keszrejelenteseoniratkod">
       </div>
       <div class="editform-row">
         <div class="editform-label">Készrejelentés MVM iratkód</div>
-        <input type="number" class="editform-number" id="m3"
-               autocomplete="off"
-               [(ngModel)]="cProjekt.KeszrejelentesMvmIratkod" name="m3">
+        <input type="number" class="editform-number" formControlName="keszrejelentesmvmiratkod">
       </div>
       <div class="editform-row">
         <div class="editform-label">Készrejelentés EON/ELMÜ iratkód</div>
-        <input type="number" class="editform-number" id="m31"
-               autocomplete="off"
-               [(ngModel)]="cProjekt.KeszrejelentesEonelmuIratkod" name="m31">
+        <input type="number" class="editform-number" formControlName="keszrejelenteseonelmuiratkod">
       </div>
       <div class="editform-row">
         <div class="editform-label">Készrejelentés MVM/ÉMÁSZ iratkód</div>
-        <input type="number" class="editform-number" id="m32"
-               autocomplete="off"
-               [(ngModel)]="cProjekt.KeszrejelentesMvmemaszIratkod" name="m32">
+        <input type="number" class="editform-number" formControlName="keszrejelentesmvmemasziratkod">
       </div>
     </div>
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
       <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ParticioDto} from '../particiodto';
 import {BizonylatConf} from '../bizonylatconf';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-particio-bizonylatnyomtatas',
@@ -11,7 +12,17 @@ export class ParticioBizonylatComponent implements OnInit, OnDestroy {
   @Output() eventOk = new EventEmitter<ParticioDto>();
   @Output() eventCancel = new EventEmitter<void>();
 
+  form: FormGroup;
   cBizonylat: BizonylatConf;
+
+  constructor(private _fb: FormBuilder) {
+
+    this.form = this._fb.group({
+      'bizonylatkepiratkod': [0, [Validators.required]],
+      'eredetipeldanyokszama': [0, [Validators.required]],
+      'masolatokszama': [0, [Validators.required]],
+    });
+  }
 
   ngOnInit() {
     try {
@@ -22,9 +33,23 @@ export class ParticioBizonylatComponent implements OnInit, OnDestroy {
     } catch (ex) {
       this.cBizonylat = new BizonylatConf();
     }
+
+    this.updateform();
+  }
+
+  updateform() {
+    this.form.controls['bizonylatkepiratkod'].setValue(this.cBizonylat.BizonylatkepIratkod);
+    this.form.controls['eredetipeldanyokszama'].setValue(this.cBizonylat.EredetipeldanyokSzama);
+    this.form.controls['masolatokszama'].setValue(this.cBizonylat.MasolatokSzama);
+  }
+  updateconf() {
+    this.cBizonylat.BizonylatkepIratkod = this.form.value['bizonylatkepiratkod'];
+    this.cBizonylat.EredetipeldanyokSzama = this.form.value['eredetipeldanyokszama'];
+    this.cBizonylat.MasolatokSzama = this.form.value['masolatokszama'];
   }
 
   onSubmit() {
+    this.updateconf();
     this.Dto.Bizonylat = JSON.stringify(this.cBizonylat);
 
     this.eventOk.emit(this.Dto);

@@ -1,31 +1,25 @@
 <div class="alapkeret">
   <h5>Bizonylatnyomtatás</h5>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
     <div class="editform-row">
         <div class="editform-label">Bizonylatkép iratkód</div>
-        <input type="number" class="editform-number" id="m1"
-               autocomplete="off"
-               [(ngModel)]="cBizonylat.BizonylatkepIratkod" name="m1">
+        <input type="number" class="editform-number" formControlName="bizonylatkepiratkod">
     </div>
 
     <div class="editform-row">
         <div class="editform-label">Eredeti példány</div>
-        <input type="number" class="editform-number" id="m2"
-               autocomplete="off"
-               [(ngModel)]="cBizonylat.EredetipeldanyokSzama" name="m2">
+        <input type="number" class="editform-number" formControlName="eredetipeldanyokszama">
     </div>
 
     <div class="editform-row">
         <div class="editform-label">Másolatok</div>
-        <input type="number" class="editform-number" id="m3"
-               autocomplete="off"
-               [(ngModel)]="cBizonylat.MasolatokSzama" name="m3">
+        <input type="number" class="editform-number" formControlName="masolatokszama">
     </div>
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
       <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>

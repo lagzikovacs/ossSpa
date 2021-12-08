@@ -3,6 +3,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {UgyfelService} from '../ugyfel.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {UgyfelDto} from '../ugyfeldto';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-ugyfel-csoport',
@@ -16,27 +17,36 @@ export class UgyfelCsoportComponent implements OnInit, OnDestroy {
   @Output() eventSzerkeszteskesz = new EventEmitter<UgyfelDto>();
 
   entries = ['(0) Mind', '(1) Kiemelt'];
-  selected = 0;
+
+  form: FormGroup;
   eppFrissit = false;
 
   ugyfelservice: UgyfelService;
 
   constructor(private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               ugyfelservice: UgyfelService) {
     this.ugyfelservice = ugyfelservice;
+
+    this.form = this._fb.group({
+      'ugyfeltipus': [0, [Validators.required]]
+    });
   }
 
   ngOnInit() {
-    this.selected = this.DtoEdited.Csoport;
+    this.updateform();
   }
 
-  change(i) {
-    this.selected = i;
-    this.DtoEdited.Csoport = this.selected;
+  updateform() {
+    this.form.controls['ugyfeltipus'].setValue(this.DtoEdited.Csoport);
+  }
+  updatedto() {
+    this.DtoEdited.Csoport = this.form.value['ugyfeltipus'];
   }
 
-  okClick() {
+  onSubmit() {
     this.eppFrissit = true;
+    this.updatedto();
     this.ugyfelservice.Update(this.DtoEdited)
       .then(res1 => {
         if (res1.Error !== null) {
@@ -59,7 +69,7 @@ export class UgyfelCsoportComponent implements OnInit, OnDestroy {
       });
   }
 
-  cancelClick() {
+  onCancel() {
     this.eventSzerkeszteskesz.emit(null);
   }
 

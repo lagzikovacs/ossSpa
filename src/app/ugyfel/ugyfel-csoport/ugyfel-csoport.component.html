@@ -1,21 +1,17 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>Csoport</h5>
 
-  <form #f="ngForm">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
     <div class="editform-row">
-        <div *ngFor="let entry of entries;let i = index">
-          <input type="radio" name="radiogroup" id="entry"
-                 [checked]="i === selected" (change)="change(i)">
-          <label for="entry">
-            {{entry}}
-          </label>
-        </div>
-      </div>
+      <select type="text" class="editform-combo" formControlName="ugyfeltipus">
+        <option *ngFor="let s of entries; let i = index" [value]="i">{{s}}</option>
+      </select>
+    </div>
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" [disabled]="!f.valid" type="button" (click)="okClick()">Ok</button>
-      <button class="toolbutton" [disabled]="!f.valid" type="button" (click)="cancelClick()">Mégsem</button>
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>
 </div>

@@ -7,6 +7,7 @@ import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
 import {LogonService} from '../../logon/logon.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-projektkapcsolat-ujbizonylat',
@@ -19,6 +20,7 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnInit, OnDestroy {
 
   entryindex = 3;
 
+  form: FormGroup;
   eppFrissit = false;
 
   projektkapcsolatservice: ProjektkapcsolatService;
@@ -27,16 +29,30 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnInit, OnDestroy {
   constructor(private _ugyfelservice: UgyfelService,
               private _logonservice: LogonService,
               private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               projektkapcsolatservice: ProjektkapcsolatService,
               bizonylatservice: BizonylatService) {
     this.projektkapcsolatservice = projektkapcsolatservice;
     this.bizonylatservice = bizonylatservice;
+
+    this.form = this._fb.group({
+      'bizonylattipus': [0, [Validators.required]],
+    });
   }
 
   ngOnInit() {
     for (let i = 0; i < this.bizonylatservice.tipusok.length; i++) {
       this.bizonylatservice.tipusok[i][2] = !this._logonservice.Jogaim.includes(this.bizonylatservice.tipusok[i][3]);
     }
+
+    this.updateform();
+  }
+
+  updateform() {
+    this.form.controls['bizonylattipus'].setValue(this.entryindex);
+  }
+  updatedto() {
+    this.entryindex = this.form.value['bizonylattipus'];
   }
 
   onSubmit() {
@@ -44,6 +60,7 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnInit, OnDestroy {
     let ugyfelDto: UgyfelDto;
 
     this.eppFrissit = true;
+    this.updatedto();
     this.bizonylatservice.CreateNewComplex()
       .then(res => {
         if (res.Error != null) {

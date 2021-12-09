@@ -2,40 +2,38 @@
   <h5 *ngIf="uj">Új {{szamlazasirendservice.cim | lowercase}}</h5>
   <h5 *ngIf="!uj">{{szamlazasirendservice.cim}} módosítása</h5>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
     <div class="editform-row">
         <div class="editform-label">Összeg</div>
-        <input type="number" class="editform-number" id="osszeg"
-               required autocomplete="off"
-               [(ngModel)]="DtoEdited.Osszeg" name="osszeg">
+        <input type="number" class="editform-number" formControlName="osszeg">
       </div>
 
     <div class="editform-row">
         <div class="editform-label">Pénznem</div>
-        <input type="text" class="editform-edit zoomedit penznemwidth" id="penznem"
-               maxlength="3" required autocomplete="off"
-               [(ngModel)]="DtoEdited.Penznem" name="penznem">
+        <input type="text" class="editform-edit zoomedit penznemwidth" formControlName="penznem">
         <button class="toolbutton" type="button" (click)="PenznemZoom()">...</button>
     </div>
 
     <div class="editform-row">
         <div class="editform-label">Megjegyzés</div>
-        <input type="text" class="editform-edit megjegyzeswidth" id="megjegyzes"
-               autocomplete="off"
-               [(ngModel)]="DtoEdited.Megjegyzes" name="megjegyzes">
+        <input type="text" class="editform-edit megjegyzeswidth" formControlName="megjegyzes">
     </div>
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
       <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>
 
-  <ng-container *ngIf="SzerkesztesMode === 1">
-    <app-penznem-list [maszk]="DtoEdited.Penznem || ''"
-                      (eventSelectzoom)="onPenznemSelectzoom($event)"
-                      (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
-  </ng-container>
+  <div id="penznemzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
+    <div class="zoom-modal-content-primitiv">
+      <ng-container *ngIf="SzerkesztesMode === 1">
+        <app-penznem-list [maszk]="DtoEdited.Penznem || ''"
+                          (eventSelectzoom)="onPenznemSelectzoom($event)"
+                          (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
+      </ng-container>
+    </div>
+  </div>
 </div>
 

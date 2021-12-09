@@ -5,6 +5,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {ProjektjegyzetDto} from '../projektjegyzetdto';
 import {NumberResult} from '../../dtos/numberresult';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-projekt-jegyzet-szerkesztes',
@@ -19,13 +20,19 @@ export class ProjektJegyzetSzerkesztesComponent implements OnInit, OnDestroy {
   @Input() Projektkod = -1;
   @Output() eventSzerkeszteskesz = new EventEmitter<ProjektjegyzetDto>();
 
+  form: FormGroup;
   eppFrissit = false;
 
   projektjegyzetservice: ProjektjegyzetService;
 
   constructor(private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               projektjegyzetservice: ProjektjegyzetService) {
     this.projektjegyzetservice = projektjegyzetservice;
+
+    this.form = this._fb.group({
+      'leiras': ['', [Validators.required]],
+    });
   }
 
   ngOnInit() {
@@ -38,18 +45,29 @@ export class ProjektJegyzetSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
+          this.updateform();
           this.eppFrissit = false;
         })
         .catch(err => {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
+    } else {
+      this.updateform();
     }
+  }
+
+  updateform() {
+    this.form.controls['leiras'].setValue(this.DtoEdited.Leiras);
+  }
+  updatedto() {
+    this.DtoEdited.Leiras = this.form.value['leiras'];
   }
 
   onSubmit() {
     this.eppFrissit = true;
     let p: Promise<NumberResult>;
+    this.updatedto();
 
     if (this.uj) {
       this.DtoEdited.Projektkod = this.Projektkod;

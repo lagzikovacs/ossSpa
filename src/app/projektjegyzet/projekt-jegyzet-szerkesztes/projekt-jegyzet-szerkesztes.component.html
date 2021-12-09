@@ -2,17 +2,15 @@
   <h5 *ngIf="uj">Új {{projektjegyzetservice.cim | lowercase}}</h5>
   <h5 *ngIf="!uj">{{projektjegyzetservice.cim}} módosítása</h5>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
     <div class="editform-row">
       <div class="editform-label">Leírás</div>
-      <input type="text" class="editform-edit megjegyzeswidth" id="leiras"
-             autocomplete="off"
-             [(ngModel)]="DtoEdited.Leiras" name="leiras">
+      <input type="text" class="editform-edit megjegyzeswidth" formControlName="leiras">
     </div>
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
       <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>

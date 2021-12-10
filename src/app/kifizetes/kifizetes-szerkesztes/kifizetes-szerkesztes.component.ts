@@ -12,6 +12,7 @@ import {FizetesimodDto} from '../../primitiv/fizetesimod/fizetesimoddto';
 import {deepCopy} from '../../tools/deepCopy';
 import {KifizetesDto} from '../kifizetesdto';
 import {BizonylatDto} from '../../bizonylat/bizonylatdto';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-kifizetes-szerkesztes',
@@ -28,8 +29,7 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
 
   SzerkesztesMode = KifizetesSzerkesztesMode.Blank;
 
-  Datum: any;
-
+  form: FormGroup;
   eppFrissit = false;
 
   kifizeteszoombox: any;
@@ -39,8 +39,16 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
   constructor(private _penznemservice: PenznemService,
               private _fizetesimodservice: FizetesimodService,
               private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               bizonylatkifizetesservice: KifizetesService) {
     this.bizonylatkifizetesservice = bizonylatkifizetesservice;
+
+    this.form = this._fb.group({
+      'datum': ['', [Validators.required]],
+      'osszeg': [0, [Validators.required]],
+      'penznem': ['', [Validators.required, Validators.maxLength(3)]],
+      'fizetesimod': ['', [Validators.required, Validators.maxLength(20)]]
+    });
   }
 
   ngOnInit() {
@@ -60,19 +68,39 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
           this.DtoEdited.Penznem = this.Bizonylat.Penznem;
           this.DtoEdited.Fizetesimodkod = this.Bizonylat.Fizetesimodkod;
           this.DtoEdited.Fizetesimod = this.Bizonylat.Fizetesimod;
+          this.updateform();
           this.eppFrissit = false;
         })
         .catch(err => {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
+    } else {
+      this.updateform();
     }
+  }
 
-    this.Datum = moment(this.DtoEdited.Datum).format('YYYY-MM-DD');
+  updateform() {
+    const formDatum = moment(this.DtoEdited.Datum).format('YYYY-MM-DD');
+
+    this.form.controls['datum'].setValue(formDatum);
+    this.form.controls['osszeg'].setValue(this.DtoEdited.Osszeg);
+    this.form.controls['penznem'].setValue(this.DtoEdited.Penznem);
+    this.form.controls['fizetesimod'].setValue(this.DtoEdited.Fizetesimod);
+  }
+  updatedto() {
+    const dtoDatum = moment(this.form.value['datum']).toISOString(true);
+
+    this.DtoEdited.Datum = dtoDatum;
+    this.DtoEdited.Osszeg = this.form.value['osszeg'];
+    this.DtoEdited.Penznem = this.form.value['penznem'];
+    this.DtoEdited.Fizetesimod = this.form.value['fizetesimod'];
   }
 
   onSubmit() {
     this.eppFrissit = true;
+    this.updatedto();
+
     this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.DtoEdited.Penznemkod, this.DtoEdited.Penznem))
       .then(res => {
         if (res.Error != null) {
@@ -86,7 +114,6 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
           throw res1.Error;
         }
 
-        this.DtoEdited.Datum = moment(this.Datum).toISOString(true);
         if (this.uj) {
           this.DtoEdited.Bizonylatkod = this.Bizonylat.Bizonylatkod;
           return this.bizonylatkifizetesservice.Add(this.DtoEdited);
@@ -120,12 +147,14 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   PenznemZoom() {
+    this.updatedto();
     this.SzerkesztesMode = KifizetesSzerkesztesMode.PenznemZoom;
     this.kifizeteszoombox.style.display = 'block';
   }
   onPenznemSelectzoom(Dto: PenznemDto) {
     this.DtoEdited.Penznemkod = Dto.Penznemkod;
     this.DtoEdited.Penznem = Dto.Penznem1;
+    this.updateform();
     this.kifizeteszoombox.style.display = 'none';
   }
   onPenznemStopzoom() {
@@ -134,12 +163,14 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   FizetesimodZoom() {
+    this.updatedto();
     this.SzerkesztesMode = KifizetesSzerkesztesMode.FizetesimodZoom;
     this.kifizeteszoombox.style.display = 'block';
   }
   onFizetesimodSelectzoom(Dto: FizetesimodDto) {
     this.DtoEdited.Fizetesimodkod = Dto.Fizetesimodkod;
     this.DtoEdited.Fizetesimod = Dto.Fizetesimod1;
+    this.updateform();
     this.kifizeteszoombox.style.display = 'none';
   }
   onFizetesimodStopzoom() {

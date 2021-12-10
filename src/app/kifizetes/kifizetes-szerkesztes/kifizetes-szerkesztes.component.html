@@ -2,48 +2,40 @@
   <h5 *ngIf="uj">Új {{bizonylatkifizetesservice.cim | lowercase}}</h5>
   <h5 *ngIf="!uj">{{bizonylatkifizetesservice.cim}} módosítása</h5>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
     <div class="editform-row">
       <div>
         <div class="editform-label">Dátum</div>
-        <input type="date" class="editform-date" id="datum"
-               [(ngModel)]="Datum" name="datum">
+        <input type="date" class="editform-date" formControlName="datum">
       </div>
     </div>
 
     <div class="editform-row">
       <div>
         <div class="editform-label">Összeg</div>
-        <input type="number" class="editform-number" id="osszeg"
-               [(ngModel)]="DtoEdited.Osszeg" name="osszeg">
+        <input type="number" class="editform-number" formControlName="osszeg">
       </div>
     </div>
 
     <div class="editform-row">
       <div>
         <div class="editform-label">Pénznem</div>
-        <input type="text" class="editform-edit zoomedit penznemwidth" id="penznem"
-               maxlength="3" required autocomplete="off"
-               [(ngModel)]="DtoEdited.Penznem" name="penznem">
-        <button class="toolbutton" type="button"
-                (click)="PenznemZoom()">...</button>
+        <input type="text" class="editform-edit zoomedit penznemwidth" formControlName="penznem">
+        <button class="toolbutton" type="button" (click)="PenznemZoom()">...</button>
       </div>
     </div>
 
     <div class="editform-row">
       <div>
         <div class="editform-label">Fizetési mód</div>
-        <input type="text" class="editform-edit zoomedit primitivwidth" id="fizetesimod"
-               maxlength="20" required autocomplete="off"
-               [(ngModel)]="DtoEdited.Fizetesimod" name="fizetesimod">
-        <button class="toolbutton" type="button"
-                (click)="FizetesimodZoom()">...</button>
+        <input type="text" class="editform-edit zoomedit primitivwidth" formControlName="fizetesimod">
+        <button class="toolbutton" type="button" (click)="FizetesimodZoom()">...</button>
       </div>
     </div>
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
       <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>

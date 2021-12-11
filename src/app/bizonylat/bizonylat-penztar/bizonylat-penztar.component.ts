@@ -9,6 +9,7 @@ import {BizonylatDto} from '../bizonylatdto';
 import {PenztarDto} from '../../penztar/penztardto';
 import {PenztarService} from '../../penztar/penztar.service';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-bizonylat-penztar',
@@ -29,6 +30,7 @@ export class BizonylatPenztarComponent implements OnInit, OnDestroy {
   penztarkivalasztva = false;
   megjegyzes = '';
 
+  form: FormGroup;
   eppFrissit = false;
 
   bizonylatservice: BizonylatService;
@@ -36,8 +38,17 @@ export class BizonylatPenztarComponent implements OnInit, OnDestroy {
   constructor(private _penztarservice: PenztarService,
               private _penztartetelservice: PenztartetelService,
               private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
+
+    this.form = this._fb.group({
+      'penztar': [{value: '', disabled: true}, []],
+      'penznem': [{value: '', disabled: true}, []],
+      'egyenleg': [{value: 0, disabled: true}, []],
+      'osszeg': [{value: 0, disabled: true}, []],
+      'megjegyzes': ['', []],
+    });
   }
 
   ngOnInit() {
@@ -60,12 +71,25 @@ export class BizonylatPenztarComponent implements OnInit, OnDestroy {
   penztarvalasztas(i: number) {
     this.penztarindex = i;
     this.penztarkivalasztva = true;
+    this.updateform();
+  }
+
+  updateform() {
+    this.form.controls['penztar'].setValue(this.penztarDto[this.penztarindex].Penztar1);
+    this.form.controls['penznem'].setValue(this.penztarDto[this.penztarindex].Penznem);
+    this.form.controls['egyenleg'].setValue(this.penztarDto[this.penztarindex].Egyenleg);
+    this.form.controls['osszeg'].setValue(this.Dto.Brutto);
+  }
+  updatedto() {
+    this.megjegyzes = this.form.value['megjegyzes'];
   }
 
   onSubmit() {
     let penztartetelDto: PenztartetelDto;
 
     this.eppFrissit = true;
+    this.updatedto();
+
     this._penztartetelservice.CreateNew()
       .then(res => {
         if (res.Error != null) {

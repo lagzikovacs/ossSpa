@@ -24,45 +24,37 @@
   </ng-container>
 
   <ng-container *ngIf="penztarkivalasztva">
-    <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
       <div class="editform-row">
-          <div class="editform-label">Pénztár</div>
-          <input type="text" class="editform-edit em15width" id="penztar"
-                 disabled="true"
-                 [(ngModel)]="penztarDto[penztarindex].Penztar1" name="penztar">
+        <div class="editform-row-block">
+            <div class="editform-label">Pénztár</div>
+            <input type="text" class="editform-edit em15width" formControlName="penztar">
+        </div>
+
+        <div class="editform-row-block">
+            <div class="editform-label">Pénznem</div>
+            <input type="text" class="editform-edit penznemwidth" formControlName="penznem">
+        </div>
+
+        <div class="editform-row-block">
+            <div class="editform-label">Egyenleg</div>
+            <input type="number" class="editform-number" formControlName="egyenleg">
+        </div>
       </div>
 
       <div class="editform-row">
-          <div class="editform-label">Pénznem</div>
-          <input type="text" class="editform-edit penznemwidth" id="penznem"
-                 disabled="true"
-                 [(ngModel)]="penztarDto[penztarindex].Penznem" name="penznem">
-      </div>
-
-      <div class="editform-row">
-          <div class="editform-label">Egyenleg</div>
-          <input type="number" class="editform-number" id="egyenleg"
-                 disabled="true"
-                 [(ngModel)]="penztarDto[penztarindex].Egyenleg" name="egyenleg">
-      </div>
-
-      <div class="editform-row">
-          <div class="editform-label">Összeg</div>
-          <input type="number" class="editform-number" id="osszeg"
-                 disabled="true"
-                 [(ngModel)]="Dto.Brutto" name="osszeg">
+          <div class="editform-label">Bizonylat brutto</div>
+          <input type="number" class="editform-number" formControlName="osszeg">
       </div>
 
       <div class="editform-row">
           <div class="editform-label">Megjegyzés</div>
-          <input type="text" class="editform-edit megjegyzeswidth" id="megjegyzes"
-                 autocomplete="off"
-                 [(ngModel)]="megjegyzes" name="megjegyzes">
+          <input type="text" class="editform-edit megjegyzeswidth" formControlName="megjegyzes">
       </div>
 
       <div class="editform-row-bottom">
-        <button class="toolbutton okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+        <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
         <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
       </div>
     </form>

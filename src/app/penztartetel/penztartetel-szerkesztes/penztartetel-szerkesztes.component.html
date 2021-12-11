@@ -26,22 +26,6 @@
       </div>
 
       <div class="editform-row">
-        <div class="editform-label">Ügyfél</div>
-        <input #ugyfel type="text" class="editform-edit ugyfelwidth" id="ugyfel"
-               autocomplete="off"
-               [(ngModel)]="DtoEdited.Ugyfelnev" name="ugyfel">
-      </div>
-
-      <div class="editform-row">
-        <div class="editform-label">Bizonylatszám</div>
-        <input #bizonylatszam type="text" class="editform-edit em15width" id="bizonylatszam"
-               autocomplete="off"
-               [(ngModel)]="DtoEdited.Bizonylatszam" name="bizonylatszam">
-      </div>
-    </div>
-
-    <div class="editform-card">
-      <div class="editform-row">
         <div class="editform-label">Bevétel</div>
         <input #bevetel type="number" class="editform-number" id="bevetel"
                autocomplete="off"
@@ -53,6 +37,22 @@
         <input #kiadas type="number" class="editform-number" id="kiadas"
                autocomplete="off"
                [(ngModel)]="DtoEdited.Kiadas" name="kiadas">
+      </div>
+    </div>
+
+    <div class="editform-card">
+      <div class="editform-row">
+        <div class="editform-label">Ügyfél</div>
+        <input #ugyfel type="text" class="editform-edit ugyfelwidth" id="ugyfel"
+               autocomplete="off"
+               [(ngModel)]="DtoEdited.Ugyfelnev" name="ugyfel">
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Bizonylatszám</div>
+        <input #bizonylatszam type="text" class="editform-edit em15width" id="bizonylatszam"
+               autocomplete="off"
+               [(ngModel)]="DtoEdited.Bizonylatszam" name="bizonylatszam">
       </div>
 
       <div class="editform-row">

@@ -138,6 +138,9 @@ table tr.inactive td {
 .passwordwidth {
   width: 10em;
 }
+.emailwidth {
+  width: 15em;
+}
 
 .editform-combo {
   outline: 0;

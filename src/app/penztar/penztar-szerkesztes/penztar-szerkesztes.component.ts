@@ -7,6 +7,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {PenznemDto} from '../../primitiv/penznem/penznemdto';
 import {PenztarDto} from '../penztardto';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-penztar-szerkesztes',
@@ -22,6 +23,7 @@ export class PenztarSzerkesztesComponent implements OnInit, OnDestroy {
 
   SzerkesztesMode = PenztarSzerkesztesMode.Blank;
 
+  form: FormGroup;
   eppFrissit = false;
 
   penztarzoombox: any;
@@ -30,8 +32,14 @@ export class PenztarSzerkesztesComponent implements OnInit, OnDestroy {
 
   constructor(private _penznemservice: PenznemService,
               private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               penztarservice: PenztarService) {
     this.penztarservice = penztarservice;
+
+    this.form = this._fb.group({
+      'penztar': ['', [Validators.required, Validators.maxLength(30)]],
+      'penznem': ['', [Validators.required, Validators.maxLength(3)]],
+    });
   }
 
   ngOnInit() {
@@ -46,17 +54,31 @@ export class PenztarSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
+          this.updateform();
           this.eppFrissit = false;
         })
         .catch(err => {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
+    } else {
+      this.updateform();
     }
+  }
+
+  updateform() {
+    this.form.controls['penztar'].setValue(this.DtoEdited.Penztar1);
+    this.form.controls['penznem'].setValue(this.DtoEdited.Penznem);
+  }
+  updatedto() {
+    this.DtoEdited.Penztar1 = this.form.value['penztar'];
+    this.DtoEdited.Penznem = this.form.value['penznem'];
   }
 
   onSubmit() {
     this.eppFrissit = true;
+    this.updatedto();
+
     this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.DtoEdited.Penznemkod || 0,
       this.DtoEdited.Penznem || ''))
       .then(res => {
@@ -96,12 +118,14 @@ export class PenztarSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   PenznemZoom() {
+    this.updatedto();
     this.SzerkesztesMode = PenztarSzerkesztesMode.PenznemZoom;
     this.penztarzoombox.style.display = 'block';
   }
   onPenznemSelectzoom(Dto: PenznemDto) {
     this.DtoEdited.Penznemkod = Dto.Penznemkod;
     this.DtoEdited.Penznem = Dto.Penznem1;
+    this.updateform();
     this.penztarzoombox.style.display = 'none';
   }
   onPenznemStopzoom() {

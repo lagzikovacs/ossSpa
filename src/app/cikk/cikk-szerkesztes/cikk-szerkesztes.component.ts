@@ -14,6 +14,7 @@ import {AfakulcsDto} from '../../primitiv/afakulcs/afakulcsdto';
 import {MeDto} from '../../primitiv/me/medto';
 import {TermekdijDto} from '../../primitiv/termekdij/termekdijdto';
 import {CikkDto} from '../cikkdto';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-cikk-szerkesztes',
@@ -27,6 +28,7 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
   }
   @Output() eventSzerkeszteskesz = new EventEmitter<CikkDto>();
 
+  form: FormGroup;
   eppFrissit = false;
 
   cikkzoombox: any;
@@ -39,8 +41,21 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
               private _afakulcsservice: AfakulcsService,
               private _termekdijservice: TermekdijService,
               private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               cikkservice: CikkService) {
     this.cikkservice = cikkservice;
+
+    this.form = this._fb.group({
+      'megnevezes': ['', [Validators.required, Validators.maxLength(100)]],
+      'me': ['', [Validators.required, Validators.maxLength(10)]],
+      'afakulcs': ['', [Validators.required, Validators.maxLength(10)]],
+      'egysegar': [0, [Validators.required]],
+      'kk': ['', [Validators.required]],
+      'tomeg': [0, [Validators.required]],
+      'termekdijkt': ['', [Validators.maxLength(30)]],
+      'termekdijmegnevezes': ['', []],
+      'termekdijegysegar': ['', []]
+    });
   }
 
   ngOnInit() {
@@ -55,17 +70,45 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
+          this.updateform();
           this.eppFrissit = false;
         })
         .catch(err => {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
+    } else {
+      this.updateform();
     }
+
+  }
+
+  updateform() {
+    this.form.controls['megnevezes'].setValue(this.DtoEdited.Megnevezes);
+    this.form.controls['me'].setValue(this.DtoEdited.Me);
+    this.form.controls['afakulcs'].setValue(this.DtoEdited.Afakulcs);
+    this.form.controls['egysegar'].setValue(this.DtoEdited.Egysegar);
+    this.form.controls['kk'].setValue(this.DtoEdited.Keszletetkepez);
+    this.form.controls['tomeg'].setValue(this.DtoEdited.Tomegkg);
+    this.form.controls['termekdijkt'].setValue(this.DtoEdited.Termekdijkt);
+    this.form.controls['termekdijmegnevezes'].setValue(this.DtoEdited.Termekdijmegnevezes);
+    this.form.controls['termekdijegysegar'].setValue(this.DtoEdited.Termekdijegysegar);
+  }
+  updatedto() {
+    this.DtoEdited.Megnevezes = this.form.value['megnevezes'];
+    this.DtoEdited.Me = this.form.value['me'];
+    this.DtoEdited.Afakulcs = this.form.value['afakulcs'];
+    this.DtoEdited.Egysegar = this.form.value['egysegar'];
+    this.DtoEdited.Keszletetkepez = this.form.value['kk'] === 'true';
+    this.DtoEdited.Tomegkg = this.form.value['tomeg'];
+    this.DtoEdited.Termekdijkt = this.form.value['termekdijkt'];
+    this.DtoEdited.Termekdijmegnevezes = this.form.value['termekdijmegnevezes'];
+    this.DtoEdited.Termekdijegysegar = this.form.value['termekdijegysegar'];
   }
 
   onSubmit() {
     this.eppFrissit = true;
+    this.updatedto();
 
     this._meservice.ZoomCheck(new MeZoomParameter(this.DtoEdited.Mekod || 0,
       this.DtoEdited.Me || ''))
@@ -129,12 +172,14 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   MeZoom() {
+    this.updatedto();
     this.SzerkesztesMode = CikkSzerkesztesMode.MeZoom;
     this.cikkzoombox.style.display = 'block';
   }
   onMeSelectzoom(Dto: MeDto) {
     this.DtoEdited.Mekod = Dto.Mekod;
     this.DtoEdited.Me = Dto.Me;
+    this.updateform();
     this.cikkzoombox.style.display = 'none';
   }
   onMeStopzoom() {
@@ -143,6 +188,7 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   AfakulcsZoom() {
+    this.updatedto();
     this.SzerkesztesMode = CikkSzerkesztesMode.AfakulcsZoom;
     this.cikkzoombox.style.display = 'block';
   }
@@ -150,6 +196,7 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Afakulcskod = Dto.Afakulcskod;
     this.DtoEdited.Afakulcs = Dto.Afakulcs1;
     this.DtoEdited.Afamerteke = Dto.Afamerteke;
+    this.updateform();
     this.cikkzoombox.style.display = 'none';
   }
   onAfakulcsStopzoom() {
@@ -158,6 +205,7 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   TermekdijZoom() {
+    this.updatedto();
     this.SzerkesztesMode = CikkSzerkesztesMode.TermekdijZoom;
     this.cikkzoombox.style.display = 'block';
   }
@@ -166,11 +214,20 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Termekdijkt = Dto.Termekdijkt;
     this.DtoEdited.Termekdijmegnevezes = Dto.Termekdijmegnevezes;
     this.DtoEdited.Termekdijegysegar = Dto.Termekdijegysegar;
+    this.updateform();
     this.cikkzoombox.style.display = 'none';
   }
   onTermekdijStopzoom() {
     this.SzerkesztesMode = CikkSzerkesztesMode.Blank;
     this.cikkzoombox.style.display = 'none';
+  }
+  TermekdijTorles() {
+    this.updatedto();
+    this.DtoEdited.Termekdijkod = null;
+    this.DtoEdited.Termekdijkt = null;
+    this.DtoEdited.Termekdijmegnevezes = null;
+    this.DtoEdited.Termekdijegysegar = null;
+    this.updateform();
   }
 
   ngOnDestroy() {

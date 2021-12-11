@@ -12,6 +12,7 @@ import {PenznemDto} from '../../primitiv/penznem/penznemdto';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 import {ProjektDto} from '../projektdto';
 import * as moment from 'moment';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-projekt-szerkesztes',
@@ -28,21 +29,32 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
 
   SzerkesztesMode = ProjektSzerkesztesMode.Blank;
 
+  form: FormGroup;
   eppFrissit = false;
 
   projektzoombox: any;
-
-  Keletkezett: any;
-  Megrendelve: any;
-  KivHat: any;
 
   projektservice: ProjektService;
 
   constructor(private _ugyfelservice: UgyfelService,
               private _penznemservice: PenznemService,
               private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               projektservice: ProjektService) {
     this.projektservice = projektservice;
+
+    this.form = this._fb.group({
+      'ugyfelnev': ['', [Validators.required, Validators.maxLength(200)]],
+      'ugyfelcim': ['', []],
+      'telepitesicim': ['', [Validators.maxLength(200)]],
+      'projektjellege': ['', [Validators.maxLength(50)]],
+      'var': ['0', [Validators.required]],
+      'penznem': ['', [Validators.required, Validators.maxLength(3)]],
+      'keletkezett': ['', []],
+      'megrendelve': ['', []],
+      'kivhat': ['', []],
+      'megjegyzes': ['', []],
+    });
   }
 
   ngOnInit() {
@@ -57,25 +69,57 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.DtoEdited = res.Result[0];
+          this.updateform();
           this.eppFrissit = false;
         })
         .catch(err => {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
+    } else {
+      this.updateform();
     }
+  }
 
-    this.Keletkezett = moment(this.DtoEdited.Keletkezett).format('YYYY-MM-DD');
-    this.Megrendelve = moment(this.DtoEdited.Megrendelve).format('YYYY-MM-DD');
-    this.KivHat = moment(this.DtoEdited.Kivitelezesihatarido).format('YYYY-MM-DD');
+  updateform() {
+    const formKeletkezett = moment(this.DtoEdited.Keletkezett).format('YYYY-MM-DD');
+    const formMegrendelve = moment(this.DtoEdited.Megrendelve).format('YYYY-MM-DD');
+    const formKivHat = moment(this.DtoEdited.Kivitelezesihatarido).format('YYYY-MM-DD');
+
+    this.form.controls['keletkezett'].setValue(formKeletkezett);
+    this.form.controls['megrendelve'].setValue(formMegrendelve);
+    this.form.controls['kivhat'].setValue(formKivHat);
+
+    this.form.controls['ugyfelnev'].setValue(this.DtoEdited.Ugyfelnev);
+    this.form.controls['ugyfelcim'].setValue(this.DtoEdited.Ugyfelcim);
+    this.form.controls['telepitesicim'].setValue(this.DtoEdited.Telepitesicim);
+    this.form.controls['projektjellege'].setValue(this.DtoEdited.Projektjellege);
+    this.form.controls['var'].setValue(this.DtoEdited.Vallalasiarnetto);
+    this.form.controls['penznem'].setValue(this.DtoEdited.Penznem);
+    this.form.controls['megjegyzes'].setValue(this.DtoEdited.Megjegyzes);
+  }
+  updatedto() {
+    const dtoKeletkezett = moment(this.form.value['keletkezett']).toISOString(true);
+    const dtoMegrendelve = moment(this.form.value['megrendelve']).toISOString(true);
+    const dtoKivHat = moment(this.form.value['kivhat']).toISOString(true);
+
+    this.DtoEdited.Keletkezett = dtoKeletkezett;
+    this.DtoEdited.Megrendelve = dtoMegrendelve;
+    this.DtoEdited.Kivitelezesihatarido = dtoKivHat;
+
+    this.DtoEdited.Ugyfelnev = this.form.value['ugyfelnev'];
+    this.DtoEdited.Ugyfelcim = this.form.value['ugyfelcim'];
+    this.DtoEdited.Telepitesicim = this.form.value['telepitesicim'];
+    this.DtoEdited.Projektjellege = this.form.value['projektjellege'];
+    this.DtoEdited.Vallalasiarnetto = this.form.value['var'];
+    this.DtoEdited.Penznem = this.form.value['penznem'];
+    this.DtoEdited.Megjegyzes = this.form.value['megjegyzes'];
   }
 
   onSubmit() {
-    this.DtoEdited.Keletkezett = moment(this.Keletkezett).toISOString(true);
-    this.DtoEdited.Megrendelve = moment(this.Megrendelve).toISOString(true);
-    this.DtoEdited.Kivitelezesihatarido = moment(this.KivHat).toISOString(true);
-
     this.eppFrissit = true;
+    this.updatedto();
+
     this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.DtoEdited.Ugyfelkod || 0,
       this.DtoEdited.Ugyfelnev || ''))
       .then(res => {
@@ -122,6 +166,7 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   UgyfelZoom() {
+    this.updatedto();
     this.SzerkesztesMode = ProjektSzerkesztesMode.UgyfelZoom;
     this.projektzoombox.style.display = 'block';
   }
@@ -129,6 +174,7 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Ugyfelkod = Dto.Ugyfelkod;
     this.DtoEdited.Ugyfelnev = Dto.Nev;
     this.DtoEdited.Ugyfelcim = Dto.Cim;
+    this.updateform();
     this.projektzoombox.style.display = 'none';
   }
   onUgyfelStopzoom() {
@@ -137,12 +183,14 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   PenznemZoom() {
+    this.updatedto();
     this.SzerkesztesMode = ProjektSzerkesztesMode.PenznemZoom;
     this.projektzoombox.style.display = 'block';
   }
   onPenznemSelectzoom(Dto: PenznemDto) {
     this.DtoEdited.Penznemkod = Dto.Penznemkod;
     this.DtoEdited.Penznem = Dto.Penznem1;
+    this.updateform();
     this.projektzoombox.style.display = 'none';
   }
   onPenznemStopzoom() {

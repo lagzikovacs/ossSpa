@@ -1,44 +1,35 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>{{ngmservice.cim}}</h5>
 
-  <form #f="ngForm" (ngSubmit)="submit()">
-
+  <form [formGroup]="form" autocomplete="off">
     <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">A számlák kelte</div>
-        <input type="date" class="editform-date" id="szktol"
-               [(ngModel)]="szktol" name="szktol">
+        <input type="date" class="editform-date" formControlName="szktol">
       </div>
 
       <div class="editform-row">
-        <div class="editform-row-block">
-          <input type="date" class="editform-date" id="szkig"
-                 [(ngModel)]="szkig" name="szkig">
-          <button class="toolbutton" (click)="szamlakelte()" type="button" style="margin-left: 1em">
-            <i class="fa fa-angle-right" aria-hidden="true"></i>
-          </button>
-        </div>
+        <input type="date" class="editform-date" formControlName="szkig">
+        <button class="toolbutton" (click)="szamlakelte()" type="button">
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </button>
       </div>
     </div>
 
     <div class="editform-card">
       <div class="editform-row">
-        <div class="editform-label">A számlák száma</div>
-        <input type="text" class="editform-edit em10width" id="szsztol"
-               [(ngModel)]="szsztol" name="szsztol">
+        <div class="editform-label">Számlaszámok</div>
+        <input type="text" class="editform-edit em10width" formControlName="szsztol">
       </div>
 
       <div class="editform-row">
-        <div class="editform-row-block">
-          <input type="text" class="editform-edit em10width" id="szszig"
-                 [(ngModel)]="szszig" name="szszig">
-          <button class="toolbutton" (click)="szamlaszam()" type="button" style="margin-left: 1em">
-            <i class="fa fa-angle-right" aria-hidden="true"></i>
-          </button>
-        </div>
+        <input type="text" class="editform-edit em10width" formControlName="szszig">
+        <button class="toolbutton" (click)="szamlaszam()" type="button">
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </button>
       </div>
     </div>
 
+    <div class="editform-row-bottom">{{result}}</div>
   </form>
-  <div class="editform-row-bottom">{{result}}</div>
 </div>

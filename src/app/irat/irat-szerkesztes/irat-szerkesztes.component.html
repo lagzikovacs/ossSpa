@@ -2,13 +2,12 @@
   <h5 *ngIf="uj">Új {{iratservice.cim | lowercase}}</h5>
   <h5 *ngIf="!uj">{{iratservice.cim}} módosítása</h5>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
     <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Irány</div>
-        <select type="text" class="editform-combo"
-                [(ngModel)]="DtoEdited.Irany" name="irany">
+        <select type="text" class="editform-combo" formControlName="irany">
           <option>Be</option>
           <option>Ki</option>
           <option>Belső</option>
@@ -17,15 +16,12 @@
 
       <div class="editform-row">
         <div class="editform-label">Keletkezett</div>
-        <input type="date" class="editform-date" id="keletkezett"
-               [(ngModel)]="Keletkezett" name="keletkezett">
+        <input type="date" class="editform-date" formControlName="keletkezett">
       </div>
 
       <div class="editform-row">
         <div class="editform-label">Irattipus</div>
-        <input type="text" class="editform-edit zoomedit em10width" id="irattipus"
-               maxlength="30" required autocomplete="off"
-               [(ngModel)]="DtoEdited.Irattipus" name="irattipus">
+        <input type="text" class="editform-edit zoomedit em10width" formControlName="irattipus">
         <button class="toolbutton" type="button" (click)="IrattipusZoom()">...</button>
       </div>
     </div>
@@ -33,62 +29,52 @@
     <div class="editform-card">
       <ng-container *ngIf="enUgyfel">
         <div class="editform-row">
-            <div class="editform-label">Ügyfél</div>
-            <input type="text" class="editform-edit zoomedit ugyfelwidth" id="ugyfelnev"
-                   maxlength="200" autocomplete="off"
-                   [(ngModel)]="DtoEdited.Ugyfelnev" name="ugyfelnev">
-            <button class="toolbutton" type="button" (click)="UgyfelZoom()">...</button>
-            <button class="toolbutton" (click)="UgyfelTorles()" type="button">
-              <i class="fa fa-close" aria-hidden="true"></i>
-            </button>
+          <div class="editform-label">Ügyfél</div>
+          <input type="text" class="editform-edit zoomedit ugyfelwidth" formControlName="ugyfelnev">
+          <button class="toolbutton" type="button" (click)="UgyfelZoom()">...</button>
+          <button class="toolbutton" (click)="UgyfelTorles()" type="button">
+            <i class="fa fa-close" aria-hidden="true"></i>
+          </button>
         </div>
 
         <div class="editform-row">
           <div class="editform-label">Cím</div>
-            <input type="text" class="editform-edit cimwidth" id="ugyfelcim"
-                   autocomplete="off" readonly="true" disabled="true"
-                   [(ngModel)]="DtoEdited.Ugyfelcim" name="ugyfelcim">
+          <input type="text" class="editform-edit cimwidth" formControlName="ugyfelcim">
         </div>
 
         <div class="editform-row">
-            <div class="editform-label">Küldő</div>
-            <input type="text" class="editform-edit ugyfelwidth" id="kuldo"
-                   maxlength="100" autocomplete="off"
-                   [(ngModel)]="DtoEdited.Kuldo" name="kuldo">
+          <div class="editform-label">Küldő</div>
+          <input type="text" class="editform-edit ugyfelwidth" formControlName="kuldo">
         </div>
       </ng-container>
 
       <div class="editform-row">
-          <div class="editform-label">Tárgy</div>
-          <input type="text" class="editform-edit em15width" id="targy"
-                 maxlength="200" autocomplete="off"
-                 [(ngModel)]="DtoEdited.Targy" name="targy">
+        <div class="editform-label">Tárgy</div>
+        <input type="text" class="editform-edit megjegyzeswidth" formControlName="targy">
       </div>
     </div>
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
       <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>
 
   <div id="iratzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
+    <ng-container *ngIf="SzerkesztesMode === 1">
+      <div class="zoom-modal-content-primitiv">
+        <app-irattipus-list [maszk]="DtoEdited.Irattipus || ''"
+                            (eventSelectzoom)="onIrattipusSelectzoom($event)"
+                            (eventStopzoom)="onIrattipusStopzoom()"></app-irattipus-list>
+      </div>
+    </ng-container>
 
-      <ng-container *ngIf="SzerkesztesMode === 1">
-        <div class="zoom-modal-content-primitiv">
-          <app-irattipus-list [maszk]="DtoEdited.Irattipus || ''"
-                              (eventSelectzoom)="onIrattipusSelectzoom($event)"
-                              (eventStopzoom)="onIrattipusStopzoom()"></app-irattipus-list>
-        </div>
-      </ng-container>
-
-      <ng-container *ngIf="SzerkesztesMode === 2">
-        <div class="zoom-modal-content">
-          <app-ugyfel-list [maszk]="DtoEdited.Ugyfelnev || ''"
-                           (eventSelectzoom)="onUgyfelSelectzoom($event)"
-                           (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>
-        </div>
-      </ng-container>
-
+    <ng-container *ngIf="SzerkesztesMode === 2">
+      <div class="zoom-modal-content">
+        <app-ugyfel-list [maszk]="DtoEdited.Ugyfelnev || ''"
+                         (eventSelectzoom)="onUgyfelSelectzoom($event)"
+                         (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>
+      </div>
+    </ng-container>
   </div>
 </div>

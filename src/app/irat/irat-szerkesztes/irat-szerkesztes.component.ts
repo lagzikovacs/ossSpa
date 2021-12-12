@@ -12,19 +12,17 @@ import {deepCopy} from '../../tools/deepCopy';
 import {IrattipusDto} from '../../primitiv/irattipus/irattipusdto';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 import {IratDto} from '../iratdto';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-irat-szerkesztes',
   templateUrl: './irat-szerkesztes.component.html'
 })
 export class IratSzerkesztesComponent implements OnInit, OnDestroy {
-  Keletkezett: any;
-
   @Input() uj = false;
   DtoEdited = new IratDto();
   @Input() set DtoOriginal(value: IratDto) {
     this.DtoEdited = deepCopy(value);
-    this.Keletkezett = moment(this.DtoEdited.Keletkezett).format('YYYY-MM-DD');
   }
   @Input() enUgyfel = true;
   @Input() Ugyfelkod = null;
@@ -34,6 +32,7 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
 
   iratzoombox: any;
 
+  form: FormGroup;
   eppFrissit = false;
 
   iratservice: IratService;
@@ -41,8 +40,19 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
   constructor(private _irattipusservice: IrattipusService,
               private _ugyfelservice: UgyfelService,
               private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               iratservice: IratService) {
     this.iratservice = iratservice;
+
+    this.form = this._fb.group({
+      'irany': ['', [Validators.required]],
+      'keletkezett': ['', [Validators.required]],
+      'irattipus': ['', [Validators.required, Validators.maxLength(30)]],
+      'ugyfelnev': ['', [Validators.required, Validators.maxLength(200)]],
+      'ugyfelcim': [{value: '', disabled: true}, []],
+      'kuldo': ['', [Validators.maxLength(100)]],
+      'targy': ['', [Validators.maxLength(200)]],
+    });
   }
 
   ngOnInit() {
@@ -58,19 +68,46 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
 
           this.DtoEdited = res.Result[0];
           this.DtoEdited.Ugyfelkod = this.Ugyfelkod;
+          this.updateform();
           this.eppFrissit = false;
         })
         .catch(err => {
           this.eppFrissit = false;
           this._errorservice.Error = err;
         });
-
-      this.Keletkezett = moment().format('YYYY-MM-DD');
+    } else {
+      this.updateform();
     }
+  }
+
+  updateform() {
+    this.form.controls['irany'].setValue(this.DtoEdited.Irany);
+
+    const formKeletkezett = moment(this.DtoEdited.Keletkezett).format('YYYY-MM-DD');
+    this.form.controls['keletkezett'].setValue(formKeletkezett);
+
+    this.form.controls['irattipus'].setValue(this.DtoEdited.Irattipus);
+    this.form.controls['ugyfelnev'].setValue(this.DtoEdited.Ugyfelnev);
+    this.form.controls['ugyfelcim'].setValue(this.DtoEdited.Ugyfelcim);
+    this.form.controls['kuldo'].setValue(this.DtoEdited.Kuldo);
+    this.form.controls['targy'].setValue(this.DtoEdited.Targy);
+  }
+  updatedto() {
+    this.DtoEdited.Irany = this.form.value['irany'];
+
+    const dtoKeletkezett = moment(this.form.value['keletkezett']).toISOString(true);
+    this.DtoEdited.Keletkezett = dtoKeletkezett;
+
+    this.DtoEdited.Irattipus = this.form.value['irattipus'];
+    this.DtoEdited.Ugyfelnev = this.form.value['ugyfelnev'];
+    this.DtoEdited.Ugyfelcim = this.form.value['ugyfelcim'];
+    this.DtoEdited.Kuldo = this.form.value['kuldo'];
+    this.DtoEdited.Targy = this.form.value['targy'];
   }
 
   onSubmit() {
     this.eppFrissit = true;
+    this.updatedto();
 
     this._irattipusservice.ZoomCheck(new IrattipusZoomParameter(this.DtoEdited.Irattipuskod,
       this.DtoEdited.Irattipus))
@@ -90,8 +127,6 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
         if (res1.Error != null) {
           throw res1.Error;
         }
-
-        this.DtoEdited.Keletkezett = moment(this.Keletkezett).toISOString(true);
 
         if (this.uj) {
           return this.iratservice.Add(this.DtoEdited);
@@ -125,12 +160,14 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   IrattipusZoom() {
+    this.updatedto();
     this.SzerkesztesMode = IratSzerkesztesMode.IrattipusZoom;
     this.iratzoombox.style.display = 'block';
   }
   onIrattipusSelectzoom(Dto: IrattipusDto) {
     this.DtoEdited.Irattipuskod = Dto.Irattipuskod;
     this.DtoEdited.Irattipus = Dto.Irattipus1;
+    this.updateform();
     this.iratzoombox.style.display = 'none';
   }
   onIrattipusStopzoom() {
@@ -139,6 +176,7 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   UgyfelZoom() {
+    this.updatedto();
     this.SzerkesztesMode = IratSzerkesztesMode.UgyfelZoom;
     this.iratzoombox.style.display = 'block';
   }
@@ -146,6 +184,7 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Ugyfelkod = Dto.Ugyfelkod;
     this.DtoEdited.Ugyfelnev = Dto.Nev;
     this.DtoEdited.Ugyfelcim = Dto.Cim;
+    this.updateform();
     this.iratzoombox.style.display = 'none';
   }
   onUgyfelStopzoom() {
@@ -156,6 +195,7 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Ugyfelkod = null;
     this.DtoEdited.Ugyfelnev = null;
     this.DtoEdited.Ugyfelcim = null;
+    this.updateform();
   }
 
   ngOnDestroy() {

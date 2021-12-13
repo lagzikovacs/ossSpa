@@ -34,7 +34,9 @@ table tr.active td {
 table tr.inactive td {
   background-color: var(--hatterszin);
 }
-
+input[type="file"] {
+  display: none;
+}
 
 .itemID {
   text-align: right;

@@ -1,22 +1,24 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>{{dokumentumservice.cim}} feltöltés</h5>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
     <div class="editform-row">
-        <input type="file" (change)="onFileChange($event)" #fileInput>
+      <div class="editform-label">Fájl</div>
+      <input type="text" class="editform-edit megjegyzeswidth" formControlName="fajlnev">
+      <label class="toolbutton">...
+        <input type="file" (change)="onFileChange($event)">
+      </label>
     </div>
 
     <div class="editform-row">
-        <div class="editform-label">Megjegyzés</div>
-        <input type="text" class="tooledit megjegyzeswidth" id="megjegyzes"
-               autocomplete="off"
-               [(ngModel)]="megjegyzes" name="megjegyzes">
-        <div style="color: red">Ha ez a mező üresen marad, automatikusan<br> az eredeti fájlnév kerül a megjegyzésbe.</div>
+      <div class="editform-label">Megjegyzés</div>
+      <div class="editform-label" style="color: red">Ha ez a mező üresen marad, automatikusan az eredeti fájlnév kerül a megjegyzésbe.</div>
+      <input type="text" class="editform-edit megjegyzeswidth" formControlName="megjegyzes">
     </div>
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" [disabled]="file === undefined" type="submit">Ok</button>
+      <button class="toolbutton okbutton" [disabled]="fb === undefined" type="submit">Ok</button>
       <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>

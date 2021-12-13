@@ -98,16 +98,18 @@ export class BizonylatZoomComponent implements OnInit, OnDestroy {
       });
   }
 
-  doStopZoom() {
+  onStartzoom(i: number) {
+    this.eventSelectzoom.emit(this.items[i]);
+
+    this.onStopZoom();
+  }
+
+  onStopZoom() {
     this.eventStopzoom.emit();
   }
 
   clickforrow(i: number) {
     this.clickedrowindex = i;
-  }
-
-  clickforzoom(i: number) {
-    this.eventSelectzoom.emit(this.items[i]);
   }
 
   ngOnDestroy() {

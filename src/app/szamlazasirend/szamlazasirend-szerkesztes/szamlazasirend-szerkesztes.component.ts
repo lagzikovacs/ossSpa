@@ -131,7 +131,6 @@ export class SzamlazasirendSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Penznemkod = Dto.Penznemkod;
     this.DtoEdited.Penznem = Dto.Penznem1;
     this.updateform();
-    this.penznemzoombox.style.display = 'none';
   }
   onPenznemStopzoom() {
     this.SzerkesztesMode = SzamlazasirendSzerkesztesMode.Blank;

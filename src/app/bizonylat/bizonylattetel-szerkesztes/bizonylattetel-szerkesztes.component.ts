@@ -74,7 +74,6 @@ export class BizonylattetelSzerkesztesComponent implements OnInit, OnDestroy {
     this.TetelDtoEdited.Termekdijkt = Dto.Termekdijkt;
     this.TetelDtoEdited.Termekdijmegnevezes = Dto.Termekdijmegnevezes;
     this.TetelDtoEdited.Termekdijegysegar = Dto.Termekdijegysegar;
-    this.bizonylattetelzoombox.style.display = 'none';
     this._cdr.detectChanges();
   }
   onCikkStopzoom() {
@@ -91,7 +90,6 @@ export class BizonylattetelSzerkesztesComponent implements OnInit, OnDestroy {
   onMeSelectzoom(Dto: MeDto) {
     this.TetelDtoEdited.Mekod = Dto.Mekod;
     this.TetelDtoEdited.Me = Dto.Me;
-    this.bizonylattetelzoombox.style.display = 'none';
     this._cdr.detectChanges();
   }
   onMeStopzoom() {
@@ -109,7 +107,6 @@ export class BizonylattetelSzerkesztesComponent implements OnInit, OnDestroy {
     this.TetelDtoEdited.Afakulcskod = Dto.Afakulcskod;
     this.TetelDtoEdited.Afakulcs = Dto.Afakulcs1;
     this.TetelDtoEdited.Afamerteke = Dto.Afamerteke;
-    this.bizonylattetelzoombox.style.display = 'none';
     this._cdr.detectChanges();
   }
   onAfakulcsStopzoom() {
@@ -128,7 +125,6 @@ export class BizonylattetelSzerkesztesComponent implements OnInit, OnDestroy {
     this.TetelDtoEdited.Termekdijkt = Dto.Termekdijkt;
     this.TetelDtoEdited.Termekdijmegnevezes = Dto.Termekdijmegnevezes;
     this.TetelDtoEdited.Termekdijegysegar = Dto.Termekdijegysegar;
-    this.bizonylattetelzoombox.style.display = 'none';
     this._cdr.detectChanges();
   }
   onTermekdijStopzoom() {

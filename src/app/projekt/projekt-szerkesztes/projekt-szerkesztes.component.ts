@@ -45,7 +45,7 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
 
     this.form = this._fb.group({
       'ugyfelnev': ['', [Validators.required, Validators.maxLength(200)]],
-      'ugyfelcim': ['', []],
+      'ugyfelcim': [{value: '', disabled: true}, []],
       'telepitesicim': ['', [Validators.maxLength(200)]],
       'projektjellege': ['', [Validators.maxLength(50)]],
       'var': ['0', [Validators.required]],
@@ -175,7 +175,6 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Ugyfelnev = Dto.Nev;
     this.DtoEdited.Ugyfelcim = Dto.Cim;
     this.updateform();
-    this.projektzoombox.style.display = 'none';
   }
   onUgyfelStopzoom() {
     this.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
@@ -191,7 +190,6 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Penznemkod = Dto.Penznemkod;
     this.DtoEdited.Penznem = Dto.Penznem1;
     this.updateform();
-    this.projektzoombox.style.display = 'none';
   }
   onPenznemStopzoom() {
     this.SzerkesztesMode = ProjektSzerkesztesMode.Blank;

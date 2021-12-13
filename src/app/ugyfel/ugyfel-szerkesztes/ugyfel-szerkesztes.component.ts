@@ -180,7 +180,6 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Helysegkod = Dto.Helysegkod;
     this.DtoEdited.Helysegnev = Dto.Helysegnev;
     this.updateform();
-    this.ugyfelzoombox.style.display = 'none';
   }
   onHelysegStopzoom() {
     this.SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
@@ -196,7 +195,6 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Tevekenysegkod = Dto.Tevekenysegkod;
     this.DtoEdited.Tevekenyseg = Dto.Tevekenyseg1;
     this.updateform();
-    this.ugyfelzoombox.style.display = 'none';
   }
   onTevekenysegStopzoom() {
     this.SzerkesztesMode = UgyfelSzerkesztesMode.Blank;

@@ -53,8 +53,8 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
       'kk': ['', [Validators.required]],
       'tomeg': [0, [Validators.required]],
       'termekdijkt': ['', [Validators.maxLength(30)]],
-      'termekdijmegnevezes': ['', []],
-      'termekdijegysegar': ['', []]
+      'termekdijmegnevezes': [{value: '', disabled: true}, []],
+      'termekdijegysegar': [{value: '', disabled: true}, []]
     });
   }
 
@@ -180,7 +180,6 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Mekod = Dto.Mekod;
     this.DtoEdited.Me = Dto.Me;
     this.updateform();
-    this.cikkzoombox.style.display = 'none';
   }
   onMeStopzoom() {
     this.SzerkesztesMode = CikkSzerkesztesMode.Blank;
@@ -197,7 +196,6 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Afakulcs = Dto.Afakulcs1;
     this.DtoEdited.Afamerteke = Dto.Afamerteke;
     this.updateform();
-    this.cikkzoombox.style.display = 'none';
   }
   onAfakulcsStopzoom() {
     this.SzerkesztesMode = CikkSzerkesztesMode.Blank;
@@ -215,7 +213,6 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Termekdijmegnevezes = Dto.Termekdijmegnevezes;
     this.DtoEdited.Termekdijegysegar = Dto.Termekdijegysegar;
     this.updateform();
-    this.cikkzoombox.style.display = 'none';
   }
   onTermekdijStopzoom() {
     this.SzerkesztesMode = CikkSzerkesztesMode.Blank;

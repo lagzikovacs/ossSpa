@@ -155,7 +155,6 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Penznemkod = Dto.Penznemkod;
     this.DtoEdited.Penznem = Dto.Penznem1;
     this.updateform();
-    this.kifizeteszoombox.style.display = 'none';
   }
   onPenznemStopzoom() {
     this.SzerkesztesMode = KifizetesSzerkesztesMode.Blank;
@@ -171,7 +170,6 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Fizetesimodkod = Dto.Fizetesimodkod;
     this.DtoEdited.Fizetesimod = Dto.Fizetesimod1;
     this.updateform();
-    this.kifizeteszoombox.style.display = 'none';
   }
   onFizetesimodStopzoom() {
     this.SzerkesztesMode = KifizetesSzerkesztesMode.Blank;

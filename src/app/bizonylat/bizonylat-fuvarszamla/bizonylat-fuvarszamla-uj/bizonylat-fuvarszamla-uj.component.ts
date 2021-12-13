@@ -4,6 +4,7 @@ import {ErrorService} from '../../../tools/errorbox/error.service';
 import {BizonylatDto} from '../../bizonylatdto';
 import {BizonylatZoomParameter} from '../../bizonylatzoomparameter';
 import {FuvardijParam} from '../../fuvardijparam';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-bizonylat-fuvarszamla-uj',
@@ -14,8 +15,9 @@ export class BizonylatFuvarszamlaUjComponent implements OnInit, OnDestroy {
   dtoFuvarszamla = new BizonylatDto();
   @Output() eventMegsem = new EventEmitter();
   @Output() eventOK = new EventEmitter<BizonylatDto>();
+
+  form: FormGroup;
   eppFrissit = false;
-  bizonylatservice: BizonylatService;
 
   Fuvardij: number;
 
@@ -23,35 +25,43 @@ export class BizonylatFuvarszamlaUjComponent implements OnInit, OnDestroy {
 
   fuvarszamlazoombox: any;
 
+  bizonylatservice: BizonylatService;
+
   constructor(private _errorservice: ErrorService,
+              private _fb: FormBuilder,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
+
+    this.form = this._fb.group({
+      'bizonylatszam': ['', [Validators.required, Validators.maxLength(100)]],
+      'fuvardij': [0, [Validators.required]],
+      'fuvardijpenzneme': [{value: '', disabled: true}, [Validators.required, Validators.maxLength(3)]],
+      'fuvardijarfolyama': [{value: 0, disabled: true}, [Validators.required]],
+    });
   }
 
   ngOnInit() {
     this.fuvarszamlazoombox = document.getElementById('fuvarszamlazoombox');
+    this.updateform();
   }
 
-  BizonylatZoom() {
-    this.SzerkesztesMode = 1;
-    this.fuvarszamlazoombox.style.display = 'block';
+  updateform() {
+    this.form.controls['bizonylatszam'].setValue(this.dtoFuvarszamla.Bizonylatszam);
+    this.form.controls['fuvardij'].setValue(this.Fuvardij);
+    this.form.controls['fuvardijpenzneme'].setValue(this.dtoFuvarszamla.Penznem);
+    this.form.controls['fuvardijarfolyama'].setValue(this.dtoFuvarszamla.Arfolyam);
   }
-
-  eventStopZoom() {
-    this.SzerkesztesMode = 0;
-    this.fuvarszamlazoombox.style.display = 'none';
-  }
-
-  eventSelectzoom(Dto: BizonylatDto) {
-    this.dtoFuvarszamla = Dto;
-    this.Fuvardij = Dto.Netto;
-
-    this.SzerkesztesMode = 0;
-    this.fuvarszamlazoombox.style.display = 'none';
+  updatedto() {
+    this.dtoFuvarszamla.Bizonylatszam = this.form.value['bizonylatszam'];
+    this.Fuvardij = this.form.value['fuvardij'];
+    this.dtoFuvarszamla.Penznem = this.form.value['fuvardijpenzneme'];
+    this.dtoFuvarszamla.Arfolyam = this.form.value['fuvardijarfolyama'];
   }
 
   onSubmit() {
     this.eppFrissit = true;
+    this.updatedto();
+
     this.bizonylatservice.ZoomCheck(new BizonylatZoomParameter(this.dtoFuvarszamla.Bizonylatkod || 0,
       this.dtoFuvarszamla.Bizonylatszam || ''))
       .then(res => {
@@ -84,6 +94,21 @@ export class BizonylatFuvarszamlaUjComponent implements OnInit, OnDestroy {
 
   doCancel() {
     this.eventMegsem.emit();
+  }
+
+  BizonylatZoom() {
+    this.updatedto();
+    this.SzerkesztesMode = 1;
+    this.fuvarszamlazoombox.style.display = 'block';
+  }
+  eventSelectzoom(Dto: BizonylatDto) {
+    this.dtoFuvarszamla = Dto;
+    this.Fuvardij = Dto.Netto;
+    this.updateform();
+  }
+  eventStopZoom() {
+    this.SzerkesztesMode = 0;
+    this.fuvarszamlazoombox.style.display = 'none';
   }
 
   ngOnDestroy() {

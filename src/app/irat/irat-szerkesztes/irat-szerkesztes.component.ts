@@ -168,7 +168,6 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Irattipuskod = Dto.Irattipuskod;
     this.DtoEdited.Irattipus = Dto.Irattipus1;
     this.updateform();
-    this.iratzoombox.style.display = 'none';
   }
   onIrattipusStopzoom() {
     this.SzerkesztesMode = IratSzerkesztesMode.Blank;
@@ -185,7 +184,6 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Ugyfelnev = Dto.Nev;
     this.DtoEdited.Ugyfelcim = Dto.Cim;
     this.updateform();
-    this.iratzoombox.style.display = 'none';
   }
   onUgyfelStopzoom() {
     this.SzerkesztesMode = IratSzerkesztesMode.Blank;

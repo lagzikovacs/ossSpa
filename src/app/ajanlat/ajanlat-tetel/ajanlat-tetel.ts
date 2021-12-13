@@ -32,7 +32,6 @@ export class AjanlatTetelComponent implements OnInit, OnDestroy {
     this.item.CikkNev = Dto.Megnevezes;
     this.item.AfaMerteke = Dto.Afamerteke;
     this.item.EgysegAr = Dto.Egysegar;
-    this.ajanlatzoombox.style.display = 'none';
     this._cdr.detectChanges();
   }
   onCikkStopzoom() {

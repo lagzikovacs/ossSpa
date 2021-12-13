@@ -140,7 +140,6 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this.ComplexDtoEdited.Dto.Ugyfelkozterulettipus = Dto.Kozterulettipus;
     this.ComplexDtoEdited.Dto.Ugyfelhazszam = Dto.Hazszam;
 
-    this.bizonylatzoombox.style.display = 'none';
     this._cdr.detectChanges();
   }
   onUgyfelStopzoom() {
@@ -158,7 +157,6 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   onPenznemSelectzoom(Dto: PenznemDto) {
     this.ComplexDtoEdited.Dto.Penznemkod = Dto.Penznemkod;
     this.ComplexDtoEdited.Dto.Penznem = Dto.Penznem1;
-    this.bizonylatzoombox.style.display = 'none';
     this._cdr.detectChanges();
   }
   onPenznemStopzoom() {
@@ -176,7 +174,6 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   onFizetesimodSelectzoom(Dto: FizetesimodDto) {
     this.ComplexDtoEdited.Dto.Fizetesimodkod = Dto.Fizetesimodkod;
     this.ComplexDtoEdited.Dto.Fizetesimod = Dto.Fizetesimod1;
-    this.bizonylatzoombox.style.display = 'none';
     this._cdr.detectChanges();
   }
   onFizetesimodStopzoom() {

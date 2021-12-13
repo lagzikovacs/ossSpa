@@ -126,7 +126,6 @@ export class PenztarSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Penznemkod = Dto.Penznemkod;
     this.DtoEdited.Penznem = Dto.Penznem1;
     this.updateform();
-    this.penztarzoombox.style.display = 'none';
   }
   onPenznemStopzoom() {
     this.SzerkesztesMode = PenztarSzerkesztesMode.Blank;

@@ -1,20 +1,17 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>Új pénztártétel</h5>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
     <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Dátum</div>
-        <input type="date" class="editform-date" id="datum"
-               [(ngModel)]="datum" name="datum">
+        <input type="date" class="editform-date" formControlName="datum">
       </div>
 
       <div class="editform-row">
         <div class="editform-label">Jogcím</div>
-        <select #jogcim type="text" class="editform-combo"
-                [(ngModel)]="DtoEdited.Jogcim" name="jogcim"
-                (change)="jogcimchange()">
+        <select #jogcim type="text" class="editform-combo" formControlName="jogcim" (change)="jogcimchange()">
           <option>Bevét korrekció</option>
           <option>Kiadás korrekció</option>
           <option>Pénzfelvét bankból</option>
@@ -27,44 +24,34 @@
 
       <div class="editform-row">
         <div class="editform-label">Bevétel</div>
-        <input #bevetel type="number" class="editform-number" id="bevetel"
-               autocomplete="off"
-               [(ngModel)]="DtoEdited.Bevetel" name="bevetel">
+        <input #bevetel type="number" class="editform-number" formControlName="bevetel">
       </div>
 
       <div class="editform-row">
         <div class="editform-label">Kiadás</div>
-        <input #kiadas type="number" class="editform-number" id="kiadas"
-               autocomplete="off"
-               [(ngModel)]="DtoEdited.Kiadas" name="kiadas">
+        <input #kiadas type="number" class="editform-number" formControlName="kiadas">
       </div>
     </div>
 
     <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Ügyfél</div>
-        <input #ugyfel type="text" class="editform-edit ugyfelwidth" id="ugyfel"
-               autocomplete="off"
-               [(ngModel)]="DtoEdited.Ugyfelnev" name="ugyfel">
+        <input #ugyfel type="text" class="editform-edit ugyfelwidth" formControlName="ugyfel">
       </div>
 
       <div class="editform-row">
         <div class="editform-label">Bizonylatszám</div>
-        <input #bizonylatszam type="text" class="editform-edit em15width" id="bizonylatszam"
-               autocomplete="off"
-               [(ngModel)]="DtoEdited.Bizonylatszam" name="bizonylatszam">
+        <input #bizonylatszam type="text" class="editform-edit em15width" formControlName="bizonylatszam">
       </div>
 
       <div class="editform-row">
         <div class="editform-label">Megjegyzés</div>
-        <input type="text" class="editform-edit megjegyzeswidth" id="megjegyzes"
-               autocomplete="off"
-               [(ngModel)]="DtoEdited.Megjegyzes" name="megjegyzes">
+        <input type="text" class="editform-edit megjegyzeswidth" formControlName="megjegyzes">
       </div>
     </div>
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" [disabled]="!f.valid" type="submit">Ok</button>
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
       <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </form>

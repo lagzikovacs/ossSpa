@@ -6,6 +6,7 @@ import {FajlBuf} from '../../dokumentum/fajlbuf';
 import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {LogonService} from '../../logon/logon.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-fotozas',
@@ -20,18 +21,22 @@ export class FotozasComponent implements OnInit, OnDestroy {
   bejelentkezve = false;
   Dto = new FotozasDto();
 
-  file: any;
-  file64: any;
-  fajlnev = '';
-  megjegyzes = '';
+  fb: any;
 
+  form: FormGroup;
   eppFrissit = false;
 
   constructor(private _route: ActivatedRoute,
               private _logonservice: LogonService,
               private _dokumentumservice: DokumentumService,
               private _fotozasservice: FotozasService,
-              private _errorservice: ErrorService) {
+              private _errorservice: ErrorService,
+              private _fb: FormBuilder) {
+
+    this.form = this._fb.group({
+      'fajlnev': [{value: '', disabled: true}, []],
+      'megjegyzes': ['', [Validators.required]]
+    });
   }
 
   ngOnInit() {
@@ -39,6 +44,8 @@ export class FotozasComponent implements OnInit, OnDestroy {
       .queryParams
       .subscribe(params => {
         this.fp = params['fp'] || '';
+
+        this.folytatas();
       });
   }
 
@@ -66,32 +73,36 @@ export class FotozasComponent implements OnInit, OnDestroy {
   onFileChange(event) {
     const reader = new FileReader();
     if (event.target.files && event.target.files.length > 0) {
-      this.file = event.target.files[0];
-      this.fajlnev = this.file.name;
-      reader.readAsDataURL(this.file);
+      const file = event.target.files[0];
+
+      this.form.controls['fajlnev'].setValue(file.name);
+
+      reader.readAsDataURL(file);
       reader.onload = () => {
-        this.file64 = (reader.result as string).split(',')[1];
+        const file64 = (reader.result as string).split(',')[1];
+
+        this.fb = new FajlBuf();
+        this.fb.b = file64;
+        this.fb.Fajlnev = file.name;
+        this.fb.Meret = file.size;
+        this.fb.IratKod = this.Dto.iratDto[0].Iratkod;
       };
     }
   }
 
   onSubmit() {
-    const fb = new FajlBuf();
-    fb.b = this.file64;
-    fb.Fajlnev = this.fajlnev;
-    fb.Meret = this.file.size;
-    fb.Megjegyzes = this.megjegyzes;
-    fb.IratKod = this.Dto.iratDto[0].Iratkod;
-
     this.eppFrissit = true;
-    this._dokumentumservice.FeltoltesAngular(fb)
+    this.fb.Megjegyzes = this.form.value['megjegyzes'];
+
+    this._dokumentumservice.FeltoltesAngular(this.fb)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        this.megjegyzes = '';
-        this.fileInput.nativeElement.value = '';
+        delete this.fb;
+        this.form.controls['fajlnev'].setValue('');
+        this.form.controls['megjegyzes'].setValue('');
 
         this.eppFrissit = false;
 
@@ -102,8 +113,6 @@ export class FotozasComponent implements OnInit, OnDestroy {
         this._errorservice.Error = err;
       });
   }
-
-  // this.Dto.dokumentumDto.unshift(res1.Result[0]);
 
   ngOnDestroy() {
     this._sub.unsubscribe();

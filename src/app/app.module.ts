@@ -187,6 +187,7 @@ import { VagolapBizonylathozComponent } from './vagolap/vagolap-bizonylathoz/vag
 import { IratProjektjeComponent } from './irat/irat-projektje/irat-projektje.component';
 import { BizonylatProjektjeComponent } from './bizonylat/bizonylat-projektje/bizonylat-projektje.component';
 import { FooldalComponent } from './fooldal/fooldal.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -398,6 +399,7 @@ if (environment.production) {
     IratProjektjeComponent,
     BizonylatProjektjeComponent,
     FooldalComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

@@ -18,17 +18,21 @@ export class NavbarComponent extends OnDestroyMixin implements OnInit, OnDestroy
   public verzioesbuild = 'OSS';
   public angularmenudto: AngularmenuDto[];
 
+  sidebar: any;
+  selected: any;
+
   constructor(private _router: Router,
               private _logonservice: LogonService,
               private _menuservice: MenuService,
               private _verzioservice: VerzioService,
               private _errorservice: ErrorService) {
     super();
-
-    document.addEventListener('click', this.closeSubmenu, false);
   }
 
   ngOnInit(): void {
+    this.sidebar = document.getElementById('sidebar');
+    // document.addEventListener('click', this.closesidebar, false);
+
     this.bejelentkezve = this._logonservice.isBejelentkezve();
 
     this._logonservice.SzerepkorKivalasztvaObservable().pipe(untilComponentDestroyed(this)).subscribe(uzenet => {
@@ -61,6 +65,25 @@ export class NavbarComponent extends OnDestroyMixin implements OnInit, OnDestroy
       this.szerepkorkivalasztva = szerepkorkivalasztva;
     });
   }
+
+  opensidebar() {
+    if (this.szerepkorkivalasztva) {
+      this.sidebar.style.display = 'block';
+    }
+  }
+  setselected(i) {
+    this.selected = i;
+  }
+  menuclick(rtl) {
+    this.sidebar.style.display = 'none';
+    this._menuservice.menuclick(rtl);
+  }
+
+  closesidebar(e) {
+    this.sidebar.style.display = 'none';
+  }
+
+
 
   toggleItem() {
     console.log('nah');

@@ -1,42 +1,25 @@
 <nav>
-  <ul class="menu">
-    <li class="logo"><a routerLink="/fooldal">{{verzioesbuild}}</a></li>
-    <!--<li class="item"><a href="#">Home</a></li>-->
-    <!--<li class="item"><a href="#">About</a></li>-->
-    <ng-container *ngIf="szerepkorkivalasztva">
-      <li class="item has-submenu" *ngFor="let node of angularmenudto">
-        <a tabindex="0" (click)="toggleItem()">{{node.Title}}</a>
-        <ul class="submenu">
-          <li class="subitem" *ngFor="let item of node.Sub">
-            <a *ngIf="item.Title !== 'divider' && item.Enabled" (click)="menuservice.menuclick(item.RouterLink)">
-              {{item.Title}}
-            </a>
-          </li>
-        </ul>
-      </li>
-    </ng-container>
-
-    <li class="item has-submenu">
-      <a tabindex="0">Services</a>
-      <ul class="submenu">
-        <li class="subitem"><a href="#">Design</a></li>
-        <li class="subitem"><a href="#">Development</a></li>
-        <li class="subitem"><a href="#">SEO</a></li>
-        <li class="subitem"><a href="#">Copywriting</a></li>
-      </ul>
-    </li>
-    <li class="item has-submenu">
-      <a tabindex="0">Plans</a>
-      <ul class="submenu">
-        <li class="subitem"><a href="#">Freelancer</a></li>
-        <li class="subitem"><a href="#">Startup</a></li>
-        <li class="subitem"><a href="#">Enterprise</a></li>
-      </ul>
-    </li>
-    <!--<li class="item"><a href="#">Blog</a></li>-->
-    <!--<li class="item"><a href="#">Contact</a></li>-->
-    <!--<li class="item button"><a href="#">Log In</a></li>-->
-    <!--<li class="item button secondary"><a href="#">Sign Up</a></li>-->
-    <li class="toggle"><a (click)="toggleMenu()"><i class="fa fa-bars"></i></a></li>
-  </ul>
+  <div class="logo"><a (click)="opensidebar()">{{verzioesbuild}}</a></div>
 </nav>
+
+<div id="sidebar" class="sidebar" role="dialog"  data-backdrop="true" data-keyboard="false">
+  <div class="sidebar-content">
+    <ng-container *ngIf="szerepkorkivalasztva">
+      <ul>
+        <li class="sidebar-menu" *ngFor="let node of angularmenudto;let i = index">
+          <a (click)="setselected(i)">{{node.Title}}</a>
+
+          <ng-container *ngIf="i === selected">
+            <ul>
+              <li class="sidebar-menuitem" *ngFor="let item of node.Sub">
+                <a *ngIf="item.Title !== 'divider' && item.Enabled" (click)="menuclick(item.RouterLink)">
+                  {{item.Title}}
+                </a>
+              </li>
+            </ul>
+          </ng-container>
+        </li>
+      </ul>
+    </ng-container>
+  </div>
+</div>

@@ -79,7 +79,7 @@ export class NavbarComponent extends OnDestroyMixin implements OnInit, OnDestroy
     this._menuservice.menuclick(rtl);
   }
 
-  closesidebar(e) {
+  closesidebar() {
     this.sidebar.style.display = 'none';
   }
 

@@ -1,12 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {enableProdMode, NgModule} from '@angular/core';
 import { AppComponent } from './app.component';
-import { MenuComponent } from './menu/menu/menu.component';
 import {RouterModule, Routes} from '@angular/router';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import {environment} from '../environments/environment';
-import { MenunodeComponent } from './menu/menunode/menunode.component';
-import { MenuitemComponent } from './menu/menuitem/menuitem.component';
 import {LogonService} from './logon/logon.service';
 import {MenuService} from './menu/menu.service';
 import {HttpClientModule} from '@angular/common/http';
@@ -257,9 +254,6 @@ if (environment.production) {
     BoolHunPipe,
 
     AppComponent,
-    MenuComponent,
-    MenunodeComponent,
-    MenuitemComponent,
     BejelentkezesComponent,
     FelhasznaloListComponent,
     SzerepkorvalasztasComponent,

@@ -17,17 +17,20 @@ button, input, select, textarea {
   font-family: inherit;
   font-size: 100%;
 }
-th {
-  border: 1px solid var(--keretszin);
-  font-weight: normal;
-  font-style: normal;
-  padding: 6px;
+h5 {
+  font-family: inherit;
+  font-size: 140%;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 0.25em;
 }
-td {
+table, th, td {
   border: 1px solid var(--keretszin);
   font-weight: normal;
   font-style: normal;
   padding: 6px;
+  border-collapse: collapse;
 }
 table tr.active td {
   background-color: var(--kivalasztottszin);
@@ -99,7 +102,7 @@ input[type="file"] {
   margin-right: 0.5em;
   margin-bottom: 0.3em;
   font-family: inherit;
-  height: calc(1.5em + 0.5rem + 2px);
+  height: calc(1.5em);
   padding: 0.25rem 0.25rem;
   font-size: 0.875rem;
 }
@@ -163,13 +166,14 @@ input[type="file"] {
   outline: 0;
   border: 1px solid var(--kontrolszin);
   border-radius: 0.2em;
+  margin-right: 0.5em;
+  margin-bottom: 0.3em;
   font-family: inherit;
-  height: calc(1.5em + 0.5rem + 2px);
+  height: calc(1.5em);
   padding: 0.25rem 0.25rem;
   font-size: 0.875rem;
   width: 10em;
-  margin-right: 0.5em;
-  margin-bottom: 0.3em;
+
 }
 .editform-date:disabled {
   background-color: var(--keretszin);
@@ -178,13 +182,13 @@ input[type="file"] {
   outline: 0;
   border: 1px solid var(--kontrolszin);
   border-radius: 0.2em;
+  margin-right: 0.5em;
+  margin-bottom: 0.3em;
   font-family: inherit;
-  height: calc(1.5em + 0.5rem + 2px);
+  height: calc(1.5em);
   padding: 0.25rem 0.25rem;
   font-size: 0.875rem;
   width: 8em;
-  margin-right: 0.5em;
-  margin-bottom: 0.3em;
   text-align: right;
 }
 .editform-number:disabled {
@@ -205,9 +209,6 @@ input[type="file"] {
 }
 .em8width {
   width: 8em;
-}
-.em9width {
-  width: 9em;
 }
 .em10width {
   width: 10em;
@@ -265,7 +266,7 @@ input[type="file"] {
   border-radius: 0.2em;
   margin-right: 0.2em;
   font-family: inherit;
-  height: calc(1.5em + 0.5rem + 2px);
+  height: calc(1.5em);
   padding: 0.25rem 0.25rem;
   font-size: 0.875rem;
 }

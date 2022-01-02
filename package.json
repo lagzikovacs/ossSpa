@@ -27,7 +27,6 @@
     "@types/jquery": "^3.3.31",
     "@w11k/ngx-componentdestroyed": "^5.0.2",
     "@w11k/rx-ninja": "^4.5.3",
-    "bootstrap": "^4.3.1",
     "core-js": "^3.1.4",
     "file-saver": "^2.0.2",
     "font-awesome": "^4.7.0",

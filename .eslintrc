@@ -1,0 +1,15 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [],
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "rulesdir"
+  ],
+  "rules": {
+    "rulesdir/rx-ninja-subscribe-takeuntil": true,
+    "rulesdir/rx-ninja-subscribe-in-subscribe": true
+  }
+}

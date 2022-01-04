@@ -12,7 +12,7 @@ import {deepCopy} from '../../tools/deepCopy';
 import {IrattipusDto} from '../../primitiv/irattipus/irattipusdto';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 import {IratDto} from '../iratdto';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-irat-szerkesztes',
@@ -48,14 +48,21 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
       'irany': ['', [Validators.required]],
       'keletkezett': ['', [Validators.required]],
       'irattipus': ['', [Validators.required, Validators.maxLength(30)]],
-      'ugyfelnev': ['', [Validators.required, Validators.maxLength(200)]],
-      'ugyfelcim': [{value: '', disabled: true}, []],
-      'kuldo': ['', [Validators.maxLength(100)]],
       'targy': ['', [Validators.maxLength(200)]],
+
+      // 'ugyfelnev': ['', [Validators.required, Validators.maxLength(200)]],
+      // 'ugyfelcim': [{value: '', disabled: true}, []],
+      // 'kuldo': ['', [Validators.maxLength(100)]],
     });
   }
 
   ngOnInit() {
+    if (this.enUgyfel) {
+      this.form.addControl('ugyfelnev', new FormControl('', [Validators.required, Validators.maxLength(200)]));
+      this.form.addControl('ugyfelcim', new FormControl({value: '', disabled: true}, []));
+      this.form.addControl('kuldo', new FormControl('', [Validators.maxLength(100)]));
+    }
+
     this.iratzoombox = document.getElementById('iratzoombox');
 
     if (this.uj) {
@@ -87,10 +94,13 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
     this.form.controls['keletkezett'].setValue(formKeletkezett);
 
     this.form.controls['irattipus'].setValue(this.DtoEdited.Irattipus);
-    this.form.controls['ugyfelnev'].setValue(this.DtoEdited.Ugyfelnev);
-    this.form.controls['ugyfelcim'].setValue(this.DtoEdited.Ugyfelcim);
-    this.form.controls['kuldo'].setValue(this.DtoEdited.Kuldo);
     this.form.controls['targy'].setValue(this.DtoEdited.Targy);
+
+    if (this.enUgyfel) {
+      this.form.controls['ugyfelnev'].setValue(this.DtoEdited.Ugyfelnev);
+      this.form.controls['ugyfelcim'].setValue(this.DtoEdited.Ugyfelcim);
+      this.form.controls['kuldo'].setValue(this.DtoEdited.Kuldo);
+    }
   }
   updatedto() {
     this.DtoEdited.Irany = this.form.value['irany'];
@@ -99,10 +109,13 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Keletkezett = dtoKeletkezett;
 
     this.DtoEdited.Irattipus = this.form.value['irattipus'];
-    this.DtoEdited.Ugyfelnev = this.form.value['ugyfelnev'];
-    this.DtoEdited.Ugyfelcim = this.form.value['ugyfelcim'];
-    this.DtoEdited.Kuldo = this.form.value['kuldo'];
     this.DtoEdited.Targy = this.form.value['targy'];
+
+    if (this.enUgyfel) {
+      this.DtoEdited.Ugyfelnev = this.form.value['ugyfelnev'];
+      this.DtoEdited.Ugyfelcim = this.form.value['ugyfelcim'];
+      this.DtoEdited.Kuldo = this.form.value['kuldo'];
+    }
   }
 
   onSubmit() {

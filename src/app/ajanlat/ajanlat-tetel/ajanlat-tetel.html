@@ -46,7 +46,7 @@
   }-->
 
   <div id="ajanlatzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
-    <div class="zoom-modal-content">
+    <div class="zoom-modal-content-complex">
       <ng-container *ngIf="AjanlatSzerkesztesMode === 1">
         <app-cikk-list [maszk]="item.CikkNev || ''"
                        (eventSelectzoom)="onCikkSelectzoom($event)"

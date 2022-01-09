@@ -62,7 +62,7 @@
 
   <div id="iratzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
     <ng-container *ngIf="SzerkesztesMode === 1">
-      <div class="zoom-modal-content-primitiv">
+      <div class="zoom-modal-content-primitive">
         <app-irattipus-list [maszk]="DtoEdited.Irattipus || ''"
                             (eventSelectzoom)="onIrattipusSelectzoom($event)"
                             (eventStopzoom)="onIrattipusStopzoom()"></app-irattipus-list>
@@ -70,7 +70,7 @@
     </ng-container>
 
     <ng-container *ngIf="SzerkesztesMode === 2">
-      <div class="zoom-modal-content">
+      <div class="zoom-modal-content-complex">
         <app-ugyfel-list [maszk]="DtoEdited.Ugyfelnev || ''"
                          (eventSelectzoom)="onUgyfelSelectzoom($event)"
                          (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>

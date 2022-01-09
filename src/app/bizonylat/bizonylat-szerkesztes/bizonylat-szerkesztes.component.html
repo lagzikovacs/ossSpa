@@ -139,7 +139,7 @@
 
   <div id="bizonylatzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
     <ng-container *ngIf="SzerkesztesMode === 2">
-      <div class="zoom-modal-content">
+      <div class="zoom-modal-content-complex">
         <app-ugyfel-list [maszk]="ComplexDtoEdited.Dto.Ugyfelnev || ''"
                          (eventSelectzoom)="onUgyfelSelectzoom($event)"
                          (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>
@@ -147,7 +147,7 @@
     </ng-container>
 
     <ng-container *ngIf="SzerkesztesMode === 3">
-      <div class="zoom-modal-content-primitiv">
+      <div class="zoom-modal-content-primitive">
         <app-penznem-list [maszk]="ComplexDtoEdited.Dto.Penznem || ''"
                           (eventSelectzoom)="onPenznemSelectzoom($event)"
                           (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
@@ -155,7 +155,7 @@
     </ng-container>
 
     <ng-container *ngIf="SzerkesztesMode === 4">
-      <div class="zoom-modal-content-primitiv">
+      <div class="zoom-modal-content-primitive">
         <app-fizetesimod-list [maszk]="ComplexDtoEdited.Dto.Fizetesimod || ''"
                               (eventSelectzoom)="onFizetesimodSelectzoom($event)"
                               (eventStopzoom)="onFizetesimodStopzoom()"></app-fizetesimod-list>

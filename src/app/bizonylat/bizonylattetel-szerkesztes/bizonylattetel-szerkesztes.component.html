@@ -172,7 +172,7 @@
 
   <div id="bizonylattetelzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
     <ng-container *ngIf="TetelSzerkesztesMode === 1">
-      <div class="zoom-modal-content">
+      <div class="zoom-modal-content-complex">
         <app-cikk-list [maszk]="TetelDtoEdited.Megnevezes || ''"
                        (eventSelectzoom)="onCikkSelectzoom($event)"
                        (eventStopzoom)="onCikkStopzoom()"></app-cikk-list>
@@ -180,7 +180,7 @@
     </ng-container>
 
     <ng-container *ngIf="TetelSzerkesztesMode === 2">
-      <div class="zoom-modal-content-primitiv">
+      <div class="zoom-modal-content-primitive">
         <app-me-list [maszk]="TetelDtoEdited.Me || ''"
                      (eventSelectzoom)="onMeSelectzoom($event)"
                      (eventStopzoom)="onMeStopzoom()"></app-me-list>
@@ -188,7 +188,7 @@
     </ng-container>
 
     <ng-container *ngIf="TetelSzerkesztesMode === 3">
-      <div class="zoom-modal-content-primitiv">
+      <div class="zoom-modal-content-primitive">
         <app-afakulcs-list [maszk]="TetelDtoEdited.Afakulcs || ''"
                            (eventSelectzoom)="onAfakulcsSelectzoom($event)"
                            (eventStopzoom)="onAfakulcsStopzoom()"></app-afakulcs-list>
@@ -196,7 +196,7 @@
     </ng-container>
 
     <ng-container *ngIf="TetelSzerkesztesMode === 4">
-      <div class="zoom-modal-content-primitiv">
+      <div class="zoom-modal-content-primitive">
         <app-termekdij-list [maszk]="TetelDtoEdited.Termekdijkt || ''"
                             (eventSelectzoom)="onTermekdijSelectzoom($event)"
                             (eventStopzoom)="onTermekdijStopzoom()"></app-termekdij-list>

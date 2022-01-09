@@ -30,7 +30,7 @@
   </form>
 
   <div id="fuvarszamlazoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
-    <div class="zoom-modal-content">
+    <div class="zoom-modal-content-complex">
       <ng-container *ngIf="SzerkesztesMode === 1">
         <app-bizonylat-zoom [maszk]="dtoFuvarszamla.Bizonylatszam"
                             (eventStopzoom)="eventStopZoom()"

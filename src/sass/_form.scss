@@ -1,0 +1,93 @@
+.editform-card {
+  float: left;
+  margin-right: 1em;
+}
+.editform-row {
+  margin-left: 1em;
+  margin-bottom: 0.7em;
+}
+.editform-row-block {
+  display: inline-block;
+  margin-right: 0.5em
+}
+.editform-row-bottom {
+  margin-top: 1em;
+  margin-left: 1em;
+  margin-bottom: 0.5em;
+
+  clear: both;
+}
+
+.editform-label {
+  text-align: left;
+  font-style: italic;
+  font-family: inherit;
+  font-size: 90%;
+  margin-bottom: 0.1em;
+}
+
+
+.editform-edit {
+  @extend %input-base;
+
+  background-color: $hatterszin;
+  color: $szovegszin;
+  height: calc(1.5em);
+  padding: 0.25rem 0.25rem;
+}
+.editform-edit:disabled {
+  background-color: $keretszin;
+}
+// az @extendből származó tulajdonságot nem írja felül
+.zoomedit {
+  background-color: $zoomszin;
+}
+
+.editform-combo {
+  @extend %input-base;
+
+  background-color: $hatterszin;
+  color: $szovegszin;
+  height: calc(1.5em + 0.5rem + 2px);
+  padding: 0.25rem 0.25rem;
+}
+.editform-combo:disabled {
+  background-color: $keretszin;
+}
+
+.editform-date {
+  @extend %input-base;
+
+  background-color: $hatterszin;
+  color: $szovegszin;
+  height: calc(1.5em);
+  padding: 0.25rem 0.25rem;
+
+  width: 10em;
+}
+.editform-date:disabled {
+  background-color: $keretszin;
+}
+
+.editform-number {
+  @extend %input-base;
+
+  background-color: $hatterszin;
+  color: $szovegszin;
+  height: calc(1.5em);
+  padding: 0.25rem 0.25rem;
+
+  width: 8em;
+  text-align: right;
+}
+.editform-number:disabled {
+  background-color: $keretszin;
+}
+
+
+/*.ng-valid:not(form) {*/
+/*border-left: 0.3em solid #56ac96;*/
+/*}*/
+.ng-invalid:not(form) {
+  border-left: 0.3em solid lightpink;
+}

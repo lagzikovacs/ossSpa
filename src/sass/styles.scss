@@ -1,30 +1,22 @@
-:root {
-  --hatterszin: white;
-  --szovegszin: black;
-  --keretszin: #dddddd;
-  --kivalasztottszin: #d0e0df;
-  --kontrolszin: #5d8dea;
-  --zoomszin: rgba(149, 253, 189, 0.67);
-  --navbarszin: #4e555b;
-}
-
-
-
 @import 'szinek';
 @import 'modal';
 @import 'tabla';
 @import 'spinner';
 @import 'navbar';
+@import 'toolbar';
+@import 'form';
 
 html, body {
   font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
   font-size: 14px;
   font-weight: 300;
 }
-button, input, select, textarea {
+
+textarea {
   font-family: inherit;
   font-size: 100%;
 }
+
 h5 {
   font-family: inherit;
   font-size: 140%;
@@ -38,9 +30,6 @@ input[type="file"] {
   display: none;
 }
 
-
-
-
 .alapkeret {
   overflow: auto;
   background-color: $hatterszin;
@@ -48,49 +37,14 @@ input[type="file"] {
   padding: 0.5em;
 }
 
-.editform-card {
-  float: left;
-  margin-right: 1em;
-}
-.editform-row {
-  margin-left: 1em;
-  margin-bottom: 0.7em;
-}
-.editform-row-block {
-  display: inline-block;
-  margin-right: 0.5em
-}
-.editform-row-bottom {
-  margin-top: 1em;
-  margin-left: 1em;
-  margin-bottom: 0.5em;
-
-  clear: both;
-}
-
-.editform-label {
-  text-align: left;
-  font-style: italic;
-  font-family: inherit;
-  font-size: 90%;
-  margin-bottom: 0.1em;
-}
-.editform-edit {
+%input-base {
   outline: 0;
-  border: 1px solid var(--kontrolszin);
+  font-family: inherit;
+  font-size: 0.875rem;
+  border: 1px solid $kontrolszin;
   border-radius: 0.2em;
   margin-right: 0.5em;
   margin-bottom: 0.3em;
-  font-family: inherit;
-  height: calc(1.5em);
-  padding: 0.25rem 0.25rem;
-  font-size: 0.875rem;
-}
-.editform-edit:disabled {
-  background-color: var(--keretszin);
-}
-.zoomedit {
-  background-color: var(--zoomszin);
 }
 
 
@@ -128,58 +82,6 @@ input[type="file"] {
   width: 15em;
 }
 
-.editform-combo {
-  outline: 0;
-  border: 1px solid var(--kontrolszin);
-  border-radius: 0.2em;
-  margin-right: 0.5em;
-  margin-bottom: 0.3em;
-  font-family: inherit;
-  height: calc(1.5em + 0.5rem + 2px);
-  padding: 0.25rem 0.25rem;
-  font-size: 0.875rem;
-}
-.editform-combo:disabled {
-  background-color: var(--keretszin);
-}
-.editform-date {
-  outline: 0;
-  border: 1px solid var(--kontrolszin);
-  border-radius: 0.2em;
-  margin-right: 0.5em;
-  margin-bottom: 0.3em;
-  font-family: inherit;
-  height: calc(1.5em);
-  padding: 0.25rem 0.25rem;
-  font-size: 0.875rem;
-  width: 10em;
-
-}
-.editform-date:disabled {
-  background-color: var(--keretszin);
-}
-.editform-number {
-  outline: 0;
-  border: 1px solid var(--kontrolszin);
-  border-radius: 0.2em;
-  margin-right: 0.5em;
-  margin-bottom: 0.3em;
-  font-family: inherit;
-  height: calc(1.5em);
-  padding: 0.25rem 0.25rem;
-  font-size: 0.875rem;
-  width: 8em;
-  text-align: right;
-}
-.editform-number:disabled {
-  background-color: var(--keretszin);
-}
-/*.ng-valid:not(form) {*/
-/*border-left: 0.3em solid #56ac96;*/
-/*}*/
-.ng-invalid:not(form) {
-  border-left: 0.3em solid lightpink;
-}
 
 .em4width {
   width: 4em;
@@ -199,77 +101,3 @@ input[type="file"] {
 .em20width {
   width: 20em;
 }
-
-
-
-.toolbar {
-  margin-top: 0.25em;
-  margin-bottom: 0.25em;
-}
-
-.toolbutton {
-  cursor: pointer;
-  border: 1px solid var(--kontrolszin);
-  border-radius: 0.2em;
-  background-color: $hatterszin;
-  color: var(--kontrolszin);
-  margin-right: 0.3em;
-  margin-bottom: 0.3em;
-  font-family: inherit;
-  height: calc(1.5em + 0.5rem + 2px);
-  padding: 0.25rem 0.5rem;
-  font-size: 0.875rem;
-}
-.toolbutton:disabled {
-  background-color: var(--keretszin);
-  cursor: not-allowed;
-}
-.toolbutton:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--kontrolszin);
-}
-.toolbutton:hover {
-  background-color: var(--kontrolszin);
-  color: $hatterszin;
-}
-
-.okbutton {
-  background-color: var(--kontrolszin);
-  color: $hatterszin;
-}
-
-.tooledit {
-  outline: 0;
-  background-color: $hatterszin;
-  border: 1px solid var(--kontrolszin);
-  border-radius: 0.2em;
-  margin-right: 0.2em;
-  font-family: inherit;
-  height: calc(1.5em);
-  padding: 0.25rem 0.25rem;
-  font-size: 0.875rem;
-}
-.toolcombo {
-  outline: 0;
-  background-color: $hatterszin;
-  border: 1px solid var(--kontrolszin);
-  border-radius: 0.2em;
-  margin-right: 0.2em;
-  font-family: inherit;
-  height: calc(1.5em + 0.5rem + 2px);
-  padding: 0.25rem 0.25rem;
-  font-size: 0.875rem;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-

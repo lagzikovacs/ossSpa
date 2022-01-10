@@ -8,10 +8,11 @@
   --navbarszin: #4e555b;
 }
 
-$hatterszin: white;
-$zoomszin: rgba(149, 253, 189, 0.67);
 
+
+@import 'szinek';
 @import 'modal';
+@import 'tabla';
 
 html, body {
   font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
@@ -30,46 +31,18 @@ h5 {
   margin: 0;
   margin-bottom: 0.25em;
 }
-table, th, td {
-  border: 1px solid var(--keretszin);
-  font-weight: normal;
-  font-style: normal;
-  padding: 6px;
-  border-collapse: collapse;
-}
-table tr.active td {
-  background-color: var(--kivalasztottszin);
-}
-table tr.inactive td {
-  background-color: $hatterszin;
-}
+
 input[type="file"] {
   display: none;
 }
 
-.itemID {
-  text-align: right;
-  color: var(--kontrolszin);
-  text-decoration: underline;
-  cursor: pointer;
-  width: 4em;
-  padding-left: 0.5em;
-  padding-right: 0.5em
-}
-.itemIcon {
-  text-align: right;
-  color: var(--kontrolszin);
-  cursor: pointer;
-  width: 1em;
-  padding-left: 0.5em;
-  padding-right: 0.5em
-}
+
 
 
 .alapkeret {
   overflow: auto;
   background-color: $hatterszin;
-  border: 1px solid var(--keretszin);
+  border: 1px solid $keretszin;
   padding: 0.5em;
 }
 

@@ -1,0 +1,38 @@
+%modal-base {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 99999; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.zoom-modal {
+  @extend %modal-base;
+}
+.error-modal {
+  @extend %modal-base;
+}
+
+%modal-content-base {
+  background-color: $hatterszin;
+  margin: 5% auto; /* 15% from the top and centered */
+  padding: 20px;
+}
+.zoom-modal-content-complex {
+  @extend %modal-content-base;
+  width: 80%;
+  border: 3px solid $zoomszin;
+}
+.zoom-modal-content-primitive {
+  @extend %modal-content-base;
+  width: 30%;
+  border: 3px solid $zoomszin;
+}
+.error-modal-content {
+  @extend %modal-content-base;
+  width: 50%;
+  border: 3px solid red;
+}

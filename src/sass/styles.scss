@@ -9,37 +9,9 @@
 }
 
 $hatterszin: white;
+$zoomszin: rgba(149, 253, 189, 0.67);
 
-.zoom-modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 99999; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-%zoom-modal-content-base {
-  background-color: $hatterszin;
-  margin: 5% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-}
-.zoom-modal-content-complex {
-  @extend %zoom-modal-content-base;
-  width: 80%;
-}
-.zoom-modal-content-primitive {
-  @extend %zoom-modal-content-base;
-  width: 30%;
-}
-.zoom-modal-content-error {
-  @extend %zoom-modal-content-base;
-  width: 50%;
-}
+@import 'modal';
 
 html, body {
   font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;

@@ -15,11 +15,14 @@
 .error-modal {
   @extend %modal-base;
 }
+.sidebar-modal {
+  @extend %modal-base;
+}
 
 %modal-content-base {
   background-color: $hatterszin;
-  margin: 5% auto; /* 15% from the top and centered */
-  padding: 20px;
+  margin: 5% auto; /* 5% from the top and centered */
+  padding: 1em;
 }
 .zoom-modal-content-complex {
   @extend %modal-content-base;
@@ -35,4 +38,11 @@
   @extend %modal-content-base;
   width: 50%;
   border: 3px solid red;
+}
+.sidebar-modal-content {
+  @extend %modal-content-base;
+  left: 0;
+  margin: 0;
+  width: 20em;
+  height: 100%;
 }

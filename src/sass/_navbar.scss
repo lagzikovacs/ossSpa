@@ -1,0 +1,31 @@
+.navbar {
+  background-color: $navbarszin;
+  color: $hatterszin;
+  padding-left: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  margin-bottom: 1em;
+}
+
+%sidebar-item-base {
+  cursor: pointer;
+  margin-bottom: 0.5em;
+  padding: 0.25em;
+}
+.sidebar-item {
+  @extend %sidebar-item-base;
+}
+.sidebar-item:hover {
+  background-color: $kivalasztottszin;
+}
+.sidebar-item-disabled {
+  @extend %sidebar-item-base;
+  cursor: not-allowed;
+  color: silver;
+}
+.sidebar-item-divider {
+  @extend %sidebar-item-base;
+  cursor: not-allowed;
+  border-top: solid 1px black;
+  margin-bottom: 0;
+}

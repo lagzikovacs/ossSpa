@@ -36,7 +36,8 @@
 .sidebar-menu {
   list-style-type: none;
   cursor: pointer;
-  margin-bottom: 0.5em
+  margin-bottom: 0.5em;
+  padding: 0.25em;
 }
 .sidebar-menuitem {
   list-style-type: none;

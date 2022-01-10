@@ -3,8 +3,7 @@ import {BizonylatKapcsolatDto} from '../bizonylatkapcsolatdto';
 
 @Component({
   selector: 'app-bizonylatkapcsolat-tabla',
-  templateUrl: './bizonylatkapcsolat-tabla.component.html',
-  styleUrls: ['./bizonylatkapcsolat-tabla.component.css']
+  templateUrl: './bizonylatkapcsolat-tabla.component.html'
 })
 export class BizonylatkapcsolatTablaComponent implements OnDestroy {
   @Input() items: BizonylatKapcsolatDto[];

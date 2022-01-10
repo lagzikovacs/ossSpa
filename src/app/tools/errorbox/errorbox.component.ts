@@ -5,8 +5,7 @@ import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestro
 
 @Component({
   selector: 'app-errorbox',
-  templateUrl: './errorbox.component.html',
-  styleUrls: ['./errorbox.component.css']
+  templateUrl: './errorbox.component.html'
 })
 export class ErrorboxComponent extends OnDestroyMixin implements OnInit, OnDestroy {
   errorbox: any;

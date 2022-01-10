@@ -11,7 +11,7 @@
   <tbody>
   <ng-container *ngFor="let item of Dto; let i = index">
     <tr>
-      <td *ngIf="enIdclick" class="itemID" (click)="setClickedRow(i)">{{item.Bizonylattermekdijkod}}</td>
+      <td *ngIf="enIdclick" class="tabla-kontrol-id" (click)="setClickedRow(i)">{{item.Bizonylattermekdijkod}}</td>
       <td *ngIf="!enIdclick">{{item.Bizonylattermekdijkod}}</td>
       <td>{{item.Termekdijkt}}</td>
       <td style="text-align: right">{{item.Ossztomegkg | number: '1.2-2'}}</td>

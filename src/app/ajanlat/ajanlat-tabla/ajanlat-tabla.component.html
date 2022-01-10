@@ -17,7 +17,7 @@
   <tbody>
     <ng-container *ngFor="let item of items; let i = index">
       <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
-        <td class="itemID" (click)="clickforid(i)">{{item.TetelTipus}}</td>
+        <td class="tabla-kontrol-id" (click)="clickforid(i)">{{item.TetelTipus}}</td>
         <td>{{item.CikkNev}}</td>
         <td style="text-align: right">{{item.Mennyiseg}}</td>
         <td style="text-align: right">{{item.EgysegAr}}</td>

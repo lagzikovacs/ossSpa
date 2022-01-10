@@ -19,14 +19,13 @@ table tr.inactive td {
   padding-left: 0.5em;
   padding-right: 0.5em
 }
-
-.itemID {
+.tabla-kontrol-id {
   @extend %tabla-kontrol-base;
 
   width: 4em;
   text-decoration: underline;
 }
-.itemIcon {
+.tabla-kontrol-icon {
   @extend %tabla-kontrol-base;
 
   width: 1em;

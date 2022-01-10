@@ -16,21 +16,21 @@
 
     <ng-container *ngFor="let item of items; let i = index">
       <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
-        <td *ngIf="letoltes" class="itemIcon"
+        <td *ngIf="letoltes" class="tabla-kontrol-icon"
           (click)="clickfordownload(i)">
           <i class="fa fa-arrow-down" aria-hidden="true"></i>
         </td>
-        <td *ngIf="nezet" class="itemIcon"
+        <td *ngIf="nezet" class="tabla-kontrol-icon"
             (click)="clickforview(i)">
           <i class="fa fa-book" aria-hidden="true"></i>
         </td>
-        <td *ngIf="zoom" class="itemIcon"
+        <td *ngIf="zoom" class="tabla-kontrol-icon"
           (click)="clickforzoom(i)">
           <i class="fa fa-check" aria-hidden="true"></i>
         </td>
 
         <td *ngFor="let cs of colsets; let j = index">
-          <div *ngIf="cs.Type === 'INT' && j === 0 && enIdclick" class="itemID" (click)="clickforid(i)">{{item[cs.Name]}}</div>
+          <div *ngIf="cs.Type === 'INT' && j === 0 && enIdclick" class="tabla-kontrol-id" (click)="clickforid(i)">{{item[cs.Name]}}</div>
           <div *ngIf="cs.Type === 'INT' && j === 0 && !enIdclick" style="text-align: right" >{{item[cs.Name]}}</div>
           <div *ngIf="cs.Type === 'INT' && j > 0" style="text-align: right">{{item[cs.Name]}}</div>
 

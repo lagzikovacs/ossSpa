@@ -22,12 +22,12 @@
 
     <ng-container *ngFor="let item of items; let i = index">
       <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
-        <td class="itemIcon"
+        <td class="tabla-kontrol-icon"
             (click)="clickforlevalasztas(i)">
           <i class="fa fa-minus" aria-hidden="true"></i>
         </td>
 
-        <td class="itemID"
+        <td class="tabla-kontrol-id"
             (click)="clickforid(i)">{{item.Bizonylatkapcsolatkod}}
         </td>
 

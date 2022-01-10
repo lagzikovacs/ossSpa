@@ -31,10 +31,10 @@
 
     <ng-container *ngFor="let item of Dto; let i = index">
       <tr (click)="clickforrow(i)" [className]="i === clickedrowindex ? 'active' : 'inactive'">
-        <td *ngIf="enEdit" class="itemIcon"
+        <td *ngIf="enEdit" class="tabla-kontrol-icon"
             (click)="dotorles(i)">
           <i class="fa fa-minus" aria-hidden="true"></i></td>
-        <td *ngIf="enEdit" class="itemIcon"
+        <td *ngIf="enEdit" class="tabla-kontrol-icon"
             (click)="domodositas(i)">
           <i class="fa fa-edit" aria-hidden="true"></i></td>
 

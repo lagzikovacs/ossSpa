@@ -1,10 +1,12 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>{{esemenynaploservice.cim}}</h5>
+
   <div>
     <button (click)="onKereses()" class="toolbutton">
       <i class="fa fa-search" aria-hidden="true"></i>
     </button>
   </div>
+
   <table>
     <thead>
     <tr>
@@ -16,7 +18,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let item of Dto; let i = index">
+    <tr *ngFor="let item of Dto; let i = index" (click)="RowClick(i)" [className]="i === selectedindex ? 'active' : 'inactive'">
       <td>{{item.Esemenynaplokod}}</td>
       <td>{{item.Idopont | datetimehun}}</td>
       <td>{{item.Particio}}</td>
@@ -25,6 +27,7 @@
     </tr>
     </tbody>
   </table>
+
   <app-toolbarfooter [enKereses]="!elsokereses"
                      [rekordszam]="Dto.length"
                      [osszesrekord]="OsszesRekord"

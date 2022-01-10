@@ -13,6 +13,7 @@ export class EsemenynaploComponent implements OnInit, OnDestroy {
   ep = new EsemenynaploParameter(0, environment.lapmeret);
   elsokereses = true;
   OsszesRekord = 0;
+  selectedindex: number;
 
   Dto = new Array<EsemenynaploDto>();
 
@@ -74,6 +75,10 @@ export class EsemenynaploComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
+  }
+
+  RowClick(i: number) {
+    this.selectedindex = i;
   }
 
   ngOnDestroy() {

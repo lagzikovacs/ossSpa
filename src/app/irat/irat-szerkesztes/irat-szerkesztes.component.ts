@@ -49,10 +49,6 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
       'keletkezett': ['', [Validators.required]],
       'irattipus': ['', [Validators.required, Validators.maxLength(30)]],
       'targy': ['', [Validators.maxLength(200)]],
-
-      // 'ugyfelnev': ['', [Validators.required, Validators.maxLength(200)]],
-      // 'ugyfelcim': [{value: '', disabled: true}, []],
-      // 'kuldo': ['', [Validators.maxLength(100)]],
     });
   }
 

@@ -6,7 +6,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {BizonylatDto} from '../bizonylatdto';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-bizonylat-kibocsatas',
@@ -36,19 +36,27 @@ export class BizonylatKibocsatasComponent implements OnInit, OnDestroy {
     this.bizonylatservice = bizonylatservice;
 
     this.form = this._fb.group({
-      'bizonylatszam': ['', [Validators.required]]
+      // 'bizonylatszam': ['', [Validators.required]]
     });
   }
 
   ngOnInit() {
+    if (!this.bizonylatLeiro.GenBizonylatszam) {
+      this.form.addControl('bizonylatszam', new FormControl('', [Validators.required]));
+    }
+
     this.updateform();
   }
 
   updateform() {
-    this.form.controls['bizonylatszam'].setValue(this.vbizonylatszam);
+    if (!this.bizonylatLeiro.GenBizonylatszam) {
+      this.form.controls['bizonylatszam'].setValue(this.vbizonylatszam);
+    }
   }
   updatedto() {
-    this.vbizonylatszam = this.form.value['bizonylatszam'];
+    if (!this.bizonylatLeiro.GenBizonylatszam) {
+      this.vbizonylatszam = this.form.value['bizonylatszam'];
+    }
   }
 
   onSubmit() {

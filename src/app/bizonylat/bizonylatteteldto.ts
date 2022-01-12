@@ -29,3 +29,5 @@ export class BizonylatTetelDto {
   Fuvardijegysegar: number;
   Fuvardij: number;
 }
+
+

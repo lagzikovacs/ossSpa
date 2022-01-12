@@ -215,8 +215,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
   public Setszvesz() {
     this.szvesz = this.bizonylatTipus === BizonylatTipus.Szamla ||
-      this.bizonylatTipus === BizonylatTipus.ElolegSzamla ||
-      this.bizonylatTipus === BizonylatTipus.Szallito;
+      this.bizonylatTipus === BizonylatTipus.ElolegSzamla;
   }
 
   onTetelUjElott() {

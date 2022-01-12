@@ -18,12 +18,14 @@ import {TermekdijDto} from '../../primitiv/termekdij/termekdijdto';
 import {CikkDto} from '../../cikk/cikkdto';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 import {BizonylatTetelDto} from '../bizonylatteteldto';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
 
 @Component({
   selector: 'app-bizonylattetel-szerkesztes',
   templateUrl: './bizonylattetel-szerkesztes.component.html'
 })
-export class BizonylattetelSzerkesztesComponent implements OnInit, OnDestroy {
+export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implements OnInit, OnDestroy {
   @Input() bizonylatLeiro = new BizonylatTipusLeiro();
   @Input() teteluj = false;
   @Input() szvesz = false;
@@ -34,6 +36,7 @@ export class BizonylattetelSzerkesztesComponent implements OnInit, OnDestroy {
 
   bruttoosszeg = 0;
 
+  formTetel: FormGroup;
   eppFrissit = false;
 
   bizonylattetelzoombox: any;
@@ -46,15 +49,57 @@ export class BizonylattetelSzerkesztesComponent implements OnInit, OnDestroy {
               private _termekdijservice: TermekdijService,
               private _errorservice: ErrorService,
               private _cdr: ChangeDetectorRef,
+              private _fb: FormBuilder,
               bizonylatservice: BizonylatService) {
+    super();
+
     this.bizonylatservice = bizonylatservice;
+
+    this.formTetel = this._fb.group({
+      'megnevezes': ['', [Validators.required, Validators.maxLength(100)]],
+      'mennyiseg': [0, [Validators.required, Validators.min(0)]],
+      'me': ['', [Validators.required, Validators.maxLength(10)]],
+      'egysegar': [0, [Validators.required]],
+      'bruttoosszeg': [0, []],
+      'afakulcs': ['', [Validators.required, Validators.maxLength(10)]],
+      'megjegyzes': ['', []],
+      'netto': [{value: 0, disabled: true}, []],
+      'afa': [{value: 0, disabled: true}, []],
+      'brutto': [{value: 0, disabled: true}, []],
+    });
   }
 
   ngOnInit() {
     this.bizonylattetelzoombox = document.getElementById('bizonylattetelzoombox');
+
+    this.updateform();
   }
 
+  updateform() {
+    this.formTetel.controls['megnevezes'].setValue(this.TetelDtoEdited.Megnevezes);
+    this.formTetel.controls['mennyiseg'].setValue(this.TetelDtoEdited.Mennyiseg);
+    this.formTetel.controls['me'].setValue(this.TetelDtoEdited.Me);
+    this.formTetel.controls['egysegar'].setValue(this.TetelDtoEdited.Egysegar);
+    this.formTetel.controls['bruttoosszeg'].setValue(this.bruttoosszeg);
+    this.formTetel.controls['afakulcs'].setValue(this.TetelDtoEdited.Afakulcs);
+    this.formTetel.controls['megjegyzes'].setValue(this.TetelDtoEdited.Megjegyzes);
+    this.formTetel.controls['netto'].setValue(this.TetelDtoEdited.Netto);
+    this.formTetel.controls['afa'].setValue(this.TetelDtoEdited.Afa);
+    this.formTetel.controls['brutto'].setValue(this.TetelDtoEdited.Brutto);
+  }
+  updatedto() {
+    this.TetelDtoEdited.Megnevezes = this.formTetel.value['megnevezes'];
+    this.TetelDtoEdited.Mennyiseg = this.formTetel.value['mennyiseg'];
+    this.TetelDtoEdited.Me = this.formTetel.value['me'];
+    this.TetelDtoEdited.Egysegar = this.formTetel.value['egysegar'];
+    this.bruttoosszeg = this.formTetel.value['bruttoosszeg'];
+    this.TetelDtoEdited.Afakulcs = this.formTetel.value['afakulcs'];
+    this.TetelDtoEdited.Megjegyzes = this.formTetel.value['megjegyzes'];
+  }
+
+
   CikkZoom() {
+    this.updatedto();
     this.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.CikkZoom;
     this.bizonylattetelzoombox.style.display = 'block';
     this._cdr.detectChanges();
@@ -74,6 +119,8 @@ export class BizonylattetelSzerkesztesComponent implements OnInit, OnDestroy {
     this.TetelDtoEdited.Termekdijkt = Dto.Termekdijkt;
     this.TetelDtoEdited.Termekdijmegnevezes = Dto.Termekdijmegnevezes;
     this.TetelDtoEdited.Termekdijegysegar = Dto.Termekdijegysegar;
+
+    this.updateform();
     this._cdr.detectChanges();
   }
   onCikkStopzoom() {
@@ -83,6 +130,7 @@ export class BizonylattetelSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   MeZoom() {
+    this.updatedto();
     this.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.MeZoom;
     this.bizonylattetelzoombox.style.display = 'block';
     this._cdr.detectChanges();
@@ -90,6 +138,8 @@ export class BizonylattetelSzerkesztesComponent implements OnInit, OnDestroy {
   onMeSelectzoom(Dto: MeDto) {
     this.TetelDtoEdited.Mekod = Dto.Mekod;
     this.TetelDtoEdited.Me = Dto.Me;
+
+    this.updateform();
     this._cdr.detectChanges();
   }
   onMeStopzoom() {
@@ -99,6 +149,7 @@ export class BizonylattetelSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   AfakulcsZoom() {
+    this.updatedto();
     this.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.AfakulcsZoom;
     this.bizonylattetelzoombox.style.display = 'block';
     this._cdr.detectChanges();
@@ -107,6 +158,8 @@ export class BizonylattetelSzerkesztesComponent implements OnInit, OnDestroy {
     this.TetelDtoEdited.Afakulcskod = Dto.Afakulcskod;
     this.TetelDtoEdited.Afakulcs = Dto.Afakulcs1;
     this.TetelDtoEdited.Afamerteke = Dto.Afamerteke;
+
+    this.updateform();
     this._cdr.detectChanges();
   }
   onAfakulcsStopzoom() {
@@ -115,33 +168,10 @@ export class BizonylattetelSzerkesztesComponent implements OnInit, OnDestroy {
     this._cdr.detectChanges();
   }
 
-  TermekdijZoom() {
-    this.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.TermekdijZoom;
-    this.bizonylattetelzoombox.style.display = 'block';
-    this._cdr.detectChanges();
-  }
-  onTermekdijSelectzoom(Dto: TermekdijDto) {
-    this.TetelDtoEdited.Termekdijkod = Dto.Termekdijkod;
-    this.TetelDtoEdited.Termekdijkt = Dto.Termekdijkt;
-    this.TetelDtoEdited.Termekdijmegnevezes = Dto.Termekdijmegnevezes;
-    this.TetelDtoEdited.Termekdijegysegar = Dto.Termekdijegysegar;
-    this._cdr.detectChanges();
-  }
-  onTermekdijStopzoom() {
-    this.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
-    this.bizonylattetelzoombox.style.display = 'none';
-    this._cdr.detectChanges();
-  }
-  TermekdijTorles() {
-    this.TetelDtoEdited.Termekdijkod = null;
-    this.TetelDtoEdited.Termekdijkt = null;
-    this.TetelDtoEdited.Termekdijmegnevezes = null;
-    this.TetelDtoEdited.Termekdijegysegar = null;
-    this._cdr.detectChanges();
-  }
-
   bruttobol() {
     this.eppFrissit = true;
+    this.updatedto();
+
     this.bizonylatservice.Bruttobol(new BruttobolParam(this.TetelDtoEdited, this.bruttoosszeg))
       .then(res => {
         if (res.Error != null) {
@@ -149,6 +179,7 @@ export class BizonylattetelSzerkesztesComponent implements OnInit, OnDestroy {
         }
 
         this.TetelDtoEdited = res.Result[0];
+        this.updateform();
         this.eppFrissit = false;
       })
       .catch(err => {
@@ -157,8 +188,10 @@ export class BizonylattetelSzerkesztesComponent implements OnInit, OnDestroy {
       });
   }
 
-  tetelcalc(e: any) {
+  tetelcalc(event: any) {
     this.eppFrissit = true;
+    this.updatedto();
+
     this.bizonylatservice.BizonylattetelCalc(this.TetelDtoEdited)
       .then(res => {
         if (res.Error != null) {
@@ -166,6 +199,7 @@ export class BizonylattetelSzerkesztesComponent implements OnInit, OnDestroy {
         }
 
         this.TetelDtoEdited = res.Result[0];
+        this.updateform();
         this.eppFrissit = false;
       })
       .catch(err => {
@@ -176,6 +210,8 @@ export class BizonylattetelSzerkesztesComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.eppFrissit = true;
+    this.updatedto();
+
     this._cikkservice.ZoomCheck(new CikkZoomParameter(this.TetelDtoEdited.Cikkkod || 0,
             this.TetelDtoEdited.Megnevezes || ''))
       .then(res1 => {
@@ -238,6 +274,8 @@ export class BizonylattetelSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    super.ngOnDestroy();
+
     Object.keys(this).map(k => {
       (this[k]) = null;
     });

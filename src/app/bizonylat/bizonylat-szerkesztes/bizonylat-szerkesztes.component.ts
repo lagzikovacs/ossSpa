@@ -23,6 +23,7 @@ import {BizonylatAfaDto} from '../bizonylatafadto';
 import {BizonylatTermekdijDto} from '../bizonylattermekdijdto';
 import {BizonylatteteltablaComponent} from '../bizonylatteteltabla/bizonylatteteltabla.component';
 import {propCopy} from '../../tools/propCopy';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-bizonylat-szerkesztes',
@@ -53,6 +54,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
   SzerkesztesMode = BizonylatSzerkesztesMode.List;
 
+  formFej: FormGroup;
   eppFrissit = false;
 
   bizonylatzoombox: any;
@@ -64,6 +66,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
               private _fizetesimodservice: FizetesimodService,
               private _errorservice: ErrorService,
               private _cdr: ChangeDetectorRef,
+              private _fb: FormBuilder,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
 

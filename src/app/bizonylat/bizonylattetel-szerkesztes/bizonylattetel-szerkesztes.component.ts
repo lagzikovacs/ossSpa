@@ -48,7 +48,6 @@ export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implement
               private _afakulcsservice: AfakulcsService,
               private _termekdijservice: TermekdijService,
               private _errorservice: ErrorService,
-              private _cdr: ChangeDetectorRef,
               private _fb: FormBuilder,
               bizonylatservice: BizonylatService) {
     super();
@@ -102,7 +101,6 @@ export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implement
     this.updatedto();
     this.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.CikkZoom;
     this.bizonylattetelzoombox.style.display = 'block';
-    this._cdr.detectChanges();
   }
   onCikkSelectzoom(Dto: CikkDto) {
     this.TetelDtoEdited.Cikkkod = Dto.Cikkkod;
@@ -121,38 +119,32 @@ export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implement
     this.TetelDtoEdited.Termekdijegysegar = Dto.Termekdijegysegar;
 
     this.updateform();
-    this._cdr.detectChanges();
   }
   onCikkStopzoom() {
     this.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
     this.bizonylattetelzoombox.style.display = 'none';
-    this._cdr.detectChanges();
   }
 
   MeZoom() {
     this.updatedto();
     this.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.MeZoom;
     this.bizonylattetelzoombox.style.display = 'block';
-    this._cdr.detectChanges();
   }
   onMeSelectzoom(Dto: MeDto) {
     this.TetelDtoEdited.Mekod = Dto.Mekod;
     this.TetelDtoEdited.Me = Dto.Me;
 
     this.updateform();
-    this._cdr.detectChanges();
   }
   onMeStopzoom() {
     this.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
     this.bizonylattetelzoombox.style.display = 'none';
-    this._cdr.detectChanges();
   }
 
   AfakulcsZoom() {
     this.updatedto();
     this.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.AfakulcsZoom;
     this.bizonylattetelzoombox.style.display = 'block';
-    this._cdr.detectChanges();
   }
   onAfakulcsSelectzoom(Dto: AfakulcsDto) {
     this.TetelDtoEdited.Afakulcskod = Dto.Afakulcskod;
@@ -160,12 +152,10 @@ export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implement
     this.TetelDtoEdited.Afamerteke = Dto.Afamerteke;
 
     this.updateform();
-    this._cdr.detectChanges();
   }
   onAfakulcsStopzoom() {
     this.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
     this.bizonylattetelzoombox.style.display = 'none';
-    this._cdr.detectChanges();
   }
 
   bruttobol() {
@@ -258,7 +248,6 @@ export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implement
           throw res5.Error;
         }
 
-        this._cdr.detectChanges();
         this.eppFrissit = false;
         this.eventUjModositasUtan.emit(res5.Result[0]);
       })
@@ -269,7 +258,6 @@ export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implement
   }
 
   cancel() {
-    this._cdr.detectChanges();
     this.eventUjModositasUtan.emit(null);
   }
 

@@ -62,7 +62,7 @@
     </div>
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" type="submit">Ok</button>
+      <button class="toolbutton okbutton" type="submit" [disabled]="formTetel.invalid">Ok</button>
       <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
     </div>
 

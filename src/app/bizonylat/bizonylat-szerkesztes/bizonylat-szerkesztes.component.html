@@ -2,140 +2,136 @@
   <h5 *ngIf="uj">Új {{bizonylatLeiro.BizonylatNev | lowercase}}</h5>
   <h5 *ngIf="!uj">{{bizonylatLeiro.BizonylatNev}} módosítása</h5>
 
-  <div class="editform-card">
-    <div class="editform-row">
-      <div class="editform-label">Ügyfél</div>
-      <input type="text" class="editform-edit zoomedit ugyfelwidth" id="ugyfelnev"
-             maxlength="200" required autocomplete="off"
-             [(ngModel)]="ComplexDtoEdited.Dto.Ugyfelnev">
-      <button class="toolbutton" (click)="UgyfelZoom()" [disabled] = "SzerkesztesMode !== 1" type="button">...</button>
+  <form [formGroup]="formFej" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div class="editform-card">
+      <div class="editform-row">
+        <div class="editform-label">Ügyfél</div>
+        <input type="text" class="editform-edit zoomedit ugyfelwidth" formControlName="ugyfelnev">
+        <button class="toolbutton" (click)="UgyfelZoom()" [disabled] = "SzerkesztesMode !== 1" type="button">...</button>
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Cím</div>
+        <input type="text" class="editform-edit cimwidth" formControlName="cim">
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Megjegyzés</div>
+        <input type="text" class="editform-edit megjegyzeswidth" formControlName="megjegyzes">
+      </div>
     </div>
 
-    <div class="editform-row">
-      <div class="editform-label">Cím</div>
-      <input type="text" class="editform-edit cimwidth" id="cim"
-             maxlength="200" required autocomplete="off" disabled
-             [(ngModel)]="ComplexDtoEdited.Dto.Ugyfelcim">
+    <div class="editform-card">
+      <div class="editform-row">
+        <div class="editform-row-block">
+          <div class="editform-label">Pénznem</div>
+          <input type="text" class="editform-edit zoomedit penznemwidth" formControlName="penznem"
+                 maxlength="3" required autocomplete="off"
+                 [(ngModel)]="ComplexDtoEdited.Dto.Penznem">
+          <button class="toolbutton" (click)="PenznemZoom()" [disabled] = "SzerkesztesMode !== 1" type="button">...</button>
+        </div>
+
+        <div class="editform-row-block">
+          <div class="editform-label">Árfolyam</div>
+          <input type="number" class="editform-number" formControlName="arfolyam"
+                 [(ngModel)]="ComplexDtoEdited.Dto.Arfolyam">
+        </div>
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Fizetési mód</div>
+        <input type="text" class="editform-edit zoomedit primitivwidth" formControlName="fizetesimod"
+               maxlength="20" required autocomplete="off"
+               [(ngModel)]="ComplexDtoEdited.Dto.Fizetesimod">
+        <button class="toolbutton" (click)="FizetesimodZoom()" [disabled] = "SzerkesztesMode !== 1" type="button">...</button>
+        <button class="toolbutton" (click)="Bk()" type="button">Bk</button>
+        <button class="toolbutton" (click)="Kp()" type="button">Kp</button>
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-row-block">
+          <div class="editform-label">A bizonylat kelte</div>
+          <input type="date" class="editform-date" formControlName="bizonylatkelte"
+                 [(ngModel)]="BizonylatKelte">
+        </div>
+
+        <div class="editform-row-block">
+          <div class="editform-label">A teljesités kelte</div>
+          <input type="date" class="editform-date" formControlName="teljesiteskelte"
+                 [(ngModel)]="TeljesitesKelte">
+        </div>
+
+        <div class="editform-row-block">
+          <div class="editform-label">Fizetési határidő</div>
+          <input type="date" class="editform-date" formControlName="fizetesihatarido"
+                 [(ngModel)]="FizetesiHatarido">
+        </div>
+      </div>
     </div>
 
-    <div class="editform-row">
-      <div class="editform-label">Megjegyzés</div>
-      <input type="text" class="editform-edit megjegyzeswidth" id="megjegyzes"
-             maxlength="200" autocomplete="off"
-             [(ngModel)]="ComplexDtoEdited.Dto.Megjegyzesfej">
-    </div>
-  </div>
-
-  <div class="editform-card">
-    <div class="editform-row">
+    <div class="editform-row-bottom">
       <div class="editform-row-block">
-        <div class="editform-label">Pénznem</div>
-        <input type="text" class="editform-edit zoomedit penznemwidth" id="penznem1"
-               maxlength="3" required autocomplete="off"
-               [(ngModel)]="ComplexDtoEdited.Dto.Penznem">
-        <button class="toolbutton" (click)="PenznemZoom()" [disabled] = "SzerkesztesMode !== 1" type="button">...</button>
+        <div class="editform-label">Netto</div>
+        <input type="number" class="editform-number" formControlName="netto1"
+               disabled="true"
+               [(ngModel)]="ComplexDtoEdited.Dto.Netto">
       </div>
 
       <div class="editform-row-block">
-        <div class="editform-label">Árfolyam</div>
-        <input type="number" class="editform-number" id="arfolyam"
-               [(ngModel)]="ComplexDtoEdited.Dto.Arfolyam">
-      </div>
-    </div>
-
-    <div class="editform-row">
-      <div class="editform-label">Fizetési mód</div>
-      <input type="text" class="editform-edit zoomedit primitivwidth" id="fizetesimod"
-             maxlength="20" required autocomplete="off"
-             [(ngModel)]="ComplexDtoEdited.Dto.Fizetesimod">
-      <button class="toolbutton" (click)="FizetesimodZoom()" [disabled] = "SzerkesztesMode !== 1" type="button">...</button>
-      <button class="toolbutton" (click)="Bk()" type="button">Bk</button>
-      <button class="toolbutton" (click)="Kp()" type="button">Kp</button>
-    </div>
-
-    <div class="editform-row">
-      <div class="editform-row-block">
-        <div class="editform-label">A bizonylat kelte</div>
-        <input type="date" class="editform-date" id="bizonylatkelte"
-               [(ngModel)]="BizonylatKelte">
+        <div class="editform-label">Áfa</div>
+        <input type="number" class="editform-number" formControlName="afa1"
+               disabled="true"
+               [(ngModel)]="ComplexDtoEdited.Dto.Afa">
       </div>
 
       <div class="editform-row-block">
-        <div class="editform-label">A teljesités kelte</div>
-        <input type="date" class="editform-date" id="teljesiteskelte"
-               [(ngModel)]="TeljesitesKelte">
-      </div>
-
-      <div class="editform-row-block">
-        <div class="editform-label">Fizetési határidő</div>
-        <input type="date" class="editform-date" id="fizetesihatarido"
-               [(ngModel)]="FizetesiHatarido">
+        <div class="editform-label">Brutto</div>
+        <input type="number" class="editform-number" formControlName="brutto1"
+               disabled="true"
+               [(ngModel)]="ComplexDtoEdited.Dto.Brutto">
       </div>
     </div>
-  </div>
 
-  <div class="editform-row-bottom">
-    <div class="editform-row-block">
-      <div class="editform-label">Netto</div>
-      <input type="number" class="editform-number" id="netto1"
-             disabled="true"
-             [(ngModel)]="ComplexDtoEdited.Dto.Netto">
-    </div>
+    <div class="editform-row-bottom">
+      <div class="alapkeret">
+        <div class="toolbar">
+          <button (click)="onTetelUjElott()" class="toolbutton">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </button>
+        </div>
+        <app-bizonylatteteltabla #teteltabla
+                                 [enEdit]="true"
+                                 [Dto]="ComplexDtoEdited.LstTetelDto"
+                                 [ujTemplate]="gridmod"
+                                 [torlesTemplate]="gridtorles"
+                                 [modTemplate]="gridmod"
+                                 (eventTorlesElott)="onTetelTorlesElott($event)"
+                                 (eventModositasElott)="onTetelModositasElott($event)">
+        </app-bizonylatteteltabla>
 
-    <div class="editform-row-block">
-      <div class="editform-label">Áfa</div>
-      <input type="number" class="editform-number" id="afa1"
-             disabled="true"
-             [(ngModel)]="ComplexDtoEdited.Dto.Afa">
-    </div>
+        <ng-template #gridtorles>
+          <app-tetel-torles [cim]="'Bizonylattétel'"
+                            (eventTorles)="onTeteltorles($event)">
+          </app-tetel-torles>
+        </ng-template>
 
-    <div class="editform-row-block">
-      <div class="editform-label">Brutto</div>
-      <input type="number" class="editform-number" id="brutto1"
-             disabled="true"
-             [(ngModel)]="ComplexDtoEdited.Dto.Brutto">
-    </div>
-  </div>
-
-
-  <div class="editform-row-bottom">
-    <div class="alapkeret">
-      <div class="toolbar">
-        <button (click)="onTetelUjElott()" class="toolbutton">
-          <i class="fa fa-plus" aria-hidden="true"></i>
-        </button>
+        <ng-template #gridmod>
+          <app-bizonylattetel-szerkesztes [teteluj]="teteluj"
+                                          [bizonylatLeiro]="bizonylatLeiro"
+                                          [szvesz]="szvesz"
+                                          [TetelDtoEdited]="TetelDtoEdited"
+                                          (eventUjModositasUtan)="onUjModositasUtan($event)">
+          </app-bizonylattetel-szerkesztes>
+        </ng-template>
       </div>
-      <app-bizonylatteteltabla #teteltabla
-                               [enEdit]="true"
-                               [Dto]="ComplexDtoEdited.LstTetelDto"
-                               [ujTemplate]="gridmod"
-                               [torlesTemplate]="gridtorles"
-                               [modTemplate]="gridmod"
-                               (eventTorlesElott)="onTetelTorlesElott($event)"
-                               (eventModositasElott)="onTetelModositasElott($event)">
-      </app-bizonylatteteltabla>
-
-      <ng-template #gridtorles>
-        <app-tetel-torles [cim]="'Bizonylattétel'"
-                          (eventTorles)="onTeteltorles($event)">
-        </app-tetel-torles>
-      </ng-template>
-
-      <ng-template #gridmod>
-        <app-bizonylattetel-szerkesztes [teteluj]="teteluj"
-                                        [bizonylatLeiro]="bizonylatLeiro"
-                                        [szvesz]="szvesz"
-                                        [TetelDtoEdited]="TetelDtoEdited"
-                                        (eventUjModositasUtan)="onUjModositasUtan($event)">
-        </app-bizonylattetel-szerkesztes>
-      </ng-template>
     </div>
-  </div>
 
-  <div class="editform-row-bottom">
-    <button class="toolbutton okbutton" [disabled]="SzerkesztesMode !== 1" type="button" (click)="onSubmit()">Ok</button>
-    <button class="toolbutton" [disabled]="SzerkesztesMode !== 1" type="button" (click)="cancel()">Mégsem</button>
-  </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" [disabled]="formFej.invalid || SzerkesztesMode !== 1" type="submit">Ok</button>
+      <button class="toolbutton" [disabled]="SzerkesztesMode !== 1" type="button" (click)="cancel()">Mégsem</button>
+    </div>
+  </form>
 
   <div id="bizonylatzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
     <ng-container *ngIf="SzerkesztesMode === 2">

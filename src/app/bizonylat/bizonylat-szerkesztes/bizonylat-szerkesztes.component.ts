@@ -23,7 +23,7 @@ import {BizonylatAfaDto} from '../bizonylatafadto';
 import {BizonylatTermekdijDto} from '../bizonylattermekdijdto';
 import {BizonylatteteltablaComponent} from '../bizonylatteteltabla/bizonylatteteltabla.component';
 import {propCopy} from '../../tools/propCopy';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-bizonylat-szerkesztes',
@@ -65,7 +65,6 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
               private _penznemservice: PenznemService,
               private _fizetesimodservice: FizetesimodService,
               private _errorservice: ErrorService,
-              private _cdr: ChangeDetectorRef,
               private _fb: FormBuilder,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
@@ -75,6 +74,12 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this.ComplexDtoEdited.LstTetelDto = new Array<BizonylatTetelDto>();
     this.ComplexDtoEdited.LstAfaDto = new Array<BizonylatAfaDto>();
     this.ComplexDtoEdited.LstTermekdijDto = new Array<BizonylatTermekdijDto>();
+
+    this.formFej = this._fb.group({
+      'ugyfelnev': ['', [Validators.required, Validators.maxLength(200)]],
+      'cim': [{value: '', disabled: true}, []],
+      'megjegyzes': ['', [Validators.maxLength(200)]],
+    });
   }
 
   ngOnInit() {
@@ -116,6 +121,19 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     }
+
+    this.updateform();
+  }
+
+  updateform() {
+    this.formFej.controls['ugyfelnev'].setValue(this.ComplexDtoEdited.Dto.Ugyfelnev);
+    this.formFej.controls['cim'].setValue(this.ComplexDtoEdited.Dto.Ugyfelcim);
+    this.formFej.controls['megjegyzes'].setValue(this.ComplexDtoEdited.Dto.Megjegyzesfej);
+  }
+  updatedto() {
+    this.ComplexDtoEdited.Dto.Ugyfelnev = this.formFej.value['ugyfelnev'];
+    this.ComplexDtoEdited.Dto.Ugyfelcim = this.formFej.value['cim'];
+    this.ComplexDtoEdited.Dto.Megjegyzesfej = this.formFej.value['megjegyzes'];
   }
 
   datumok() {
@@ -125,9 +143,10 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   UgyfelZoom() {
+    this.updatedto();
+
     this.SzerkesztesMode = BizonylatSzerkesztesMode.UgyfelZoom;
     this.bizonylatzoombox.style.display = 'block';
-    this._cdr.detectChanges();
   }
   onUgyfelSelectzoom(Dto: UgyfelDto) {
     this.ComplexDtoEdited.Dto.Ugyfelkod = Dto.Ugyfelkod;
@@ -143,46 +162,47 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this.ComplexDtoEdited.Dto.Ugyfelkozterulettipus = Dto.Kozterulettipus;
     this.ComplexDtoEdited.Dto.Ugyfelhazszam = Dto.Hazszam;
 
-    this._cdr.detectChanges();
+    this.updateform();
   }
   onUgyfelStopzoom() {
     this.SzerkesztesMode = BizonylatSzerkesztesMode.List;
     this.bizonylatzoombox.style.display = 'none';
-    this._cdr.detectChanges();
   }
 
 
   PenznemZoom() {
+    this.updatedto();
+
     this.SzerkesztesMode = BizonylatSzerkesztesMode.PenznemZoom;
     this.bizonylatzoombox.style.display = 'block';
-    this._cdr.detectChanges();
   }
   onPenznemSelectzoom(Dto: PenznemDto) {
     this.ComplexDtoEdited.Dto.Penznemkod = Dto.Penznemkod;
     this.ComplexDtoEdited.Dto.Penznem = Dto.Penznem1;
-    this._cdr.detectChanges();
+
+    this.updateform();
   }
   onPenznemStopzoom() {
     this.SzerkesztesMode = BizonylatSzerkesztesMode.List;
     this.bizonylatzoombox.style.display = 'none';
-    this._cdr.detectChanges();
   }
 
 
   FizetesimodZoom() {
+    this.updatedto();
+
     this.SzerkesztesMode = BizonylatSzerkesztesMode.FizetesimodZoom;
     this.bizonylatzoombox.style.display = 'block';
-    this._cdr.detectChanges();
   }
   onFizetesimodSelectzoom(Dto: FizetesimodDto) {
     this.ComplexDtoEdited.Dto.Fizetesimodkod = Dto.Fizetesimodkod;
     this.ComplexDtoEdited.Dto.Fizetesimod = Dto.Fizetesimod1;
-    this._cdr.detectChanges();
+
+    this.updateform();
   }
   onFizetesimodStopzoom() {
     this.SzerkesztesMode = BizonylatSzerkesztesMode.List;
     this.bizonylatzoombox.style.display = 'none';
-    this._cdr.detectChanges();
   }
 
   Fiztool(fm: string) {
@@ -234,7 +254,6 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
         this.Setszvesz();
 
         this.TetelDtoEdited = res.Result[0];
-        this._cdr.detectChanges();
 
         this.eppFrissit = false;
         this.tabla.doUj();
@@ -247,7 +266,6 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
   onTetelTorlesElott(i: number) {
     this.TetelDtoSelectedIndex = i;
-    this._cdr.detectChanges();
   }
   onTeteltorles(ok: boolean) {
     if (ok) {
@@ -277,7 +295,6 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this.Setszvesz();
 
     this.TetelDtoEdited = deepCopy(this.ComplexDtoEdited.LstTetelDto[i]);
-    this._cdr.detectChanges();
   }
 
   onUjModositasUtan(dto: BizonylatTetelDto) {
@@ -301,7 +318,6 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
           this.eppFrissit = false;
           this.tabla.egysem();
           this.SzerkesztesMode = BizonylatSzerkesztesMode.List;
-          this._cdr.detectChanges();
         })
         .catch(err => {
           this.eppFrissit = false;

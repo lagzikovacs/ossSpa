@@ -48,10 +48,6 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
   szvesz = false;
 
-  BizonylatKelte: any;
-  TeljesitesKelte: any;
-  FizetesiHatarido: any;
-
   SzerkesztesMode = BizonylatSzerkesztesMode.List;
 
   formFej: FormGroup;
@@ -79,6 +75,15 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
       'ugyfelnev': ['', [Validators.required, Validators.maxLength(200)]],
       'cim': [{value: '', disabled: true}, []],
       'megjegyzes': ['', [Validators.maxLength(200)]],
+      'penznem': ['', [Validators.required, Validators.maxLength(3)]],
+      'arfolyam': [0, [Validators.required]],
+      'fizetesimod': ['', [Validators.required, Validators.maxLength(20)]],
+      'bizonylatkelte': ['', [Validators.required]],
+      'teljesiteskelte': ['', [Validators.required]],
+      'fizetesihatarido': ['', [Validators.required]],
+      'netto': [{value: 0, disabled: true}, []],
+      'afa': [{value: 0, disabled: true}, []],
+      'brutto': [{value: 0, disabled: true}, []],
     });
   }
 
@@ -95,7 +100,8 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
           this.ComplexDtoEdited = res.Result[0];
           this.ComplexDtoEdited.Dto.Bizonylattipuskod = this.bizonylatTipus;
-          this.datumok();
+
+          this.updateform();
           this.eppFrissit = false;
           this.SzerkesztesMode = BizonylatSzerkesztesMode.List;
         })
@@ -112,7 +118,8 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
           }
 
           this.ComplexDtoEdited = res.Result[0];
-          this.datumok();
+
+          this.updateform();
           this.eppFrissit = false;
           this.SzerkesztesMode = BizonylatSzerkesztesMode.List;
         })
@@ -121,25 +128,39 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     }
-
-    this.updateform();
   }
 
   updateform() {
     this.formFej.controls['ugyfelnev'].setValue(this.ComplexDtoEdited.Dto.Ugyfelnev);
     this.formFej.controls['cim'].setValue(this.ComplexDtoEdited.Dto.Ugyfelcim);
     this.formFej.controls['megjegyzes'].setValue(this.ComplexDtoEdited.Dto.Megjegyzesfej);
+    this.formFej.controls['penznem'].setValue(this.ComplexDtoEdited.Dto.Penznem);
+    this.formFej.controls['arfolyam'].setValue(this.ComplexDtoEdited.Dto.Arfolyam);
+    this.formFej.controls['fizetesimod'].setValue(this.ComplexDtoEdited.Dto.Fizetesimod);
+
+    this.formFej.controls['bizonylatkelte'].setValue(moment(this.ComplexDtoEdited.Dto.Bizonylatkelte).format('YYYY-MM-DD'));
+    this.formFej.controls['teljesiteskelte'].setValue(moment(this.ComplexDtoEdited.Dto.Teljesiteskelte).format('YYYY-MM-DD'));
+    this.formFej.controls['fizetesihatarido'].setValue(moment(this.ComplexDtoEdited.Dto.Fizetesihatarido).format('YYYY-MM-DD'));
+
+    this.formFej.controls['netto'].setValue(this.ComplexDtoEdited.Dto.Netto);
+    this.formFej.controls['afa'].setValue(this.ComplexDtoEdited.Dto.Afa);
+    this.formFej.controls['brutto'].setValue(this.ComplexDtoEdited.Dto.Brutto);
   }
   updatedto() {
     this.ComplexDtoEdited.Dto.Ugyfelnev = this.formFej.value['ugyfelnev'];
     this.ComplexDtoEdited.Dto.Ugyfelcim = this.formFej.value['cim'];
     this.ComplexDtoEdited.Dto.Megjegyzesfej = this.formFej.value['megjegyzes'];
-  }
+    this.ComplexDtoEdited.Dto.Penznem = this.formFej.value['penznem'];
+    this.ComplexDtoEdited.Dto.Arfolyam = this.formFej.value['arfolyam'];
+    this.ComplexDtoEdited.Dto.Fizetesimod = this.formFej.value['fizetesimod'];
 
-  datumok() {
-    this.BizonylatKelte = moment(this.ComplexDtoEdited.Dto.Bizonylatkelte).format('YYYY-MM-DD');
-    this.TeljesitesKelte = moment(this.ComplexDtoEdited.Dto.Teljesiteskelte).format('YYYY-MM-DD');
-    this.FizetesiHatarido = moment(this.ComplexDtoEdited.Dto.Fizetesihatarido).format('YYYY-MM-DD');
+    this.ComplexDtoEdited.Dto.Bizonylatkelte = moment(this.formFej.value['bizonylatkelte']).toISOString(true);
+    this.ComplexDtoEdited.Dto.Teljesiteskelte = moment(this.formFej.value['teljesiteskelte']).toISOString(true);
+    this.ComplexDtoEdited.Dto.Fizetesihatarido = moment(this.formFej.value['fizetesihatarido']).toISOString(true);
+
+    this.ComplexDtoEdited.Dto.Netto = this.formFej.value['netto'];
+    this.ComplexDtoEdited.Dto.Afa = this.formFej.value['afa'];
+    this.ComplexDtoEdited.Dto.Brutto = this.formFej.value['brutto'];
   }
 
   UgyfelZoom() {
@@ -207,6 +228,8 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
   Fiztool(fm: string) {
     this.eppFrissit = true;
+    this.updatedto();
+
     this._fizetesimodservice.Read(fm)
       .then(res => {
         if (res.Error != null) {
@@ -216,10 +239,12 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
           throw this.fizerr + fm;
         }
 
-        this.TeljesitesKelte = this.BizonylatKelte;
+        this.ComplexDtoEdited.Dto.Teljesiteskelte = this.ComplexDtoEdited.Dto.Bizonylatkelte;
         this.ComplexDtoEdited.Dto.Fizetesimodkod = res.Result[0].Fizetesimodkod;
         this.ComplexDtoEdited.Dto.Fizetesimod = res.Result[0].Fizetesimod1;
-        this.FizetesiHatarido = this.BizonylatKelte;
+        this.ComplexDtoEdited.Dto.Fizetesihatarido = this.ComplexDtoEdited.Dto.Bizonylatkelte;
+
+        this.updateform();
         this.eppFrissit = false;
       })
       .catch(err => {
@@ -357,10 +382,6 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
         if (res2.Error != null) {
           throw res2.Error;
         }
-
-        this.ComplexDtoEdited.Dto.Bizonylatkelte = moment(this.BizonylatKelte).toISOString(true);
-        this.ComplexDtoEdited.Dto.Teljesiteskelte = moment(this.TeljesitesKelte).toISOString(true);
-        this.ComplexDtoEdited.Dto.Fizetesihatarido = moment(this.FizetesiHatarido).toISOString(true);
 
         return this.bizonylatservice.Save(this.ComplexDtoEdited);
       })

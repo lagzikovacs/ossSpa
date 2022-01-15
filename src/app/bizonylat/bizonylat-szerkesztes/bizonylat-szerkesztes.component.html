@@ -25,46 +25,38 @@
       <div class="editform-row">
         <div class="editform-row-block">
           <div class="editform-label">Pénznem</div>
-          <input type="text" class="editform-edit zoomedit penznemwidth" formControlName="penznem"
-                 maxlength="3" required autocomplete="off"
-                 [(ngModel)]="ComplexDtoEdited.Dto.Penznem">
+          <input type="text" class="editform-edit zoomedit penznemwidth" formControlName="penznem">
           <button class="toolbutton" (click)="PenznemZoom()" [disabled] = "SzerkesztesMode !== 1" type="button">...</button>
         </div>
 
         <div class="editform-row-block">
           <div class="editform-label">Árfolyam</div>
-          <input type="number" class="editform-number" formControlName="arfolyam"
-                 [(ngModel)]="ComplexDtoEdited.Dto.Arfolyam">
+          <input type="number" class="editform-number" formControlName="arfolyam">
         </div>
       </div>
 
       <div class="editform-row">
         <div class="editform-label">Fizetési mód</div>
-        <input type="text" class="editform-edit zoomedit primitivwidth" formControlName="fizetesimod"
-               maxlength="20" required autocomplete="off"
-               [(ngModel)]="ComplexDtoEdited.Dto.Fizetesimod">
+        <input type="text" class="editform-edit zoomedit primitivwidth" formControlName="fizetesimod">
         <button class="toolbutton" (click)="FizetesimodZoom()" [disabled] = "SzerkesztesMode !== 1" type="button">...</button>
-        <button class="toolbutton" (click)="Bk()" type="button">Bk</button>
-        <button class="toolbutton" (click)="Kp()" type="button">Kp</button>
+        <button class="toolbutton" (click)="Bk()" [disabled] = "SzerkesztesMode !== 1" type="button">Bk</button>
+        <button class="toolbutton" (click)="Kp()" [disabled] = "SzerkesztesMode !== 1" type="button">Kp</button>
       </div>
 
       <div class="editform-row">
         <div class="editform-row-block">
           <div class="editform-label">A bizonylat kelte</div>
-          <input type="date" class="editform-date" formControlName="bizonylatkelte"
-                 [(ngModel)]="BizonylatKelte">
+          <input type="date" class="editform-date" formControlName="bizonylatkelte">
         </div>
 
         <div class="editform-row-block">
           <div class="editform-label">A teljesités kelte</div>
-          <input type="date" class="editform-date" formControlName="teljesiteskelte"
-                 [(ngModel)]="TeljesitesKelte">
+          <input type="date" class="editform-date" formControlName="teljesiteskelte">
         </div>
 
         <div class="editform-row-block">
           <div class="editform-label">Fizetési határidő</div>
-          <input type="date" class="editform-date" formControlName="fizetesihatarido"
-                 [(ngModel)]="FizetesiHatarido">
+          <input type="date" class="editform-date" formControlName="fizetesihatarido">
         </div>
       </div>
     </div>
@@ -72,23 +64,17 @@
     <div class="editform-row-bottom">
       <div class="editform-row-block">
         <div class="editform-label">Netto</div>
-        <input type="number" class="editform-number" formControlName="netto1"
-               disabled="true"
-               [(ngModel)]="ComplexDtoEdited.Dto.Netto">
+        <input type="number" class="editform-number" formControlName="netto">
       </div>
 
       <div class="editform-row-block">
         <div class="editform-label">Áfa</div>
-        <input type="number" class="editform-number" formControlName="afa1"
-               disabled="true"
-               [(ngModel)]="ComplexDtoEdited.Dto.Afa">
+        <input type="number" class="editform-number" formControlName="afa">
       </div>
 
       <div class="editform-row-block">
         <div class="editform-label">Brutto</div>
-        <input type="number" class="editform-number" formControlName="brutto1"
-               disabled="true"
-               [(ngModel)]="ComplexDtoEdited.Dto.Brutto">
+        <input type="number" class="editform-number" formControlName="brutto">
       </div>
     </div>
 

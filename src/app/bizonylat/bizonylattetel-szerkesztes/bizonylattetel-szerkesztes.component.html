@@ -2,7 +2,7 @@
   <h5 *ngIf="teteluj">Új {{bizonylatLeiro.BizonylatNev | lowercase}}tétel</h5>
   <h5 *ngIf="!teteluj">{{bizonylatLeiro.BizonylatNev}}tétel módosítása</h5>
 
-  <form [formGroup]="formTetel" (ngSubmit)="onSubmit()" autocomplete="off">
+  <div [formGroup]="formTetel" autocomplete="off">
 
     <div class="editform-card">
       <div class="editform-row">
@@ -62,11 +62,11 @@
     </div>
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" type="submit" [disabled]="formTetel.invalid">Ok</button>
+      <button class="toolbutton okbutton" type="button" [disabled]="formTetel.invalid" (click)="onSubmit()">Ok</button>
       <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
     </div>
 
-  </form>
+  </div>
 
 <!--  export enum BizonylattetelSzerkesztesMode {
   Blank = 0,

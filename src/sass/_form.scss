@@ -88,6 +88,9 @@
 /*.ng-valid:not(form) {*/
 /*border-left: 0.3em solid #56ac96;*/
 /*}*/
-.ng-invalid:not(form) {
+//.ng-invalid:not(form) {
+//  border-left: 0.3em solid lightpink;
+//}
+input.ng-invalid {
   border-left: 0.3em solid lightpink;
 }

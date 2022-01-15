@@ -2,7 +2,7 @@
   <h5 *ngIf="uj">Új {{bizonylatLeiro.BizonylatNev | lowercase}}</h5>
   <h5 *ngIf="!uj">{{bizonylatLeiro.BizonylatNev}} módosítása</h5>
 
-  <form [formGroup]="formFej" (ngSubmit)="onSubmit()" autocomplete="off">
+  <div [formGroup]="formFej" autocomplete="off">
     <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Ügyfél</div>
@@ -114,10 +114,10 @@
 
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" [disabled]="formFej.invalid || SzerkesztesMode !== 1" type="submit">Ok</button>
+      <button class="toolbutton okbutton" [disabled]="formFej.invalid || SzerkesztesMode !== 1" type="button" (click)="onSubmit()">Ok</button>
       <button class="toolbutton" [disabled]="SzerkesztesMode !== 1" type="button" (click)="cancel()">Mégsem</button>
     </div>
-  </form>
+  </div>
 
   <div id="bizonylatzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
     <ng-container *ngIf="SzerkesztesMode === 2">

@@ -161,6 +161,8 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this.ComplexDtoEdited.Dto.Netto = this.formFej.value['netto'];
     this.ComplexDtoEdited.Dto.Afa = this.formFej.value['afa'];
     this.ComplexDtoEdited.Dto.Brutto = this.formFej.value['brutto'];
+
+    console.log(this.ComplexDtoEdited.Dto);
   }
 
   UgyfelZoom() {
@@ -355,6 +357,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.eppFrissit = true;
+    this.updatedto();
 
     this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.ComplexDtoEdited.Dto.Ugyfelkod,
       this.ComplexDtoEdited.Dto.Ugyfelnev))

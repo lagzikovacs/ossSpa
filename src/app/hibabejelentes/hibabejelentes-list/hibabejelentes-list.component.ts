@@ -65,6 +65,8 @@ export class HibabejelentesListComponent implements OnDestroy {
           throw res.Error;
         }
 
+        console.log(res.Result);
+
         if (this.elsokereses) {
           this.Dto = res.Result;
           this.elsokereses = false;

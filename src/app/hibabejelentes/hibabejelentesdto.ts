@@ -1,14 +1,10 @@
 export class HibabejelentesDto {
-  Ajanlatkereskod: number;
-  Ugynoknev: string;
+  Hibabejelenteskod: number;
   Nev: string;
-  Cim: string;
   Email: string;
   Telefonszam: string;
-  Havifogyasztaskwh: string;
-  Haviszamlaft: string;
-  Napelemekteljesitmenyekw: string;
-  Megjegyzes: string;
+  Telepitesicim: string;
+  Hiba: string;
   Letrehozva: any;
   Letrehozta: string;
   Modositva: any;

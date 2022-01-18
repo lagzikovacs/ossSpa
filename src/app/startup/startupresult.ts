@@ -57,4 +57,7 @@ export class StartupResult {
   Volume_Reszletek: ColumnSettings[];
   Ugyfelterlog_Grid: ColumnSettings[];
   Ugyfelterlog_Reszletek: ColumnSettings[];
+
+  Hibabejelentes_Grid: ColumnSettings[];
+  Hibabejelentes_Reszletek: ColumnSettings[];
 }

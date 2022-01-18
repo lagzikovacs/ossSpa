@@ -28,6 +28,7 @@ import {KifizetesService} from '../kifizetes/kifizetes.service';
 import {DokumentumService} from '../dokumentum/dokumentum.service';
 import {UgyfelterlogService} from '../ugyfelterlog/ugyfelterlog.service';
 import {TevekenysegService} from '../primitiv/tevekenyseg/tevekenyseg.service';
+import {HibabejelentesService} from '../hibabejelentes/hibabejelentes.service';
 
 @Injectable({
   providedIn: 'root'
@@ -60,7 +61,8 @@ export class StartupService {
               private _kifizetesservice: KifizetesService,
               private _dokumentumservice: DokumentumService,
               private _volumeservice: VolumeService,
-              private _ugyfelterlogservice: UgyfelterlogService) { }
+              private _ugyfelterlogservice: UgyfelterlogService,
+              private _hibabejelentesservice: HibabejelentesService) { }
 
   public Get(): Promise<StartupResult> {
     return this._httpClient.post<StartupResult>(
@@ -154,6 +156,9 @@ export class StartupService {
         this._volumeservice.ReszletekSettings = res3.Volume_Reszletek;
         this._ugyfelterlogservice.GridSettings = res3.Ugyfelterlog_Grid;
         this._ugyfelterlogservice.ReszletekSettings = res3.Ugyfelterlog_Reszletek;
+
+        this._hibabejelentesservice.GridSettings = res3.Hibabejelentes_Grid;
+        this._hibabejelentesservice.ReszletekSettings = res3.Hibabejelentes_Reszletek;
 
         this._logonservice.SzerepkorKivalasztva = true;
 

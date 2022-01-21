@@ -9,6 +9,9 @@ import {environment} from '../../../environments/environment';
 import {AjanlatkeresParameter} from '../ajanlatkeresparameter';
 import {EgyMode} from '../../enums/egymode';
 import {rowanimation} from '../../animation/rowAnimation';
+import {LogonService} from '../../logon/logon.service';
+import {JogKod} from '../../enums/jogkod';
+import {propCopy} from '../../tools/propCopy';
 
 @Component({
   selector: 'app-ajanlatkeres-list',
@@ -28,6 +31,7 @@ export class AjanlatkeresListComponent implements OnDestroy {
   fp = new AjanlatkeresParameter(0, environment.lapmeret);
   OsszesRekord = 0;
   elsokereses = true;
+  jog = false;
   eppFrissit = false;
 
   Dto = new Array<AjanlatkeresDto>();
@@ -38,8 +42,11 @@ export class AjanlatkeresListComponent implements OnDestroy {
 
   ajanlatkeresservice: AjanlatkeresService;
 
-  constructor(private _errorservice: ErrorService,
+  constructor(private _logonservice: LogonService,
+              private _errorservice: ErrorService,
               ajanlatkeresservice: AjanlatkeresService) {
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.AJANLATKERESMOD]);
+
     this.ajanlatkeresservice = ajanlatkeresservice;
   }
 
@@ -102,6 +109,48 @@ export class AjanlatkeresListComponent implements OnDestroy {
   doNav(i: number) {
     this.bbmode = 0;
     this.egymode = i;
+  }
+
+  doUjtetel() {
+    this.tabla.ujtetelstart();
+  }
+  onUjtetelkesz(dto: AjanlatkeresDto) {
+    if (dto !== null) {
+      this.Dto.unshift(dto);
+    }
+    this.tabla.ujtetelstop();
+  }
+  onModositaskesz(dto: AjanlatkeresDto) {
+    if (dto !== null) {
+      propCopy(dto, this.Dto[this.DtoSelectedIndex]);
+    }
+    this.bbmode = 1;
+    this.egymode = 0;
+  }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
+
+      this.ajanlatkeresservice.Delete(this.Dto[this.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
+
+          this.Dto.splice(this.DtoSelectedIndex, 1);
+          this.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.tabla.clearselections();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.bbmode = 1;
+      this.egymode = 0;
+    }
   }
 
   ngOnDestroy() {

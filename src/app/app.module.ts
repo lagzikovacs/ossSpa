@@ -186,6 +186,8 @@ import { BizonylatProjektjeComponent } from './bizonylat/bizonylat-projektje/biz
 import { FooldalComponent } from './fooldal/fooldal.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import {HibabejelentesListComponent} from './hibabejelentes/hibabejelentes-list/hibabejelentes-list.component';
+import { AjanlatkeresSzerkesztesComponent } from './ajanlatkeres/ajanlatkeres-szerkesztes/ajanlatkeres-szerkesztes.component';
+import { AutofocusDirective } from './directives/autofocus.directive';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -397,6 +399,8 @@ if (environment.production) {
     FooldalComponent,
     NavbarComponent,
     HibabejelentesListComponent,
+    AjanlatkeresSzerkesztesComponent,
+    AutofocusDirective,
   ],
   imports: [
     BrowserModule,

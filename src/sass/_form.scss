@@ -84,6 +84,12 @@
   background-color: $keretszin;
 }
 
+.editform-text {
+  @extend %input-base;
+
+  background-color: $hatterszin;
+  color: $szovegszin;
+}
 
 /*.ng-valid:not(form) {*/
 /*border-left: 0.3em solid #56ac96;*/

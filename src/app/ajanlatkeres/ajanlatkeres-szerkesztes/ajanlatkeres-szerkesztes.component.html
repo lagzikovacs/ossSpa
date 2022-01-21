@@ -1,0 +1,48 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5 *ngIf="uj">Új {{ajanlatkeresservice.cim | lowercase}}</h5>
+  <h5 *ngIf="!uj">{{ajanlatkeresservice.cim}} módosítása</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <div class="editform-row">
+      <div class="editform-label">Név</div>
+      <input type="text" class="editform-edit ugyfelwidth" formControlName="nev">
+    </div>
+    <div class="editform-row">
+      <div class="editform-label">Cím</div>
+      <input type="text" class="editform-edit cimwidth" formControlName="cim">
+    </div>
+    <div class="editform-row">
+      <div class="editform-label">Email</div>
+      <input type="text" class="editform-edit emailwidth" formControlName="email">
+    </div>
+    <div class="editform-row">
+      <div class="editform-label">Telefonszám</div>
+      <input type="text" class="editform-edit em10width" formControlName="telefonszam">
+    </div>
+
+    <div class="editform-row">
+      <div class="editform-label">Havi fogyasztás, kWh</div>
+      <input type="number" class="editform-number" formControlName="havifogyasztaskwh">
+    </div>
+    <div class="editform-row">
+      <div class="editform-label">vagy Havi számla, Ft</div>
+      <input type="number" class="editform-number" formControlName="haviszamlaft">
+    </div>
+    <div class="editform-row">
+      <div class="editform-label">vagy Napelemek teljesítménye, kW</div>
+      <input type="number" class="editform-number" formControlName="napelemekteljesitmenyekw">
+    </div>
+
+    <div class="editform-row">
+      <div class="editform-label">Megjegyzés</div>
+      <!--<input type="text" class="editform-edit em100width" formControlName="megjegyzes">-->
+      <textarea rows="3" class="editform-text cimwidth" formControlName="megjegyzes"></textarea>
+    </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
+    </div>
+  </form>
+</div>

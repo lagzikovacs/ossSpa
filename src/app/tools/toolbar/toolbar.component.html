@@ -1,9 +1,13 @@
 <div class="toolbar">
+  <select *ngIf="visStatusz" #Statusz type="text" class="toolcombo">
+    <option *ngFor="let sz of StatuszSzurok; let i = index" [value]="i" [selected]="i == _statusz">{{sz}}</option>
+  </select>
+
   <select [disabled]="!enKereses" #Szempont type="text" class="toolcombo">
     <option *ngFor="let sz of Szurok; let i = index" [value]="i" [selected]="i == _szempont">{{sz}}</option>
   </select>
-
   <input [disabled]="!enKereses" #Minta type="text" class="tooledit em10width">
+
   <button [disabled]="!enKereses" (click)="doKereses()" class="toolbutton" type="button">
     <i class="fa fa-search" aria-hidden="true"></i>
   </button>

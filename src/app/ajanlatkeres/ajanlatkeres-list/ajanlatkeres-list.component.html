@@ -1,6 +1,7 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>{{ajanlatkeresservice.cim}}</h5>
-  <app-toolbar [Szurok]="szurok" [(szempont)]="szempont" [(minta)]="minta" (Kereses)="onKereses()"
+  <app-toolbar [visStatusz]="true"
+               [Szurok]="szurok" [(szempont)]="szempont" [(minta)]="minta" (Kereses)="onKereses()"
                [visUj]="true" [enUj]="jog" (Uj)="doUjtetel()">
   </app-toolbar>
 

@@ -188,6 +188,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {HibabejelentesListComponent} from './hibabejelentes/hibabejelentes-list/hibabejelentes-list.component';
 import { AjanlatkeresSzerkesztesComponent } from './ajanlatkeres/ajanlatkeres-szerkesztes/ajanlatkeres-szerkesztes.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
+import {FelmeresListComponent} from './felmeres/felmeres-list/felmeres-list.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -205,6 +206,7 @@ const routes: Routes = [
   {path: 'irat', component: IratListComponent, canActivate: [RoleGuard]},
   {path: 'penztar', component: PenztarListComponent, canActivate: [RoleGuard]},
   {path: 'ajanlatkeres', component: AjanlatkeresListComponent, canActivate: [RoleGuard]},
+  {path: 'felmeres', component: FelmeresListComponent, canActivate: [RoleGuard]},
   {path: 'hibabejelentes', component: HibabejelentesListComponent, canActivate: [RoleGuard]},
   {path: 'ugyfelterlog', component: UgyfelterlogComponent, canActivate: [RoleGuard]},
 
@@ -384,6 +386,7 @@ if (environment.production) {
     AjanlatTablaComponent,
     HscrollDirective,
     SpinnerDirective,
+    AutofocusDirective,
     ParticioEmailComponent,
     BizonylatFuvarszamlaComponent,
     BizonylatFuvarszamlaUjComponent,
@@ -400,7 +403,7 @@ if (environment.production) {
     NavbarComponent,
     HibabejelentesListComponent,
     AjanlatkeresSzerkesztesComponent,
-    AutofocusDirective,
+    FelmeresListComponent,
   ],
   imports: [
     BrowserModule,

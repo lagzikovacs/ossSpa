@@ -12,6 +12,7 @@ export class TablaComponent implements OnDestroy {
   @Input() letoltes = false;
   @Input() nezet = false;
   @Input() enIdclick = true;
+  @Input() megjegyzesIs = false;
 
   @Input() ujTemplate: TemplateRef<any>;
   @Input() egyTemplate: TemplateRef<any>;

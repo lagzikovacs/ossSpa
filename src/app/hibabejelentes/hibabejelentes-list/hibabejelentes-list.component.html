@@ -1,17 +1,16 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>{{hibabejelentesservice.cim}}</h5>
-  <app-toolbar [Szurok]="szurok"
-               [(szempont)]="szempont"
-               [(minta)]="minta"
-               (Kereses)="onKereses()"
-               [visUj]="false">
+  <app-toolbar [StatuszSzurok]="statuszszurok" [(statusz)]="statusz" [visStatusz]="true"
+               [Szurok]="szurok" [(szempont)]="szempont" [(minta)]="minta" (Kereses)="onKereses()"
+               [visUj]="true" [enUj]="jog" (Uj)="doUjtetel()">
   </app-toolbar>
 
   <app-tabla #tabla
              [items]="Dto"
              [colsets]="hibabejelentesservice.GridSettings"
              (forid)="onId($event)"
-             [egyTemplate]="gridegy">
+             [egyTemplate]="gridegy"
+             [megjegyzesIs]="true">
   </app-tabla>
 
   <ng-template #gridegy>

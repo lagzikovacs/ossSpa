@@ -1,24 +1,24 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {AjanlatkeresService} from '../ajanlatkeres.service';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
-import {AjanlatkeresDto} from '../ajanlatkeresdto';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
-import {AjanlatkeresParameter} from '../ajanlatkeresparameter';
 import {EgyMode} from '../../enums/egymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {propCopy} from '../../tools/propCopy';
+import {FelmeresService} from '../felmeres.service';
+import {FelmeresParameter} from '../felmeresparameter';
+import {FelmeresDto} from '../felmeresdto';
 
 @Component({
-  selector: 'app-ajanlatkeres-list',
-  templateUrl: './ajanlatkeres-list.component.html',
+  selector: 'app-felmeres-list',
+  templateUrl: './felmeres-list.component.html',
   animations: [rowanimation]
 })
-export class AjanlatkeresListComponent implements OnDestroy {
+export class FelmeresListComponent implements OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: TablaComponent;
 
   statuszszurok = ['Mind', 'Csak a nyitottak'];
@@ -32,30 +32,30 @@ export class AjanlatkeresListComponent implements OnDestroy {
   szempont = 0;
   minta = '';
 
-  fp = new AjanlatkeresParameter(0, environment.lapmeret);
+  fp = new FelmeresParameter(0, environment.lapmeret);
   OsszesRekord = 0;
   elsokereses = true;
   jog = false;
   eppFrissit = false;
 
-  Dto = new Array<AjanlatkeresDto>();
+  Dto = new Array<FelmeresDto>();
   DtoSelectedIndex = -1;
 
   bbmode = 1;
   egymode = 1;
 
-  ajanlatkeresservice: AjanlatkeresService;
+  felmeresservice: FelmeresService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
-              ajanlatkeresservice: AjanlatkeresService) {
-    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.AJANLATKERESMOD]);
+              felmeresservice: FelmeresService) {
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.FELMERESMOD]);
 
-    this.ajanlatkeresservice = ajanlatkeresservice;
+    this.felmeresservice = felmeresservice;
   }
 
   onKereses() {
-    this.Dto = new Array<AjanlatkeresDto>();
+    this.Dto = new Array<FelmeresDto>();
     this.DtoSelectedIndex = -1;
     this.OsszesRekord = 0;
 
@@ -71,7 +71,7 @@ export class AjanlatkeresListComponent implements OnDestroy {
 
   onKeresesTovabb() {
     this.eppFrissit = true;
-    this.ajanlatkeresservice.Select(this.fp)
+    this.felmeresservice.Select(this.fp)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -118,13 +118,13 @@ export class AjanlatkeresListComponent implements OnDestroy {
   doUjtetel() {
     this.tabla.ujtetelstart();
   }
-  onUjtetelkesz(dto: AjanlatkeresDto) {
+  onUjtetelkesz(dto: FelmeresDto) {
     if (dto !== null) {
       this.Dto.unshift(dto);
     }
     this.tabla.ujtetelstop();
   }
-  onModositaskesz(dto: AjanlatkeresDto) {
+  onModositaskesz(dto: FelmeresDto) {
     if (dto !== null) {
       propCopy(dto, this.Dto[this.DtoSelectedIndex]);
     }
@@ -135,7 +135,7 @@ export class AjanlatkeresListComponent implements OnDestroy {
     if (ok) {
       this.eppFrissit = true;
 
-      this.ajanlatkeresservice.Delete(this.Dto[this.DtoSelectedIndex])
+      this.felmeresservice.Delete(this.Dto[this.DtoSelectedIndex])
         .then(res => {
           if (res.Error != null) {
             throw res.Error;

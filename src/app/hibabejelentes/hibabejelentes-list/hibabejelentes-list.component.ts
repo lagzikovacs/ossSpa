@@ -9,6 +9,9 @@ import {rowanimation} from '../../animation/rowAnimation';
 import {HibabejelentesService} from '../hibabejelentes.service';
 import {HibabejelentesParameter} from '../hibabejelentesparameter';
 import {HibabejelentesDto} from '../hibabejelentesdto';
+import {propCopy} from '../../tools/propCopy';
+import {JogKod} from '../../enums/jogkod';
+import {LogonService} from '../../logon/logon.service';
 
 @Component({
   selector: 'app-hibabejelentes-list',
@@ -18,15 +21,20 @@ import {HibabejelentesDto} from '../hibabejelentesdto';
 export class HibabejelentesListComponent implements OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: TablaComponent;
 
+  statuszszurok = ['Mind', 'Csak a nyitottak'];
+  statusz = 1;
+
   szurok = ['Id', 'Név', 'Email', 'Telefonszám', 'Telepítési cím'];
   szempontok = [
     Szempont.Kod, Szempont.Nev, Szempont.Email, Szempont.Telefonszam, Szempont.Cim
   ];
   szempont = 0;
   minta = '';
+
   fp = new HibabejelentesParameter(0, environment.lapmeret);
   OsszesRekord = 0;
   elsokereses = true;
+  jog = false;
   eppFrissit = false;
 
   Dto = new Array<HibabejelentesDto>();
@@ -37,8 +45,11 @@ export class HibabejelentesListComponent implements OnDestroy {
 
   hibabejelentesservice: HibabejelentesService;
 
-  constructor(private _errorservice: ErrorService,
+  constructor(private _logonservice: LogonService,
+              private _errorservice: ErrorService,
               hibabejelentesservice: HibabejelentesService) {
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.HIBABEJELENTESMOD]);
+
     this.hibabejelentesservice = hibabejelentesservice;
   }
 
@@ -103,6 +114,48 @@ export class HibabejelentesListComponent implements OnDestroy {
   doNav(i: number) {
     this.bbmode = 0;
     this.egymode = i;
+  }
+
+  doUjtetel() {
+    this.tabla.ujtetelstart();
+  }
+  onUjtetelkesz(dto: HibabejelentesDto) {
+    if (dto !== null) {
+      this.Dto.unshift(dto);
+    }
+    this.tabla.ujtetelstop();
+  }
+  onModositaskesz(dto: HibabejelentesDto) {
+    if (dto !== null) {
+      propCopy(dto, this.Dto[this.DtoSelectedIndex]);
+    }
+    this.bbmode = 1;
+    this.egymode = 0;
+  }
+  onTorles(ok: boolean) {
+    if (ok) {
+      this.eppFrissit = true;
+
+      this.hibabejelentesservice.Delete(this.Dto[this.DtoSelectedIndex])
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
+
+          this.Dto.splice(this.DtoSelectedIndex, 1);
+          this.DtoSelectedIndex = -1;
+
+          this.eppFrissit = false;
+          this.tabla.clearselections();
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.bbmode = 1;
+      this.egymode = 0;
+    }
   }
 
   ngOnDestroy() {

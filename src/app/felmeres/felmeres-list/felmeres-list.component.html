@@ -1,5 +1,5 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
-  <h5>{{ajanlatkeresservice.cim}}</h5>
+  <h5>{{felmeresservice.cim}}</h5>
   <app-toolbar [StatuszSzurok]="statuszszurok" [(statusz)]="statusz" [visStatusz]="true"
                [Szurok]="szurok" [(szempont)]="szempont" [(minta)]="minta" (Kereses)="onKereses()"
                [visUj]="true" [enUj]="jog" (Uj)="doUjtetel()">
@@ -7,7 +7,7 @@
 
   <app-tabla #tabla
              [items]="Dto"
-             [colsets]="ajanlatkeresservice.GridSettings"
+             [colsets]="felmeresservice.GridSettings"
              (forid)="onId($event)"
              [ujTemplate]="griduj"
              [egyTemplate]="gridegy"

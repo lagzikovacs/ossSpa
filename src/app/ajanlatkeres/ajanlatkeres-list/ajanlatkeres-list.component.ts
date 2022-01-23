@@ -43,7 +43,7 @@ export class AjanlatkeresListComponent implements OnDestroy {
   DtoSelectedIndex = -1;
 
   bbmode = 1;
-  egymode = 1;
+  egymode = 0;
 
   ajanlatkeresservice: AjanlatkeresService;
 
@@ -103,13 +103,8 @@ export class AjanlatkeresListComponent implements OnDestroy {
   }
 
   onId(i: number) {
-    if (i !== this.DtoSelectedIndex) {
-      this.bbmode = 0;
-      this.egymode = 1;
-    } else {
-      this.bbmode = 1;
-      this.egymode = 0;
-    }
+    this.bbmode = 1;
+    this.egymode = 0;
 
     this.DtoSelectedIndex = i;
   }
@@ -164,11 +159,8 @@ export class AjanlatkeresListComponent implements OnDestroy {
   zarasnyitas() {
     this.eppFrissit = true;
 
-    console.log(this.Dto[this.DtoSelectedIndex].Nyitott);
     const DtoEdited = deepCopy(this.Dto[this.DtoSelectedIndex]);
-    console.log(DtoEdited.Nyitott);
     DtoEdited.Nyitott = !DtoEdited.Nyitott;
-    console.log(DtoEdited.Nyitott);
 
     this.ajanlatkeresservice.Update(DtoEdited)
       .then(res => {

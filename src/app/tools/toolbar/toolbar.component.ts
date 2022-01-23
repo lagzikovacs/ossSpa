@@ -39,11 +39,11 @@ export class ToolbarComponent implements OnDestroy  {
 
 
   doStatuszChange(event) {
-    this._statusz = event.target.value;
+    this._statusz = parseInt(event.target.value, 10);
     this.statuszChange.emit(this._statusz);
   }
   doSzempontChange(event) {
-    this._szempont = event.target.value;
+    this._szempont = parseInt(event.target.value, 10);
     this.szempontChange.emit(this._szempont);
   }
   doMintaChange(event) {

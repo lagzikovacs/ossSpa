@@ -67,7 +67,7 @@ export class AjanlatTetelComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.updatedto();
-    
+
     this.eventTetelKesz.emit(this.item);
   }
   cancel() {

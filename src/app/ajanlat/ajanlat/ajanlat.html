@@ -1,51 +1,40 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>Új ajánlat</h5>
 
-    <div class="editform-row">
-        <div class="editform-label">Érvényes</div>
-        <input type="date" class="editform-date" id="ervenyes"
-               [(ngModel)]="AjanlatErvenyes" name="ervenyes">
-    </div>
-
+  <div [formGroup]="formFej" autocomplete="off">
     <div class="editform-row">
       <div class="editform-row-block">
+        <div class="editform-label">Érvényes</div>
+        <input type="date" class="editform-date" formControlName="ervenyes">
+      </div>
+
+      <div class="editform-row-block">
         <div class="editform-label">Szüks. áramerősség</div>
-        <input type="text" class="editform-edit em6width" appAutofocus id="szuksaram"
-               maxlength="20" required autocomplete="off"
-               [(ngModel)]="AjanlatParam.SzuksegesAramerosseg" name="szuksaram">
+        <input type="text" class="editform-edit em6width" appAutofocus formControlName="szuksaram">
       </div>
 
       <div class="editform-row-block">
         <div class="editform-label">Tájolás</div>
-        <input type="text" class="editform-edit em6width" id="tajolas"
+        <input type="text" class="editform-edit em6width" formControlName="tajolas"
                maxlength="20" required autocomplete="off"
                [(ngModel)]="AjanlatParam.Tajolas" name="tajolas">
       </div>
 
       <div class="editform-row-block">
         <div class="editform-label">Termelés</div>
-        <input type="number" class="editform-number" id="termeles"
-               required
-               [(ngModel)]="AjanlatParam.Termeles" name="termeles">
+        <input type="number" class="editform-number" formControlName="termeles">
       </div>
     </div>
 
     <div class="editform-row">
         <div class="editform-label">Megjegyzés (tárgy)</div>
-        <input type="text" class="editform-edit megjegyzeswidth" id="megjegyzes"
-               maxlength="200" autocomplete="off"
-               [(ngModel)]="AjanlatParam.Megjegyzes" name="megjegyzes">
+        <input type="text" class="editform-edit megjegyzeswidth" formControlName="megjegyzes">
     </div>
 
     <div class="editform-row">
-        <input type="text" class="editform-number" id="netto"
-               disabled [(ngModel)]="AjanlatParam.Netto">
-
-        <input type="text" class="editform-number" id="afa"
-               disabled [(ngModel)]="AjanlatParam.Afa">
-
-        <input type="text" class="editform-number" id="brutto"
-               disabled [(ngModel)]="AjanlatParam.Brutto">
+        <input type="number" class="editform-number" formControlName="netto">
+        <input type="number" class="editform-number" formControlName="afa">
+        <input type="number" class="editform-number" formControlName="brutto">
     </div>
 
     <div class="editform-row">
@@ -66,5 +55,6 @@
       <button class="toolbutton okbutton" type="button" (click)="onSubmit()">Ok</button>
       <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
+  </div>
 </div>
 

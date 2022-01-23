@@ -57,6 +57,8 @@ export enum Szempont {
   Ceg = 56,
   Beosztas = 57,
   Egyeblink = 58,
-  Ajanlo = 59
+  Ajanlo = 59,
+
+  Projekt = 60,
 }
 

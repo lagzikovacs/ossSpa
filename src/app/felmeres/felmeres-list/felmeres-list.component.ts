@@ -1,4 +1,4 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import {ErrorService} from '../../tools/errorbox/error.service';
@@ -18,8 +18,11 @@ import {FelmeresDto} from '../felmeresdto';
   templateUrl: './felmeres-list.component.html',
   animations: [rowanimation]
 })
-export class FelmeresListComponent implements OnDestroy {
+export class FelmeresListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: TablaComponent;
+
+  @Input() csakProjekt = false;
+  @Input() Projektkod = 0;
 
   statuszszurok = ['Mind', 'Csak a nyitottak'];
   statusz = 1;
@@ -54,6 +57,12 @@ export class FelmeresListComponent implements OnDestroy {
     this.felmeresservice = felmeresservice;
   }
 
+  ngOnInit(): void {
+    if (this.csakProjekt) {
+      this.onKereses();
+    }
+  }
+
   onKereses() {
     this.Dto = new Array<FelmeresDto>();
     this.DtoSelectedIndex = -1;
@@ -63,6 +72,9 @@ export class FelmeresListComponent implements OnDestroy {
     this.fp.rekordtol = 0;
     this.fp.fi = new Array<SzMT>();
     this.fp.fi.push(new SzMT(this.szempontok[this.szempont], this.minta));
+    if (this.csakProjekt) {
+      this.fp.fi.push(new SzMT(Szempont.Projekt, this.Projektkod));
+    }
 
     this.tabla.clearselections();
 

@@ -1,12 +1,12 @@
 <div class="toolbar">
-  <select *ngIf="visStatusz" #Statusz type="text" class="toolcombo">
+  <select *ngIf="visStatusz" #Statusz type="text" class="toolcombo" (change)="doStatuszChange($event)">
     <option *ngFor="let sz of StatuszSzurok; let i = index" [value]="i" [selected]="i == _statusz">{{sz}}</option>
   </select>
 
-  <select [disabled]="!enKereses" #Szempont type="text" class="toolcombo">
+  <select [disabled]="!enKereses" #Szempont type="text" class="toolcombo" (change)="doSzempontChange($event)">
     <option *ngFor="let sz of Szurok; let i = index" [value]="i" [selected]="i == _szempont">{{sz}}</option>
   </select>
-  <input [disabled]="!enKereses" #Minta type="text" class="tooledit em10width" appAutofocus>
+  <input [disabled]="!enKereses" #Minta type="text" class="tooledit em10width" appAutofocus [value]="_minta" (change)="doMintaChange($event)">
 
   <button [disabled]="!enKereses" (click)="doKereses()" class="toolbutton" type="button">
     <i class="fa fa-search" aria-hidden="true"></i>

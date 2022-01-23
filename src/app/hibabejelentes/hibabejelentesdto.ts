@@ -5,6 +5,7 @@ export class HibabejelentesDto {
   Telefonszam: string;
   Telepitesicim: string;
   Hiba: string;
+  Projektkod: number;
   Letrehozva: any;
   Letrehozta: string;
   Modositva: any;

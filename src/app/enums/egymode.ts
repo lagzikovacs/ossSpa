@@ -55,4 +55,7 @@ export enum EgyMode {
 
   VagolapIrathoz = 41,
   VagolapBizonylathoz = 42,
+
+  FelmeresProjekthez = 43,
+  HibabejelentesProjekthez = 44,
 }

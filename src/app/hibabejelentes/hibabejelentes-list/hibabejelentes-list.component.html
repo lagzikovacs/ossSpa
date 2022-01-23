@@ -13,6 +13,12 @@
              [megjegyzesIs]="true">
   </app-tabla>
 
+  <ng-template #griduj>
+    <app-hibabejelentes-szerkesztes [uj] = "true"
+                                  (eventSzerkeszteskesz)="onUjtetelkesz($event)">
+    </app-hibabejelentes-szerkesztes>
+  </ng-template>
+
   <ng-template #gridegy>
     <div class="alapkeret">
       <ng-container *ngIf="bbmode === 1">
@@ -20,8 +26,17 @@
           <button (click)="doNav(1)" class="toolbutton">
             <i class="fa fa-file" aria-hidden="true"></i>
           </button>
-          <button (click)="doNav(8)" class="toolbutton">
-            Projekt
+          <button [disabled]="!jog" (click)="doNav(2)" class="toolbutton">
+            <i class="fa fa-minus" aria-hidden="true"></i>
+          </button>
+          <button [disabled]="!jog" (click)="doNav(3)" class="toolbutton">
+            <i class="fa fa-edit" aria-hidden="true"></i>
+          </button>
+          <button (click)="doNav(8)" class="toolbutton" [disabled]="csakProjekt">
+            Korábbi projektek
+          </button>
+          <button (click)="doNav(100)" class="toolbutton" [disabled]="csakProjekt">
+            Projekthez rendelés
           </button>
         </div>
       </ng-container>

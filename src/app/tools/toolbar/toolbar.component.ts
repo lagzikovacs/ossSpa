@@ -4,7 +4,7 @@ import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Ou
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html'
 })
-export class ToolbarComponent implements AfterViewInit, OnDestroy  {
+export class ToolbarComponent implements OnDestroy  {
   @Input() StatuszSzurok: string[] = [];
   @Input() visStatusz = false;
 
@@ -19,48 +19,37 @@ export class ToolbarComponent implements AfterViewInit, OnDestroy  {
   @Output() Uj = new EventEmitter<void>();
   @Output() StopZoom = new EventEmitter<void>();
 
-  // azért kell a kétirányú adatkötés, h a szülő komponens újrainicializálja a toolbart
-  // pl. egy tétel szerkesztése után
-
   _statusz = 1;
-  @ViewChild('Statusz', {static: true}) StatuszCombobox: ElementRef;
-  @Input()
-  set statusz(value: number) {
+  @Input() set statusz(value: number) {
     this._statusz = value;
   }
   @Output() statuszChange: EventEmitter<number> = new EventEmitter();
 
-
   _szempont = 1;
-  @ViewChild('Szempont', {static: true}) SzempontCombobox: ElementRef;
-  @Input()
-  set szempont(value: number) {
+  @Input() set szempont(value: number) {
     this._szempont = value;
   }
   @Output() szempontChange: EventEmitter<number> = new EventEmitter();
 
-  @ViewChild('Minta', {static: true}) MintaTextBox: ElementRef;
-  @Input()
-  set minta(value: string) {
-    this.MintaTextBox.nativeElement.value = value;
+  _minta = '';
+  @Input() set minta(value: string) {
+    this._minta = value;
   }
   @Output() mintaChange: EventEmitter<string> = new EventEmitter();
 
-  ngAfterViewInit(): void {
-    this.StatuszCombobox.nativeElement.addEventListener('change', (event) => {
-      this._statusz = event.target.value;
-      this.statuszChange.emit(this._statusz);
-    });
 
-
-    this.SzempontCombobox.nativeElement.addEventListener('change', (event) => {
-      this._szempont = event.target.value;
-      this.szempontChange.emit(this._szempont);
-    });
-    this.MintaTextBox.nativeElement.addEventListener('keyup', () => {
-      this.mintaChange.emit(this.MintaTextBox.nativeElement.value);
-    });
+  doStatuszChange(event) {
+    this._statusz = event.target.value;
+    this.statuszChange.emit(this._statusz);
   }
+  doSzempontChange(event) {
+    this._szempont = event.target.value;
+    this.szempontChange.emit(this._szempont);
+  }
+  doMintaChange(event) {
+    this.mintaChange.emit(event.target.value);
+  }
+
 
   doKereses() {
     this.Kereses.emit();

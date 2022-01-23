@@ -58,6 +58,9 @@
           <button (click)="doNav(24)" class="toolbutton">
             Bizonylat és irat
           </button>
+          <button (click)="doNav(43)" class="toolbutton">
+            Felmérés
+          </button>
           <button (click)="doNav(23)" class="toolbutton">
             Iratminta
           </button>
@@ -66,6 +69,9 @@
           </button>
           <button (click)="doNav(25)" class="toolbutton">
             Számlázási rend
+          </button>
+          <button (click)="doNav(44)" class="toolbutton">
+            Hibabejentés
           </button>
         </div>
       </ng-container>
@@ -133,6 +139,19 @@
         <div [@rowanimation]>
           <app-projekt-jegyzet-list [Projektkod]="Dto[DtoSelectedIndex].Projektkod">
           </app-projekt-jegyzet-list>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="egymode === 43">
+        <div [@rowanimation]>
+          <app-felmeres-list [csakProjekt]="true" [Projektkod]="Dto[DtoSelectedIndex].Projektkod">
+          </app-felmeres-list>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 44">
+        <div [@rowanimation]>
+          <app-hibabejelentes-list [csakProjekt]="true" [Projektkod]="Dto[DtoSelectedIndex].Projektkod">
+          </app-hibabejelentes-list>
         </div>
       </ng-container>
     </div>

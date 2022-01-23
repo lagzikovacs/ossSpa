@@ -189,6 +189,8 @@ import {HibabejelentesListComponent} from './hibabejelentes/hibabejelentes-list/
 import { AjanlatkeresSzerkesztesComponent } from './ajanlatkeres/ajanlatkeres-szerkesztes/ajanlatkeres-szerkesztes.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import {FelmeresListComponent} from './felmeres/felmeres-list/felmeres-list.component';
+import { HibabejelentesSzerkesztesComponent } from './hibabejelentes/hibabejelentes-szerkesztes/hibabejelentes-szerkesztes.component';
+import { FelmeresSzerkesztesComponent } from './felmeres/felmeres-szerkesztes/felmeres-szerkesztes.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -404,6 +406,8 @@ if (environment.production) {
     HibabejelentesListComponent,
     AjanlatkeresSzerkesztesComponent,
     FelmeresListComponent,
+    HibabejelentesSzerkesztesComponent,
+    FelmeresSzerkesztesComponent,
   ],
   imports: [
     BrowserModule,

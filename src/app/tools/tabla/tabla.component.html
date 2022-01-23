@@ -42,7 +42,7 @@
         </td>
       </tr>
 
-      <tr *ngIf="item.Megjegyzes !== null && item.Megjegyzes !== '' && megjegyzesIs" (click)="clickforrow(i)" style="font-size: 90%" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
+      <tr *ngIf="item.Megjegyzes !== undefined && item.Megjegyzes !== null && item.Megjegyzes !== '' && megjegyzesIs" (click)="clickforrow(i)" style="font-size: 90%" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
         <td colspan="100">{{item.Megjegyzes}}</td>
       </tr>
 

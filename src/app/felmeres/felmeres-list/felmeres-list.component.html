@@ -15,9 +15,9 @@
   </app-tabla>
 
   <ng-template #griduj>
-    <app-ajanlatkeres-szerkesztes [uj] = "true"
+    <app-felmeres-szerkesztes [uj] = "true"
                               (eventSzerkeszteskesz)="onUjtetelkesz($event)">
-    </app-ajanlatkeres-szerkesztes>
+    </app-felmeres-szerkesztes>
   </ng-template>
 
   <ng-template #gridegy>
@@ -33,8 +33,11 @@
             <button [disabled]="!jog" (click)="doNav(3)" class="toolbutton">
               <i class="fa fa-edit" aria-hidden="true"></i>
             </button>
-            <button (click)="doNav(8)" class="toolbutton">
+            <button (click)="doNav(8)" class="toolbutton" [disabled]="csakProjekt">
               Projekt
+            </button>
+            <button (click)="doNav(100)" class="toolbutton" [disabled]="!csakProjekt">
+              Projekthez rendelés
             </button>
         </div>
       </ng-container>

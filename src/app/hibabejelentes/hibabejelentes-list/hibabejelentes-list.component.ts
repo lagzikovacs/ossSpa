@@ -1,4 +1,4 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
 import {ErrorService} from '../../tools/errorbox/error.service';
@@ -18,8 +18,11 @@ import {LogonService} from '../../logon/logon.service';
   templateUrl: './hibabejelentes-list.component.html',
   animations: [rowanimation]
 })
-export class HibabejelentesListComponent implements OnDestroy {
+export class HibabejelentesListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: TablaComponent;
+
+  @Input() csakProjekt = false;
+  @Input() Projektkod = 0;
 
   statuszszurok = ['Mind', 'Csak a nyitottak'];
   statusz = 1;
@@ -53,6 +56,12 @@ export class HibabejelentesListComponent implements OnDestroy {
     this.hibabejelentesservice = hibabejelentesservice;
   }
 
+  ngOnInit(): void {
+    if (this.csakProjekt) {
+      this.onKereses();
+    }
+  }
+
   onKereses() {
     this.Dto = new Array<HibabejelentesDto>();
     this.DtoSelectedIndex = -1;
@@ -62,6 +71,9 @@ export class HibabejelentesListComponent implements OnDestroy {
     this.fp.rekordtol = 0;
     this.fp.fi = new Array<SzMT>();
     this.fp.fi.push(new SzMT(this.szempontok[this.szempont], this.minta));
+    if (this.csakProjekt) {
+      this.fp.fi.push(new SzMT(Szempont.Projekt, this.Projektkod));
+    }
 
     this.tabla.clearselections();
 
@@ -75,8 +87,6 @@ export class HibabejelentesListComponent implements OnDestroy {
         if (res.Error != null) {
           throw res.Error;
         }
-
-        console.log(res.Result);
 
         if (this.elsokereses) {
           this.Dto = res.Result;

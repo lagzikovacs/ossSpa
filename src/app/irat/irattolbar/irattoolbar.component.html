@@ -2,7 +2,7 @@
   <select [disabled]="!enKereses" #Szempont type="text" class="toolcombo">
     <option *ngFor="let sz of szurok; let i = index" [value]="i" [selected]="i == _szempont">{{sz}}</option>
   </select>
-  <input [disabled]="!enKereses" #Minta type="text" class="tooledit em10width">
+  <input [disabled]="!enKereses" #Minta type="text" class="tooledit em10width" appAutofocus>
 
   <select [disabled]="!enKereses" #Szempont2 type="text" class="toolcombo">
     <option *ngFor="let sz of szurok2; let i = index" [value]="i" [selected]="i == _szempont2">{{sz}}</option>

@@ -8,7 +8,7 @@
   <select [disabled]="!enKereses" #Szempont type="text" class="toolcombo">
     <option *ngFor="let sz of Szurok; let i = index" [value]="i" [selected]="i == _szempont">{{sz}}</option>
   </select>
-  <input [disabled]="!enKereses" #Minta type="text" class="tooledit em10width">
+  <input [disabled]="!enKereses" #Minta type="text" class="tooledit em10width" appAutofocus>
 
 
   <button [disabled]="!enKereses" (click)="doKereses()" class="toolbutton" type="button">

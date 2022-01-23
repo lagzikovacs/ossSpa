@@ -6,7 +6,7 @@
     <div class="editform-card">
       <div class="editform-row">
         <div class="editform-label">Ügyfél</div>
-        <input type="text" class="editform-edit zoomedit ugyfelwidth" formControlName="ugyfelnev">
+        <input type="text" class="editform-edit zoomedit ugyfelwidth" appAutofocus formControlName="ugyfelnev">
         <button class="toolbutton" (click)="UgyfelZoom()" [disabled] = "SzerkesztesMode !== 1" type="button">...</button>
       </div>
 

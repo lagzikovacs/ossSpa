@@ -4,7 +4,7 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
     <div class="editform-row">
         <div class="editform-label">Fuvarszámla</div>
-        <input type="text" class="editform-edit zoomedit em15width" formControlName="bizonylatszam">
+        <input type="text" class="editform-edit zoomedit em15width" appAutofocus formControlName="bizonylatszam">
         <button class="toolbutton" type="button" (click)="BizonylatZoom()">...</button>
     </div>
 

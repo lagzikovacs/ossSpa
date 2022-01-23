@@ -16,7 +16,7 @@
 
   <ng-template #griduj>
     <app-ajanlatkeres-szerkesztes [uj] = "true"
-                              (eventSzerkeszteskesz)="onUjtetelkesz($event)">
+                                  (eventSzerkeszteskesz)="onUjtetelkesz($event)">
     </app-ajanlatkeres-szerkesztes>
   </ng-template>
 
@@ -35,6 +35,9 @@
             </button>
             <button (click)="doNav(8)" class="toolbutton">
               Projekt
+            </button>
+            <button (click)="zarasnyitas()" class="toolbutton">
+              Zárás/nyitás
             </button>
         </div>
       </ng-container>

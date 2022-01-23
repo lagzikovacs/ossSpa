@@ -12,6 +12,7 @@ import {rowanimation} from '../../animation/rowAnimation';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../enums/jogkod';
 import {propCopy} from '../../tools/propCopy';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-ajanlatkeres-list',
@@ -63,6 +64,9 @@ export class AjanlatkeresListComponent implements OnDestroy {
     this.fp.rekordtol = 0;
     this.fp.fi = new Array<SzMT>();
     this.fp.fi.push(new SzMT(this.szempontok[this.szempont], this.minta));
+    if (this.statusz === 1) {
+      this.fp.fi.push(new SzMT(Szempont.CsakNyitottak, true));
+    }
 
     this.tabla.clearselections();
 
@@ -155,6 +159,37 @@ export class AjanlatkeresListComponent implements OnDestroy {
       this.bbmode = 1;
       this.egymode = 0;
     }
+  }
+
+  zarasnyitas() {
+    this.eppFrissit = true;
+
+    console.log(this.Dto[this.DtoSelectedIndex].Nyitott);
+    const DtoEdited = deepCopy(this.Dto[this.DtoSelectedIndex]);
+    console.log(DtoEdited.Nyitott);
+    DtoEdited.Nyitott = !DtoEdited.Nyitott;
+    console.log(DtoEdited.Nyitott);
+
+    this.ajanlatkeresservice.Update(DtoEdited)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        return this.ajanlatkeresservice.Get(DtoEdited.Ajanlatkereskod);
+      })
+      .then(res1 => {
+        if (res1.Error != null) {
+          throw res1.Error;
+        }
+
+        propCopy(res1.Result[0], this.Dto[this.DtoSelectedIndex]);
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this._errorservice.Error = err;
+      });
   }
 
   ngOnDestroy() {

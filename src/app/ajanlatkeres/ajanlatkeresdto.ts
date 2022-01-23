@@ -9,6 +9,7 @@ export class AjanlatkeresDto {
   Haviszamlaft: string;
   Napelemekteljesitmenyekw: string;
   Megjegyzes: string;
+  Nyitott: boolean;
   Letrehozva: any;
   Letrehozta: string;
   Modositva: any;

@@ -28,32 +28,30 @@
 
   <ng-template #gridegy>
     <div class="alapkeret">
-      <ng-container *ngIf="bbmode === 1">
-        <div>
-          <button (click)="doNav(1)" class="toolbutton">
-            <i class="fa fa-file" aria-hidden="true"></i>
-          </button>
+      <div class="tabla-toolbar">
+        <button (click)="doNav(1)" class="toolbutton">
+          <i class="fa fa-file" aria-hidden="true"></i>
+        </button>
 
-          <button [disabled]="!jog" (click)="doNav(2)" class="toolbutton">
-            <i class="fa fa-minus" aria-hidden="true"></i>
-          </button>
-          <button [disabled]="!jog" (click)="doNav(3)" class="toolbutton">
-            <i class="fa fa-edit" aria-hidden="true"></i>
-          </button>
-          <button (click)="doNav(7)" class="toolbutton">
-            Csoport
-          </button>
-          <button (click)="doNav(8)" class="toolbutton">
-            Projekt
-          </button>
-          <button (click)="doNav(9)" class="toolbutton">
-            Ügyféltér link
-          </button>
-          <button (click)="doNav(10)" class="toolbutton">
-            vCard
-          </button>
-        </div>
-      </ng-container>
+        <button [disabled]="!jog" (click)="doNav(2)" class="toolbutton">
+          <i class="fa fa-minus" aria-hidden="true"></i>
+        </button>
+        <button [disabled]="!jog" (click)="doNav(3)" class="toolbutton">
+          <i class="fa fa-edit" aria-hidden="true"></i>
+        </button>
+        <button (click)="doNav(7)" class="toolbutton">
+          Csoport
+        </button>
+        <button (click)="doNav(8)" class="toolbutton">
+          Projekt
+        </button>
+        <button (click)="doNav(9)" class="toolbutton">
+          Ügyféltér link
+        </button>
+        <button (click)="doNav(10)" class="toolbutton">
+          vCard
+        </button>
+      </div>
 
       <ng-container *ngIf="egymode === 1">
         <div [@rowanimation]>

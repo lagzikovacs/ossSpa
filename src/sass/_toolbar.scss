@@ -3,6 +3,14 @@
   margin-bottom: 0.25em;
 }
 
+.tabla-toolbar {
+  border: $keretszin 1px solid;
+  padding-left: 0.5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.5em;
+}
+
 .toolbutton {
   @extend %input-base;
 

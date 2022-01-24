@@ -148,7 +148,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   }
   updatedto() {
     this.ComplexDtoEdited.Dto.Ugyfelnev = this.formFej.value['ugyfelnev'];
-    this.ComplexDtoEdited.Dto.Ugyfelcim = this.formFej.value['cim'];
+    // this.ComplexDtoEdited.Dto.Ugyfelcim = this.formFej.value['cim'];
     this.ComplexDtoEdited.Dto.Megjegyzesfej = this.formFej.value['megjegyzes'];
     this.ComplexDtoEdited.Dto.Penznem = this.formFej.value['penznem'];
     this.ComplexDtoEdited.Dto.Arfolyam = this.formFej.value['arfolyam'];
@@ -158,11 +158,9 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this.ComplexDtoEdited.Dto.Teljesiteskelte = moment(this.formFej.value['teljesiteskelte']).toISOString(true);
     this.ComplexDtoEdited.Dto.Fizetesihatarido = moment(this.formFej.value['fizetesihatarido']).toISOString(true);
 
-    this.ComplexDtoEdited.Dto.Netto = this.formFej.value['netto'];
-    this.ComplexDtoEdited.Dto.Afa = this.formFej.value['afa'];
-    this.ComplexDtoEdited.Dto.Brutto = this.formFej.value['brutto'];
-
-    console.log(this.ComplexDtoEdited.Dto);
+    // this.ComplexDtoEdited.Dto.Netto = this.formFej.value['netto'];
+    // this.ComplexDtoEdited.Dto.Afa = this.formFej.value['afa'];
+    // this.ComplexDtoEdited.Dto.Brutto = this.formFej.value['brutto'];
   }
 
   UgyfelZoom() {
@@ -306,8 +304,9 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
           this.ComplexDtoEdited = res.Result[0];
 
-          this.eppFrissit = false;
           this.tabla.clearselections();
+          this.updateform();
+          this.eppFrissit = false;
         })
         .catch(err => {
           this.eppFrissit = false;
@@ -342,9 +341,11 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
           this.ComplexDtoEdited = res.Result[0];
 
-          this.eppFrissit = false;
+
           this.tabla.egysem();
           this.SzerkesztesMode = BizonylatSzerkesztesMode.List;
+          this.updateform();
+          this.eppFrissit = false;
         })
         .catch(err => {
           this.eppFrissit = false;

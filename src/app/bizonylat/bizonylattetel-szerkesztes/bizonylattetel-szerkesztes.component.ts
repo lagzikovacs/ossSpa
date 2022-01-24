@@ -229,6 +229,7 @@ export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implement
           return this._termekdijservice.ZoomCheck(new TermekdijZoomParameter(this.TetelDtoEdited.Termekdijkod || 0,
             this.TetelDtoEdited.Termekdijkt || ''));
         } else {
+          this.TetelDtoEdited.Termekdijas = false;
           this.TetelDtoEdited.Termekdijkod = undefined;
           this.TetelDtoEdited.Termekdijkt = undefined;
           this.TetelDtoEdited.Termekdijmegnevezes = undefined;

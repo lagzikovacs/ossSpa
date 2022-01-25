@@ -34,14 +34,6 @@ export class IratEgyComponent implements OnDestroy {
   @Input() enProjekt = true;
   @Input() enUgyfel = true;
 
-  private _bbmode = 1;
-  @Output() bbmodeChange = new EventEmitter<number>();
-  @Input() get bbmode() { return this._bbmode; }
-  set bbmode(value: number) {
-    this._bbmode = value;
-    this.bbmodeChange.emit(this._bbmode);
-  }
-
   private _egymode = 0;
   @Output() egymodeChange = new EventEmitter<number>();
   @Input() get egymode() { return this._egymode; }
@@ -64,7 +56,6 @@ export class IratEgyComponent implements OnDestroy {
   }
 
   doNav(i: number) {
-    this.bbmode = 0;
     this.egymode = i;
   }
 
@@ -86,7 +77,6 @@ export class IratEgyComponent implements OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.bbmode = 1;
       this.egymode = 0;
     }
   }
@@ -97,7 +87,6 @@ export class IratEgyComponent implements OnDestroy {
       this.eventSzerkesztesutan.emit(this.Dto);
     }
 
-    this.bbmode = 1;
     this.egymode = 0;
   }
 

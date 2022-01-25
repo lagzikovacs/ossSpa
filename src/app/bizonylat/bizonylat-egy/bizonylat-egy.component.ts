@@ -29,14 +29,6 @@ export class BizonylatEgyComponent implements OnDestroy {
   @Output() eventSzerkesztesutan = new EventEmitter<BizonylatDto>();
   @Output() eventTorlesutan = new EventEmitter<void>();
 
-  private _bbmode = 1;
-  @Output() bbmodeChange = new EventEmitter<number>();
-  @Input() get bbmode() { return this._bbmode; }
-  set bbmode(value: number) {
-    this._bbmode = value;
-    this.bbmodeChange.emit(this._bbmode);
-  }
-
   private _egymode = 0;
   @Output() egymodeChange = new EventEmitter<number>();
   @Input() get egymode() { return this._egymode; }
@@ -107,7 +99,6 @@ export class BizonylatEgyComponent implements OnDestroy {
   }
 
   doNav(i: number) {
-    this.bbmode = 0;
     this.egymode = i;
   }
 
@@ -128,13 +119,11 @@ export class BizonylatEgyComponent implements OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.bbmode = 1;
       this.egymode = 0;
     }
   }
 
   onBizonylaterrolUtan(ok: boolean) {
-    this.bbmode = 1;
     this.egymode = 0;
   }
 
@@ -158,7 +147,6 @@ export class BizonylatEgyComponent implements OnDestroy {
   }
 
   onStornoMegsem() {
-    this.bbmode = 1;
     this.egymode = 0;
   }
 
@@ -167,23 +155,19 @@ export class BizonylatEgyComponent implements OnDestroy {
       propCopy(dto, this.Dto);
       this.eventSzerkesztesutan.emit(dto);
     } else {
-      this.bbmode = 1;
       this.egymode = 0;
     }
   }
 
   onKibocsatasUtanKeszpenzes(keszpenzes: boolean) {
     if (keszpenzes) {
-      this.bbmode = 1;
       this.egymode = BizonylatEgyMode.Penztar;
     } else {
-      this.bbmode = 1;
       this.egymode = 0;
     }
   }
 
   onPenztarUtan() {
-    this.bbmode = 1;
     this.egymode = 0;
   }
 
@@ -193,7 +177,6 @@ export class BizonylatEgyComponent implements OnDestroy {
       this.eventSzerkesztesutan.emit(dto);
     }
 
-    this.bbmode = 1;
     this.egymode = 0;
   }
 

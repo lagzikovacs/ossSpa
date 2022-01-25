@@ -1,56 +1,52 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
-  <ng-container *ngIf="bbmode === 1">
-    <div>
-      <button (click)="doNav(2)" class="toolbutton">
-        <i class="fa fa-file" aria-hidden="true"></i>
-      </button>
-      <button [disabled]="!torlesenabled()" (click)="doNav(5)" class="toolbutton">
-        <i class="fa fa-minus" aria-hidden="true"></i>
-      </button>
-      <button [disabled]="!modositasenabled()" (click)="doNav(6)" class="toolbutton">
-        <i class="fa fa-edit" aria-hidden="true"></i>
-      </button>
-
-
-      <button [disabled]="!kibocsatasenabled()" (click)="doNav(8)" class="toolbutton">
-        Kibocsátás
-      </button>
-      <button (click)="doNav(1)" class="toolbutton">
-        <i class="fa fa-print" aria-hidden="true"></i>Nyomtatás
-      </button>
-      <button [disabled]="!stornoenabled()" (click)="doNav(9)" class="toolbutton">
-        Storno
-      </button>
-      <button [disabled]="!penztarenabled()" (click)="doNav(10)" class="toolbutton">
-        Pénztár
-      </button>
-      <button [disabled]="!fuvarszamlaenabled()" (click)="doNav(16)" class="toolbutton">
-        Fuvarszámla
-      </button>
-      <button [disabled]="!kiszallitvaenabled()" (click)="doNav(12)" class="toolbutton">
-        Kiszállítva
-      </button>
-      <button (click)="doNav(3)" class="toolbutton">
-        Kifizetés
-      </button>
-      <button [disabled]="!kifizetesrendbenenabled()" (click)="doNav(11)" class="toolbutton">
-        Kifizetés rendben
-      </button>
-      <button (click)="doNav(4)" class="toolbutton">
-        Irat
-      </button>
-      <button (click)="doNav(7)" class="toolbutton">
-        Erről
-      </button>
-      <button [disabled]="!enProjekt" (click)="doNav(15)" class="toolbutton">
-        Projekt
-      </button>
-      <button (click)="doNav(17)" class="toolbutton">
-        <i class="fa fa-angle-right" aria-hidden="true"></i>
-        Vágólapra
-      </button>
-    </div>
-  </ng-container>
+  <div class="tabla-toolbar">
+    <button (click)="doNav(2)" class="toolbutton">
+      <i class="fa fa-file" aria-hidden="true"></i>
+    </button>
+    <button [disabled]="!torlesenabled()" (click)="doNav(5)" class="toolbutton">
+      <i class="fa fa-minus" aria-hidden="true"></i>
+    </button>
+    <button [disabled]="!modositasenabled()" (click)="doNav(6)" class="toolbutton">
+      <i class="fa fa-edit" aria-hidden="true"></i>
+    </button>
+    <button [disabled]="!kibocsatasenabled()" (click)="doNav(8)" class="toolbutton">
+      Kibocsátás
+    </button>
+    <button (click)="doNav(1)" class="toolbutton">
+      <i class="fa fa-print" aria-hidden="true"></i>Nyomtatás
+    </button>
+    <button [disabled]="!stornoenabled()" (click)="doNav(9)" class="toolbutton">
+      Storno
+    </button>
+    <button [disabled]="!penztarenabled()" (click)="doNav(10)" class="toolbutton">
+      Pénztár
+    </button>
+    <button [disabled]="!fuvarszamlaenabled()" (click)="doNav(16)" class="toolbutton">
+      Fuvarszámla
+    </button>
+    <button [disabled]="!kiszallitvaenabled()" (click)="doNav(12)" class="toolbutton">
+      Kiszállítva
+    </button>
+    <button (click)="doNav(3)" class="toolbutton">
+      Kifizetés
+    </button>
+    <button [disabled]="!kifizetesrendbenenabled()" (click)="doNav(11)" class="toolbutton">
+      Kifizetés rendben
+    </button>
+    <button (click)="doNav(4)" class="toolbutton">
+      Irat
+    </button>
+    <button (click)="doNav(7)" class="toolbutton">
+      Erről
+    </button>
+    <button [disabled]="!enProjekt" (click)="doNav(15)" class="toolbutton">
+      Projekt
+    </button>
+    <button (click)="doNav(17)" class="toolbutton">
+      <i class="fa fa-angle-right" aria-hidden="true"></i>
+      Vágólapra
+    </button>
+  </div>
 
 <!--  export enum BizonylatEgyMode {
   Blank = 0,

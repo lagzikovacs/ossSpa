@@ -30,7 +30,6 @@ export class MeListComponent implements OnInit, OnDestroy {
   Dto = new Array<MeDto>();
   DtoSelectedIndex = -1;
 
-  bbmode = 0;
   egymode = EgyMode.Reszletek;
 
   @Input() set maszk(value: string) {
@@ -101,12 +100,10 @@ export class MeListComponent implements OnInit, OnDestroy {
 
   onId(i: number) {
     this.DtoSelectedIndex = i;
-    this.bbmode = 1;
     this.egymode = 0;
   }
 
   doNav(i: number) {
-    this.bbmode = 0;
     this.egymode = i;
   }
 
@@ -123,7 +120,6 @@ export class MeListComponent implements OnInit, OnDestroy {
     if (dto !== null) {
       propCopy(dto, this.Dto[this.DtoSelectedIndex]);
     }
-    this.bbmode = 1;
     this.egymode = 0;
   }
   onTorles(ok: boolean) {
@@ -147,7 +143,6 @@ export class MeListComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.bbmode = 1;
       this.egymode = 0;
     }
   }

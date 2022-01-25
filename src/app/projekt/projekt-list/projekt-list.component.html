@@ -35,46 +35,44 @@
 
   <ng-template #gridegy>
     <div class="alapkeret">
-      <ng-container *ngIf="bbmode === 1">
-        <div>
-          <button (click)="doNav(1)" class="toolbutton">
-            <i class="fa fa-file" aria-hidden="true"></i>
-          </button>
+      <div class="tabla-toolbar">
+        <button (click)="doNav(1)" class="toolbutton">
+          <i class="fa fa-file" aria-hidden="true"></i>
+        </button>
 
-          <button [disabled]="!mod" (click)="doNav(2)" class="toolbutton">
-            <i class="fa fa-minus" aria-hidden="true"></i>
-          </button>
+        <button [disabled]="!mod" (click)="doNav(2)" class="toolbutton">
+          <i class="fa fa-minus" aria-hidden="true"></i>
+        </button>
 
-          <button [disabled]="!mod" (click)="doNav(3)" class="toolbutton">
-            <i class="fa fa-edit" aria-hidden="true"></i>
-          </button>
+        <button [disabled]="!mod" (click)="doNav(3)" class="toolbutton">
+          <i class="fa fa-edit" aria-hidden="true"></i>
+        </button>
 
-          <button [disabled]="!mod" (click)="doNav(19)" class="toolbutton">
-            Stsz
-          </button>
-          <button [disabled]="!mod" (click)="doNav(20)" class="toolbutton">
-            Műszaki állapot
-          </button>
-          <button (click)="doNav(24)" class="toolbutton">
-            Bizonylat és irat
-          </button>
-          <button (click)="doNav(43)" class="toolbutton">
-            Felmérés
-          </button>
-          <button (click)="doNav(23)" class="toolbutton">
-            Iratminta
-          </button>
-          <button (click)="doNav(26)" class="toolbutton">
-            Jegyzet
-          </button>
-          <button (click)="doNav(25)" class="toolbutton">
-            Számlázási rend
-          </button>
-          <button (click)="doNav(44)" class="toolbutton">
-            Hibabejentés
-          </button>
-        </div>
-      </ng-container>
+        <button [disabled]="!mod" (click)="doNav(19)" class="toolbutton">
+          Stsz
+        </button>
+        <button [disabled]="!mod" (click)="doNav(20)" class="toolbutton">
+          Műszaki állapot
+        </button>
+        <button (click)="doNav(24)" class="toolbutton">
+          Bizonylat és irat
+        </button>
+        <button (click)="doNav(43)" class="toolbutton">
+          Felmérés
+        </button>
+        <button (click)="doNav(23)" class="toolbutton">
+          Iratminta
+        </button>
+        <button (click)="doNav(26)" class="toolbutton">
+          Jegyzet
+        </button>
+        <button (click)="doNav(25)" class="toolbutton">
+          Számlázási rend
+        </button>
+        <button (click)="doNav(44)" class="toolbutton">
+          Hibabejentés
+        </button>
+      </div>
 
       <ng-container *ngIf="egymode === 1">
         <div [@rowanimation]>

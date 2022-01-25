@@ -22,7 +22,6 @@ export class VolumeListComponent implements OnInit, OnDestroy {
   Dto = new Array<VolumeDto>();
   DtoSelectedIndex = -1;
 
-  bbmode = 0;
   egymode = 1;
 
   volumeservice: VolumeService;
@@ -74,12 +73,10 @@ export class VolumeListComponent implements OnInit, OnDestroy {
 
   onId(i: number) {
     this.DtoSelectedIndex = i;
-    this.bbmode = 1;
     this.egymode = 0;
   }
 
   doNav(i: number) {
-    this.bbmode = 0;
     this.egymode = i;
   }
 

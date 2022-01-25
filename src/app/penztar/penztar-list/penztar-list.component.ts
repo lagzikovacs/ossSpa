@@ -29,7 +29,6 @@ export class PenztarListComponent implements OnInit, OnDestroy {
   Dto = new Array<PenztarDto>();
   DtoSelectedIndex = -1;
 
-  bbmode = 1;
   egymode = 13;
 
   penztarservice: PenztarService;
@@ -84,10 +83,8 @@ export class PenztarListComponent implements OnInit, OnDestroy {
 
   onId(i: number) {
     if (i !== this.DtoSelectedIndex) {
-      this.bbmode = 0;
       this.egymode = 13;
     } else {
-      this.bbmode = 1;
       this.egymode = 0;
     }
 
@@ -97,7 +94,6 @@ export class PenztarListComponent implements OnInit, OnDestroy {
   }
 
   doNav(i: number) {
-    this.bbmode = 0;
     this.egymode = i;
   }
 
@@ -115,7 +111,6 @@ export class PenztarListComponent implements OnInit, OnDestroy {
     if (dto !== null) {
       propCopy(dto, this.Dto[this.DtoSelectedIndex]);
     }
-    this.bbmode = 1;
     this.egymode = 0;
   }
   onTorles(ok: boolean) {
@@ -139,7 +134,6 @@ export class PenztarListComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.bbmode = 1;
       this.egymode = 0;
     }
   }

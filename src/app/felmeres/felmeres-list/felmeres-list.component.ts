@@ -44,7 +44,6 @@ export class FelmeresListComponent implements OnInit, OnDestroy {
   Dto = new Array<FelmeresDto>();
   DtoSelectedIndex = -1;
 
-  bbmode = 1;
   egymode = 1;
 
   felmeresservice: FelmeresService;
@@ -112,10 +111,8 @@ export class FelmeresListComponent implements OnInit, OnDestroy {
 
   onId(i: number) {
     if (i !== this.DtoSelectedIndex) {
-      this.bbmode = 0;
       this.egymode = 1;
     } else {
-      this.bbmode = 1;
       this.egymode = 0;
     }
 
@@ -123,7 +120,6 @@ export class FelmeresListComponent implements OnInit, OnDestroy {
   }
 
   doNav(i: number) {
-    this.bbmode = 0;
     this.egymode = i;
   }
 
@@ -140,7 +136,6 @@ export class FelmeresListComponent implements OnInit, OnDestroy {
     if (dto !== null) {
       propCopy(dto, this.Dto[this.DtoSelectedIndex]);
     }
-    this.bbmode = 1;
     this.egymode = 0;
   }
   onTorles(ok: boolean) {
@@ -164,7 +159,6 @@ export class FelmeresListComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.bbmode = 1;
       this.egymode = 0;
     }
   }

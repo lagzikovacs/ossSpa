@@ -42,7 +42,6 @@ export class AjanlatkeresListComponent implements OnDestroy {
   Dto = new Array<AjanlatkeresDto>();
   DtoSelectedIndex = -1;
 
-  bbmode = 1;
   egymode = 0;
 
   ajanlatkeresservice: AjanlatkeresService;
@@ -103,14 +102,12 @@ export class AjanlatkeresListComponent implements OnDestroy {
   }
 
   onId(i: number) {
-    this.bbmode = 1;
     this.egymode = 0;
 
     this.DtoSelectedIndex = i;
   }
 
   doNav(i: number) {
-    this.bbmode = 0;
     this.egymode = i;
   }
 
@@ -127,7 +124,6 @@ export class AjanlatkeresListComponent implements OnDestroy {
     if (dto !== null) {
       propCopy(dto, this.Dto[this.DtoSelectedIndex]);
     }
-    this.bbmode = 1;
     this.egymode = 0;
   }
   onTorles(ok: boolean) {
@@ -151,7 +147,6 @@ export class AjanlatkeresListComponent implements OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.bbmode = 1;
       this.egymode = 0;
     }
   }

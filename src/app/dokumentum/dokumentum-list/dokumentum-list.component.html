@@ -27,26 +27,24 @@
 
   <ng-template #gridegy>
     <div class="alapkeret">
-      <ng-container *ngIf="bbmode === 1">
-        <div>
-            <button (click)="doNav(1)" class="toolbutton">
-              <i class="fa fa-file" aria-hidden="true"></i>
-            </button>
-            <button (click)="doNav(2)" class="toolbutton">
-              <i class="fa fa-minus" aria-hidden="true"></i>
-            </button>
+      <div class="tabla-toolbar">
+          <button (click)="doNav(1)" class="toolbutton">
+            <i class="fa fa-file" aria-hidden="true"></i>
+          </button>
+          <button (click)="doNav(2)" class="toolbutton">
+            <i class="fa fa-minus" aria-hidden="true"></i>
+          </button>
 
-            <button (click)="doNav(39)" class="toolbutton">
-              Letöltés
-            </button>
-            <button (click)="doNav(38)" class="toolbutton">
-              Nézet
-            </button>
-            <button (click)="doNav(40)" class="toolbutton">
-              Letöltés PDF-ben
-            </button>
-        </div>
-      </ng-container>
+          <button (click)="doNav(39)" class="toolbutton">
+            Letöltés
+          </button>
+          <button (click)="doNav(38)" class="toolbutton">
+            Nézet
+          </button>
+          <button (click)="doNav(40)" class="toolbutton">
+            Letöltés PDF-ben
+          </button>
+      </div>
 
       <!--  export enum DokumentumEgyMode {
         Reszletek = 1,

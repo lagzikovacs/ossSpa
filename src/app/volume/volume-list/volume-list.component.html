@@ -13,17 +13,15 @@
   </app-tabla>
   <ng-template #gridegy>
     <div class="alapkeret">
-      <ng-container *ngIf="bbmode === 1">
-        <div>
-          <button (click)="doNav(1)" class="toolbutton">
-            <i class="fa fa-file" aria-hidden="true"></i>
-          </button>
+      <div class="tabla-toolbar">
+        <button (click)="doNav(1)" class="toolbutton">
+          <i class="fa fa-file" aria-hidden="true"></i>
+        </button>
 
-          <button (click)="doNav(17)" class="toolbutton">
-            Ellenőrzés
-          </button>
-        </div>
-      </ng-container>
+        <button (click)="doNav(17)" class="toolbutton">
+          Ellenőrzés
+        </button>
+      </div>
 
       <ng-container *ngIf="egymode === 1">
         <div [@rowanimation]>

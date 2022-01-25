@@ -26,7 +26,6 @@ export class BizonylatkapcsolatListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
 
-  egyirat_bbmode = 0;
   egyirat_egymode = 15; // dokumentum
 
   bizonylatkapcsolatservice: BizonylatkapcsolatService;
@@ -81,10 +80,8 @@ export class BizonylatkapcsolatListComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
 
         if (i !== OldIndex) {
-          this.egyirat_bbmode = 0;
           this.egyirat_egymode = 15;
         } else {
-          this.egyirat_bbmode = 1;
           this.egyirat_egymode = 0;
         }
 

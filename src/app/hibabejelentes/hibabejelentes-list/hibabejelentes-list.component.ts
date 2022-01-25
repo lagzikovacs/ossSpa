@@ -43,7 +43,6 @@ export class HibabejelentesListComponent implements OnInit, OnDestroy {
   Dto = new Array<HibabejelentesDto>();
   DtoSelectedIndex = -1;
 
-  bbmode = 1;
   egymode = 1;
 
   hibabejelentesservice: HibabejelentesService;
@@ -111,10 +110,8 @@ export class HibabejelentesListComponent implements OnInit, OnDestroy {
 
   onId(i: number) {
     if (i !== this.DtoSelectedIndex) {
-      this.bbmode = 0;
       this.egymode = 1;
     } else {
-      this.bbmode = 1;
       this.egymode = 0;
     }
 
@@ -122,7 +119,6 @@ export class HibabejelentesListComponent implements OnInit, OnDestroy {
   }
 
   doNav(i: number) {
-    this.bbmode = 0;
     this.egymode = i;
   }
 
@@ -139,7 +135,6 @@ export class HibabejelentesListComponent implements OnInit, OnDestroy {
     if (dto !== null) {
       propCopy(dto, this.Dto[this.DtoSelectedIndex]);
     }
-    this.bbmode = 1;
     this.egymode = 0;
   }
   onTorles(ok: boolean) {
@@ -163,7 +158,6 @@ export class HibabejelentesListComponent implements OnInit, OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.bbmode = 1;
       this.egymode = 0;
     }
   }

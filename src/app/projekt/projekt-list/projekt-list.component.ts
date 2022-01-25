@@ -49,7 +49,6 @@ export class ProjektListComponent implements OnDestroy {
   Dto = new Array<ProjektDto>();
   DtoSelectedIndex = -1;
 
-  bbmode = 1;
   egymode = 24;
 
   projektservice: ProjektService;
@@ -109,10 +108,8 @@ export class ProjektListComponent implements OnDestroy {
 
   onId(i: number) {
     if (i !== this.DtoSelectedIndex) {
-      this.bbmode = 0;
       this.egymode = 24;
     } else {
-      this.bbmode = 1;
       this.egymode = 0;
     }
 
@@ -120,7 +117,6 @@ export class ProjektListComponent implements OnDestroy {
   }
 
   doNav(i: number) {
-    this.bbmode = 0;
     this.egymode = i;
   }
 
@@ -137,7 +133,6 @@ export class ProjektListComponent implements OnDestroy {
     if (dto !== null) {
       propCopy(dto, this.Dto[this.DtoSelectedIndex]);
     }
-    this.bbmode = 1;
     this.egymode = 0;
   }
 
@@ -162,7 +157,6 @@ export class ProjektListComponent implements OnDestroy {
           this._errorservice.Error = err;
         });
     } else {
-      this.bbmode = 1;
       this.egymode = 0;
     }
   }
@@ -189,7 +183,6 @@ export class ProjektListComponent implements OnDestroy {
         propCopy(res1.Result[0], this.Dto[this.DtoSelectedIndex]);
 
         this.eppFrissit = false;
-        this.bbmode = 1;
         this.egymode = 0;
       })
       .catch(err => {
@@ -198,7 +191,6 @@ export class ProjektListComponent implements OnDestroy {
       });
   }
   onSegedCancel() {
-    this.bbmode = 1;
     this.egymode = 0;
   }
 

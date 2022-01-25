@@ -39,10 +39,8 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
 
   eppFrissit = false;
 
-  egybizonylat_bbmode = 0;
   egybizonylat_egymode = 2; // részletek
 
-  egyirat_bbmode = 0;
   egyirat_egymode = 15; // dokumentum
 
   projektkapcsolatservice: ProjektkapcsolatService;
@@ -113,10 +111,8 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
           this.eppFrissit = false;
 
           if (i !== OldIndex) {
-            this.egybizonylat_bbmode = 0;
             this.egybizonylat_egymode = 2;
           } else {
-            this.egybizonylat_bbmode = 1;
             this.egybizonylat_egymode = 0;
           }
 
@@ -140,10 +136,8 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
           this.eppFrissit = false;
 
           if (i !== OldIndex) {
-            this.egyirat_bbmode = 0;
             this.egyirat_egymode = 15;
           } else {
-            this.egyirat_bbmode = 1;
             this.egyirat_egymode = 0;
           }
 

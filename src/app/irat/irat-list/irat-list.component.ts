@@ -42,7 +42,6 @@ export class IratListComponent implements OnDestroy {
   Dto = new Array<IratDto>();
   DtoSelectedIndex = -1;
 
-  egyirat_bbmode = 0;
   egyirat_egymode = 15; // dokumentum
 
   iratservice: IratService;
@@ -110,10 +109,8 @@ export class IratListComponent implements OnDestroy {
 
   onId(i: number) {
     if (i !== this.DtoSelectedIndex) {
-      this.egyirat_bbmode = 0;
       this.egyirat_egymode = 15;
     } else {
-      this.egyirat_bbmode = 1;
       this.egyirat_egymode = 0;
     }
 

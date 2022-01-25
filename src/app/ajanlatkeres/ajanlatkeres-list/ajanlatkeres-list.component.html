@@ -33,7 +33,7 @@
             <i class="fa fa-edit" aria-hidden="true"></i>
           </button>
           <button (click)="doNav(8)" class="toolbutton">
-            Projekt
+            Projektek email alapján
           </button>
           <button (click)="zarasnyitas()" class="toolbutton">
             Zárás/nyitás
@@ -66,8 +66,8 @@
 
       <ng-container *ngIf="egymode === 8">
         <div [@rowanimation]>
-          <app-ajanlatkeres-projekt [Email]="Dto[DtoSelectedIndex].Email">
-          </app-ajanlatkeres-projekt>
+          <app-projekt-emailalapjan [Email]="Dto[DtoSelectedIndex].Email">
+          </app-projekt-emailalapjan>
         </div>
       </ng-container>
     </div>

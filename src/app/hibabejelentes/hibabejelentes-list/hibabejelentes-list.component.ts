@@ -12,6 +12,7 @@ import {HibabejelentesDto} from '../hibabejelentesdto';
 import {propCopy} from '../../tools/propCopy';
 import {JogKod} from '../../enums/jogkod';
 import {LogonService} from '../../logon/logon.service';
+import {deepCopy} from '../../tools/deepCopy';
 
 @Component({
   selector: 'app-hibabejelentes-list',
@@ -21,8 +22,8 @@ import {LogonService} from '../../logon/logon.service';
 export class HibabejelentesListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: TablaComponent;
 
-  @Input() csakProjekt = false;
-  @Input() Projektkod = 0;
+  @Input() ProjektBol = false;
+  @Input() ProjektDto;
 
   statuszszurok = ['Mind', 'Csak a nyitottak'];
   statusz = 1;
@@ -56,7 +57,7 @@ export class HibabejelentesListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this.csakProjekt) {
+    if (this.ProjektBol) {
       this.onKereses();
     }
   }
@@ -70,8 +71,11 @@ export class HibabejelentesListComponent implements OnInit, OnDestroy {
     this.fp.rekordtol = 0;
     this.fp.fi = new Array<SzMT>();
     this.fp.fi.push(new SzMT(this.szempontok[this.szempont], this.minta));
-    if (this.csakProjekt) {
-      this.fp.fi.push(new SzMT(Szempont.Projekt, this.Projektkod));
+    if (this.ProjektBol) {
+      this.fp.fi.push(new SzMT(Szempont.Projekt, this.ProjektDto.Projektkod));
+    }
+    if (this.statusz === 1) {
+      this.fp.fi.push(new SzMT(Szempont.CsakNyitottak, true));
     }
 
     this.tabla.clearselections();
@@ -160,6 +164,68 @@ export class HibabejelentesListComponent implements OnInit, OnDestroy {
     } else {
       this.egymode = 0;
     }
+  }
+
+  onProjekthezRendeles(projektkod: number) {
+    if (projektkod !== null) {
+      this.eppFrissit = true;
+
+      const DtoEdited = deepCopy(this.Dto[this.DtoSelectedIndex]);
+
+      DtoEdited.Projektkod = projektkod;
+
+      this.hibabejelentesservice.Update(DtoEdited)
+        .then(res => {
+          if (res.Error != null) {
+            throw res.Error;
+          }
+
+          return this.hibabejelentesservice.Get(DtoEdited.Hibabejelenteskod);
+        })
+        .then(res1 => {
+          if (res1.Error != null) {
+            throw res1.Error;
+          }
+
+          propCopy(res1.Result[0], this.Dto[this.DtoSelectedIndex]);
+          this.egymode = 0;
+          this.eppFrissit = false;
+        })
+        .catch(err => {
+          this.eppFrissit = false;
+          this._errorservice.Error = err;
+        });
+    } else {
+      this.egymode = 0;
+    }
+  }
+
+  zarasnyitas() {
+    this.eppFrissit = true;
+    this.egymode = 0;
+
+    const DtoEdited = deepCopy(this.Dto[this.DtoSelectedIndex]);
+
+    this.hibabejelentesservice.ZarasNyitas(DtoEdited)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        return this.hibabejelentesservice.Get(DtoEdited.Hibabejelenteskod);
+      })
+      .then(res1 => {
+        if (res1.Error != null) {
+          throw res1.Error;
+        }
+
+        propCopy(res1.Result[0], this.Dto[this.DtoSelectedIndex]);
+        this.eppFrissit = false;
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this._errorservice.Error = err;
+      });
   }
 
   ngOnDestroy() {

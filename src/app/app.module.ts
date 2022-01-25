@@ -51,7 +51,7 @@ import { CsoportFelhasznaloComponent } from './csoport/csoport-felhasznalo/csopo
 import { CsoportJogComponent } from './csoport/csoport-jog/csoport-jog.component';
 import { VolumeTesztComponent } from './volume/volume-teszt/volume-teszt.component';
 import { AjanlatkeresListComponent } from './ajanlatkeres/ajanlatkeres-list/ajanlatkeres-list.component';
-import { AjanlatkeresProjektComponent } from './ajanlatkeres/ajanlatkeres-projekt/ajanlatkeres-projekt.component';
+import { ProjektEmailalapjanComponent } from './projekt/projekt-emailalapjan/projekt-emailalapjan.component';
 import { ProjektTablaComponent } from './projekt/projekttabla/projekt-tabla.component';
 import { RiportComponent } from './riport/riport.component';
 import { KimenoszamlaComponent } from './riport/kimenoszamla/kimenoszamla.component';
@@ -191,6 +191,7 @@ import { AutofocusDirective } from './directives/autofocus.directive';
 import {FelmeresListComponent} from './felmeres/felmeres-list/felmeres-list.component';
 import { HibabejelentesSzerkesztesComponent } from './hibabejelentes/hibabejelentes-szerkesztes/hibabejelentes-szerkesztes.component';
 import { FelmeresSzerkesztesComponent } from './felmeres/felmeres-szerkesztes/felmeres-szerkesztes.component';
+import {ProjekthezRendelesComponent} from './projekt/projekthez-rendeles/projekthez-rendeles.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -294,7 +295,7 @@ if (environment.production) {
     CsoportJogComponent,
     VolumeTesztComponent,
     AjanlatkeresListComponent,
-    AjanlatkeresProjektComponent,
+    ProjektEmailalapjanComponent,
     ProjektTablaComponent,
     RiportComponent,
     KimenoszamlaComponent,
@@ -408,6 +409,7 @@ if (environment.production) {
     FelmeresListComponent,
     HibabejelentesSzerkesztesComponent,
     FelmeresSzerkesztesComponent,
+    ProjekthezRendelesComponent,
   ],
   imports: [
     BrowserModule,

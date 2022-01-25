@@ -6,6 +6,7 @@ export class HibabejelentesDto {
   Telepitesicim: string;
   Megjegyzes: string;
   Projektkod: number;
+  Nyitott: boolean;
   Letrehozva: any;
   Letrehozta: string;
   Modositva: any;

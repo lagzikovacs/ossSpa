@@ -1,17 +1,17 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Szempont} from '../../enums/szempont';
 import {SzMT} from '../../dtos/szmt';
-import {ProjektService} from '../../projekt/projekt.service';
-import {ProjektDto} from '../../projekt/projektdto';
+import {ProjektService} from '../projekt.service';
+import {ProjektDto} from '../projektdto';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {environment} from '../../../environments/environment';
-import {ProjektParameter} from '../../projekt/projektparameter';
+import {ProjektParameter} from '../projektparameter';
 
 @Component({
-  selector: 'app-ajanlatkeres-projekt',
-  templateUrl: './ajanlatkeres-projekt.component.html'
+  selector: 'app-projekt-emailalapjan',
+  templateUrl: './projekt-emailalapjan.component.html'
 })
-export class AjanlatkeresProjektComponent implements OnInit, OnDestroy {
+export class ProjektEmailalapjanComponent implements OnInit, OnDestroy {
   @Input() Email = '';
 
   pp = new ProjektParameter(0, environment.lapmeret);

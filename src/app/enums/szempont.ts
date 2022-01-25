@@ -61,5 +61,7 @@ export enum Szempont {
 
   Projekt = 60,
   CsakNyitottak = 61,
+
+  ProjekthezRendeles = 62,
 }
 

@@ -1,0 +1,16 @@
+<div class="alapkeret">
+  <h5>Projekthez rendelés</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <div class="editform-row">
+      <div class="editform-label">Projektkód</div>
+      <input type="number" class="editform-edit em6width" appAutofocus formControlName="projektkod">
+    </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
+    </div>
+  </form>
+</div>

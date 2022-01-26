@@ -2,10 +2,11 @@ export class FelmeresDto {
   Felmereskod: number;
   Ugynoknev: string;
   Nev: string;
-  Cim: string;
+  Telepitesicim: string;
   Email: string;
   Telefonszam: string;
   Megjegyzes: string;
+  Projektkod: number;
   Letrehozva: any;
   Letrehozta: string;
   Modositva: any;

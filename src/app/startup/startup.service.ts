@@ -29,6 +29,7 @@ import {DokumentumService} from '../dokumentum/dokumentum.service';
 import {UgyfelterlogService} from '../ugyfelterlog/ugyfelterlog.service';
 import {TevekenysegService} from '../primitiv/tevekenyseg/tevekenyseg.service';
 import {HibabejelentesService} from '../hibabejelentes/hibabejelentes.service';
+import {FelmeresService} from '../felmeres/felmeres.service';
 
 @Injectable({
   providedIn: 'root'
@@ -55,13 +56,15 @@ export class StartupService {
               private _projektjegyzetservice: ProjektjegyzetService,
               private _szamlazasirendservice: SzamlazasirendService,
               private _iratservice: IratService,
-              private _ajanlatkeresservice: AjanlatkeresService,
               private _penztarservice: PenztarService,
               private _penztartetelservice: PenztartetelService,
               private _kifizetesservice: KifizetesService,
               private _dokumentumservice: DokumentumService,
               private _volumeservice: VolumeService,
               private _ugyfelterlogservice: UgyfelterlogService,
+
+              private _ajanlatkeresservice: AjanlatkeresService,
+              private _felmeresservice: FelmeresService,
               private _hibabejelentesservice: HibabejelentesService) { }
 
   public Get(): Promise<StartupResult> {
@@ -140,9 +143,6 @@ export class StartupService {
         this._csoportservice.GridSettings = res3.Csoport_Grid;
         this._csoportservice.ReszletekSettings = res3.Csoport_Reszletek;
 
-        this._ajanlatkeresservice.GridSettings = res3.Ajanlatkeres_Grid;
-        this._ajanlatkeresservice.ReszletekSettings = res3.Ajanlatkeres_Reszletek;
-
         this._penztarservice.GridSettings = res3.Penztar_Grid;
         this._penztarservice.ReszletekSettings = res3.Penztar_Reszletek;
         this._penztartetelservice.GridSettings = res3.Penztartetel_Grid;
@@ -157,6 +157,10 @@ export class StartupService {
         this._ugyfelterlogservice.GridSettings = res3.Ugyfelterlog_Grid;
         this._ugyfelterlogservice.ReszletekSettings = res3.Ugyfelterlog_Reszletek;
 
+        this._ajanlatkeresservice.GridSettings = res3.Ajanlatkeres_Grid;
+        this._ajanlatkeresservice.ReszletekSettings = res3.Ajanlatkeres_Reszletek;
+        this._felmeresservice.GridSettings = res3.Felmeres_Grid;
+        this._felmeresservice.ReszletekSettings = res3.Felmeres_Reszletek;
         this._hibabejelentesservice.GridSettings = res3.Hibabejelentes_Grid;
         this._hibabejelentesservice.ReszletekSettings = res3.Hibabejelentes_Reszletek;
 

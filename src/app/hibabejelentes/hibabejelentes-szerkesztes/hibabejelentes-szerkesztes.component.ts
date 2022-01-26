@@ -36,9 +36,6 @@ export class HibabejelentesSzerkesztesComponent implements OnInit, OnDestroy {
       'cim': ['', [Validators.required, Validators.maxLength(100)]],
       'email': ['', [Validators.required, Validators.maxLength(100)]],
       'telefonszam': ['', [Validators.required, Validators.maxLength(100)]],
-      'havifogyasztaskwh': [0, [Validators.min(0)]],
-      'haviszamlaft': [0, [Validators.min(0)]],
-      'napelemekteljesitmenyekw': [0, [Validators.min(0)]],
       'megjegyzes': ['', [Validators.maxLength(200)]],
     });
   }

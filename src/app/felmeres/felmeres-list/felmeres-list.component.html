@@ -16,7 +16,9 @@
 
   <ng-template #griduj>
     <app-felmeres-szerkesztes [uj] = "true"
-                              (eventSzerkeszteskesz)="onUjtetelkesz($event)">
+                                    [ProjektBol]="ProjektBol"
+                                    [ProjektDto]="ProjektDto"
+                                    (eventSzerkeszteskesz)="onUjtetelkesz($event)">
     </app-felmeres-szerkesztes>
   </ng-template>
 
@@ -32,13 +34,13 @@
         <button [disabled]="!jog" (click)="doNav(3)" class="toolbutton">
           <i class="fa fa-edit" aria-hidden="true"></i>
         </button>
-        <button (click)="doNav(8)" class="toolbutton" [disabled]="csakProjekt">
-          Projekt
+        <button [disabled]="ProjektBol" (click)="doNav(8)" class="toolbutton">
+          Projektek email alapján
         </button>
-        <button (click)="doNav(100)" class="toolbutton" [disabled]="!csakProjekt">
+        <button [disabled]="ProjektBol" (click)="doNav(62)" class="toolbutton">
           Projekthez rendelés
         </button>
-        <button (click)="doNav(100)" class="toolbutton">
+        <button [disabled]="!jog" (click)="zarasnyitas()" class="toolbutton">
           Zárás/nyitás
         </button>
       </div>
@@ -60,10 +62,12 @@
       </ng-container>
       <ng-container *ngIf="egymode === 3">
         <div [@rowanimation]>
-          <app-ajanlatkeres-szerkesztes [uj]="false"
+          <app-felmeres-szerkesztes [uj] = "false"
+                                    [ProjektBol]="ProjektBol"
+                                    [ProjektDto]="ProjektDto"
                                     [DtoOriginal]="Dto[DtoSelectedIndex]"
                                     (eventSzerkeszteskesz)="onModositaskesz($event)">
-          </app-ajanlatkeres-szerkesztes>
+          </app-felmeres-szerkesztes>
         </div>
       </ng-container>
 

@@ -41,9 +41,6 @@ export class StartupResult {
   Csoport_Grid: ColumnSettings[];
   Csoport_Reszletek: ColumnSettings[];
 
-  Ajanlatkeres_Grid: ColumnSettings[];
-  Ajanlatkeres_Reszletek: ColumnSettings[];
-
   Penztar_Grid: ColumnSettings[];
   Penztar_Reszletek: ColumnSettings[];
   Penztartetel_Grid: ColumnSettings[];
@@ -58,6 +55,10 @@ export class StartupResult {
   Ugyfelterlog_Grid: ColumnSettings[];
   Ugyfelterlog_Reszletek: ColumnSettings[];
 
+  Ajanlatkeres_Grid: ColumnSettings[];
+  Ajanlatkeres_Reszletek: ColumnSettings[];
+  Felmeres_Grid: ColumnSettings[];
+  Felmeres_Reszletek: ColumnSettings[];
   Hibabejelentes_Grid: ColumnSettings[];
   Hibabejelentes_Reszletek: ColumnSettings[];
 }

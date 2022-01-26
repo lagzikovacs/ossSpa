@@ -1,1 +1,34 @@
-<p>felmeres-szerkesztes works!</p>
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5 *ngIf="uj">Új {{felmeresservice.cim | lowercase}}</h5>
+  <h5 *ngIf="!uj">{{felmeresservice.cim}} módosítása</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <div class="editform-row">
+      <div class="editform-label">Név</div>
+      <input type="text" class="editform-edit ugyfelwidth" appAutofocus formControlName="nev">
+    </div>
+    <div class="editform-row">
+      <div class="editform-label">Telepítési cím</div>
+      <input type="text" class="editform-edit cimwidth" formControlName="cim">
+    </div>
+    <div class="editform-row">
+      <div class="editform-label">Email</div>
+      <input type="text" class="editform-edit emailwidth" formControlName="email">
+    </div>
+    <div class="editform-row">
+      <div class="editform-label">Telefonszám</div>
+      <input type="text" class="editform-edit em10width" formControlName="telefonszam">
+    </div>
+
+    <div class="editform-row">
+      <div class="editform-label">Feladat</div>
+      <textarea rows="3" class="editform-text cimwidth" formControlName="megjegyzes"></textarea>
+    </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
+    </div>
+  </form>
+</div>

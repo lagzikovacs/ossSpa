@@ -59,6 +59,12 @@ export class FelmeresService {
       .toPromise();
   }
 
+  public ZarasNyitas(dto: FelmeresDto): Promise<NumberResult> {
+    return this._httpClient.post<NumberResult>(
+      this._controller + 'zarasnyitas', dto, this._logonservice.httpoptions())
+      .toPromise();
+  }
+
   public GetGridSettings(): Promise<ColumnSettingsResult> {
     return this._httpClient.post<ColumnSettingsResult>(
       this._controller + 'getgridsettings', '', this._logonservice.httpoptions())

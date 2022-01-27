@@ -58,4 +58,6 @@ export enum EgyMode {
 
   FelmeresProjekthez = 43,
   HibabejelentesProjekthez = 44,
+
+  Uzenet = 45,
 }

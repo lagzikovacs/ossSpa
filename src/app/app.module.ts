@@ -192,6 +192,7 @@ import {FelmeresListComponent} from './felmeres/felmeres-list/felmeres-list.comp
 import { HibabejelentesSzerkesztesComponent } from './hibabejelentes/hibabejelentes-szerkesztes/hibabejelentes-szerkesztes.component';
 import { FelmeresSzerkesztesComponent } from './felmeres/felmeres-szerkesztes/felmeres-szerkesztes.component';
 import {ProjekthezRendelesComponent} from './projekt/projekthez-rendeles/projekthez-rendeles.component';
+import { EgyszeruUzenetComponent } from './tools/egyszeru-uzenet/egyszeru-uzenet.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -410,6 +411,7 @@ if (environment.production) {
     HibabejelentesSzerkesztesComponent,
     FelmeresSzerkesztesComponent,
     ProjekthezRendelesComponent,
+    EgyszeruUzenetComponent,
   ],
   imports: [
     BrowserModule,

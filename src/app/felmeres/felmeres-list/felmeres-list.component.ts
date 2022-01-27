@@ -26,7 +26,7 @@ export class FelmeresListComponent implements OnInit, OnDestroy {
   @Input() ProjektDto;
 
   statuszszurok = ['Mind', 'Csak a nyitottak'];
-  statusz = 1;
+  @Input() statusz = 1;
 
   szurok = ['Id', 'Ügynök', 'Név', 'Cím', 'Email', 'Telefonszám'];
   szempontok = [
@@ -46,6 +46,8 @@ export class FelmeresListComponent implements OnInit, OnDestroy {
   DtoSelectedIndex = -1;
 
   egymode = 1;
+
+  uzenet = '';
 
   felmeresservice: FelmeresService;
 
@@ -181,7 +183,7 @@ export class FelmeresListComponent implements OnInit, OnDestroy {
             throw res.Error;
           }
 
-          return this.felmeresservice.Get(DtoEdited.Hibabejelenteskod);
+          return this.felmeresservice.Get(DtoEdited.Felmereskod);
         })
         .then(res1 => {
           if (res1.Error != null) {
@@ -203,7 +205,9 @@ export class FelmeresListComponent implements OnInit, OnDestroy {
 
   zarasnyitas() {
     this.eppFrissit = true;
-    this.egymode = 0;
+
+    this.uzenet = 'Kis türelmet...'
+    this.egymode = 45;
 
     const DtoEdited = deepCopy(this.Dto[this.DtoSelectedIndex]);
 
@@ -213,7 +217,7 @@ export class FelmeresListComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        return this.felmeresservice.Get(DtoEdited.Hibabejelenteskod);
+        return this.felmeresservice.Get(DtoEdited.Felmereskod);
       })
       .then(res1 => {
         if (res1.Error != null) {
@@ -221,6 +225,13 @@ export class FelmeresListComponent implements OnInit, OnDestroy {
         }
 
         propCopy(res1.Result[0], this.Dto[this.DtoSelectedIndex]);
+
+        if (this.Dto[this.DtoSelectedIndex].Nyitott) {
+          this.uzenet = 'A felmérés újra megnyitva!';
+        } else {
+          this.uzenet = 'A felmérés lezárva!';
+        }
+
         this.eppFrissit = false;
       })
       .catch(err => {

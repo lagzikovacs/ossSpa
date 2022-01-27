@@ -70,7 +70,7 @@
           Számlázási rend
         </button>
         <button (click)="doNav(44)" class="toolbutton">
-          Hibabejentés
+          Hibabejelentés
         </button>
       </div>
 
@@ -142,7 +142,7 @@
 
       <ng-container *ngIf="egymode === 43">
         <div [@rowanimation]>
-          <app-felmeres-list [ProjektBol]="true" [ProjektDto]="Dto[DtoSelectedIndex]">
+          <app-felmeres-list [ProjektBol]="true" [ProjektDto]="Dto[DtoSelectedIndex]" [statusz]="0">
           </app-felmeres-list>
         </div>
       </ng-container>

@@ -16,6 +16,7 @@ export class DokumentumListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: TablaComponent;
 
   @Input() Iratkod = -1;
+  @Input() mod = true;
 
   Dto = new Array<DokumentumDto>();
   DtoSelectedIndex = -1;

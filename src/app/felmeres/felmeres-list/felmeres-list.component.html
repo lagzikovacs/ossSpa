@@ -34,11 +34,14 @@
         <button [disabled]="!jog || !ProjektBol || !Dto[DtoSelectedIndex].Nyitott" (click)="doNav(3)" class="toolbutton">
           <i class="fa fa-edit" aria-hidden="true"></i>
         </button>
-        <button [disabled]="!jog" class="toolbutton">
+        <button [disabled]="!jog" (click)="doNav(15)" class="toolbutton">
           Dokumentumok
         </button>
+        <button [disabled]="!jog || ProjektBol || !Dto[DtoSelectedIndex].Nyitott" class="toolbutton">
+          Jelentés
+        </button>
         <button [disabled]="!jog || ProjektBol" (click)="zarasnyitas()" class="toolbutton">
-          {{Dto[DtoSelectedIndex].Nyitott ? 'Jelentés és zárás' : 'Újranyitás'}}
+          {{Dto[DtoSelectedIndex].Nyitott ? 'Zárás' : 'Újranyitás'}}
         </button>
       </div>
 
@@ -65,6 +68,13 @@
                                     [DtoOriginal]="Dto[DtoSelectedIndex]"
                                     (eventSzerkeszteskesz)="onModositaskesz($event)">
           </app-felmeres-szerkesztes>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 15">
+        <div [@rowanimation]>
+          <app-dokumentum-list [Iratkod]="Dto[DtoSelectedIndex].Iratkod"
+                               [mod]="!ProjektBol && Dto[DtoSelectedIndex].Nyitott">
+          </app-dokumentum-list>
         </div>
       </ng-container>
       <ng-container *ngIf="egymode === 45">

@@ -6,7 +6,10 @@ export class FelmeresDto {
   Email: string;
   Telefonszam: string;
   Megjegyzes: string;
+  Megjegyzes1: string;
   Projektkod: number;
+  Projektkapcsolatkod: number;
+  Iratkod: number;
   Inverter: string;
   Napelem: string;
   Nyitott: boolean;

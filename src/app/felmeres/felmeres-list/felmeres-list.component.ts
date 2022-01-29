@@ -47,6 +47,8 @@ export class FelmeresListComponent implements OnInit, OnDestroy {
 
   egymode = 1;
 
+  cim = '';
+  kerdes = '';
   uzenet = '';
 
   felmeresservice: FelmeresService;
@@ -169,46 +171,16 @@ export class FelmeresListComponent implements OnInit, OnDestroy {
     }
   }
 
-  onProjekthezRendeles(projektkod: number) {
-    if (projektkod !== null) {
-      this.eppFrissit = true;
+  zarasnyitas() {
+    this.cim = this.Dto[this.DtoSelectedIndex].Nyitott ? 'Felmérés zárása' : 'Felmérés újranyitása';
+    this.kerdes = this.Dto[this.DtoSelectedIndex].Nyitott ? 'Biztosan zárja ezt a felmérést?' : 'Biztosan újranyitja ezt a felmérést?';
+    this.uzenet = 'Kis türelmet...';
 
-      const DtoEdited = deepCopy(this.Dto[this.DtoSelectedIndex]);
-
-      DtoEdited.Projektkod = projektkod;
-
-      this.felmeresservice.Update(DtoEdited)
-        .then(res => {
-          if (res.Error != null) {
-            throw res.Error;
-          }
-
-          return this.felmeresservice.Get(DtoEdited.Felmereskod);
-        })
-        .then(res1 => {
-          if (res1.Error != null) {
-            throw res1.Error;
-          }
-
-          propCopy(res1.Result[0], this.Dto[this.DtoSelectedIndex]);
-          this.egymode = 0;
-          this.eppFrissit = false;
-        })
-        .catch(err => {
-          this.eppFrissit = false;
-          this._errorservice.Error = err;
-        });
-    } else {
-      this.egymode = 0;
-    }
+    this.egymode = 45;
   }
 
-  zarasnyitas() {
+  zarasnyitasOk() {
     this.eppFrissit = true;
-
-    this.uzenet = 'Kis türelmet...'
-    this.egymode = 45;
-
     const DtoEdited = deepCopy(this.Dto[this.DtoSelectedIndex]);
 
     this.felmeresservice.ZarasNyitas(DtoEdited)
@@ -238,6 +210,10 @@ export class FelmeresListComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
+  }
+
+  zarasnyitasCancel() {
+    this.egymode = 0;
   }
 
   ngOnDestroy() {

@@ -8,7 +8,6 @@ export class FelmeresDto {
   Megjegyzes: string;
   Megjegyzes1: string;
   Projektkod: number;
-  Projektkapcsolatkod: number;
   Iratkod: number;
   Inverter: string;
   Napelem: string;

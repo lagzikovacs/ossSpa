@@ -37,7 +37,7 @@
         <button [disabled]="!jog" (click)="doNav(15)" class="toolbutton">
           Dokumentumok
         </button>
-        <button [disabled]="!jog || ProjektBol || !Dto[DtoSelectedIndex].Nyitott" class="toolbutton">
+        <button [disabled]="!jog || ProjektBol || !Dto[DtoSelectedIndex].Nyitott" (click)="doNav(46)" class="toolbutton">
           Jelentés
         </button>
         <button [disabled]="!jog || ProjektBol" (click)="zarasnyitas()" class="toolbutton">
@@ -77,10 +77,18 @@
           </app-dokumentum-list>
         </div>
       </ng-container>
+      <ng-container *ngIf="egymode === 46">
+        <div [@rowanimation]>
+          <app-felmeres-jelentes [DtoOriginal]="Dto[DtoSelectedIndex]"
+                                 (eventSzerkeszteskesz)="onModositaskesz($event)">
+          </app-felmeres-jelentes>
+        </div>
+      </ng-container>
       <ng-container *ngIf="egymode === 45">
         <div [@rowanimation]>
-          <app-egyszeru-uzenet [uzenet]="uzenet">
-          </app-egyszeru-uzenet>
+          <app-egyszeru-kerdes-uzenet [cim]="cim" [kerdes]="kerdes" [uzenet]="uzenet"
+                                      (eventOk)="zarasnyitasOk($event)" (eventCancel)="zarasnyitasCancel($event)">
+          </app-egyszeru-kerdes-uzenet>
         </div>
       </ng-container>
     </div>

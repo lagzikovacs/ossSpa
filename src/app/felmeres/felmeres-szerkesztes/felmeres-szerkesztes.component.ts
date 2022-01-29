@@ -76,10 +76,6 @@ export class FelmeresSzerkesztesComponent implements OnInit, OnDestroy {
     }
   }
 
-  onCancel() {
-    this.eventSzerkeszteskesz.emit(null);
-  }
-
   updateform() {
     this.form.controls['nev'].setValue(this.DtoEdited.Nev);
     this.form.controls['cim'].setValue(this.DtoEdited.Telepitesicim);
@@ -130,6 +126,10 @@ export class FelmeresSzerkesztesComponent implements OnInit, OnDestroy {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
+  }
+
+  onCancel() {
+    this.eventSzerkeszteskesz.emit(null);
   }
 
   ngOnDestroy() {

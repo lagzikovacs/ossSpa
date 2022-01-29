@@ -1,0 +1,9 @@
+<div class="alapkeret">
+  <h5>{{cim}}</h5>
+  <div *ngIf="okcancel" class="editform-row">{{kerdes}}</div>
+  <div *ngIf="okcancel" class="editform-row-bottom">
+    <button class="toolbutton okbutton" (click)="doOk()">Ok</button>
+    <button class="toolbutton" (click)="doCancel()">Mégsem</button>
+  </div>
+  <div *ngIf="!okcancel" class="editform-row">{{uzenet}}</div>
+</div>

@@ -45,6 +45,9 @@
       <tr *ngIf="item.Megjegyzes !== undefined && item.Megjegyzes !== null && item.Megjegyzes !== '' && megjegyzesIs" (click)="clickforrow(i)" style="font-size: 90%" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
         <td colspan="100">{{item.Megjegyzes}}</td>
       </tr>
+      <tr *ngIf="item.Megjegyzes1 !== undefined && item.Megjegyzes1 !== null && item.Megjegyzes1 !== '' && megjegyzesIs" (click)="clickforrow(i)" style="font-size: 90%" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
+        <td colspan="100">{{item.Megjegyzes1}}</td>
+      </tr>
 
       <tr *ngIf="i === clickedidindex && egyTemplate !== undefined" [class.active]="i === clickedidindex">
         <td colspan="100">

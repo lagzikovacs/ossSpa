@@ -36,6 +36,8 @@ export class HibabejelentesSzerkesztesComponent implements OnInit, OnDestroy {
       'cim': ['', [Validators.required, Validators.maxLength(100)]],
       'email': ['', [Validators.required, Validators.maxLength(100)]],
       'telefonszam': ['', [Validators.required, Validators.maxLength(100)]],
+      'inverter': ['', [Validators.required, Validators.maxLength(50)]],
+      'napelem': ['', [Validators.required, Validators.maxLength(50)]],
       'megjegyzes': ['', [Validators.maxLength(200)]],
     });
   }
@@ -58,6 +60,8 @@ export class HibabejelentesSzerkesztesComponent implements OnInit, OnDestroy {
             this.DtoEdited.Email = this.ProjektDto.Ugyfelemail;
             this.DtoEdited.Telefonszam = this.ProjektDto.Ugyfeltelefonszam;
             this.DtoEdited.Telepitesicim = this.ProjektDto.Telepitesicim;
+            this.DtoEdited.Inverter = this.ProjektDto.Inverter;
+            this.DtoEdited.Napelem = this.ProjektDto.Napelem;
           }
 
           this.updateform();
@@ -77,6 +81,8 @@ export class HibabejelentesSzerkesztesComponent implements OnInit, OnDestroy {
     this.form.controls['cim'].setValue(this.DtoEdited.Telepitesicim);
     this.form.controls['email'].setValue(this.DtoEdited.Email);
     this.form.controls['telefonszam'].setValue(this.DtoEdited.Telefonszam);
+    this.form.controls['inverter'].setValue(this.DtoEdited.Inverter);
+    this.form.controls['napelem'].setValue(this.DtoEdited.Napelem);
     this.form.controls['megjegyzes'].setValue(this.DtoEdited.Megjegyzes);
   }
   updatedto() {
@@ -84,6 +90,8 @@ export class HibabejelentesSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Telepitesicim = this.form.value['cim'];
     this.DtoEdited.Email = this.form.value['email'];
     this.DtoEdited.Telefonszam = this.form.value['telefonszam'];
+    this.DtoEdited.Inverter = this.form.value['inverter'];
+    this.DtoEdited.Napelem = this.form.value['napelem'];
     this.DtoEdited.Megjegyzes = this.form.value['megjegyzes'];
   }
 

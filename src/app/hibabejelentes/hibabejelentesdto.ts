@@ -4,8 +4,12 @@ export class HibabejelentesDto {
   Email: string;
   Telefonszam: string;
   Telepitesicim: string;
+  Inverter: string;
+  Napelem: string;
   Megjegyzes: string;
+  Megjegyzes1: string;
   Projektkod: number;
+  Iratkod: number;
   Nyitott: boolean;
   Letrehozva: any;
   Letrehozta: string;

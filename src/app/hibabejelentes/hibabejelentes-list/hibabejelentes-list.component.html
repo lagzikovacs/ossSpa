@@ -34,14 +34,20 @@
         <button [disabled]="!jog" (click)="doNav(3)" class="toolbutton">
           <i class="fa fa-edit" aria-hidden="true"></i>
         </button>
-        <button [disabled]="ProjektBol" (click)="doNav(8)" class="toolbutton">
+        <button [disabled]="ProjektBol || !Dto[DtoSelectedIndex].Nyitott" (click)="doNav(8)" class="toolbutton">
           Projektek email alapján
         </button>
-        <button [disabled]="ProjektBol" (click)="doNav(62)" class="toolbutton">
+        <button [disabled]="ProjektBol || !Dto[DtoSelectedIndex].Nyitott" (click)="doNav(62)" class="toolbutton">
           Projekthez rendelés
         </button>
-        <button [disabled]="!jog" (click)="zarasnyitas()" class="toolbutton">
-          Zárás/nyitás
+        <button [disabled]="!jog" (click)="doNav(15)" class="toolbutton">
+          Dokumentumok
+        </button>
+        <button [disabled]="!jog || ProjektBol || !Dto[DtoSelectedIndex].Nyitott" (click)="doNav(46)" class="toolbutton">
+          Jelentés
+        </button>
+        <button [disabled]="!jog || ProjektBol" (click)="zarasnyitas()" class="toolbutton">
+          {{Dto[DtoSelectedIndex].Nyitott ? 'Zárás' : 'Újranyitás'}}
         </button>
       </div>
 

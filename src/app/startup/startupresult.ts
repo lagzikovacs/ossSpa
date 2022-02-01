@@ -32,8 +32,6 @@ export class StartupResult {
   Projekt_Reszletek: ColumnSettings[];
   Projektjegyzet_Grid: ColumnSettings[];
   Projektjegyzet_Reszletek: ColumnSettings[];
-  Szamlazasirend_Grid: ColumnSettings[];
-  Szamlazasirend_Reszletek: ColumnSettings[];
 
   Irat_Grid: ColumnSettings[];
   Irat_Reszletek: ColumnSettings[];

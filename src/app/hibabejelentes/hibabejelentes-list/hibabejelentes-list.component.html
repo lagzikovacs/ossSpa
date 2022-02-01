@@ -28,20 +28,20 @@
         <button (click)="doNav(1)" class="toolbutton">
           <i class="fa fa-file" aria-hidden="true"></i>
         </button>
-        <button [disabled]="true" (click)="doNav(2)" class="toolbutton">
+        <button [disabled]="!jog || !ProjektBol || !Dto[DtoSelectedIndex].Nyitott" (click)="doNav(2)" class="toolbutton">
           <i class="fa fa-minus" aria-hidden="true"></i>
         </button>
-        <button [disabled]="!jog" (click)="doNav(3)" class="toolbutton">
+        <button [disabled]="!jog || !ProjektBol || !Dto[DtoSelectedIndex].Nyitott" (click)="doNav(3)" class="toolbutton">
           <i class="fa fa-edit" aria-hidden="true"></i>
         </button>
-        <button [disabled]="ProjektBol || !Dto[DtoSelectedIndex].Nyitott" (click)="doNav(8)" class="toolbutton">
+        <button [disabled]="ProjektBol || !Dto[DtoSelectedIndex].Nyitott || !Dto[DtoSelectedIndex].Webes" (click)="doNav(8)" class="toolbutton">
           Projektek email alapján
         </button>
-        <button [disabled]="ProjektBol || !Dto[DtoSelectedIndex].Nyitott" (click)="doNav(62)" class="toolbutton">
+        <button [disabled]="ProjektBol || !Dto[DtoSelectedIndex].Nyitott || !Dto[DtoSelectedIndex].Webes" (click)="doNav(62)" class="toolbutton">
           Projekthez rendelés
         </button>
         <button [disabled]="!jog" (click)="doNav(15)" class="toolbutton">
-          Dokumentumok
+          {{dokcim}}
         </button>
         <button [disabled]="!jog || ProjektBol || !Dto[DtoSelectedIndex].Nyitott" (click)="doNav(46)" class="toolbutton">
           Jelentés
@@ -86,6 +86,28 @@
         <div [@rowanimation]>
           <app-projekthez-rendeles (Szerkeszteskesz)="onProjekthezRendeles($event)">
           </app-projekthez-rendeles>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 15">
+        <div [@rowanimation]>
+          <app-dokumentum-list [Iratkod]="Dto[DtoSelectedIndex].Iratkod"
+                               [cim]="dokcim"
+                               [mod]="!ProjektBol && Dto[DtoSelectedIndex].Nyitott">
+          </app-dokumentum-list>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 46">
+        <div [@rowanimation]>
+          <app-hibabejelentes-jelentes [DtoOriginal]="Dto[DtoSelectedIndex]"
+                                       (eventSzerkeszteskesz)="onModositaskesz($event)">
+          </app-hibabejelentes-jelentes>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 45">
+        <div [@rowanimation]>
+          <app-egyszeru-kerdes-uzenet [cim]="cim" [kerdes]="kerdes" [uzenet]="uzenet"
+                                      (eventOk)="zarasnyitasOk($event)" (eventCancel)="zarasnyitasCancel($event)">
+          </app-egyszeru-kerdes-uzenet>
         </div>
       </ng-container>
     </div>

@@ -30,7 +30,6 @@ import {ProjektService} from './projekt/projekt.service';
 import { ProjektMuszakiallapotComponent } from './projekt/projekt-muszakiallapot/projekt-muszakiallapot.component';
 import { ProjektIratmintaComponent } from './projekt/projekt-iratminta/projekt-iratminta.component';
 import { ProjektkapcsolatListComponent } from './projektkapcsolat/projektkapcsolat-list/projektkapcsolat-list.component';
-import { SzamlazasirendListComponent } from './szamlazasirend/szamlazasirend-list/szamlazasirend-list.component';
 import { ProjektJegyzetListComponent } from './projektjegyzet/projekt-jegyzet-list/projekt-jegyzet-list.component';
 import { IratListComponent } from './irat/irat-list/irat-list.component';
 import { IratEgyComponent } from './irat/irat-egy/irat-egy.component';
@@ -95,7 +94,6 @@ import {AjanlatkeresService} from './ajanlatkeres/ajanlatkeres.service';
 import {PenztarService} from './penztar/penztar.service';
 import { PenztartetelSzerkesztesComponent } from './penztartetel/penztartetel-szerkesztes/penztartetel-szerkesztes.component';
 import { ProjektStatuszComponent } from './projekt/projekt-statusz/projekt-statusz.component';
-import { SzamlazasirendSzerkesztesComponent } from './szamlazasirend/szamlazasirend-szerkesztes/szamlazasirend-szerkesztes.component';
 import { ProjektJegyzetSzerkesztesComponent } from './projektjegyzet/projekt-jegyzet-szerkesztes/projekt-jegyzet-szerkesztes.component';
 import { ProjektkapcsolatUjbizonylatComponent } from './projektkapcsolat/projektkapcsolat-ujbizonylat/projektkapcsolat-ujbizonylat.component';
 import { AjanlatComponent } from './ajanlat/ajanlat/ajanlat';
@@ -195,6 +193,7 @@ import {ProjekthezRendelesComponent} from './projekt/projekthez-rendeles/projekt
 import { EgyszeruUzenetComponent } from './tools/egyszeru-uzenet/egyszeru-uzenet.component';
 import { FelmeresJelentesComponent } from './felmeres/felmeres-jelentes/felmeres-jelentes.component';
 import { EgyszeruKerdesUzenetComponent } from './tools/egyszeru-kerdes-uzenet/egyszeru-kerdes-uzenet.component';
+import { HibabejelentesJelentesComponent } from './hibabejelentes/hibabejelentes-jelentes/hibabejelentes-jelentes.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -280,7 +279,6 @@ if (environment.production) {
     ProjektMuszakiallapotComponent,
     ProjektIratmintaComponent,
     ProjektkapcsolatListComponent,
-    SzamlazasirendListComponent,
     ProjektJegyzetListComponent,
     IratListComponent,
     IratEgyComponent,
@@ -333,7 +331,6 @@ if (environment.production) {
     PenztartetelListComponent,
     PenztartetelSzerkesztesComponent,
     ProjektStatuszComponent,
-    SzamlazasirendSzerkesztesComponent,
     ProjektJegyzetSzerkesztesComponent,
     ProjektkapcsolatUjbizonylatComponent,
     AjanlatComponent,
@@ -416,6 +413,7 @@ if (environment.production) {
     EgyszeruUzenetComponent,
     FelmeresJelentesComponent,
     EgyszeruKerdesUzenetComponent,
+    HibabejelentesJelentesComponent,
   ],
   imports: [
     BrowserModule,

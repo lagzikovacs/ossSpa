@@ -50,6 +50,7 @@ export class FelmeresListComponent implements OnInit, OnDestroy {
   cim = '';
   kerdes = '';
   uzenet = '';
+  dokcim = 'A jelentés dokumentumai';
 
   felmeresservice: FelmeresService;
 

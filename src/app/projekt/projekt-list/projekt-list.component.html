@@ -57,17 +57,14 @@
         <button (click)="doNav(24)" class="toolbutton">
           Bizonylat és irat
         </button>
-        <button (click)="doNav(43)" class="toolbutton">
-          Felmérés
+        <button (click)="doNav(26)" class="toolbutton">
+          Jegyzet
         </button>
         <button (click)="doNav(23)" class="toolbutton">
           Iratminta
         </button>
-        <button (click)="doNav(26)" class="toolbutton">
-          Jegyzet
-        </button>
-        <button (click)="doNav(25)" class="toolbutton">
-          Számlázási rend
+        <button (click)="doNav(43)" class="toolbutton">
+          Felmérés
         </button>
         <button (click)="doNav(44)" class="toolbutton">
           Hibabejelentés
@@ -125,12 +122,6 @@
           <app-projektkapcsolat-list [Projektkod]="Dto[DtoSelectedIndex].Projektkod"
                                      [Ugyfelkod]="Dto[DtoSelectedIndex].Ugyfelkod">
           </app-projektkapcsolat-list>
-        </div>
-      </ng-container>
-      <ng-container *ngIf="egymode === 25">
-        <div [@rowanimation]>
-          <app-szamlazasirend-list [Projektkod]="Dto[DtoSelectedIndex].Projektkod">
-          </app-szamlazasirend-list>
         </div>
       </ng-container>
       <ng-container *ngIf="egymode === 26">

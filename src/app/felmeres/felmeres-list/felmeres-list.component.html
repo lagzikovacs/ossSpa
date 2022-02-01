@@ -35,7 +35,7 @@
           <i class="fa fa-edit" aria-hidden="true"></i>
         </button>
         <button [disabled]="!jog" (click)="doNav(15)" class="toolbutton">
-          Dokumentumok
+          {{dokcim}}
         </button>
         <button [disabled]="!jog || ProjektBol || !Dto[DtoSelectedIndex].Nyitott" (click)="doNav(46)" class="toolbutton">
           Jelentés
@@ -73,6 +73,7 @@
       <ng-container *ngIf="egymode === 15">
         <div [@rowanimation]>
           <app-dokumentum-list [Iratkod]="Dto[DtoSelectedIndex].Iratkod"
+                               [cim]="dokcim"
                                [mod]="!ProjektBol && Dto[DtoSelectedIndex].Nyitott">
           </app-dokumentum-list>
         </div>

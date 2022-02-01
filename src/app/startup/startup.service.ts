@@ -19,7 +19,6 @@ import {ProjektjegyzetService} from '../projektjegyzet/projektjegyzet.service';
 import {StartupResult} from './startupresult';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {SzamlazasirendService} from '../szamlazasirend/szamlazasirend.service';
 import {AjanlatkeresService} from '../ajanlatkeres/ajanlatkeres.service';
 import {PenztarService} from '../penztar/penztar.service';
 import {PenztartetelService} from '../penztartetel/penztartetel.service';
@@ -54,7 +53,6 @@ export class StartupService {
               private _ugyfelservice: UgyfelService,
               private _projektservice: ProjektService,
               private _projektjegyzetservice: ProjektjegyzetService,
-              private _szamlazasirendservice: SzamlazasirendService,
               private _iratservice: IratService,
               private _penztarservice: PenztarService,
               private _penztartetelservice: PenztartetelService,
@@ -134,8 +132,6 @@ export class StartupService {
         this._projektservice.ReszletekSettings = res3.Projekt_Reszletek;
         this._projektjegyzetservice.GridSettings = res3.Projektjegyzet_Grid;
         this._projektjegyzetservice.ReszletekSettings = res3.Projektjegyzet_Reszletek;
-        this._szamlazasirendservice.GridSettings = res3.Szamlazasirend_Grid;
-        this._szamlazasirendservice.ReszletekSettings = res3.Szamlazasirend_Reszletek;
 
         this._iratservice.GridSettings = res3.Irat_Grid;
         this._iratservice.ReszletekSettings = res3.Irat_Reszletek;

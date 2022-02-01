@@ -46,6 +46,11 @@ export class HibabejelentesListComponent implements OnInit, OnDestroy {
 
   egymode = 1;
 
+  cim = '';
+  kerdes = '';
+  uzenet = '';
+  dokcim = 'A jelentés dokumentumai';
+
   hibabejelentesservice: HibabejelentesService;
 
   constructor(private _logonservice: LogonService,
@@ -201,9 +206,15 @@ export class HibabejelentesListComponent implements OnInit, OnDestroy {
   }
 
   zarasnyitas() {
-    this.eppFrissit = true;
-    this.egymode = 0;
+    this.cim = this.Dto[this.DtoSelectedIndex].Nyitott ? 'Hibabejelentés zárása' : 'Hibabejelentés újranyitása';
+    this.kerdes = this.Dto[this.DtoSelectedIndex].Nyitott ? 'Biztosan zárja ezt a hibabejelentést?' : 'Biztosan újranyitja ezt a hibabejelentést?';
+    this.uzenet = 'Kis türelmet...';
 
+    this.egymode = 45;
+  }
+
+  zarasnyitasOk() {
+    this.eppFrissit = true;
     const DtoEdited = deepCopy(this.Dto[this.DtoSelectedIndex]);
 
     this.hibabejelentesservice.ZarasNyitas(DtoEdited)
@@ -220,12 +231,23 @@ export class HibabejelentesListComponent implements OnInit, OnDestroy {
         }
 
         propCopy(res1.Result[0], this.Dto[this.DtoSelectedIndex]);
+
+        if (this.Dto[this.DtoSelectedIndex].Nyitott) {
+          this.uzenet = 'A hibabejelentés újra megnyitva!';
+        } else {
+          this.uzenet = 'A hibabejelentés lezárva!';
+        }
+
         this.eppFrissit = false;
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
+  }
+
+  zarasnyitasCancel() {
+    this.egymode = 0;
   }
 
   ngOnDestroy() {

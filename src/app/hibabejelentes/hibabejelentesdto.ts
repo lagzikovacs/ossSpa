@@ -10,6 +10,7 @@ export class HibabejelentesDto {
   Megjegyzes1: string;
   Projektkod: number;
   Iratkod: number;
+  Webes: boolean;
   Nyitott: boolean;
   Letrehozva: any;
   Letrehozta: string;

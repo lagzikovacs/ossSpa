@@ -97,6 +97,13 @@
 //.ng-invalid:not(form) {
 //  border-left: 0.3em solid lightpink;
 //}
-input.ng-invalid {
+
+%invalid-input {
   border-left: 0.3em solid lightpink;
+}
+input.ng-invalid {
+  @extend %invalid-input;
+}
+textarea.ng-invalid {
+  @extend %invalid-input;
 }

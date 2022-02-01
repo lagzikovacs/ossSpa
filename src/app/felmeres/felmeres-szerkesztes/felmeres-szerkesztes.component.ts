@@ -38,7 +38,7 @@ export class FelmeresSzerkesztesComponent implements OnInit, OnDestroy {
       'telefonszam': ['', [Validators.required, Validators.maxLength(100)]],
       'inverter': ['', [Validators.required, Validators.maxLength(50)]],
       'napelem': ['', [Validators.required, Validators.maxLength(50)]],
-      'megjegyzes': ['', [Validators.maxLength(200)]],
+      'megjegyzes': ['', [Validators.required]],
     });
   }
 

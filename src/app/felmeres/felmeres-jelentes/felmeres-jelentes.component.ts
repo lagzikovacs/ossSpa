@@ -27,7 +27,7 @@ export class FelmeresJelentesComponent  implements OnInit, OnDestroy {
     this.felmeresservice = felmeresservice;
 
     this.form = this._fb.group({
-      'megjegyzes1': ['', [Validators.maxLength(200)]],
+      'megjegyzes1': ['', [Validators.required]],
     });
   }
 

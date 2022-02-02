@@ -2,7 +2,7 @@
   <h5>{{hibabejelentesservice.cim}}</h5>
   <app-toolbar [StatuszSzurok]="statuszszurok" [(statusz)]="statusz" [visStatusz]="true"
                [Szurok]="szurok" [(szempont)]="szempont" [(minta)]="minta" (Kereses)="onKereses()"
-               [visUj]="true" [enUj]="jog" (Uj)="doUjtetel()">
+               [visUj]="ProjektBol" [enUj]="jog" (Uj)="doUjtetel()">
   </app-toolbar>
 
   <app-tabla #tabla
@@ -28,25 +28,34 @@
         <button (click)="doNav(1)" class="toolbutton">
           <i class="fa fa-file" aria-hidden="true"></i>
         </button>
-        <button [disabled]="!jog || !ProjektBol || !Dto[DtoSelectedIndex].Nyitott" (click)="doNav(2)" class="toolbutton">
+        <button *ngIf="ProjektBol" [disabled]="!jog || !Dto[DtoSelectedIndex].Nyitott" (click)="doNav(2)" class="toolbutton">
           <i class="fa fa-minus" aria-hidden="true"></i>
         </button>
-        <button [disabled]="!jog || !ProjektBol || !Dto[DtoSelectedIndex].Nyitott" (click)="doNav(3)" class="toolbutton">
+        <button *ngIf="ProjektBol" [disabled]="!jog || !Dto[DtoSelectedIndex].Nyitott" (click)="doNav(3)" class="toolbutton">
           <i class="fa fa-edit" aria-hidden="true"></i>
         </button>
-        <button [disabled]="ProjektBol || !Dto[DtoSelectedIndex].Nyitott || !Dto[DtoSelectedIndex].Webes" (click)="doNav(8)" class="toolbutton">
-          Projektek email alapján
+
+        <!--EZ MÉG KELLENI FOG-->
+        <!--<button [disabled]="ProjektBol || !Dto[DtoSelectedIndex].Nyitott || !Dto[DtoSelectedIndex].Webes" (click)="doNav(8)" class="toolbutton">-->
+          <!--Projektek email alapján-->
+        <!--</button>-->
+        <!--<button [disabled]="ProjektBol || !Dto[DtoSelectedIndex].Nyitott || !Dto[DtoSelectedIndex].Webes" (click)="doNav(62)" class="toolbutton">-->
+          <!--Projekthez rendelés-->
+        <!--</button>-->
+
+        <button *ngIf="ProjektBol" [disabled]="!jog" class="toolbutton">
+          Telepítési dokumentumok vágólapról
         </button>
-        <button [disabled]="ProjektBol || !Dto[DtoSelectedIndex].Nyitott || !Dto[DtoSelectedIndex].Webes" (click)="doNav(62)" class="toolbutton">
-          Projekthez rendelés
+        <button [disabled]="!jog" class="toolbutton">
+          A telepítés dokumentumai
         </button>
         <button [disabled]="!jog" (click)="doNav(15)" class="toolbutton">
           {{dokcim}}
         </button>
-        <button [disabled]="!jog || ProjektBol || !Dto[DtoSelectedIndex].Nyitott" (click)="doNav(46)" class="toolbutton">
+        <button *ngIf="!ProjektBol" [disabled]="!jog || !Dto[DtoSelectedIndex].Nyitott" (click)="doNav(46)" class="toolbutton">
           Jelentés
         </button>
-        <button [disabled]="!jog || ProjektBol" (click)="zarasnyitas()" class="toolbutton">
+        <button *ngIf="!ProjektBol" [disabled]="!jog" (click)="zarasnyitas()" class="toolbutton">
           {{Dto[DtoSelectedIndex].Nyitott ? 'Zárás' : 'Újranyitás'}}
         </button>
       </div>

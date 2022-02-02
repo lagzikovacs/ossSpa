@@ -268,6 +268,8 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
 
   onTetelUjElott() {
     this.eppFrissit = true;
+    this.updatedto();
+
     this.bizonylatservice.CreateNewTetel(this.bizonylatTipus)
       .then(res => {
         if (res.Error != null) {
@@ -290,6 +292,8 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onTetelTorlesElott(i: number) {
+    this.updatedto();
+
     this.TetelDtoSelectedIndex = i;
   }
   onTeteltorles(ok: boolean) {
@@ -316,6 +320,8 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onTetelModositasElott(i: number) {
+    this.updatedto();
+
     this.TetelDtoSelectedIndex = i;
     this.teteluj = false;
     this.Setszvesz();

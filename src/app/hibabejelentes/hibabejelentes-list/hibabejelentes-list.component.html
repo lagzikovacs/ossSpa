@@ -43,8 +43,11 @@
           <!--Projekthez rendelés-->
         <!--</button>-->
 
-        <button *ngIf="ProjektBol" [disabled]="!jog" class="toolbutton">
-          Telepítési dokumentumok vágólapról
+        <button *ngIf="ProjektBol" [disabled]="!jog || !Dto[DtoSelectedIndex].Nyitott" class="toolbutton">
+          Telepítési dokumentumok kiválasztása
+        </button>
+        <button *ngIf="!ProjektBol && Dto[DtoSelectedIndex].Webes" [disabled]="!jog || !Dto[DtoSelectedIndex].Nyitott" class="toolbutton">
+          Projekt és telepítési dokumentumok kiválasztása
         </button>
         <button [disabled]="!jog" class="toolbutton">
           A telepítés dokumentumai

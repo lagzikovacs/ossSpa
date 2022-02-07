@@ -26,17 +26,14 @@
           <button (click)="doNav(1)" class="toolbutton">
             <i class="fa fa-file" aria-hidden="true"></i>
           </button>
-          <button [disabled]="!jog" (click)="doNav(2)" class="toolbutton">
+          <button [disabled]="!jog || !Dto[DtoSelectedIndex].Nyitott" (click)="doNav(2)" class="toolbutton">
             <i class="fa fa-minus" aria-hidden="true"></i>
           </button>
-          <button [disabled]="!jog" (click)="doNav(3)" class="toolbutton">
+          <button [disabled]="!jog || !Dto[DtoSelectedIndex].Nyitott" (click)="doNav(3)" class="toolbutton">
             <i class="fa fa-edit" aria-hidden="true"></i>
           </button>
-          <button (click)="doNav(8)" class="toolbutton">
-            Projektek email alapján
-          </button>
           <button (click)="zarasnyitas()" class="toolbutton">
-            Zárás/nyitás
+            {{Dto[DtoSelectedIndex].Nyitott ? 'Zárás' : 'Újranyitás'}}
           </button>
       </div>
 
@@ -64,10 +61,11 @@
         </div>
       </ng-container>
 
-      <ng-container *ngIf="egymode === 8">
+      <ng-container *ngIf="egymode === 45">
         <div [@rowanimation]>
-          <app-projekt-emailalapjan [Email]="Dto[DtoSelectedIndex].Email">
-          </app-projekt-emailalapjan>
+          <app-egyszeru-kerdes-uzenet [cim]="cim" [kerdes]="kerdes" [uzenet]="uzenet"
+                                      (eventOk)="zarasnyitasOk($event)" (eventCancel)="zarasnyitasCancel($event)">
+          </app-egyszeru-kerdes-uzenet>
         </div>
       </ng-container>
     </div>

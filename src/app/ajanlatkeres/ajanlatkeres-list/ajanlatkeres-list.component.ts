@@ -44,6 +44,10 @@ export class AjanlatkeresListComponent implements OnDestroy {
 
   egymode = 0;
 
+  cim = '';
+  kerdes = '';
+  uzenet = '';
+
   ajanlatkeresservice: AjanlatkeresService;
 
   constructor(private _logonservice: LogonService,
@@ -152,12 +156,18 @@ export class AjanlatkeresListComponent implements OnDestroy {
   }
 
   zarasnyitas() {
+    this.cim = this.Dto[this.DtoSelectedIndex].Nyitott ? 'Ajánlatkérés zárása' : 'Ajánlatkérés újranyitása';
+    this.kerdes = this.Dto[this.DtoSelectedIndex].Nyitott ? 'Biztosan zárja ezt az ajánlatkérést?' : 'Biztosan újranyitja ezt az ajánlatkérést?';
+    this.uzenet = 'Kis türelmet...';
+
+    this.egymode = 45;
+  }
+
+  zarasnyitasOk() {
     this.eppFrissit = true;
-
     const DtoEdited = deepCopy(this.Dto[this.DtoSelectedIndex]);
-    DtoEdited.Nyitott = !DtoEdited.Nyitott;
 
-    this.ajanlatkeresservice.Update(DtoEdited)
+    this.ajanlatkeresservice.ZarasNyitas(DtoEdited)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
@@ -171,12 +181,23 @@ export class AjanlatkeresListComponent implements OnDestroy {
         }
 
         propCopy(res1.Result[0], this.Dto[this.DtoSelectedIndex]);
+
+        if (this.Dto[this.DtoSelectedIndex].Nyitott) {
+          this.uzenet = 'Az ajánlatkérés újra megnyitva!';
+        } else {
+          this.uzenet = 'Az ajánlatkérés lezárva!';
+        }
+
         this.eppFrissit = false;
       })
       .catch(err => {
         this.eppFrissit = false;
         this._errorservice.Error = err;
       });
+  }
+
+  zarasnyitasCancel() {
+    this.egymode = 0;
   }
 
   ngOnDestroy() {

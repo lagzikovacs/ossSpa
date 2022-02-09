@@ -6,7 +6,7 @@
 
   <ng-container *ngIf="!kivalasztva">
     <app-tabla #tabla
-               [items]="Dto"
+               [items]="iratDto"
                [colsets]="iratservice.GridSettings"
                [enIdclick]="false"
                [zoom]="true" (forzoom)="onZoom($event)">

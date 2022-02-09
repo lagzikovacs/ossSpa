@@ -1,9 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IratService} from '../../irat/irat.service';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {HibabejelentesService} from '../hibabejelentes.service';
 import {IratDto} from '../../irat/iratdto';
+import {HibabejelentesDto} from '../hibabejelentesdto';
+import {deepCopy} from '../../tools/deepCopy';
+import {NumberResult} from '../../dtos/numberresult';
 
 @Component({
   selector: 'app-telepitesi-dokumentumok-kivalasztasa',
@@ -12,7 +15,13 @@ import {IratDto} from '../../irat/iratdto';
 export class TelepitesiDokumentumokKivalasztasaComponent implements OnInit {
   @Input() Projektkod = 0;
 
-  Dto = new Array<IratDto>();
+  DtoEdited = new HibabejelentesDto();
+  @Input() set DtoOriginal(value: HibabejelentesDto) {
+    this.DtoEdited = deepCopy(value);
+  }
+  @Output() eventSzerkeszteskesz = new EventEmitter<HibabejelentesDto>();
+
+  iratDto = new Array<IratDto>();
 
   kivalasztva = false;
   eppFrissit = false;
@@ -33,7 +42,7 @@ export class TelepitesiDokumentumokKivalasztasaComponent implements OnInit {
           throw res.Error;
         }
 
-        this.Dto = res.Result;
+        this.iratDto = res.Result;
         this.eppFrissit = false;
       })
       .catch(err => {
@@ -43,6 +52,30 @@ export class TelepitesiDokumentumokKivalasztasaComponent implements OnInit {
   }
 
   onZoom(i: number) {
-    this.kivalasztva = true;
+    this.eppFrissit = true;
+
+    this.DtoEdited.Iratkod1 = this.iratDto[i].Iratkod;
+
+    this._hibabejelentesservice.Update(this.DtoEdited)
+      .then(res => {
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        return this._hibabejelentesservice.Get(res.Result);
+      })
+      .then(res1 => {
+        if (res1.Error != null) {
+          throw res1.Error;
+        }
+
+        this.kivalasztva = true;
+        this.eppFrissit = false;
+        this.eventSzerkeszteskesz.emit(res1.Result[0]);
+      })
+      .catch(err => {
+        this.eppFrissit = false;
+        this._errorservice.Error = err;
+      });
   }
 }

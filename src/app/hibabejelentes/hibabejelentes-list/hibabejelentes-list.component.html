@@ -49,7 +49,7 @@
         <button *ngIf="!ProjektBol && Dto[DtoSelectedIndex].Webes" [disabled]="!jog || !Dto[DtoSelectedIndex].Nyitott" class="toolbutton" (click)="doNav(48)">
           Projekt és telepítési dokumentumok kiválasztása
         </button>
-        <button [disabled]="!jog" class="toolbutton">
+        <button *ngIf="Dto[DtoSelectedIndex].Iratkod1 > 0" [disabled]="!jog" class="toolbutton" (click)="doNav(49)">
           A telepítés dokumentumai
         </button>
         <button [disabled]="!jog" (click)="doNav(15)" class="toolbutton">
@@ -100,6 +100,16 @@
           </app-projekthez-rendeles>
         </div>
       </ng-container>
+
+      <ng-container *ngIf="egymode === 49">
+        <div [@rowanimation]>
+          <app-dokumentum-list [Iratkod]="Dto[DtoSelectedIndex].Iratkod1"
+                               [cim]="dokcim1"
+                               [mod]="false">
+          </app-dokumentum-list>
+        </div>
+      </ng-container>
+
       <ng-container *ngIf="egymode === 15">
         <div [@rowanimation]>
           <app-dokumentum-list [Iratkod]="Dto[DtoSelectedIndex].Iratkod"
@@ -108,6 +118,7 @@
           </app-dokumentum-list>
         </div>
       </ng-container>
+
       <ng-container *ngIf="egymode === 46">
         <div [@rowanimation]>
           <app-hibabejelentes-jelentes [DtoOriginal]="Dto[DtoSelectedIndex]"
@@ -124,8 +135,9 @@
       </ng-container>
 
       <ng-container *ngIf="egymode === 47">
-        <app-telepitesi-dokumentumok-kivalasztasa [Projektkod]="ProjektDto.Projektkod">
-
+        <app-telepitesi-dokumentumok-kivalasztasa [Projektkod]="ProjektDto.Projektkod"
+                                                  [DtoOriginal]="Dto[DtoSelectedIndex]"
+                                                  (eventSzerkeszteskesz)="onModositaskesz($event)">
         </app-telepitesi-dokumentumok-kivalasztasa>
       </ng-container>
     </div>

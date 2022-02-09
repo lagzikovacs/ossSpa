@@ -65,4 +65,5 @@ export enum EgyMode {
 
   TelepitesiDokumentumokKivalasztasa = 47,
   PorojektEsTelepitesiDokumentumokKivalasztasa = 48,
+  TelepitesiDokumentumok = 49,
 }

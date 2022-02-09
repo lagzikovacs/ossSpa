@@ -50,6 +50,7 @@ export class HibabejelentesListComponent implements OnInit, OnDestroy {
   kerdes = '';
   uzenet = '';
   dokcim = 'A jelentés dokumentumai';
+  dokcim1 = 'A telepítés dokumentumai';
 
   hibabejelentesservice: HibabejelentesService;
 

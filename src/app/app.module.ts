@@ -194,6 +194,7 @@ import { EgyszeruUzenetComponent } from './tools/egyszeru-uzenet/egyszeru-uzenet
 import { FelmeresJelentesComponent } from './felmeres/felmeres-jelentes/felmeres-jelentes.component';
 import { EgyszeruKerdesUzenetComponent } from './tools/egyszeru-kerdes-uzenet/egyszeru-kerdes-uzenet.component';
 import { HibabejelentesJelentesComponent } from './hibabejelentes/hibabejelentes-jelentes/hibabejelentes-jelentes.component';
+import { TelepitesiDokumentumokKivalasztasaComponent } from './hibabejelentes/telepitesi-dokumentumok-kivalasztasa/telepitesi-dokumentumok-kivalasztasa.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -414,6 +415,7 @@ if (environment.production) {
     FelmeresJelentesComponent,
     EgyszeruKerdesUzenetComponent,
     HibabejelentesJelentesComponent,
+    TelepitesiDokumentumokKivalasztasaComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import {environment} from '../../environments/environment';
 import {NumberResult} from '../dtos/numberresult';
 import {ProjektKapcsolatParameter} from './projektkapcsolatparameter';
 import {EmptyResult} from '../dtos/emptyresult';
+import {IratResult} from '../irat/iratresult';
 
 @Injectable({
   providedIn: 'root'

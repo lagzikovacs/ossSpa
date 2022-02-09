@@ -9,6 +9,7 @@ import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
 import {HibabejelentesDto} from './hibabejelentesdto';
 import {HibabejelentesParameter} from './hibabejelentesparameter';
+import {IratResult} from '../irat/iratresult';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +51,12 @@ export class HibabejelentesService {
   public Select(fp: HibabejelentesParameter): Promise<HibabejelentesResult> {
     return this._httpClient.post<HibabejelentesResult>(
       this._controller + 'select', fp, this._logonservice.httpoptions())
+      .toPromise();
+  }
+
+  public SelectTelepitesdokumentumai(projektkod: number): Promise<IratResult> {
+    return this._httpClient.post<IratResult>(
+      this._controller + 'selecttelepitesdokumentumai', projektkod, this._logonservice.httpoptions())
       .toPromise();
   }
 

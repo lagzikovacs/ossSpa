@@ -62,4 +62,7 @@ export enum EgyMode {
   Uzenet = 45,
 
   FelmeresJelentes = 46,
+
+  TelepitesiDokumentumokKivalasztasa = 47,
+  PorojektEsTelepitesiDokumentumokKivalasztasa = 48,
 }

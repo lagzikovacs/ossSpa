@@ -43,10 +43,10 @@
           <!--Projekthez rendelés-->
         <!--</button>-->
 
-        <button *ngIf="ProjektBol" [disabled]="!jog || !Dto[DtoSelectedIndex].Nyitott" class="toolbutton">
+        <button *ngIf="ProjektBol" [disabled]="!jog || !Dto[DtoSelectedIndex].Nyitott" class="toolbutton" (click)="doNav(47)">
           Telepítési dokumentumok kiválasztása
         </button>
-        <button *ngIf="!ProjektBol && Dto[DtoSelectedIndex].Webes" [disabled]="!jog || !Dto[DtoSelectedIndex].Nyitott" class="toolbutton">
+        <button *ngIf="!ProjektBol && Dto[DtoSelectedIndex].Webes" [disabled]="!jog || !Dto[DtoSelectedIndex].Nyitott" class="toolbutton" (click)="doNav(48)">
           Projekt és telepítési dokumentumok kiválasztása
         </button>
         <button [disabled]="!jog" class="toolbutton">
@@ -121,6 +121,12 @@
                                       (eventOk)="zarasnyitasOk($event)" (eventCancel)="zarasnyitasCancel($event)">
           </app-egyszeru-kerdes-uzenet>
         </div>
+      </ng-container>
+
+      <ng-container *ngIf="egymode === 47">
+        <app-telepitesi-dokumentumok-kivalasztasa [Projektkod]="ProjektDto.Projektkod">
+
+        </app-telepitesi-dokumentumok-kivalasztasa>
       </ng-container>
     </div>
   </ng-template>

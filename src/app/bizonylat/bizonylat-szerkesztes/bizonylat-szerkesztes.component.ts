@@ -77,7 +77,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
       'megjegyzes': ['', [Validators.maxLength(200)]],
       'penznem': ['', [Validators.required, Validators.maxLength(3)]],
       'arfolyam': [0, [Validators.required]],
-      'fizetesimod': ['', [Validators.required, Validators.maxLength(20)]],
+      'fizetesimod': ['', [Validators.maxLength(20)]],
       'bizonylatkelte': ['', [Validators.required]],
       'teljesiteskelte': ['', [Validators.required]],
       'fizetesihatarido': ['', [Validators.required]],

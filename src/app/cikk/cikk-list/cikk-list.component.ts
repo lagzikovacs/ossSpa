@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, ViewContainerRef} from '@angular/core';
 import {CikkService} from '../cikk.service';
 import {Szempont} from '../../enums/szempont';
 import {CikkDto} from '../cikkdto';

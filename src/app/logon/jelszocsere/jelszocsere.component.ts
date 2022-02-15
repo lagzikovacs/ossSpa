@@ -1,10 +1,11 @@
-import {Component, OnDestroy} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
 import {FelhasznaloService} from '../../primitiv/felhasznalo/felhasznalo.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-jelszocsere',
   templateUrl: './jelszocsere.component.html'
 })
@@ -15,6 +16,11 @@ export class JelszocsereComponent implements OnDestroy {
 
   form: FormGroup;
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   felhasznaloservice: FelhasznaloService;
 
@@ -22,6 +28,7 @@ export class JelszocsereComponent implements OnDestroy {
               private _route: ActivatedRoute,
               private _errorservice: ErrorService,
               private _fb: FormBuilder,
+              private _cdr: ChangeDetectorRef,
               felhasznaloservice: FelhasznaloService) {
     this.felhasznaloservice = felhasznaloservice;
 
@@ -42,18 +49,18 @@ export class JelszocsereComponent implements OnDestroy {
       return;
     }
 
-    this.eppFrissit = true;
+    this.spinner = true;
     this.felhasznaloservice.JelszoCsere(this.regijelszo, this.jelszo)
       .then(res => {
         if (res.Error != null) {
           throw res.Error;
         }
 
-        this.eppFrissit = false;
-        this._router.navigate(['../fooldal'], {relativeTo: this._route});
+        this.spinner = false;
+        this._router.navigate(['../bejelentkezes'], {relativeTo: this._route});
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinner = false;
         this._errorservice.Error = err;
       });
   }

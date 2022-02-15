@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {LogonService} from '../logon.service';
@@ -8,20 +8,26 @@ import {StartupService} from '../../startup/startup.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-bejelentkezes',
   templateUrl: './bejelentkezes.component.html'
 })
 export class BejelentkezesComponent implements OnInit, OnDestroy {
   form: FormGroup;
-
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   constructor(private _router: Router,
               private _fb: FormBuilder,
               private _logonservice: LogonService,
               private _sessionservice: SessionService,
               private _startupservice: StartupService,
-              private _errorservice: ErrorService) {
+              private _errorservice: ErrorService,
+              private _cdr: ChangeDetectorRef) {
 
     this.form = this._fb.group({
       'azonosito': ['', [Validators.required, Validators.maxLength(30)]],
@@ -37,7 +43,7 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.eppFrissit = true;
+    this.spinner = true;
     const nincsBesorolva = 'Önt a rendszergazda még nem sorolta be egyetlen felhasználói csoportba sem!';
 
     this._logonservice.Bejelentkezes(this.form.value['azonosito'], this.form.value['jelszo'])
@@ -66,7 +72,7 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
                   throw res4.Error;
                 }
 
-                this.eppFrissit = false;
+                this.spinner = false;
                 this._router.navigate(['/fooldal']);
               })
               .catch(err => {
@@ -74,12 +80,12 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
               });
             break;
           default:
-            this.eppFrissit = false;
+            this.spinner = false;
             this._router.navigate(['/szerepkorvalasztas']);
         }
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinner = false;
         this._errorservice.Error = err;
       });
   }

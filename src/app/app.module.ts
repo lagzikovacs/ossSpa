@@ -195,6 +195,8 @@ import { FelmeresJelentesComponent } from './felmeres/felmeres-jelentes/felmeres
 import { EgyszeruKerdesUzenetComponent } from './tools/egyszeru-kerdes-uzenet/egyszeru-kerdes-uzenet.component';
 import { HibabejelentesJelentesComponent } from './hibabejelentes/hibabejelentes-jelentes/hibabejelentes-jelentes.component';
 import { TelepitesiDokumentumokKivalasztasaComponent } from './hibabejelentes/telepitesi-dokumentumok-kivalasztasa/telepitesi-dokumentumok-kivalasztasa.component';
+import { ProjektTelepitesiDokumentumokKivalasztasaComponent } from './hibabejelentes/projekt-telepitesi-dokumentumok-kivalasztasa/projekt-telepitesi-dokumentumok-kivalasztasa.component';
+import { SzerelesitervComponent } from './szerelesiterv/szerelesiterv.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -208,12 +210,13 @@ const routes: Routes = [
   {path: 'tevekenyseg', component: TevekenysegListComponent, canActivate: [RoleGuard]},
   {path: 'ugyfel', component: UgyfelListComponent, canActivate: [RoleGuard]},
 
-  {path: 'projekt', component: ProjektListComponent, canActivate: [RoleGuard]},
-  {path: 'irat', component: IratListComponent, canActivate: [RoleGuard]},
-  {path: 'penztar', component: PenztarListComponent, canActivate: [RoleGuard]},
   {path: 'ajanlatkeres', component: AjanlatkeresListComponent, canActivate: [RoleGuard]},
   {path: 'felmeres', component: FelmeresListComponent, canActivate: [RoleGuard]},
+  {path: 'projekt', component: ProjektListComponent, canActivate: [RoleGuard]},
+  {path: 'szerelesiterv', component: SzerelesitervComponent, canActivate: [RoleGuard]},
+  {path: 'penztar', component: PenztarListComponent, canActivate: [RoleGuard]},
   {path: 'hibabejelentes', component: HibabejelentesListComponent, canActivate: [RoleGuard]},
+  {path: 'irat', component: IratListComponent, canActivate: [RoleGuard]},
   {path: 'ugyfelterlog', component: UgyfelterlogComponent, canActivate: [RoleGuard]},
 
   {path: 'bizonylat', children: [
@@ -416,6 +419,8 @@ if (environment.production) {
     EgyszeruKerdesUzenetComponent,
     HibabejelentesJelentesComponent,
     TelepitesiDokumentumokKivalasztasaComponent,
+    ProjektTelepitesiDokumentumokKivalasztasaComponent,
+    SzerelesitervComponent,
   ],
   imports: [
     BrowserModule,

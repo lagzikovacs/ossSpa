@@ -140,6 +140,11 @@
                                                   (eventSzerkeszteskesz)="onModositaskesz($event)">
         </app-telepitesi-dokumentumok-kivalasztasa>
       </ng-container>
+
+      <ng-container *ngIf="egymode === 48">
+        <app-projekt-telepitesi-dokumentumok-kivalasztasa>
+        </app-projekt-telepitesi-dokumentumok-kivalasztasa>
+      </ng-container>
     </div>
   </ng-template>
 

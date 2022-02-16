@@ -24,8 +24,7 @@ export class AfakulcsService {
               private _logonservice: LogonService) { }
 
   public Add(dto: AfakulcsDto): Promise<NumberResult> {
-    return this._httpClient.post<NumberResult>(
-      this._controller + 'add', dto, this._logonservice.httpoptions())
+    return this._httpClient.post<NumberResult>(this._controller + 'add', dto, this._logonservice.httpoptions())
       .toPromise();
   }
 

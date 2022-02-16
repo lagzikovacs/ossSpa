@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {AfakulcsService} from '../afakulcs.service';
 import {NumberResult} from '../../../dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
@@ -7,6 +7,7 @@ import {AfakulcsDto} from '../afakulcsdto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-afakulcs-szerkesztes',
   templateUrl: './afakulcs-szerkesztes.component.html'
 })
@@ -20,11 +21,17 @@ export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   afakulcsservice: AfakulcsService;
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
+              private _cdr: ChangeDetectorRef,
               afakulcsservice: AfakulcsService) {
     this.afakulcsservice = afakulcsservice;
 
@@ -36,7 +43,7 @@ export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.uj) {
-      this.eppFrissit = true;
+      this.spinner = true;
       this.afakulcsservice.CreateNew()
         .then(res => {
           if (res.Error !== null) {
@@ -45,10 +52,10 @@ export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
 
           this.DtoEdited = res.Result[0];
           this.updateform();
-          this.eppFrissit = false;
+          this.spinner = false;
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this.spinner = false;
           this._errorservice.Error = err;
         });
     } else {
@@ -66,7 +73,7 @@ export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.eppFrissit = true;
+    this.spinner = true;
     let p: Promise<NumberResult>;
     this.updatedto();
 
@@ -89,11 +96,11 @@ export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
           throw res1.Error;
         }
 
-        this.eppFrissit = false;
+        this.spinner = false;
         this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinner = false;
         this._errorservice.Error = err;
       });
   }

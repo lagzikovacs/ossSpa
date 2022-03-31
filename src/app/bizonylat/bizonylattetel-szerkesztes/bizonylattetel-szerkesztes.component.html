@@ -37,6 +37,13 @@
           <button class="toolbutton" (click)="AfakulcsZoom()" type="button">...</button>
       </div>
 
+      <div class="editform-row">
+        <div class="editform-label">Tömeg, kg</div>
+        <input type="number" class="editform-number" id="tomegkg" name="tomegkg"
+               [(ngModel)]="TetelDtoEdited.Tomegkg"
+               (focusout)="tetelcalc($event)"
+               min="0">
+      </div>
     </div>
 
     <div class="editform-card">

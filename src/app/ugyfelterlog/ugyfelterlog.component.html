@@ -1,0 +1,21 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>{{ugyfelterlogservice.cim}}</h5>
+  <app-toolbar [Szurok]="szurok"
+               [(szempont)]="szempont"
+               [(minta)]="minta"
+               (Kereses)="onKereses()"
+               [visUj]="false">
+  </app-toolbar>
+
+  <app-tabla #tabla
+             [items]="Dto"
+             [colsets]="ugyfelterlogservice.GridSettings"
+             [enIdclick]="false">
+  </app-tabla>
+
+  <app-toolbarfooter [enKereses]="!elsokereses"
+                     [rekordszam]="Dto.length"
+                     [osszesrekord]="OsszesRekord"
+                     (KeresesTovabb)="onKeresesTovabb()">
+  </app-toolbarfooter>
+</div>

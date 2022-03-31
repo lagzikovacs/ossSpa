@@ -1,0 +1,27 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>{{bizonylatLeiro.BizonylatNev}} kibocsátás</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <ng-container *ngIf="!bizonylatLeiro.GenBizonylatszam">
+      <div class="editform-row">
+        <div>
+          <div class="editform-label">Bizonylatszám</div>
+          <input type="text" class="editform-edit em10width" appAutofocus formControlName="bizonylatszam">
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="bizonylatLeiro.GenBizonylatszam">
+      <div class="editform-row">
+        Biztosan kibocsátja ezt a bizonylatot?
+      </div>
+    </ng-container>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
+    </div>
+
+  </form>
+</div>

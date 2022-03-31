@@ -1,0 +1,32 @@
+table, th, td {
+  border: 1px solid $keretszin;
+  font-weight: normal;
+  font-style: normal;
+  padding: 6px;
+  border-collapse: collapse;
+}
+table tr.active td {
+  background-color: $kivalasztottszin;
+}
+table tr.inactive td {
+  background-color: $hatterszin;
+}
+
+%tabla-kontrol-base {
+  color: $kontrolszin;
+  cursor: pointer;
+  text-align: right;
+  padding-left: 0.5em;
+  padding-right: 0.5em
+}
+.tabla-kontrol-id {
+  @extend %tabla-kontrol-base;
+
+  width: 4em;
+  text-decoration: underline;
+}
+.tabla-kontrol-icon {
+  @extend %tabla-kontrol-base;
+
+  width: 1em;
+}

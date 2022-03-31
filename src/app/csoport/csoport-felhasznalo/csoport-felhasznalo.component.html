@@ -1,0 +1,14 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>A csoport felhasználói</h5>
+  <table>
+    <tbody>
+    <tr *ngFor="let item of DtoCsoportFelhasznalo; let i = index" [className]="'inactive'">
+      <td>
+        <input type="checkbox" [checked]="item.Csoporttag" (click)="checkFelhasznalo(i)">
+      </td>
+      <td>{{item.Azonosito}}</td>
+      <td>{{item.Nev}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

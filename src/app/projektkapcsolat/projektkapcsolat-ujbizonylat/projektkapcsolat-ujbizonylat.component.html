@@ -1,0 +1,20 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>Új bizonylat</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <div class="editform-row">
+      <div class="editform-label">Bizonylattipus</div>
+      <select type="text" class="editform-combo" formControlName="bizonylattipus">
+        <option *ngFor="let s of bizonylatservice.tipusok; let i = index" [value]="i" [disabled]=s[2]>{{s[0]}}</option>
+      </select>
+    </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
+    </div>
+
+  </form>
+</div>
+

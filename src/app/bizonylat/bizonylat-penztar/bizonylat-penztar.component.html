@@ -1,0 +1,66 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>{{bizonylatLeiro.BizonylatNev}} pénztári kezelése</h5>
+
+  <ng-container *ngIf="penztarDto.length > 0 && !penztarkivalasztva">
+    <div>A bizonylat pénznemének megfelelő nyitott pénztárak a következők, válassza ki a megfelelőt:</div>
+    <table>
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>Pénztár</th>
+        <th>Pénznem</th>
+        <th>Egyenleg</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of penztarDto; let i = index" class="inactive">
+        <td class="tabla-kontrol-id" (click)="penztarvalasztas(i)">{{item.Penztarkod}}</td>
+        <td>{{item.Penztar1}}</td>
+        <td>{{item.Penznem}}</td>
+        <td>{{item.Egyenleg}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </ng-container>
+
+  <ng-container *ngIf="penztarkivalasztva">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+
+      <div class="editform-row">
+        <div class="editform-row-block">
+            <div class="editform-label">Pénztár</div>
+            <input type="text" class="editform-edit em15width" appAutofocus formControlName="penztar">
+        </div>
+
+        <div class="editform-row-block">
+            <div class="editform-label">Pénznem</div>
+            <input type="text" class="editform-edit penznemwidth" formControlName="penznem">
+        </div>
+
+        <div class="editform-row-block">
+            <div class="editform-label">Egyenleg</div>
+            <input type="number" class="editform-number" formControlName="egyenleg">
+        </div>
+      </div>
+
+      <div class="editform-row">
+          <div class="editform-label">Bizonylat brutto</div>
+          <input type="number" class="editform-number" formControlName="osszeg">
+      </div>
+
+      <div class="editform-row">
+          <div class="editform-label">Megjegyzés</div>
+          <input type="text" class="editform-edit megjegyzeswidth" formControlName="megjegyzes">
+      </div>
+
+      <div class="editform-row-bottom">
+        <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+        <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
+      </div>
+    </form>
+  </ng-container>
+
+  <ng-container *ngIf="penztarDto.length === 0">
+    <div>Nincs a bizonylat pénznemének megfelelő nyitott pénztár!</div>
+  </ng-container>
+</div>

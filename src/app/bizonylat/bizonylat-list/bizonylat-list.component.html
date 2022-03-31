@@ -1,0 +1,46 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>{{bizonylatLeiro.BizonylatNev}}</h5>
+  <app-bizonylattoolbar [Megrendeles]="bizonylatTipus === 4"
+                        [MegrendelesSzurok]="megrendelesszurok"
+                        [Szurok]="szurok"
+                        [(megrendelesszempont)]="megrendelesszempont"
+                        [(szempont)]="szempont"
+                        [(minta)]="minta"
+                        (Kereses)="onKereses()"
+                        (Uj)="doUjtetel()">
+  </app-bizonylattoolbar>
+
+  <div appHscroll style="overflow-x: auto;overflow-y: hidden">
+    <app-bizonylattabla #tabla
+                        [items]="Dto"
+                        (forid)="onId($event)"
+                        [ujTemplate]="griduj"
+                        [egyTemplate]="gridegy">
+    </app-bizonylattabla>
+  </div>
+
+  <ng-template #griduj>
+    <app-bizonylat-szerkesztes [uj]="true"
+                               [bizonylatTipus]="bizonylatTipus"
+                               [bizonylatLeiro]="bizonylatLeiro"
+                               (eventSzerkesztesUtan)="onUjtetelkesz($event)">
+    </app-bizonylat-szerkesztes>
+  </ng-template>
+
+  <ng-template #gridegy>
+    <app-bizonylat-egy [DtoOriginal]="Dto[DtoSelectedIndex]"
+                       [bizonylatTipus]="bizonylatTipus"
+                       [bizonylatLeiro]="bizonylatLeiro"
+                       [enTorles]="true"
+                       [(egymode)]="egybizonylat_egymode"
+                       (eventSzerkesztesutan)="onSzerkesztesutan($event)"
+                       (eventTorlesutan)="onTorlesutan()">
+    </app-bizonylat-egy>
+  </ng-template>
+
+  <app-toolbarfooter [enKereses]="!elsokereses"
+                     [rekordszam]="Dto.length"
+                     [osszesrekord]="OsszesRekord"
+                     (KeresesTovabb)="onKeresesTovabb()">
+  </app-toolbarfooter>
+</div>

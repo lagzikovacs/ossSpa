@@ -1,0 +1,29 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>Ügyféltér</h5>
+
+  <img src="assets/ossspa/gsg.jpg" style="margin-top: 8px;margin-bottom: 8px" alt="GSG">
+
+  <ng-container *ngIf="!bejelentkezve">
+    <p>Üdvözöljük, ön a GridSolar Group Kft. informatikai rendszerét (OSS) használja. Kérjük a levélben kapott linket kezelje bizalmasan!</p>
+    <button [disabled]="eppFrissit" (click)="folytatas()" class="toolbutton">
+      Folytatás
+    </button>
+  </ng-container>
+
+  <ng-container *ngIf="bejelentkezve">
+    <p>Üdvözöljük <b>{{ugyfelDto.Nev}}</b> ({{ugyfelDto.Cim}}, {{ugyfelDto.Telefon}}, {{ugyfelDto.Email}}) az önnel kapcsolatos tárolt adatok a következők:</p>
+    <app-ugyfelter-projekt-tabla [Dto]="lstProjektDto" [megjegyzesIs]="false" [(selectedrow)]="pi" (forid)="projektvalasztas($event)"></app-ugyfelter-projekt-tabla>
+  </ng-container>
+
+  <ng-container *ngIf="projektkod > 0">
+    Projekt Id: {{projektkod}}
+    <app-ugyfelter-bizonylatesirat [Dto]="lstProjektkapcsolatDto" (bizonylatclick)="bizonylatvalasztas($event)" (iratclick)="iratvalasztas($event)"></app-ugyfelter-bizonylatesirat>
+  </ng-container>
+
+  <ng-container *ngIf="iratkod > 0">
+    Irat azonosító: {{iratkod}}
+    <app-ugyfelter-dokumentum [Dto]="lstDokumentumDto" (dokumentumclick)="dokumentumvalasztas($event)"></app-ugyfelter-dokumentum>
+  </ng-container>
+</div>
+
+

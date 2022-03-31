@@ -1,0 +1,42 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>Új vagy felülírás</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div class="editform-row">
+        <div class="editform-label">Fuvarszámla</div>
+        <input type="text" class="editform-edit zoomedit em15width" appAutofocus formControlName="bizonylatszam">
+        <button class="toolbutton" type="button" (click)="BizonylatZoom()">...</button>
+    </div>
+
+    <div class="editform-row">
+        <div class="editform-label">Fuvardíj</div>
+        <input type="number" class="editform-number" formControlName="fuvardij">
+    </div>
+
+    <div class="editform-row">
+        <div class="editform-label">Fuvardíj pénzneme</div>
+        <input type="text" class="editform-edit penznemwidth" formControlName="fuvardijpenzneme">
+    </div>
+
+    <div class="editform-row">
+        <div class="editform-label">Fuvardíj árfolyama</div>
+        <input type="number" class="editform-number" formControlName="fuvardijarfolyama">
+    </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="doCancel()">Mégsem</button>
+    </div>
+  </form>
+
+  <div id="fuvarszamlazoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
+    <div class="zoom-modal-content-complex">
+      <ng-container *ngIf="SzerkesztesMode === 1">
+        <app-bizonylat-zoom [maszk]="dtoFuvarszamla.Bizonylatszam"
+                            (eventStopzoom)="eventStopZoom()"
+                            (eventSelectzoom)="eventSelectzoom($event)">
+        </app-bizonylat-zoom>
+      </ng-container>
+    </div>
+  </div>
+</div>

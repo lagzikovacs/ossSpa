@@ -1,0 +1,21 @@
+<div class="toolbar">
+  <select [disabled]="!enKereses" #Csoportszempont type="text" class="toolcombo">
+    <option *ngFor="let s of Csoportszurok; let i = index" [value]="i" [selected]="i == _csoportszempont">{{s}}</option>
+  </select>
+
+  <select [disabled]="!enKereses" #Szempont type="text" class="toolcombo">
+    <option *ngFor="let sz of Szurok; let i = index" [value]="i" [selected]="i == _szempont">{{sz}}</option>
+  </select>
+
+  <input [disabled]="!enKereses" #Minta type="text" class="tooledit em10width" appAutofocus>
+
+  <button [disabled]="!enKereses" (click)="doKereses()" class="toolbutton" type="button">
+    <i class="fa fa-search" aria-hidden="true"></i>
+  </button>
+  <button *ngIf="visUj" [disabled]="!enUj" (click)="doUj()" class="toolbutton" type="button">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+  </button>
+  <button *ngIf="visZoom" (click)="doStopZoom()" class="toolbutton" type="button">
+    <i class="fa fa-close" aria-hidden="true"></i>
+  </button>
+</div>

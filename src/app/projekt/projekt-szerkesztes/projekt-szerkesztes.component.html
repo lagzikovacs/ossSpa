@@ -1,0 +1,88 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5 *ngIf="uj">Új {{projektservice.cim | lowercase}}</h5>
+  <h5 *ngIf="!uj">{{projektservice.cim}} módosítása</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <div class="editform-card" style="margin-right: 3em">
+      <div class="editform-row">
+        <div class="editform-label">Ügyfél</div>
+        <input type="text" class="editform-edit zoomedit ugyfelwidth" appAutofocus formControlName="ugyfelnev">
+        <button type="button" class="toolbutton" (click)="UgyfelZoom()">...</button>
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Cím</div>
+        <input type="text" class="editform-edit cimwidth" formControlName="ugyfelcim">
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Telepítési cím</div>
+        <input type="text" class="editform-edit cimwidth" formControlName="telepitesicim">
+      </div>
+    </div>
+
+    <div class="editform-card" style="margin-right: 3em">
+      <div class="editform-row">
+        <div class="editform-label">A projekt jellege</div>
+        <input type="text" class="editform-edit em20width" formControlName="projektjellege">
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Vállalási ár</div>
+        <input type="number" class="editform-number" formControlName="var">
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Pénznem</div>
+        <input type="text" class="editform-edit zoomedit penznemwidth" formControlName="penznem">
+        <button class="toolbutton" type="button" (click)="PenznemZoom()">...</button>
+      </div>
+    </div>
+
+    <div class="editform-card">
+      <div class="editform-row">
+        <div class="editform-label">Keletkezett</div>
+        <input type="date" class="editform-date" formControlName="keletkezett">
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Megrendelve</div>
+        <input type="date" class="editform-date" formControlName="megrendelve">
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Kivitelezési határidő</div>
+        <input type="date" class="editform-date" formControlName="kivhat">
+      </div>
+    </div>
+
+    <div class="editform-row-bottom">
+        <div class="editform-label">Megjegyzés</div>
+        <input type="text" class="editform-edit megjegyzeswidth" formControlName="megjegyzes">
+    </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
+    </div>
+  </form>
+
+  <div id="projektzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
+    <ng-container *ngIf="SzerkesztesMode === 1">
+      <div class="zoom-modal-content-complex">
+      <app-ugyfel-list [maszk]="DtoEdited.Ugyfelnev || ''"
+                       (eventSelectzoom)="onUgyfelSelectzoom($event)"
+                       (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="SzerkesztesMode === 2">
+      <div class="zoom-modal-content-primitive">
+      <app-penznem-list [maszk]="DtoEdited.Penznem || ''"
+                        (eventSelectzoom)="onPenznemSelectzoom($event)"
+                        (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
+      </div>
+    </ng-container>
+  </div>
+</div>

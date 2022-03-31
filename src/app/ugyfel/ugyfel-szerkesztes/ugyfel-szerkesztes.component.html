@@ -1,0 +1,120 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5 *ngIf="uj">Új {{ugyfelservice.cim | lowercase}}</h5>
+  <h5 *ngIf="!uj">{{ugyfelservice.cim}} módosítása</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <div class="editform-card">
+      <div class="editform-row">
+        <div class="editform-label">Név</div>
+        <input type="text" class="editform-edit ugyfelwidth" appAutofocus formControlName="nev">
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-row-block">
+          <div class="editform-label">Ir. szám</div>
+          <input type="text" class="editform-edit em4width" formControlName="iranyitoszam">
+        </div>
+
+        <div class="editform-row-block">
+          <div class="editform-label">Helységnév</div>
+          <input type="text" class="editform-edit zoomedit primitivwidth" formControlName="helysegnev">
+          <button class="toolbutton" type="button" (click)="HelysegZoom()">...</button>
+        </div>
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-row-block">
+          <div class="editform-label">Közterület</div>
+          <input type="text" class="editform-edit em10width" formControlName="kozterulet">
+        </div>
+
+        <div class="editform-row-block">
+          <div class="editform-label">Közterület tipus</div>
+          <input type="text" class="editform-edit em6width" formControlName="kozterulettipus">
+        </div>
+
+        <div class="editform-row-block">
+          <div class="editform-label">Házszám</div>
+          <input type="text" class="editform-edit em4width" formControlName="hazszam">
+        </div>
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-row-block">
+          <div class="editform-label">Telefon</div>
+          <input type="text" class="editform-edit em10width" formControlName="telefon">
+        </div>
+
+        <div class="editform-row-block">
+          <div class="editform-label">Email</div>
+          <input type="text" class="editform-edit emailwidth" formControlName="email">
+        </div>
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Adószám</div>
+        <input type="text" class="editform-edit em10width" formControlName="adoszam">
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">EU adószám</div>
+        <input type="text" class="editform-edit em10width" formControlName="euadoszam">
+      </div>
+    </div>
+
+    <div class="editform-card">
+      <div class="editform-row">
+          <div class="editform-label">Cég</div>
+          <input type="text" class="editform-edit em15width" formControlName="ceg">
+      </div>
+
+      <div class="editform-row">
+          <div class="editform-label">Beosztás</div>
+          <input type="text" class="editform-edit em15width" formControlName="beosztas">
+      </div>
+
+      <div class="editform-row">
+          <div class="editform-label">Tevékenység</div>
+          <input type="text" class="editform-edit zoomedit primitivwidth" formControlName="tevekenyseg">
+          <button class="toolbutton" type="button" (click)="TevekenysegZoom()">...</button>
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Egyéb link</div>
+        <input type="text" class="editform-edit megjegyzeswidth" formControlName="egyeblink">
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Ajánlotta</div>
+        <input type="text" class="editform-edit megjegyzeswidth" formControlName="ajanlotta">
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Megjegyzés</div>
+        <input type="text" class="editform-edit megjegyzeswidth" formControlName="megjegyzes">
+      </div>
+    </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
+    </div>
+  </form>
+
+  <div id="ugyfelzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
+    <div class="zoom-modal-content-primitive">
+      <ng-container *ngIf="SzerkesztesMode === 1">
+        <app-helyseg-list [maszk]="DtoEdited.Helysegnev || ''"
+                          (eventSelectzoom)="onHelysegSelectzoom($event)"
+                          (eventStopzoom)="onHelysegStopzoom()"></app-helyseg-list>
+      </ng-container>
+      <ng-container *ngIf="SzerkesztesMode === 2">
+        <app-tevekenyseg-list [maszk]="DtoEdited.Tevekenyseg || ''"
+                          (eventSelectzoom)="onTevekenysegSelectzoom($event)"
+                          (eventStopzoom)="onTevekenysegStopzoom()"></app-tevekenyseg-list>
+      </ng-container>
+    </div>
+  </div>
+</div>
+

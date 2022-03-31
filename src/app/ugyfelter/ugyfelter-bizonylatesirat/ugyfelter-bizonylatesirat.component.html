@@ -1,0 +1,31 @@
+<div class="alapkeret">
+  <table class="table table-bordered table-sm table-responsive" style="border: none">
+    <thead>
+    <tr>
+      <th></th>
+      <th>Id</th>
+      <th>Kapcsolat</th>
+      <th>Tipus</th>
+      <th>Azonosító</th>
+      <th>Keletkezett</th>
+      <th>Irány</th>
+      <th>Tárgy</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of Dto; let i = index">
+      <td *ngIf="item.Kapcsolat=='Bizonylat'" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"(click)="bizonylatvalasztas(i)"><i class="fa fa-arrow-down" aria-hidden="true"></i></td>
+      <td *ngIf="item.Kapcsolat=='Irat'"></td>
+      <td *ngIf="item.Kapcsolat=='Bizonylat'">{{item.Projektkapcsolatkod}}</td>
+      <td *ngIf="item.Kapcsolat=='Irat'" style="text-align: right; color: blue; text-decoration: underline; cursor: pointer"
+          (click)="iratvalasztas(i)">{{item.Projektkapcsolatkod}}</td>
+      <td>{{item.Kapcsolat}}</td>
+      <td>{{item.Tipus}}</td>
+      <td>{{item.Azonosito}}</td>
+      <td>{{item.Keletkezett | datehun}}</td>
+      <td>{{item.Irany}}</td>
+      <td>{{item.Targy}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

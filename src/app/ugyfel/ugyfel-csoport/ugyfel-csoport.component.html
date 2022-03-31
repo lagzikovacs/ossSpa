@@ -1,0 +1,18 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>Csoport</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <div class="editform-row">
+      <select type="text" class="editform-combo" formControlName="ugyfeltipus">
+        <option *ngFor="let s of entries; let i = index" [value]="i">{{s}}</option>
+      </select>
+    </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
+    </div>
+  </form>
+</div>
+

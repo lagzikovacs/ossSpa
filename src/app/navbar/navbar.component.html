@@ -1,0 +1,32 @@
+<div class="navbar">
+  <a style="cursor: pointer" (click)="opensidebar()">{{verzioesbuild}}</a>
+</div>
+
+<div id="sidebar" class="sidebar-modal" role="dialog"  data-backdrop="true" data-keyboard="false">
+  <div class="sidebar-modal-content">
+
+    <div style="margin-bottom: 1em">
+      <a style="cursor: pointer" (click)="closesidebar()"><i class="fa fa-close" aria-hidden="true"></i></a>
+    </div>
+
+    <div *ngFor="let node of angularmenudto;let i = index">
+      <div class="sidebar-item">
+        <a (click)="setselected(i)">{{node.Title}}</a>
+      </div>
+
+      <ng-container *ngIf="i === selected">
+        <div style="margin-left: 3em" *ngFor="let item of node.Sub">
+          <div class="sidebar-item" *ngIf="item.Title !== 'divider' && item.Enabled">
+            <a (click)="menuclick(item.RouterLink)">{{item.Title}}</a>
+          </div>
+          <div class="sidebar-item-disabled" *ngIf="item.Title !== 'divider' && !item.Enabled">
+            {{item.Title}}
+          </div>
+          <div class="sidebar-item-divider" *ngIf="item.Title === 'divider'">
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+  </div>
+</div>

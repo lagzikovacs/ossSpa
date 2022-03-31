@@ -1,0 +1,189 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <div class="tabla-toolbar">
+    <button (click)="doNav(2)" class="toolbutton">
+      <i class="fa fa-file" aria-hidden="true"></i>
+    </button>
+    <button [disabled]="!torlesenabled()" (click)="doNav(5)" class="toolbutton">
+      <i class="fa fa-minus" aria-hidden="true"></i>
+    </button>
+    <button [disabled]="!modositasenabled()" (click)="doNav(6)" class="toolbutton">
+      <i class="fa fa-edit" aria-hidden="true"></i>
+    </button>
+    <button [disabled]="!kibocsatasenabled()" (click)="doNav(8)" class="toolbutton">
+      Kibocsátás
+    </button>
+    <button (click)="doNav(1)" class="toolbutton">
+      <i class="fa fa-print" aria-hidden="true"></i>Nyomtatás
+    </button>
+    <button [disabled]="!stornoenabled()" (click)="doNav(9)" class="toolbutton">
+      Storno
+    </button>
+    <button [disabled]="!penztarenabled()" (click)="doNav(10)" class="toolbutton">
+      Pénztár
+    </button>
+    <button [disabled]="!fuvarszamlaenabled()" (click)="doNav(16)" class="toolbutton">
+      Fuvarszámla
+    </button>
+    <button [disabled]="!kiszallitvaenabled()" (click)="doNav(12)" class="toolbutton">
+      Kiszállítva
+    </button>
+    <button (click)="doNav(3)" class="toolbutton">
+      Kifizetés
+    </button>
+    <button [disabled]="!kifizetesrendbenenabled()" (click)="doNav(11)" class="toolbutton">
+      Kifizetés rendben
+    </button>
+    <button (click)="doNav(4)" class="toolbutton">
+      Irat
+    </button>
+    <button (click)="doNav(7)" class="toolbutton">
+      Erről
+    </button>
+    <button [disabled]="!enProjekt" (click)="doNav(15)" class="toolbutton">
+      Projekt
+    </button>
+    <button (click)="doNav(17)" class="toolbutton">
+      <i class="fa fa-angle-right" aria-hidden="true"></i>
+      Vágólapra
+    </button>
+  </div>
+
+<!--  export enum BizonylatEgyMode {
+  Blank = 0,
+  Nyomtatas = 1,
+  Reszletek = 2,
+  Kifizetes = 3,
+  Irat = 4,
+  Torles = 5,
+  Modositas = 6,
+  Errol = 7,
+  Kibocsatas = 8,
+  Storno = 9,
+  Penztar = 10,
+  Kifizetesrendben = 11,
+  Kiszallitva = 12,
+  Formaiellenorzes = 13,
+  OSNxml = 14,
+  Projekt = 15
+  }-->
+
+  <ng-container *ngIf="egymode === 1">
+    <div [@rowanimation]>
+      <app-bizonylat-nyomtatas [Bizonylatkod]="Dto.Bizonylatkod">
+      </app-bizonylat-nyomtatas>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="egymode === 2">
+    <div [@rowanimation]>
+      <app-bizonylat-reszletek [Bizonylatkod]="Dto.Bizonylatkod"
+                               [bizonylatLeiro]="bizonylatLeiro">
+      </app-bizonylat-reszletek>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="egymode === 3">
+    <div [@rowanimation]>
+      <app-kifizetes-list [Bizonylat]="Dto">
+      </app-kifizetes-list>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="egymode === 4">
+    <div [@rowanimation]>
+      <app-bizonylatkapcsolat-list [Bizonylatkod]="Dto.Bizonylatkod"
+                                   [Ugyfelkod]="Dto.Ugyfelkod">
+      </app-bizonylatkapcsolat-list>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="egymode === 5">
+    <div [@rowanimation]>
+      <app-tetel-torles [cim]="bizonylatLeiro.BizonylatNev"
+                        (eventTorles)="onTorles($event)">
+      </app-tetel-torles>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="egymode === 6">
+    <div [@rowanimation]>
+      <app-bizonylat-szerkesztes [uj]="false"
+                                 [bizonylatTipus]="bizonylatTipus"
+                                 [bizonylatLeiro]="bizonylatLeiro"
+                                 [Bizonylatkod]="Dto.Bizonylatkod"
+                                 (eventSzerkesztesUtan)="onSzerkesztesUtan($event)">
+      </app-bizonylat-szerkesztes>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="egymode === 7">
+    <div [@rowanimation]>
+      <app-bizonylat-errol [Bizonylatkod]="Dto.Bizonylatkod"
+                           (eventBizonylaterrolUtan)="onBizonylaterrolUtan($event)">
+      </app-bizonylat-errol>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="egymode === 8">
+    <div [@rowanimation]>
+      <app-bizonylat-kibocsatas [DtoOriginal]="Dto"
+                                [bizonylatLeiro]="bizonylatLeiro"
+                                (eventKibocsatasUtan)="onKibocsatasUtan($event)"
+                                (eventKibocsatasUtanKeszpenzes)="onKibocsatasUtanKeszpenzes($event)">
+      </app-bizonylat-kibocsatas>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="egymode === 9">
+    <div [@rowanimation]>
+      <app-bizonylat-storno [DtoOriginal]="Dto"
+                            [bizonylatLeiro]="bizonylatLeiro"
+                            (eventStornozando)="onStornozando($event)"
+                            (eventStornozo)="onStornozo($event)"
+                            (eventStornoMegsem)="onStornoMegsem()">
+      </app-bizonylat-storno>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="egymode === 10">
+    <div [@rowanimation]>
+      <app-bizonylat-penztar [DtoOriginal]="Dto"
+                             [bizonylatTipus]="bizonylatTipus"
+                             [bizonylatLeiro]="bizonylatLeiro"
+                             (eventPenztarUtan)="onPenztarUtan()">
+      </app-bizonylat-penztar>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="egymode === 11">
+    <div [@rowanimation]>
+      <app-bizonylat-kifizetesrendben [DtoOriginal]="Dto"
+                                      [bizonylatLeiro]="bizonylatLeiro"
+                                      (eventKifizetesrendbenUtan)="onKifizetesrendbenUtan($event)">
+      </app-bizonylat-kifizetesrendben>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="egymode === 12">
+    <div [@rowanimation]>
+      <app-bizonylat-kiszallitva [DtoOriginal]="Dto"
+                                 [bizonylatLeiro]="bizonylatLeiro"
+                                 (eventKiszallitvaUtan)="onKiszallitvaUtan($event)">
+      </app-bizonylat-kiszallitva>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="egymode === 15">
+    <div [@rowanimation]>
+      <app-bizonylat-projektje [item]="Dto"></app-bizonylat-projektje>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="egymode === 16">
+    <div [@rowanimation]>
+      <app-bizonylat-fuvarszamla  [dtoAnyagszamla]="Dto"
+                                  (eventOK)="onFuvarszamlaUtan($event)">
+      </app-bizonylat-fuvarszamla>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="egymode === 17">
+    <div [@rowanimation]>
+      <app-vagolap-bizonylathoz [item]="Dto" [tipus]="bizonylatLeiro.BizonylatNev">
+      </app-vagolap-bizonylathoz>
+    </div>
+  </ng-container>
+</div>
+

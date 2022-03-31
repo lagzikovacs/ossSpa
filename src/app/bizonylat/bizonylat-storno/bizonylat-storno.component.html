@@ -1,0 +1,10 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>{{bizonylatLeiro.BizonylatNev}} storno</h5>
+  <div class="editform-row">
+    Biztosan stornozni akarja ezt a tételt?
+  </div>
+  <div class="editform-row-bottom">
+    <button class="toolbutton okbutton" type="button" (click)="ok()">Ok</button>
+    <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
+  </div>
+</div>

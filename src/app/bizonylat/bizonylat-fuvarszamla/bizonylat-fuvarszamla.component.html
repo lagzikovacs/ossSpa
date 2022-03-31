@@ -1,0 +1,31 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>Fuvarszámla</h5>
+  <div>
+    <button (click)="doPage(1)" class="toolbutton">
+      <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>
+      Új vagy felülírás
+    </button>
+    <button (click)="doPage(2)" class="toolbutton">
+      <i class="fa fa-minus" style="margin-right: 3px" aria-hidden="true"></i>
+      Fuvardíjak törlése
+    </button>
+  </div>
+
+  <ng-container *ngIf="EgyMode === 1">
+    <div [@rowanimation]>
+      <app-bizonylat-fuvarszamla-uj [dtoAnyagszamla]="dtoAnyagszamla"
+                                    (eventMegsem)="onMegsem()"
+                                    (eventOK)="onOK($event)">
+      </app-bizonylat-fuvarszamla-uj>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="EgyMode === 2">
+    <div [@rowanimation]>
+      <app-bizonylat-fuvarszamla-torles [dtoAnyagszamla]="dtoAnyagszamla"
+                                        (eventMegsem)="onMegsem()"
+                                        (eventOK)="onOK($event)">
+      </app-bizonylat-fuvarszamla-torles>
+    </div>
+  </ng-container>
+
+</div>

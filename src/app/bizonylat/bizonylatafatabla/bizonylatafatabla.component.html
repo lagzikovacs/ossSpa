@@ -1,0 +1,25 @@
+<table>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>ÁFA %</th>
+    <th>Netto</th>
+    <th>ÁFA</th>
+    <th>Brutto</th>
+  </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngFor="let item of Dto; let i = index">
+    <tr [className]="false ? 'active' : 'inactive'">
+      <td *ngIf="enIdclick" class="tabla-kontrol-id" (click)="setClickedRow(i)">{{item.Bizonylatafakod}}</td>
+      <td *ngIf="!enIdclick">{{item.Bizonylatafakod}}</td>
+      <td style="text-align: right">{{item.Afamerteke | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.Netto | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.Afa | number: '1.2-2'}}</td>
+      <td style="text-align: right">{{item.Brutto | number: '1.2-2'}}</td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>
+
+

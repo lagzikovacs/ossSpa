@@ -1,0 +1,19 @@
+<div class="alapkeret">
+  <h5>Státusz</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <div class="editform-row">
+      <select type="text" class="editform-combo" formControlName="statusz">
+        <option *ngFor="let s of projektservice.statuszszurok; let i = index" [value]="i">{{s}}</option>
+      </select>
+    </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
+    </div>
+  </form>
+
+</div>
+

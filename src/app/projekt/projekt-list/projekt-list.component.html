@@ -1,0 +1,156 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>{{projektservice.cim}}</h5>
+  <app-projekttoolbar [Statuszszurok]="projektservice.statuszszurok"
+                      [Jegyzetszurok]="jegyzetszurok"
+                      [Szurok]="szurok"
+                      [(statuszszempont)]="statuszszempont"
+                      [(jegyzetszempont)]="jegyzetszempont"
+                      [(szempont)]="szempont"
+                      [(minta)]="minta"
+                      (Kereses)="onKereses()"
+                      [enUj]="mod" (Uj)="doUjtetel()"
+                      (Export)="onExport($event)">
+  </app-projekttoolbar>
+
+  <ng-container *ngIf="export">
+    <app-projekt-export [projektcsoport]="projektcsoport"
+                        [statuszszempont]="statuszszempont"
+                        (eventBezar)="doExportbezar()"></app-projekt-export>
+  </ng-container>
+
+  <div appHscroll style="overflow-x: auto;overflow-y: hidden">
+    <app-projekt-tabla id="tabla" #tabla
+                       [Dto]="Dto"
+                       (forid)="onId($event)"
+                       [ujTemplate]="griduj"
+                       [egyTemplate]="gridegy">
+    </app-projekt-tabla>
+  </div>
+
+  <ng-template #griduj>
+    <app-projekt-szerkesztes [uj]="true"
+                             (eventSzerkeszteskesz)="onUjtetelkesz($event)">
+    </app-projekt-szerkesztes>
+  </ng-template>
+
+  <ng-template #gridegy>
+    <div class="alapkeret">
+      <div class="tabla-toolbar">
+        <button (click)="doNav(1)" class="toolbutton">
+          <i class="fa fa-file" aria-hidden="true"></i>
+        </button>
+
+        <button [disabled]="!mod" (click)="doNav(2)" class="toolbutton">
+          <i class="fa fa-minus" aria-hidden="true"></i>
+        </button>
+
+        <button [disabled]="!mod" (click)="doNav(3)" class="toolbutton">
+          <i class="fa fa-edit" aria-hidden="true"></i>
+        </button>
+
+        <button [disabled]="!mod" (click)="doNav(19)" class="toolbutton">
+          Stsz
+        </button>
+        <button [disabled]="!mod" (click)="doNav(20)" class="toolbutton">
+          Műszaki állapot
+        </button>
+        <button (click)="doNav(24)" class="toolbutton">
+          Bizonylat és irat
+        </button>
+        <button (click)="doNav(26)" class="toolbutton">
+          Jegyzet
+        </button>
+        <button (click)="doNav(23)" class="toolbutton">
+          Iratminta
+        </button>
+        <button (click)="doNav(43)" class="toolbutton">
+          Felmérés
+        </button>
+        <button (click)="doNav(44)" class="toolbutton">
+          Hibabejelentés
+        </button>
+      </div>
+
+      <ng-container *ngIf="egymode === 1">
+        <div [@rowanimation]>
+          <app-reszletek [cim]="projektservice.cim"
+                         [item]="Dto[DtoSelectedIndex]"
+                         [colsets]="projektservice.ReszletekSettings">
+          </app-reszletek>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 2">
+        <div [@rowanimation]>
+          <app-tetel-torles [cim]="projektservice.cim"
+                            (eventTorles)="onTorles($event)">
+          </app-tetel-torles>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 3">
+        <div [@rowanimation]>
+          <app-projekt-szerkesztes [uj]="false"
+                                   [DtoOriginal]="Dto[DtoSelectedIndex]"
+                                   (eventSzerkeszteskesz)="onModositaskesz($event)">
+          </app-projekt-szerkesztes>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="egymode === 19">
+        <div [@rowanimation]><app-projekt-statusz [DtoOriginal]="Dto[DtoSelectedIndex]"
+                                                  (eventOk)="onSegedOk($event)"
+                                                  (eventCancel)="onSegedCancel()">
+        </app-projekt-statusz></div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 20">
+        <div [@rowanimation]>
+          <app-projekt-muszakiallapot [DtoOriginal]="Dto[DtoSelectedIndex]"
+                                      (eventOk)="onSegedOk($event)"
+                                      (eventCancel)="onSegedCancel()">
+          </app-projekt-muszakiallapot>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="egymode === 23">
+        <div [@rowanimation]>
+          <app-projekt-iratminta [Projektkod]="Dto[DtoSelectedIndex].Projektkod"
+                                 (eventMunkalaputan)="onMunkalaputan()">
+          </app-projekt-iratminta>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 24">
+        <div [@rowanimation]>
+          <app-projektkapcsolat-list [Projektkod]="Dto[DtoSelectedIndex].Projektkod"
+                                     [Ugyfelkod]="Dto[DtoSelectedIndex].Ugyfelkod">
+          </app-projektkapcsolat-list>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 26">
+        <div [@rowanimation]>
+          <app-projekt-jegyzet-list [Projektkod]="Dto[DtoSelectedIndex].Projektkod">
+          </app-projekt-jegyzet-list>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="egymode === 43">
+        <div [@rowanimation]>
+          <app-felmeres-list [ProjektBol]="true" [ProjektDto]="Dto[DtoSelectedIndex]" [statusz]="0">
+          </app-felmeres-list>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="egymode === 44">
+        <div [@rowanimation]>
+          <app-hibabejelentes-list [ProjektBol]="true" [ProjektDto]="Dto[DtoSelectedIndex]">
+          </app-hibabejelentes-list>
+        </div>
+      </ng-container>
+    </div>
+  </ng-template>
+
+  <app-toolbarfooter [enKereses]="!elsokereses"
+                     [rekordszam]="Dto.length"
+                     [osszesrekord]="OsszesRekord"
+                     (KeresesTovabb)="onKeresesTovabb()">
+  </app-toolbarfooter>
+</div>
+
+

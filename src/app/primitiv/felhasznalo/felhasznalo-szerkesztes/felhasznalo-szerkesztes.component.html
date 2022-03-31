@@ -1,0 +1,48 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5 *ngIf="uj">Új {{felhasznaloservice.cim | lowercase}}</h5>
+  <h5 *ngIf="!uj">{{felhasznaloservice.cim}} módosítása</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <div class="editform-card">
+      <div class="editform-row">
+        <div class="editform-label">Azonosító</div>
+        <input type="text" class="editform-edit em10width" appAutofocus formControlName="azonosito">
+      </div>
+      <div class="editform-row">
+        <div class="editform-label">Név</div>
+        <input type="text" class="editform-edit primitivwidth" formControlName="nev">
+      </div>
+      <div class="editform-row">
+        <div class="editform-label">Telefon</div>
+        <input type="text" class="editform-edit em15width" formControlName="telefon">
+      </div>
+      <div class="editform-row">
+        <div class="editform-label">Email</div>
+        <input type="text" class="editform-edit em15width" formControlName="email">
+      </div>
+    </div>
+
+    <div class="editform-card">
+      <div class="editform-row">
+        <div class="editform-label">Státusz</div>
+        <select type="text" class="editform-combo" formControlName="statusz">
+          <option>OK</option>
+          <option>Tiltott</option>
+        </select>
+      </div>
+      <div class="editform-row">
+        <div class="editform-label">Log</div>
+        <select type="text" class="editform-combo" formControlName="logonlog">
+          <option value="false">Nem</option>
+          <option value="true">Igen</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
+    </div>
+  </form>
+</div>

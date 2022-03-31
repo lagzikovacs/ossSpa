@@ -1,0 +1,28 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>Új bizonylat erről</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+    <ng-container *ngIf="!kesz">
+      <div class="editform-row">
+        <div class="editform-label">Az új bizonylat tipusa</div>
+        <select type="text" class="editform-combo" formControlName="bizonylattipusok">
+          <option *ngFor="let s of bizonylatservice.tipusok; let i = index" [value]="i" [disabled]=s[2]>{{s[0]}}</option>
+        </select>
+      </div>
+
+      <div class="editform-row-bottom">
+        <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+        <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="kesz">
+      <div class="editform-row">
+        Az új bizonylat elkészült, bizonylatkód: {{ujbizonylatkod}}
+      </div>
+      <div class="editform-row-bottom">
+        <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      </div>
+    </ng-container>
+  </form>
+</div>

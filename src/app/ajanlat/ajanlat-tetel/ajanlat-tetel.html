@@ -1,0 +1,54 @@
+<div class="alapkeret">
+  <div [formGroup]="formTetel" autocomplete="off">
+    <div class="editform-row">
+        <div class="editform-label">{{item.TetelTipus}}</div>
+        <input type="text" class="editform-edit zoomedit cikkwidth" appAutofocus formControlName="cikk">
+        <button class="toolbutton" style="display: inline-block" type="button" (click)="CikkZoom()">...</button>
+    </div>
+
+    <div class="editform-row">
+      <div class="editform-row-block">
+        <div class="editform-label">Mennyiség</div>
+        <input type="number" class="editform-number" formControlName="mennyiseg">
+      </div>
+
+      <div class="editform-row-block">
+        <div class="editform-label">Egységár</div>
+        <input type="number" class="editform-number" formControlName="egysegar">
+      </div>
+    </div>
+
+    <div class="editform-row">
+      <div class="editform-row-block">
+        <div class="editform-label">Egys. teljesítmény</div>
+        <input type="number" class="editform-number" formControlName="egysegnyi">
+      </div>
+
+      <div class="editform-row-block">
+        <div class="editform-label">Garancia</div>
+        <input type="number" class="editform-number" formControlName="garancia">
+      </div>
+    </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="button" (click)="onSubmit()">Ok</button>
+      <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
+    </div>
+  </div>
+
+<!--  export eAjanlatSzerkesztesModeMode {
+  Blank = 0,
+  CikkZoom = 1
+  }-->
+
+  <div id="ajanlatzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
+    <div class="zoom-modal-content-complex">
+      <ng-container *ngIf="AjanlatSzerkesztesMode === 1">
+        <app-cikk-list [maszk]="item.CikkNev || ''"
+                       (eventSelectzoom)="onCikkSelectzoom($event)"
+                       (eventStopzoom)="onCikkStopzoom()"></app-cikk-list>
+      </ng-container>
+    </div>
+  </div>
+</div>
+

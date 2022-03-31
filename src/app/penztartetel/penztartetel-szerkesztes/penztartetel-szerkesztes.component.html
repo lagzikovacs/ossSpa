@@ -1,0 +1,59 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>Új pénztártétel</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <div class="editform-card">
+      <div class="editform-row">
+        <div class="editform-label">Dátum</div>
+        <input type="date" class="editform-date" formControlName="datum">
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Jogcím</div>
+        <select #jogcim type="text" class="editform-combo" formControlName="jogcim" (change)="jogcimchange()">
+          <option>Bevét korrekció</option>
+          <option>Kiadás korrekció</option>
+          <option>Pénzfelvét bankból</option>
+          <option>Befizetés bankba</option>
+          <option>Bejövő számla</option>
+          <option>Kimenő számla</option>
+          <option>Bérkifizetés</option>
+        </select>
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Bevétel</div>
+        <input #bevetel type="number" class="editform-number" formControlName="bevetel">
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Kiadás</div>
+        <input #kiadas type="number" class="editform-number" formControlName="kiadas">
+      </div>
+    </div>
+
+    <div class="editform-card">
+      <div class="editform-row">
+        <div class="editform-label">Ügyfél</div>
+        <input #ugyfel type="text" class="editform-edit ugyfelwidth" formControlName="ugyfel">
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Bizonylatszám</div>
+        <input #bizonylatszam type="text" class="editform-edit em15width" formControlName="bizonylatszam">
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Megjegyzés</div>
+        <input type="text" class="editform-edit megjegyzeswidth" formControlName="megjegyzes">
+      </div>
+    </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
+    </div>
+  </form>
+</div>
+

@@ -1,0 +1,37 @@
+<div class="alapkeret">
+  <h5 *ngIf="vagolapservice.Mode === 1">{{vagolapservice.cim}}</h5>
+
+  <ng-container *ngIf="vagolapservice.Mode === 1">
+    <div class="toolbar">
+      <button [disabled]="eppFrissit" (click)="torles()" class="toolbutton">
+        A vágólap törlése
+      </button>
+    </div>
+  </ng-container>
+
+  <table>
+    <thead>
+    <tr>
+      <th></th>
+      <th>Id</th>
+      <th>Azonosító</th>
+      <th>Tipus</th>
+      <th>Ügyfélnév</th>
+      <th>Ügyfélcím</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of vagolapservice.Dto; let i = index">
+      <td><input type="checkbox" [(ngModel)] = "item.selected" [disabled]="isdisabled(i)" /></td>
+      <td *ngIf="item.tipus === 0">{{item.iratkod}}</td>
+      <td *ngIf="item.tipus === 1">{{item.bizonylatkod}}</td>
+      <td *ngIf="item.tipus === 0"></td>
+      <td *ngIf="item.tipus === 1">{{item.bizonylatszam}}</td>
+      <td *ngIf="item.tipus === 0">{{item.irattipus}}</td>
+      <td *ngIf="item.tipus === 1">{{item.bizonylattipus}}</td>
+      <td class="ugyfelwidth">{{item.ugyfelnev}}</td>
+      <td>{{item.ugyfelcim}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

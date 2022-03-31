@@ -1,0 +1,40 @@
+<div class="alapkeret">
+  <h5>vCard</h5>
+  <table style="margin-bottom: 0.5em">
+    <tbody>
+      <tr [className]="'inactive'">
+        <td class="editform-label">Név:</td>
+        <td>{{Dto.Nev}}</td>
+      </tr>
+
+      <tr [className]="'inactive'">
+        <td class="editform-label">Cég:</td>
+        <td>{{Dto.Ceg}}</td>
+      </tr>
+
+      <tr [className]="'inactive'">
+        <td class="editform-label">Beosztás:</td>
+        <td>{{Dto.Beosztas}}</td>
+      </tr>
+
+      <tr [className]="'inactive'">
+        <td class="editform-label">Cím:</td>
+        <td>{{Dto.Iranyitoszam}} {{Dto.Helysegnev}}, {{Dto.Kozterulet}} {{Dto.Kozterulettipus}} {{Dto.Hazszam}}</td>
+      </tr>
+
+      <tr [className]="'inactive'">
+        <td class="editform-label">Telefon:</td>
+        <td>{{Dto.Telefon}}</td>
+      </tr>
+
+      <tr [className]="'inactive'">
+        <td class="editform-label">Email:</td>
+        <td>{{Dto.Email}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button (click)="letoltesClick()" class="toolbutton">
+    Letöltés
+  </button>
+</div>

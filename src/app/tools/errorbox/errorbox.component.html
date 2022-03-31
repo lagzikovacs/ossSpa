@@ -1,0 +1,21 @@
+<div id="errorbox" class="error-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
+  <div class="error-modal-content">
+    <div class="alapkeret">
+      <h5>Hiba</h5>
+
+      <div class="editform-row">
+        <ng-container *ngIf="ahibastring">
+          {{hiba}}
+        </ng-container>
+        <ng-container *ngIf="!ahibastring">
+          <p>{{hiba.status}} {{hiba.statusText}}</p>
+          <p>{{hiba.url}}</p>
+        </ng-container>
+      </div>
+
+      <div class="editform-row-bottom">
+        <button type="button" class="toolbutton" data-dismiss="modal" (click)="onClose()">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

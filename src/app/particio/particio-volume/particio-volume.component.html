@@ -1,0 +1,22 @@
+<div class="alapkeret">
+  <h5>Volume</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <div class="editform-row">
+        <div class="editform-label">Új volume max. méret</div>
+        <input type="number" class="editform-number" appAutofocus formControlName="ujvolumemaxmeret">
+    </div>
+
+    <div class="editform-row">
+        <div class="editform-label">Új volume elérési út</div>
+        <input type="text" class="editform-edit em15width" formControlName="ujvolumeeleresiut">
+    </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
+    </div>
+  </form>
+</div>
+

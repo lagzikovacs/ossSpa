@@ -1,0 +1,43 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>Fotózás link</h5>
+
+  <div class="toolbar">
+    <button (click)="doUj()" class="toolbutton">
+      Új fotózás link
+    </button>
+    <button [disabled]="link === ''" (click)="doTorles()" class="toolbutton">
+      Fotózás link törlése
+    </button>
+  </div>
+
+  <ng-container *ngIf="link !== ''">
+    <div>
+      <textarea rows="3" cols="100" id="regilink" disabled="true" [(ngModel)]="link"></textarea>
+    </div>
+    <div>
+      {{kikuldesikodidopontja}}
+    </div>
+  </ng-container>
+
+
+  <ng-container *ngIf="egymode === 3">
+    <div [@rowanimation]>
+      <div class="alapkeret">
+        <h5>Új fotózás link</h5>
+        <div class="editform-row">Ha új fotózás linket készít, a régi érvényessége megszűnik. Biztos benne?</div>
+        <div class="editform-row-bottom" style="margin-bottom: 10px">
+          <button class="toolbutton okbutton" (click)="onUj()">Ok</button>
+          <button class="toolbutton" (click)="onMegsem()">Mégsem</button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="egymode === 2">
+    <div [@rowanimation]>
+        <app-tetel-torles [cim]="'Fotózás link'"
+                          (eventTorles)="onTorles($event)">
+        </app-tetel-torles>
+    </div>
+  </ng-container>
+</div>

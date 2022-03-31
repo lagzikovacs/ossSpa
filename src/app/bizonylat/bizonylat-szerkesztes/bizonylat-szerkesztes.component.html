@@ -1,0 +1,147 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5 *ngIf="uj">Új {{bizonylatLeiro.BizonylatNev | lowercase}}</h5>
+  <h5 *ngIf="!uj">{{bizonylatLeiro.BizonylatNev}} módosítása</h5>
+
+  <div [formGroup]="formFej" autocomplete="off">
+    <div class="editform-card">
+      <div class="editform-row">
+        <div class="editform-label">Ügyfél</div>
+        <input type="text" class="editform-edit zoomedit ugyfelwidth" appAutofocus formControlName="ugyfelnev">
+        <button class="toolbutton" (click)="UgyfelZoom()" [disabled] = "SzerkesztesMode !== 1" type="button">...</button>
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Cím</div>
+        <input type="text" class="editform-edit cimwidth" formControlName="cim">
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Megjegyzés</div>
+        <input type="text" class="editform-edit megjegyzeswidth" formControlName="megjegyzes">
+      </div>
+    </div>
+
+    <div class="editform-card">
+      <div class="editform-row">
+        <div class="editform-row-block">
+          <div class="editform-label">Pénznem</div>
+          <input type="text" class="editform-edit zoomedit penznemwidth" formControlName="penznem">
+          <button class="toolbutton" (click)="PenznemZoom()" [disabled] = "SzerkesztesMode !== 1" type="button">...</button>
+        </div>
+
+        <div class="editform-row-block">
+          <div class="editform-label">Árfolyam</div>
+          <input type="number" class="editform-number" formControlName="arfolyam">
+        </div>
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Fizetési mód</div>
+        <input type="text" class="editform-edit zoomedit primitivwidth" formControlName="fizetesimod">
+        <button class="toolbutton" (click)="FizetesimodZoom()" [disabled] = "SzerkesztesMode !== 1" type="button">...</button>
+        <button class="toolbutton" (click)="Bk()" [disabled] = "SzerkesztesMode !== 1" type="button">Bk</button>
+        <button class="toolbutton" (click)="Kp()" [disabled] = "SzerkesztesMode !== 1" type="button">Kp</button>
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-row-block">
+          <div class="editform-label">A bizonylat kelte</div>
+          <input type="date" class="editform-date" formControlName="bizonylatkelte">
+        </div>
+
+        <div class="editform-row-block">
+          <div class="editform-label">A teljesités kelte</div>
+          <input type="date" class="editform-date" formControlName="teljesiteskelte">
+        </div>
+
+        <div class="editform-row-block">
+          <div class="editform-label">Fizetési határidő</div>
+          <input type="date" class="editform-date" formControlName="fizetesihatarido">
+        </div>
+      </div>
+    </div>
+
+    <div class="editform-row-bottom">
+      <div class="editform-row-block">
+        <div class="editform-label">Netto</div>
+        <input type="number" class="editform-number" formControlName="netto">
+      </div>
+
+      <div class="editform-row-block">
+        <div class="editform-label">Áfa</div>
+        <input type="number" class="editform-number" formControlName="afa">
+      </div>
+
+      <div class="editform-row-block">
+        <div class="editform-label">Brutto</div>
+        <input type="number" class="editform-number" formControlName="brutto">
+      </div>
+    </div>
+
+    <div class="editform-row-bottom">
+      <div class="alapkeret">
+        <div class="toolbar">
+          <button (click)="onTetelUjElott()" class="toolbutton">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </button>
+        </div>
+        <app-bizonylatteteltabla #teteltabla
+                                 [enEdit]="true"
+                                 [Dto]="ComplexDtoEdited.LstTetelDto"
+                                 [ujTemplate]="gridmod"
+                                 [torlesTemplate]="gridtorles"
+                                 [modTemplate]="gridmod"
+                                 (eventTorlesElott)="onTetelTorlesElott($event)"
+                                 (eventModositasElott)="onTetelModositasElott($event)">
+        </app-bizonylatteteltabla>
+
+        <ng-template #gridtorles>
+          <app-tetel-torles [cim]="'Bizonylattétel'"
+                            (eventTorles)="onTeteltorles($event)">
+          </app-tetel-torles>
+        </ng-template>
+
+        <ng-template #gridmod>
+          <app-bizonylattetel-szerkesztes [teteluj]="teteluj"
+                                          [bizonylatLeiro]="bizonylatLeiro"
+                                          [szvesz]="szvesz"
+                                          [TetelDtoEdited]="TetelDtoEdited"
+                                          (eventUjModositasUtan)="onUjModositasUtan($event)">
+          </app-bizonylattetel-szerkesztes>
+        </ng-template>
+      </div>
+    </div>
+
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" [disabled]="formFej.invalid || SzerkesztesMode !== 1" type="button" (click)="onSubmit()">Ok</button>
+      <button class="toolbutton" [disabled]="SzerkesztesMode !== 1" type="button" (click)="cancel()">Mégsem</button>
+    </div>
+  </div>
+
+  <div id="bizonylatzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
+    <ng-container *ngIf="SzerkesztesMode === 2">
+      <div class="zoom-modal-content-complex">
+        <app-ugyfel-list [maszk]="ComplexDtoEdited.Dto.Ugyfelnev || ''"
+                         (eventSelectzoom)="onUgyfelSelectzoom($event)"
+                         (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="SzerkesztesMode === 3">
+      <div class="zoom-modal-content-primitive">
+        <app-penznem-list [maszk]="ComplexDtoEdited.Dto.Penznem || ''"
+                          (eventSelectzoom)="onPenznemSelectzoom($event)"
+                          (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="SzerkesztesMode === 4">
+      <div class="zoom-modal-content-primitive">
+        <app-fizetesimod-list [maszk]="ComplexDtoEdited.Dto.Fizetesimod || ''"
+                              (eventSelectzoom)="onFizetesimodSelectzoom($event)"
+                              (eventStopzoom)="onFizetesimodStopzoom()"></app-fizetesimod-list>
+      </div>
+    </ng-container>
+  </div>
+</div>

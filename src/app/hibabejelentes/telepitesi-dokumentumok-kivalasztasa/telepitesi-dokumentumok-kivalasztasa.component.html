@@ -1,0 +1,21 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>(Korábban készült) telepítési dokumentumok kiválasztása</h5>
+  <div class="editform-row">
+    (Így a javítást végző is láthatja a telepítéskor készült fotókat)
+  </div>
+
+  <ng-container *ngIf="!kivalasztva">
+    <app-tabla #tabla
+               [items]="iratDto"
+               [colsets]="iratservice.GridSettings"
+               [enIdclick]="false"
+               [zoom]="true" (forzoom)="onZoom($event)">
+    </app-tabla>
+  </ng-container>
+
+  <ng-container *ngIf="kivalasztva">
+    <div class="editform-row">
+      A telepítési dokumentumok kiválasztva!
+    </div>
+  </ng-container>
+</div>

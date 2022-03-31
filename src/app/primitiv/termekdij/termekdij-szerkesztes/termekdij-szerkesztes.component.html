@@ -1,0 +1,25 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5 *ngIf="uj">Új {{termekdijservice.cim | lowercase}}</h5>
+  <h5 *ngIf="!uj">{{termekdijservice.cim}} módosítása</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <div class="editform-row">
+        <div class="editform-label">KT</div>
+        <input type="text" class="editform-edit primitivwidth" appAutofocus formControlName="kt">
+    </div>
+    <div class="editform-row">
+        <div class="editform-label">Megnevezés</div>
+        <input type="text" class="editform-edit primitivwidth" formControlName="megnevezes">
+    </div>
+    <div class="editform-row">
+        <div class="editform-label">Egységár</div>
+        <input type="number" class="editform-number" formControlName="egysegar">
+    </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
+    </div>
+  </form>
+</div>

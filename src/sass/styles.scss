@@ -1,0 +1,106 @@
+@import 'szinek';
+@import 'modal';
+@import 'tabla';
+@import 'spinner';
+@import 'navbar';
+@import 'toolbar';
+@import 'form';
+
+html, body {
+  font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+}
+
+h5 {
+  font-family: inherit;
+  font-size: 140%;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 0.25em;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.alapkeret {
+  overflow: auto;
+  background-color: $hatterszin;
+  border: 1px solid $keretszin;
+  padding: 0.5em;
+}
+
+%input-base {
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.875rem;
+  border: 1px solid $kontrolszin;
+  border-radius: 0.2em;
+  margin-right: 0.5em;
+  margin-bottom: 0.3em;
+}
+
+
+.datum {
+  width: 5em;
+}
+.idobelyeg {
+  width: 9em;
+}
+.penznemwidth {
+  width: 3em;
+}
+.ugyfelwidth {
+  width: 20em;
+}
+.cimwidth {
+  width: 30em;
+}
+.megjegyzeswidth {
+  width: 50em;
+}
+.primitivwidth {
+  width: 15em;
+}
+.kisprimitivwidth {
+  width: 8em;
+}
+.cikkwidth {
+  width: 30em;
+}
+.passwordwidth {
+  width: 10em;
+}
+.emailwidth {
+  width: 15em;
+}
+
+
+.em4width {
+  width: 4em;
+}
+.em6width {
+  width: 6em;
+}
+.em8width {
+  width: 8em;
+}
+.em10width {
+  width: 10em;
+}
+.em15width {
+  width: 15em;
+}
+.em20width {
+  width: 20em;
+}
+.em100width {
+  width: 100em;
+}

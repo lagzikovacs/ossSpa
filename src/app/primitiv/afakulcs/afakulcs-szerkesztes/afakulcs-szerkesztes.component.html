@@ -1,0 +1,21 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5 *ngIf="uj">Új {{afakulcsservice.cim | lowercase}}</h5>
+  <h5 *ngIf="!uj">{{afakulcsservice.cim}} módosítása</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <div class="editform-row">
+      <div class="editform-label">ÁFA kulcs</div>
+      <input type="text" class="editform-edit primitivwidth" appAutofocus formControlName="afakulcs">
+    </div>
+    <div class="editform-row">
+      <div class="editform-label">Az ÁFA mértéke, %</div>
+      <input type="number" class="editform-number" formControlName="afamerteke">
+    </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
+    </div>
+  </form>
+</div>

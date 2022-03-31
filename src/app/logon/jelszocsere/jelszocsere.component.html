@@ -1,0 +1,26 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>Jelszócsere</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <div class="editform-row">
+        <div class="editform-label">Régi jelszó</div>
+        <input type="password" class="editform-edit passwordwidth" appAutofocus formControlName="regijelszo">
+    </div>
+
+    <div class="editform-row">
+        <div class="editform-label">Új jelszó</div>
+        <input type="password" class="editform-edit passwordwidth" formControlName="jelszo">
+    </div>
+
+    <div class="editform-row">
+        <div class="editform-label">Új jelszó újra</div>
+        <input type="password" class="editform-edit passwordwidth" formControlName="jelszoujra">
+    </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
+    </div>
+  </form>
+</div>

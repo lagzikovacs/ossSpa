@@ -1,0 +1,30 @@
+export class ProjektDto {
+  Projektkod: number;
+  Statusz: number;
+  Muszakiallapot: string;
+  Ugyfelkod: number;
+  Ugyfelnev: string;
+  Ugyfelcim: string;
+  Ugyfeltelefonszam: string;
+  Ugyfelemail: string;
+  Telepitesicim: string;
+  Projektjellege: string;
+  Inverter: string;
+  Inverterallapot: string;
+  Napelem: string;
+  Napelemallapot: string;
+  Dckw: number;
+  Ackva: number;
+  Vallalasiarnetto: number;
+  Penznemkod: number;
+  Penznem: string;
+  Munkalapszam: string;
+  Keletkezett: any;
+  Megrendelve: any;
+  Kivitelezesihatarido: any;
+  Megjegyzes: string;
+  Letrehozva: any;
+  Letrehozta: string;
+  Modositva: any;
+  Modositotta: string;
+}

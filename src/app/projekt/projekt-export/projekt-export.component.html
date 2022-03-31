@@ -1,0 +1,13 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>{{projektservice.cim}} export</h5>
+
+  <div class="editform-row">
+    <div class="editform-label">{{projektcsoport}}</div>
+  </div>
+
+  <div class="editform-row-bottom">
+    <button class="toolbutton okbutton" type="button" (click)="onSubmit()">Ok</button>
+    <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
+  </div>
+</div>
+

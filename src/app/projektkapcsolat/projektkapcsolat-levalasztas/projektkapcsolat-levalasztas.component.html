@@ -1,0 +1,11 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>{{Dto.Kapcsolat}} leválasztása</h5>
+  <div class="editform-row">
+    Biztosan le akarja választani ezt a tételt a projektről?
+  </div>
+  <div class="editform-row-bottom">
+    <button class="toolbutton okbutton" type="button" (click)="ok()">Ok</button>
+    <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
+  </div>
+</div>
+

@@ -1,0 +1,56 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>{{bizonylatkapcsolatservice.cim}}</h5>
+  <div>
+    <button (click)="onKereses()" class="toolbutton">
+      <i class="fa fa-search" aria-hidden="true"></i>
+    </button>
+    <button (click)="onUjirat()" class="toolbutton">
+      <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>
+    </button>
+    <button (click)="onVagolaprol()" class="toolbutton">
+      <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Vágólapról
+    </button>
+  </div>
+
+  <app-bizonylatkapcsolat-tabla #tabla
+                                [items]="Dto"
+                                (forid)="onId($event)"
+                                (forlevalasztas)="onLevalasztas($event)"
+                                [egyLevalasztas]="levalasztasegy"
+                                [egyVagolaprol]="vagolaprolegy"
+                                [egyIrat]="irategy"
+                                [egyUjirat]="ujirategy">
+
+  </app-bizonylatkapcsolat-tabla>
+
+  <ng-template #irategy>
+    <app-irat-egy [DtoOriginal]="OriginalIrat"
+                  [enTorles]="false"
+                  [enProjekt]="false"
+                  [enUgyfel]="false"
+                  [(egymode)]="egyirat_egymode"
+                  (eventSzerkesztesutan)="onIratSzerkesztesutan($event)">
+    </app-irat-egy>
+  </ng-template>
+
+  <ng-template #ujirategy>
+    <app-irat-szerkesztes [uj]="true"
+                          [enUgyfel]="false"
+                          [Ugyfelkod]="Ugyfelkod"
+                          (eventSzerkeszteskesz)="onUjiratutan($event)">
+    </app-irat-szerkesztes>
+  </ng-template>
+
+  <ng-template #levalasztasegy>
+    <app-bizonylatkapcsolat-levalasztas [Dto]="Dto[DtoSelectedIndex]"
+                                      (eventLevalasztasutan)="onLevalasztasutan($event)">
+    </app-bizonylatkapcsolat-levalasztas>
+  </ng-template>
+
+  <ng-template #vagolaprolegy>
+    <app-bizonylatkapcsolat-vagolaprol [Bizonylatkod]="Bizonylatkod"
+                                       (eventVagolaprolutan)="onVagolaprolutan($event)"
+                                       (eventVagolaprolutanvege)="onVagolaprolutanvege()">
+    </app-bizonylatkapcsolat-vagolaprol>
+  </ng-template>
+</div>

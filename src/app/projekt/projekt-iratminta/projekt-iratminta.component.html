@@ -1,0 +1,46 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>Iratminta</h5>
+  <div style="paddig-top: 6px;padding-bottom: 6px">
+      <button (click)="szerzodes()" class="toolbutton">
+        Szerződés
+      </button>
+      <button (click)="szallitasiszerzodes()" class="toolbutton">
+        Szállítási szerződés
+      </button>
+      <button (click)="feltetelesszerzodes()" class="toolbutton">
+        Feltételes szerződés
+      </button>
+      <button (click)="oftszerzodes()" class="toolbutton">
+        OFT szerződés
+      </button>
+      <button (click)="hmketulajdonoshozzajarulas()" class="toolbutton">
+        HMKE tulajdonos hozzájárulás
+      </button>
+  </div>
+  <div style="paddig-top: 6px;padding-bottom: 6px">
+      <button (click)="munkalap()" class="toolbutton">
+        Munkalap
+      </button>
+      <button (click)="elegedettseg()" class="toolbutton">
+        Elégedettségi felmérés
+      </button>
+  </div>
+  <div style="paddig-top: 6px;padding-bottom: 6px">
+      <button (click)="elmuemasz()" class="toolbutton">
+        ELMŰ-ÉMÁSZ készrejelentés
+      </button>
+      <button (click)="eon()" class="toolbutton">
+        E.ON készrejelentés
+      </button>
+      <button (click)="mvm()" class="toolbutton">
+        MVM készrejelentés
+      </button>
+
+      <button (click)="eonelmu()" class="toolbutton">
+        EON/ELMÜ készrejelentés
+      </button>
+      <button (click)="mvmemasz()" class="toolbutton">
+        MVM/ÉMÁSZ készrejelentés
+      </button>
+  </div>
+</div>

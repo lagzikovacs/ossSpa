@@ -1,0 +1,113 @@
+<table>
+  <thead>
+  <tr>
+    <th>
+      <div>Id</div>
+      <div>Sorszám</div>
+    </th>
+    <th>
+      <div>Ügyfél</div>
+      <div>Cím</div>
+    </th>
+    <th>
+      <div>Bizonylat kelte</div>
+      <div>Teljesítés kelte</div>
+    </th>
+    <th>
+      <div>Fizetési mód</div>
+      <div>Fizetési határidő</div>
+    </th>
+    <th>
+      <div>Kifizetés rendben</div>
+      <div>Kiszállítva</div>
+    </th>
+    <th>
+      <div>Pénznem</div>
+      <div>Árfolyam</div>
+    </th>
+    <th>Netto</th>
+    <th>ÁFA</th>
+    <th>Brutto</th>
+    <th>
+      <div>Ez stornozo</div>
+      <div>Ez stornozott</div>
+    </th>
+    <th>
+      <div>Fuvarszámla</div>
+      <div>Fuvardíj</div>
+    </th>
+    <th>
+      <div>Fuvardíj pénzneme</div>
+      <div>Fuvardíj árfolyama</div>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="ujtetel && ujTemplate !== undefined" class="active">
+      <td colspan="100">
+        <ng-template *ngTemplateOutlet="ujTemplate"></ng-template>
+      </td>
+    </tr>
+
+    <ng-container *ngFor="let item of items; let i = index">
+      <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
+        <td>
+          <div *ngIf="enIdclick" class="tabla-kontrol-id" (click)="clickforid(i)">{{item.Bizonylatkod}}</div>
+          <div *ngIf="!enIdclick">{{item.Bizonylatkod}}</div>
+          <div>{{item.Bizonylatszam}}</div>
+        </td>
+
+        <td>
+          <div class="ugyfelwidth">{{item.Ugyfelnev}}</div>
+          <div style="width: 20em">{{item.Ugyfelcim}}</div>
+        </td>
+
+        <td>
+          <div>{{item.Bizonylatkelte | datehun}}</div>
+          <div>{{item.Teljesiteskelte | datehun}}</div>
+        </td>
+        <td>
+          <div>{{item.Fizetesimod}}</div>
+          <div>{{item.Fizetesihatarido | datehun}}</div>
+        </td>
+        <td>
+          <div *ngIf="item.Kifizetesrendben">igen</div>
+          <div *ngIf="item.Kifizetesrendben"></div>
+          <div *ngIf="item.Kiszallitva">igen</div>
+          <div *ngIf="item.Kiszallitva"></div>
+        </td>
+        <td>
+          <div>{{item.Penznem}}</div>
+          <div style="text-align: right">{{item.Arfolyam | number: '1.2-2'}}</div>
+        </td>
+        <td style="text-align: right">{{item.Netto | number: '1.2-2'}}</td>
+        <td style="text-align: right">{{item.Afa | number: '1.2-2'}}</td>
+        <td style="text-align: right">{{item.Brutto | number: '1.2-2'}}</td>
+        <td>
+          <div *ngIf="item.Ezstornozo">igen</div>
+          <div *ngIf="item.Ezstornozo"></div>
+          <div *ngIf="item.Ezstornozott">igen</div>
+          <div *ngIf="item.Ezstornozott"></div>
+        </td>
+        <td>
+          <div>{{item.Fuvarszamla}}</div>
+          <div style="text-align: right">{{item.Fuvardij | number: '1.2-2'}}</div>
+        </td>
+        <td>
+          <div>{{item.Fuvardijpenznem}}</div>
+          <div style="text-align: right">{{item.Fuvardijarfolyam | number: '1.2-2'}}</div>
+        </td>
+      </tr>
+      <tr *ngIf="item.Megjegyzesfej || '' !== ''" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
+        <td colspan="100">{{item.Megjegyzesfej}}</td>
+      </tr>
+
+      <tr *ngIf="i === clickedidindex && egyTemplate !== undefined" [class.active]="i === clickedidindex">
+        <td colspan="100">
+          <ng-template *ngTemplateOutlet="egyTemplate"></ng-template>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
+

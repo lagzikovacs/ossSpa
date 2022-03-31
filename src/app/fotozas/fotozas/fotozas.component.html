@@ -1,0 +1,81 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>Fotózás</h5>
+
+  <div class="editform-row">
+    <img src="assets/ossspa/gsg.jpg" style="margin-top: 8px;margin-bottom: 8px" alt="GSG">
+  </div>
+
+  <ng-container *ngIf="!bejelentkezve">
+    <p>Üdvözöljük, ön a GridSolar Group Kft. informatikai rendszerét (OSS) használja.<br>Kis türelmet...</p>
+  </ng-container>
+
+  <ng-container *ngIf="bejelentkezve">
+    <div class="editform-row">
+      <div class="editform-label">Ügyfél</div>
+      <div>{{Dto.iratDto[0].Ugyfelnev}}</div>
+      <div>{{Dto.iratDto[0].Ugyfelcim}}</div>
+      <div><b>{{Dto.iratDto[0].Targy}}</b></div>
+    </div>
+
+    <ng-container *ngIf="Dto.projektDto !== undefined && Dto.projektDto !== null">
+      <div class="editform-row">
+        <div class="editform-label">Telepítési cím</div>
+        <div><b>{{Dto.projektDto[0].Telepitesicim}}</b></div>
+      </div>
+    </ng-container>
+
+    <div class="editform-row">
+      <table>
+        <thead>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of Dto.dokumentumDto">
+          <td style="border: none; padding: 0">
+            <div style="height: 15px"></div>
+            <div>
+              {{item.Megjegyzes}}
+            </div>
+            <div style="height: 5px"></div>
+            <div *ngIf="item.Imgprev !== null">
+              <img [src] = "'data:image/jpg;base64,' + item.Imgprev"/>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="height: 15px"></div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+
+      <div class="editform-row">
+        <div class="editform-label">Fájl</div>
+        <input type="text" class="editform-edit" formControlName="fajlnev">
+        <label class="toolbutton">...
+          <input type="file" (change)="onFileChange($event)">
+        </label>
+      </div>
+
+      <div class="editform-row">
+        <div>
+          <div class="editform-label">Megjegyzés</div>
+          <input type="text" list="ssz" class="editform-combo em15width" formControlName="megjegyzes">
+          <datalist id="ssz">
+            <option value="Kész tető">
+            <option value="Kész inverter és környéke">
+            <option value="AC doboz">
+            <option value="DC doboz">
+            <option value="Inverter adattábla">
+            <option value="Mérőóra">
+            <option value="Rákötési pont">
+          </datalist>
+        </div>
+      </div>
+
+      <div class="editform-row-bottom">
+        <button class="toolbutton okbutton" [disabled]="fb === undefined || form.invalid" type="submit">Ok</button>
+      </div>
+    </form>
+  </ng-container>
+</div>

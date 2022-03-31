@@ -1,0 +1,97 @@
+<table>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Stsz</th>
+    <th>Ügyfél és cím</th>
+    <th>Email és telefonszám</th>
+    <th>Telepítési cím és a projekt jellege</th>
+    <th>Műszaki állapot</th>
+    <th>Inverter</th>
+    <th>Napelem</th>
+    <th>
+      <div style="white-space: nowrap">
+        <div>AC, kVA</div>
+        <div>DC, kW</div>
+      </div>
+    </th>
+    <th>Vállalási ár</th>
+    <th>Pénznem</th>
+    <th>Munkalapszám</th>
+    <th>Keletkezett</th>
+    <th>Megrendelve</th>
+    <th>Kivitelezési határidő</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="ujtetel && ujTemplate !== undefined" class="active">
+      <td colspan="100">
+        <ng-template *ngTemplateOutlet="ujTemplate"></ng-template>
+      </td>
+    </tr>
+
+    <ng-container *ngFor="let item of Dto; let i = index">
+      <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
+        <td *ngIf="enIdclick" class="tabla-kontrol-id" (click)="clickforid(i)">{{item.Projektkod}}</td>
+        <td *ngIf="!enIdclick">{{item.Projektkod}}</td>
+        <td>{{item.Statusz}}</td>
+        <td>
+          <div class="ugyfelwidth">{{item.Ugyfelnev}}</div>
+          <div style="width: 20em">{{item.Ugyfelcim}}</div>
+        </td>
+        <td>
+          <div>{{item.Ugyfelemail}}</div>
+          <div>{{item.Ugyfeltelefonszam}}</div>
+        </td>
+        <td>
+          <div style="width: 30em">{{item.Telepitesicim}}</div>
+          <div style="width: 30em">{{item.Projektjellege}}</div>
+        </td>
+        <td>
+          <div style="width: 8em;padding-left: 0.5em;padding-right: 0.5em"
+               [style.background-color]="MuszakiallapotColor(item.Muszakiallapot)[0]"
+               [style.color]="MuszakiallapotColor(item.Muszakiallapot)[1]">
+            {{item.Muszakiallapot}}
+          </div>
+        </td>
+        <td>
+          <div style="width: 15em;padding-left: 0.5em;padding-right: 0.5em"
+               [style.background-color]="InverterNapelemColor(item.Inverterallapot)[0]"
+               [style.color]="InverterNapelemColor(item.Inverterallapot)[1]">
+            <div>{{item.Inverter}}</div>
+            <div>{{item.Inverterallapot}}</div>
+          </div>
+        </td>
+        <td>
+          <div style="width: 15em;padding-left: 0.5em;padding-right: 0.5em"
+               [style.background-color]="InverterNapelemColor(item.Napelemallapot)[0]"
+               [style.color]="InverterNapelemColor(item.Napelemallapot)[1]">
+            <div>{{item.Napelem}}</div>
+            <div>{{item.Napelemallapot}}</div>
+          </div>
+        </td>
+        <td>
+          <div style="text-align: right">
+            <div>{{item.Ackva | number: '1.2-2'}}</div>
+            <div>{{item.Dckw | number: '1.2-2'}}</div>
+          </div>
+        </td>
+        <td style="text-align: right">{{item.Vallalasiarnetto | number: '1.2-2'}}</td>
+        <td>{{item.Penznem}}</td>
+        <td>{{item.Munkalapszam}}</td>
+        <td>{{item.Keletkezett | datehun}}</td>
+        <td>{{item.Megrendelve | datehun}}</td>
+        <td>{{item.Kivitelezesihatarido | datehun}}</td>
+      </tr>
+      <tr *ngIf="item.Megjegyzes !== null && item.Megjegyzes !== '' && megjegyzesIs" (click)="clickforrow(i)" style="font-size: 90%" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
+        <td colspan="100">{{item.Megjegyzes}}</td>
+      </tr>
+
+      <tr *ngIf="i === clickedidindex && egyTemplate !== undefined" [class.active]="i === clickedidindex">
+        <td colspan="100">
+          <ng-template *ngTemplateOutlet="egyTemplate"></ng-template>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>

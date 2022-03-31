@@ -1,0 +1,60 @@
+<table>
+  <thead>
+  <tr>
+    <th *ngIf="letoltes"></th>
+    <th *ngIf="nezet"></th>
+    <th *ngIf="zoom"></th>
+    <th *ngFor="let cs of colsets">{{cs.Title}}</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="ujtetel && ujTemplate !== undefined" class="active">
+      <td colspan="100">
+        <ng-template *ngTemplateOutlet="ujTemplate"></ng-template>
+      </td>
+    </tr>
+
+    <ng-container *ngFor="let item of items; let i = index">
+      <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
+        <td *ngIf="letoltes" class="tabla-kontrol-icon"
+          (click)="clickfordownload(i)">
+          <i class="fa fa-arrow-down" aria-hidden="true"></i>
+        </td>
+        <td *ngIf="nezet" class="tabla-kontrol-icon"
+            (click)="clickforview(i)">
+          <i class="fa fa-book" aria-hidden="true"></i>
+        </td>
+        <td *ngIf="zoom" class="tabla-kontrol-icon"
+          (click)="clickforzoom(i)">
+          <i class="fa fa-check" aria-hidden="true"></i>
+        </td>
+
+        <td *ngFor="let cs of colsets; let j = index">
+          <div *ngIf="cs.Type === 'INT' && j === 0 && enIdclick" class="tabla-kontrol-id" (click)="clickforid(i)">{{item[cs.Name]}}</div>
+          <div *ngIf="cs.Type === 'INT' && j === 0 && !enIdclick" style="text-align: right" >{{item[cs.Name]}}</div>
+          <div *ngIf="cs.Type === 'INT' && j > 0" style="text-align: right">{{item[cs.Name]}}</div>
+
+          <div *ngIf="cs.Type === 'NUMBER'" style="text-align: right">{{item[cs.Name] | number: '1.2-2'}}</div>
+          <div *ngIf="cs.Type === 'STRING'" [class]="cs.Classname">{{item[cs.Name]}}</div>
+          <div *ngIf="cs.Type === 'DATE'" [class]="'datum'">{{item[cs.Name] | datehun}}</div>
+          <div *ngIf="cs.Type === 'DATETIME'" [class]="'idobelyeg'">{{item[cs.Name] | datetimehun}}</div>
+          <div *ngIf="cs.Type === 'BOOL'">{{item[cs.Name] | boolhun}}</div>
+        </td>
+      </tr>
+
+      <tr *ngIf="item.Megjegyzes !== undefined && item.Megjegyzes !== null && item.Megjegyzes !== '' && megjegyzesIs" (click)="clickforrow(i)" style="font-size: 90%" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
+        <td colspan="100">{{item.Megjegyzes}}</td>
+      </tr>
+      <tr *ngIf="item.Megjegyzes1 !== undefined && item.Megjegyzes1 !== null && item.Megjegyzes1 !== '' && megjegyzesIs" (click)="clickforrow(i)" style="font-size: 90%" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
+        <td colspan="100">{{item.Megjegyzes1}}</td>
+      </tr>
+
+      <tr *ngIf="i === clickedidindex && egyTemplate !== undefined" [class.active]="i === clickedidindex">
+        <td colspan="100">
+          <ng-template *ngTemplateOutlet="egyTemplate"></ng-template>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
+

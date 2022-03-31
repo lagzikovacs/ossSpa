@@ -1,0 +1,76 @@
+<div class="alapkeret">
+  <h5>Projekt iratminta</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div class="editform-card">
+      <div class="editform-row">
+          <div class="editform-label">Ajánlat iratkód</div>
+          <input type="number" class="editform-number" appAutofocus formControlName="ajanlatiratkod">
+      </div>
+    </div>
+
+    <div class="editform-card">
+      <div class="editform-row">
+          <div class="editform-label">Szerződés iratkód</div>
+          <input type="number" class="editform-number" formControlName="szerzodesiratkod">
+      </div>
+      <div class="editform-row">
+          <div class="editform-label">Szállítási szerződés iratkód</div>
+          <input type="number" class="editform-number" formControlName="szallitasiszerzodesiratkod">
+      </div>
+      <div class="editform-row">
+          <div class="editform-label">Feltételes szerződés iratkód</div>
+          <input type="number" class="editform-number" formControlName="feltetelesszerzodesiratkod">
+      </div>
+      <div class="editform-row">
+          <div class="editform-label">OFT szerződés iratkód</div>
+          <input type="number" class="editform-number" formControlName="oftszerzodesiratkod">
+      </div>
+      <div class="editform-row">
+          <div class="editform-label">HMKE tulajdonos hozzájárulás iratkód</div>
+          <input type="number" class="editform-number" formControlName="hmketulajdonoshozzajarulasiratkod">
+      </div>
+    </div>
+
+    <div class="editform-card">
+      <div class="editform-row">
+          <div class="editform-label">Munkalap iratkód</div>
+          <input type="number" class="editform-number" formControlName="munkalapiratkod">
+      </div>
+      <div class="editform-row">
+          <div class="editform-label">Elégedettségi felmérés iratkód</div>
+          <input type="number" class="editform-number" formControlName="elegedettsegifelmeresiratkod">
+      </div>
+    </div>
+
+    <div class="editform-card">
+      <div class="editform-row">
+          <div class="editform-label">Készrejelentés ELMŰ-ÉMÁSZ iratkód</div>
+          <input type="number" class="editform-number" formControlName="keszrejelenteselmuemasziratkod">
+      </div>
+      <div class="editform-row">
+          <div class="editform-label">Készrejelentés E.ON iratkód</div>
+          <input type="number" class="editform-number" formControlName="keszrejelenteseoniratkod">
+      </div>
+      <div class="editform-row">
+        <div class="editform-label">Készrejelentés MVM iratkód</div>
+        <input type="number" class="editform-number" formControlName="keszrejelentesmvmiratkod">
+      </div>
+      <div class="editform-row">
+        <div class="editform-label">Készrejelentés EON/ELMÜ iratkód</div>
+        <input type="number" class="editform-number" formControlName="keszrejelenteseonelmuiratkod">
+      </div>
+      <div class="editform-row">
+        <div class="editform-label">Készrejelentés MVM/ÉMÁSZ iratkód</div>
+        <input type="number" class="editform-number" formControlName="keszrejelentesmvmemasziratkod">
+      </div>
+    </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
+    </div>
+  </form>
+
+</div>
+

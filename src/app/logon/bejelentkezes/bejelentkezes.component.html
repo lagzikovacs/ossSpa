@@ -1,0 +1,24 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>Bejelentkezés</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <div class="editform-row">
+      <div class="editform-label">Azonosító</div>
+      <input type="text" class="editform-edit em10width" appAutofocus formControlName="azonosito">
+    </div>
+
+    <div class="editform-row">
+      <div class="editform-label">Jelszó</div>
+      <input type="password" class="editform-edit passwordwidth" formControlName="jelszo">
+    </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+    </div>
+  </form>
+</div>
+
+
+
+

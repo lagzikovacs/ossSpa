@@ -1,0 +1,147 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5 *ngIf="teteluj">Új {{bizonylatLeiro.BizonylatNev | lowercase}}tétel</h5>
+  <h5 *ngIf="!teteluj">{{bizonylatLeiro.BizonylatNev}}tétel módosítása</h5>
+
+  <div [formGroup]="formTetel" autocomplete="off">
+
+    <div class="editform-card">
+      <div class="editform-row">
+          <div class="editform-label">Megnevezés</div>
+          <input type="text" class="editform-edit zoomedit cikkwidth" appAutofocus formControlName="megnevezes">
+          <button class="toolbutton" (click)="CikkZoom()" type="button">...</button>
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-row-block">
+            <div class="editform-label">Mennyiség</div>
+            <input type="number" class="editform-number" formControlName="mennyiseg" (focusout)="tetelcalc($event)">
+        </div>
+
+        <div class="editform-row-block">
+            <div class="editform-label">Me</div>
+            <input type="text" class="editform-edit zoomedit kisprimitivwidth" formControlName="me">
+            <button class="toolbutton" (click)="MeZoom()" type="button">...</button>
+        </div>
+      </div>
+
+      <div class="editform-row">
+          <div class="editform-label">Egységár</div>
+          <input type="number" class="editform-number" formControlName="egysegar" (focusout)="tetelcalc($event)">
+          <button class="toolbutton" (click)="bruttobol()" type="button"><- Br</button>
+          <input type="number" class="editform-number" formControlName="bruttoosszeg">
+      </div>
+
+      <div class="editform-row">
+          <div class="editform-label">ÁFA kulcs</div>
+          <input type="text" class="editform-edit zoomedit kisprimitivwidth" formControlName="afakulcs">
+          <button class="toolbutton" (click)="AfakulcsZoom()" type="button">...</button>
+      </div>
+
+    </div>
+
+    <div class="editform-card">
+      <div class="editform-row">
+        <div class="editform-label">Termékdíj KT</div>
+        <input type="text" class="editform-edit zoomedit primitivwidth" id="termekdijkt" name="termekdijkt"
+               [(ngModel)]="TetelDtoEdited.Termekdijkt"
+               maxlength="10" autocomplete="off">
+        <button class="toolbutton" (click)="TermekdijZoom()" type="button">...</button>
+        <button class="toolbutton" (click)="TermekdijTorles()" type="button">
+          <i class="fa fa-close" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Termékdíj megnevezés</div>
+        <input type="text" class="editform-edit em20width" id="termekdijmegnevezes" name="termekdijmegnevezes"
+               [(ngModel)]="TetelDtoEdited.Termekdijmegnevezes"
+               disabled="true" autocomplete="off">
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Termékdíj egységár</div>
+        <input type="number" class="editform-number" id="termekdijegysegar" name="termekdijegysegar"
+               [(ngModel)]="TetelDtoEdited.Termekdijegysegar"
+               (focusout)="tetelcalc($event)"
+               readonly="true">
+      </div>
+
+      <div class="editform-row">
+        <div class="editform-label">Termékdíj a brutto árból</div>
+        <input type="number" class="editform-number" id="terekdijabruttoarbol" name="terekdijabruttoarbol"
+               [(ngModel)]="TetelDtoEdited.Termekdij"
+               disabled="true">
+      </div>
+    </div>
+
+    <div class="editform-row-bottom">
+      <div class="editform-label">Megjegyzés</div>
+      <input type="text" class="editform-edit megjegyzeswidth" formControlName="megjegyzes">
+    </div>
+
+    <div class="editform-row-bottom">
+      <div class="editform-row-block">
+        <div class="editform-label">Netto</div>
+        <input type="number" class="editform-number" formControlName="netto">
+      </div>
+
+      <div class="editform-row-block">
+        <div class="editform-label">ÁFA</div>
+        <input type="number" class="editform-number" formControlName="afa">
+      </div>
+
+      <div class="editform-row-block">
+        <div class="editform-label">Brutto</div>
+        <input type="number" class="editform-number" formControlName="brutto">
+      </div>
+    </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="button" [disabled]="formTetel.invalid" (click)="onSubmit()">Ok</button>
+      <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
+    </div>
+
+  </div>
+
+<!--  export enum BizonylattetelSzerkesztesMode {
+  Blank = 0,
+  CikkZoom = 1,
+  MeZoom = 2,
+  AfakulcsZoom = 3,
+  TermekdijZoom = 4
+  }-->
+
+  <div id="bizonylattetelzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
+    <ng-container *ngIf="TetelSzerkesztesMode === 1">
+      <div class="zoom-modal-content-complex">
+        <app-cikk-list [maszk]="TetelDtoEdited.Megnevezes || ''"
+                       (eventSelectzoom)="onCikkSelectzoom($event)"
+                       (eventStopzoom)="onCikkStopzoom()"></app-cikk-list>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="TetelSzerkesztesMode === 2">
+      <div class="zoom-modal-content-primitive">
+        <app-me-list [maszk]="TetelDtoEdited.Me || ''"
+                     (eventSelectzoom)="onMeSelectzoom($event)"
+                     (eventStopzoom)="onMeStopzoom()"></app-me-list>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="TetelSzerkesztesMode === 3">
+      <div class="zoom-modal-content-primitive">
+        <app-afakulcs-list [maszk]="TetelDtoEdited.Afakulcs || ''"
+                           (eventSelectzoom)="onAfakulcsSelectzoom($event)"
+                           (eventStopzoom)="onAfakulcsStopzoom()"></app-afakulcs-list>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="TetelSzerkesztesMode === 4">
+      <div class="zoom-modal-content-primitive">
+        <app-termekdij-list [maszk]="TetelDtoEdited.Termekdijkt || ''"
+                            (eventSelectzoom)="onTermekdijSelectzoom($event)"
+                            (eventStopzoom)="onTermekdijStopzoom()"></app-termekdij-list>
+      </div>
+    </ng-container>
+  </div>
+</div>

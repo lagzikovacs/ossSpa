@@ -1,0 +1,24 @@
+<div class="toolbar">
+  <select [disabled]="!enKereses" #Statuszszempont type="text" class="toolcombo">
+    <option *ngFor="let s of Statuszszurok; let i = index" [value]="i" [selected]="i == _statuszszempont">{{s}}</option>
+  </select>
+  <select [disabled]="!enKereses" #Jegyzetszempont type="text" class="toolcombo">
+    <option *ngFor="let t of Jegyzetszurok; let i = index" [value]="i" [selected]="i == _jegyzetszempont">{{t}}</option>
+  </select>
+  <select [disabled]="!enKereses" #Szempont type="text" class="toolcombo">
+    <option *ngFor="let sz of Szurok; let i = index" [value]="i" [selected]="i == _szempont">{{sz}}</option>
+  </select>
+  <input [disabled]="!enKereses" #Minta type="text" class="tooledit em10width" appAutofocus>
+
+
+  <button [disabled]="!enKereses" (click)="doKereses()" class="toolbutton" type="button">
+    <i class="fa fa-search" aria-hidden="true"></i>
+  </button>
+  <button [disabled]="!enUj" (click)="doUj()" class="toolbutton" type="button">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+  </button>
+  <button (click)="doExport()" class="toolbutton" type="button">
+    Export
+  </button>
+</div>
+

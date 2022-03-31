@@ -1,0 +1,15 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>Jelentés</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div class="editform-row-bottom">
+      <div class="editform-label">Jelentés</div>
+      <textarea rows="5" class="editform-text" style="width: 50em" appAutofocus formControlName="megjegyzes1"></textarea>
+    </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
+    </div>
+  </form>
+</div>

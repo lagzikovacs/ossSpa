@@ -1,0 +1,57 @@
+<div class="alapkeret">
+  <h5>Kibocsátó</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <div class="editform-card">
+      <div class="editform-row">
+        <div class="editform-label">Név</div>
+        <input type="text" class="editform-edit em15width" appAutofocus formControlName="nev">
+      </div>
+      <div class="editform-row">
+        <div class="editform-label">Irányítószám</div>
+        <input type="text" class="editform-edit em6width" formControlName="iranyitoszam">
+      </div>
+      <div class="editform-row">
+        <div class="editform-label">Helységnév</div>
+        <input type="text" class="editform-edit em15width" formControlName="helysegnev">
+      </div>
+      <div class="editform-row">
+        <div class="editform-label">Utca, házszám</div>
+        <input type="text" class="editform-edit em15width" formControlName="utcahazszam">
+      </div>
+    </div>
+
+    <div class="editform-card">
+      <div class="editform-row">
+        <div class="editform-label">Bankszámla 1</div>
+        <input type="text" class="editform-edit em15width" formControlName="bankszamla1">
+      </div>
+      <div class="editform-row">
+        <div class="editform-label">Bankszámla 2</div>
+        <input type="text" class="editform-edit em15width" formControlName="bankszamla2">
+      </div>
+    </div>
+
+    <div class="editform-card">
+      <div class="editform-row">
+        <div class="editform-label">Adó törzsszám</div>
+        <input type="text" class="editform-edit em10width" formControlName="adotorzsszam">
+      </div>
+      <div class="editform-row">
+        <div class="editform-label">Adó áfakód</div>
+        <input type="text" class="editform-edit em6width" formControlName="adoafakod">
+      </div>
+      <div class="editform-row">
+        <div class="editform-label">Adó megyekód</div>
+        <input type="text" class="editform-edit em6width" formControlName="adomegyekod">
+      </div>
+    </div>
+
+    <div class="editform-row-bottom">
+      <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
+      <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
+    </div>
+  </form>
+</div>
+

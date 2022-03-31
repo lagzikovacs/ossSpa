@@ -159,11 +159,30 @@ export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implement
   }
 
   TermekdijZoom() {
+    this.updatedto();
+    this.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.TermekdijZoom;
+    this.bizonylattetelzoombox.style.display = 'block';
+  }
+  onTermekdijSelectzoom(Dto: TermekdijDto) {
+    this.TetelDtoEdited.Termekdijkod = Dto.Termekdijkod;
+    this.TetelDtoEdited.Termekdijkt = Dto.Termekdijkt;
+    this.TetelDtoEdited.Termekdijmegnevezes = Dto.Termekdijmegnevezes;
+    this.TetelDtoEdited.Termekdijegysegar = Dto.Termekdijegysegar;
 
+    this.updateform();
+  }
+  onTermekdijStopzoom() {
+    this.TetelSzerkesztesMode = BizonylattetelSzerkesztesMode.Blank;
+    this.bizonylattetelzoombox.style.display = 'none';
   }
 
   TermekdijTorles() {
+    this.TetelDtoEdited.Termekdijkod = null;
+    this.TetelDtoEdited.Termekdijkt = null;
+    this.TetelDtoEdited.Termekdijmegnevezes = null;
+    this.TetelDtoEdited.Termekdijegysegar = null;
 
+    this.updateform();
   }
 
   bruttobol() {

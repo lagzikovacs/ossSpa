@@ -28,9 +28,9 @@
 
       <div class="editform-row">
         <div class="editform-label">Készletet képez</div>
-        <select type="text" class="editform-combo" formControlName="kk">
-          <option value="false">Nem</option>
-          <option value="true">Igen</option>
+        <select class="editform-combo" formControlName="kk">
+          <option [ngValue]="false">Nem</option>
+          <option [ngValue]="true">Igen</option>
         </select>
       </div>
     </div>

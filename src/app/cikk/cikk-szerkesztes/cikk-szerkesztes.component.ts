@@ -99,7 +99,7 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Me = this.form.value['me'];
     this.DtoEdited.Afakulcs = this.form.value['afakulcs'];
     this.DtoEdited.Egysegar = this.form.value['egysegar'];
-    this.DtoEdited.Keszletetkepez = this.form.value['kk'] === 'true';
+    this.DtoEdited.Keszletetkepez = this.form.value['kk'];
     this.DtoEdited.Tomegkg = this.form.value['tomeg'];
     this.DtoEdited.Termekdijkt = this.form.value['termekdijkt'];
     this.DtoEdited.Termekdijmegnevezes = this.form.value['termekdijmegnevezes'];

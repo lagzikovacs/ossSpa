@@ -65,6 +65,13 @@ export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implement
       'netto': [{value: 0, disabled: true}, []],
       'afa': [{value: 0, disabled: true}, []],
       'brutto': [{value: 0, disabled: true}, []],
+
+      'tomegkg': [0, [Validators.required, Validators.min(0)]],
+      'termekdijkt': ['', [Validators.maxLength(10)]],
+      'termekdijmegnevezes': [{value: '', disabled: true}, []],
+      'termekdijegysegar': ['', []],
+      'termekdij': [{value: '', disabled: true}, []],
+      'termekdijas': ['', [Validators.required]],
     });
   }
 
@@ -85,6 +92,13 @@ export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implement
     this.formTetel.controls['netto'].setValue(this.TetelDtoEdited.Netto);
     this.formTetel.controls['afa'].setValue(this.TetelDtoEdited.Afa);
     this.formTetel.controls['brutto'].setValue(this.TetelDtoEdited.Brutto);
+
+    this.formTetel.controls['tomegkg'].setValue(this.TetelDtoEdited.Tomegkg);
+    this.formTetel.controls['termekdijkt'].setValue(this.TetelDtoEdited.Termekdijkt);
+    this.formTetel.controls['termekdijmegnevezes'].setValue(this.TetelDtoEdited.Termekdijmegnevezes);
+    this.formTetel.controls['termekdijegysegar'].setValue(this.TetelDtoEdited.Termekdijegysegar);
+    this.formTetel.controls['termekdij'].setValue(this.TetelDtoEdited.Termekdij);
+    this.formTetel.controls['termekdijas'].setValue(this.TetelDtoEdited.Termekdijas);
   }
   updatedto() {
     this.TetelDtoEdited.Megnevezes = this.formTetel.value['megnevezes'];
@@ -94,6 +108,11 @@ export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implement
     this.bruttoosszeg = this.formTetel.value['bruttoosszeg'];
     this.TetelDtoEdited.Afakulcs = this.formTetel.value['afakulcs'];
     this.TetelDtoEdited.Megjegyzes = this.formTetel.value['megjegyzes'];
+
+    this.TetelDtoEdited.Tomegkg = this.formTetel.value['tomegkg'];
+    this.TetelDtoEdited.Termekdijkt = this.formTetel.value['termekdijkt'];
+    this.TetelDtoEdited.Termekdijegysegar = this.formTetel.value['termekdijegysegar'];
+    this.TetelDtoEdited.Termekdijas = this.formTetel.value['termekdijas'];
   }
 
 
@@ -225,65 +244,48 @@ export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implement
       });
   }
 
-  onSubmit() {
+  async onSubmit() {
     this.eppFrissit = true;
     this.updatedto();
 
-    this._cikkservice.ZoomCheck(new CikkZoomParameter(this.TetelDtoEdited.Cikkkod || 0,
-            this.TetelDtoEdited.Megnevezes || ''))
-      .then(res1 => {
-        if (res1.Error != null) {
-          throw res1.Error;
-        }
+    try {
+      const res1 = await this._cikkservice.ZoomCheck(new CikkZoomParameter(this.TetelDtoEdited.Cikkkod || 0,
+        this.TetelDtoEdited.Megnevezes || ''));
+      if (res1.Error != null) {
+        throw res1.Error;
+      }
 
-        return this._meservice.ZoomCheck(new MeZoomParameter(this.TetelDtoEdited.Mekod || 0,
-          this.TetelDtoEdited.Me || ''));
-      })
-      .then(res2 => {
-        if (res2.Error != null) {
-          throw res2.Error;
-        }
+      const res2 = await this._meservice.ZoomCheck(new MeZoomParameter(this.TetelDtoEdited.Mekod || 0,
+        this.TetelDtoEdited.Me || ''));
+      if (res2.Error != null) {
+        throw res2.Error;
+      }
 
-        return this._afakulcsservice.ZoomCheck(new AfakulcsZoomParameter(this.TetelDtoEdited.Afakulcskod || 0,
-          this.TetelDtoEdited.Afakulcs || ''));
-      })
-      .then(res3 => {
-        if (res3.Error != null) {
-          throw res3.Error;
-        }
+      const res3 = await this._afakulcsservice.ZoomCheck(new AfakulcsZoomParameter(this.TetelDtoEdited.Afakulcskod || 0,
+        this.TetelDtoEdited.Afakulcs || ''));
+      if (res3.Error != null) {
+        throw res3.Error;
+      }
 
-        if ((this.TetelDtoEdited.Termekdijkt || '') !== '') {
-          return this._termekdijservice.ZoomCheck(new TermekdijZoomParameter(this.TetelDtoEdited.Termekdijkod || 0,
-            this.TetelDtoEdited.Termekdijkt || ''));
-        } else {
-          this.TetelDtoEdited.Termekdijas = false;
-          this.TetelDtoEdited.Termekdijkod = undefined;
-          this.TetelDtoEdited.Termekdijkt = undefined;
-          this.TetelDtoEdited.Termekdijmegnevezes = undefined;
-          this.TetelDtoEdited.Termekdijegysegar = undefined;
-
-          return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
-        }
-      })
-      .then(res4 => {
+      if (this.TetelDtoEdited.Termekdijas) {
+        const res4 = await this._termekdijservice.ZoomCheck(new TermekdijZoomParameter(this.TetelDtoEdited.Termekdijkod || 0,
+          this.TetelDtoEdited.Termekdijkt || ''));
         if (res4.Error != null) {
           throw res4.Error;
         }
+      }
 
-        return this.bizonylatservice.BizonylattetelCalc(this.TetelDtoEdited);
-      })
-      .then(res5 => {
-        if (res5.Error != null) {
-          throw res5.Error;
-        }
+      const res5 = await this.bizonylatservice.BizonylattetelCalc(this.TetelDtoEdited);
+      if (res5.Error != null) {
+        throw res5.Error;
+      }
 
-        this.eppFrissit = false;
-        this.eventUjModositasUtan.emit(res5.Result[0]);
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+      this.eppFrissit = false;
+      this.eventUjModositasUtan.emit(res5.Result[0]);
+    } catch (err) {
+      this.eppFrissit = false;
+      this._errorservice.Error = err;
+    }
   }
 
   cancel() {

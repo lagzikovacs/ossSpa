@@ -12,6 +12,7 @@ import {CikkMozgasParameter} from './cikkmozgasparameter';
 import {CikkZoomParameter} from './cikkzoomparameter';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
+import {lastValueFrom} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -69,10 +70,16 @@ export class CikkService {
       .toPromise();
   }
 
-  public ZoomCheck(par: CikkZoomParameter): Promise<EmptyResult> {
-    return this._httpClient.post<EmptyResult>(
-      this._controller + 'zoomcheck', par, this._logonservice.httpoptions())
-      .toPromise();
+  public async ZoomCheck(par: CikkZoomParameter): Promise<EmptyResult> {
+    const url = this._controller + 'zoomcheck';
+
+    // return this._httpClient.post<EmptyResult>(
+    //   url, par, this._logonservice.httpoptions())
+    //   .toPromise();
+
+    return await lastValueFrom(
+      this._httpClient.post<EmptyResult>(url, par, this._logonservice.httpoptions())
+    );
   }
 
   public GetGridSettings(): Promise<ColumnSettingsResult> {

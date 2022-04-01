@@ -39,19 +39,22 @@
 
       <div class="editform-row">
         <div class="editform-label">Tömeg, kg</div>
-        <input type="number" class="editform-number" id="tomegkg" name="tomegkg"
-               [(ngModel)]="TetelDtoEdited.Tomegkg"
-               (focusout)="tetelcalc($event)"
-               min="0">
+        <input type="number" class="editform-number" formControlName="tomegkg" (focusout)="tetelcalc($event)">
       </div>
     </div>
 
     <div class="editform-card">
       <div class="editform-row">
+        <div class="editform-label">Termékdíjas?</div>
+        <select class="editform-combo" formControlName="termekdijas">
+          <option [ngValue]="false">Nem</option>
+          <option [ngValue]="true">Igen</option>
+        </select>
+      </div>
+
+      <div class="editform-row">
         <div class="editform-label">Termékdíj KT</div>
-        <input type="text" class="editform-edit zoomedit primitivwidth" id="termekdijkt" name="termekdijkt"
-               [(ngModel)]="TetelDtoEdited.Termekdijkt"
-               maxlength="10" autocomplete="off">
+        <input type="text" class="editform-edit zoomedit primitivwidth" formControlName="termekdijkt">
         <button class="toolbutton" (click)="TermekdijZoom()" type="button">...</button>
         <button class="toolbutton" (click)="TermekdijTorles()" type="button">
           <i class="fa fa-close" aria-hidden="true"></i>
@@ -60,24 +63,17 @@
 
       <div class="editform-row">
         <div class="editform-label">Termékdíj megnevezés</div>
-        <input type="text" class="editform-edit em20width" id="termekdijmegnevezes" name="termekdijmegnevezes"
-               [(ngModel)]="TetelDtoEdited.Termekdijmegnevezes"
-               disabled="true" autocomplete="off">
+        <input type="text" class="editform-edit em20width" formControlName="termekdijmegnevezes">
       </div>
 
       <div class="editform-row">
         <div class="editform-label">Termékdíj egységár</div>
-        <input type="number" class="editform-number" id="termekdijegysegar" name="termekdijegysegar"
-               [(ngModel)]="TetelDtoEdited.Termekdijegysegar"
-               (focusout)="tetelcalc($event)"
-               readonly="true">
+        <input type="number" class="editform-number" formControlName="termekdijegysegar" (focusout)="tetelcalc($event)">
       </div>
 
       <div class="editform-row">
         <div class="editform-label">Termékdíj a brutto árból</div>
-        <input type="number" class="editform-number" id="terekdijabruttoarbol" name="terekdijabruttoarbol"
-               [(ngModel)]="TetelDtoEdited.Termekdij"
-               disabled="true">
+        <input type="number" class="editform-number" formControlName="termekdij">
       </div>
     </div>
 

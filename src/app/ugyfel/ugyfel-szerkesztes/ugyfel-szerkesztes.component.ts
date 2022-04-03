@@ -7,9 +7,9 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {HelysegDto} from '../../01 Torzsadatok/07 Helyseg/helysegdto';
 import {UgyfelDto} from '../ugyfeldto';
-import {TevekenysegDto} from '../../primitiv/tevekenyseg/tevekenysegdto';
-import {TevekenysegService} from '../../primitiv/tevekenyseg/tevekenyseg.service';
-import {TevekenysegZoomParameter} from '../../primitiv/tevekenyseg/tevekenysegzoomparameter';
+import {TevekenysegDto} from '../../01 Torzsadatok/08 Tevekenyseg/tevekenysegdto';
+import {TevekenysegService} from '../../01 Torzsadatok/08 Tevekenyseg/tevekenyseg.service';
+import {TevekenysegZoomParam} from '../../01 Torzsadatok/08 Tevekenyseg/tevekenysegzoomparam';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -132,7 +132,7 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        return this._tevekenysegservice.ZoomCheck(new TevekenysegZoomParameter(this.DtoEdited.Tevekenysegkod || 0,
+        return this._tevekenysegservice.ZoomCheck(new TevekenysegZoomParam(this.DtoEdited.Tevekenysegkod || 0,
           this.DtoEdited.Tevekenyseg || ''));
       })
       .then(res0 => {

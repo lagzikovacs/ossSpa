@@ -167,7 +167,7 @@ import { AjanlatTablaComponent } from './ajanlat/ajanlat-tabla/ajanlat-tabla.com
 import { HscrollDirective } from './directives/divhscroll.directive';
 import {SpinnerDirective} from './directives/spinner.directive';
 import { ParticioEmailComponent } from './particio/particio-email/particio-email.component';
-import {TevekenysegService} from './primitiv/tevekenyseg/tevekenyseg.service';
+import {TevekenysegService} from './01 Torzsadatok/08 Tevekenyseg/tevekenyseg.service';
 import {TevekenysegSzerkesztesComponent} from './primitiv/tevekenyseg/tevekenyseg-szerkesztes/tevekenyseg-szerkesztes.component';
 import {TevekenysegListComponent} from './primitiv/tevekenyseg/tevekenyseg-list/tevekenyseg-list.component';
 import { BizonylatFuvarszamlaComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla.component';

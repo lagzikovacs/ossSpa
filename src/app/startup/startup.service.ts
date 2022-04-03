@@ -26,7 +26,7 @@ import {VolumeService} from '../volume/volume.service';
 import {KifizetesService} from '../kifizetes/kifizetes.service';
 import {DokumentumService} from '../dokumentum/dokumentum.service';
 import {UgyfelterlogService} from '../ugyfelterlog/ugyfelterlog.service';
-import {TevekenysegService} from '../primitiv/tevekenyseg/tevekenyseg.service';
+import {TevekenysegService} from '../01 Torzsadatok/08 Tevekenyseg/tevekenyseg.service';
 import {HibabejelentesService} from '../hibabejelentes/hibabejelentes.service';
 import {FelmeresService} from '../felmeres/felmeres.service';
 

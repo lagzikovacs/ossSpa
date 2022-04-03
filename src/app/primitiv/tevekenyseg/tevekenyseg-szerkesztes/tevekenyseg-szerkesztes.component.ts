@@ -2,8 +2,8 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {NumberResult} from '../../../common/dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {deepCopy} from '../../../tools/deepCopy';
-import {TevekenysegDto} from '../tevekenysegdto';
-import {TevekenysegService} from '../tevekenyseg.service';
+import {TevekenysegDto} from '../../../01 Torzsadatok/08 Tevekenyseg/tevekenysegdto';
+import {TevekenysegService} from '../../../01 Torzsadatok/08 Tevekenyseg/tevekenyseg.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({

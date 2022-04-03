@@ -9,8 +9,8 @@ import {deepCopy} from '../../../tools/deepCopy';
 import {EgyMode} from '../../../common/enums/egymode';
 import {propCopy} from '../../../tools/propCopy';
 import {rowanimation} from '../../../animation/rowAnimation';
-import {TevekenysegService} from '../tevekenyseg.service';
-import {TevekenysegDto} from '../tevekenysegdto';
+import {TevekenysegService} from '../../../01 Torzsadatok/08 Tevekenyseg/tevekenyseg.service';
+import {TevekenysegDto} from '../../../01 Torzsadatok/08 Tevekenyseg/tevekenysegdto';
 
 @Component({
   selector: 'app-tevekenyseg-list',

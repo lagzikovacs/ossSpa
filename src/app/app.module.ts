@@ -40,7 +40,7 @@ import {DokumentumService} from './dokumentum/dokumentum.service';
 import { IratSzerkesztesComponent } from './irat/irat-szerkesztes/irat-szerkesztes.component';
 import { DokumentumFeltoltesComponent } from './dokumentum/dokumentum-feltoltes/dokumentum-feltoltes.component';
 import { IrattipusListComponent } from './primitiv/irattipus/irattipus-list/irattipus-list.component';
-import { IrattipusSzerkesztesComponent } from './primitiv/irattipus/irattipus-szerkesztes/irattipus-szerkesztes.component';
+import { IrattipusSzerkesztesComponent } from './01 Torzsadatok/01 Irattipus/irattipus-szerkesztes/irattipus-szerkesztes.component';
 import { HelysegSzerkesztesComponent } from './primitiv/helyseg/helyseg-szerkesztes/helyseg-szerkesztes.component';
 import { UgyfelListComponent } from './ugyfel/ugyfel-list/ugyfel-list.component';
 import { UgyfelSzerkesztesComponent } from './ugyfel/ugyfel-szerkesztes/ugyfel-szerkesztes.component';

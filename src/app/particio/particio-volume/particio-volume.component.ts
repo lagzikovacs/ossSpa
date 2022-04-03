@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {ParticioDto} from '../particiodto';
-import {VolumeConf} from '../volumeconf';
+import {ParticioDto} from '../../05 Segedeszkozok/01 Particio/particiodto';
+import {VolumeConf} from '../../05 Segedeszkozok/01 Particio/volumeconf';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({

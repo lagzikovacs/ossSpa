@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ParticioService} from '../particio.service';
-import {ParticioDto} from '../particiodto';
+import {ParticioService} from '../../05 Segedeszkozok/01 Particio/particio.service';
+import {ParticioDto} from '../../05 Segedeszkozok/01 Particio/particiodto';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {EgyMode} from '../../common/enums/egymode';

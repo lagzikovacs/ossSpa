@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {ParticioDto} from '../particiodto';
-import {EmailConf} from '../emailconf';
+import {ParticioDto} from '../../05 Segedeszkozok/01 Particio/particiodto';
+import {EmailConf} from '../../05 Segedeszkozok/01 Particio/emailconf';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({

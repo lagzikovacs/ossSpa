@@ -3,7 +3,7 @@ import {IratService} from '../irat.service';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
 import {ProjektService} from '../../projekt/projekt.service';
 import {ProjektResult} from '../../projekt/projektresult';
-import {VagolapService} from '../../vagolap/vagolap.service';
+import {VagolapService} from '../../05 Segedeszkozok/08 Vagolap/vagolap.service';
 import {AbuComponent} from '../../tools/abu/abu.component';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {JogKod} from '../../common/enums/jogkod';

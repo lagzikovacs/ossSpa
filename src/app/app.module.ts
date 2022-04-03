@@ -131,7 +131,7 @@ import { BizonylatKifizetesrendbenComponent } from './bizonylat/bizonylat-kifize
 import { BizonylatKiszallitvaComponent } from './bizonylat/bizonylat-kiszallitva/bizonylat-kiszallitva.component';
 import { BoolHunPipe } from './pipes/boolhun.pipe';
 import { VagolapComponent } from './vagolap/vagolap.component';
-import {VagolapService} from './vagolap/vagolap.service';
+import {VagolapService} from './05 Segedeszkozok/08 Vagolap/vagolap.service';
 import { AbuComponent } from './tools/abu/abu.component';
 import { BizonylatkapcsolatVagolaprolComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-vagolaprol/bizonylatkapcsolat-vagolaprol.component';
 import { ProjektkapcsolatVagolaprolComponent } from './projektkapcsolat/projektkapcsolat-vagolaprol/projektkapcsolat-vagolaprol.component';

@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {IratDto} from '../../irat/iratdto';
-import {VagolapService} from '../vagolap.service';
+import {VagolapService} from '../../05 Segedeszkozok/08 Vagolap/vagolap.service';
 
 @Component({
   selector: 'app-vagolap-irathoz',

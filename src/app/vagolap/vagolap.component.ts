@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {VagolapService} from './vagolap.service';
-import {VagolapDto} from './vagolapdto';
-import {VagolapMode} from './vagolapmode';
+import {VagolapService} from '../05 Segedeszkozok/08 Vagolap/vagolap.service';
+import {VagolapDto} from '../05 Segedeszkozok/08 Vagolap/vagolapdto';
+import {VagolapMode} from '../05 Segedeszkozok/08 Vagolap/vagolapmode';
 
 @Component({
   selector: 'app-vagolap',

@@ -5,8 +5,8 @@ import {LogonService} from '../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {AngularmenuResult} from './angularmenuresult';
 import {Router} from '@angular/router';
 import {PlatformLocation} from '@angular/common';
-import {VagolapService} from '../vagolap/vagolap.service';
-import {VagolapMode} from '../vagolap/vagolapmode';
+import {VagolapService} from '../05 Segedeszkozok/08 Vagolap/vagolap.service';
+import {VagolapMode} from '../05 Segedeszkozok/08 Vagolap/vagolapmode';
 
 @Injectable({
   providedIn: 'root'

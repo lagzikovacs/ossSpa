@@ -8,7 +8,7 @@ import {IratService} from '../irat/irat.service';
 import {AfakulcsService} from '../01 Torzsadatok/05 Afakulcs/afakulcs.service';
 import {FelhasznaloService} from '../primitiv/felhasznalo/felhasznalo.service';
 import {FizetesimodService} from '../01 Torzsadatok/02 Fizetesimod/fizetesimod.service';
-import {HelysegService} from '../primitiv/helyseg/helyseg.service';
+import {HelysegService} from '../01 Torzsadatok/07 Helyseg/helyseg.service';
 import {IrattipusService} from '../01 Torzsadatok/01 Irattipus/irattipus.service';
 import {MeService} from '../01 Torzsadatok/04 Mennyisegiegyseg/me.service';
 import {PenznemService} from '../01 Torzsadatok/03 Penznem/penznem.service';

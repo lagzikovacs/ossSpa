@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {HelysegService} from '../helyseg.service';
+import {HelysegService} from '../../../01 Torzsadatok/07 Helyseg/helyseg.service';
 import {NumberResult} from '../../../common/dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {deepCopy} from '../../../tools/deepCopy';
-import {HelysegDto} from '../helysegdto';
+import {HelysegDto} from '../../../01 Torzsadatok/07 Helyseg/helysegdto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({

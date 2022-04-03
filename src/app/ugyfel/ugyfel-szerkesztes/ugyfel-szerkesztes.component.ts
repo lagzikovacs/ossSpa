@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {UgyfelService} from '../ugyfel.service';
-import {HelysegService} from '../../primitiv/helyseg/helyseg.service';
-import {HelysegZoomParameter} from '../../primitiv/helyseg/helysegzoomparameter';
+import {HelysegService} from '../../01 Torzsadatok/07 Helyseg/helyseg.service';
+import {HelysegZoomParam} from '../../01 Torzsadatok/07 Helyseg/helysegzoomparam';
 import {UgyfelSzerkesztesMode} from '../ugyfelszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {deepCopy} from '../../tools/deepCopy';
-import {HelysegDto} from '../../primitiv/helyseg/helysegdto';
+import {HelysegDto} from '../../01 Torzsadatok/07 Helyseg/helysegdto';
 import {UgyfelDto} from '../ugyfeldto';
 import {TevekenysegDto} from '../../primitiv/tevekenyseg/tevekenysegdto';
 import {TevekenysegService} from '../../primitiv/tevekenyseg/tevekenyseg.service';
@@ -125,7 +125,7 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
     this.eppFrissit = true;
     this.updatedto();
 
-    this._helysegservice.ZoomCheck(new HelysegZoomParameter(this.DtoEdited.Helysegkod || 0,
+    this._helysegservice.ZoomCheck(new HelysegZoomParam(this.DtoEdited.Helysegkod || 0,
       this.DtoEdited.Helysegnev || ''))
       .then(res => {
         if (res.Error !== null) {

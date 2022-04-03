@@ -6,7 +6,7 @@ import {LogonParameter} from './logonparameter';
 import {LogonResult} from './logonresult';
 import {Md5} from 'ts-md5';
 import {SzerepkorokResult} from './szerepkorokresult';
-import {CsoportDto} from '../csoport/csoportdto';
+import {CsoportDto} from '../05 Segedeszkozok/04 Csoport/csoportdto';
 import {SzerepkorvalasztasParameter} from './szerepkorvalasztasparameter';
 import {EmptyResult} from '../common/dtos/emptyresult';
 

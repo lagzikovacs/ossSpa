@@ -1,6 +1,6 @@
 import {LehetsegesJogDto} from './lehetsegesjogdto';
 
 export class LehetsegesJogResult {
-  Error: string;
-  Result: LehetsegesJogDto[];
+  Error: string = '';
+  Result: LehetsegesJogDto[] = new Array<LehetsegesJogDto>();
 }

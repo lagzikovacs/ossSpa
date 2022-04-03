@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {FelhasznaloService} from '../felhasznalo.service';
+import {FelhasznaloService} from '../../../05 Segedeszkozok/03 Felhasznalo/felhasznalo.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../common/enums/jogkod';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
 import {environment} from '../../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../../common/dtos/egyszerukeresesdto';
-import {FelhasznaloDto} from '../felhasznalodto';
+import {FelhasznaloDto} from '../../../05 Segedeszkozok/03 Felhasznalo/felhasznalodto';
 import {deepCopy} from '../../../tools/deepCopy';
 import {EgyMode} from '../../../common/enums/egymode';
 import {propCopy} from '../../../tools/propCopy';

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import {EmptyResult} from '../common/dtos/emptyresult';
 import {LogonService} from '../logon/logon.service';
-import {CsoportService} from '../csoport/csoport.service';
+import {CsoportService} from '../05 Segedeszkozok/04 Csoport/csoport.service';
 import {SessionService} from '../session/session.service';
 import {ProjektService} from '../projekt/projekt.service';
 import {IratService} from '../irat/irat.service';
 import {AfakulcsService} from '../01 Torzsadatok/05 Afakulcs/afakulcs.service';
-import {FelhasznaloService} from '../primitiv/felhasznalo/felhasznalo.service';
+import {FelhasznaloService} from '../05 Segedeszkozok/03 Felhasznalo/felhasznalo.service';
 import {FizetesimodService} from '../01 Torzsadatok/02 Fizetesimod/fizetesimod.service';
 import {HelysegService} from '../01 Torzsadatok/07 Helyseg/helyseg.service';
 import {IrattipusService} from '../01 Torzsadatok/01 Irattipus/irattipus.service';

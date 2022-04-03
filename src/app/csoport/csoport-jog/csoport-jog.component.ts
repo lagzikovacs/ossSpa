@@ -1,8 +1,8 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {CsoportService} from '../csoport.service';
-import {CsoportJogParameter} from '../csoportjogparameter';
+import {CsoportService} from '../../05 Segedeszkozok/04 Csoport/csoport.service';
+import {CsoportJogParam} from '../../05 Segedeszkozok/04 Csoport/csoportjogparam';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {LehetsegesJogDto} from '../lehetsegesjogdto';
+import {LehetsegesJogDto} from '../../05 Segedeszkozok/04 Csoport/lehetsegesjogdto';
 
 @Component({
   selector: 'app-csoport-jog',
@@ -42,7 +42,7 @@ export class CsoportJogComponent implements OnInit, OnDestroy {
   checkJog(i: number) {
     this.eppFrissit = true;
 
-    const par = new CsoportJogParameter(this.Csoportkod,
+    const par = new CsoportJogParam(this.Csoportkod,
       this.DtoCsoportLehetsegesJog[i].Lehetsegesjogkod, !this.DtoCsoportLehetsegesJog[i].Csoporttag);
 
     this.csoportservice.CsoportJogBeKi(par)

@@ -1,10 +1,10 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {CsoportService} from '../csoport.service';
+import {CsoportService} from '../../05 Segedeszkozok/04 Csoport/csoport.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../common/dtos/egyszerukeresesdto';
-import {CsoportDto} from '../csoportdto';
+import {CsoportDto} from '../../05 Segedeszkozok/04 Csoport/csoportdto';
 import {EgyMode} from '../../common/enums/egymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {propCopy} from '../../tools/propCopy';

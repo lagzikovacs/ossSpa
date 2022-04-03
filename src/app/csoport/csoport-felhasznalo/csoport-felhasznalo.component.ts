@@ -1,8 +1,8 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {CsoportService} from '../csoport.service';
-import {CsoportFelhasznaloParameter} from '../csoportfelhasznaloparameter';
+import {CsoportService} from '../../05 Segedeszkozok/04 Csoport/csoport.service';
+import {CsoportFelhasznaloParam} from '../../05 Segedeszkozok/04 Csoport/csoportfelhasznaloparam';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {FelhasznaloDto} from '../../primitiv/felhasznalo/felhasznalodto';
+import {FelhasznaloDto} from '../../05 Segedeszkozok/03 Felhasznalo/felhasznalodto';
 
 @Component({
   selector: 'app-csoport-felhasznalo',
@@ -42,7 +42,7 @@ export class CsoportFelhasznaloComponent implements OnInit, OnDestroy {
   checkFelhasznalo(i: number) {
     this.eppFrissit = true;
 
-    const par = new CsoportFelhasznaloParameter(this.Csoportkod,
+    const par = new CsoportFelhasznaloParam(this.Csoportkod,
       this.DtoCsoportFelhasznalo[i].Felhasznalokod, !this.DtoCsoportFelhasznalo[i].Csoporttag);
 
     this.csoportservice.CsoportFelhasznaloBeKi(par)

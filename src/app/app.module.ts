@@ -86,7 +86,7 @@ import {AfakulcsService} from './01 Torzsadatok/05 Afakulcs/afakulcs.service';
 import {TermekdijService} from './01 Torzsadatok/051 Termekdij/termekdij.service';
 import {CikkService} from './01 Torzsadatok/06 Cikk/cikk.service';
 import {HelysegService} from './01 Torzsadatok/07 Helyseg/helyseg.service';
-import {UgyfelService} from './ugyfel/ugyfel.service';
+import {UgyfelService} from './01 Torzsadatok/09 Ugyfel/ugyfel.service';
 import {ParticioService} from './particio/particio.service';
 import {VolumeService} from './volume/volume.service';
 import {CsoportService} from './csoport/csoport.service';

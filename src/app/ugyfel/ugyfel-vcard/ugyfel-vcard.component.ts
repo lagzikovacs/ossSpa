@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy} from '@angular/core';
-import {UgyfelDto} from '../ugyfeldto';
+import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
 import * as FileSaver from 'file-saver';
 
 @Component({

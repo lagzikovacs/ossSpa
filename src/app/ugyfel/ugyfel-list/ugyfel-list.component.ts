@@ -1,14 +1,14 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {Szempont} from '../../common/enums/szempont';
-import {UgyfelService} from '../ugyfel.service';
-import {UgyfelDto} from '../ugyfeldto';
+import {UgyfelService} from '../../01 Torzsadatok/09 Ugyfel/ugyfel.service';
+import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
 import {SzMT} from '../../common/dtos/szmt';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../common/enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {UgyfelTablaComponent} from '../ugyfel-tabla/ugyfel-tabla.component';
 import {environment} from '../../../environments/environment';
-import {UgyfelParameter} from '../ugyfelparameter';
+import {UgyfelParam} from '../../01 Torzsadatok/09 Ugyfel/ugyfelparam';
 import {deepCopy} from '../../tools/deepCopy';
 import {EgyMode} from '../../common/enums/egymode';
 import {rowanimation} from '../../animation/rowAnimation';
@@ -27,7 +27,7 @@ import {propCopy} from '../../tools/propCopy';
   szurok = ['Név', 'Cég', 'Beosztás', 'Helységnév', 'Telefon', 'Email', 'Egyéb link', 'Ajánlotta', 'Id'];
   szempont = 0;
   minta = '';
-  up = new UgyfelParameter(0, environment.lapmeret);
+  up = new UgyfelParam(0, environment.lapmeret);
   szempontok = [
     Szempont.Nev, Szempont.Ceg, Szempont.Beosztas, Szempont.Telepules, Szempont.UgyfelTelefonszam, Szempont.UgyfelEmail,
     Szempont.Egyeblink, Szempont.Ajanlo, Szempont.Kod

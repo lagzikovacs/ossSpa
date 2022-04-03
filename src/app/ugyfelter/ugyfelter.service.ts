@@ -3,7 +3,7 @@ import {LogonService} from '../logon/logon.service';
 import {HttpClient} from '@angular/common/http';
 import {StringResult} from '../common/dtos/stringresult';
 import {environment} from '../../environments/environment';
-import {UgyfelDto} from '../ugyfel/ugyfeldto';
+import {UgyfelDto} from '../01 Torzsadatok/09 Ugyfel/ugyfeldto';
 import {UgyfelterResult} from './ugyfelterresult';
 import {EmptyResult} from '../common/dtos/emptyresult';
 

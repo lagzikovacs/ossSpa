@@ -2,15 +2,15 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {IratService} from '../irat.service';
 import {IrattipusService} from '../../01 Torzsadatok/01 Irattipus/irattipus.service';
 import * as moment from 'moment';
-import {UgyfelService} from '../../ugyfel/ugyfel.service';
+import {UgyfelService} from '../../01 Torzsadatok/09 Ugyfel/ugyfel.service';
 import {IratSzerkesztesMode} from '../iratszerkesztesmode';
 import {IrattipusZoomParam} from '../../01 Torzsadatok/01 Irattipus/irattipuszoomparam';
 import {EmptyResult} from '../../common/dtos/emptyresult';
-import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
+import {UgyfelZoomParam} from '../../01 Torzsadatok/09 Ugyfel/ugyfelzoomparam';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {IrattipusDto} from '../../01 Torzsadatok/01 Irattipus/irattipusdto';
-import {UgyfelDto} from '../../ugyfel/ugyfeldto';
+import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
 import {IratDto} from '../iratdto';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
@@ -126,7 +126,7 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
         }
 
         if (this.DtoEdited.Ugyfelnev || '' !== '') {
-          return this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.DtoEdited.Ugyfelkod,
+          return this._ugyfelservice.ZoomCheck(new UgyfelZoomParam(this.DtoEdited.Ugyfelkod,
             this.DtoEdited.Ugyfelnev));
         } else {
           return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });

@@ -4,7 +4,7 @@ import {UgyfelterService} from '../ugyfelter.service';
 import {UgyfelterDto} from '../ugyfelterdto';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
 import {LogonService} from '../../logon/logon.service';
-import {UgyfelDto} from '../../ugyfel/ugyfeldto';
+import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
 import {ProjektDto} from '../../projekt/projektdto';
 import {ProjektKapcsolatDto} from '../../projektkapcsolat/projektkapcsolatdto';
 import {DokumentumDto} from '../../dokumentum/dokumentumdto';

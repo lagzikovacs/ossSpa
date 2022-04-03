@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
-import {UgyfelService} from '../../ugyfel/ugyfel.service';
+import {UgyfelService} from '../../01 Torzsadatok/09 Ugyfel/ugyfel.service';
 import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
-import {UgyfelDto} from '../../ugyfel/ugyfeldto';
+import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
 import {LogonService} from '../../logon/logon.service';

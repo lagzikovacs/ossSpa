@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {UgyfelService} from '../ugyfel.service';
+import {UgyfelService} from '../../01 Torzsadatok/09 Ugyfel/ugyfel.service';
 import {ProjektService} from '../../projekt/projekt.service';
 import {ProjektDto} from '../../projekt/projektdto';
 import {SzMT} from '../../common/dtos/szmt';

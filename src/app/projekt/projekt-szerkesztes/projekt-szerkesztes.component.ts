@@ -1,15 +1,15 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ProjektService} from '../projekt.service';
-import {UgyfelService} from '../../ugyfel/ugyfel.service';
+import {UgyfelService} from '../../01 Torzsadatok/09 Ugyfel/ugyfel.service';
 import {PenznemService} from '../../01 Torzsadatok/03 Penznem/penznem.service';
 import {ProjektSzerkesztesMode} from '../projektszerkesztesmode';
-import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
+import {UgyfelZoomParam} from '../../01 Torzsadatok/09 Ugyfel/ugyfelzoomparam';
 import {PenznemZoomParam} from '../../01 Torzsadatok/03 Penznem/penznemzoomparam';
 import {rowanimation} from '../../animation/rowAnimation';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {PenznemDto} from '../../01 Torzsadatok/03 Penznem/penznemdto';
-import {UgyfelDto} from '../../ugyfel/ugyfeldto';
+import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
 import {ProjektDto} from '../projektdto';
 import * as moment from 'moment';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -120,7 +120,7 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
     this.eppFrissit = true;
     this.updatedto();
 
-    this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.DtoEdited.Ugyfelkod || 0,
+    this._ugyfelservice.ZoomCheck(new UgyfelZoomParam(this.DtoEdited.Ugyfelkod || 0,
       this.DtoEdited.Ugyfelnev || ''))
       .then(res => {
         if (res.Error !== null) {

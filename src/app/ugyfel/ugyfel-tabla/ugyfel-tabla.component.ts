@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, Output, TemplateRef} from '@angular/core';
-import {UgyfelDto} from '../ugyfeldto';
+import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
 
 @Component({
   selector: 'app-ugyfel-tabla',

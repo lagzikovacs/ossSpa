@@ -1,4 +1,4 @@
-import {UgyfelDto} from '../ugyfel/ugyfeldto';
+import {UgyfelDto} from '../01 Torzsadatok/09 Ugyfel/ugyfeldto';
 import {ProjektDto} from '../projekt/projektdto';
 
 export class UgyfelterDto {

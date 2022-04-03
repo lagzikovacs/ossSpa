@@ -1,10 +1,10 @@
 import {ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
-import {UgyfelService} from '../../ugyfel/ugyfel.service';
+import {UgyfelService} from '../../01 Torzsadatok/09 Ugyfel/ugyfel.service';
 import {PenznemService} from '../../01 Torzsadatok/03 Penznem/penznem.service';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
 import {FizetesimodService} from '../../01 Torzsadatok/02 Fizetesimod/fizetesimod.service';
-import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
+import {UgyfelZoomParam} from '../../01 Torzsadatok/09 Ugyfel/ugyfelzoomparam';
 import {PenznemZoomParam} from '../../01 Torzsadatok/03 Penznem/penznemzoomparam';
 import {FizetesimodZoomParam} from '../../01 Torzsadatok/02 Fizetesimod/fiztesimodzoomparam';
 import {EmptyResult} from '../../common/dtos/emptyresult';
@@ -13,7 +13,7 @@ import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {PenznemDto} from '../../01 Torzsadatok/03 Penznem/penznemdto';
 import {FizetesimodDto} from '../../01 Torzsadatok/02 Fizetesimod/fizetesimoddto';
-import {UgyfelDto} from '../../ugyfel/ugyfeldto';
+import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 import {BizonylatTipus} from '../bizonylattipus';
 import {BizonylatComplexDto} from '../bizonylatcomplexdto';
@@ -366,7 +366,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
     this.eppFrissit = true;
     this.updatedto();
 
-    this._ugyfelservice.ZoomCheck(new UgyfelZoomParameter(this.ComplexDtoEdited.Dto.Ugyfelkod,
+    this._ugyfelservice.ZoomCheck(new UgyfelZoomParam(this.ComplexDtoEdited.Dto.Ugyfelkod,
       this.ComplexDtoEdited.Dto.Ugyfelnev))
       .then(res => {
         if (res.Error != null) {

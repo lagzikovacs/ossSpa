@@ -105,7 +105,7 @@ import {PenztarExportComponent} from './penztar/penztar-export/penztar-export.co
 import {PenztarSzerkesztesComponent} from './penztar/penztar-szerkesztes/penztar-szerkesztes.component';
 import {PenztartetelService} from './penztartetel/penztartetel.service';
 import {BizonylatService} from './bizonylat/bizonylat.service';
-import {RiportService} from './riport/riport.service';
+import {RiportService} from './04 Riportok/riport.service';
 import { ProjektkapcsolatLevalasztasComponent } from './projektkapcsolat/projektkapcsolat-levalasztas/projektkapcsolat-levalasztas.component';
 import { ProjektExportComponent } from './projekt/projekt-export/projekt-export.component';
 import { AjanlatTetelComponent } from './ajanlat/ajanlat-tetel/ajanlat-tetel';

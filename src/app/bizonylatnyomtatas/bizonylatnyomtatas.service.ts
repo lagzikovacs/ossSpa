@@ -5,7 +5,7 @@ import {environment} from '../../environments/environment';
 import {SzMT} from '../common/dtos/szmt';
 import {StringResult} from '../common/dtos/stringresult';
 import {EmptyResult} from '../common/dtos/emptyresult';
-import {RiportResult} from '../riport/riportresult';
+import {RiportResult} from '../04 Riportok/riportresult';
 
 @Injectable({
   providedIn: 'root'

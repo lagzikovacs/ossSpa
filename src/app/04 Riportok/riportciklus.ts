@@ -1,8 +1,8 @@
 import {RiportService} from './riport.service';
-import {ErrorService} from '../tools/errorbox/error.service';
-import {b64toBlob} from '../tools/b64toBlob';
 import * as FileSaver from 'file-saver';
 import {LiteEvent} from '../tools/event/LiteEvent';
+import {ErrorService} from '../tools/errorbox/error.service';
+import {b64toBlob} from '../tools/b64toBlob';
 
 export class Riportciklus {
   eventCiklusutan = new LiteEvent<void>();

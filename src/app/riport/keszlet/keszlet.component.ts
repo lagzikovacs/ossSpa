@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {RiportService} from '../riport.service';
+import {RiportService} from '../../04 Riportok/riport.service';
 import * as moment from 'moment';
 import {Szempont} from '../../common/enums/szempont';
 import {SzMT} from '../../common/dtos/szmt';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {Riportciklus} from '../riportciklus';
+import {Riportciklus} from '../../04 Riportok/riportciklus';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({

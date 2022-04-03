@@ -1,8 +1,8 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {NgmService} from './ngm.service';
-import {NGMParam} from './ngmparam';
+import {NgmService} from '../04 Riportok/07 Ngm/ngm.service';
+import {NGMParam} from '../04 Riportok/07 Ngm/ngmparam';
 import * as moment from 'moment';
-import {NGMMode} from './ngmmode';
+import {NGMMode} from '../04 Riportok/07 Ngm/ngmmode';
 import {ErrorService} from '../tools/errorbox/error.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 

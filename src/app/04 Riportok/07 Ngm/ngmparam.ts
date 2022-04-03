@@ -7,3 +7,4 @@ export class NGMParam {
   SzamlaSzamTol: string;
   SzamlaSzamIg: string;
 }
+

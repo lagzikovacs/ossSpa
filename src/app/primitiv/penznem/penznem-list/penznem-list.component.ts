@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {PenznemService} from '../penznem.service';
+import {PenznemService} from '../../../01 Torzsadatok/03 Penznem/penznem.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../common/enums/jogkod';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
 import {environment} from '../../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../../common/dtos/egyszerukeresesdto';
-import {PenznemDto} from '../penznemdto';
+import {PenznemDto} from '../../../01 Torzsadatok/03 Penznem/penznemdto';
 import {deepCopy} from '../../../tools/deepCopy';
 import {EgyMode} from '../../../common/enums/egymode';
 import {propCopy} from '../../../tools/propCopy';

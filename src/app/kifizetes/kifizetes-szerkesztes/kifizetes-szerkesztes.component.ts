@@ -1,13 +1,13 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {KifizetesService} from '../kifizetes.service';
-import {PenznemService} from '../../primitiv/penznem/penznem.service';
+import {PenznemService} from '../../01 Torzsadatok/03 Penznem/penznem.service';
 import {FizetesimodService} from '../../01 Torzsadatok/02 Fizetesimod/fizetesimod.service';
 import {KifizetesSzerkesztesMode} from '../kifizetesszerkesztesmode';
 import * as moment from 'moment';
-import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
+import {PenznemZoomParam} from '../../01 Torzsadatok/03 Penznem/penznemzoomparam';
 import {FizetesimodZoomParam} from '../../01 Torzsadatok/02 Fizetesimod/fiztesimodzoomparam';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {PenznemDto} from '../../primitiv/penznem/penznemdto';
+import {PenznemDto} from '../../01 Torzsadatok/03 Penznem/penznemdto';
 import {FizetesimodDto} from '../../01 Torzsadatok/02 Fizetesimod/fizetesimoddto';
 import {deepCopy} from '../../tools/deepCopy';
 import {KifizetesDto} from '../kifizetesdto';
@@ -101,7 +101,7 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
     this.eppFrissit = true;
     this.updatedto();
 
-    this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.DtoEdited.Penznemkod, this.DtoEdited.Penznem))
+    this._penznemservice.ZoomCheck(new PenznemZoomParam(this.DtoEdited.Penznemkod, this.DtoEdited.Penznem))
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

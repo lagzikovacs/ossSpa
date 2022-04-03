@@ -80,7 +80,7 @@ import { CikkBeszerzesKivetComponent } from './cikk/cikk-beszerzes-kivet/cikk-be
 import { PenztarListComponent } from './penztar/penztar-list/penztar-list.component';
 import {IrattipusService} from './01 Torzsadatok/01 Irattipus/irattipus.service';
 import {FizetesimodService} from './01 Torzsadatok/02 Fizetesimod/fizetesimod.service';
-import {PenznemService} from './primitiv/penznem/penznem.service';
+import {PenznemService} from './01 Torzsadatok/03 Penznem/penznem.service';
 import {MeService} from './primitiv/me/me.service';
 import {AfakulcsService} from './primitiv/afakulcs/afakulcs.service';
 import {TermekdijService} from './primitiv/termekdij/termekdij.service';

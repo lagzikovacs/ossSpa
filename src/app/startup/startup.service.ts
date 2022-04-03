@@ -11,7 +11,7 @@ import {FizetesimodService} from '../01 Torzsadatok/02 Fizetesimod/fizetesimod.s
 import {HelysegService} from '../primitiv/helyseg/helyseg.service';
 import {IrattipusService} from '../01 Torzsadatok/01 Irattipus/irattipus.service';
 import {MeService} from '../primitiv/me/me.service';
-import {PenznemService} from '../primitiv/penznem/penznem.service';
+import {PenznemService} from '../01 Torzsadatok/03 Penznem/penznem.service';
 import {TermekdijService} from '../primitiv/termekdij/termekdij.service';
 import {CikkService} from '../cikk/cikk.service';
 import {UgyfelService} from '../ugyfel/ugyfel.service';

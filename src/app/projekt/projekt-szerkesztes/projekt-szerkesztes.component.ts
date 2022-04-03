@@ -1,14 +1,14 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
-import {PenznemService} from '../../primitiv/penznem/penznem.service';
+import {PenznemService} from '../../01 Torzsadatok/03 Penznem/penznem.service';
 import {ProjektSzerkesztesMode} from '../projektszerkesztesmode';
 import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
-import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
+import {PenznemZoomParam} from '../../01 Torzsadatok/03 Penznem/penznemzoomparam';
 import {rowanimation} from '../../animation/rowAnimation';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {deepCopy} from '../../tools/deepCopy';
-import {PenznemDto} from '../../primitiv/penznem/penznemdto';
+import {PenznemDto} from '../../01 Torzsadatok/03 Penznem/penznemdto';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 import {ProjektDto} from '../projektdto';
 import * as moment from 'moment';
@@ -127,7 +127,7 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        return this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.DtoEdited.Penznemkod || 0,
+        return this._penznemservice.ZoomCheck(new PenznemZoomParam(this.DtoEdited.Penznemkod || 0,
           this.DtoEdited.Penznem || ''));
       })
       .then(res1 => {

@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {PenznemService} from '../../primitiv/penznem/penznem.service';
-import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
+import {PenznemService} from '../../01 Torzsadatok/03 Penznem/penznem.service';
+import {PenznemZoomParam} from '../../01 Torzsadatok/03 Penznem/penznemzoomparam';
 import {PenztarService} from '../penztar.service';
 import {PenztarSzerkesztesMode} from '../penztarszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {deepCopy} from '../../tools/deepCopy';
-import {PenznemDto} from '../../primitiv/penznem/penznemdto';
+import {PenznemDto} from '../../01 Torzsadatok/03 Penznem/penznemdto';
 import {PenztarDto} from '../penztardto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
@@ -79,7 +79,7 @@ export class PenztarSzerkesztesComponent implements OnInit, OnDestroy {
     this.eppFrissit = true;
     this.updatedto();
 
-    this._penznemservice.ZoomCheck(new PenznemZoomParameter(this.DtoEdited.Penznemkod || 0,
+    this._penznemservice.ZoomCheck(new PenznemZoomParam(this.DtoEdited.Penznemkod || 0,
       this.DtoEdited.Penznem || ''))
       .then(res => {
         if (res.Error !== null) {

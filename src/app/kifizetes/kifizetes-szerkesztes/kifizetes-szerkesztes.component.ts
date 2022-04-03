@@ -1,14 +1,14 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {KifizetesService} from '../kifizetes.service';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
-import {FizetesimodService} from '../../primitiv/fizetesimod/fizetesimod.service';
+import {FizetesimodService} from '../../01 Torzsadatok/02 Fizetesimod/fizetesimod.service';
 import {KifizetesSzerkesztesMode} from '../kifizetesszerkesztesmode';
 import * as moment from 'moment';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
-import {FizetesimodZoomParameter} from '../../primitiv/fizetesimod/fiztesimodzoomparameter';
+import {FizetesimodZoomParam} from '../../01 Torzsadatok/02 Fizetesimod/fiztesimodzoomparam';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {PenznemDto} from '../../primitiv/penznem/penznemdto';
-import {FizetesimodDto} from '../../primitiv/fizetesimod/fizetesimoddto';
+import {FizetesimodDto} from '../../01 Torzsadatok/02 Fizetesimod/fizetesimoddto';
 import {deepCopy} from '../../tools/deepCopy';
 import {KifizetesDto} from '../kifizetesdto';
 import {BizonylatDto} from '../../bizonylat/bizonylatdto';
@@ -107,7 +107,7 @@ export class KifizetesSzerkesztesComponent implements OnInit, OnDestroy {
           throw res.Error;
         }
 
-        return this._fizetesimodservice.ZoomCheck(new FizetesimodZoomParameter(this.DtoEdited.Fizetesimodkod, this.DtoEdited.Fizetesimod));
+        return this._fizetesimodservice.ZoomCheck(new FizetesimodZoomParam(this.DtoEdited.Fizetesimodkod, this.DtoEdited.Fizetesimod));
       })
       .then(res1 => {
         if (res1.Error != null) {

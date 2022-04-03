@@ -3,16 +3,16 @@ import {BizonylatService} from '../bizonylat.service';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {PenznemService} from '../../primitiv/penznem/penznem.service';
 import {BizonylatSzerkesztesMode} from '../bizonylatszerkesztesmode';
-import {FizetesimodService} from '../../primitiv/fizetesimod/fizetesimod.service';
+import {FizetesimodService} from '../../01 Torzsadatok/02 Fizetesimod/fizetesimod.service';
 import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
-import {FizetesimodZoomParameter} from '../../primitiv/fizetesimod/fiztesimodzoomparameter';
+import {FizetesimodZoomParam} from '../../01 Torzsadatok/02 Fizetesimod/fiztesimodzoomparam';
 import {EmptyResult} from '../../common/dtos/emptyresult';
 import * as moment from 'moment';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {PenznemDto} from '../../primitiv/penznem/penznemdto';
-import {FizetesimodDto} from '../../primitiv/fizetesimod/fizetesimoddto';
+import {FizetesimodDto} from '../../01 Torzsadatok/02 Fizetesimod/fizetesimoddto';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 import {BizonylatTipus} from '../bizonylattipus';
@@ -382,7 +382,7 @@ export class BizonylatSzerkesztesComponent implements OnInit, OnDestroy {
         }
 
         if (this.bizonylatLeiro.FizetesiModIs) {
-          return this._fizetesimodservice.ZoomCheck(new FizetesimodZoomParameter(this.ComplexDtoEdited.Dto.Fizetesimodkod,
+          return this._fizetesimodservice.ZoomCheck(new FizetesimodZoomParam(this.ComplexDtoEdited.Dto.Fizetesimodkod,
             this.ComplexDtoEdited.Dto.Fizetesimod));
         } else {
           return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });

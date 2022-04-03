@@ -7,7 +7,7 @@ import {ProjektService} from '../projekt/projekt.service';
 import {IratService} from '../irat/irat.service';
 import {AfakulcsService} from '../primitiv/afakulcs/afakulcs.service';
 import {FelhasznaloService} from '../primitiv/felhasznalo/felhasznalo.service';
-import {FizetesimodService} from '../primitiv/fizetesimod/fizetesimod.service';
+import {FizetesimodService} from '../01 Torzsadatok/02 Fizetesimod/fizetesimod.service';
 import {HelysegService} from '../primitiv/helyseg/helyseg.service';
 import {IrattipusService} from '../01 Torzsadatok/01 Irattipus/irattipus.service';
 import {MeService} from '../primitiv/me/me.service';

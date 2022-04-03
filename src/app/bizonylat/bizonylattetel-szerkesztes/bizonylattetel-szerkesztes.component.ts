@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {CikkService} from '../../cikk/cikk.service';
-import {MeService} from '../../primitiv/me/me.service';
+import {MeService} from '../../01 Torzsadatok/04 Mennyisegiegyseg/me.service';
 import {AfakulcsService} from '../../primitiv/afakulcs/afakulcs.service';
 import {TermekdijService} from '../../primitiv/termekdij/termekdij.service';
 import {BizonylattetelSzerkesztesMode} from '../bizonylattetelszerkesztesmode';
@@ -10,10 +10,10 @@ import {CikkZoomParameter} from '../../cikk/cikkzoomparameter';
 import {EmptyResult} from '../../common/dtos/emptyresult';
 import {TermekdijZoomParameter} from '../../primitiv/termekdij/termekdijzoomparameter';
 import {AfakulcsZoomParameter} from '../../primitiv/afakulcs/afakulcszoomparameter';
-import {MeZoomParameter} from '../../primitiv/me/mezoomparameter';
+import {MeZoomParam} from '../../01 Torzsadatok/04 Mennyisegiegyseg/mezoomparam';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {AfakulcsDto} from '../../primitiv/afakulcs/afakulcsdto';
-import {MeDto} from '../../primitiv/me/medto';
+import {MeDto} from '../../01 Torzsadatok/04 Mennyisegiegyseg/medto';
 import {TermekdijDto} from '../../primitiv/termekdij/termekdijdto';
 import {CikkDto} from '../../cikk/cikkdto';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
@@ -255,7 +255,7 @@ export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implement
         throw res1.Error;
       }
 
-      const res2 = await this._meservice.ZoomCheck(new MeZoomParameter(this.TetelDtoEdited.Mekod || 0,
+      const res2 = await this._meservice.ZoomCheck(new MeZoomParam(this.TetelDtoEdited.Mekod || 0,
         this.TetelDtoEdited.Me || ''));
       if (res2.Error != null) {
         throw res2.Error;

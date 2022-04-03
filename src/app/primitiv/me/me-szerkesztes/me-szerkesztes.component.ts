@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {MeService} from '../me.service';
+import {MeService} from '../../../01 Torzsadatok/04 Mennyisegiegyseg/me.service';
 import {NumberResult} from '../../../common/dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {deepCopy} from '../../../tools/deepCopy';
-import {MeDto} from '../medto';
+import {MeDto} from '../../../01 Torzsadatok/04 Mennyisegiegyseg/medto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({

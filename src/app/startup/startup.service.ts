@@ -10,7 +10,7 @@ import {FelhasznaloService} from '../primitiv/felhasznalo/felhasznalo.service';
 import {FizetesimodService} from '../01 Torzsadatok/02 Fizetesimod/fizetesimod.service';
 import {HelysegService} from '../primitiv/helyseg/helyseg.service';
 import {IrattipusService} from '../01 Torzsadatok/01 Irattipus/irattipus.service';
-import {MeService} from '../primitiv/me/me.service';
+import {MeService} from '../01 Torzsadatok/04 Mennyisegiegyseg/me.service';
 import {PenznemService} from '../01 Torzsadatok/03 Penznem/penznem.service';
 import {TermekdijService} from '../primitiv/termekdij/termekdij.service';
 import {CikkService} from '../cikk/cikk.service';

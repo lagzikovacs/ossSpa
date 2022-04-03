@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {CikkService} from '../cikk.service';
-import {MeService} from '../../primitiv/me/me.service';
+import {MeService} from '../../01 Torzsadatok/04 Mennyisegiegyseg/me.service';
 import {AfakulcsService} from '../../primitiv/afakulcs/afakulcs.service';
 import {TermekdijService} from '../../primitiv/termekdij/termekdij.service';
-import {MeZoomParameter} from '../../primitiv/me/mezoomparameter';
+import {MeZoomParam} from '../../01 Torzsadatok/04 Mennyisegiegyseg/mezoomparam';
 import {AfakulcsZoomParameter} from '../../primitiv/afakulcs/afakulcszoomparameter';
 import {EmptyResult} from '../../common/dtos/emptyresult';
 import {TermekdijZoomParameter} from '../../primitiv/termekdij/termekdijzoomparameter';
@@ -11,7 +11,7 @@ import {CikkSzerkesztesMode} from '../cikkszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {AfakulcsDto} from '../../primitiv/afakulcs/afakulcsdto';
-import {MeDto} from '../../primitiv/me/medto';
+import {MeDto} from '../../01 Torzsadatok/04 Mennyisegiegyseg/medto';
 import {TermekdijDto} from '../../primitiv/termekdij/termekdijdto';
 import {CikkDto} from '../cikkdto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -110,7 +110,7 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
     this.eppFrissit = true;
     this.updatedto();
 
-    this._meservice.ZoomCheck(new MeZoomParameter(this.DtoEdited.Mekod || 0,
+    this._meservice.ZoomCheck(new MeZoomParam(this.DtoEdited.Mekod || 0,
       this.DtoEdited.Me || ''))
       .then(res => {
         if (res.Error !== null) {

@@ -1,8 +1,8 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {CikkService} from '../cikk.service';
-import {CikkMozgasTetelDto} from '../cikkmozgasteteldto';
+import {CikkService} from '../../01 Torzsadatok/06 Cikk/cikk.service';
+import {CikkMozgasTetelDto} from '../../01 Torzsadatok/06 Cikk/cikkmozgasteteldto';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {CikkMozgasParameter} from '../cikkmozgasparameter';
+import {CikkMozgasParam} from '../../01 Torzsadatok/06 Cikk/cikkmozgasparam';
 
 @Component({
   selector: 'app-cikk-beszerzes-kivet',
@@ -25,7 +25,7 @@ export class CikkBeszerzesKivetComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.eppFrissit = true;
-    this.cikkservice.Mozgas(new CikkMozgasParameter(this.Cikkkod, this.BizonylattipusKod))
+    this.cikkservice.Mozgas(new CikkMozgasParam(this.Cikkkod, this.BizonylattipusKod))
       .then(res => {
         if (res.Error != null) {
           throw res.Error;

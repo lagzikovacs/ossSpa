@@ -1,14 +1,14 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, ViewContainerRef} from '@angular/core';
-import {CikkService} from '../cikk.service';
+import {CikkService} from '../../01 Torzsadatok/06 Cikk/cikk.service';
 import {Szempont} from '../../common/enums/szempont';
-import {CikkDto} from '../cikkdto';
+import {CikkDto} from '../../01 Torzsadatok/06 Cikk/cikkdto';
 import {SzMT} from '../../common/dtos/szmt';
 import {LogonService} from '../../logon/logon.service';
 import {JogKod} from '../../common/enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
-import {CikkParameter} from '../cikkparameter';
+import {CikkParameter} from '../../01 Torzsadatok/06 Cikk/cikkparameter';
 import {deepCopy} from '../../tools/deepCopy';
 import {EgyMode} from '../../common/enums/egymode';
 import {propCopy} from '../../tools/propCopy';

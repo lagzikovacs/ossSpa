@@ -1,19 +1,19 @@
 import {ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
-import {CikkService} from '../../cikk/cikk.service';
+import {CikkService} from '../../01 Torzsadatok/06 Cikk/cikk.service';
 import {MeService} from '../../01 Torzsadatok/04 Mennyisegiegyseg/me.service';
 import {AfakulcsService} from '../../01 Torzsadatok/05 Afakulcs/afakulcs.service';
 import {TermekdijService} from '../../01 Torzsadatok/051 Termekdij/termekdij.service';
 import {BizonylattetelSzerkesztesMode} from '../bizonylattetelszerkesztesmode';
 import {BruttobolParam} from '../bruttobolparam';
-import {CikkZoomParameter} from '../../cikk/cikkzoomparameter';
+import {CikkZoomParam} from '../../01 Torzsadatok/06 Cikk/cikkzoomparam';
 import {TermekdijZoomParam} from '../../01 Torzsadatok/051 Termekdij/termekdijzoomparam';
 import {MeZoomParam} from '../../01 Torzsadatok/04 Mennyisegiegyseg/mezoomparam';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {AfakulcsDto} from '../../01 Torzsadatok/05 Afakulcs/afakulcsdto';
 import {MeDto} from '../../01 Torzsadatok/04 Mennyisegiegyseg/medto';
 import {TermekdijDto} from '../../01 Torzsadatok/051 Termekdij/termekdijdto';
-import {CikkDto} from '../../cikk/cikkdto';
+import {CikkDto} from '../../01 Torzsadatok/06 Cikk/cikkdto';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 import {BizonylatTetelDto} from '../bizonylatteteldto';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
@@ -248,7 +248,7 @@ export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implement
     this.updatedto();
 
     try {
-      const res1 = await this._cikkservice.ZoomCheck(new CikkZoomParameter(this.TetelDtoEdited.Cikkkod || 0,
+      const res1 = await this._cikkservice.ZoomCheck(new CikkZoomParam(this.TetelDtoEdited.Cikkkod || 0,
         this.TetelDtoEdited.Megnevezes || ''));
       if (res1.Error != null) {
         throw res1.Error;

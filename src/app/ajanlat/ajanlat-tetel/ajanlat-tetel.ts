@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {AjanlatSzerkesztesMode} from '../ajanlatszerkesztesmode';
-import {CikkDto} from '../../cikk/cikkdto';
+import {CikkDto} from '../../01 Torzsadatok/06 Cikk/cikkdto';
 import {AjanlatBuf} from '../ajanlatbuf';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 

@@ -9,10 +9,10 @@ export class CikkDto {
   Egysegar: number;
   Keszletetkepez: boolean;
   Tomegkg: number;
-  Termekdijkod: number;
-  Termekdijkt: string;
-  Termekdijmegnevezes: string;
-  Termekdijegysegar: number;
+  Termekdijkod: number | null;
+  Termekdijkt: string | null;
+  Termekdijmegnevezes: string | null;
+  Termekdijegysegar: number | null;
   Letrehozva: Date;
   Letrehozta: string;
   Modositva: Date;

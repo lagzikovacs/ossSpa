@@ -13,7 +13,7 @@ import {IrattipusService} from '../01 Torzsadatok/01 Irattipus/irattipus.service
 import {MeService} from '../01 Torzsadatok/04 Mennyisegiegyseg/me.service';
 import {PenznemService} from '../01 Torzsadatok/03 Penznem/penznem.service';
 import {TermekdijService} from '../01 Torzsadatok/051 Termekdij/termekdij.service';
-import {CikkService} from '../cikk/cikk.service';
+import {CikkService} from '../01 Torzsadatok/06 Cikk/cikk.service';
 import {UgyfelService} from '../ugyfel/ugyfel.service';
 import {ProjektjegyzetService} from '../projektjegyzet/projektjegyzet.service';
 import {StartupResult} from './startupresult';

@@ -8,7 +8,7 @@ import {EmptyResult} from '../common/dtos/emptyresult';
 import {LetoltesResult} from './letoltesresult';
 import {LetoltesParam} from './letoltesparam';
 import * as FileSaver from 'file-saver';
-import {b64toBlob} from '../tools/b64toBlob';
+import {b64toBlob} from '../common/b64toBlob';
 import {NumberResult} from '../common/dtos/numberresult';
 import {FajlBuf} from './fajlbuf';
 import {LetoltesPDFResult} from './letoltespdfresult';

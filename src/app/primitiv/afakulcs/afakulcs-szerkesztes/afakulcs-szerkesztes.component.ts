@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Inp
 import {AfakulcsService} from '../../../01 Torzsadatok/05 Afakulcs/afakulcs.service';
 import {NumberResult} from '../../../common/dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
-import {deepCopy} from '../../../tools/deepCopy';
+import {deepCopy} from '../../../common/deepCopy';
 import {AfakulcsDto} from '../../../01 Torzsadatok/05 Afakulcs/afakulcsdto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 

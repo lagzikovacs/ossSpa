@@ -7,7 +7,7 @@ import {EgyszeruKeresesDto} from '../../common/dtos/egyszerukeresesdto';
 import {CsoportDto} from '../../05 Segedeszkozok/04 Csoport/csoportdto';
 import {EgyMode} from '../../common/enums/egymode';
 import {rowanimation} from '../../animation/rowAnimation';
-import {propCopy} from '../../tools/propCopy';
+import {propCopy} from '../../common/propCopy';
 
 @Component({
   selector: 'app-csoport-list',

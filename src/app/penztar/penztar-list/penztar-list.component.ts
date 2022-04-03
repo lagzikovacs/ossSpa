@@ -8,7 +8,7 @@ import {environment} from '../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../common/dtos/egyszerukeresesdto';
 import {PenztarDto} from '../penztardto';
 import {EgyMode} from '../../common/enums/egymode';
-import {propCopy} from '../../tools/propCopy';
+import {propCopy} from '../../common/propCopy';
 import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({

@@ -4,7 +4,7 @@ import {HelysegService} from '../../01 Torzsadatok/07 Helyseg/helyseg.service';
 import {HelysegZoomParam} from '../../01 Torzsadatok/07 Helyseg/helysegzoomparam';
 import {UgyfelSzerkesztesMode} from '../../01 Torzsadatok/09 Ugyfel/ugyfelszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {deepCopy} from '../../tools/deepCopy';
+import {deepCopy} from '../../common/deepCopy';
 import {HelysegDto} from '../../01 Torzsadatok/07 Helyseg/helysegdto';
 import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
 import {TevekenysegDto} from '../../01 Torzsadatok/08 Tevekenyseg/tevekenysegdto';

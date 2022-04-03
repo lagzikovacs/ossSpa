@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AjanlatkeresDto} from '../ajanlatkeresdto';
 import {AjanlatkeresService} from '../ajanlatkeres.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {deepCopy} from '../../tools/deepCopy';
+import {deepCopy} from '../../common/deepCopy';
 import {NumberResult} from '../../common/dtos/numberresult';
 
 @Component({

@@ -9,7 +9,7 @@ import {PenznemZoomParam} from '../../01 Torzsadatok/03 Penznem/penznemzoomparam
 import {FizetesimodZoomParam} from '../../01 Torzsadatok/02 Fizetesimod/fiztesimodzoomparam';
 import {EmptyResult} from '../../common/dtos/emptyresult';
 import * as moment from 'moment';
-import {deepCopy} from '../../tools/deepCopy';
+import {deepCopy} from '../../common/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {PenznemDto} from '../../01 Torzsadatok/03 Penznem/penznemdto';
 import {FizetesimodDto} from '../../01 Torzsadatok/02 Fizetesimod/fizetesimoddto';
@@ -22,7 +22,7 @@ import {BizonylatTetelDto} from '../bizonylatteteldto';
 import {BizonylatAfaDto} from '../bizonylatafadto';
 import {BizonylatTermekdijDto} from '../bizonylattermekdijdto';
 import {BizonylatteteltablaComponent} from '../bizonylatteteltabla/bizonylatteteltabla.component';
-import {propCopy} from '../../tools/propCopy';
+import {propCopy} from '../../common/propCopy';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({

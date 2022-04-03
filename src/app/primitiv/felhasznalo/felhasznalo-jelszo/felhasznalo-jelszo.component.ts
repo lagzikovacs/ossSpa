@@ -3,7 +3,7 @@ import {FelhasznaloService} from '../../../05 Segedeszkozok/03 Felhasznalo/felha
 import {rowanimation} from '../../../animation/rowAnimation';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {FelhasznaloDto} from '../../../05 Segedeszkozok/03 Felhasznalo/felhasznalodto';
-import {deepCopy} from '../../../tools/deepCopy';
+import {deepCopy} from '../../../common/deepCopy';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({

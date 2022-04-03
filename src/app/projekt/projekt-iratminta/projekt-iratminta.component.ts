@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {b64toBlob} from '../../tools/b64toBlob';
+import {b64toBlob} from '../../common/b64toBlob';
 import * as FileSaver from 'file-saver';
 import {IratmintaService} from './iratminta.service';
 import {rowanimation} from '../../animation/rowAnimation';

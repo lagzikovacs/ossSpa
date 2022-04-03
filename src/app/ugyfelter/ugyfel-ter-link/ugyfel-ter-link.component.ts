@@ -5,7 +5,7 @@ import * as moment from 'moment';
 import {environment} from '../../../environments/environment';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
-import {deepCopy} from '../../tools/deepCopy';
+import {deepCopy} from '../../common/deepCopy';
 import {EgyMode} from '../../common/enums/egymode';
 import {rowanimation} from '../../animation/rowAnimation';
 

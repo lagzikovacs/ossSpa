@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HibabejelentesService} from '../hibabejelentes.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {HibabejelentesDto} from '../hibabejelentesdto';
-import {deepCopy} from '../../tools/deepCopy';
+import {deepCopy} from '../../common/deepCopy';
 
 @Component({
   selector: 'app-hibabejelentes-jelentes',

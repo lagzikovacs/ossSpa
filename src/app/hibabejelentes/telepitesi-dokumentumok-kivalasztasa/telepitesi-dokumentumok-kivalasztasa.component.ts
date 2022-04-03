@@ -5,7 +5,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {HibabejelentesService} from '../hibabejelentes.service';
 import {IratDto} from '../../irat/iratdto';
 import {HibabejelentesDto} from '../hibabejelentesdto';
-import {deepCopy} from '../../tools/deepCopy';
+import {deepCopy} from '../../common/deepCopy';
 import {NumberResult} from '../../common/dtos/numberresult';
 
 @Component({

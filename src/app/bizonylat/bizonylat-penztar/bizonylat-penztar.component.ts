@@ -4,7 +4,7 @@ import {PenztartetelService} from '../../penztartetel/penztartetel.service';
 import {PenztartetelDto} from '../../penztartetel/penztarteteldto';
 import {BizonylatTipus} from '../bizonylattipus';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {deepCopy} from '../../tools/deepCopy';
+import {deepCopy} from '../../common/deepCopy';
 import {BizonylatDto} from '../bizonylatdto';
 import {PenztarDto} from '../../penztar/penztardto';
 import {PenztarService} from '../../penztar/penztar.service';

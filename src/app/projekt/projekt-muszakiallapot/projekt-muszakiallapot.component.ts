@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {rowanimation} from '../../animation/rowAnimation';
-import {deepCopy} from '../../tools/deepCopy';
+import {deepCopy} from '../../common/deepCopy';
 import {ProjektDto} from '../projektdto';
 import {ProjektService} from '../projekt.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';

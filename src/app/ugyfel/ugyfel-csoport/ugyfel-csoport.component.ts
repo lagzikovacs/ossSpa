@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {UgyfelService} from '../../01 Torzsadatok/09 Ugyfel/ugyfel.service';
-import {deepCopy} from '../../tools/deepCopy';
+import {deepCopy} from '../../common/deepCopy';
 import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 

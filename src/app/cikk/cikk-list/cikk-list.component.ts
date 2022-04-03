@@ -9,9 +9,9 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
 import {CikkParameter} from '../../01 Torzsadatok/06 Cikk/cikkparameter';
-import {deepCopy} from '../../tools/deepCopy';
+import {deepCopy} from '../../common/deepCopy';
 import {EgyMode} from '../../common/enums/egymode';
-import {propCopy} from '../../tools/propCopy';
+import {propCopy} from '../../common/propCopy';
 import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({

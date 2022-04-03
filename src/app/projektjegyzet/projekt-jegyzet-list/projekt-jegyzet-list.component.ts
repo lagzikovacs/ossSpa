@@ -4,7 +4,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {ProjektjegyzetDto} from '../projektjegyzetdto';
 import {EgyMode} from '../../common/enums/egymode';
-import {propCopy} from '../../tools/propCopy';
+import {propCopy} from '../../common/propCopy';
 import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({

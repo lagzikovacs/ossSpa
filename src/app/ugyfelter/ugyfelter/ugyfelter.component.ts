@@ -14,7 +14,7 @@ import {BizonylatnyomtatasService} from '../../bizonylatnyomtatas/bizonylatnyomt
 import {SzMT} from '../../common/dtos/szmt';
 import {BizonylatNyomtatasTipus} from '../../bizonylatnyomtatas/bizonylatnyomtatastipus';
 import * as FileSaver from 'file-saver';
-import {b64toBlob} from '../../tools/b64toBlob';
+import {b64toBlob} from '../../common/b64toBlob';
 import {LetoltesParam} from '../../dokumentum/letoltesparam';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {Bizonylatnyomtatasciklus} from '../../bizonylatnyomtatas/bizonylatnyomtatasciklus';

@@ -5,7 +5,7 @@ import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {KifizetesDto} from '../kifizetesdto';
 import {EgyMode} from '../../common/enums/egymode';
 import {rowanimation} from '../../animation/rowAnimation';
-import {propCopy} from '../../tools/propCopy';
+import {propCopy} from '../../common/propCopy';
 import {BizonylatDto} from '../../bizonylat/bizonylatdto';
 
 @Component({

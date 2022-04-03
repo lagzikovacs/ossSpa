@@ -1,7 +1,7 @@
 import {ErrorService} from '../tools/errorbox/error.service';
-import {b64toBlob} from '../tools/b64toBlob';
+import {b64toBlob} from '../common/b64toBlob';
 import * as FileSaver from 'file-saver';
-import {LiteEvent} from '../tools/event/LiteEvent';
+import {LiteEvent} from '../common/event/LiteEvent';
 import {BizonylatnyomtatasService} from './bizonylatnyomtatas.service';
 
 export class Bizonylatnyomtatasciklus {

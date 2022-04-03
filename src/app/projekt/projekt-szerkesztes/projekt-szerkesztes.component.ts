@@ -7,7 +7,7 @@ import {UgyfelZoomParam} from '../../01 Torzsadatok/09 Ugyfel/ugyfelzoomparam';
 import {PenznemZoomParam} from '../../01 Torzsadatok/03 Penznem/penznemzoomparam';
 import {rowanimation} from '../../animation/rowAnimation';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {deepCopy} from '../../tools/deepCopy';
+import {deepCopy} from '../../common/deepCopy';
 import {PenznemDto} from '../../01 Torzsadatok/03 Penznem/penznemdto';
 import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
 import {ProjektDto} from '../projektdto';

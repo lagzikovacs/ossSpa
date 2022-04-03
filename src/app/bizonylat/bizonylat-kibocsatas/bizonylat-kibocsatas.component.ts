@@ -3,7 +3,7 @@ import {BizonylatService} from '../bizonylat.service';
 import {BizonylatKibocsatasParam} from '../bizonylatkibocsatasparam';
 import {BizonylatTipus} from '../bizonylattipus';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {deepCopy} from '../../tools/deepCopy';
+import {deepCopy} from '../../common/deepCopy';
 import {BizonylatDto} from '../bizonylatdto';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';

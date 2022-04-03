@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FelmeresService} from '../felmeres.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {FelmeresDto} from '../felmeresdto';
-import {deepCopy} from '../../tools/deepCopy';
+import {deepCopy} from '../../common/deepCopy';
 
 @Component({
   selector: 'app-felmeres-jelentes',

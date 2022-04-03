@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {deepCopy} from '../../tools/deepCopy';
+import {deepCopy} from '../../common/deepCopy';
 import {HibabejelentesDto} from '../hibabejelentesdto';
 import {HibabejelentesService} from '../hibabejelentes.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';

@@ -7,9 +7,9 @@ import {TablaComponent} from '../../../tools/tabla/tabla.component';
 import {environment} from '../../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../../common/dtos/egyszerukeresesdto';
 import {HelysegDto} from '../../../01 Torzsadatok/07 Helyseg/helysegdto';
-import {deepCopy} from '../../../tools/deepCopy';
+import {deepCopy} from '../../../common/deepCopy';
 import {EgyMode} from '../../../common/enums/egymode';
-import {propCopy} from '../../../tools/propCopy';
+import {propCopy} from '../../../common/propCopy';
 import {rowanimation} from '../../../animation/rowAnimation';
 
 @Component({

@@ -12,7 +12,7 @@ import {environment} from '../../../environments/environment';
 import {BizonylatParameter} from '../bizonylatparameter';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 import {BizonylattablaComponent} from '../bizonylattabla/bizonylattabla.component';
-import {propCopy} from '../../tools/propCopy';
+import {propCopy} from '../../common/propCopy';
 
 @Component({
   selector: 'app-bizonylat-list',

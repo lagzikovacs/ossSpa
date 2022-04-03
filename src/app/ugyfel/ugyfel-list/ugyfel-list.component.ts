@@ -9,10 +9,10 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {UgyfelTablaComponent} from '../ugyfel-tabla/ugyfel-tabla.component';
 import {environment} from '../../../environments/environment';
 import {UgyfelParam} from '../../01 Torzsadatok/09 Ugyfel/ugyfelparam';
-import {deepCopy} from '../../tools/deepCopy';
+import {deepCopy} from '../../common/deepCopy';
 import {EgyMode} from '../../common/enums/egymode';
 import {rowanimation} from '../../animation/rowAnimation';
-import {propCopy} from '../../tools/propCopy';
+import {propCopy} from '../../common/propCopy';
 
 @Component({
   selector: 'app-ugyfel-list',

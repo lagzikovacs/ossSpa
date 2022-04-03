@@ -9,7 +9,7 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
 import {IratParameter} from '../iratparameter';
-import {propCopy} from '../../tools/propCopy';
+import {propCopy} from '../../common/propCopy';
 
 @Component({
   selector: 'app-irat-list',

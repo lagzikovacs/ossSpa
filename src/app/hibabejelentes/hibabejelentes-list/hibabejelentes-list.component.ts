@@ -9,10 +9,10 @@ import {rowanimation} from '../../animation/rowAnimation';
 import {HibabejelentesService} from '../hibabejelentes.service';
 import {HibabejelentesParameter} from '../hibabejelentesparameter';
 import {HibabejelentesDto} from '../hibabejelentesdto';
-import {propCopy} from '../../tools/propCopy';
+import {propCopy} from '../../common/propCopy';
 import {JogKod} from '../../common/enums/jogkod';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
-import {deepCopy} from '../../tools/deepCopy';
+import {deepCopy} from '../../common/deepCopy';
 
 @Component({
   selector: 'app-hibabejelentes-list',

@@ -10,7 +10,7 @@ import {environment} from '../../../environments/environment';
 import {ProjektParameter} from '../projektparameter';
 import {EgyMode} from '../../common/enums/egymode';
 import {ProjektDto} from '../projektdto';
-import {propCopy} from '../../tools/propCopy';
+import {propCopy} from '../../common/propCopy';
 import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({

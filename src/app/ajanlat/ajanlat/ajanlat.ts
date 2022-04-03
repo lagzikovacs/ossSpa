@@ -6,8 +6,8 @@ import {ErrorService} from '../../tools/errorbox/error.service';
 import {ProjektKapcsolatDto} from '../../projektkapcsolat/projektkapcsolatdto';
 import {AjanlatParam} from '../ajanlatparam';
 import {AjanlatBuf} from '../ajanlatbuf';
-import {deepCopy} from '../../tools/deepCopy';
-import {propCopy} from '../../tools/propCopy';
+import {deepCopy} from '../../common/deepCopy';
+import {propCopy} from '../../common/propCopy';
 import {AjanlatTablaComponent} from '../ajanlat-tabla/ajanlat-tabla.component';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 

@@ -9,7 +9,7 @@ import {FizetesimodZoomParam} from '../../01 Torzsadatok/02 Fizetesimod/fiztesim
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {PenznemDto} from '../../01 Torzsadatok/03 Penznem/penznemdto';
 import {FizetesimodDto} from '../../01 Torzsadatok/02 Fizetesimod/fizetesimoddto';
-import {deepCopy} from '../../tools/deepCopy';
+import {deepCopy} from '../../common/deepCopy';
 import {KifizetesDto} from '../kifizetesdto';
 import {BizonylatDto} from '../../bizonylat/bizonylatdto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';

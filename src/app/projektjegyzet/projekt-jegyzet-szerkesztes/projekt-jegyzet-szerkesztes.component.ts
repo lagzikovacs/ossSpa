@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {ProjektjegyzetService} from '../projektjegyzet.service';
 import * as moment from 'moment';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {deepCopy} from '../../tools/deepCopy';
+import {deepCopy} from '../../common/deepCopy';
 import {ProjektjegyzetDto} from '../projektjegyzetdto';
 import {NumberResult} from '../../common/dtos/numberresult';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';

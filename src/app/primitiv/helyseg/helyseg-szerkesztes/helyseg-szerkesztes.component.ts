@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {HelysegService} from '../../../01 Torzsadatok/07 Helyseg/helyseg.service';
 import {NumberResult} from '../../../common/dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
-import {deepCopy} from '../../../tools/deepCopy';
+import {deepCopy} from '../../../common/deepCopy';
 import {HelysegDto} from '../../../01 Torzsadatok/07 Helyseg/helysegdto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 

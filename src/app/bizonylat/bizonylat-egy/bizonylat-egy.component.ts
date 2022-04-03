@@ -7,8 +7,8 @@ import {JogKod} from '../../common/enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {BizonylatDto} from '../bizonylatdto';
-import {propCopy} from '../../tools/propCopy';
-import {deepCopy} from '../../tools/deepCopy';
+import {propCopy} from '../../common/propCopy';
+import {deepCopy} from '../../common/deepCopy';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 import {ProjektService} from '../../projekt/projekt.service';
 

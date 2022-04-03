@@ -8,11 +8,11 @@ import {EgyMode} from '../../common/enums/egymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {JogKod} from '../../common/enums/jogkod';
-import {propCopy} from '../../tools/propCopy';
+import {propCopy} from '../../common/propCopy';
 import {FelmeresService} from '../felmeres.service';
 import {FelmeresParameter} from '../felmeresparameter';
 import {FelmeresDto} from '../felmeresdto';
-import {deepCopy} from '../../tools/deepCopy';
+import {deepCopy} from '../../common/deepCopy';
 
 @Component({
   selector: 'app-felmeres-list',

@@ -5,11 +5,11 @@ import {JogKod} from '../../../common/enums/jogkod';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
 import {AfakulcsDto} from '../../../01 Torzsadatok/05 Afakulcs/afakulcsdto';
-import {deepCopy} from '../../../tools/deepCopy';
+import {deepCopy} from '../../../common/deepCopy';
 import {environment} from '../../../../environments/environment.prod';
 import {EgyszeruKeresesDto} from '../../../common/dtos/egyszerukeresesdto';
 import {EgyMode} from '../../../common/enums/egymode';
-import {propCopy} from '../../../tools/propCopy';
+import {propCopy} from '../../../common/propCopy';
 import {rowanimation} from '../../../animation/rowAnimation';
 
 @Component({

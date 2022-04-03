@@ -4,7 +4,7 @@ import {PenznemZoomParam} from '../../01 Torzsadatok/03 Penznem/penznemzoomparam
 import {PenztarService} from '../penztar.service';
 import {PenztarSzerkesztesMode} from '../penztarszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {deepCopy} from '../../tools/deepCopy';
+import {deepCopy} from '../../common/deepCopy';
 import {PenznemDto} from '../../01 Torzsadatok/03 Penznem/penznemdto';
 import {PenztarDto} from '../penztardto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';

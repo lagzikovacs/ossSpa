@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {VolumeService} from '../volume.service';
+import {VolumeService} from '../../05 Segedeszkozok/02 Volume/volume.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../common/dtos/egyszerukeresesdto';
-import {VolumeDto} from '../volumedto';
+import {VolumeDto} from '../../05 Segedeszkozok/02 Volume/volumedto';
 import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({

@@ -22,7 +22,7 @@ import {HttpClient} from '@angular/common/http';
 import {AjanlatkeresService} from '../ajanlatkeres/ajanlatkeres.service';
 import {PenztarService} from '../penztar/penztar.service';
 import {PenztartetelService} from '../penztartetel/penztartetel.service';
-import {VolumeService} from '../volume/volume.service';
+import {VolumeService} from '../05 Segedeszkozok/02 Volume/volume.service';
 import {KifizetesService} from '../kifizetes/kifizetes.service';
 import {DokumentumService} from '../dokumentum/dokumentum.service';
 import {UgyfelterlogService} from '../ugyfelterlog/ugyfelterlog.service';

@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {VolumeService} from '../volume.service';
+import {VolumeService} from '../../05 Segedeszkozok/02 Volume/volume.service';
 import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 

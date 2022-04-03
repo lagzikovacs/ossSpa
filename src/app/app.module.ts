@@ -88,7 +88,7 @@ import {CikkService} from './01 Torzsadatok/06 Cikk/cikk.service';
 import {HelysegService} from './01 Torzsadatok/07 Helyseg/helyseg.service';
 import {UgyfelService} from './01 Torzsadatok/09 Ugyfel/ugyfel.service';
 import {ParticioService} from './05 Segedeszkozok/01 Particio/particio.service';
-import {VolumeService} from './volume/volume.service';
+import {VolumeService} from './05 Segedeszkozok/02 Volume/volume.service';
 import {CsoportService} from './csoport/csoport.service';
 import {AjanlatkeresService} from './ajanlatkeres/ajanlatkeres.service';
 import {PenztarService} from './penztar/penztar.service';

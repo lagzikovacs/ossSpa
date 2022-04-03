@@ -1,15 +1,15 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {IratService} from '../irat.service';
-import {IrattipusService} from '../../primitiv/irattipus/irattipus.service';
+import {IrattipusService} from '../../01 Torzsadatok/01 Irattipus/irattipus.service';
 import * as moment from 'moment';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {IratSzerkesztesMode} from '../iratszerkesztesmode';
-import {IrattipusZoomParameter} from '../../primitiv/irattipus/irattipuszoomparameter';
+import {IrattipusZoomParam} from '../../01 Torzsadatok/01 Irattipus/irattipuszoomparam';
 import {EmptyResult} from '../../dtos/emptyresult';
 import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {deepCopy} from '../../tools/deepCopy';
-import {IrattipusDto} from '../../primitiv/irattipus/irattipusdto';
+import {IrattipusDto} from '../../01 Torzsadatok/01 Irattipus/irattipusdto';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 import {IratDto} from '../iratdto';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
@@ -118,7 +118,7 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
     this.eppFrissit = true;
     this.updatedto();
 
-    this._irattipusservice.ZoomCheck(new IrattipusZoomParameter(this.DtoEdited.Irattipuskod,
+    this._irattipusservice.ZoomCheck(new IrattipusZoomParam(this.DtoEdited.Irattipuskod,
       this.DtoEdited.Irattipus))
       .then(res => {
         if (res.Error != null) {

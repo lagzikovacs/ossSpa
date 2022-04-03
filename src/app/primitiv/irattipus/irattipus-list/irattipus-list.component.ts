@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {IrattipusService} from '../irattipus.service';
+import {IrattipusService} from '../../../01 Torzsadatok/01 Irattipus/irattipus.service';
 import {LogonService} from '../../../logon/logon.service';
 import {JogKod} from '../../../enums/jogkod';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
 import {environment} from '../../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../../dtos/egyszerukeresesdto';
-import {IrattipusDto} from '../irattipusdto';
+import {IrattipusDto} from '../../../01 Torzsadatok/01 Irattipus/irattipusdto';
 import {deepCopy} from '../../../tools/deepCopy';
 import {EgyMode} from '../../../enums/egymode';
 import {propCopy} from '../../../tools/propCopy';

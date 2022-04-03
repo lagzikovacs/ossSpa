@@ -78,7 +78,7 @@ import { FizetesimodSzerkesztesComponent } from './primitiv/fizetesimod/fizetesi
 import { PenznemSzerkesztesComponent } from './primitiv/penznem/penznem-szerkesztes/penznem-szerkesztes.component';
 import { CikkBeszerzesKivetComponent } from './cikk/cikk-beszerzes-kivet/cikk-beszerzes-kivet.component';
 import { PenztarListComponent } from './penztar/penztar-list/penztar-list.component';
-import {IrattipusService} from './primitiv/irattipus/irattipus.service';
+import {IrattipusService} from './01 Torzsadatok/01 Irattipus/irattipus.service';
 import {FizetesimodService} from './primitiv/fizetesimod/fizetesimod.service';
 import {PenznemService} from './primitiv/penznem/penznem.service';
 import {MeService} from './primitiv/me/me.service';

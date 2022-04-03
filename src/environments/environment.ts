@@ -6,10 +6,10 @@ export const environment = {
   production: false,
   lapmeret: 5,
 
-  // CoreRef: 'https://docport.hu/ossserver/',
-  // OSSRef: 'http://localhost:4200/',
-  CoreRef: 'https://localhost:44373/',
+  CoreRef: 'https://docport.hu/ossserver/',
   OSSRef: 'http://localhost:4200/',
+  // CoreRef: 'https://localhost:44373/',
+  // OSSRef: 'http://localhost:4200/',
 
   perAlldefault: '0 / 0'
 };

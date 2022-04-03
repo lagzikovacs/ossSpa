@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {NumberResult} from '../dtos/numberresult';
+import {NumberResult} from '../common/dtos/numberresult';
 import {environment} from '../../environments/environment';
 import {ParticioDto} from './particiodto';
 import {LogonService} from '../logon/logon.service';

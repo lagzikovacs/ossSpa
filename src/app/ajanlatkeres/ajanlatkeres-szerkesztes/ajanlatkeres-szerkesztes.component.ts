@@ -4,7 +4,7 @@ import {AjanlatkeresDto} from '../ajanlatkeresdto';
 import {AjanlatkeresService} from '../ajanlatkeres.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {deepCopy} from '../../tools/deepCopy';
-import {NumberResult} from '../../dtos/numberresult';
+import {NumberResult} from '../../common/dtos/numberresult';
 
 @Component({
   selector: 'app-ajanlatkeres-szerkesztes',

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {NumberResult} from '../dtos/numberresult';
+import {NumberResult} from '../common/dtos/numberresult';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {ProjektjegyzetDto} from './projektjegyzetdto';
 import {LogonService} from '../logon/logon.service';
 import {ProjektjegyzetResult} from './projektjegyzetresult';
-import {EmptyResult} from '../dtos/emptyresult';
+import {EmptyResult} from '../common/dtos/emptyresult';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 

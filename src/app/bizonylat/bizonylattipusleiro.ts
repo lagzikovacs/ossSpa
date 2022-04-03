@@ -1,4 +1,4 @@
-import {JogKod} from '../enums/jogkod';
+import {JogKod} from '../common/enums/jogkod';
 import {BizonylatTipus} from './bizonylattipus';
 
 export class BizonylatTipusLeiro {

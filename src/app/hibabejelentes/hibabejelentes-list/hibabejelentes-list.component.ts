@@ -1,16 +1,16 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Szempont} from '../../enums/szempont';
-import {SzMT} from '../../dtos/szmt';
+import {Szempont} from '../../common/enums/szempont';
+import {SzMT} from '../../common/dtos/szmt';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
-import {EgyMode} from '../../enums/egymode';
+import {EgyMode} from '../../common/enums/egymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {HibabejelentesService} from '../hibabejelentes.service';
 import {HibabejelentesParameter} from '../hibabejelentesparameter';
 import {HibabejelentesDto} from '../hibabejelentesdto';
 import {propCopy} from '../../tools/propCopy';
-import {JogKod} from '../../enums/jogkod';
+import {JogKod} from '../../common/enums/jogkod';
 import {LogonService} from '../../logon/logon.service';
 import {deepCopy} from '../../tools/deepCopy';
 

@@ -3,9 +3,9 @@ import {environment} from '../../environments/environment';
 import {PenztarDto} from './penztardto';
 import {HttpClient} from '@angular/common/http';
 import {LogonService} from '../logon/logon.service';
-import {NumberResult} from '../dtos/numberresult';
+import {NumberResult} from '../common/dtos/numberresult';
 import {PenztarResult} from './penztarresult';
-import {EmptyResult} from '../dtos/emptyresult';
+import {EmptyResult} from '../common/dtos/emptyresult';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 

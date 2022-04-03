@@ -5,9 +5,9 @@ import {IrattipusDto} from './irattipusdto';
 import {IrattipusResult} from './irattipusresult';
 import {ColumnSettings} from '../../tools/reszletek/columnsettings';
 import {LogonService} from '../../logon/logon.service';
-import {NumberResult} from '../../dtos/numberresult';
+import {NumberResult} from '../../common/dtos/numberresult';
 import {lastValueFrom} from 'rxjs';
-import {EmptyResult} from '../../dtos/emptyresult';
+import {EmptyResult} from '../../common/dtos/emptyresult';
 import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 import {IrattipusZoomParam} from './irattipuszoomparam';
 

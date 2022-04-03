@@ -1,10 +1,10 @@
 import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
 import {IratService} from '../irat.service';
-import {SzMT} from '../../dtos/szmt';
-import {Szempont} from '../../enums/szempont';
+import {SzMT} from '../../common/dtos/szmt';
+import {Szempont} from '../../common/enums/szempont';
 import {IratDto} from '../iratdto';
 import {LogonService} from '../../logon/logon.service';
-import {JogKod} from '../../enums/jogkod';
+import {JogKod} from '../../common/enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';

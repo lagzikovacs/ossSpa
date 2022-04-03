@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {LogonService} from '../../logon/logon.service';
-import {JogKod} from '../../enums/jogkod';
+import {JogKod} from '../../common/enums/jogkod';
 import {PenztartetelService} from '../penztartetel.service';
-import {Szempont} from '../../enums/szempont';
-import {SzMT} from '../../dtos/szmt';
+import {Szempont} from '../../common/enums/szempont';
+import {SzMT} from '../../common/dtos/szmt';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';

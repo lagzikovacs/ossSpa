@@ -7,7 +7,7 @@ import {FizetesimodService} from '../../primitiv/fizetesimod/fizetesimod.service
 import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
 import {PenznemZoomParameter} from '../../primitiv/penznem/penznemzoomparameter';
 import {FizetesimodZoomParameter} from '../../primitiv/fizetesimod/fiztesimodzoomparameter';
-import {EmptyResult} from '../../dtos/emptyresult';
+import {EmptyResult} from '../../common/dtos/emptyresult';
 import * as moment from 'moment';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';

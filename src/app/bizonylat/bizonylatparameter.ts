@@ -1,4 +1,4 @@
-import {SzMT} from '../dtos/szmt';
+import {SzMT} from '../common/dtos/szmt';
 import {BizonylatTipus} from './bizonylattipus';
 
 export class BizonylatParameter {

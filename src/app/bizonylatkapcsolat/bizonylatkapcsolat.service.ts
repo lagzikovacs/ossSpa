@@ -4,8 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {BizonylatKapcsolatResult} from './bizonylatkapcsolatresult';
 import {environment} from '../../environments/environment';
 import {BizonylatKapcsolatDto} from './bizonylatkapcsolatdto';
-import {NumberResult} from '../dtos/numberresult';
-import {EmptyResult} from '../dtos/emptyresult';
+import {NumberResult} from '../common/dtos/numberresult';
+import {EmptyResult} from '../common/dtos/emptyresult';
 import {BizonylatKapcsolatParam} from './bizonylatkapcsolatparam';
 
 @Injectable({

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {CsoportService} from '../csoport.service';
-import {NumberResult} from '../../dtos/numberresult';
+import {NumberResult} from '../../common/dtos/numberresult';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {CsoportDto} from '../csoportdto';
 import {deepCopy} from '../../tools/deepCopy';

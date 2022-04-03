@@ -5,7 +5,7 @@ import {VagolapService} from '../../vagolap/vagolap.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {BizonylatKapcsolatDto} from '../bizonylatkapcsolatdto';
 import {BizonylatKapcsolatResult} from '../bizonylatkapcsolatresult';
-import {NumberResult} from '../../dtos/numberresult';
+import {NumberResult} from '../../common/dtos/numberresult';
 
 @Component({
   selector: 'app-bizonylatkapcsolat-vagolaprol',

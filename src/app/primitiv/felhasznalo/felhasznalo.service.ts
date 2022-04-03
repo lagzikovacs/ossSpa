@@ -6,8 +6,8 @@ import {Md5} from 'ts-md5';
 import {JelszocsereParameter} from './jelszocsereparameter';
 import {environment} from '../../../environments/environment';
 import {LogonService} from '../../logon/logon.service';
-import {NumberResult} from '../../dtos/numberresult';
-import {EmptyResult} from '../../dtos/emptyresult';
+import {NumberResult} from '../../common/dtos/numberresult';
+import {EmptyResult} from '../../common/dtos/emptyresult';
 import {ColumnSettings} from '../../tools/reszletek/columnsettings';
 import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 

@@ -3,7 +3,7 @@ import {ParticioService} from '../particio.service';
 import {ParticioDto} from '../particiodto';
 import {deepCopy} from '../../tools/deepCopy';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {EgyMode} from '../../enums/egymode';
+import {EgyMode} from '../../common/enums/egymode';
 import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({

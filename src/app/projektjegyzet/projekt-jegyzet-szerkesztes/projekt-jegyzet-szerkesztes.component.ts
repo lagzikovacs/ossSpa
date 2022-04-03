@@ -4,7 +4,7 @@ import * as moment from 'moment';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {ProjektjegyzetDto} from '../projektjegyzetdto';
-import {NumberResult} from '../../dtos/numberresult';
+import {NumberResult} from '../../common/dtos/numberresult';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({

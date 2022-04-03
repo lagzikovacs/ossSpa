@@ -5,7 +5,7 @@ import {IratService} from '../../irat/irat.service';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {VagolapService} from '../../vagolap/vagolap.service';
 import {VagolapMode} from '../../vagolap/vagolapmode';
-import {JogKod} from '../../enums/jogkod';
+import {JogKod} from '../../common/enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {ProjektkapcsolatTablaComponent} from '../projektkapcsolat-tabla/projektkapcsolat-tabla.component';
 import {IratDto} from '../../irat/iratdto';

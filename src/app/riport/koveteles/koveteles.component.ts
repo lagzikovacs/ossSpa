@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {RiportService} from '../riport.service';
-import {Szempont} from '../../enums/szempont';
-import {SzMT} from '../../dtos/szmt';
+import {Szempont} from '../../common/enums/szempont';
+import {SzMT} from '../../common/dtos/szmt';
 import * as moment from 'moment';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {Riportciklus} from '../riportciklus';

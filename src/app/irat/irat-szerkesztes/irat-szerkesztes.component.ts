@@ -5,7 +5,7 @@ import * as moment from 'moment';
 import {UgyfelService} from '../../ugyfel/ugyfel.service';
 import {IratSzerkesztesMode} from '../iratszerkesztesmode';
 import {IrattipusZoomParam} from '../../01 Torzsadatok/01 Irattipus/irattipuszoomparam';
-import {EmptyResult} from '../../dtos/emptyresult';
+import {EmptyResult} from '../../common/dtos/emptyresult';
 import {UgyfelZoomParameter} from '../../ugyfel/ugyfelzoomparameter';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {deepCopy} from '../../tools/deepCopy';

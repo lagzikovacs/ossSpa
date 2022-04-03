@@ -3,9 +3,9 @@ import {CsoportService} from '../csoport.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
-import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
+import {EgyszeruKeresesDto} from '../../common/dtos/egyszerukeresesdto';
 import {CsoportDto} from '../csoportdto';
-import {EgyMode} from '../../enums/egymode';
+import {EgyMode} from '../../common/enums/egymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {propCopy} from '../../tools/propCopy';
 

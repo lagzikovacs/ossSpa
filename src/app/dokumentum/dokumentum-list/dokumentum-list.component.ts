@@ -3,7 +3,7 @@ import {DokumentumService} from '../dokumentum.service';
 import {DokumentumDto} from '../dokumentumdto';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
-import {EgyMode} from '../../enums/egymode';
+import {EgyMode} from '../../common/enums/egymode';
 import {propCopy} from '../../tools/propCopy';
 import {rowanimation} from '../../animation/rowAnimation';
 

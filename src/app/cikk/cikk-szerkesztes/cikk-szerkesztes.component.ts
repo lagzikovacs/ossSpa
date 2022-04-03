@@ -5,7 +5,7 @@ import {AfakulcsService} from '../../primitiv/afakulcs/afakulcs.service';
 import {TermekdijService} from '../../primitiv/termekdij/termekdij.service';
 import {MeZoomParameter} from '../../primitiv/me/mezoomparameter';
 import {AfakulcsZoomParameter} from '../../primitiv/afakulcs/afakulcszoomparameter';
-import {EmptyResult} from '../../dtos/emptyresult';
+import {EmptyResult} from '../../common/dtos/emptyresult';
 import {TermekdijZoomParameter} from '../../primitiv/termekdij/termekdijzoomparameter';
 import {CikkSzerkesztesMode} from '../cikkszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';

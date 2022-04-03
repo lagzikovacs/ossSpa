@@ -3,7 +3,7 @@ import {BizonylatService} from '../bizonylat.service';
 import {BizonylatEgyMode} from '../bizonylategymode';
 import {BizonylatTipus} from '../bizonylattipus';
 import {LogonService} from '../../logon/logon.service';
-import {JogKod} from '../../enums/jogkod';
+import {JogKod} from '../../common/enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {BizonylatDto} from '../bizonylatdto';

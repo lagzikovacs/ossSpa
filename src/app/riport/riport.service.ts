@@ -3,9 +3,9 @@ import {LogonService} from '../logon/logon.service';
 import {HttpClient} from '@angular/common/http';
 import {RiportResult} from './riportresult';
 import {environment} from '../../environments/environment';
-import {EmptyResult} from '../dtos/emptyresult';
-import {StringResult} from '../dtos/stringresult';
-import {SzMT} from '../dtos/szmt';
+import {EmptyResult} from '../common/dtos/emptyresult';
+import {StringResult} from '../common/dtos/stringresult';
+import {SzMT} from '../common/dtos/szmt';
 
 @Injectable({
   providedIn: 'root'

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {LogonService} from '../../logon/logon.service';
-import {EmptyResult} from '../../dtos/emptyresult';
-import {NumberResult} from '../../dtos/numberresult';
+import {EmptyResult} from '../../common/dtos/emptyresult';
+import {NumberResult} from '../../common/dtos/numberresult';
 import {ColumnSettings} from '../../tools/reszletek/columnsettings';
 import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 import {HttpClient} from '@angular/common/http';

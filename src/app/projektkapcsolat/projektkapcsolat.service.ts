@@ -3,9 +3,9 @@ import {LogonService} from '../logon/logon.service';
 import {HttpClient} from '@angular/common/http';
 import {ProjektKapcsolatResult} from './projektkapcsolatresult';
 import {environment} from '../../environments/environment';
-import {NumberResult} from '../dtos/numberresult';
+import {NumberResult} from '../common/dtos/numberresult';
 import {ProjektKapcsolatParameter} from './projektkapcsolatparameter';
-import {EmptyResult} from '../dtos/emptyresult';
+import {EmptyResult} from '../common/dtos/emptyresult';
 import {IratResult} from '../irat/iratresult';
 
 @Injectable({

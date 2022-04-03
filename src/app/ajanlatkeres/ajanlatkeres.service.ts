@@ -5,8 +5,8 @@ import {AjanlatkeresResult} from './ajanlatkeresresult';
 import {environment} from '../../environments/environment';
 import {AjanlatkeresDto} from './ajanlatkeresdto';
 import {AjanlatkeresParameter} from './ajanlatkeresparameter';
-import {NumberResult} from '../dtos/numberresult';
-import {EmptyResult} from '../dtos/emptyresult';
+import {NumberResult} from '../common/dtos/numberresult';
+import {EmptyResult} from '../common/dtos/emptyresult';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
 

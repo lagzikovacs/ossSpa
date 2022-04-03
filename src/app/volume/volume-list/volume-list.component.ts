@@ -3,7 +3,7 @@ import {VolumeService} from '../volume.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
-import {EgyszeruKeresesDto} from '../../dtos/egyszerukeresesdto';
+import {EgyszeruKeresesDto} from '../../common/dtos/egyszerukeresesdto';
 import {VolumeDto} from '../volumedto';
 import {rowanimation} from '../../animation/rowAnimation';
 

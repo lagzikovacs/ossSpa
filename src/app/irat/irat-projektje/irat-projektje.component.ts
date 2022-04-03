@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {EgyMode} from '../../enums/egymode';
+import {EgyMode} from '../../common/enums/egymode';
 import {ProjektResult} from '../../projekt/projektresult';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
 import {ProjektDto} from '../../projekt/projektdto';

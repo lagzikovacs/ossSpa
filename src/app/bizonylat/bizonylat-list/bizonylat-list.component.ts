@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
-import {Szempont} from '../../enums/szempont';
-import {SzMT} from '../../dtos/szmt';
+import {Szempont} from '../../common/enums/szempont';
+import {SzMT} from '../../common/dtos/szmt';
 import {BizonylatTipus} from '../bizonylattipus';
 import {LogonService} from '../../logon/logon.service';
-import {JogKod} from '../../enums/jogkod';
+import {JogKod} from '../../common/enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {BizonylatDto} from '../bizonylatdto';
 import {ActivatedRoute} from '@angular/router';

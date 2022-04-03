@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import {LogonService} from '../logon/logon.service';
 import {HttpClient} from '@angular/common/http';
-import {StringResult} from '../dtos/stringresult';
+import {StringResult} from '../common/dtos/stringresult';
 import {environment} from '../../environments/environment';
 import {UgyfelDto} from '../ugyfel/ugyfeldto';
 import {UgyfelterResult} from './ugyfelterresult';
-import {EmptyResult} from '../dtos/emptyresult';
+import {EmptyResult} from '../common/dtos/emptyresult';
 
 @Injectable({
   providedIn: 'root'

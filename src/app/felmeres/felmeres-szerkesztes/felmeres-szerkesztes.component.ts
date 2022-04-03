@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {NumberResult} from '../../dtos/numberresult';
+import {NumberResult} from '../../common/dtos/numberresult';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FelmeresDto} from '../felmeresdto';
 import {deepCopy} from '../../tools/deepCopy';

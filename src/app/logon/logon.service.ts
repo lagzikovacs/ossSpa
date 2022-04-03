@@ -8,7 +8,7 @@ import {Md5} from 'ts-md5';
 import {SzerepkorokResult} from './szerepkorokresult';
 import {CsoportDto} from '../csoport/csoportdto';
 import {SzerepkorvalasztasParameter} from './szerepkorvalasztasparameter';
-import {EmptyResult} from '../dtos/emptyresult';
+import {EmptyResult} from '../common/dtos/emptyresult';
 
 @Injectable({
   providedIn: 'root'

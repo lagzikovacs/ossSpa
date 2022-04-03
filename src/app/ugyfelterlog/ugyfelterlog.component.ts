@@ -1,7 +1,7 @@
 import {Component, OnDestroy} from '@angular/core';
 import {UgyfelterlogService} from './ugyfelterlog.service';
-import {Szempont} from '../enums/szempont';
-import {SzMT} from '../dtos/szmt';
+import {Szempont} from '../common/enums/szempont';
+import {SzMT} from '../common/dtos/szmt';
 import {UgyfelterlogDto} from './ugyfelterlogdto';
 import {ErrorService} from '../tools/errorbox/error.service';
 import {environment} from '../../environments/environment';

@@ -7,7 +7,7 @@ import {TermekdijService} from '../../primitiv/termekdij/termekdij.service';
 import {BizonylattetelSzerkesztesMode} from '../bizonylattetelszerkesztesmode';
 import {BruttobolParam} from '../bruttobolparam';
 import {CikkZoomParameter} from '../../cikk/cikkzoomparameter';
-import {EmptyResult} from '../../dtos/emptyresult';
+import {EmptyResult} from '../../common/dtos/emptyresult';
 import {TermekdijZoomParameter} from '../../primitiv/termekdij/termekdijzoomparameter';
 import {AfakulcsZoomParameter} from '../../primitiv/afakulcs/afakulcszoomparameter';
 import {MeZoomParameter} from '../../primitiv/me/mezoomparameter';

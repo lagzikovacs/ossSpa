@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import {LogonService} from '../logon/logon.service';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {SzMT} from '../dtos/szmt';
-import {StringResult} from '../dtos/stringresult';
-import {EmptyResult} from '../dtos/emptyresult';
+import {SzMT} from '../common/dtos/szmt';
+import {StringResult} from '../common/dtos/stringresult';
+import {EmptyResult} from '../common/dtos/emptyresult';
 import {RiportResult} from '../riport/riportresult';
 
 @Injectable({

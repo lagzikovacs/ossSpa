@@ -4,8 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {KifizetesDto} from './kifizetesdto';
 import {KifizetesResult} from './kifizetesresult';
 import {environment} from '../../environments/environment';
-import {NumberResult} from '../dtos/numberresult';
-import {EmptyResult} from '../dtos/emptyresult';
+import {NumberResult} from '../common/dtos/numberresult';
+import {EmptyResult} from '../common/dtos/emptyresult';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
 

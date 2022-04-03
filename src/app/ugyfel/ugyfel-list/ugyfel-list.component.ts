@@ -1,16 +1,16 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {Szempont} from '../../enums/szempont';
+import {Szempont} from '../../common/enums/szempont';
 import {UgyfelService} from '../ugyfel.service';
 import {UgyfelDto} from '../ugyfeldto';
-import {SzMT} from '../../dtos/szmt';
+import {SzMT} from '../../common/dtos/szmt';
 import {LogonService} from '../../logon/logon.service';
-import {JogKod} from '../../enums/jogkod';
+import {JogKod} from '../../common/enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {UgyfelTablaComponent} from '../ugyfel-tabla/ugyfel-tabla.component';
 import {environment} from '../../../environments/environment';
 import {UgyfelParameter} from '../ugyfelparameter';
 import {deepCopy} from '../../tools/deepCopy';
-import {EgyMode} from '../../enums/egymode';
+import {EgyMode} from '../../common/enums/egymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {propCopy} from '../../tools/propCopy';
 

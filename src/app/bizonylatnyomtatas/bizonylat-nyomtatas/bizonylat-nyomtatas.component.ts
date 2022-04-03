@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {BizonylatnyomtatasService} from '../bizonylatnyomtatas.service';
-import {SzMT} from '../../dtos/szmt';
-import {Szempont} from '../../enums/szempont';
+import {SzMT} from '../../common/dtos/szmt';
+import {Szempont} from '../../common/enums/szempont';
 import {BizonylatNyomtatasTipus} from '../bizonylatnyomtatastipus';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {Bizonylatnyomtatasciklus} from '../bizonylatnyomtatasciklus';

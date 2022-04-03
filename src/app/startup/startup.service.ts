@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {EmptyResult} from '../dtos/emptyresult';
+import {EmptyResult} from '../common/dtos/emptyresult';
 import {LogonService} from '../logon/logon.service';
 import {CsoportService} from '../csoport/csoport.service';
 import {SessionService} from '../session/session.service';

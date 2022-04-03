@@ -3,7 +3,7 @@ import {KifizetesService} from '../kifizetes.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {KifizetesDto} from '../kifizetesdto';
-import {EgyMode} from '../../enums/egymode';
+import {EgyMode} from '../../common/enums/egymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {propCopy} from '../../tools/propCopy';
 import {BizonylatDto} from '../../bizonylat/bizonylatdto';

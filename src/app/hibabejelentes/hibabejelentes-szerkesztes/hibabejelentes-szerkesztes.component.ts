@@ -4,7 +4,7 @@ import {HibabejelentesDto} from '../hibabejelentesdto';
 import {HibabejelentesService} from '../hibabejelentes.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {NumberResult} from '../../dtos/numberresult';
+import {NumberResult} from '../../common/dtos/numberresult';
 
 @Component({
   selector: 'app-hibabejelentes-szerkesztes',

@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
 import {VagolapService} from '../../vagolap/vagolap.service';
-import {NumberResult} from '../../dtos/numberresult';
+import {NumberResult} from '../../common/dtos/numberresult';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {ProjektKapcsolatResult} from '../projektkapcsolatresult';
 import {ProjektKapcsolatDto} from '../projektkapcsolatdto';

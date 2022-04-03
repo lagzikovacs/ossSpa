@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {LogonService} from '../logon/logon.service';
-import {StringResult} from '../dtos/stringresult';
+import {StringResult} from '../common/dtos/stringresult';
 import {environment} from '../../environments/environment';
 
 @Injectable({

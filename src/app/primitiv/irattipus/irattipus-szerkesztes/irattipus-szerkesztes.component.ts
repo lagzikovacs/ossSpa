@@ -1,6 +1,6 @@
 import {IrattipusService} from '../../../01 Torzsadatok/01 Irattipus/irattipus.service';
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {NumberResult} from '../../../dtos/numberresult';
+import {NumberResult} from '../../../common/dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {deepCopy} from '../../../tools/deepCopy';
 import {IrattipusDto} from '../../../01 Torzsadatok/01 Irattipus/irattipusdto';

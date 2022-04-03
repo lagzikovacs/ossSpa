@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Szempont} from '../../enums/szempont';
-import {SzMT} from '../../dtos/szmt';
+import {Szempont} from '../../common/enums/szempont';
+import {SzMT} from '../../common/dtos/szmt';
 import {ProjektService} from '../projekt.service';
 import {ProjektDto} from '../projektdto';
 import {ErrorService} from '../../tools/errorbox/error.service';

@@ -3,7 +3,7 @@ import {LogonService} from '../logon/logon.service';
 import {HttpClient} from '@angular/common/http';
 import {AjanlatParamResult} from './ajanlatparamresult';
 import {AjanlatParam} from './ajanlatparam';
-import {NumberResult} from '../dtos/numberresult';
+import {NumberResult} from '../common/dtos/numberresult';
 import {environment} from '../../environments/environment';
 
 @Injectable({

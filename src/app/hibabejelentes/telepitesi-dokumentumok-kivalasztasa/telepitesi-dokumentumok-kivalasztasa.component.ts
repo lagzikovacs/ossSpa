@@ -6,7 +6,7 @@ import {HibabejelentesService} from '../hibabejelentes.service';
 import {IratDto} from '../../irat/iratdto';
 import {HibabejelentesDto} from '../hibabejelentesdto';
 import {deepCopy} from '../../tools/deepCopy';
-import {NumberResult} from '../../dtos/numberresult';
+import {NumberResult} from '../../common/dtos/numberresult';
 
 @Component({
   selector: 'app-telepitesi-dokumentumok-kivalasztasa',

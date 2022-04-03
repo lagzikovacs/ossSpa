@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {NumberResult} from '../../dtos/numberresult';
+import {NumberResult} from '../../common/dtos/numberresult';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {AfakulcsDto} from './afakulcsdto';
 import {LogonService} from '../../logon/logon.service';
 import {AfakulcsResult} from './afakulcsresult';
-import {EmptyResult} from '../../dtos/emptyresult';
+import {EmptyResult} from '../../common/dtos/emptyresult';
 import {AfakulcsZoomParameter} from './afakulcszoomparameter';
 import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 import {ColumnSettings} from '../../tools/reszletek/columnsettings';

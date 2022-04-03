@@ -5,8 +5,8 @@ import {IratParameter} from './iratparameter';
 import {environment} from '../../environments/environment';
 import {IratDto} from './iratdto';
 import {IratResult} from './iratresult';
-import {NumberResult} from '../dtos/numberresult';
-import {EmptyResult} from '../dtos/emptyresult';
+import {NumberResult} from '../common/dtos/numberresult';
+import {EmptyResult} from '../common/dtos/emptyresult';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
 import {ColumnSettings} from '../tools/reszletek/columnsettings';
 

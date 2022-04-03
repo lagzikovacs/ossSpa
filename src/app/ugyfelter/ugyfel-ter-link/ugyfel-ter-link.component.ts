@@ -6,7 +6,7 @@ import {environment} from '../../../environments/environment';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {UgyfelDto} from '../../ugyfel/ugyfeldto';
 import {deepCopy} from '../../tools/deepCopy';
-import {EgyMode} from '../../enums/egymode';
+import {EgyMode} from '../../common/enums/egymode';
 import {rowanimation} from '../../animation/rowAnimation';
 
 @Component({

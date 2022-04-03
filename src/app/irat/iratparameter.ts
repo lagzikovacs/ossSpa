@@ -1,4 +1,4 @@
-import {SzMT} from '../dtos/szmt';
+import {SzMT} from '../common/dtos/szmt';
 
 export class IratParameter {
   rekordtol: number;

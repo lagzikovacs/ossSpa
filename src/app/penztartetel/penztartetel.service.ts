@@ -3,7 +3,7 @@ import {environment} from '../../environments/environment';
 import {PenztartetelDto} from './penztarteteldto';
 import {HttpClient} from '@angular/common/http';
 import {LogonService} from '../logon/logon.service';
-import {NumberResult} from '../dtos/numberresult';
+import {NumberResult} from '../common/dtos/numberresult';
 import {PenztartetelResult} from './penztartetelresult';
 import {PenztartetelParameter} from './penztartetelparameter';
 import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';

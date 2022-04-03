@@ -6,8 +6,8 @@ import {BizonylatTipus} from '../bizonylattipus';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 import {BizonylatService} from '../bizonylat.service';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {Szempont} from '../../enums/szempont';
-import {SzMT} from '../../dtos/szmt';
+import {Szempont} from '../../common/enums/szempont';
+import {SzMT} from '../../common/dtos/szmt';
 
 @Component({
   selector: 'app-bizonylat-zoom',

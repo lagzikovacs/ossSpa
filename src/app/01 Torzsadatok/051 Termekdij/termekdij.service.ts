@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {TermekdijDto} from './termekdijdto';
-import {LogonService} from '../../logon/logon.service';
+import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {TermekdijResult} from './termekdijresult';
 import {EmptyResult} from '../../common/dtos/emptyresult';
 import {NumberResult} from '../../common/dtos/numberresult';

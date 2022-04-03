@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {LogonService} from '../logon/logon.service';
+import {LogonService} from '../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {AngularmenuResult} from './angularmenuresult';
 import {Router} from '@angular/router';
 import {PlatformLocation} from '@angular/common';

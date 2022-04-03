@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {LogonService} from '../logon.service';
+import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {Router} from '@angular/router';
 import {SessionService} from '../../session/session.service';
 import {SessionDto} from '../../session/sessiondto';

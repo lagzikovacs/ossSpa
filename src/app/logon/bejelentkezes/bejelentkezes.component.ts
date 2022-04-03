@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {LogonService} from '../logon.service';
+import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {SessionService} from '../../session/session.service';
 import {SessionDto} from '../../session/sessiondto';
 import {StartupService} from '../../startup/startup.service';

@@ -7,7 +7,7 @@ import {EmptyResult} from '../../common/dtos/emptyresult';
 import {NumberResult} from '../../common/dtos/numberresult';
 import {PenznemZoomParam} from './penznemzoomparam';
 import {ColumnSettings} from '../../tools/reszletek/columnsettings';
-import {LogonService} from '../../logon/logon.service';
+import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {lastValueFrom} from 'rxjs';
 import {ColumnSettingsResult} from "../../tools/reszletek/columnsettingsresult";
 

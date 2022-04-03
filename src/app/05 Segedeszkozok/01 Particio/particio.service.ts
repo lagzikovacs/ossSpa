@@ -5,7 +5,7 @@ import {ParticioDto} from './particiodto';
 import {ParticioResult} from './particioresult';
 import {HttpClient} from '@angular/common/http';
 import {lastValueFrom} from 'rxjs';
-import {LogonService} from '../../logon/logon.service';
+import {LogonService} from '../05 Bejelentkezes/logon.service';
 
 @Injectable({
   providedIn: 'root'

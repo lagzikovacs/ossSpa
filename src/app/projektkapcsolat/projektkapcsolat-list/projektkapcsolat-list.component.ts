@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
-import {LogonService} from '../../logon/logon.service';
+import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {IratService} from '../../irat/irat.service';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {VagolapService} from '../../vagolap/vagolap.service';

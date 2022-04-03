@@ -1,7 +1,7 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
 import { Observable } from 'rxjs';
-import {LogonService} from '../logon/logon.service';
+import {LogonService} from '../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 
 @Injectable({
   providedIn: 'root'

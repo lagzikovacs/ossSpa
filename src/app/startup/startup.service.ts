@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {EmptyResult} from '../common/dtos/emptyresult';
-import {LogonService} from '../logon/logon.service';
+import {LogonService} from '../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {CsoportService} from '../05 Segedeszkozok/04 Csoport/csoport.service';
 import {SessionService} from '../session/session.service';
 import {ProjektService} from '../projekt/projekt.service';

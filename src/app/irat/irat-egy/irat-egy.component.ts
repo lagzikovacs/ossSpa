@@ -5,7 +5,7 @@ import {ProjektService} from '../../projekt/projekt.service';
 import {ProjektResult} from '../../projekt/projektresult';
 import {VagolapService} from '../../vagolap/vagolap.service';
 import {AbuComponent} from '../../tools/abu/abu.component';
-import {LogonService} from '../../logon/logon.service';
+import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {JogKod} from '../../common/enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
 import {ErrorService} from '../../tools/errorbox/error.service';

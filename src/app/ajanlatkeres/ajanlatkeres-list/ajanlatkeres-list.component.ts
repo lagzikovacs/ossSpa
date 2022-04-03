@@ -9,7 +9,7 @@ import {environment} from '../../../environments/environment';
 import {AjanlatkeresParameter} from '../ajanlatkeresparameter';
 import {EgyMode} from '../../common/enums/egymode';
 import {rowanimation} from '../../animation/rowAnimation';
-import {LogonService} from '../../logon/logon.service';
+import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {JogKod} from '../../common/enums/jogkod';
 import {propCopy} from '../../tools/propCopy';
 import {deepCopy} from '../../tools/deepCopy';

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {FizetesimodService} from '../../../01 Torzsadatok/02 Fizetesimod/fizetesimod.service';
-import {LogonService} from '../../../logon/logon.service';
+import {LogonService} from '../../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {JogKod} from '../../../common/enums/jogkod';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';

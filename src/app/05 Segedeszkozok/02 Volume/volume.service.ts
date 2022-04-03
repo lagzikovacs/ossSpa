@@ -5,7 +5,7 @@ import {VolumeResult} from './volumeresult';
 import {DokumentumkodByVolumeResult} from './dokumentumbyvolumeresult';
 import {lastValueFrom} from 'rxjs';
 import {ColumnSettings} from '../../tools/reszletek/columnsettings';
-import {LogonService} from '../../logon/logon.service';
+import {LogonService} from '../05 Bejelentkezes/logon.service';
 import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 
 @Injectable({

@@ -3,7 +3,7 @@ import {StringResult} from '../common/dtos/stringresult';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {IratDto} from '../irat/iratdto';
-import {LogonService} from '../logon/logon.service';
+import {LogonService} from '../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {FotozasResult} from './fotozasresult';
 import {EmptyResult} from '../common/dtos/emptyresult';
 

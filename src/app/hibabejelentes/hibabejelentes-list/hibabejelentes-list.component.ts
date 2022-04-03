@@ -11,7 +11,7 @@ import {HibabejelentesParameter} from '../hibabejelentesparameter';
 import {HibabejelentesDto} from '../hibabejelentesdto';
 import {propCopy} from '../../tools/propCopy';
 import {JogKod} from '../../common/enums/jogkod';
-import {LogonService} from '../../logon/logon.service';
+import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {deepCopy} from '../../tools/deepCopy';
 
 @Component({

@@ -4,7 +4,7 @@ import {environment} from '../../../environments/environment';
 import {IrattipusDto} from './irattipusdto';
 import {IrattipusResult} from './irattipusresult';
 import {ColumnSettings} from '../../tools/reszletek/columnsettings';
-import {LogonService} from '../../logon/logon.service';
+import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {NumberResult} from '../../common/dtos/numberresult';
 import {lastValueFrom} from 'rxjs';
 import {EmptyResult} from '../../common/dtos/emptyresult';

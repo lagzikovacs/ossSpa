@@ -12,7 +12,7 @@ import {CikkZoomParam} from './cikkzoomparam';
 import {CikkDto} from './cikkdto';
 import {ColumnSettings} from '../../tools/reszletek/columnsettings';
 import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
-import {LogonService} from '../../logon/logon.service';
+import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 
 @Injectable({
   providedIn: 'root'

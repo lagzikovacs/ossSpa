@@ -7,7 +7,7 @@ import {MeResult} from './meresult';
 import {lastValueFrom} from 'rxjs';
 import {MeZoomParam} from './mezoomparam';
 import {ColumnSettings} from '../../tools/reszletek/columnsettings';
-import {LogonService} from '../../logon/logon.service';
+import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {EmptyResult} from '../../common/dtos/emptyresult';
 import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
 

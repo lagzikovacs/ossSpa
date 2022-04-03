@@ -6,7 +6,7 @@ import {environment} from '../../../environments/environment';
 import {NumberResult} from '../../common/dtos/numberresult';
 import {EmptyResult} from '../../common/dtos/emptyresult';
 import {HelysegZoomParam} from './helysegzoomparam';
-import {LogonService} from '../../logon/logon.service';
+import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {ColumnSettings} from '../../tools/reszletek/columnsettings';
 import {lastValueFrom} from 'rxjs';
 import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';

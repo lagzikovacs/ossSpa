@@ -3,7 +3,7 @@ import {IratService} from '../irat.service';
 import {SzMT} from '../../common/dtos/szmt';
 import {Szempont} from '../../common/enums/szempont';
 import {IratDto} from '../iratdto';
-import {LogonService} from '../../logon/logon.service';
+import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {JogKod} from '../../common/enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';

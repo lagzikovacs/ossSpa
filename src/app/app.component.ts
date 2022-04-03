@@ -1,5 +1,5 @@
 import {Component, HostListener} from '@angular/core';
-import {LogonService} from './logon/logon.service';
+import {LogonService} from './05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {ScreenService} from './screen/screen.service';
 
 @Component({

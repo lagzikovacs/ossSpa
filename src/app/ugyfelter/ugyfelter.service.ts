@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {LogonService} from '../logon/logon.service';
+import {LogonService} from '../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {HttpClient} from '@angular/common/http';
 import {StringResult} from '../common/dtos/stringresult';
 import {environment} from '../../environments/environment';

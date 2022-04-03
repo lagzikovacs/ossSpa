@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import {RouterModule, Routes} from '@angular/router';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import {environment} from '../environments/environment';
-import {LogonService} from './logon/logon.service';
+import {LogonService} from './05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {MenuService} from './menu/menu.service';
 import {HttpClientModule} from '@angular/common/http';
 import { BejelentkezesComponent } from './logon/bejelentkezes/bejelentkezes.component';

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {LogonService} from '../logon/logon.service';
+import {LogonService} from '../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {SessionResult} from './sessionresult';
 import {environment} from '../../environments/environment';
 import {SessionDto} from './sessiondto';

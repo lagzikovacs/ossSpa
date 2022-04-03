@@ -3,7 +3,7 @@ import {Szempont} from '../../common/enums/szempont';
 import {UgyfelService} from '../../01 Torzsadatok/09 Ugyfel/ugyfel.service';
 import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
 import {SzMT} from '../../common/dtos/szmt';
-import {LogonService} from '../../logon/logon.service';
+import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {JogKod} from '../../common/enums/jogkod';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {UgyfelTablaComponent} from '../ugyfel-tabla/ugyfel-tabla.component';

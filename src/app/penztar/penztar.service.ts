@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
 import {PenztarDto} from './penztardto';
 import {HttpClient} from '@angular/common/http';
-import {LogonService} from '../logon/logon.service';
+import {LogonService} from '../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {NumberResult} from '../common/dtos/numberresult';
 import {PenztarResult} from './penztarresult';
 import {EmptyResult} from '../common/dtos/emptyresult';

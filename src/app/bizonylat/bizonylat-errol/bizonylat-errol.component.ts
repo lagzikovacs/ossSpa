@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {BizonylatService} from '../bizonylat.service';
 import {BizonylatMintaAlapjanParam} from '../bizonylatmintaalapjan';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {LogonService} from '../../logon/logon.service';
+import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({

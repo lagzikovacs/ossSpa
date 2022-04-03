@@ -1,20 +1,20 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {CikkService} from '../cikk.service';
 import {MeService} from '../../01 Torzsadatok/04 Mennyisegiegyseg/me.service';
-import {AfakulcsService} from '../../primitiv/afakulcs/afakulcs.service';
+import {AfakulcsService} from '../../01 Torzsadatok/05 Afakulcs/afakulcs.service';
 import {TermekdijService} from '../../primitiv/termekdij/termekdij.service';
 import {MeZoomParam} from '../../01 Torzsadatok/04 Mennyisegiegyseg/mezoomparam';
-import {AfakulcsZoomParameter} from '../../primitiv/afakulcs/afakulcszoomparameter';
 import {EmptyResult} from '../../common/dtos/emptyresult';
 import {TermekdijZoomParameter} from '../../primitiv/termekdij/termekdijzoomparameter';
 import {CikkSzerkesztesMode} from '../cikkszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {deepCopy} from '../../tools/deepCopy';
-import {AfakulcsDto} from '../../primitiv/afakulcs/afakulcsdto';
+import {AfakulcsDto} from '../../01 Torzsadatok/05 Afakulcs/afakulcsdto';
 import {MeDto} from '../../01 Torzsadatok/04 Mennyisegiegyseg/medto';
 import {TermekdijDto} from '../../primitiv/termekdij/termekdijdto';
 import {CikkDto} from '../cikkdto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AfakulcsZoomParam} from '../../01 Torzsadatok/05 Afakulcs/afakulcszoomparam';
 
 @Component({
   selector: 'app-cikk-szerkesztes',
@@ -116,7 +116,7 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
         if (res.Error !== null) {
           throw res.Error;
         }
-        return this._afakulcsservice.ZoomCheck(new AfakulcsZoomParameter(this.DtoEdited.Afakulcskod || 0,
+        return this._afakulcsservice.ZoomCheck(new AfakulcsZoomParam(this.DtoEdited.Afakulcskod || 0,
           this.DtoEdited.Afakulcs || ''));
       })
       .then(res1 => {

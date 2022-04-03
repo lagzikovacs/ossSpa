@@ -82,7 +82,7 @@ import {IrattipusService} from './01 Torzsadatok/01 Irattipus/irattipus.service'
 import {FizetesimodService} from './01 Torzsadatok/02 Fizetesimod/fizetesimod.service';
 import {PenznemService} from './01 Torzsadatok/03 Penznem/penznem.service';
 import {MeService} from './01 Torzsadatok/04 Mennyisegiegyseg/me.service';
-import {AfakulcsService} from './primitiv/afakulcs/afakulcs.service';
+import {AfakulcsService} from './01 Torzsadatok/05 Afakulcs/afakulcs.service';
 import {TermekdijService} from './primitiv/termekdij/termekdij.service';
 import {CikkService} from './cikk/cikk.service';
 import {HelysegService} from './primitiv/helyseg/helyseg.service';

@@ -2,17 +2,15 @@ import {ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Ou
 import {BizonylatService} from '../bizonylat.service';
 import {CikkService} from '../../cikk/cikk.service';
 import {MeService} from '../../01 Torzsadatok/04 Mennyisegiegyseg/me.service';
-import {AfakulcsService} from '../../primitiv/afakulcs/afakulcs.service';
+import {AfakulcsService} from '../../01 Torzsadatok/05 Afakulcs/afakulcs.service';
 import {TermekdijService} from '../../primitiv/termekdij/termekdij.service';
 import {BizonylattetelSzerkesztesMode} from '../bizonylattetelszerkesztesmode';
 import {BruttobolParam} from '../bruttobolparam';
 import {CikkZoomParameter} from '../../cikk/cikkzoomparameter';
-import {EmptyResult} from '../../common/dtos/emptyresult';
 import {TermekdijZoomParameter} from '../../primitiv/termekdij/termekdijzoomparameter';
-import {AfakulcsZoomParameter} from '../../primitiv/afakulcs/afakulcszoomparameter';
 import {MeZoomParam} from '../../01 Torzsadatok/04 Mennyisegiegyseg/mezoomparam';
 import {ErrorService} from '../../tools/errorbox/error.service';
-import {AfakulcsDto} from '../../primitiv/afakulcs/afakulcsdto';
+import {AfakulcsDto} from '../../01 Torzsadatok/05 Afakulcs/afakulcsdto';
 import {MeDto} from '../../01 Torzsadatok/04 Mennyisegiegyseg/medto';
 import {TermekdijDto} from '../../primitiv/termekdij/termekdijdto';
 import {CikkDto} from '../../cikk/cikkdto';
@@ -20,6 +18,7 @@ import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 import {BizonylatTetelDto} from '../bizonylatteteldto';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
+import {AfakulcsZoomParam} from '../../01 Torzsadatok/05 Afakulcs/afakulcszoomparam';
 
 @Component({
   selector: 'app-bizonylattetel-szerkesztes',
@@ -261,7 +260,7 @@ export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implement
         throw res2.Error;
       }
 
-      const res3 = await this._afakulcsservice.ZoomCheck(new AfakulcsZoomParameter(this.TetelDtoEdited.Afakulcskod || 0,
+      const res3 = await this._afakulcsservice.ZoomCheck(new AfakulcsZoomParam(this.TetelDtoEdited.Afakulcskod || 0,
         this.TetelDtoEdited.Afakulcs || ''));
       if (res3.Error != null) {
         throw res3.Error;

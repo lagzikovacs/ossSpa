@@ -5,7 +5,7 @@ import {CsoportService} from '../csoport/csoport.service';
 import {SessionService} from '../session/session.service';
 import {ProjektService} from '../projekt/projekt.service';
 import {IratService} from '../irat/irat.service';
-import {AfakulcsService} from '../primitiv/afakulcs/afakulcs.service';
+import {AfakulcsService} from '../01 Torzsadatok/05 Afakulcs/afakulcs.service';
 import {FelhasznaloService} from '../primitiv/felhasznalo/felhasznalo.service';
 import {FizetesimodService} from '../01 Torzsadatok/02 Fizetesimod/fizetesimod.service';
 import {HelysegService} from '../primitiv/helyseg/helyseg.service';

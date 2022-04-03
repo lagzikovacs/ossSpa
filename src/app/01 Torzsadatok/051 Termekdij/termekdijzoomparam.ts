@@ -1,4 +1,4 @@
-export class TermekdijZoomParameter {
+export class TermekdijZoomParam {
   termekdijkod: number;
   termekdijkt: string;
 

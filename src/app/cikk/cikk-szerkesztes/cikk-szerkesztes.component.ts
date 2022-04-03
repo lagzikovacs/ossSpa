@@ -2,16 +2,16 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {CikkService} from '../cikk.service';
 import {MeService} from '../../01 Torzsadatok/04 Mennyisegiegyseg/me.service';
 import {AfakulcsService} from '../../01 Torzsadatok/05 Afakulcs/afakulcs.service';
-import {TermekdijService} from '../../primitiv/termekdij/termekdij.service';
+import {TermekdijService} from '../../01 Torzsadatok/051 Termekdij/termekdij.service';
 import {MeZoomParam} from '../../01 Torzsadatok/04 Mennyisegiegyseg/mezoomparam';
 import {EmptyResult} from '../../common/dtos/emptyresult';
-import {TermekdijZoomParameter} from '../../primitiv/termekdij/termekdijzoomparameter';
+import {TermekdijZoomParam} from '../../01 Torzsadatok/051 Termekdij/termekdijzoomparam';
 import {CikkSzerkesztesMode} from '../cikkszerkesztesmode';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {deepCopy} from '../../tools/deepCopy';
 import {AfakulcsDto} from '../../01 Torzsadatok/05 Afakulcs/afakulcsdto';
 import {MeDto} from '../../01 Torzsadatok/04 Mennyisegiegyseg/medto';
-import {TermekdijDto} from '../../primitiv/termekdij/termekdijdto';
+import {TermekdijDto} from '../../01 Torzsadatok/051 Termekdij/termekdijdto';
 import {CikkDto} from '../cikkdto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AfakulcsZoomParam} from '../../01 Torzsadatok/05 Afakulcs/afakulcszoomparam';
@@ -125,7 +125,7 @@ export class CikkSzerkesztesComponent implements OnInit, OnDestroy {
         }
 
         if ((this.DtoEdited.Termekdijkt || '') !== '') {
-          return this._termekdijservice.ZoomCheck(new TermekdijZoomParameter(this.DtoEdited.Termekdijkod || 0,
+          return this._termekdijservice.ZoomCheck(new TermekdijZoomParam(this.DtoEdited.Termekdijkod || 0,
             this.DtoEdited.Termekdijkt || ''));
         } else {
           this.DtoEdited.Termekdijkod = undefined;

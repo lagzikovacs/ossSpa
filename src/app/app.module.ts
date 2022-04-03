@@ -83,7 +83,7 @@ import {FizetesimodService} from './01 Torzsadatok/02 Fizetesimod/fizetesimod.se
 import {PenznemService} from './01 Torzsadatok/03 Penznem/penznem.service';
 import {MeService} from './01 Torzsadatok/04 Mennyisegiegyseg/me.service';
 import {AfakulcsService} from './01 Torzsadatok/05 Afakulcs/afakulcs.service';
-import {TermekdijService} from './primitiv/termekdij/termekdij.service';
+import {TermekdijService} from './01 Torzsadatok/051 Termekdij/termekdij.service';
 import {CikkService} from './cikk/cikk.service';
 import {HelysegService} from './primitiv/helyseg/helyseg.service';
 import {UgyfelService} from './ugyfel/ugyfel.service';

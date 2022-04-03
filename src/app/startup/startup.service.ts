@@ -12,7 +12,7 @@ import {HelysegService} from '../primitiv/helyseg/helyseg.service';
 import {IrattipusService} from '../01 Torzsadatok/01 Irattipus/irattipus.service';
 import {MeService} from '../01 Torzsadatok/04 Mennyisegiegyseg/me.service';
 import {PenznemService} from '../01 Torzsadatok/03 Penznem/penznem.service';
-import {TermekdijService} from '../primitiv/termekdij/termekdij.service';
+import {TermekdijService} from '../01 Torzsadatok/051 Termekdij/termekdij.service';
 import {CikkService} from '../cikk/cikk.service';
 import {UgyfelService} from '../ugyfel/ugyfel.service';
 import {ProjektjegyzetService} from '../projektjegyzet/projektjegyzet.service';

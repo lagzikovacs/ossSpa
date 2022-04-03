@@ -3,16 +3,16 @@ import {BizonylatService} from '../bizonylat.service';
 import {CikkService} from '../../cikk/cikk.service';
 import {MeService} from '../../01 Torzsadatok/04 Mennyisegiegyseg/me.service';
 import {AfakulcsService} from '../../01 Torzsadatok/05 Afakulcs/afakulcs.service';
-import {TermekdijService} from '../../primitiv/termekdij/termekdij.service';
+import {TermekdijService} from '../../01 Torzsadatok/051 Termekdij/termekdij.service';
 import {BizonylattetelSzerkesztesMode} from '../bizonylattetelszerkesztesmode';
 import {BruttobolParam} from '../bruttobolparam';
 import {CikkZoomParameter} from '../../cikk/cikkzoomparameter';
-import {TermekdijZoomParameter} from '../../primitiv/termekdij/termekdijzoomparameter';
+import {TermekdijZoomParam} from '../../01 Torzsadatok/051 Termekdij/termekdijzoomparam';
 import {MeZoomParam} from '../../01 Torzsadatok/04 Mennyisegiegyseg/mezoomparam';
 import {ErrorService} from '../../tools/errorbox/error.service';
 import {AfakulcsDto} from '../../01 Torzsadatok/05 Afakulcs/afakulcsdto';
 import {MeDto} from '../../01 Torzsadatok/04 Mennyisegiegyseg/medto';
-import {TermekdijDto} from '../../primitiv/termekdij/termekdijdto';
+import {TermekdijDto} from '../../01 Torzsadatok/051 Termekdij/termekdijdto';
 import {CikkDto} from '../../cikk/cikkdto';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 import {BizonylatTetelDto} from '../bizonylatteteldto';
@@ -267,7 +267,7 @@ export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implement
       }
 
       if (this.TetelDtoEdited.Termekdijas) {
-        const res4 = await this._termekdijservice.ZoomCheck(new TermekdijZoomParameter(this.TetelDtoEdited.Termekdijkod || 0,
+        const res4 = await this._termekdijservice.ZoomCheck(new TermekdijZoomParam(this.TetelDtoEdited.Termekdijkod || 0,
           this.TetelDtoEdited.Termekdijkt || ''));
         if (res4.Error != null) {
           throw res4.Error;

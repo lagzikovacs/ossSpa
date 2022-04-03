@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {TermekdijService} from '../termekdij.service';
+import {TermekdijService} from '../../../01 Torzsadatok/051 Termekdij/termekdij.service';
 import {NumberResult} from '../../../common/dtos/numberresult';
 import {ErrorService} from '../../../tools/errorbox/error.service';
 import {deepCopy} from '../../../tools/deepCopy';
-import {TermekdijDto} from '../termekdijdto';
+import {TermekdijDto} from '../../../01 Torzsadatok/051 Termekdij/termekdijdto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({

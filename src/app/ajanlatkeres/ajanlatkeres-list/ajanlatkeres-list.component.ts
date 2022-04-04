@@ -3,7 +3,7 @@ import {AjanlatkeresService} from '../ajanlatkeres.service';
 import {Szempont} from '../../common/enums/szempont';
 import {SzMT} from '../../common/dtos/szmt';
 import {AjanlatkeresDto} from '../ajanlatkeresdto';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
 import {AjanlatkeresParameter} from '../ajanlatkeresparameter';

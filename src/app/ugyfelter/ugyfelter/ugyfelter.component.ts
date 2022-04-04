@@ -16,7 +16,7 @@ import {BizonylatNyomtatasTipus} from '../../bizonylatnyomtatas/bizonylatnyomtat
 import * as FileSaver from 'file-saver';
 import {b64toBlob} from '../../common/b64toBlob';
 import {LetoltesParam} from '../../dokumentum/letoltesparam';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {Bizonylatnyomtatasciklus} from '../../bizonylatnyomtatas/bizonylatnyomtatasciklus';
 
 @Component({

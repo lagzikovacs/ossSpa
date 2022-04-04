@@ -4,7 +4,7 @@ import {ProjektService} from '../../projekt/projekt.service';
 import {ProjektDto} from '../../projekt/projektdto';
 import {SzMT} from '../../common/dtos/szmt';
 import {Szempont} from '../../common/enums/szempont';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {environment} from '../../../environments/environment';
 import {ProjektParameter} from '../../projekt/projektparameter';
 

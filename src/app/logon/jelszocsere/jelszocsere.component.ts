@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
 import {FelhasznaloService} from '../../05 Segedeszkozok/03 Felhasznalo/felhasznalo.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({

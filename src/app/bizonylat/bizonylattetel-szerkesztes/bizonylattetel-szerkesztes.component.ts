@@ -9,7 +9,7 @@ import {BruttobolParam} from '../bruttobolparam';
 import {CikkZoomParam} from '../../01 Torzsadatok/06 Cikk/cikkzoomparam';
 import {TermekdijZoomParam} from '../../01 Torzsadatok/051 Termekdij/termekdijzoomparam';
 import {MeZoomParam} from '../../01 Torzsadatok/04 Mennyisegiegyseg/mezoomparam';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {AfakulcsDto} from '../../01 Torzsadatok/05 Afakulcs/afakulcsdto';
 import {MeDto} from '../../01 Torzsadatok/04 Mennyisegiegyseg/medto';
 import {TermekdijDto} from '../../01 Torzsadatok/051 Termekdij/termekdijdto';

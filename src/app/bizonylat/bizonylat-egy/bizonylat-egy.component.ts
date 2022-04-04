@@ -5,7 +5,7 @@ import {BizonylatTipus} from '../bizonylattipus';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {JogKod} from '../../common/enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {BizonylatDto} from '../bizonylatdto';
 import {propCopy} from '../../common/propCopy';
 import {deepCopy} from '../../common/deepCopy';

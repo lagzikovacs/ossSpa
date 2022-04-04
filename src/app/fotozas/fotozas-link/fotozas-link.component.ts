@@ -3,7 +3,7 @@ import {IratService} from '../../irat/irat.service';
 import {FotozasService} from '../fotozas.service';
 import * as moment from 'moment';
 import {environment} from '../../../environments/environment';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {deepCopy} from '../../common/deepCopy';
 import {IratDto} from '../../irat/iratdto';
 import {EgyMode} from '../../common/enums/egymode';

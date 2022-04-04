@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {SessionService} from '../../session/session.service';
 import {SessionDto} from '../../session/sessiondto';
 import {StartupService} from '../../startup/startup.service';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

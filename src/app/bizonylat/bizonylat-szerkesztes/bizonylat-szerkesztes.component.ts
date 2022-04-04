@@ -10,7 +10,7 @@ import {FizetesimodZoomParam} from '../../01 Torzsadatok/02 Fizetesimod/fiztesim
 import {EmptyResult} from '../../common/dtos/emptyresult';
 import * as moment from 'moment';
 import {deepCopy} from '../../common/deepCopy';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {PenznemDto} from '../../01 Torzsadatok/03 Penznem/penznemdto';
 import {FizetesimodDto} from '../../01 Torzsadatok/02 Fizetesimod/fizetesimoddto';
 import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';

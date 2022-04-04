@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} fr
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
 import * as moment from 'moment';
 import {AjanlatService} from '../ajanlat.service';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {ProjektKapcsolatDto} from '../../projektkapcsolat/projektkapcsolatdto';
 import {AjanlatParam} from '../ajanlatparam';
 import {AjanlatBuf} from '../ajanlatbuf';

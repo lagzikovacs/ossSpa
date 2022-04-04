@@ -4,7 +4,7 @@ import {JogKod} from '../../common/enums/jogkod';
 import {PenztartetelService} from '../penztartetel.service';
 import {Szempont} from '../../common/enums/szempont';
 import {SzMT} from '../../common/dtos/szmt';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
 import {PenztartetelParameter} from '../penztartetelparameter';

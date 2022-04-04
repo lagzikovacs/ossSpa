@@ -3,7 +3,7 @@ import {UgyfelterService} from '../ugyfelter.service';
 import {UgyfelService} from '../../01 Torzsadatok/09 Ugyfel/ugyfel.service';
 import * as moment from 'moment';
 import {environment} from '../../../environments/environment';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
 import {deepCopy} from '../../common/deepCopy';
 import {EgyMode} from '../../common/enums/egymode';

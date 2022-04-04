@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {CikkService} from '../../01 Torzsadatok/06 Cikk/cikk.service';
 import {CikkMozgasTetelDto} from '../../01 Torzsadatok/06 Cikk/cikkmozgasteteldto';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {CikkMozgasParam} from '../../01 Torzsadatok/06 Cikk/cikkmozgasparam';
 
 @Component({

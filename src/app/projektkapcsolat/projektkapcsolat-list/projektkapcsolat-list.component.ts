@@ -6,7 +6,7 @@ import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {VagolapService} from '../../05 Segedeszkozok/08 Vagolap/vagolap.service';
 import {VagolapMode} from '../../05 Segedeszkozok/08 Vagolap/vagolapmode';
 import {JogKod} from '../../common/enums/jogkod';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {ProjektkapcsolatTablaComponent} from '../projektkapcsolat-tabla/projektkapcsolat-tabla.component';
 import {IratDto} from '../../irat/iratdto';
 import {BizonylatDto} from '../../bizonylat/bizonylatdto';

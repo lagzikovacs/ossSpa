@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {BizonylatKapcsolatDto} from '../bizonylatkapcsolatdto';
 
 @Component({

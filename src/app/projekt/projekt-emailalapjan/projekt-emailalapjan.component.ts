@@ -3,7 +3,7 @@ import {Szempont} from '../../common/enums/szempont';
 import {SzMT} from '../../common/dtos/szmt';
 import {ProjektService} from '../projekt.service';
 import {ProjektDto} from '../projektdto';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {environment} from '../../../environments/environment';
 import {ProjektParameter} from '../projektparameter';
 

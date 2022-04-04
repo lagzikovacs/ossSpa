@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
 
 @Component({

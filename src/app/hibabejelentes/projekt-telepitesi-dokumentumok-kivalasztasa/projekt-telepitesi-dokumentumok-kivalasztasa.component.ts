@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {HibabejelentesService} from '../hibabejelentes.service';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {ProjektToolbarComponent} from '../../projekt/projekttoolbar/projekttoolbar.component';
 
 @Component({

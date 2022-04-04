@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {EsemenynaploService} from './esemenynaplo.service';
-import {ErrorService} from '../tools/errorbox/error.service';
+import {ErrorService} from '../common/errorbox/error.service';
 import {environment} from '../../environments/environment';
 import {EsemenynaploParameter} from './esemenynaploparameter';
 import {EsemenynaploDto} from './esemenynaplodto';

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FizetesimodService} from '../../../01 Torzsadatok/02 Fizetesimod/fizetesimod.service';
 import {NumberResult} from '../../../common/dtos/numberresult';
-import {ErrorService} from '../../../tools/errorbox/error.service';
+import {ErrorService} from '../../../common/errorbox/error.service';
 import {deepCopy} from '../../../common/deepCopy';
 import {FizetesimodDto} from '../../../01 Torzsadatok/02 Fizetesimod/fizetesimoddto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';

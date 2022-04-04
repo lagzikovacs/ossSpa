@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {AfakulcsService} from '../../../01 Torzsadatok/05 Afakulcs/afakulcs.service';
 import {NumberResult} from '../../../common/dtos/numberresult';
-import {ErrorService} from '../../../tools/errorbox/error.service';
+import {ErrorService} from '../../../common/errorbox/error.service';
 import {deepCopy} from '../../../common/deepCopy';
 import {AfakulcsDto} from '../../../01 Torzsadatok/05 Afakulcs/afakulcsdto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';

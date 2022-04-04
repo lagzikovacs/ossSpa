@@ -4,7 +4,7 @@ import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {UgyfelService} from '../../01 Torzsadatok/09 Ugyfel/ugyfel.service';
 import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
 import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';

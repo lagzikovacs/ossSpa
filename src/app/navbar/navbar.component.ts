@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ErrorService} from '../tools/errorbox/error.service';
+import {ErrorService} from '../common/errorbox/error.service';
 import {VerzioService} from '../menu/verzio.service';
 import {MenuService} from '../menu/menu.service';
 import {LogonService} from '../05 Segedeszkozok/05 Bejelentkezes/logon.service';

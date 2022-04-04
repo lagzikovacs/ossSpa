@@ -3,7 +3,7 @@ import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
 import {IratService} from '../../irat/irat.service';
 import {VagolapService} from '../../05 Segedeszkozok/08 Vagolap/vagolap.service';
 import {VagolapMode} from '../../05 Segedeszkozok/08 Vagolap/vagolapmode';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {IratDto} from '../../irat/iratdto';
 import {BizonylatkapcsolatTablaComponent} from '../bizonylatkapcsolat-tabla/bizonylatkapcsolat-tabla.component';
 import {BizonylatKapcsolatParam} from '../bizonylatkapcsolatparam';

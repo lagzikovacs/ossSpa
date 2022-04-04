@@ -5,7 +5,7 @@ import {BizonylatParameter} from '../bizonylatparameter';
 import {BizonylatTipus} from '../bizonylattipus';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 import {BizonylatService} from '../bizonylat.service';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {Szempont} from '../../common/enums/szempont';
 import {SzMT} from '../../common/dtos/szmt';
 

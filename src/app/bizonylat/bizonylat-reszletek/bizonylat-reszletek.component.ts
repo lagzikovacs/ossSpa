@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {BizonylatComplexDto} from '../bizonylatcomplexdto';
 import {BizonylatDto} from '../bizonylatdto';
 import {BizonylatTetelDto} from '../bizonylatteteldto';

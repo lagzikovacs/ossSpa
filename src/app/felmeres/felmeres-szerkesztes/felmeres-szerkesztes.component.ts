@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FelmeresDto} from '../felmeresdto';
 import {deepCopy} from '../../common/deepCopy';
 import {FelmeresService} from '../felmeres.service';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 
 @Component({
   selector: 'app-felmeres-szerkesztes',

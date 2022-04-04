@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {ErrorService} from '../../../tools/errorbox/error.service';
+import {ErrorService} from '../../../common/errorbox/error.service';
 import {BizonylatService} from '../../bizonylat.service';
 import {BizonylatDto} from '../../bizonylatdto';
 

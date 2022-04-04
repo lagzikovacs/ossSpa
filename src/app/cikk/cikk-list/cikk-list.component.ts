@@ -5,7 +5,7 @@ import {CikkDto} from '../../01 Torzsadatok/06 Cikk/cikkdto';
 import {SzMT} from '../../common/dtos/szmt';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {JogKod} from '../../common/enums/jogkod';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
 import {CikkParameter} from '../../01 Torzsadatok/06 Cikk/cikkparameter';

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IratService} from '../../irat/irat.service';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {HibabejelentesService} from '../hibabejelentes.service';
 import {IratDto} from '../../irat/iratdto';
 import {HibabejelentesDto} from '../hibabejelentesdto';

@@ -2,7 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ProjektDto} from '../../projekt/projektdto';
 import {ProjektResult} from '../../projekt/projektresult';
 import {ProjektService} from '../../projekt/projekt.service';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
 import {IratDto} from '../../irat/iratdto';
 import {BizonylatDto} from '../bizonylatdto';

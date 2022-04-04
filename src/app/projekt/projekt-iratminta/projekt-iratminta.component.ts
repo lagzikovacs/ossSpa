@@ -3,7 +3,7 @@ import {b64toBlob} from '../../common/b64toBlob';
 import * as FileSaver from 'file-saver';
 import {IratmintaService} from './iratminta.service';
 import {rowanimation} from '../../animation/rowAnimation';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 
 @Component({
   selector: 'app-projekt-iratminta',

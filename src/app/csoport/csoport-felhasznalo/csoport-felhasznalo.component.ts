@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {CsoportService} from '../../05 Segedeszkozok/04 Csoport/csoport.service';
 import {CsoportFelhasznaloParam} from '../../05 Segedeszkozok/04 Csoport/csoportfelhasznaloparam';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {FelhasznaloDto} from '../../05 Segedeszkozok/03 Felhasznalo/felhasznalodto';
 
 @Component({

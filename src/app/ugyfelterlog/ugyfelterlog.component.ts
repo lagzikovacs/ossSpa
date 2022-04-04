@@ -3,7 +3,7 @@ import {UgyfelterlogService} from './ugyfelterlog.service';
 import {Szempont} from '../common/enums/szempont';
 import {SzMT} from '../common/dtos/szmt';
 import {UgyfelterlogDto} from './ugyfelterlogdto';
-import {ErrorService} from '../tools/errorbox/error.service';
+import {ErrorService} from '../common/errorbox/error.service';
 import {environment} from '../../environments/environment';
 import {UgyfelterlogParameter} from './ugyfelterlogparameter';
 

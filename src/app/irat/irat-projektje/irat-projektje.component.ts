@@ -5,7 +5,7 @@ import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.s
 import {ProjektDto} from '../../projekt/projektdto';
 import {IratDto} from '../iratdto';
 import {ProjektService} from '../../projekt/projekt.service';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 
 @Component({
   selector: 'app-irat-projektje',

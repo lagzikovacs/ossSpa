@@ -3,7 +3,7 @@ import {deepCopy} from '../../common/deepCopy';
 import {HibabejelentesDto} from '../hibabejelentesdto';
 import {HibabejelentesService} from '../hibabejelentes.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {NumberResult} from '../../common/dtos/numberresult';
 
 @Component({

@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {CsoportService} from '../../05 Segedeszkozok/04 Csoport/csoport.service';
 import {CsoportJogParam} from '../../05 Segedeszkozok/04 Csoport/csoportjogparam';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {LehetsegesJogDto} from '../../05 Segedeszkozok/04 Csoport/lehetsegesjogdto';
 
 @Component({

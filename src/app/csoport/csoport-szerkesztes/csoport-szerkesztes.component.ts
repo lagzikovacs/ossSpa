@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {CsoportService} from '../../05 Segedeszkozok/04 Csoport/csoport.service';
 import {NumberResult} from '../../common/dtos/numberresult';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {CsoportDto} from '../../05 Segedeszkozok/04 Csoport/csoportdto';
 import {deepCopy} from '../../common/deepCopy';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';

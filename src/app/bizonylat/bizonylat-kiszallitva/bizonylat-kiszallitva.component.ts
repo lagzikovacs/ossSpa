@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {BizonylatDto} from '../bizonylatdto';
 import {deepCopy} from '../../common/deepCopy';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';

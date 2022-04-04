@@ -3,7 +3,7 @@ import {PenznemService} from '../../01 Torzsadatok/03 Penznem/penznem.service';
 import {PenznemZoomParam} from '../../01 Torzsadatok/03 Penznem/penznemzoomparam';
 import {PenztarService} from '../penztar.service';
 import {PenztarSzerkesztesMode} from '../penztarszerkesztesmode';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {deepCopy} from '../../common/deepCopy';
 import {PenznemDto} from '../../01 Torzsadatok/03 Penznem/penznemdto';
 import {PenztarDto} from '../penztardto';

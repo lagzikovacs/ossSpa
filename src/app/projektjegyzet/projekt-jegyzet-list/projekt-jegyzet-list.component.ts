@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ProjektjegyzetService} from '../projektjegyzet.service';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {ProjektjegyzetDto} from '../projektjegyzetdto';
 import {EgyMode} from '../../common/enums/egymode';

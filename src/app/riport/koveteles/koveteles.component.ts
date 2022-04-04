@@ -3,7 +3,7 @@ import {RiportService} from '../../04 Riportok/riport.service';
 import {Szempont} from '../../common/enums/szempont';
 import {SzMT} from '../../common/dtos/szmt';
 import * as moment from 'moment';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {Riportciklus} from '../../04 Riportok/riportciklus';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 

@@ -6,7 +6,7 @@ import {
 import {NumberResult} from '../../../common/dtos/numberresult';
 import {IrattipusDto} from '../irattipusdto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ErrorService} from '../../../tools/errorbox/error.service';
+import {ErrorService} from '../../../common/errorbox/error.service';
 import {deepCopy} from '../../../common/deepCopy';
 
 @Component({

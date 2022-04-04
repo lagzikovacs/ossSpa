@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {NumberResult} from '../../../common/dtos/numberresult';
-import {ErrorService} from '../../../tools/errorbox/error.service';
+import {ErrorService} from '../../../common/errorbox/error.service';
 import {deepCopy} from '../../../common/deepCopy';
 import {TevekenysegDto} from '../../../01 Torzsadatok/08 Tevekenyseg/tevekenysegdto';
 import {TevekenysegService} from '../../../01 Torzsadatok/08 Tevekenyseg/tevekenyseg.service';

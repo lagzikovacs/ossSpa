@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} fr
 import {IrattipusService} from '../../../01 Torzsadatok/01 Irattipus/irattipus.service';
 import {LogonService} from '../../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {JogKod} from '../../../common/enums/jogkod';
-import {ErrorService} from '../../../tools/errorbox/error.service';
+import {ErrorService} from '../../../common/errorbox/error.service';
 import {TablaComponent} from '../../../tools/tabla/tabla.component';
 import {environment} from '../../../../environments/environment';
 import {EgyszeruKeresesDto} from '../../../common/dtos/egyszerukeresesdto';

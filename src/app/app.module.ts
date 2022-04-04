@@ -157,8 +157,8 @@ import { UgyfelVcardComponent } from './ugyfel/ugyfel-vcard/ugyfel-vcard.compone
 import { UgyfelTablaComponent } from './ugyfel/ugyfel-tabla/ugyfel-tabla.component';
 import { TablaComponent } from './tools/tabla/tabla.component';
 import {StartupService} from './startup/startup.service';
-import {ErrorService} from './tools/errorbox/error.service';
-import { ErrorboxComponent } from './tools/errorbox/errorbox.component';
+import {ErrorService} from './common/errorbox/error.service';
+import { ErrorboxComponent } from './common/errorbox/errorbox.component';
 import { UgyfelterProjektTablaComponent } from './ugyfelter/ugyfelter-projekt-tabla/ugyfelter-projekt-tabla.component';
 import { ProjektkapcsolatTablaComponent } from './projektkapcsolat/projektkapcsolat-tabla/projektkapcsolat-tabla.component';
 import { BizonylatkapcsolatTablaComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-tabla/bizonylatkapcsolat-tabla.component';

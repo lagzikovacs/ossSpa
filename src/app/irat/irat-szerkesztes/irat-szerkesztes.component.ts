@@ -7,7 +7,7 @@ import {IratSzerkesztesMode} from '../iratszerkesztesmode';
 import {IrattipusZoomParam} from '../../01 Torzsadatok/01 Irattipus/irattipuszoomparam';
 import {EmptyResult} from '../../common/dtos/emptyresult';
 import {UgyfelZoomParam} from '../../01 Torzsadatok/09 Ugyfel/ugyfelzoomparam';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {deepCopy} from '../../common/deepCopy';
 import {IrattipusDto} from '../../01 Torzsadatok/01 Irattipus/irattipusdto';
 import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';

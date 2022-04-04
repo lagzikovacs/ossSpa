@@ -5,7 +5,7 @@ import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.servic
 import {SessionService} from '../../session/session.service';
 import {SessionDto} from '../../session/sessiondto';
 import {StartupService} from '../../startup/startup.service';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ProjektjegyzetService} from '../projektjegyzet.service';
 import * as moment from 'moment';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {deepCopy} from '../../common/deepCopy';
 import {ProjektjegyzetDto} from '../projektjegyzetdto';
 import {NumberResult} from '../../common/dtos/numberresult';

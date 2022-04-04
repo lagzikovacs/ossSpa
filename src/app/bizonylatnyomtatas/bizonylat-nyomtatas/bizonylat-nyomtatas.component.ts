@@ -3,7 +3,7 @@ import {BizonylatnyomtatasService} from '../bizonylatnyomtatas.service';
 import {SzMT} from '../../common/dtos/szmt';
 import {Szempont} from '../../common/enums/szempont';
 import {BizonylatNyomtatasTipus} from '../bizonylatnyomtatastipus';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {Bizonylatnyomtatasciklus} from '../bizonylatnyomtatasciklus';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';

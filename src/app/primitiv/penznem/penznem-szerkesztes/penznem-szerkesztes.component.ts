@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {PenznemService} from '../../../01 Torzsadatok/03 Penznem/penznem.service';
 import {NumberResult} from '../../../common/dtos/numberresult';
-import {ErrorService} from '../../../tools/errorbox/error.service';
+import {ErrorService} from '../../../common/errorbox/error.service';
 import {deepCopy} from '../../../common/deepCopy';
 import {PenznemDto} from '../../../01 Torzsadatok/03 Penznem/penznemdto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';

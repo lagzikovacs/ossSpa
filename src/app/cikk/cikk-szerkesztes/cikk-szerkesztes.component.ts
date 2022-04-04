@@ -7,7 +7,7 @@ import {MeZoomParam} from '../../01 Torzsadatok/04 Mennyisegiegyseg/mezoomparam'
 import {EmptyResult} from '../../common/dtos/emptyresult';
 import {TermekdijZoomParam} from '../../01 Torzsadatok/051 Termekdij/termekdijzoomparam';
 import {CikkSzerkesztesMode} from '../../01 Torzsadatok/06 Cikk/cikkszerkesztesmode';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {deepCopy} from '../../common/deepCopy';
 import {AfakulcsDto} from '../../01 Torzsadatok/05 Afakulcs/afakulcsdto';
 import {MeDto} from '../../01 Torzsadatok/04 Mennyisegiegyseg/medto';

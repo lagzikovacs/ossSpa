@@ -5,7 +5,7 @@ import {FotozasDto} from '../fotozasdto';
 import {FajlBuf} from '../../dokumentum/fajlbuf';
 import {DokumentumService} from '../../dokumentum/dokumentum.service';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({

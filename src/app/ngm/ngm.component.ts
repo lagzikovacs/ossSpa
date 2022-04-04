@@ -3,7 +3,7 @@ import {NgmService} from '../04 Riportok/07 Ngm/ngm.service';
 import {NGMParam} from '../04 Riportok/07 Ngm/ngmparam';
 import * as moment from 'moment';
 import {NGMMode} from '../04 Riportok/07 Ngm/ngmmode';
-import {ErrorService} from '../tools/errorbox/error.service';
+import {ErrorService} from '../common/errorbox/error.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({

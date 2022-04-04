@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {DokumentumService} from '../dokumentum.service';
 import {FajlBuf} from '../fajlbuf';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {DokumentumDto} from '../dokumentumdto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 

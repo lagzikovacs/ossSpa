@@ -1,4 +1,4 @@
-import {ErrorService} from '../tools/errorbox/error.service';
+import {ErrorService} from '../common/errorbox/error.service';
 import {b64toBlob} from '../common/b64toBlob';
 import * as FileSaver from 'file-saver';
 import {LiteEvent} from '../common/event/LiteEvent';

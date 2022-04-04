@@ -5,15 +5,13 @@ import {Observable, Subject} from 'rxjs';
   providedIn: 'root'
 })
 export class ErrorService {
-  private _subjectErrormessage = new Subject<void>();
-  hiba: string;
+  private _subjectErrormessage = new Subject<any>();
 
   set Error(hiba: any) {
-    this.hiba = hiba;
-    this._subjectErrormessage.next();
+    this._subjectErrormessage.next(hiba);
   }
 
-  ErrormessageObservable(): Observable<void> {
+  ErrormessageObservable(): Observable<any> {
     return this._subjectErrormessage.asObservable();
   }
 }

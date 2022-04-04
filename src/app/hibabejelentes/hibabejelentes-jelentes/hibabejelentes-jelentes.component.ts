@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HibabejelentesService} from '../hibabejelentes.service';
-import {ErrorService} from '../../tools/errorbox/error.service';
+import {ErrorService} from '../../common/errorbox/error.service';
 import {HibabejelentesDto} from '../hibabejelentesdto';
 import {deepCopy} from '../../common/deepCopy';
 

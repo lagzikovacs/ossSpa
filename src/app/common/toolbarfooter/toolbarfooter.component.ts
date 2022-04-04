@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-toolbarfooter',
-  templateUrl: './toolbarfooter.component.html',
-  styleUrls: ['./toolbarfooter.component.css']
+  templateUrl: './toolbarfooter.component.html'
 })
 export class ToolbarfooterComponent implements OnDestroy {
   @Input() enKereses = true;

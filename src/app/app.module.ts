@@ -190,7 +190,7 @@ import {FelmeresListComponent} from './felmeres/felmeres-list/felmeres-list.comp
 import { HibabejelentesSzerkesztesComponent } from './hibabejelentes/hibabejelentes-szerkesztes/hibabejelentes-szerkesztes.component';
 import { FelmeresSzerkesztesComponent } from './felmeres/felmeres-szerkesztes/felmeres-szerkesztes.component';
 import {ProjekthezRendelesComponent} from './projekt/projekthez-rendeles/projekthez-rendeles.component';
-import { EgyszeruUzenetComponent } from './tools/egyszeru-uzenet/egyszeru-uzenet.component';
+import { EgyszeruUzenetComponent } from './common/egyszeru-uzenet/egyszeru-uzenet.component';
 import { FelmeresJelentesComponent } from './felmeres/felmeres-jelentes/felmeres-jelentes.component';
 import { EgyszeruKerdesUzenetComponent } from './common/egyszeru-kerdes-uzenet/egyszeru-kerdes-uzenet.component';
 import { HibabejelentesJelentesComponent } from './hibabejelentes/hibabejelentes-jelentes/hibabejelentes-jelentes.component';

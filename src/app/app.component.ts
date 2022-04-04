@@ -1,6 +1,6 @@
 import {Component, HostListener} from '@angular/core';
 import {LogonService} from './05 Segedeszkozok/05 Bejelentkezes/logon.service';
-import {ScreenService} from './screen/screen.service';
+import {ScreenService} from './common/screen/screen.service';
 
 @Component({
   selector: 'app-root',

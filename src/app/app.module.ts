@@ -197,6 +197,7 @@ import { HibabejelentesJelentesComponent } from './hibabejelentes/hibabejelentes
 import { TelepitesiDokumentumokKivalasztasaComponent } from './hibabejelentes/telepitesi-dokumentumok-kivalasztasa/telepitesi-dokumentumok-kivalasztasa.component';
 import { ProjektTelepitesiDokumentumokKivalasztasaComponent } from './hibabejelentes/projekt-telepitesi-dokumentumok-kivalasztasa/projekt-telepitesi-dokumentumok-kivalasztasa.component';
 import { SzerelesitervComponent } from './szerelesiterv/szerelesiterv.component';
+import {PrimitivEgyToolbarComponent} from "./common/primitiv-egy-toolbar/primitiv-egy-toolbar.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -421,6 +422,7 @@ if (environment.production) {
     TelepitesiDokumentumokKivalasztasaComponent,
     ProjektTelepitesiDokumentumokKivalasztasaComponent,
     SzerelesitervComponent,
+    PrimitivEgyToolbarComponent,
   ],
   imports: [
     BrowserModule,

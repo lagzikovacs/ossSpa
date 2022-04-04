@@ -192,7 +192,7 @@ import { FelmeresSzerkesztesComponent } from './felmeres/felmeres-szerkesztes/fe
 import {ProjekthezRendelesComponent} from './projekt/projekthez-rendeles/projekthez-rendeles.component';
 import { EgyszeruUzenetComponent } from './tools/egyszeru-uzenet/egyszeru-uzenet.component';
 import { FelmeresJelentesComponent } from './felmeres/felmeres-jelentes/felmeres-jelentes.component';
-import { EgyszeruKerdesUzenetComponent } from './tools/egyszeru-kerdes-uzenet/egyszeru-kerdes-uzenet.component';
+import { EgyszeruKerdesUzenetComponent } from './common/egyszeru-kerdes-uzenet/egyszeru-kerdes-uzenet.component';
 import { HibabejelentesJelentesComponent } from './hibabejelentes/hibabejelentes-jelentes/hibabejelentes-jelentes.component';
 import { TelepitesiDokumentumokKivalasztasaComponent } from './hibabejelentes/telepitesi-dokumentumok-kivalasztasa/telepitesi-dokumentumok-kivalasztasa.component';
 import { ProjektTelepitesiDokumentumokKivalasztasaComponent } from './hibabejelentes/projekt-telepitesi-dokumentumok-kivalasztasa/projekt-telepitesi-dokumentumok-kivalasztasa.component';

@@ -6,8 +6,8 @@ import {ProjektjegyzetDto} from './projektjegyzetdto';
 import {LogonService} from '../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {ProjektjegyzetResult} from './projektjegyzetresult';
 import {EmptyResult} from '../common/dtos/emptyresult';
-import {ColumnSettings} from '../tools/reszletek/columnsettings';
-import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
+import {ColumnSettings} from '../common/reszletek/columnsettings';
+import {ColumnSettingsResult} from '../common/reszletek/columnsettingsresult';
 
 @Injectable({
   providedIn: 'root'

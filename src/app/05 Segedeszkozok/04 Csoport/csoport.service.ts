@@ -11,9 +11,9 @@ import {CsoportJogParam} from "./csoportjogparam";
 import {CsoportFelhasznaloParam} from "./csoportfelhasznaloparam";
 import {lastValueFrom} from "rxjs";
 import {FelhasznaloResult} from "../03 Felhasznalo/felhasznaloresult";
-import {ColumnSettings} from "../../tools/reszletek/columnsettings";
+import {ColumnSettings} from "../../common/reszletek/columnsettings";
 import {LogonService} from "../05 Bejelentkezes/logon.service";
-import {ColumnSettingsResult} from "../../tools/reszletek/columnsettingsresult";
+import {ColumnSettingsResult} from "../../common/reszletek/columnsettingsresult";
 
 @Injectable({
   providedIn: 'root'

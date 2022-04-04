@@ -4,9 +4,9 @@ import {HttpClient} from '@angular/common/http';
 import {VolumeResult} from './volumeresult';
 import {DokumentumkodByVolumeResult} from './dokumentumbyvolumeresult';
 import {lastValueFrom} from 'rxjs';
-import {ColumnSettings} from '../../tools/reszletek/columnsettings';
+import {ColumnSettings} from '../../common/reszletek/columnsettings';
 import {LogonService} from '../05 Bejelentkezes/logon.service';
-import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
+import {ColumnSettingsResult} from '../../common/reszletek/columnsettingsresult';
 
 @Injectable({
   providedIn: 'root'

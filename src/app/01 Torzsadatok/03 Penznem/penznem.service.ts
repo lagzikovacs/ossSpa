@@ -6,10 +6,10 @@ import {PenznemResult} from './penznemresult';
 import {EmptyResult} from '../../common/dtos/emptyresult';
 import {NumberResult} from '../../common/dtos/numberresult';
 import {PenznemZoomParam} from './penznemzoomparam';
-import {ColumnSettings} from '../../tools/reszletek/columnsettings';
+import {ColumnSettings} from '../../common/reszletek/columnsettings';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {lastValueFrom} from 'rxjs';
-import {ColumnSettingsResult} from "../../tools/reszletek/columnsettingsresult";
+import {ColumnSettingsResult} from "../../common/reszletek/columnsettingsresult";
 
 @Injectable({
   providedIn: 'root'

@@ -4,7 +4,7 @@ import {UgyfelterlogParameter} from './ugyfelterlogparameter';
 import {LogonService} from '../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {HttpClient} from '@angular/common/http';
 import {UgyfelterlogResult} from './ugyfelterlogresult';
-import {ColumnSettings} from '../tools/reszletek/columnsettings';
+import {ColumnSettings} from '../common/reszletek/columnsettings';
 
 @Injectable({
   providedIn: 'root'

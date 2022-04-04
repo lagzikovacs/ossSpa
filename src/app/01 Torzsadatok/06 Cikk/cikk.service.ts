@@ -10,8 +10,8 @@ import {CikkMozgasParam} from './cikkmozgasparam';
 import {lastValueFrom} from 'rxjs';
 import {CikkZoomParam} from './cikkzoomparam';
 import {CikkDto} from './cikkdto';
-import {ColumnSettings} from '../../tools/reszletek/columnsettings';
-import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
+import {ColumnSettings} from '../../common/reszletek/columnsettings';
+import {ColumnSettingsResult} from '../../common/reszletek/columnsettingsresult';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 
 @Injectable({

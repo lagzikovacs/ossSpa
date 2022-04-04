@@ -6,8 +6,8 @@ import {LogonService} from '../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {NumberResult} from '../common/dtos/numberresult';
 import {PenztartetelResult} from './penztartetelresult';
 import {PenztartetelParameter} from './penztartetelparameter';
-import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
-import {ColumnSettings} from '../tools/reszletek/columnsettings';
+import {ColumnSettingsResult} from '../common/reszletek/columnsettingsresult';
+import {ColumnSettings} from '../common/reszletek/columnsettings';
 
 @Injectable({
   providedIn: 'root'

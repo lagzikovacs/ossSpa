@@ -150,7 +150,7 @@ import { UgyfelterBizonylatesiratComponent } from './ugyfelter/ugyfelter-bizonyl
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { UgyfelterDokumentumComponent } from './ugyfelter/ugyfelter-dokumentum/ugyfelter-dokumentum.component';
 import { TetelTorlesComponent } from './common/tetel-torles/tetel-torles.component';
-import { ReszletekComponent } from './tools/reszletek/reszletek.component';
+import { ReszletekComponent } from './common/reszletek/reszletek.component';
 import { UgyfeltoolbarComponent } from './ugyfel/ugyfeltoolbar/ugyfeltoolbar.component';
 import { UgyfelCsoportComponent } from './ugyfel/ugyfel-csoport/ugyfel-csoport.component';
 import { UgyfelVcardComponent } from './ugyfel/ugyfel-vcard/ugyfel-vcard.component';

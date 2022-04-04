@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, Output, TemplateRef} from '@angular/core';
-import {ColumnSettings} from '../reszletek/columnsettings';
+import {ColumnSettings} from '../../common/reszletek/columnsettings';
 
 @Component({
   selector: 'app-tabla',

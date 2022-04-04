@@ -6,8 +6,8 @@ import {TermekdijResult} from './termekdijresult';
 import {EmptyResult} from '../../common/dtos/emptyresult';
 import {NumberResult} from '../../common/dtos/numberresult';
 import {TermekdijZoomParam} from './termekdijzoomparam';
-import {ColumnSettings} from '../../tools/reszletek/columnsettings';
-import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
+import {ColumnSettings} from '../../common/reszletek/columnsettings';
+import {ColumnSettingsResult} from '../../common/reszletek/columnsettingsresult';
 import {HttpClient} from '@angular/common/http';
 import {lastValueFrom} from 'rxjs';
 

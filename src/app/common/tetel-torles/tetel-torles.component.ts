@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-tetel-torles',
   templateUrl: './tetel-torles.component.html'
 })

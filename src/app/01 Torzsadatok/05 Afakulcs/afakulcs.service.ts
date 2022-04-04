@@ -7,9 +7,9 @@ import {AfakulcsResult} from './afakulcsresult';
 import {EmptyResult} from '../../common/dtos/emptyresult';
 import {lastValueFrom} from 'rxjs';
 import {AfakulcsZoomParam} from './afakulcszoomparam';
-import {ColumnSettings} from '../../tools/reszletek/columnsettings';
+import {ColumnSettings} from '../../common/reszletek/columnsettings';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
-import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
+import {ColumnSettingsResult} from '../../common/reszletek/columnsettingsresult';
 
 @Injectable({
   providedIn: 'root'

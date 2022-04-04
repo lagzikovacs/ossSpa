@@ -3,12 +3,12 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {IrattipusDto} from './irattipusdto';
 import {IrattipusResult} from './irattipusresult';
-import {ColumnSettings} from '../../tools/reszletek/columnsettings';
+import {ColumnSettings} from '../../common/reszletek/columnsettings';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {NumberResult} from '../../common/dtos/numberresult';
 import {lastValueFrom} from 'rxjs';
 import {EmptyResult} from '../../common/dtos/emptyresult';
-import {ColumnSettingsResult} from '../../tools/reszletek/columnsettingsresult';
+import {ColumnSettingsResult} from '../../common/reszletek/columnsettingsresult';
 import {IrattipusZoomParam} from './irattipuszoomparam';
 
 @Injectable({

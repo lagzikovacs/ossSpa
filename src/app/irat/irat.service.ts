@@ -7,8 +7,8 @@ import {IratDto} from './iratdto';
 import {IratResult} from './iratresult';
 import {NumberResult} from '../common/dtos/numberresult';
 import {EmptyResult} from '../common/dtos/emptyresult';
-import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
-import {ColumnSettings} from '../tools/reszletek/columnsettings';
+import {ColumnSettingsResult} from '../common/reszletek/columnsettingsresult';
+import {ColumnSettings} from '../common/reszletek/columnsettings';
 
 @Injectable({
   providedIn: 'root'

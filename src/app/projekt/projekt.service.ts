@@ -6,8 +6,8 @@ import {environment} from '../../environments/environment';
 import {ProjektResult} from './projektresult';
 import {NumberResult} from '../common/dtos/numberresult';
 import {EmptyResult} from '../common/dtos/emptyresult';
-import {ColumnSettings} from '../tools/reszletek/columnsettings';
-import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
+import {ColumnSettings} from '../common/reszletek/columnsettings';
+import {ColumnSettingsResult} from '../common/reszletek/columnsettingsresult';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({

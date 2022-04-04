@@ -12,8 +12,8 @@ import {b64toBlob} from '../common/b64toBlob';
 import {NumberResult} from '../common/dtos/numberresult';
 import {FajlBuf} from './fajlbuf';
 import {LetoltesPDFResult} from './letoltespdfresult';
-import {ColumnSettings} from '../tools/reszletek/columnsettings';
-import {ColumnSettingsResult} from '../tools/reszletek/columnsettingsresult';
+import {ColumnSettings} from '../common/reszletek/columnsettings';
+import {ColumnSettingsResult} from '../common/reszletek/columnsettingsresult';
 
 @Injectable({
   providedIn: 'root'

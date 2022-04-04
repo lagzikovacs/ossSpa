@@ -15,7 +15,7 @@ import {LoginGuard} from './guards/login.guard';
 import {RoleGuard} from './guards/role.guard';
 import { SzerepkorvalasztasComponent } from './logon/szerepkorvalasztas/szerepkorvalasztas.component';
 import { JelszocsereComponent } from './logon/jelszocsere/jelszocsere.component';
-import { ToolbarComponent } from './tools/toolbar/toolbar.component';
+import { ToolbarComponent } from './common/toolbar/toolbar.component';
 import { ToolbarfooterComponent } from './common/toolbarfooter/toolbarfooter.component';
 import {VerzioService} from './menu/verzio.service';
 import {SessionService} from './session/session.service';

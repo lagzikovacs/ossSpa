@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {ColumnSettings} from './columnsettings';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-reszletek',
   templateUrl: './reszletek.component.html'
 })
@@ -10,12 +11,10 @@ export class ReszletekComponent implements OnDestroy {
   @Input() item: any;
   @Input() colsets: ColumnSettings[];
 
-  @Input() selectedindex: number;
-  @Output() selectedindexChange = new EventEmitter<number>();
+  selectedindex: number;
 
-  RowClick(i: number) {
+  rowClick(i: number) {
     this.selectedindex = i;
-    this.selectedindexChange.emit(i);
   }
 
   ngOnDestroy() {

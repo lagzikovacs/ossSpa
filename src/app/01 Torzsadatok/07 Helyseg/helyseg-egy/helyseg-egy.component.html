@@ -1,0 +1,6 @@
+<div [ngClass]="!uj ? 'alapkeret' : ''" [appSpinner]="eppFrissit">
+  <app-primitiv-egy-toolbar *ngIf="!uj"
+                            (eventNav)="doNav($event)">
+  </app-primitiv-egy-toolbar>
+  <ng-template #compcont_helyseg></ng-template>
+</div>

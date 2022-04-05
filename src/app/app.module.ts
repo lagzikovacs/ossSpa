@@ -39,7 +39,7 @@ import {IratService} from './irat/irat.service';
 import {DokumentumService} from './dokumentum/dokumentum.service';
 import { IratSzerkesztesComponent } from './irat/irat-szerkesztes/irat-szerkesztes.component';
 import { DokumentumFeltoltesComponent } from './dokumentum/dokumentum-feltoltes/dokumentum-feltoltes.component';
-import { IrattipusListComponent } from './primitiv/irattipus/irattipus-list/irattipus-list.component';
+import { IrattipusListComponent } from './01 Torzsadatok/01 Irattipus/irattipus-list/irattipus-list.component';
 import { IrattipusSzerkesztesComponent } from './01 Torzsadatok/01 Irattipus/irattipus-szerkesztes/irattipus-szerkesztes.component';
 import { HelysegSzerkesztesComponent } from './01 Torzsadatok/07 Helyseg/helyseg-szerkesztes/helyseg-szerkesztes.component';
 import { UgyfelListComponent } from './ugyfel/ugyfel-list/ugyfel-list.component';
@@ -64,12 +64,12 @@ import { ParticioSzallitoComponent } from './particio/particio-kibocsato/partici
 import { ParticioBizonylatComponent } from './particio/particio-bizonylatnyomtatas/particio-bizonylatnyomtatas.component';
 import { ParticioProjektiratmintaComponent } from './particio/particio-projektiratminta/particio-projektiratminta.component';
 import { ParticioVolumeComponent } from './particio/particio-volume/particio-volume.component';
-import { FizetesimodListComponent } from './primitiv/fizetesimod/fizetesimod-list/fizetesimod-list.component';
-import { PenznemListComponent } from './primitiv/penznem/penznem-list/penznem-list.component';
+import { FizetesimodListComponent } from './01 Torzsadatok/02 Fizetesimod/fizetesimod-list/fizetesimod-list.component';
+import { PenznemListComponent } from './01 Torzsadatok/03 Penznem/penznem-list/penznem-list.component';
 import { CikkListComponent } from './cikk/cikk-list/cikk-list.component';
-import { MeListComponent } from './primitiv/me/me-list/me-list.component';
-import { AfakulcsListComponent } from './primitiv/afakulcs/afakulcs-list/afakulcs-list.component';
-import { TermekdijListComponent } from './primitiv/termekdij/termekdij-list/termekdij-list.component';
+import { MeListComponent } from './01 Torzsadatok/04 Mennyisegiegyseg/me-list/me-list.component';
+import { AfakulcsListComponent } from './01 Torzsadatok/05 Afakulcs/afakulcs-list/afakulcs-list.component';
+import { TermekdijListComponent } from './01 Torzsadatok/051 Termekdij/termekdij-list/termekdij-list.component';
 import { TermekdijSzerkesztesComponent } from './01 Torzsadatok/051 Termekdij/termekdij-szerkesztes/termekdij-szerkesztes.component';
 import { AfakulcsSzerkesztesComponent } from './01 Torzsadatok/05 Afakulcs/afakulcs-szerkesztes/afakulcs-szerkesztes.component';
 import { MeSzerkesztesComponent } from './01 Torzsadatok/04 Mennyisegiegyseg/me-szerkesztes/me-szerkesztes.component';
@@ -99,7 +99,7 @@ import { ProjektkapcsolatUjbizonylatComponent } from './projektkapcsolat/projekt
 import { AjanlatComponent } from './ajanlat/ajanlat/ajanlat';
 import { VolumeListComponent } from './volume/volume-list/volume-list.component';
 import { ParticioEgyComponent } from './particio/particio-egy/particio-egy.component';
-import { HelysegListComponent } from './primitiv/helyseg/helyseg-list/helyseg-list.component';
+import { HelysegListComponent } from './01 Torzsadatok/07 Helyseg/helyseg-list/helyseg-list.component';
 import {PenztartetelListComponent} from './penztartetel/penztartetel-list/penztartetel-list.component';
 import {PenztarExportComponent} from './penztar/penztar-export/penztar-export.component';
 import {PenztarSzerkesztesComponent} from './penztar/penztar-szerkesztes/penztar-szerkesztes.component';
@@ -169,7 +169,7 @@ import {SpinnerDirective} from './directives/spinner.directive';
 import { ParticioEmailComponent } from './particio/particio-email/particio-email.component';
 import {TevekenysegService} from './01 Torzsadatok/08 Tevekenyseg/tevekenyseg.service';
 import {TevekenysegSzerkesztesComponent} from './01 Torzsadatok/08 Tevekenyseg/tevekenyseg-szerkesztes/tevekenyseg-szerkesztes.component';
-import {TevekenysegListComponent} from './primitiv/tevekenyseg/tevekenyseg-list/tevekenyseg-list.component';
+import {TevekenysegListComponent} from './01 Torzsadatok/08 Tevekenyseg/tevekenyseg-list/tevekenyseg-list.component';
 import { BizonylatFuvarszamlaComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla.component';
 import { BizonylatFuvarszamlaUjComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla-uj/bizonylat-fuvarszamla-uj.component';
 import { BizonylatFuvarszamlaTorlesComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla-torles/bizonylat-fuvarszamla-torles.component';
@@ -201,6 +201,14 @@ import {PrimitivEgyToolbarComponent} from "./common/primitiv-egy-toolbar/primiti
 import {FelhasznaloEgyToolbarComponent} from "./05 Segedeszkozok/03 Felhasznalo/felhasznalo-egy-toolbar/felhasznalo-egy-toolbar.component";
 import {TablaExComponent} from "./common/tabla-ex/tabla-ex.component";
 import {FelhasznaloEgyComponent} from "./05 Segedeszkozok/03 Felhasznalo/felhasznalo-egy/felhasznalo-egy.component";
+import {IrattipusEgyComponent} from "./01 Torzsadatok/01 Irattipus/irattipus-egy/irattipus-egy.component";
+import {FizetesimodEgyComponent} from "./01 Torzsadatok/02 Fizetesimod/fizetesimod-egy/fizetesimod-egy.component";
+import {PenznemEgyComponent} from "./01 Torzsadatok/03 Penznem/penznem-egy/penznem-egy.component";
+import {MeEgyComponent} from "./01 Torzsadatok/04 Mennyisegiegyseg/me-egy/me-egy.component";
+import {AfakulcsEgyComponent} from "./01 Torzsadatok/05 Afakulcs/afakulcs-egy/afakulcs-egy.component";
+import {HelysegEgyComponent} from "./01 Torzsadatok/07 Helyseg/helyseg-egy/helyseg-egy.component";
+import {TevekenysegEgyComponent} from "./01 Torzsadatok/08 Tevekenyseg/tevekenyseg-egy/tevekenyseg-egy.component";
+import {TermekdijEgyComponent} from "./01 Torzsadatok/051 Termekdij/termekdij-egy/termekdij-egy.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -429,6 +437,14 @@ if (environment.production) {
     FelhasznaloEgyToolbarComponent,
     TablaExComponent,
     FelhasznaloEgyComponent,
+    IrattipusEgyComponent,
+    FizetesimodEgyComponent,
+    PenznemEgyComponent,
+    MeEgyComponent,
+    AfakulcsEgyComponent,
+    HelysegEgyComponent,
+    TevekenysegEgyComponent,
+    TermekdijEgyComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,30 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5 *ngIf="!zoom">{{irattipusservice.cim}}</h5>
+  <h5 *ngIf="zoom">{{irattipusservice.cim}} - zoom</h5>
+
+  <app-toolbar [Szurok]="szurok"
+               [(szempont)]="ekDto.szempont"
+               [(minta)]="ekDto.minta"
+               (Kereses)="onKereses()"
+               [enUj]="jog" (Uj)="doUjtetel()"
+               [visZoom]="zoom" (StopZoom)="onStopzoom()">
+  </app-toolbar>
+
+  <app-tabla-ex #tabla
+                [items]="Dto"
+                [colsets]="irattipusservice.GridSettings"
+                [zoom]="zoom"
+                (forzoom)="onStartzoom($event)"
+                (forid)="onId($event)"
+                [egyTemplate]="gridegy">
+  </app-tabla-ex>
+
+  <ng-template #gridegy>
+    <app-irattipus-egy [uj]="uj"
+                       [dto]="Dto[DtoSelectedIndex]"
+                       (eventUj)="onUjtetelkesz($event)"
+                       (eventTorles)="onTorles()"
+                       (eventModositas)="onModositaskesz($event)">
+    </app-irattipus-egy>
+  </ng-template>
+</div>

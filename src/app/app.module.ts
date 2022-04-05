@@ -22,7 +22,7 @@ import {SessionService} from './session/session.service';
 import {DateHunPipe} from './pipes/datehun.pipe';
 import {DatetimeHunPipe} from './pipes/datetimehun.pipe';
 import { FelhasznaloSzerkesztesComponent } from './05 Segedeszkozok/03 Felhasznalo/felhasznalo-szerkesztes/felhasznalo-szerkesztes.component';
-import { FelhasznaloJelszoComponent } from './primitiv/felhasznalo/felhasznalo-jelszo/felhasznalo-jelszo.component';
+import { FelhasznaloJelszoComponent } from './05 Segedeszkozok/03 Felhasznalo/felhasznalo-jelszo/felhasznalo-jelszo.component';
 import { ProjektListComponent } from './projekt/projekt-list/projekt-list.component';
 import { ProjektSzerkesztesComponent } from './projekt/projekt-szerkesztes/projekt-szerkesztes.component';
 import {ProjektToolbarComponent} from './projekt/projekttoolbar/projekttoolbar.component';
@@ -137,7 +137,7 @@ import { BizonylatkapcsolatVagolaprolComponent } from './bizonylatkapcsolat/bizo
 import { ProjektkapcsolatVagolaprolComponent } from './projektkapcsolat/projektkapcsolat-vagolaprol/projektkapcsolat-vagolaprol.component';
 import {AjanlatService} from './ajanlat/ajanlat.service';
 import {IratmintaService} from './projekt/projekt-iratminta/iratminta.service';
-import { EsemenynaploComponent } from './esemenynaplo/esemenynaplo.component';
+import { EsemenynaploComponent } from './05 Segedeszkozok/03 Felhasznalo/esemenynaplo/esemenynaplo.component';
 import { UgyfelterComponent } from './ugyfelter/ugyfelter/ugyfelter.component';
 import { UgyfelTerLinkComponent } from './ugyfelter/ugyfel-ter-link/ugyfel-ter-link.component';
 import {UgyfelterService} from './ugyfelter/ugyfelter.service';

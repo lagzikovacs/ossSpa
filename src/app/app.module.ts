@@ -74,7 +74,7 @@ import { TermekdijSzerkesztesComponent } from './primitiv/termekdij/termekdij-sz
 import { AfakulcsSzerkesztesComponent } from './primitiv/afakulcs/afakulcs-szerkesztes/afakulcs-szerkesztes.component';
 import { MeSzerkesztesComponent } from './primitiv/me/me-szerkesztes/me-szerkesztes.component';
 import { CikkSzerkesztesComponent } from './cikk/cikk-szerkesztes/cikk-szerkesztes.component';
-import { FizetesimodSzerkesztesComponent } from './primitiv/fizetesimod/fizetesimod-szerkesztes/fizetesimod-szerkesztes.component';
+import { FizetesimodSzerkesztesComponent } from './01 Torzsadatok/02 Fizetesimod/fizetesimod-szerkesztes/fizetesimod-szerkesztes.component';
 import { PenznemSzerkesztesComponent } from './primitiv/penznem/penznem-szerkesztes/penznem-szerkesztes.component';
 import { CikkBeszerzesKivetComponent } from './cikk/cikk-beszerzes-kivet/cikk-beszerzes-kivet.component';
 import { PenztarListComponent } from './penztar/penztar-list/penztar-list.component';

@@ -198,6 +198,7 @@ import { TelepitesiDokumentumokKivalasztasaComponent } from './hibabejelentes/te
 import { ProjektTelepitesiDokumentumokKivalasztasaComponent } from './hibabejelentes/projekt-telepitesi-dokumentumok-kivalasztasa/projekt-telepitesi-dokumentumok-kivalasztasa.component';
 import { SzerelesitervComponent } from './szerelesiterv/szerelesiterv.component';
 import {PrimitivEgyToolbarComponent} from "./common/primitiv-egy-toolbar/primitiv-egy-toolbar.component";
+import {FelhasznaloEgyToolbarComponent} from "./05 Segedeszkozok/03 Felhasznalo/felhasznalo-egy-toolbar/felhasznalo-egy-toolbar.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -423,6 +424,7 @@ if (environment.production) {
     ProjektTelepitesiDokumentumokKivalasztasaComponent,
     SzerelesitervComponent,
     PrimitivEgyToolbarComponent,
+    FelhasznaloEgyToolbarComponent,
   ],
   imports: [
     BrowserModule,

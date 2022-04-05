@@ -9,7 +9,7 @@ import {MenuService} from './menu/menu.service';
 import {HttpClientModule} from '@angular/common/http';
 import { BejelentkezesComponent } from './logon/bejelentkezes/bejelentkezes.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { FelhasznaloListComponent } from './primitiv/felhasznalo/felhasznalo-list/felhasznalo-list.component';
+import { FelhasznaloListComponent } from './05 Segedeszkozok/03 Felhasznalo/felhasznalo-list/felhasznalo-list.component';
 import {FelhasznaloService} from './05 Segedeszkozok/03 Felhasznalo/felhasznalo.service';
 import {LoginGuard} from './guards/login.guard';
 import {RoleGuard} from './guards/role.guard';
@@ -199,6 +199,7 @@ import { ProjektTelepitesiDokumentumokKivalasztasaComponent } from './hibabejele
 import { SzerelesitervComponent } from './szerelesiterv/szerelesiterv.component';
 import {PrimitivEgyToolbarComponent} from "./common/primitiv-egy-toolbar/primitiv-egy-toolbar.component";
 import {FelhasznaloEgyToolbarComponent} from "./05 Segedeszkozok/03 Felhasznalo/felhasznalo-egy-toolbar/felhasznalo-egy-toolbar.component";
+import {TablaExComponent} from "./common/tabla-ex/tabla-ex.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -425,6 +426,7 @@ if (environment.production) {
     SzerelesitervComponent,
     PrimitivEgyToolbarComponent,
     FelhasznaloEgyToolbarComponent,
+    TablaExComponent,
   ],
   imports: [
     BrowserModule,

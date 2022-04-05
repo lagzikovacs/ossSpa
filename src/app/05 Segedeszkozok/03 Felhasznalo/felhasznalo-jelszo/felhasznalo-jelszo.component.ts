@@ -1,15 +1,17 @@
-import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {FelhasznaloService} from '../../../05 Segedeszkozok/03 Felhasznalo/felhasznalo.service';
-import {rowanimation} from '../../../animation/rowAnimation';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy,
+  Output
+} from '@angular/core';
+import {FelhasznaloService} from '../felhasznalo.service';
 import {ErrorService} from '../../../common/errorbox/error.service';
-import {FelhasznaloDto} from '../../../05 Segedeszkozok/03 Felhasznalo/felhasznalodto';
+import {FelhasznaloDto} from '../felhasznalodto';
 import {deepCopy} from '../../../common/deepCopy';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-felhasznalo-jelszo',
-  templateUrl: './felhasznalo-jelszo.component.html',
-  animations: [rowanimation]
+  templateUrl: './felhasznalo-jelszo.component.html'
 })
 export class FelhasznaloJelszoComponent implements OnDestroy {
   DtoEdited = new FelhasznaloDto();
@@ -20,6 +22,11 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
 
   form: FormGroup;
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   jelszo = '';
   jelszoujra = '';
@@ -28,6 +35,7 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
+              private _cdr: ChangeDetectorRef,
               felhasznaloservice: FelhasznaloService) {
     this.felhasznaloservice = felhasznaloservice;
 
@@ -37,7 +45,7 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     this.jelszo = this.form.value['jelszo'];
     this.jelszoujra = this.form.value['jelszoujra'];
 
@@ -46,27 +54,25 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
       return;
     }
 
-    this.eppFrissit = true;
-    this.felhasznaloservice.JelszoBeallitas(this.DtoEdited.Felhasznalokod, this.jelszo, this.DtoEdited.Modositva)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+    this.spinner = true;
+    try {
+      const res = await this.felhasznaloservice.JelszoBeallitas(this.DtoEdited.Felhasznalokod,
+        this.jelszo, this.DtoEdited.Modositva);
+      if (res.Error != null) {
+        throw res.Error;
+      }
 
-        return this.felhasznaloservice.Get(this.DtoEdited.Felhasznalokod);
-      })
-      .then(res1 => {
-        if (res1.Error != null) {
-          throw res1.Error;
-        }
+      const res1 = await this.felhasznaloservice.Get(this.DtoEdited.Felhasznalokod);
+      if (res1.Error != null) {
+        throw res1.Error;
+      }
 
-        this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit(res1.Result[0]);
-      })
-      .catch(err => {
-        this._errorservice.Error = err;
-        this.eppFrissit = false;
-      });
+      this.spinner = false;
+      this.eventSzerkeszteskesz.emit(res1.Result[0]);
+    } catch (err) {
+      this._errorservice.Error = err;
+      this.spinner = false;
+    }
   }
 
   onCancel() {

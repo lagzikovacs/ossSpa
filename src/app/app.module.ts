@@ -200,6 +200,7 @@ import { SzerelesitervComponent } from './szerelesiterv/szerelesiterv.component'
 import {PrimitivEgyToolbarComponent} from "./common/primitiv-egy-toolbar/primitiv-egy-toolbar.component";
 import {FelhasznaloEgyToolbarComponent} from "./05 Segedeszkozok/03 Felhasznalo/felhasznalo-egy-toolbar/felhasznalo-egy-toolbar.component";
 import {TablaExComponent} from "./common/tabla-ex/tabla-ex.component";
+import {FelhasznaloEgyComponent} from "./05 Segedeszkozok/03 Felhasznalo/felhasznalo-egy/felhasznalo-egy.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -427,6 +428,7 @@ if (environment.production) {
     PrimitivEgyToolbarComponent,
     FelhasznaloEgyToolbarComponent,
     TablaExComponent,
+    FelhasznaloEgyComponent,
   ],
   imports: [
     BrowserModule,

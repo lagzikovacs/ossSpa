@@ -1,4 +1,5 @@
 export enum EgyMode {
+  Uj = -1,
   Blank = 0,
   Reszletek = 1,
   Torles = 2,
@@ -64,6 +65,8 @@ export enum EgyMode {
   FelmeresJelentes = 46,
 
   TelepitesiDokumentumokKivalasztasa = 47,
-  PorojektEsTelepitesiDokumentumokKivalasztasa = 48,
+  ProjektEsTelepitesiDokumentumokKivalasztasa = 48,
   TelepitesiDokumentumok = 49,
+
+  ZarasNyitas = 50,
 }

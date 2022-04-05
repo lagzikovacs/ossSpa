@@ -1,9 +1,9 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {AfakulcsService} from '../../../01 Torzsadatok/05 Afakulcs/afakulcs.service';
+import {AfakulcsService} from '../afakulcs.service';
 import {NumberResult} from '../../../common/dtos/numberresult';
 import {ErrorService} from '../../../common/errorbox/error.service';
 import {deepCopy} from '../../../common/deepCopy';
-import {AfakulcsDto} from '../../../01 Torzsadatok/05 Afakulcs/afakulcsdto';
+import {AfakulcsDto} from '../afakulcsdto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -41,26 +41,24 @@ export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     if (this.uj) {
       this.spinner = true;
-      this.afakulcsservice.CreateNew()
-        .then(res => {
-          if (res.Error !== null) {
-            throw res.Error;
-          }
+      try {
+        const res = await this.afakulcsservice.CreateNew();
+        if (res.Error !== null) {
+          throw res.Error;
+        }
 
-          this.DtoEdited = res.Result[0];
-          this.updateform();
-          this.spinner = false;
-        })
-        .catch(err => {
-          this.spinner = false;
-          this._errorservice.Error = err;
-        });
-    } else {
-      this.updateform();
+        this.DtoEdited = res.Result[0];
+        this.spinner = false;
+      } catch (err) {
+        this.spinner = false;
+        this._errorservice.Error = err;
+      }
     }
+
+    this.updateform();
   }
 
   updateform() {
@@ -72,41 +70,36 @@ export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Afamerteke = this.form.value['afamerteke'];
   }
 
-  onSubmit() {
-    this.spinner = true;
-    let p: Promise<NumberResult>;
+  async onSubmit() {
     this.updatedto();
 
-    if (this.uj) {
-      p = this.afakulcsservice.Add(this.DtoEdited);
-    } else {
-      p = this.afakulcsservice.Update(this.DtoEdited);
+    this.spinner = true;
+    try {
+      let res: NumberResult;
+      if (this.uj) {
+        res = await this.afakulcsservice.Add(this.DtoEdited);
+      } else {
+        res = await this.afakulcsservice.Update(this.DtoEdited);
+      }
+      if (res.Error != null) {
+        throw res.Error;
+      }
+
+      const res1 = await this.afakulcsservice.Get(res.Result);
+      if (res1.Error != null) {
+        throw res1.Error;
+      }
+
+      this.spinner = false;
+      this.eventSzerkeszteskesz.emit(res1.Result[0]);
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
     }
-
-    p
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        return this.afakulcsservice.Get(res.Result);
-      })
-      .then(res1 => {
-        if (res1.Error != null) {
-          throw res1.Error;
-        }
-
-        this.spinner = false;
-        this.eventSzerkeszteskesz.emit(res1.Result[0]);
-      })
-      .catch(err => {
-        this.spinner = false;
-        this._errorservice.Error = err;
-      });
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit(null);
+    this.eventSzerkeszteskesz.emit();
   }
 
   ngOnDestroy() {

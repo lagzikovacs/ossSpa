@@ -1,12 +1,16 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {TermekdijService} from '../../../01 Torzsadatok/051 Termekdij/termekdij.service';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit,
+  Output
+} from '@angular/core';
+import {TermekdijService} from '../termekdij.service';
 import {NumberResult} from '../../../common/dtos/numberresult';
 import {ErrorService} from '../../../common/errorbox/error.service';
 import {deepCopy} from '../../../common/deepCopy';
-import {TermekdijDto} from '../../../01 Torzsadatok/051 Termekdij/termekdijdto';
+import {TermekdijDto} from '../termekdijdto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-termekdij-szerkesztes',
   templateUrl: './termekdij-szerkesztes.component.html'
 })
@@ -20,11 +24,17 @@ export class TermekdijSzerkesztesComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   termekdijservice: TermekdijService;
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
+              private _cdr: ChangeDetectorRef,
               termekdijservice: TermekdijService) {
     this.termekdijservice = termekdijservice;
 
@@ -35,26 +45,24 @@ export class TermekdijSzerkesztesComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     if (this.uj) {
-      this.eppFrissit = true;
-      this.termekdijservice.CreateNew()
-        .then(res => {
-          if (res.Error !== null) {
-            throw res.Error;
-          }
+      this.spinner = true;
+      try {
+        const res = await this.termekdijservice.CreateNew();
+        if (res.Error !== null) {
+          throw res.Error;
+        }
 
-          this.DtoEdited = res.Result[0];
-          this.updateform();
-          this.eppFrissit = false;
-        })
-        .catch(err => {
-          this.eppFrissit = false;
-          this._errorservice.Error = err;
-        });
-    } else {
-      this.updateform();
+        this.DtoEdited = res.Result[0];
+        this.spinner = false;
+      } catch (err) {
+        this.spinner = false;
+        this._errorservice.Error = err;
+      }
     }
+
+    this.updateform();
   }
 
   updateform() {
@@ -68,37 +76,32 @@ export class TermekdijSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Termekdijegysegar = this.form.value['egysegar'];
   }
 
-  onSubmit() {
-    this.eppFrissit = true;
-    let p: Promise<NumberResult>;
+  async onSubmit() {
     this.updatedto();
 
-    if (this.uj) {
-      p = this.termekdijservice.Add(this.DtoEdited);
-    } else {
-      p = this.termekdijservice.Update(this.DtoEdited);
+    this.spinner = true;
+    try {
+      let res: NumberResult;
+      if (this.uj) {
+        res = await this.termekdijservice.Add(this.DtoEdited);
+      } else {
+        res = await this.termekdijservice.Update(this.DtoEdited);
+      }
+      if (res.Error != null) {
+        throw res.Error;
+      }
+
+      const res1 = await this.termekdijservice.Get(res.Result);
+      if (res1.Error != null) {
+        throw res1.Error;
+      }
+
+      this.spinner = false;
+      this.eventSzerkeszteskesz.emit(res1.Result[0]);
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
     }
-
-    p
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        return this.termekdijservice.Get(res.Result);
-      })
-      .then(res1 => {
-        if (res1.Error != null) {
-          throw res1.Error;
-        }
-
-        this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit(res1.Result[0]);
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
   }
 
   onCancel() {

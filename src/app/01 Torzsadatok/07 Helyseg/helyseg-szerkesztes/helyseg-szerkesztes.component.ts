@@ -1,12 +1,16 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {HelysegService} from '../../../01 Torzsadatok/07 Helyseg/helyseg.service';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit,
+  Output
+} from '@angular/core';
+import {HelysegService} from '../helyseg.service';
 import {NumberResult} from '../../../common/dtos/numberresult';
 import {ErrorService} from '../../../common/errorbox/error.service';
 import {deepCopy} from '../../../common/deepCopy';
-import {HelysegDto} from '../../../01 Torzsadatok/07 Helyseg/helysegdto';
+import {HelysegDto} from '../helysegdto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-helyseg-szerkesztes',
   templateUrl: './helyseg-szerkesztes.component.html'
 })
@@ -20,11 +24,17 @@ export class HelysegSzerkesztesComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   helysegservice: HelysegService;
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
+              private _cdr: ChangeDetectorRef,
               helysegservice: HelysegService) {
     this.helysegservice = helysegservice;
 
@@ -35,7 +45,7 @@ export class HelysegSzerkesztesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.uj) {
-      this.eppFrissit = true;
+      this.spinner = true;
       this.helysegservice.CreateNew()
         .then(res => {
           if (res.Error !== null) {
@@ -44,10 +54,10 @@ export class HelysegSzerkesztesComponent implements OnInit, OnDestroy {
 
           this.DtoEdited = res.Result[0];
           this.updateform();
-          this.eppFrissit = false;
+          this.spinner = false;
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this.spinner = false;
           this._errorservice.Error = err;
         });
     } else {
@@ -63,7 +73,7 @@ export class HelysegSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.eppFrissit = true;
+    this.spinner = true;
     let p: Promise<NumberResult>;
     this.updatedto();
 
@@ -86,17 +96,17 @@ export class HelysegSzerkesztesComponent implements OnInit, OnDestroy {
           throw res1.Error;
         }
 
-        this.eppFrissit = false;
+        this.spinner = false;
         this.eventSzerkeszteskesz.emit(res1.Result[0]);
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinner = false;
         this._errorservice.Error = err;
       });
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit(null);
+    this.eventSzerkeszteskesz.emit();
   }
 
   ngOnDestroy() {

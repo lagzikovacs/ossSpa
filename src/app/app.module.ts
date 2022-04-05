@@ -21,7 +21,7 @@ import {VerzioService} from './menu/verzio.service';
 import {SessionService} from './session/session.service';
 import {DateHunPipe} from './pipes/datehun.pipe';
 import {DatetimeHunPipe} from './pipes/datetimehun.pipe';
-import { FelhasznaloSzerkesztesComponent } from './primitiv/felhasznalo/felhasznalo-szerkesztes/felhasznalo-szerkesztes.component';
+import { FelhasznaloSzerkesztesComponent } from './05 Segedeszkozok/03 Felhasznalo/felhasznalo-szerkesztes/felhasznalo-szerkesztes.component';
 import { FelhasznaloJelszoComponent } from './primitiv/felhasznalo/felhasznalo-jelszo/felhasznalo-jelszo.component';
 import { ProjektListComponent } from './projekt/projekt-list/projekt-list.component';
 import { ProjektSzerkesztesComponent } from './projekt/projekt-szerkesztes/projekt-szerkesztes.component';

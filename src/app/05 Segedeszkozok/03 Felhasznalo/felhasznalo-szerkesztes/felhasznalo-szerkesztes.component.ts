@@ -1,12 +1,16 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {FelhasznaloService} from '../../../05 Segedeszkozok/03 Felhasznalo/felhasznalo.service';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit,
+  Output
+} from '@angular/core';
+import {FelhasznaloService} from '../felhasznalo.service';
 import {NumberResult} from '../../../common/dtos/numberresult';
 import {ErrorService} from '../../../common/errorbox/error.service';
 import {deepCopy} from '../../../common/deepCopy';
-import {FelhasznaloDto} from '../../../05 Segedeszkozok/03 Felhasznalo/felhasznalodto';
+import {FelhasznaloDto} from '../felhasznalodto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-felhasznalo-szerkesztes',
   templateUrl: './felhasznalo-szerkesztes.component.html'
 })
@@ -20,11 +24,17 @@ export class FelhasznaloSzerkesztesComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   felhasznaloservice: FelhasznaloService;
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
+              private _cdr: ChangeDetectorRef,
               felhasznaloservice: FelhasznaloService) {
     this.felhasznaloservice = felhasznaloservice;
 
@@ -38,26 +48,24 @@ export class FelhasznaloSzerkesztesComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     if (this.uj) {
-      this.eppFrissit = true;
-      this.felhasznaloservice.CreateNew()
-        .then(res => {
-          if (res.Error !== null) {
-            throw res.Error;
-          }
+      this.spinner = true;
+      try {
+        const res = await this.felhasznaloservice.CreateNew();
+        if (res.Error !== null) {
+          throw res.Error;
+        }
 
-          this.DtoEdited = res.Result[0];
-          this.updateform();
-          this.eppFrissit = false;
-        })
-        .catch(err => {
-          this.eppFrissit = false;
-          this._errorservice.Error = err;
-        });
-    } else {
-      this.updateform();
+        this.DtoEdited = res.Result[0];
+        this.spinner = false;
+      } catch (err) {
+        this.spinner = false;
+        this._errorservice.Error = err;
+      }
     }
+
+    this.updateform();
   }
 
   updateform() {
@@ -77,37 +85,32 @@ export class FelhasznaloSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Logonlog = this.form.value['logonlog'] === 'true' ? true : false;
   }
 
-  onSubmit() {
-    this.eppFrissit = true;
-    let p: Promise<NumberResult>;
+  async onSubmit() {
     this.updatedto();
 
-    if (this.uj) {
-      p = this.felhasznaloservice.Add(this.DtoEdited);
-    } else {
-      p = this.felhasznaloservice.Update(this.DtoEdited);
+    this.spinner = true;
+    try {
+      let res: NumberResult;
+      if (this.uj) {
+        res = await this.felhasznaloservice.Add(this.DtoEdited);
+      } else {
+        res = await this.felhasznaloservice.Update(this.DtoEdited);
+      }
+      if (res.Error != null) {
+        throw res.Error;
+      }
+
+      const res1 = await this.felhasznaloservice.Get(res.Result);
+      if (res1.Error != null) {
+        throw res1.Error;
+      }
+
+      this.spinner = false;
+      this.eventSzerkeszteskesz.emit(res1.Result[0]);
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
     }
-
-    p
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        return this.felhasznaloservice.Get(res.Result);
-      })
-      .then(res1 => {
-        if (res1.Error != null) {
-          throw res1.Error;
-        }
-
-        this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit(res1.Result[0]);
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
   }
 
   onCancel() {

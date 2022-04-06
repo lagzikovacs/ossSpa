@@ -1,20 +1,20 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {CikkService} from '../../01 Torzsadatok/06 Cikk/cikk.service';
-import {MeService} from '../../01 Torzsadatok/04 Mennyisegiegyseg/me.service';
-import {AfakulcsService} from '../../01 Torzsadatok/05 Afakulcs/afakulcs.service';
-import {TermekdijService} from '../../01 Torzsadatok/051 Termekdij/termekdij.service';
-import {MeZoomParam} from '../../01 Torzsadatok/04 Mennyisegiegyseg/mezoomparam';
-import {EmptyResult} from '../../common/dtos/emptyresult';
-import {TermekdijZoomParam} from '../../01 Torzsadatok/051 Termekdij/termekdijzoomparam';
-import {CikkSzerkesztesMode} from '../../01 Torzsadatok/06 Cikk/cikkszerkesztesmode';
-import {ErrorService} from '../../common/errorbox/error.service';
-import {deepCopy} from '../../common/deepCopy';
-import {AfakulcsDto} from '../../01 Torzsadatok/05 Afakulcs/afakulcsdto';
-import {MeDto} from '../../01 Torzsadatok/04 Mennyisegiegyseg/medto';
-import {TermekdijDto} from '../../01 Torzsadatok/051 Termekdij/termekdijdto';
-import {CikkDto} from '../../01 Torzsadatok/06 Cikk/cikkdto';
+import {CikkService} from '../cikk.service';
+import {MeService} from '../../04 Mennyisegiegyseg/me.service';
+import {AfakulcsService} from '../../05 Afakulcs/afakulcs.service';
+import {TermekdijService} from '../../051 Termekdij/termekdij.service';
+import {MeZoomParam} from '../../04 Mennyisegiegyseg/mezoomparam';
+import {EmptyResult} from '../../../common/dtos/emptyresult';
+import {TermekdijZoomParam} from '../../051 Termekdij/termekdijzoomparam';
+import {CikkSzerkesztesMode} from '../cikkszerkesztesmode';
+import {ErrorService} from '../../../common/errorbox/error.service';
+import {deepCopy} from '../../../common/deepCopy';
+import {AfakulcsDto} from '../../05 Afakulcs/afakulcsdto';
+import {MeDto} from '../../04 Mennyisegiegyseg/medto';
+import {TermekdijDto} from '../../051 Termekdij/termekdijdto';
+import {CikkDto} from '../cikkdto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AfakulcsZoomParam} from '../../01 Torzsadatok/05 Afakulcs/afakulcszoomparam';
+import {AfakulcsZoomParam} from '../../05 Afakulcs/afakulcszoomparam';
 
 @Component({
   selector: 'app-cikk-szerkesztes',

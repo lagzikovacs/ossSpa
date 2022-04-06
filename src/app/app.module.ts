@@ -73,7 +73,7 @@ import { TermekdijListComponent } from './01 Torzsadatok/051 Termekdij/termekdij
 import { TermekdijSzerkesztesComponent } from './01 Torzsadatok/051 Termekdij/termekdij-szerkesztes/termekdij-szerkesztes.component';
 import { AfakulcsSzerkesztesComponent } from './01 Torzsadatok/05 Afakulcs/afakulcs-szerkesztes/afakulcs-szerkesztes.component';
 import { MeSzerkesztesComponent } from './01 Torzsadatok/04 Mennyisegiegyseg/me-szerkesztes/me-szerkesztes.component';
-import { CikkSzerkesztesComponent } from './cikk/cikk-szerkesztes/cikk-szerkesztes.component';
+import { CikkSzerkesztesComponent } from './01 Torzsadatok/06 Cikk/cikk-szerkesztes/cikk-szerkesztes.component';
 import { FizetesimodSzerkesztesComponent } from './01 Torzsadatok/02 Fizetesimod/fizetesimod-szerkesztes/fizetesimod-szerkesztes.component';
 import { PenznemSzerkesztesComponent } from './01 Torzsadatok/03 Penznem/penznem-szerkesztes/penznem-szerkesztes.component';
 import { CikkBeszerzesKivetComponent } from './cikk/cikk-beszerzes-kivet/cikk-beszerzes-kivet.component';
@@ -209,6 +209,8 @@ import {AfakulcsEgyComponent} from "./01 Torzsadatok/05 Afakulcs/afakulcs-egy/af
 import {HelysegEgyComponent} from "./01 Torzsadatok/07 Helyseg/helyseg-egy/helyseg-egy.component";
 import {TevekenysegEgyComponent} from "./01 Torzsadatok/08 Tevekenyseg/tevekenyseg-egy/tevekenyseg-egy.component";
 import {TermekdijEgyComponent} from "./01 Torzsadatok/051 Termekdij/termekdij-egy/termekdij-egy.component";
+import {ModalComponent} from "./common/modal/modal.component";
+import {ModalService} from "./common/modal/modal.service";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -445,6 +447,7 @@ if (environment.production) {
     HelysegEgyComponent,
     TevekenysegEgyComponent,
     TermekdijEgyComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -501,6 +504,8 @@ if (environment.production) {
     SessionService,
     VagolapService,
     ErrorService,
+
+    ModalService,
   ],
   bootstrap: [AppComponent]
 })

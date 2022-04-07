@@ -66,7 +66,7 @@ import { ParticioProjektiratmintaComponent } from './particio/particio-projektir
 import { ParticioVolumeComponent } from './particio/particio-volume/particio-volume.component';
 import { FizetesimodListComponent } from './01 Torzsadatok/02 Fizetesimod/fizetesimod-list/fizetesimod-list.component';
 import { PenznemListComponent } from './01 Torzsadatok/03 Penznem/penznem-list/penznem-list.component';
-import { CikkListComponent } from './cikk/cikk-list/cikk-list.component';
+import { CikkListComponent } from './01 Torzsadatok/06 Cikk/cikk-list/cikk-list.component';
 import { MeListComponent } from './01 Torzsadatok/04 Mennyisegiegyseg/me-list/me-list.component';
 import { AfakulcsListComponent } from './01 Torzsadatok/05 Afakulcs/afakulcs-list/afakulcs-list.component';
 import { TermekdijListComponent } from './01 Torzsadatok/051 Termekdij/termekdij-list/termekdij-list.component';
@@ -212,6 +212,7 @@ import {TermekdijEgyComponent} from "./01 Torzsadatok/051 Termekdij/termekdij-eg
 import {ModalComponent} from "./common/modal/modal.component";
 import {ModalService} from "./common/modal/modal.service";
 import {CikkEgyToolbarComponent} from "./01 Torzsadatok/06 Cikk/cikk-egy-toolbar/cikk-egy-toolbar.component";
+import {CikkEgyComponent} from "./01 Torzsadatok/06 Cikk/cikk-egy/cikk-egy.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -450,6 +451,7 @@ if (environment.production) {
     TermekdijEgyComponent,
     ModalComponent,
     CikkEgyToolbarComponent,
+    CikkEgyComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,35 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5 *ngIf="!zoom">{{cikkservice.cim}}</h5>
+  <h5 *ngIf="zoom">{{cikkservice.cim}} - zoom</h5>
+  <app-toolbar [Szurok]="szurok"
+               [(szempont)]="szempont"
+               [(minta)]="minta"
+               (Kereses)="onKereses()"
+               [enUj]="jog" (Uj)="doUjtetel()"
+               [visZoom]="zoom" (StopZoom)="onStopzoom()">
+  </app-toolbar>
+  <app-tabla-ex #tabla
+                [items]="Dto"
+                [colsets]="cikkservice.GridSettings"
+                [zoom]="zoom"
+                (forzoom)="onStartzoom($event)"
+                (forid)="onId($event)"
+                [egyTemplate]="gridegy">
+  </app-tabla-ex>
+
+  <ng-template #gridegy>
+    <app-cikk-egy [uj]="uj"
+                  [dto]="Dto[DtoSelectedIndex]"
+                  (eventUj)="onUjtetelkesz($event)"
+                  (eventTorles)="onTorles()"
+                  (eventModositas)="onModositaskesz($event)">
+    </app-cikk-egy>
+  </ng-template>
+
+  <app-toolbarfooter [enKereses]="!elsokereses"
+                     [rekordszam]="Dto.length"
+                     [osszesrekord]="osszesrekord"
+                     (KeresesTovabb)="onKeresesTovabb()">
+  </app-toolbarfooter>
+</div>
+

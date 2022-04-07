@@ -1,0 +1,6 @@
+<div [ngClass]="!uj ? 'alapkeret' : ''" [appSpinner]="eppFrissit">
+  <app-cikk-egy-toolbar *ngIf="!uj"
+                        (eventNav)="doNav($event)">
+  </app-cikk-egy-toolbar>
+  <ng-template #compcont_cikk></ng-template>
+</div>

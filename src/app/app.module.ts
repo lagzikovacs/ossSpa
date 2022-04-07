@@ -211,6 +211,7 @@ import {TevekenysegEgyComponent} from "./01 Torzsadatok/08 Tevekenyseg/tevekenys
 import {TermekdijEgyComponent} from "./01 Torzsadatok/051 Termekdij/termekdij-egy/termekdij-egy.component";
 import {ModalComponent} from "./common/modal/modal.component";
 import {ModalService} from "./common/modal/modal.service";
+import {CikkEgyToolbarComponent} from "./01 Torzsadatok/06 Cikk/cikk-egy-toolbar/cikk-egy-toolbar.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -448,6 +449,7 @@ if (environment.production) {
     TevekenysegEgyComponent,
     TermekdijEgyComponent,
     ModalComponent,
+    CikkEgyToolbarComponent,
   ],
   imports: [
     BrowserModule,

@@ -43,26 +43,24 @@ export class HelysegSzerkesztesComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     if (this.uj) {
       this.spinner = true;
-      this.helysegservice.CreateNew()
-        .then(res => {
-          if (res.Error !== null) {
-            throw res.Error;
-          }
+      try {
+        const res = await this.helysegservice.CreateNew();
+        if (res.Error !== null) {
+          throw res.Error;
+        }
 
-          this.DtoEdited = res.Result[0];
-          this.updateform();
-          this.spinner = false;
-        })
-        .catch(err => {
-          this.spinner = false;
-          this._errorservice.Error = err;
-        });
-    } else {
-      this.updateform();
+        this.DtoEdited = res.Result[0];
+        this.spinner = false;
+      } catch (err) {
+        this.spinner = false;
+        this._errorservice.Error = err;
+      }
     }
+
+    this.updateform();
   }
 
   updateform() {
@@ -72,37 +70,32 @@ export class HelysegSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Helysegnev = this.form.value['helysegnev'];
   }
 
-  onSubmit() {
-    this.spinner = true;
-    let p: Promise<NumberResult>;
+  async onSubmit() {
     this.updatedto();
 
-    if (this.uj) {
-      p = this.helysegservice.Add(this.DtoEdited);
-    } else {
-      p = this.helysegservice.Update(this.DtoEdited);
+    this.spinner = true;
+    try {
+      let res: NumberResult;
+      if (this.uj) {
+        res = await this.helysegservice.Add(this.DtoEdited);
+      } else {
+        res = await this.helysegservice.Update(this.DtoEdited);
+      }
+      if (res.Error != null) {
+        throw res.Error;
+      }
+
+      const res1 = await this.helysegservice.Get(res.Result);
+      if (res1.Error != null) {
+        throw res1.Error;
+      }
+
+      this.spinner = false;
+      this.eventSzerkeszteskesz.emit(res1.Result[0]);
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
     }
-
-    p
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        return this.helysegservice.Get(res.Result);
-      })
-      .then(res1 => {
-        if (res1.Error != null) {
-          throw res1.Error;
-        }
-
-        this.spinner = false;
-        this.eventSzerkeszteskesz.emit(res1.Result[0]);
-      })
-      .catch(err => {
-        this.spinner = false;
-        this._errorservice.Error = err;
-      });
   }
 
   onCancel() {

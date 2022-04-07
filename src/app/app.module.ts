@@ -76,7 +76,7 @@ import { MeSzerkesztesComponent } from './01 Torzsadatok/04 Mennyisegiegyseg/me-
 import { CikkSzerkesztesComponent } from './01 Torzsadatok/06 Cikk/cikk-szerkesztes/cikk-szerkesztes.component';
 import { FizetesimodSzerkesztesComponent } from './01 Torzsadatok/02 Fizetesimod/fizetesimod-szerkesztes/fizetesimod-szerkesztes.component';
 import { PenznemSzerkesztesComponent } from './01 Torzsadatok/03 Penznem/penznem-szerkesztes/penznem-szerkesztes.component';
-import { CikkBeszerzesKivetComponent } from './cikk/cikk-beszerzes-kivet/cikk-beszerzes-kivet.component';
+import { CikkBeszerzesKivetComponent } from './01 Torzsadatok/06 Cikk/cikk-beszerzes-kivet/cikk-beszerzes-kivet.component';
 import { PenztarListComponent } from './penztar/penztar-list/penztar-list.component';
 import {IrattipusService} from './01 Torzsadatok/01 Irattipus/irattipus.service';
 import {FizetesimodService} from './01 Torzsadatok/02 Fizetesimod/fizetesimod.service';

@@ -43,9 +43,9 @@
   </tr>
   </thead>
   <tbody>
-    <tr *ngIf="ujtetel && ujTemplate !== undefined" class="active">
+    <tr *ngIf="ujtetel && egyTemplate !== undefined" class="active">
       <td colspan="100">
-        <ng-template *ngTemplateOutlet="ujTemplate"></ng-template>
+        <ng-template *ngTemplateOutlet="egyTemplate"></ng-template>
       </td>
     </tr>
 
@@ -84,7 +84,7 @@
         </td>
       </tr>
 
-      <tr *ngIf="i === clickedidindex && egyTemplate !== undefined" [class.active]="i === clickedidindex">
+      <tr *ngIf="egytetel && i === clickedidindex && egyTemplate !== undefined" [class.active]="i === clickedidindex">
         <td colspan="100">
           <ng-template *ngTemplateOutlet="egyTemplate"></ng-template>
         </td>

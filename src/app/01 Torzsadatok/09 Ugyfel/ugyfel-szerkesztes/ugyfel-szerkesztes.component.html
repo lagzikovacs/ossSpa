@@ -102,19 +102,8 @@
     </div>
   </form>
 
-  <div id="ugyfelzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
-    <div class="zoom-modal-content-primitive">
-      <ng-container *ngIf="SzerkesztesMode === 1">
-        <app-helyseg-list [maszk]="DtoEdited.Helysegnev || ''"
-                          (eventSelectzoom)="onHelysegSelectzoom($event)"
-                          (eventStopzoom)="onHelysegStopzoom()"></app-helyseg-list>
-      </ng-container>
-      <ng-container *ngIf="SzerkesztesMode === 2">
-        <app-tevekenyseg-list [maszk]="DtoEdited.Tevekenyseg || ''"
-                          (eventSelectzoom)="onTevekenysegSelectzoom($event)"
-                          (eventStopzoom)="onTevekenysegStopzoom()"></app-tevekenyseg-list>
-      </ng-container>
-    </div>
-  </div>
+  <jw-modal [id]="modalname" bodyclass="jw-modal-body-primitive">
+    <ng-template #compcont_ugyfelszerk></ng-template>
+  </jw-modal>
 </div>
 

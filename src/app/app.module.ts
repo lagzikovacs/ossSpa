@@ -42,8 +42,8 @@ import { DokumentumFeltoltesComponent } from './dokumentum/dokumentum-feltoltes/
 import { IrattipusListComponent } from './01 Torzsadatok/01 Irattipus/irattipus-list/irattipus-list.component';
 import { IrattipusSzerkesztesComponent } from './01 Torzsadatok/01 Irattipus/irattipus-szerkesztes/irattipus-szerkesztes.component';
 import { HelysegSzerkesztesComponent } from './01 Torzsadatok/07 Helyseg/helyseg-szerkesztes/helyseg-szerkesztes.component';
-import { UgyfelListComponent } from './ugyfel/ugyfel-list/ugyfel-list.component';
-import { UgyfelSzerkesztesComponent } from './ugyfel/ugyfel-szerkesztes/ugyfel-szerkesztes.component';
+import { UgyfelListComponent } from './01 Torzsadatok/09 Ugyfel/ugyfel-list/ugyfel-list.component';
+import { UgyfelSzerkesztesComponent } from './01 Torzsadatok/09 Ugyfel/ugyfel-szerkesztes/ugyfel-szerkesztes.component';
 import { CsoportListComponent } from './csoport/csoport-list/csoport-list.component';
 import { CsoportSzerkesztesComponent } from './csoport/csoport-szerkesztes/csoport-szerkesztes.component';
 import { CsoportFelhasznaloComponent } from './csoport/csoport-felhasznalo/csoport-felhasznalo.component';
@@ -141,7 +141,7 @@ import { EsemenynaploComponent } from './05 Segedeszkozok/03 Felhasznalo/esemeny
 import { UgyfelterComponent } from './ugyfelter/ugyfelter/ugyfelter.component';
 import { UgyfelTerLinkComponent } from './ugyfelter/ugyfel-ter-link/ugyfel-ter-link.component';
 import {UgyfelterService} from './ugyfelter/ugyfelter.service';
-import { UgyfelProjektComponent } from './ugyfel/ugyfel-projekt/ugyfel-projekt.component';
+import { UgyfelProjektComponent } from './01 Torzsadatok/09 Ugyfel/ugyfel-projekt/ugyfel-projekt.component';
 import { UgyfelterlogComponent } from './ugyfelterlog/ugyfelterlog.component';
 import {UgyfelterlogService} from './ugyfelterlog/ugyfelterlog.service';
 import { FotozasComponent } from './fotozas/fotozas/fotozas.component';
@@ -151,10 +151,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { UgyfelterDokumentumComponent } from './ugyfelter/ugyfelter-dokumentum/ugyfelter-dokumentum.component';
 import { TetelTorlesComponent } from './common/tetel-torles/tetel-torles.component';
 import { ReszletekComponent } from './common/reszletek/reszletek.component';
-import { UgyfeltoolbarComponent } from './ugyfel/ugyfeltoolbar/ugyfeltoolbar.component';
-import { UgyfelCsoportComponent } from './ugyfel/ugyfel-csoport/ugyfel-csoport.component';
-import { UgyfelVcardComponent } from './ugyfel/ugyfel-vcard/ugyfel-vcard.component';
-import { UgyfelTablaComponent } from './ugyfel/ugyfel-tabla/ugyfel-tabla.component';
+import { UgyfeltoolbarComponent } from './01 Torzsadatok/09 Ugyfel/ugyfeltoolbar/ugyfeltoolbar.component';
+import { UgyfelCsoportComponent } from './01 Torzsadatok/09 Ugyfel/ugyfel-csoport/ugyfel-csoport.component';
+import { UgyfelVcardComponent } from './01 Torzsadatok/09 Ugyfel/ugyfel-vcard/ugyfel-vcard.component';
+import { UgyfelTablaComponent } from './01 Torzsadatok/09 Ugyfel/ugyfel-tabla/ugyfel-tabla.component';
 import { TablaComponent } from './tools/tabla/tabla.component';
 import {StartupService} from './startup/startup.service';
 import {ErrorService} from './common/errorbox/error.service';
@@ -213,6 +213,8 @@ import {ModalComponent} from "./common/modal/modal.component";
 import {ModalService} from "./common/modal/modal.service";
 import {CikkEgyToolbarComponent} from "./01 Torzsadatok/06 Cikk/cikk-egy-toolbar/cikk-egy-toolbar.component";
 import {CikkEgyComponent} from "./01 Torzsadatok/06 Cikk/cikk-egy/cikk-egy.component";
+import {UgyfelEgyComponent} from "./01 Torzsadatok/09 Ugyfel/ugyfel-egy/ugyfel-egy.component";
+import {UgyfelEgyToolbarComponent} from "./01 Torzsadatok/09 Ugyfel/ugyfel-egy-toolbar/ugyfel-egy-toolbar.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -452,6 +454,8 @@ if (environment.production) {
     ModalComponent,
     CikkEgyToolbarComponent,
     CikkEgyComponent,
+    UgyfelEgyComponent,
+    UgyfelEgyToolbarComponent,
   ],
   imports: [
     BrowserModule,

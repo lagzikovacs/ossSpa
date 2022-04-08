@@ -1,7 +1,11 @@
-import {Component, EventEmitter, Input, OnDestroy, Output, TemplateRef} from '@angular/core';
-import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, Output,
+  TemplateRef
+} from '@angular/core';
+import {UgyfelDto} from '../ugyfeldto';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-ugyfel-tabla',
   templateUrl: './ugyfel-tabla.component.html'
 })
@@ -9,7 +13,6 @@ export class UgyfelTablaComponent implements OnDestroy {
   @Input() items: UgyfelDto[];
   @Input() zoom = false;
 
-  @Input() ujTemplate: TemplateRef<any>;
   @Input() egyTemplate: TemplateRef<any>;
 
   @Output() forzoom = new EventEmitter<number>();
@@ -18,21 +21,41 @@ export class UgyfelTablaComponent implements OnDestroy {
   clickedrowindex = -1;
   clickedidindex = -1;
   ujtetel = false;
+  egytetel = false;
+
+  constructor(private _cdr: ChangeDetectorRef) {
+  }
 
   clearselections() {
     this.ujtetel = false;
 
     this.clickedrowindex = -1;
     this.clickedidindex = -1;
+
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   ujtetelstart() {
     this.clearselections();
-
     this.ujtetel = true;
+
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
+
   ujtetelstop() {
     this.ujtetel = false;
+
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
+
+  egytetelstart() {
+    this.egytetel = true;
+
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   clickforid(i: number) {

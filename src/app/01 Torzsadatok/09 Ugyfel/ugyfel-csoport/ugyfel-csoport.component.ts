@@ -1,11 +1,15 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {ErrorService} from '../../common/errorbox/error.service';
-import {UgyfelService} from '../../01 Torzsadatok/09 Ugyfel/ugyfel.service';
-import {deepCopy} from '../../common/deepCopy';
-import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit,
+  Output
+} from '@angular/core';
+import {ErrorService} from '../../../common/errorbox/error.service';
+import {UgyfelService} from '../ugyfel.service';
+import {deepCopy} from '../../../common/deepCopy';
+import {UgyfelDto} from '../ugyfeldto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-ugyfel-csoport',
   templateUrl: './ugyfel-csoport.component.html'
 })
@@ -20,11 +24,17 @@ export class UgyfelCsoportComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   ugyfelservice: UgyfelService;
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
+              private _cdr: ChangeDetectorRef,
               ugyfelservice: UgyfelService) {
     this.ugyfelservice = ugyfelservice;
 
@@ -45,7 +55,7 @@ export class UgyfelCsoportComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.eppFrissit = true;
+    this.spinner = true;
     this.updatedto();
     this.ugyfelservice.Update(this.DtoEdited)
       .then(res1 => {
@@ -60,17 +70,17 @@ export class UgyfelCsoportComponent implements OnInit, OnDestroy {
           throw res2.Error;
         }
 
-        this.eppFrissit = false;
+        this.spinner = false;
         this.eventSzerkeszteskesz.emit(res2.Result[0]);
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinner = false;
         this._errorservice.Error = err;
       });
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit(null);
+    this.eventSzerkeszteskesz.emit();
   }
 
   ngOnDestroy() {

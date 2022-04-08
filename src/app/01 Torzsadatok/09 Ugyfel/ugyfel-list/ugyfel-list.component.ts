@@ -1,23 +1,24 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {Szempont} from '../../common/enums/szempont';
-import {UgyfelService} from '../../01 Torzsadatok/09 Ugyfel/ugyfel.service';
-import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
-import {SzMT} from '../../common/dtos/szmt';
-import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
-import {JogKod} from '../../common/enums/jogkod';
-import {ErrorService} from '../../common/errorbox/error.service';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output,
+  ViewChild
+} from '@angular/core';
+import {Szempont} from '../../../common/enums/szempont';
+import {UgyfelService} from '../ugyfel.service';
+import {UgyfelDto} from '../ugyfeldto';
+import {SzMT} from '../../../common/dtos/szmt';
+import {LogonService} from '../../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
+import {JogKod} from '../../../common/enums/jogkod';
+import {ErrorService} from '../../../common/errorbox/error.service';
 import {UgyfelTablaComponent} from '../ugyfel-tabla/ugyfel-tabla.component';
-import {environment} from '../../../environments/environment';
-import {UgyfelParam} from '../../01 Torzsadatok/09 Ugyfel/ugyfelparam';
-import {deepCopy} from '../../common/deepCopy';
-import {EgyMode} from '../../common/enums/egymode';
-import {rowanimation} from '../../animation/rowAnimation';
-import {propCopy} from '../../common/propCopy';
+import {environment} from '../../../../environments/environment';
+import {UgyfelParam} from '../ugyfelparam';
+import {deepCopy} from '../../../common/deepCopy';
+import {propCopy} from '../../../common/propCopy';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-ugyfel-list',
-  templateUrl: './ugyfel-list.component.html',
-  animations: [rowanimation]
+  templateUrl: './ugyfel-list.component.html'
   })
   export class UgyfelListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: UgyfelTablaComponent;
@@ -35,13 +36,17 @@ import {propCopy} from '../../common/propCopy';
   elsokereses = true;
   osszesrekord = 0;
   jog = false;
+  uj = false;
   zoom = false;
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   Dto = new Array<UgyfelDto>();
   DtoSelectedIndex = -1;
-
-  egymode = EgyMode.Reszletek;
 
   @Input() set maszk(value: string) {
     if (value !== undefined) {
@@ -58,6 +63,7 @@ import {propCopy} from '../../common/propCopy';
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
+              private _cdr: ChangeDetectorRef,
               ugyfelservice: UgyfelService  ) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.UGYFELEKMOD]);
 
@@ -87,7 +93,7 @@ import {propCopy} from '../../common/propCopy';
   }
 
   onKeresesTovabb() {
-    this.eppFrissit = true;
+    this.spinner = true;
     this.ugyfelservice.Select(this.up)
       .then(res => {
         if (res.Error != null) {
@@ -107,74 +113,42 @@ import {propCopy} from '../../common/propCopy';
         this.osszesrekord = res.OsszesRekord;
 
         this.up.rekordtol += this.up.lapmeret;
-        this.eppFrissit = false;
-
-        // if (this.ugyfelservice.zoom) {
-        //   window.scrollTo(0, document.body.scrollHeight);
-        // }
+        this.spinner = false;
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinner = false;
         this._errorservice.Error = err;
       });
   }
 
   onId(i: number) {
     this.DtoSelectedIndex = i;
-    this.egymode = 0;
+
+    this.uj = false;
+    this.tabla.egytetelstart();
   }
-
-  doNav(i: number) {
-    this.egymode = i;
-  }
-
-
 
   doUjtetel() {
+    this.uj = true;
     this.tabla.ujtetelstart();
   }
+
   onUjtetelkesz(dto: UgyfelDto) {
-    if (dto !== null) {
+    if (dto !== undefined) {
       this.Dto.unshift(dto);
     }
     this.tabla.ujtetelstop();
   }
+
+  onTorles() {
+    this.Dto.splice(this.DtoSelectedIndex, 1);
+    this.DtoSelectedIndex = -1;
+    this.tabla.clearselections();
+  }
+
   onModositaskesz(dto: UgyfelDto) {
-    this.onModositaskeszCsak(dto);
-    this.egymode = 0;
+    propCopy(dto, this.Dto[this.DtoSelectedIndex]);
   }
-  onModositaskeszCsak(dto: UgyfelDto) {
-    if (dto !== null) {
-      propCopy(dto, this.Dto[this.DtoSelectedIndex]);
-    }
-  }
-  onTorles(ok: boolean) {
-    if (ok) {
-      this.eppFrissit = true;
-
-      this.ugyfelservice.Delete(this.Dto[this.DtoSelectedIndex])
-        .then(res => {
-          if (res.Error != null) {
-            throw res.Error;
-          }
-
-          this.Dto.splice(this.DtoSelectedIndex, 1);
-          this.DtoSelectedIndex = -1;
-
-          this.eppFrissit = false;
-          this.tabla.clearselections();
-        })
-        .catch(err => {
-          this.eppFrissit = false;
-          this._errorservice.Error = err;
-        });
-    } else {
-      this.egymode = 0;
-    }
-  }
-
-
-
 
   onStartzoom(i: number) {
     this.eventSelectzoom.emit(deepCopy(this.Dto[i]));

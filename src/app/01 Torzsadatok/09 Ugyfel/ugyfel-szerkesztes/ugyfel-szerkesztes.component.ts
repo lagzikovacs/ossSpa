@@ -1,22 +1,33 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {UgyfelService} from '../../01 Torzsadatok/09 Ugyfel/ugyfel.service';
-import {HelysegService} from '../../01 Torzsadatok/07 Helyseg/helyseg.service';
-import {HelysegZoomParam} from '../../01 Torzsadatok/07 Helyseg/helysegzoomparam';
-import {UgyfelSzerkesztesMode} from '../../01 Torzsadatok/09 Ugyfel/ugyfelszerkesztesmode';
-import {ErrorService} from '../../common/errorbox/error.service';
-import {deepCopy} from '../../common/deepCopy';
-import {HelysegDto} from '../../01 Torzsadatok/07 Helyseg/helysegdto';
-import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
-import {TevekenysegDto} from '../../01 Torzsadatok/08 Tevekenyseg/tevekenysegdto';
-import {TevekenysegService} from '../../01 Torzsadatok/08 Tevekenyseg/tevekenyseg.service';
-import {TevekenysegZoomParam} from '../../01 Torzsadatok/08 Tevekenyseg/tevekenysegzoomparam';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit,
+  Output, ViewChild, ViewContainerRef
+} from '@angular/core';
+import {UgyfelService} from '../ugyfel.service';
+import {HelysegService} from '../../07 Helyseg/helyseg.service';
+import {UgyfelSzerkesztesMode} from '../ugyfelszerkesztesmode';
+import {ErrorService} from '../../../common/errorbox/error.service';
+import {deepCopy} from '../../../common/deepCopy';
+import {HelysegDto} from '../../07 Helyseg/helysegdto';
+import {UgyfelDto} from '../ugyfeldto';
+import {TevekenysegDto} from '../../08 Tevekenyseg/tevekenysegdto';
+import {TevekenysegService} from '../../08 Tevekenyseg/tevekenyseg.service';
+import {TevekenysegZoomParam} from '../../08 Tevekenyseg/tevekenysegzoomparam';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {HelysegZoomParam} from "../../07 Helyseg/helysegzoomparam";
+import {HelysegListComponent} from "../../07 Helyseg/helyseg-list/helyseg-list.component";
+import {OnDestroyMixin, untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
+import {TevekenysegListComponent} from "../../08 Tevekenyseg/tevekenyseg-list/tevekenyseg-list.component";
+import {ModalService} from "../../../common/modal/modal.service";
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-ugyfel-szerkesztes',
   templateUrl: './ugyfel-szerkesztes.component.html'
 })
-export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
+export class UgyfelSzerkesztesComponent extends OnDestroyMixin implements OnInit, OnDestroy {
+  @ViewChild('compcont_ugyfelszerk', {read: ViewContainerRef}) vcr: ViewContainerRef;
+  modalname: string = 'modal_ugyfelszerk';
+
   @Input() uj = false;
   DtoEdited = new UgyfelDto();
   @Input() set DtoOriginal(value: UgyfelDto) {
@@ -26,18 +37,23 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   eppFrissit = false;
-
-  ugyfelzoombox: any;
-
-  SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   ugyfelservice: UgyfelService;
 
   constructor(private _helysegservice: HelysegService,
               private _tevekenysegservice: TevekenysegService,
               private _errorservice: ErrorService,
+              private _modalservice: ModalService,
               private _fb: FormBuilder,
+              private _cdr: ChangeDetectorRef,
               ugyfelservice: UgyfelService) {
+    super();
+
     this.ugyfelservice = ugyfelservice;
 
     this.form = this._fb.group({
@@ -61,10 +77,8 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.ugyfelzoombox = document.getElementById('ugyfelzoombox');
-
     if (this.uj) {
-      this.eppFrissit = true;
+      this.spinner = true;
       this.ugyfelservice.CreateNew()
         .then(res => {
           if (res.Error !== null) {
@@ -73,10 +87,10 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
 
           this.DtoEdited = res.Result[0];
           this.updateform();
-          this.eppFrissit = false;
+          this.spinner = false;
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this.spinner = false;
           this._errorservice.Error = err;
         });
     } else {
@@ -122,7 +136,7 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.eppFrissit = true;
+    this.spinner = true;
     this.updatedto();
 
     this._helysegservice.ZoomCheck(new HelysegZoomParam(this.DtoEdited.Helysegkod || 0,
@@ -158,50 +172,60 @@ export class UgyfelSzerkesztesComponent implements OnInit, OnDestroy {
           throw res2.Error;
         }
 
-        this.eppFrissit = false;
+        this.spinner = false;
         this.eventSzerkeszteskesz.emit(res2.Result[0]);
       })
       .catch(err => {
-        this.eppFrissit = false;
+        this.spinner = false;
         this._errorservice.Error = err;
       });
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit(null);
+    this.eventSzerkeszteskesz.emit();
   }
 
   HelysegZoom() {
     this.updatedto();
-    this.SzerkesztesMode = UgyfelSzerkesztesMode.HelysegZoom;
-    this.ugyfelzoombox.style.display = 'block';
-  }
-  onHelysegSelectzoom(Dto: HelysegDto) {
-    this.DtoEdited.Helysegkod = Dto.Helysegkod;
-    this.DtoEdited.Helysegnev = Dto.Helysegnev;
-    this.updateform();
-  }
-  onHelysegStopzoom() {
-    this.SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
-    this.ugyfelzoombox.style.display = 'none';
+
+    this.vcr.clear();
+    const C = this.vcr.createComponent(HelysegListComponent);
+    C.instance.maszk = this.DtoEdited.Helysegnev || '';
+    C.instance.eventSelectzoom.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+      this.DtoEdited.Helysegkod = dto.Helysegkod;
+      this.DtoEdited.Helysegnev = dto.Helysegnev;
+      this.updateform();
+    });
+    C.instance.eventStopzoom.pipe(untilComponentDestroyed(this)).subscribe(() => {
+      this.vcr.clear();
+      this._modalservice.close(this.modalname);
+    });
+
+    this._modalservice.open(this.modalname);
   }
 
   TevekenysegZoom() {
     this.updatedto();
-    this.SzerkesztesMode = UgyfelSzerkesztesMode.TevekenysegZoom;
-    this.ugyfelzoombox.style.display = 'block';
-  }
-  onTevekenysegSelectzoom(Dto: TevekenysegDto) {
-    this.DtoEdited.Tevekenysegkod = Dto.Tevekenysegkod;
-    this.DtoEdited.Tevekenyseg = Dto.Tevekenyseg1;
-    this.updateform();
-  }
-  onTevekenysegStopzoom() {
-    this.SzerkesztesMode = UgyfelSzerkesztesMode.Blank;
-    this.ugyfelzoombox.style.display = 'none';
+
+    this.vcr.clear();
+    const C = this.vcr.createComponent(TevekenysegListComponent);
+    C.instance.maszk = this.DtoEdited.Tevekenyseg || '';
+    C.instance.eventSelectzoom.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+      this.DtoEdited.Tevekenysegkod = dto.Tevekenysegkod;
+      this.DtoEdited.Tevekenyseg = dto.Tevekenyseg1;
+      this.updateform();
+    });
+    C.instance.eventStopzoom.pipe(untilComponentDestroyed(this)).subscribe(() => {
+      this.vcr.clear();
+      this._modalservice.close(this.modalname);
+    });
+
+    this._modalservice.open(this.modalname);
   }
 
-  ngOnDestroy() {
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+
     Object.keys(this).map(k => {
       (this[k]) = null;
     });

@@ -1,0 +1,6 @@
+<div [ngClass]="!uj ? 'alapkeret' : ''" [appSpinner]="eppFrissit">
+  <app-ugyfel-egy-toolbar *ngIf="!uj"
+                        (eventNav)="doNav($event)">
+  </app-ugyfel-egy-toolbar>
+  <ng-template #compcont_ugyfel></ng-template>
+</div>

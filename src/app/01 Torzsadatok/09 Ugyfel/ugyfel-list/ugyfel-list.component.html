@@ -1,0 +1,36 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5 *ngIf="!zoom">{{ugyfelservice.cim}}</h5>
+  <h5 *ngIf="zoom">{{ugyfelservice.cim}} - zoom</h5>
+  <app-ugyfeltoolbar [Csoportszurok]="csoportszurok"
+                     [Szurok]="szurok"
+                     [(csoportszempont)]="csoportszempont"
+                     [(szempont)]="szempont"
+                     [(minta)]="minta"
+                     (eventKereses)="onKereses()"
+                     [enUj]="jog" (eventUj)="doUjtetel()"
+                     [visZoom]="zoom" (eventStopZoom)="onStopzoom()">
+  </app-ugyfeltoolbar>
+
+  <app-ugyfel-tabla #tabla
+                    [items]="Dto"
+                    [zoom]="zoom"
+                    (forid)="onId($event)"
+                    (forzoom)="onStartzoom($event)"
+                    [egyTemplate]="gridegy">
+  </app-ugyfel-tabla>
+
+  <ng-template #gridegy>
+    <app-ugyfel-egy [uj]="uj"
+                    [dto]="Dto[DtoSelectedIndex]"
+                    (eventUj)="onUjtetelkesz($event)"
+                    (eventTorles)="onTorles()"
+                    (eventModositas)="onModositaskesz($event)">
+    </app-ugyfel-egy>
+  </ng-template>
+
+  <app-toolbarfooter [enKereses]="!elsokereses"
+                     [rekordszam]="Dto.length"
+                     [osszesrekord]="osszesrekord"
+                     (KeresesTovabb)="onKeresesTovabb()">
+  </app-toolbarfooter>
+</div>

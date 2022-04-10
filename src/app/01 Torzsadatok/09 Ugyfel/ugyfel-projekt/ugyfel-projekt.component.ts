@@ -35,26 +35,26 @@ export class UgyfelProjektComponent implements OnInit, OnDestroy {
     this.ugyfelservice = ugyfelservice;
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.pp.fi = new Array<SzMT>();
     this.pp.fi.push(new SzMT(Szempont.UgyfelKod, this.Ugyfelkod.toString()));
 
     this.spinner = true;
-    this._projektservice.Select(this.pp)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+    try {
+      const res = await this._projektservice.Select(this.pp);
+      if (res.Error != null) {
+        throw res.Error;
+      }
 
-        this.ProjektDto = res.Result;
+      this.ProjektDto = res.Result;
 
-        this.spinner = false;
-      })
-      .catch(err => {
-        this.spinner = false;
-        this._errorservice.Error = err;
-      });
+      this.spinner = false;
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

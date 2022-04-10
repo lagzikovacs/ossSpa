@@ -13,11 +13,12 @@ import {TevekenysegDto} from '../../08 Tevekenyseg/tevekenysegdto';
 import {TevekenysegService} from '../../08 Tevekenyseg/tevekenyseg.service';
 import {TevekenysegZoomParam} from '../../08 Tevekenyseg/tevekenysegzoomparam';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {HelysegZoomParam} from "../../07 Helyseg/helysegzoomparam";
-import {HelysegListComponent} from "../../07 Helyseg/helyseg-list/helyseg-list.component";
-import {OnDestroyMixin, untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
-import {TevekenysegListComponent} from "../../08 Tevekenyseg/tevekenyseg-list/tevekenyseg-list.component";
-import {ModalService} from "../../../common/modal/modal.service";
+import {HelysegZoomParam} from '../../07 Helyseg/helysegzoomparam';
+import {HelysegListComponent} from '../../07 Helyseg/helyseg-list/helyseg-list.component';
+import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
+import {TevekenysegListComponent} from '../../08 Tevekenyseg/tevekenyseg-list/tevekenyseg-list.component';
+import {ModalService} from '../../../common/modal/modal.service';
+import {NumberResult} from '../../../common/dtos/numberresult';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,7 +27,7 @@ import {ModalService} from "../../../common/modal/modal.service";
 })
 export class UgyfelSzerkesztesComponent extends OnDestroyMixin implements OnInit, OnDestroy {
   @ViewChild('compcont_ugyfelszerk', {read: ViewContainerRef}) vcr: ViewContainerRef;
-  modalname: string = 'modal_ugyfelszerk';
+  modalname = 'modal_ugyfelszerk';
 
   @Input() uj = false;
   DtoEdited = new UgyfelDto();
@@ -76,23 +77,22 @@ export class UgyfelSzerkesztesComponent extends OnDestroyMixin implements OnInit
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     if (this.uj) {
       this.spinner = true;
-      this.ugyfelservice.CreateNew()
-        .then(res => {
-          if (res.Error !== null) {
-            throw res.Error;
-          }
+      try {
+        const res = await this.ugyfelservice.CreateNew();
+        if (res.Error !== null) {
+          throw res.Error;
+        }
 
-          this.DtoEdited = res.Result[0];
-          this.updateform();
-          this.spinner = false;
-        })
-        .catch(err => {
-          this.spinner = false;
-          this._errorservice.Error = err;
-        });
+        this.DtoEdited = res.Result[0];
+        this.updateform();
+        this.spinner = false;
+      } catch (err) {
+        this.spinner = false;
+        this._errorservice.Error = err;
+      }
     } else {
       this.updateform();
     }
@@ -135,50 +135,44 @@ export class UgyfelSzerkesztesComponent extends OnDestroyMixin implements OnInit
     this.DtoEdited.Megjegyzes = this.form.value['megjegyzes'];
   }
 
-  onSubmit() {
-    this.spinner = true;
+  async onSubmit() {
     this.updatedto();
 
-    this._helysegservice.ZoomCheck(new HelysegZoomParam(this.DtoEdited.Helysegkod || 0,
-      this.DtoEdited.Helysegnev || ''))
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
+    this.spinner = true;
+    try {
+      const res = await this._helysegservice.ZoomCheck(new HelysegZoomParam(this.DtoEdited.Helysegkod || 0,
+        this.DtoEdited.Helysegnev || ''));
+      if (res.Error !== null) {
+        throw res.Error;
+      }
 
-        return this._tevekenysegservice.ZoomCheck(new TevekenysegZoomParam(this.DtoEdited.Tevekenysegkod || 0,
-          this.DtoEdited.Tevekenyseg || ''));
-      })
-      .then(res0 => {
-        if (res0.Error !== null) {
-          throw res0.Error;
-        }
+      const res0 = await this._tevekenysegservice.ZoomCheck(new TevekenysegZoomParam(this.DtoEdited.Tevekenysegkod || 0,
+        this.DtoEdited.Tevekenyseg || ''));
+      if (res0.Error !== null) {
+        throw res0.Error;
+      }
 
-        if (this.uj) {
-          return this.ugyfelservice.Add(this.DtoEdited);
-        } else {
-          return this.ugyfelservice.Update(this.DtoEdited);
-        }
-      })
-      .then(res1 => {
-        if (res1.Error !== null) {
-          throw res1.Error;
-        }
+      let res1: NumberResult;
+      if (this.uj) {
+        res1 = await this.ugyfelservice.Add(this.DtoEdited);
+      } else {
+        res1 = await this.ugyfelservice.Update(this.DtoEdited);
+      }
+      if (res1.Error !== null) {
+        throw res1.Error;
+      }
 
-        return this.ugyfelservice.Get(res1.Result);
-      })
-      .then(res2 => {
-        if (res2.Error !== null) {
-          throw res2.Error;
-        }
+      const res2 = await this.ugyfelservice.Get(res1.Result);
+      if (res2.Error !== null) {
+        throw res2.Error;
+      }
 
-        this.spinner = false;
-        this.eventSzerkeszteskesz.emit(res2.Result[0]);
-      })
-      .catch(err => {
-        this.spinner = false;
-        this._errorservice.Error = err;
-      });
+      this.spinner = false;
+      this.eventSzerkeszteskesz.emit(res2.Result[0]);
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
   onCancel() {

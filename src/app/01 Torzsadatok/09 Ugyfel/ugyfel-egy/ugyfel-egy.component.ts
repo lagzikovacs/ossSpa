@@ -112,8 +112,8 @@ export class UgyfelEgyComponent extends OnDestroyMixin implements AfterViewInit,
         });
         break;
       case EgyMode.Projekt: // 8
-        // const ugyfelprojektC = this.vcr.createComponent(UgyfelProjektComponent);
-        // ugyfelprojektC.instance.Ugyfelkod = this.Dto.Ugyfelkod;
+        const ugyfelprojektC = this.vcr.createComponent(UgyfelProjektComponent);
+        ugyfelprojektC.instance.Ugyfelkod = this.Dto.Ugyfelkod;
         break;
       case EgyMode.UgyfelterLink: // 9
         // const ugyfelterlinkC = this.vcr.createComponent(UgyfelTerLinkComponent);
@@ -122,8 +122,8 @@ export class UgyfelEgyComponent extends OnDestroyMixin implements AfterViewInit,
         // });
         break;
       case EgyMode.Vcard: // 10
-        // const ugyfelvcardC = this.vcr.createComponent(UgyfelVcardComponent);
-        // ugyfelvcardC.instance.Dto = this.Dto;
+        const ugyfelvcardC = this.vcr.createComponent(UgyfelVcardComponent);
+        ugyfelvcardC.instance.Dto = this.Dto;
         break;
     }
   }

@@ -54,29 +54,27 @@ export class UgyfelCsoportComponent implements OnInit, OnDestroy {
     this.DtoEdited.Csoport = this.form.value['ugyfeltipus'];
   }
 
-  onSubmit() {
-    this.spinner = true;
+  async onSubmit() {
     this.updatedto();
-    this.ugyfelservice.Update(this.DtoEdited)
-      .then(res1 => {
-        if (res1.Error !== null) {
-          throw res1.Error;
-        }
 
-        return this.ugyfelservice.Get(res1.Result);
-      })
-      .then(res2 => {
-        if (res2.Error !== null) {
-          throw res2.Error;
-        }
+    this.spinner = true;
+    try {
+      const res1 = await this.ugyfelservice.Update(this.DtoEdited);
+      if (res1.Error !== null) {
+        throw res1.Error;
+      }
 
-        this.spinner = false;
-        this.eventSzerkeszteskesz.emit(res2.Result[0]);
-      })
-      .catch(err => {
-        this.spinner = false;
-        this._errorservice.Error = err;
-      });
+      const res2 = await this.ugyfelservice.Get(res1.Result);
+      if (res2.Error !== null) {
+        throw res2.Error;
+      }
+
+      this.spinner = false;
+      this.eventSzerkeszteskesz.emit(res2.Result[0]);
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
   onCancel() {

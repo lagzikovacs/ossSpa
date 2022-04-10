@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
-import {LogonService} from "../../../05 Segedeszkozok/05 Bejelentkezes/logon.service";
-import {JogKod} from "../../../common/enums/jogkod";
+import {LogonService} from '../../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
+import {JogKod} from '../../../common/enums/jogkod';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -9,7 +9,7 @@ import {JogKod} from "../../../common/enums/jogkod";
 })
 export class UgyfelEgyToolbarComponent implements OnDestroy {
   @Output() eventNav: EventEmitter<number> = new EventEmitter<number>();
-  jog: boolean = false;
+  jog = false;
 
   constructor(private _logonservice: LogonService) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.UGYFELEKMOD]);

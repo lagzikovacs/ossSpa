@@ -139,7 +139,6 @@ import {AjanlatService} from './ajanlat/ajanlat.service';
 import {IratmintaService} from './projekt/projekt-iratminta/iratminta.service';
 import { EsemenynaploComponent } from './05 Segedeszkozok/03 Felhasznalo/esemenynaplo/esemenynaplo.component';
 import { UgyfelterComponent } from './ugyfelter/ugyfelter/ugyfelter.component';
-import { UgyfelTerLinkComponent } from './ugyfelter/ugyfel-ter-link/ugyfel-ter-link.component';
 import {UgyfelterService} from './ugyfelter/ugyfelter.service';
 import { UgyfelProjektComponent } from './01 Torzsadatok/09 Ugyfel/ugyfel-projekt/ugyfel-projekt.component';
 import { UgyfelterlogComponent } from './ugyfelterlog/ugyfelterlog.component';
@@ -197,24 +196,25 @@ import { HibabejelentesJelentesComponent } from './hibabejelentes/hibabejelentes
 import { TelepitesiDokumentumokKivalasztasaComponent } from './hibabejelentes/telepitesi-dokumentumok-kivalasztasa/telepitesi-dokumentumok-kivalasztasa.component';
 import { ProjektTelepitesiDokumentumokKivalasztasaComponent } from './hibabejelentes/projekt-telepitesi-dokumentumok-kivalasztasa/projekt-telepitesi-dokumentumok-kivalasztasa.component';
 import { SzerelesitervComponent } from './szerelesiterv/szerelesiterv.component';
-import {PrimitivEgyToolbarComponent} from "./common/primitiv-egy-toolbar/primitiv-egy-toolbar.component";
-import {FelhasznaloEgyToolbarComponent} from "./05 Segedeszkozok/03 Felhasznalo/felhasznalo-egy-toolbar/felhasznalo-egy-toolbar.component";
-import {TablaExComponent} from "./common/tabla-ex/tabla-ex.component";
-import {FelhasznaloEgyComponent} from "./05 Segedeszkozok/03 Felhasznalo/felhasznalo-egy/felhasznalo-egy.component";
-import {IrattipusEgyComponent} from "./01 Torzsadatok/01 Irattipus/irattipus-egy/irattipus-egy.component";
-import {FizetesimodEgyComponent} from "./01 Torzsadatok/02 Fizetesimod/fizetesimod-egy/fizetesimod-egy.component";
-import {PenznemEgyComponent} from "./01 Torzsadatok/03 Penznem/penznem-egy/penznem-egy.component";
-import {MeEgyComponent} from "./01 Torzsadatok/04 Mennyisegiegyseg/me-egy/me-egy.component";
-import {AfakulcsEgyComponent} from "./01 Torzsadatok/05 Afakulcs/afakulcs-egy/afakulcs-egy.component";
-import {HelysegEgyComponent} from "./01 Torzsadatok/07 Helyseg/helyseg-egy/helyseg-egy.component";
-import {TevekenysegEgyComponent} from "./01 Torzsadatok/08 Tevekenyseg/tevekenyseg-egy/tevekenyseg-egy.component";
-import {TermekdijEgyComponent} from "./01 Torzsadatok/051 Termekdij/termekdij-egy/termekdij-egy.component";
-import {ModalComponent} from "./common/modal/modal.component";
-import {ModalService} from "./common/modal/modal.service";
-import {CikkEgyToolbarComponent} from "./01 Torzsadatok/06 Cikk/cikk-egy-toolbar/cikk-egy-toolbar.component";
-import {CikkEgyComponent} from "./01 Torzsadatok/06 Cikk/cikk-egy/cikk-egy.component";
-import {UgyfelEgyComponent} from "./01 Torzsadatok/09 Ugyfel/ugyfel-egy/ugyfel-egy.component";
-import {UgyfelEgyToolbarComponent} from "./01 Torzsadatok/09 Ugyfel/ugyfel-egy-toolbar/ugyfel-egy-toolbar.component";
+import {PrimitivEgyToolbarComponent} from './common/primitiv-egy-toolbar/primitiv-egy-toolbar.component';
+import {FelhasznaloEgyToolbarComponent} from './05 Segedeszkozok/03 Felhasznalo/felhasznalo-egy-toolbar/felhasznalo-egy-toolbar.component';
+import {TablaExComponent} from './common/tabla-ex/tabla-ex.component';
+import {FelhasznaloEgyComponent} from './05 Segedeszkozok/03 Felhasznalo/felhasznalo-egy/felhasznalo-egy.component';
+import {IrattipusEgyComponent} from './01 Torzsadatok/01 Irattipus/irattipus-egy/irattipus-egy.component';
+import {FizetesimodEgyComponent} from './01 Torzsadatok/02 Fizetesimod/fizetesimod-egy/fizetesimod-egy.component';
+import {PenznemEgyComponent} from './01 Torzsadatok/03 Penznem/penznem-egy/penznem-egy.component';
+import {MeEgyComponent} from './01 Torzsadatok/04 Mennyisegiegyseg/me-egy/me-egy.component';
+import {AfakulcsEgyComponent} from './01 Torzsadatok/05 Afakulcs/afakulcs-egy/afakulcs-egy.component';
+import {HelysegEgyComponent} from './01 Torzsadatok/07 Helyseg/helyseg-egy/helyseg-egy.component';
+import {TevekenysegEgyComponent} from './01 Torzsadatok/08 Tevekenyseg/tevekenyseg-egy/tevekenyseg-egy.component';
+import {TermekdijEgyComponent} from './01 Torzsadatok/051 Termekdij/termekdij-egy/termekdij-egy.component';
+import {ModalComponent} from './common/modal/modal.component';
+import {ModalService} from './common/modal/modal.service';
+import {CikkEgyToolbarComponent} from './01 Torzsadatok/06 Cikk/cikk-egy-toolbar/cikk-egy-toolbar.component';
+import {CikkEgyComponent} from './01 Torzsadatok/06 Cikk/cikk-egy/cikk-egy.component';
+import {UgyfelEgyComponent} from './01 Torzsadatok/09 Ugyfel/ugyfel-egy/ugyfel-egy.component';
+import {UgyfelEgyToolbarComponent} from './01 Torzsadatok/09 Ugyfel/ugyfel-egy-toolbar/ugyfel-egy-toolbar.component';
+import {UgyfelterLinkComponent} from './01 Torzsadatok/09 Ugyfel/ugyfelter-link/ugyfelter-link.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -390,7 +390,7 @@ if (environment.production) {
     ProjektkapcsolatVagolaprolComponent,
     EsemenynaploComponent,
     UgyfelterComponent,
-    UgyfelTerLinkComponent,
+    UgyfelterLinkComponent,
     UgyfelProjektComponent,
     UgyfelterlogComponent,
     FotozasComponent,

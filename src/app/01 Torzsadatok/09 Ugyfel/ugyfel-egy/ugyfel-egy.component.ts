@@ -3,19 +3,20 @@ import {
   ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {UgyfelDto} from "../ugyfeldto";
-import {deepCopy} from "../../../common/deepCopy";
-import {UgyfelService} from "../ugyfel.service";
-import {ErrorService} from "../../../common/errorbox/error.service";
-import {OnDestroyMixin, untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
-import {propCopy} from "../../../common/propCopy";
-import {UgyfelSzerkesztesComponent} from "../ugyfel-szerkesztes/ugyfel-szerkesztes.component";
-import {TetelTorlesComponent} from "../../../common/tetel-torles/tetel-torles.component";
-import {EgyMode} from "../../../common/enums/egymode";
-import {ReszletekComponent} from "../../../common/reszletek/reszletek.component";
-import {UgyfelCsoportComponent} from "../ugyfel-csoport/ugyfel-csoport.component";
-import {UgyfelProjektComponent} from "../ugyfel-projekt/ugyfel-projekt.component";
-import {UgyfelVcardComponent} from "../ugyfel-vcard/ugyfel-vcard.component";
+import {UgyfelDto} from '../ugyfeldto';
+import {deepCopy} from '../../../common/deepCopy';
+import {UgyfelService} from '../ugyfel.service';
+import {ErrorService} from '../../../common/errorbox/error.service';
+import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
+import {propCopy} from '../../../common/propCopy';
+import {UgyfelSzerkesztesComponent} from '../ugyfel-szerkesztes/ugyfel-szerkesztes.component';
+import {TetelTorlesComponent} from '../../../common/tetel-torles/tetel-torles.component';
+import {EgyMode} from '../../../common/enums/egymode';
+import {ReszletekComponent} from '../../../common/reszletek/reszletek.component';
+import {UgyfelCsoportComponent} from '../ugyfel-csoport/ugyfel-csoport.component';
+import {UgyfelProjektComponent} from '../ugyfel-projekt/ugyfel-projekt.component';
+import {UgyfelVcardComponent} from '../ugyfel-vcard/ugyfel-vcard.component';
+import {UgyfelterLinkComponent} from '../ugyfelter-link/ugyfelter-link.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,8 +26,8 @@ import {UgyfelVcardComponent} from "../ugyfel-vcard/ugyfel-vcard.component";
 export class UgyfelEgyComponent extends OnDestroyMixin implements AfterViewInit, OnDestroy {
   @ViewChild('compcont_ugyfel', {read: ViewContainerRef}) vcr: ViewContainerRef;
 
-  @Input() uj: boolean = false;
-  @Input() defaultNav: number = 0;
+  @Input() uj = false;
+  @Input() defaultNav = 0;
   Dto = new UgyfelDto();
   @Input() set dto(value: UgyfelDto) {
     this.Dto = deepCopy(value);
@@ -116,10 +117,11 @@ export class UgyfelEgyComponent extends OnDestroyMixin implements AfterViewInit,
         ugyfelprojektC.instance.Ugyfelkod = this.Dto.Ugyfelkod;
         break;
       case EgyMode.UgyfelterLink: // 9
-        // const ugyfelterlinkC = this.vcr.createComponent(UgyfelTerLinkComponent);
-        // ugyfelterlinkC.instance.eventSzerkeszteskesz.pipe(untilComponentDestroyed(this)).subscribe(dto => {
-        //   this.doModositaskeszCsak(dto);
-        // });
+        const ugyfelterlinkC = this.vcr.createComponent(UgyfelterLinkComponent);
+        ugyfelterlinkC.instance.DtoOriginal = this.Dto;
+        ugyfelterlinkC.instance.eventSzerkeszteskesz.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+          this.doModositaskeszCsak(dto);
+        });
         break;
       case EgyMode.Vcard: // 10
         const ugyfelvcardC = this.vcr.createComponent(UgyfelVcardComponent);
@@ -132,25 +134,23 @@ export class UgyfelEgyComponent extends OnDestroyMixin implements AfterViewInit,
     this.eventUj.emit(dto);
   }
 
-  doTorles(ok: boolean) {
+  async doTorles(ok: boolean) {
     if (ok) {
       this.spinner = true;
+      try {
+        const res = await this.ugyfelservice.Delete(this.Dto);
+        if (res.Error != null) {
+          throw res.Error;
+        }
 
-      this.ugyfelservice.Delete(this.Dto)
-        .then(res => {
-          if (res.Error != null) {
-            throw res.Error;
-          }
+        this.spinner = false;
+        this.doNav(0);
 
-          this.spinner = false;
-          this.doNav(0);
-
-          this.eventTorles.emit();
-        })
-        .catch(err => {
-          this.spinner = false;
-          this._errorservice.Error = err;
-        });
+        this.eventTorles.emit();
+      } catch (err) {
+        this.spinner = false;
+        this._errorservice.Error = err;
+      }
     } else {
       this.doNav(0);
     }

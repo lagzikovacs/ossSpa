@@ -92,33 +92,32 @@ import {propCopy} from '../../../common/propCopy';
     this.onKeresesTovabb();
   }
 
-  onKeresesTovabb() {
+  async onKeresesTovabb() {
     this.spinner = true;
-    this.ugyfelservice.Select(this.up)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+    try {
+      const res = await this.ugyfelservice.Select(this.up);
+      if (res.Error != null) {
+        throw res.Error;
+      }
 
-        if (this.elsokereses) {
-          this.Dto = res.Result;
-          this.elsokereses = false;
-        } else {
-          const buf = [...this.Dto];
-          res.Result.forEach(element => {
-            buf.push(element);
-          });
-          this.Dto = buf;
-        }
-        this.osszesrekord = res.OsszesRekord;
+      if (this.elsokereses) {
+        this.Dto = res.Result;
+        this.elsokereses = false;
+      } else {
+        const buf = [...this.Dto];
+        res.Result.forEach(element => {
+          buf.push(element);
+        });
+        this.Dto = buf;
+      }
+      this.osszesrekord = res.OsszesRekord;
 
-        this.up.rekordtol += this.up.lapmeret;
-        this.spinner = false;
-      })
-      .catch(err => {
-        this.spinner = false;
-        this._errorservice.Error = err;
-      });
+      this.up.rekordtol += this.up.lapmeret;
+      this.spinner = false;
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
   onId(i: number) {

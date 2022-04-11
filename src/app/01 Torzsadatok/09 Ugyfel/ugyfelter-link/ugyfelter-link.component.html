@@ -1,0 +1,23 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>Ügyféltér link</h5>
+
+  <div class="toolbar">
+    <button (click)="doNav(3)" class="toolbutton">
+      Új ügyféltér link
+    </button>
+    <button [disabled]="link === ''" (click)="doNav(2)" class="toolbutton">
+      Ügyféltér link törlése
+    </button>
+  </div>
+
+  <ng-container *ngIf="link !== ''">
+    <div>
+      <textarea rows="3" cols="150" id="regilink" disabled="true" [(ngModel)]="link"></textarea>
+    </div>
+    <div style="margin-bottom: 1em">
+      {{kikuldesikodidopontja}}
+    </div>
+  </ng-container>
+
+  <ng-template #compcont_ugyfelterlink></ng-template>
+</div>

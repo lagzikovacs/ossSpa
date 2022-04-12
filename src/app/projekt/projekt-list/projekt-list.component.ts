@@ -1,5 +1,5 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {ProjektService} from '../projekt.service';
+import {ProjektService} from '../../02 Eszkozok/01 Projekt/projekt/projekt.service';
 import {SzMT} from '../../common/dtos/szmt';
 import {Szempont} from '../../common/enums/szempont';
 import {JogKod} from '../../common/enums/jogkod';
@@ -7,11 +7,11 @@ import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.servic
 import {ErrorService} from '../../common/errorbox/error.service';
 import {ProjektTablaComponent} from '../projekttabla/projekt-tabla.component';
 import {environment} from '../../../environments/environment';
-import {ProjektParameter} from '../projektparameter';
 import {EgyMode} from '../../common/enums/egymode';
-import {ProjektDto} from '../projektdto';
+import {ProjektDto} from '../../02 Eszkozok/01 Projekt/projekt/projektdto';
 import {propCopy} from '../../common/propCopy';
 import {rowanimation} from '../../animation/rowAnimation';
+import {ProjektParam} from '../../02 Eszkozok/01 Projekt/projekt/projektparam';
 
 @Component({
   selector: 'app-projekt-list',
@@ -41,7 +41,7 @@ export class ProjektListComponent implements OnDestroy {
   jegyzetszempont = 0;
   szempont = 0;
   minta = '';
-  pp = new ProjektParameter(0, environment.lapmeret);
+  pp = new ProjektParam(0, environment.lapmeret);
   elsokereses = true;
   OsszesRekord = 0;
   eppFrissit = false;

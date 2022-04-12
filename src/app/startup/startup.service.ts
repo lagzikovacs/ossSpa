@@ -3,7 +3,7 @@ import {EmptyResult} from '../common/dtos/emptyresult';
 import {LogonService} from '../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {CsoportService} from '../05 Segedeszkozok/04 Csoport/csoport.service';
 import {SessionService} from '../session/session.service';
-import {ProjektService} from '../projekt/projekt.service';
+import {ProjektService} from '../02 Eszkozok/01 Projekt/projekt/projekt.service';
 import {IratService} from '../irat/irat.service';
 import {AfakulcsService} from '../01 Torzsadatok/05 Afakulcs/afakulcs.service';
 import {FelhasznaloService} from '../05 Segedeszkozok/03 Felhasznalo/felhasznalo.service';

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, Output, TemplateRef} from '@angular/core';
-import {ProjektDto} from '../projektdto';
+import {ProjektDto} from '../../02 Eszkozok/01 Projekt/projekt/projektdto';
 
 @Component({
   selector: 'app-projekt-tabla',

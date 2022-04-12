@@ -1,23 +1,22 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ProjektService} from '../projekt.service';
-import {UgyfelService} from '../../01 Torzsadatok/09 Ugyfel/ugyfel.service';
-import {PenznemService} from '../../01 Torzsadatok/03 Penznem/penznem.service';
-import {ProjektSzerkesztesMode} from '../projektszerkesztesmode';
-import {UgyfelZoomParam} from '../../01 Torzsadatok/09 Ugyfel/ugyfelzoomparam';
-import {PenznemZoomParam} from '../../01 Torzsadatok/03 Penznem/penznemzoomparam';
-import {rowanimation} from '../../animation/rowAnimation';
-import {ErrorService} from '../../common/errorbox/error.service';
-import {deepCopy} from '../../common/deepCopy';
-import {PenznemDto} from '../../01 Torzsadatok/03 Penznem/penznemdto';
-import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
 import {ProjektDto} from '../projektdto';
 import * as moment from 'moment';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {deepCopy} from '../../../../common/deepCopy';
+import {ProjektSzerkesztesMode} from '../projektszerkesztesmode';
+import {UgyfelService} from '../../../../01 Torzsadatok/09 Ugyfel/ugyfel.service';
+import {PenznemService} from '../../../../01 Torzsadatok/03 Penznem/penznem.service';
+import {ErrorService} from '../../../../common/errorbox/error.service';
+import {UgyfelZoomParam} from '../../../../01 Torzsadatok/09 Ugyfel/ugyfelzoomparam';
+import {PenznemZoomParam} from '../../../../01 Torzsadatok/03 Penznem/penznemzoomparam';
+import {UgyfelDto} from '../../../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
+import {PenznemDto} from '../../../../01 Torzsadatok/03 Penznem/penznemdto';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-projekt-szerkesztes',
-  templateUrl: './projekt-szerkesztes.component.html',
-  animations: [rowanimation]
+  templateUrl: './projekt-szerkesztes.component.html'
 })
 export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
   @Input() uj = false;
@@ -162,7 +161,7 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
       });
   }
   cancel() {
-    this.eventSzerkeszteskesz.emit(null);
+    this.eventSzerkeszteskesz.emit();
   }
 
   UgyfelZoom() {

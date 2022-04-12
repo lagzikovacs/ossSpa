@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
-import {IratmintaResult} from '../iratmintaresult';
+import {IratmintaResult} from '../../02 Eszkozok/01 Projekt/projekt/iratmintaresult';
 import {environment} from '../../../environments/environment';
 
 @Injectable({

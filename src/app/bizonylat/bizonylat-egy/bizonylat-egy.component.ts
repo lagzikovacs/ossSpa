@@ -10,7 +10,7 @@ import {BizonylatDto} from '../bizonylatdto';
 import {propCopy} from '../../common/propCopy';
 import {deepCopy} from '../../common/deepCopy';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
-import {ProjektService} from '../../projekt/projekt.service';
+import {ProjektService} from '../../02 Eszkozok/01 Projekt/projekt/projekt.service';
 
 @Component({
   selector: 'app-bizonylat-egy',

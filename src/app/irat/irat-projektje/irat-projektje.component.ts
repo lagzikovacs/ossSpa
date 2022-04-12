@@ -1,10 +1,10 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {EgyMode} from '../../common/enums/egymode';
-import {ProjektResult} from '../../projekt/projektresult';
+import {ProjektResult} from '../../02 Eszkozok/01 Projekt/projekt/projektresult';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
-import {ProjektDto} from '../../projekt/projektdto';
+import {ProjektDto} from '../../02 Eszkozok/01 Projekt/projekt/projektdto';
 import {IratDto} from '../iratdto';
-import {ProjektService} from '../../projekt/projekt.service';
+import {ProjektService} from '../../02 Eszkozok/01 Projekt/projekt/projekt.service';
 import {ErrorService} from '../../common/errorbox/error.service';
 
 @Component({

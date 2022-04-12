@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {ProjektService} from '../projekt.service';
+import {ProjektService} from '../../02 Eszkozok/01 Projekt/projekt/projekt.service';
 import {rowanimation} from '../../animation/rowAnimation';
 import {deepCopy} from '../../common/deepCopy';
-import {ProjektDto} from '../projektdto';
+import {ProjektDto} from '../../02 Eszkozok/01 Projekt/projekt/projektdto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({

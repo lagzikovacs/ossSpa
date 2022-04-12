@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {RiportService} from '../../04 Riportok/riport.service';
 import {Szempont} from '../../common/enums/szempont';
 import {SzMT} from '../../common/dtos/szmt';
-import {ProjektService} from '../projekt.service';
+import {ProjektService} from '../../02 Eszkozok/01 Projekt/projekt/projekt.service';
 import {ErrorService} from '../../common/errorbox/error.service';
 import {Riportciklus} from '../../04 Riportok/riportciklus';
 

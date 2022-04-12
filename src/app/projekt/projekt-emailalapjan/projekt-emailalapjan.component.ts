@@ -1,11 +1,11 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Szempont} from '../../common/enums/szempont';
 import {SzMT} from '../../common/dtos/szmt';
-import {ProjektService} from '../projekt.service';
-import {ProjektDto} from '../projektdto';
+import {ProjektService} from '../../02 Eszkozok/01 Projekt/projekt/projekt.service';
+import {ProjektDto} from '../../02 Eszkozok/01 Projekt/projekt/projektdto';
 import {ErrorService} from '../../common/errorbox/error.service';
 import {environment} from '../../../environments/environment';
-import {ProjektParameter} from '../projektparameter';
+import {ProjektParam} from '../../02 Eszkozok/01 Projekt/projekt/projektparam';
 
 @Component({
   selector: 'app-projekt-emailalapjan',
@@ -14,7 +14,7 @@ import {ProjektParameter} from '../projektparameter';
 export class ProjektEmailalapjanComponent implements OnInit, OnDestroy {
   @Input() Email = '';
 
-  pp = new ProjektParameter(0, environment.lapmeret);
+  pp = new ProjektParam(0, environment.lapmeret);
   ProjektDto = new Array<ProjektDto>();
 
   eppFrissit = false;

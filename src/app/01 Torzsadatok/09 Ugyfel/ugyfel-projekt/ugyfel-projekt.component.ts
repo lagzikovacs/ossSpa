@@ -4,9 +4,9 @@ import {SzMT} from '../../../common/dtos/szmt';
 import {Szempont} from '../../../common/enums/szempont';
 import {ErrorService} from '../../../common/errorbox/error.service';
 import {environment} from '../../../../environments/environment';
-import {ProjektDto} from '../../../projekt/projektdto';
-import {ProjektService} from '../../../projekt/projekt.service';
-import {ProjektParameter} from '../../../projekt/projektparameter';
+import {ProjektDto} from '../../../02 Eszkozok/01 Projekt/projekt/projektdto';
+import {ProjektService} from '../../../02 Eszkozok/01 Projekt/projekt/projekt.service';
+import {ProjektParam} from '../../../02 Eszkozok/01 Projekt/projekt/projektparam';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,7 +16,7 @@ import {ProjektParameter} from '../../../projekt/projektparameter';
 export class UgyfelProjektComponent implements OnInit, OnDestroy {
   @Input() Ugyfelkod = -1;
 
-  pp = new ProjektParameter(0, environment.lapmeret);
+  pp = new ProjektParam(0, environment.lapmeret);
   ProjektDto: ProjektDto[] = new Array<ProjektDto>();
 
   eppFrissit = false;

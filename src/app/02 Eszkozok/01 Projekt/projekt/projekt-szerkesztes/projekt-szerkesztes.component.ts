@@ -1,4 +1,7 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit,
+  Output, ViewChild, ViewContainerRef
+} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {ProjektDto} from '../projektdto';
 import * as moment from 'moment';
@@ -12,13 +15,23 @@ import {UgyfelZoomParam} from '../../../../01 Torzsadatok/09 Ugyfel/ugyfelzoompa
 import {PenznemZoomParam} from '../../../../01 Torzsadatok/03 Penznem/penznemzoomparam';
 import {UgyfelDto} from '../../../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
 import {PenznemDto} from '../../../../01 Torzsadatok/03 Penznem/penznemdto';
+import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
+import {NumberResult} from '../../../../common/dtos/numberresult';
+import {PenznemListComponent} from '../../../../01 Torzsadatok/03 Penznem/penznem-list/penznem-list.component';
+import {ModalService} from '../../../../common/modal/modal.service';
+import {UgyfelListComponent} from "../../../../01 Torzsadatok/09 Ugyfel/ugyfel-list/ugyfel-list.component";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-projekt-szerkesztes',
   templateUrl: './projekt-szerkesztes.component.html'
 })
-export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
+export class ProjektSzerkesztesComponent extends OnDestroyMixin implements OnInit, OnDestroy {
+  @ViewChild('compcont_projektszerkprim', {read: ViewContainerRef}) vcrprim: ViewContainerRef;
+  modalnameprim = 'modal_ugyfelszerkprim';
+  @ViewChild('compcont_projektszerkcomp', {read: ViewContainerRef}) vcrcomp: ViewContainerRef;
+  modalnamecomp = 'modal_ugyfelszerkcomp';
+
   @Input() uj = false;
   DtoEdited = new ProjektDto();
   @Input() set DtoOriginal(value: ProjektDto) {
@@ -26,12 +39,13 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
   }
   @Output() eventSzerkeszteskesz = new EventEmitter<ProjektDto>();
 
-  SzerkesztesMode = ProjektSzerkesztesMode.Blank;
-
   form: FormGroup;
   eppFrissit = false;
-
-  projektzoombox: any;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   projektservice: ProjektService;
 
@@ -39,7 +53,11 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
               private _penznemservice: PenznemService,
               private _errorservice: ErrorService,
               private _fb: FormBuilder,
+              private _cdr: ChangeDetectorRef,
+              private _modalservice: ModalService,
               projektservice: ProjektService) {
+    super();
+
     this.projektservice = projektservice;
 
     this.form = this._fb.group({
@@ -56,25 +74,22 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
-    this.projektzoombox = document.getElementById('projektzoombox');
-
+  async ngOnInit() {
     if (this.uj) {
-      this.eppFrissit = true;
-      this.projektservice.CreateNew()
-        .then(res => {
-          if (res.Error !== null) {
-            throw res.Error;
-          }
+      this.spinner = true;
+      try {
+        const res = await this.projektservice.CreateNew();
+        if (res.Error !== null) {
+          throw res.Error;
+        }
 
-          this.DtoEdited = res.Result[0];
-          this.updateform();
-          this.eppFrissit = false;
-        })
-        .catch(err => {
-          this.eppFrissit = false;
-          this._errorservice.Error = err;
-        });
+        this.DtoEdited = res.Result[0];
+        this.updateform();
+        this.spinner = false;
+      } catch (err) {
+        this.spinner = false;
+        this._errorservice.Error = err;
+      }
     } else {
       this.updateform();
     }
@@ -115,50 +130,44 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Megjegyzes = this.form.value['megjegyzes'];
   }
 
-  onSubmit() {
-    this.eppFrissit = true;
+  async onSubmit() {
     this.updatedto();
 
-    this._ugyfelservice.ZoomCheck(new UgyfelZoomParam(this.DtoEdited.Ugyfelkod || 0,
-      this.DtoEdited.Ugyfelnev || ''))
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
+    this.spinner = true;
+    try {
+      const res = await this._ugyfelservice.ZoomCheck(new UgyfelZoomParam(this.DtoEdited.Ugyfelkod || 0,
+        this.DtoEdited.Ugyfelnev || ''));
+      if (res.Error !== null) {
+        throw res.Error;
+      }
 
-        return this._penznemservice.ZoomCheck(new PenznemZoomParam(this.DtoEdited.Penznemkod || 0,
-          this.DtoEdited.Penznem || ''));
-      })
-      .then(res1 => {
-        if (res1.Error !== null) {
-          throw res1.Error;
-        }
+      const res1 = await this._penznemservice.ZoomCheck(new PenznemZoomParam(this.DtoEdited.Penznemkod || 0,
+        this.DtoEdited.Penznem || ''));
+      if (res1.Error !== null) {
+        throw res1.Error;
+      }
 
-        if (this.uj) {
-          return this.projektservice.Add(this.DtoEdited);
-        } else {
-          return this.projektservice.Update(this.DtoEdited);
-        }
-      })
-      .then(res2 => {
-        if (res2.Error !== null) {
-          throw res2.Error;
-        }
+      let res2: NumberResult;
+      if (this.uj) {
+        res2 = await this.projektservice.Add(this.DtoEdited);
+      } else {
+        res2 = await this.projektservice.Update(this.DtoEdited);
+      }
+      if (res2.Error !== null) {
+        throw res2.Error;
+      }
 
-        return this.projektservice.Get(res2.Result);
-      })
-      .then(res3 => {
-        if (res3.Error !== null) {
-          throw res3.Error;
-        }
+      const res3 = await this.projektservice.Get(res2.Result);
+      if (res3.Error !== null) {
+        throw res3.Error;
+      }
 
-        this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit(res3.Result[0]);
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+      this.spinner = false;
+      this.eventSzerkeszteskesz.emit(res3.Result[0]);
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
   cancel() {
     this.eventSzerkeszteskesz.emit();
@@ -166,36 +175,46 @@ export class ProjektSzerkesztesComponent implements OnInit, OnDestroy {
 
   UgyfelZoom() {
     this.updatedto();
-    this.SzerkesztesMode = ProjektSzerkesztesMode.UgyfelZoom;
-    this.projektzoombox.style.display = 'block';
-  }
-  onUgyfelSelectzoom(Dto: UgyfelDto) {
-    this.DtoEdited.Ugyfelkod = Dto.Ugyfelkod;
-    this.DtoEdited.Ugyfelnev = Dto.Nev;
-    this.DtoEdited.Ugyfelcim = Dto.Cim;
-    this.updateform();
-  }
-  onUgyfelStopzoom() {
-    this.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
-    this.projektzoombox.style.display = 'none';
+
+    this.vcrcomp.clear();
+    const C = this.vcrcomp.createComponent(UgyfelListComponent);
+    C.instance.maszk = this.DtoEdited.Ugyfelnev || '';
+    C.instance.eventSelectzoom.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+      this.DtoEdited.Ugyfelkod = dto.Ugyfelkod;
+      this.DtoEdited.Ugyfelnev = dto.Nev;
+      this.DtoEdited.Ugyfelcim = dto.Cim;
+      this.updateform();
+    });
+    C.instance.eventStopzoom.pipe(untilComponentDestroyed(this)).subscribe(() => {
+      this.vcrcomp.clear();
+      this._modalservice.close(this.modalnamecomp);
+    });
+
+    this._modalservice.open(this.modalnamecomp);
   }
 
   PenznemZoom() {
     this.updatedto();
-    this.SzerkesztesMode = ProjektSzerkesztesMode.PenznemZoom;
-    this.projektzoombox.style.display = 'block';
-  }
-  onPenznemSelectzoom(Dto: PenznemDto) {
-    this.DtoEdited.Penznemkod = Dto.Penznemkod;
-    this.DtoEdited.Penznem = Dto.Penznem1;
-    this.updateform();
-  }
-  onPenznemStopzoom() {
-    this.SzerkesztesMode = ProjektSzerkesztesMode.Blank;
-    this.projektzoombox.style.display = 'none';
+
+    this.vcrprim.clear();
+    const C = this.vcrprim.createComponent(PenznemListComponent);
+    C.instance.maszk = this.DtoEdited.Penznem || '';
+    C.instance.eventSelectzoom.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+      this.DtoEdited.Penznemkod = dto.Penznemkod;
+      this.DtoEdited.Penznem = dto.Penznem1;
+      this.updateform();
+    });
+    C.instance.eventStopzoom.pipe(untilComponentDestroyed(this)).subscribe(() => {
+      this.vcrprim.clear();
+      this._modalservice.close(this.modalnameprim);
+    });
+
+    this._modalservice.open(this.modalnameprim);
   }
 
-  ngOnDestroy() {
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+
     Object.keys(this).map(k => {
       (this[k]) = null;
     });

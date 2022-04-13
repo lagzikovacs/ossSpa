@@ -68,21 +68,10 @@
     </div>
   </form>
 
-  <div id="projektzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
-    <ng-container *ngIf="SzerkesztesMode === 1">
-      <div class="zoom-modal-content-complex">
-      <app-ugyfel-list [maszk]="DtoEdited.Ugyfelnev || ''"
-                       (eventSelectzoom)="onUgyfelSelectzoom($event)"
-                       (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>
-      </div>
-    </ng-container>
-
-    <ng-container *ngIf="SzerkesztesMode === 2">
-      <div class="zoom-modal-content-primitive">
-      <app-penznem-list [maszk]="DtoEdited.Penznem || ''"
-                        (eventSelectzoom)="onPenznemSelectzoom($event)"
-                        (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
-      </div>
-    </ng-container>
-  </div>
+  <jw-modal [id]="modalnameprim" bodyclass="jw-modal-body-primitive">
+    <ng-template #compcont_projektszerkprim></ng-template>
+  </jw-modal>
+  <jw-modal [id]="modalnamecomp" bodyclass="jw-modal-body-complex">
+    <ng-template #compcont_projektszerkcomp></ng-template>
+  </jw-modal>
 </div>

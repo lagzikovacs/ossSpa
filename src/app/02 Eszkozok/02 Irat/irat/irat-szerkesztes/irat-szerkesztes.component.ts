@@ -13,10 +13,11 @@ import {ErrorService} from '../../../../common/errorbox/error.service';
 import {deepCopy} from '../../../../common/deepCopy';
 import {IratDto} from '../iratdto';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {OnDestroyMixin, untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
-import {ModalService} from "../../../../common/modal/modal.service";
-import {IrattipusListComponent} from "../../../../01 Torzsadatok/01 Irattipus/irattipus-list/irattipus-list.component";
-import {UgyfelListComponent} from "../../../../01 Torzsadatok/09 Ugyfel/ugyfel-list/ugyfel-list.component";
+import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
+import {ModalService} from '../../../../common/modal/modal.service';
+import {IrattipusListComponent} from '../../../../01 Torzsadatok/01 Irattipus/irattipus-list/irattipus-list.component';
+import {UgyfelListComponent} from '../../../../01 Torzsadatok/09 Ugyfel/ugyfel-list/ugyfel-list.component';
+import {NumberResult} from "../../../../common/dtos/numberresult";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,8 +26,8 @@ import {UgyfelListComponent} from "../../../../01 Torzsadatok/09 Ugyfel/ugyfel-l
 })
 export class IratSzerkesztesComponent extends OnDestroyMixin implements OnInit, OnDestroy {
   @ViewChild('compcont_iratszerk', {read: ViewContainerRef}) vcr: ViewContainerRef;
-  modalname: string = 'modal_iratszerk';
-  bodyclass: string = '';
+  modalname = 'modal_iratszerk';
+  bodyclass = '';
 
   @Input() uj = false;
   DtoEdited = new IratDto();
@@ -66,7 +67,7 @@ export class IratSzerkesztesComponent extends OnDestroyMixin implements OnInit, 
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     if (this.enUgyfel) {
       this.form.addControl('ugyfelnev', new FormControl('', [Validators.required, Validators.maxLength(200)]));
       this.form.addControl('ugyfelcim', new FormControl({value: '', disabled: true}, []));
@@ -75,21 +76,20 @@ export class IratSzerkesztesComponent extends OnDestroyMixin implements OnInit, 
 
     if (this.uj) {
       this.spinner = true;
-      this.iratservice.CreateNew()
-        .then(res => {
-          if (res.Error !== null) {
-            throw res.Error;
-          }
+      try {
+        const res = await this.iratservice.CreateNew();
+        if (res.Error !== null) {
+          throw res.Error;
+        }
 
-          this.DtoEdited = res.Result[0];
-          this.DtoEdited.Ugyfelkod = this.Ugyfelkod;
-          this.updateform();
-          this.spinner = false;
-        })
-        .catch(err => {
-          this.spinner = false;
-          this._errorservice.Error = err;
-        });
+        this.DtoEdited = res.Result[0];
+        this.DtoEdited.Ugyfelkod = this.Ugyfelkod;
+        this.updateform();
+        this.spinner = false;
+      } catch (err) {
+        this.spinner = false;
+        this._errorservice.Error = err;
+      }
     } else {
       this.updateform();
     }
@@ -126,54 +126,46 @@ export class IratSzerkesztesComponent extends OnDestroyMixin implements OnInit, 
     }
   }
 
-  onSubmit() {
-    this.eppFrissit = true;
+  async onSubmit() {
     this.updatedto();
 
-    this._irattipusservice.ZoomCheck(new IrattipusZoomParam(this.DtoEdited.Irattipuskod,
-      this.DtoEdited.Irattipus))
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+    this.spinner = true;
+    try {
+      const res = await this._irattipusservice.ZoomCheck(new IrattipusZoomParam(this.DtoEdited.Irattipuskod,
+        this.DtoEdited.Irattipus));
+      if (res.Error != null) {
+        throw res.Error;
+      }
 
-        if (this.DtoEdited.Ugyfelnev || '' !== '') {
-          return this._ugyfelservice.ZoomCheck(new UgyfelZoomParam(this.DtoEdited.Ugyfelkod,
-            this.DtoEdited.Ugyfelnev));
-        } else {
-          return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
-        }
-      })
-      .then(res1 => {
+      if (this.DtoEdited.Ugyfelnev || '' !== '') {
+        const res1 = await this._ugyfelservice.ZoomCheck(new UgyfelZoomParam(this.DtoEdited.Ugyfelkod,
+          this.DtoEdited.Ugyfelnev));
         if (res1.Error != null) {
           throw res1.Error;
         }
+      }
 
-        if (this.uj) {
-          return this.iratservice.Add(this.DtoEdited);
-        } else {
-          return this.iratservice.Update(this.DtoEdited);
-        }
-      })
-      .then(res2 => {
-        if (res2.Error != null) {
-          throw res2.Error;
-        }
+      let res2: NumberResult;
+      if (this.uj) {
+        res2 = await this.iratservice.Add(this.DtoEdited);
+      } else {
+        res2 = await this.iratservice.Update(this.DtoEdited);
+      }
+      if (res2.Error != null) {
+        throw res2.Error;
+      }
 
-        return this.iratservice.Get(res2.Result);
-      })
-      .then(res3 => {
-        if (res3.Error != null) {
-          throw res3.Error;
-        }
+      const res3 = await this.iratservice.Get(res2.Result);
+      if (res3.Error != null) {
+        throw res3.Error;
+      }
 
-        this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit(res3.Result[0]);
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+      this.spinner = false;
+      this.eventSzerkeszteskesz.emit(res3.Result[0]);
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
   onCancel() {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {VagolapDto} from './vagolapdto';
 import {VagolapMode} from './vagolapmode';
-import {IratDto} from '../../irat/iratdto';
+import {IratDto} from '../../02 Eszkozok/02 Irat/irat/iratdto';
 import {BizonylatDto} from '../../bizonylat/bizonylatdto';
 
 @Injectable({

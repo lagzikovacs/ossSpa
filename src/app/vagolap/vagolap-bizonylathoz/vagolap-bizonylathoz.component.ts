@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {VagolapService} from '../../05 Segedeszkozok/08 Vagolap/vagolap.service';
-import {IratDto} from '../../irat/iratdto';
+import {IratDto} from '../../02 Eszkozok/02 Irat/irat/iratdto';
 import {BizonylatDto} from '../../bizonylat/bizonylatdto';
 
 @Component({

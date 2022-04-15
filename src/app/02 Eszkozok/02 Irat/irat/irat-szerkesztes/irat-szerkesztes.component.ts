@@ -1,47 +1,61 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {IratService} from '../irat.service';
-import {IrattipusService} from '../../01 Torzsadatok/01 Irattipus/irattipus.service';
+import {IrattipusService} from '../../../../01 Torzsadatok/01 Irattipus/irattipus.service';
 import * as moment from 'moment';
-import {UgyfelService} from '../../01 Torzsadatok/09 Ugyfel/ugyfel.service';
-import {IratSzerkesztesMode} from '../iratszerkesztesmode';
-import {IrattipusZoomParam} from '../../01 Torzsadatok/01 Irattipus/irattipuszoomparam';
-import {EmptyResult} from '../../common/dtos/emptyresult';
-import {UgyfelZoomParam} from '../../01 Torzsadatok/09 Ugyfel/ugyfelzoomparam';
-import {ErrorService} from '../../common/errorbox/error.service';
-import {deepCopy} from '../../common/deepCopy';
-import {IrattipusDto} from '../../01 Torzsadatok/01 Irattipus/irattipusdto';
-import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
+import {UgyfelService} from '../../../../01 Torzsadatok/09 Ugyfel/ugyfel.service';
+import {IrattipusZoomParam} from '../../../../01 Torzsadatok/01 Irattipus/irattipuszoomparam';
+import {EmptyResult} from '../../../../common/dtos/emptyresult';
+import {UgyfelZoomParam} from '../../../../01 Torzsadatok/09 Ugyfel/ugyfelzoomparam';
+import {ErrorService} from '../../../../common/errorbox/error.service';
+import {deepCopy} from '../../../../common/deepCopy';
 import {IratDto} from '../iratdto';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {OnDestroyMixin, untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
+import {ModalService} from "../../../../common/modal/modal.service";
+import {IrattipusListComponent} from "../../../../01 Torzsadatok/01 Irattipus/irattipus-list/irattipus-list.component";
+import {UgyfelListComponent} from "../../../../01 Torzsadatok/09 Ugyfel/ugyfel-list/ugyfel-list.component";
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-irat-szerkesztes',
   templateUrl: './irat-szerkesztes.component.html'
 })
-export class IratSzerkesztesComponent implements OnInit, OnDestroy {
+export class IratSzerkesztesComponent extends OnDestroyMixin implements OnInit, OnDestroy {
+  @ViewChild('compcont_iratszerk', {read: ViewContainerRef}) vcr: ViewContainerRef;
+  modalname: string = 'modal_iratszerk';
+  bodyclass: string = '';
+
   @Input() uj = false;
   DtoEdited = new IratDto();
   @Input() set DtoOriginal(value: IratDto) {
     this.DtoEdited = deepCopy(value);
   }
   @Input() enUgyfel = true;
-  @Input() Ugyfelkod = null;
+  @Input() Ugyfelkod: number;
   @Output() eventSzerkeszteskesz = new EventEmitter<IratDto>();
-
-  SzerkesztesMode = IratSzerkesztesMode.Blank;
-
-  iratzoombox: any;
 
   form: FormGroup;
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   iratservice: IratService;
 
   constructor(private _irattipusservice: IrattipusService,
               private _ugyfelservice: UgyfelService,
               private _errorservice: ErrorService,
+              private _modalservice: ModalService,
+              private _cdr: ChangeDetectorRef,
               private _fb: FormBuilder,
               iratservice: IratService) {
+    super();
+
     this.iratservice = iratservice;
 
     this.form = this._fb.group({
@@ -59,10 +73,8 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
       this.form.addControl('kuldo', new FormControl('', [Validators.maxLength(100)]));
     }
 
-    this.iratzoombox = document.getElementById('iratzoombox');
-
     if (this.uj) {
-      this.eppFrissit = true;
+      this.spinner = true;
       this.iratservice.CreateNew()
         .then(res => {
           if (res.Error !== null) {
@@ -72,10 +84,10 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
           this.DtoEdited = res.Result[0];
           this.DtoEdited.Ugyfelkod = this.Ugyfelkod;
           this.updateform();
-          this.eppFrissit = false;
+          this.spinner = false;
         })
         .catch(err => {
-          this.eppFrissit = false;
+          this.spinner = false;
           this._errorservice.Error = err;
         });
     } else {
@@ -165,47 +177,62 @@ export class IratSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit(null);
+    this.eventSzerkeszteskesz.emit();
   }
 
   IrattipusZoom() {
     this.updatedto();
-    this.SzerkesztesMode = IratSzerkesztesMode.IrattipusZoom;
-    this.iratzoombox.style.display = 'block';
+
+    this.vcr.clear();
+    const C = this.vcr.createComponent(IrattipusListComponent);
+    C.instance.maszk = this.DtoEdited.Irattipus || '';
+    C.instance.eventSelectzoom.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+      this.DtoEdited.Irattipuskod = dto.Irattipuskod;
+      this.DtoEdited.Irattipus = dto.Irattipus1;
+      this.updateform();
+    });
+    C.instance.eventStopzoom.pipe(untilComponentDestroyed(this)).subscribe(() => {
+      this.vcr.clear();
+      this._modalservice.close(this.modalname);
+    });
+
+    this.bodyclass = 'jw-modal-body-primitive';
+    this._modalservice.open(this.modalname);
   }
-  onIrattipusSelectzoom(Dto: IrattipusDto) {
-    this.DtoEdited.Irattipuskod = Dto.Irattipuskod;
-    this.DtoEdited.Irattipus = Dto.Irattipus1;
-    this.updateform();
-  }
-  onIrattipusStopzoom() {
-    this.SzerkesztesMode = IratSzerkesztesMode.Blank;
-    this.iratzoombox.style.display = 'none';
-  }
+
 
   UgyfelZoom() {
     this.updatedto();
-    this.SzerkesztesMode = IratSzerkesztesMode.UgyfelZoom;
-    this.iratzoombox.style.display = 'block';
-  }
-  onUgyfelSelectzoom(Dto: UgyfelDto) {
-    this.DtoEdited.Ugyfelkod = Dto.Ugyfelkod;
-    this.DtoEdited.Ugyfelnev = Dto.Nev;
-    this.DtoEdited.Ugyfelcim = Dto.Cim;
-    this.updateform();
-  }
-  onUgyfelStopzoom() {
-    this.SzerkesztesMode = IratSzerkesztesMode.Blank;
-    this.iratzoombox.style.display = 'none';
-  }
-  UgyfelTorles() {
-    this.DtoEdited.Ugyfelkod = null;
-    this.DtoEdited.Ugyfelnev = null;
-    this.DtoEdited.Ugyfelcim = null;
-    this.updateform();
+
+    this.vcr.clear();
+    const C = this.vcr.createComponent(UgyfelListComponent);
+    C.instance.maszk = this.DtoEdited.Ugyfelnev || '';
+    C.instance.eventSelectzoom.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+      this.DtoEdited.Ugyfelkod = dto.Ugyfelkod;
+      this.DtoEdited.Ugyfelnev = dto.Nev;
+      this.DtoEdited.Ugyfelcim = dto.Cim;
+      this.updateform();
+    });
+    C.instance.eventStopzoom.pipe(untilComponentDestroyed(this)).subscribe(() => {
+      this.vcr.clear();
+      this._modalservice.close(this.modalname);
+    });
+
+    this.bodyclass = 'jw-modal-body-complex';
+    this._modalservice.open(this.modalname);
   }
 
-  ngOnDestroy() {
+
+  // UgyfelTorles() {
+  //   this.DtoEdited.Ugyfelkod = null;
+  //   this.DtoEdited.Ugyfelnev = null;
+  //   this.DtoEdited.Ugyfelcim = null;
+  //   this.updateform();
+  // }
+
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+
     Object.keys(this).map(k => {
       (this[k]) = null;
     });

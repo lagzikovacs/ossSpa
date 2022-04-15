@@ -9,7 +9,7 @@ import {ColumnSettingsResult} from '../common/reszletek/columnsettingsresult';
 import {ColumnSettings} from '../common/reszletek/columnsettings';
 import {HibabejelentesDto} from './hibabejelentesdto';
 import {HibabejelentesParameter} from './hibabejelentesparameter';
-import {IratResult} from '../irat/iratresult';
+import {IratResult} from '../02 Eszkozok/02 Irat/irat/iratresult';
 
 @Injectable({
   providedIn: 'root'

@@ -1,14 +1,14 @@
 import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
-import {IratService} from '../irat.service';
+import {IratService} from '../../02 Eszkozok/02 Irat/irat/irat.service';
 import {SzMT} from '../../common/dtos/szmt';
 import {Szempont} from '../../common/enums/szempont';
-import {IratDto} from '../iratdto';
+import {IratDto} from '../../02 Eszkozok/02 Irat/irat/iratdto';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {JogKod} from '../../common/enums/jogkod';
 import {ErrorService} from '../../common/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
-import {IratParameter} from '../iratparameter';
+import {IratParam} from '../../02 Eszkozok/02 Irat/irat/iratparam';
 import {propCopy} from '../../common/propCopy';
 
 @Component({
@@ -33,7 +33,7 @@ export class IratListComponent implements OnDestroy {
   szempont2 = 0;
   minta = '';
   minta2 = '';
-  ip = new IratParameter(0, environment.lapmeret);
+  ip = new IratParam(0, environment.lapmeret);
   elsokereses = true;
   OsszesRekord = 0;
   jog = false;

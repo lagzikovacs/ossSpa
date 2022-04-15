@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {IratService} from '../../irat/irat.service';
+import {IratService} from '../../02 Eszkozok/02 Irat/irat/irat.service';
 import {FotozasService} from '../fotozas.service';
 import * as moment from 'moment';
 import {environment} from '../../../environments/environment';
 import {ErrorService} from '../../common/errorbox/error.service';
 import {deepCopy} from '../../common/deepCopy';
-import {IratDto} from '../../irat/iratdto';
+import {IratDto} from '../../02 Eszkozok/02 Irat/irat/iratdto';
 import {EgyMode} from '../../common/enums/egymode';
 import {rowanimation} from '../../animation/rowAnimation';
 

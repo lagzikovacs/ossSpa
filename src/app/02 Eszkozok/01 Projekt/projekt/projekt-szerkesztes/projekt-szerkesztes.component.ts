@@ -27,10 +27,9 @@ import {UgyfelListComponent} from "../../../../01 Torzsadatok/09 Ugyfel/ugyfel-l
   templateUrl: './projekt-szerkesztes.component.html'
 })
 export class ProjektSzerkesztesComponent extends OnDestroyMixin implements OnInit, OnDestroy {
-  @ViewChild('compcont_projektszerkprim', {read: ViewContainerRef}) vcrprim: ViewContainerRef;
-  modalnameprim = 'modal_ugyfelszerkprim';
-  @ViewChild('compcont_projektszerkcomp', {read: ViewContainerRef}) vcrcomp: ViewContainerRef;
-  modalnamecomp = 'modal_ugyfelszerkcomp';
+  @ViewChild('compcont_projektszerk', {read: ViewContainerRef}) vcr: ViewContainerRef;
+  modalname: string = 'modal_projektszerk';
+  bodyclass: string = '';
 
   @Input() uj = false;
   DtoEdited = new ProjektDto();
@@ -176,8 +175,8 @@ export class ProjektSzerkesztesComponent extends OnDestroyMixin implements OnIni
   UgyfelZoom() {
     this.updatedto();
 
-    this.vcrcomp.clear();
-    const C = this.vcrcomp.createComponent(UgyfelListComponent);
+    this.vcr.clear();
+    const C = this.vcr.createComponent(UgyfelListComponent);
     C.instance.maszk = this.DtoEdited.Ugyfelnev || '';
     C.instance.eventSelectzoom.pipe(untilComponentDestroyed(this)).subscribe(dto => {
       this.DtoEdited.Ugyfelkod = dto.Ugyfelkod;
@@ -186,18 +185,19 @@ export class ProjektSzerkesztesComponent extends OnDestroyMixin implements OnIni
       this.updateform();
     });
     C.instance.eventStopzoom.pipe(untilComponentDestroyed(this)).subscribe(() => {
-      this.vcrcomp.clear();
-      this._modalservice.close(this.modalnamecomp);
+      this.vcr.clear();
+      this._modalservice.close(this.modalname);
     });
 
-    this._modalservice.open(this.modalnamecomp);
+    this.bodyclass = 'jw-modal-body-complex';
+    this._modalservice.open(this.modalname);
   }
 
   PenznemZoom() {
     this.updatedto();
 
-    this.vcrprim.clear();
-    const C = this.vcrprim.createComponent(PenznemListComponent);
+    this.vcr.clear();
+    const C = this.vcr.createComponent(PenznemListComponent);
     C.instance.maszk = this.DtoEdited.Penznem || '';
     C.instance.eventSelectzoom.pipe(untilComponentDestroyed(this)).subscribe(dto => {
       this.DtoEdited.Penznemkod = dto.Penznemkod;
@@ -205,11 +205,12 @@ export class ProjektSzerkesztesComponent extends OnDestroyMixin implements OnIni
       this.updateform();
     });
     C.instance.eventStopzoom.pipe(untilComponentDestroyed(this)).subscribe(() => {
-      this.vcrprim.clear();
-      this._modalservice.close(this.modalnameprim);
+      this.vcr.clear();
+      this._modalservice.close(this.modalname);
     });
 
-    this._modalservice.open(this.modalnameprim);
+    this.bodyclass = 'jw-modal-body-primitive';
+    this._modalservice.open(this.modalname);
   }
 
   override ngOnDestroy(): void {

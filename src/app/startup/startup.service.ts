@@ -4,7 +4,7 @@ import {LogonService} from '../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {CsoportService} from '../05 Segedeszkozok/04 Csoport/csoport.service';
 import {SessionService} from '../session/session.service';
 import {ProjektService} from '../02 Eszkozok/01 Projekt/projekt/projekt.service';
-import {IratService} from '../irat/irat.service';
+import {IratService} from '../02 Eszkozok/02 Irat/irat/irat.service';
 import {AfakulcsService} from '../01 Torzsadatok/05 Afakulcs/afakulcs.service';
 import {FelhasznaloService} from '../05 Segedeszkozok/03 Felhasznalo/felhasznalo.service';
 import {FizetesimodService} from '../01 Torzsadatok/02 Fizetesimod/fizetesimod.service';

@@ -68,10 +68,7 @@
     </div>
   </form>
 
-  <jw-modal [id]="modalnameprim" bodyclass="jw-modal-body-primitive">
-    <ng-template #compcont_projektszerkprim></ng-template>
-  </jw-modal>
-  <jw-modal [id]="modalnamecomp" bodyclass="jw-modal-body-complex">
-    <ng-template #compcont_projektszerkcomp></ng-template>
+  <jw-modal [id]="modalname" [bodyclass]="bodyclass">
+    <ng-template #compcont_projektszerk></ng-template>
   </jw-modal>
 </div>

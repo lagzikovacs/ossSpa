@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
-import {IratService} from '../irat.service';
+import {IratService} from '../../02 Eszkozok/02 Irat/irat/irat.service';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
 import {ProjektService} from '../../02 Eszkozok/01 Projekt/projekt/projekt.service';
 import {ProjektResult} from '../../02 Eszkozok/01 Projekt/projekt/projektresult';
@@ -10,7 +10,7 @@ import {JogKod} from '../../common/enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
 import {ErrorService} from '../../common/errorbox/error.service';
 import {EgyMode} from '../../common/enums/egymode';
-import {IratDto} from '../iratdto';
+import {IratDto} from '../../02 Eszkozok/02 Irat/irat/iratdto';
 import {propCopy} from '../../common/propCopy';
 import {deepCopy} from '../../common/deepCopy';
 import {ProjektDto} from '../../02 Eszkozok/01 Projekt/projekt/projektdto';

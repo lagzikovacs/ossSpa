@@ -32,9 +32,9 @@
           <div class="editform-label">Ügyfél</div>
           <input type="text" class="editform-edit zoomedit ugyfelwidth" formControlName="ugyfelnev">
           <button class="toolbutton" type="button" (click)="UgyfelZoom()">...</button>
-          <button class="toolbutton" (click)="UgyfelTorles()" type="button">
-            <i class="fa fa-close" aria-hidden="true"></i>
-          </button>
+          <!--<button class="toolbutton" (click)="UgyfelTorles()" type="button">-->
+            <!--<i class="fa fa-close" aria-hidden="true"></i>-->
+          <!--</button>-->
         </div>
 
         <div class="editform-row">
@@ -60,21 +60,7 @@
     </div>
   </form>
 
-  <div id="iratzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
-    <ng-container *ngIf="SzerkesztesMode === 1">
-      <div class="zoom-modal-content-primitive">
-        <app-irattipus-list [maszk]="DtoEdited.Irattipus || ''"
-                            (eventSelectzoom)="onIrattipusSelectzoom($event)"
-                            (eventStopzoom)="onIrattipusStopzoom()"></app-irattipus-list>
-      </div>
-    </ng-container>
-
-    <ng-container *ngIf="SzerkesztesMode === 2">
-      <div class="zoom-modal-content-complex">
-        <app-ugyfel-list [maszk]="DtoEdited.Ugyfelnev || ''"
-                         (eventSelectzoom)="onUgyfelSelectzoom($event)"
-                         (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>
-      </div>
-    </ng-container>
-  </div>
+  <jw-modal [id]="modalname" [bodyclass]="bodyclass">
+    <ng-template #compcont_iratszerk></ng-template>
+  </jw-modal>
 </div>

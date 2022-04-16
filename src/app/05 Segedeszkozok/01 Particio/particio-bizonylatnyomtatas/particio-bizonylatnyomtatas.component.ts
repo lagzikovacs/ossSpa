@@ -1,19 +1,20 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {ParticioDto} from '../../05 Segedeszkozok/01 Particio/particiodto';
-import {BizonylatConf} from '../../05 Segedeszkozok/01 Particio/bizonylatconf';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {ParticioDto} from '../particiodto';
+import {BizonylatConf} from '../bizonylatconf';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-particio-bizonylatnyomtatas',
   templateUrl: './particio-bizonylatnyomtatas.component.html'
 })
 export class ParticioBizonylatComponent implements OnInit, OnDestroy {
-  @Input() Dto: ParticioDto;
+  @Input() Dto: ParticioDto = new ParticioDto();
   @Output() eventOk = new EventEmitter<ParticioDto>();
   @Output() eventCancel = new EventEmitter<void>();
 
   form: FormGroup;
-  cBizonylat: BizonylatConf;
+  cBizonylat: BizonylatConf = new BizonylatConf();
 
   constructor(private _fb: FormBuilder) {
 

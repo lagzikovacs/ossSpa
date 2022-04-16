@@ -164,7 +164,7 @@ import {BizonylattetelSzerkesztesComponent} from './03 Bizonylatok/bizonylattete
 import { AjanlatTablaComponent } from './ajanlat/ajanlat-tabla/ajanlat-tabla.component';
 import { HscrollDirective } from './directives/divhscroll.directive';
 import {SpinnerDirective} from './directives/spinner.directive';
-import { ParticioEmailComponent } from './particio/particio-email/particio-email.component';
+import { ParticioEmailComponent } from './05 Segedeszkozok/01 Particio/particio-email/particio-email.component';
 import {TevekenysegService} from './01 Torzsadatok/08 Tevekenyseg/tevekenyseg.service';
 import {TevekenysegSzerkesztesComponent} from './01 Torzsadatok/08 Tevekenyseg/tevekenyseg-szerkesztes/tevekenyseg-szerkesztes.component';
 import {TevekenysegListComponent} from './01 Torzsadatok/08 Tevekenyseg/tevekenyseg-list/tevekenyseg-list.component';

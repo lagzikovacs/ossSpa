@@ -6,7 +6,7 @@
     <div class="editform-card">
       <div class="editform-row">
           <div class="editform-label">Konfiguráció</div>
-          <select type="text" class="editform-combo" (change)="selectedchange($event.target.value)" formControlName="konfiguracio">
+          <select class="editform-combo" (change)="selectedchange($event)" formControlName="konfiguracio">
             <option *ngFor="let s of entries; let i = index" [value]="i">{{s}}</option>
           </select>
       </div>
@@ -49,8 +49,8 @@
       <div class="editform-row">
         <div class="editform-label">Ssl</div>
         <select type="text" class="editform-combo" formControlName="ssl">
-          <option value="false">Nem</option>
-          <option value="true">Igen</option>
+          <option [ngValue]="false">Nem</option>
+          <option [ngValue]="true">Igen</option>
         </select>
       </div>
     </div>

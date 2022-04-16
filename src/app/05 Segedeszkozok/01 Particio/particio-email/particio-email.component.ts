@@ -1,14 +1,15 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {ParticioDto} from '../../05 Segedeszkozok/01 Particio/particiodto';
-import {EmailConf} from '../../05 Segedeszkozok/01 Particio/emailconf';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {ParticioDto} from '../particiodto';
+import {EmailConf} from '../emailconf';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-particio-email',
   templateUrl: './particio-email.component.html'
 })
 export class ParticioEmailComponent implements OnInit, OnDestroy {
-  @Input() Dto: ParticioDto;
+  @Input() Dto: ParticioDto = new ParticioDto();
   @Output() eventOk = new EventEmitter<ParticioDto>();
   @Output() eventCancel = new EventEmitter<void>();
 
@@ -16,7 +17,7 @@ export class ParticioEmailComponent implements OnInit, OnDestroy {
   selected = 0;
 
   form: FormGroup;
-  cEmails: EmailConf[];
+  cEmails: EmailConf[] = new Array<EmailConf>();
 
   constructor(private _fb: FormBuilder) {
 

@@ -62,7 +62,7 @@ import { KeszletComponent } from './riport/keszlet/keszlet.component';
 import { NgmComponent } from './ngm/ngm.component';
 import { ParticioSzallitoComponent } from './particio/particio-kibocsato/particio-kibocsato.component';
 import { ParticioBizonylatComponent } from './05 Segedeszkozok/01 Particio/particio-bizonylatnyomtatas/particio-bizonylatnyomtatas.component';
-import { ParticioProjektiratmintaComponent } from './particio/particio-projektiratminta/particio-projektiratminta.component';
+import { ParticioProjektiratmintaComponent } from './05 Segedeszkozok/01 Particio/particio-projektiratminta/particio-projektiratminta.component';
 import { ParticioVolumeComponent } from './05 Segedeszkozok/01 Particio/particio-volume/particio-volume.component';
 import { FizetesimodListComponent } from './01 Torzsadatok/02 Fizetesimod/fizetesimod-list/fizetesimod-list.component';
 import { PenznemListComponent } from './01 Torzsadatok/03 Penznem/penznem-list/penznem-list.component';

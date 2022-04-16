@@ -1,19 +1,20 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {ParticioDto} from '../../05 Segedeszkozok/01 Particio/particiodto';
-import {ProjektConf} from '../../05 Segedeszkozok/01 Particio/projektconf';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {ParticioDto} from '../particiodto';
+import {ProjektConf} from '../projektconf';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-particio-projektiratminta',
   templateUrl: './particio-projektiratminta.component.html'
 })
 export class ParticioProjektiratmintaComponent implements OnInit, OnDestroy {
-  @Input() Dto: ParticioDto;
+  @Input() Dto: ParticioDto = new ParticioDto();
   @Output() eventOk = new EventEmitter<ParticioDto>();
   @Output() eventCancel = new EventEmitter<void>();
 
   form: FormGroup;
-  cProjekt: ProjektConf;
+  cProjekt: ProjektConf = new ProjektConf();
 
   constructor(private _fb: FormBuilder) {
 

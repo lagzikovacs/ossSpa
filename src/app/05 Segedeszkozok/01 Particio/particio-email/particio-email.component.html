@@ -7,7 +7,7 @@
       <div class="editform-row">
           <div class="editform-label">Konfiguráció</div>
           <select class="editform-combo" (change)="selectedchange($event)" formControlName="konfiguracio">
-            <option *ngFor="let s of entries; let i = index" [value]="i">{{s}}</option>
+            <option *ngFor="let s of entries; let i = index" [ngValue]="i">{{s}}</option>
           </select>
       </div>
     </div>

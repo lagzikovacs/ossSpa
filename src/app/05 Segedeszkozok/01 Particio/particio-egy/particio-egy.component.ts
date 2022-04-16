@@ -6,13 +6,13 @@ import {ParticioService} from '../particio.service';
 import {ParticioDto} from '../particiodto';
 import {deepCopy} from '../../../common/deepCopy';
 import {EgyMode} from '../../../common/enums/egymode';
-import {ParticioKibocsatoComponent} from "../particio-kibocsato/particio-kibocsato.component";
-import {ParticioBizonylatComponent} from "../particio-bizonylatnyomtatas/particio-bizonylatnyomtatas.component";
-import {OnDestroyMixin, untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
-import {ParticioProjektiratmintaComponent} from "../particio-projektiratminta/particio-projektiratminta.component";
-import {ParticioVolumeComponent} from "../particio-volume/particio-volume.component";
-import {ParticioEmailComponent} from "../particio-email/particio-email.component";
-import {ErrorService} from "../../../common/errorbox/error.service";
+import {ParticioKibocsatoComponent} from '../particio-kibocsato/particio-kibocsato.component';
+import {ParticioBizonylatComponent} from '../particio-bizonylatnyomtatas/particio-bizonylatnyomtatas.component';
+import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
+import {ParticioProjektiratmintaComponent} from '../particio-projektiratminta/particio-projektiratminta.component';
+import {ParticioVolumeComponent} from '../particio-volume/particio-volume.component';
+import {ParticioEmailComponent} from '../particio-email/particio-email.component';
+import {ErrorService} from '../../../common/errorbox/error.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -115,7 +115,7 @@ export class ParticioEgyComponent extends OnDestroyMixin implements OnInit, OnDe
       this._errorservice.Error = err;
     }
   }
-  
+
   doCancel() {
     this.Dto = deepCopy(this.Ori);
     this.doNav(0);

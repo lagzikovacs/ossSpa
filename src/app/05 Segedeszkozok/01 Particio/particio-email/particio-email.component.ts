@@ -40,6 +40,7 @@ export class ParticioEmailComponent implements OnInit, OnDestroy {
       if (this.cEmails === null) { // null, ha a mező is null
         throw new Error();
       }
+
     } catch (ex) {
       this.cEmails = new Array<EmailConf>();
       this.cEmails.push(new EmailConf());
@@ -68,11 +69,13 @@ export class ParticioEmailComponent implements OnInit, OnDestroy {
     this.form.controls['customport'].setValue(this.cEmails[this.selected].CustomPort);
     this.form.controls['ssl'].setValue(this.cEmails[this.selected].Ssl);
   }
-  selectedchange(i) {
+
+  selectedchange(e) {
     this.updateconf();
-    this.selected = i;
+    this.selected = this.form.value['konfiguracio'];
     this.updateform();
   }
+
   updateconf() {
     this.cEmails[this.selected].Azonosito = this.form.value['azonosito'];
     this.cEmails[this.selected].Jelszo = this.form.value['jelszo'];

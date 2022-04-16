@@ -97,7 +97,7 @@ import { ProjektJegyzetSzerkesztesComponent } from './projektjegyzet/projekt-jeg
 import { ProjektkapcsolatUjbizonylatComponent } from './projektkapcsolat/projektkapcsolat-ujbizonylat/projektkapcsolat-ujbizonylat.component';
 import { AjanlatComponent } from './ajanlat/ajanlat/ajanlat';
 import { VolumeListComponent } from './volume/volume-list/volume-list.component';
-import { ParticioEgyComponent } from './particio/particio-egy/particio-egy.component';
+import { ParticioEgyComponent } from './05 Segedeszkozok/01 Particio/particio-egy/particio-egy.component';
 import { HelysegListComponent } from './01 Torzsadatok/07 Helyseg/helyseg-list/helyseg-list.component';
 import {PenztartetelListComponent} from './penztartetel/penztartetel-list/penztartetel-list.component';
 import {PenztarExportComponent} from './penztar/penztar-export/penztar-export.component';

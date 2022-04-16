@@ -1,19 +1,20 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {ParticioDto} from '../../05 Segedeszkozok/01 Particio/particiodto';
-import {SzallitoConf} from '../../05 Segedeszkozok/01 Particio/szallitoconf';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {ParticioDto} from '../particiodto';
+import {SzallitoConf} from '../szallitoconf';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-particio-kibocsato',
   templateUrl: './particio-kibocsato.component.html'
 })
-export class ParticioSzallitoComponent implements OnInit, OnDestroy {
-  @Input() Dto: ParticioDto;
+export class ParticioKibocsatoComponent implements OnInit, OnDestroy {
+  @Input() Dto: ParticioDto = new ParticioDto;
   @Output() eventOk = new EventEmitter<ParticioDto>();
   @Output() eventCancel = new EventEmitter<void>();
 
   form: FormGroup;
-  cSzallito: SzallitoConf;
+  cSzallito: SzallitoConf = new SzallitoConf();
 
   constructor(private _fb: FormBuilder) {
 

@@ -60,7 +60,6 @@ import { TartozasComponent } from './riport/tartozas/tartozas.component';
 import { BeszerzesComponent } from './riport/beszerzes/beszerzes.component';
 import { KeszletComponent } from './riport/keszlet/keszlet.component';
 import { NgmComponent } from './ngm/ngm.component';
-import { ParticioSzallitoComponent } from './particio/particio-kibocsato/particio-kibocsato.component';
 import { ParticioBizonylatComponent } from './05 Segedeszkozok/01 Particio/particio-bizonylatnyomtatas/particio-bizonylatnyomtatas.component';
 import { ParticioProjektiratmintaComponent } from './05 Segedeszkozok/01 Particio/particio-projektiratminta/particio-projektiratminta.component';
 import { ParticioVolumeComponent } from './05 Segedeszkozok/01 Particio/particio-volume/particio-volume.component';
@@ -215,7 +214,8 @@ import {CikkEgyComponent} from './01 Torzsadatok/06 Cikk/cikk-egy/cikk-egy.compo
 import {UgyfelEgyComponent} from './01 Torzsadatok/09 Ugyfel/ugyfel-egy/ugyfel-egy.component';
 import {UgyfelEgyToolbarComponent} from './01 Torzsadatok/09 Ugyfel/ugyfel-egy-toolbar/ugyfel-egy-toolbar.component';
 import {UgyfelterLinkComponent} from './01 Torzsadatok/09 Ugyfel/ugyfelter-link/ugyfelter-link.component';
-import {BizonylattetelService} from "./03 Bizonylatok/bizonylattetel/bizonylattetel.service";
+import {BizonylattetelService} from './03 Bizonylatok/bizonylattetel/bizonylattetel.service';
+import {ParticioKibocsatoComponent} from "./05 Segedeszkozok/01 Particio/particio-kibocsato/particio-kibocsato.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -329,7 +329,7 @@ if (environment.production) {
     BeszerzesComponent,
     KeszletComponent,
     NgmComponent,
-    ParticioSzallitoComponent,
+    ParticioKibocsatoComponent,
     ParticioBizonylatComponent,
     ParticioProjektiratmintaComponent,
     ParticioVolumeComponent,

@@ -72,31 +72,30 @@ export class FelhasznaloListComponent implements OnInit, OnDestroy {
     this.onKeresesTovabb();
   }
 
-  onKeresesTovabb() {
+  async onKeresesTovabb() {
     this.spinner = true;
-    this.felhasznaloservice.Read(this.ekDto.minta)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+    try {
+      const res = await this.felhasznaloservice.Read(this.ekDto.minta);
+      if (res.Error != null) {
+        throw res.Error;
+      }
 
-        if (this.elsokereses) {
-          this.Dto = res.Result;
-          this.elsokereses = false;
-        } else {
-          const buf = [...this.Dto];
-          res.Result.forEach(element => {
-            buf.push(element);
-          });
-          this.Dto = buf;
-        }
+      if (this.elsokereses) {
+        this.Dto = res.Result;
+        this.elsokereses = false;
+      } else {
+        const buf = [...this.Dto];
+        res.Result.forEach(element => {
+          buf.push(element);
+        });
+        this.Dto = buf;
+      }
 
-        this.spinner = false;
-      })
-      .catch(err => {
-        this.spinner = false;
-        this._errorservice.Error = err;
-      });
+      this.spinner = false;
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
   onId(i: number) {

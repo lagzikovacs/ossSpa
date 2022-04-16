@@ -161,7 +161,7 @@ import { ErrorboxComponent } from './common/errorbox/errorbox.component';
 import { UgyfelterProjektTablaComponent } from './ugyfelter/ugyfelter-projekt-tabla/ugyfelter-projekt-tabla.component';
 import { ProjektkapcsolatTablaComponent } from './projektkapcsolat/projektkapcsolat-tabla/projektkapcsolat-tabla.component';
 import { BizonylatkapcsolatTablaComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-tabla/bizonylatkapcsolat-tabla.component';
-import {BizonylattetelSzerkesztesComponent} from './bizonylat/bizonylattetel-szerkesztes/bizonylattetel-szerkesztes.component';
+import {BizonylattetelSzerkesztesComponent} from './03 Bizonylatok/bizonylattetel/bizonylattetel-szerkesztes/bizonylattetel-szerkesztes.component';
 import { AjanlatTablaComponent } from './ajanlat/ajanlat-tabla/ajanlat-tabla.component';
 import { HscrollDirective } from './directives/divhscroll.directive';
 import {SpinnerDirective} from './directives/spinner.directive';
@@ -215,6 +215,7 @@ import {CikkEgyComponent} from './01 Torzsadatok/06 Cikk/cikk-egy/cikk-egy.compo
 import {UgyfelEgyComponent} from './01 Torzsadatok/09 Ugyfel/ugyfel-egy/ugyfel-egy.component';
 import {UgyfelEgyToolbarComponent} from './01 Torzsadatok/09 Ugyfel/ugyfel-egy-toolbar/ugyfel-egy-toolbar.component';
 import {UgyfelterLinkComponent} from './01 Torzsadatok/09 Ugyfel/ugyfelter-link/ugyfelter-link.component';
+import {BizonylattetelService} from "./03 Bizonylatok/bizonylattetel/bizonylattetel.service";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -497,6 +498,7 @@ if (environment.production) {
     AjanlatkeresService,
 
     BizonylatService,
+    BizonylattetelService,
     RiportService,
 
     ParticioService,

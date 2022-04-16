@@ -18,7 +18,7 @@ import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 import {BizonylatTipus} from '../bizonylattipus';
 import {BizonylatComplexDto} from '../bizonylatcomplexdto';
 import {BizonylatDto} from '../bizonylatdto';
-import {BizonylatTetelDto} from '../bizonylatteteldto';
+import {BizonylatTetelDto} from '../../03 Bizonylatok/bizonylattetel/bizonylatteteldto';
 import {BizonylatAfaDto} from '../bizonylatafadto';
 import {BizonylatTermekdijDto} from '../bizonylattermekdijdto';
 import {BizonylatteteltablaComponent} from '../bizonylatteteltabla/bizonylatteteltabla.component';

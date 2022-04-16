@@ -103,48 +103,9 @@
       <button class="toolbutton okbutton" type="button" [disabled]="formTetel.invalid" (click)="onSubmit()">Ok</button>
       <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
     </div>
-
   </div>
 
-<!--  export enum BizonylattetelSzerkesztesMode {
-  Blank = 0,
-  CikkZoom = 1,
-  MeZoom = 2,
-  AfakulcsZoom = 3,
-  TermekdijZoom = 4
-  }-->
-
-  <div id="bizonylattetelzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
-    <ng-container *ngIf="TetelSzerkesztesMode === 1">
-      <div class="zoom-modal-content-complex">
-        <app-cikk-list [maszk]="TetelDtoEdited.Megnevezes || ''"
-                       (eventSelectzoom)="onCikkSelectzoom($event)"
-                       (eventStopzoom)="onCikkStopzoom()"></app-cikk-list>
-      </div>
-    </ng-container>
-
-    <ng-container *ngIf="TetelSzerkesztesMode === 2">
-      <div class="zoom-modal-content-primitive">
-        <app-me-list [maszk]="TetelDtoEdited.Me || ''"
-                     (eventSelectzoom)="onMeSelectzoom($event)"
-                     (eventStopzoom)="onMeStopzoom()"></app-me-list>
-      </div>
-    </ng-container>
-
-    <ng-container *ngIf="TetelSzerkesztesMode === 3">
-      <div class="zoom-modal-content-primitive">
-        <app-afakulcs-list [maszk]="TetelDtoEdited.Afakulcs || ''"
-                           (eventSelectzoom)="onAfakulcsSelectzoom($event)"
-                           (eventStopzoom)="onAfakulcsStopzoom()"></app-afakulcs-list>
-      </div>
-    </ng-container>
-
-    <ng-container *ngIf="TetelSzerkesztesMode === 4">
-      <div class="zoom-modal-content-primitive">
-        <app-termekdij-list [maszk]="TetelDtoEdited.Termekdijkt || ''"
-                            (eventSelectzoom)="onTermekdijSelectzoom($event)"
-                            (eventStopzoom)="onTermekdijStopzoom()"></app-termekdij-list>
-      </div>
-    </ng-container>
-  </div>
+  <jw-modal [id]="modalname" [bodyclass]="bodyclass">
+    <ng-template #compcont_bizonylattetelszerk></ng-template>
+  </jw-modal>
 </div>

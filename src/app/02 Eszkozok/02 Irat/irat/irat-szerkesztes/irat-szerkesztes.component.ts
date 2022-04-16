@@ -17,7 +17,7 @@ import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestro
 import {ModalService} from '../../../../common/modal/modal.service';
 import {IrattipusListComponent} from '../../../../01 Torzsadatok/01 Irattipus/irattipus-list/irattipus-list.component';
 import {UgyfelListComponent} from '../../../../01 Torzsadatok/09 Ugyfel/ugyfel-list/ugyfel-list.component';
-import {NumberResult} from "../../../../common/dtos/numberresult";
+import {NumberResult} from '../../../../common/dtos/numberresult';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

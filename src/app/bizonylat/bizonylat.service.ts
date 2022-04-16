@@ -9,13 +9,11 @@ import {BizonylatTipusLeiroResult} from './bizonylattipusleiroresult';
 import {EmptyResult} from '../common/dtos/emptyresult';
 import {BizonylatParameter} from './bizonylatparameter';
 import {BizonylatResult} from './bizonylatresult';
-import {BizonylatTetelDto} from './bizonylatteteldto';
 import {NumberResult} from '../common/dtos/numberresult';
 import {BizonylatMintaAlapjanParam} from './bizonylatmintaalapjan';
 import {BizonylatKibocsatasParam} from './bizonylatkibocsatasparam';
 import {BizonylatComplexDto} from './bizonylatcomplexdto';
-import {BizonylatTetelResult} from './bizonylattetelresult';
-import {BruttobolParam} from './bruttobolparam';
+import {BizonylatTetelResult} from '../03 Bizonylatok/bizonylattetel/bizonylattetelresult';
 import {FuvardijParam} from './fuvardijparam';
 import {BizonylatZoomParameter} from './bizonylatzoomparameter';
 
@@ -111,18 +109,6 @@ export class BizonylatService {
   public Kibocsatas(par: BizonylatKibocsatasParam): Promise<NumberResult> {
     return this._httpClient.post<NumberResult>(
       this._controller + 'kibocsatas', par, this._logonservice.httpoptions())
-      .toPromise();
-  }
-
-  public BizonylattetelCalc(dto: BizonylatTetelDto): Promise<BizonylatTetelResult> {
-    return this._httpClient.post<BizonylatTetelResult>(
-      this._controller + 'bizonylattetelcalc', dto, this._logonservice.httpoptions())
-      .toPromise();
-  }
-
-  public Bruttobol(par: BruttobolParam): Promise<BizonylatTetelResult> {
-    return this._httpClient.post<BizonylatTetelResult>(
-      this._controller + 'bruttobol', par, this._logonservice.httpoptions())
       .toPromise();
   }
 

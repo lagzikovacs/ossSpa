@@ -3,7 +3,7 @@ import {BizonylatService} from '../bizonylat.service';
 import {ErrorService} from '../../common/errorbox/error.service';
 import {BizonylatComplexDto} from '../bizonylatcomplexdto';
 import {BizonylatDto} from '../bizonylatdto';
-import {BizonylatTetelDto} from '../bizonylatteteldto';
+import {BizonylatTetelDto} from '../../03 Bizonylatok/bizonylattetel/bizonylatteteldto';
 import {BizonylatAfaDto} from '../bizonylatafadto';
 import {BizonylatTermekdijDto} from '../bizonylattermekdijdto';
 import {BizonylatTipusLeiro} from '../bizonylattipusleiro';

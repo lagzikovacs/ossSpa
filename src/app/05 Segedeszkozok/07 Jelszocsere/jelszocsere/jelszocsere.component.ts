@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
-import {FelhasznaloService} from '../../05 Segedeszkozok/03 Felhasznalo/felhasznalo.service';
+import {FelhasznaloService} from '../../03 Felhasznalo/felhasznalo.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ErrorService} from '../../common/errorbox/error.service';
+import {ErrorService} from '../../../common/errorbox/error.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -39,7 +39,7 @@ export class JelszocsereComponent implements OnDestroy {
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     this.regijelszo = this.form.value['regijelszo'];
     this.jelszo = this.form.value['jelszo'];
     this.jelszoujra = this.form.value['jelszoujra'];
@@ -50,19 +50,18 @@ export class JelszocsereComponent implements OnDestroy {
     }
 
     this.spinner = true;
-    this.felhasznaloservice.JelszoCsere(this.regijelszo, this.jelszo)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+    try {
+      const res = await this.felhasznaloservice.JelszoCsere(this.regijelszo, this.jelszo);
+      if (res.Error != null) {
+        throw res.Error;
+      }
 
-        this.spinner = false;
-        this._router.navigate(['../bejelentkezes'], {relativeTo: this._route});
-      })
-      .catch(err => {
-        this.spinner = false;
-        this._errorservice.Error = err;
-      });
+      this.spinner = false;
+      this._router.navigate(['../bejelentkezes'], {relativeTo: this._route});
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
   onCancel() {

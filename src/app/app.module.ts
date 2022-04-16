@@ -48,7 +48,7 @@ import { CsoportListComponent } from './csoport/csoport-list/csoport-list.compon
 import { CsoportSzerkesztesComponent } from './csoport/csoport-szerkesztes/csoport-szerkesztes.component';
 import { CsoportFelhasznaloComponent } from './csoport/csoport-felhasznalo/csoport-felhasznalo.component';
 import { CsoportJogComponent } from './csoport/csoport-jog/csoport-jog.component';
-import { VolumeTesztComponent } from './volume/volume-teszt/volume-teszt.component';
+import { VolumeTesztComponent } from './05 Segedeszkozok/02 Volume/volume-teszt/volume-teszt.component';
 import { AjanlatkeresListComponent } from './ajanlatkeres/ajanlatkeres-list/ajanlatkeres-list.component';
 import { ProjektEmailalapjanComponent } from './projekt/projekt-emailalapjan/projekt-emailalapjan.component';
 import { ProjektTablaComponent } from './projekt/projekttabla/projekt-tabla.component';
@@ -96,7 +96,7 @@ import { ProjektStatuszComponent } from './projekt/projekt-statusz/projekt-statu
 import { ProjektJegyzetSzerkesztesComponent } from './projektjegyzet/projekt-jegyzet-szerkesztes/projekt-jegyzet-szerkesztes.component';
 import { ProjektkapcsolatUjbizonylatComponent } from './projektkapcsolat/projektkapcsolat-ujbizonylat/projektkapcsolat-ujbizonylat.component';
 import { AjanlatComponent } from './ajanlat/ajanlat/ajanlat';
-import { VolumeListComponent } from './volume/volume-list/volume-list.component';
+import { VolumeListComponent } from './05 Segedeszkozok/02 Volume/volume-list/volume-list.component';
 import { ParticioEgyComponent } from './05 Segedeszkozok/01 Particio/particio-egy/particio-egy.component';
 import { HelysegListComponent } from './01 Torzsadatok/07 Helyseg/helyseg-list/helyseg-list.component';
 import {PenztartetelListComponent} from './penztartetel/penztartetel-list/penztartetel-list.component';
@@ -216,6 +216,7 @@ import {UgyfelEgyToolbarComponent} from './01 Torzsadatok/09 Ugyfel/ugyfel-egy-t
 import {UgyfelterLinkComponent} from './01 Torzsadatok/09 Ugyfel/ugyfelter-link/ugyfelter-link.component';
 import {BizonylattetelService} from './03 Bizonylatok/bizonylattetel/bizonylattetel.service';
 import {ParticioKibocsatoComponent} from "./05 Segedeszkozok/01 Particio/particio-kibocsato/particio-kibocsato.component";
+import {VolumeEgyComponent} from "./05 Segedeszkozok/02 Volume/volume-egy/volume-egy.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -457,6 +458,7 @@ if (environment.production) {
     CikkEgyComponent,
     UgyfelEgyComponent,
     UgyfelEgyToolbarComponent,
+    VolumeEgyComponent,
   ],
   imports: [
     BrowserModule,

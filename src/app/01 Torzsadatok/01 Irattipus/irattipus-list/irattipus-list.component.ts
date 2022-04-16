@@ -10,7 +10,6 @@ import {ErrorService} from '../../../common/errorbox/error.service';
 import {environment} from '../../../../environments/environment';
 import {IrattipusDto} from '../irattipusdto';
 import {deepCopy} from '../../../common/deepCopy';
-import {EgyMode} from '../../../common/enums/egymode';
 import {propCopy} from '../../../common/propCopy';
 import {EgyszeruKeresesParam} from '../../../common/dtos/egyszerukeresesparam';
 import {TablaExComponent} from '../../../common/tabla-ex/tabla-ex.component';

@@ -1,0 +1,23 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>{{volumeservice.cim}}</h5>
+  <div>
+    <button (click)="onKereses()" class="toolbutton">
+      <i class="fa fa-search" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <app-tabla-ex #tabla
+                [items]="Dto"
+                [colsets]="volumeservice.GridSettings"
+                (forid)="onId($event)"
+                [egyTemplate]="gridegy">
+  </app-tabla-ex>
+
+  <ng-template #gridegy>
+    <app-volume-egy [defaultNav]="17"
+                    [dto]="Dto[DtoSelectedIndex]">
+    </app-volume-egy>
+  </ng-template>
+</div>
+
+

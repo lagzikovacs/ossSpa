@@ -1,19 +1,20 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {ParticioDto} from '../../05 Segedeszkozok/01 Particio/particiodto';
-import {VolumeConf} from '../../05 Segedeszkozok/01 Particio/volumeconf';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {ParticioDto} from '../particiodto';
+import {VolumeConf} from '../volumeconf';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-particio-volume',
   templateUrl: './particio-volume.component.html'
 })
 export class ParticioVolumeComponent implements OnInit, OnDestroy {
-  @Input() Dto: ParticioDto;
+  @Input() Dto: ParticioDto = new ParticioDto();
   @Output() eventOk = new EventEmitter<ParticioDto>();
   @Output() eventCancel = new EventEmitter<void>();
 
   form: FormGroup;
-  cVolume: VolumeConf;
+  cVolume: VolumeConf = new VolumeConf();
 
   constructor(private _fb: FormBuilder) {
 

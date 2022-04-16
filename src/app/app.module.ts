@@ -63,7 +63,7 @@ import { NgmComponent } from './ngm/ngm.component';
 import { ParticioSzallitoComponent } from './particio/particio-kibocsato/particio-kibocsato.component';
 import { ParticioBizonylatComponent } from './05 Segedeszkozok/01 Particio/particio-bizonylatnyomtatas/particio-bizonylatnyomtatas.component';
 import { ParticioProjektiratmintaComponent } from './particio/particio-projektiratminta/particio-projektiratminta.component';
-import { ParticioVolumeComponent } from './particio/particio-volume/particio-volume.component';
+import { ParticioVolumeComponent } from './05 Segedeszkozok/01 Particio/particio-volume/particio-volume.component';
 import { FizetesimodListComponent } from './01 Torzsadatok/02 Fizetesimod/fizetesimod-list/fizetesimod-list.component';
 import { PenznemListComponent } from './01 Torzsadatok/03 Penznem/penznem-list/penznem-list.component';
 import { CikkListComponent } from './01 Torzsadatok/06 Cikk/cikk-list/cikk-list.component';

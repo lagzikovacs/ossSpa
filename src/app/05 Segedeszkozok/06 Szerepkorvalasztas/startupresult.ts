@@ -1,4 +1,4 @@
-import {ColumnSettings} from '../common/reszletek/columnsettings';
+import {ColumnSettings} from '../../common/reszletek/columnsettings';
 
 export class StartupResult {
   Error: string;

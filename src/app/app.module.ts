@@ -154,7 +154,7 @@ import { UgyfelCsoportComponent } from './01 Torzsadatok/09 Ugyfel/ugyfel-csopor
 import { UgyfelVcardComponent } from './01 Torzsadatok/09 Ugyfel/ugyfel-vcard/ugyfel-vcard.component';
 import { UgyfelTablaComponent } from './01 Torzsadatok/09 Ugyfel/ugyfel-tabla/ugyfel-tabla.component';
 import { TablaComponent } from './tools/tabla/tabla.component';
-import {StartupService} from './startup/startup.service';
+import {StartupService} from './05 Segedeszkozok/06 Szerepkorvalasztas/startup.service';
 import {ErrorService} from './common/errorbox/error.service';
 import { ErrorboxComponent } from './common/errorbox/errorbox.component';
 import { UgyfelterProjektTablaComponent } from './ugyfelter/ugyfelter-projekt-tabla/ugyfelter-projekt-tabla.component';

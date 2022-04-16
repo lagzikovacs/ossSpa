@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {LogonService} from '../logon.service';
 import {SessionService} from '../../../session/session.service';
 import {SessionDto} from '../../../session/sessiondto';
-import {StartupService} from '../../../startup/startup.service';
+import {StartupService} from '../../06 Szerepkorvalasztas/startup.service';
 import {ErrorService} from '../../../common/errorbox/error.service';
 
 @Component({
@@ -64,11 +64,8 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
           throw nincsBesorolva;
         case 1:
           try {
-            const res4 = await this._startupservice.SzerepkorValasztas(this._logonservice.lehetsegesszerepkorokDto[0].Particiokod,
+            await this._startupservice.SzerepkorValasztas(this._logonservice.lehetsegesszerepkorokDto[0].Particiokod,
               this._logonservice.lehetsegesszerepkorokDto[0].Csoportkod);
-            if (res4.Error != null) {
-              throw res4.Error;
-            }
 
             this.spinner = false;
             this._router.navigate(['/fooldal']);

@@ -13,7 +13,7 @@ import { FelhasznaloListComponent } from './05 Segedeszkozok/03 Felhasznalo/felh
 import {FelhasznaloService} from './05 Segedeszkozok/03 Felhasznalo/felhasznalo.service';
 import {LoginGuard} from './guards/login.guard';
 import {RoleGuard} from './guards/role.guard';
-import { SzerepkorvalasztasComponent } from './logon/szerepkorvalasztas/szerepkorvalasztas.component';
+import { SzerepkorvalasztasComponent } from './05 Segedeszkozok/06 Szerepkorvalasztas/szerepkorvalasztas/szerepkorvalasztas.component';
 import { JelszocsereComponent } from './05 Segedeszkozok/07 Jelszocsere/jelszocsere/jelszocsere.component';
 import { ToolbarComponent } from './common/toolbar/toolbar.component';
 import { ToolbarfooterComponent } from './common/toolbarfooter/toolbarfooter.component';

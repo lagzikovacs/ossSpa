@@ -1,10 +1,10 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
+import {LogonService} from '../../05 Bejelentkezes/logon.service';
 import {Router} from '@angular/router';
-import {SessionService} from '../../session/session.service';
-import {SessionDto} from '../../session/sessiondto';
-import {StartupService} from '../../startup/startup.service';
-import {ErrorService} from '../../common/errorbox/error.service';
+import {SessionService} from '../../../session/session.service';
+import {SessionDto} from '../../../session/sessiondto';
+import {StartupService} from '../../../startup/startup.service';
+import {ErrorService} from '../../../common/errorbox/error.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -35,23 +35,21 @@ export class SzerepkorvalasztasComponent implements OnInit, OnDestroy {
     this.logonservice.SzerepkorKivalasztva = false;
   }
 
-  setClickedRow(i: number) {
+  async setClickedRow(i: number) {
     this.spinner = true;
+    try {
+      const res2 = await this._startupservice.SzerepkorValasztas(this.logonservice.lehetsegesszerepkorokDto[i].Particiokod,
+        this.logonservice.lehetsegesszerepkorokDto[i].Csoportkod);
+      if (res2.Error != null) {
+        throw res2.Error;
+      }
 
-    this._startupservice.SzerepkorValasztas(this.logonservice.lehetsegesszerepkorokDto[i].Particiokod,
-      this.logonservice.lehetsegesszerepkorokDto[i].Csoportkod)
-      .then(res2 => {
-        if (res2.Error != null) {
-          throw res2.Error;
-        }
-
-        this.spinner = false;
-        this._router.navigate(['/fooldal']);
-      })
-      .catch(err => {
-        this.spinner = false;
-        this._errorservice.Error = err;
-      });
+      this.spinner = false;
+      this._router.navigate(['/fooldal']);
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
   ngOnDestroy() {

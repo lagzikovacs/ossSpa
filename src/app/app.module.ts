@@ -7,7 +7,7 @@ import {environment} from '../environments/environment';
 import {LogonService} from './05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {MenuService} from './menu/menu.service';
 import {HttpClientModule} from '@angular/common/http';
-import { BejelentkezesComponent } from './logon/bejelentkezes/bejelentkezes.component';
+import { BejelentkezesComponent } from './05 Segedeszkozok/05 Bejelentkezes/bejelentkezes/bejelentkezes.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FelhasznaloListComponent } from './05 Segedeszkozok/03 Felhasznalo/felhasznalo-list/felhasznalo-list.component';
 import {FelhasznaloService} from './05 Segedeszkozok/03 Felhasznalo/felhasznalo.service';

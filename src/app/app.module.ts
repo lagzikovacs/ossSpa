@@ -45,7 +45,7 @@ import { HelysegSzerkesztesComponent } from './01 Torzsadatok/07 Helyseg/helyseg
 import { UgyfelListComponent } from './01 Torzsadatok/09 Ugyfel/ugyfel-list/ugyfel-list.component';
 import { UgyfelSzerkesztesComponent } from './01 Torzsadatok/09 Ugyfel/ugyfel-szerkesztes/ugyfel-szerkesztes.component';
 import { CsoportListComponent } from './csoport/csoport-list/csoport-list.component';
-import { CsoportSzerkesztesComponent } from './csoport/csoport-szerkesztes/csoport-szerkesztes.component';
+import { CsoportSzerkesztesComponent } from './05 Segedeszkozok/04 Csoport/csoport-szerkesztes/csoport-szerkesztes.component';
 import { CsoportFelhasznaloComponent } from './csoport/csoport-felhasznalo/csoport-felhasznalo.component';
 import { CsoportJogComponent } from './csoport/csoport-jog/csoport-jog.component';
 import { VolumeTesztComponent } from './05 Segedeszkozok/02 Volume/volume-teszt/volume-teszt.component';

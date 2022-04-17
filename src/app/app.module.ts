@@ -44,7 +44,7 @@ import { IrattipusSzerkesztesComponent } from './01 Torzsadatok/01 Irattipus/ira
 import { HelysegSzerkesztesComponent } from './01 Torzsadatok/07 Helyseg/helyseg-szerkesztes/helyseg-szerkesztes.component';
 import { UgyfelListComponent } from './01 Torzsadatok/09 Ugyfel/ugyfel-list/ugyfel-list.component';
 import { UgyfelSzerkesztesComponent } from './01 Torzsadatok/09 Ugyfel/ugyfel-szerkesztes/ugyfel-szerkesztes.component';
-import { CsoportListComponent } from './csoport/csoport-list/csoport-list.component';
+import { CsoportListComponent } from './05 Segedeszkozok/04 Csoport/csoport-list/csoport-list.component';
 import { CsoportSzerkesztesComponent } from './05 Segedeszkozok/04 Csoport/csoport-szerkesztes/csoport-szerkesztes.component';
 import { CsoportFelhasznaloComponent } from './05 Segedeszkozok/04 Csoport/csoport-felhasznalo/csoport-felhasznalo.component';
 import { CsoportJogComponent } from './05 Segedeszkozok/04 Csoport/csoport-jog/csoport-jog.component';
@@ -217,6 +217,8 @@ import {UgyfelterLinkComponent} from './01 Torzsadatok/09 Ugyfel/ugyfelter-link/
 import {BizonylattetelService} from './03 Bizonylatok/bizonylattetel/bizonylattetel.service';
 import {ParticioKibocsatoComponent} from "./05 Segedeszkozok/01 Particio/particio-kibocsato/particio-kibocsato.component";
 import {VolumeEgyComponent} from "./05 Segedeszkozok/02 Volume/volume-egy/volume-egy.component";
+import {CsoportEgyToolbarComponent} from "./05 Segedeszkozok/04 Csoport/csoport-egy-toolbar/csoport-egy-toolbar.component";
+import {CsoportEgyComponent} from "./05 Segedeszkozok/04 Csoport/csoport-egy/csoport-egy.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -459,6 +461,8 @@ if (environment.production) {
     UgyfelEgyComponent,
     UgyfelEgyToolbarComponent,
     VolumeEgyComponent,
+    CsoportEgyToolbarComponent,
+    CsoportEgyComponent,
   ],
   imports: [
     BrowserModule,

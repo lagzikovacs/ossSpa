@@ -47,7 +47,7 @@ import { UgyfelSzerkesztesComponent } from './01 Torzsadatok/09 Ugyfel/ugyfel-sz
 import { CsoportListComponent } from './csoport/csoport-list/csoport-list.component';
 import { CsoportSzerkesztesComponent } from './05 Segedeszkozok/04 Csoport/csoport-szerkesztes/csoport-szerkesztes.component';
 import { CsoportFelhasznaloComponent } from './05 Segedeszkozok/04 Csoport/csoport-felhasznalo/csoport-felhasznalo.component';
-import { CsoportJogComponent } from './csoport/csoport-jog/csoport-jog.component';
+import { CsoportJogComponent } from './05 Segedeszkozok/04 Csoport/csoport-jog/csoport-jog.component';
 import { VolumeTesztComponent } from './05 Segedeszkozok/02 Volume/volume-teszt/volume-teszt.component';
 import { AjanlatkeresListComponent } from './ajanlatkeres/ajanlatkeres-list/ajanlatkeres-list.component';
 import { ProjektEmailalapjanComponent } from './projekt/projekt-emailalapjan/projekt-emailalapjan.component';

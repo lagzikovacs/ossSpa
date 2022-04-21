@@ -1,28 +1,35 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {RiportService} from '../../04 Riportok/riport.service';
-import * as moment from 'moment';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {RiportService} from '../riport.service';
 import {Szempont} from '../../common/enums/szempont';
 import {SzMT} from '../../common/dtos/szmt';
+import * as moment from 'moment';
 import {ErrorService} from '../../common/errorbox/error.service';
-import {Riportciklus} from '../../04 Riportok/riportciklus';
+import {Riportciklus} from '../riportciklus';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-tartozas',
-  templateUrl: './tartozas.component.html'
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-koveteles',
+  templateUrl: './koveteles.component.html'
 })
-export class TartozasComponent implements OnInit, OnDestroy {
+export class KovetelesComponent implements OnInit, OnDestroy {
   rc: Riportciklus;
 
   vdatum = moment().format('YYYY-MM-DD');
 
   form: FormGroup;
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   riportservice: RiportService;
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
+              private _cdr: ChangeDetectorRef,
               riportservice: RiportService) {
     this.riportservice = riportservice;
 
@@ -30,9 +37,9 @@ export class TartozasComponent implements OnInit, OnDestroy {
       'datum': ['', [Validators.required]]
     });
 
-    this.rc = new Riportciklus(_errorservice, riportservice, 'Tartozás.xls');
+    this.rc = new Riportciklus(_errorservice, riportservice, 'Követelés.xls');
     this.rc.eventSpinnervege.on(() => {
-      this.eppFrissit = false;
+      this.spinner = false;
     });
   }
 
@@ -47,27 +54,27 @@ export class TartozasComponent implements OnInit, OnDestroy {
     this.vdatum = this.form.value['datum'];
   }
 
-  onSubmit() {
-    this.eppFrissit = true;
+  async onSubmit() {
+    this.spinner = true;
     this.rc.megszakitani = false;
     this.updatedto();
 
     const fi = [
       new SzMT(Szempont.Null, moment(this.vdatum).toISOString(true))
     ];
-    this.riportservice.TartozasokTaskStart(fi)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
 
-        this.rc.tasktoken = res.Result;
-        this.rc.ciklus();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+    try {
+      const res = await this.riportservice.KovetelesekTaskStart(fi);
+      if (res.Error != null) {
+        throw res.Error;
+      }
+
+      this.rc.tasktoken = res.Result;
+      this.rc.ciklus();
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
   onCancel() {

@@ -1,18 +1,17 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {IratService} from '../../02 Eszkozok/02 Irat/irat/irat.service';
-import {FotozasService} from '../fotozas.service';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {IratService} from '../../../02 Eszkozok/02 Irat/irat/irat.service';
 import * as moment from 'moment';
-import {environment} from '../../../environments/environment';
-import {ErrorService} from '../../common/errorbox/error.service';
-import {deepCopy} from '../../common/deepCopy';
-import {IratDto} from '../../02 Eszkozok/02 Irat/irat/iratdto';
-import {EgyMode} from '../../common/enums/egymode';
-import {rowanimation} from '../../animation/rowAnimation';
+import {environment} from '../../../../environments/environment';
+import {ErrorService} from '../../../common/errorbox/error.service';
+import {deepCopy} from '../../../common/deepCopy';
+import {IratDto} from '../../../02 Eszkozok/02 Irat/irat/iratdto';
+import {EgyMode} from '../../../common/enums/egymode';
+import {FotozasService} from "../../../ext/fotozas/fotozas.service";
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-fotozas-link',
-  templateUrl: './fotozas-link.component.html',
-  animations: [rowanimation]
+  templateUrl: './fotozas-link.component.html'
 })
 export class FotozasLinkComponent implements OnInit, OnDestroy {
   DtoEdited = new IratDto();

@@ -2,22 +2,22 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {UgyfelterService} from '../ugyfelter.service';
 import {UgyfelterDto} from '../ugyfelterdto';
-import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
-import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
-import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
-import {ProjektDto} from '../../02 Eszkozok/01 Projekt/projekt/projektdto';
-import {ProjektKapcsolatDto} from '../../projektkapcsolat/projektkapcsolatdto';
-import {DokumentumDto} from '../../dokumentum/dokumentumdto';
-import {DokumentumService} from '../../dokumentum/dokumentum.service';
-import {Szempont} from '../../common/enums/szempont';
-import {BizonylatnyomtatasService} from '../../bizonylatnyomtatas/bizonylatnyomtatas.service';
-import {SzMT} from '../../common/dtos/szmt';
-import {BizonylatNyomtatasTipus} from '../../bizonylatnyomtatas/bizonylatnyomtatastipus';
+import {ProjektkapcsolatService} from '../../../projektkapcsolat/projektkapcsolat.service';
+import {LogonService} from '../../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
+import {UgyfelDto} from '../../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
+import {ProjektDto} from '../../../02 Eszkozok/01 Projekt/projekt/projektdto';
+import {ProjektKapcsolatDto} from '../../../projektkapcsolat/projektkapcsolatdto';
+import {DokumentumDto} from '../../../dokumentum/dokumentumdto';
+import {DokumentumService} from '../../../dokumentum/dokumentum.service';
+import {Szempont} from '../../../common/enums/szempont';
+import {BizonylatnyomtatasService} from '../../../bizonylatnyomtatas/bizonylatnyomtatas.service';
+import {SzMT} from '../../../common/dtos/szmt';
+import {BizonylatNyomtatasTipus} from '../../../bizonylatnyomtatas/bizonylatnyomtatastipus';
 import * as FileSaver from 'file-saver';
-import {b64toBlob} from '../../common/b64toBlob';
-import {LetoltesParam} from '../../dokumentum/letoltesparam';
-import {ErrorService} from '../../common/errorbox/error.service';
-import {Bizonylatnyomtatasciklus} from '../../bizonylatnyomtatas/bizonylatnyomtatasciklus';
+import {b64toBlob} from '../../../common/b64toBlob';
+import {LetoltesParam} from '../../../dokumentum/letoltesparam';
+import {ErrorService} from '../../../common/errorbox/error.service';
+import {Bizonylatnyomtatasciklus} from '../../../bizonylatnyomtatas/bizonylatnyomtatasciklus';
 
 @Component({
   selector: 'app-ugyfelter',

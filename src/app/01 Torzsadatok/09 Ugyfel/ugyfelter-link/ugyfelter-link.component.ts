@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit,
   Output, ViewChild, ViewContainerRef
 } from '@angular/core';
-import {UgyfelterService} from '../../../ugyfelter/ugyfelter.service';
+import {UgyfelterService} from '../../../ext/ugyfelter/ugyfelter.service';
 import {UgyfelService} from '../ugyfel.service';
 import * as moment from 'moment';
 import {environment} from '../../../../environments/environment';

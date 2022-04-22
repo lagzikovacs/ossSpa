@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {ProjektDto} from '../../02 Eszkozok/01 Projekt/projekt/projektdto';
+import {ProjektDto} from '../../../02 Eszkozok/01 Projekt/projekt/projektdto';
 
 @Component({
   selector: 'app-ugyfelter-projekt-tabla',

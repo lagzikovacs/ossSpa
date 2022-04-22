@@ -1,14 +1,15 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FotozasService} from '../fotozas.service';
 import {FotozasDto} from '../fotozasdto';
-import {FajlBuf} from '../../dokumentum/fajlbuf';
-import {DokumentumService} from '../../dokumentum/dokumentum.service';
-import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
-import {ErrorService} from '../../common/errorbox/error.service';
+import {LogonService} from '../../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
+import {ErrorService} from '../../../common/errorbox/error.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {DokumentumService} from '../../../dokumentum/dokumentum.service';
+import {FajlBuf} from '../../../dokumentum/fajlbuf';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-fotozas',
   templateUrl: './fotozas.component.html'
 })
@@ -49,25 +50,24 @@ export class FotozasComponent implements OnInit, OnDestroy {
       });
   }
 
-  folytatas() {
+  async folytatas() {
     this.eppFrissit = true;
-    this._fotozasservice.Check(this.fp)
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
+    try {
+      const res = await this._fotozasservice.Check(this.fp);
+      if (res.Error !== null) {
+        throw res.Error;
+      }
 
-        this.Dto = res.Result;
-        this._logonservice.Sid = this.Dto.sid;
-        this.Dto.dokumentumDto.reverse();
+      this.Dto = res.Result;
+      this._logonservice.Sid = this.Dto.sid;
+      this.Dto.dokumentumDto.reverse();
 
-        this.bejelentkezve = true;
-        this.eppFrissit = false;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+      this.bejelentkezve = true;
+      this.eppFrissit = false;
+    } catch (err) {
+      this.eppFrissit = false;
+      this._errorservice.Error = err;
+    }
   }
 
   onFileChange(event) {
@@ -90,28 +90,27 @@ export class FotozasComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSubmit() {
-    this.eppFrissit = true;
+  async onSubmit() {
     this.fb.Megjegyzes = this.form.value['megjegyzes'];
 
-    this._dokumentumservice.FeltoltesAngular(this.fb)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+    this.eppFrissit = true;
+    try {
+      const res = await this._dokumentumservice.FeltoltesAngular(this.fb);
+      if (res.Error != null) {
+        throw res.Error;
+      }
 
-        delete this.fb;
-        this.form.controls['fajlnev'].setValue('');
-        this.form.controls['megjegyzes'].setValue('');
+      delete this.fb;
+      this.form.controls['fajlnev'].setValue('');
+      this.form.controls['megjegyzes'].setValue('');
 
-        this.eppFrissit = false;
+      this.eppFrissit = false;
 
-        this.folytatas();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+      this.folytatas();
+    } catch (err) {
+      this.eppFrissit = false;
+      this._errorservice.Error = err;
+    }
   }
 
   ngOnDestroy() {

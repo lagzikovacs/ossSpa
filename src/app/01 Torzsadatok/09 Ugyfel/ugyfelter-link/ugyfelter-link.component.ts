@@ -56,7 +56,6 @@ export class UgyfelterLinkComponent extends OnDestroyMixin implements OnInit, On
         this.link = environment.OSSRef + res.Result;
         this.kikuldesidopontja();
         this.spinner = false;
-
       } catch (err) {
         this.spinner = false;
         this._errorservice.Error = err;

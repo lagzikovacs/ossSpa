@@ -2,38 +2,22 @@
   <h5>Fotózás link</h5>
 
   <div class="toolbar">
-    <button (click)="doUj()" class="toolbutton">
+    <button (click)="doNav(3)" class="toolbutton">
       Új fotózás link
     </button>
-    <button [disabled]="link === ''" (click)="doTorles()" class="toolbutton">
+    <button [disabled]="link === ''" (click)="doNav(2)" class="toolbutton">
       Fotózás link törlése
     </button>
   </div>
 
   <ng-container *ngIf="link !== ''">
     <div>
-      <!--<textarea rows="3" cols="100" id="regilink" disabled="true" [(ngModel)]="link"></textarea>-->
+      <textarea rows="3" cols="150" id="regilink" disabled="true" [(ngModel)]="link"></textarea>
     </div>
-    <div>
+    <div style="margin-bottom: 1em">
       {{kikuldesikodidopontja}}
     </div>
   </ng-container>
 
-
-  <ng-container *ngIf="egymode === 3">
-      <div class="alapkeret">
-        <h5>Új fotózás link</h5>
-        <div class="editform-row">Ha új fotózás linket készít, a régi érvényessége megszűnik. Biztos benne?</div>
-        <div class="editform-row-bottom" style="margin-bottom: 10px">
-          <button class="toolbutton okbutton" (click)="onUj()">Ok</button>
-          <button class="toolbutton" (click)="onMegsem()">Mégsem</button>
-        </div>
-      </div>
-  </ng-container>
-
-  <ng-container *ngIf="egymode === 2">
-        <app-tetel-torles [cim]="'Fotózás link'"
-                          (eventTorles)="onTorles($event)">
-        </app-tetel-torles>
-  </ng-container>
+  <ng-template #compcont_fotozaslink></ng-template>
 </div>

@@ -1,4 +1,7 @@
-import {ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit,
+  ViewChild
+} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FotozasService} from '../fotozas.service';
 import {FotozasDto} from '../fotozasdto';
@@ -26,13 +29,18 @@ export class FotozasComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this.docdr();
+  }
 
   constructor(private _route: ActivatedRoute,
               private _logonservice: LogonService,
               private _dokumentumservice: DokumentumService,
               private _fotozasservice: FotozasService,
               private _errorservice: ErrorService,
-              private _fb: FormBuilder) {
+              private _fb: FormBuilder,
+              private _cdr: ChangeDetectorRef) {
 
     this.form = this._fb.group({
       'fajlnev': [{value: '', disabled: true}, []],
@@ -50,8 +58,13 @@ export class FotozasComponent implements OnInit, OnDestroy {
       });
   }
 
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
+
   async folytatas() {
-    this.eppFrissit = true;
+    this.spinner = true;
     try {
       const res = await this._fotozasservice.Check(this.fp);
       if (res.Error !== null) {
@@ -63,9 +76,9 @@ export class FotozasComponent implements OnInit, OnDestroy {
       this.Dto.dokumentumDto.reverse();
 
       this.bejelentkezve = true;
-      this.eppFrissit = false;
+      this.spinner = false;
     } catch (err) {
-      this.eppFrissit = false;
+      this.spinner = false;
       this._errorservice.Error = err;
     }
   }
@@ -93,7 +106,7 @@ export class FotozasComponent implements OnInit, OnDestroy {
   async onSubmit() {
     this.fb.Megjegyzes = this.form.value['megjegyzes'];
 
-    this.eppFrissit = true;
+    this.spinner = true;
     try {
       const res = await this._dokumentumservice.FeltoltesAngular(this.fb);
       if (res.Error != null) {
@@ -104,11 +117,11 @@ export class FotozasComponent implements OnInit, OnDestroy {
       this.form.controls['fajlnev'].setValue('');
       this.form.controls['megjegyzes'].setValue('');
 
-      this.eppFrissit = false;
+      this.spinner = false;
 
       this.folytatas();
     } catch (err) {
-      this.eppFrissit = false;
+      this.spinner = false;
       this._errorservice.Error = err;
     }
   }

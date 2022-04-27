@@ -76,7 +76,7 @@ import { CikkSzerkesztesComponent } from './01 Torzsadatok/06 Cikk/cikk-szerkesz
 import { FizetesimodSzerkesztesComponent } from './01 Torzsadatok/02 Fizetesimod/fizetesimod-szerkesztes/fizetesimod-szerkesztes.component';
 import { PenznemSzerkesztesComponent } from './01 Torzsadatok/03 Penznem/penznem-szerkesztes/penznem-szerkesztes.component';
 import { CikkBeszerzesKivetComponent } from './01 Torzsadatok/06 Cikk/cikk-beszerzes-kivet/cikk-beszerzes-kivet.component';
-import { PenztarListComponent } from './penztar/penztar-list/penztar-list.component';
+import { PenztarListComponent } from './02 Eszkozok/03 Penztar/penztar/penztar-list/penztar-list.component';
 import {IrattipusService} from './01 Torzsadatok/01 Irattipus/irattipus.service';
 import {FizetesimodService} from './01 Torzsadatok/02 Fizetesimod/fizetesimod.service';
 import {PenznemService} from './01 Torzsadatok/03 Penznem/penznem.service';
@@ -91,7 +91,7 @@ import {VolumeService} from './05 Segedeszkozok/02 Volume/volume.service';
 import {CsoportService} from './05 Segedeszkozok/04 Csoport/csoport.service';
 import {AjanlatkeresService} from './ajanlatkeres/ajanlatkeres.service';
 import {PenztarService} from './02 Eszkozok/03 Penztar/penztar/penztar.service';
-import { PenztartetelSzerkesztesComponent } from './penztartetel/penztartetel-szerkesztes/penztartetel-szerkesztes.component';
+import { PenztartetelSzerkesztesComponent } from './02 Eszkozok/03 Penztar/penztartetel/penztartetel-szerkesztes/penztartetel-szerkesztes.component';
 import { ProjektStatuszComponent } from './projekt/projekt-statusz/projekt-statusz.component';
 import { ProjektJegyzetSzerkesztesComponent } from './projektjegyzet/projekt-jegyzet-szerkesztes/projekt-jegyzet-szerkesztes.component';
 import { ProjektkapcsolatUjbizonylatComponent } from './projektkapcsolat/projektkapcsolat-ujbizonylat/projektkapcsolat-ujbizonylat.component';
@@ -99,8 +99,8 @@ import { AjanlatComponent } from './ajanlat/ajanlat/ajanlat';
 import { VolumeListComponent } from './05 Segedeszkozok/02 Volume/volume-list/volume-list.component';
 import { ParticioEgyComponent } from './05 Segedeszkozok/01 Particio/particio-egy/particio-egy.component';
 import { HelysegListComponent } from './01 Torzsadatok/07 Helyseg/helyseg-list/helyseg-list.component';
-import {PenztartetelListComponent} from './penztartetel/penztartetel-list/penztartetel-list.component';
-import {PenztarExportComponent} from './penztar/penztar-export/penztar-export.component';
+import {PenztartetelListComponent} from './02 Eszkozok/03 Penztar/penztartetel/penztartetel-list/penztartetel-list.component';
+import {PenztarExportComponent} from './02 Eszkozok/03 Penztar/penztar/penztar-export/penztar-export.component';
 import {PenztarSzerkesztesComponent} from './02 Eszkozok/03 Penztar/penztar/penztar-szerkesztes/penztar-szerkesztes.component';
 import {PenztartetelService} from './02 Eszkozok/03 Penztar/penztartetel/penztartetel.service';
 import {BizonylatService} from './bizonylat/bizonylat.service';
@@ -219,6 +219,8 @@ import {ParticioKibocsatoComponent} from "./05 Segedeszkozok/01 Particio/partici
 import {VolumeEgyComponent} from "./05 Segedeszkozok/02 Volume/volume-egy/volume-egy.component";
 import {CsoportEgyToolbarComponent} from "./05 Segedeszkozok/04 Csoport/csoport-egy-toolbar/csoport-egy-toolbar.component";
 import {CsoportEgyComponent} from "./05 Segedeszkozok/04 Csoport/csoport-egy/csoport-egy.component";
+import {PenztarEgyToolbarComponent} from "./02 Eszkozok/03 Penztar/penztar/penztar-egy-toolbar/penztar-egy-toolbar.component";
+import {PenztarEgyComponent} from "./02 Eszkozok/03 Penztar/penztar/penztar-egy/penztar-egy.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -463,6 +465,8 @@ if (environment.production) {
     VolumeEgyComponent,
     CsoportEgyToolbarComponent,
     CsoportEgyComponent,
+    PenztarEgyToolbarComponent,
+    PenztarEgyComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,7 @@
+<div [ngClass]="!uj ? 'alapkeret' : ''" [appSpinner]="eppFrissit">
+  <app-penztar-egy-toolbar *ngIf="!uj"
+                           [nyitva]="Dto.Nyitva"
+                           (eventNav)="doNav($event)">
+  </app-penztar-egy-toolbar>
+  <ng-template #compcont_penztar></ng-template>
+</div>

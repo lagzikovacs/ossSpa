@@ -6,11 +6,11 @@
                (Kereses)="onKereses()"
                [enUj]="jog && nyitva" (Uj)="doUjtetel()">
   </app-toolbar>
-  <app-tabla #tabla
-             [items]="Dto"
-             [colsets]="penztartetelservice.GridSettings"
-             [ujTemplate]="griduj">
-  </app-tabla>
+  <app-tabla-ex #tabla
+                [items]="Dto"
+                [colsets]="penztartetelservice.GridSettings"
+                [egyTemplate]="griduj">
+  </app-tabla-ex>
 
   <ng-template #griduj>
     <app-penztartetel-szerkesztes [Penztarkod]="Penztarkod"

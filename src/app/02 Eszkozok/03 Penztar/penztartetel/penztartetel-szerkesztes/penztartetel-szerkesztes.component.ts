@@ -1,11 +1,16 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {PenztartetelService} from '../../02 Eszkozok/03 Penztar/penztartetel/penztartetel.service';
+import {
+  AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy,
+  OnInit, Output,
+  ViewChild
+} from '@angular/core';
+import {PenztartetelService} from '../penztartetel.service';
 import * as moment from 'moment';
-import {ErrorService} from '../../common/errorbox/error.service';
-import {PenztartetelDto} from '../../02 Eszkozok/03 Penztar/penztartetel/penztarteteldto';
+import {ErrorService} from '../../../../common/errorbox/error.service';
+import {PenztartetelDto} from '../penztarteteldto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-penztartetel-szerkesztes',
   templateUrl: './penztartetel-szerkesztes.component.html'
 })
@@ -20,11 +25,17 @@ export class PenztartetelSzerkesztesComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   penztartetelservice: PenztartetelService;
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
+              private _cdr: ChangeDetectorRef,
               penztartetelservice: PenztartetelService) {
     this.penztartetelservice = penztartetelservice;
 
@@ -39,27 +50,26 @@ export class PenztartetelSzerkesztesComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
-    this.eppFrissit = true;
-    this.penztartetelservice.CreateNew()
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
+  async ngOnInit() {
+    this.spinner = true;
+    try {
+      const res = await this.penztartetelservice.CreateNew();
+      if (res.Error !== null) {
+        throw res.Error;
+      }
 
-        this.DtoEdited = res.Result[0];
-        this.DtoEdited.Penztarkod = this.Penztarkod;
+      this.DtoEdited = res.Result[0];
+      this.DtoEdited.Penztarkod = this.Penztarkod;
 
-        this.updateform();
-        this.jogcimInput.nativeElement.selectedIndex = 2;
-        this.jogcimchange();
+      this.updateform();
+      this.jogcimInput.nativeElement.selectedIndex = 2;
+      this.jogcimchange();
 
-        this.eppFrissit = false;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-        });
+      this.spinner = false;
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
   jogcimchange() {
@@ -125,34 +135,31 @@ export class PenztartetelSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Megjegyzes = this.form.value['megjegyzes'];
   }
 
-  onSubmit() {
-    this.eppFrissit = true;
+  async onSubmit() {
     this.updatedto();
 
-    this.penztartetelservice.Add(this.DtoEdited)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+    this.spinner = true;
+    try {
+      const res = await this.penztartetelservice.Add(this.DtoEdited);
+      if (res.Error != null) {
+        throw res.Error;
+      }
 
-        return this.penztartetelservice.Get(res.Result);
-      })
-      .then(res1 => {
-        if (res1.Error != null) {
-          throw res1.Error;
-        }
+      const res1 = await this.penztartetelservice.Get(res.Result);
+      if (res1.Error != null) {
+        throw res1.Error;
+      }
 
-        this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit(res1.Result[0]);
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+      this.spinner = false;
+      this.eventSzerkeszteskesz.emit(res1.Result[0]);
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit(null);
+    this.eventSzerkeszteskesz.emit();
   }
 
   ngOnDestroy() {

@@ -1,0 +1,26 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>{{penztarservice.cim}}</h5>
+  <app-toolbar [Szurok]="szurok"
+               [(szempont)]="ekDto.szempont"
+               [(minta)]="ekDto.minta"
+               (Kereses)="onKereses()"
+               [enUj]="jog" (Uj)="doUjtetel()">
+  </app-toolbar>
+
+  <app-tabla-ex #tabla
+                [items]="Dto"
+                [colsets]="penztarservice.GridSettings"
+                (forid)="onId($event)"
+                [egyTemplate]="gridegy">
+  </app-tabla-ex>
+
+  <ng-template #gridegy>
+    <app-penztar-egy [uj]="uj"
+                     [dto]="Dto[DtoSelectedIndex]"
+                     (eventUj)="onUjtetelkesz($event)"
+                     (eventTorles)="onTorles()"
+                     (eventModositas)="onModositaskesz($event)">
+    </app-penztar-egy>
+  </ng-template>
+</div>
+

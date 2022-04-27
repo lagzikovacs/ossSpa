@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {PenztartetelService} from '../penztartetel.service';
+import {PenztartetelService} from '../../02 Eszkozok/03 Penztar/penztartetel/penztartetel.service';
 import * as moment from 'moment';
 import {ErrorService} from '../../common/errorbox/error.service';
-import {PenztartetelDto} from '../penztarteteldto';
+import {PenztartetelDto} from '../../02 Eszkozok/03 Penztar/penztartetel/penztarteteldto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({

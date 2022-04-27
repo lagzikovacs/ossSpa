@@ -7,7 +7,6 @@ import {IrattipusService} from '../../../../01 Torzsadatok/01 Irattipus/irattipu
 import * as moment from 'moment';
 import {UgyfelService} from '../../../../01 Torzsadatok/09 Ugyfel/ugyfel.service';
 import {IrattipusZoomParam} from '../../../../01 Torzsadatok/01 Irattipus/irattipuszoomparam';
-import {EmptyResult} from '../../../../common/dtos/emptyresult';
 import {UgyfelZoomParam} from '../../../../01 Torzsadatok/09 Ugyfel/ugyfelzoomparam';
 import {ErrorService} from '../../../../common/errorbox/error.service';
 import {deepCopy} from '../../../../common/deepCopy';

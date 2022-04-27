@@ -1,14 +1,14 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {JogKod} from '../../common/enums/jogkod';
-import {PenztartetelService} from '../penztartetel.service';
+import {PenztartetelService} from '../../02 Eszkozok/03 Penztar/penztartetel/penztartetel.service';
 import {Szempont} from '../../common/enums/szempont';
 import {SzMT} from '../../common/dtos/szmt';
 import {ErrorService} from '../../common/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
-import {PenztartetelParameter} from '../penztartetelparameter';
-import {PenztartetelDto} from '../penztarteteldto';
+import {PenztartetelParam} from '../../02 Eszkozok/03 Penztar/penztartetel/penztartetelparam';
+import {PenztartetelDto} from '../../02 Eszkozok/03 Penztar/penztartetel/penztarteteldto';
 
 @Component({
   selector: 'app-penztartetel-list',
@@ -30,7 +30,7 @@ export class PenztartetelListComponent implements OnInit, OnDestroy {
   szempont = 0;
   minta = '';
   elsokereses = true;
-  ptp = new PenztartetelParameter(0, environment.lapmeret);
+  ptp = new PenztartetelParam(0, environment.lapmeret);
   OsszesRekord = 0;
   eppFrissit = false;
 

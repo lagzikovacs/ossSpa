@@ -1,11 +1,15 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit,
+  Output
+} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HibabejelentesService} from '../hibabejelentes.service';
-import {ErrorService} from '../../common/errorbox/error.service';
+import {ErrorService} from '../../../common/errorbox/error.service';
 import {HibabejelentesDto} from '../hibabejelentesdto';
-import {deepCopy} from '../../common/deepCopy';
+import {deepCopy} from '../../../common/deepCopy';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-hibabejelentes-jelentes',
   templateUrl: './hibabejelentes-jelentes.component.html'
 })
@@ -18,11 +22,17 @@ export class HibabejelentesJelentesComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   hibabejelentesservice: HibabejelentesService;
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
+              private _cdr: ChangeDetectorRef,
               hibabejelentesservice: HibabejelentesService) {
     this.hibabejelentesservice = hibabejelentesservice;
 
@@ -42,34 +52,31 @@ export class HibabejelentesJelentesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Megjegyzes1 = this.form.value['megjegyzes1'];
   }
 
-  onSubmit() {
-    this.eppFrissit = true;
+  async onSubmit() {
     this.updatedto();
 
-    this.hibabejelentesservice.Update(this.DtoEdited)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+    this.spinner = true;
+    try {
+      const res = await this.hibabejelentesservice.Update(this.DtoEdited);
+      if (res.Error != null) {
+        throw res.Error;
+      }
 
-        return this.hibabejelentesservice.Get(res.Result);
-      })
-      .then(res1 => {
-        if (res1.Error != null) {
-          throw res1.Error;
-        }
+      const res1 = await this.hibabejelentesservice.Get(res.Result);
+      if (res1.Error != null) {
+        throw res1.Error;
+      }
 
-        this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit(res1.Result[0]);
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+      this.spinner = false;
+      this.eventSzerkeszteskesz.emit(res1.Result[0]);
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit(null);
+    this.eventSzerkeszteskesz.emit();
   }
 
   ngOnDestroy() {

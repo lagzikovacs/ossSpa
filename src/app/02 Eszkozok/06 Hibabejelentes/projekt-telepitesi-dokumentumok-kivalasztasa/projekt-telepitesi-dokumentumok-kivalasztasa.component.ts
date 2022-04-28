@@ -1,9 +1,10 @@
-import {AfterViewInit, Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {HibabejelentesService} from '../hibabejelentes.service';
-import {ErrorService} from '../../common/errorbox/error.service';
-import {ProjektToolbarComponent} from '../../projekt/projekttoolbar/projekttoolbar.component';
+import {ErrorService} from '../../../common/errorbox/error.service';
+import {ProjektToolbarComponent} from '../../../projekt/projekttoolbar/projekttoolbar.component';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-projekt-telepitesi-dokumentumok-kivalasztasa',
   templateUrl: './projekt-telepitesi-dokumentumok-kivalasztasa.component.html'
 })

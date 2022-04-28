@@ -181,19 +181,19 @@ import { IratProjektjeComponent } from './irat/irat-projektje/irat-projektje.com
 import { BizonylatProjektjeComponent } from './bizonylat/bizonylat-projektje/bizonylat-projektje.component';
 import { FooldalComponent } from './fooldal/fooldal.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import {HibabejelentesListComponent} from './hibabejelentes/hibabejelentes-list/hibabejelentes-list.component';
+import {HibabejelentesListComponent} from './02 Eszkozok/06 Hibabejelentes/hibabejelentes-list/hibabejelentes-list.component';
 import { AjanlatkeresSzerkesztesComponent } from './ajanlatkeres/ajanlatkeres-szerkesztes/ajanlatkeres-szerkesztes.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import {FelmeresListComponent} from './felmeres/felmeres-list/felmeres-list.component';
-import { HibabejelentesSzerkesztesComponent } from './hibabejelentes/hibabejelentes-szerkesztes/hibabejelentes-szerkesztes.component';
+import { HibabejelentesSzerkesztesComponent } from './02 Eszkozok/06 Hibabejelentes/hibabejelentes-szerkesztes/hibabejelentes-szerkesztes.component';
 import { FelmeresSzerkesztesComponent } from './felmeres/felmeres-szerkesztes/felmeres-szerkesztes.component';
 import {ProjekthezRendelesComponent} from './projekt/projekthez-rendeles/projekthez-rendeles.component';
 import { EgyszeruUzenetComponent } from './common/egyszeru-uzenet/egyszeru-uzenet.component';
 import { FelmeresJelentesComponent } from './felmeres/felmeres-jelentes/felmeres-jelentes.component';
 import { EgyszeruKerdesUzenetComponent } from './common/egyszeru-kerdes-uzenet/egyszeru-kerdes-uzenet.component';
-import { HibabejelentesJelentesComponent } from './hibabejelentes/hibabejelentes-jelentes/hibabejelentes-jelentes.component';
-import { TelepitesiDokumentumokKivalasztasaComponent } from './hibabejelentes/telepitesi-dokumentumok-kivalasztasa/telepitesi-dokumentumok-kivalasztasa.component';
-import { ProjektTelepitesiDokumentumokKivalasztasaComponent } from './hibabejelentes/projekt-telepitesi-dokumentumok-kivalasztasa/projekt-telepitesi-dokumentumok-kivalasztasa.component';
+import { HibabejelentesJelentesComponent } from './02 Eszkozok/06 Hibabejelentes/hibabejelentes-jelentes/hibabejelentes-jelentes.component';
+import { TelepitesiDokumentumokKivalasztasaComponent } from './02 Eszkozok/06 Hibabejelentes/telepitesi-dokumentumok-kivalasztasa/telepitesi-dokumentumok-kivalasztasa.component';
+import { ProjektTelepitesiDokumentumokKivalasztasaComponent } from './02 Eszkozok/06 Hibabejelentes/projekt-telepitesi-dokumentumok-kivalasztasa/projekt-telepitesi-dokumentumok-kivalasztasa.component';
 import { SzerelesitervComponent } from './szerelesiterv/szerelesiterv.component';
 import {PrimitivEgyToolbarComponent} from './common/primitiv-egy-toolbar/primitiv-egy-toolbar.component';
 import {FelhasznaloEgyToolbarComponent} from './05 Segedeszkozok/03 Felhasznalo/felhasznalo-egy-toolbar/felhasznalo-egy-toolbar.component';
@@ -221,6 +221,8 @@ import {CsoportEgyToolbarComponent} from "./05 Segedeszkozok/04 Csoport/csoport-
 import {CsoportEgyComponent} from "./05 Segedeszkozok/04 Csoport/csoport-egy/csoport-egy.component";
 import {PenztarEgyToolbarComponent} from "./02 Eszkozok/03 Penztar/penztar/penztar-egy-toolbar/penztar-egy-toolbar.component";
 import {PenztarEgyComponent} from "./02 Eszkozok/03 Penztar/penztar/penztar-egy/penztar-egy.component";
+import {HibabejelentesEgyComponent} from "./02 Eszkozok/06 Hibabejelentes/hibabejelentes-egy/hibabejelentes-egy.component";
+import {HibabejelentesEgyToolbarComponent} from "./02 Eszkozok/06 Hibabejelentes/hibabejelentes-egy-toolbar/hibabejelentes-egy-toolbar.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -467,6 +469,8 @@ if (environment.production) {
     CsoportEgyComponent,
     PenztarEgyToolbarComponent,
     PenztarEgyComponent,
+    HibabejelentesEgyComponent,
+    HibabejelentesEgyToolbarComponent,
   ],
   imports: [
     BrowserModule,

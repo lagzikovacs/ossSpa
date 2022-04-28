@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {DokumentumService} from '../dokumentum.service';
 import {DokumentumDto} from '../dokumentumdto';
 import {ErrorService} from '../../common/errorbox/error.service';

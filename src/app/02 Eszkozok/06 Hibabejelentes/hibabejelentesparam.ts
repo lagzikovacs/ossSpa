@@ -1,6 +1,6 @@
-import {SzMT} from '../common/dtos/szmt';
+import {SzMT} from '../../common/dtos/szmt';
 
-export class HibabejelentesParameter {
+export class HibabejelentesParam {
   rekordtol: number;
   lapmeret: number;
   fi: SzMT[];

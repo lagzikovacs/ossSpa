@@ -1,0 +1,9 @@
+<div [ngClass]="!uj ? 'alapkeret' : ''" [appSpinner]="eppFrissit">
+  <app-hibabejelentes-egy-toolbar *ngIf="!uj"
+                                  [ProjektBol]="ProjektBol"
+                                  [dokcim]="dokcim"
+                                  [dto]="Dto"
+                                  (eventNav)="doNav($event)">
+  </app-hibabejelentes-egy-toolbar>
+  <ng-template #compcont_hibabejelentes></ng-template>
+</div>

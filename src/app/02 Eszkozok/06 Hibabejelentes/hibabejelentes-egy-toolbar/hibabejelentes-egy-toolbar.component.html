@@ -1,0 +1,38 @@
+<div class="tabla-toolbar">
+  <button (click)="doNav(1)" class="toolbutton">
+    <i class="fa fa-file" aria-hidden="true"></i>
+  </button>
+  <button *ngIf="ProjektBol" [disabled]="!jog || !Dto.Nyitott" (click)="doNav(2)" class="toolbutton">
+    <i class="fa fa-minus" aria-hidden="true"></i>
+  </button>
+  <button *ngIf="ProjektBol" [disabled]="!jog || !Dto.Nyitott" (click)="doNav(3)" class="toolbutton">
+    <i class="fa fa-edit" aria-hidden="true"></i>
+  </button>
+
+  <!--EZ MÉG KELLENI FOG-->
+  <!--<button [disabled]="ProjektBol || !Dto[DtoSelectedIndex].Nyitott || !Dto[DtoSelectedIndex].Webes" (click)="doNav(8)" class="toolbutton">-->
+  <!--Projektek email alapján-->
+  <!--</button>-->
+  <!--<button [disabled]="ProjektBol || !Dto[DtoSelectedIndex].Nyitott || !Dto[DtoSelectedIndex].Webes" (click)="doNav(51)" class="toolbutton">-->
+  <!--Projekthez rendelés-->
+  <!--</button>-->
+
+  <button *ngIf="ProjektBol" [disabled]="!jog || !Dto.Nyitott" class="toolbutton" (click)="doNav(47)">
+    Telepítési dokumentumok kiválasztása
+  </button>
+  <button *ngIf="!ProjektBol && Dto.Webes" [disabled]="!jog || !Dto.Nyitott" class="toolbutton" (click)="doNav(48)">
+    Projekt és telepítési dokumentumok kiválasztása
+  </button>
+  <button *ngIf="Dto.Iratkod1 > 0" [disabled]="!jog" class="toolbutton" (click)="doNav(49)">
+    A telepítés dokumentumai
+  </button>
+  <button [disabled]="!jog" (click)="doNav(15)" class="toolbutton">
+    {{dokcim}}
+  </button>
+  <button *ngIf="!ProjektBol" [disabled]="!jog || !Dto.Nyitott" (click)="doNav(46)" class="toolbutton">
+    Jelentés
+  </button>
+  <button *ngIf="!ProjektBol" [disabled]="!jog" (click)="doNav(50)" class="toolbutton">
+    {{Dto.Nyitott ? 'Zárás' : 'Újranyitás'}}
+  </button>
+</div>

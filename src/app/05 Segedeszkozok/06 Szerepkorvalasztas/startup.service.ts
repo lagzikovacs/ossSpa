@@ -26,7 +26,7 @@ import {VolumeService} from "../02 Volume/volume.service";
 import {UgyfelterlogService} from "../../ugyfelterlog/ugyfelterlog.service";
 import {AjanlatkeresService} from "../../ajanlatkeres/ajanlatkeres.service";
 import {FelmeresService} from "../../felmeres/felmeres.service";
-import {HibabejelentesService} from "../../hibabejelentes/hibabejelentes.service";
+import {HibabejelentesService} from "../../02 Eszkozok/06 Hibabejelentes/hibabejelentes.service";
 import {lastValueFrom} from "rxjs";
 import {EmptyResult} from "../../common/dtos/emptyresult";
 import {Observable} from "rxjs";

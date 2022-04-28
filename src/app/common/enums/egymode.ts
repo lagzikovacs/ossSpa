@@ -69,4 +69,6 @@ export enum EgyMode {
   TelepitesiDokumentumok = 49,
 
   ZarasNyitas = 50,
+
+  ProjekthezRendeles = 51,
 }

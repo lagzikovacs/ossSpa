@@ -6,7 +6,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   templateUrl: './projekthez-rendeles.component.html'
 })
 export class ProjekthezRendelesComponent {
-  @Output() Szerkeszteskesz = new EventEmitter<Number>();
+  @Output() Szerkeszteskesz = new EventEmitter<number>();
 
   form: FormGroup;
   constructor(private _fb: FormBuilder) {

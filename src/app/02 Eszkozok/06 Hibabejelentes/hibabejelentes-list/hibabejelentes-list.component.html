@@ -1,0 +1,35 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>{{hibabejelentesservice.cim}}</h5>
+  <app-toolbar [StatuszSzurok]="statuszszurok" [(statusz)]="statusz" [visStatusz]="true"
+               [Szurok]="szurok" [(szempont)]="szempont" [(minta)]="minta" (Kereses)="onKereses()"
+               [visUj]="ProjektBol" [enUj]="jog" (Uj)="doUjtetel()">
+  </app-toolbar>
+
+  <app-tabla-ex #tabla
+                [items]="Dto"
+                [colsets]="hibabejelentesservice.GridSettings"
+                (forid)="onId($event)"
+                [egyTemplate]="gridegy"
+                [megjegyzesIs]="true">
+  </app-tabla-ex>
+
+  <ng-template #gridegy>
+    <app-hibabejelentes-egy [uj]="uj"
+                            [ProjektBol]="ProjektBol"
+                            [ProjektDto]="ProjektDto"
+                            [dto]="Dto[DtoSelectedIndex]"
+                            [dokcim]="dokcim"
+                            (eventUj)="onUjtetelkesz($event)"
+                            (eventTorles)="onTorles()"
+                            (eventModositas)="onModositaskesz($event)">
+    </app-hibabejelentes-egy>
+  </ng-template>
+
+  <app-toolbarfooter [enKereses]="!elsokereses"
+                     [rekordszam]="Dto.length"
+                     [osszesrekord]="OsszesRekord"
+                     (KeresesTovabb)="onKeresesTovabb()">
+  </app-toolbarfooter>
+</div>
+
+

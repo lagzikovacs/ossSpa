@@ -1,5 +1,5 @@
 import {IratDto} from '../../02 Eszkozok/02 Irat/irat/iratdto';
-import {DokumentumDto} from '../../dokumentum/dokumentumdto';
+import {DokumentumDto} from '../../02 Eszkozok/02 Irat/dokumentum/dokumentumdto';
 import {ProjektDto} from '../../02 Eszkozok/01 Projekt/projekt/projektdto';
 
 export class FotozasDto {

@@ -34,11 +34,11 @@ import { ProjektJegyzetListComponent } from './projektjegyzet/projekt-jegyzet-li
 import { IratListComponent } from './irat/irat-list/irat-list.component';
 import { IratEgyComponent } from './irat/irat-egy/irat-egy.component';
 import {IratToolbarComponent} from './irat/irattolbar/irattoolbar.component';
-import { DokumentumListComponent } from './dokumentum/dokumentum-list/dokumentum-list.component';
+import { DokumentumListComponent } from './02 Eszkozok/02 Irat/dokumentum/dokumentum-list/dokumentum-list.component';
 import {IratService} from './02 Eszkozok/02 Irat/irat/irat.service';
-import {DokumentumService} from './dokumentum/dokumentum.service';
+import {DokumentumService} from './02 Eszkozok/02 Irat/dokumentum/dokumentum.service';
 import { IratSzerkesztesComponent } from './02 Eszkozok/02 Irat/irat/irat-szerkesztes/irat-szerkesztes.component';
-import { DokumentumFeltoltesComponent } from './dokumentum/dokumentum-feltoltes/dokumentum-feltoltes.component';
+import { DokumentumFeltoltesComponent } from './02 Eszkozok/02 Irat/dokumentum/dokumentum-feltoltes/dokumentum-feltoltes.component';
 import { IrattipusListComponent } from './01 Torzsadatok/01 Irattipus/irattipus-list/irattipus-list.component';
 import { IrattipusSzerkesztesComponent } from './01 Torzsadatok/01 Irattipus/irattipus-szerkesztes/irattipus-szerkesztes.component';
 import { HelysegSzerkesztesComponent } from './01 Torzsadatok/07 Helyseg/helyseg-szerkesztes/helyseg-szerkesztes.component';
@@ -172,9 +172,9 @@ import { BizonylatFuvarszamlaComponent } from './bizonylat/bizonylat-fuvarszamla
 import { BizonylatFuvarszamlaUjComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla-uj/bizonylat-fuvarszamla-uj.component';
 import { BizonylatFuvarszamlaTorlesComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla-torles/bizonylat-fuvarszamla-torles.component';
 import { BizonylatZoomComponent } from './bizonylat/bizonylat-zoom/bizonylat-zoom.component';
-import { DokumentumLetoltesComponent } from './dokumentum/dokumentum-letoltes/dokumentum-letoltes.component';
-import { DokumentumLetoltesPdfComponent } from './dokumentum/dokumentum-letoltes-pdf/dokumentum-letoltes-pdf.component';
-import { DokumentumNezetComponent } from './dokumentum/dokumentum-nezet/dokumentum-nezet.component';
+import { DokumentumLetoltesComponent } from './02 Eszkozok/02 Irat/dokumentum/dokumentum-letoltes/dokumentum-letoltes.component';
+import { DokumentumLetoltesPdfComponent } from './02 Eszkozok/02 Irat/dokumentum/dokumentum-letoltes-pdf/dokumentum-letoltes-pdf.component';
+import { DokumentumNezetComponent } from './02 Eszkozok/02 Irat/dokumentum/dokumentum-nezet/dokumentum-nezet.component';
 import { VagolapIrathozComponent } from './vagolap/vagolap-irathoz/vagolap-irathoz.component';
 import { VagolapBizonylathozComponent } from './vagolap/vagolap-bizonylathoz/vagolap-bizonylathoz.component';
 import { IratProjektjeComponent } from './irat/irat-projektje/irat-projektje.component';
@@ -223,6 +223,8 @@ import {PenztarEgyToolbarComponent} from "./02 Eszkozok/03 Penztar/penztar/penzt
 import {PenztarEgyComponent} from "./02 Eszkozok/03 Penztar/penztar/penztar-egy/penztar-egy.component";
 import {HibabejelentesEgyComponent} from "./02 Eszkozok/06 Hibabejelentes/hibabejelentes-egy/hibabejelentes-egy.component";
 import {HibabejelentesEgyToolbarComponent} from "./02 Eszkozok/06 Hibabejelentes/hibabejelentes-egy-toolbar/hibabejelentes-egy-toolbar.component";
+import {DokumentumEgyToolbarComponent} from "./02 Eszkozok/02 Irat/dokumentum/dokumentum-egy-toolbar/dokumentum-egy-toolbar.component";
+import {DokumentumEgyComponent} from "./02 Eszkozok/02 Irat/dokumentum/dokumentum-egy/dokumentum-egy.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -471,6 +473,8 @@ if (environment.production) {
     PenztarEgyComponent,
     HibabejelentesEgyComponent,
     HibabejelentesEgyToolbarComponent,
+    DokumentumEgyToolbarComponent,
+    DokumentumEgyComponent,
   ],
   imports: [
     BrowserModule,

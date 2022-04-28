@@ -21,7 +21,7 @@ import {IratService} from "../../02 Eszkozok/02 Irat/irat/irat.service";
 import {PenztarService} from "../../02 Eszkozok/03 Penztar/penztar/penztar.service";
 import {PenztartetelService} from "../../02 Eszkozok/03 Penztar/penztartetel/penztartetel.service";
 import {KifizetesService} from "../../kifizetes/kifizetes.service";
-import {DokumentumService} from "../../dokumentum/dokumentum.service";
+import {DokumentumService} from "../../02 Eszkozok/02 Irat/dokumentum/dokumentum.service";
 import {VolumeService} from "../02 Volume/volume.service";
 import {UgyfelterlogService} from "../../ugyfelterlog/ugyfelterlog.service";
 import {AjanlatkeresService} from "../../ajanlatkeres/ajanlatkeres.service";

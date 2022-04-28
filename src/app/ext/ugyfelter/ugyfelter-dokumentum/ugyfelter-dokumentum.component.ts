@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {DokumentumDto} from '../../../dokumentum/dokumentumdto';
+import {DokumentumDto} from '../../../02 Eszkozok/02 Irat/dokumentum/dokumentumdto';
 
 @Component({
   selector: 'app-ugyfelter-dokumentum',

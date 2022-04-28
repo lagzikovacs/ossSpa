@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {VolumeService} from '../volume.service';
 import {ErrorService} from '../../../common/errorbox/error.service';
-import {DokumentumService} from '../../../dokumentum/dokumentum.service';
+import {DokumentumService} from '../../../02 Eszkozok/02 Irat/dokumentum/dokumentum.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

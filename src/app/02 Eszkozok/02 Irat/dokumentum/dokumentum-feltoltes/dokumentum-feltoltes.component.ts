@@ -1,11 +1,15 @@
-import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy,
+  Output
+} from '@angular/core';
 import {DokumentumService} from '../dokumentum.service';
 import {FajlBuf} from '../fajlbuf';
-import {ErrorService} from '../../common/errorbox/error.service';
+import {ErrorService} from '../../../../common/errorbox/error.service';
 import {DokumentumDto} from '../dokumentumdto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-dokumentum-feltoltes',
   templateUrl: './dokumentum-feltoltes.component.html'
 })
@@ -17,11 +21,16 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
 
   form: FormGroup;
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this.docdr();
+  }
 
   dokumentumservice: DokumentumService;
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
+              private _cdr: ChangeDetectorRef,
               dokumentumservice: DokumentumService) {
     this.dokumentumservice = dokumentumservice;
 
@@ -29,6 +38,11 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
       'fajlnev': [{value: '', disabled: true}, []],
       'megjegyzes': ['', []]
     });
+  }
+
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   onFileChange(event) {
@@ -47,38 +61,37 @@ export class DokumentumFeltoltesComponent implements OnDestroy {
         this.fb.Fajlnev = file.name;
         this.fb.Meret = file.size;
         this.fb.IratKod = this.Iratkod;
+
+        this.docdr();
       };
     }
   }
 
-  onSubmit() {
-    this.eppFrissit = true;
+  async onSubmit() {
     this.fb.Megjegyzes = this.form.value['megjegyzes'];
 
-    this.dokumentumservice.FeltoltesAngular(this.fb)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+    this.spinner = true;
+    try {
+      const res = await this.dokumentumservice.FeltoltesAngular(this.fb);
+      if (res.Error != null) {
+        throw res.Error;
+      }
 
-        return this.dokumentumservice.Get(res.Result);
-      })
-      .then(res1 => {
-        if (res1.Error != null) {
-          throw res1.Error;
-        }
+      const res1 = await this.dokumentumservice.Get(res.Result);
+      if (res1.Error != null) {
+        throw res1.Error;
+      }
 
-        this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit(res1.Result[0]);
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+      this.spinner = false;
+      this.eventSzerkeszteskesz.emit(res1.Result[0]);
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit(null);
+    this.eventSzerkeszteskesz.emit();
   }
 
   ngOnDestroy() {

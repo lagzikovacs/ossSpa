@@ -1,0 +1,25 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>{{cim}}</h5>
+  <button (click)="onKereses()" class="toolbutton">
+    <i class="fa fa-search" aria-hidden="true"></i>
+  </button>
+  <button [disabled]="!mod" (click)="doUjtetel()" class="toolbutton">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+  </button>
+
+  <app-tabla-ex #tabla
+                [items]="Dto"
+                [colsets]="dokumentumservice.GridSettings"
+                (forid)="onId($event)"
+                [egyTemplate]="gridegy">
+  </app-tabla-ex>
+
+  <ng-template #gridegy>
+    <app-dokumentum-egy [uj]="uj"
+                        [Iratkod]="Iratkod"
+                        [dto]="Dto[DtoSelectedIndex]"
+                        (eventUj)="onUjtetelkesz($event)"
+                        (eventTorles)="onTorlesutan()">
+    </app-dokumentum-egy>
+  </ng-template>
+</div>

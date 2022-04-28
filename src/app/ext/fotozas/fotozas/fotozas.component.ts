@@ -8,8 +8,8 @@ import {FotozasDto} from '../fotozasdto';
 import {LogonService} from '../../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {ErrorService} from '../../../common/errorbox/error.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {DokumentumService} from '../../../dokumentum/dokumentum.service';
-import {FajlBuf} from '../../../dokumentum/fajlbuf';
+import {DokumentumService} from '../../../02 Eszkozok/02 Irat/dokumentum/dokumentum.service';
+import {FajlBuf} from '../../../02 Eszkozok/02 Irat/dokumentum/fajlbuf';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

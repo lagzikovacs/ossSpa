@@ -12,7 +12,7 @@ import {HibabejelentesService} from '../hibabejelentes.service';
 import {ErrorService} from '../../../common/errorbox/error.service';
 import {ReszletekComponent} from '../../../common/reszletek/reszletek.component';
 import {ProjektTelepitesiDokumentumokKivalasztasaComponent} from '../projekt-telepitesi-dokumentumok-kivalasztasa/projekt-telepitesi-dokumentumok-kivalasztasa.component';
-import {DokumentumListComponent} from '../../../dokumentum/dokumentum-list/dokumentum-list.component';
+import {DokumentumListComponent} from '../../02 Irat/dokumentum/dokumentum-list/dokumentum-list.component';
 import {ProjektEmailalapjanComponent} from '../../../projekt/projekt-emailalapjan/projekt-emailalapjan.component';
 import {HibabejelentesSzerkesztesComponent} from '../hibabejelentes-szerkesztes/hibabejelentes-szerkesztes.component';
 import {TetelTorlesComponent} from '../../../common/tetel-torles/tetel-torles.component';

@@ -4,14 +4,13 @@ import {SzMT} from '../../common/dtos/szmt';
 import {ErrorService} from '../../common/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
-import {EgyMode} from '../../common/enums/egymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {JogKod} from '../../common/enums/jogkod';
 import {propCopy} from '../../common/propCopy';
-import {FelmeresService} from '../felmeres.service';
-import {FelmeresParameter} from '../felmeresparameter';
-import {FelmeresDto} from '../felmeresdto';
+import {FelmeresService} from '../../02 Eszkozok/05 Felmeres/felmeres.service';
+import {FelmeresParam} from '../../02 Eszkozok/05 Felmeres/felmeresparam';
+import {FelmeresDto} from '../../02 Eszkozok/05 Felmeres/felmeresdto';
 import {deepCopy} from '../../common/deepCopy';
 
 @Component({
@@ -36,7 +35,7 @@ export class FelmeresListComponent implements OnInit, OnDestroy {
   szempont = 0;
   minta = '';
 
-  fp = new FelmeresParameter(0, environment.lapmeret);
+  fp = new FelmeresParam(0, environment.lapmeret);
   OsszesRekord = 0;
   elsokereses = true;
   jog = false;

@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {NumberResult} from '../../common/dtos/numberresult';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {FelmeresDto} from '../felmeresdto';
+import {FelmeresDto} from '../../02 Eszkozok/05 Felmeres/felmeresdto';
 import {deepCopy} from '../../common/deepCopy';
-import {FelmeresService} from '../felmeres.service';
+import {FelmeresService} from '../../02 Eszkozok/05 Felmeres/felmeres.service';
 import {ErrorService} from '../../common/errorbox/error.service';
 
 @Component({

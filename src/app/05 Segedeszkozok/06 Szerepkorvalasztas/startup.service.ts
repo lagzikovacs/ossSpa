@@ -23,9 +23,9 @@ import {PenztartetelService} from "../../02 Eszkozok/03 Penztar/penztartetel/pen
 import {KifizetesService} from "../../kifizetes/kifizetes.service";
 import {DokumentumService} from "../../02 Eszkozok/02 Irat/dokumentum/dokumentum.service";
 import {VolumeService} from "../02 Volume/volume.service";
-import {UgyfelterlogService} from "../../ugyfelterlog/ugyfelterlog.service";
-import {AjanlatkeresService} from "../../ajanlatkeres/ajanlatkeres.service";
-import {FelmeresService} from "../../felmeres/felmeres.service";
+import {UgyfelterlogService} from "../../02 Eszkozok/07 Ugyfelterlog/ugyfelterlog.service";
+import {AjanlatkeresService} from "../../02 Eszkozok/04 Ajanlatkeres/ajanlatkeres.service";
+import {FelmeresService} from "../../02 Eszkozok/05 Felmeres/felmeres.service";
 import {HibabejelentesService} from "../../02 Eszkozok/06 Hibabejelentes/hibabejelentes.service";
 import {lastValueFrom} from "rxjs";
 import {EmptyResult} from "../../common/dtos/emptyresult";

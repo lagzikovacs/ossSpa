@@ -1,13 +1,12 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
-import {AjanlatkeresService} from '../ajanlatkeres.service';
+import {AjanlatkeresService} from '../../02 Eszkozok/04 Ajanlatkeres/ajanlatkeres.service';
 import {Szempont} from '../../common/enums/szempont';
 import {SzMT} from '../../common/dtos/szmt';
-import {AjanlatkeresDto} from '../ajanlatkeresdto';
+import {AjanlatkeresDto} from '../../02 Eszkozok/04 Ajanlatkeres/ajanlatkeresdto';
 import {ErrorService} from '../../common/errorbox/error.service';
 import {TablaComponent} from '../../tools/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
-import {AjanlatkeresParameter} from '../ajanlatkeresparameter';
-import {EgyMode} from '../../common/enums/egymode';
+import {AjanlatkeresParam} from '../../02 Eszkozok/04 Ajanlatkeres/ajanlatkeresparam';
 import {rowanimation} from '../../animation/rowAnimation';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {JogKod} from '../../common/enums/jogkod';
@@ -33,7 +32,7 @@ export class AjanlatkeresListComponent implements OnDestroy {
   szempont = 0;
   minta = '';
 
-  fp = new AjanlatkeresParameter(0, environment.lapmeret);
+  fp = new AjanlatkeresParam(0, environment.lapmeret);
   OsszesRekord = 0;
   elsokereses = true;
   jog = false;

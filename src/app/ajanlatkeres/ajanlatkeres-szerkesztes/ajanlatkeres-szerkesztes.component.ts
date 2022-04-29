@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AjanlatkeresDto} from '../ajanlatkeresdto';
-import {AjanlatkeresService} from '../ajanlatkeres.service';
+import {AjanlatkeresDto} from '../../02 Eszkozok/04 Ajanlatkeres/ajanlatkeresdto';
+import {AjanlatkeresService} from '../../02 Eszkozok/04 Ajanlatkeres/ajanlatkeres.service';
 import {ErrorService} from '../../common/errorbox/error.service';
 import {deepCopy} from '../../common/deepCopy';
 import {NumberResult} from '../../common/dtos/numberresult';

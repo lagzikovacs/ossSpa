@@ -1,11 +1,15 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit,
+  Output
+} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {FelmeresService} from '../../02 Eszkozok/05 Felmeres/felmeres.service';
-import {ErrorService} from '../../common/errorbox/error.service';
-import {FelmeresDto} from '../../02 Eszkozok/05 Felmeres/felmeresdto';
-import {deepCopy} from '../../common/deepCopy';
+import {FelmeresService} from '../felmeres.service';
+import {ErrorService} from '../../../common/errorbox/error.service';
+import {FelmeresDto} from '../felmeresdto';
+import {deepCopy} from '../../../common/deepCopy';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-felmeres-jelentes',
   templateUrl: './felmeres-jelentes.component.html'
 })
@@ -18,11 +22,17 @@ export class FelmeresJelentesComponent  implements OnInit, OnDestroy {
 
   form: FormGroup;
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   felmeresservice: FelmeresService;
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
+              private _cdr: ChangeDetectorRef,
               felmeresservice: FelmeresService) {
     this.felmeresservice = felmeresservice;
 
@@ -42,34 +52,31 @@ export class FelmeresJelentesComponent  implements OnInit, OnDestroy {
     this.DtoEdited.Megjegyzes1 = this.form.value['megjegyzes1'];
   }
 
-  onSubmit() {
-    this.eppFrissit = true;
+  async onSubmit() {
     this.updatedto();
 
-    this.felmeresservice.Update(this.DtoEdited)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+    this.spinner = true;
+    try {
+      const res = await this.felmeresservice.Update(this.DtoEdited);
+      if (res.Error != null) {
+        throw res.Error;
+      }
 
-        return this.felmeresservice.Get(res.Result);
-      })
-      .then(res1 => {
-        if (res1.Error != null) {
-          throw res1.Error;
-        }
+      const res1 = await this.felmeresservice.Get(res.Result);
+      if (res1.Error != null) {
+        throw res1.Error;
+      }
 
-        this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit(res1.Result[0]);
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+      this.spinner = false;
+      this.eventSzerkeszteskesz.emit(res1.Result[0]);
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit(null);
+    this.eventSzerkeszteskesz.emit();
   }
 
   ngOnDestroy() {

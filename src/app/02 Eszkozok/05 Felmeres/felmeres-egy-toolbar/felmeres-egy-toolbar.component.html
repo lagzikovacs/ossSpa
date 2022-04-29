@@ -1,0 +1,20 @@
+<div class="tabla-toolbar">
+  <button (click)="doNav(1)" class="toolbutton">
+    <i class="fa fa-file" aria-hidden="true"></i>
+  </button>
+  <button *ngIf="ProjektBol" [disabled]="!jog || !Dto.Nyitott" (click)="doNav(2)" class="toolbutton">
+    <i class="fa fa-minus" aria-hidden="true"></i>
+  </button>
+  <button *ngIf="ProjektBol" [disabled]="!jog || !Dto.Nyitott" (click)="doNav(3)" class="toolbutton">
+    <i class="fa fa-edit" aria-hidden="true"></i>
+  </button>
+  <button [disabled]="!jog" (click)="doNav(15)" class="toolbutton">
+    {{dokcim}}
+  </button>
+  <button *ngIf="!ProjektBol" [disabled]="!jog || !Dto.Nyitott" (click)="doNav(46)" class="toolbutton">
+    Jelentés
+  </button>
+  <button *ngIf="!ProjektBol" [disabled]="!jog" (click)="doNav(50)" class="toolbutton">
+    {{Dto.Nyitott ? 'Zárás' : 'Újranyitás'}}
+  </button>
+</div>

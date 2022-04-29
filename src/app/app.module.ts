@@ -186,7 +186,7 @@ import { AjanlatkeresSzerkesztesComponent } from './ajanlatkeres/ajanlatkeres-sz
 import { AutofocusDirective } from './directives/autofocus.directive';
 import {FelmeresListComponent} from './felmeres/felmeres-list/felmeres-list.component';
 import { HibabejelentesSzerkesztesComponent } from './02 Eszkozok/06 Hibabejelentes/hibabejelentes-szerkesztes/hibabejelentes-szerkesztes.component';
-import { FelmeresSzerkesztesComponent } from './felmeres/felmeres-szerkesztes/felmeres-szerkesztes.component';
+import { FelmeresSzerkesztesComponent } from './02 Eszkozok/05 Felmeres/felmeres-szerkesztes/felmeres-szerkesztes.component';
 import {ProjekthezRendelesComponent} from './projekt/projekthez-rendeles/projekthez-rendeles.component';
 import { EgyszeruUzenetComponent } from './common/egyszeru-uzenet/egyszeru-uzenet.component';
 import { FelmeresJelentesComponent } from './felmeres/felmeres-jelentes/felmeres-jelentes.component';
@@ -225,6 +225,8 @@ import {HibabejelentesEgyComponent} from "./02 Eszkozok/06 Hibabejelentes/hibabe
 import {HibabejelentesEgyToolbarComponent} from "./02 Eszkozok/06 Hibabejelentes/hibabejelentes-egy-toolbar/hibabejelentes-egy-toolbar.component";
 import {DokumentumEgyToolbarComponent} from "./02 Eszkozok/02 Irat/dokumentum/dokumentum-egy-toolbar/dokumentum-egy-toolbar.component";
 import {DokumentumEgyComponent} from "./02 Eszkozok/02 Irat/dokumentum/dokumentum-egy/dokumentum-egy.component";
+import {AjanlatkeresEgyToolbarComponent} from "./02 Eszkozok/04 Ajanlatkeres/ajanlatkeres-egy-toolbar/ajanlatkeres-egy-toolbar.component";
+import {FelmeresEgyToolbarComponent} from "./02 Eszkozok/05 Felmeres/felmeres-egy-toolbar/felmeres-egy-toolbar.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -475,6 +477,8 @@ if (environment.production) {
     HibabejelentesEgyToolbarComponent,
     DokumentumEgyToolbarComponent,
     DokumentumEgyComponent,
+    AjanlatkeresEgyToolbarComponent,
+    FelmeresEgyToolbarComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,12 +1,16 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {NumberResult} from '../../common/dtos/numberresult';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit,
+  Output
+} from '@angular/core';
+import {NumberResult} from '../../../common/dtos/numberresult';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {FelmeresDto} from '../../02 Eszkozok/05 Felmeres/felmeresdto';
-import {deepCopy} from '../../common/deepCopy';
-import {FelmeresService} from '../../02 Eszkozok/05 Felmeres/felmeres.service';
-import {ErrorService} from '../../common/errorbox/error.service';
+import {FelmeresDto} from '../felmeresdto';
+import {deepCopy} from '../../../common/deepCopy';
+import {FelmeresService} from '../felmeres.service';
+import {ErrorService} from '../../../common/errorbox/error.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-felmeres-szerkesztes',
   templateUrl: './felmeres-szerkesztes.component.html'
 })
@@ -23,11 +27,17 @@ export class FelmeresSzerkesztesComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   felmeresservice: FelmeresService;
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
+              private _cdr: ChangeDetectorRef,
               felmeresservice: FelmeresService) {
     this.felmeresservice = felmeresservice;
 
@@ -42,35 +52,34 @@ export class FelmeresSzerkesztesComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     if (this.uj) {
-      this.eppFrissit = true;
-      this.felmeresservice.CreateNew()
-        .then(res => {
-          if (res.Error !== null) {
-            throw res.Error;
-          }
+      this.spinner = true;
+      try {
+        const res = await this.felmeresservice.CreateNew();
+        if (res.Error !== null) {
+          throw res.Error;
+        }
 
-          this.DtoEdited = res.Result[0];
+        this.DtoEdited = res.Result[0];
 
-          if (this.ProjektBol) {
-            this.DtoEdited.Projektkod = this.ProjektDto.Projektkod;
+        if (this.ProjektBol) {
+          this.DtoEdited.Projektkod = this.ProjektDto.Projektkod;
 
-            this.DtoEdited.Nev = this.ProjektDto.Ugyfelnev;
-            this.DtoEdited.Email = this.ProjektDto.Ugyfelemail;
-            this.DtoEdited.Telefonszam = this.ProjektDto.Ugyfeltelefonszam;
-            this.DtoEdited.Telepitesicim = this.ProjektDto.Telepitesicim;
-            this.DtoEdited.Inverter = this.ProjektDto.Inverter;
-            this.DtoEdited.Napelem = this.ProjektDto.Napelem;
-          }
+          this.DtoEdited.Nev = this.ProjektDto.Ugyfelnev;
+          this.DtoEdited.Email = this.ProjektDto.Ugyfelemail;
+          this.DtoEdited.Telefonszam = this.ProjektDto.Ugyfeltelefonszam;
+          this.DtoEdited.Telepitesicim = this.ProjektDto.Telepitesicim;
+          this.DtoEdited.Inverter = this.ProjektDto.Inverter;
+          this.DtoEdited.Napelem = this.ProjektDto.Napelem;
+        }
 
-          this.updateform();
-          this.eppFrissit = false;
-        })
-        .catch(err => {
-          this.eppFrissit = false;
-          this._errorservice.Error = err;
-        });
+        this.updateform();
+        this.spinner = false;
+      } catch (err) {
+        this.spinner = false;
+        this._errorservice.Error = err;
+      }
     } else {
       this.updateform();
     }
@@ -95,41 +104,36 @@ export class FelmeresSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Megjegyzes = this.form.value['megjegyzes'];
   }
 
-  onSubmit() {
-    this.eppFrissit = true;
-    let p: Promise<NumberResult>;
+  async onSubmit() {
     this.updatedto();
 
-    if (this.uj) {
-      p = this.felmeresservice.Add(this.DtoEdited);
-    } else {
-      p = this.felmeresservice.Update(this.DtoEdited);
+    this.spinner = true;
+    try {
+      let res: NumberResult;
+      if (this.uj) {
+        res = await this.felmeresservice.Add(this.DtoEdited);
+      } else {
+        res = await this.felmeresservice.Update(this.DtoEdited);
+      }
+      if (res.Error != null) {
+        throw res.Error;
+      }
+
+      const res1 = await this.felmeresservice.Get(res.Result);
+      if (res1.Error != null) {
+        throw res1.Error;
+      }
+
+      this.spinner = false;
+      this.eventSzerkeszteskesz.emit(res1.Result[0]);
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
     }
-
-    p
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        return this.felmeresservice.Get(res.Result);
-      })
-      .then(res1 => {
-        if (res1.Error != null) {
-          throw res1.Error;
-        }
-
-        this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit(res1.Result[0]);
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit(null);
+    this.eventSzerkeszteskesz.emit();
   }
 
   ngOnDestroy() {

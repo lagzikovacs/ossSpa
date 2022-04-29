@@ -1,12 +1,16 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit,
+  Output
+} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AjanlatkeresDto} from '../../02 Eszkozok/04 Ajanlatkeres/ajanlatkeresdto';
-import {AjanlatkeresService} from '../../02 Eszkozok/04 Ajanlatkeres/ajanlatkeres.service';
-import {ErrorService} from '../../common/errorbox/error.service';
-import {deepCopy} from '../../common/deepCopy';
-import {NumberResult} from '../../common/dtos/numberresult';
+import {AjanlatkeresDto} from '../ajanlatkeresdto';
+import {AjanlatkeresService} from '../ajanlatkeres.service';
+import {ErrorService} from '../../../common/errorbox/error.service';
+import {deepCopy} from '../../../common/deepCopy';
+import {NumberResult} from '../../../common/dtos/numberresult';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-ajanlatkeres-szerkesztes',
   templateUrl: './ajanlatkeres-szerkesztes.component.html'
 })
@@ -20,11 +24,17 @@ export class AjanlatkeresSzerkesztesComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   ajanlatkeresservice: AjanlatkeresService;
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
+              private _cdr: ChangeDetectorRef,
               ajanlatkeresservice: AjanlatkeresService) {
     this.ajanlatkeresservice = ajanlatkeresservice;
 
@@ -40,23 +50,22 @@ export class AjanlatkeresSzerkesztesComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     if (this.uj) {
-      this.eppFrissit = true;
-      this.ajanlatkeresservice.CreateNew()
-        .then(res => {
-          if (res.Error !== null) {
-            throw res.Error;
-          }
+      this.spinner = true;
+      try {
+        const res = await this.ajanlatkeresservice.CreateNew();
+        if (res.Error !== null) {
+          throw res.Error;
+        }
 
-          this.DtoEdited = res.Result[0];
-          this.updateform();
-          this.eppFrissit = false;
-        })
-        .catch(err => {
-          this.eppFrissit = false;
-          this._errorservice.Error = err;
-        });
+        this.DtoEdited = res.Result[0];
+        this.updateform();
+        this.spinner = false;
+      } catch (err) {
+        this.spinner = false;
+        this._errorservice.Error = err;
+      }
     } else {
       this.updateform();
     }
@@ -83,41 +92,36 @@ export class AjanlatkeresSzerkesztesComponent implements OnInit, OnDestroy {
     this.DtoEdited.Megjegyzes = this.form.value['megjegyzes'];
   }
 
-  onSubmit() {
-    this.eppFrissit = true;
-    let p: Promise<NumberResult>;
+  async onSubmit() {
     this.updatedto();
 
-    if (this.uj) {
-      p = this.ajanlatkeresservice.Add(this.DtoEdited);
-    } else {
-      p = this.ajanlatkeresservice.Update(this.DtoEdited);
+    this.spinner = true;
+    try {
+      let res: NumberResult;
+      if (this.uj) {
+        res = await this.ajanlatkeresservice.Add(this.DtoEdited);
+      } else {
+        res = await this.ajanlatkeresservice.Update(this.DtoEdited);
+      }
+      if (res.Error != null) {
+        throw res.Error;
+      }
+
+      const res1 = await this.ajanlatkeresservice.Get(res.Result);
+      if (res1.Error != null) {
+        throw res1.Error;
+      }
+
+      this.spinner = false;
+      this.eventSzerkeszteskesz.emit(res1.Result[0]);
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
     }
-
-    p
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        return this.ajanlatkeresservice.Get(res.Result);
-      })
-      .then(res1 => {
-        if (res1.Error != null) {
-          throw res1.Error;
-        }
-
-        this.eppFrissit = false;
-        this.eventSzerkeszteskesz.emit(res1.Result[0]);
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit(null);
+    this.eventSzerkeszteskesz.emit();
   }
 
   ngOnDestroy() {

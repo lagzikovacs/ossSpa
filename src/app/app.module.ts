@@ -182,7 +182,7 @@ import { BizonylatProjektjeComponent } from './bizonylat/bizonylat-projektje/biz
 import { FooldalComponent } from './fooldal/fooldal.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import {HibabejelentesListComponent} from './02 Eszkozok/06 Hibabejelentes/hibabejelentes-list/hibabejelentes-list.component';
-import { AjanlatkeresSzerkesztesComponent } from './ajanlatkeres/ajanlatkeres-szerkesztes/ajanlatkeres-szerkesztes.component';
+import { AjanlatkeresSzerkesztesComponent } from './02 Eszkozok/04 Ajanlatkeres/ajanlatkeres-szerkesztes/ajanlatkeres-szerkesztes.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import {FelmeresListComponent} from './felmeres/felmeres-list/felmeres-list.component';
 import { HibabejelentesSzerkesztesComponent } from './02 Eszkozok/06 Hibabejelentes/hibabejelentes-szerkesztes/hibabejelentes-szerkesztes.component';

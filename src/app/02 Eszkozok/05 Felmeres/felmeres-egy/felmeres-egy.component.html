@@ -1,6 +1,8 @@
 <div [ngClass]="!uj ? 'alapkeret' : ''" [appSpinner]="eppFrissit">
   <app-felmeres-egy-toolbar *ngIf="!uj"
                             [ProjektBol]="ProjektBol"
+                            [ProjektDto]="ProjektDto"
+                            [dto]="Dto"
                             [dokcim]="dokcim"
                             (eventNav)="doNav($event)">
   </app-felmeres-egy-toolbar>

@@ -184,7 +184,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {HibabejelentesListComponent} from './02 Eszkozok/06 Hibabejelentes/hibabejelentes-list/hibabejelentes-list.component';
 import { AjanlatkeresSzerkesztesComponent } from './02 Eszkozok/04 Ajanlatkeres/ajanlatkeres-szerkesztes/ajanlatkeres-szerkesztes.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
-import {FelmeresListComponent} from './felmeres/felmeres-list/felmeres-list.component';
+import {FelmeresListComponent} from './02 Eszkozok/05 Felmeres/felmeres-list/felmeres-list.component';
 import { HibabejelentesSzerkesztesComponent } from './02 Eszkozok/06 Hibabejelentes/hibabejelentes-szerkesztes/hibabejelentes-szerkesztes.component';
 import { FelmeresSzerkesztesComponent } from './02 Eszkozok/05 Felmeres/felmeres-szerkesztes/felmeres-szerkesztes.component';
 import {ProjekthezRendelesComponent} from './projekt/projekthez-rendeles/projekthez-rendeles.component';
@@ -228,6 +228,7 @@ import {DokumentumEgyComponent} from "./02 Eszkozok/02 Irat/dokumentum/dokumentu
 import {AjanlatkeresEgyToolbarComponent} from "./02 Eszkozok/04 Ajanlatkeres/ajanlatkeres-egy-toolbar/ajanlatkeres-egy-toolbar.component";
 import {FelmeresEgyToolbarComponent} from "./02 Eszkozok/05 Felmeres/felmeres-egy-toolbar/felmeres-egy-toolbar.component";
 import {AjanlatkeresEgyComponent} from "./02 Eszkozok/04 Ajanlatkeres/ajanlatkeres-egy/ajanlatkeres-egy.component";
+import {FelmeresEgyComponent} from "./02 Eszkozok/05 Felmeres/felmeres-egy/felmeres-egy.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -482,6 +483,7 @@ if (environment.production) {
     FelmeresEgyToolbarComponent,
     AjanlatkeresEgyComponent,
     FelmeresEgyToolbarComponent,
+    FelmeresEgyComponent,
   ],
   imports: [
     BrowserModule,

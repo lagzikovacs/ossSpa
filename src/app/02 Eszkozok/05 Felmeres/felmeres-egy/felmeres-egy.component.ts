@@ -3,20 +3,20 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {OnDestroyMixin, untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
-import {FelmeresDto} from "../felmeresdto";
-import {deepCopy} from "../../../common/deepCopy";
-import {FelmeresService} from "../felmeres.service";
-import {ErrorService} from "../../../common/errorbox/error.service";
-import {EgyMode} from "../../../common/enums/egymode";
-import {ReszletekComponent} from "../../../common/reszletek/reszletek.component";
-import {TetelTorlesComponent} from "../../../common/tetel-torles/tetel-torles.component";
-import {propCopy} from "../../../common/propCopy";
-import {FelmeresJelentesComponent} from "../felmeres-jelentes/felmeres-jelentes.component";
-import {DokumentumListComponent} from "../../02 Irat/dokumentum/dokumentum-list/dokumentum-list.component";
-import {FelmeresSzerkesztesComponent} from "../felmeres-szerkesztes/felmeres-szerkesztes.component";
-import {ProjektDto} from "../../01 Projekt/projekt/projektdto";
-import {EgyszeruKerdesUzenetComponent} from "../../../common/egyszeru-kerdes-uzenet/egyszeru-kerdes-uzenet.component";
+import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
+import {FelmeresDto} from '../felmeresdto';
+import {deepCopy} from '../../../common/deepCopy';
+import {FelmeresService} from '../felmeres.service';
+import {ErrorService} from '../../../common/errorbox/error.service';
+import {EgyMode} from '../../../common/enums/egymode';
+import {ReszletekComponent} from '../../../common/reszletek/reszletek.component';
+import {TetelTorlesComponent} from '../../../common/tetel-torles/tetel-torles.component';
+import {propCopy} from '../../../common/propCopy';
+import {FelmeresJelentesComponent} from '../felmeres-jelentes/felmeres-jelentes.component';
+import {DokumentumListComponent} from '../../02 Irat/dokumentum/dokumentum-list/dokumentum-list.component';
+import {FelmeresSzerkesztesComponent} from '../felmeres-szerkesztes/felmeres-szerkesztes.component';
+import {ProjektDto} from '../../01 Projekt/projekt/projektdto';
+import {EgyszeruKerdesUzenetComponent} from '../../../common/egyszeru-kerdes-uzenet/egyszeru-kerdes-uzenet.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,14 +26,14 @@ import {EgyszeruKerdesUzenetComponent} from "../../../common/egyszeru-kerdes-uze
 export class FelmeresEgyComponent extends OnDestroyMixin implements AfterViewInit, OnDestroy {
   @ViewChild('compcont_felmeres', {read: ViewContainerRef}) vcr: ViewContainerRef;
 
-  @Input() uj: boolean = false;
-  @Input() defaultNav: number = 0;
+  @Input() uj = false;
+  @Input() defaultNav = 0;
   Dto = new FelmeresDto();
   @Input() set dto(value: FelmeresDto) {
     this.Dto = deepCopy(value);
   }
-  @Input() dokcim: string = '';
-  @Input() ProjektBol: boolean = false;
+  @Input() dokcim = '';
+  @Input() ProjektBol = false;
   @Input() ProjektDto: ProjektDto = new ProjektDto();
   @Output() eventUj: EventEmitter<FelmeresDto> = new EventEmitter<FelmeresDto>();
   @Output() eventTorles: EventEmitter<void> = new EventEmitter<void>();
@@ -80,8 +80,8 @@ export class FelmeresEgyComponent extends OnDestroyMixin implements AfterViewIni
         const ujC = this.vcr.createComponent(FelmeresSzerkesztesComponent);
 
         ujC.instance.uj = true;
-        C.instance.ProjektBol = this.ProjektBol;
-        C.instance.ProjektDto = this.ProjektDto;
+        ujC.instance.ProjektBol = this.ProjektBol;
+        ujC.instance.ProjektDto = this.ProjektDto;
         ujC.instance.eventSzerkeszteskesz.pipe(untilComponentDestroyed(this)).subscribe(dto => {
           this.doUjkesz(dto);
         });
@@ -147,63 +147,58 @@ export class FelmeresEgyComponent extends OnDestroyMixin implements AfterViewIni
     this.eventUj.emit(dto);
   }
 
-  doTorles(ok: boolean) {
+  async doTorles(ok: boolean) {
     if (ok) {
       this.spinner = true;
+      try {
+        const res = await this.felmeresservice.Delete(this.Dto);
+        if (res.Error != null) {
+          throw res.Error;
+        }
 
-      this.felmeresservice.Delete(this.Dto)
-        .then(res => {
-          if (res.Error != null) {
-            throw res.Error;
-          }
+        this.spinner = false;
+        this.doNav(0);
 
-          this.spinner = false;
-          this.doNav(0);
-
-          this.eventTorles.emit();
-        })
-        .catch(err => {
-          this.spinner = false;
-          this._errorservice.Error = err;
-        });
+        this.eventTorles.emit();
+      } catch (err) {
+        this.spinner = false;
+        this._errorservice.Error = err;
+      }
     } else {
       this.doNav(0);
     }
   }
 
-  doZarasnyitas(ekuC: any, msgNyitott: string, msgZart: string) {
-    this.spinner = true;
+  async doZarasnyitas(ekuC: any, msgNyitott: string, msgZart: string) {
     const DtoEdited = deepCopy(this.Dto);
 
-    this.felmeresservice.ZarasNyitas(DtoEdited)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+    this.spinner = true;
+    try {
+      const res = await this.felmeresservice.ZarasNyitas(DtoEdited);
+      if (res.Error != null) {
+        throw res.Error;
+      }
 
-        return this.felmeresservice.Get(DtoEdited.Ajanlatkereskod);
-      })
-      .then(res1 => {
-        if (res1.Error != null) {
-          throw res1.Error;
-        }
+      const res1 = await this.felmeresservice.Get(DtoEdited.Ajanlatkereskod);
+      if (res1.Error != null) {
+        throw res1.Error;
+      }
 
-        propCopy(res1.Result[0], this.Dto);
+      propCopy(res1.Result[0], this.Dto);
 
-        if (this.Dto.Nyitott) {
-          ekuC.instance.uzenet = msgNyitott;
-        } else {
-          ekuC.instance.uzenet = msgZart;
-        }
+      if (this.Dto.Nyitott) {
+        ekuC.instance.uzenet = msgNyitott;
+      } else {
+        ekuC.instance.uzenet = msgZart;
+      }
 
-        this.eventModositas.emit(res1.Result[0]);
+      this.eventModositas.emit(res1.Result[0]);
 
-        this.spinner = false;
-      })
-      .catch(err => {
-        this.spinner = false;
-        this._errorservice.Error = err;
-      });
+      this.spinner = false;
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
   doModositaskesz(dto: FelmeresDto) {

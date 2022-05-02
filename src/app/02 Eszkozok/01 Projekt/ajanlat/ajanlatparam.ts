@@ -1,4 +1,4 @@
-import {SzMT} from '../common/dtos/szmt';
+import {SzMT} from '../../../common/dtos/szmt';
 import {AjanlatBuf} from './ajanlatbuf';
 
 export class AjanlatParam {

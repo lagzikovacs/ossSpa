@@ -7,3 +7,4 @@ export enum AjanlatTetelTipus {
   Munkadij = 5,
   TuzesetiKapcsolo = 6
 }
+

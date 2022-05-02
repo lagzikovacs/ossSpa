@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, Output, TemplateRef} from '@angular/core';
-import {AjanlatBuf} from '../ajanlatbuf';
+import {AjanlatBuf} from '../../02 Eszkozok/01 Projekt/ajanlat/ajanlatbuf';
 
 @Component({
   selector: 'app-ajanlat-tabla',

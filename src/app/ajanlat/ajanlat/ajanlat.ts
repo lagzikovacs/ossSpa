@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
 import * as moment from 'moment';
-import {AjanlatService} from '../ajanlat.service';
+import {AjanlatService} from '../../02 Eszkozok/01 Projekt/ajanlat/ajanlat.service';
 import {ErrorService} from '../../common/errorbox/error.service';
 import {ProjektKapcsolatDto} from '../../projektkapcsolat/projektkapcsolatdto';
-import {AjanlatParam} from '../ajanlatparam';
-import {AjanlatBuf} from '../ajanlatbuf';
+import {AjanlatParam} from '../../02 Eszkozok/01 Projekt/ajanlat/ajanlatparam';
+import {AjanlatBuf} from '../../02 Eszkozok/01 Projekt/ajanlat/ajanlatbuf';
 import {deepCopy} from '../../common/deepCopy';
 import {propCopy} from '../../common/propCopy';
 import {AjanlatTablaComponent} from '../ajanlat-tabla/ajanlat-tabla.component';

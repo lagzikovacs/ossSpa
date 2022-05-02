@@ -134,7 +134,7 @@ import {VagolapService} from './05 Segedeszkozok/08 Vagolap/vagolap.service';
 import { AbuComponent } from './tools/abu/abu.component';
 import { BizonylatkapcsolatVagolaprolComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-vagolaprol/bizonylatkapcsolat-vagolaprol.component';
 import { ProjektkapcsolatVagolaprolComponent } from './projektkapcsolat/projektkapcsolat-vagolaprol/projektkapcsolat-vagolaprol.component';
-import {AjanlatService} from './ajanlat/ajanlat.service';
+import {AjanlatService} from './02 Eszkozok/01 Projekt/ajanlat/ajanlat.service';
 import {IratmintaService} from './projekt/projekt-iratminta/iratminta.service';
 import { EsemenynaploComponent } from './05 Segedeszkozok/03 Felhasznalo/esemenynaplo/esemenynaplo.component';
 import { UgyfelterComponent } from './ext/ugyfelter/ugyfelter/ugyfelter.component';

@@ -16,7 +16,7 @@ import {TevekenysegService} from "../../01 Torzsadatok/08 Tevekenyseg/tevekenyse
 import {CikkService} from "../../01 Torzsadatok/06 Cikk/cikk.service";
 import {UgyfelService} from "../../01 Torzsadatok/09 Ugyfel/ugyfel.service";
 import {ProjektService} from "../../02 Eszkozok/01 Projekt/projekt/projekt.service";
-import {ProjektjegyzetService} from "../../projektjegyzet/projektjegyzet.service";
+import {ProjektjegyzetService} from "../../02 Eszkozok/01 Projekt/projektjegyzet/projektjegyzet.service";
 import {IratService} from "../../02 Eszkozok/02 Irat/irat/irat.service";
 import {PenztarService} from "../../02 Eszkozok/03 Penztar/penztar/penztar.service";
 import {PenztartetelService} from "../../02 Eszkozok/03 Penztar/penztartetel/penztartetel.service";

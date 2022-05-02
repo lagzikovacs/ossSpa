@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {ProjektjegyzetService} from '../projektjegyzet.service';
+import {ProjektjegyzetService} from '../../02 Eszkozok/01 Projekt/projektjegyzet/projektjegyzet.service';
 import * as moment from 'moment';
 import {ErrorService} from '../../common/errorbox/error.service';
 import {deepCopy} from '../../common/deepCopy';
-import {ProjektjegyzetDto} from '../projektjegyzetdto';
+import {ProjektjegyzetDto} from '../../02 Eszkozok/01 Projekt/projektjegyzet/projektjegyzetdto';
 import {NumberResult} from '../../common/dtos/numberresult';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 

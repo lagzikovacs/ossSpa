@@ -1,0 +1,32 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>{{ajanlatkeresservice.cim}}</h5>
+  <app-toolbar [StatuszSzurok]="statuszszurok" [(statusz)]="statusz" [visStatusz]="true"
+               [Szurok]="szurok" [(szempont)]="szempont" [(minta)]="minta" (Kereses)="onKereses()"
+               [visUj]="true" [enUj]="jog" (Uj)="doUjtetel()">
+  </app-toolbar>
+
+  <app-tabla-ex #tabla
+                [items]="Dto"
+                [colsets]="ajanlatkeresservice.GridSettings"
+                (forid)="onId($event)"
+                [egyTemplate]="gridegy"
+                [megjegyzesIs]="true">
+  </app-tabla-ex>
+
+  <ng-template #gridegy>
+    <app-ajanlatkeres-egy [uj]="uj"
+                  [dto]="Dto[DtoSelectedIndex]"
+                  (eventUj)="onUjtetelkesz($event)"
+                  (eventTorles)="onTorles()"
+                  (eventModositas)="onModositaskesz($event)">
+    </app-ajanlatkeres-egy>
+  </ng-template>
+
+  <app-toolbarfooter [enKereses]="!elsokereses"
+                     [rekordszam]="Dto.length"
+                     [osszesrekord]="OsszesRekord"
+                     (KeresesTovabb)="onKeresesTovabb()">
+  </app-toolbarfooter>
+</div>
+
+

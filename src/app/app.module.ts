@@ -49,7 +49,7 @@ import { CsoportSzerkesztesComponent } from './05 Segedeszkozok/04 Csoport/csopo
 import { CsoportFelhasznaloComponent } from './05 Segedeszkozok/04 Csoport/csoport-felhasznalo/csoport-felhasznalo.component';
 import { CsoportJogComponent } from './05 Segedeszkozok/04 Csoport/csoport-jog/csoport-jog.component';
 import { VolumeTesztComponent } from './05 Segedeszkozok/02 Volume/volume-teszt/volume-teszt.component';
-import { AjanlatkeresListComponent } from './ajanlatkeres/ajanlatkeres-list/ajanlatkeres-list.component';
+import { AjanlatkeresListComponent } from './02 Eszkozok/04 Ajanlatkeres/ajanlatkeres-list/ajanlatkeres-list.component';
 import { ProjektEmailalapjanComponent } from './projekt/projekt-emailalapjan/projekt-emailalapjan.component';
 import { ProjektTablaComponent } from './projekt/projekttabla/projekt-tabla.component';
 import { RiportComponent } from './04 Riportok/riport/riport.component';
@@ -227,6 +227,7 @@ import {DokumentumEgyToolbarComponent} from "./02 Eszkozok/02 Irat/dokumentum/do
 import {DokumentumEgyComponent} from "./02 Eszkozok/02 Irat/dokumentum/dokumentum-egy/dokumentum-egy.component";
 import {AjanlatkeresEgyToolbarComponent} from "./02 Eszkozok/04 Ajanlatkeres/ajanlatkeres-egy-toolbar/ajanlatkeres-egy-toolbar.component";
 import {FelmeresEgyToolbarComponent} from "./02 Eszkozok/05 Felmeres/felmeres-egy-toolbar/felmeres-egy-toolbar.component";
+import {AjanlatkeresEgyComponent} from "./02 Eszkozok/04 Ajanlatkeres/ajanlatkeres-egy/ajanlatkeres-egy.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -478,6 +479,8 @@ if (environment.production) {
     DokumentumEgyToolbarComponent,
     DokumentumEgyComponent,
     AjanlatkeresEgyToolbarComponent,
+    FelmeresEgyToolbarComponent,
+    AjanlatkeresEgyComponent,
     FelmeresEgyToolbarComponent,
   ],
   imports: [

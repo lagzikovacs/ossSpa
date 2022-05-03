@@ -1,8 +1,9 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {IratDto} from '../../02 Eszkozok/02 Irat/irat/iratdto';
-import {VagolapService} from '../../05 Segedeszkozok/08 Vagolap/vagolap.service';
+import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {IratDto} from '../../../02 Eszkozok/02 Irat/irat/iratdto';
+import {VagolapService} from '../vagolap.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-vagolap-irathoz',
   templateUrl: './vagolap-irathoz.component.html'
 })

@@ -129,7 +129,7 @@ import { BizonylatPenztarComponent } from './bizonylat/bizonylat-penztar/bizonyl
 import { BizonylatKifizetesrendbenComponent } from './bizonylat/bizonylat-kifizetesrendben/bizonylat-kifizetesrendben.component';
 import { BizonylatKiszallitvaComponent } from './bizonylat/bizonylat-kiszallitva/bizonylat-kiszallitva.component';
 import { BoolHunPipe } from './pipes/boolhun.pipe';
-import { VagolapComponent } from './vagolap/vagolap.component';
+import { VagolapComponent } from './05 Segedeszkozok/08 Vagolap/vagolap/vagolap.component';
 import {VagolapService} from './05 Segedeszkozok/08 Vagolap/vagolap.service';
 import { AbuComponent } from './tools/abu/abu.component';
 import { BizonylatkapcsolatVagolaprolComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-vagolaprol/bizonylatkapcsolat-vagolaprol.component';
@@ -175,8 +175,8 @@ import { BizonylatZoomComponent } from './bizonylat/bizonylat-zoom/bizonylat-zoo
 import { DokumentumLetoltesComponent } from './02 Eszkozok/02 Irat/dokumentum/dokumentum-letoltes/dokumentum-letoltes.component';
 import { DokumentumLetoltesPdfComponent } from './02 Eszkozok/02 Irat/dokumentum/dokumentum-letoltes-pdf/dokumentum-letoltes-pdf.component';
 import { DokumentumNezetComponent } from './02 Eszkozok/02 Irat/dokumentum/dokumentum-nezet/dokumentum-nezet.component';
-import { VagolapIrathozComponent } from './vagolap/vagolap-irathoz/vagolap-irathoz.component';
-import { VagolapBizonylathozComponent } from './vagolap/vagolap-bizonylathoz/vagolap-bizonylathoz.component';
+import { VagolapIrathozComponent } from './05 Segedeszkozok/08 Vagolap/vagolap-irathoz/vagolap-irathoz.component';
+import { VagolapBizonylathozComponent } from './05 Segedeszkozok/08 Vagolap/vagolap-bizonylathoz/vagolap-bizonylathoz.component';
 import { IratProjektjeComponent } from './irat/irat-projektje/irat-projektje.component';
 import { BizonylatProjektjeComponent } from './bizonylat/bizonylat-projektje/bizonylat-projektje.component';
 import { FooldalComponent } from './fooldal/fooldal.component';

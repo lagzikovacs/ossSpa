@@ -1,22 +1,32 @@
-import {ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {AjanlatSzerkesztesMode} from '../../02 Eszkozok/01 Projekt/ajanlat/ajanlatszerkesztesmode';
-import {CikkDto} from '../../01 Torzsadatok/06 Cikk/cikkdto';
-import {AjanlatBuf} from '../../02 Eszkozok/01 Projekt/ajanlat/ajanlatbuf';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit,
+  Output, ViewChild, ViewContainerRef
+} from '@angular/core';
+import {CikkDto} from '../../../../01 Torzsadatok/06 Cikk/cikkdto';
+import {AjanlatBuf} from '../ajanlatbuf';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
+import {CikkListComponent} from '../../../../01 Torzsadatok/06 Cikk/cikk-list/cikk-list.component';
+import {ModalService} from '../../../../common/modal/modal.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-ajanlat-tetel',
   templateUrl: './ajanlat-tetel.html'
 })
-export class AjanlatTetelComponent implements OnInit, OnDestroy {
+export class AjanlatTetelComponent extends OnDestroyMixin implements OnInit, OnDestroy {
+  @ViewChild('compcont_ajanlatszerk', {read: ViewContainerRef}) vcr: ViewContainerRef;
+  modalname = 'modal_ajanlatszerk';
+
   @Input() item: AjanlatBuf;
   @Output() eventTetelKesz = new EventEmitter<AjanlatBuf>();
 
-  ajanlatzoombox: any;
-  AjanlatSzerkesztesMode = AjanlatSzerkesztesMode.Blank;
   formTetel: FormGroup;
 
-  constructor(private _fb: FormBuilder) {
+  constructor(private _fb: FormBuilder,
+              private _modalservice: ModalService) {
+    super();
+
     this.formTetel = this._fb.group({
       'cikk': ['', [Validators.required, Validators.maxLength(100)]],
       'mennyiseg': [0, [Validators.required, Validators.min(0)]],
@@ -27,8 +37,6 @@ export class AjanlatTetelComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.ajanlatzoombox = document.getElementById('ajanlatzoombox');
-
     this.updateform();
   }
 
@@ -49,20 +57,23 @@ export class AjanlatTetelComponent implements OnInit, OnDestroy {
 
   CikkZoom() {
     this.updatedto();
-    this.AjanlatSzerkesztesMode = AjanlatSzerkesztesMode.CikkZoom;
-    this.ajanlatzoombox.style.display = 'block';
-  }
-  onCikkSelectzoom(Dto: CikkDto) {
-    this.item.CikkKod = Dto.Cikkkod;
-    this.item.CikkNev = Dto.Megnevezes;
-    this.item.AfaMerteke = Dto.Afamerteke;
-    this.item.EgysegAr = Dto.Egysegar;
 
-    this.updateform();
-  }
-  onCikkStopzoom() {
-    this.AjanlatSzerkesztesMode = AjanlatSzerkesztesMode.Blank;
-    this.ajanlatzoombox.style.display = 'none';
+    this.vcr.clear();
+    const C = this.vcr.createComponent(CikkListComponent);
+    C.instance.maszk = this.item.CikkNev || '';
+    C.instance.eventSelectzoom.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+      this.item.CikkKod = dto.Cikkkod;
+      this.item.CikkNev = dto.Megnevezes;
+      this.item.AfaMerteke = dto.Afamerteke;
+      this.item.EgysegAr = dto.Egysegar;
+      this.updateform();
+    });
+    C.instance.eventStopzoom.pipe(untilComponentDestroyed(this)).subscribe(() => {
+      this.vcr.clear();
+      this._modalservice.close(this.modalname);
+    });
+
+    this._modalservice.open(this.modalname);
   }
 
   onSubmit() {
@@ -74,7 +85,9 @@ export class AjanlatTetelComponent implements OnInit, OnDestroy {
     this.eventTetelKesz.emit(null);
   }
 
-  ngOnDestroy() {
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+
     Object.keys(this).map(k => {
       (this[k]) = null;
     });

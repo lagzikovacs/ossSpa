@@ -95,7 +95,7 @@ import { PenztartetelSzerkesztesComponent } from './02 Eszkozok/03 Penztar/penzt
 import { ProjektStatuszComponent } from './projekt/projekt-statusz/projekt-statusz.component';
 import { ProjektJegyzetSzerkesztesComponent } from './projektjegyzet/projekt-jegyzet-szerkesztes/projekt-jegyzet-szerkesztes.component';
 import { ProjektkapcsolatUjbizonylatComponent } from './projektkapcsolat/projektkapcsolat-ujbizonylat/projektkapcsolat-ujbizonylat.component';
-import { AjanlatComponent } from './ajanlat/ajanlat/ajanlat';
+import { AjanlatComponent } from './02 Eszkozok/01 Projekt/ajanlat/ajanlat/ajanlat';
 import { VolumeListComponent } from './05 Segedeszkozok/02 Volume/volume-list/volume-list.component';
 import { ParticioEgyComponent } from './05 Segedeszkozok/01 Particio/particio-egy/particio-egy.component';
 import { HelysegListComponent } from './01 Torzsadatok/07 Helyseg/helyseg-list/helyseg-list.component';
@@ -107,7 +107,7 @@ import {BizonylatService} from './bizonylat/bizonylat.service';
 import {RiportService} from './04 Riportok/riport.service';
 import { ProjektkapcsolatLevalasztasComponent } from './projektkapcsolat/projektkapcsolat-levalasztas/projektkapcsolat-levalasztas.component';
 import { ProjektExportComponent } from './projekt/projekt-export/projekt-export.component';
-import { AjanlatTetelComponent } from './ajanlat/ajanlat-tetel/ajanlat-tetel';
+import { AjanlatTetelComponent } from './02 Eszkozok/01 Projekt/ajanlat/ajanlat-tetel/ajanlat-tetel';
 import { BizonylatListComponent } from './bizonylat/bizonylat-list/bizonylat-list.component';
 import { BizonylatEgyComponent } from './bizonylat/bizonylat-egy/bizonylat-egy.component';
 import { BizonylattoolbarComponent } from './bizonylat/bizonylattoolbar/bizonylattoolbar.component';
@@ -160,7 +160,7 @@ import { UgyfelterProjektTablaComponent } from './ext/ugyfelter/ugyfelter-projek
 import { ProjektkapcsolatTablaComponent } from './projektkapcsolat/projektkapcsolat-tabla/projektkapcsolat-tabla.component';
 import { BizonylatkapcsolatTablaComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-tabla/bizonylatkapcsolat-tabla.component';
 import {BizonylattetelSzerkesztesComponent} from './03 Bizonylatok/bizonylattetel/bizonylattetel-szerkesztes/bizonylattetel-szerkesztes.component';
-import { AjanlatTablaComponent } from './ajanlat/ajanlat-tabla/ajanlat-tabla.component';
+import { AjanlatTablaComponent } from './02 Eszkozok/01 Projekt/ajanlat/ajanlat-tabla/ajanlat-tabla.component';
 import { HscrollDirective } from './directives/divhscroll.directive';
 import {SpinnerDirective} from './directives/spinner.directive';
 import { ParticioEmailComponent } from './05 Segedeszkozok/01 Particio/particio-email/particio-email.component';

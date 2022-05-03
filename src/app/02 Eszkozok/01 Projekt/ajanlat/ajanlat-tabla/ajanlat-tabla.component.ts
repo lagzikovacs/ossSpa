@@ -1,7 +1,11 @@
-import {Component, EventEmitter, Input, OnDestroy, Output, TemplateRef} from '@angular/core';
-import {AjanlatBuf} from '../../02 Eszkozok/01 Projekt/ajanlat/ajanlatbuf';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, Output,
+  TemplateRef
+} from '@angular/core';
+import {AjanlatBuf} from '../ajanlatbuf';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-ajanlat-tabla',
   templateUrl: './ajanlat-tabla.component.html'
 })
@@ -15,9 +19,15 @@ export class AjanlatTablaComponent implements OnDestroy {
   clickedrowindex = -1;
   clickedidindex = -1;
 
+  constructor(private _cdr: ChangeDetectorRef) {
+  }
+
   clearselections() {
     this.clickedrowindex = -1;
     this.clickedidindex = -1;
+
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   nem() {

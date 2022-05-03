@@ -1,17 +1,21 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {ProjektkapcsolatService} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat.service';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output,
+  ViewChild
+} from '@angular/core';
 import * as moment from 'moment';
-import {AjanlatService} from '../../02 Eszkozok/01 Projekt/ajanlat/ajanlat.service';
-import {ErrorService} from '../../common/errorbox/error.service';
-import {ProjektKapcsolatDto} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolatdto';
-import {AjanlatParam} from '../../02 Eszkozok/01 Projekt/ajanlat/ajanlatparam';
-import {AjanlatBuf} from '../../02 Eszkozok/01 Projekt/ajanlat/ajanlatbuf';
-import {deepCopy} from '../../common/deepCopy';
-import {propCopy} from '../../common/propCopy';
+import {AjanlatService} from '../ajanlat.service';
+import {AjanlatParam} from '../ajanlatparam';
+import {AjanlatBuf} from '../ajanlatbuf';
 import {AjanlatTablaComponent} from '../ajanlat-tabla/ajanlat-tabla.component';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {deepCopy} from '../../../../common/deepCopy';
+import {ProjektKapcsolatDto} from '../../projektkapcsolat/projektkapcsolatdto';
+import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
+import {ErrorService} from '../../../../common/errorbox/error.service';
+import {propCopy} from '../../../../common/propCopy';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-ajanlat',
   templateUrl: './ajanlat.html'
 })
@@ -27,6 +31,12 @@ export class AjanlatComponent implements OnInit, OnDestroy {
   AjanlatErvenyes: any;
 
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
+
   formFej: FormGroup;
 
   ajanlatservice: AjanlatService;
@@ -34,6 +44,7 @@ export class AjanlatComponent implements OnInit, OnDestroy {
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
+              private _cdr: ChangeDetectorRef,
               ajanlatservice: AjanlatService,
               projektkapcsolatservice: ProjektkapcsolatService) {
     this.ajanlatservice = ajanlatservice;
@@ -51,24 +62,23 @@ export class AjanlatComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
-    this.eppFrissit = true;
-    this.ajanlatservice.CreateNew()
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+  async ngOnInit() {
+    this.spinner = true;
+    try {
+      const res = await this.ajanlatservice.CreateNew();
+      if (res.Error != null) {
+        throw res.Error;
+      }
 
-        this.AjanlatParam = res.Result;
-        this.AjanlatErvenyes = moment(this.AjanlatParam.Ervenyes).format('YYYY-MM-DD');
+      this.AjanlatParam = res.Result;
+      this.AjanlatErvenyes = moment(this.AjanlatParam.Ervenyes).format('YYYY-MM-DD');
 
-        this.updateform();
-        this.eppFrissit = false;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+      this.updateform();
+      this.spinner = false;
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
   updateform() {
@@ -101,60 +111,58 @@ export class AjanlatComponent implements OnInit, OnDestroy {
     this.ajanlatitemindex = i;
     this.ajanlatitem = deepCopy(this.AjanlatParam.AjanlatBuf[this.ajanlatitemindex]);
   }
-  onTetelKesz(item: AjanlatBuf) {
+
+  async onTetelKesz(item: AjanlatBuf) {
     this.tabla.nem();
 
     if (item !== null) {
-      this.eppFrissit = true;
       propCopy(item, this.AjanlatParam.AjanlatBuf[this.ajanlatitemindex]);
-      this.ajanlatservice.AjanlatCalc(this.AjanlatParam)
-        .then(res => {
-          if (res.Error != null) {
-            throw res.Error;
-          }
 
-          this.AjanlatParam = res.Result;
-
-          this.updateform();
-          this.eppFrissit = false;
-        })
-        .catch(err => {
-          this.eppFrissit = false;
-          this._errorservice.Error = err;
-        });
-    }
-  }
-
-  onSubmit() {
-    this.eppFrissit = true;
-    this.updatedto();
-
-    this.AjanlatParam.ProjektKod = this.Projektkod;
-    this.AjanlatParam.Ervenyes = moment(this.AjanlatErvenyes).toISOString(true);
-    this.ajanlatservice.AjanlatKeszites(this.AjanlatParam)
-      .then(res => {
+      this.spinner = true;
+      try {
+        const res = await this.ajanlatservice.AjanlatCalc(this.AjanlatParam);
         if (res.Error != null) {
           throw res.Error;
         }
 
-        return this.projektkapcsolatservice.Get(res.Result);
-      })
-      .then(res1 => {
-        if (res1.Error != null) {
-          throw res1.Error;
-        }
+        this.AjanlatParam = res.Result;
 
-        this.eppFrissit = false;
-        this.eventAjanlatkesz.emit(res1.Result[0]);
-      })
-      .catch(err => {
-        this.eppFrissit = false;
+        this.updateform();
+        this.spinner = false;
+      } catch (err) {
+        this.spinner = false;
         this._errorservice.Error = err;
-      });
+      }
+    }
+  }
+
+  async onSubmit() {
+    this.updatedto();
+    this.AjanlatParam.ProjektKod = this.Projektkod;
+    this.AjanlatParam.Ervenyes = moment(this.AjanlatErvenyes).toISOString(true);
+
+    this.spinner = true;
+    try {
+      const res = await this.ajanlatservice.AjanlatKeszites(this.AjanlatParam);
+      if (res.Error != null) {
+        throw res.Error;
+      }
+
+      const res1 = await this.projektkapcsolatservice.Get(res.Result);
+      if (res1.Error != null) {
+        throw res1.Error;
+      }
+
+      this.spinner = false;
+      this.eventAjanlatkesz.emit(res1.Result[0]);
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
   onCancel() {
-    this.eventAjanlatkesz.emit(null);
+    this.eventAjanlatkesz.emit();
   }
 
   ngOnDestroy() {

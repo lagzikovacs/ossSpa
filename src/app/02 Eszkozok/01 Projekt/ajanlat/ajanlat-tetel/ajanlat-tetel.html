@@ -36,19 +36,8 @@
     </div>
   </div>
 
-<!--  export eAjanlatSzerkesztesModeMode {
-  Blank = 0,
-  CikkZoom = 1
-  }-->
-
-  <div id="ajanlatzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
-    <div class="zoom-modal-content-complex">
-      <ng-container *ngIf="AjanlatSzerkesztesMode === 1">
-        <app-cikk-list [maszk]="item.CikkNev || ''"
-                       (eventSelectzoom)="onCikkSelectzoom($event)"
-                       (eventStopzoom)="onCikkStopzoom()"></app-cikk-list>
-      </ng-container>
-    </div>
-  </div>
+  <jw-modal [id]="modalname" bodyclass="jw-modal-body-complex">
+    <ng-template #compcont_ajanlatszerk></ng-template>
+  </jw-modal>
 </div>
 

@@ -93,7 +93,7 @@ import {AjanlatkeresService} from './02 Eszkozok/04 Ajanlatkeres/ajanlatkeres.se
 import {PenztarService} from './02 Eszkozok/03 Penztar/penztar/penztar.service';
 import { PenztartetelSzerkesztesComponent } from './02 Eszkozok/03 Penztar/penztartetel/penztartetel-szerkesztes/penztartetel-szerkesztes.component';
 import { ProjektStatuszComponent } from './projekt/projekt-statusz/projekt-statusz.component';
-import { ProjektJegyzetSzerkesztesComponent } from './projektjegyzet/projekt-jegyzet-szerkesztes/projekt-jegyzet-szerkesztes.component';
+import { ProjektJegyzetSzerkesztesComponent } from './02 Eszkozok/01 Projekt/projektjegyzet/projekt-jegyzet-szerkesztes/projekt-jegyzet-szerkesztes.component';
 import { ProjektkapcsolatUjbizonylatComponent } from './projektkapcsolat/projektkapcsolat-ujbizonylat/projektkapcsolat-ujbizonylat.component';
 import { AjanlatComponent } from './02 Eszkozok/01 Projekt/ajanlat/ajanlat/ajanlat';
 import { VolumeListComponent } from './05 Segedeszkozok/02 Volume/volume-list/volume-list.component';

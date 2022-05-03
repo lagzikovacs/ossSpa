@@ -1,8 +1,8 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {KifizetesService} from '../kifizetes.service';
+import {KifizetesService} from '../../03 Bizonylatok/kifizetes/kifizetes.service';
 import {ErrorService} from '../../common/errorbox/error.service';
 import {TablaComponent} from '../../common/tabla/tabla.component';
-import {KifizetesDto} from '../kifizetesdto';
+import {KifizetesDto} from '../../03 Bizonylatok/kifizetes/kifizetesdto';
 import {EgyMode} from '../../common/enums/egymode';
 import {rowanimation} from '../../animation/rowAnimation';
 import {propCopy} from '../../common/propCopy';

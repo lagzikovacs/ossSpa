@@ -20,7 +20,7 @@ import {ProjektjegyzetService} from "../../02 Eszkozok/01 Projekt/projektjegyzet
 import {IratService} from "../../02 Eszkozok/02 Irat/irat/irat.service";
 import {PenztarService} from "../../02 Eszkozok/03 Penztar/penztar/penztar.service";
 import {PenztartetelService} from "../../02 Eszkozok/03 Penztar/penztartetel/penztartetel.service";
-import {KifizetesService} from "../../kifizetes/kifizetes.service";
+import {KifizetesService} from "../../03 Bizonylatok/kifizetes/kifizetes.service";
 import {DokumentumService} from "../../02 Eszkozok/02 Irat/dokumentum/dokumentum.service";
 import {VolumeService} from "../02 Volume/volume.service";
 import {UgyfelterlogService} from "../../02 Eszkozok/07 Ugyfelterlog/ugyfelterlog.service";

@@ -40,26 +40,8 @@
     </div>
   </form>
 
-  <!--  export enum IratSzerkesztesMode {
-    Blank = 0,
-    PenznemZoom = 1,
-    FizetesimodZoom = 2,
-    }-->
-
-  <div id="kifizeteszoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
-    <div class="zoom-modal-content-primitive">
-      <ng-container *ngIf="SzerkesztesMode === 1">
-        <app-penznem-list [maszk]="DtoEdited.Penznem || ''"
-                          (eventSelectzoom)="onPenznemSelectzoom($event)"
-                          (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
-      </ng-container>
-
-      <ng-container *ngIf="SzerkesztesMode === 2">
-        <app-fizetesimod-list [maszk]="DtoEdited.Fizetesimod || ''"
-                              (eventSelectzoom)="onFizetesimodSelectzoom($event)"
-                              (eventStopzoom)="onFizetesimodStopzoom()"></app-fizetesimod-list>
-      </ng-container>
-    </div>
-  </div>
+  <jw-modal [id]="modalname" bodyclass="jw-modal-body-primitive">
+    <ng-template #compcont_kifizetesszerk></ng-template>
+  </jw-modal>
 </div>
 

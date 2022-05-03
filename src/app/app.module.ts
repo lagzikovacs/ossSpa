@@ -114,7 +114,7 @@ import { BizonylattoolbarComponent } from './bizonylat/bizonylattoolbar/bizonyla
 import { BizonylattablaComponent } from './bizonylat/bizonylattabla/bizonylattabla.component';
 import { BizonylatSzerkesztesComponent } from './bizonylat/bizonylat-szerkesztes/bizonylat-szerkesztes.component';
 import { KifizetesListComponent } from './kifizetes/kifizetes-list/kifizetes-list.component';
-import { KifizetesSzerkesztesComponent } from './kifizetes/kifizetes-szerkesztes/kifizetes-szerkesztes.component';
+import { KifizetesSzerkesztesComponent } from './03 Bizonylatok/kifizetes/kifizetes-szerkesztes/kifizetes-szerkesztes.component';
 import { BizonylatNyomtatasComponent } from './bizonylatnyomtatas/bizonylat-nyomtatas/bizonylat-nyomtatas.component';
 import { BizonylatReszletekComponent } from './bizonylat/bizonylat-reszletek/bizonylat-reszletek.component';
 import { BizonylatkapcsolatListComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-list/bizonylatkapcsolat-list.component';

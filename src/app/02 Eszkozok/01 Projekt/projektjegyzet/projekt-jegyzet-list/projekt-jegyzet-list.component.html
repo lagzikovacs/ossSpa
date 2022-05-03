@@ -1,5 +1,5 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
-  <h5>{{bizonylatkifizetesservice.cim}}</h5>
+  <h5>{{projektjegyzetservice.cim}}</h5>
   <div>
     <button (click)="onKereses()" class="toolbutton">
       <i class="fa fa-search" aria-hidden="true"></i>
@@ -8,22 +8,20 @@
       <i class="fa fa-plus" aria-hidden="true"></i>
     </button>
   </div>
-
   <app-tabla-ex #tabla
                 [items]="Dto"
-                [colsets]="bizonylatkifizetesservice.GridSettings"
+                [colsets]="projektjegyzetservice.GridSettings"
                 (forid)="onId($event)"
                 [egyTemplate]="gridegy">
   </app-tabla-ex>
 
   <ng-template #gridegy>
-    <app-kifizetes-egy [uj]="uj"
-                       [dto]="Dto[DtoSelectedIndex]"
-                       [Bizonylat]="Bizonylat"
-                       (eventUj)="onUjtetelkesz($event)"
-                       (eventTorles)="onTorles()"
-                       (eventModositas)="onModositaskesz($event)">
-    </app-kifizetes-egy>
+    <app-projekt-jegyzet-egy [uj]="uj"
+                             [dto]="Dto[DtoSelectedIndex]"
+                             [Projektkod]="Projektkod"
+                             (eventUj)="onUjtetelkesz($event)"
+                             (eventTorles)="onTorles()"
+                             (eventModositas)="onModositaskesz($event)">
+    </app-projekt-jegyzet-egy>
   </ng-template>
 </div>
-

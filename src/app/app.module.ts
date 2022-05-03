@@ -30,7 +30,7 @@ import {ProjektService} from './02 Eszkozok/01 Projekt/projekt/projekt.service';
 import { ProjektMuszakiallapotComponent } from './projekt/projekt-muszakiallapot/projekt-muszakiallapot.component';
 import { ProjektIratmintaComponent } from './projekt/projekt-iratminta/projekt-iratminta.component';
 import { ProjektkapcsolatListComponent } from './projektkapcsolat/projektkapcsolat-list/projektkapcsolat-list.component';
-import { ProjektJegyzetListComponent } from './projektjegyzet/projekt-jegyzet-list/projekt-jegyzet-list.component';
+import { ProjektJegyzetListComponent } from './02 Eszkozok/01 Projekt/projektjegyzet/projekt-jegyzet-list/projekt-jegyzet-list.component';
 import { IratListComponent } from './irat/irat-list/irat-list.component';
 import { IratEgyComponent } from './irat/irat-egy/irat-egy.component';
 import {IratToolbarComponent} from './irat/irattolbar/irattoolbar.component';
@@ -229,6 +229,7 @@ import {FelmeresEgyToolbarComponent} from "./02 Eszkozok/05 Felmeres/felmeres-eg
 import {AjanlatkeresEgyComponent} from "./02 Eszkozok/04 Ajanlatkeres/ajanlatkeres-egy/ajanlatkeres-egy.component";
 import {FelmeresEgyComponent} from "./02 Eszkozok/05 Felmeres/felmeres-egy/felmeres-egy.component";
 import {KifizetesEgyComponent} from "./03 Bizonylatok/kifizetes/kifizetes-egy/kifizetes-egy.component";
+import {ProjektJegyzetEgyComponent} from "./02 Eszkozok/01 Projekt/projektjegyzet/projekt-jegyzet-egy/projekt-jegyzet-egy.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -484,6 +485,7 @@ if (environment.production) {
     FelmeresEgyToolbarComponent,
     FelmeresEgyComponent,
     KifizetesEgyComponent,
+    ProjektJegyzetEgyComponent,
   ],
   imports: [
     BrowserModule,

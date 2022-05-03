@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ProjektkapcsolatService} from '../projektkapcsolat.service';
+import {ProjektkapcsolatService} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat.service';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {IratService} from '../../02 Eszkozok/02 Irat/irat/irat.service';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
@@ -10,8 +10,8 @@ import {ErrorService} from '../../common/errorbox/error.service';
 import {ProjektkapcsolatTablaComponent} from '../projektkapcsolat-tabla/projektkapcsolat-tabla.component';
 import {IratDto} from '../../02 Eszkozok/02 Irat/irat/iratdto';
 import {BizonylatDto} from '../../bizonylat/bizonylatdto';
-import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
-import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
+import {ProjektKapcsolatDto} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolatdto';
+import {ProjektKapcsolatParam} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolatparam';
 import {BizonylatTipusLeiro} from '../../bizonylat/bizonylattipusleiro';
 import {BizonylatTipus} from '../../bizonylat/bizonylattipus';
 
@@ -171,7 +171,7 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
   onUjiratutan(dto: IratDto) {
     if (dto !== null) {
       this.eppFrissit = true;
-      this.projektkapcsolatservice.AddIratToProjekt(new ProjektKapcsolatParameter(
+      this.projektkapcsolatservice.AddIratToProjekt(new ProjektKapcsolatParam(
             this.Projektkod, 0, dto.Iratkod, undefined))
         .then(res1 => {
           if (res1.Error != null) {

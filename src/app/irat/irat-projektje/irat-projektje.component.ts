@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {EgyMode} from '../../common/enums/egymode';
 import {ProjektResult} from '../../02 Eszkozok/01 Projekt/projekt/projektresult';
-import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
+import {ProjektkapcsolatService} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat.service';
 import {ProjektDto} from '../../02 Eszkozok/01 Projekt/projekt/projektdto';
 import {IratDto} from '../../02 Eszkozok/02 Irat/irat/iratdto';
 import {ProjektService} from '../../02 Eszkozok/01 Projekt/projekt/projekt.service';

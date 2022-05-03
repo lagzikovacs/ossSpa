@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {ProjektkapcsolatService} from '../projektkapcsolat.service';
+import {ProjektkapcsolatService} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat.service';
 import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {UgyfelService} from '../../01 Torzsadatok/09 Ugyfel/ugyfel.service';
-import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
+import {ProjektKapcsolatParam} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolatparam';
 import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
 import {ErrorService} from '../../common/errorbox/error.service';
-import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
+import {ProjektKapcsolatDto} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolatdto';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
@@ -89,7 +89,7 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnInit, OnDestroy {
         bizonylatDto.Ugyfelkozterulettipus = ugyfelDto.Kozterulettipus;
         bizonylatDto.Ugyfelhazszam = ugyfelDto.Hazszam;
 
-        return this.projektkapcsolatservice.UjBizonylatToProjekt(new ProjektKapcsolatParameter(
+        return this.projektkapcsolatservice.UjBizonylatToProjekt(new ProjektKapcsolatParam(
           this.Projektkod,
           0,
           0,

@@ -3,7 +3,7 @@ import {ProjektDto} from '../../02 Eszkozok/01 Projekt/projekt/projektdto';
 import {ProjektResult} from '../../02 Eszkozok/01 Projekt/projekt/projektresult';
 import {ProjektService} from '../../02 Eszkozok/01 Projekt/projekt/projekt.service';
 import {ErrorService} from '../../common/errorbox/error.service';
-import {ProjektkapcsolatService} from '../../projektkapcsolat/projektkapcsolat.service';
+import {ProjektkapcsolatService} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat.service';
 import {IratDto} from '../../02 Eszkozok/02 Irat/irat/iratdto';
 import {BizonylatDto} from '../bizonylatdto';
 

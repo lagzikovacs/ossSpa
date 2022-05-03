@@ -9,7 +9,7 @@ export class ProjektKapcsolatDto {
   Azonosito: string;
   Keletkezett: any;
   Targy: string;
-  Kulso: string;
+  Kuldo: string;
   Irany: string;
 
   Letrehozva: Date;

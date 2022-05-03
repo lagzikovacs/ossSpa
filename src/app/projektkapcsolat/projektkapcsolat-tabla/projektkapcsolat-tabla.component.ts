@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, Output, TemplateRef} from '@angular/core';
-import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
+import {ProjektKapcsolatDto} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolatdto';
 
 @Component({
   selector: 'app-projektkapcsolat-tabla',

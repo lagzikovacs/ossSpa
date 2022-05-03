@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {ProjektkapcsolatService} from '../projektkapcsolat.service';
+import {ProjektkapcsolatService} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat.service';
 import {ErrorService} from '../../common/errorbox/error.service';
-import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
+import {ProjektKapcsolatDto} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolatdto';
 
 @Component({
   selector: 'app-projektkapcsolat-levalasztas',

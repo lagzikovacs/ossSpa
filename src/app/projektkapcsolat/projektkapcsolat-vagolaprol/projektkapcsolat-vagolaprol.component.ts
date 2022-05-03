@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {ProjektkapcsolatService} from '../projektkapcsolat.service';
-import {ProjektKapcsolatParameter} from '../projektkapcsolatparameter';
+import {ProjektkapcsolatService} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat.service';
+import {ProjektKapcsolatParam} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolatparam';
 import {VagolapService} from '../../05 Segedeszkozok/08 Vagolap/vagolap.service';
 import {NumberResult} from '../../common/dtos/numberresult';
 import {ErrorService} from '../../common/errorbox/error.service';
-import {ProjektKapcsolatResult} from '../projektkapcsolatresult';
-import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
+import {ProjektKapcsolatResult} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolatresult';
+import {ProjektKapcsolatDto} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolatdto';
 
 @Component({
   selector: 'app-projektkapcsolat-vagolaprol',
@@ -41,14 +41,14 @@ export class ProjektkapcsolatVagolaprolComponent implements OnDestroy {
     let p: Promise<NumberResult>;
 
     if (this._vagolapservice.Dto[this.ci].tipus === 0) {
-      p = this.projektkapcsolatservice.AddIratToProjekt(new ProjektKapcsolatParameter(
+      p = this.projektkapcsolatservice.AddIratToProjekt(new ProjektKapcsolatParam(
         this.Projektkod,
         0,
         this._vagolapservice.Dto[this.ci].iratkod,
         null
       ));
     } else {
-      p = this.projektkapcsolatservice.AddBizonylatToProjekt(new ProjektKapcsolatParameter(
+      p = this.projektkapcsolatservice.AddBizonylatToProjekt(new ProjektKapcsolatParam(
         this.Projektkod,
         this._vagolapservice.Dto[this.ci].bizonylatkod,
         0,

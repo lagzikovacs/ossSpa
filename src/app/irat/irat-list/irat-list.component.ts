@@ -6,7 +6,7 @@ import {IratDto} from '../../02 Eszkozok/02 Irat/irat/iratdto';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {JogKod} from '../../common/enums/jogkod';
 import {ErrorService} from '../../common/errorbox/error.service';
-import {TablaComponent} from '../../tools/tabla/tabla.component';
+import {TablaComponent} from '../../common/tabla/tabla.component';
 import {environment} from '../../../environments/environment';
 import {IratParam} from '../../02 Eszkozok/02 Irat/irat/iratparam';
 import {propCopy} from '../../common/propCopy';

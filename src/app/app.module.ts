@@ -131,7 +131,6 @@ import { BizonylatKiszallitvaComponent } from './bizonylat/bizonylat-kiszallitva
 import { BoolHunPipe } from './pipes/boolhun.pipe';
 import { VagolapComponent } from './05 Segedeszkozok/08 Vagolap/vagolap/vagolap.component';
 import {VagolapService} from './05 Segedeszkozok/08 Vagolap/vagolap.service';
-import { AbuComponent } from './tools/abu/abu.component';
 import { BizonylatkapcsolatVagolaprolComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-vagolaprol/bizonylatkapcsolat-vagolaprol.component';
 import { ProjektkapcsolatVagolaprolComponent } from './projektkapcsolat/projektkapcsolat-vagolaprol/projektkapcsolat-vagolaprol.component';
 import {AjanlatService} from './02 Eszkozok/01 Projekt/ajanlat/ajanlat.service';
@@ -153,7 +152,7 @@ import { UgyfeltoolbarComponent } from './01 Torzsadatok/09 Ugyfel/ugyfeltoolbar
 import { UgyfelCsoportComponent } from './01 Torzsadatok/09 Ugyfel/ugyfel-csoport/ugyfel-csoport.component';
 import { UgyfelVcardComponent } from './01 Torzsadatok/09 Ugyfel/ugyfel-vcard/ugyfel-vcard.component';
 import { UgyfelTablaComponent } from './01 Torzsadatok/09 Ugyfel/ugyfel-tabla/ugyfel-tabla.component';
-import { TablaComponent } from './tools/tabla/tabla.component';
+import { TablaComponent } from './common/tabla/tabla.component';
 import {StartupService} from './05 Segedeszkozok/06 Szerepkorvalasztas/startup.service';
 import {ErrorService} from './common/errorbox/error.service';
 import { ErrorboxComponent } from './common/errorbox/errorbox.component';
@@ -399,7 +398,6 @@ if (environment.production) {
     BizonylatKiszallitvaComponent,
     BizonylattetelSzerkesztesComponent,
     VagolapComponent,
-    AbuComponent,
     BizonylatkapcsolatVagolaprolComponent,
     ProjektkapcsolatVagolaprolComponent,
     EsemenynaploComponent,

@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
 import {IratService} from '../../02 Eszkozok/02 Irat/irat/irat.service';
-import {AbuComponent} from '../../tools/abu/abu.component';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {JogKod} from '../../common/enums/jogkod';
 import {rowanimation} from '../../animation/rowAnimation';
@@ -15,8 +14,6 @@ import {deepCopy} from '../../common/deepCopy';
   animations: [rowanimation]
 })
 export class IratEgyComponent implements OnDestroy {
-  @ViewChild(AbuComponent, {static: true}) abu: AbuComponent;
-
   Dto = new IratDto();
   @Input() set DtoOriginal(value: IratDto) {
     this.Dto = deepCopy(value);

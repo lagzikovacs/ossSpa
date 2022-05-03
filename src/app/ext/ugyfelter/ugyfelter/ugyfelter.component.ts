@@ -10,14 +10,14 @@ import {ProjektKapcsolatDto} from '../../../02 Eszkozok/01 Projekt/projektkapcso
 import {DokumentumDto} from '../../../02 Eszkozok/02 Irat/dokumentum/dokumentumdto';
 import {DokumentumService} from '../../../02 Eszkozok/02 Irat/dokumentum/dokumentum.service';
 import {Szempont} from '../../../common/enums/szempont';
-import {BizonylatnyomtatasService} from '../../../bizonylatnyomtatas/bizonylatnyomtatas.service';
+import {BizonylatnyomtatasService} from '../../../03 Bizonylatok/bizonylatnyomtatas/bizonylatnyomtatas.service';
 import {SzMT} from '../../../common/dtos/szmt';
-import {BizonylatNyomtatasTipus} from '../../../bizonylatnyomtatas/bizonylatnyomtatastipus';
+import {BizonylatNyomtatasTipus} from '../../../03 Bizonylatok/bizonylatnyomtatas/bizonylatnyomtatastipus';
 import * as FileSaver from 'file-saver';
 import {b64toBlob} from '../../../common/b64toBlob';
 import {LetoltesParam} from '../../../02 Eszkozok/02 Irat/dokumentum/letoltesparam';
 import {ErrorService} from '../../../common/errorbox/error.service';
-import {Bizonylatnyomtatasciklus} from '../../../bizonylatnyomtatas/bizonylatnyomtatasciklus';
+import {Bizonylatnyomtatasciklus} from '../../../03 Bizonylatok/bizonylatnyomtatas/bizonylatnyomtatasciklus';
 
 @Component({
   selector: 'app-ugyfelter',

@@ -5,7 +5,7 @@
 
     <div class="editform-row">
       <select type="text" class="editform-combo" formControlName="nyomtatastipus">
-        <option *ngFor="let s of entries; let i = index" [value]="i">{{s}}</option>
+        <option *ngFor="let s of entries; let i = index" [ngValue]="i">{{s}}</option>
       </select>
     </div>
 

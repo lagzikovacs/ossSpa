@@ -113,7 +113,7 @@ import { BizonylatEgyComponent } from './bizonylat/bizonylat-egy/bizonylat-egy.c
 import { BizonylattoolbarComponent } from './bizonylat/bizonylattoolbar/bizonylattoolbar.component';
 import { BizonylattablaComponent } from './bizonylat/bizonylattabla/bizonylattabla.component';
 import { BizonylatSzerkesztesComponent } from './bizonylat/bizonylat-szerkesztes/bizonylat-szerkesztes.component';
-import { KifizetesListComponent } from './kifizetes/kifizetes-list/kifizetes-list.component';
+import { KifizetesListComponent } from './03 Bizonylatok/kifizetes/kifizetes-list/kifizetes-list.component';
 import { KifizetesSzerkesztesComponent } from './03 Bizonylatok/kifizetes/kifizetes-szerkesztes/kifizetes-szerkesztes.component';
 import { BizonylatNyomtatasComponent } from './bizonylatnyomtatas/bizonylat-nyomtatas/bizonylat-nyomtatas.component';
 import { BizonylatReszletekComponent } from './bizonylat/bizonylat-reszletek/bizonylat-reszletek.component';
@@ -228,6 +228,7 @@ import {AjanlatkeresEgyToolbarComponent} from "./02 Eszkozok/04 Ajanlatkeres/aja
 import {FelmeresEgyToolbarComponent} from "./02 Eszkozok/05 Felmeres/felmeres-egy-toolbar/felmeres-egy-toolbar.component";
 import {AjanlatkeresEgyComponent} from "./02 Eszkozok/04 Ajanlatkeres/ajanlatkeres-egy/ajanlatkeres-egy.component";
 import {FelmeresEgyComponent} from "./02 Eszkozok/05 Felmeres/felmeres-egy/felmeres-egy.component";
+import {KifizetesEgyComponent} from "./03 Bizonylatok/kifizetes/kifizetes-egy/kifizetes-egy.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -482,6 +483,7 @@ if (environment.production) {
     AjanlatkeresEgyComponent,
     FelmeresEgyToolbarComponent,
     FelmeresEgyComponent,
+    KifizetesEgyComponent,
   ],
   imports: [
     BrowserModule,

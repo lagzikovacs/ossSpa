@@ -5,7 +5,7 @@ import {RouterModule, Routes} from '@angular/router';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import {environment} from '../environments/environment';
 import {LogonService} from './05 Segedeszkozok/05 Bejelentkezes/logon.service';
-import {MenuService} from './menu/menu.service';
+import {MenuService} from './navbar/menu/menu.service';
 import {HttpClientModule} from '@angular/common/http';
 import { BejelentkezesComponent } from './05 Segedeszkozok/05 Bejelentkezes/bejelentkezes/bejelentkezes.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -17,7 +17,7 @@ import { SzerepkorvalasztasComponent } from './05 Segedeszkozok/06 Szerepkorvala
 import { JelszocsereComponent } from './05 Segedeszkozok/07 Jelszocsere/jelszocsere/jelszocsere.component';
 import { ToolbarComponent } from './common/toolbar/toolbar.component';
 import { ToolbarfooterComponent } from './common/toolbarfooter/toolbarfooter.component';
-import {VerzioService} from './menu/verzio.service';
+import {VerzioService} from './navbar/menu/verzio.service';
 import {SessionService} from './session/session.service';
 import {DateHunPipe} from './pipes/datehun.pipe';
 import {DatetimeHunPipe} from './pipes/datetimehun.pipe';
@@ -179,7 +179,7 @@ import { VagolapBizonylathozComponent } from './05 Segedeszkozok/08 Vagolap/vago
 import { IratProjektjeComponent } from './irat/irat-projektje/irat-projektje.component';
 import { BizonylatProjektjeComponent } from './bizonylat/bizonylat-projektje/bizonylat-projektje.component';
 import { FooldalComponent } from './fooldal/fooldal.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './navbar/navbar/navbar.component';
 import {HibabejelentesListComponent} from './02 Eszkozok/06 Hibabejelentes/hibabejelentes-list/hibabejelentes-list.component';
 import { AjanlatkeresSzerkesztesComponent } from './02 Eszkozok/04 Ajanlatkeres/ajanlatkeres-szerkesztes/ajanlatkeres-szerkesztes.component';
 import { AutofocusDirective } from './directives/autofocus.directive';

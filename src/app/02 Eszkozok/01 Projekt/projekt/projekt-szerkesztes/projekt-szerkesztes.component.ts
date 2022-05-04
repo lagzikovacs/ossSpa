@@ -7,19 +7,16 @@ import {ProjektDto} from '../projektdto';
 import * as moment from 'moment';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {deepCopy} from '../../../../common/deepCopy';
-import {ProjektSzerkesztesMode} from '../projektszerkesztesmode';
 import {UgyfelService} from '../../../../01 Torzsadatok/09 Ugyfel/ugyfel.service';
 import {PenznemService} from '../../../../01 Torzsadatok/03 Penznem/penznem.service';
 import {ErrorService} from '../../../../common/errorbox/error.service';
 import {UgyfelZoomParam} from '../../../../01 Torzsadatok/09 Ugyfel/ugyfelzoomparam';
 import {PenznemZoomParam} from '../../../../01 Torzsadatok/03 Penznem/penznemzoomparam';
-import {UgyfelDto} from '../../../../01 Torzsadatok/09 Ugyfel/ugyfeldto';
-import {PenznemDto} from '../../../../01 Torzsadatok/03 Penznem/penznemdto';
 import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
 import {NumberResult} from '../../../../common/dtos/numberresult';
 import {PenznemListComponent} from '../../../../01 Torzsadatok/03 Penznem/penznem-list/penznem-list.component';
 import {ModalService} from '../../../../common/modal/modal.service';
-import {UgyfelListComponent} from "../../../../01 Torzsadatok/09 Ugyfel/ugyfel-list/ugyfel-list.component";
+import {UgyfelListComponent} from '../../../../01 Torzsadatok/09 Ugyfel/ugyfel-list/ugyfel-list.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,8 +25,8 @@ import {UgyfelListComponent} from "../../../../01 Torzsadatok/09 Ugyfel/ugyfel-l
 })
 export class ProjektSzerkesztesComponent extends OnDestroyMixin implements OnInit, OnDestroy {
   @ViewChild('compcont_projektszerk', {read: ViewContainerRef}) vcr: ViewContainerRef;
-  modalname: string = 'modal_projektszerk';
-  bodyclass: string = '';
+  modalname = 'modal_projektszerk';
+  bodyclass = '';
 
   @Input() uj = false;
   DtoEdited = new ProjektDto();

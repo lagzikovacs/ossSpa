@@ -5,6 +5,8 @@ export class BizonylatKapcsolatDto {
   Letrehozva: any;
   Letrehozta: string;
 
+  Kapcsolat: string;
+
   Tipus: string;
   Azonosito: string;
   Keletkezett: any;

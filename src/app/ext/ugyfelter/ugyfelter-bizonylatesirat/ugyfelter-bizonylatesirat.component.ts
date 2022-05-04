@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {BizonylatKapcsolatDto} from '../../../bizonylatkapcsolat/bizonylatkapcsolatdto';
+import {BizonylatKapcsolatDto} from '../../../03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolatdto';
 
 @Component({
   selector: 'app-ugyfelter-bizonylatesirat',

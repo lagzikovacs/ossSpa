@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
+import {BizonylatkapcsolatService} from '../../03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolat.service';
 import {ErrorService} from '../../common/errorbox/error.service';
-import {BizonylatKapcsolatDto} from '../bizonylatkapcsolatdto';
+import {BizonylatKapcsolatDto} from '../../03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolatdto';
 
 @Component({
   selector: 'app-bizonylatkapcsolat-levalasztas',

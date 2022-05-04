@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
-import {BizonylatKapcsolatParam} from '../bizonylatkapcsolatparam';
+import {BizonylatkapcsolatService} from '../../03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolat.service';
+import {BizonylatKapcsolatParam} from '../../03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolatparam';
 import {VagolapService} from '../../05 Segedeszkozok/08 Vagolap/vagolap.service';
 import {ErrorService} from '../../common/errorbox/error.service';
-import {BizonylatKapcsolatDto} from '../bizonylatkapcsolatdto';
-import {BizonylatKapcsolatResult} from '../bizonylatkapcsolatresult';
+import {BizonylatKapcsolatDto} from '../../03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolatdto';
+import {BizonylatKapcsolatResult} from '../../03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolatresult';
 import {NumberResult} from '../../common/dtos/numberresult';
 
 @Component({

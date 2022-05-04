@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, Output, TemplateRef} from '@angular/core';
-import {BizonylatKapcsolatDto} from '../bizonylatkapcsolatdto';
+import {BizonylatKapcsolatDto} from '../../03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolatdto';
 
 @Component({
   selector: 'app-bizonylatkapcsolat-tabla',

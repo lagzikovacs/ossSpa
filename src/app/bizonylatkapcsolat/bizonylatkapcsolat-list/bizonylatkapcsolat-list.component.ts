@@ -1,13 +1,13 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {BizonylatkapcsolatService} from '../bizonylatkapcsolat.service';
+import {BizonylatkapcsolatService} from '../../03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolat.service';
 import {IratService} from '../../02 Eszkozok/02 Irat/irat/irat.service';
 import {VagolapService} from '../../05 Segedeszkozok/08 Vagolap/vagolap.service';
 import {VagolapMode} from '../../05 Segedeszkozok/08 Vagolap/vagolapmode';
 import {ErrorService} from '../../common/errorbox/error.service';
 import {IratDto} from '../../02 Eszkozok/02 Irat/irat/iratdto';
 import {BizonylatkapcsolatTablaComponent} from '../bizonylatkapcsolat-tabla/bizonylatkapcsolat-tabla.component';
-import {BizonylatKapcsolatParam} from '../bizonylatkapcsolatparam';
-import {BizonylatKapcsolatDto} from '../bizonylatkapcsolatdto';
+import {BizonylatKapcsolatParam} from '../../03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolatparam';
+import {BizonylatKapcsolatDto} from '../../03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolatdto';
 
 @Component({
   selector: 'app-bizonylatkapcsolat-list',

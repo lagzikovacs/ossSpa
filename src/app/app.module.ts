@@ -122,7 +122,7 @@ import { BizonylatkapcsolatLevalasztasComponent } from './bizonylatkapcsolat/biz
 import { BizonylatteteltablaComponent } from './bizonylat/bizonylatteteltabla/bizonylatteteltabla.component';
 import { BizonylatafatablaComponent } from './bizonylat/bizonylatafatabla/bizonylatafatabla.component';
 import { BizonylattermekdijtablaComponent } from './bizonylat/bizonylattermekdijtabla/bizonylattermekdijtabla.component';
-import { BizonylatErrolComponent } from './bizonylat/bizonylat-errol/bizonylat-errol.component';
+import { BizonylatErrolComponent } from './03 Bizonylatok/bizonylat/bizonylat-errol/bizonylat-errol.component';
 import { BizonylatKibocsatasComponent } from './03 Bizonylatok/bizonylat/bizonylat-kibocsatas/bizonylat-kibocsatas.component';
 import { BizonylatStornoComponent } from './03 Bizonylatok/bizonylat/bizonylat-storno/bizonylat-storno.component';
 import { BizonylatPenztarComponent } from './bizonylat/bizonylat-penztar/bizonylat-penztar.component';

@@ -56,7 +56,7 @@ export class BizonylatStornoComponent implements OnDestroy {
       }
 
       this.eventStornozando.emit(res1.Result[0]);
-      
+
       const res2 = await this.bizonylatservice.Get(stornozoKod);
       if (res2.Error != null) {
         throw res2.Error;

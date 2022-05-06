@@ -1,11 +1,15 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {BizonylatService} from '../../03 Bizonylatok/bizonylat/bizonylat.service';
-import {BizonylatMintaAlapjanParam} from '../../03 Bizonylatok/bizonylat/bizonylatmintaalapjan';
-import {ErrorService} from '../../common/errorbox/error.service';
-import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit,
+  Output
+} from '@angular/core';
+import {BizonylatService} from '../bizonylat.service';
+import {BizonylatMintaAlapjanParam} from '../bizonylatmintaalapjan';
+import {ErrorService} from '../../../common/errorbox/error.service';
+import {LogonService} from '../../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-bizonylat-errol',
   templateUrl: './bizonylat-errol.component.html'
 })
@@ -19,11 +23,17 @@ export class BizonylatErrolComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   bizonylatservice: BizonylatService;
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
+              private _cdr: ChangeDetectorRef,
               private _logonservice: LogonService,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
@@ -48,25 +58,25 @@ export class BizonylatErrolComponent implements OnInit, OnDestroy {
     this.entryindex = this.form.value['bizonylattipusok'];
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (!this.kesz) {
-      this.eppFrissit = true;
       this.updatedto();
-      this.bizonylatservice.UjBizonylatMintaAlapjan(new BizonylatMintaAlapjanParam(
-        this.Bizonylatkod, this.bizonylatservice.tipusok[this.entryindex][1]))
-        .then(res => {
-          if (res.Error != null) {
-            throw res.Error;
-          }
 
-          this.ujbizonylatkod = res.Result;
-          this.kesz = true;
-          this.eppFrissit = false;
-        })
-        .catch(err => {
-          this.eppFrissit = false;
-          this._errorservice.Error = err;
-        });
+      this.spinner = true;
+      try {
+        const res = await this.bizonylatservice.UjBizonylatMintaAlapjan(new BizonylatMintaAlapjanParam(
+          this.Bizonylatkod, this.bizonylatservice.tipusok[this.entryindex][1]));
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.ujbizonylatkod = res.Result;
+        this.kesz = true;
+        this.spinner = false;
+      } catch (err) {
+        this.spinner = false;
+        this._errorservice.Error = err;
+      }
     } else {
       this.eventBizonylaterrolUtan.emit(true);
     }

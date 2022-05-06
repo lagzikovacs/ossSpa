@@ -6,7 +6,7 @@
       <div class="editform-row">
         <div class="editform-label">Az új bizonylat tipusa</div>
         <select type="text" class="editform-combo" formControlName="bizonylattipusok">
-          <option *ngFor="let s of bizonylatservice.tipusok; let i = index" [value]="i" [disabled]=s[2]>{{s[0]}}</option>
+          <option *ngFor="let s of bizonylatservice.tipusok; let i = index" [ngValue]="i" [disabled]=s[2]>{{s[0]}}</option>
         </select>
       </div>
 

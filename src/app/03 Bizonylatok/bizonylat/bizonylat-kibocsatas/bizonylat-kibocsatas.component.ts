@@ -1,14 +1,18 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {BizonylatService} from '../../03 Bizonylatok/bizonylat/bizonylat.service';
-import {BizonylatKibocsatasParam} from '../../03 Bizonylatok/bizonylat/bizonylatkibocsatasparam';
-import {BizonylatTipus} from '../../03 Bizonylatok/bizonylat/bizonylattipus';
-import {ErrorService} from '../../common/errorbox/error.service';
-import {deepCopy} from '../../common/deepCopy';
-import {BizonylatDto} from '../../03 Bizonylatok/bizonylat/bizonylatdto';
-import {BizonylatTipusLeiro} from '../../03 Bizonylatok/bizonylat/bizonylattipusleiro';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit,
+  Output
+} from '@angular/core';
+import {BizonylatService} from '../bizonylat.service';
+import {BizonylatKibocsatasParam} from '../bizonylatkibocsatasparam';
+import {BizonylatTipus} from '../bizonylattipus';
+import {ErrorService} from '../../../common/errorbox/error.service';
+import {deepCopy} from '../../../common/deepCopy';
+import {BizonylatDto} from '../bizonylatdto';
+import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-bizonylat-kibocsatas',
   templateUrl: './bizonylat-kibocsatas.component.html'
 })
@@ -27,16 +31,21 @@ export class BizonylatKibocsatasComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   bizonylatservice: BizonylatService;
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
+              private _cdr: ChangeDetectorRef,
               bizonylatservice: BizonylatService) {
     this.bizonylatservice = bizonylatservice;
 
     this.form = this._fb.group({
-      // 'bizonylatszam': ['', [Validators.required]]
     });
   }
 
@@ -59,36 +68,34 @@ export class BizonylatKibocsatasComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSubmit() {
-    this.eppFrissit = true;
+  async onSubmit() {
     this.updatedto();
-    this.bizonylatservice.Kibocsatas(new BizonylatKibocsatasParam(this.Dto, this.vbizonylatszam))
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
 
-        return this.bizonylatservice.Get(res.Result);
-      })
-      .then(res1 => {
-        if (res1.Error != null) {
-          throw res1.Error;
-        }
+    this.spinner = true;
+    try {
+      const res = await this.bizonylatservice.Kibocsatas(new BizonylatKibocsatasParam(this.Dto, this.vbizonylatszam));
+      if (res.Error != null) {
+        throw res.Error;
+      }
 
-        this.eppFrissit = false;
-        this.eventKibocsatasUtan.emit(res1.Result[0]);
+      const res1 = await this.bizonylatservice.Get(res.Result);
+      if (res1.Error != null) {
+        throw res1.Error;
+      }
 
-        this._keszpenzes = (this.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
-            this.bizonylatTipus === BizonylatTipus.ElolegSzamla ||
-            this.bizonylatTipus === BizonylatTipus.Szamla) &&
-            this.Dto.Fizetesimod === 'Készpénz';
+      this.spinner = false;
+      this.eventKibocsatasUtan.emit(res1.Result[0]);
 
-        this.eventKibocsatasUtanKeszpenzes.emit(this._keszpenzes);
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+      this._keszpenzes = (this.bizonylatTipus === BizonylatTipus.BejovoSzamla ||
+        this.bizonylatTipus === BizonylatTipus.ElolegSzamla ||
+        this.bizonylatTipus === BizonylatTipus.Szamla) &&
+        this.Dto.Fizetesimod === 'Készpénz';
+
+      this.eventKibocsatasUtanKeszpenzes.emit(this._keszpenzes);
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
   cancel() {

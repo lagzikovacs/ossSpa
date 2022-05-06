@@ -1,9 +1,9 @@
 import {Component, OnDestroy, Output, EventEmitter, Input, OnInit} from '@angular/core';
-import {BizonylatService} from '../../bizonylat.service';
+import {BizonylatService} from '../../../03 Bizonylatok/bizonylat/bizonylat.service';
 import {ErrorService} from '../../../common/errorbox/error.service';
-import {BizonylatDto} from '../../bizonylatdto';
-import {BizonylatZoomParameter} from '../../bizonylatzoomparameter';
-import {FuvardijParam} from '../../fuvardijparam';
+import {BizonylatDto} from '../../../03 Bizonylatok/bizonylat/bizonylatdto';
+import {BizonylatZoomParameter} from '../../../03 Bizonylatok/bizonylat/bizonylatzoomparameter';
+import {FuvardijParam} from '../../../03 Bizonylatok/bizonylat/fuvardijparam';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({

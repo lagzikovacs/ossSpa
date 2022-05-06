@@ -1,12 +1,12 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {BizonylatService} from '../bizonylat.service';
+import {BizonylatService} from '../../03 Bizonylatok/bizonylat/bizonylat.service';
 import {ErrorService} from '../../common/errorbox/error.service';
-import {BizonylatComplexDto} from '../bizonylatcomplexdto';
-import {BizonylatDto} from '../bizonylatdto';
+import {BizonylatComplexDto} from '../../03 Bizonylatok/bizonylat/bizonylatcomplexdto';
+import {BizonylatDto} from '../../03 Bizonylatok/bizonylat/bizonylatdto';
 import {BizonylatTetelDto} from '../../03 Bizonylatok/bizonylattetel/bizonylatteteldto';
-import {BizonylatAfaDto} from '../bizonylatafadto';
-import {BizonylatTermekdijDto} from '../bizonylattermekdijdto';
-import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
+import {BizonylatAfaDto} from '../../03 Bizonylatok/bizonylat/bizonylatafadto';
+import {BizonylatTermekdijDto} from '../../03 Bizonylatok/bizonylat/bizonylattermekdijdto';
+import {BizonylatTipusLeiro} from '../../03 Bizonylatok/bizonylat/bizonylattipusleiro';
 
 @Component({
   selector: 'app-bizonylat-reszletek',

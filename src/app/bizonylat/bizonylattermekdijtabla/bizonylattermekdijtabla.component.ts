@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {BizonylatTermekdijDto} from '../bizonylattermekdijdto';
+import {BizonylatTermekdijDto} from '../../03 Bizonylatok/bizonylat/bizonylattermekdijdto';
 
 @Component({
   selector: 'app-bizonylattermekdijtabla',

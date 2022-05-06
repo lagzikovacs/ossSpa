@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ProjektkapcsolatService} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat.service';
-import {BizonylatService} from '../../bizonylat/bizonylat.service';
+import {BizonylatService} from '../../03 Bizonylatok/bizonylat/bizonylat.service';
 import {UgyfelService} from '../../01 Torzsadatok/09 Ugyfel/ugyfel.service';
 import {ProjektKapcsolatParam} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolatparam';
 import {UgyfelDto} from '../../01 Torzsadatok/09 Ugyfel/ugyfeldto';

@@ -2,18 +2,18 @@ import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ProjektkapcsolatService} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat.service';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {IratService} from '../../02 Eszkozok/02 Irat/irat/irat.service';
-import {BizonylatService} from '../../bizonylat/bizonylat.service';
+import {BizonylatService} from '../../03 Bizonylatok/bizonylat/bizonylat.service';
 import {VagolapService} from '../../05 Segedeszkozok/08 Vagolap/vagolap.service';
 import {VagolapMode} from '../../05 Segedeszkozok/08 Vagolap/vagolapmode';
 import {JogKod} from '../../common/enums/jogkod';
 import {ErrorService} from '../../common/errorbox/error.service';
 import {ProjektkapcsolatTablaComponent} from '../projektkapcsolat-tabla/projektkapcsolat-tabla.component';
 import {IratDto} from '../../02 Eszkozok/02 Irat/irat/iratdto';
-import {BizonylatDto} from '../../bizonylat/bizonylatdto';
+import {BizonylatDto} from '../../03 Bizonylatok/bizonylat/bizonylatdto';
 import {ProjektKapcsolatDto} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolatdto';
 import {ProjektKapcsolatParam} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolatparam';
-import {BizonylatTipusLeiro} from '../../bizonylat/bizonylattipusleiro';
-import {BizonylatTipus} from '../../bizonylat/bizonylattipus';
+import {BizonylatTipusLeiro} from '../../03 Bizonylatok/bizonylat/bizonylattipusleiro';
+import {BizonylatTipus} from '../../03 Bizonylatok/bizonylat/bizonylattipus';
 
 @Component({
   selector: 'app-projektkapcsolat-list',

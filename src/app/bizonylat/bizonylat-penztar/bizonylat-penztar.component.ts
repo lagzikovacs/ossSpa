@@ -1,14 +1,14 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {BizonylatService} from '../bizonylat.service';
+import {BizonylatService} from '../../03 Bizonylatok/bizonylat/bizonylat.service';
 import {PenztartetelService} from '../../02 Eszkozok/03 Penztar/penztartetel/penztartetel.service';
 import {PenztartetelDto} from '../../02 Eszkozok/03 Penztar/penztartetel/penztarteteldto';
-import {BizonylatTipus} from '../bizonylattipus';
+import {BizonylatTipus} from '../../03 Bizonylatok/bizonylat/bizonylattipus';
 import {ErrorService} from '../../common/errorbox/error.service';
 import {deepCopy} from '../../common/deepCopy';
-import {BizonylatDto} from '../bizonylatdto';
+import {BizonylatDto} from '../../03 Bizonylatok/bizonylat/bizonylatdto';
 import {PenztarDto} from '../../02 Eszkozok/03 Penztar/penztar/penztardto';
 import {PenztarService} from '../../02 Eszkozok/03 Penztar/penztar/penztar.service';
-import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
+import {BizonylatTipusLeiro} from '../../03 Bizonylatok/bizonylat/bizonylattipusleiro';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({

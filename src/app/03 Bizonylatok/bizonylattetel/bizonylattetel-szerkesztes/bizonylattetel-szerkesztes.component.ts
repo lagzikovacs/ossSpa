@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit,
   Output, ViewChild, ViewContainerRef
 } from '@angular/core';
-import {BizonylatService} from '../../../bizonylat/bizonylat.service';
+import {BizonylatService} from '../../bizonylat/bizonylat.service';
 import {CikkService} from '../../../01 Torzsadatok/06 Cikk/cikk.service';
 import {MeService} from '../../../01 Torzsadatok/04 Mennyisegiegyseg/me.service';
 import {AfakulcsService} from '../../../01 Torzsadatok/05 Afakulcs/afakulcs.service';
@@ -12,7 +12,7 @@ import {CikkZoomParam} from '../../../01 Torzsadatok/06 Cikk/cikkzoomparam';
 import {TermekdijZoomParam} from '../../../01 Torzsadatok/051 Termekdij/termekdijzoomparam';
 import {MeZoomParam} from '../../../01 Torzsadatok/04 Mennyisegiegyseg/mezoomparam';
 import {ErrorService} from '../../../common/errorbox/error.service';
-import {BizonylatTipusLeiro} from '../../../bizonylat/bizonylattipusleiro';
+import {BizonylatTipusLeiro} from '../../bizonylat/bizonylattipusleiro';
 import {BizonylatTetelDto} from '../bizonylatteteldto';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';

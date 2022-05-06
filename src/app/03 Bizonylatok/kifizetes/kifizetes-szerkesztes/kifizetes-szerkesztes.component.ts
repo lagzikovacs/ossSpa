@@ -18,7 +18,7 @@ import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestro
 import {ModalService} from '../../../common/modal/modal.service';
 import {PenznemListComponent} from '../../../01 Torzsadatok/03 Penznem/penznem-list/penznem-list.component';
 import {FizetesimodListComponent} from '../../../01 Torzsadatok/02 Fizetesimod/fizetesimod-list/fizetesimod-list.component';
-import {BizonylatDto} from '../../../bizonylat/bizonylatdto';
+import {BizonylatDto} from '../../bizonylat/bizonylatdto';
 import {NumberResult} from "../../../common/dtos/numberresult";
 
 @Component({

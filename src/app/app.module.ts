@@ -103,7 +103,7 @@ import {PenztartetelListComponent} from './02 Eszkozok/03 Penztar/penztartetel/p
 import {PenztarExportComponent} from './02 Eszkozok/03 Penztar/penztar/penztar-export/penztar-export.component';
 import {PenztarSzerkesztesComponent} from './02 Eszkozok/03 Penztar/penztar/penztar-szerkesztes/penztar-szerkesztes.component';
 import {PenztartetelService} from './02 Eszkozok/03 Penztar/penztartetel/penztartetel.service';
-import {BizonylatService} from './bizonylat/bizonylat.service';
+import {BizonylatService} from './03 Bizonylatok/bizonylat/bizonylat.service';
 import {RiportService} from './04 Riportok/riport.service';
 import { ProjektkapcsolatLevalasztasComponent } from './projektkapcsolat/projektkapcsolat-levalasztas/projektkapcsolat-levalasztas.component';
 import { ProjektExportComponent } from './projekt/projekt-export/projekt-export.component';

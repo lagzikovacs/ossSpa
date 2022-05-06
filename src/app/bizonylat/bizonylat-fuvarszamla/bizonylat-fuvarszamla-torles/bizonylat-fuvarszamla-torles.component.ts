@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {ErrorService} from '../../../common/errorbox/error.service';
-import {BizonylatService} from '../../bizonylat.service';
-import {BizonylatDto} from '../../bizonylatdto';
+import {BizonylatService} from '../../../03 Bizonylatok/bizonylat/bizonylat.service';
+import {BizonylatDto} from '../../../03 Bizonylatok/bizonylat/bizonylatdto';
 
 @Component({
   selector: 'app-bizonylat-fuvarszamla-torles',

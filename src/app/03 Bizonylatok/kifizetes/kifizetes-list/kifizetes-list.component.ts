@@ -6,7 +6,7 @@ import {KifizetesService} from '../kifizetes.service';
 import {ErrorService} from '../../../common/errorbox/error.service';
 import {KifizetesDto} from '../kifizetesdto';
 import {propCopy} from '../../../common/propCopy';
-import {BizonylatDto} from '../../../bizonylat/bizonylatdto';
+import {BizonylatDto} from '../../bizonylat/bizonylatdto';
 import {TablaExComponent} from '../../../common/tabla-ex/tabla-ex.component';
 
 @Component({

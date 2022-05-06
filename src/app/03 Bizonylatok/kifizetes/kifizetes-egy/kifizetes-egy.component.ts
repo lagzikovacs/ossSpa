@@ -13,7 +13,7 @@ import {ReszletekComponent} from '../../../common/reszletek/reszletek.component'
 import {TetelTorlesComponent} from '../../../common/tetel-torles/tetel-torles.component';
 import {propCopy} from '../../../common/propCopy';
 import {KifizetesSzerkesztesComponent} from '../kifizetes-szerkesztes/kifizetes-szerkesztes.component';
-import {BizonylatDto} from '../../../bizonylat/bizonylatdto';
+import {BizonylatDto} from '../../bizonylat/bizonylatdto';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

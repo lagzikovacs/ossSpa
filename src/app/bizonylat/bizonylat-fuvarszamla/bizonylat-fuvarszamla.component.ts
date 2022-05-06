@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, Output, EventEmitter} from '@angular/core';
 import {rowanimation} from '../../animation/rowAnimation';
-import {BizonylatDto} from '../bizonylatdto';
+import {BizonylatDto} from '../../03 Bizonylatok/bizonylat/bizonylatdto';
 
 @Component({
   selector: 'app-bizonylat-fuvarszamla',

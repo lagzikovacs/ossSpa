@@ -1,10 +1,10 @@
 import {Component, ElementRef, Input, OnDestroy, OnInit, Output, ViewChild, EventEmitter} from '@angular/core';
-import {BizonylatDto} from '../bizonylatdto';
+import {BizonylatDto} from '../../03 Bizonylatok/bizonylat/bizonylatdto';
 import {environment} from '../../../environments/environment';
-import {BizonylatParameter} from '../bizonylatparameter';
-import {BizonylatTipus} from '../bizonylattipus';
-import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
-import {BizonylatService} from '../bizonylat.service';
+import {BizonylatParameter} from '../../03 Bizonylatok/bizonylat/bizonylatparameter';
+import {BizonylatTipus} from '../../03 Bizonylatok/bizonylat/bizonylattipus';
+import {BizonylatTipusLeiro} from '../../03 Bizonylatok/bizonylat/bizonylattipusleiro';
+import {BizonylatService} from '../../03 Bizonylatok/bizonylat/bizonylat.service';
 import {ErrorService} from '../../common/errorbox/error.service';
 import {Szempont} from '../../common/enums/szempont';
 import {SzMT} from '../../common/dtos/szmt';

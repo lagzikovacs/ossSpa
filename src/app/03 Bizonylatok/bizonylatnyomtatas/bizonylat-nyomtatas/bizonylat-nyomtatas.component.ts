@@ -6,7 +6,7 @@ import {BizonylatNyomtatasTipus} from '../bizonylatnyomtatastipus';
 import {ErrorService} from '../../../common/errorbox/error.service';
 import {Bizonylatnyomtatasciklus} from '../bizonylatnyomtatasciklus';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {BizonylatService} from "../../../bizonylat/bizonylat.service";
+import {BizonylatService} from "../../bizonylat/bizonylat.service";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

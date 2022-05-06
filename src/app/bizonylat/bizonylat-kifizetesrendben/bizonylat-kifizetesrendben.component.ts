@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {BizonylatService} from '../bizonylat.service';
+import {BizonylatService} from '../../03 Bizonylatok/bizonylat/bizonylat.service';
 import {ErrorService} from '../../common/errorbox/error.service';
-import {BizonylatDto} from '../bizonylatdto';
+import {BizonylatDto} from '../../03 Bizonylatok/bizonylat/bizonylatdto';
 import {deepCopy} from '../../common/deepCopy';
-import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
+import {BizonylatTipusLeiro} from '../../03 Bizonylatok/bizonylat/bizonylattipusleiro';
 
 @Component({
   selector: 'app-bizonylat-kifizetesrendben',

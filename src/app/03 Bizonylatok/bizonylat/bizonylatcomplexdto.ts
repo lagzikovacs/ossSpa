@@ -1,6 +1,6 @@
 import {BizonylatTermekdijDto} from './bizonylattermekdijdto';
 import {BizonylatAfaDto} from './bizonylatafadto';
-import {BizonylatTetelDto} from '../03 Bizonylatok/bizonylattetel/bizonylatteteldto';
+import {BizonylatTetelDto} from '../bizonylattetel/bizonylatteteldto';
 import {BizonylatDto} from './bizonylatdto';
 
 export class BizonylatComplexDto {

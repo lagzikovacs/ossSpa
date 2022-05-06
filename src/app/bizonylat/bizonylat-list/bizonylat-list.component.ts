@@ -1,16 +1,16 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {BizonylatService} from '../bizonylat.service';
+import {BizonylatService} from '../../03 Bizonylatok/bizonylat/bizonylat.service';
 import {Szempont} from '../../common/enums/szempont';
 import {SzMT} from '../../common/dtos/szmt';
-import {BizonylatTipus} from '../bizonylattipus';
+import {BizonylatTipus} from '../../03 Bizonylatok/bizonylat/bizonylattipus';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {JogKod} from '../../common/enums/jogkod';
 import {ErrorService} from '../../common/errorbox/error.service';
-import {BizonylatDto} from '../bizonylatdto';
+import {BizonylatDto} from '../../03 Bizonylatok/bizonylat/bizonylatdto';
 import {ActivatedRoute} from '@angular/router';
 import {environment} from '../../../environments/environment';
-import {BizonylatParameter} from '../bizonylatparameter';
-import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
+import {BizonylatParameter} from '../../03 Bizonylatok/bizonylat/bizonylatparameter';
+import {BizonylatTipusLeiro} from '../../03 Bizonylatok/bizonylat/bizonylattipusleiro';
 import {BizonylattablaComponent} from '../bizonylattabla/bizonylattabla.component';
 import {propCopy} from '../../common/propCopy';
 

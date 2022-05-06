@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {BizonylatAfaDto} from '../bizonylatafadto';
+import {BizonylatAfaDto} from '../../03 Bizonylatok/bizonylat/bizonylatafadto';
 
 @Component({
   selector: 'app-bizonylatafatabla',

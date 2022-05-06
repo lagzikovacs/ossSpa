@@ -5,7 +5,7 @@ import {ProjektService} from '../../02 Eszkozok/01 Projekt/projekt/projekt.servi
 import {ErrorService} from '../../common/errorbox/error.service';
 import {ProjektkapcsolatService} from '../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat.service';
 import {IratDto} from '../../02 Eszkozok/02 Irat/irat/iratdto';
-import {BizonylatDto} from '../bizonylatdto';
+import {BizonylatDto} from '../../03 Bizonylatok/bizonylat/bizonylatdto';
 
 @Component({
   selector: 'app-bizonylat-projektje',

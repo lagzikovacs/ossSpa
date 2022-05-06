@@ -1,4 +1,4 @@
-import {BizonylatDto} from "../../../bizonylat/bizonylatdto";
+import {BizonylatDto} from "../../../03 Bizonylatok/bizonylat/bizonylatdto";
 
 export class ProjektKapcsolatParam {
   ProjektKod: number;

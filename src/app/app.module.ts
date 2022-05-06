@@ -28,7 +28,7 @@ import { ProjektSzerkesztesComponent } from './02 Eszkozok/01 Projekt/projekt/pr
 import {ProjektToolbarComponent} from './projekt/projekttoolbar/projekttoolbar.component';
 import {ProjektService} from './02 Eszkozok/01 Projekt/projekt/projekt.service';
 import { ProjektMuszakiallapotComponent } from './projekt/projekt-muszakiallapot/projekt-muszakiallapot.component';
-import { ProjektIratmintaComponent } from './projekt/projekt-iratminta/projekt-iratminta.component';
+import { ProjektIratmintaComponent } from './02 Eszkozok/01 Projekt/projekt/projekt-iratminta/projekt-iratminta.component';
 import { ProjektkapcsolatListComponent } from './projektkapcsolat/projektkapcsolat-list/projektkapcsolat-list.component';
 import { ProjektJegyzetListComponent } from './02 Eszkozok/01 Projekt/projektjegyzet/projekt-jegyzet-list/projekt-jegyzet-list.component';
 import { IratListComponent } from './irat/irat-list/irat-list.component';
@@ -134,7 +134,7 @@ import {VagolapService} from './05 Segedeszkozok/08 Vagolap/vagolap.service';
 import { BizonylatkapcsolatVagolaprolComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-vagolaprol/bizonylatkapcsolat-vagolaprol.component';
 import { ProjektkapcsolatVagolaprolComponent } from './projektkapcsolat/projektkapcsolat-vagolaprol/projektkapcsolat-vagolaprol.component';
 import {AjanlatService} from './02 Eszkozok/01 Projekt/ajanlat/ajanlat.service';
-import {IratmintaService} from './projekt/projekt-iratminta/iratminta.service';
+import {IratmintaService} from './02 Eszkozok/01 Projekt/projekt/projekt-iratminta/iratminta.service';
 import { EsemenynaploComponent } from './05 Segedeszkozok/03 Felhasznalo/esemenynaplo/esemenynaplo.component';
 import { UgyfelterComponent } from './ext/ugyfelter/ugyfelter/ugyfelter.component';
 import {UgyfelterService} from './ext/ugyfelter/ugyfelter.service';

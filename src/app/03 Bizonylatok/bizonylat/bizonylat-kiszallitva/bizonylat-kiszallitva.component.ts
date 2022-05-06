@@ -10,16 +10,16 @@ import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'app-bizonylat-kifizetesrendben',
-  templateUrl: './bizonylat-kifizetesrendben.component.html'
+  selector: 'app-bizonylat-kiszallitva',
+  templateUrl: './bizonylat-kiszallitva.component.html'
 })
-export class BizonylatKifizetesrendbenComponent implements OnDestroy {
+export class BizonylatKiszallitvaComponent implements OnDestroy {
   Dto = new BizonylatDto();
   @Input() set DtoOriginal(value: BizonylatDto) {
     this.Dto = deepCopy(value);
   }
   @Input() bizonylatLeiro = new BizonylatTipusLeiro();
-  @Output() eventKifizetesrendbenUtan = new EventEmitter<BizonylatDto>();
+  @Output() eventKiszallitvaUtan = new EventEmitter<BizonylatDto>();
 
   eppFrissit = false;
   set spinner(value: boolean) {
@@ -39,7 +39,7 @@ export class BizonylatKifizetesrendbenComponent implements OnDestroy {
   async modositas() {
     this.spinner = true;
     try {
-      const res = await this.bizonylatservice.KifizetesRendben(this.Dto);
+      const res = await this.bizonylatservice.Kiszallitva(this.Dto);
       if (res.Error != null) {
         throw res.Error;
       }
@@ -51,7 +51,7 @@ export class BizonylatKifizetesrendbenComponent implements OnDestroy {
 
       this.Dto = deepCopy(res1.Result[0]);
       this.spinner = false;
-      this.eventKifizetesrendbenUtan.emit(res1.Result[0]);
+      this.eventKiszallitvaUtan.emit(res1.Result[0]);
     } catch (err) {
       this.spinner = false;
       this._errorservice.Error = err;

@@ -126,7 +126,7 @@ import { BizonylatErrolComponent } from './bizonylat/bizonylat-errol/bizonylat-e
 import { BizonylatKibocsatasComponent } from './03 Bizonylatok/bizonylat/bizonylat-kibocsatas/bizonylat-kibocsatas.component';
 import { BizonylatStornoComponent } from './bizonylat/bizonylat-storno/bizonylat-storno.component';
 import { BizonylatPenztarComponent } from './bizonylat/bizonylat-penztar/bizonylat-penztar.component';
-import { BizonylatKifizetesrendbenComponent } from './bizonylat/bizonylat-kifizetesrendben/bizonylat-kifizetesrendben.component';
+import { BizonylatKifizetesrendbenComponent } from './03 Bizonylatok/bizonylat/bizonylat-kifizetesrendben/bizonylat-kifizetesrendben.component';
 import { BizonylatKiszallitvaComponent } from './bizonylat/bizonylat-kiszallitva/bizonylat-kiszallitva.component';
 import { BoolHunPipe } from './pipes/boolhun.pipe';
 import { VagolapComponent } from './05 Segedeszkozok/08 Vagolap/vagolap/vagolap.component';

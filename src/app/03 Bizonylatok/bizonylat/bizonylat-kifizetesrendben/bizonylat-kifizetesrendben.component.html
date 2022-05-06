@@ -1,0 +1,9 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>{{bizonylatLeiro.BizonylatNev}} kifizetés</h5>
+  <div class="editform-row">
+    Kifizetés rendben: {{Dto.Kifizetesrendben | boolhun}}
+  </div>
+  <div class="editform-row-bottom">
+    <button class="toolbutton" (click)="modositas()">Módosítás</button>
+  </div>
+</div>

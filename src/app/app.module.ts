@@ -124,7 +124,7 @@ import { BizonylatafatablaComponent } from './bizonylat/bizonylatafatabla/bizony
 import { BizonylattermekdijtablaComponent } from './bizonylat/bizonylattermekdijtabla/bizonylattermekdijtabla.component';
 import { BizonylatErrolComponent } from './bizonylat/bizonylat-errol/bizonylat-errol.component';
 import { BizonylatKibocsatasComponent } from './03 Bizonylatok/bizonylat/bizonylat-kibocsatas/bizonylat-kibocsatas.component';
-import { BizonylatStornoComponent } from './bizonylat/bizonylat-storno/bizonylat-storno.component';
+import { BizonylatStornoComponent } from './03 Bizonylatok/bizonylat/bizonylat-storno/bizonylat-storno.component';
 import { BizonylatPenztarComponent } from './bizonylat/bizonylat-penztar/bizonylat-penztar.component';
 import { BizonylatKifizetesrendbenComponent } from './03 Bizonylatok/bizonylat/bizonylat-kifizetesrendben/bizonylat-kifizetesrendben.component';
 import { BizonylatKiszallitvaComponent } from './03 Bizonylatok/bizonylat/bizonylat-kiszallitva/bizonylat-kiszallitva.component';

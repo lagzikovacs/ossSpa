@@ -1,0 +1,46 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>{{projektservice.cim}}</h5>
+  <app-projekttoolbar [Statuszszurok]="projektservice.statuszszurok"
+                      [Jegyzetszurok]="jegyzetszurok"
+                      [Szurok]="szurok"
+                      [(statuszszempont)]="statuszszempont"
+                      [(jegyzetszempont)]="jegyzetszempont"
+                      [(szempont)]="szempont"
+                      [(minta)]="minta"
+                      (Kereses)="onKereses()"
+                      [enUj]="jog" (Uj)="doUjtetel()"
+                      (Export)="onExport($event)">
+  </app-projekttoolbar>
+
+  <ng-container *ngIf="export">
+    <app-projekt-export [projektcsoport]="projektcsoport"
+                        [statuszszempont]="statuszszempont"
+                        (eventBezar)="doExportbezar()">
+    </app-projekt-export>
+  </ng-container>
+
+  <div appHscroll style="overflow-x: auto;overflow-y: hidden">
+    <app-projekt-tabla #tabla
+                       [Dto]="Dto"
+                       (forid)="onId($event)"
+                       [egyTemplate]="gridegy">
+    </app-projekt-tabla>
+  </div>
+
+  <ng-template #gridegy>
+    <app-projekt-egy [uj]="uj"
+                     [dto]="Dto[DtoSelectedIndex]"
+                     (eventUj)="onUjtetelkesz($event)"
+                     (eventTorles)="onTorlesutan()"
+                     (eventModositas)="onSzerkesztesutan($event)">
+    </app-projekt-egy>
+  </ng-template>
+
+  <app-toolbarfooter [enKereses]="!elsokereses"
+                     [rekordszam]="Dto.length"
+                     [osszesrekord]="OsszesRekord"
+                     (KeresesTovabb)="onKeresesTovabb()">
+  </app-toolbarfooter>
+</div>
+
+

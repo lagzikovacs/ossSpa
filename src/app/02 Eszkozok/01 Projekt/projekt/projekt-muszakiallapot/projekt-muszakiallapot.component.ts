@@ -1,14 +1,13 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {rowanimation} from '../../animation/rowAnimation';
-import {deepCopy} from '../../common/deepCopy';
-import {ProjektDto} from '../../02 Eszkozok/01 Projekt/projekt/projektdto';
-import {ProjektService} from '../../02 Eszkozok/01 Projekt/projekt/projekt.service';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {deepCopy} from '../../../../common/deepCopy';
+import {ProjektDto} from '../projektdto';
+import {ProjektService} from '../projekt.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-projekt-muszakiallapot',
-  templateUrl: './projekt-muszakiallapot.component.html',
-  animations: [rowanimation]
+  templateUrl: './projekt-muszakiallapot.component.html'
 })
 export class ProjektMuszakiallapotComponent implements OnInit, OnDestroy {
   @Input() eppFrissit: boolean;

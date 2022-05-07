@@ -1,7 +1,11 @@
-import {Component, EventEmitter, Input, OnDestroy, Output, TemplateRef} from '@angular/core';
-import {ProjektDto} from '../../02 Eszkozok/01 Projekt/projekt/projektdto';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, Output,
+  TemplateRef
+} from '@angular/core';
+import {ProjektDto} from '../projektdto';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-projekt-tabla',
   templateUrl: './projekt-tabla.component.html'
 })
@@ -10,7 +14,6 @@ export class ProjektTablaComponent implements OnDestroy {
   @Input() megjegyzesIs = true;
   @Input() enIdclick = true;
 
-  @Input() ujTemplate: TemplateRef<any>;
   @Input() egyTemplate: TemplateRef<any>;
 
   @Output() forid = new EventEmitter<number>();
@@ -18,21 +21,41 @@ export class ProjektTablaComponent implements OnDestroy {
   clickedrowindex = -1;
   clickedidindex = -1;
   ujtetel = false;
+  egytetel = false
+
+  constructor(private _cdr: ChangeDetectorRef) {
+  }
 
   clearselections() {
     this.ujtetel = false;
 
     this.clickedrowindex = -1;
     this.clickedidindex = -1;
+
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   ujtetelstart() {
     this.clearselections();
-
     this.ujtetel = true;
+
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
+
   ujtetelstop() {
     this.ujtetel = false;
+
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
+
+  egytetelstart() {
+    this.egytetel = true;
+
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   clickforid(i: number) {

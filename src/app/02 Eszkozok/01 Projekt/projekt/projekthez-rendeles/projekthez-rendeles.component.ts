@@ -1,7 +1,8 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-projekthez-rendeles',
   templateUrl: './projekthez-rendeles.component.html'
 })
@@ -20,6 +21,6 @@ export class ProjekthezRendelesComponent {
   }
 
   onCancel() {
-    this.Szerkeszteskesz.emit(null);
+    this.Szerkeszteskesz.emit();
   }
 }

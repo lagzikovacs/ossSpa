@@ -13,14 +13,14 @@ import {ErrorService} from '../../../common/errorbox/error.service';
 import {ReszletekComponent} from '../../../common/reszletek/reszletek.component';
 import {ProjektTelepitesiDokumentumokKivalasztasaComponent} from '../projekt-telepitesi-dokumentumok-kivalasztasa/projekt-telepitesi-dokumentumok-kivalasztasa.component';
 import {DokumentumListComponent} from '../../02 Irat/dokumentum/dokumentum-list/dokumentum-list.component';
-import {ProjektEmailalapjanComponent} from '../../../projekt/projekt-emailalapjan/projekt-emailalapjan.component';
+import {ProjektEmailalapjanComponent} from '../../01 Projekt/projekt/projekt-emailalapjan/projekt-emailalapjan.component';
 import {HibabejelentesSzerkesztesComponent} from '../hibabejelentes-szerkesztes/hibabejelentes-szerkesztes.component';
 import {TetelTorlesComponent} from '../../../common/tetel-torles/tetel-torles.component';
 import {propCopy} from '../../../common/propCopy';
 import {HibabejelentesJelentesComponent} from '../hibabejelentes-jelentes/hibabejelentes-jelentes.component';
 import {TelepitesiDokumentumokKivalasztasaComponent} from '../telepitesi-dokumentumok-kivalasztasa/telepitesi-dokumentumok-kivalasztasa.component';
 import {EgyszeruKerdesUzenetComponent} from '../../../common/egyszeru-kerdes-uzenet/egyszeru-kerdes-uzenet.component';
-import {ProjekthezRendelesComponent} from '../../../projekt/projekthez-rendeles/projekthez-rendeles.component';
+import {ProjekthezRendelesComponent} from '../../01 Projekt/projekt/projekthez-rendeles/projekthez-rendeles.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,7 +1,7 @@
 import {AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {HibabejelentesService} from '../hibabejelentes.service';
 import {ErrorService} from '../../../common/errorbox/error.service';
-import {ProjektToolbarComponent} from '../../../projekt/projekttoolbar/projekttoolbar.component';
+import {ProjektToolbarComponent} from '../../01 Projekt/projekt/projekttoolbar/projekttoolbar.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

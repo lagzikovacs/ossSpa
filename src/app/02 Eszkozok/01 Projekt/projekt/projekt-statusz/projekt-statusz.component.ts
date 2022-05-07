@@ -1,14 +1,13 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {ProjektService} from '../../02 Eszkozok/01 Projekt/projekt/projekt.service';
-import {rowanimation} from '../../animation/rowAnimation';
-import {deepCopy} from '../../common/deepCopy';
-import {ProjektDto} from '../../02 Eszkozok/01 Projekt/projekt/projektdto';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {ProjektService} from '../projekt.service';
+import {deepCopy} from '../../../../common/deepCopy';
+import {ProjektDto} from '../projektdto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-projekt-statusz',
-  templateUrl: './projekt-statusz.component.html',
-  animations: [rowanimation]
+  templateUrl: './projekt-statusz.component.html'
 })
 export class ProjektStatuszComponent implements OnInit, OnDestroy {
   @Input() eppFrissit: boolean;

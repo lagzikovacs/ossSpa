@@ -23,11 +23,11 @@ import {DateHunPipe} from './pipes/datehun.pipe';
 import {DatetimeHunPipe} from './pipes/datetimehun.pipe';
 import { FelhasznaloSzerkesztesComponent } from './05 Segedeszkozok/03 Felhasznalo/felhasznalo-szerkesztes/felhasznalo-szerkesztes.component';
 import { FelhasznaloJelszoComponent } from './05 Segedeszkozok/03 Felhasznalo/felhasznalo-jelszo/felhasznalo-jelszo.component';
-import { ProjektListComponent } from './projekt/projekt-list/projekt-list.component';
+import { ProjektListComponent } from './02 Eszkozok/01 Projekt/projekt/projekt-list/projekt-list.component';
 import { ProjektSzerkesztesComponent } from './02 Eszkozok/01 Projekt/projekt/projekt-szerkesztes/projekt-szerkesztes.component';
-import {ProjektToolbarComponent} from './projekt/projekttoolbar/projekttoolbar.component';
+import {ProjektToolbarComponent} from './02 Eszkozok/01 Projekt/projekt/projekttoolbar/projekttoolbar.component';
 import {ProjektService} from './02 Eszkozok/01 Projekt/projekt/projekt.service';
-import { ProjektMuszakiallapotComponent } from './projekt/projekt-muszakiallapot/projekt-muszakiallapot.component';
+import { ProjektMuszakiallapotComponent } from './02 Eszkozok/01 Projekt/projekt/projekt-muszakiallapot/projekt-muszakiallapot.component';
 import { ProjektIratmintaComponent } from './02 Eszkozok/01 Projekt/projekt/projekt-iratminta/projekt-iratminta.component';
 import { ProjektkapcsolatListComponent } from './projektkapcsolat/projektkapcsolat-list/projektkapcsolat-list.component';
 import { ProjektJegyzetListComponent } from './02 Eszkozok/01 Projekt/projektjegyzet/projekt-jegyzet-list/projekt-jegyzet-list.component';
@@ -50,8 +50,8 @@ import { CsoportFelhasznaloComponent } from './05 Segedeszkozok/04 Csoport/csopo
 import { CsoportJogComponent } from './05 Segedeszkozok/04 Csoport/csoport-jog/csoport-jog.component';
 import { VolumeTesztComponent } from './05 Segedeszkozok/02 Volume/volume-teszt/volume-teszt.component';
 import { AjanlatkeresListComponent } from './02 Eszkozok/04 Ajanlatkeres/ajanlatkeres-list/ajanlatkeres-list.component';
-import { ProjektEmailalapjanComponent } from './projekt/projekt-emailalapjan/projekt-emailalapjan.component';
-import { ProjektTablaComponent } from './projekt/projekttabla/projekt-tabla.component';
+import { ProjektEmailalapjanComponent } from './02 Eszkozok/01 Projekt/projekt/projekt-emailalapjan/projekt-emailalapjan.component';
+import { ProjektTablaComponent } from './02 Eszkozok/01 Projekt/projekt/projekttabla/projekt-tabla.component';
 import { RiportComponent } from './04 Riportok/riport/riport.component';
 import { KimenoszamlaComponent } from './04 Riportok/01 Kimenoszamla/kimenoszamla.component';
 import { BejovoszamlaComponent } from './04 Riportok/02 Bejovoszamla/bejovoszamla.component';
@@ -92,7 +92,7 @@ import {CsoportService} from './05 Segedeszkozok/04 Csoport/csoport.service';
 import {AjanlatkeresService} from './02 Eszkozok/04 Ajanlatkeres/ajanlatkeres.service';
 import {PenztarService} from './02 Eszkozok/03 Penztar/penztar/penztar.service';
 import { PenztartetelSzerkesztesComponent } from './02 Eszkozok/03 Penztar/penztartetel/penztartetel-szerkesztes/penztartetel-szerkesztes.component';
-import { ProjektStatuszComponent } from './projekt/projekt-statusz/projekt-statusz.component';
+import { ProjektStatuszComponent } from './02 Eszkozok/01 Projekt/projekt/projekt-statusz/projekt-statusz.component';
 import { ProjektJegyzetSzerkesztesComponent } from './02 Eszkozok/01 Projekt/projektjegyzet/projekt-jegyzet-szerkesztes/projekt-jegyzet-szerkesztes.component';
 import { ProjektkapcsolatUjbizonylatComponent } from './projektkapcsolat/projektkapcsolat-ujbizonylat/projektkapcsolat-ujbizonylat.component';
 import { AjanlatComponent } from './02 Eszkozok/01 Projekt/ajanlat/ajanlat/ajanlat';
@@ -106,7 +106,7 @@ import {PenztartetelService} from './02 Eszkozok/03 Penztar/penztartetel/penztar
 import {BizonylatService} from './03 Bizonylatok/bizonylat/bizonylat.service';
 import {RiportService} from './04 Riportok/riport.service';
 import { ProjektkapcsolatLevalasztasComponent } from './projektkapcsolat/projektkapcsolat-levalasztas/projektkapcsolat-levalasztas.component';
-import { ProjektExportComponent } from './projekt/projekt-export/projekt-export.component';
+import { ProjektExportComponent } from './02 Eszkozok/01 Projekt/projekt/projekt-export/projekt-export.component';
 import { AjanlatTetelComponent } from './02 Eszkozok/01 Projekt/ajanlat/ajanlat-tetel/ajanlat-tetel';
 import { BizonylatListComponent } from './bizonylat/bizonylat-list/bizonylat-list.component';
 import { BizonylatEgyComponent } from './bizonylat/bizonylat-egy/bizonylat-egy.component';
@@ -186,7 +186,7 @@ import { AutofocusDirective } from './directives/autofocus.directive';
 import {FelmeresListComponent} from './02 Eszkozok/05 Felmeres/felmeres-list/felmeres-list.component';
 import { HibabejelentesSzerkesztesComponent } from './02 Eszkozok/06 Hibabejelentes/hibabejelentes-szerkesztes/hibabejelentes-szerkesztes.component';
 import { FelmeresSzerkesztesComponent } from './02 Eszkozok/05 Felmeres/felmeres-szerkesztes/felmeres-szerkesztes.component';
-import {ProjekthezRendelesComponent} from './projekt/projekthez-rendeles/projekthez-rendeles.component';
+import {ProjekthezRendelesComponent} from './02 Eszkozok/01 Projekt/projekt/projekthez-rendeles/projekthez-rendeles.component';
 import { EgyszeruUzenetComponent } from './common/egyszeru-uzenet/egyszeru-uzenet.component';
 import { FelmeresJelentesComponent } from './02 Eszkozok/05 Felmeres/felmeres-jelentes/felmeres-jelentes.component';
 import { EgyszeruKerdesUzenetComponent } from './common/egyszeru-kerdes-uzenet/egyszeru-kerdes-uzenet.component';
@@ -230,6 +230,8 @@ import {AjanlatkeresEgyComponent} from "./02 Eszkozok/04 Ajanlatkeres/ajanlatker
 import {FelmeresEgyComponent} from "./02 Eszkozok/05 Felmeres/felmeres-egy/felmeres-egy.component";
 import {KifizetesEgyComponent} from "./03 Bizonylatok/kifizetes/kifizetes-egy/kifizetes-egy.component";
 import {ProjektJegyzetEgyComponent} from "./02 Eszkozok/01 Projekt/projektjegyzet/projekt-jegyzet-egy/projekt-jegyzet-egy.component";
+import {ProjektEgyToolbarComponent} from "./02 Eszkozok/01 Projekt/projekt/projekt-egy-toolbar/projekt-egy-toolbar.component";
+import {ProjektEgyComponent} from "./02 Eszkozok/01 Projekt/projekt/projekt-egy/projekt-egy.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -486,6 +488,8 @@ if (environment.production) {
     FelmeresEgyComponent,
     KifizetesEgyComponent,
     ProjektJegyzetEgyComponent,
+    ProjektEgyToolbarComponent,
+    ProjektEgyComponent,
   ],
   imports: [
     BrowserModule,

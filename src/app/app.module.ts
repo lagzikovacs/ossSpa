@@ -31,9 +31,9 @@ import { ProjektMuszakiallapotComponent } from './02 Eszkozok/01 Projekt/projekt
 import { ProjektIratmintaComponent } from './02 Eszkozok/01 Projekt/projekt/projekt-iratminta/projekt-iratminta.component';
 import { ProjektkapcsolatListComponent } from './projektkapcsolat/projektkapcsolat-list/projektkapcsolat-list.component';
 import { ProjektJegyzetListComponent } from './02 Eszkozok/01 Projekt/projektjegyzet/projekt-jegyzet-list/projekt-jegyzet-list.component';
-import { IratListComponent } from './irat/irat-list/irat-list.component';
-import { IratEgyComponent } from './irat/irat-egy/irat-egy.component';
-import {IratToolbarComponent} from './irat/irattolbar/irattoolbar.component';
+import { IratListComponent } from './02 Eszkozok/02 Irat/irat/irat-list/irat-list.component';
+import { IratEgyComponent } from './02 Eszkozok/02 Irat/irat/irat-egy/irat-egy.component';
+import {IratToolbarComponent} from './02 Eszkozok/02 Irat/irat/irattolbar/irattoolbar.component';
 import { DokumentumListComponent } from './02 Eszkozok/02 Irat/dokumentum/dokumentum-list/dokumentum-list.component';
 import {IratService} from './02 Eszkozok/02 Irat/irat/irat.service';
 import {DokumentumService} from './02 Eszkozok/02 Irat/dokumentum/dokumentum.service';
@@ -176,7 +176,7 @@ import { DokumentumLetoltesPdfComponent } from './02 Eszkozok/02 Irat/dokumentum
 import { DokumentumNezetComponent } from './02 Eszkozok/02 Irat/dokumentum/dokumentum-nezet/dokumentum-nezet.component';
 import { VagolapIrathozComponent } from './05 Segedeszkozok/08 Vagolap/vagolap-irathoz/vagolap-irathoz.component';
 import { VagolapBizonylathozComponent } from './05 Segedeszkozok/08 Vagolap/vagolap-bizonylathoz/vagolap-bizonylathoz.component';
-import { IratProjektjeComponent } from './irat/irat-projektje/irat-projektje.component';
+import { IratProjektjeComponent } from './02 Eszkozok/02 Irat/irat/irat-projektje/irat-projektje.component';
 import { BizonylatProjektjeComponent } from './bizonylat/bizonylat-projektje/bizonylat-projektje.component';
 import { FooldalComponent } from './fooldal/fooldal.component';
 import { NavbarComponent } from './navbar/navbar/navbar.component';
@@ -232,6 +232,7 @@ import {KifizetesEgyComponent} from "./03 Bizonylatok/kifizetes/kifizetes-egy/ki
 import {ProjektJegyzetEgyComponent} from "./02 Eszkozok/01 Projekt/projektjegyzet/projekt-jegyzet-egy/projekt-jegyzet-egy.component";
 import {ProjektEgyToolbarComponent} from "./02 Eszkozok/01 Projekt/projekt/projekt-egy-toolbar/projekt-egy-toolbar.component";
 import {ProjektEgyComponent} from "./02 Eszkozok/01 Projekt/projekt/projekt-egy/projekt-egy.component";
+import {IratEgyToolbarComponent} from "./02 Eszkozok/02 Irat/irat/irat-egy-toolbar/irat-egy-toolbar.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -490,6 +491,7 @@ if (environment.production) {
     ProjektJegyzetEgyComponent,
     ProjektEgyToolbarComponent,
     ProjektEgyComponent,
+    IratEgyToolbarComponent,
   ],
   imports: [
     BrowserModule,

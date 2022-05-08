@@ -12,27 +12,21 @@
     [enUj]="jog" (Uj)="doUjtetel()">
   </app-irattoolbar>
 
-  <app-tabla #tabla
-             [items]="Dto"
-             [colsets]="iratservice.GridSettings"
-             (forid)="onId($event)"
-             [ujTemplate]="griduj"
-             [egyTemplate]="gridegy">
-  </app-tabla>
-
-  <ng-template #griduj>
-    <app-irat-szerkesztes [uj] = "true"
-                          (eventSzerkeszteskesz)="onUjtetelkesz($event)">
-    </app-irat-szerkesztes>
-  </ng-template>
+  <app-tabla-ex #tabla
+                [items]="Dto"
+                [colsets]="iratservice.GridSettings"
+                (forid)="onId($event)"
+                [egyTemplate]="gridegy">
+  </app-tabla-ex>
 
   <ng-template #gridegy>
-    <app-irat-egy [DtoOriginal]="Dto[DtoSelectedIndex]"
+    <app-irat-egy [uj]="uj"
+                  [dto]="Dto[DtoSelectedIndex]"
                   [enTorles]="true"
                   [enProjekt]="enProjekt"
-                  [(egymode)]="egyirat_egymode"
-                  (eventSzerkesztesutan)="onSzerkesztesutan($event)"
-                  (eventTorlesutan)="onTorlesutan()">
+                  (eventUj)="onUjtetelkesz($event)"
+                  (eventTorles)="onTorlesutan()"
+                  (eventModositas)="onSzerkesztesutan($event)">
     </app-irat-egy>
   </ng-template>
 

@@ -1,22 +1,23 @@
-import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
-import {IratService} from '../../02 Eszkozok/02 Irat/irat/irat.service';
-import {SzMT} from '../../common/dtos/szmt';
-import {Szempont} from '../../common/enums/szempont';
-import {IratDto} from '../../02 Eszkozok/02 Irat/irat/iratdto';
-import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
-import {JogKod} from '../../common/enums/jogkod';
-import {ErrorService} from '../../common/errorbox/error.service';
-import {TablaComponent} from '../../common/tabla/tabla.component';
-import {environment} from '../../../environments/environment';
-import {IratParam} from '../../02 Eszkozok/02 Irat/irat/iratparam';
-import {propCopy} from '../../common/propCopy';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, ViewChild} from '@angular/core';
+import {IratService} from '../irat.service';
+import {SzMT} from '../../../../common/dtos/szmt';
+import {Szempont} from '../../../../common/enums/szempont';
+import {IratDto} from '../iratdto';
+import {LogonService} from '../../../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
+import {JogKod} from '../../../../common/enums/jogkod';
+import {ErrorService} from '../../../../common/errorbox/error.service';
+import {environment} from '../../../../../environments/environment';
+import {IratParam} from '../iratparam';
+import {propCopy} from '../../../../common/propCopy';
+import {TablaExComponent} from '../../../../common/tabla-ex/tabla-ex.component';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-irat-list',
   templateUrl: './irat-list.component.html'
 })
 export class IratListComponent implements OnDestroy {
-  @ViewChild('tabla', {static: true}) tabla: TablaComponent;
+  @ViewChild('tabla', {static: true}) tabla: TablaExComponent;
 
   @Input() enProjekt = true;
 
@@ -37,17 +38,22 @@ export class IratListComponent implements OnDestroy {
   elsokereses = true;
   OsszesRekord = 0;
   jog = false;
+  uj = false;
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   Dto = new Array<IratDto>();
   DtoSelectedIndex = -1;
-
-  egyirat_egymode = 15; // dokumentum
 
   iratservice: IratService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
+              private _cdr: ChangeDetectorRef,
               iratservice: IratService) {
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.IRATMOD]);
 
@@ -78,62 +84,61 @@ export class IratListComponent implements OnDestroy {
     this.onKeresesTovabb();
   }
 
-  onKeresesTovabb() {
-    this.eppFrissit = true;
-    this.iratservice.Select(this.ip)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+  async onKeresesTovabb() {
+    this.spinner = true;
+    try {
+      const res = await this.iratservice.Select(this.ip);
+      if (res.Error != null) {
+        throw res.Error;
+      }
 
-        if (this.elsokereses) {
-          this.Dto = res.Result;
-          this.elsokereses = false;
-        } else {
-          const buf = [...this.Dto];
-          res.Result.forEach(element => {
-            buf.push(element);
-          });
-          this.Dto = buf;
-        }
-        this.OsszesRekord = res.OsszesRekord;
+      if (this.elsokereses) {
+        this.Dto = res.Result;
+        this.elsokereses = false;
+      } else {
+        const buf = [...this.Dto];
+        res.Result.forEach(element => {
+          buf.push(element);
+        });
+        this.Dto = buf;
+      }
+      this.OsszesRekord = res.OsszesRekord;
 
-        this.ip.rekordtol += this.ip.lapmeret;
-        this.eppFrissit = false;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+      this.ip.rekordtol += this.ip.lapmeret;
+      this.spinner = false;
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
   onId(i: number) {
-    if (i !== this.DtoSelectedIndex) {
-      this.egyirat_egymode = 15;
-    } else {
-      this.egyirat_egymode = 0;
-    }
-
     this.DtoSelectedIndex = i;
+
+    this.uj = false;
+    this.tabla.egytetelstart();
   }
 
   doUjtetel() {
+    this.uj = true;
     this.tabla.ujtetelstart();
   }
+
   onUjtetelkesz(dto: IratDto) {
-    if (dto !== null) {
+    if (dto !== undefined) {
       this.Dto.unshift(dto);
     }
     this.tabla.ujtetelstop();
   }
-  onSzerkesztesutan(dto: IratDto) {
-    propCopy(dto, this.Dto[this.DtoSelectedIndex]);
-  }
+
   onTorlesutan() {
     this.Dto.splice(this.DtoSelectedIndex, 1);
     this.DtoSelectedIndex = -1;
-
     this.tabla.clearselections();
+  }
+
+  onSzerkesztesutan(dto: IratDto) {
+    propCopy(dto, this.Dto[this.DtoSelectedIndex]);
   }
 
   ngOnDestroy() {

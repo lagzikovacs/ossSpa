@@ -15,6 +15,13 @@ import {ReszletekComponent} from '../../../../common/reszletek/reszletek.compone
 import {TetelTorlesComponent} from '../../../../common/tetel-torles/tetel-torles.component';
 import {propCopy} from '../../../../common/propCopy';
 import {ProjektkapcsolatListComponent} from '../../../../projektkapcsolat/projektkapcsolat-list/projektkapcsolat-list.component';
+import {ProjektSzerkesztesComponent} from '../projekt-szerkesztes/projekt-szerkesztes.component';
+import {HibabejelentesListComponent} from '../../../06 Hibabejelentes/hibabejelentes-list/hibabejelentes-list.component';
+import {FelmeresListComponent} from '../../../05 Felmeres/felmeres-list/felmeres-list.component';
+import {ProjektJegyzetListComponent} from '../../projektjegyzet/projekt-jegyzet-list/projekt-jegyzet-list.component';
+import {ProjektStatuszComponent} from '../projekt-statusz/projekt-statusz.component';
+import {ProjektMuszakiallapotComponent} from '../projekt-muszakiallapot/projekt-muszakiallapot.component';
+import {ProjektIratmintaComponent} from '../projekt-iratminta/projekt-iratminta.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -76,6 +83,12 @@ export class ProjektEgyComponent extends OnDestroyMixin implements AfterViewInit
 
     switch (i) {
       case EgyMode.Uj: // -1
+        const ujC = this.vcr.createComponent(ProjektSzerkesztesComponent);
+
+        ujC.instance.uj = true;
+        ujC.instance.eventSzerkeszteskesz.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+          this.doModositaskesz(dto);
+        });
         break;
       case EgyMode.Reszletek: // 1
         const reszletekC = this.vcr.createComponent(ReszletekComponent);
@@ -93,44 +106,67 @@ export class ProjektEgyComponent extends OnDestroyMixin implements AfterViewInit
         });
         break;
       case EgyMode.Modositas: // 3
-        // <app-projekt-szerkesztes [uj]="false"
-        //   [DtoOriginal]="Dto[DtoSelectedIndex]"
-        // (eventSzerkeszteskesz)="onModositaskesz($event)">
-        //   </app-projekt-szerkesztes>
+        const C = this.vcr.createComponent(ProjektSzerkesztesComponent);
+
+        C.instance.uj = false;
+        C.instance.DtoOriginal = this.Dto;
+        C.instance.eventSzerkeszteskesz.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+          this.doModositaskesz(dto);
+        });
         break;
       case EgyMode.Statusz: // 19
-      //   <div [@rowanimation]><app-projekt-statusz [DtoOriginal]="Dto[DtoSelectedIndex]"
-      // (eventOk)="onSegedOk($event)"
-      // (eventCancel)="onSegedCancel()">
-      //   </app-projekt-statusz></div>
+        const projektstatuszC = this.vcr.createComponent(ProjektStatuszComponent);
+
+        projektstatuszC.instance.DtoOriginal = this.Dto;
+        projektstatuszC.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+          this.doSegedOk(dto);
+        });
+        projektstatuszC.instance.eventCancel.pipe(untilComponentDestroyed(this)).subscribe(() => {
+          this.doSegedCancel();
+        });
         break;
       case EgyMode.Muszakiallapot: // 20
-        // <app-projekt-muszakiallapot [DtoOriginal]="Dto[DtoSelectedIndex]"
-        // (eventOk)="onSegedOk($event)"
-        // (eventCancel)="onSegedCancel()">
-        //   </app-projekt-muszakiallapot>
+        const projektmuszakiallapotC = this.vcr.createComponent(ProjektMuszakiallapotComponent);
+
+        projektmuszakiallapotC.instance.DtoOriginal = this.Dto;
+        projektmuszakiallapotC.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+          this.doSegedOk(dto);
+        });
+        projektmuszakiallapotC.instance.eventCancel.pipe(untilComponentDestroyed(this)).subscribe(() => {
+          this.doSegedCancel();
+        });
         break;
       case EgyMode.Iratminta: // 23
-        // <app-projekt-iratminta [Projektkod]="Dto[DtoSelectedIndex].Projektkod"
-        // (eventMunkalaputan)="onMunkalaputan()">
-        //   </app-projekt-iratminta>
+        const projektiratmintaC = this.vcr.createComponent(ProjektIratmintaComponent);
+
+        projektiratmintaC.instance.Projektkod = this.Dto.Projektkod;
+        projektiratmintaC.instance.eventMunkalaputan.pipe(untilComponentDestroyed(this)).subscribe(() => {
+          this.doMunkalaputan();
+        });
         break;
       case EgyMode.Bizonylatesirat: // 24
         const projektkapcsolatlistC = this.vcr.createComponent(ProjektkapcsolatListComponent);
+
         projektkapcsolatlistC.instance.Projektkod = this.Dto.Projektkod;
         projektkapcsolatlistC.instance.Ugyfelkod = this.Dto.Ugyfelkod;
         break;
       case EgyMode.Jegyzet: // 26
-        // <app-projekt-jegyzet-list [Projektkod]="Dto[DtoSelectedIndex].Projektkod">
-        //   </app-projekt-jegyzet-list>
+        const projektjegyzetC = this.vcr.createComponent(ProjektJegyzetListComponent);
+
+        projektjegyzetC.instance.Projektkod = this.Dto.Projektkod;
         break;
       case EgyMode.FelmeresProjekthez: // 43
-        // <app-felmeres-list [ProjektBol]="true" [ProjektDto]="Dto[DtoSelectedIndex]" [statusz]="0">
-        //   </app-felmeres-list>
+        const felmereslistC = this.vcr.createComponent(FelmeresListComponent);
+
+        felmereslistC.instance.ProjektBol = true;
+        felmereslistC.instance.ProjektDto = this.Dto;
+        felmereslistC.instance.statusz = 0;
         break;
       case EgyMode.HibabejelentesProjekthez: // 44
-        // <app-hibabejelentes-list [ProjektBol]="true" [ProjektDto]="Dto[DtoSelectedIndex]">
-        //   </app-hibabejelentes-list>
+        const hibabejelenteslistC = this.vcr.createComponent(HibabejelentesListComponent);
+
+        hibabejelenteslistC.instance.ProjektBol = true;
+        hibabejelenteslistC.instance.ProjektDto = this.Dto;
         break;
     }
   }
@@ -167,6 +203,54 @@ export class ProjektEgyComponent extends OnDestroyMixin implements AfterViewInit
 
       this.eventModositas.emit(dto);
     }
+    this.doNav(0);
+  }
+
+  async doMunkalaputan() {
+    this.spinner = true;
+    try {
+      const res = await this.projektservice.Get(this.Dto.Projektkod);
+      if (res.Error !== null) {
+        throw res.Error;
+      }
+
+      propCopy(res.Result[0], this.Dto);
+
+      this.spinner = false;
+      this.eventModositas.emit(this.Dto);
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
+  }
+
+  async doSegedOk(dto: ProjektDto) {
+    this.spinner = true;
+    try {
+      const res = await this.projektservice.Update(dto);
+      if (res.Error !== null) {
+        throw res.Error;
+      }
+
+      const res1 = await this.projektservice.Get(res.Result);
+      if (res1.Error !== null) {
+        throw res1.Error;
+      }
+
+      propCopy(res1.Result[0], this.Dto);
+
+      this.spinner = false;
+      this.doNav(0);
+
+      this.eventModositas.emit(this.Dto);
+
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
+  }
+
+  doSegedCancel() {
     this.doNav(0);
   }
 

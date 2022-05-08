@@ -147,50 +147,6 @@ export class ProjektListComponent implements OnDestroy {
     propCopy(dto, this.Dto[this.DtoSelectedIndex]);
   }
 
-
-
-
-
-
-  // onMunkalaputan() {
-  //   // TODO a munkalap írja a projektet, újra kell olvasni
-  // }
-  //
-  // onSegedOk(dto: ProjektDto) {
-  //   this.eppFrissit = true;
-  //   this.projektservice.Update(dto)
-  //     .then(res => {
-  //       if (res.Error !== null) {
-  //         throw res.Error;
-  //       }
-  //
-  //       return this.projektservice.Get(res.Result);
-  //     })
-  //     .then(res1 => {
-  //       if (res1.Error !== null) {
-  //         throw res1.Error;
-  //       }
-  //
-  //       propCopy(res1.Result[0], this.Dto[this.DtoSelectedIndex]);
-  //
-  //       this.eppFrissit = false;
-  //       this.egymode = 0;
-  //     })
-  //     .catch(err => {
-  //       this.eppFrissit = false;
-  //       this._errorservice.Error = err;
-  //     });
-  // }
-  // onSegedCancel() {
-  //   this.egymode = 0;
-  // }
-
-
-
-  torlesutan() {
-    this.tabla.clearselections();
-  }
-
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;

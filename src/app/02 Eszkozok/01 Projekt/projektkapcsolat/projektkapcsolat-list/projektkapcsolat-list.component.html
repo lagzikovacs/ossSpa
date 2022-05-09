@@ -1,0 +1,36 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>{{projektkapcsolatservice.cim}}</h5>
+
+  <div class="tabla-toolbar">
+    <button (click)="onKereses()" class="toolbutton">
+      <i class="fa fa-search" aria-hidden="true"></i>
+    </button>
+    <button [disabled]="!bizonylatjog" (click)="doUjbizonylat()" class="toolbutton">
+      <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Bizonylat
+    </button>
+    <button [disabled]="!iratjog" (click)="doUjirat()" class="toolbutton">
+      <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Irat
+    </button>
+    <button [disabled]="!ajanlatjog" (click)="doUjajanlat()" class="toolbutton">
+      <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Ajánlat
+    </button>
+    <button (click)="doVagolaprol()" class="toolbutton">
+      <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Vágólapról
+    </button>
+  </div>
+
+  <app-projektkapcsolat-tabla #tabla
+                              [items]="Dto"
+                              (forid)="onId($event)"
+                              [egyKapcsolat]="egykapcsolat">
+  </app-projektkapcsolat-tabla>
+
+  <ng-template #egykapcsolat>
+    <app-projektkapcsolat-egy [egymode]="egymode"
+                              [projektkapcsolatDto]="Dto[DtoSelectedIndex]"
+                              (eventUj)="onUjutan($event)"
+                              (eventTorles)="onTorlesutan()"
+                              (eventModositas)="onModositasutan($event)">
+    </app-projektkapcsolat-egy>
+  </ng-template>
+</div>

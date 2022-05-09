@@ -29,7 +29,7 @@ import {ProjektToolbarComponent} from './02 Eszkozok/01 Projekt/projekt/projektt
 import {ProjektService} from './02 Eszkozok/01 Projekt/projekt/projekt.service';
 import { ProjektMuszakiallapotComponent } from './02 Eszkozok/01 Projekt/projekt/projekt-muszakiallapot/projekt-muszakiallapot.component';
 import { ProjektIratmintaComponent } from './02 Eszkozok/01 Projekt/projekt/projekt-iratminta/projekt-iratminta.component';
-import { ProjektkapcsolatListComponent } from './projektkapcsolat/projektkapcsolat-list/projektkapcsolat-list.component';
+import { ProjektkapcsolatListComponent } from './02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat-list/projektkapcsolat-list.component';
 import { ProjektJegyzetListComponent } from './02 Eszkozok/01 Projekt/projektjegyzet/projekt-jegyzet-list/projekt-jegyzet-list.component';
 import { IratListComponent } from './02 Eszkozok/02 Irat/irat/irat-list/irat-list.component';
 import { IratEgyComponent } from './02 Eszkozok/02 Irat/irat/irat-egy/irat-egy.component';
@@ -157,7 +157,7 @@ import {StartupService} from './05 Segedeszkozok/06 Szerepkorvalasztas/startup.s
 import {ErrorService} from './common/errorbox/error.service';
 import { ErrorboxComponent } from './common/errorbox/errorbox.component';
 import { UgyfelterProjektTablaComponent } from './ext/ugyfelter/ugyfelter-projekt-tabla/ugyfelter-projekt-tabla.component';
-import { ProjektkapcsolatTablaComponent } from './projektkapcsolat/projektkapcsolat-tabla/projektkapcsolat-tabla.component';
+import { ProjektkapcsolatTablaComponent } from './02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat-tabla/projektkapcsolat-tabla.component';
 import { BizonylatkapcsolatTablaComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-tabla/bizonylatkapcsolat-tabla.component';
 import {BizonylattetelSzerkesztesComponent} from './03 Bizonylatok/bizonylattetel/bizonylattetel-szerkesztes/bizonylattetel-szerkesztes.component';
 import { AjanlatTablaComponent } from './02 Eszkozok/01 Projekt/ajanlat/ajanlat-tabla/ajanlat-tabla.component';
@@ -233,6 +233,7 @@ import {ProjektJegyzetEgyComponent} from "./02 Eszkozok/01 Projekt/projektjegyze
 import {ProjektEgyToolbarComponent} from "./02 Eszkozok/01 Projekt/projekt/projekt-egy-toolbar/projekt-egy-toolbar.component";
 import {ProjektEgyComponent} from "./02 Eszkozok/01 Projekt/projekt/projekt-egy/projekt-egy.component";
 import {IratEgyToolbarComponent} from "./02 Eszkozok/02 Irat/irat/irat-egy-toolbar/irat-egy-toolbar.component";
+import {ProjektkapcsolatEgyComponent} from "./02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat-egy/projektkapcsolat-egy.component";
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -492,6 +493,7 @@ if (environment.production) {
     ProjektEgyToolbarComponent,
     ProjektEgyComponent,
     IratEgyToolbarComponent,
+    ProjektkapcsolatEgyComponent,
   ],
   imports: [
     BrowserModule,

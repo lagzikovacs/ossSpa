@@ -14,7 +14,7 @@ import {EgyMode} from '../../../../common/enums/egymode';
 import {ReszletekComponent} from '../../../../common/reszletek/reszletek.component';
 import {TetelTorlesComponent} from '../../../../common/tetel-torles/tetel-torles.component';
 import {propCopy} from '../../../../common/propCopy';
-import {ProjektkapcsolatListComponent} from '../../../../projektkapcsolat/projektkapcsolat-list/projektkapcsolat-list.component';
+import {ProjektkapcsolatListComponent} from '../../projektkapcsolat/projektkapcsolat-list/projektkapcsolat-list.component';
 import {ProjektSzerkesztesComponent} from '../projekt-szerkesztes/projekt-szerkesztes.component';
 import {HibabejelentesListComponent} from '../../../06 Hibabejelentes/hibabejelentes-list/hibabejelentes-list.component';
 import {FelmeresListComponent} from '../../../05 Felmeres/felmeres-list/felmeres-list.component';

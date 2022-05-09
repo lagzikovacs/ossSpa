@@ -1,0 +1,41 @@
+<table>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Kapcsolat</th>
+    <th>Tipus</th>
+    <th>Azonosító</th>
+    <th>Keletkezett</th>
+    <th>Irány</th>
+    <th>Tárgy</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="ujOk && egyKapcsolat !== undefined" class="active">
+      <td colspan="100">
+        <ng-template *ngTemplateOutlet="egyKapcsolat"></ng-template>
+      </td>
+    </tr>
+
+    <ng-container *ngFor="let item of items; let i = index">
+      <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
+        <td class="tabla-kontrol-id"
+            (click)="clickforid(i)">{{item.Projektkapcsolatkod}}
+        </td>
+
+        <td>{{item.Kapcsolat}}</td>
+        <td>{{item.Tipus}}</td>
+        <td>{{item.Azonosito}}</td>
+        <td>{{item.Keletkezett | datehun}}</td>
+        <td>{{item.Irany}}</td>
+        <td>{{item.Targy}}</td>
+      </tr>
+
+      <tr *ngIf="egyOk && i === clickedidindex && egyKapcsolat !== undefined" [class.active]="i === clickedidindex">
+        <td colspan="100">
+          <ng-template *ngTemplateOutlet="egyKapcsolat"></ng-template>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>

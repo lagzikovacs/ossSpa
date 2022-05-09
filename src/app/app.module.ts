@@ -105,7 +105,7 @@ import {PenztarSzerkesztesComponent} from './02 Eszkozok/03 Penztar/penztar/penz
 import {PenztartetelService} from './02 Eszkozok/03 Penztar/penztartetel/penztartetel.service';
 import {BizonylatService} from './03 Bizonylatok/bizonylat/bizonylat.service';
 import {RiportService} from './04 Riportok/riport.service';
-import { ProjektkapcsolatLevalasztasComponent } from './projektkapcsolat/projektkapcsolat-levalasztas/projektkapcsolat-levalasztas.component';
+import { ProjektkapcsolatLevalasztasComponent } from './02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat-levalasztas/projektkapcsolat-levalasztas.component';
 import { ProjektExportComponent } from './02 Eszkozok/01 Projekt/projekt/projekt-export/projekt-export.component';
 import { AjanlatTetelComponent } from './02 Eszkozok/01 Projekt/ajanlat/ajanlat-tetel/ajanlat-tetel';
 import { BizonylatListComponent } from './bizonylat/bizonylat-list/bizonylat-list.component';
@@ -132,7 +132,7 @@ import { BoolHunPipe } from './pipes/boolhun.pipe';
 import { VagolapComponent } from './05 Segedeszkozok/08 Vagolap/vagolap/vagolap.component';
 import {VagolapService} from './05 Segedeszkozok/08 Vagolap/vagolap.service';
 import { BizonylatkapcsolatVagolaprolComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-vagolaprol/bizonylatkapcsolat-vagolaprol.component';
-import { ProjektkapcsolatVagolaprolComponent } from './projektkapcsolat/projektkapcsolat-vagolaprol/projektkapcsolat-vagolaprol.component';
+import { ProjektkapcsolatVagolaprolComponent } from './02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat-vagolaprol/projektkapcsolat-vagolaprol.component';
 import {AjanlatService} from './02 Eszkozok/01 Projekt/ajanlat/ajanlat.service';
 import {IratmintaService} from './02 Eszkozok/01 Projekt/projekt/projekt-iratminta/iratminta.service';
 import { EsemenynaploComponent } from './05 Segedeszkozok/03 Felhasznalo/esemenynaplo/esemenynaplo.component';

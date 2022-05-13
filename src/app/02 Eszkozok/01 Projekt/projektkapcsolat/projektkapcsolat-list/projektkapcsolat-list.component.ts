@@ -145,6 +145,13 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
     }
   }
 
+  onLevalasztasutan() {
+    this.Dto.splice(this.DtoSelectedIndex, 1);
+    this.DtoSelectedIndex = -1;
+
+    this.tabla.clearselections();
+  }
+
   ngOnDestroy() {
     Object.keys(this).map(k => {
       (this[k]) = null;
@@ -165,14 +172,5 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
     // this.tabla.nemOk();
     this.DtoSelectedIndex = i;
   }
-  onLevalasztasutan(ok: boolean) {
-    if (ok) {
-      this.tabla.clearselections();
 
-      this.Dto.splice(this.DtoSelectedIndex, 1);
-      this.DtoSelectedIndex = -1;
-    } else {
-      // this.tabla.nemOk();
-    }
-  }
 }

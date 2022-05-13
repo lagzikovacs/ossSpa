@@ -71,4 +71,6 @@ export enum EgyMode {
   ZarasNyitas = 50,
 
   ProjekthezRendeles = 51,
+
+  Levalasztas = 52,
 }

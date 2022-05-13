@@ -10,6 +10,7 @@ import {LogonService} from '../../../../05 Segedeszkozok/05 Bejelentkezes/logon.
 export class IratEgyToolbarComponent implements OnDestroy {
   @Input() enTorles = true;
   @Input() enProjekt = true;
+  @Input() enLevalasztas = false;
   @Output() eventNav: EventEmitter<number> = new EventEmitter<number>();
   jog = false;
 

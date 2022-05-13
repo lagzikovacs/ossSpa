@@ -22,4 +22,7 @@
     <i class="fa fa-angle-right" style="margin-right: 3px" aria-hidden="true"></i>
     Vágólapra
   </button>
+  <button *ngIf="enLevalasztas" [disabled]="!jog" (click)="doNav(52)" class="toolbutton">
+    Leválasztás
+  </button>
 </div>

@@ -18,6 +18,8 @@ import {JogKod} from '../../../../common/enums/jogkod';
 import {IratProjektjeComponent} from "../irat-projektje/irat-projektje.component";
 import {VagolapIrathozComponent} from "../../../../05 Segedeszkozok/08 Vagolap/vagolap-irathoz/vagolap-irathoz.component";
 import {FotozasLinkComponent} from "../../fotozas-link/fotozas-link.component";
+import {ProjektkapcsolatLevalasztasComponent} from "../../../01 Projekt/projektkapcsolat/projektkapcsolat-levalasztas/projektkapcsolat-levalasztas.component";
+import {ProjektKapcsolatDto} from "../../../01 Projekt/projektkapcsolat/projektkapcsolatdto";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,7 +33,10 @@ export class IratEgyComponent extends OnDestroyMixin implements AfterViewInit, O
   @Input() enTorles = true;
   @Input() enProjekt = true;
   @Input() enUgyfel = true;
+  @Input() enLevalasztas = false;
   @Input() defaultNav = 15;
+
+  @Input() projektkapcsolatDto: ProjektKapcsolatDto = new ProjektKapcsolatDto();
 
   Dto = new IratDto();
   @Input() set dto(value: IratDto) {
@@ -41,6 +46,7 @@ export class IratEgyComponent extends OnDestroyMixin implements AfterViewInit, O
   @Output() eventTorles: EventEmitter<void> = new EventEmitter<void>();
   @Output() eventModositas: EventEmitter<IratDto> = new EventEmitter<IratDto>();
 
+  @Output() eventLevalasztasutan: EventEmitter<void> = new EventEmitter<void>();
 
   eppFrissit = false;
   set spinner(value: boolean) {
@@ -134,6 +140,17 @@ export class IratEgyComponent extends OnDestroyMixin implements AfterViewInit, O
       case EgyMode.VagolapIrathoz: // 41
         const vagolapirathozC = this.vcr.createComponent(VagolapIrathozComponent);
         vagolapirathozC.instance.item = this.Dto;
+        break;
+      case EgyMode.Levalasztas: // 52
+        const pklevalasztasC = this.vcr.createComponent(ProjektkapcsolatLevalasztasComponent);
+        pklevalasztasC.instance.Dto = this.projektkapcsolatDto;
+        pklevalasztasC.instance.eventLevalasztasutan.pipe(untilComponentDestroyed(this)).subscribe(ok => {
+          this.doNav(0);
+          if (ok) {
+            this.eventLevalasztasutan.emit();
+          }
+        });
+        this.docdr();
         break;
     }
   }

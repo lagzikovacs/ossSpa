@@ -33,8 +33,9 @@ export class ProjektkapcsolatEgyComponent extends OnDestroyMixin implements Afte
   @Input() projektkapcsolatDto: ProjektKapcsolatDto = new ProjektKapcsolatDto();
 
   @Output() eventUj: EventEmitter<ProjektKapcsolatDto> = new EventEmitter<ProjektKapcsolatDto>();
-  @Output() eventTorles: EventEmitter<void> = new EventEmitter<void>();
   @Output() eventModositas: EventEmitter<ProjektKapcsolatDto> = new EventEmitter<ProjektKapcsolatDto>();
+
+  @Output() eventLevalasztasutan: EventEmitter<void> = new EventEmitter<void>();
 
   eppFrissit = false;
   set spinner(value: boolean) {
@@ -199,6 +200,8 @@ export class ProjektkapcsolatEgyComponent extends OnDestroyMixin implements Afte
           iratC.instance.enTorles = false;
           iratC.instance.enProjekt = false;
           iratC.instance.enUgyfel = false;
+          iratC.instance.enLevalasztas = true;
+          iratC.instance.projektkapcsolatDto = this.projektkapcsolatDto;
           iratC.instance.eventModositas.pipe(untilComponentDestroyed(this)).subscribe(async dto => {
             if (dto !== undefined) {
               const resP2 = await this._projektkapcsolatservice.Get(this.projektkapcsolatDto.Projektkapcsolatkod);
@@ -209,6 +212,9 @@ export class ProjektkapcsolatEgyComponent extends OnDestroyMixin implements Afte
             } else {
               this.eventModositas.emit(null);
             }
+          });
+          iratC.instance.eventLevalasztasutan.pipe(untilComponentDestroyed(this)).subscribe(() => {
+            this.eventLevalasztasutan.emit();
           });
           this.spinner = false;
 

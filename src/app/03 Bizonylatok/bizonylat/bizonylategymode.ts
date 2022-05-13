@@ -1,4 +1,5 @@
 export enum BizonylatEgyMode {
+  Uj = -1,
   Blank = 0,
   Nyomtatas = 1,
   Reszletek = 2,

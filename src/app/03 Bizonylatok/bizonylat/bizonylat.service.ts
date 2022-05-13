@@ -76,17 +76,6 @@ export class BizonylatService {
     );
   }
 
-  public GetGetComplex(bizonylatkod: number): Promise<EmptyResult> {
-    return this.GetComplex(bizonylatkod)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        return new Promise<EmptyResult>((resolve, reject) => { resolve(new EmptyResult()); });
-      });
-  }
-
   public async Select(bp: BizonylatParameter): Promise<BizonylatResult> {
     const url = this._controller + 'select';
 

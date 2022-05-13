@@ -17,7 +17,7 @@ export class BizonylatErrolComponent implements OnInit, OnDestroy {
   @Input() Bizonylatkod = -1;
   @Output() eventBizonylaterrolUtan = new EventEmitter<boolean>();
 
-  entryindex = 4;
+  entryindex = 3;
   kesz = false;
   ujbizonylatkod = 0;
 

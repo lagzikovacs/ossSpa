@@ -1,0 +1,13 @@
+<div [ngClass]="!uj ? 'alapkeret' : ''" [appSpinner]="eppFrissit">
+  <app-bizonylat-egy-toolbar *ngIf="!uj"
+                             [Dto]="Dto"
+                             [bizonylatTipus]="bizonylatTipus"
+                             [bizonylatLeiro]="bizonylatLeiro"
+                             [enTorles]="enTorles"
+                             [enProjekt]="enProjekt"
+                             [enLevalasztas]="enLevalasztas"
+                             (eventNav)="doNav($event)">
+  </app-bizonylat-egy-toolbar>
+  <ng-template #compcont_bizonylat></ng-template>
+</div>
+

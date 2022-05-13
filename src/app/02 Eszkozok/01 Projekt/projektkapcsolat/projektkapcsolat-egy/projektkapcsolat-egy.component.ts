@@ -10,7 +10,7 @@ import {IratEgyComponent} from '../../../02 Irat/irat/irat-egy/irat-egy.componen
 import {ErrorService} from '../../../../common/errorbox/error.service';
 import {IratService} from '../../../02 Irat/irat/irat.service';
 import {BizonylatService} from '../../../../03 Bizonylatok/bizonylat/bizonylat.service';
-import {BizonylatEgyComponent} from '../../../../bizonylat/bizonylat-egy/bizonylat-egy.component';
+import {BizonylatEgyComponent} from '../../../../03 Bizonylatok/bizonylat/bizonylat-egy/bizonylat-egy.component';
 import {AjanlatComponent} from '../../ajanlat/ajanlat/ajanlat';
 import {ProjektkapcsolatVagolaprolComponent} from '../projektkapcsolat-vagolaprol/projektkapcsolat-vagolaprol.component';
 import {ProjektkapcsolatUjbizonylatComponent} from '../projektkapcsolat-ujbizonylat/projektkapcsolat-ujbizonylat.component';

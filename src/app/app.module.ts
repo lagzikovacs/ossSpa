@@ -109,7 +109,7 @@ import { ProjektkapcsolatLevalasztasComponent } from './02 Eszkozok/01 Projekt/p
 import { ProjektExportComponent } from './02 Eszkozok/01 Projekt/projekt/projekt-export/projekt-export.component';
 import { AjanlatTetelComponent } from './02 Eszkozok/01 Projekt/ajanlat/ajanlat-tetel/ajanlat-tetel';
 import { BizonylatListComponent } from './bizonylat/bizonylat-list/bizonylat-list.component';
-import { BizonylatEgyComponent } from './bizonylat/bizonylat-egy/bizonylat-egy.component';
+import { BizonylatEgyComponent } from './03 Bizonylatok/bizonylat/bizonylat-egy/bizonylat-egy.component';
 import { BizonylattoolbarComponent } from './bizonylat/bizonylattoolbar/bizonylattoolbar.component';
 import { BizonylattablaComponent } from './bizonylat/bizonylattabla/bizonylattabla.component';
 import { BizonylatSzerkesztesComponent } from './bizonylat/bizonylat-szerkesztes/bizonylat-szerkesztes.component';
@@ -234,6 +234,7 @@ import {ProjektEgyToolbarComponent} from "./02 Eszkozok/01 Projekt/projekt/proje
 import {ProjektEgyComponent} from "./02 Eszkozok/01 Projekt/projekt/projekt-egy/projekt-egy.component";
 import {IratEgyToolbarComponent} from "./02 Eszkozok/02 Irat/irat/irat-egy-toolbar/irat-egy-toolbar.component";
 import {ProjektkapcsolatEgyComponent} from "./02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat-egy/projektkapcsolat-egy.component";
+import { BizonylatEgyToolbarComponent } from './03 Bizonylatok/bizonylat/bizonylat-egy-toolbar/bizonylat-egy-toolbar.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -494,6 +495,7 @@ if (environment.production) {
     ProjektEgyComponent,
     IratEgyToolbarComponent,
     ProjektkapcsolatEgyComponent,
+    BizonylatEgyToolbarComponent,
   ],
   imports: [
     BrowserModule,

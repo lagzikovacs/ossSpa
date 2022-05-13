@@ -1,0 +1,35 @@
+<div class="tabla-toolbar">
+  <button (click)="doNav(1)" class="toolbutton">
+    <i class="fa fa-file" aria-hidden="true"></i>
+  </button>
+
+  <button [disabled]="!jog" (click)="doNav(2)" class="toolbutton">
+    <i class="fa fa-minus" aria-hidden="true"></i>
+  </button>
+
+  <button [disabled]="!jog" (click)="doNav(3)" class="toolbutton">
+    <i class="fa fa-edit" aria-hidden="true"></i>
+  </button>
+
+  <button [disabled]="!jog" (click)="doNav(19)" class="toolbutton">
+    Stsz
+  </button>
+  <button [disabled]="!jog" (click)="doNav(20)" class="toolbutton">
+    Műszaki állapot
+  </button>
+  <button (click)="doNav(24)" class="toolbutton">
+    Bizonylat és irat
+  </button>
+  <button (click)="doNav(26)" class="toolbutton">
+    Jegyzet
+  </button>
+  <button (click)="doNav(23)" class="toolbutton">
+    Iratminta
+  </button>
+  <button (click)="doNav(43)" class="toolbutton">
+    Felmérés
+  </button>
+  <button (click)="doNav(44)" class="toolbutton">
+    Hibabejelentés
+  </button>
+</div>

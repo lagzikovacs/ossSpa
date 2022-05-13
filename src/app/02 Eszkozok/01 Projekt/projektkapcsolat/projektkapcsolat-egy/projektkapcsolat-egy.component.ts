@@ -165,17 +165,18 @@ export class ProjektkapcsolatEgyComponent extends OnDestroyMixin implements Afte
           if (resEgyBizonylat.Error != null) {
             throw resEgyBizonylat.Error;
           }
+          const resEgyLeiro = await this._bizonylatservice.BizonylatLeiro(resEgyBizonylat.Result[0].Bizonylattipuskod);
+          if (resEgyLeiro.Error != null) {
+            throw resEgyLeiro.Error;
+          }
           this.spinner = false;
 
           const bizonylatC = this.vcr.createComponent(BizonylatEgyComponent);
-          // TODO paraméterek, események
-          // <!--<app-bizonylat-egy [DtoOriginal]="OriginalBizonylat"-->
-          // <!--[bizonylatTipus]=""-->
-          // <!--[bizonylatLeiro]="bizonylatLeiro"-->
-          // <!--[enTorles]="false"-->
-          // <!--[enProjekt]="false"-->
-          // <!--[(egymode)]="egybizonylat_egymode">-->
-          // <!--</app-bizonylat-egy>-->
+          bizonylatC.instance.DtoOriginal = resEgyBizonylat.Result[0];
+          bizonylatC.instance.bizonylatTipus = resEgyBizonylat.Result[0].Bizonylattipuskod;
+          bizonylatC.instance.bizonylatLeiro = resEgyLeiro.Result;
+          bizonylatC.instance.enTorles = false;
+          bizonylatC.instance.enProjekt = false;
 
           this._cdr.markForCheck();
           this._cdr.detectChanges();

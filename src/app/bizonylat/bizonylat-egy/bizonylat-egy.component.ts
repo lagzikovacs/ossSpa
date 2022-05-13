@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {BizonylatService} from '../../03 Bizonylatok/bizonylat/bizonylat.service';
 import {BizonylatEgyMode} from '../../03 Bizonylatok/bizonylat/bizonylategymode';
 import {BizonylatTipus} from '../../03 Bizonylatok/bizonylat/bizonylattipus';
@@ -29,7 +29,7 @@ export class BizonylatEgyComponent implements OnDestroy {
   @Output() eventSzerkesztesutan = new EventEmitter<BizonylatDto>();
   @Output() eventTorlesutan = new EventEmitter<void>();
 
-  private _egymode = 0;
+  private _egymode = 2;
   @Output() egymodeChange = new EventEmitter<number>();
   @Input() get egymode() { return this._egymode; }
   set egymode(value: number) {

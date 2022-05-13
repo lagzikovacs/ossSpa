@@ -48,9 +48,6 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
     this._cdr.detectChanges();
   }
 
-  egybizonylat_egymode = 2; // részletek
-  egyirat_egymode = 15; // dokumentum
-
   bizonylatjog = false;
   iratjog = false;
   ajanlatjog = false;
@@ -142,13 +139,6 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
     this.tabla.ujtetelstop();
   }
 
-  onTorlesutan() {
-    this.tabla.clearselections();
-
-    this.Dto.splice(this.DtoSelectedIndex, 1);
-    this.DtoSelectedIndex = -1;
-  }
-
   onModositasutan(dto: ProjektKapcsolatDto) {
     if (dto !== null) {
       propCopy(dto, this.Dto[this.DtoSelectedIndex]);
@@ -162,76 +152,6 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
   }
 
 
-
-
-
-  // onId(i: number) {
-  //   const OldIndex = this.DtoSelectedIndex;
-  //
-  //   // this.tabla.nemOk();
-  //   this.DtoSelectedIndex = i;
-  //
-  //   if (this.DtoSelectedIndex === -1) {
-  //     return;
-  //   }
-  //
-  //   if (this.Dto[this.DtoSelectedIndex].Bizonylatkod !== null) {
-  //     this.eppFrissit = true;
-  //     this._bizonylatservice.Get(this.Dto[this.DtoSelectedIndex].Bizonylatkod)
-  //       .then(res => {
-  //         if (res.Error != null) {
-  //           throw res.Error;
-  //         }
-  //
-  //         this.OriginalBizonylat = res.Result[0];
-  //         this.bizonylatTipus = this.OriginalBizonylat.Bizonylattipuskod;
-  //         return this._bizonylatservice.BizonylatLeiro(this.bizonylatTipus);
-  //       })
-  //       .then(res1 => {
-  //         if (res1.Error != null) {
-  //           throw res1.Error;
-  //         }
-  //
-  //         this.bizonylatLeiro = res1.Result;
-  //         this.eppFrissit = false;
-  //
-  //         if (i !== OldIndex) {
-  //           this.egybizonylat_egymode = 2;
-  //         } else {
-  //           this.egybizonylat_egymode = 0;
-  //         }
-  //
-  //       })
-  //       .catch(err => {
-  //         this.eppFrissit = false;
-  //         this._errorservice.Error = err;
-  //       });
-  //   }
-  //
-  //   if (this.Dto[this.DtoSelectedIndex].Iratkod !== null) {
-  //     this.eppFrissit = true;
-  //     this._iratservice.Get(this.Dto[this.DtoSelectedIndex].Iratkod)
-  //       .then(res => {
-  //         if (res.Error != null) {
-  //           throw res.Error;
-  //         }
-  //
-  //         this.OriginalIrat = res.Result[0];
-  //         this.eppFrissit = false;
-  //
-  //         if (i !== OldIndex) {
-  //           this.egyirat_egymode = 15;
-  //         } else {
-  //           this.egyirat_egymode = 0;
-  //         }
-  //
-  //       })
-  //       .catch(err => {
-  //         this.eppFrissit = false;
-  //         this._errorservice.Error = err;
-  //       });
-  //   }
-  // }
 
 
 

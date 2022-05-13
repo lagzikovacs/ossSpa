@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit,
   Output
 } from '@angular/core';
@@ -17,7 +18,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   selector: 'app-projektkapcsolat-ujbizonylat',
   templateUrl: './projektkapcsolat-ujbizonylat.component.html'
 })
-export class ProjektkapcsolatUjbizonylatComponent implements OnInit, OnDestroy {
+export class ProjektkapcsolatUjbizonylatComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() Projektkod = -1;
   @Input() Ugyfelkod = -1;
   @Output() eventUjbizonylatutan = new EventEmitter<ProjektKapcsolatDto>();
@@ -28,8 +29,7 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnInit, OnDestroy {
   eppFrissit = false;
   set spinner(value: boolean) {
     this.eppFrissit = value;
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
   projektkapcsolatservice: ProjektkapcsolatService;
@@ -44,10 +44,6 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnInit, OnDestroy {
               bizonylatservice: BizonylatService) {
     this.projektkapcsolatservice = projektkapcsolatservice;
     this.bizonylatservice = bizonylatservice;
-
-    this.form = this._fb.group({
-      'bizonylattipus': [0, [Validators.required]],
-    });
   }
 
   ngOnInit() {
@@ -55,7 +51,19 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnInit, OnDestroy {
       this.bizonylatservice.tipusok[i][2] = !this._logonservice.Jogaim.includes(this.bizonylatservice.tipusok[i][3]);
     }
 
+    this.form = this._fb.group({
+      'bizonylattipus': [0, [Validators.required]],
+    });
+  }
+
+  ngAfterViewInit() {
     this.updateform();
+    this.docdr();
+  }
+
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   updateform() {

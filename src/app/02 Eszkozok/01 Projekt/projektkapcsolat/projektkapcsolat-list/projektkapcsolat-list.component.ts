@@ -19,6 +19,7 @@ import {BizonylatTipusLeiro} from '../../../../03 Bizonylatok/bizonylat/bizonyla
 import {BizonylatTipus} from '../../../../03 Bizonylatok/bizonylat/bizonylattipus';
 import {ProjektDto} from '../../projekt/projektdto';
 import {ProjektkapcsolatEgyMode} from '../projektkapcsolategymode';
+import {propCopy} from "../../../../common/propCopy";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -135,7 +136,7 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
   }
 
   onUjutan(dto: ProjektKapcsolatDto) {
-    if (dto !== undefined) {
+    if (dto !== null) {
       this.Dto.unshift(dto);
     }
     this.tabla.ujtetelstop();
@@ -149,7 +150,9 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
   }
 
   onModositasutan(dto: ProjektKapcsolatDto) {
-
+    if (dto !== null) {
+      propCopy(dto, this.Dto[this.DtoSelectedIndex]);
+    }
   }
 
   ngOnDestroy() {
@@ -231,65 +234,6 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
   // }
 
 
-  onUjbizonylatutan(dto: ProjektKapcsolatDto) {
-    if (dto !== null) {
-      this.Dto.unshift(dto);
-      // this.tabla.nemOk();
-    } else {
-      // this.tabla.nemOk();
-    }
-  }
-
-  // az app-irat-szerkesztes komponenssel dolgoznak
-
-  onUjiratutan(dto: IratDto) {
-    if (dto !== null) {
-      this.eppFrissit = true;
-      this.projektkapcsolatservice.AddIratToProjekt(new ProjektKapcsolatParam(
-            this.Projektkod, 0, dto.Iratkod, new BizonylatDto()))
-        .then(res1 => {
-          if (res1.Error != null) {
-            throw res1.Error;
-          }
-
-          return this.projektkapcsolatservice.Get(res1.Result);
-        })
-        .then(res2 => {
-          if (res2.Error != null) {
-            throw res2.Error;
-          }
-
-          this.Dto.unshift(res2.Result[0]);
-          this.eppFrissit = false;
-          // this.tabla.nemOk();
-        })
-        .catch(err => {
-          this.eppFrissit = false;
-          this._errorservice.Error = err;
-        });
-    } else {
-      // this.tabla.nemOk();
-    }
-  }
-  onIratSzerkesztesutan(dto: IratDto) {
-    if (dto !== null) {
-      this.Dto[this.DtoSelectedIndex].Keletkezett = dto.Keletkezett;
-      this.Dto[this.DtoSelectedIndex].Irany = dto.Irany;
-      this.Dto[this.DtoSelectedIndex].Targy = dto.Targy;
-      this.Dto[this.DtoSelectedIndex].Tipus = dto.Irattipus;
-    }
-  }
-
-
-  onAjanlatutan(dto: ProjektKapcsolatDto) {
-    if (dto !== null) {
-      this.Dto.unshift(dto);
-      // this.tabla.nemOk();
-    } else {
-      // this.tabla.nemOk();
-    }
-  }
-
 
   // TODO app-bizonylat-egy eseménye, vszeg később nem kell
   torlesutan() {
@@ -311,14 +255,4 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
       // this.tabla.nemOk();
     }
   }
-
-
-  onVagolaprolutan(dto: ProjektKapcsolatDto) {
-    this.Dto.unshift(dto);
-  }
-  onVagolaprolutanvege() {
-    // this.tabla.nemOk();
-  }
-
-
 }

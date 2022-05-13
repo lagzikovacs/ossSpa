@@ -35,7 +35,6 @@ export class IratEgyComponent extends OnDestroyMixin implements AfterViewInit, O
 
   Dto = new IratDto();
   @Input() set dto(value: IratDto) {
-    console.log(value);
     this.Dto = deepCopy(value);
   }
   @Output() eventUj: EventEmitter<IratDto> = new EventEmitter<IratDto>();

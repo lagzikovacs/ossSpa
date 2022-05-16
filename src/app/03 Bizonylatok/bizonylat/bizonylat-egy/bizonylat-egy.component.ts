@@ -19,6 +19,9 @@ import {OnDestroyMixin, untilComponentDestroyed} from "@w11k/ngx-componentdestro
 import {BizonylatErrolComponent} from "../bizonylat-errol/bizonylat-errol.component";
 import {BizonylatKibocsatasComponent} from "../bizonylat-kibocsatas/bizonylat-kibocsatas.component";
 import {BizonylatKifizetesrendbenComponent} from "../bizonylat-kifizetesrendben/bizonylat-kifizetesrendben.component";
+import {BizonylatKiszallitvaComponent} from "../bizonylat-kiszallitva/bizonylat-kiszallitva.component";
+import {BizonylatStornoComponent} from "../bizonylat-storno/bizonylat-storno.component";
+import {BizonylatNyomtatasComponent} from "../../bizonylatnyomtatas/bizonylat-nyomtatas/bizonylat-nyomtatas.component";
 
 @Component({
   selector: 'app-bizonylat-egy',
@@ -91,6 +94,11 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
     this.vcr.clear();
 
     switch (i) {
+      case BizonylatEgyMode.Nyomtatas: // 1
+        const nyomtatasC = this.vcr.createComponent(BizonylatNyomtatasComponent);
+        nyomtatasC.instance.Bizonylatkod = this.Dto.Bizonylatkod;
+      break;
+
       case BizonylatEgyMode.Errol: // 7
         const errolC = this.vcr.createComponent(BizonylatErrolComponent);
         errolC.instance.Bizonylatkod = this.Dto.Bizonylatkod;
@@ -120,6 +128,21 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
           }
         });
       break;
+      case BizonylatEgyMode.Storno: // 9
+        const stornoC = this.vcr.createComponent(BizonylatStornoComponent);
+        stornoC.instance.DtoOriginal = this.Dto;
+        stornoC.instance.bizonylatLeiro = this.bizonylatLeiro;
+        stornoC.instance.eventStornozando.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+          propCopy(dto, this.Dto);
+          this.eventSzerkesztesutan.emit(dto);
+        });
+        stornoC.instance.eventStornozo.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+          // this.bizonylatservice.Dto.unshift(dto);
+        });
+        stornoC.instance.eventStornoMegsem.pipe(untilComponentDestroyed(this)).subscribe(() => {
+          this.doNav(0);
+        });
+      break;
 
       case BizonylatEgyMode.Kifizetesrendben: // 11
         const kifizetesrendbenC = this.vcr.createComponent(BizonylatKifizetesrendbenComponent);
@@ -131,20 +154,14 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
         });
       break;
       case BizonylatEgyMode.Kiszallitva: // 12
-        // <ng-container *ngIf="egymode === 12">
-        //   <div [@rowanimation]>
-        // <app-bizonylat-kiszallitva [DtoOriginal]="Dto"
-        //   [bizonylatLeiro]="bizonylatLeiro"
-        // (eventKiszallitvaUtan)="onKiszallitvaUtan($event)">
-        // </app-bizonylat-kiszallitva>
-        // </div>
-        // </ng-container>
+        const kiszallitvaC = this.vcr.createComponent(BizonylatKiszallitvaComponent);
+        kiszallitvaC.instance.DtoOriginal = this.Dto;
+        kiszallitvaC.instance.bizonylatLeiro = this.bizonylatLeiro;
+        kiszallitvaC.instance.eventKiszallitvaUtan.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+          propCopy(dto, this.Dto);
+          this.eventSzerkesztesutan.emit(dto);
+        });
       break;
-    }
-
-    onKiszallitvaUtan(dto: BizonylatDto) {
-      propCopy(dto, this.Dto);
-      this.eventSzerkesztesutan.emit(dto);
     }
 
     // Blank = 0,
@@ -164,12 +181,7 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
     //   OSNxml = 14,
     //   Projekt = 15
 
-    // <ng-container *ngIf="egymode === 1">
-    //   <div [@rowanimation]>
-    // <app-bizonylat-nyomtatas [Bizonylatkod]="Dto.Bizonylatkod">
-    // </app-bizonylat-nyomtatas>
-    // </div>
-    // </ng-container>
+
     // <ng-container *ngIf="egymode === 2">
     //   <div [@rowanimation]>
     // <app-bizonylat-reszletek [Bizonylatkod]="Dto.Bizonylatkod"
@@ -177,12 +189,14 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
     // </app-bizonylat-reszletek>
     // </div>
     // </ng-container>
+
     // <ng-container *ngIf="egymode === 3">
     //   <div [@rowanimation]>
     // <app-kifizetes-list [Bizonylat]="Dto">
     // </app-kifizetes-list>
     // </div>
     // </ng-container>
+
     // <ng-container *ngIf="egymode === 4">
     //   <div [@rowanimation]>
     // <app-bizonylatkapcsolat-list [Bizonylatkod]="Dto.Bizonylatkod"
@@ -190,6 +204,7 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
     // </app-bizonylatkapcsolat-list>
     // </div>
     // </ng-container>
+
     // <ng-container *ngIf="egymode === 5">
     //   <div [@rowanimation]>
     // <app-tetel-torles [cim]="bizonylatLeiro.BizonylatNev"
@@ -197,6 +212,7 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
     // </app-tetel-torles>
     // </div>
     // </ng-container>
+
     // <ng-container *ngIf="egymode === 6">
     //   <div [@rowanimation]>
     // <app-bizonylat-szerkesztes [uj]="false"
@@ -207,20 +223,7 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
     // </app-bizonylat-szerkesztes>
     // </div>
     // </ng-container>
-    //
 
-    //
-    // <ng-container *ngIf="egymode === 9">
-    //   <div [@rowanimation]>
-    // <app-bizonylat-storno [DtoOriginal]="Dto"
-    //   [bizonylatLeiro]="bizonylatLeiro"
-    // (eventStornozando)="onStornozando($event)"
-    // (eventStornozo)="onStornozo($event)"
-    // (eventStornoMegsem)="onStornoMegsem()">
-    // </app-bizonylat-storno>
-    // </div>
-    // </ng-container>
-    //
     // <ng-container *ngIf="egymode === 10">
     //   <div [@rowanimation]>
     // <app-bizonylat-penztar [DtoOriginal]="Dto"
@@ -231,14 +234,12 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
     // </div>
     // </ng-container>
 
-
-    //
     // <ng-container *ngIf="egymode === 15">
     //   <div [@rowanimation]>
     // <app-bizonylat-projektje [item]="Dto"></app-bizonylat-projektje>
     // </div>
     // </ng-container>
-    //
+
     // <ng-container *ngIf="egymode === 16">
     //   <div [@rowanimation]>
     // <app-bizonylat-fuvarszamla  [dtoAnyagszamla]="Dto"
@@ -246,7 +247,7 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
     // </app-bizonylat-fuvarszamla>
     // </div>
     // </ng-container>
-    //
+
     // <ng-container *ngIf="egymode === 17">
     //   <div [@rowanimation]>
     // <app-vagolap-bizonylathoz [item]="Dto" [tipus]="bizonylatLeiro.BizonylatNev">
@@ -281,18 +282,7 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
 
 
 
-  onStornozando(dto: BizonylatDto) {
-    propCopy(dto, this.Dto);
-    this.eventSzerkesztesutan.emit(dto);
-  }
 
-  onStornozo(dto: BizonylatDto) {
-    // this.bizonylatservice.Dto.unshift(dto);
-  }
-
-  onStornoMegsem() {
-    this.doNav(0);
-  }
 
 
 

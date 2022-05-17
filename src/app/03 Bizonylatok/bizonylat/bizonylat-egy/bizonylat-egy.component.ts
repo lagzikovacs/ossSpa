@@ -22,6 +22,9 @@ import {BizonylatKifizetesrendbenComponent} from "../bizonylat-kifizetesrendben/
 import {BizonylatKiszallitvaComponent} from "../bizonylat-kiszallitva/bizonylat-kiszallitva.component";
 import {BizonylatStornoComponent} from "../bizonylat-storno/bizonylat-storno.component";
 import {BizonylatNyomtatasComponent} from "../../bizonylatnyomtatas/bizonylat-nyomtatas/bizonylat-nyomtatas.component";
+import {KifizetesListComponent} from "../../kifizetes/kifizetes-list/kifizetes-list.component";
+import {VagolapBizonylathozComponent} from "../../../05 Segedeszkozok/08 Vagolap/vagolap-bizonylathoz/vagolap-bizonylathoz.component";
+import {BizonylatProjektjeComponent} from "../bizonylat-projektje/bizonylat-projektje.component";
 
 @Component({
   selector: 'app-bizonylat-egy',
@@ -99,6 +102,38 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
         nyomtatasC.instance.Bizonylatkod = this.Dto.Bizonylatkod;
       break;
 
+      case BizonylatEgyMode.Reszletek: // 2
+      // <app-bizonylat-reszletek [Bizonylatkod]="Dto.Bizonylatkod"
+      //   [bizonylatLeiro]="bizonylatLeiro">
+      // </app-bizonylat-reszletek>
+      break;
+
+      case BizonylatEgyMode.Kifizetes: // 3
+        const kifizetesC = this.vcr.createComponent(KifizetesListComponent);
+        kifizetesC.instance.Bizonylat = this.Dto;
+      break;
+
+      case BizonylatEgyMode.Irat: // 4
+      // <app-bizonylatkapcsolat-list [Bizonylatkod]="Dto.Bizonylatkod"
+      //   [Ugyfelkod]="Dto.Ugyfelkod">
+      // </app-bizonylatkapcsolat-list>
+      break;
+
+      case BizonylatEgyMode.Torles: // 5
+      // <app-tetel-torles [cim]="bizonylatLeiro.BizonylatNev"
+      // (eventTorles)="onTorles($event)">
+      // </app-tetel-torles>
+      break;
+
+      case BizonylatEgyMode.Modositas: // 6
+      // <app-bizonylat-szerkesztes [uj]="false"
+      //   [bizonylatTipus]="bizonylatTipus"
+      //   [bizonylatLeiro]="bizonylatLeiro"
+      //   [Bizonylatkod]="Dto.Bizonylatkod"
+      // (eventSzerkesztesUtan)="onSzerkesztesUtan($event)">
+      // </app-bizonylat-szerkesztes>
+      break;
+
       case BizonylatEgyMode.Errol: // 7
         const errolC = this.vcr.createComponent(BizonylatErrolComponent);
         errolC.instance.Bizonylatkod = this.Dto.Bizonylatkod;
@@ -144,6 +179,14 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
         });
       break;
 
+      case BizonylatEgyMode.Penztar: // 10
+      // <app-bizonylat-penztar [DtoOriginal]="Dto"
+      //   [bizonylatTipus]="bizonylatTipus"
+      //   [bizonylatLeiro]="bizonylatLeiro"
+      // (eventPenztarUtan)="onPenztarUtan()">
+      // </app-bizonylat-penztar>
+      break;
+
       case BizonylatEgyMode.Kifizetesrendben: // 11
         const kifizetesrendbenC = this.vcr.createComponent(BizonylatKifizetesrendbenComponent);
         kifizetesrendbenC.instance.DtoOriginal = this.Dto;
@@ -162,98 +205,24 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
           this.eventSzerkesztesutan.emit(dto);
         });
       break;
+
+      case BizonylatEgyMode.Projekt: // 15
+        const projektC = this.vcr.createComponent(BizonylatProjektjeComponent);
+        projektC.instance.item = this.Dto;
+      break;
+
+      case BizonylatEgyMode.Fuvarszamla: // 16
+      // <app-bizonylat-fuvarszamla  [dtoAnyagszamla]="Dto"
+      // (eventOK)="onFuvarszamlaUtan($event)">
+      // </app-bizonylat-fuvarszamla>
+      break;
+
+      case BizonylatEgyMode.Vagolap: // 17
+        const vagolapC = this.vcr.createComponent(VagolapBizonylathozComponent);
+        vagolapC.instance.item = this.Dto;
+        vagolapC.instance.tipus = this.bizonylatLeiro.BizonylatNev;
+      break;
     }
-
-    // Blank = 0,
-    //   Nyomtatas = 1,
-    //   Reszletek = 2,
-    //   Kifizetes = 3,
-    //   Irat = 4,
-    //   Torles = 5,
-    //   Modositas = 6,
-    //   Errol = 7,
-    //   Kibocsatas = 8,
-    //   Storno = 9,
-    //   Penztar = 10,
-    //   Kifizetesrendben = 11,
-    //   Kiszallitva = 12,
-    //   Formaiellenorzes = 13,
-    //   OSNxml = 14,
-    //   Projekt = 15
-
-
-    // <ng-container *ngIf="egymode === 2">
-    //   <div [@rowanimation]>
-    // <app-bizonylat-reszletek [Bizonylatkod]="Dto.Bizonylatkod"
-    //   [bizonylatLeiro]="bizonylatLeiro">
-    // </app-bizonylat-reszletek>
-    // </div>
-    // </ng-container>
-
-    // <ng-container *ngIf="egymode === 3">
-    //   <div [@rowanimation]>
-    // <app-kifizetes-list [Bizonylat]="Dto">
-    // </app-kifizetes-list>
-    // </div>
-    // </ng-container>
-
-    // <ng-container *ngIf="egymode === 4">
-    //   <div [@rowanimation]>
-    // <app-bizonylatkapcsolat-list [Bizonylatkod]="Dto.Bizonylatkod"
-    //   [Ugyfelkod]="Dto.Ugyfelkod">
-    // </app-bizonylatkapcsolat-list>
-    // </div>
-    // </ng-container>
-
-    // <ng-container *ngIf="egymode === 5">
-    //   <div [@rowanimation]>
-    // <app-tetel-torles [cim]="bizonylatLeiro.BizonylatNev"
-    // (eventTorles)="onTorles($event)">
-    // </app-tetel-torles>
-    // </div>
-    // </ng-container>
-
-    // <ng-container *ngIf="egymode === 6">
-    //   <div [@rowanimation]>
-    // <app-bizonylat-szerkesztes [uj]="false"
-    //   [bizonylatTipus]="bizonylatTipus"
-    //   [bizonylatLeiro]="bizonylatLeiro"
-    //   [Bizonylatkod]="Dto.Bizonylatkod"
-    // (eventSzerkesztesUtan)="onSzerkesztesUtan($event)">
-    // </app-bizonylat-szerkesztes>
-    // </div>
-    // </ng-container>
-
-    // <ng-container *ngIf="egymode === 10">
-    //   <div [@rowanimation]>
-    // <app-bizonylat-penztar [DtoOriginal]="Dto"
-    //   [bizonylatTipus]="bizonylatTipus"
-    //   [bizonylatLeiro]="bizonylatLeiro"
-    // (eventPenztarUtan)="onPenztarUtan()">
-    // </app-bizonylat-penztar>
-    // </div>
-    // </ng-container>
-
-    // <ng-container *ngIf="egymode === 15">
-    //   <div [@rowanimation]>
-    // <app-bizonylat-projektje [item]="Dto"></app-bizonylat-projektje>
-    // </div>
-    // </ng-container>
-
-    // <ng-container *ngIf="egymode === 16">
-    //   <div [@rowanimation]>
-    // <app-bizonylat-fuvarszamla  [dtoAnyagszamla]="Dto"
-    // (eventOK)="onFuvarszamlaUtan($event)">
-    // </app-bizonylat-fuvarszamla>
-    // </div>
-    // </ng-container>
-
-    // <ng-container *ngIf="egymode === 17">
-    //   <div [@rowanimation]>
-    // <app-vagolap-bizonylathoz [item]="Dto" [tipus]="bizonylatLeiro.BizonylatNev">
-    //   </app-vagolap-bizonylathoz>
-    //   </div>
-    //   </ng-container>
   }
 
   onTorles(ok: boolean) {

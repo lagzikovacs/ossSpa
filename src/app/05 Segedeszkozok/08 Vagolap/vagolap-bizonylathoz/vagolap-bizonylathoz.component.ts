@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {VagolapService} from '../vagolap.service';
-import {BizonylatDto} from "../../../03 Bizonylatok/bizonylat/bizonylatdto";
+import {BizonylatDto} from '../../../03 Bizonylatok/bizonylat/bizonylatdto';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

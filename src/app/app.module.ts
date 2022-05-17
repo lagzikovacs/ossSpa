@@ -177,7 +177,7 @@ import { DokumentumNezetComponent } from './02 Eszkozok/02 Irat/dokumentum/dokum
 import { VagolapIrathozComponent } from './05 Segedeszkozok/08 Vagolap/vagolap-irathoz/vagolap-irathoz.component';
 import { VagolapBizonylathozComponent } from './05 Segedeszkozok/08 Vagolap/vagolap-bizonylathoz/vagolap-bizonylathoz.component';
 import { IratProjektjeComponent } from './02 Eszkozok/02 Irat/irat/irat-projektje/irat-projektje.component';
-import { BizonylatProjektjeComponent } from './bizonylat/bizonylat-projektje/bizonylat-projektje.component';
+import { BizonylatProjektjeComponent } from './03 Bizonylatok/bizonylat/bizonylat-projektje/bizonylat-projektje.component';
 import { FooldalComponent } from './fooldal/fooldal.component';
 import { NavbarComponent } from './navbar/navbar/navbar.component';
 import {HibabejelentesListComponent} from './02 Eszkozok/06 Hibabejelentes/hibabejelentes-list/hibabejelentes-list.component';

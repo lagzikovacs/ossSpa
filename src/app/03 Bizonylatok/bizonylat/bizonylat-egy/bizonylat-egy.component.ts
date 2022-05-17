@@ -25,6 +25,7 @@ import {BizonylatNyomtatasComponent} from "../../bizonylatnyomtatas/bizonylat-ny
 import {KifizetesListComponent} from "../../kifizetes/kifizetes-list/kifizetes-list.component";
 import {VagolapBizonylathozComponent} from "../../../05 Segedeszkozok/08 Vagolap/vagolap-bizonylathoz/vagolap-bizonylathoz.component";
 import {BizonylatProjektjeComponent} from "../bizonylat-projektje/bizonylat-projektje.component";
+import {BizonylatPenztarComponent} from "../bizonylat-penztar/bizonylat-penztar.component";
 
 @Component({
   selector: 'app-bizonylat-egy',
@@ -180,11 +181,13 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
       break;
 
       case BizonylatEgyMode.Penztar: // 10
-      // <app-bizonylat-penztar [DtoOriginal]="Dto"
-      //   [bizonylatTipus]="bizonylatTipus"
-      //   [bizonylatLeiro]="bizonylatLeiro"
-      // (eventPenztarUtan)="onPenztarUtan()">
-      // </app-bizonylat-penztar>
+        const penztarC = this.vcr.createComponent(BizonylatPenztarComponent);
+        penztarC.instance.DtoOriginal = this.Dto;
+        penztarC.instance.bizonylatTipus = this.bizonylatTipus;
+        penztarC.instance.bizonylatLeiro = this.bizonylatLeiro;
+        penztarC.instance.eventPenztarUtan.pipe(untilComponentDestroyed(this)).subscribe(() => {
+          this.doNav(0);
+        });
       break;
 
       case BizonylatEgyMode.Kifizetesrendben: // 11
@@ -244,19 +247,6 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
     } else {
       this.doNav(0);
     }
-  }
-
-
-
-
-
-
-
-
-
-
-  onPenztarUtan() {
-    this.doNav(0);
   }
 
   onSzerkesztesUtan(dto: BizonylatDto) {

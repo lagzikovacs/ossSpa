@@ -11,7 +11,7 @@ import {ActivatedRoute} from '@angular/router';
 import {environment} from '../../../environments/environment';
 import {BizonylatParameter} from '../../03 Bizonylatok/bizonylat/bizonylatparameter';
 import {BizonylatTipusLeiro} from '../../03 Bizonylatok/bizonylat/bizonylattipusleiro';
-import {BizonylattablaComponent} from '../bizonylattabla/bizonylattabla.component';
+import {BizonylattablaComponent} from '../../03 Bizonylatok/bizonylat/bizonylattabla/bizonylattabla.component';
 import {propCopy} from '../../common/propCopy';
 
 @Component({

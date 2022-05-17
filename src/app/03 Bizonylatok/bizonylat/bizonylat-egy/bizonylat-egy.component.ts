@@ -1,5 +1,6 @@
 import {
-  AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild,
+  AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output,
+  ViewChild,
   ViewContainerRef
 } from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
@@ -26,8 +27,10 @@ import {KifizetesListComponent} from "../../kifizetes/kifizetes-list/kifizetes-l
 import {VagolapBizonylathozComponent} from "../../../05 Segedeszkozok/08 Vagolap/vagolap-bizonylathoz/vagolap-bizonylathoz.component";
 import {BizonylatProjektjeComponent} from "../bizonylat-projektje/bizonylat-projektje.component";
 import {BizonylatPenztarComponent} from "../bizonylat-penztar/bizonylat-penztar.component";
+import {BizonylatReszletekComponent} from "../bizonylat-reszletek/bizonylat-reszletek.component";
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-bizonylat-egy',
   templateUrl: './bizonylat-egy.component.html'
 })
@@ -104,9 +107,9 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
       break;
 
       case BizonylatEgyMode.Reszletek: // 2
-      // <app-bizonylat-reszletek [Bizonylatkod]="Dto.Bizonylatkod"
-      //   [bizonylatLeiro]="bizonylatLeiro">
-      // </app-bizonylat-reszletek>
+        const reszletekC = this.vcr.createComponent(BizonylatReszletekComponent);
+        reszletekC.instance.Bizonylatkod = this.Dto.Bizonylatkod;
+        reszletekC.instance.bizonylatLeiro = this.bizonylatLeiro;
       break;
 
       case BizonylatEgyMode.Kifizetes: // 3

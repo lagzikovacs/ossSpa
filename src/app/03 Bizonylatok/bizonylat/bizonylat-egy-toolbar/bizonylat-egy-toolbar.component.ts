@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {JogKod} from "../../../common/enums/jogkod";
 import {LogonService} from "../../../05 Segedeszkozok/05 Bejelentkezes/logon.service";
 import {BizonylatDto} from "../bizonylatdto";
@@ -6,6 +6,7 @@ import {BizonylatTipus} from "../bizonylattipus";
 import {BizonylatTipusLeiro} from "../bizonylattipusleiro";
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-bizonylat-egy-toolbar',
   templateUrl: './bizonylat-egy-toolbar.component.html'
 })

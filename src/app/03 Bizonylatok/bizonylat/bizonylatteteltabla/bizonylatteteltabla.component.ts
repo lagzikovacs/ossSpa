@@ -1,7 +1,11 @@
-import {Component, EventEmitter, Input, OnDestroy, Output, TemplateRef} from '@angular/core';
-import {BizonylatTetelDto} from '../../03 Bizonylatok/bizonylattetel/bizonylatteteldto';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, Output,
+  TemplateRef
+} from '@angular/core';
+import {BizonylatTetelDto} from '../../bizonylattetel/bizonylatteteldto';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-bizonylatteteltabla',
   templateUrl: './bizonylatteteltabla.component.html'
 })
@@ -21,6 +25,9 @@ export class BizonylatteteltablaComponent implements OnDestroy {
   ujOk = false;
   torlesOk = false;
   modOk = false;
+
+  constructor(private _cdr: ChangeDetectorRef) {
+  }
 
   clearselections() {
     this.egysem();

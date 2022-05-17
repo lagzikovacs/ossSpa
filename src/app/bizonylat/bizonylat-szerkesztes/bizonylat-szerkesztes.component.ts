@@ -21,7 +21,7 @@ import {BizonylatDto} from '../../03 Bizonylatok/bizonylat/bizonylatdto';
 import {BizonylatTetelDto} from '../../03 Bizonylatok/bizonylattetel/bizonylatteteldto';
 import {BizonylatAfaDto} from '../../03 Bizonylatok/bizonylat/bizonylatafadto';
 import {BizonylatTermekdijDto} from '../../03 Bizonylatok/bizonylat/bizonylattermekdijdto';
-import {BizonylatteteltablaComponent} from '../bizonylatteteltabla/bizonylatteteltabla.component';
+import {BizonylatteteltablaComponent} from '../../03 Bizonylatok/bizonylat/bizonylatteteltabla/bizonylatteteltabla.component';
 import {propCopy} from '../../common/propCopy';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 

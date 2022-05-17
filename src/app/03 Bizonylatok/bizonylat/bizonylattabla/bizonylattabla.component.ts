@@ -1,12 +1,17 @@
-import {Component, EventEmitter, Input, OnDestroy, Output, TemplateRef} from '@angular/core';
-import {BizonylatDto} from '../../03 Bizonylatok/bizonylat/bizonylatdto';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output,
+  TemplateRef
+} from '@angular/core';
+import {BizonylatDto} from '../bizonylatdto';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-bizonylattabla',
   templateUrl: './bizonylattabla.component.html'
 })
-export class BizonylattablaComponent implements OnDestroy {
-  @Input() items: BizonylatDto[] = new Array<BizonylatDto>();
+export class BizonylattablaComponent implements AfterViewInit, OnDestroy {
+  @Input() items = new Array<BizonylatDto>();
   @Input() enIdclick = true;
 
   @Input() ujTemplate: TemplateRef<any>;
@@ -18,20 +23,35 @@ export class BizonylattablaComponent implements OnDestroy {
   clickedidindex = -1;
   ujtetel = false;
 
+  constructor(private _cdr: ChangeDetectorRef) {
+  }
+
+  ngAfterViewInit() {
+
+  }
+
   clearselections() {
     this.ujtetel = false;
 
     this.clickedrowindex = -1;
     this.clickedidindex = -1;
+
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   ujtetelstart() {
     this.clearselections();
-
     this.ujtetel = true;
+
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
   ujtetelstop() {
     this.ujtetel = false;
+
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   clickforid(i: number) {

@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {BizonylatAfaDto} from '../../03 Bizonylatok/bizonylat/bizonylatafadto';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {BizonylatAfaDto} from '../bizonylatafadto';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-bizonylatafatabla',
   templateUrl: './bizonylatafatabla.component.html'
 })

@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {BizonylatTermekdijDto} from '../../03 Bizonylatok/bizonylat/bizonylattermekdijdto';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {BizonylatTermekdijDto} from '../bizonylattermekdijdto';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-bizonylattermekdijtabla',
   templateUrl: './bizonylattermekdijtabla.component.html'
 })

@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
-  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output,
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output,
+  SimpleChanges,
   TemplateRef
 } from '@angular/core';
 import {BizonylatDto} from '../bizonylatdto';
@@ -10,7 +11,7 @@ import {BizonylatDto} from '../bizonylatdto';
   selector: 'app-bizonylattabla',
   templateUrl: './bizonylattabla.component.html'
 })
-export class BizonylattablaComponent implements AfterViewInit, OnDestroy {
+export class BizonylattablaComponent implements OnDestroy {
   @Input() Dto = new Array<BizonylatDto>();
   @Input() enIdclick = true;
 
@@ -24,11 +25,6 @@ export class BizonylattablaComponent implements AfterViewInit, OnDestroy {
   ujtetel = false;
 
   constructor(private _cdr: ChangeDetectorRef) {
-  }
-
-  ngAfterViewInit() {
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
   }
 
   clearselections() {

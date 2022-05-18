@@ -49,7 +49,10 @@ export class BizonylatReszletekComponent implements OnInit, OnDestroy {
 
       this.cdto = res.Result[0];
 
-      this.cdtoFej.push(this.cdto.Dto); // a tábla komponens tömböt vár
+      const f = new Array<BizonylatDto>();
+      f.push(this.cdto.Dto); // a tábla komponens tömböt vár
+
+      this.cdtoFej = f;
       this.cdtoTetel = this.cdto.LstTetelDto;
       this.cdtoAfa = this.cdto.LstAfaDto;
       this.cdtoTermekdij = this.cdto.LstTermekdijDto;

@@ -132,7 +132,7 @@ export class AjanlatkeresListComponent implements OnDestroy {
   }
 
   onModositaskesz(dto: AjanlatkeresDto) {
-    propCopy(dto, this.Dto[this.DtoSelectedIndex]);
+    this.Dto[this.DtoSelectedIndex] = dto;
   }
 
   ngOnDestroy() {

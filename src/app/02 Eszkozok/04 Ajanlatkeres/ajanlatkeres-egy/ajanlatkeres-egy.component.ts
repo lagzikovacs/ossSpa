@@ -168,7 +168,7 @@ export class AjanlatkeresEgyComponent extends OnDestroyMixin implements AfterVie
         throw res1.Error;
       }
 
-      propCopy(res1.Result[0], this.Dto);
+      this.Dto = res1.Result[0];
 
       if (this.Dto.Nyitott) {
         ekuC.instance.uzenet = msgNyitott;

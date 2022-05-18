@@ -1,4 +1,7 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy,
+  Output
+} from '@angular/core';
 import {BizonylatAfaDto} from '../bizonylatafadto';
 
 @Component({
@@ -11,7 +14,16 @@ export class BizonylatafatablaComponent implements OnDestroy {
   @Input() enIdclick = true;
   @Output() idclick = new EventEmitter<number>();
 
-  setClickedRow(i: number) {
+  clickedrowindex = -1;
+
+  constructor(private _cdr: ChangeDetectorRef) {
+  }
+
+  clickforrow(i: number) {
+    this.clickedrowindex = i;
+  }
+
+  clickforid(i: number) {
     this.idclick.emit(i);
   }
 

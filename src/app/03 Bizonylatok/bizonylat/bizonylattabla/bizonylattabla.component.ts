@@ -11,7 +11,7 @@ import {BizonylatDto} from '../bizonylatdto';
   templateUrl: './bizonylattabla.component.html'
 })
 export class BizonylattablaComponent implements AfterViewInit, OnDestroy {
-  @Input() items = new Array<BizonylatDto>();
+  @Input() Dto = new Array<BizonylatDto>();
   @Input() enIdclick = true;
 
   @Input() ujTemplate: TemplateRef<any>;
@@ -27,7 +27,8 @@ export class BizonylattablaComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   clearselections() {

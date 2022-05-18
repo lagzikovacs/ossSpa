@@ -1,9 +1,11 @@
-import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit,
+  ViewChild
+} from '@angular/core';
 import {Szempont} from '../../../common/enums/szempont';
 import {SzMT} from '../../../common/dtos/szmt';
 import {ErrorService} from '../../../common/errorbox/error.service';
 import {environment} from '../../../../environments/environment';
-import {rowanimation} from '../../../animation/rowAnimation';
 import {HibabejelentesService} from '../hibabejelentes.service';
 import {HibabejelentesParam} from '../hibabejelentesparam';
 import {HibabejelentesDto} from '../hibabejelentesdto';
@@ -13,9 +15,9 @@ import {LogonService} from '../../../05 Segedeszkozok/05 Bejelentkezes/logon.ser
 import {TablaExComponent} from '../../../common/tabla-ex/tabla-ex.component';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-hibabejelentes-list',
-  templateUrl: './hibabejelentes-list.component.html',
-  animations: [rowanimation]
+  templateUrl: './hibabejelentes-list.component.html'
 })
 export class HibabejelentesListComponent implements OnInit, OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: TablaExComponent;

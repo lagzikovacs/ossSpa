@@ -1,11 +1,9 @@
 import {Component, Input, OnDestroy, Output, EventEmitter} from '@angular/core';
-import {rowanimation} from '../../animation/rowAnimation';
 import {BizonylatDto} from '../../03 Bizonylatok/bizonylat/bizonylatdto';
 
 @Component({
   selector: 'app-bizonylat-fuvarszamla',
-  templateUrl: './bizonylat-fuvarszamla.component.html',
-  animations: [rowanimation]
+  templateUrl: './bizonylat-fuvarszamla.component.html'
 })
 export class BizonylatFuvarszamlaComponent implements OnDestroy {
   @Input() dtoAnyagszamla: BizonylatDto;

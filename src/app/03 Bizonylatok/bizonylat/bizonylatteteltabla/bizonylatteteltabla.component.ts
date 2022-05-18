@@ -1,5 +1,6 @@
 import {
-  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, Output,
+  AfterViewInit,
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output,
   TemplateRef
 } from '@angular/core';
 import {BizonylatTetelDto} from '../../bizonylattetel/bizonylatteteldto';
@@ -9,7 +10,7 @@ import {BizonylatTetelDto} from '../../bizonylattetel/bizonylatteteldto';
   selector: 'app-bizonylatteteltabla',
   templateUrl: './bizonylatteteltabla.component.html'
 })
-export class BizonylatteteltablaComponent implements OnDestroy {
+export class BizonylatteteltablaComponent implements AfterViewInit, OnDestroy {
   @Input() Dto: BizonylatTetelDto[] = new Array<BizonylatTetelDto>();
   @Input() enEdit = false;
   @Output() eventTorlesElott = new EventEmitter<number>();
@@ -27,6 +28,9 @@ export class BizonylatteteltablaComponent implements OnDestroy {
   modOk = false;
 
   constructor(private _cdr: ChangeDetectorRef) {
+  }
+
+  ngAfterViewInit() {
   }
 
   clearselections() {

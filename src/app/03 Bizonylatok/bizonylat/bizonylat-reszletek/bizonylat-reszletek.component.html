@@ -1,11 +1,23 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>{{bizonylatLeiro.BizonylatNev}} részletesen</h5>
+
   <div class="editform-label" style="margin-top: 1em">Bizonylat</div>
-  <app-bizonylattabla [enIdclick]="false" [items]="cdtoDto"></app-bizonylattabla>
+  <app-bizonylattabla [enIdclick]="false"
+                      [Dto]="cdtoFej">
+  </app-bizonylattabla>
+
   <div class="editform-label" style="margin-top: 1em">Tételek</div>
-  <app-bizonylatteteltabla [enEdit]="false" [Dto]="cdtoTetel"></app-bizonylatteteltabla>
+  <app-bizonylatteteltabla [enEdit]="false"
+                           [Dto]="cdtoTetel">
+  </app-bizonylatteteltabla>
+
   <div class="editform-label" style="margin-top: 1em">ÁFA összesítés</div>
-  <app-bizonylatafatabla [enIdclick]="false" [Dto]="cdtoAfa"></app-bizonylatafatabla>
+  <app-bizonylatafatabla [enIdclick]="false"
+                         [Dto]="cdtoAfa">
+  </app-bizonylatafatabla>
+
   <div class="editform-label" style="margin-top: 1em">Termékdíj összesítés</div>
-  <app-bizonylattermekdijtabla [enIdclick]="false" [Dto]="cdtoTermekdij"></app-bizonylattermekdijtabla>
+  <app-bizonylattermekdijtabla [enIdclick]="false"
+                               [Dto]="cdtoTermekdij">
+  </app-bizonylattermekdijtabla>
 </div>

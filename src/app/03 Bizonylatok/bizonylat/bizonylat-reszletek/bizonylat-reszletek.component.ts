@@ -19,7 +19,7 @@ export class BizonylatReszletekComponent implements OnInit, OnDestroy {
 
   cdto = new BizonylatComplexDto();
 
-  cdtoDto = new Array<BizonylatDto>();
+  cdtoFej = new Array<BizonylatDto>();
   cdtoTetel = new Array<BizonylatTetelDto>();
   cdtoAfa = new Array<BizonylatAfaDto>();
   cdtoTermekdij = new Array<BizonylatTermekdijDto>();
@@ -49,7 +49,7 @@ export class BizonylatReszletekComponent implements OnInit, OnDestroy {
 
       this.cdto = res.Result[0];
 
-      this.cdtoDto.unshift(this.cdto.Dto); // a tábla komponens tömböt vár
+      this.cdtoFej.push(this.cdto.Dto); // a tábla komponens tömböt vár
       this.cdtoTetel = this.cdto.LstTetelDto;
       this.cdtoAfa = this.cdto.LstAfaDto;
       this.cdtoTermekdij = this.cdto.LstTermekdijDto;

@@ -49,7 +49,7 @@
       </td>
     </tr>
 
-    <ng-container *ngFor="let item of items; let i = index">
+    <ng-container *ngFor="let item of Dto; let i = index">
       <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
         <td>
           <div *ngIf="enIdclick" class="tabla-kontrol-id" (click)="clickforid(i)">{{item.Bizonylatkod}}</div>

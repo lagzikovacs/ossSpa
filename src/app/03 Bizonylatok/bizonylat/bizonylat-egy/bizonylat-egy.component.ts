@@ -27,6 +27,7 @@ import {VagolapBizonylathozComponent} from '../../../05 Segedeszkozok/08 Vagolap
 import {BizonylatProjektjeComponent} from '../bizonylat-projektje/bizonylat-projektje.component';
 import {BizonylatPenztarComponent} from '../bizonylat-penztar/bizonylat-penztar.component';
 import {BizonylatReszletekComponent} from '../bizonylat-reszletek/bizonylat-reszletek.component';
+import {TetelTorlesComponent} from "../../../common/tetel-torles/tetel-torles.component";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -123,9 +124,27 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
       break;
 
       case BizonylatEgyMode.Torles: // 5
-      // <app-tetel-torles [cim]="bizonylatLeiro.BizonylatNev"
-      // (eventTorles)="onTorles($event)">
-      // </app-tetel-torles>
+        const torlesC = this.vcr.createComponent(TetelTorlesComponent);
+        torlesC.instance.cim = this.bizonylatLeiro.BizonylatNev;
+        torlesC.instance.eventTorles.pipe(untilComponentDestroyed(this)).subscribe(async ok => {
+          if (ok) {
+            this.spinner = true;
+            try {
+              const res = await this.bizonylatservice.Delete(this.Dto);
+              if (res.Error != null) {
+                throw res.Error;
+              }
+
+              this.spinner = false;
+              this.eventTorlesutan.emit();
+            } catch (err) {
+              this.spinner = false;
+              this._errorservice.Error = err;
+            }
+          } else {
+            this.doNav(0);
+          }
+        });
       break;
 
       case BizonylatEgyMode.Modositas: // 6
@@ -231,24 +250,7 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
   }
 
   onTorles(ok: boolean) {
-    if (ok) {
-      this.eppFrissit = true;
-      this.bizonylatservice.Delete(this.Dto)
-        .then(res => {
-          if (res.Error != null) {
-            throw res.Error;
-          }
 
-          this.eppFrissit = false;
-          this.eventTorlesutan.emit();
-        })
-        .catch(err => {
-          this.eppFrissit = false;
-          this._errorservice.Error = err;
-        });
-    } else {
-      this.doNav(0);
-    }
   }
 
   onSzerkesztesUtan(dto: BizonylatDto) {

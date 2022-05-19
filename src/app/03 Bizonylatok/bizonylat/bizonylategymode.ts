@@ -18,4 +18,5 @@ export enum BizonylatEgyMode {
   Projekt = 15,
   Fuvarszamla = 16,
   Vagolap = 17,
+  Levalasztas = 18,
 }

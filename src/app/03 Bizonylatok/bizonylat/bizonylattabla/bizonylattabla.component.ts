@@ -15,7 +15,6 @@ export class BizonylattablaComponent implements OnDestroy {
   @Input() Dto = new Array<BizonylatDto>();
   @Input() enIdclick = true;
 
-  @Input() ujTemplate: TemplateRef<any>;
   @Input() egyTemplate: TemplateRef<any>;
 
   @Output() forid = new EventEmitter<number>();
@@ -23,6 +22,7 @@ export class BizonylattablaComponent implements OnDestroy {
   clickedrowindex = -1;
   clickedidindex = -1;
   ujtetel = false;
+  egytetel = false;
 
   constructor(private _cdr: ChangeDetectorRef) {
   }
@@ -46,6 +46,13 @@ export class BizonylattablaComponent implements OnDestroy {
   }
   ujtetelstop() {
     this.ujtetel = false;
+
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
+
+  egytetelstart() {
+    this.egytetel = true;
 
     this._cdr.markForCheck();
     this._cdr.detectChanges();

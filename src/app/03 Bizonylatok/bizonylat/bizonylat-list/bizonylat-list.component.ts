@@ -1,18 +1,18 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {BizonylatService} from '../../03 Bizonylatok/bizonylat/bizonylat.service';
-import {Szempont} from '../../common/enums/szempont';
-import {SzMT} from '../../common/dtos/szmt';
-import {BizonylatTipus} from '../../03 Bizonylatok/bizonylat/bizonylattipus';
-import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
-import {JogKod} from '../../common/enums/jogkod';
-import {ErrorService} from '../../common/errorbox/error.service';
-import {BizonylatDto} from '../../03 Bizonylatok/bizonylat/bizonylatdto';
+import {BizonylatService} from '../bizonylat.service';
+import {Szempont} from '../../../common/enums/szempont';
+import {SzMT} from '../../../common/dtos/szmt';
+import {BizonylatTipus} from '../bizonylattipus';
+import {LogonService} from '../../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
+import {JogKod} from '../../../common/enums/jogkod';
+import {ErrorService} from '../../../common/errorbox/error.service';
+import {BizonylatDto} from '../bizonylatdto';
 import {ActivatedRoute} from '@angular/router';
-import {environment} from '../../../environments/environment';
-import {BizonylatParameter} from '../../03 Bizonylatok/bizonylat/bizonylatparameter';
-import {BizonylatTipusLeiro} from '../../03 Bizonylatok/bizonylat/bizonylattipusleiro';
-import {BizonylattablaComponent} from '../../03 Bizonylatok/bizonylat/bizonylattabla/bizonylattabla.component';
-import {propCopy} from '../../common/propCopy';
+import {environment} from '../../../../environments/environment';
+import {BizonylatParameter} from '../bizonylatparameter';
+import {BizonylatTipusLeiro} from '../bizonylattipusleiro';
+import {BizonylattablaComponent} from '../bizonylattabla/bizonylattabla.component';
+import {propCopy} from '../../../common/propCopy';
 
 @Component({
   selector: 'app-bizonylat-list',
@@ -37,6 +37,7 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
   bizonylatTipus = BizonylatTipus.Szamla;
   bizonylatLeiro = new BizonylatTipusLeiro();
   mod = false;
+  uj = false;
 
   Dto = new Array<BizonylatDto>();
   DtoSelectedIndex = -1;
@@ -144,32 +145,32 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
   }
 
   onId(i: number) {
-    if (i !== this.DtoSelectedIndex) {
-      this.egybizonylat_egymode = 2;
-    } else {
-      this.egybizonylat_egymode = 0;
-    }
-
     this.DtoSelectedIndex = i;
+
+    this.uj = false;
+    this.tabla.egytetelstart();
   }
 
   doUjtetel() {
+    this.uj = true;
     this.tabla.ujtetelstart();
   }
+
   onUjtetelkesz(dto: BizonylatDto) {
     if (dto !== null) {
       this.Dto.unshift(dto);
     }
     this.tabla.ujtetelstop();
   }
-  onSzerkesztesutan(dto: BizonylatDto) {
-    propCopy(dto, this.Dto[this.DtoSelectedIndex]);
-  }
+
   onTorlesutan() {
     this.Dto.splice(this.DtoSelectedIndex, 1);
     this.DtoSelectedIndex = -1;
-
     this.tabla.clearselections();
+  }
+
+  onSzerkesztesutan(dto: BizonylatDto) {
+    propCopy(dto, this.Dto[this.DtoSelectedIndex]);
   }
 
   ngOnDestroy() {

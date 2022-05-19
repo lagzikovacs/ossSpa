@@ -108,7 +108,7 @@ import {RiportService} from './04 Riportok/riport.service';
 import { ProjektkapcsolatLevalasztasComponent } from './02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat-levalasztas/projektkapcsolat-levalasztas.component';
 import { ProjektExportComponent } from './02 Eszkozok/01 Projekt/projekt/projekt-export/projekt-export.component';
 import { AjanlatTetelComponent } from './02 Eszkozok/01 Projekt/ajanlat/ajanlat-tetel/ajanlat-tetel';
-import { BizonylatListComponent } from './bizonylat/bizonylat-list/bizonylat-list.component';
+import { BizonylatListComponent } from './03 Bizonylatok/bizonylat/bizonylat-list/bizonylat-list.component';
 import { BizonylatEgyComponent } from './03 Bizonylatok/bizonylat/bizonylat-egy/bizonylat-egy.component';
 import { BizonylattoolbarComponent } from './03 Bizonylatok/bizonylat/bizonylattoolbar/bizonylattoolbar.component';
 import { BizonylattablaComponent } from './03 Bizonylatok/bizonylat/bizonylattabla/bizonylattabla.component';
@@ -118,7 +118,7 @@ import { KifizetesSzerkesztesComponent } from './03 Bizonylatok/kifizetes/kifize
 import { BizonylatNyomtatasComponent } from './03 Bizonylatok/bizonylatnyomtatas/bizonylat-nyomtatas/bizonylat-nyomtatas.component';
 import { BizonylatReszletekComponent } from './03 Bizonylatok/bizonylat/bizonylat-reszletek/bizonylat-reszletek.component';
 import { BizonylatkapcsolatListComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-list/bizonylatkapcsolat-list.component';
-import { BizonylatkapcsolatLevalasztasComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-levalasztas/bizonylatkapcsolat-levalasztas.component';
+import { BizonylatkapcsolatLevalasztasComponent } from './03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolat-levalasztas/bizonylatkapcsolat-levalasztas.component';
 import { BizonylatteteltablaComponent } from './03 Bizonylatok/bizonylat/bizonylatteteltabla/bizonylatteteltabla.component';
 import { BizonylatafatablaComponent } from './03 Bizonylatok/bizonylat/bizonylatafatabla/bizonylatafatabla.component';
 import { BizonylattermekdijtablaComponent } from './03 Bizonylatok/bizonylat/bizonylattermekdijtabla/bizonylattermekdijtabla.component';

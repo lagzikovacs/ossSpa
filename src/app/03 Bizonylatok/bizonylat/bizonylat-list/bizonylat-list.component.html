@@ -14,27 +14,19 @@
     <app-bizonylattabla #tabla
                         [Dto]="Dto"
                         (forid)="onId($event)"
-                        [ujTemplate]="griduj"
                         [egyTemplate]="gridegy">
     </app-bizonylattabla>
   </div>
 
-  <ng-template #griduj>
-    <app-bizonylat-szerkesztes [uj]="true"
-                               [bizonylatTipus]="bizonylatTipus"
-                               [bizonylatLeiro]="bizonylatLeiro"
-                               (eventSzerkesztesUtan)="onUjtetelkesz($event)">
-    </app-bizonylat-szerkesztes>
-  </ng-template>
-
   <ng-template #gridegy>
-    <app-bizonylat-egy [DtoOriginal]="Dto[DtoSelectedIndex]"
+    <app-bizonylat-egy [uj]="uj"
+                       [DtoOriginal]="Dto[DtoSelectedIndex]"
                        [bizonylatTipus]="bizonylatTipus"
                        [bizonylatLeiro]="bizonylatLeiro"
                        [enTorles]="true"
-                       [(egymode)]="egybizonylat_egymode"
-                       (eventSzerkesztesutan)="onSzerkesztesutan($event)"
-                       (eventTorlesutan)="onTorlesutan()">
+                       (eventUj)="onUjtetelkesz($event)"
+                       (eventTorles)="onTorlesutan()"
+                       (eventModositas)="onSzerkesztesutan($event)">
     </app-bizonylat-egy>
   </ng-template>
 

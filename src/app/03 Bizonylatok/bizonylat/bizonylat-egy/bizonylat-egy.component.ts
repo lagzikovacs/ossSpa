@@ -27,7 +27,11 @@ import {VagolapBizonylathozComponent} from '../../../05 Segedeszkozok/08 Vagolap
 import {BizonylatProjektjeComponent} from '../bizonylat-projektje/bizonylat-projektje.component';
 import {BizonylatPenztarComponent} from '../bizonylat-penztar/bizonylat-penztar.component';
 import {BizonylatReszletekComponent} from '../bizonylat-reszletek/bizonylat-reszletek.component';
-import {TetelTorlesComponent} from "../../../common/tetel-torles/tetel-torles.component";
+import {TetelTorlesComponent} from '../../../common/tetel-torles/tetel-torles.component';
+import {BizonylatkapcsolatListComponent} from '../../../bizonylatkapcsolat/bizonylatkapcsolat-list/bizonylatkapcsolat-list.component';
+import {BizonylatFuvarszamlaComponent} from '../../../bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla.component';
+import {BizonylatSzerkesztesComponent} from '../../../bizonylat/bizonylat-szerkesztes/bizonylat-szerkesztes.component';
+import {ProjektkapcsolatLevalasztasComponent} from '../../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat-levalasztas/projektkapcsolat-levalasztas.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -52,10 +56,11 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
     this.Dto = deepCopy(value);
   }
 
-  @Output() eventSzerkesztesutan = new EventEmitter<BizonylatDto>();
-  @Output() eventTorlesutan = new EventEmitter<void>();
+  @Output() eventUj: EventEmitter<BizonylatDto> = new EventEmitter<BizonylatDto>();
+  @Output() eventTorles = new EventEmitter<void>();
+  @Output() eventModositas = new EventEmitter<BizonylatDto>();
 
-  @Output() eventLevalasztasutan: EventEmitter<void> = new EventEmitter<void>();
+  @Output() eventLevalasztas: EventEmitter<void> = new EventEmitter<void>();
 
   mod = false;
   eppFrissit = false;
@@ -101,6 +106,17 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
     this.vcr.clear();
 
     switch (i) {
+      case BizonylatEgyMode.Uj: // -1
+        const ujC = this.vcr.createComponent(BizonylatSzerkesztesComponent);
+        ujC.instance.uj = true;
+        ujC.instance.bizonylatTipus = this.bizonylatTipus;
+        ujC.instance.bizonylatLeiro = this.bizonylatLeiro;
+        ujC.instance.Bizonylatkod = this.Dto.Bizonylatkod;
+        ujC.instance.eventSzerkesztesUtan.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+          this.eventUj.emit(dto);
+        });
+      break;
+
       case BizonylatEgyMode.Nyomtatas: // 1
         const nyomtatasC = this.vcr.createComponent(BizonylatNyomtatasComponent);
         nyomtatasC.instance.Bizonylatkod = this.Dto.Bizonylatkod;
@@ -118,9 +134,9 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
       break;
 
       case BizonylatEgyMode.Irat: // 4
-      // <app-bizonylatkapcsolat-list [Bizonylatkod]="Dto.Bizonylatkod"
-      //   [Ugyfelkod]="Dto.Ugyfelkod">
-      // </app-bizonylatkapcsolat-list>
+        const bklC = this.vcr.createComponent(BizonylatkapcsolatListComponent);
+        bklC.instance.Bizonylatkod = this.Dto.Bizonylatkod;
+        bklC.instance.Ugyfelkod = this.Dto.Ugyfelkod;
       break;
 
       case BizonylatEgyMode.Torles: // 5
@@ -136,7 +152,7 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
               }
 
               this.spinner = false;
-              this.eventTorlesutan.emit();
+              this.eventTorles.emit();
             } catch (err) {
               this.spinner = false;
               this._errorservice.Error = err;
@@ -148,12 +164,19 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
       break;
 
       case BizonylatEgyMode.Modositas: // 6
-      // <app-bizonylat-szerkesztes [uj]="false"
-      //   [bizonylatTipus]="bizonylatTipus"
-      //   [bizonylatLeiro]="bizonylatLeiro"
-      //   [Bizonylatkod]="Dto.Bizonylatkod"
-      // (eventSzerkesztesUtan)="onSzerkesztesUtan($event)">
-      // </app-bizonylat-szerkesztes>
+        const szerkesztesC = this.vcr.createComponent(BizonylatSzerkesztesComponent);
+        szerkesztesC.instance.uj = false;
+        szerkesztesC.instance.bizonylatTipus = this.bizonylatTipus;
+        szerkesztesC.instance.bizonylatLeiro = this.bizonylatLeiro;
+        szerkesztesC.instance.Bizonylatkod = this.Dto.Bizonylatkod;
+        szerkesztesC.instance.eventSzerkesztesUtan.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+          if (dto !== null) {
+            propCopy(dto, this.Dto);
+            this.eventModositas.emit(dto);
+          }
+
+          this.doNav(0);
+        });
       break;
 
       case BizonylatEgyMode.Errol: // 7
@@ -172,7 +195,7 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
         kibocsatasC.instance.eventKibocsatasUtan.pipe(untilComponentDestroyed(this)).subscribe(dto => {
           if (dto !== null) {
             propCopy(dto, this.Dto);
-            this.eventSzerkesztesutan.emit(dto);
+            this.eventModositas.emit(dto);
           } else {
             this.doNav(0);
           }
@@ -191,7 +214,7 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
         stornoC.instance.bizonylatLeiro = this.bizonylatLeiro;
         stornoC.instance.eventStornozando.pipe(untilComponentDestroyed(this)).subscribe(dto => {
           propCopy(dto, this.Dto);
-          this.eventSzerkesztesutan.emit(dto);
+          this.eventModositas.emit(dto);
         });
         stornoC.instance.eventStornozo.pipe(untilComponentDestroyed(this)).subscribe(dto => {
           // this.bizonylatservice.Dto.unshift(dto);
@@ -217,7 +240,7 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
         kifizetesrendbenC.instance.bizonylatLeiro = this.bizonylatLeiro;
         kifizetesrendbenC.instance.eventKifizetesrendbenUtan.pipe(untilComponentDestroyed(this)).subscribe(dto => {
           propCopy(dto, this.Dto);
-          this.eventSzerkesztesutan.emit(dto);
+          this.eventModositas.emit(dto);
         });
       break;
       case BizonylatEgyMode.Kiszallitva: // 12
@@ -226,7 +249,7 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
         kiszallitvaC.instance.bizonylatLeiro = this.bizonylatLeiro;
         kiszallitvaC.instance.eventKiszallitvaUtan.pipe(untilComponentDestroyed(this)).subscribe(dto => {
           propCopy(dto, this.Dto);
-          this.eventSzerkesztesutan.emit(dto);
+          this.eventModositas.emit(dto);
         });
       break;
 
@@ -236,9 +259,12 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
       break;
 
       case BizonylatEgyMode.Fuvarszamla: // 16
-      // <app-bizonylat-fuvarszamla  [dtoAnyagszamla]="Dto"
-      // (eventOK)="onFuvarszamlaUtan($event)">
-      // </app-bizonylat-fuvarszamla>
+        const fuvarszamlaC = this.vcr.createComponent(BizonylatFuvarszamlaComponent);
+        fuvarszamlaC.instance.dtoAnyagszamla = this.Dto;
+        fuvarszamlaC.instance.eventOK.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+          propCopy(dto, this.Dto);
+          this.eventModositas.emit(dto);
+        });
       break;
 
       case BizonylatEgyMode.Vagolap: // 17
@@ -246,25 +272,21 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
         vagolapC.instance.item = this.Dto;
         vagolapC.instance.tipus = this.bizonylatLeiro.BizonylatNev;
       break;
+
+      case BizonylatEgyMode.Levalasztas: // 18
+        console.log(this.projektkapcsolatDto);
+
+        const pklevalasztasC = this.vcr.createComponent(ProjektkapcsolatLevalasztasComponent);
+        pklevalasztasC.instance.Dto = this.projektkapcsolatDto;
+        pklevalasztasC.instance.eventLevalasztasutan.pipe(untilComponentDestroyed(this)).subscribe(ok => {
+          this.doNav(0);
+          if (ok) {
+            this.eventLevalasztas.emit();
+          }
+        });
+        this.docdr();
+      break;
     }
-  }
-
-  onTorles(ok: boolean) {
-
-  }
-
-  onSzerkesztesUtan(dto: BizonylatDto) {
-    if (dto !== null) {
-      propCopy(dto, this.Dto);
-      this.eventSzerkesztesutan.emit(dto);
-    }
-
-    this.doNav(0);
-  }
-
-  onFuvarszamlaUtan(dto: BizonylatDto) {
-    propCopy(dto, this.Dto);
-    this.eventSzerkesztesutan.emit(dto);
   }
 
   override ngOnDestroy(): void {

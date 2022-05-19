@@ -178,6 +178,9 @@ export class ProjektkapcsolatEgyComponent extends OnDestroyMixin implements Afte
           bizonylatC.instance.bizonylatLeiro = resEgyLeiro.Result;
           bizonylatC.instance.enTorles = false;
           bizonylatC.instance.enProjekt = false;
+          bizonylatC.instance.enLevalasztas = true;
+          bizonylatC.instance.projektkapcsolatDto = this.projektkapcsolatDto;
+          // TODO események
 
           this._cdr.markForCheck();
           this._cdr.detectChanges();

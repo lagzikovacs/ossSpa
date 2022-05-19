@@ -21,7 +21,7 @@ export class ProjektTablaComponent implements OnDestroy {
   clickedrowindex = -1;
   clickedidindex = -1;
   ujtetel = false;
-  egytetel = false
+  egytetel = false;
 
   constructor(private _cdr: ChangeDetectorRef) {
   }

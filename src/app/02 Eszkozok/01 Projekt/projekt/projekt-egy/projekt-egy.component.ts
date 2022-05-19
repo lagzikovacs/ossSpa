@@ -87,7 +87,7 @@ export class ProjektEgyComponent extends OnDestroyMixin implements AfterViewInit
 
         ujC.instance.uj = true;
         ujC.instance.eventSzerkeszteskesz.pipe(untilComponentDestroyed(this)).subscribe(dto => {
-          this.doModositaskesz(dto);
+          this.doUjkesz(dto);
         });
         break;
       case EgyMode.Reszletek: // 1

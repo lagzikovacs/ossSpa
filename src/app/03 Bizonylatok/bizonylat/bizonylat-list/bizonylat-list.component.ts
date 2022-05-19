@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BizonylatService} from '../bizonylat.service';
 import {Szempont} from '../../../common/enums/szempont';
 import {SzMT} from '../../../common/dtos/szmt';
@@ -15,6 +15,7 @@ import {BizonylattablaComponent} from '../bizonylattabla/bizonylattabla.componen
 import {propCopy} from '../../../common/propCopy';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-bizonylat-list',
   templateUrl: './bizonylat-list.component.html'
 })
@@ -32,7 +33,13 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
   bp = new BizonylatParameter(0, environment.lapmeret);
   OsszesRekord = 0;
   elsokereses = true;
+
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   bizonylatTipus = BizonylatTipus.Szamla;
   bizonylatLeiro = new BizonylatTipusLeiro();
@@ -44,21 +51,20 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
 
   private _sub: any;
 
-  egybizonylat_egymode = 2; // részletek
-
   bizonylatservice: BizonylatService;
 
   constructor(private _logonservice: LogonService,
               private _errorservice: ErrorService,
               private _route: ActivatedRoute,
+              private _cdr: ChangeDetectorRef,
               bizonylatservice: BizonylatService) {
     this.mod = this._logonservice.Jogaim.includes(JogKod[JogKod.BIZONYLATMOD]);
 
     this.bizonylatservice = bizonylatservice;
   }
 
-  ngOnInit() {
-    this._sub = this._route.url.subscribe(pars => {
+  async ngOnInit() {
+    this._sub = this._route.url.subscribe(async pars => {
       switch (pars[0].path) {
         case 'dijbekero':
           this.bizonylatTipus = BizonylatTipus.DijBekero;
@@ -80,20 +86,19 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
           break;
       }
 
-      this.eppFrissit = true;
-      this.bizonylatservice.BizonylatLeiro(this.bizonylatTipus)
-        .then(res => {
-          if (res.Error != null) {
-            throw res.Error;
-          }
+      this.spinner = true;
+      try {
+        const res = await this.bizonylatservice.BizonylatLeiro(this.bizonylatTipus);
+        if (res.Error != null) {
+          throw res.Error;
+        }
 
-          this.bizonylatLeiro = res.Result;
-          this.eppFrissit = false;
-        })
-        .catch(err => {
-          this.eppFrissit = false;
-          this._errorservice.Error = err;
-        });
+        this.bizonylatLeiro = res.Result;
+        this.spinner = false;
+      } catch (err) {
+        this.spinner = false;
+        this._errorservice.Error = err;
+      }
     });
   }
 
@@ -115,33 +120,32 @@ export class BizonylatListComponent implements OnInit, OnDestroy {
     this.onKeresesTovabb();
   }
 
-  onKeresesTovabb() {
-    this.eppFrissit = true;
-    this.bizonylatservice.Select(this.bp)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+  async onKeresesTovabb() {
+    this.spinner = true;
+    try {
+      const res = await this.bizonylatservice.Select(this.bp);
+      if (res.Error != null) {
+        throw res.Error;
+      }
 
-        if (this.elsokereses) {
-          this.Dto = res.Result;
-          this.elsokereses = false;
-        } else {
-          const buf = [...this.Dto];
-          res.Result.forEach(element => {
-            buf.push(element);
-          });
-          this.Dto = buf;
-        }
-        this.OsszesRekord = res.OsszesRekord;
+      if (this.elsokereses) {
+        this.Dto = res.Result;
+        this.elsokereses = false;
+      } else {
+        const buf = [...this.Dto];
+        res.Result.forEach(element => {
+          buf.push(element);
+        });
+        this.Dto = buf;
+      }
+      this.OsszesRekord = res.OsszesRekord;
 
-        this.bp.rekordtol += this.bp.lapmeret;
-        this.eppFrissit = false;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+      this.bp.rekordtol += this.bp.lapmeret;
+      this.spinner = false;
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
   onId(i: number) {

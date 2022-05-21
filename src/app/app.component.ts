@@ -37,9 +37,9 @@ export class AppComponent {
   }
 
   @HostListener('window:beforeunload')
-  BezarasElott() {
+  async BezarasElott() {
     if (this._logonservice.isBejelentkezve()) {
-      this._logonservice.Kijelentkezes().then();
+      await this._logonservice.Kijelentkezes();
     }
   }
 

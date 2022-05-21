@@ -29,33 +29,30 @@ export class NavbarComponent extends OnDestroyMixin implements OnInit, OnDestroy
     super();
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.sidebar = document.getElementById('sidebar');
 
-    this._logonservice.SzerepkorKivalasztvaObservable().pipe(untilComponentDestroyed(this)).subscribe(uzenet => {
+    this._logonservice.SzerepkorKivalasztvaObservable().pipe(untilComponentDestroyed(this)).subscribe(async uzenet => {
       this.szerepkorkivalasztva = (uzenet.szerepkorkivalasztva as boolean);
 
       if (this.szerepkorkivalasztva) {
-        this._menuservice.AngularMenu()
-          .then(res => {
-            if (res.Error !== null) {
-              throw res.Error;
-            }
-            this.angularmenudto = res.Result;
+        try {
+          const res = await this._menuservice.AngularMenu();
+          if (res.Error !== null) {
+            throw res.Error;
+          }
+          this.angularmenudto = res.Result;
 
-            return this._verzioservice.VerzioEsBuild();
-          })
-          .then(res1 => {
-            if (res1.Error !== null) {
-              throw res1.Error;
-            }
-            this.verzioesbuild = 'OSS ' + res1.Result;
-            this._cdr.markForCheck();
-            this._cdr.detectChanges();
-          })
-          .catch(err => {
-            this._errorservice.Error = err;
-          });
+          const res1 = await this._verzioservice.VerzioEsBuild();
+          if (res1.Error !== null) {
+            throw res1.Error;
+          }
+          this.verzioesbuild = 'OSS ' + res1.Result;
+          this._cdr.markForCheck();
+          this._cdr.detectChanges();
+        } catch (err) {
+          this._errorservice.Error = err;
+        }
       } else {
         this.verzioesbuild = 'OSS';
         this._cdr.markForCheck();

@@ -51,11 +51,17 @@ export class BizonylatteteltablaComponent implements AfterViewInit, OnDestroy {
     this.ujOk = false;
     this.torlesOk = false;
     this.modOk = false;
+
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   doUj() {
     this.clearselections();
     this.ujOk = true;
+
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
   dotorles(i: number) {
     this.egysem();
@@ -63,6 +69,9 @@ export class BizonylatteteltablaComponent implements AfterViewInit, OnDestroy {
     this.eventTorlesElott.emit(i);
 
     this.torlesOk = true;
+
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
   domodositas(i: number) {
     this.egysem();
@@ -70,6 +79,9 @@ export class BizonylatteteltablaComponent implements AfterViewInit, OnDestroy {
     this.eventModositasElott.emit(i);
 
     this.modOk = true;
+
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   ngOnDestroy() {

@@ -30,7 +30,7 @@ import {BizonylatReszletekComponent} from '../bizonylat-reszletek/bizonylat-resz
 import {TetelTorlesComponent} from '../../../common/tetel-torles/tetel-torles.component';
 import {BizonylatkapcsolatListComponent} from '../../bizonylatkapcsolat/bizonylatkapcsolat-list/bizonylatkapcsolat-list.component';
 import {BizonylatFuvarszamlaComponent} from '../../../bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla.component';
-import {BizonylatSzerkesztesComponent} from '../../../bizonylat/bizonylat-szerkesztes/bizonylat-szerkesztes.component';
+import {BizonylatSzerkesztesComponent} from '../bizonylat-szerkesztes/bizonylat-szerkesztes.component';
 import {ProjektkapcsolatLevalasztasComponent} from '../../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat-levalasztas/projektkapcsolat-levalasztas.component';
 
 @Component({

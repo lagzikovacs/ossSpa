@@ -7,7 +7,7 @@
       <div class="editform-row">
         <div class="editform-label">Ügyfél</div>
         <input type="text" class="editform-edit zoomedit ugyfelwidth" appAutofocus formControlName="ugyfelnev">
-        <button class="toolbutton" (click)="UgyfelZoom()" [disabled] = "SzerkesztesMode !== 1" type="button">...</button>
+        <button class="toolbutton" (click)="UgyfelZoom()" type="button">...</button>
       </div>
 
       <div class="editform-row">
@@ -26,7 +26,7 @@
         <div class="editform-row-block">
           <div class="editform-label">Pénznem</div>
           <input type="text" class="editform-edit zoomedit penznemwidth" formControlName="penznem">
-          <button class="toolbutton" (click)="PenznemZoom()" [disabled] = "SzerkesztesMode !== 1" type="button">...</button>
+          <button class="toolbutton" (click)="PenznemZoom()" type="button">...</button>
         </div>
 
         <div class="editform-row-block">
@@ -38,9 +38,9 @@
       <div class="editform-row">
         <div class="editform-label">Fizetési mód</div>
         <input type="text" class="editform-edit zoomedit primitivwidth" formControlName="fizetesimod">
-        <button class="toolbutton" (click)="FizetesimodZoom()" [disabled] = "SzerkesztesMode !== 1" type="button">...</button>
-        <button class="toolbutton" (click)="Bk()" [disabled] = "SzerkesztesMode !== 1" type="button">Bk</button>
-        <button class="toolbutton" (click)="Kp()" [disabled] = "SzerkesztesMode !== 1" type="button">Kp</button>
+        <button class="toolbutton" (click)="FizetesimodZoom()" type="button">...</button>
+        <button class="toolbutton" (click)="Bk()" type="button">Bk</button>
+        <button class="toolbutton" (click)="Kp()" type="button">Kp</button>
       </div>
 
       <div class="editform-row">
@@ -114,34 +114,12 @@
 
 
     <div class="editform-row-bottom">
-      <button class="toolbutton okbutton" [disabled]="formFej.invalid || SzerkesztesMode !== 1" type="button" (click)="onSubmit()">Ok</button>
-      <button class="toolbutton" [disabled]="SzerkesztesMode !== 1" type="button" (click)="cancel()">Mégsem</button>
+      <button class="toolbutton okbutton" [disabled]="formFej.invalid" type="button" (click)="onSubmit()">Ok</button>
+      <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
     </div>
   </div>
 
-  <div id="bizonylatzoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
-    <ng-container *ngIf="SzerkesztesMode === 2">
-      <div class="zoom-modal-content-complex">
-        <app-ugyfel-list [maszk]="ComplexDtoEdited.Dto.Ugyfelnev || ''"
-                         (eventSelectzoom)="onUgyfelSelectzoom($event)"
-                         (eventStopzoom)="onUgyfelStopzoom()"></app-ugyfel-list>
-      </div>
-    </ng-container>
-
-    <ng-container *ngIf="SzerkesztesMode === 3">
-      <div class="zoom-modal-content-primitive">
-        <app-penznem-list [maszk]="ComplexDtoEdited.Dto.Penznem || ''"
-                          (eventSelectzoom)="onPenznemSelectzoom($event)"
-                          (eventStopzoom)="onPenznemStopzoom()"></app-penznem-list>
-      </div>
-    </ng-container>
-
-    <ng-container *ngIf="SzerkesztesMode === 4">
-      <div class="zoom-modal-content-primitive">
-        <app-fizetesimod-list [maszk]="ComplexDtoEdited.Dto.Fizetesimod || ''"
-                              (eventSelectzoom)="onFizetesimodSelectzoom($event)"
-                              (eventStopzoom)="onFizetesimodStopzoom()"></app-fizetesimod-list>
-      </div>
-    </ng-container>
-  </div>
+  <jw-modal [id]="modalname" [bodyclass]="bodyclass">
+    <ng-template #compcont_bizonylatszerk></ng-template>
+  </jw-modal>
 </div>

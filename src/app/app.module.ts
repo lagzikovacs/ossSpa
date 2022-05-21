@@ -170,7 +170,7 @@ import {TevekenysegListComponent} from './01 Torzsadatok/08 Tevekenyseg/tevekeny
 import { BizonylatFuvarszamlaComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla.component';
 import { BizonylatFuvarszamlaUjComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla-uj/bizonylat-fuvarszamla-uj.component';
 import { BizonylatFuvarszamlaTorlesComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla-torles/bizonylat-fuvarszamla-torles.component';
-import { BizonylatZoomComponent } from './bizonylat/bizonylat-zoom/bizonylat-zoom.component';
+import { BizonylatZoomComponent } from './03 Bizonylatok/bizonylat/bizonylat-zoom/bizonylat-zoom.component';
 import { DokumentumLetoltesComponent } from './02 Eszkozok/02 Irat/dokumentum/dokumentum-letoltes/dokumentum-letoltes.component';
 import { DokumentumLetoltesPdfComponent } from './02 Eszkozok/02 Irat/dokumentum/dokumentum-letoltes-pdf/dokumentum-letoltes-pdf.component';
 import { DokumentumNezetComponent } from './02 Eszkozok/02 Irat/dokumentum/dokumentum-nezet/dokumentum-nezet.component';

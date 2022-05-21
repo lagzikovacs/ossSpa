@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild,
   ViewContainerRef
 } from '@angular/core';
@@ -30,6 +31,7 @@ import {PenznemListComponent} from '../../../01 Torzsadatok/03 Penznem/penznem-l
 import {FizetesimodListComponent} from '../../../01 Torzsadatok/02 Fizetesimod/fizetesimod-list/fizetesimod-list.component';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-bizonylat-szerkesztes',
   templateUrl: './bizonylat-szerkesztes.component.html'
 })

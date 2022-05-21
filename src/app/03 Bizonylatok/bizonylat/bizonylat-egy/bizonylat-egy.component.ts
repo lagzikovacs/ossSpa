@@ -111,7 +111,6 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
         ujC.instance.uj = true;
         ujC.instance.bizonylatTipus = this.bizonylatTipus;
         ujC.instance.bizonylatLeiro = this.bizonylatLeiro;
-        ujC.instance.Bizonylatkod = this.Dto.Bizonylatkod;
         ujC.instance.eventSzerkesztesUtan.pipe(untilComponentDestroyed(this)).subscribe(dto => {
           this.eventUj.emit(dto);
         });

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {UgyfelterService} from '../ugyfelter.service';
 import {UgyfelterDto} from '../ugyfelterdto';
@@ -20,6 +20,7 @@ import {ErrorService} from '../../../common/errorbox/error.service';
 import {Bizonylatnyomtatasciklus} from '../../../03 Bizonylatok/bizonylatnyomtatas/bizonylatnyomtatasciklus';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-ugyfelter',
   templateUrl: './ugyfelter.component.html'
 })
@@ -31,7 +32,13 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
   bejelentkezve = false;
   Dto = new UgyfelterDto();
   pi = -1;
+
   eppFrissit = false;
+  set spinner(value: boolean) {
+    this.eppFrissit = value;
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
 
   ugyfelDto = new UgyfelDto();
   lstProjektDto: ProjektDto[];
@@ -49,10 +56,11 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
               private _projektkapcsolatservice: ProjektkapcsolatService,
               private _bizonylatnyomtatasservice: BizonylatnyomtatasService,
               private _dokumentumservice: DokumentumService,
+              private _cdr: ChangeDetectorRef,
               private _errorservice: ErrorService) {
     this.bc = new Bizonylatnyomtatasciklus(_errorservice, _bizonylatnyomtatasservice);
     this.bc.eventSpinnervege.on(() => {
-      this.eppFrissit = false;
+      this.spinner = false;
     });
   }
 
@@ -64,51 +72,49 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
       });
   }
 
-  folytatas() {
-    this.eppFrissit = true;
-    this._ugyfelterservice.UgyfelterCheck(this.up)
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
+  async folytatas() {
+    this.spinner = true;
+    try {
+      const res = await this._ugyfelterservice.UgyfelterCheck(this.up);
+      if (res.Error !== null) {
+        throw res.Error;
+      }
 
-        this.Dto = res.Result;
-        this._logonservice.Sid = res.Result.sid;
-        this.ugyfelDto = res.Result.ugyfelDto;
-        this.lstProjektDto = res.Result.lstProjektDto;
+      this.Dto = res.Result;
+      this._logonservice.Sid = res.Result.sid;
+      this.ugyfelDto = res.Result.ugyfelDto;
+      this.lstProjektDto = res.Result.lstProjektDto;
 
-        this.bejelentkezve = true;
-        this.eppFrissit = false;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+      this.bejelentkezve = true;
+      this.spinner = false;
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
-  projektvalasztas(i: number) {
+  async projektvalasztas(i: number) {
     this.projektkod = this.lstProjektDto[i].Projektkod;
     this.iratkod = 0;
     this.dokumentumkod = 0;
 
-    this.eppFrissit = true;
-    this._projektkapcsolatservice.SelectForUgyfelter(this.projektkod)
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
+    this.spinner = true;
+    try {
+      const res = await this._projektkapcsolatservice.SelectForUgyfelter(this.projektkod);
+      if (res.Error !== null) {
+        throw res.Error;
+      }
 
-        this.lstProjektkapcsolatDto = res.Result;
+      this.lstProjektkapcsolatDto = res.Result;
 
-        this.eppFrissit = false;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+      this.spinner = false;
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
-  bizonylatvalasztas(i: number) {
+  async bizonylatvalasztas(i: number) {
     this.bizonylatkod = this.lstProjektkapcsolatDto[i].Bizonylatkod;
     this.iratkod = 0;
     this.dokumentumkod = 0;
@@ -120,85 +126,81 @@ export class UgyfelterComponent implements OnInit, OnDestroy {
       new SzMT(Szempont.NyomtatasTipus, BizonylatNyomtatasTipus.Masolat)
     ];
 
-    this.eppFrissit = true;
-    this._bizonylatnyomtatasservice.TaskStart(fi)
-      .then(res => {
-        if (res.Error != null) {
-          throw res.Error;
-        }
+    this.spinner = true;
+    try {
+      const res = await this._bizonylatnyomtatasservice.TaskStart(fi);
+      if (res.Error != null) {
+        throw res.Error;
+      }
 
-        this.bc.tasktoken = res.Result;
-        this.bc.ciklus();
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+      this.bc.tasktoken = res.Result;
+      this.bc.ciklus();
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
-  iratvalasztas(i: number) {
+  async iratvalasztas(i: number) {
     this.bizonylatkod = 0;
     this.iratkod = this.lstProjektkapcsolatDto[i].Iratkod;
     this.dokumentumkod = 0;
 
-    this.eppFrissit = true;
-    this._dokumentumservice.Select(this.iratkod)
-      .then(res => {
-        if (res.Error !== null) {
-          throw res.Error;
-        }
+    this.spinner = true;
+    try {
+      const res = await this._dokumentumservice.Select(this.iratkod);
+      if (res.Error !== null) {
+        throw res.Error;
+      }
 
-        this.lstDokumentumDto = res.Result;
+      this.lstDokumentumDto = res.Result;
 
-        this.eppFrissit = false;
-      })
-      .catch(err => {
-        this.eppFrissit = false;
-        this._errorservice.Error = err;
-      });
+      this.spinner = false;
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
   }
 
-  dokumentumvalasztas(i: number) {
+  async dokumentumvalasztas(i: number) {
     this.dokumentumkod = this.lstDokumentumDto[i].Dokumentumkod;
 
     const meret = this.lstDokumentumDto[i].Meret;
     const megjegyzes = this.lstDokumentumDto[i].Megjegyzes;
     const ext = this.lstDokumentumDto[i].Ext.toLowerCase();
 
-    this.eppFrissit = true;
+    this.spinner = true;
     if (ext !== '.doc' && ext !== '.docx' && ext !== '.xls' && ext !== '.xlsx') {
-      this._dokumentumservice.Letoltes(new LetoltesParam(
-        this.dokumentumkod, meret))
-        .then(res => {
-          if (res.Error !== null) {
-            throw res.Error;
-          }
+      try {
+        const res = await this._dokumentumservice.Letoltes(new LetoltesParam(this.dokumentumkod, meret));
+        if (res.Error !== null) {
+          throw res.Error;
+        }
 
-          const blob = b64toBlob(res.Result.b);
-          FileSaver.saveAs(blob, megjegyzes + ext);
+        const blob = b64toBlob(res.Result.b);
+        FileSaver.saveAs(blob, megjegyzes + ext);
 
-          this.eppFrissit = false;
-        })
-        .catch(err => {
-          this.eppFrissit = false;
-          this._errorservice.Error = err;
-        });
+        this.spinner = false;
+      } catch (err) {
+        this.spinner = false;
+        this._errorservice.Error = err;
+      }
     } else {
-      this._dokumentumservice.LetoltesPDF(this.dokumentumkod)
-        .then(res => {
-          if (res.Error !== null) {
-            throw res.Error;
-          }
+      try {
+        const res1 = await this._dokumentumservice.LetoltesPDF(this.dokumentumkod);
+        if (res1.Error !== null) {
+          throw res1.Error;
+        }
 
-          const blob = b64toBlob(res.Result);
-          FileSaver.saveAs(blob, megjegyzes + '.pdf');
+        const blob = b64toBlob(res1.Result);
+        FileSaver.saveAs(blob, megjegyzes + '.pdf');
 
-          this.eppFrissit = false;
-        })
-        .catch(err => {
-          this.eppFrissit = false;
-          this._errorservice.Error = err;
-        });
+        this.spinner = false;
+
+      } catch (err) {
+        this.spinner = false;
+        this._errorservice.Error = err;
+      }
     }
   }
 

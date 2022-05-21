@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {DokumentumDto} from '../../../02 Eszkozok/02 Irat/dokumentum/dokumentumdto';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-ugyfelter-dokumentum',
   templateUrl: './ugyfelter-dokumentum.component.html'
 })

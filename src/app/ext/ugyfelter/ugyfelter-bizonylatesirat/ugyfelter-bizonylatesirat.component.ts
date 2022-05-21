@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {BizonylatKapcsolatDto} from '../../../03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolatdto';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-ugyfelter-bizonylatesirat',
   templateUrl: './ugyfelter-bizonylatesirat.component.html'
 })

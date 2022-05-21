@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {ProjektDto} from '../../../02 Eszkozok/01 Projekt/projekt/projektdto';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-ugyfelter-projekt-tabla',
   templateUrl: './ugyfelter-projekt-tabla.component.html'
 })

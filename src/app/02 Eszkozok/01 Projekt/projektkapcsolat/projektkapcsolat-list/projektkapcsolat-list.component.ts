@@ -4,8 +4,6 @@ import {
 } from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {LogonService} from '../../../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
-import {IratService} from '../../../02 Irat/irat/irat.service';
-import {BizonylatService} from '../../../../03 Bizonylatok/bizonylat/bizonylat.service';
 import {VagolapService} from '../../../../05 Segedeszkozok/08 Vagolap/vagolap.service';
 import {VagolapMode} from '../../../../05 Segedeszkozok/08 Vagolap/vagolapmode';
 import {JogKod} from '../../../../common/enums/jogkod';
@@ -14,12 +12,10 @@ import {ProjektkapcsolatTablaComponent} from '../projektkapcsolat-tabla/projektk
 import {IratDto} from '../../../02 Irat/irat/iratdto';
 import {BizonylatDto} from '../../../../03 Bizonylatok/bizonylat/bizonylatdto';
 import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
-import {ProjektKapcsolatParam} from '../projektkapcsolatparam';
 import {BizonylatTipusLeiro} from '../../../../03 Bizonylatok/bizonylat/bizonylattipusleiro';
 import {BizonylatTipus} from '../../../../03 Bizonylatok/bizonylat/bizonylattipus';
-import {ProjektDto} from '../../projekt/projektdto';
 import {ProjektkapcsolatEgyMode} from '../projektkapcsolategymode';
-import {propCopy} from "../../../../common/propCopy";
+import {propCopy} from '../../../../common/propCopy';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,7 +27,6 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
 
   @Input() Projektkod = -1;
   @Input() Ugyfelkod = -1;
-
 
   Dto = new Array<ProjektKapcsolatDto>();
   DtoSelectedIndex = -1;
@@ -57,8 +52,6 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
   projektkapcsolatservice: ProjektkapcsolatService;
 
   constructor(private _logonservice: LogonService,
-              private _iratservice: IratService,
-              private _bizonylatservice: BizonylatService,
               private _vagolapservice: VagolapService,
               private _errorservice: ErrorService,
               private _cdr: ChangeDetectorRef,

@@ -117,7 +117,7 @@ import { KifizetesListComponent } from './03 Bizonylatok/kifizetes/kifizetes-lis
 import { KifizetesSzerkesztesComponent } from './03 Bizonylatok/kifizetes/kifizetes-szerkesztes/kifizetes-szerkesztes.component';
 import { BizonylatNyomtatasComponent } from './03 Bizonylatok/bizonylatnyomtatas/bizonylat-nyomtatas/bizonylat-nyomtatas.component';
 import { BizonylatReszletekComponent } from './03 Bizonylatok/bizonylat/bizonylat-reszletek/bizonylat-reszletek.component';
-import { BizonylatkapcsolatListComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-list/bizonylatkapcsolat-list.component';
+import { BizonylatkapcsolatListComponent } from './03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolat-list/bizonylatkapcsolat-list.component';
 import { BizonylatkapcsolatLevalasztasComponent } from './03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolat-levalasztas/bizonylatkapcsolat-levalasztas.component';
 import { BizonylatteteltablaComponent } from './03 Bizonylatok/bizonylat/bizonylatteteltabla/bizonylatteteltabla.component';
 import { BizonylatafatablaComponent } from './03 Bizonylatok/bizonylat/bizonylatafatabla/bizonylatafatabla.component';
@@ -158,7 +158,7 @@ import {ErrorService} from './common/errorbox/error.service';
 import { ErrorboxComponent } from './common/errorbox/errorbox.component';
 import { UgyfelterProjektTablaComponent } from './ext/ugyfelter/ugyfelter-projekt-tabla/ugyfelter-projekt-tabla.component';
 import { ProjektkapcsolatTablaComponent } from './02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat-tabla/projektkapcsolat-tabla.component';
-import { BizonylatkapcsolatTablaComponent } from './bizonylatkapcsolat/bizonylatkapcsolat-tabla/bizonylatkapcsolat-tabla.component';
+import { BizonylatkapcsolatTablaComponent } from './03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolat-tabla/bizonylatkapcsolat-tabla.component';
 import {BizonylattetelSzerkesztesComponent} from './03 Bizonylatok/bizonylattetel/bizonylattetel-szerkesztes/bizonylattetel-szerkesztes.component';
 import { AjanlatTablaComponent } from './02 Eszkozok/01 Projekt/ajanlat/ajanlat-tabla/ajanlat-tabla.component';
 import { HscrollDirective } from './directives/divhscroll.directive';

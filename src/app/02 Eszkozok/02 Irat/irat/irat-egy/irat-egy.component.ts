@@ -20,6 +20,9 @@ import {VagolapIrathozComponent} from "../../../../05 Segedeszkozok/08 Vagolap/v
 import {FotozasLinkComponent} from "../../fotozas-link/fotozas-link.component";
 import {ProjektkapcsolatLevalasztasComponent} from "../../../01 Projekt/projektkapcsolat/projektkapcsolat-levalasztas/projektkapcsolat-levalasztas.component";
 import {ProjektKapcsolatDto} from "../../../01 Projekt/projektkapcsolat/projektkapcsolatdto";
+import {IratlevalasztasMode} from "../iratlevalasztasmode";
+import {BizonylatKapcsolatDto} from "../../../../03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolatdto";
+import {BizonylatkapcsolatLevalasztasComponent} from "../../../../03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolat-levalasztas/bizonylatkapcsolat-levalasztas.component";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,9 +37,11 @@ export class IratEgyComponent extends OnDestroyMixin implements AfterViewInit, O
   @Input() enProjekt = true;
   @Input() enUgyfel = true;
   @Input() enLevalasztas = false;
+  @Input() LevalasztasMode = IratlevalasztasMode.Projektrol;
   @Input() defaultNav = 15;
 
   @Input() projektkapcsolatDto: ProjektKapcsolatDto = new ProjektKapcsolatDto();
+  @Input() bizonylatkapcsolatDto: BizonylatKapcsolatDto = new BizonylatKapcsolatDto();
 
   Dto = new IratDto();
   @Input() set dto(value: IratDto) {
@@ -142,15 +147,30 @@ export class IratEgyComponent extends OnDestroyMixin implements AfterViewInit, O
         vagolapirathozC.instance.item = this.Dto;
         break;
       case EgyMode.Levalasztas: // 52
-        const pklevalasztasC = this.vcr.createComponent(ProjektkapcsolatLevalasztasComponent);
-        pklevalasztasC.instance.Dto = this.projektkapcsolatDto;
-        pklevalasztasC.instance.eventLevalasztasutan.pipe(untilComponentDestroyed(this)).subscribe(ok => {
-          this.doNav(0);
-          if (ok) {
-            this.eventLevalasztasutan.emit();
-          }
-        });
-        this.docdr();
+        switch (this.LevalasztasMode) {
+          case IratlevalasztasMode.Projektrol:
+            const pklevalasztasC = this.vcr.createComponent(ProjektkapcsolatLevalasztasComponent);
+            pklevalasztasC.instance.Dto = this.projektkapcsolatDto;
+            pklevalasztasC.instance.eventLevalasztasutan.pipe(untilComponentDestroyed(this)).subscribe(ok => {
+              this.doNav(0);
+              if (ok) {
+                this.eventLevalasztasutan.emit();
+              }
+            });
+            this.docdr();
+            break;
+          case IratlevalasztasMode.Bizonylatrol:
+            const bklevalasztasC = this.vcr.createComponent(BizonylatkapcsolatLevalasztasComponent);
+            bklevalasztasC.instance.Dto = this.bizonylatkapcsolatDto;
+            bklevalasztasC.instance.eventLevalasztasutan.pipe(untilComponentDestroyed(this)).subscribe(ok => {
+              this.doNav(0);
+              if (ok) {
+                this.eventLevalasztasutan.emit();
+              }
+            });
+            this.docdr();
+            break;
+        }
         break;
     }
   }

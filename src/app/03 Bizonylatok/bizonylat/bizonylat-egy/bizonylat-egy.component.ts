@@ -28,7 +28,7 @@ import {BizonylatProjektjeComponent} from '../bizonylat-projektje/bizonylat-proj
 import {BizonylatPenztarComponent} from '../bizonylat-penztar/bizonylat-penztar.component';
 import {BizonylatReszletekComponent} from '../bizonylat-reszletek/bizonylat-reszletek.component';
 import {TetelTorlesComponent} from '../../../common/tetel-torles/tetel-torles.component';
-import {BizonylatkapcsolatListComponent} from '../../../bizonylatkapcsolat/bizonylatkapcsolat-list/bizonylatkapcsolat-list.component';
+import {BizonylatkapcsolatListComponent} from '../../bizonylatkapcsolat/bizonylatkapcsolat-list/bizonylatkapcsolat-list.component';
 import {BizonylatFuvarszamlaComponent} from '../../../bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla.component';
 import {BizonylatSzerkesztesComponent} from '../../../bizonylat/bizonylat-szerkesztes/bizonylat-szerkesztes.component';
 import {ProjektkapcsolatLevalasztasComponent} from '../../../02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat-levalasztas/projektkapcsolat-levalasztas.component';

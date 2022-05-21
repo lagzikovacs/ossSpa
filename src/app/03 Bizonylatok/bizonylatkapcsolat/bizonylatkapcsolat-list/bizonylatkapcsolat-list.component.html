@@ -1,0 +1,30 @@
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <h5>{{bizonylatkapcsolatservice.cim}}</h5>
+  <div>
+    <button (click)="onKereses()" class="toolbutton">
+      <i class="fa fa-search" aria-hidden="true"></i>
+    </button>
+    <button (click)="doUj()" class="toolbutton">
+      <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>
+    </button>
+    <button (click)="doVagolaprol()" class="toolbutton">
+      <i class="fa fa-plus" style="margin-right: 3px" aria-hidden="true"></i>Vágólapról
+    </button>
+  </div>
+
+  <app-bizonylatkapcsolat-tabla #tabla
+                                [items]="Dto"
+                                (forid)="onId($event)"
+                                [egyKapcsolat]="egykapcsolat">
+  </app-bizonylatkapcsolat-tabla>
+
+  <ng-template #egykapcsolat>
+    <app-bizonylatkapcsolat-egy [egymode]="egymode"
+                                [Bizonylatkod] = "Bizonylatkod"
+                                [bizonylatkapcsolatDto]="Dto[DtoSelectedIndex]"
+                                (eventUj)="onUjutan($event)"
+                                (eventModositas)="onModositasutan($event)"
+                                (eventLevalasztasutan)="onLevalasztasutan()">
+    </app-bizonylatkapcsolat-egy>
+  </ng-template>
+</div>

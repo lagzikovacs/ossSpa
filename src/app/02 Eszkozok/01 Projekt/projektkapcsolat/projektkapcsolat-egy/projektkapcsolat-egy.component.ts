@@ -19,6 +19,7 @@ import {ProjektService} from '../../projekt/projekt.service';
 import {BizonylatDto} from '../../../../03 Bizonylatok/bizonylat/bizonylatdto';
 import {ProjektKapcsolatParam} from '../projektkapcsolatparam';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
+import {IratlevalasztasMode} from '../../../02 Irat/irat/iratlevalasztasmode';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -204,6 +205,7 @@ export class ProjektkapcsolatEgyComponent extends OnDestroyMixin implements Afte
           iratC.instance.enProjekt = false;
           iratC.instance.enUgyfel = false;
           iratC.instance.enLevalasztas = true;
+          iratC.instance.LevalasztasMode = IratlevalasztasMode.Projektrol;
           iratC.instance.projektkapcsolatDto = this.projektkapcsolatDto;
           iratC.instance.eventModositas.pipe(untilComponentDestroyed(this)).subscribe(async dto => {
             if (dto !== undefined) {

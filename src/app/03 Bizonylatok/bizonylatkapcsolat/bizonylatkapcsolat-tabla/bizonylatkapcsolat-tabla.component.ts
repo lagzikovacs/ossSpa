@@ -1,45 +1,64 @@
-import {Component, EventEmitter, Input, OnDestroy, Output, TemplateRef} from '@angular/core';
-import {BizonylatKapcsolatDto} from '../../03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolatdto';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, Output,
+  TemplateRef
+} from '@angular/core';
+import {BizonylatKapcsolatDto} from '../bizonylatkapcsolatdto';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-bizonylatkapcsolat-tabla',
   templateUrl: './bizonylatkapcsolat-tabla.component.html'
 })
 export class BizonylatkapcsolatTablaComponent implements OnDestroy {
   @Input() items: BizonylatKapcsolatDto[];
 
-  @Input() egyIrat: TemplateRef<any>;
-  @Input() egyLevalasztas: TemplateRef<any>;
-  @Input() egyVagolaprol: TemplateRef<any>;
-  @Input() egyUjirat: TemplateRef<any>;
+  @Input() egyKapcsolat: TemplateRef<any>;
 
   @Output() forid = new EventEmitter<number>();
-  @Output() forlevalasztas = new EventEmitter<number>();
 
-  @Input() iratOk = false;
-  @Input() levalasztasOk = false;
-  @Input() vagolaprolOk = false;
-  @Input() ujiratOk = false;
+  @Input() ujOk = false;
+  @Input() egyOk = false;
 
   clickedrowindex = -1;
   clickedidindex = -1;
+
+  constructor(private _cdr: ChangeDetectorRef) {
+  }
 
   clearselections() {
     this.clickedrowindex = -1;
     this.clickedidindex = -1;
 
-    this.nemOk();
+    this.ujOk = false;
+    this.egyOk = false;
+
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
-  nemOk() {
-    this.iratOk = false;
-    this.levalasztasOk = false;
-    this.vagolaprolOk = false;
-    this.ujiratOk = false;
+  ujtetelstart() {
+    this.clearselections();
+    this.ujOk = true;
+
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
+  ujtetelstop() {
+    this.ujOk = false;
+
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
+
+  egytetelstart() {
+    this.egyOk = true;
+
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   clickforid(i: number) {
-    this.nemOk();
+    this.ujOk = false;
 
     this.clickedidindex = i;
     this.clickedrowindex = this.clickedidindex;
@@ -48,21 +67,16 @@ export class BizonylatkapcsolatTablaComponent implements OnDestroy {
   }
 
   clickforrow(i: number) {
+    this.ujOk = false;
+
     this.clickedrowindex = i;
     // először clickforid aztán clickforrow is, clickforrow felülírná az eseményeket
     if (this.clickedrowindex !== this.clickedidindex) {
-      this.nemOk();
       this.clickedidindex = -1;
       this.forid.emit(-1);
     }
   }
 
-  clickforlevalasztas(i: number) {
-    this.nemOk();
-
-    this.clickedidindex = i;
-    this.forlevalasztas.emit(i);
-  }
 
   ngOnDestroy() {
     Object.keys(this).map(k => {

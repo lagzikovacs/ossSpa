@@ -4,7 +4,6 @@ import {
 } from '@angular/core';
 import {UgyfelService} from '../ugyfel.service';
 import {HelysegService} from '../../07 Helyseg/helyseg.service';
-import {UgyfelSzerkesztesMode} from '../ugyfelszerkesztesmode';
 import {ErrorService} from '../../../common/errorbox/error.service';
 import {deepCopy} from '../../../common/deepCopy';
 import {HelysegDto} from '../../07 Helyseg/helysegdto';

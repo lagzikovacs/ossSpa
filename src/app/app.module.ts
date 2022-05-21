@@ -167,9 +167,9 @@ import { ParticioEmailComponent } from './05 Segedeszkozok/01 Particio/particio-
 import {TevekenysegService} from './01 Torzsadatok/08 Tevekenyseg/tevekenyseg.service';
 import {TevekenysegSzerkesztesComponent} from './01 Torzsadatok/08 Tevekenyseg/tevekenyseg-szerkesztes/tevekenyseg-szerkesztes.component';
 import {TevekenysegListComponent} from './01 Torzsadatok/08 Tevekenyseg/tevekenyseg-list/tevekenyseg-list.component';
-import { BizonylatFuvarszamlaComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla.component';
-import { BizonylatFuvarszamlaUjComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla-uj/bizonylat-fuvarszamla-uj.component';
-import { BizonylatFuvarszamlaTorlesComponent } from './bizonylat/bizonylat-fuvarszamla/bizonylat-fuvarszamla-torles/bizonylat-fuvarszamla-torles.component';
+import { BizonylatFuvarszamlaComponent } from './03 Bizonylatok/fuvarszamla/bizonylat-fuvarszamla/bizonylat-fuvarszamla.component';
+import { BizonylatFuvarszamlaUjComponent } from './03 Bizonylatok/fuvarszamla/bizonylat-fuvarszamla-uj/bizonylat-fuvarszamla-uj.component';
+import { BizonylatFuvarszamlaTorlesComponent } from './03 Bizonylatok/fuvarszamla/bizonylat-fuvarszamla-torles/bizonylat-fuvarszamla-torles.component';
 import { BizonylatZoomComponent } from './03 Bizonylatok/bizonylat/bizonylat-zoom/bizonylat-zoom.component';
 import { DokumentumLetoltesComponent } from './02 Eszkozok/02 Irat/dokumentum/dokumentum-letoltes/dokumentum-letoltes.component';
 import { DokumentumLetoltesPdfComponent } from './02 Eszkozok/02 Irat/dokumentum/dokumentum-letoltes-pdf/dokumentum-letoltes-pdf.component';

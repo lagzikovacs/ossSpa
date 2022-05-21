@@ -49,7 +49,7 @@ export class BizonylatZoomComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this.MintaTextBox.nativeElement.value = this.maszk;
 
-    this.eppFrissit = true;
+    this.spinner = true;
     try {
       const res = await this.bizonylatservice.BizonylatLeiro(this.bizonylatTipus);
       if (res.Error != null) {
@@ -57,11 +57,11 @@ export class BizonylatZoomComponent implements OnInit, OnDestroy {
       }
 
       this.bizonylatLeiro = res.Result;
-      this.eppFrissit = false;
+      this.spinner = false;
 
       this.doKereses();
     } catch (err) {
-      this.eppFrissit = false;
+      this.spinner = false;
       this._errorservice.Error = err;
     }
   }
@@ -80,7 +80,7 @@ export class BizonylatZoomComponent implements OnInit, OnDestroy {
   }
 
   async doKeresesTovabb() {
-    this.eppFrissit = true;
+    this.spinner = true;
     try {
       const res = await this.bizonylatservice.Select(this.bp);
       if (res.Error != null) {
@@ -100,9 +100,9 @@ export class BizonylatZoomComponent implements OnInit, OnDestroy {
       this.OsszesRekord = res.OsszesRekord;
 
       this.bp.rekordtol += this.bp.lapmeret;
-      this.eppFrissit = false;
+      this.spinner = false;
     } catch (err) {
-      this.eppFrissit = false;
+      this.spinner = false;
       this._errorservice.Error = err;
     }
   }

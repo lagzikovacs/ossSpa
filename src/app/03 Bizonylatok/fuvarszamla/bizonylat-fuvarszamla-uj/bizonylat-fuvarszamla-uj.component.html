@@ -29,14 +29,7 @@
     </div>
   </form>
 
-  <div id="fuvarszamlazoombox" class="zoom-modal" role="dialog"  data-backdrop="false" data-keyboard="false">
-    <div class="zoom-modal-content-complex">
-      <ng-container *ngIf="SzerkesztesMode === 1">
-        <app-bizonylat-zoom [maszk]="dtoFuvarszamla.Bizonylatszam"
-                            (eventStopzoom)="eventStopZoom()"
-                            (eventSelectzoom)="eventSelectzoom($event)">
-        </app-bizonylat-zoom>
-      </ng-container>
-    </div>
-  </div>
+  <jw-modal [id]="modalname" bodyclass="jw-modal-body-complex">
+    <ng-template #compcont_bizonylatzoom></ng-template>
+  </jw-modal>
 </div>

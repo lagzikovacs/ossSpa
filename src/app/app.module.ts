@@ -236,6 +236,7 @@ import {IratEgyToolbarComponent} from "./02 Eszkozok/02 Irat/irat/irat-egy-toolb
 import {ProjektkapcsolatEgyComponent} from "./02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat-egy/projektkapcsolat-egy.component";
 import { BizonylatEgyToolbarComponent } from './03 Bizonylatok/bizonylat/bizonylat-egy-toolbar/bizonylat-egy-toolbar.component';
 import { BizonylatkapcsolatEgyComponent } from './03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolat-egy/bizonylatkapcsolat-egy.component';
+import { CsoportEntityComponent } from './05 Segedeszkozok/04 Csoport/csoport-entity/csoport-entity.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -423,7 +424,6 @@ if (environment.production) {
     UgyfelCsoportComponent,
     UgyfelVcardComponent,
     UgyfelTablaComponent,
-    TablaComponent,
     ErrorboxComponent,
     UgyfelterProjektTablaComponent,
     ProjektkapcsolatTablaComponent,
@@ -498,6 +498,8 @@ if (environment.production) {
     ProjektkapcsolatEgyComponent,
     BizonylatEgyToolbarComponent,
     BizonylatkapcsolatEgyComponent,
+    TablaComponent,
+    CsoportEntityComponent,
   ],
   imports: [
     BrowserModule,

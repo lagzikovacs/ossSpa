@@ -13,6 +13,10 @@
                 [egyTemplate]="gridegy">
   </app-tabla-ex>
 
+  <!--<app-csoport-entity *ngFor="let item of Dto; let i = index" [Dto]="item"-->
+                                                              <!--[DtoIndex]="i">-->
+  <!--</app-csoport-entity>-->
+
   <ng-template #gridegy>
     <app-csoport-egy [uj]="uj"
                      [dto]="Dto[DtoSelectedIndex]"

@@ -6,8 +6,6 @@ import {MeService} from '../../04 Mennyisegiegyseg/me.service';
 import {AfakulcsService} from '../../05 Afakulcs/afakulcs.service';
 import {ErrorService} from '../../../common/errorbox/error.service';
 import {deepCopy} from '../../../common/deepCopy';
-import {AfakulcsDto} from '../../05 Afakulcs/afakulcsdto';
-import {MeDto} from '../../04 Mennyisegiegyseg/medto';
 import {CikkDto} from '../cikkdto';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MeZoomParam} from '../../04 Mennyisegiegyseg/mezoomparam';

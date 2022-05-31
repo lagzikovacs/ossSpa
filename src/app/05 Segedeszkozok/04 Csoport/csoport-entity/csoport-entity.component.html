@@ -1,19 +1,30 @@
-<div style="width: min-content">
-  <div *ngIf="_dtoindex === 0">
-    <div style="width: 4em;text-align: right; border: solid 1px; float: left; padding: 6px">
+<div *ngIf="_dtoindex === 0" style="display: grid; grid-template-columns: 4em min-content">
+  <div style="border-right: 1px solid; border-bottom: 1px solid; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
       Id
-    </div>
-    <div style="width: 20em; border: solid 1px; padding: 6px">
-      Csoport
-    </div>
   </div>
-
-  <div>
-    <div style="width: 4em;text-align: right; ; float: left; padding: 6px; border: solid 1px">
-      {{_dto.Csoportkod}}
-    </div>
-    <div style="width: 20em; padding: 6px; border: solid 1px">
-      {{_dto.Csoport1}}
-    </div>
+  <div style="border-right: 1px solid; border-bottom: 1px solid; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+      Csoport
   </div>
 </div>
+
+<div style="display: grid; grid-template-columns: 4em min-content">
+  <div style="border-right: 1px solid; border-bottom: 1px solid; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+    {{_dto.Csoportkod}}
+  </div>
+  <div style="border-right: 1px solid; border-bottom: 1px solid; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+    {{_dto.Csoport1}}
+  </div>
+</div>
+
+<div style="display: grid; grid-template-columns: 4em min-content">
+  <div style="border-right: 1px solid; border-bottom: 1px solid; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+
+  </div>
+  <div style="border-right: 1px solid; border-bottom: 1px solid; padding: 0.5em">
+    <app-csoport-szerkesztes></app-csoport-szerkesztes>
+  </div>
+</div>
+
+<!--https://www.google.com/search?q=replace+html+table+with+css+grid&oq=replace+html+grid+&aqs=chrome.1.69i57j0i22i30l2.19504j1j7&sourceid=chrome&ie=UTF-8-->
+<!--https://www.freecodecamp.org/news/https-medium-com-nakayama-shingo-creating-responsive-tables-with-pure-css-using-the-grid-layout-module-8e0ea8f03e83/-->
+<!--https://markheath.net/post/simple-tables-with-css-grid-layout-->

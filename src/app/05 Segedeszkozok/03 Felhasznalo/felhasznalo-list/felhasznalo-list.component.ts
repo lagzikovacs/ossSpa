@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output,
   ViewChild, ViewContainerRef
 } from '@angular/core';
@@ -12,27 +13,29 @@ import {deepCopy} from '../../../common/deepCopy';
 import {propCopy} from '../../../common/propCopy';
 import {TablaExComponent} from '../../../common/tabla-ex/tabla-ex.component';
 import {EgyszeruKeresesParam} from '../../../common/dtos/egyszerukeresesparam';
+import {OnDestroyMixin, untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
+import {FelmeresSzerkesztesComponent} from "../../../02 Eszkozok/05 Felmeres/felmeres-szerkesztes/felmeres-szerkesztes.component";
+import {FelhasznaloSzerkesztesComponent} from "../felhasznalo-szerkesztes/felhasznalo-szerkesztes.component";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-felhasznalo-list',
   templateUrl: './felhasznalo-list.component.html'
 })
-export class FelhasznaloListComponent implements OnInit, OnDestroy {
+export class FelhasznaloListComponent extends OnDestroyMixin implements AfterViewInit, OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: TablaExComponent;
-  @ViewChild('compcont_felhasznalo', {read: ViewContainerRef}) vcr: ViewContainerRef;
+  @ViewChild('compcont_felhasznalouj', {read: ViewContainerRef}) vcruj: ViewContainerRef;
 
   szurok = ['Név'];
   ekDto = new EgyszeruKeresesParam(0, '', environment.lapmeret);
   elsokereses = true;
   jog = false;
-  uj = false;
   zoom = false;
+
   eppFrissit = false;
   set spinner(value: boolean) {
     this.eppFrissit = value;
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
   Dto = new Array<FelhasznaloDto>();
@@ -53,21 +56,27 @@ export class FelhasznaloListComponent implements OnInit, OnDestroy {
               private _errorservice: ErrorService,
               private _cdr: ChangeDetectorRef,
               felhasznaloservice: FelhasznaloService) {
+    super();
+
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.FELHASZNALOMOD]);
     this.felhasznaloservice = felhasznaloservice;
   }
 
-  ngOnInit() {
-    if (this.zoom) {
-      this.onKereses();
-    }
+  ngAfterViewInit() {
+    this.onKereses();
+  }
+
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   onKereses() {
+    this.vcruj.clear();
+    this.tabla.clearselections();
+
     this.elsokereses = true;
     this.ekDto.rekordtol = 0;
-
-    this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
@@ -98,23 +107,30 @@ export class FelhasznaloListComponent implements OnInit, OnDestroy {
     }
   }
 
-  onId(i: number) {
-    this.DtoSelectedIndex = i;
-
-    this.uj = false;
-    this.tabla.egytetelstart();
-  }
-
   doUjtetel() {
-    this.uj = true;
-    this.tabla.ujtetelstart();
+    this.vcruj.clear();
+    this.tabla.clearselections();
+    const ujC = this.vcruj.createComponent(FelhasznaloSzerkesztesComponent);
+
+    ujC.instance.uj = true;
+    ujC.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+      this.vcruj.clear();
+
+      const buf = [...this.Dto];
+      buf.unshift(dto);
+      this.Dto = buf;
+
+      this.docdr();
+    });
+    ujC.instance.eventMegsem.pipe(untilComponentDestroyed(this)).subscribe(() => {
+      this.vcruj.clear();
+    });
   }
 
-  onUjtetelkesz(dto: FelhasznaloDto) {
-    if (dto !== undefined) {
-      this.Dto.unshift(dto);
-    }
-    this.tabla.ujtetelstop();
+  onId(i: number) {
+    this.vcruj.clear();
+    this.DtoSelectedIndex = i;
+    this.tabla.egytetelstart();
   }
 
   onTorles() {
@@ -123,22 +139,22 @@ export class FelhasznaloListComponent implements OnInit, OnDestroy {
     this.tabla.clearselections();
   }
 
-  onModositaskesz(dto: FelhasznaloDto) {
+  onModositas(dto: FelhasznaloDto) {
     propCopy(dto, this.Dto[this.DtoSelectedIndex]);
   }
 
   onStartzoom(i: number) {
     this.eventSelectzoom.emit(deepCopy(this.Dto[i]));
-
     this.onStopzoom();
   }
   onStopzoom() {
     this.zoom = false;
-
     this.eventStopzoom.emit();
   }
 
-  ngOnDestroy(): void {
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+
     Object.keys(this).map(k => {
       (this[k]) = null;
     });

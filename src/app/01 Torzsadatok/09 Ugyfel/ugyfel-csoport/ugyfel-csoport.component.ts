@@ -18,7 +18,8 @@ export class UgyfelCsoportComponent implements OnInit, OnDestroy {
   @Input() set DtoOriginal(value: UgyfelDto) {
     this.DtoEdited = deepCopy(value);
   }
-  @Output() eventSzerkeszteskesz = new EventEmitter<UgyfelDto>();
+  @Output() eventOk = new EventEmitter<UgyfelDto>();
+  @Output() eventMegsem = new EventEmitter<void>();
 
   entries = ['(0) Mind', '(1) Kiemelt'];
 
@@ -70,7 +71,7 @@ export class UgyfelCsoportComponent implements OnInit, OnDestroy {
       }
 
       this.spinner = false;
-      this.eventSzerkeszteskesz.emit(res2.Result[0]);
+      this.eventOk.emit(res2.Result[0]);
     } catch (err) {
       this.spinner = false;
       this._errorservice.Error = err;
@@ -78,7 +79,7 @@ export class UgyfelCsoportComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit();
+    this.eventMegsem.emit();
   }
 
   ngOnDestroy() {

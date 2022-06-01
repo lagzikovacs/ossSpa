@@ -1,6 +1,7 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5 *ngIf="!zoom">{{felhasznaloservice.cim}}</h5>
   <h5 *ngIf="zoom">{{felhasznaloservice.cim}} - zoom</h5>
+
   <app-toolbar [Szurok]="szurok"
                [(szempont)]="ekDto.szempont"
                [(minta)]="ekDto.minta"
@@ -8,6 +9,9 @@
                [enUj]="jog" (Uj)="doUjtetel()"
                [visZoom]="zoom" (StopZoom)="onStopzoom()">
   </app-toolbar>
+
+  <ng-template #compcont_felhasznalouj></ng-template>
+
   <app-tabla-ex #tabla
                 [items]="Dto"
                 [colsets]="felhasznaloservice.GridSettings"
@@ -18,11 +22,9 @@
   </app-tabla-ex>
 
   <ng-template #gridegy>
-    <app-felhasznalo-egy [uj]="uj"
-                         [dto]="Dto[DtoSelectedIndex]"
-                         (eventUj)="onUjtetelkesz($event)"
+    <app-felhasznalo-egy [dto]="Dto[DtoSelectedIndex]"
                          (eventTorles)="onTorles()"
-                         (eventModositas)="onModositaskesz($event)">
+                         (eventModositas)="onModositas($event)">
     </app-felhasznalo-egy>
   </ng-template>
 </div>

@@ -18,7 +18,8 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
   @Input() set DtoOriginal(value: FelhasznaloDto) {
     this.DtoEdited = deepCopy(value);
   }
-  @Output() eventSzerkeszteskesz = new EventEmitter<FelhasznaloDto>();
+  @Output() eventOk = new EventEmitter<FelhasznaloDto>();
+  @Output() eventMegsem = new EventEmitter<void>();
 
   form: FormGroup;
   eppFrissit = false;
@@ -68,7 +69,7 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
       }
 
       this.spinner = false;
-      this.eventSzerkeszteskesz.emit(res1.Result[0]);
+      this.eventOk.emit(res1.Result[0]);
     } catch (err) {
       this._errorservice.Error = err;
       this.spinner = false;
@@ -76,7 +77,7 @@ export class FelhasznaloJelszoComponent implements OnDestroy {
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit();
+    this.eventMegsem.emit();
   }
 
   ngOnDestroy() {

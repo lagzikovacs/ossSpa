@@ -26,7 +26,7 @@ export class UgyfelterLinkComponent extends OnDestroyMixin implements OnInit, On
   @Input() set DtoOriginal(value: UgyfelDto) {
     this.DtoEdited = deepCopy(value);
   }
-  @Output() eventSzerkeszteskesz = new EventEmitter<UgyfelDto>();
+  @Output() eventOk = new EventEmitter<UgyfelDto>();
 
   link = '';
   kikuldesikodidopontja: any;
@@ -123,7 +123,7 @@ export class UgyfelterLinkComponent extends OnDestroyMixin implements OnInit, On
       this.spinner = false;
 
       this.doNav(0);
-      this.eventSzerkeszteskesz.emit(res1.Result[0]);
+      this.eventOk.emit(res1.Result[0]);
     } catch (err) {
       this.spinner = false;
       this._errorservice.Error = err;
@@ -150,7 +150,7 @@ export class UgyfelterLinkComponent extends OnDestroyMixin implements OnInit, On
         this.spinner = false;
 
         this.doNav(0);
-        this.eventSzerkeszteskesz.emit(res1.Result[0]);
+        this.eventOk.emit(res1.Result[0]);
       } catch (err) {
         this.spinner = false;
         this._errorservice.Error = err;

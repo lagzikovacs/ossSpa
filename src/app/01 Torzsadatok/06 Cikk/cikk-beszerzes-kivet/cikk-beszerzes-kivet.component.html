@@ -2,10 +2,10 @@
   <h5 *ngIf="BizonylattipusKod === 3">Beszerzés</h5>
   <h5 *ngIf="BizonylattipusKod === 2">Kivét</h5>
 
-  <app-tabla #tabla
-             [items]="MozgasDto"
-             [colsets]="cikkservice.BeszerzesKivetGridSettings">
-  </app-tabla>
+  <app-tabla-ex #tabla
+                [items]="MozgasDto"
+                [colsets]="cikkservice.BeszerzesKivetGridSettings">
+  </app-tabla-ex>
 </div>
 
 

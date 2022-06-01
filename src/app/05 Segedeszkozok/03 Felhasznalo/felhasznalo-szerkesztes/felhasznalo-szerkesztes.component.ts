@@ -20,23 +20,22 @@ export class FelhasznaloSzerkesztesComponent implements OnInit, OnDestroy {
   @Input() set DtoOriginal(value: FelhasznaloDto) {
     this.DtoEdited = deepCopy(value);
   }
-  @Output() eventSzerkeszteskesz = new EventEmitter<FelhasznaloDto>();
+  @Output() eventOk = new EventEmitter<FelhasznaloDto>();
+  @Output() eventMegsem = new EventEmitter<void>();
 
   form: FormGroup;
   eppFrissit = false;
   set spinner(value: boolean) {
     this.eppFrissit = value;
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
-  felhasznaloservice: FelhasznaloService;
+  cim = '';
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
               private _cdr: ChangeDetectorRef,
-              felhasznaloservice: FelhasznaloService) {
-    this.felhasznaloservice = felhasznaloservice;
+              private _felhasznaloservice: FelhasznaloService) {
 
     this.form = this._fb.group({
       'azonosito': ['', [Validators.required, Validators.maxLength(30)]],
@@ -52,7 +51,7 @@ export class FelhasznaloSzerkesztesComponent implements OnInit, OnDestroy {
     if (this.uj) {
       this.spinner = true;
       try {
-        const res = await this.felhasznaloservice.CreateNew();
+        const res = await this._felhasznaloservice.CreateNew();
         if (res.Error !== null) {
           throw res.Error;
         }
@@ -65,7 +64,14 @@ export class FelhasznaloSzerkesztesComponent implements OnInit, OnDestroy {
       }
     }
 
+    this.cim = this.uj ? 'Új ' + this._felhasznaloservice.cim.toLowerCase() : this._felhasznaloservice.cim + ' módosítása';
     this.updateform();
+    this.docdr();
+  }
+
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   updateform() {
@@ -92,21 +98,21 @@ export class FelhasznaloSzerkesztesComponent implements OnInit, OnDestroy {
     try {
       let res: NumberResult;
       if (this.uj) {
-        res = await this.felhasznaloservice.Add(this.DtoEdited);
+        res = await this._felhasznaloservice.Add(this.DtoEdited);
       } else {
-        res = await this.felhasznaloservice.Update(this.DtoEdited);
+        res = await this._felhasznaloservice.Update(this.DtoEdited);
       }
       if (res.Error != null) {
         throw res.Error;
       }
 
-      const res1 = await this.felhasznaloservice.Get(res.Result);
+      const res1 = await this._felhasznaloservice.Get(res.Result);
       if (res1.Error != null) {
         throw res1.Error;
       }
 
       this.spinner = false;
-      this.eventSzerkeszteskesz.emit(res1.Result[0]);
+      this.eventOk.emit(res1.Result[0]);
     } catch (err) {
       this.spinner = false;
       this._errorservice.Error = err;
@@ -114,7 +120,7 @@ export class FelhasznaloSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit();
+    this.eventMegsem.emit();
   }
 
   ngOnDestroy() {
@@ -123,3 +129,4 @@ export class FelhasznaloSzerkesztesComponent implements OnInit, OnDestroy {
     });
   }
 }
+

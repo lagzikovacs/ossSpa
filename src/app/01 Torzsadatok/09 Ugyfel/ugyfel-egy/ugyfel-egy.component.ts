@@ -92,8 +92,11 @@ export class UgyfelEgyComponent extends OnDestroyMixin implements AfterViewInit,
       case EgyMode.Csoport: // 7
         const ugyfelcsoportC = this.vcr.createComponent(UgyfelCsoportComponent);
         ugyfelcsoportC.instance.DtoOriginal = this.Dto;
-        ugyfelcsoportC.instance.eventSzerkeszteskesz.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+        ugyfelcsoportC.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
           this.doModositaskesz(dto);
+        });
+        ugyfelcsoportC.instance.eventMegsem.pipe(untilComponentDestroyed(this)).subscribe(() => {
+          this.doNav(0);
         });
         break;
       case EgyMode.Projekt: // 8
@@ -103,7 +106,7 @@ export class UgyfelEgyComponent extends OnDestroyMixin implements AfterViewInit,
       case EgyMode.UgyfelterLink: // 9
         const ugyfelterlinkC = this.vcr.createComponent(UgyfelterLinkComponent);
         ugyfelterlinkC.instance.DtoOriginal = this.Dto;
-        ugyfelterlinkC.instance.eventSzerkeszteskesz.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+        ugyfelterlinkC.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
           this.doModositaskeszCsak(dto);
         });
         break;

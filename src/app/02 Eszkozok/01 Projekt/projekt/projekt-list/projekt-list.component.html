@@ -12,12 +12,9 @@
                       (Export)="onExport($event)">
   </app-projekttoolbar>
 
-  <ng-container *ngIf="export">
-    <app-projekt-export [projektcsoport]="projektcsoport"
-                        [statuszszempont]="statuszszempont"
-                        (eventBezar)="doExportbezar()">
-    </app-projekt-export>
-  </ng-container>
+  <ng-template #compcont_projektexport></ng-template>
+
+  <ng-template #compcont_projektuj></ng-template>
 
   <div appHscroll style="overflow-x: auto;overflow-y: hidden">
     <app-projekt-tabla #tabla
@@ -28,11 +25,9 @@
   </div>
 
   <ng-template #gridegy>
-    <app-projekt-egy [uj]="uj"
-                     [dto]="Dto[DtoSelectedIndex]"
-                     (eventUj)="onUjtetelkesz($event)"
+    <app-projekt-egy [dto]="Dto[DtoSelectedIndex]"
                      (eventTorles)="onTorlesutan()"
-                     (eventModositas)="onSzerkesztesutan($event)">
+                     (eventModositas)="onModositasutan($event)">
     </app-projekt-egy>
   </ng-template>
 

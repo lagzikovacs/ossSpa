@@ -13,8 +13,8 @@ import {deepCopy} from '../../../common/deepCopy';
 import {propCopy} from '../../../common/propCopy';
 import {EgyszeruKeresesParam} from '../../../common/dtos/egyszerukeresesparam';
 import {TablaExComponent} from '../../../common/tabla-ex/tabla-ex.component';
-import {OnDestroyMixin, untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
-import {IrattipusSzerkesztesComponent} from "../irattipus-szerkesztes/irattipus-szerkesztes.component";
+import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
+import {IrattipusSzerkesztesComponent} from '../irattipus-szerkesztes/irattipus-szerkesztes.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

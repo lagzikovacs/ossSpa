@@ -1,4 +1,7 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, ViewChild} from '@angular/core';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {ProjektService} from '../projekt.service';
 import {SzMT} from '../../../../common/dtos/szmt';
 import {Szempont} from '../../../../common/enums/szempont';
@@ -10,14 +13,19 @@ import {environment} from '../../../../../environments/environment';
 import {ProjektParam} from '../projektparam';
 import {ProjektDto} from '../projektdto';
 import {propCopy} from '../../../../common/propCopy';
+import {OnDestroyMixin, untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
+import {ProjektSzerkesztesComponent} from "../projekt-szerkesztes/projekt-szerkesztes.component";
+import {ProjektExportComponent} from "../projekt-export/projekt-export.component";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-projekt-list',
   templateUrl: './projekt-list.component.html'
 })
-export class ProjektListComponent implements OnDestroy {
+export class ProjektListComponent extends OnDestroyMixin implements OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: ProjektTablaComponent;
+  @ViewChild('compcont_projektexport', {read: ViewContainerRef}) vcrexport: ViewContainerRef;
+  @ViewChild('compcont_projektuj', {read: ViewContainerRef}) vcruj: ViewContainerRef;
 
   jegyzetszurok = ['Mind', 'Jegyzet is'];
   szurok = ['Id', 'Ügyfél', 'Ügyfélcím', 'Email', 'Telefon', 'Telepítési cím', 'Keletkezett', 'Műszaki állapot'];
@@ -32,9 +40,6 @@ export class ProjektListComponent implements OnDestroy {
   ];
 
   jog = false;
-  uj = false;
-  export = false;
-  projektcsoport = '';
 
   statuszszempont = 0;
   jegyzetszempont = 0;
@@ -43,11 +48,11 @@ export class ProjektListComponent implements OnDestroy {
   pp = new ProjektParam(0, environment.lapmeret);
   elsokereses = true;
   OsszesRekord = 0;
+
   eppFrissit = false;
   set spinner(value: boolean) {
     this.eppFrissit = value;
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
   Dto = new Array<ProjektDto>();
@@ -59,13 +64,21 @@ export class ProjektListComponent implements OnDestroy {
               private _errorservice: ErrorService,
               private _cdr: ChangeDetectorRef,
               projektservice: ProjektService) {
-    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PROJEKTMOD]);
+    super();
 
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PROJEKTMOD]);
     this.projektservice = projektservice;
   }
 
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
+
   onKereses() {
-    this.export = false;
+    this.vcrexport.clear();
+    this.vcruj.clear();
+    this.tabla.clearselections();
 
     this.elsokereses = true;
     this.pp.rekordtol = 0;
@@ -75,8 +88,6 @@ export class ProjektListComponent implements OnDestroy {
       this.pp.fi.push(new SzMT(this.jegyzetSzempontok[this.jegyzetszempont], ''));
     }
     this.pp.fi.push(new SzMT(this.szempontok[this.szempont], this.minta));
-
-    this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
@@ -110,44 +121,58 @@ export class ProjektListComponent implements OnDestroy {
   }
 
   onExport(sszi: number) {
-    this.projektcsoport = this.projektservice.statuszszurok[sszi];
-    this.export = true;
-  }
+    this.vcrexport.clear()
+    this.vcruj.clear();
+    this.tabla.clearselections();
+    const exportC = this.vcrexport.createComponent(ProjektExportComponent);
 
-  doExportbezar() {
-    this.export = false;
-  }
-
-  onId(i: number) {
-    this.DtoSelectedIndex = i;
-
-    this.uj = false;
-    this.tabla.egytetelstart();
+    exportC.instance.projektcsoport = this.projektservice.statuszszurok[sszi];
+    exportC.instance.statuszszempont = this.statuszszempont;
+    exportC.instance.eventBezar.pipe(untilComponentDestroyed(this)).subscribe(() => {
+      this.vcrexport.clear();
+    });
   }
 
   doUjtetel() {
-    this.uj = true;
-    this.tabla.ujtetelstart();
+    this.vcrexport.clear()
+    this.vcruj.clear();
+    this.tabla.clearselections();
+    const ujC = this.vcruj.createComponent(ProjektSzerkesztesComponent);
+
+    ujC.instance.uj = true;
+    ujC.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+      this.vcruj.clear();
+
+      const buf = [...this.Dto];
+      buf.unshift(dto);
+      this.Dto = buf;
+
+      this.docdr();
+    });
+    ujC.instance.eventMegsem.pipe(untilComponentDestroyed(this)).subscribe(() => {
+      this.vcruj.clear();
+    });
   }
 
-  onUjtetelkesz(dto: ProjektDto) {
-    if (dto !== undefined) {
-      this.Dto.unshift(dto);
-    }
-    this.tabla.ujtetelstop();
+  onId(i: number) {
+    this.vcruj.clear();
+    this.DtoSelectedIndex = i;
+    this.tabla.egytetelstart();
   }
 
-  onTorlesutan() {
+  onTorles() {
     this.Dto.splice(this.DtoSelectedIndex, 1);
     this.DtoSelectedIndex = -1;
     this.tabla.clearselections();
   }
 
-  onSzerkesztesutan(dto: ProjektDto) {
+  onModositasutan(dto: ProjektDto) {
     propCopy(dto, this.Dto[this.DtoSelectedIndex]);
   }
 
-  ngOnDestroy() {
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+
     Object.keys(this).map(k => {
       (this[k]) = null;
     });

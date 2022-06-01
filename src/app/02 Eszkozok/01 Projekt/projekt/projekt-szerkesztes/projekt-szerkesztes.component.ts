@@ -33,7 +33,8 @@ export class ProjektSzerkesztesComponent extends OnDestroyMixin implements OnIni
   @Input() set DtoOriginal(value: ProjektDto) {
     this.DtoEdited = deepCopy(value);
   }
-  @Output() eventSzerkeszteskesz = new EventEmitter<ProjektDto>();
+  @Output() eventOk = new EventEmitter<ProjektDto>();
+  @Output() eventMegsem = new EventEmitter<void>();
 
   form: FormGroup;
   eppFrissit = false;
@@ -159,14 +160,15 @@ export class ProjektSzerkesztesComponent extends OnDestroyMixin implements OnIni
       }
 
       this.spinner = false;
-      this.eventSzerkeszteskesz.emit(res3.Result[0]);
+      this.eventOk.emit(res3.Result[0]);
     } catch (err) {
       this.spinner = false;
       this._errorservice.Error = err;
     }
   }
+
   cancel() {
-    this.eventSzerkeszteskesz.emit();
+    this.eventMegsem.emit();
   }
 
   UgyfelZoom() {

@@ -31,14 +31,12 @@ import {ProjektIratmintaComponent} from '../projekt-iratminta/projekt-iratminta.
 export class ProjektEgyComponent extends OnDestroyMixin implements AfterViewInit, OnDestroy {
   @ViewChild('compcont_projekt', {read: ViewContainerRef}) vcr: ViewContainerRef;
 
-  @Input() uj = false;
   @Input() defaultNav = 24;
 
   Dto = new ProjektDto();
   @Input() set dto(value: ProjektDto) {
     this.Dto = deepCopy(value);
   }
-  @Output() eventUj: EventEmitter<ProjektDto> = new EventEmitter<ProjektDto>();
   @Output() eventTorles: EventEmitter<void> = new EventEmitter<void>();
   @Output() eventModositas: EventEmitter<ProjektDto> = new EventEmitter<ProjektDto>();
 
@@ -62,12 +60,7 @@ export class ProjektEgyComponent extends OnDestroyMixin implements AfterViewInit
   }
 
   ngAfterViewInit() {
-    if (this.uj) {
-      this.doNav(EgyMode.Uj);
-      this.docdr();
-    }
-
-    if (!this.uj && this.defaultNav > 0) {
+    if (this.defaultNav > 0) {
       this.doNav(this.defaultNav);
       this.docdr();
     }
@@ -82,14 +75,6 @@ export class ProjektEgyComponent extends OnDestroyMixin implements AfterViewInit
     this.vcr.clear();
 
     switch (i) {
-      case EgyMode.Uj: // -1
-        const ujC = this.vcr.createComponent(ProjektSzerkesztesComponent);
-
-        ujC.instance.uj = true;
-        ujC.instance.eventSzerkeszteskesz.pipe(untilComponentDestroyed(this)).subscribe(dto => {
-          this.doUjkesz(dto);
-        });
-        break;
       case EgyMode.Reszletek: // 1
         const reszletekC = this.vcr.createComponent(ReszletekComponent);
 
@@ -110,8 +95,13 @@ export class ProjektEgyComponent extends OnDestroyMixin implements AfterViewInit
 
         C.instance.uj = false;
         C.instance.DtoOriginal = this.Dto;
-        C.instance.eventSzerkeszteskesz.pipe(untilComponentDestroyed(this)).subscribe(dto => {
-          this.doModositaskesz(dto);
+        C.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+          this.doNav(0);
+          propCopy(dto, this.Dto);
+          this.eventModositas.emit(dto);
+        });
+        C.instance.eventMegsem.pipe(untilComponentDestroyed(this)).subscribe(() => {
+          this.doNav(0);
         });
         break;
       case EgyMode.Statusz: // 19
@@ -171,10 +161,6 @@ export class ProjektEgyComponent extends OnDestroyMixin implements AfterViewInit
     }
   }
 
-  doUjkesz(dto: ProjektDto) {
-    this.eventUj.emit(dto);
-  }
-
   async doTorles(ok: boolean) {
     if (ok) {
       this.spinner = true;
@@ -186,7 +172,6 @@ export class ProjektEgyComponent extends OnDestroyMixin implements AfterViewInit
 
         this.spinner = false;
         this.doNav(0);
-
         this.eventTorles.emit();
       } catch (err) {
         this.spinner = false;
@@ -197,14 +182,6 @@ export class ProjektEgyComponent extends OnDestroyMixin implements AfterViewInit
     }
   }
 
-  doModositaskesz(dto: ProjektDto) {
-    if (dto !== undefined) {
-      propCopy(dto, this.Dto);
-
-      this.eventModositas.emit(dto);
-    }
-    this.doNav(0);
-  }
 
   async doMunkalaputan() {
     this.spinner = true;
@@ -214,9 +191,8 @@ export class ProjektEgyComponent extends OnDestroyMixin implements AfterViewInit
         throw res.Error;
       }
 
-      propCopy(res.Result[0], this.Dto);
-
       this.spinner = false;
+      propCopy(res.Result[0], this.Dto);
       this.eventModositas.emit(this.Dto);
     } catch (err) {
       this.spinner = false;
@@ -237,13 +213,10 @@ export class ProjektEgyComponent extends OnDestroyMixin implements AfterViewInit
         throw res1.Error;
       }
 
-      propCopy(res1.Result[0], this.Dto);
-
       this.spinner = false;
       this.doNav(0);
-
+      propCopy(res1.Result[0], this.Dto);
       this.eventModositas.emit(this.Dto);
-
     } catch (err) {
       this.spinner = false;
       this._errorservice.Error = err;

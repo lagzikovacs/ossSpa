@@ -26,13 +26,11 @@ import {UgyfelterLinkComponent} from '../ugyfelter-link/ugyfelter-link.component
 export class UgyfelEgyComponent extends OnDestroyMixin implements AfterViewInit, OnDestroy {
   @ViewChild('compcont_ugyfel', {read: ViewContainerRef}) vcr: ViewContainerRef;
 
-  @Input() uj = false;
   @Input() defaultNav = 0;
   Dto = new UgyfelDto();
   @Input() set dto(value: UgyfelDto) {
     this.Dto = deepCopy(value);
   }
-  @Output() eventUj: EventEmitter<UgyfelDto> = new EventEmitter<UgyfelDto>();
   @Output() eventTorles: EventEmitter<void> = new EventEmitter<void>();
   @Output() eventModositas: EventEmitter<UgyfelDto> = new EventEmitter<UgyfelDto>();
 
@@ -42,23 +40,14 @@ export class UgyfelEgyComponent extends OnDestroyMixin implements AfterViewInit,
     this.docdr();
   }
 
-  ugyfelservice: UgyfelService;
-
   constructor(private _errorservice: ErrorService,
               private _cdr: ChangeDetectorRef,
-              ugyfelservice: UgyfelService) {
+              private _ugyfelservice: UgyfelService) {
     super();
-
-    this.ugyfelservice = ugyfelservice;
   }
 
   ngAfterViewInit() {
-    if (this.uj) {
-      this.doNav(EgyMode.Uj);
-      this.docdr();
-    }
-
-    if (!this.uj && this.defaultNav > 0) {
+    if (this.defaultNav > 0) {
       this.doNav(this.defaultNav);
       this.docdr();
     }
@@ -73,25 +62,17 @@ export class UgyfelEgyComponent extends OnDestroyMixin implements AfterViewInit,
     this.vcr.clear();
 
     switch (i) {
-      case EgyMode.Uj: // -1
-        const ujC = this.vcr.createComponent(UgyfelSzerkesztesComponent);
-
-        ujC.instance.uj = true;
-        ujC.instance.eventSzerkeszteskesz.pipe(untilComponentDestroyed(this)).subscribe(dto => {
-          this.doUjkesz(dto);
-        });
-        break;
       case EgyMode.Reszletek: // 1
         const reszletekC = this.vcr.createComponent(ReszletekComponent);
 
-        reszletekC.instance.cim = this.ugyfelservice.cim;
+        reszletekC.instance.cim = this._ugyfelservice.cim;
         reszletekC.instance.item = this.Dto;
-        reszletekC.instance.colsets = this.ugyfelservice.ReszletekSettings;
+        reszletekC.instance.colsets = this._ugyfelservice.ReszletekSettings;
         break;
       case EgyMode.Torles: // 2
         const teteltorlesC = this.vcr.createComponent(TetelTorlesComponent);
 
-        teteltorlesC.instance.cim = this.ugyfelservice.cim;
+        teteltorlesC.instance.cim = this._ugyfelservice.cim;
         teteltorlesC.instance.eventTorles.pipe(untilComponentDestroyed(this)).subscribe(ok => {
           this.doTorles(ok);
         });
@@ -101,8 +82,11 @@ export class UgyfelEgyComponent extends OnDestroyMixin implements AfterViewInit,
 
         C.instance.uj = false;
         C.instance.DtoOriginal = this.Dto;
-        C.instance.eventSzerkeszteskesz.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+        C.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
           this.doModositaskesz(dto);
+        });
+        C.instance.eventMegsem.pipe(untilComponentDestroyed(this)).subscribe(() => {
+          this.doNav(0);
         });
         break;
       case EgyMode.Csoport: // 7
@@ -130,15 +114,11 @@ export class UgyfelEgyComponent extends OnDestroyMixin implements AfterViewInit,
     }
   }
 
-  doUjkesz(dto: UgyfelDto) {
-    this.eventUj.emit(dto);
-  }
-
   async doTorles(ok: boolean) {
     if (ok) {
       this.spinner = true;
       try {
-        const res = await this.ugyfelservice.Delete(this.Dto);
+        const res = await this._ugyfelservice.Delete(this.Dto);
         if (res.Error != null) {
           throw res.Error;
         }
@@ -157,15 +137,12 @@ export class UgyfelEgyComponent extends OnDestroyMixin implements AfterViewInit,
   }
 
   doModositaskeszCsak(dto: UgyfelDto) {
-    if (dto !== undefined) {
-      propCopy(dto, this.Dto);
-
-      this.eventModositas.emit(dto);
-    }
+    propCopy(dto, this.Dto);
+    this.eventModositas.emit(dto);
   }
   doModositaskesz(dto: UgyfelDto) {
-    this.doModositaskeszCsak(dto);
     this.doNav(0);
+    this.doModositaskeszCsak(dto);
   }
 
   override ngOnDestroy(): void {

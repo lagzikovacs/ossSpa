@@ -97,6 +97,7 @@ export class CsoportListComponent extends OnDestroyMixin implements AfterViewIni
 
   doUjtetel() {
     this.vcruj.clear();
+    this.tabla.clearselections();
     const ujC = this.vcruj.createComponent(CsoportSzerkesztesComponent);
 
     ujC.instance.uj = true;

@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild,
   ViewContainerRef
@@ -15,14 +16,17 @@ import {deepCopy} from '../../../common/deepCopy';
 import {propCopy} from '../../../common/propCopy';
 import {CikkService} from '../cikk.service';
 import {TablaExComponent} from '../../../common/tabla-ex/tabla-ex.component';
+import {OnDestroyMixin, untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
+import {CikkSzerkesztesComponent} from "../cikk-szerkesztes/cikk-szerkesztes.component";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-cikk-list',
   templateUrl: './cikk-list.component.html'
 })
-export class CikkListComponent implements OnInit, OnDestroy {
+export class CikkListComponent extends OnDestroyMixin implements AfterViewInit, OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: TablaExComponent;
+  @ViewChild('compcont_cikkuj', {read: ViewContainerRef}) vcruj: ViewContainerRef;
 
   szurok = ['Megnevezés', 'Id'];
   szempont = 0;
@@ -34,13 +38,12 @@ export class CikkListComponent implements OnInit, OnDestroy {
   elsokereses = true;
   osszesrekord = 0;
   jog = false;
-  uj = false;
   zoom = false;
+
   eppFrissit = false;
   set spinner(value: boolean) {
     this.eppFrissit = value;
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
   Dto = new Array<CikkDto>();
@@ -62,17 +65,27 @@ export class CikkListComponent implements OnInit, OnDestroy {
               private _errorservice: ErrorService,
               private _cdr: ChangeDetectorRef,
               cikkservice: CikkService  ) {
+    super();
+
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.CIKKMOD]);
     this.cikkservice = cikkservice;
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     if (this.zoom) {
       this.onKereses();
     }
   }
 
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
+
   onKereses() {
+    this.vcruj.clear();
+    this.tabla.clearselections();
+
     this.Dto = new Array<CikkDto>();
     this.DtoSelectedIndex = -1;
     this.osszesrekord = 0;
@@ -81,8 +94,6 @@ export class CikkListComponent implements OnInit, OnDestroy {
     this.up.rekordtol = 0;
     this.up.fi = new Array<SzMT>();
     this.up.fi.push(new SzMT(this.szempontok[this.szempont], this.minta));
-
-    this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
@@ -115,23 +126,30 @@ export class CikkListComponent implements OnInit, OnDestroy {
     }
   }
 
-  onId(i: number) {
-    this.DtoSelectedIndex = i;
-
-    this.uj = false;
-    this.tabla.egytetelstart();
-  }
-
   doUjtetel() {
-    this.uj = true;
-    this.tabla.ujtetelstart();
+    this.vcruj.clear();
+    this.tabla.clearselections();
+    const ujC = this.vcruj.createComponent(CikkSzerkesztesComponent);
+
+    ujC.instance.uj = true;
+    ujC.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+      this.vcruj.clear();
+
+      const buf = [...this.Dto];
+      buf.unshift(dto);
+      this.Dto = buf;
+
+      this.docdr();
+    });
+    ujC.instance.eventMegsem.pipe(untilComponentDestroyed(this)).subscribe(() => {
+      this.vcruj.clear();
+    });
   }
 
-  onUjtetelkesz(dto: CikkDto) {
-    if (dto !== undefined) {
-      this.Dto.unshift(dto);
-    }
-    this.tabla.ujtetelstop();
+  onId(i: number) {
+    this.vcruj.clear();
+    this.DtoSelectedIndex = i;
+    this.tabla.egytetelstart();
   }
 
   onTorles() {
@@ -146,17 +164,17 @@ export class CikkListComponent implements OnInit, OnDestroy {
 
   onStartzoom(i: number) {
     this.eventSelectzoom.emit(deepCopy(this.Dto[i]));
-
     this.onStopzoom();
   }
 
   onStopzoom() {
     this.zoom = false;
-
     this.eventStopzoom.emit();
   }
 
-  ngOnDestroy(): void {
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+
     Object.keys(this).map(k => {
       (this[k]) = null;
     });

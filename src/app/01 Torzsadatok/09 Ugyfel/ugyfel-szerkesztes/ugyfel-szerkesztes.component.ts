@@ -31,17 +31,17 @@ export class UgyfelSzerkesztesComponent extends OnDestroyMixin implements OnInit
   @Input() set DtoOriginal(value: UgyfelDto) {
     this.DtoEdited = deepCopy(value);
   }
-  @Output() eventSzerkeszteskesz = new EventEmitter<UgyfelDto>();
+  @Output() eventOk = new EventEmitter<UgyfelDto>();
+  @Output() eventMegsem = new EventEmitter<void>();
 
   form: FormGroup;
   eppFrissit = false;
   set spinner(value: boolean) {
     this.eppFrissit = value;
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
-  ugyfelservice: UgyfelService;
+  cim = '';
 
   constructor(private _helysegservice: HelysegService,
               private _tevekenysegservice: TevekenysegService,
@@ -49,10 +49,8 @@ export class UgyfelSzerkesztesComponent extends OnDestroyMixin implements OnInit
               private _modalservice: ModalService,
               private _fb: FormBuilder,
               private _cdr: ChangeDetectorRef,
-              ugyfelservice: UgyfelService) {
+              private _ugyfelservice: UgyfelService) {
     super();
-
-    this.ugyfelservice = ugyfelservice;
 
     this.form = this._fb.group({
       'nev': ['', [Validators.required, Validators.maxLength(200)]],
@@ -78,21 +76,27 @@ export class UgyfelSzerkesztesComponent extends OnDestroyMixin implements OnInit
     if (this.uj) {
       this.spinner = true;
       try {
-        const res = await this.ugyfelservice.CreateNew();
+        const res = await this._ugyfelservice.CreateNew();
         if (res.Error !== null) {
           throw res.Error;
         }
 
         this.DtoEdited = res.Result[0];
-        this.updateform();
         this.spinner = false;
       } catch (err) {
         this.spinner = false;
         this._errorservice.Error = err;
       }
-    } else {
-      this.updateform();
     }
+
+    this.cim = this.uj ? 'Új ' + this._ugyfelservice.cim.toLowerCase() : this._ugyfelservice.cim + ' módosítása';
+    this.updateform();
+    this.docdr();
+  }
+
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   updateform() {
@@ -151,21 +155,21 @@ export class UgyfelSzerkesztesComponent extends OnDestroyMixin implements OnInit
 
       let res1: NumberResult;
       if (this.uj) {
-        res1 = await this.ugyfelservice.Add(this.DtoEdited);
+        res1 = await this._ugyfelservice.Add(this.DtoEdited);
       } else {
-        res1 = await this.ugyfelservice.Update(this.DtoEdited);
+        res1 = await this._ugyfelservice.Update(this.DtoEdited);
       }
       if (res1.Error !== null) {
         throw res1.Error;
       }
 
-      const res2 = await this.ugyfelservice.Get(res1.Result);
+      const res2 = await this._ugyfelservice.Get(res1.Result);
       if (res2.Error !== null) {
         throw res2.Error;
       }
 
       this.spinner = false;
-      this.eventSzerkeszteskesz.emit(res2.Result[0]);
+      this.eventOk.emit(res2.Result[0]);
     } catch (err) {
       this.spinner = false;
       this._errorservice.Error = err;
@@ -173,7 +177,7 @@ export class UgyfelSzerkesztesComponent extends OnDestroyMixin implements OnInit
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit();
+    this.eventMegsem.emit();
   }
 
   HelysegZoom() {

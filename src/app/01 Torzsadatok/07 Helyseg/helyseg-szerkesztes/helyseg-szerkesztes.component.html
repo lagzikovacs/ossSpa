@@ -1,6 +1,5 @@
-<div class="alapkeret" [appSpinner]="eppFrissit">
-  <h5 *ngIf="uj">Új {{helysegservice.cim | lowercase}}</h5>
-  <h5 *ngIf="!uj">{{helysegservice.cim}} módosítása</h5>
+<div class="alapkeret szerkeszto" [appSpinner]="eppFrissit">
+  <h5>{{cim}}</h5>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 

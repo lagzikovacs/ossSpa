@@ -34,7 +34,8 @@ export class CikkSzerkesztesComponent extends OnDestroyMixin implements OnInit, 
   @Input() set DtoOriginal(value: CikkDto) {
     this.DtoEdited = deepCopy(value);
   }
-  @Output() eventSzerkeszteskesz = new EventEmitter<CikkDto>();
+  @Output() eventOk = new EventEmitter<CikkDto>();
+  @Output() eventMegsem = new EventEmitter<void>();
 
   form: FormGroup;
   eppFrissit = false;
@@ -43,7 +44,7 @@ export class CikkSzerkesztesComponent extends OnDestroyMixin implements OnInit, 
     this.docdr();
   }
 
-  cikkservice: CikkService;
+  cim = '';
 
   constructor(private _meservice: MeService,
               private _afakulcsservice: AfakulcsService,
@@ -52,10 +53,8 @@ export class CikkSzerkesztesComponent extends OnDestroyMixin implements OnInit, 
               private _modalservice: ModalService,
               private _fb: FormBuilder,
               private _cdr: ChangeDetectorRef,
-              cikkservice: CikkService) {
+              private _cikkservice: CikkService) {
     super();
-
-    this.cikkservice = cikkservice;
 
     this.form = this._fb.group({
       'megnevezes': ['', [Validators.required, Validators.maxLength(100)]],
@@ -74,7 +73,7 @@ export class CikkSzerkesztesComponent extends OnDestroyMixin implements OnInit, 
     if (this.uj) {
       this.spinner = true;
       try {
-        const res = await this.cikkservice.CreateNew();
+        const res = await this._cikkservice.CreateNew();
         if (res.Error !== null) {
           throw res.Error;
         }
@@ -87,7 +86,9 @@ export class CikkSzerkesztesComponent extends OnDestroyMixin implements OnInit, 
       }
     }
 
+    this.cim = this.uj ? 'Új ' + this._cikkservice.cim.toLowerCase() : this._cikkservice.cim + ' módosítása';
     this.updateform();
+    this.docdr();
   }
 
   docdr() {
@@ -145,21 +146,21 @@ export class CikkSzerkesztesComponent extends OnDestroyMixin implements OnInit, 
 
       let res3: NumberResult;
       if (this.uj) {
-        res3 = await this.cikkservice.Add(this.DtoEdited);
+        res3 = await this._cikkservice.Add(this.DtoEdited);
       } else {
-        res3 = await this.cikkservice.Update(this.DtoEdited);
+        res3 = await this._cikkservice.Update(this.DtoEdited);
       }
       if (res3.Error !== null) {
         throw res3.Error;
       }
 
-      const res4 = await this.cikkservice.Get(res3.Result);
+      const res4 = await this._cikkservice.Get(res3.Result);
       if (res4.Error !== null) {
         throw res4.Error;
       }
 
       this.spinner = false;
-      this.eventSzerkeszteskesz.emit(res4.Result[0]);
+      this.eventOk.emit(res4.Result[0]);
     } catch (err) {
       this.spinner = false;
       this._errorservice.Error = err;
@@ -167,7 +168,7 @@ export class CikkSzerkesztesComponent extends OnDestroyMixin implements OnInit, 
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit();
+    this.eventMegsem.emit();
   }
 
 

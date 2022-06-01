@@ -7,8 +7,11 @@
                (Kereses)="onKereses()"
                [enUj]="jog" (Uj)="doUjtetel()"
                [visZoom]="zoom" (StopZoom)="onStopzoom()">
-    </app-toolbar>
-    <app-tabla-ex #tabla
+  </app-toolbar>
+
+  <ng-template #compcont_helyseguj></ng-template>
+
+  <app-tabla-ex #tabla
                   [items]="Dto"
                   [colsets]="helysegservice.GridSettings"
                   [zoom]="zoom"
@@ -18,9 +21,7 @@
   </app-tabla-ex>
 
   <ng-template #gridegy>
-    <app-helyseg-egy [uj]="uj"
-                     [dto]="Dto[DtoSelectedIndex]"
-                     (eventUj)="onUjtetelkesz($event)"
+    <app-helyseg-egy [dto]="Dto[DtoSelectedIndex]"
                      (eventTorles)="onTorles()"
                      (eventModositas)="onModositaskesz($event)">
     </app-helyseg-egy>

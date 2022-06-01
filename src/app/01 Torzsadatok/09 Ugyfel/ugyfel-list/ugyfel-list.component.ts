@@ -1,6 +1,7 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output,
-  ViewChild
+  ViewChild, ViewContainerRef
 } from '@angular/core';
 import {Szempont} from '../../../common/enums/szempont';
 import {UgyfelService} from '../ugyfel.service';
@@ -14,14 +15,17 @@ import {environment} from '../../../../environments/environment';
 import {UgyfelParam} from '../ugyfelparam';
 import {deepCopy} from '../../../common/deepCopy';
 import {propCopy} from '../../../common/propCopy';
+import {OnDestroyMixin, untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
+import {UgyfelSzerkesztesComponent} from "../ugyfel-szerkesztes/ugyfel-szerkesztes.component";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-ugyfel-list',
   templateUrl: './ugyfel-list.component.html'
   })
-  export class UgyfelListComponent implements OnInit, OnDestroy {
+  export class UgyfelListComponent extends OnDestroyMixin implements AfterViewInit, OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: UgyfelTablaComponent;
+  @ViewChild('compcont_ugyfeluj', {read: ViewContainerRef}) vcruj: ViewContainerRef;
 
   csoportszempont = 0;
   csoportszurok = ['Mind', 'Kiemelt'];
@@ -36,13 +40,12 @@ import {propCopy} from '../../../common/propCopy';
   elsokereses = true;
   osszesrekord = 0;
   jog = false;
-  uj = false;
   zoom = false;
+
   eppFrissit = false;
   set spinner(value: boolean) {
     this.eppFrissit = value;
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
   Dto = new Array<UgyfelDto>();
@@ -65,18 +68,27 @@ import {propCopy} from '../../../common/propCopy';
               private _errorservice: ErrorService,
               private _cdr: ChangeDetectorRef,
               ugyfelservice: UgyfelService  ) {
-    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.UGYFELEKMOD]);
+    super();
 
+    this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.UGYFELEKMOD]);
     this.ugyfelservice = ugyfelservice;
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     if (this.zoom) {
       this.onKereses();
     }
   }
 
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
+
   onKereses() {
+    this.vcruj.clear();
+    this.tabla.clearselections();
+
     this.Dto = new Array<UgyfelDto>();
     this.DtoSelectedIndex = -1;
     this.osszesrekord = 0;
@@ -86,8 +98,6 @@ import {propCopy} from '../../../common/propCopy';
     this.up.csoport = this.csoportszempont;
     this.up.fi = new Array<SzMT>();
     this.up.fi.push(new SzMT(this.szempontok[this.szempont], this.minta));
-
-    this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
@@ -120,23 +130,30 @@ import {propCopy} from '../../../common/propCopy';
     }
   }
 
-  onId(i: number) {
-    this.DtoSelectedIndex = i;
-
-    this.uj = false;
-    this.tabla.egytetelstart();
-  }
-
   doUjtetel() {
-    this.uj = true;
-    this.tabla.ujtetelstart();
+    this.vcruj.clear();
+    this.tabla.clearselections();
+    const ujC = this.vcruj.createComponent(UgyfelSzerkesztesComponent);
+
+    ujC.instance.uj = true;
+    ujC.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+      this.vcruj.clear();
+
+      const buf = [...this.Dto];
+      buf.unshift(dto);
+      this.Dto = buf;
+
+      this.docdr();
+    });
+    ujC.instance.eventMegsem.pipe(untilComponentDestroyed(this)).subscribe(() => {
+      this.vcruj.clear();
+    });
   }
 
-  onUjtetelkesz(dto: UgyfelDto) {
-    if (dto !== undefined) {
-      this.Dto.unshift(dto);
-    }
-    this.tabla.ujtetelstop();
+  onId(i: number) {
+    this.vcruj.clear();
+    this.DtoSelectedIndex = i;
+    this.tabla.egytetelstart();
   }
 
   onTorles() {
@@ -151,16 +168,16 @@ import {propCopy} from '../../../common/propCopy';
 
   onStartzoom(i: number) {
     this.eventSelectzoom.emit(deepCopy(this.Dto[i]));
-
     this.onStopzoom();
   }
   onStopzoom() {
     this.zoom = false;
-
     this.eventStopzoom.emit();
   }
 
-  ngOnDestroy() {
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+
     Object.keys(this).map(k => {
       (this[k]) = null;
     });

@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output,
   ViewChild, ViewContainerRef
 } from '@angular/core';
@@ -13,27 +14,28 @@ import {EgyMode} from '../../../common/enums/egymode';
 import {propCopy} from '../../../common/propCopy';
 import {EgyszeruKeresesParam} from '../../../common/dtos/egyszerukeresesparam';
 import {TablaExComponent} from '../../../common/tabla-ex/tabla-ex.component';
+import {OnDestroyMixin, untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
+import {MeSzerkesztesComponent} from "../me-szerkesztes/me-szerkesztes.component";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-me-list',
   templateUrl: './me-list.component.html'
 })
-export class MeListComponent implements OnInit, OnDestroy {
+export class MeListComponent extends OnDestroyMixin implements AfterViewInit, OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: TablaExComponent;
-  @ViewChild('compcont_me', {read: ViewContainerRef}) vcr: ViewContainerRef;
+  @ViewChild('compcont_meuj', {read: ViewContainerRef}) vcruj: ViewContainerRef;
 
   szurok = ['Mennyiségi egység'];
   ekDto = new EgyszeruKeresesParam(0, '', environment.lapmeret);
   elsokereses = true;
   jog = false;
-  uj = false;
   zoom = false;
+
   eppFrissit = false;
   set spinner(value: boolean) {
     this.eppFrissit = value;
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
   Dto = new Array<MeDto>();
@@ -54,21 +56,29 @@ export class MeListComponent implements OnInit, OnDestroy {
               private _errorservice: ErrorService,
               private _cdr: ChangeDetectorRef,
               meservice: MeService) {
+    super();
+
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.meservice = meservice;
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     if (this.zoom) {
       this.onKereses();
     }
   }
 
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
+
   onKereses() {
+    this.vcruj.clear();
+    this.tabla.clearselections();
+
     this.elsokereses = true;
     this.ekDto.rekordtol = 0;
-
-    this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
@@ -99,24 +109,30 @@ export class MeListComponent implements OnInit, OnDestroy {
     }
   }
 
+  doUjtetel() {
+    this.vcruj.clear();
+    this.tabla.clearselections();
+    const ujC = this.vcruj.createComponent(MeSzerkesztesComponent);
+
+    ujC.instance.uj = true;
+    ujC.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+      this.vcruj.clear();
+
+      const buf = [...this.Dto];
+      buf.unshift(dto);
+      this.Dto = buf;
+
+      this.docdr();
+    });
+    ujC.instance.eventMegsem.pipe(untilComponentDestroyed(this)).subscribe(() => {
+      this.vcruj.clear();
+    });
+  }
 
   onId(i: number) {
+    this.vcruj.clear();
     this.DtoSelectedIndex = i;
-
-    this.uj = false;
     this.tabla.egytetelstart();
-  }
-
-  doUjtetel() {
-    this.uj = true;
-    this.tabla.ujtetelstart();
-  }
-
-  onUjtetelkesz(dto: MeDto) {
-    if (dto !== undefined) {
-      this.Dto.unshift(dto);
-    }
-    this.tabla.ujtetelstop();
   }
 
   onTorles() {
@@ -131,16 +147,16 @@ export class MeListComponent implements OnInit, OnDestroy {
 
   onStartzoom(i: number) {
     this.eventSelectzoom.emit(deepCopy(this.Dto[i]));
-
     this.onStopzoom();
   }
   onStopzoom() {
     this.zoom = false;
-
     this.eventStopzoom.emit();
   }
 
-  ngOnDestroy(): void {
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+
     Object.keys(this).map(k => {
       (this[k]) = null;
     });

@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output,
   ViewChild, ViewContainerRef
 } from '@angular/core';
@@ -12,27 +13,28 @@ import {deepCopy} from '../../../common/deepCopy';
 import {propCopy} from '../../../common/propCopy';
 import {EgyszeruKeresesParam} from '../../../common/dtos/egyszerukeresesparam';
 import {TablaExComponent} from '../../../common/tabla-ex/tabla-ex.component';
+import {OnDestroyMixin, untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
+import {TermekdijSzerkesztesComponent} from "../termekdij-szerkesztes/termekdij-szerkesztes.component";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-termekdij-list',
   templateUrl: './termekdij-list.component.html'
 })
-export class TermekdijListComponent implements OnInit, OnDestroy {
+export class TermekdijListComponent extends OnDestroyMixin implements AfterViewInit, OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: TablaExComponent;
-  @ViewChild('compcont_termekdij', {read: ViewContainerRef}) vcr: ViewContainerRef;
+  @ViewChild('compcont_termekdijuj', {read: ViewContainerRef}) vcruj: ViewContainerRef;
 
   szurok = ['KT'];
   ekDto = new EgyszeruKeresesParam(0, '', environment.lapmeret);
   elsokereses = true;
   jog = false;
-  uj = false;
   zoom = false;
+
   eppFrissit = false;
   set spinner(value: boolean) {
     this.eppFrissit = value;
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
   Dto = new Array<TermekdijDto>();
@@ -53,21 +55,29 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
               private _errorservice: ErrorService,
               private _cdr: ChangeDetectorRef,
               termekdijservice: TermekdijService) {
+    super();
+
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.PRIMITIVEKMOD]);
     this.termekdijservice = termekdijservice;
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     if (this.zoom) {
       this.onKereses();
     }
   }
 
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
+
   onKereses() {
+    this.vcruj.clear();
+    this.tabla.clearselections();
+
     this.elsokereses = true;
     this.ekDto.rekordtol = 0;
-
-    this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
@@ -98,24 +108,30 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
     }
   }
 
-  onId(i: number) {
-    this.DtoSelectedIndex = i;
-
-    this.uj = false;
-    this.tabla.egytetelstart();
-  }
-
-
   doUjtetel() {
-    this.uj = true;
-    this.tabla.ujtetelstart();
+    this.vcruj.clear();
+    this.tabla.clearselections();
+    const ujC = this.vcruj.createComponent(TermekdijSzerkesztesComponent);
+
+    ujC.instance.uj = true;
+    ujC.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+      this.vcruj.clear();
+
+      const buf = [...this.Dto];
+      buf.unshift(dto);
+      this.Dto = buf;
+
+      this.docdr();
+    });
+    ujC.instance.eventMegsem.pipe(untilComponentDestroyed(this)).subscribe(() => {
+      this.vcruj.clear();
+    });
   }
 
-  onUjtetelkesz(dto: TermekdijDto) {
-    if (dto !== undefined) {
-      this.Dto.unshift(dto);
-    }
-    this.tabla.ujtetelstop();
+  onId(i: number) {
+    this.vcruj.clear();
+    this.DtoSelectedIndex = i;
+    this.tabla.egytetelstart();
   }
 
   onTorles() {
@@ -130,17 +146,17 @@ export class TermekdijListComponent implements OnInit, OnDestroy {
 
   onStartzoom(i: number) {
     this.eventSelectzoom.emit(deepCopy(this.Dto[i]));
-
     this.onStopzoom();
   }
 
   onStopzoom() {
     this.zoom = false;
-
     this.eventStopzoom.emit();
   }
 
-  ngOnDestroy(): void {
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+
     Object.keys(this).map(k => {
       (this[k]) = null;
     });

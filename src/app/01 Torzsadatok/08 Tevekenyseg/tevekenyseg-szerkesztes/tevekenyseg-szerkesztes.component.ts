@@ -20,25 +20,22 @@ export class TevekenysegSzerkesztesComponent implements OnInit, OnDestroy {
   @Input() set DtoOriginal(value: TevekenysegDto) {
     this.DtoEdited = deepCopy(value);
   }
-  @Output() eventSzerkeszteskesz = new EventEmitter<TevekenysegDto>();
-  @Output() eventCancel = new EventEmitter<void>();
+  @Output() eventOk = new EventEmitter<TevekenysegDto>();
+  @Output() eventMegsem = new EventEmitter<void>();
 
   form: FormGroup;
   eppFrissit = false;
   set spinner(value: boolean) {
     this.eppFrissit = value;
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
-  tevekenysegservice: TevekenysegService;
+  cim = '';
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
               private _cdr: ChangeDetectorRef,
-              tevekenysegservice: TevekenysegService) {
-    this.tevekenysegservice = tevekenysegservice;
-
+              private _tevekenysegservice: TevekenysegService) {
     this.form = this._fb.group({
       'tevekenyseg': ['', [Validators.required, Validators.maxLength(100)]]
     });
@@ -48,7 +45,7 @@ export class TevekenysegSzerkesztesComponent implements OnInit, OnDestroy {
     if (this.uj) {
       this.spinner = true;
       try {
-        const res = await this.tevekenysegservice.CreateNew();
+        const res = await this._tevekenysegservice.CreateNew();
         if (res.Error !== null) {
           throw res.Error;
         }
@@ -61,7 +58,14 @@ export class TevekenysegSzerkesztesComponent implements OnInit, OnDestroy {
       }
     }
 
+    this.cim = this.uj ? 'Új ' + this._tevekenysegservice.cim.toLowerCase() : this._tevekenysegservice.cim + ' módosítása';
     this.updateform();
+    this.docdr();
+  }
+
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   updateform() {
@@ -78,21 +82,21 @@ export class TevekenysegSzerkesztesComponent implements OnInit, OnDestroy {
     try {
       let res: NumberResult;
       if (this.uj) {
-        res = await this.tevekenysegservice.Add(this.DtoEdited);
+        res = await this._tevekenysegservice.Add(this.DtoEdited);
       } else {
-        res = await this.tevekenysegservice.Update(this.DtoEdited);
+        res = await this._tevekenysegservice.Update(this.DtoEdited);
       }
       if (res.Error != null) {
         throw res.Error;
       }
 
-      const res1 = await this.tevekenysegservice.Get(res.Result);
+      const res1 = await this._tevekenysegservice.Get(res.Result);
       if (res1.Error != null) {
         throw res1.Error;
       }
 
       this.spinner = false;
-      this.eventSzerkeszteskesz.emit(res1.Result[0]);
+      this.eventOk.emit(res1.Result[0]);
     } catch (err) {
       this.spinner = false;
       this._errorservice.Error = err;
@@ -100,7 +104,7 @@ export class TevekenysegSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit();
+    this.eventMegsem.emit();
   }
 
   ngOnDestroy() {

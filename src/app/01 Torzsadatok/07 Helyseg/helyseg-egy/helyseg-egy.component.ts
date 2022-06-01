@@ -22,13 +22,11 @@ import {HelysegSzerkesztesComponent} from '../helyseg-szerkesztes/helyseg-szerke
 export class HelysegEgyComponent extends OnDestroyMixin implements AfterViewInit, OnDestroy {
   @ViewChild('compcont_helyseg', {read: ViewContainerRef}) vcr: ViewContainerRef;
 
-  @Input() uj = false;
   @Input() defaultNav = 0;
   Dto = new HelysegDto();
   @Input() set dto(value: HelysegDto) {
     this.Dto = deepCopy(value);
   }
-  @Output() eventUj: EventEmitter<HelysegDto> = new EventEmitter<HelysegDto>();
   @Output() eventTorles: EventEmitter<void> = new EventEmitter<void>();
   @Output() eventModositas: EventEmitter<HelysegDto> = new EventEmitter<HelysegDto>();
 
@@ -38,23 +36,14 @@ export class HelysegEgyComponent extends OnDestroyMixin implements AfterViewInit
     this.docdr();
   }
 
-  helysegservice: HelysegService;
-
   constructor(private _errorservice: ErrorService,
               private _cdr: ChangeDetectorRef,
-              helysegservice: HelysegService) {
+              private _helysegservice: HelysegService) {
     super();
-
-    this.helysegservice = helysegservice;
   }
 
   ngAfterViewInit() {
-    if (this.uj) {
-      this.doNav(EgyMode.Uj);
-      this.docdr();
-    }
-
-    if (!this.uj && this.defaultNav > 0) {
+    if (this.defaultNav > 0) {
       this.doNav(this.defaultNav);
       this.docdr();
     }
@@ -69,25 +58,17 @@ export class HelysegEgyComponent extends OnDestroyMixin implements AfterViewInit
     this.vcr.clear();
 
     switch (i) {
-      case EgyMode.Uj: // -1
-        const ujC = this.vcr.createComponent(HelysegSzerkesztesComponent);
-
-        ujC.instance.uj = true;
-        ujC.instance.eventSzerkeszteskesz.pipe(untilComponentDestroyed(this)).subscribe(dto => {
-          this.doUjkesz(dto);
-        });
-        break;
       case EgyMode.Reszletek: // 1
         const reszletekC = this.vcr.createComponent(ReszletekComponent);
 
-        reszletekC.instance.cim = this.helysegservice.cim;
+        reszletekC.instance.cim = this._helysegservice.cim;
         reszletekC.instance.item = this.Dto;
-        reszletekC.instance.colsets = this.helysegservice.ReszletekSettings;
+        reszletekC.instance.colsets = this._helysegservice.ReszletekSettings;
         break;
       case EgyMode.Torles: // 2
         const teteltorlesC = this.vcr.createComponent(TetelTorlesComponent);
 
-        teteltorlesC.instance.cim = this.helysegservice.cim;
+        teteltorlesC.instance.cim = this._helysegservice.cim;
         teteltorlesC.instance.eventTorles.pipe(untilComponentDestroyed(this)).subscribe(ok => {
           this.doTorles(ok);
         });
@@ -97,22 +78,21 @@ export class HelysegEgyComponent extends OnDestroyMixin implements AfterViewInit
 
         C.instance.uj = false;
         C.instance.DtoOriginal = this.Dto;
-        C.instance.eventSzerkeszteskesz.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+        C.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
           this.doModositaskesz(dto);
+        });
+        C.instance.eventMegsem.pipe(untilComponentDestroyed(this)).subscribe(() => {
+          this.doNav(0);
         });
         break;
     }
-  }
-
-  doUjkesz(dto: HelysegDto) {
-    this.eventUj.emit(dto);
   }
 
   async doTorles(ok: boolean) {
     if (ok) {
       this.spinner = true;
       try {
-        const res = await this.helysegservice.Delete(this.Dto);
+        const res = await this._helysegservice.Delete(this.Dto);
         if (res.Error != null) {
           throw res.Error;
         }
@@ -131,12 +111,9 @@ export class HelysegEgyComponent extends OnDestroyMixin implements AfterViewInit
   }
 
   doModositaskesz(dto: HelysegDto) {
-    if (dto !== undefined) {
-      propCopy(dto, this.Dto);
-
-      this.eventModositas.emit(dto);
-    }
     this.doNav(0);
+    propCopy(dto, this.Dto);
+    this.eventModositas.emit(dto);
   }
 
   override ngOnDestroy(): void {

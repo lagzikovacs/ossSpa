@@ -20,24 +20,22 @@ export class FizetesimodSzerkesztesComponent implements OnInit, OnDestroy {
   @Input() set DtoOriginal(value: FizetesimodDto) {
     this.DtoEdited = deepCopy(value);
   }
-  @Output() eventSzerkeszteskesz = new EventEmitter<FizetesimodDto>();
+  @Output() eventOk = new EventEmitter<FizetesimodDto>();
+  @Output() eventMegsem = new EventEmitter<void>();
 
   form: FormGroup;
   eppFrissit = false;
   set spinner(value: boolean) {
     this.eppFrissit = value;
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
-  fizetesimodservice: FizetesimodService;
+  cim = '';
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
               private _cdr: ChangeDetectorRef,
-              fizetesimodservice: FizetesimodService) {
-    this.fizetesimodservice = fizetesimodservice;
-
+              private _fizetesimodservice: FizetesimodService) {
     this.form = this._fb.group({
       'fizetesimod': ['', [Validators.required, Validators.maxLength(30)]]
     });
@@ -47,7 +45,7 @@ export class FizetesimodSzerkesztesComponent implements OnInit, OnDestroy {
     if (this.uj) {
       this.spinner = true;
       try {
-        const res = await this.fizetesimodservice.CreateNew();
+        const res = await this._fizetesimodservice.CreateNew();
         if (res.Error !== null) {
           throw res.Error;
         }
@@ -60,7 +58,14 @@ export class FizetesimodSzerkesztesComponent implements OnInit, OnDestroy {
       }
     }
 
+    this.cim = this.uj ? 'Új ' + this._fizetesimodservice.cim.toLowerCase() : this._fizetesimodservice.cim + ' módosítása';
     this.updateform();
+    this.docdr();
+  }
+
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   updateform() {
@@ -77,21 +82,21 @@ export class FizetesimodSzerkesztesComponent implements OnInit, OnDestroy {
     try {
       let res: NumberResult;
       if (this.uj) {
-        res = await this.fizetesimodservice.Add(this.DtoEdited);
+        res = await this._fizetesimodservice.Add(this.DtoEdited);
       } else {
-        res = await this.fizetesimodservice.Update(this.DtoEdited);
+        res = await this._fizetesimodservice.Update(this.DtoEdited);
       }
       if (res.Error != null) {
         throw res.Error;
       }
 
-      const res1 = await this.fizetesimodservice.Get(res.Result);
+      const res1 = await this._fizetesimodservice.Get(res.Result);
       if (res1.Error != null) {
         throw res1.Error;
       }
 
       this.spinner = false;
-      this.eventSzerkeszteskesz.emit(res1.Result[0]);
+      this.eventOk.emit(res1.Result[0]);
     } catch (err) {
       this.spinner = false;
       this._errorservice.Error = err;
@@ -99,7 +104,7 @@ export class FizetesimodSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit();
+    this.eventMegsem.emit();
   }
 
   ngOnDestroy() {

@@ -17,24 +17,22 @@ export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
   @Input() set DtoOriginal(value: AfakulcsDto) {
     this.DtoEdited = deepCopy(value);
   }
-  @Output() eventSzerkeszteskesz = new EventEmitter<AfakulcsDto>();
+  @Output() eventOk = new EventEmitter<AfakulcsDto>();
+  @Output() eventMegsem = new EventEmitter<void>();
 
   form: FormGroup;
   eppFrissit = false;
   set spinner(value: boolean) {
     this.eppFrissit = value;
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
-  afakulcsservice: AfakulcsService;
+  cim = '';
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
               private _cdr: ChangeDetectorRef,
-              afakulcsservice: AfakulcsService) {
-    this.afakulcsservice = afakulcsservice;
-
+              private _afakulcsservice: AfakulcsService) {
     this.form = this._fb.group({
       'afakulcs': ['', [Validators.required, Validators.maxLength(10)]],
       'afamerteke': ['', [Validators.required, Validators.min(0), Validators.max(100)]]
@@ -45,7 +43,7 @@ export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
     if (this.uj) {
       this.spinner = true;
       try {
-        const res = await this.afakulcsservice.CreateNew();
+        const res = await this._afakulcsservice.CreateNew();
         if (res.Error !== null) {
           throw res.Error;
         }
@@ -58,7 +56,14 @@ export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
       }
     }
 
+    this.cim = this.uj ? 'Új ' + this._afakulcsservice.cim.toLowerCase() : this._afakulcsservice.cim + ' módosítása';
     this.updateform();
+    this.docdr();
+  }
+
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   updateform() {
@@ -77,21 +82,21 @@ export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
     try {
       let res: NumberResult;
       if (this.uj) {
-        res = await this.afakulcsservice.Add(this.DtoEdited);
+        res = await this._afakulcsservice.Add(this.DtoEdited);
       } else {
-        res = await this.afakulcsservice.Update(this.DtoEdited);
+        res = await this._afakulcsservice.Update(this.DtoEdited);
       }
       if (res.Error != null) {
         throw res.Error;
       }
 
-      const res1 = await this.afakulcsservice.Get(res.Result);
+      const res1 = await this._afakulcsservice.Get(res.Result);
       if (res1.Error != null) {
         throw res1.Error;
       }
 
       this.spinner = false;
-      this.eventSzerkeszteskesz.emit(res1.Result[0]);
+      this.eventOk.emit(res1.Result[0]);
     } catch (err) {
       this.spinner = false;
       this._errorservice.Error = err;
@@ -99,7 +104,7 @@ export class AfakulcsSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit();
+    this.eventMegsem.emit();
   }
 
   ngOnDestroy() {

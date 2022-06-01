@@ -10,6 +10,8 @@
                [visZoom]="zoom" (StopZoom)="onStopzoom()">
   </app-toolbar>
 
+  <ng-template #compcont_afakulcsuj></ng-template>
+
   <app-tabla-ex #tabla
                 [items]="Dto"
                 [colsets]="afakulcsservice.GridSettings"
@@ -20,9 +22,7 @@
   </app-tabla-ex>
 
   <ng-template #gridegy>
-    <app-afakulcs-egy [uj]="uj"
-                      [dto]="Dto[DtoSelectedIndex]"
-                      (eventUj)="onUjtetelkesz($event)"
+    <app-afakulcs-egy [dto]="Dto[DtoSelectedIndex]"
                       (eventTorles)="onTorles()"
                       (eventModositas)="onModositaskesz($event)">
     </app-afakulcs-egy>

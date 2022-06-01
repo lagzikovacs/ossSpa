@@ -8,6 +8,9 @@
                [enUj]="jog" (Uj)="doUjtetel()"
                [visZoom]="zoom" (StopZoom)="onStopzoom()">
   </app-toolbar>
+
+  <ng-template #compcont_meuj></ng-template>
+
   <app-tabla-ex #tabla
                 [items]="Dto"
                 [colsets]="meservice.GridSettings"
@@ -18,9 +21,7 @@
   </app-tabla-ex>
 
   <ng-template #gridegy>
-    <app-me-egy [uj]="uj"
-                [dto]="Dto[DtoSelectedIndex]"
-                (eventUj)="onUjtetelkesz($event)"
+    <app-me-egy [dto]="Dto[DtoSelectedIndex]"
                 (eventTorles)="onTorles()"
                 (eventModositas)="onModositaskesz($event)">
     </app-me-egy>

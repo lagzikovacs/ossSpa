@@ -11,6 +11,8 @@
                      [visZoom]="zoom" (eventStopZoom)="onStopzoom()">
   </app-ugyfeltoolbar>
 
+  <ng-template #compcont_ugyfeluj></ng-template>
+
   <app-ugyfel-tabla #tabla
                     [items]="Dto"
                     [zoom]="zoom"
@@ -20,9 +22,7 @@
   </app-ugyfel-tabla>
 
   <ng-template #gridegy>
-    <app-ugyfel-egy [uj]="uj"
-                    [dto]="Dto[DtoSelectedIndex]"
-                    (eventUj)="onUjtetelkesz($event)"
+    <app-ugyfel-egy [dto]="Dto[DtoSelectedIndex]"
                     (eventTorles)="onTorles()"
                     (eventModositas)="onModositaskesz($event)">
     </app-ugyfel-egy>

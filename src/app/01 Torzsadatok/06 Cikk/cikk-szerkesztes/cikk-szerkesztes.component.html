@@ -1,6 +1,5 @@
-<div class="alapkeret" [appSpinner]="eppFrissit">
-  <h5 *ngIf="uj">Új {{cikkservice.cim | lowercase}}</h5>
-  <h5 *ngIf="!uj">{{cikkservice.cim}} módosítása</h5>
+<div class="alapkeret szerkeszto" [appSpinner]="eppFrissit">
+  <h5>{{cim}}</h5>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
     <div class="editform-card">

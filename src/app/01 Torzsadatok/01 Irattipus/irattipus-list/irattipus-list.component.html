@@ -10,6 +10,8 @@
                [visZoom]="zoom" (StopZoom)="onStopzoom()">
   </app-toolbar>
 
+  <ng-template #compcont_irattipusuj></ng-template>
+
   <app-tabla-ex #tabla
                 [items]="Dto"
                 [colsets]="irattipusservice.GridSettings"
@@ -20,9 +22,7 @@
   </app-tabla-ex>
 
   <ng-template #gridegy>
-    <app-irattipus-egy [uj]="uj"
-                       [dto]="Dto[DtoSelectedIndex]"
-                       (eventUj)="onUjtetelkesz($event)"
+    <app-irattipus-egy [dto]="Dto[DtoSelectedIndex]"
                        (eventTorles)="onTorles()"
                        (eventModositas)="onModositaskesz($event)">
     </app-irattipus-egy>

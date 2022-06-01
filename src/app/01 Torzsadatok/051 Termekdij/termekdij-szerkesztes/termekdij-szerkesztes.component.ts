@@ -20,24 +20,22 @@ export class TermekdijSzerkesztesComponent implements OnInit, OnDestroy {
   @Input() set DtoOriginal(value: TermekdijDto) {
     this.DtoEdited = deepCopy(value);
   }
-  @Output() eventSzerkeszteskesz = new EventEmitter<TermekdijDto>();
+  @Output() eventOk = new EventEmitter<TermekdijDto>();
+  @Output() eventMegsem = new EventEmitter<void>();
 
   form: FormGroup;
   eppFrissit = false;
   set spinner(value: boolean) {
     this.eppFrissit = value;
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
-  termekdijservice: TermekdijService;
+  cim = '';
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
               private _cdr: ChangeDetectorRef,
-              termekdijservice: TermekdijService) {
-    this.termekdijservice = termekdijservice;
-
+              private _termekdijservice: TermekdijService) {
     this.form = this._fb.group({
       'kt': ['', [Validators.required, Validators.maxLength(30)]],
       'megnevezes': ['', [Validators.required, Validators.maxLength(50)]],
@@ -49,7 +47,7 @@ export class TermekdijSzerkesztesComponent implements OnInit, OnDestroy {
     if (this.uj) {
       this.spinner = true;
       try {
-        const res = await this.termekdijservice.CreateNew();
+        const res = await this._termekdijservice.CreateNew();
         if (res.Error !== null) {
           throw res.Error;
         }
@@ -62,7 +60,14 @@ export class TermekdijSzerkesztesComponent implements OnInit, OnDestroy {
       }
     }
 
+    this.cim = this.uj ? 'Új ' + this._termekdijservice.cim.toLowerCase() : this._termekdijservice.cim + ' módosítása';
     this.updateform();
+    this.docdr();
+  }
+
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   updateform() {
@@ -83,21 +88,21 @@ export class TermekdijSzerkesztesComponent implements OnInit, OnDestroy {
     try {
       let res: NumberResult;
       if (this.uj) {
-        res = await this.termekdijservice.Add(this.DtoEdited);
+        res = await this._termekdijservice.Add(this.DtoEdited);
       } else {
-        res = await this.termekdijservice.Update(this.DtoEdited);
+        res = await this._termekdijservice.Update(this.DtoEdited);
       }
       if (res.Error != null) {
         throw res.Error;
       }
 
-      const res1 = await this.termekdijservice.Get(res.Result);
+      const res1 = await this._termekdijservice.Get(res.Result);
       if (res1.Error != null) {
         throw res1.Error;
       }
 
       this.spinner = false;
-      this.eventSzerkeszteskesz.emit(res1.Result[0]);
+      this.eventOk.emit(res1.Result[0]);
     } catch (err) {
       this.spinner = false;
       this._errorservice.Error = err;
@@ -105,7 +110,7 @@ export class TermekdijSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit(null);
+    this.eventMegsem.emit(null);
   }
 
   ngOnDestroy() {

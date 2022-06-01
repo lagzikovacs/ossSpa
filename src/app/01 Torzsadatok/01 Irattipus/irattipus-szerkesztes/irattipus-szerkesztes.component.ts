@@ -20,8 +20,6 @@ export class IrattipusSzerkesztesComponent implements OnInit, OnDestroy {
   @Input() set DtoOriginal(value: IrattipusDto) {
     this.DtoEdited = deepCopy(value);
   }
-  @Output() eventSzerkeszteskesz = new EventEmitter<IrattipusDto>();
-
   @Output() eventOk = new EventEmitter<IrattipusDto>();
   @Output() eventMegsem = new EventEmitter<void>();
 
@@ -61,8 +59,8 @@ export class IrattipusSzerkesztesComponent implements OnInit, OnDestroy {
     }
 
     this.cim = this.uj ? 'Új ' + this._irattipusservice.cim.toLowerCase() : this._irattipusservice.cim + ' módosítása';
-    this.docdr();
     this.updateform();
+    this.docdr();
   }
 
   docdr() {
@@ -99,8 +97,6 @@ export class IrattipusSzerkesztesComponent implements OnInit, OnDestroy {
 
       this.spinner = false;
       this.eventOk.emit(res1.Result[0]);
-      // TODO nem így
-      this.eventSzerkeszteskesz.emit(res1.Result[0]);
     } catch (err) {
       this.spinner = false;
       this._errorservice.Error = err;
@@ -109,9 +105,6 @@ export class IrattipusSzerkesztesComponent implements OnInit, OnDestroy {
 
   onCancel() {
     this.eventMegsem.emit();
-
-    // TODO nem így
-    this.eventSzerkeszteskesz.emit();
   }
 
   ngOnDestroy() {

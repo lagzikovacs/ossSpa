@@ -20,24 +20,22 @@ export class HelysegSzerkesztesComponent implements OnInit, OnDestroy {
   @Input() set DtoOriginal(value: HelysegDto) {
     this.DtoEdited = deepCopy(value);
   }
-  @Output() eventSzerkeszteskesz = new EventEmitter<HelysegDto>();
+  @Output() eventOk = new EventEmitter<HelysegDto>();
+  @Output() eventMegsem = new EventEmitter<void>();
 
   form: FormGroup;
   eppFrissit = false;
   set spinner(value: boolean) {
     this.eppFrissit = value;
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
-  helysegservice: HelysegService;
+  cim = '';
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
               private _cdr: ChangeDetectorRef,
-              helysegservice: HelysegService) {
-    this.helysegservice = helysegservice;
-
+              private _helysegservice: HelysegService) {
     this.form = this._fb.group({
       'helysegnev': ['', [Validators.required, Validators.maxLength(100)]]
     });
@@ -47,7 +45,7 @@ export class HelysegSzerkesztesComponent implements OnInit, OnDestroy {
     if (this.uj) {
       this.spinner = true;
       try {
-        const res = await this.helysegservice.CreateNew();
+        const res = await this._helysegservice.CreateNew();
         if (res.Error !== null) {
           throw res.Error;
         }
@@ -60,7 +58,14 @@ export class HelysegSzerkesztesComponent implements OnInit, OnDestroy {
       }
     }
 
+    this.cim = this.uj ? 'Új ' + this._helysegservice.cim.toLowerCase() : this._helysegservice.cim + ' módosítása';
     this.updateform();
+    this.docdr();
+  }
+
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   updateform() {
@@ -77,21 +82,21 @@ export class HelysegSzerkesztesComponent implements OnInit, OnDestroy {
     try {
       let res: NumberResult;
       if (this.uj) {
-        res = await this.helysegservice.Add(this.DtoEdited);
+        res = await this._helysegservice.Add(this.DtoEdited);
       } else {
-        res = await this.helysegservice.Update(this.DtoEdited);
+        res = await this._helysegservice.Update(this.DtoEdited);
       }
       if (res.Error != null) {
         throw res.Error;
       }
 
-      const res1 = await this.helysegservice.Get(res.Result);
+      const res1 = await this._helysegservice.Get(res.Result);
       if (res1.Error != null) {
         throw res1.Error;
       }
 
       this.spinner = false;
-      this.eventSzerkeszteskesz.emit(res1.Result[0]);
+      this.eventOk.emit(res1.Result[0]);
     } catch (err) {
       this.spinner = false;
       this._errorservice.Error = err;
@@ -99,7 +104,7 @@ export class HelysegSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit();
+    this.eventMegsem.emit();
   }
 
   ngOnDestroy() {

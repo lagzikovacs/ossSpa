@@ -8,6 +8,9 @@
                [enUj]="jog" (Uj)="doUjtetel()"
                [visZoom]="zoom" (StopZoom)="onStopzoom()">
   </app-toolbar>
+
+  <ng-template #compcont_tevekenyseguj></ng-template>
+
   <app-tabla-ex #tabla
                 [items]="Dto"
                 [colsets]="tevekenysegservice.GridSettings"
@@ -18,9 +21,7 @@
   </app-tabla-ex>
 
   <ng-template #gridegy>
-    <app-tevekenyseg-egy [uj]="uj"
-                         [dto]="Dto[DtoSelectedIndex]"
-                         (eventUj)="onUjtetelkesz($event)"
+    <app-tevekenyseg-egy [dto]="Dto[DtoSelectedIndex]"
                          (eventTorles)="onTorles()"
                          (eventModositas)="onModositaskesz($event)">
     </app-tevekenyseg-egy>

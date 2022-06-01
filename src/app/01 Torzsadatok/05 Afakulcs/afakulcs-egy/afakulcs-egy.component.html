@@ -1,6 +1,4 @@
-<div [ngClass]="!uj ? 'alapkeret' : ''" [appSpinner]="eppFrissit">
-  <app-primitiv-egy-toolbar *ngIf="!uj"
-                            (eventNav)="doNav($event)">
-  </app-primitiv-egy-toolbar>
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <app-primitiv-egy-toolbar (eventNav)="doNav($event)"></app-primitiv-egy-toolbar>
   <ng-template #compcont_afakulcs></ng-template>
 </div>

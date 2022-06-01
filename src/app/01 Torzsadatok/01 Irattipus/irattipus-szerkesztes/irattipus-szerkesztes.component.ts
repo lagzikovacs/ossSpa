@@ -22,22 +22,22 @@ export class IrattipusSzerkesztesComponent implements OnInit, OnDestroy {
   }
   @Output() eventSzerkeszteskesz = new EventEmitter<IrattipusDto>();
 
+  @Output() eventOk = new EventEmitter<IrattipusDto>();
+  @Output() eventMegsem = new EventEmitter<void>();
+
   form: FormGroup;
   eppFrissit = false;
   set spinner(value: boolean) {
     this.eppFrissit = value;
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
-  irattipusservice: IrattipusService;
+  cim = '';
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
               private _cdr: ChangeDetectorRef,
-              irattipusservice: IrattipusService) {
-    this.irattipusservice = irattipusservice;
-
+              private _irattipusservice: IrattipusService) {
     this.form = this._fb.group({
       'irattipus': ['', [Validators.required, Validators.maxLength(30)]]
     });
@@ -47,7 +47,7 @@ export class IrattipusSzerkesztesComponent implements OnInit, OnDestroy {
     if (this.uj) {
       this.spinner = true;
       try {
-        const res = await this.irattipusservice.CreateNew();
+        const res = await this._irattipusservice.CreateNew();
         if (res.Error !== null) {
           throw res.Error;
         }
@@ -60,7 +60,14 @@ export class IrattipusSzerkesztesComponent implements OnInit, OnDestroy {
       }
     }
 
+    this.cim = this.uj ? 'Új ' + this._irattipusservice.cim.toLowerCase() : this._irattipusservice.cim + ' módosítása';
+    this.docdr();
     this.updateform();
+  }
+
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   updateform() {
@@ -77,20 +84,22 @@ export class IrattipusSzerkesztesComponent implements OnInit, OnDestroy {
     try {
       let res: NumberResult;
       if (this.uj) {
-        res = await this.irattipusservice.Add(this.DtoEdited);
+        res = await this._irattipusservice.Add(this.DtoEdited);
       } else {
-        res = await this.irattipusservice.Update(this.DtoEdited);
+        res = await this._irattipusservice.Update(this.DtoEdited);
       }
       if (res.Error != null) {
         throw res.Error;
       }
 
-      const res1 = await this.irattipusservice.Get(res.Result);
+      const res1 = await this._irattipusservice.Get(res.Result);
       if (res1.Error != null) {
         throw res1.Error;
       }
 
       this.spinner = false;
+      this.eventOk.emit(res1.Result[0]);
+      // TODO nem így
       this.eventSzerkeszteskesz.emit(res1.Result[0]);
     } catch (err) {
       this.spinner = false;
@@ -99,6 +108,9 @@ export class IrattipusSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
+    this.eventMegsem.emit();
+
+    // TODO nem így
     this.eventSzerkeszteskesz.emit();
   }
 

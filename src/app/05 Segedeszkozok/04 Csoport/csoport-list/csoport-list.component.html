@@ -1,11 +1,15 @@
 <div class="alapkeret" [appSpinner]="eppFrissit">
   <h5>{{csoportservice.cim}}</h5>
+
   <app-toolbar [Szurok]="szurok"
                [(szempont)]="ekDto.szempont"
                [(minta)]="ekDto.minta"
                (Kereses)="onKereses()"
                (Uj)="doUjtetel()">
   </app-toolbar>
+
+  <ng-template #compcont_csoportuj></ng-template>
+
   <app-tabla-ex #tabla
                 [items]="Dto"
                 [colsets]="csoportservice.GridSettings"
@@ -13,18 +17,10 @@
                 [egyTemplate]="gridegy">
   </app-tabla-ex>
 
-  <!--<div style="border-left: 1px solid; border-top: 1px solid; width: min-content; margin-top: 2em">-->
-    <!--<app-csoport-entity *ngFor="let item of Dto; let i = index" [Dto]="item"-->
-                                                                <!--[DtoIndex]="i">-->
-    <!--</app-csoport-entity>-->
-  <!--</div>-->
-
   <ng-template #gridegy>
-    <app-csoport-egy [uj]="uj"
-                     [dto]="Dto[DtoSelectedIndex]"
-                     (eventUj)="onUjtetelkesz($event)"
+    <app-csoport-egy [dto]="Dto[DtoSelectedIndex]"
                      (eventTorles)="onTorles()"
-                     (eventModositas)="onModositaskesz($event)">
+                     (eventModositas)="onModositas($event)">
     </app-csoport-egy>
   </ng-template>
 </div>

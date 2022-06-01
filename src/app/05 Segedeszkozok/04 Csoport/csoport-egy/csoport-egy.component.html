@@ -1,7 +1,5 @@
-<div [ngClass]="!uj ? 'alapkeret' : ''" [appSpinner]="eppFrissit">
-  <app-csoport-egy-toolbar *ngIf="!uj"
-                           (eventNav)="doNav($event)">
-  </app-csoport-egy-toolbar>
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <app-csoport-egy-toolbar (eventNav)="doNav($event)"></app-csoport-egy-toolbar>
   <ng-template #compcont_csoport></ng-template>
 </div>
 

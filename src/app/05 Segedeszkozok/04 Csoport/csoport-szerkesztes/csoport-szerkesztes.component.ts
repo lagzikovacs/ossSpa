@@ -20,24 +20,22 @@ export class CsoportSzerkesztesComponent implements OnInit, OnDestroy {
   @Input() set DtoOriginal(value: CsoportDto) {
     this.DtoEdited = deepCopy(value);
   }
-  @Output() eventSzerkeszteskesz = new EventEmitter<CsoportDto>();
+  @Output() eventOk = new EventEmitter<CsoportDto>();
+  @Output() eventMegsem = new EventEmitter<void>();
 
   form: FormGroup;
   eppFrissit = false;
   set spinner(value: boolean) {
     this.eppFrissit = value;
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
-  csoportservice: CsoportService;
+  cim = '';
 
   constructor(private _errorservice: ErrorService,
               private _fb: FormBuilder,
               private _cdr: ChangeDetectorRef,
-              csoportservice: CsoportService) {
-    this.csoportservice = csoportservice;
-
+              private _csoportservice: CsoportService) {
     this.form = this._fb.group({
       'csoport': ['', [Validators.required, Validators.maxLength(100)]]
     });
@@ -47,21 +45,27 @@ export class CsoportSzerkesztesComponent implements OnInit, OnDestroy {
     if (this.uj) {
       this.spinner = true;
       try {
-        const res = await this.csoportservice.CreateNew();
+        const res = await this._csoportservice.CreateNew();
         if (res.Error !== null) {
           throw res.Error;
         }
 
         this.DtoEdited = res.Result[0];
-        this.updateform();
         this.spinner = false;
       } catch (err) {
         this.spinner = false;
         this._errorservice.Error = err;
       }
-    } else {
-      this.updateform();
     }
+
+    this.cim = this.uj ? 'Új ' + this._csoportservice.cim.toLowerCase() : this._csoportservice.cim + ' módosítása';
+    this.updateform();
+    this.docdr();
+  }
+
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   updateform() {
@@ -78,21 +82,21 @@ export class CsoportSzerkesztesComponent implements OnInit, OnDestroy {
     try {
       let res: NumberResult;
       if (this.uj) {
-        res = await this.csoportservice.Add(this.DtoEdited);
+        res = await this._csoportservice.Add(this.DtoEdited);
       } else {
-        res = await this.csoportservice.Update(this.DtoEdited);
+        res = await this._csoportservice.Update(this.DtoEdited);
       }
       if (res.Error != null) {
         throw res.Error;
       }
 
-      const res1 = await this.csoportservice.Get(res.Result);
+      const res1 = await this._csoportservice.Get(res.Result);
       if (res1.Error != null) {
         throw res1.Error;
       }
 
       this.spinner = false;
-      this.eventSzerkeszteskesz.emit(res1.Result[0]);
+      this.eventOk.emit(res1.Result[0]);
     } catch (err) {
       this.spinner = false;
       this._errorservice.Error = err;
@@ -100,7 +104,7 @@ export class CsoportSzerkesztesComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit();
+    this.eventMegsem.emit();
   }
 
   ngOnDestroy() {

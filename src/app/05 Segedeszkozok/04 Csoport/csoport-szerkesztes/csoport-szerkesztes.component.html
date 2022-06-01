@@ -1,6 +1,5 @@
-<div class="alapkeret" [appSpinner]="eppFrissit">
-  <h5 *ngIf="uj">Új {{csoportservice.cim | lowercase}}</h5>
-  <h5 *ngIf="!uj">{{csoportservice.cim}} módosítása</h5>
+<div class="alapkeret szerkeszto" [appSpinner]="eppFrissit">
+  <h5>{{cim}}</h5>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 
@@ -13,6 +12,7 @@
       <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
       <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
+
   </form>
 </div>
 

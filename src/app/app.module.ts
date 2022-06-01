@@ -214,29 +214,28 @@ import {UgyfelEgyComponent} from './01 Torzsadatok/09 Ugyfel/ugyfel-egy/ugyfel-e
 import {UgyfelEgyToolbarComponent} from './01 Torzsadatok/09 Ugyfel/ugyfel-egy-toolbar/ugyfel-egy-toolbar.component';
 import {UgyfelterLinkComponent} from './01 Torzsadatok/09 Ugyfel/ugyfelter-link/ugyfelter-link.component';
 import {BizonylattetelService} from './03 Bizonylatok/bizonylattetel/bizonylattetel.service';
-import {ParticioKibocsatoComponent} from "./05 Segedeszkozok/01 Particio/particio-kibocsato/particio-kibocsato.component";
-import {VolumeEgyComponent} from "./05 Segedeszkozok/02 Volume/volume-egy/volume-egy.component";
-import {CsoportEgyToolbarComponent} from "./05 Segedeszkozok/04 Csoport/csoport-egy-toolbar/csoport-egy-toolbar.component";
-import {CsoportEgyComponent} from "./05 Segedeszkozok/04 Csoport/csoport-egy/csoport-egy.component";
-import {PenztarEgyToolbarComponent} from "./02 Eszkozok/03 Penztar/penztar/penztar-egy-toolbar/penztar-egy-toolbar.component";
-import {PenztarEgyComponent} from "./02 Eszkozok/03 Penztar/penztar/penztar-egy/penztar-egy.component";
-import {HibabejelentesEgyComponent} from "./02 Eszkozok/06 Hibabejelentes/hibabejelentes-egy/hibabejelentes-egy.component";
-import {HibabejelentesEgyToolbarComponent} from "./02 Eszkozok/06 Hibabejelentes/hibabejelentes-egy-toolbar/hibabejelentes-egy-toolbar.component";
-import {DokumentumEgyToolbarComponent} from "./02 Eszkozok/02 Irat/dokumentum/dokumentum-egy-toolbar/dokumentum-egy-toolbar.component";
-import {DokumentumEgyComponent} from "./02 Eszkozok/02 Irat/dokumentum/dokumentum-egy/dokumentum-egy.component";
-import {AjanlatkeresEgyToolbarComponent} from "./02 Eszkozok/04 Ajanlatkeres/ajanlatkeres-egy-toolbar/ajanlatkeres-egy-toolbar.component";
-import {FelmeresEgyToolbarComponent} from "./02 Eszkozok/05 Felmeres/felmeres-egy-toolbar/felmeres-egy-toolbar.component";
-import {AjanlatkeresEgyComponent} from "./02 Eszkozok/04 Ajanlatkeres/ajanlatkeres-egy/ajanlatkeres-egy.component";
-import {FelmeresEgyComponent} from "./02 Eszkozok/05 Felmeres/felmeres-egy/felmeres-egy.component";
-import {KifizetesEgyComponent} from "./03 Bizonylatok/kifizetes/kifizetes-egy/kifizetes-egy.component";
-import {ProjektJegyzetEgyComponent} from "./02 Eszkozok/01 Projekt/projektjegyzet/projekt-jegyzet-egy/projekt-jegyzet-egy.component";
-import {ProjektEgyToolbarComponent} from "./02 Eszkozok/01 Projekt/projekt/projekt-egy-toolbar/projekt-egy-toolbar.component";
-import {ProjektEgyComponent} from "./02 Eszkozok/01 Projekt/projekt/projekt-egy/projekt-egy.component";
-import {IratEgyToolbarComponent} from "./02 Eszkozok/02 Irat/irat/irat-egy-toolbar/irat-egy-toolbar.component";
-import {ProjektkapcsolatEgyComponent} from "./02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat-egy/projektkapcsolat-egy.component";
+import {ParticioKibocsatoComponent} from './05 Segedeszkozok/01 Particio/particio-kibocsato/particio-kibocsato.component';
+import {VolumeEgyComponent} from './05 Segedeszkozok/02 Volume/volume-egy/volume-egy.component';
+import {CsoportEgyToolbarComponent} from './05 Segedeszkozok/04 Csoport/csoport-egy-toolbar/csoport-egy-toolbar.component';
+import {CsoportEgyComponent} from './05 Segedeszkozok/04 Csoport/csoport-egy/csoport-egy.component';
+import {PenztarEgyToolbarComponent} from './02 Eszkozok/03 Penztar/penztar/penztar-egy-toolbar/penztar-egy-toolbar.component';
+import {PenztarEgyComponent} from './02 Eszkozok/03 Penztar/penztar/penztar-egy/penztar-egy.component';
+import {HibabejelentesEgyComponent} from './02 Eszkozok/06 Hibabejelentes/hibabejelentes-egy/hibabejelentes-egy.component';
+import {HibabejelentesEgyToolbarComponent} from './02 Eszkozok/06 Hibabejelentes/hibabejelentes-egy-toolbar/hibabejelentes-egy-toolbar.component';
+import {DokumentumEgyToolbarComponent} from './02 Eszkozok/02 Irat/dokumentum/dokumentum-egy-toolbar/dokumentum-egy-toolbar.component';
+import {DokumentumEgyComponent} from './02 Eszkozok/02 Irat/dokumentum/dokumentum-egy/dokumentum-egy.component';
+import {AjanlatkeresEgyToolbarComponent} from './02 Eszkozok/04 Ajanlatkeres/ajanlatkeres-egy-toolbar/ajanlatkeres-egy-toolbar.component';
+import {FelmeresEgyToolbarComponent} from './02 Eszkozok/05 Felmeres/felmeres-egy-toolbar/felmeres-egy-toolbar.component';
+import {AjanlatkeresEgyComponent} from './02 Eszkozok/04 Ajanlatkeres/ajanlatkeres-egy/ajanlatkeres-egy.component';
+import {FelmeresEgyComponent} from './02 Eszkozok/05 Felmeres/felmeres-egy/felmeres-egy.component';
+import {KifizetesEgyComponent} from './03 Bizonylatok/kifizetes/kifizetes-egy/kifizetes-egy.component';
+import {ProjektJegyzetEgyComponent} from './02 Eszkozok/01 Projekt/projektjegyzet/projekt-jegyzet-egy/projekt-jegyzet-egy.component';
+import {ProjektEgyToolbarComponent} from './02 Eszkozok/01 Projekt/projekt/projekt-egy-toolbar/projekt-egy-toolbar.component';
+import {ProjektEgyComponent} from './02 Eszkozok/01 Projekt/projekt/projekt-egy/projekt-egy.component';
+import {IratEgyToolbarComponent} from './02 Eszkozok/02 Irat/irat/irat-egy-toolbar/irat-egy-toolbar.component';
+import {ProjektkapcsolatEgyComponent} from './02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat-egy/projektkapcsolat-egy.component';
 import { BizonylatEgyToolbarComponent } from './03 Bizonylatok/bizonylat/bizonylat-egy-toolbar/bizonylat-egy-toolbar.component';
 import { BizonylatkapcsolatEgyComponent } from './03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolat-egy/bizonylatkapcsolat-egy.component';
-import { CsoportEntityComponent } from './05 Segedeszkozok/04 Csoport/csoport-entity/csoport-entity.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -499,7 +498,6 @@ if (environment.production) {
     BizonylatEgyToolbarComponent,
     BizonylatkapcsolatEgyComponent,
     TablaComponent,
-    CsoportEntityComponent,
   ],
   imports: [
     BrowserModule,

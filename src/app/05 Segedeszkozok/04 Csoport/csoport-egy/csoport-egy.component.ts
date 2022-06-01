@@ -24,13 +24,11 @@ import {propCopy} from '../../../common/propCopy';
 export class CsoportEgyComponent extends OnDestroyMixin implements AfterViewInit, OnDestroy {
   @ViewChild('compcont_csoport', {read: ViewContainerRef}) vcr: ViewContainerRef;
 
-  @Input() uj = false;
   @Input() defaultNav = 0;
   Dto = new CsoportDto();
   @Input() set dto(value: CsoportDto) {
     this.Dto = deepCopy(value);
   }
-  @Output() eventUj: EventEmitter<CsoportDto> = new EventEmitter<CsoportDto>();
   @Output() eventTorles: EventEmitter<void> = new EventEmitter<void>();
   @Output() eventModositas: EventEmitter<CsoportDto> = new EventEmitter<CsoportDto>();
 
@@ -40,23 +38,14 @@ export class CsoportEgyComponent extends OnDestroyMixin implements AfterViewInit
     this.docdr();
   }
 
-  csoportservice: CsoportService;
-
   constructor(private _errorservice: ErrorService,
               private _cdr: ChangeDetectorRef,
-              csoportservice: CsoportService) {
+              private _csoportservice: CsoportService) {
     super();
-
-    this.csoportservice = csoportservice;
   }
 
   ngAfterViewInit() {
-    if (this.uj) {
-      this.doNav(EgyMode.Uj);
-      this.docdr();
-    }
-
-    if (!this.uj && this.defaultNav > 0) {
+    if (this.defaultNav > 0) {
       this.doNav(this.defaultNav);
       this.docdr();
     }
@@ -71,24 +60,17 @@ export class CsoportEgyComponent extends OnDestroyMixin implements AfterViewInit
     this.vcr.clear();
 
     switch (i) {
-      case EgyMode.Uj: // -1
-        const ujC = this.vcr.createComponent(CsoportSzerkesztesComponent);
-
-        ujC.instance.uj = true;
-        ujC.instance.eventSzerkeszteskesz.pipe(untilComponentDestroyed(this)).subscribe(dto => {
-          this.doUjkesz(dto);
-        });        break;
       case EgyMode.Reszletek: // 1
         const reszletekC = this.vcr.createComponent(ReszletekComponent);
 
-        reszletekC.instance.cim = this.csoportservice.cim;
+        reszletekC.instance.cim = this._csoportservice.cim;
         reszletekC.instance.item = this.Dto;
-        reszletekC.instance.colsets = this.csoportservice.ReszletekSettings;
+        reszletekC.instance.colsets = this._csoportservice.ReszletekSettings;
         break;
       case EgyMode.Torles: // 2
         const teteltorlesC = this.vcr.createComponent(TetelTorlesComponent);
 
-        teteltorlesC.instance.cim = this.csoportservice.cim;
+        teteltorlesC.instance.cim = this._csoportservice.cim;
         teteltorlesC.instance.eventTorles.pipe(untilComponentDestroyed(this)).subscribe(ok => {
           this.doTorles(ok);
         });
@@ -98,8 +80,11 @@ export class CsoportEgyComponent extends OnDestroyMixin implements AfterViewInit
 
         C.instance.uj = false;
         C.instance.DtoOriginal = this.Dto;
-        C.instance.eventSzerkeszteskesz.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+        C.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
           this.doModositaskesz(dto);
+        });
+        C.instance.eventMegsem.pipe(untilComponentDestroyed(this)).subscribe(() => {
+          this.doNav(0);
         });
         break;
       case EgyMode.Felhasznalo: // 11
@@ -113,15 +98,11 @@ export class CsoportEgyComponent extends OnDestroyMixin implements AfterViewInit
     }
   }
 
-  doUjkesz(dto: CsoportDto) {
-    this.eventUj.emit(dto);
-  }
-
   async doTorles(ok: boolean) {
     if (ok) {
       this.spinner = true;
       try {
-        const res = await this.csoportservice.Delete(this.Dto);
+        const res = await this._csoportservice.Delete(this.Dto);
         if (res.Error != null) {
           throw res.Error;
         }
@@ -139,13 +120,11 @@ export class CsoportEgyComponent extends OnDestroyMixin implements AfterViewInit
     }
   }
 
+  // bonyolultabb komponensnél többször hívódik
   doModositaskesz(dto: CsoportDto) {
-    if (dto !== undefined) {
-      propCopy(dto, this.Dto);
-
-      this.eventModositas.emit(dto);
-    }
     this.doNav(0);
+    propCopy(dto, this.Dto);
+    this.eventModositas.emit(dto);
   }
 
   override ngOnDestroy(): void {

@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild,
   ViewContainerRef
 } from '@angular/core';
@@ -11,21 +12,22 @@ import {EgyszeruKeresesParam} from '../../../common/dtos/egyszerukeresesparam';
 import {LogonService} from '../../05 Bejelentkezes/logon.service';
 import {JogKod} from '../../../common/enums/jogkod';
 import {TablaExComponent} from '../../../common/tabla-ex/tabla-ex.component';
+import {CsoportSzerkesztesComponent} from '../csoport-szerkesztes/csoport-szerkesztes.component';
+import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-csoport-list',
   templateUrl: './csoport-list.component.html'
 })
-export class CsoportListComponent implements OnInit, OnDestroy {
+export class CsoportListComponent extends OnDestroyMixin implements AfterViewInit, OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: TablaExComponent;
-  @ViewChild('compcont_csoport', {read: ViewContainerRef}) vcr: ViewContainerRef;
+  @ViewChild('compcont_csoportuj', {read: ViewContainerRef}) vcruj: ViewContainerRef;
 
   szurok = ['Csoport'];
   ekDto = new EgyszeruKeresesParam(0, '', environment.lapmeret);
   elsokereses = true;
   jog = false;
-  uj = false;
 
   Dto = new Array<CsoportDto>();
   DtoSelectedIndex = -1;
@@ -33,8 +35,7 @@ export class CsoportListComponent implements OnInit, OnDestroy {
   eppFrissit = false;
   set spinner(value: boolean) {
     this.eppFrissit = value;
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
   csoportservice: CsoportService;
@@ -43,19 +44,27 @@ export class CsoportListComponent implements OnInit, OnDestroy {
               private _errorservice: ErrorService,
               private _cdr: ChangeDetectorRef,
               csoportservice: CsoportService) {
+    super();
+
     this.jog = _logonservice.Jogaim.includes(JogKod[JogKod.CSOPORT]);
     this.csoportservice = csoportservice;
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.onKereses();
   }
 
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
+
   onKereses() {
+    this.vcruj.clear();
+    this.tabla.clearselections();
+
     this.elsokereses = true;
     this.ekDto.rekordtol = 0;
-
-    this.tabla.clearselections();
 
     this.onKeresesTovabb();
   }
@@ -86,23 +95,29 @@ export class CsoportListComponent implements OnInit, OnDestroy {
     }
   }
 
-  onId(i: number) {
-    this.DtoSelectedIndex = i;
-
-    this.uj = false;
-    this.tabla.egytetelstart();
-  }
-
   doUjtetel() {
-    this.uj = true;
-    this.tabla.ujtetelstart();
+    this.vcruj.clear();
+    const ujC = this.vcruj.createComponent(CsoportSzerkesztesComponent);
+
+    ujC.instance.uj = true;
+    ujC.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+      this.vcruj.clear();
+
+      const buf = [...this.Dto];
+      buf.unshift(dto);
+      this.Dto = buf;
+
+      this.docdr();
+    });
+    ujC.instance.eventMegsem.pipe(untilComponentDestroyed(this)).subscribe(() => {
+      this.vcruj.clear();
+    });
   }
 
-  onUjtetelkesz(dto: CsoportDto) {
-    if (dto !== undefined) {
-      this.Dto.unshift(dto);
-    }
-    this.tabla.ujtetelstop();
+  onId(i: number) {
+    this.vcruj.clear();
+    this.DtoSelectedIndex = i;
+    this.tabla.egytetelstart();
   }
 
   onTorles() {
@@ -111,11 +126,13 @@ export class CsoportListComponent implements OnInit, OnDestroy {
     this.tabla.clearselections();
   }
 
-  onModositaskesz(dto: CsoportDto) {
+  onModositas(dto: CsoportDto) {
     propCopy(dto, this.Dto[this.DtoSelectedIndex]);
   }
 
-  ngOnDestroy(): void {
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+
     Object.keys(this).map(k => {
       (this[k]) = null;
     });

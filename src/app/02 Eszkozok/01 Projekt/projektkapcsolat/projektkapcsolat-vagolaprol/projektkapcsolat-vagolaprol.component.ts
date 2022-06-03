@@ -16,8 +16,9 @@ import {ProjektKapcsolatDto} from '../projektkapcsolatdto';
 })
 export class ProjektkapcsolatVagolaprolComponent implements OnDestroy {
   @Input() Projektkod = -1;
-  @Output() eventVagolaprolutan = new EventEmitter<ProjektKapcsolatDto>();
-  @Output() eventVagolaprolutanvege = new EventEmitter<void>();
+  @Output() eventEgytetel = new EventEmitter<ProjektKapcsolatDto>();
+  @Output() eventMegsem = new EventEmitter<void>();
+  @Output() eventVege = new EventEmitter<void>();
 
   ci = 0;
   eppFrissit = false;
@@ -36,7 +37,7 @@ export class ProjektkapcsolatVagolaprolComponent implements OnDestroy {
     this.projektkapcsolatservice = projektkapcsolatservice;
   }
 
-  ok() {
+  onSubmit() {
     if (this._vagolapservice.kijeloltekszama() === 0) {
       this._errorservice.Error = 'Nincs kijelölt tétel!';
       return;
@@ -75,7 +76,7 @@ export class ProjektkapcsolatVagolaprolComponent implements OnDestroy {
         try {
           const pkDto = await this.add();
 
-          this.eventVagolaprolutan.emit(pkDto);
+          this.eventEgytetel.emit(pkDto);
 
           ++this.ci;
           await this.ciklus();
@@ -89,12 +90,12 @@ export class ProjektkapcsolatVagolaprolComponent implements OnDestroy {
       }
     } else {
       this.spinner = false;
-      this.eventVagolaprolutanvege.emit();
+      this.eventVege.emit();
     }
   }
 
-  cancel() {
-    this.eventVagolaprolutanvege.emit();
+  onCancel() {
+    this.eventMegsem.emit();
   }
 
   ngOnDestroy() {

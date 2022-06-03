@@ -72,18 +72,7 @@ export class ProjektkapcsolatEgyComponent extends OnDestroyMixin implements Afte
 
         break;
       case ProjektkapcsolatEgyMode.Vagolaprol: // 4
-        const vagolaprolC = this.vcr.createComponent(ProjektkapcsolatVagolaprolComponent);
 
-        vagolaprolC.instance.Projektkod = this.Projektkod;
-        vagolaprolC.instance.eventVagolaprolutan.pipe(untilComponentDestroyed(this)).subscribe(dto => {
-          this.eventUj.emit(dto);
-        });
-        vagolaprolC.instance.eventVagolaprolutanvege.pipe(untilComponentDestroyed(this)).subscribe(() => {
-          this.eventUj.emit(null);
-        });
-
-        this._cdr.markForCheck();
-        this._cdr.detectChanges();
         break;
       case ProjektkapcsolatEgyMode.Egybizonylat: // 5
         this.spinner = true;

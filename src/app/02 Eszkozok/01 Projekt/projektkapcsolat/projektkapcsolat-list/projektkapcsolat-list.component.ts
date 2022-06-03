@@ -22,6 +22,7 @@ import {ProjektService} from "../../projekt/projekt.service";
 import {ProjektKapcsolatParam} from "../projektkapcsolatparam";
 import {IratSzerkesztesComponent} from "../../../02 Irat/irat/irat-szerkesztes/irat-szerkesztes.component";
 import {AjanlatComponent} from "../../ajanlat/ajanlat/ajanlat";
+import {ProjektkapcsolatVagolaprolComponent} from "../projektkapcsolat-vagolaprol/projektkapcsolat-vagolaprol.component";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -212,10 +213,26 @@ export class ProjektkapcsolatListComponent extends OnDestroyMixin implements OnI
     this.vcruj.clear();
     this._vagolapservice.Mode = VagolapMode.Projekt;
 
+    const vagolaprolC = this.vcruj.createComponent(ProjektkapcsolatVagolaprolComponent);
 
-    this.tabla.clearselections();
-    this.egymode = ProjektkapcsolatEgyMode.Vagolaprol;
-    this.tabla.ujtetelstart();
+    vagolaprolC.instance.Projektkod = this.Projektkod;
+    vagolaprolC.instance.eventEgytetel.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+      this.vcruj.clear();
+
+      const buf = [...this.Dto];
+      buf.unshift(dto);
+      this.Dto = buf;
+
+      this.docdr();
+    });
+    vagolaprolC.instance.eventVege.pipe(untilComponentDestroyed(this)).subscribe(() => {
+      this.vcruj.clear();
+    });
+    vagolaprolC.instance.eventMegsem.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+      this.vcruj.clear();
+    });
+
+    this.docdr();
   }
 
   onId(i: number) {

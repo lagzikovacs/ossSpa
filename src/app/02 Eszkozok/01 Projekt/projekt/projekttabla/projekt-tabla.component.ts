@@ -20,32 +20,14 @@ export class ProjektTablaComponent implements OnDestroy {
 
   clickedrowindex = -1;
   clickedidindex = -1;
-  ujtetel = false;
   egytetel = false;
 
   constructor(private _cdr: ChangeDetectorRef) {
   }
 
   clearselections() {
-    this.ujtetel = false;
-
     this.clickedrowindex = -1;
     this.clickedidindex = -1;
-
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
-  }
-
-  ujtetelstart() {
-    this.clearselections();
-    this.ujtetel = true;
-
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
-  }
-
-  ujtetelstop() {
-    this.ujtetel = false;
 
     this._cdr.markForCheck();
     this._cdr.detectChanges();
@@ -59,8 +41,6 @@ export class ProjektTablaComponent implements OnDestroy {
   }
 
   clickforid(i: number) {
-    this.ujtetel = false;
-
     this.clickedidindex = i;
     this.clickedrowindex = this.clickedidindex;
 
@@ -68,8 +48,6 @@ export class ProjektTablaComponent implements OnDestroy {
   }
 
   clickforrow(i: number) {
-    this.ujtetel = false;
-
     this.clickedrowindex = i;
     // először clickforid aztán clickforrow is, clickforrow felülírná az eseményeket
     if (this.clickedrowindex !== this.clickedidindex) {

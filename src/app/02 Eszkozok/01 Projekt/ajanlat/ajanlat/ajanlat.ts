@@ -23,7 +23,8 @@ export class AjanlatComponent implements OnInit, OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: AjanlatTablaComponent;
 
   @Input() Projektkod = -1;
-  @Output() eventAjanlatkesz = new EventEmitter<ProjektKapcsolatDto>();
+  @Output() eventOk = new EventEmitter<ProjektKapcsolatDto>();
+  @Output() eventMegsem = new EventEmitter<void>();
 
   AjanlatParam = new AjanlatParam();
   ajanlatitemindex = -1;
@@ -154,7 +155,7 @@ export class AjanlatComponent implements OnInit, OnDestroy {
       }
 
       this.spinner = false;
-      this.eventAjanlatkesz.emit(res1.Result[0]);
+      this.eventOk.emit(res1.Result[0]);
     } catch (err) {
       this.spinner = false;
       this._errorservice.Error = err;
@@ -162,7 +163,7 @@ export class AjanlatComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.eventAjanlatkesz.emit();
+    this.eventMegsem.emit();
   }
 
   ngOnDestroy() {

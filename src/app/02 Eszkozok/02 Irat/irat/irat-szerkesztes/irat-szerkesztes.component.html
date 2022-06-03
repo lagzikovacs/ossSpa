@@ -1,4 +1,4 @@
-<div class="alapkeret" [appSpinner]="eppFrissit">
+<div class="alapkeret szerkeszto" [appSpinner]="eppFrissit">
   <h5 *ngIf="uj">Új {{iratservice.cim | lowercase}}</h5>
   <h5 *ngIf="!uj">{{iratservice.cim}} módosítása</h5>
 
@@ -32,9 +32,6 @@
           <div class="editform-label">Ügyfél</div>
           <input type="text" class="editform-edit zoomedit ugyfelwidth" formControlName="ugyfelnev">
           <button class="toolbutton" type="button" (click)="UgyfelZoom()">...</button>
-          <!--<button class="toolbutton" (click)="UgyfelTorles()" type="button">-->
-            <!--<i class="fa fa-close" aria-hidden="true"></i>-->
-          <!--</button>-->
         </div>
 
         <div class="editform-row">

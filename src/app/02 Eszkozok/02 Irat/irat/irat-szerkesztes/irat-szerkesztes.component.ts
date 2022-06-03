@@ -36,7 +36,8 @@ export class IratSzerkesztesComponent extends OnDestroyMixin implements OnInit, 
   }
   @Input() enUgyfel = true;
   @Input() Ugyfelkod: number;
-  @Output() eventSzerkeszteskesz = new EventEmitter<IratDto>();
+  @Output() eventOk = new EventEmitter<IratDto>();
+  @Output() eventMegsem = new EventEmitter<void>();
 
   form: FormGroup;
   eppFrissit = false;
@@ -161,7 +162,7 @@ export class IratSzerkesztesComponent extends OnDestroyMixin implements OnInit, 
       }
 
       this.spinner = false;
-      this.eventSzerkeszteskesz.emit(res3.Result[0]);
+      this.eventOk.emit(res3.Result[0]);
     } catch (err) {
       this.spinner = false;
       this._errorservice.Error = err;
@@ -169,7 +170,7 @@ export class IratSzerkesztesComponent extends OnDestroyMixin implements OnInit, 
   }
 
   onCancel() {
-    this.eventSzerkeszteskesz.emit();
+    this.eventMegsem.emit();
   }
 
   IrattipusZoom() {
@@ -213,14 +214,6 @@ export class IratSzerkesztesComponent extends OnDestroyMixin implements OnInit, 
     this.bodyclass = 'jw-modal-body-complex';
     this._modalservice.open(this.modalname);
   }
-
-
-  // UgyfelTorles() {
-  //   this.DtoEdited.Ugyfelkod = null;
-  //   this.DtoEdited.Ugyfelnev = null;
-  //   this.DtoEdited.Ugyfelcim = null;
-  //   this.updateform();
-  // }
 
   override ngOnDestroy(): void {
     super.ngOnDestroy();

@@ -1,4 +1,4 @@
-<div class="alapkeret" [appSpinner]="eppFrissit">
+<div class="alapkeret szerkeszto" [appSpinner]="eppFrissit">
   <h5>Új bizonylat</h5>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
@@ -12,7 +12,7 @@
 
     <div class="editform-row-bottom">
       <button class="toolbutton okbutton" type="submit" [disabled]="form.invalid">Ok</button>
-      <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
 
   </form>

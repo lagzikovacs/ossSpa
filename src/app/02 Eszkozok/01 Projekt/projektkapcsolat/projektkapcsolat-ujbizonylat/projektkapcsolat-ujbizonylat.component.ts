@@ -21,7 +21,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class ProjektkapcsolatUjbizonylatComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() Projektkod = -1;
   @Input() Ugyfelkod = -1;
-  @Output() eventUjbizonylatutan = new EventEmitter<ProjektKapcsolatDto>();
+  @Output() eventOk = new EventEmitter<ProjektKapcsolatDto>();
+  @Output() eventMegsem = new EventEmitter<void>();
 
   entryindex = 3;
 
@@ -119,15 +120,15 @@ export class ProjektkapcsolatUjbizonylatComponent implements OnInit, AfterViewIn
       }
 
       this.spinner = false;
-      this.eventUjbizonylatutan.emit(res3.Result[0]);
+      this.eventOk.emit(res3.Result[0]);
     } catch (err) {
       this.spinner = false;
       this._errorservice.Error = err;
     }
   }
 
-  cancel() {
-    this.eventUjbizonylatutan.emit(null);
+  onCancel() {
+    this.eventMegsem.emit(null);
   }
 
   ngOnDestroy() {

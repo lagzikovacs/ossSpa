@@ -63,88 +63,13 @@ export class ProjektkapcsolatEgyComponent extends OnDestroyMixin implements Afte
 
     switch (this.egymode) {
       case ProjektkapcsolatEgyMode.UjBizonylat: // 1
-        this.spinner = true;
-        try {
-          const resP = await this._projektservice.Get(this.Projektkod);
-          if (resP.Error != null) {
-            throw resP.Error;
-          }
-          const Ugyfelkod = resP.Result[0].Ugyfelkod;
-          this.spinner = false;
 
-          const ujbC = this.vcr.createComponent(ProjektkapcsolatUjbizonylatComponent);
-          ujbC.instance.Projektkod = this.Projektkod;
-          ujbC.instance.Ugyfelkod = Ugyfelkod;
-          ujbC.instance.eventUjbizonylatutan.pipe(untilComponentDestroyed(this)).subscribe(dto => {
-            this.eventUj.emit(dto);
-          });
-
-          this._cdr.markForCheck();
-          this._cdr.detectChanges();
-        } catch (err) {
-          this.spinner = false;
-          this._errorservice.Error = err;
-          this.eventUj.emit(null);
-        }
         break;
       case ProjektkapcsolatEgyMode.UjIrat: // 2
-        this.spinner = true;
-        try {
-          const resP1 = await this._projektservice.Get(this.Projektkod);
-          if (resP1.Error != null) {
-            throw resP1.Error;
-          }
-          const ugyfelkod1 = resP1.Result[0].Ugyfelkod;
-          this.spinner = false;
 
-          const ujiC = this.vcr.createComponent(IratSzerkesztesComponent);
-          ujiC.instance.uj = true;
-          ujiC.instance.enUgyfel = false;
-          ujiC.instance.Ugyfelkod = ugyfelkod1;
-          ujiC.instance.eventSzerkeszteskesz.pipe(untilComponentDestroyed(this)).subscribe(async dtoIrat => {
-            if (dtoIrat !== undefined) {
-              this.spinner = true;
-
-              const resPkk = await this._projektkapcsolatservice.AddIratToProjekt(new ProjektKapcsolatParam(
-                this.Projektkod, 0, dtoIrat.Iratkod, new BizonylatDto()));
-              if (resPkk.Error != null) {
-                throw resPkk.Error;
-              }
-
-              const resPk = await this._projektkapcsolatservice.Get(resPkk.Result);
-              if (resPk.Error != null) {
-                throw resPk.Error;
-              }
-
-              this.spinner = false;
-              this.eventUj.emit(resPk.Result[0]);
-            } else {
-              this.eventUj.emit(null);
-            }
-          });
-
-          this._cdr.markForCheck();
-          this._cdr.detectChanges();
-        } catch (err) {
-          this.spinner = false;
-          this._errorservice.Error = err;
-          this.eventUj.emit(null);
-        }
         break;
       case ProjektkapcsolatEgyMode.Ajanlat: // 3
-        const ajanlatC = this.vcr.createComponent(AjanlatComponent);
 
-        ajanlatC.instance.Projektkod = this.Projektkod;
-        ajanlatC.instance.eventAjanlatkesz.pipe(untilComponentDestroyed(this)).subscribe(dto => {
-          if (dto !== undefined) {
-            this.eventUj.emit(dto);
-          } else {
-            this.eventUj.emit(null);
-          }
-        });
-
-        this._cdr.markForCheck();
-        this._cdr.detectChanges();
         break;
       case ProjektkapcsolatEgyMode.Vagolaprol: // 4
         const vagolaprolC = this.vcr.createComponent(ProjektkapcsolatVagolaprolComponent);

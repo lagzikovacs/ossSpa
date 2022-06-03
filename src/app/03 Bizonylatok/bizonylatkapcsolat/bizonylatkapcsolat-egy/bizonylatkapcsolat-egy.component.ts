@@ -70,26 +70,25 @@ export class BizonylatkapcsolatEgyComponent extends OnDestroyMixin implements Af
           ujiC.instance.uj = true;
           ujiC.instance.enUgyfel = false;
           ujiC.instance.Ugyfelkod = ugyfelkod1;
-          ujiC.instance.eventSzerkeszteskesz.pipe(untilComponentDestroyed(this)).subscribe(async dtoIrat => {
-            if (dtoIrat !== undefined) {
-              this.spinner = true;
+          ujiC.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(async dtoIrat => {
+            this.spinner = true;
 
-              const resBkk = await this._bizonylatkapcsolatservice.AddIratToBizonylat(new BizonylatKapcsolatParam(
-                this.Bizonylatkod, dtoIrat.Iratkod));
-              if (resBkk.Error != null) {
-                throw resBkk.Error;
-              }
-
-              const resBk = await this._bizonylatkapcsolatservice.Get(resBkk.Result);
-              if (resBk.Error != null) {
-                throw resBk.Error;
-              }
-
-              this.spinner = false;
-              this.eventUj.emit(resBk.Result[0]);
-            } else {
-              this.eventUj.emit(null);
+            const resBkk = await this._bizonylatkapcsolatservice.AddIratToBizonylat(new BizonylatKapcsolatParam(
+              this.Bizonylatkod, dtoIrat.Iratkod));
+            if (resBkk.Error != null) {
+              throw resBkk.Error;
             }
+
+            const resBk = await this._bizonylatkapcsolatservice.Get(resBkk.Result);
+            if (resBk.Error != null) {
+              throw resBk.Error;
+            }
+
+            this.spinner = false;
+            this.eventUj.emit(resBk.Result[0]);
+          });
+          ujiC.instance.eventMegsem.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+            this.vcr.clear();
           });
 
           this._cdr.markForCheck();

@@ -98,7 +98,7 @@ export class IratEgyComponent extends OnDestroyMixin implements AfterViewInit, O
 
         ujC.instance.uj = true;
         ujC.instance.enUgyfel = this.enUgyfel;
-        ujC.instance.eventSzerkeszteskesz.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+        ujC.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
           this.doUjkesz(dto);
         });
         break;
@@ -123,7 +123,7 @@ export class IratEgyComponent extends OnDestroyMixin implements AfterViewInit, O
         C.instance.uj = false;
         C.instance.enUgyfel = this.enUgyfel;
         C.instance.DtoOriginal = this.Dto;
-        C.instance.eventSzerkeszteskesz.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+        C.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
           this.doModositaskesz(dto);
         });
         break;

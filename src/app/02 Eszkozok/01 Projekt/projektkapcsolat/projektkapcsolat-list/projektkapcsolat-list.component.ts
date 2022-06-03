@@ -1,6 +1,6 @@
 import {
   ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit,
-  ViewChild
+  ViewChild, ViewContainerRef
 } from '@angular/core';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {LogonService} from '../../../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
@@ -16,14 +16,21 @@ import {BizonylatTipusLeiro} from '../../../../03 Bizonylatok/bizonylat/bizonyla
 import {BizonylatTipus} from '../../../../03 Bizonylatok/bizonylat/bizonylattipus';
 import {ProjektkapcsolatEgyMode} from '../projektkapcsolategymode';
 import {propCopy} from '../../../../common/propCopy';
+import {OnDestroyMixin, untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
+import {ProjektkapcsolatUjbizonylatComponent} from "../projektkapcsolat-ujbizonylat/projektkapcsolat-ujbizonylat.component";
+import {ProjektService} from "../../projekt/projekt.service";
+import {ProjektKapcsolatParam} from "../projektkapcsolatparam";
+import {IratSzerkesztesComponent} from "../../../02 Irat/irat/irat-szerkesztes/irat-szerkesztes.component";
+import {AjanlatComponent} from "../../ajanlat/ajanlat/ajanlat";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-projektkapcsolat-list',
   templateUrl: './projektkapcsolat-list.component.html'
 })
-export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
+export class ProjektkapcsolatListComponent extends OnDestroyMixin implements OnInit, OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: ProjektkapcsolatTablaComponent;
+  @ViewChild('compcont_projektkapcsolatuj', {read: ViewContainerRef}) vcruj: ViewContainerRef;
 
   @Input() Projektkod = -1;
   @Input() Ugyfelkod = -1;
@@ -39,8 +46,7 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
   eppFrissit = false;
   set spinner(value: boolean) {
     this.eppFrissit = value;
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
   bizonylatjog = false;
@@ -55,7 +61,10 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
               private _vagolapservice: VagolapService,
               private _errorservice: ErrorService,
               private _cdr: ChangeDetectorRef,
+              private _projektservice: ProjektService,
               projektkapcsolatservice: ProjektkapcsolatService) {
+    super();
+
     this.bizonylatjog = this._logonservice.Jogaim.includes(JogKod[JogKod.BIZONYLATMOD]);
     this.iratjog = this._logonservice.Jogaim.includes(JogKod[JogKod.IRATMOD]);
     this.ajanlatjog = this._logonservice.Jogaim.includes(JogKod[JogKod.AJANLATKESZITES]);
@@ -65,6 +74,11 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.onKereses();
+  }
+
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   async onKereses() {
@@ -85,26 +99,120 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
     }
   }
 
-  doUjbizonylat() {
-    this.tabla.clearselections();
-    this.egymode = ProjektkapcsolatEgyMode.UjBizonylat;
-    this.tabla.ujtetelstart();
+  async doUjbizonylat() {
+    this.vcruj.clear();
+
+    this.spinner = true;
+    try {
+      const resP = await this._projektservice.Get(this.Projektkod);
+      if (resP.Error != null) {
+        throw resP.Error;
+      }
+      const Ugyfelkod = resP.Result[0].Ugyfelkod;
+      this.spinner = false;
+
+      const ujbC = this.vcruj.createComponent(ProjektkapcsolatUjbizonylatComponent);
+      ujbC.instance.Projektkod = this.Projektkod;
+      ujbC.instance.Ugyfelkod = Ugyfelkod;
+      ujbC.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+        this.vcruj.clear();
+
+        const buf = [...this.Dto];
+        buf.unshift(dto);
+        this.Dto = buf;
+
+        this.docdr();
+      });
+      ujbC.instance.eventMegsem.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+        this.vcruj.clear();
+      });
+
+      this.docdr();
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+      this.vcruj.clear();
+    }
   }
 
-  doUjirat() {
-    this.tabla.clearselections();
-    this.egymode = ProjektkapcsolatEgyMode.UjIrat;
-    this.tabla.ujtetelstart();
+  async doUjirat() {
+    this.vcruj.clear();
+
+    this.spinner = true;
+    try {
+      const resP1 = await this._projektservice.Get(this.Projektkod);
+      if (resP1.Error != null) {
+        throw resP1.Error;
+      }
+      const ugyfelkod1 = resP1.Result[0].Ugyfelkod;
+      this.spinner = false;
+
+      const ujiC = this.vcruj.createComponent(IratSzerkesztesComponent);
+      ujiC.instance.uj = true;
+      ujiC.instance.enUgyfel = false;
+      ujiC.instance.Ugyfelkod = ugyfelkod1;
+      ujiC.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(async dtoIrat => {
+        this.spinner = true;
+
+        const resPkk = await this.projektkapcsolatservice.AddIratToProjekt(new ProjektKapcsolatParam(
+          this.Projektkod, 0, dtoIrat.Iratkod, new BizonylatDto()));
+        if (resPkk.Error != null) {
+          throw resPkk.Error;
+        }
+
+        const resPk = await this.projektkapcsolatservice.Get(resPkk.Result);
+        if (resPk.Error != null) {
+          throw resPk.Error;
+        }
+
+        this.spinner = false;
+        this.vcruj.clear();
+
+        const buf = [...this.Dto];
+        buf.unshift(resPk.Result[0]);
+        this.Dto = buf;
+
+        this.docdr();
+      });
+      ujiC.instance.eventMegsem.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+        this.vcruj.clear();
+      });
+
+      this.docdr();
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+      this.vcruj.clear();
+    }
   }
 
   doUjajanlat() {
-    this.tabla.clearselections();
-    this.egymode = ProjektkapcsolatEgyMode.Ajanlat;
-    this.tabla.ujtetelstart();
+    this.vcruj.clear();
+
+    const ajanlatC = this.vcruj.createComponent(AjanlatComponent);
+
+    ajanlatC.instance.Projektkod = this.Projektkod;
+    ajanlatC.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+      this.vcruj.clear();
+
+      const buf = [...this.Dto];
+      buf.unshift(dto);
+      this.Dto = buf;
+
+      this.docdr();
+    });
+    ajanlatC.instance.eventMegsem.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+      this.vcruj.clear();
+    });
+
+    this.docdr();
   }
 
   doVagolaprol() {
+    this.vcruj.clear();
     this._vagolapservice.Mode = VagolapMode.Projekt;
+
+
     this.tabla.clearselections();
     this.egymode = ProjektkapcsolatEgyMode.Vagolaprol;
     this.tabla.ujtetelstart();
@@ -145,11 +253,13 @@ export class ProjektkapcsolatListComponent implements OnInit, OnDestroy {
     this.tabla.clearselections();
   }
 
-  ngOnDestroy() {
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+
     Object.keys(this).map(k => {
       (this[k]) = null;
     });
-  }
+}
 
 
 

@@ -11,13 +11,6 @@ import {ErrorService} from '../../../../common/errorbox/error.service';
 import {IratService} from '../../../02 Irat/irat/irat.service';
 import {BizonylatService} from '../../../../03 Bizonylatok/bizonylat/bizonylat.service';
 import {BizonylatEgyComponent} from '../../../../03 Bizonylatok/bizonylat/bizonylat-egy/bizonylat-egy.component';
-import {AjanlatComponent} from '../../ajanlat/ajanlat/ajanlat';
-import {ProjektkapcsolatVagolaprolComponent} from '../projektkapcsolat-vagolaprol/projektkapcsolat-vagolaprol.component';
-import {ProjektkapcsolatUjbizonylatComponent} from '../projektkapcsolat-ujbizonylat/projektkapcsolat-ujbizonylat.component';
-import {IratSzerkesztesComponent} from '../../../02 Irat/irat/irat-szerkesztes/irat-szerkesztes.component';
-import {ProjektService} from '../../projekt/projekt.service';
-import {BizonylatDto} from '../../../../03 Bizonylatok/bizonylat/bizonylatdto';
-import {ProjektKapcsolatParam} from '../projektkapcsolatparam';
 import {ProjektkapcsolatService} from '../projektkapcsolat.service';
 import {IratlevalasztasMode} from '../../../02 Irat/irat/iratlevalasztasmode';
 
@@ -30,26 +23,21 @@ export class ProjektkapcsolatEgyComponent extends OnDestroyMixin implements Afte
   @ViewChild('compcont_projektkapcsolat', {read: ViewContainerRef}) vcr: ViewContainerRef;
 
   @Input() egymode = 0;
-  @Input() Projektkod = 0;
   @Input() projektkapcsolatDto: ProjektKapcsolatDto = new ProjektKapcsolatDto();
 
-  @Output() eventUj: EventEmitter<ProjektKapcsolatDto> = new EventEmitter<ProjektKapcsolatDto>();
   @Output() eventModositas: EventEmitter<ProjektKapcsolatDto> = new EventEmitter<ProjektKapcsolatDto>();
-
   @Output() eventLevalasztasutan: EventEmitter<void> = new EventEmitter<void>();
 
   eppFrissit = false;
   set spinner(value: boolean) {
     this.eppFrissit = value;
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
   constructor(private _errorservice: ErrorService,
               private _cdr: ChangeDetectorRef,
               private _projektkapcsolatservice: ProjektkapcsolatService,
               private _iratservice: IratService,
-              private _projektservice: ProjektService,
               private _bizonylatservice: BizonylatService) {
     super();
   }
@@ -58,22 +46,15 @@ export class ProjektkapcsolatEgyComponent extends OnDestroyMixin implements Afte
     this.doNav();
   }
 
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
+  }
+
   async doNav() {
     this.vcr.clear();
 
     switch (this.egymode) {
-      case ProjektkapcsolatEgyMode.UjBizonylat: // 1
-
-        break;
-      case ProjektkapcsolatEgyMode.UjIrat: // 2
-
-        break;
-      case ProjektkapcsolatEgyMode.Ajanlat: // 3
-
-        break;
-      case ProjektkapcsolatEgyMode.Vagolaprol: // 4
-
-        break;
       case ProjektkapcsolatEgyMode.Egybizonylat: // 5
         this.spinner = true;
         try {
@@ -97,8 +78,7 @@ export class ProjektkapcsolatEgyComponent extends OnDestroyMixin implements Afte
           bizonylatC.instance.projektkapcsolatDto = this.projektkapcsolatDto;
           // TODO események
 
-          this._cdr.markForCheck();
-          this._cdr.detectChanges();
+          this.docdr();
         } catch (err) {
           this.spinner = false;
           this._errorservice.Error = err;
@@ -113,7 +93,6 @@ export class ProjektkapcsolatEgyComponent extends OnDestroyMixin implements Afte
           }
 
           const iratC = this.vcr.createComponent(IratEgyComponent);
-          iratC.instance.uj = false;
           iratC.instance.Dto = resEgyIrat.Result[0];
           iratC.instance.enTorles = false;
           iratC.instance.enProjekt = false;
@@ -137,8 +116,7 @@ export class ProjektkapcsolatEgyComponent extends OnDestroyMixin implements Afte
           });
           this.spinner = false;
 
-          this._cdr.markForCheck();
-          this._cdr.detectChanges();
+          this.docdr();
         } catch (err) {
           this.spinner = false;
           this._errorservice.Error = err;
@@ -146,10 +124,6 @@ export class ProjektkapcsolatEgyComponent extends OnDestroyMixin implements Afte
         break;
     }
   }
-
-//   <!--<app-projektkapcsolat-levalasztas [Dto]="Dto[DtoSelectedIndex]"-->
-//   <!--(eventLevalasztasutan)="onLevalasztasutan($event)">-->
-// <!--</app-projektkapcsolat-levalasztas>-->
 
   override ngOnDestroy(): void {
     super.ngOnDestroy();

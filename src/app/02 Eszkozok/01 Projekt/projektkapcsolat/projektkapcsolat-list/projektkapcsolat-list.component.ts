@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit,
   ViewChild, ViewContainerRef
 } from '@angular/core';
@@ -16,20 +17,20 @@ import {BizonylatTipusLeiro} from '../../../../03 Bizonylatok/bizonylat/bizonyla
 import {BizonylatTipus} from '../../../../03 Bizonylatok/bizonylat/bizonylattipus';
 import {ProjektkapcsolatEgyMode} from '../projektkapcsolategymode';
 import {propCopy} from '../../../../common/propCopy';
-import {OnDestroyMixin, untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
-import {ProjektkapcsolatUjbizonylatComponent} from "../projektkapcsolat-ujbizonylat/projektkapcsolat-ujbizonylat.component";
-import {ProjektService} from "../../projekt/projekt.service";
-import {ProjektKapcsolatParam} from "../projektkapcsolatparam";
-import {IratSzerkesztesComponent} from "../../../02 Irat/irat/irat-szerkesztes/irat-szerkesztes.component";
-import {AjanlatComponent} from "../../ajanlat/ajanlat/ajanlat";
-import {ProjektkapcsolatVagolaprolComponent} from "../projektkapcsolat-vagolaprol/projektkapcsolat-vagolaprol.component";
+import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
+import {ProjektkapcsolatUjbizonylatComponent} from '../projektkapcsolat-ujbizonylat/projektkapcsolat-ujbizonylat.component';
+import {ProjektService} from '../../projekt/projekt.service';
+import {ProjektKapcsolatParam} from '../projektkapcsolatparam';
+import {IratSzerkesztesComponent} from '../../../02 Irat/irat/irat-szerkesztes/irat-szerkesztes.component';
+import {AjanlatComponent} from '../../ajanlat/ajanlat/ajanlat';
+import {ProjektkapcsolatVagolaprolComponent} from '../projektkapcsolat-vagolaprol/projektkapcsolat-vagolaprol.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-projektkapcsolat-list',
   templateUrl: './projektkapcsolat-list.component.html'
 })
-export class ProjektkapcsolatListComponent extends OnDestroyMixin implements OnInit, OnDestroy {
+export class ProjektkapcsolatListComponent extends OnDestroyMixin implements AfterViewInit, OnDestroy {
   @ViewChild('tabla', {static: true}) tabla: ProjektkapcsolatTablaComponent;
   @ViewChild('compcont_projektkapcsolatuj', {read: ViewContainerRef}) vcruj: ViewContainerRef;
 
@@ -73,7 +74,7 @@ export class ProjektkapcsolatListComponent extends OnDestroyMixin implements OnI
     this.projektkapcsolatservice = projektkapcsolatservice;
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.onKereses();
   }
 
@@ -83,6 +84,7 @@ export class ProjektkapcsolatListComponent extends OnDestroyMixin implements OnI
   }
 
   async onKereses() {
+    this.vcruj.clear();
     this.tabla.clearselections();
 
     this.spinner = true;
@@ -102,6 +104,7 @@ export class ProjektkapcsolatListComponent extends OnDestroyMixin implements OnI
 
   async doUjbizonylat() {
     this.vcruj.clear();
+    this.tabla.clearselections();
 
     this.spinner = true;
     try {
@@ -138,6 +141,7 @@ export class ProjektkapcsolatListComponent extends OnDestroyMixin implements OnI
 
   async doUjirat() {
     this.vcruj.clear();
+    this.tabla.clearselections();
 
     this.spinner = true;
     try {
@@ -189,6 +193,7 @@ export class ProjektkapcsolatListComponent extends OnDestroyMixin implements OnI
 
   doUjajanlat() {
     this.vcruj.clear();
+    this.tabla.clearselections();
 
     const ajanlatC = this.vcruj.createComponent(AjanlatComponent);
 
@@ -211,6 +216,8 @@ export class ProjektkapcsolatListComponent extends OnDestroyMixin implements OnI
 
   doVagolaprol() {
     this.vcruj.clear();
+    this.tabla.clearselections();
+
     this._vagolapservice.Mode = VagolapMode.Projekt;
 
     const vagolaprolC = this.vcruj.createComponent(ProjektkapcsolatVagolaprolComponent);
@@ -236,6 +243,8 @@ export class ProjektkapcsolatListComponent extends OnDestroyMixin implements OnI
   }
 
   onId(i: number) {
+    this.vcruj.clear();
+
     this.DtoSelectedIndex = i;
     if (this.DtoSelectedIndex === -1) {
       return;
@@ -248,13 +257,6 @@ export class ProjektkapcsolatListComponent extends OnDestroyMixin implements OnI
       this.egymode = ProjektkapcsolatEgyMode.Egyirat;
     }
     this.tabla.egytetelstart();
-  }
-
-  onUjutan(dto: ProjektKapcsolatDto) {
-    if (dto !== null) {
-      this.Dto.unshift(dto);
-    }
-    this.tabla.ujtetelstop();
   }
 
   onModositasutan(dto: ProjektKapcsolatDto) {
@@ -276,7 +278,7 @@ export class ProjektkapcsolatListComponent extends OnDestroyMixin implements OnI
     Object.keys(this).map(k => {
       (this[k]) = null;
     });
-}
+  }
 
 
 

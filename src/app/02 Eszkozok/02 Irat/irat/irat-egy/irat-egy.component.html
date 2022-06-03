@@ -1,6 +1,5 @@
-<div [ngClass]="!uj ? 'alapkeret' : ''" [appSpinner]="eppFrissit">
-  <app-irat-egy-toolbar *ngIf="!uj"
-                        [enTorles]="enTorles"
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <app-irat-egy-toolbar [enTorles]="enTorles"
                         [enProjekt]="enProjekt"
                         [enLevalasztas]="enLevalasztas"
                         (eventNav)="doNav($event)">

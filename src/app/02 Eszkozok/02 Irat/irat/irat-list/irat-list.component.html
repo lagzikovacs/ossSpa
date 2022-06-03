@@ -12,6 +12,8 @@
     [enUj]="jog" (Uj)="doUjtetel()">
   </app-irattoolbar>
 
+  <ng-template #compcont_iratuj></ng-template>
+
   <app-tabla-ex #tabla
                 [items]="Dto"
                 [colsets]="iratservice.GridSettings"
@@ -20,8 +22,7 @@
   </app-tabla-ex>
 
   <ng-template #gridegy>
-    <app-irat-egy [uj]="uj"
-                  [dto]="Dto[DtoSelectedIndex]"
+    <app-irat-egy [dto]="Dto[DtoSelectedIndex]"
                   [enTorles]="true"
                   [enProjekt]="enProjekt"
                   (eventUj)="onUjtetelkesz($event)"

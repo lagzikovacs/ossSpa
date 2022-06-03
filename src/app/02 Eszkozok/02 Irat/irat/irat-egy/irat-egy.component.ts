@@ -15,14 +15,14 @@ import {ReszletekComponent} from '../../../../common/reszletek/reszletek.compone
 import {DokumentumListComponent} from '../../dokumentum/dokumentum-list/dokumentum-list.component';
 import {LogonService} from '../../../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {JogKod} from '../../../../common/enums/jogkod';
-import {IratProjektjeComponent} from "../irat-projektje/irat-projektje.component";
-import {VagolapIrathozComponent} from "../../../../05 Segedeszkozok/08 Vagolap/vagolap-irathoz/vagolap-irathoz.component";
-import {FotozasLinkComponent} from "../../fotozas-link/fotozas-link.component";
-import {ProjektkapcsolatLevalasztasComponent} from "../../../01 Projekt/projektkapcsolat/projektkapcsolat-levalasztas/projektkapcsolat-levalasztas.component";
-import {ProjektKapcsolatDto} from "../../../01 Projekt/projektkapcsolat/projektkapcsolatdto";
-import {IratlevalasztasMode} from "../iratlevalasztasmode";
-import {BizonylatKapcsolatDto} from "../../../../03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolatdto";
-import {BizonylatkapcsolatLevalasztasComponent} from "../../../../03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolat-levalasztas/bizonylatkapcsolat-levalasztas.component";
+import {IratProjektjeComponent} from '../irat-projektje/irat-projektje.component';
+import {VagolapIrathozComponent} from '../../../../05 Segedeszkozok/08 Vagolap/vagolap-irathoz/vagolap-irathoz.component';
+import {FotozasLinkComponent} from '../../fotozas-link/fotozas-link.component';
+import {ProjektkapcsolatLevalasztasComponent} from '../../../01 Projekt/projektkapcsolat/projektkapcsolat-levalasztas/projektkapcsolat-levalasztas.component';
+import {ProjektKapcsolatDto} from '../../../01 Projekt/projektkapcsolat/projektkapcsolatdto';
+import {IratlevalasztasMode} from '../iratlevalasztasmode';
+import {BizonylatKapcsolatDto} from '../../../../03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolatdto';
+import {BizonylatkapcsolatLevalasztasComponent} from '../../../../03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolat-levalasztas/bizonylatkapcsolat-levalasztas.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,7 +32,6 @@ import {BizonylatkapcsolatLevalasztasComponent} from "../../../../03 Bizonylatok
 export class IratEgyComponent extends OnDestroyMixin implements AfterViewInit, OnDestroy {
   @ViewChild('compcont_irat', {read: ViewContainerRef}) vcr: ViewContainerRef;
 
-  @Input() uj = false;
   @Input() enTorles = true;
   @Input() enProjekt = true;
   @Input() enUgyfel = true;
@@ -73,12 +72,7 @@ export class IratEgyComponent extends OnDestroyMixin implements AfterViewInit, O
   }
 
   ngAfterViewInit() {
-    if (this.uj) {
-      this.doNav(EgyMode.Uj);
-      this.docdr();
-    }
-
-    if (!this.uj && this.defaultNav > 0) {
+    if (this.defaultNav > 0) {
       this.doNav(this.defaultNav);
       this.docdr();
     }
@@ -93,15 +87,6 @@ export class IratEgyComponent extends OnDestroyMixin implements AfterViewInit, O
     this.vcr.clear();
 
     switch (i) {
-      case EgyMode.Uj: // -1
-        const ujC = this.vcr.createComponent(IratSzerkesztesComponent);
-
-        ujC.instance.uj = true;
-        ujC.instance.enUgyfel = this.enUgyfel;
-        ujC.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
-          this.doUjkesz(dto);
-        });
-        break;
       case EgyMode.Reszletek: // 1
         const reszletekC = this.vcr.createComponent(ReszletekComponent);
 

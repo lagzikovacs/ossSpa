@@ -13,7 +13,6 @@ export class ProjektkapcsolatTablaComponent implements OnDestroy {
   @Input() items: ProjektKapcsolatDto[];
 
   @Input() egyKapcsolat: TemplateRef<any>;
-  @Input() ujOk = false;
   @Input() egyOk = false;
 
   @Output() forid = new EventEmitter<number>();
@@ -28,22 +27,7 @@ export class ProjektkapcsolatTablaComponent implements OnDestroy {
     this.clickedrowindex = -1;
     this.clickedidindex = -1;
 
-    this.ujOk = false;
     this.egyOk = false;
-
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
-  }
-
-  ujtetelstart() {
-    this.clearselections();
-    this.ujOk = true;
-
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
-  }
-  ujtetelstop() {
-    this.ujOk = false;
 
     this._cdr.markForCheck();
     this._cdr.detectChanges();
@@ -57,8 +41,6 @@ export class ProjektkapcsolatTablaComponent implements OnDestroy {
   }
 
   clickforid(i: number) {
-    this.ujOk = false;
-
     this.clickedidindex = i;
     this.clickedrowindex = this.clickedidindex;
 
@@ -66,8 +48,6 @@ export class ProjektkapcsolatTablaComponent implements OnDestroy {
   }
 
   clickforrow(i: number) {
-    this.ujOk = false;
-
     this.clickedrowindex = i;
     // először clickforid aztán clickforrow is, clickforrow felülírná az eseményeket
     if (this.clickedrowindex !== this.clickedidindex) {

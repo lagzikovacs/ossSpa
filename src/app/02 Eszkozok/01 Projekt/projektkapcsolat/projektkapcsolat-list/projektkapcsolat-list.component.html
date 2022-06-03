@@ -29,9 +29,7 @@
 
   <ng-template #egykapcsolat>
     <app-projektkapcsolat-egy [egymode]="egymode"
-                              [Projektkod] = "Projektkod"
                               [projektkapcsolatDto]="Dto[DtoSelectedIndex]"
-                              (eventUj)="onUjutan($event)"
                               (eventModositas)="onModositasutan($event)"
                               (eventLevalasztasutan)="onLevalasztasutan()">
     </app-projektkapcsolat-egy>

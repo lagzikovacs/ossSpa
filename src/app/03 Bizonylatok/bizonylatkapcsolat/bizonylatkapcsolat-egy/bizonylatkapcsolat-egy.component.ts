@@ -122,7 +122,6 @@ export class BizonylatkapcsolatEgyComponent extends OnDestroyMixin implements Af
           }
 
           const iratC = this.vcr.createComponent(IratEgyComponent);
-          iratC.instance.uj = false;
           iratC.instance.Dto = resEgyIrat.Result[0];
           iratC.instance.enTorles = false;
           iratC.instance.enProjekt = false;

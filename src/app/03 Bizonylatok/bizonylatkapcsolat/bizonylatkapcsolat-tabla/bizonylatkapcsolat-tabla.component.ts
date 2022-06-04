@@ -11,13 +11,9 @@ import {BizonylatKapcsolatDto} from '../bizonylatkapcsolatdto';
 })
 export class BizonylatkapcsolatTablaComponent implements OnDestroy {
   @Input() items: BizonylatKapcsolatDto[];
-
-  @Input() egyKapcsolat: TemplateRef<any>;
-
-  @Output() forid = new EventEmitter<number>();
-
-  @Input() ujOk = false;
   @Input() egyOk = false;
+  @Input() egyKapcsolat: TemplateRef<any>;
+  @Output() forid = new EventEmitter<number>();
 
   clickedrowindex = -1;
   clickedidindex = -1;
@@ -29,22 +25,7 @@ export class BizonylatkapcsolatTablaComponent implements OnDestroy {
     this.clickedrowindex = -1;
     this.clickedidindex = -1;
 
-    this.ujOk = false;
     this.egyOk = false;
-
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
-  }
-
-  ujtetelstart() {
-    this.clearselections();
-    this.ujOk = true;
-
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
-  }
-  ujtetelstop() {
-    this.ujOk = false;
 
     this._cdr.markForCheck();
     this._cdr.detectChanges();
@@ -58,8 +39,6 @@ export class BizonylatkapcsolatTablaComponent implements OnDestroy {
   }
 
   clickforid(i: number) {
-    this.ujOk = false;
-
     this.clickedidindex = i;
     this.clickedrowindex = this.clickedidindex;
 
@@ -67,8 +46,6 @@ export class BizonylatkapcsolatTablaComponent implements OnDestroy {
   }
 
   clickforrow(i: number) {
-    this.ujOk = false;
-
     this.clickedrowindex = i;
     // először clickforid aztán clickforrow is, clickforrow felülírná az eseményeket
     if (this.clickedrowindex !== this.clickedidindex) {

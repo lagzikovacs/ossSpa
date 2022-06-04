@@ -37,61 +37,44 @@ export class ProjektkapcsolatVagolaprolComponent implements OnDestroy {
     this.projektkapcsolatservice = projektkapcsolatservice;
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this._vagolapservice.kijeloltekszama() === 0) {
       this._errorservice.Error = 'Nincs kijelölt tétel!';
       return;
     }
 
-    this.ci = 0;
-    this.ciklus();
-  }
-
-  async add(): Promise<ProjektKapcsolatDto> {
-    let res: NumberResult;
-
-    if (this._vagolapservice.Dto[this.ci].tipus === 0) {
-      res = await this.projektkapcsolatservice.AddIratToProjekt(new ProjektKapcsolatParam(
-        this.Projektkod, 0, this._vagolapservice.Dto[this.ci].iratkod,  null));
-    } else {
-      res = await this.projektkapcsolatservice.AddBizonylatToProjekt(new ProjektKapcsolatParam(
-        this.Projektkod, this._vagolapservice.Dto[this.ci].bizonylatkod, 0, null));
-    }
-    if (res.Error != null) {
-      throw res.Error;
-    }
-
-    const res1 = await this.projektkapcsolatservice.Get(res.Result);
-    if (res1.Error != null) {
-      throw res1.Error;
-    }
-
-    return res1.Result[0];
-  }
-
-  async ciklus() {
-    this.spinner = true;
-    if (this.ci < this._vagolapservice.Dto.length) {
-      if (this._vagolapservice.Dto[this.ci].selected) {
+    for (let i = 0; i < this._vagolapservice.Dto.length; i++) {
+      if (this._vagolapservice.Dto[i].selected) {
+        this.spinner = true;
         try {
-          const pkDto = await this.add();
+          let res: NumberResult;
 
-          this.eventEgytetel.emit(pkDto);
+          if (this._vagolapservice.Dto[i].tipus === 0) {
+            res = await this.projektkapcsolatservice.AddIratToProjekt(new ProjektKapcsolatParam(
+              this.Projektkod, 0, this._vagolapservice.Dto[i].iratkod,  null));
+          } else {
+            res = await this.projektkapcsolatservice.AddBizonylatToProjekt(new ProjektKapcsolatParam(
+              this.Projektkod, this._vagolapservice.Dto[i].bizonylatkod, 0, null));
+          }
+          if (res.Error != null) {
+            throw res.Error;
+          }
 
-          ++this.ci;
-          await this.ciklus();
+          const res1 = await this.projektkapcsolatservice.Get(res.Result);
+          if (res1.Error != null) {
+            throw res1.Error;
+          }
+
+          this.eventEgytetel.emit(res1.Result[0]);
+          this.spinner = false;
         } catch (err) {
           this.spinner = false;
           this._errorservice.Error = err;
         }
-      } else {
-        ++this.ci;
-        await this.ciklus();
       }
-    } else {
-      this.spinner = false;
-      this.eventVege.emit();
     }
+
+    this.eventVege.emit();
   }
 
   onCancel() {

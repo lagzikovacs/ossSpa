@@ -260,9 +260,7 @@ export class ProjektkapcsolatListComponent extends OnDestroyMixin implements Aft
   }
 
   onModositasutan(dto: ProjektKapcsolatDto) {
-    if (dto !== null) {
-      propCopy(dto, this.Dto[this.DtoSelectedIndex]);
-    }
+    propCopy(dto, this.Dto[this.DtoSelectedIndex]);
   }
 
   onLevalasztasutan() {

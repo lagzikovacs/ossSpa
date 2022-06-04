@@ -182,7 +182,6 @@ export class ProjektEgyComponent extends OnDestroyMixin implements AfterViewInit
     }
   }
 
-
   async doMunkalaputan() {
     this.spinner = true;
     try {

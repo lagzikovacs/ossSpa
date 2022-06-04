@@ -41,7 +41,6 @@ import {ProjektkapcsolatLevalasztasComponent} from '../../../02 Eszkozok/01 Proj
 export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewInit, OnDestroy {
   @ViewChild('compcont_bizonylat', {read: ViewContainerRef}) vcr: ViewContainerRef;
 
-  @Input() uj = false;
   @Input() bizonylatTipus = BizonylatTipus.Szamla;
   @Input() bizonylatLeiro = new BizonylatTipusLeiro();
   @Input() enTorles = true;
@@ -56,10 +55,8 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
     this.Dto = deepCopy(value);
   }
 
-  @Output() eventUj: EventEmitter<BizonylatDto> = new EventEmitter<BizonylatDto>();
   @Output() eventTorles = new EventEmitter<void>();
   @Output() eventModositas = new EventEmitter<BizonylatDto>();
-
   @Output() eventLevalasztas: EventEmitter<void> = new EventEmitter<void>();
 
   mod = false;
@@ -86,12 +83,7 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
   }
 
   ngAfterViewInit() {
-    if (this.uj) {
-      this.doNav(BizonylatEgyMode.Uj);
-      this.docdr();
-    }
-
-    if (!this.uj && this.defaultNav > 0) {
+    if (this.defaultNav > 0) {
       this.doNav(this.defaultNav);
       this.docdr();
     }
@@ -106,16 +98,6 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
     this.vcr.clear();
 
     switch (i) {
-      case BizonylatEgyMode.Uj: // -1
-        const ujC = this.vcr.createComponent(BizonylatSzerkesztesComponent);
-        ujC.instance.uj = true;
-        ujC.instance.bizonylatTipus = this.bizonylatTipus;
-        ujC.instance.bizonylatLeiro = this.bizonylatLeiro;
-        ujC.instance.eventSzerkesztesUtan.pipe(untilComponentDestroyed(this)).subscribe(dto => {
-          this.eventUj.emit(dto);
-        });
-      break;
-
       case BizonylatEgyMode.Nyomtatas: // 1
         const nyomtatasC = this.vcr.createComponent(BizonylatNyomtatasComponent);
         nyomtatasC.instance.Bizonylatkod = this.Dto.Bizonylatkod;
@@ -168,12 +150,12 @@ export class BizonylatEgyComponent extends OnDestroyMixin implements AfterViewIn
         szerkesztesC.instance.bizonylatTipus = this.bizonylatTipus;
         szerkesztesC.instance.bizonylatLeiro = this.bizonylatLeiro;
         szerkesztesC.instance.Bizonylatkod = this.Dto.Bizonylatkod;
-        szerkesztesC.instance.eventSzerkesztesUtan.pipe(untilComponentDestroyed(this)).subscribe(dto => {
-          if (dto !== null) {
-            propCopy(dto, this.Dto);
-            this.eventModositas.emit(dto);
-          }
-
+        szerkesztesC.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+          this.doNav(0);
+          propCopy(dto, this.Dto);
+          this.eventModositas.emit(dto);
+        });
+        szerkesztesC.instance.eventMegsem.pipe(untilComponentDestroyed(this)).subscribe(() => {
           this.doNav(0);
         });
       break;

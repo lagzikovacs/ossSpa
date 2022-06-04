@@ -8,12 +8,6 @@
   </tr>
   </thead>
   <tbody>
-    <tr *ngIf="ujOk && egyKapcsolat !== undefined" class="active">
-      <td colspan="100">
-        <ng-template *ngTemplateOutlet="egyKapcsolat"></ng-template>
-      </td>
-    </tr>
-
     <ng-container *ngFor="let item of items; let i = index">
       <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
         <td class="tabla-kontrol-id"

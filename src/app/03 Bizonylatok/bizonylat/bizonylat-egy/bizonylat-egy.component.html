@@ -1,6 +1,5 @@
-<div [ngClass]="!uj ? 'alapkeret' : ''" [appSpinner]="eppFrissit">
-  <app-bizonylat-egy-toolbar *ngIf="!uj"
-                             [Dto]="Dto"
+<div class="alapkeret" [appSpinner]="eppFrissit">
+  <app-bizonylat-egy-toolbar [Dto]="Dto"
                              [bizonylatTipus]="bizonylatTipus"
                              [bizonylatLeiro]="bizonylatLeiro"
                              [enTorles]="enTorles"

@@ -12,6 +12,8 @@
     </button>
   </div>
 
+  <ng-template #compcont_bizonylatkapcsolatuj></ng-template>
+
   <app-bizonylatkapcsolat-tabla #tabla
                                 [items]="Dto"
                                 (forid)="onId($event)"
@@ -22,7 +24,6 @@
     <app-bizonylatkapcsolat-egy [egymode]="egymode"
                                 [Bizonylatkod] = "Bizonylatkod"
                                 [bizonylatkapcsolatDto]="Dto[DtoSelectedIndex]"
-                                (eventUj)="onUjutan($event)"
                                 (eventModositas)="onModositasutan($event)"
                                 (eventLevalasztasutan)="onLevalasztasutan()">
     </app-bizonylatkapcsolat-egy>

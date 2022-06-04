@@ -101,15 +101,11 @@ export class ProjektkapcsolatEgyComponent extends OnDestroyMixin implements Afte
           iratC.instance.LevalasztasMode = IratlevalasztasMode.Projektrol;
           iratC.instance.projektkapcsolatDto = this.projektkapcsolatDto;
           iratC.instance.eventModositas.pipe(untilComponentDestroyed(this)).subscribe(async dto => {
-            if (dto !== undefined) {
-              const resP2 = await this._projektkapcsolatservice.Get(this.projektkapcsolatDto.Projektkapcsolatkod);
-              if (resP2.Error != null) {
-                throw resP2.Error;
-              }
-              this.eventModositas.emit(resP2.Result[0]);
-            } else {
-              this.eventModositas.emit(null);
+            const resP2 = await this._projektkapcsolatservice.Get(this.projektkapcsolatDto.Projektkapcsolatkod);
+            if (resP2.Error != null) {
+              throw resP2.Error;
             }
+            this.eventModositas.emit(resP2.Result[0]);
           });
           iratC.instance.eventLevalasztasutan.pipe(untilComponentDestroyed(this)).subscribe(() => {
             this.eventLevalasztasutan.emit();

@@ -26,7 +26,7 @@ export class FotozasLinkComponent extends OnDestroyMixin implements OnInit, OnDe
   @Input() set DtoOriginal(value: IratDto) {
     this.DtoEdited = deepCopy(value);
   }
-  @Output() eventSzerkeszteskesz = new EventEmitter<IratDto>();
+  @Output() eventOk = new EventEmitter<IratDto>();
 
   link = '';
   kikuldesikodidopontja: any;
@@ -123,7 +123,7 @@ export class FotozasLinkComponent extends OnDestroyMixin implements OnInit, OnDe
       this.spinner = false;
 
       this.doNav(0);
-      this.eventSzerkeszteskesz.emit(res1.Result[0]);
+      this.eventOk.emit(res1.Result[0]);
     } catch (err) {
       this.spinner = false;
       this._errorservice.Error = err;
@@ -150,7 +150,7 @@ export class FotozasLinkComponent extends OnDestroyMixin implements OnInit, OnDe
         this.spinner = false;
 
         this.doNav(0);
-        this.eventSzerkeszteskesz.emit(res1.Result[0]);
+        this.eventOk.emit(res1.Result[0]);
       } catch (err) {
         this.spinner = false;
         this._errorservice.Error = err;

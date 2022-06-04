@@ -46,10 +46,8 @@ export class IratEgyComponent extends OnDestroyMixin implements AfterViewInit, O
   @Input() set dto(value: IratDto) {
     this.Dto = deepCopy(value);
   }
-  @Output() eventUj: EventEmitter<IratDto> = new EventEmitter<IratDto>();
   @Output() eventTorles: EventEmitter<void> = new EventEmitter<void>();
   @Output() eventModositas: EventEmitter<IratDto> = new EventEmitter<IratDto>();
-
   @Output() eventLevalasztasutan: EventEmitter<void> = new EventEmitter<void>();
 
   eppFrissit = false;
@@ -109,7 +107,12 @@ export class IratEgyComponent extends OnDestroyMixin implements AfterViewInit, O
         C.instance.enUgyfel = this.enUgyfel;
         C.instance.DtoOriginal = this.Dto;
         C.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
-          this.doModositaskesz(dto);
+          this.doNav(0);
+          propCopy(dto, this.Dto);
+          this.eventModositas.emit(dto);
+        });
+        C.instance.eventMegsem.pipe(untilComponentDestroyed(this)).subscribe(() => {
+          this.doNav(0);
         });
         break;
       case EgyMode.Dokumentum: // 15
@@ -123,8 +126,10 @@ export class IratEgyComponent extends OnDestroyMixin implements AfterViewInit, O
       case EgyMode.FotozasLink: // 16
         const fotozaslinkC = this.vcr.createComponent(FotozasLinkComponent);
         fotozaslinkC.instance.DtoOriginal = this.Dto;
-        fotozaslinkC.instance.eventSzerkeszteskesz.pipe(untilComponentDestroyed(this)).subscribe(dto => {
-          this.doFotozaslinkKesz(dto);
+        fotozaslinkC.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+          this.doNav(0);
+          propCopy(dto, this.Dto);
+          this.eventModositas.emit(dto);
         });
         break;
       case EgyMode.VagolapIrathoz: // 41
@@ -160,10 +165,6 @@ export class IratEgyComponent extends OnDestroyMixin implements AfterViewInit, O
     }
   }
 
-  doUjkesz(dto: IratDto) {
-    this.eventUj.emit(dto);
-  }
-
   async doTorles(ok: boolean) {
     if (ok) {
       this.spinner = true;
@@ -183,23 +184,6 @@ export class IratEgyComponent extends OnDestroyMixin implements AfterViewInit, O
       }
     } else {
       this.doNav(0);
-    }
-  }
-
-  doModositaskesz(dto: IratDto) {
-    if (dto !== undefined) {
-      propCopy(dto, this.Dto);
-
-      this.eventModositas.emit(dto);
-    }
-    this.doNav(0);
-  }
-
-  doFotozaslinkKesz(dto: IratDto) {
-    if (dto !== null) {
-      propCopy(dto, this.Dto);
-
-      this.eventModositas.emit(this.Dto);
     }
   }
 

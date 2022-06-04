@@ -1,4 +1,4 @@
-<div class="alapkeret" [appSpinner]="eppFrissit">
+<div class="alapkeret szerkeszto" [appSpinner]="eppFrissit">
   <h5 *ngIf="uj">Új {{bizonylatLeiro.BizonylatNev | lowercase}}</h5>
   <h5 *ngIf="!uj">{{bizonylatLeiro.BizonylatNev}} módosítása</h5>
 
@@ -115,7 +115,7 @@
 
     <div class="editform-row-bottom">
       <button class="toolbutton okbutton" [disabled]="formFej.invalid" type="button" (click)="onSubmit()">Ok</button>
-      <button class="toolbutton" type="button" (click)="cancel()">Mégsem</button>
+      <button class="toolbutton" type="button" (click)="onCancel()">Mégsem</button>
     </div>
   </div>
 

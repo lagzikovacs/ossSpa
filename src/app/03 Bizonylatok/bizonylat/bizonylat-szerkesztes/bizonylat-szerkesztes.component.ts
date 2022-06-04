@@ -46,7 +46,8 @@ export class BizonylatSzerkesztesComponent extends OnDestroyMixin implements OnI
   @Input() bizonylatLeiro = new BizonylatTipusLeiro();
   @Input() uj = false;
   @Input() Bizonylatkod = -1;
-  @Output() eventSzerkesztesUtan = new EventEmitter<BizonylatDto>();
+  @Output() eventOk = new EventEmitter<BizonylatDto>();
+  @Output() eventMegsem = new EventEmitter<void>();
 
   fizerr = 'Ismeretlen fizetési mód: ';
 
@@ -398,7 +399,7 @@ export class BizonylatSzerkesztesComponent extends OnDestroyMixin implements OnI
       }
 
       this.spinner = false;
-      this.eventSzerkesztesUtan.emit(res4.Result[0].Dto);
+      this.eventOk.emit(res4.Result[0].Dto);
     } catch (err) {
       this.spinner = false;
       this._errorservice.Error = err;
@@ -406,8 +407,8 @@ export class BizonylatSzerkesztesComponent extends OnDestroyMixin implements OnI
 
   }
 
-  cancel() {
-    this.eventSzerkesztesUtan.emit(null);
+  onCancel() {
+    this.eventMegsem.emit();
   }
 
   override ngOnDestroy() {

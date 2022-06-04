@@ -17,8 +17,9 @@ import {NumberResult} from '../../../common/dtos/numberresult';
 })
 export class BizonylatkapcsolatVagolaprolComponent implements OnDestroy {
   @Input() Bizonylatkod = -1;
-  @Output() eventVagolaprolutan = new EventEmitter<BizonylatKapcsolatDto>();
-  @Output() eventVagolaprolutanvege = new EventEmitter<void>();
+  @Output() eventEgytetel = new EventEmitter<BizonylatKapcsolatDto>();
+  @Output() eventMegsem = new EventEmitter<void>();
+  @Output() eventVege = new EventEmitter<void>();
 
   eppFrissit = false;
   set spinner(value: boolean) {
@@ -36,7 +37,7 @@ export class BizonylatkapcsolatVagolaprolComponent implements OnDestroy {
     this.bizonylatkapcsolatservice = bizonylatkapcsolatservice;
   }
 
-  async ok() {
+  async onSubmit() {
     if (this._vagolapservice.kijeloltekszama() === 0) {
       this._errorservice.Error = 'Nincs kijelölt tétel!';
       return;
@@ -58,7 +59,7 @@ export class BizonylatkapcsolatVagolaprolComponent implements OnDestroy {
               throw res1.Error;
             }
 
-            this.eventVagolaprolutan.emit(res1.Result[0]);
+            this.eventEgytetel.emit(res1.Result[0]);
             this.spinner = false;
           } catch (err) {
             this.spinner = false;
@@ -68,11 +69,11 @@ export class BizonylatkapcsolatVagolaprolComponent implements OnDestroy {
       }
     }
 
-    this.eventVagolaprolutanvege.emit();
+    this.eventVege.emit();
   }
 
-  cancel() {
-    this.eventVagolaprolutanvege.emit();
+  onCancel() {
+    this.eventMegsem.emit();
   }
 
   ngOnDestroy() {

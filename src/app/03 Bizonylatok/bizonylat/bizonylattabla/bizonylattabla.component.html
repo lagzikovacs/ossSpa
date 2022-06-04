@@ -43,12 +43,6 @@
   </tr>
   </thead>
   <tbody>
-    <tr *ngIf="ujtetel && egyTemplate !== undefined" class="active">
-      <td colspan="100">
-        <ng-template *ngTemplateOutlet="egyTemplate"></ng-template>
-      </td>
-    </tr>
-
     <ng-container *ngFor="let item of Dto; let i = index">
       <tr (click)="clickforrow(i)" [className]="i === clickedidindex || i === clickedrowindex ? 'active' : 'inactive'">
         <td>

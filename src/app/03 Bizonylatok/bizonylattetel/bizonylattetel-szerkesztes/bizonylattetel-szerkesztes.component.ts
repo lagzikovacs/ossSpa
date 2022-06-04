@@ -38,7 +38,8 @@ export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implement
   @Input() teteluj = false;
   @Input() szvesz = false;
   @Input() TetelDtoEdited = new BizonylatTetelDto();
-  @Output() eventUjModositasUtan = new EventEmitter<BizonylatTetelDto>();
+  @Output() eventOk = new EventEmitter<BizonylatTetelDto>();
+  @Output() eventMegsem = new EventEmitter<void>();
 
   bruttoosszeg = 0;
 
@@ -306,15 +307,15 @@ export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implement
       }
 
       this.spinner = false;
-      this.eventUjModositasUtan.emit(res5.Result[0]);
+      this.eventOk.emit(res5.Result[0]);
     } catch (err) {
       this.spinner = false;
       this._errorservice.Error = err;
     }
   }
 
-  cancel() {
-    this.eventUjModositasUtan.emit(null);
+  onCancel() {
+    this.eventMegsem.emit();
   }
 
   ngOnDestroy() {

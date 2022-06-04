@@ -10,6 +10,8 @@
                         (Uj)="doUjtetel()">
   </app-bizonylattoolbar>
 
+  <ng-template #compcont_bizonylatuj></ng-template>
+
   <div appHscroll style="overflow-x: auto;overflow-y: hidden">
     <app-bizonylattabla #tabla
                         [Dto]="Dto"
@@ -19,12 +21,10 @@
   </div>
 
   <ng-template #gridegy>
-    <app-bizonylat-egy [uj]="uj"
-                       [DtoOriginal]="Dto[DtoSelectedIndex]"
+    <app-bizonylat-egy [DtoOriginal]="Dto[DtoSelectedIndex]"
                        [bizonylatTipus]="bizonylatTipus"
                        [bizonylatLeiro]="bizonylatLeiro"
                        [enTorles]="true"
-                       (eventUj)="onUjtetelkesz($event)"
                        (eventTorles)="onTorlesutan()"
                        (eventModositas)="onSzerkesztesutan($event)">
     </app-bizonylat-egy>

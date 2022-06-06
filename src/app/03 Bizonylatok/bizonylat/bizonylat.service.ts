@@ -124,14 +124,6 @@ export class BizonylatService {
     );
   }
 
-  public async CreateNewTetel(bt: BizonylatTipus): Promise<BizonylatTetelResult> {
-    const url = this._controller + 'createnewtetel';
-
-    return await lastValueFrom(
-      this._httpClient.post<BizonylatTetelResult>(url, bt, this._logonservice.httpoptions())
-    );
-  }
-
   public async SumEsAfaEsTermekdij(dto: BizonylatComplexDto): Promise<BizonylatComplexResult> {
     const url = this._controller + 'sumesafaestermekdij';
 

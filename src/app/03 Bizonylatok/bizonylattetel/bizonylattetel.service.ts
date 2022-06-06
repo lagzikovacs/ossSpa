@@ -5,6 +5,8 @@ import {BizonylatTetelDto} from './bizonylatteteldto';
 import {environment} from '../../../environments/environment';
 import {LogonService} from '../../05 Segedeszkozok/05 Bejelentkezes/logon.service';
 import {HttpClient} from '@angular/common/http';
+import {lastValueFrom} from 'rxjs';
+import {BizonylatTipus} from '../bizonylat/bizonylattipus';
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +17,27 @@ export class BizonylattetelService {
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
 
-  public BizonylattetelCalc(dto: BizonylatTetelDto): Promise<BizonylatTetelResult> {
-    return this._httpClient.post<BizonylatTetelResult>(
-      this._controller + 'bizonylattetelcalc', dto, this._logonservice.httpoptions())
-      .toPromise();
+  public async CreateNewTetel(bt: BizonylatTipus): Promise<BizonylatTetelResult> {
+    const url = this._controller + 'createnewtetel';
+
+    return await lastValueFrom(
+      this._httpClient.post<BizonylatTetelResult>(url, bt, this._logonservice.httpoptions())
+    );
   }
 
-  public Bruttobol(par: BruttobolParam): Promise<BizonylatTetelResult> {
-    return this._httpClient.post<BizonylatTetelResult>(
-      this._controller + 'bruttobol', par, this._logonservice.httpoptions())
-      .toPromise();
+  public async BizonylattetelCalc(dto: BizonylatTetelDto): Promise<BizonylatTetelResult> {
+    const url = this._controller + 'bizonylattetelcalc';
+
+    return await lastValueFrom(
+      this._httpClient.post<BizonylatTetelResult>(url, this._logonservice.httpoptions())
+    );
+  }
+
+  public async Bruttobol(par: BruttobolParam): Promise<BizonylatTetelResult> {
+    const url = this._controller + 'bruttobol';
+
+    return await lastValueFrom(
+      this._httpClient.post<BizonylatTetelResult>(url, par, this._logonservice.httpoptions())
+    );
   }
 }

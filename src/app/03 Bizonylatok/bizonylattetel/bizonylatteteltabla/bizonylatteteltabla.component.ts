@@ -3,7 +3,7 @@ import {
   ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output,
   TemplateRef
 } from '@angular/core';
-import {BizonylatTetelDto} from '../../bizonylattetel/bizonylatteteldto';
+import {BizonylatTetelDto} from '../bizonylatteteldto';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,14 +16,12 @@ export class BizonylatteteltablaComponent implements AfterViewInit, OnDestroy {
   @Output() eventTorlesElott = new EventEmitter<number>();
   @Output() eventModositasElott = new EventEmitter<number>();
 
-  @Input() ujTemplate: TemplateRef<any>;
   @Input() torlesTemplate: TemplateRef<any>;
   @Input() modTemplate: TemplateRef<any>;
 
   clickedrowindex = -1;
   clickedidindex = -1;
 
-  ujOk = false;
   torlesOk = false;
   modOk = false;
 
@@ -48,7 +46,6 @@ export class BizonylatteteltablaComponent implements AfterViewInit, OnDestroy {
   }
 
   egysem() {
-    this.ujOk = false;
     this.torlesOk = false;
     this.modOk = false;
 
@@ -56,13 +53,6 @@ export class BizonylatteteltablaComponent implements AfterViewInit, OnDestroy {
     this._cdr.detectChanges();
   }
 
-  doUj() {
-    this.clearselections();
-    this.ujOk = true;
-
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
-  }
   dotorles(i: number) {
     this.egysem();
     this.clickedidindex = i;

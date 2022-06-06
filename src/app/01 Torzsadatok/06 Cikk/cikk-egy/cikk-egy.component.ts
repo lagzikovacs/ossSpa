@@ -3,17 +3,17 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {OnDestroyMixin, untilComponentDestroyed} from "@w11k/ngx-componentdestroyed";
-import {CikkDto} from "../cikkdto";
-import {deepCopy} from "../../../common/deepCopy";
-import {ErrorService} from "../../../common/errorbox/error.service";
-import {CikkService} from "../cikk.service";
-import {propCopy} from "../../../common/propCopy";
-import {TetelTorlesComponent} from "../../../common/tetel-torles/tetel-torles.component";
-import {EgyMode} from "../../../common/enums/egymode";
-import {ReszletekComponent} from "../../../common/reszletek/reszletek.component";
-import {CikkSzerkesztesComponent} from "../cikk-szerkesztes/cikk-szerkesztes.component";
-import {CikkBeszerzesKivetComponent} from "../cikk-beszerzes-kivet/cikk-beszerzes-kivet.component";
+import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
+import {CikkDto} from '../cikkdto';
+import {deepCopy} from '../../../common/deepCopy';
+import {ErrorService} from '../../../common/errorbox/error.service';
+import {CikkService} from '../cikk.service';
+import {propCopy} from '../../../common/propCopy';
+import {TetelTorlesComponent} from '../../../common/tetel-torles/tetel-torles.component';
+import {EgyMode} from '../../../common/enums/egymode';
+import {ReszletekComponent} from '../../../common/reszletek/reszletek.component';
+import {CikkSzerkesztesComponent} from '../cikk-szerkesztes/cikk-szerkesztes.component';
+import {CikkBeszerzesKivetComponent} from '../cikk-beszerzes-kivet/cikk-beszerzes-kivet.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,7 +23,7 @@ import {CikkBeszerzesKivetComponent} from "../cikk-beszerzes-kivet/cikk-beszerze
 export class CikkEgyComponent extends OnDestroyMixin implements AfterViewInit, OnDestroy {
   @ViewChild('compcont_cikk', {read: ViewContainerRef}) vcr: ViewContainerRef;
 
-  @Input() defaultNav: number = 0;
+  @Input() defaultNav = 0;
   Dto = new CikkDto();
   @Input() set dto(value: CikkDto) {
     this.Dto = deepCopy(value);

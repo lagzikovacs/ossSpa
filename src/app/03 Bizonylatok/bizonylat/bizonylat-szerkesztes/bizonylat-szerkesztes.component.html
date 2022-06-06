@@ -81,14 +81,16 @@
     <div class="editform-row-bottom">
       <div class="alapkeret">
         <div class="toolbar">
-          <button (click)="onTetelUjElott()" class="toolbutton">
+          <button (click)="onUjtetel()" class="toolbutton">
             <i class="fa fa-plus" aria-hidden="true"></i>
           </button>
         </div>
+
+        <ng-template #compcont_bizonylatteteluj></ng-template>
+
         <app-bizonylatteteltabla #teteltabla
                                  [enEdit]="true"
                                  [Dto]="ComplexDtoEdited.LstTetelDto"
-                                 [ujTemplate]="gridmod"
                                  [torlesTemplate]="gridtorles"
                                  [modTemplate]="gridmod"
                                  (eventTorlesElott)="onTetelTorlesElott($event)"
@@ -104,7 +106,6 @@
         <ng-template #gridmod>
           <app-bizonylattetel-szerkesztes [teteluj]="teteluj"
                                           [bizonylatLeiro]="bizonylatLeiro"
-                                          [szvesz]="szvesz"
                                           [TetelDtoEdited]="TetelDtoEdited"
                                           (eventUjModositasUtan)="onUjModositasUtan($event)">
           </app-bizonylattetel-szerkesztes>

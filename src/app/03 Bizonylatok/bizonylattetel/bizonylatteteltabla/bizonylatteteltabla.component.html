@@ -23,12 +23,6 @@
   </tr>
   </thead>
   <tbody>
-    <tr *ngIf="ujOk && ujTemplate !== undefined" class="active">
-      <td colspan="100">
-        <ng-template *ngTemplateOutlet="ujTemplate"></ng-template>
-      </td>
-    </tr>
-
     <ng-container *ngFor="let item of Dto; let i = index">
       <tr (click)="clickforrow(i)" [className]="i === clickedrowindex ? 'active' : 'inactive'">
         <td *ngIf="enEdit" class="tabla-kontrol-icon"

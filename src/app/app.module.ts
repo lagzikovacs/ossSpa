@@ -119,7 +119,7 @@ import { BizonylatNyomtatasComponent } from './03 Bizonylatok/bizonylatnyomtatas
 import { BizonylatReszletekComponent } from './03 Bizonylatok/bizonylat/bizonylat-reszletek/bizonylat-reszletek.component';
 import { BizonylatkapcsolatListComponent } from './03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolat-list/bizonylatkapcsolat-list.component';
 import { BizonylatkapcsolatLevalasztasComponent } from './03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolat-levalasztas/bizonylatkapcsolat-levalasztas.component';
-import { BizonylatteteltablaComponent } from './03 Bizonylatok/bizonylat/bizonylatteteltabla/bizonylatteteltabla.component';
+import { BizonylatteteltablaComponent } from './03 Bizonylatok/bizonylattetel/bizonylatteteltabla/bizonylatteteltabla.component';
 import { BizonylatafatablaComponent } from './03 Bizonylatok/bizonylat/bizonylatafatabla/bizonylatafatabla.component';
 import { BizonylattermekdijtablaComponent } from './03 Bizonylatok/bizonylat/bizonylattermekdijtabla/bizonylattermekdijtabla.component';
 import { BizonylatErrolComponent } from './03 Bizonylatok/bizonylat/bizonylat-errol/bizonylat-errol.component';
@@ -236,6 +236,7 @@ import {IratEgyToolbarComponent} from './02 Eszkozok/02 Irat/irat/irat-egy-toolb
 import {ProjektkapcsolatEgyComponent} from './02 Eszkozok/01 Projekt/projektkapcsolat/projektkapcsolat-egy/projektkapcsolat-egy.component';
 import { BizonylatEgyToolbarComponent } from './03 Bizonylatok/bizonylat/bizonylat-egy-toolbar/bizonylat-egy-toolbar.component';
 import { BizonylatkapcsolatEgyComponent } from './03 Bizonylatok/bizonylatkapcsolat/bizonylatkapcsolat-egy/bizonylatkapcsolat-egy.component';
+import { BizonylattetelEgyComponent } from './03 Bizonylatok/bizonylattetel/bizonylattetel-egy/bizonylattetel-egy.component';
 
 const routes: Routes = [
   {path: 'irattipus', component: IrattipusListComponent, canActivate: [RoleGuard]},
@@ -498,6 +499,7 @@ if (environment.production) {
     BizonylatEgyToolbarComponent,
     BizonylatkapcsolatEgyComponent,
     TablaComponent,
+    BizonylattetelEgyComponent,
   ],
   imports: [
     BrowserModule,

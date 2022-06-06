@@ -20,7 +20,7 @@ import {BizonylatDto} from '../bizonylatdto';
 import {BizonylatTetelDto} from '../../bizonylattetel/bizonylatteteldto';
 import {BizonylatAfaDto} from '../bizonylatafadto';
 import {BizonylatTermekdijDto} from '../bizonylattermekdijdto';
-import {BizonylatteteltablaComponent} from '../bizonylatteteltabla/bizonylatteteltabla.component';
+import {BizonylatteteltablaComponent} from '../../bizonylattetel/bizonylatteteltabla/bizonylatteteltabla.component';
 import {propCopy} from '../../../common/propCopy';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
@@ -29,6 +29,7 @@ import {UgyfelListComponent} from '../../../01 Torzsadatok/09 Ugyfel/ugyfel-list
 import {ModalService} from '../../../common/modal/modal.service';
 import {PenznemListComponent} from '../../../01 Torzsadatok/03 Penznem/penznem-list/penznem-list.component';
 import {FizetesimodListComponent} from '../../../01 Torzsadatok/02 Fizetesimod/fizetesimod-list/fizetesimod-list.component';
+import {BizonylattetelSzerkesztesComponent} from "../../bizonylattetel/bizonylattetel-szerkesztes/bizonylattetel-szerkesztes.component";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,6 +40,7 @@ export class BizonylatSzerkesztesComponent extends OnDestroyMixin implements OnI
   @ViewChild('compcont_bizonylatszerk', {read: ViewContainerRef}) vcr: ViewContainerRef;
   modalname = 'modal_bizonylatszerk';
   bodyclass = '';
+  @ViewChild('compcont_bizonylatteteluj', {read: ViewContainerRef}) vcruj: ViewContainerRef;
 
   @ViewChild('teteltabla', {static: true}) tabla: BizonylatteteltablaComponent;
 
@@ -271,27 +273,19 @@ export class BizonylatSzerkesztesComponent extends OnDestroyMixin implements OnI
       this.bizonylatTipus === BizonylatTipus.ElolegSzamla;
   }
 
-  async onTetelUjElott() {
+  async onUjtetel() {
     this.updatedto();
 
-    this.spinner = true;
-    try {
-      const res = await this.bizonylatservice.CreateNewTetel(this.bizonylatTipus);
-      if (res.Error != null) {
-        throw res.Error;
-      }
-
-      this.TetelDtoEdited = res.Result[0];
-      this.TetelDtoSelectedIndex = -1;
-      this.teteluj = true;
-      this.Setszvesz();
-
-      this.spinner = false;
-      this.tabla.doUj();
-    } catch (err) {
-      this.spinner = false;
-      this._errorservice.Error = err;
-    }
+    this.vcruj.clear();
+    const ujC = this.vcruj.createComponent(BizonylattetelSzerkesztesComponent);
+    ujC.instance.teteluj = true;
+    ujC.instance.bizonylatTipus = this.bizonylatTipus;
+    ujC.instance.bizonylatLeiro = this.bizonylatLeiro;
+    ujC.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+    });
+    ujC.instance.eventMegsem.pipe(untilComponentDestroyed(this)).subscribe(() => {
+      this.vcruj.clear();
+    });
   }
 
   onTetelTorlesElott(i: number) {

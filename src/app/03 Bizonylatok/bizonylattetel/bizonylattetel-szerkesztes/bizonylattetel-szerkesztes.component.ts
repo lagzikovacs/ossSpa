@@ -23,6 +23,8 @@ import {ModalService} from '../../../common/modal/modal.service';
 import {AfakulcsListComponent} from '../../../01 Torzsadatok/05 Afakulcs/afakulcs-list/afakulcs-list.component';
 import {MeListComponent} from '../../../01 Torzsadatok/04 Mennyisegiegyseg/me-list/me-list.component';
 import {CikkListComponent} from '../../../01 Torzsadatok/06 Cikk/cikk-list/cikk-list.component';
+import {deepCopy} from '../../../common/deepCopy';
+import {BizonylatTipus} from "../../bizonylat/bizonylattipus";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,10 +36,13 @@ export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implement
   modalname = 'modal_bizonylattetelszerk';
   bodyclass = '';
 
+  @Input() bizonylatTipus = BizonylatTipus.Szamla;
   @Input() bizonylatLeiro = new BizonylatTipusLeiro();
   @Input() teteluj = false;
-  @Input() szvesz = false;
-  @Input() TetelDtoEdited = new BizonylatTetelDto();
+  TetelDtoEdited = new BizonylatTetelDto();
+  @Input() set TetelDtoOriginal(value: BizonylatTetelDto) {
+    this.TetelDtoEdited = deepCopy(value);
+  }
   @Output() eventOk = new EventEmitter<BizonylatTetelDto>();
   @Output() eventMegsem = new EventEmitter<void>();
 
@@ -47,8 +52,7 @@ export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implement
   eppFrissit = false;
   set spinner(value: boolean) {
     this.eppFrissit = value;
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
   bizonylatservice: BizonylatService;
@@ -90,8 +94,28 @@ export class BizonylattetelSzerkesztesComponent extends OnDestroyMixin implement
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    if (this.teteluj) {
+      try {
+        const res = await this.bizonylattetelservice.CreateNewTetel(this.bizonylatTipus);
+        if (res.Error != null) {
+          throw res.Error;
+        }
+
+        this.TetelDtoEdited = res.Result[0];
+      } catch (err) {
+        this.spinner = false;
+        this._errorservice.Error = err;
+      }
+    }
+
     this.updateform();
+    this.docdr();
+  }
+
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   updateform() {

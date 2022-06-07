@@ -65,8 +65,7 @@ export class BizonylatSzerkesztesComponent extends OnDestroyMixin implements OnI
   eppFrissit = false;
   set spinner(value: boolean) {
     this.eppFrissit = value;
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
   bizonylatservice: BizonylatService;
@@ -106,6 +105,9 @@ export class BizonylatSzerkesztesComponent extends OnDestroyMixin implements OnI
   }
 
   async ngOnInit() {
+    this.szvesz = this.bizonylatTipus === BizonylatTipus.Szamla ||
+      this.bizonylatTipus === BizonylatTipus.ElolegSzamla;
+
     this.spinner = true;
     try {
       let res: BizonylatComplexResult;
@@ -129,6 +131,11 @@ export class BizonylatSzerkesztesComponent extends OnDestroyMixin implements OnI
       this.spinner = false;
       this._errorservice.Error = err;
     }
+  }
+
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   updateform() {
@@ -266,11 +273,8 @@ export class BizonylatSzerkesztesComponent extends OnDestroyMixin implements OnI
     this.Fiztool('Készpénz');
   }
 
-
-
-  public Setszvesz() {
-    this.szvesz = this.bizonylatTipus === BizonylatTipus.Szamla ||
-      this.bizonylatTipus === BizonylatTipus.ElolegSzamla;
+  onTetelSelected(i) {
+    this.TetelDtoSelectedIndex = i;
   }
 
   async onUjtetel() {
@@ -282,19 +286,43 @@ export class BizonylatSzerkesztesComponent extends OnDestroyMixin implements OnI
     ujC.instance.bizonylatTipus = this.bizonylatTipus;
     ujC.instance.bizonylatLeiro = this.bizonylatLeiro;
     ujC.instance.eventOk.pipe(untilComponentDestroyed(this)).subscribe(dto => {
+      this.vcruj.clear();
+      this.onTetelUj(dto);
     });
     ujC.instance.eventMegsem.pipe(untilComponentDestroyed(this)).subscribe(() => {
       this.vcruj.clear();
     });
   }
 
-  onTetelTorlesElott(i: number) {
-    this.updatedto();
-
-    this.TetelDtoSelectedIndex = i;
+  onTetelUj(dto) {
+    this.ComplexDtoEdited.LstTetelDto.push(dto);
+    this.TetelUjModositas();
   }
 
-  async onTeteltorles(ok: boolean) {
+  onTetelModositas(dto) {
+    propCopy(dto, this.ComplexDtoEdited.LstTetelDto[this.TetelDtoSelectedIndex]);
+    this.TetelUjModositas();
+  }
+
+  async TetelUjModositas() {
+    this.spinner = true;
+    try {
+      const res = await this.bizonylatservice.SumEsAfaEsTermekdij(this.ComplexDtoEdited);
+      if (res.Error != null) {
+        throw res.Error;
+      }
+
+      this.ComplexDtoEdited = res.Result[0];
+
+      this.updateform();
+      this.spinner = false;
+    } catch (err) {
+      this.spinner = false;
+      this._errorservice.Error = err;
+    }
+  }
+
+  async onTetelTorles(ok) {
     if (ok) {
       this.ComplexDtoEdited.LstTetelDto.splice(this.TetelDtoSelectedIndex, 1);
 
@@ -314,46 +342,6 @@ export class BizonylatSzerkesztesComponent extends OnDestroyMixin implements OnI
         this.spinner = false;
         this._errorservice.Error = err;
       }
-    }
-  }
-
-  onTetelModositasElott(i: number) {
-    this.updatedto();
-
-    this.TetelDtoSelectedIndex = i;
-    this.teteluj = false;
-    this.Setszvesz();
-
-    this.TetelDtoEdited = deepCopy(this.ComplexDtoEdited.LstTetelDto[i]);
-  }
-
-  async onUjModositasUtan(dto: BizonylatTetelDto) {
-    if (dto !== null) {
-      if (this.teteluj) {
-        // a lista végére teszi, h a sorrend a user szándékának feleljen meg
-        this.ComplexDtoEdited.LstTetelDto.push(dto);
-      } else {
-        propCopy(dto, this.ComplexDtoEdited.LstTetelDto[this.TetelDtoSelectedIndex]);
-      }
-
-      this.spinner = true;
-      try {
-        const res = await this.bizonylatservice.SumEsAfaEsTermekdij(this.ComplexDtoEdited);
-        if (res.Error != null) {
-          throw res.Error;
-        }
-
-        this.ComplexDtoEdited = res.Result[0];
-
-        this.tabla.egysem();
-        this.updateform();
-        this.spinner = false;
-      } catch (err) {
-        this.spinner = false;
-        this._errorservice.Error = err;
-      }
-    } else {
-      this.tabla.egysem();
     }
   }
 

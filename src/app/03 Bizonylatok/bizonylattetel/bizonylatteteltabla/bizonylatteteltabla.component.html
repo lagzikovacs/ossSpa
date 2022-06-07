@@ -26,10 +26,10 @@
     <ng-container *ngFor="let item of Dto; let i = index">
       <tr (click)="clickforrow(i)" [className]="i === clickedrowindex ? 'active' : 'inactive'">
         <td *ngIf="enEdit" class="tabla-kontrol-icon"
-            (click)="dotorles(i)">
+            (click)="doTorles(i)">
           <i class="fa fa-minus" aria-hidden="true"></i></td>
         <td *ngIf="enEdit" class="tabla-kontrol-icon"
-            (click)="domodositas(i)">
+            (click)="doModositas(i)">
           <i class="fa fa-edit" aria-hidden="true"></i></td>
 
         <td>{{item.Bizonylattetelkod}}</td>
@@ -54,14 +54,16 @@
         <td colspan="100">{{item.Megjegyzes}}</td>
       </tr>
 
-      <tr *ngIf="i === clickedidindex && torlesOk && torlesTemplate !== undefined" class="active">
+      <tr *ngIf="i === clickedidindex && modOk">
         <td colspan="100">
-          <ng-template *ngTemplateOutlet="torlesTemplate"></ng-template>
-        </td>
-      </tr>
-      <tr *ngIf="i === clickedidindex && modOk && modTemplate !== undefined" class="active">
-        <td colspan="100">
-          <ng-template *ngTemplateOutlet="modTemplate"></ng-template>
+          <app-bizonylattetel-egy [defaultNav]="defaultNav"
+                                  [bizonylatTipus]="bizonylatTipus"
+                                  [bizonylatLeiro]="bizonylatLeiro"
+                                  [TetelDtoOriginal]="Dto[clickedidindex]"
+                                  (eventTorles)="onTorles($event)"
+                                  (eventModositas)="onModositas($event)"
+                                  (eventMegsem)="onMegsem()">
+          </app-bizonylattetel-egy>
         </td>
       </tr>
     </ng-container>

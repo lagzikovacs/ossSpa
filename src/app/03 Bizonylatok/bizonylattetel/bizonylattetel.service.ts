@@ -13,6 +13,7 @@ import {BizonylatTipus} from '../bizonylat/bizonylattipus';
 })
 export class BizonylattetelService {
   private readonly _controller = environment.CoreRef + 'api/bizonylat/';
+  cim = 'Bizonylattétel';
 
   constructor(private _httpClient: HttpClient,
               private _logonservice: LogonService) { }
@@ -29,7 +30,7 @@ export class BizonylattetelService {
     const url = this._controller + 'bizonylattetelcalc';
 
     return await lastValueFrom(
-      this._httpClient.post<BizonylatTetelResult>(url, this._logonservice.httpoptions())
+      this._httpClient.post<BizonylatTetelResult>(url, dto, this._logonservice.httpoptions())
     );
   }
 

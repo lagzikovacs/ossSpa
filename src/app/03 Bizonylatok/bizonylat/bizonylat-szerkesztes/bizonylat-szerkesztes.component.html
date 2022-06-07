@@ -89,30 +89,16 @@
         <ng-template #compcont_bizonylatteteluj></ng-template>
 
         <app-bizonylatteteltabla #teteltabla
-                                 [enEdit]="true"
                                  [Dto]="ComplexDtoEdited.LstTetelDto"
-                                 [torlesTemplate]="gridtorles"
-                                 [modTemplate]="gridmod"
-                                 (eventTorlesElott)="onTetelTorlesElott($event)"
-                                 (eventModositasElott)="onTetelModositasElott($event)">
+                                 [enEdit]="true"
+                                 [bizonylatTipus]="bizonylatTipus"
+                                 [bizonylatLeiro]="bizonylatLeiro"
+                                 (eventSelected)="onTetelSelected($event)"
+                                 (eventTorles)="onTetelTorles($event)"
+                                 (eventModositas)="onTetelModositas($event)">
         </app-bizonylatteteltabla>
-
-        <ng-template #gridtorles>
-          <app-tetel-torles [cim]="'Bizonylattétel'"
-                            (eventTorles)="onTeteltorles($event)">
-          </app-tetel-torles>
-        </ng-template>
-
-        <ng-template #gridmod>
-          <app-bizonylattetel-szerkesztes [teteluj]="teteluj"
-                                          [bizonylatLeiro]="bizonylatLeiro"
-                                          [TetelDtoEdited]="TetelDtoEdited"
-                                          (eventUjModositasUtan)="onUjModositasUtan($event)">
-          </app-bizonylattetel-szerkesztes>
-        </ng-template>
       </div>
     </div>
-
 
     <div class="editform-row-bottom">
       <button class="toolbutton okbutton" [disabled]="formFej.invalid" type="button" (click)="onSubmit()">Ok</button>

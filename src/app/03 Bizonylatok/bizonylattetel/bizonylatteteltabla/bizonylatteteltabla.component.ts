@@ -4,6 +4,8 @@ import {
   TemplateRef
 } from '@angular/core';
 import {BizonylatTetelDto} from '../bizonylatteteldto';
+import {BizonylatTipus} from "../../bizonylat/bizonylattipus";
+import {BizonylatTipusLeiro} from "../../bizonylat/bizonylattipusleiro";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -13,22 +15,28 @@ import {BizonylatTetelDto} from '../bizonylatteteldto';
 export class BizonylatteteltablaComponent implements AfterViewInit, OnDestroy {
   @Input() Dto: BizonylatTetelDto[] = new Array<BizonylatTetelDto>();
   @Input() enEdit = false;
-  @Output() eventTorlesElott = new EventEmitter<number>();
-  @Output() eventModositasElott = new EventEmitter<number>();
+  @Input() bizonylatTipus = BizonylatTipus.Szamla;
+  @Input() bizonylatLeiro = new BizonylatTipusLeiro();
 
-  @Input() torlesTemplate: TemplateRef<any>;
-  @Input() modTemplate: TemplateRef<any>;
+  @Output() eventSelected = new EventEmitter<number>();
+  @Output() eventTorles = new EventEmitter<boolean>();
+  @Output() eventModositas = new EventEmitter<BizonylatTetelDto>();
 
   clickedrowindex = -1;
   clickedidindex = -1;
 
-  torlesOk = false;
+  defaultNav = 0;
   modOk = false;
 
   constructor(private _cdr: ChangeDetectorRef) {
   }
 
   ngAfterViewInit() {
+  }
+
+  docdr() {
+    this._cdr.markForCheck();
+    this._cdr.detectChanges();
   }
 
   clearselections() {
@@ -46,32 +54,45 @@ export class BizonylatteteltablaComponent implements AfterViewInit, OnDestroy {
   }
 
   egysem() {
-    this.torlesOk = false;
     this.modOk = false;
 
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
   }
 
-  dotorles(i: number) {
+  doTorles(i: number) {
     this.egysem();
     this.clickedidindex = i;
-    this.eventTorlesElott.emit(i);
+    this.eventSelected.emit(i);
 
-    this.torlesOk = true;
-
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
-  }
-  domodositas(i: number) {
-    this.egysem();
-    this.clickedidindex = i;
-    this.eventModositasElott.emit(i);
-
+    this.defaultNav = 2;
     this.modOk = true;
 
-    this._cdr.markForCheck();
-    this._cdr.detectChanges();
+    this.docdr();
+  }
+
+  doModositas(i: number) {
+    this.egysem();
+    this.clickedidindex = i;
+    this.eventSelected.emit(i);
+
+    this.defaultNav = 3;
+    this.modOk = true;
+
+    this.docdr();
+  }
+
+  onTorles(ok) {
+    this.egysem();
+    this.eventTorles.emit(ok);
+  }
+
+  onModositas(dto) {
+    this.egysem();
+    this.eventModositas.emit(dto);
+  }
+
+  onMegsem() {
+    this.egysem();
   }
 
   ngOnDestroy() {
